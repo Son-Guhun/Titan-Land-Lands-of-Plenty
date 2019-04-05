@@ -1,0 +1,8 @@
+Decoration System Abilities => Custom->Human->Items
+
+Decoration Units => Custom->Neutral Passive->Campaign->Units  
+Also: Neutral Naga
+Exception: City Buildings are in Standard, not Custom
+
+Decoration Buildigs => Custom->Neutral Passive->Buildings
+

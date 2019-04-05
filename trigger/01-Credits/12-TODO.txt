@@ -1,0 +1,23 @@
+HeroDoomEmperor (Old Sargeras)
+Frozen and Runed Glow obelisks new variations (use upgrades)
+Make Heroic Strike based on channel instead of Shadowstrike
+
+
+
+-Fix dalaran town hall
+-Tauren worker model
+-Night elf artisian model
+-Drow deco builder
+- QoL: Change Icons for the main buildings of the races to make it easier to select them from the Race Selector
+-Reaper (Malthael model)
+
+
+-Remove female nihonjin hero glow
+-Get Archmaiden description from older version
+
+
+______________________________
+Fix flying units that are not target as flying not being enumerated: Save some integer in a hashtable, using their unit type ID as a key.
+
+
+

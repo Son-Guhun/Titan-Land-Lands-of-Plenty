@@ -1,0 +1,2 @@
+Drow Archcleric: Crystal Infernal Bug -> Set unit to "Can Raise, Does not Decay"
+Fix female centaur model (crystal infernal bug) -> Set unit to "Can Raise, Does not Decay"

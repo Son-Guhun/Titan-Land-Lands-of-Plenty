@@ -1,0 +1,17 @@
+0.9.7
+-Fixed an issue with -nameunit. I made a stupid mistake when implementing compatibility for patch 1.29.2
+-Removed compatability of -nameunit for patch 1.29 and 1.29.1
+-Added new first person (actually, third person) camera system
+-Fixed tooltips for Sauron and Azor Nehai+
+-Added abilities to most heroes that did not have 4 abilities (though I was not creative enough to find abilities for all of them, will probably need to make more abilities)
+-No heroes show as 'Tooltip missing!' anymore.
+-Fixed an issue where the Dock Builder would not be in the special deco tent.
+-Made all Deco Builder tooltips be the own unit's name, as to avoid confusion now that they can be trained from the main strucutres of many races.
+-Also made all Deco Builders have a build time of 1 second, now that they can be trained and not only bought
+-Improved Titan Palace protection system: Players that aren't the Titan will not be able to buy items that are sold by neutral shops inside the Inner Titan Palace
+-Fixed a long-unspotted bug that was causing the abilities 'Will of the Tribunal' and 'Chain Slow' to not function properly.
+-Massively (and I mean, MASSIVELY) improved my coding environment with a new strategy for defining multiple map headers, while keeping vanilla WE compatibility! (YESSSSSSSSS)
+-Imported models for norse buildings and added Deco Builder Norse
+-Removed ground textures from all buildings
+-Imported models for Drow buildings
+

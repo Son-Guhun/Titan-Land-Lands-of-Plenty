@@ -1,0 +1,14 @@
+Burst:
+Orbs burst out in a circle and then come back in. They deal damage whenever a unit comes close to the (Unit In Range event).
+
+Smash:
+Jump up, fall in a location, exploding and dealing damage.
+
+Second Wind:
+Fully restores the hero's HP. 45 second cooldown.
+
+Ressurgence:
+Fully restores the hero's Mana and HP. 1 minute cooldown.
+
+Lightning Bolt:
+Deals 400 damage in an AoE. Units in the AoE have their attack speed reduced by 400% and movement speed reduced by 400. Over the next 4 seconds, they gain 100% attack speed and 100 movement speed per second.

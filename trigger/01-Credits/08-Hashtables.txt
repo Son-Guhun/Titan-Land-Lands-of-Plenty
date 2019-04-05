@@ -1,0 +1,10 @@
+Hashtable_1 used by the following systems:
+    -Flames of Azzinoth (handle ID of the flames as the parent key)
+    -Gate Replacements (unit type id's as parent)
+    -Child Hashtable 0: Hash(Player Color Strings) => Player Number
+
+Hashtable_2 used by:
+    -Deco Counting system (positive integers in the range of undead unit type IDs u000+) AND (positive integers in the range of 1 to max_players)
+    -Circle IDs for GUI circle system (positive integers in the range of 1 to MaxArraySize) (for example, see Will of the Tribunal)
+   -Knockback system (negative integers equal to UDEX of the source unit, range from -1 to -MaxArraySize)
+
