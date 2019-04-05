@@ -1,0 +1,268 @@
+Event
+    TriggerRegisterVariableEvent
+        Var   : DamageModifierEvent
+        Preset: LimitOpEqual
+        Const : 1.00
+Condition
+Action
+    IfThenElseMultiple
+        Condition
+            OperatorCompareBoolean
+                Var   : IsDamageSpell
+                Preset: OperatorEqualENE
+                Const : false
+            OperatorComparePlayer
+                Call  : GetOwningPlayer
+                    Var   : DamageEventSource
+                Preset: OperatorEqualENE
+                Preset: Player00
+        Action
+            CommentString
+                Const : ' '
+            CommentString
+                Const : 'There are four required variables when issuing a knockback'
+            CommentString
+                Const : ' '
+            CommentString
+                Const : '1. Knockback2DAngle -------- this is the direction angle the unit is knocked back (in degrees)'
+            CommentString
+                Const : '2. Knockback2DTime -------- this is how long the unit will be knocked back (in seconds)'
+            CommentString
+                Const : '3. Knockback2DDistance -------- this is how far the unit will be knocked back'
+            CommentString
+                Const : '4. Knockback2DUnit -------- this is the unit being knocked back'
+            CommentString
+                Const : ' '
+            CommentString
+                Const : 'When all four variables are set, you can run the Knockback 2D trigger, ignoring conditions'
+            CommentString
+                Const : ' '
+            Disab: SetVariable
+                Disab: 
+                Call  : GetUnitLoc
+                    Var   : DamageEventSource
+            Disab: SetVariable
+                Disab: 
+                Call  : GetUnitLoc
+                    Var   : DamageEventTarget
+            Disab: SetVariable
+                Var   : Knockback2DAngle
+                Call  : AngleBetweenPoints
+                    Disab: 
+                    Disab: 
+            CustomScriptCode
+                Const : 'call RemoveLocation(udg_CenterPoint)'
+            CustomScriptCode
+                Const : 'call RemoveLocation(udg_TargetPoint)'
+            SetVariable
+                Var   : Knockback2DTime
+                Const : 0.90
+            SetVariable
+                Var   : Knockback2DDistance
+                Const : 500.00
+            SetVariable
+                Var   : Knockback2DUnit
+                Var   : DamageEventTarget
+            IfThenElseMultiple
+                Condition
+                    OperatorComparePlayer
+                        Call  : GetOwningPlayer
+                            Var   : DamageEventSource
+                        Preset: OperatorNotEqualENE
+                        Call  : GetOwningPlayer
+                            Var   : DamageEventTarget
+                Action
+                    CommentString
+                        Const : ' '
+                    CommentString
+                        Const : 'There are optional variables you can consider when issuing a knockback'
+                    CommentString
+                        Const : 'If they are not set, "0.00, false, null" or their default states assigned in the Knockback 2D Config trigger will be used'
+                    CommentString
+                        Const : ' '
+                    CommentString
+                        Const : 'Knockback2DAmphibious -------- Allows the unit to pass over deep water, but it is more performance-intensive'
+                    CommentString
+                        Const : '-------- If you aren''t ToolOrDie from TheHiveWorkshop, you probably won''t use this'
+                    CommentString
+                        Const : 'Knockback2DBounces -------- if the unit will bounce off of walls or remain stunned there.'
+                    CommentString
+                        Const : ' '
+                    CommentString
+                        Const : 'Knockback2DCollision -------- You can specify the collision radius of units to be adjacently knocked back if you want'
+                    CommentString
+                        Const : '-------- A value of 0 will require the units'' collision sizes to overlap to knock back'
+                    CommentString
+                        Const : '-------- A value greater than 0 will allow that much space between the units to still permit the knockback'
+                    CommentString
+                        Const : '-------- A value less than 0 will disable collision checking altogether.'
+                    CommentString
+                        Const : ' '
+                    CommentString
+                        Const : 'Knockback2DDestRadius -------- If debris is to be killed, how far away must it be?'
+                    CommentString
+                        Const : 'Knockback2DFriction -------- How quickly the unit will slow down from its initial speed.'
+                    CommentString
+                        Const : 'Knockback2DFX -------- What kind of special effect will occasionally be played on the ground of the unit'
+                    CommentString
+                        Const : 'Knockback2DFXRate -------- How often should the effect appear?'
+                    CommentString
+                        Const : 'Knockback2DGravity -------- If you want to specify a custom gravity for each knockback, you can'
+                    CommentString
+                        Const : 'Knockback2DHeight -------- How high you want the unit to go during the knockback'
+                    CommentString
+                        Const : 'Knockback2DKillTrees -------- If you want surrounding trees to die, this is for you'
+                    CommentString
+                        Const : 'Knockback2DOnImpact -------- this trigger is run when the unit hits a wall or structure.'
+                    CommentString
+                        Const : '-------- If it is bouncing, it can hit multiple walls and fire this trigger multiple times'
+                    CommentString
+                        Const : '-------- The trigger will not run if it is off, so you can use this if you only want it to run on the first bounce'
+                    CommentString
+                        Const : 'Knockback2DOverride -------- Set this to true to prevent future knockbacks from interrupting this one'
+                    CommentString
+                        Const : 'Knockback2DPause -------- confines the unit to its knockback velocity (no running to change course)'
+                    CommentString
+                        Const : 'Knockback2DSimple -------- Only checks to make sure unit movement is within the map bounds'
+                    CommentString
+                        Const : 'Knockback2DSource -------- If you need to store this unit to deal damage on-impact or within the timer loop'
+                    CommentString
+                        Const : 'Knockback2DUnbiasedCollision -------- Should adjacent knockbacks consider alliances or be neutral?'
+                    CommentString
+                        Const : ' '
+                    Disab: SetVariable
+                        Var   : Knockback2DAmphibious
+                        Const : true
+                    Disab: SetVariable
+                        Var   : Knockback2DBounces
+                        Const : false
+                    SetVariable
+                        Var   : Knockback2DCollision
+                        Const : 16.00
+                    Disab: SetVariable
+                        Var   : Knockback2DDestRadius
+                        Const : 128.00
+                    Disab: SetVariable
+                        Var   : Knockback2DGravity
+                        Const : 0.67
+                    SetVariable
+                        Var   : Knockback2DHeight
+                        Const : 137.00
+                    Disab: SetVariable
+                        Var   : Knockback2DKillTrees
+                        Const : false
+                    Disab: SetVariable
+                        Var   : Knockback2DOnImpact
+                        Var   : gg_trg_On_Impact
+                    Disab: SetVariable
+                        Var   : Knockback2DOverride
+                        Const : true
+                    SetVariable
+                        Var   : Knockback2DPause
+                        Const : true
+                    SetVariable
+                        Var   : Knockback2DSimple
+                        Const : true
+                    SetVariable
+                        Var   : Knockback2DSource
+                        Var   : DamageEventSource
+                    Disab: SetVariable
+                        Var   : Knockback2DUnbiasedCollision
+                        Const : false
+                Action
+                    CommentString
+                        Const : 'Allied units shouldn''t allow collision with each other, but for the sake of the demo let''s make it interesting'
+                    SetVariable
+                        Var   : Knockback2DCollision
+                        Const : 32.00
+                    CommentString
+                        Const : 'Also make it so that enemies will bounce with these experiments'
+                    SetVariable
+                        Var   : Knockback2DUnbiasedCollision
+                        Const : true
+                    SetVariable
+                        Var   : Knockback2DLoopFX
+                        Const : Abilities\Weapons\FaerieDragonMissile\FaerieDragonMissile.mdl
+                    SetVariable
+                        Var   : Knockback2DFXRate
+                        Const : 0.20
+            CommentString
+                Const : ' '
+            CommentString
+                Const : 'When all variables are set, run the Knockback 2D trigger, checking conditions if you want to be safe'
+            CommentString
+                Const : ' '
+            ConditionalTriggerExecute
+                Var   : gg_trg_Knockback_2D
+        Action
+            IfThenElseMultiple
+                Condition
+                    OrMultiple
+                        Condition
+                            OperatorCompareBoolean
+                                Array : Tauren_Shockwave
+                                    Call  : GetUnitUserData
+                                        Var   : DamageEventSource
+                                Preset: OperatorEqualENE
+                                Const : true
+                            OperatorCompareBoolean
+                                Array : Tauren_WarStomp
+                                    Call  : GetUnitUserData
+                                        Var   : DamageEventSource
+                                Preset: OperatorEqualENE
+                                Const : true
+                Action
+                    Disab: SetVariable
+                        Disab: 
+                        Call  : GetUnitLoc
+                            Var   : DamageEventSource
+                    Disab: SetVariable
+                        Disab: 
+                        Call  : GetUnitLoc
+                            Var   : DamageEventTarget
+                    Disab: SetVariable
+                        Var   : Knockback2DAngle
+                        Call  : AngleBetweenPoints
+                            Disab: 
+                            Disab: 
+                    CustomScriptCode
+                        Const : 'call RemoveLocation(udg_CenterPoint)'
+                    CustomScriptCode
+                        Const : 'call RemoveLocation(udg_TargetPoint)'
+                    SetVariable
+                        Var   : Knockback2DTime
+                        Const : 0.50
+                    SetVariable
+                        Var   : Knockback2DDistance
+                        Const : 75.00
+                    SetVariable
+                        Var   : Knockback2DUnit
+                        Var   : DamageEventTarget
+                    IfThenElseMultiple
+                        Condition
+                            OperatorCompareBoolean
+                                Array : Tauren_WarStomp
+                                    Call  : GetUnitUserData
+                                        Var   : DamageEventSource
+                                Preset: OperatorEqualENE
+                                Const : true
+                        Action
+                            CommentString
+                                Const : 'For War Stomp, add a height factor'
+                            SetVariable
+                                Var   : Knockback2DHeight
+                                Const : 250.00
+                            SetVariable
+                                Var   : Knockback2DDistance
+                                Const : 100.00
+                        Action
+                            SetVariable
+                                Var   : Knockback2DDistance
+                                Const : 300.00
+                    TriggerExecute
+                        Var   : gg_trg_Knockback_2D
+    CommentString
+        Const : 'Deleting the next line will re-enable damage in the map'
+    SetVariable
+        Var   : DamageEventAmount
+        Const : 0.00

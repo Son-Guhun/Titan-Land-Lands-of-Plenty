@@ -1,0 +1,25 @@
+Event
+    TriggerRegisterTimerExpireEventBJ
+        Var   : K2DTimer
+Condition
+Action
+    SetVariable
+        Var   : LoopInt
+        Array : K2DNext
+            Const : 0
+    CustomScriptCode
+        Const : loop
+    CustomScriptCode
+        Const : '    exitwhen udg_LoopInt == 0'
+    CommentString
+        Const : ' '
+    CommentString
+        Const : 'Put your stuff that you want to happen every K2DTimeout seconds here. To reference the knocked back unit, use UDexUnits[LoopInt]'
+    CommentString
+        Const : ' '
+    SetVariable
+        Var   : LoopInt
+        Array : K2DNext
+            Var   : LoopInt
+    CustomScriptCode
+        Const : endloop

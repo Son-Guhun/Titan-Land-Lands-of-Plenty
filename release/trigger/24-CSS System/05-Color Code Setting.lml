@@ -1,0 +1,108 @@
+Event
+    MapInitializationEvent
+Condition
+Action
+    CommentString
+        Const : 'Color codes for the item info panel can be set here'
+    CommentString
+        Const : 'If you want a text to be colored white as default, set the color code to |cffffffff'
+    CommentString
+        Const : 'Don''t touch the indexes, modify the value only'
+    CommentString
+        Const : 'Socket Item Name'
+    SetVariable
+        Array : CSS_String
+            Const : 11
+        Const : |cffff0000
+    CommentString
+        Const : 'Item Name'
+    SetVariable
+        Array : CSS_String
+            Const : 12
+        Const : |cff32cd32
+    CommentString
+        Const : 'Bonus Stat'
+    SetVariable
+        Array : CSS_String
+            Const : 24
+        Const : |cFF0000FF
+    CommentString
+        Const : 'Other Text'
+    SetVariable
+        Array : CSS_String
+            Const : 25
+        Const : |cffffffff
+    CommentString
+        Const : 'Numbers other than stat'
+    SetVariable
+        Array : CSS_String
+            Const : 26
+        Const : |cFFFFA500
+    CommentString
+        Const : 'Color Codes for Stats'
+    CommentString
+        Const : Armor
+    SetVariable
+        Array : CSS_String
+            Const : 13
+        Const : |cFFFFA500
+    CommentString
+        Const : 'Attack Speed'
+    SetVariable
+        Array : CSS_String
+            Const : 14
+        Const : |cFF800080
+    CommentString
+        Const : Damage
+    SetVariable
+        Array : CSS_String
+            Const : 15
+        Const : |CFF7EBFF1
+    CommentString
+        Const : Agility
+    SetVariable
+        Array : CSS_String
+            Const : 16
+        Const : |cFFFFD700
+    CommentString
+        Const : Intelligence
+    SetVariable
+        Array : CSS_String
+            Const : 17
+        Const : |cFF000000
+    CommentString
+        Const : Strength
+    SetVariable
+        Array : CSS_String
+            Const : 18
+        Const : |cff00ff00
+    CommentString
+        Const : 'Life Regen'
+    SetVariable
+        Array : CSS_String
+            Const : 19
+        Const : |cff32cd32
+    CommentString
+        Const : 'Mana Regen'
+    SetVariable
+        Array : CSS_String
+            Const : 20
+        Const : |CFFFFFF01
+    CommentString
+        Const : Life
+    SetVariable
+        Array : CSS_String
+            Const : 21
+        Const : |CFF1CB619
+    CommentString
+        Const : Mana
+    SetVariable
+        Array : CSS_String
+            Const : 22
+        Const : |CFF106246
+    CommentString
+        Const : 'Sight Range'
+    SetVariable
+        Array : CSS_String
+            Const : 23
+        Const : |CFF4E2A04

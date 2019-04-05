@@ -1,3 +1,0 @@
-This trigger increase the counter of the deco builder unit type for a player when a deco builder owned by that player enters the map area.
-
-The Deco Counter is used for the -decos commands, to check if the player has deco builders of each type in play. The counter is decreased by the System Cleanup Death trigger.

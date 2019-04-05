@@ -1,0 +1,23 @@
+Hashtable_Bonuses
+
+'phyB': Physical damage bonus
+'splB': Spell damage bonus
+'bthB': Both damage bonus
+
+'phyM': Damage multiplier
+'splM': Spell multiplier
+'bthM': Both multiplier
+
+'LiSA' : Life steal absolute
+'LiSP' : Life steal percent
+
+'MaSA': Mana steal absolute
+'MaSP': Mana steal percent
+
+'phyA': Physical damage absorption
+'splA': Spell damage absorption
+'bthA': Both damage absorption
+
+'phyR': Damage reduction
+'splR': Spell reduction
+'bthR': Both reduction

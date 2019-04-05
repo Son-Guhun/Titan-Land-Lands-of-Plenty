@@ -1,0 +1,5 @@
+((int angle)/90 + 1)*90
+
+GUMSSetUnitName
+GUMSUnitHasCustomName
+GUMSGetUnitName

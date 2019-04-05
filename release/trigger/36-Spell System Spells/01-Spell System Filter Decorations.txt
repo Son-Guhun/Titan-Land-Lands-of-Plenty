@@ -1,0 +1,1 @@
+This trigger is used by spells that pick a group of units in range. It simply filters decoration units, preventing them from being added to the unit goup.

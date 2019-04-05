@@ -1,0 +1,1 @@
+This trigger simply initializes all the spells. For mroe detail, check the Spell System Sample Config trigger below.

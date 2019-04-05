@@ -1,0 +1,33 @@
+Event
+    TriggerRegisterVariableEvent
+        Var   : UnitIndexEvent
+        Preset: LimitOpEqual
+        Const : 0.50
+Condition
+Action
+    IfThenElseMultiple
+        Condition
+            OperatorCompareUnitCode
+                Call  : GetUnitTypeId
+                    Array : UDexUnits
+                        Var   : UDex
+                Preset: OperatorEqualENE
+                Const : h0H7
+            OperatorCompareInteger
+                Call  : GetUnitAbilityLevelSwapped
+                    Const : A04O
+                    Array : SummonerOfUnit
+                        Var   : UDex
+                Preset: OperatorNotEqual
+                Const : 0
+        Action
+            CustomScriptCode
+                Const : 'call CSS_AddBonus(udg_UDexUnits[udg_UDex], 4, 0)'
+            CustomScriptCode
+                Const : 'call CSS_AddBonus(udg_UDexUnits[udg_UDex], 25, 1)'
+            CustomScriptCode
+                Const : 'call CSS_AddBonus(udg_UDexUnits[udg_UDex], 20, 2)'
+            UnitRemoveAbilityBJ
+                Const : A03O
+                Array : UDexUnits
+                    Var   : UDex

@@ -1,0 +1,110 @@
+Event
+Condition
+Action
+    CustomScriptCode
+        Const : 'local group udg_temp_group = CreateGroup()'
+    CustomScriptCode
+        Const : 'local location udg_temp_point'
+    SetVariable
+        Var   : temp_point
+        Call  : GetUnitLoc
+            Var   : Knockback2DUnit
+    CustomScriptCode
+        Const : 'call GroupEnumUnitsInRangeOfLoc(udg_temp_group, udg_temp_point, 200, null)'
+    IfThenElseMultiple
+        Condition
+            OperatorCompareOrderCode
+                Call  : GetUnitCurrentOrder
+                    Var   : Knockback2DUnit
+                Preset: OperatorEqualENE
+                Call  : String2OrderIdBJ
+                    Const : attackground
+        Action
+            IssueImmediateOrder
+                Var   : Knockback2DUnit
+                Preset: UnitOrderStop
+    AddSpecialEffectLocBJ
+        Var   : temp_point
+        Const : Abilities\Spells\Human\Thunderclap\ThunderClapCaster.mdl
+    DestroyEffectBJ
+        Call  : GetLastCreatedEffectBJ
+    CustomScriptCode
+        Const : 'call FlushChildHashtable(udg_Hashtable_2, -GetUnitUserData(udg_Knockback2DUnit))'
+    ForGroupMultiple
+        Var   : temp_group
+        Action
+            IfThenElseMultiple
+                Condition
+                    OperatorCompareBoolean
+                        Call  : IsUnitType
+                            Call  : GetEnumUnit
+                            Preset: UnitTypeStructure
+                        Preset: OperatorEqualENE
+                        Const : false
+                    OperatorCompareBoolean
+                        Call  : IsUnitType
+                            Call  : GetEnumUnit
+                            Preset: UnitTypeFlying
+                        Preset: OperatorEqualENE
+                        Const : false
+                    OperatorCompareInteger
+                        Call  : GetUnitAbilityLevelSwapped
+                            Const : A0C6
+                            Call  : GetEnumUnit
+                        Preset: OperatorEqual
+                        Const : 0
+                    OperatorCompareBoolean
+                        Call  : IsPlayerEnemy
+                            Call  : GetOwningPlayer
+                                Call  : GetEnumUnit
+                            Call  : GetOwningPlayer
+                                Var   : Knockback2DUnit
+                        Preset: OperatorEqualENE
+                        Const : true
+                Action
+                    UnitDamageTargetBJ
+                        Var   : Knockback2DUnit
+                        Call  : GetEnumUnit
+                        Const : 100.00
+                        Preset: AttackTypeNormal
+                        Preset: DamageTypeMagic
+                    IfThenElseMultiple
+                        Condition
+                            OrMultiple
+                                Condition
+                                    OperatorCompareBoolean
+                                        Call  : IsUnitType
+                                            Call  : GetEnumUnit
+                                            Preset: UnitTypeHero
+                                        Preset: OperatorEqualENE
+                                        Const : true
+                                    OperatorCompareBoolean
+                                        Call  : IsUnitType
+                                            Call  : GetEnumUnit
+                                            Preset: UnitTypeResistant
+                                        Preset: OperatorEqualENE
+                                        Const : true
+                        Action
+                            SetVariable
+                                Var   : GDS_Duration
+                                Const : 4.50
+                        Action
+                            SetVariable
+                                Var   : GDS_Duration
+                                Const : 6.00
+                    SetVariable
+                        Var   : GDS_Type
+                        Var   : GDS_cSTUN
+                    SetVariable
+                        Var   : GDS_Target
+                        Call  : GetEnumUnit
+                    TriggerExecute
+                        Var   : gg_trg_GDS_Main_Modifier
+    CustomScriptCode
+        Const : 'call DestroyGroup(udg_temp_group)'
+    CustomScriptCode
+        Const : 'call RemoveLocation(udg_temp_point)'
+    CustomScriptCode
+        Const : 'set udg_temp_group = null'
+    CustomScriptCode
+        Const : 'set udg_temp_point = null'

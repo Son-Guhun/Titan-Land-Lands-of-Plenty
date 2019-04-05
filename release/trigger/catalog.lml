@@ -1,0 +1,410 @@
+01-Credits: Credits
+    Comment
+    01-IMPORTANT: IMPORTANT
+        Comment
+    02-Tutorials: Tutorials
+        Comment
+    03-Models: Models
+        Comment
+    '04-Add to Credits': 'Add to Credits'
+        Comment
+    '05-Model Bugs': 'Model Bugs'
+        Comment
+    06-Plans: Plans
+        Comment
+    07-Organization: Organization
+        Comment
+    08-Hashtables: Hashtables
+        Comment
+    09-Mentality: Mentality
+        Comment
+    '10-Ability Ideas': 'Ability Ideas'
+        Comment
+    '11-Unit Balance': 'Unit Balance'
+        Comment
+    12-TODO: TODO
+        Comment
+    13-DONE: DONE
+        Comment
+    '14-DONE 2': 'DONE 2'
+        Comment
+    '15-DONE 3': 'DONE 3'
+        Comment
+    '16-DONE 3': 'DONE 3'
+        Comment
+'02-External Commands': 'External Commands'
+    '1-Generate Missing Doodad Globals': 'Generate Missing Doodad Globals'
+    '2-External Set Tiles': 'External Set Tiles'
+        Disab
+    '3-External Import All Files': 'External Import All Files'
+        Disab
+'03-Main Systems': 'Main Systems'
+    Comment
+'04-Map Init': 'Map Init'
+    1-Functions: Functions
+        Comment
+    2-Init: Init
+    '3-Init Deco Builders': 'Init Deco Builders'
+    '4-Init Quests': 'Init Quests'
+    5-Triggers: Triggers
+        Comment
+    '6-Init Main': 'Init Main'
+        Run
+    '7-Init 0 seconds': 'Init 0 seconds'
+    '8-Init Create Events': 'Init Create Events'
+'05-Map System': 'Map System'
+    '01-System Set Unit Color': 'System Set Unit Color'
+    '02-System Level Up Heroes': 'System Level Up Heroes'
+    '03-System Autoname': 'System Autoname'
+    '04-System TPalace Doors': 'System TPalace Doors'
+    '05-System Detect Leaver': 'System Detect Leaver'
+    '06-System Player Locations': 'System Player Locations'
+    '07-System Give Potion to Hero': 'System Give Potion to Hero'
+    08-Cleanup: Cleanup
+        Comment
+    '09-System Cleanup Death': 'System Cleanup Death'
+    '10-System Cleanup Removal': 'System Cleanup Removal'
+    '11-System Cleanup Owner Change': 'System Cleanup Owner Change'
+    '12-System Cleanup UnitGroups': 'System Cleanup UnitGroups'
+    '13-System Cleanup Items': 'System Cleanup Items'
+    '14-Unit Limit System': 'Unit Limit System'
+        Comment
+    '15-System Limit Register': 'System Limit Register'
+    '16-System Limit Type Change': 'System Limit Type Change'
+    '17-Titan Powers': 'Titan Powers'
+        Comment
+    '18-System Titan Palace Item Prot': 'System Titan Palace Item Prot'
+    '19-System Titan Palace Prot': 'System Titan Palace Prot'
+    '20-System Titan GiveUnit': 'System Titan GiveUnit'
+    '21-System Titan Powers': 'System Titan Powers'
+    '22-Prevent Saving': 'Prevent Saving'
+        Comment
+    '23-System PreventSave Catch': 'System PreventSave Catch'
+    '24-System PreventSave Clear': 'System PreventSave Clear'
+'06-Player Commands': 'Player Commands'
+    '01-Commands Set Color': 'Commands Set Color'
+    '02-Commands Toggle Autoname': 'Commands Toggle Autoname'
+    '03-Commands Name Unit': 'Commands Name Unit'
+    '04-Commands Give': 'Commands Give'
+    '05-Commands Deleteme': 'Commands Deleteme'
+    '06-Commands Deco Spawn': 'Commands Deco Spawn'
+    '07-Commands Hide Decos': 'Commands Hide Decos'
+    '08-Commands Select Search': 'Commands Select Search'
+    '09-Commands Neutral': 'Commands Neutral'
+    '10-Commands Take': 'Commands Take'
+    '11-Commands Copy': 'Commands Copy'
+    '12-Commands Remove Kill': 'Commands Remove Kill'
+    '13-Commands StartRectCamera': 'Commands StartRectCamera'
+    '14-Commands Set Alliance': 'Commands Set Alliance'
+    '15-Commands Set Name': 'Commands Set Name'
+    '16-Commands Real Name': 'Commands Real Name'
+    '17-Titan Commands': 'Titan Commands'
+        Comment
+    '18-CommandsR Toggle Prot': 'CommandsR Toggle Prot'
+    '19-CommandsR Make Titan': 'CommandsR Make Titan'
+    '20-CommandsR Set Limits for Units': 'CommandsR Set Limits for Units'
+    '21-CommandsR Delete': 'CommandsR Delete'
+    '22-CommandsR Fog': 'CommandsR Fog'
+    '23-CommandsR Water Color': 'CommandsR Water Color'
+    '24-CommandsR Mind': 'CommandsR Mind'
+    '25-CommandsR Kick': 'CommandsR Kick'
+    '26-CommandsR The Creator': 'CommandsR The Creator'
+    '27-CommandsR Toggle Dmg Tags': 'CommandsR Toggle Dmg Tags'
+    '28-Decoration Commands': 'Decoration Commands'
+        Comment
+    '29-CommandsD Control': 'CommandsD Control'
+    '30-CommandsD Set AoE': 'CommandsD Set AoE'
+    '31-CommandsD Set Tree Space': 'CommandsD Set Tree Space'
+    '32-CommandsD Set Parameters': 'CommandsD Set Parameters'
+    '33-CommandsD Set RGB': 'CommandsD Set RGB'
+    '34-CommandsD Unit Mods': 'CommandsD Unit Mods'
+    '35-CommandsD Add Tag': 'CommandsD Add Tag'
+    '36-CommandsD Locust': 'CommandsD Locust'
+    '37-CommandsD Variation': 'CommandsD Variation'
+'07-Decoration Systems': 'Decoration Systems'
+    Comment
+'08-Deco Builders': 'Deco Builders'
+    '1-DecoBuilder Movement': 'DecoBuilder Movement'
+    '2-DecoBuilder Increase Count': 'DecoBuilder Increase Count'
+    '3-DecoBuilder RangedBuild': 'DecoBuilder RangedBuild'
+    '4-DecoBuilder Cast Ability': 'DecoBuilder Cast Ability'
+09-Decorations: Decorations
+    '1-Deco DisableMovement': 'Deco DisableMovement'
+    '2-Deco Instant Upgrade': 'Deco Instant Upgrade'
+    '3-Deco Root Anywhere': 'Deco Root Anywhere'
+    4-Abilities: Abilities
+        Comment
+    '5-Deco Movement': 'Deco Movement'
+    '6-Deco Waygate': 'Deco Waygate'
+    '7-Deco Gates': 'Deco Gates'
+'10-Terrain Changer': 'Terrain Changer'
+    '1-TerrainSystem Cast Ability': 'TerrainSystem Cast Ability'
+'11-Tree Spawning': 'Tree Spawning'
+    '1-TreeSystem Create Trees': 'TreeSystem Create Trees'
+    '2-TreeSystem Cast Ability': 'TreeSystem Cast Ability'
+    '3-TreeSystem Choose Tree': 'TreeSystem Choose Tree'
+12----------------------------------------: ---------------------------------------
+    Comment
+13-Systems: Systems
+    Comment
+14-------------------: ------------------
+    Comment
+15-vJass: vJass
+    Comment
+'16-Data Structures': 'Data Structures'
+    1-Lists: Lists
+    '2-GLHS Main': 'GLHS Main'
+    '3-GMUI Main': 'GMUI Main'
+17-Tables: Tables
+    1-External: External
+        Comment
+    2-Table: Table
+    '3-By Guhun': 'By Guhun'
+        Comment
+    4-ConstTable: ConstTable
+    5-HashtableWrapper: HashtableWrapper
+    6-TableStruct: TableStruct
+'18-Multipatrol (TODO)': 'Multipatrol (TODO)'
+    1-MultiPatrol: MultiPatrol
+    '2-MultiPatrol Addons': 'MultiPatrol Addons'
+19-Rects: Rects
+    1-UserDefinedRects: UserDefinedRects
+    2-RectGenerator: RectGenerator
+    3-RectEnvironment: RectEnvironment
+    4-AutoRectEnvironment: AutoRectEnvironment
+20-Tiles: Tiles
+    1-TileDefinition: TileDefinition
+    2-StructureTileDefinition: StructureTileDefinition
+21-vJass: vJass
+    01-External: External
+        Comment
+    02-WorldBounds: WorldBounds
+    03-DestructableLib: DestructableLib
+    04-GroupTools: GroupTools
+    05-DummyRecycler: DummyRecycler
+    06-Id2String: Id2String
+    '07-By Guhun': 'By Guhun'
+        Comment
+    08-CutToComma: CutToComma
+    09-UnitVisualMods: UnitVisualMods
+    '10-Camera System': 'Camera System'
+    11-MoveSpeedBonus: MoveSpeedBonus
+    '12-Move Speed Modification': 'Move Speed Modification'
+    13-MultiBoard: MultiBoard
+    14-GameTime: GameTime
+22-Map-specific: Map-specific
+    1-Debug: Debug
+    2-ArrayAgent: ArrayAgent
+    3-DummyDmg: DummyDmg
+    4-PlayerUnitLimit: PlayerUnitLimit
+    5-TimedBonus: TimedBonus
+    '6-Victim Tracker': 'Victim Tracker'
+        Disab
+    7-LoPHeader: LoPHeader
+23-External: External
+    Comment
+'24-CSS System': 'CSS System'
+    01-CustomStatSystem: CustomStatSystem
+    '02-BonusMod standalone': 'BonusMod standalone'
+        Comment
+    '03-CSS Standalone Bonus': 'CSS Standalone Bonus'
+    '04-Color codes for info panel': 'Color codes for info panel'
+        Comment
+    '05-Color Code Setting': 'Color Code Setting'
+    06-Instruction: Instruction
+        Comment
+    '07-CSS Item Functions': 'CSS Item Functions'
+        Disab
+    '08-Item Declaration': 'Item Declaration'
+        Comment
+    '09-Examplary Item Declaration': 'Examplary Item Declaration'
+        Comment
+    '10-Item Declaration': 'Item Declaration'
+        Disab
+'25-Unit Event': 'Unit Event'
+    '1-Unit Event Config': 'Unit Event Config'
+    '2-Unit Event': 'Unit Event'
+'26-Damage Engine': 'Damage Engine'
+    '1-Damage Engine Config': 'Damage Engine Config'
+    '2-Damage Engine': 'Damage Engine'
+    '3-Life Drain Fix': 'Life Drain Fix'
+    '4-Damage Tag': 'Damage Tag'
+    5-Bash: Bash
+    '6-Combat Tag': 'Combat Tag'
+'27-GUI Spell System': 'GUI Spell System'
+    '1-Read Me': 'Read Me'
+        Comment
+    '2-Spell System Config': 'Spell System Config'
+    '3-Spell System': 'Spell System'
+'28-Knockback 2D': 'Knockback 2D'
+    '1-Knockback 2D Config': 'Knockback 2D Config'
+    '2-Knockback 2D Destroy': 'Knockback 2D Destroy'
+    '3-Knockback 2D': 'Knockback 2D'
+    '4-Knockback 2D System': 'Knockback 2D System'
+    '5-Knockback 2D System Copy': 'Knockback 2D System Copy'
+        Disab
+    '6-K2D OnLoop Template': 'K2D OnLoop Template'
+        Disab
+'29-By Guhun': 'By Guhun'
+    Comment
+'30-Save System': 'Save System'
+    '01-How to Import': 'How to Import'
+        Comment
+    '02-SaveLoad Setup': 'SaveLoad Setup'
+    '03-SaveLoad Commands': 'SaveLoad Commands'
+    '04-SaveLoad Set Center Numbers': 'SaveLoad Set Center Numbers'
+    05-Save: Save
+        Comment
+    06-SaveCall: SaveCall
+    07-SaveLoop: SaveLoop
+    '08-SaveLoop Dest': 'SaveLoop Dest'
+    '09-SaveLoop Terrain': 'SaveLoop Terrain'
+    10-Load: Load
+        Comment
+    11-LoadRequest: LoadRequest
+    12-LoadUnit: LoadUnit
+        Closed
+    '13-LoadUnit Extra': 'LoadUnit Extra'
+        Closed
+    14-LoadDest: LoadDest
+    15-LoadTerrain: LoadTerrain
+    16-vJass: vJass
+        Comment
+    17-SaveNLoad: SaveNLoad
+'31-Circle Object System': 'Circle Object System'
+    '1-GCOS Init Copy': 'GCOS Init Copy'
+    '2-Circle Object System': 'Circle Object System'
+'32-Disable System - GDS': 'Disable System - GDS'
+    '1-GDS Setup': 'GDS Setup'
+    '2-GDS Main Modifier': 'GDS Main Modifier'
+    '3-GDS Main': 'GDS Main'
+33----------------------------------------: ---------------------------------------
+    Comment
+34-Spells: Spells
+    Comment
+35-------------------: ------------------
+    Comment
+'36-Spell System Spells': 'Spell System Spells'
+    '01-Spell System Filter Decorations': 'Spell System Filter Decorations'
+    '02-Initialize Spells': 'Initialize Spells'
+    '03-Spell System Sample Config': 'Spell System Sample Config'
+        Disab
+    '04-Event_ OnStart': 'Event: OnStart'
+        Comment
+    '05-Spatial Distortion Cast': 'Spatial Distortion Cast'
+    '06-AoE Snare': 'AoE Snare'
+    '07-Mass Banish': 'Mass Banish'
+    '08-Make Unit Selectable': 'Make Unit Selectable'
+    '09-Angel Judgement': 'Angel Judgement'
+    '10-Tyrael Judgement': 'Tyrael Judgement'
+    '11-Tyrael WotT Cast': 'Tyrael WotT Cast'
+    '12-Chain Slow': 'Chain Slow'
+    13-Stormstrike: Stormstrike
+    14-Replenish: Replenish
+    '15-Disarming Blow': 'Disarming Blow'
+    '16-Scatter Shot': 'Scatter Shot'
+    '17-Imperius Light of Valor': 'Imperius Light of Valor'
+    '18-War Stomp': 'War Stomp'
+    '19-Carrion Burst': 'Carrion Burst'
+    '20-Burst of Despair': 'Burst of Despair'
+    '21-Greater Shockwave': 'Greater Shockwave'
+    22-Bladespin: Bladespin
+    '23-Charge Cast': 'Charge Cast'
+    '24-Charge Collision': 'Charge Collision'
+    '25-Charge End': 'Charge End'
+    '26-Thunderstrike Cast': 'Thunderstrike Cast'
+    '27-Thunderstrike Impact': 'Thunderstrike Impact'
+    28-Waterspout: Waterspout
+    '29-Battle Jump Cast': 'Battle Jump Cast'
+    '30-Battle Jump End': 'Battle Jump End'
+    '31-Ethereal Jaunt': 'Ethereal Jaunt'
+    '32-Power Surge': 'Power Surge'
+'37-No Spell System Spells': 'No Spell System Spells'
+    1-FilterTransformations: FilterTransformations
+    '2-Ability Cooldown': 'Ability Cooldown'
+    3-Summon: Summon
+    '4-Sargeras Silence New': 'Sargeras Silence New'
+    '5-Aura Of Restitution': 'Aura Of Restitution'
+    '6-Cosmosis Stop Time': 'Cosmosis Stop Time'
+    '7-Cosmosis StTm Noise': 'Cosmosis StTm Noise'
+        Closed
+    '8-Cosmosis Give Item': 'Cosmosis Give Item'
+    '9-TheCreator Invincibility': 'TheCreator Invincibility'
+'38-Knockback Samples': 'Knockback Samples'
+    '1-On Damage': 'On Damage'
+        Disab
+    '2-On Impact': 'On Impact'
+        Disab
+    '3-On Spell Cast': 'On Spell Cast'
+        Disab
+    '4-On Spell Stop': 'On Spell Stop'
+        Disab
+    '5-Stop time of day': 'Stop time of day'
+        Disab
+    6-Test: Test
+        Disab
+39-Items: Items
+    Comment
+'40-Fixed Spells': 'Fixed Spells'
+    '01-Flames of Azzinoth': 'Flames of Azzinoth'
+        Comment
+    02-FlamesOfAzzinoth: FlamesOfAzzinoth
+        Disab
+    '03-Flame Dies': 'Flame Dies'
+        Disab
+    04-Comet: Comet
+        Comment
+    '05-Comet Cast': 'Comet Cast'
+        Disab
+    '06-Comet Summon': 'Comet Summon'
+        Disab
+    '07-Comet Impact': 'Comet Impact'
+        Disab
+    08-Pyroblast: Pyroblast
+        Comment
+    '09-Pyroblast Cast': 'Pyroblast Cast'
+        Disab
+    '10-Pyroblast Impact': 'Pyroblast Impact'
+        Disab
+    '11-Pyroblast Effect 1': 'Pyroblast Effect 1'
+        Disab
+    '12-Pyroblast Effect 2': 'Pyroblast Effect 2'
+        Disab
+41-Items: Items
+    '1-Glacius'' Ice Skull': 'Glacius'' Ice Skull'
+        Comment
+    '2-Frost Storm Casting': 'Frost Storm Casting'
+        Disab
+    '3-Frost Storm Effect': 'Frost Storm Effect'
+        Disab
+    '4-Silver Key': 'Silver Key'
+        Comment
+    '5-Silver Key Trigger': 'Silver Key Trigger'
+    '6-Pure Water': 'Pure Water'
+        Comment
+    '7-Pure Water Effect': 'Pure Water Effect'
+    8-Sword: Sword
+        Comment
+    9-Sword: Sword
+        Disab
+'42-Legendary Scroll Spell': 'Legendary Scroll Spell'
+    '1-Legendary Scroll Spell': 'Legendary Scroll Spell'
+        Comment
+    '2-ScrollSystem Learn Spell': 'ScrollSystem Learn Spell'
+43----------------------------------------: ---------------------------------------
+    Comment
+44-TESTING: TESTING
+    Comment
+    '1-Global Return Library': 'Global Return Library'
+        Disab
+    '2-Ban Player': 'Ban Player'
+        Disab
+    '3-Uproot Detect': 'Uproot Detect'
+        Disab
+    '4-Test SetUnitX': 'Test SetUnitX'
+        Disab
+'45-Destructable Systems': 'Destructable Systems'
+    '1-Untitled Trigger 002': 'Untitled Trigger 002'
+        Disab
+    '2-Create Destructable': 'Create Destructable'
+        Disab

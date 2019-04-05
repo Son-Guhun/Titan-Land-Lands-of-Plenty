@@ -1,0 +1,147 @@
+Event
+    MapInitializationEvent
+Condition
+Action
+    CommentString
+        Const : ' '
+    CommentString
+        Const : 'I have created this trigger as a means to show users what can (or must) be configured for each spell'
+    CommentString
+        Const : ' '
+    CommentString
+        Const : 'You must assign an ability ID to let the system know which spell you''re using:'
+    CommentString
+        Const : ' '
+    SetVariable
+        Var   : Spell__Ability
+        Call  : GetSpellAbilityId
+    CommentString
+        Const : ' '
+    CommentString
+        Const : 'Next, you must pick at least one of the following types of triggers to run at a phase of the spell:'
+    CommentString
+        Const : ' '
+    SetVariable
+        Var   : Spell__Trigger_OnChannel
+        Call  : GetTriggeringTrigger
+    SetVariable
+        Var   : Spell__Trigger_OnCast
+        Call  : GetTriggeringTrigger
+    SetVariable
+        Var   : Spell__Trigger_OnEffect
+        Call  : GetTriggeringTrigger
+    SetVariable
+        Var   : Spell__Trigger_OnFinish
+        Call  : GetTriggeringTrigger
+    CommentString
+        Const : ' '
+    CommentString
+        Const : 'Next, you can specify a trigger to run periodically, if you want that type of behavior.'
+    CommentString
+        Const : ' '
+    SetVariable
+        Var   : Spell__Trigger_OnLoop
+        Call  : GetTriggeringTrigger
+    CommentString
+        Const : ' '
+    CommentString
+        Const : 'Added 28 Feb 2016: You can now specify Spell__Time, Spell__Duration and Spell__DurationPerLevel from the Config trigger.'
+    CommentString
+        Const : 'NOTE: With these settings, the OnLoop trigger will run every 1 second for 4/5/6 seconds'
+    CommentString
+        Const : ' '
+    SetVariable
+        Var   : Spell__Time
+        Const : 1.00
+    SetVariable
+        Var   : Spell__Duration
+        Const : 3.00
+    SetVariable
+        Var   : Spell__DurationPerLevel
+        Const : 1.00
+    CommentString
+        Const : ' '
+    CommentString
+        Const : 'The next ones are for the InRange filter, if you use it. You don''t have to include any of these for many typical spells.'
+    CommentString
+        Const : 'TIPS:'
+    CommentString
+        Const : '> For healing spells, you''ll want to set AllowAllies to True and AllowEnemies to False.'
+    CommentString
+        Const : '> If you are creating a "kill unit" spell, you''ll want to set AllowHero to False.'
+    CommentString
+        Const : '> If you are making a custom "Resurrect", you''ll want to set AllowDead to True and AllowLiving to False.'
+    CommentString
+        Const : '> AllowMagicImmune as False also prevents invulnerable units from being picked, which is a plus in my opinion.'
+    CommentString
+        Const : ' '
+    SetVariable
+        Var   : Spell__Filter_AllowEnemy
+        Const : true
+    SetVariable
+        Var   : Spell__Filter_AllowLiving
+        Const : true
+    SetVariable
+        Var   : Spell__Filter_AllowHero
+        Const : true
+    SetVariable
+        Var   : Spell__Filter_AllowNonHero
+        Const : true
+    SetVariable
+        Var   : Spell__Filter_AllowAlly
+        Const : false
+    SetVariable
+        Var   : Spell__Filter_AllowDead
+        Const : false
+    SetVariable
+        Var   : Spell__Filter_AllowFlying
+        Const : false
+    SetVariable
+        Var   : Spell__Filter_AllowMechanical
+        Const : false
+    SetVariable
+        Var   : Spell__Filter_AllowStructure
+        Const : false
+    SetVariable
+        Var   : Spell__Filter_AllowMagicImmune
+        Const : false
+    CommentString
+        Const : ' '
+    CommentString
+        Const : 'NEW: Added 17 May 2016 - you can specify your own trigger conditions to add to the InRange check'
+    CommentString
+        Const : 'The trigger conditions reference the unit "Spell__InRangeUnit"'
+    CommentString
+        Const : ' '
+    Disab: SetVariable
+        Var   : Spell__Trigger_InRangeFilter
+        Var   : gg_trg_Spell_System_Sample_Filter
+    CommentString
+        Const : ' '
+    CommentString
+        Const : 'If you want to keep track of which units have already been hit by the spell, set UseTargetGroup to True'
+    CommentString
+        Const : 'TIPS:'
+    CommentString
+        Const : '> The group is called Spell__TargetGroup. It starts empty and will destroy itself when the spell is finished'
+    CommentString
+        Const : '> After using a Spell__InRange check, you can use "Add all units in Spell__InRangeGroup to Spell__TargetGroup"'
+    CommentString
+        Const : ' '
+    SetVariable
+        Var   : Spell__UseTargetGroup
+        Const : true
+    CommentString
+        Const : ' '
+    CommentString
+        Const : 'When everything is set the way you want it, run Spell System <gen>:'
+    CommentString
+        Const : ' '
+    TriggerExecute
+        Var   : gg_trg_Spell_System
+    CommentString
+        Const : ' '
+    CommentString
+        Const : 'To recap, you MUST set Spell__Ability and you MUST have an OnChannel/Cast/Effect or Finish trigger'
+    CommentString
+        Const : ' '

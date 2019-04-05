@@ -1,5 +1,0 @@
-This trigger contains commands for:
-
--Spawning a Wandering Soul
--Spawning a Rect Generator
--Camera adjustments

@@ -1,0 +1,31 @@
+Event
+    TriggerRegisterAnyUnitEventBJ
+        Preset: PlayerUnitEventDeath
+Condition
+    OperatorCompareUnitCode
+        Call  : GetUnitTypeId
+            Call  : GetDyingUnit
+        Preset: OperatorEqualENE
+        Const : o00C
+Action
+    CustomScriptCode
+        Const : 'local location udg_temp_point'
+    SetVariable
+        Var   : temp_point
+        Call  : GetUnitLoc
+            Call  : GetDyingUnit
+    CreateNUnitsAtLoc
+        Const : 1
+        Const : o00A
+        Call  : GetOwningPlayer
+            Call  : GetDyingUnit
+        Var   : temp_point
+        Preset: RealUnitFacing
+    UnitApplyTimedLifeBJ
+        Const : 0.80
+        Preset: TimedLifeBuffCodeGeneric
+        Call  : GetLastCreatedUnit
+    CustomScriptCode
+        Const : 'call RemoveLocation(udg_temp_point)'
+    CustomScriptCode
+        Const : 'set udg_temp_point = null'

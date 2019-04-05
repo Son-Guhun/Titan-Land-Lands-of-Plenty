@@ -1,0 +1,153 @@
+Event
+Condition
+Action
+    SetVariable
+        Var   : Spell__InRangePoint
+        Var   : Spell__CastPoint
+    SetVariable
+        Var   : Spell__InRange
+        Const : 700.00
+    SaveIntegerBJ
+        Const : 0
+        Const : 0
+        Var   : Spell__Index
+        Var   : Spell__Hash
+    SaveIntegerBJ
+        Const : 0
+        Const : 1
+        Var   : Spell__Index
+        Var   : Spell__Hash
+    SetUnitManaBJ
+        Var   : Spell__Caster
+        Call  : OperatorReal
+            Call  : GetUnitStateSwap
+                Preset: UnitStateMana
+                Var   : Spell__Caster
+            Preset: OperatorSubtract
+            Const : 4.00
+    ForGroupMultiple
+        Var   : Spell__InRangeGroup
+        Action
+            SetVariable
+                Var   : GDS_Target
+                Call  : GetEnumUnit
+            IfThenElseMultiple
+                Condition
+                    OperatorCompareReal
+                        Call  : GetUnitStateSwap
+                            Preset: UnitStateLife
+                            Call  : GetEnumUnit
+                        Preset: OperatorLessEq
+                        Call  : OperatorReal
+                            Call  : GetUnitStateSwap
+                                Preset: UnitStateMaxLife
+                                Call  : GetEnumUnit
+                            Preset: OperatorSubtract
+                            Const : 22.50
+                    OperatorCompareInteger
+                        Call  : LoadIntegerBJ
+                            Const : 0
+                            Var   : Spell__Index
+                            Var   : Spell__Hash
+                        Preset: OperatorLess
+                        Const : 5
+                    OperatorCompareReal
+                        Call  : GetUnitStateSwap
+                            Preset: UnitStateMana
+                            Var   : Spell__Caster
+                        Preset: OperatorGreaterEq
+                        Const : 2.50
+                Action
+                    SaveIntegerBJ
+                        Call  : OperatorInt
+                            Call  : LoadIntegerBJ
+                                Const : 0
+                                Var   : Spell__Index
+                                Var   : Spell__Hash
+                            Preset: OperatorAdd
+                            Const : 1
+                        Const : 0
+                        Var   : Spell__Index
+                        Var   : Spell__Hash
+                    AddSpecialEffectTargetUnitBJ
+                        Const : overhead
+                        Call  : GetEnumUnit
+                        Const : Abilities\Spells\Items\ResourceItems\ResourceEffectTarget.mdl
+                    DestroyEffectBJ
+                        Call  : GetLastCreatedEffectBJ
+                    SetUnitLifeBJ
+                        Call  : GetEnumUnit
+                        Call  : OperatorReal
+                            Call  : GetUnitStateSwap
+                                Preset: UnitStateLife
+                                Call  : GetEnumUnit
+                            Preset: OperatorAdd
+                            Const : 45.00
+                    SetUnitManaBJ
+                        Var   : Spell__Caster
+                        Call  : OperatorReal
+                            Call  : GetUnitStateSwap
+                                Preset: UnitStateMana
+                                Var   : Spell__Caster
+                            Preset: OperatorSubtract
+                            Const : 2.50
+            IfThenElseMultiple
+                Condition
+                    OperatorCompareReal
+                        Call  : GetUnitStateSwap
+                            Preset: UnitStateMana
+                            Call  : GetEnumUnit
+                        Preset: OperatorLessEq
+                        Call  : OperatorReal
+                            Call  : GetUnitStateSwap
+                                Preset: UnitStateMaxMana
+                                Call  : GetEnumUnit
+                            Preset: OperatorSubtract
+                            Const : 10.00
+                    OperatorCompareInteger
+                        Call  : LoadIntegerBJ
+                            Const : 1
+                            Var   : Spell__Index
+                            Var   : Spell__Hash
+                        Preset: OperatorLess
+                        Const : 5
+                    OperatorCompareReal
+                        Call  : GetUnitStateSwap
+                            Preset: UnitStateMana
+                            Var   : Spell__Caster
+                        Preset: OperatorGreaterEq
+                        Const : 2.50
+                Action
+                    SaveIntegerBJ
+                        Call  : OperatorInt
+                            Call  : LoadIntegerBJ
+                                Const : 1
+                                Var   : Spell__Index
+                                Var   : Spell__Hash
+                            Preset: OperatorAdd
+                            Const : 1
+                        Const : 1
+                        Var   : Spell__Index
+                        Var   : Spell__Hash
+                    AddSpecialEffectTargetUnitBJ
+                        Const : chest
+                        Call  : GetEnumUnit
+                        Const : Abilities\Spells\Undead\ReplenishMana\SpiritTouchTarget.mdl
+                    DestroyEffectBJ
+                        Call  : GetLastCreatedEffectBJ
+                    SetUnitManaBJ
+                        Call  : GetEnumUnit
+                        Call  : OperatorReal
+                            Call  : GetUnitStateSwap
+                                Preset: UnitStateMana
+                                Call  : GetEnumUnit
+                            Preset: OperatorAdd
+                            Const : 10.00
+                    SetUnitManaBJ
+                        Var   : Spell__Caster
+                        Call  : OperatorReal
+                            Call  : GetUnitStateSwap
+                                Preset: UnitStateMana
+                                Var   : Spell__Caster
+                            Preset: OperatorSubtract
+                            Const : 2.50

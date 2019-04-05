@@ -1,0 +1,41 @@
+Event
+Condition
+Action
+    SetVariable
+        Var   : GDS_Type
+        Var   : GDS_cSTUN
+    IfThenElseMultiple
+        Condition
+            OrMultiple
+                Condition
+                    OperatorCompareBoolean
+                        Call  : IsUnitType
+                            Var   : Spell__Target
+                            Preset: UnitTypeHero
+                        Preset: OperatorEqualENE
+                        Const : true
+                    OperatorCompareBoolean
+                        Call  : IsUnitType
+                            Var   : Spell__Target
+                            Preset: UnitTypeResistant
+                        Preset: OperatorEqualENE
+                        Const : true
+        Action
+            SetVariable
+                Var   : GDS_Duration
+                Const : 1.00
+        Action
+            SetVariable
+                Var   : GDS_Duration
+                Const : 2.00
+    SetVariable
+        Var   : GDS_Target
+        Var   : Spell__Target
+    UnitDamageTargetBJ
+        Var   : Spell__Caster
+        Var   : Spell__Target
+        Const : 100.00
+        Preset: AttackTypeNormal
+        Preset: DamageTypeMagic
+    TriggerExecute
+        Var   : gg_trg_GDS_Main_Modifier

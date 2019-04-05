@@ -1,0 +1,1 @@
+-Observers cannot send chat messages, need to find map flag for referees to automatically set them to ON

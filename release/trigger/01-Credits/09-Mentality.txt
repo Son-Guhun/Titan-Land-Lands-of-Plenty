@@ -1,0 +1,7 @@
+1: Create as few triggers as possible, without sacrificng readability too much:
+    -Initializing triggers can lead to the OP limit being hit, so the idea is to be conservative as to their usage
+    -That means that long IF chains are sometimes going to happen :)
+
+2: Create as few variables as possible:
+    -Use a lot of local variables (shadowed globals)
+    -Don't sacrifice readability though, and prioritize variables that permit system expandability or ease of edit

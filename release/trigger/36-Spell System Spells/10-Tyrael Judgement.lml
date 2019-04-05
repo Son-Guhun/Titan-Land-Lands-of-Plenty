@@ -1,0 +1,80 @@
+Event
+Condition
+Action
+    SetVariable
+        Var   : GDS_Type
+        Var   : GDS_cSTUN
+    IfThenElseMultiple
+        Condition
+            OrMultiple
+                Condition
+                    OperatorCompareBoolean
+                        Call  : IsUnitType
+                            Var   : Spell__Target
+                            Preset: UnitTypeHero
+                        Preset: OperatorEqualENE
+                        Const : true
+                    OperatorCompareBoolean
+                        Call  : IsUnitType
+                            Var   : Spell__Target
+                            Preset: UnitTypeResistant
+                        Preset: OperatorEqualENE
+                        Const : true
+        Action
+            SetVariable
+                Var   : GDS_Duration
+                Call  : OperatorReal
+                    Const : 3.00
+                    Preset: OperatorMultiply
+                    Call  : OperatorReal
+                        Const : 2.00
+                        Preset: OperatorSubtract
+                        Call  : OperatorReal
+                            Call  : GetUnitStateSwap
+                                Preset: UnitStateLife
+                                Var   : Spell__Caster
+                            Preset: OperatorDivide
+                            Call  : GetUnitStateSwap
+                                Preset: UnitStateMaxLife
+                                Var   : Spell__Caster
+        Action
+            SetVariable
+                Var   : GDS_Duration
+                Call  : OperatorReal
+                    Const : 5.00
+                    Preset: OperatorMultiply
+                    Call  : OperatorReal
+                        Const : 2.00
+                        Preset: OperatorSubtract
+                        Call  : OperatorReal
+                            Call  : GetUnitStateSwap
+                                Preset: UnitStateLife
+                                Var   : Spell__Caster
+                            Preset: OperatorDivide
+                            Call  : GetUnitStateSwap
+                                Preset: UnitStateMaxLife
+                                Var   : Spell__Caster
+    SetVariable
+        Var   : GDS_Target
+        Var   : Spell__Target
+    UnitDamageTargetBJ
+        Var   : Spell__Caster
+        Var   : Spell__Target
+        Call  : OperatorReal
+            Const : 300.00
+            Preset: OperatorMultiply
+            Call  : OperatorReal
+                Const : 2.00
+                Preset: OperatorSubtract
+                Call  : OperatorReal
+                    Call  : GetUnitStateSwap
+                        Preset: UnitStateLife
+                        Var   : Spell__Caster
+                    Preset: OperatorDivide
+                    Call  : GetUnitStateSwap
+                        Preset: UnitStateMaxLife
+                        Var   : Spell__Caster
+        Preset: AttackTypeNormal
+        Preset: DamageTypeMagic
+    TriggerExecute
+        Var   : gg_trg_GDS_Main_Modifier

@@ -1,0 +1,267 @@
+Event
+    TriggerRegisterVariableEvent
+        Var   : UnitIndexEvent
+        Preset: LimitOpEqual
+        Const : 3.00
+Condition
+Action
+    CommentString
+        Const : --------------------------------------
+    CommentString
+        Const : 'CHANGED BY GUHUN TO BETTER FIT THE MAP'
+    SetVariable
+        Var   : K2DRegion
+        Call  : GetPlayableMapRect
+    SetVariable
+        Var   : K2DMaxX
+        Call  : GetRectMaxX
+            Var   : K2DRegion
+    SetVariable
+        Var   : K2DMaxY
+        Call  : GetRectMaxY
+            Var   : K2DRegion
+    SetVariable
+        Var   : K2DMinX
+        Call  : GetRectMinX
+            Var   : K2DRegion
+    SetVariable
+        Var   : K2DMinY
+        Call  : GetRectMinY
+            Var   : K2DRegion
+    SetVariable
+        Var   : K2DRegion
+        Call  : GetEntireMapRect
+    CommentString
+        Const : --------------------------------------
+    CommentString
+        Const : ' '
+    CommentString
+        Const : 'Configure things below'
+    CommentString
+        Const : ' '
+    CommentString
+        Const : 'Set the timeout to be used throughout the system'
+    CommentString
+        Const : ' '
+    SetVariable
+        Var   : K2DTimeout
+        Call  : OperatorReal
+            Const : 1.00
+            Preset: OperatorDivide
+            Const : 60.00
+    CommentString
+        Const : ' '
+    CommentString
+        Const : 'Robust Pathing at 0 is only safe for collision sizes 16 and lower, but requires only one SetItemPosition check per timeout.'
+    CommentString
+        Const : '-------- 1 checks collision vertically and horizontally to momentum. Uses an extra 4 SetItemPosition checks pet timeout.'
+    CommentString
+        Const : '-------- 2 checks collision diagonally with momentum. Uses a total of 9 SetItemPosition checks per timeout.'
+    CommentString
+        Const : 'In any case, if the unit only has size 16 or lower collision, only one SetItemPosition check will be used for it.'
+    CommentString
+        Const : 'If RobustPathing is set to 2 and the unit has 36 or less collision, it will only use the normal check of 5 SetItemPosition calls'
+    CommentString
+        Const : 'The only reason to use robustness above 1 is for visual continuity - it features potentially-less glitchy movement.'
+    CommentString
+        Const : ' '
+    SetVariable
+        Var   : Knockback2DRobustPathing
+        Const : 0
+    CommentString
+        Const : ' '
+    CommentString
+        Const : 'Keep the friction between 0.00 and 1.00, At 0.00, friction keeps the unit at the same speed for the knockback'
+    CommentString
+        Const : '1.00 friction will be an evenly-distributed deceleration which sees the unit slow to a complete stop'
+    CommentString
+        Const : 'Friction outside of these bounds gives the knockback a boomerang-effect, so you are welcome to experiment.'
+    CommentString
+        Const : ' '
+    SetVariable
+        Var   : Knockback2DDefaultFriction
+        Const : 1.00
+    SetVariable
+        Var   : Knockback2DFriction
+        Var   : Knockback2DDefaultFriction
+    CommentString
+        Const : ' '
+    CommentString
+        Const : 'Determine the default bouncing behavior of units. You can set this before knocking a unit back.'
+    CommentString
+        Const : ' '
+    SetVariable
+        Var   : Knockback2DDefaultBounce
+        Const : true
+    SetVariable
+        Var   : Knockback2DBounces
+        Var   : Knockback2DDefaultBounce
+    CommentString
+        Const : ' '
+    CommentString
+        Const : 'Determine the default mechanics of whether a unit should be unable to move while knocked back'
+    CommentString
+        Const : ' '
+    SetVariable
+        Var   : Knockback2DDefaultPause
+        Const : false
+    SetVariable
+        Var   : Knockback2DPause
+        Var   : Knockback2DDefaultPause
+    CommentString
+        Const : ' '
+    CommentString
+        Const : 'Determine if surrounding trees should be killed by default or not'
+    CommentString
+        Const : ' '
+    SetVariable
+        Var   : Knockback2DDefaultKillTrees
+        Const : false
+    SetVariable
+        Var   : Knockback2DKillTrees
+        Var   : Knockback2DDefaultKillTrees
+    CommentString
+        Const : ' '
+    CommentString
+        Const : 'If so, how wide should the radius be? 128.00 should be the minimum if you use pathing robustness greater than 0.'
+    CommentString
+        Const : 'The minimum should be 64 if you use a robustness of 0.'
+    CommentString
+        Const : ' '
+    SetVariable
+        Var   : Knockback2DDefaultDestRadius
+        Const : 128.00
+    SetVariable
+        Var   : Knockback2DDestRadius
+        Var   : Knockback2DDefaultDestRadius
+    CommentString
+        Const : ' '
+    CommentString
+        Const : 'The "attack" option below will destroy any valid debris, from trees to barrels to creep homes.'
+    CommentString
+        Const : 'If you just want to destroy trees, change the string to: harvest'
+    CommentString
+        Const : ' '
+    SetVariable
+        Var   : Knockback2DTreeOrDebris
+        Const : attack
+    CommentString
+        Const : ' '
+    CommentString
+        Const : '0.50 gravity will have equal ascend and decline rate, 1.00 is instant descend, 0.67 is twice as fast, 0.75 is three times as fast.'
+    CommentString
+        Const : ' '
+    SetVariable
+        Var   : Knockback2DDefaultGravity
+        Const : 0.71
+    SetVariable
+        Var   : Knockback2DGravity
+        Var   : Knockback2DDefaultGravity
+    CommentString
+        Const : ' '
+    CommentString
+        Const : 'Change the following to the default type of looping FX you want to have if you use Knockback Effects'
+    CommentString
+        Const : ' '
+    SetVariable
+        Var   : Knockback2DDefaultFX
+        Const : Abilities\Weapons\AncientProtectorMissile\AncientProtectorMissile.mdl
+    SetVariable
+        Var   : Knockback2DLoopFX
+        Var   : Knockback2DDefaultFX
+    CommentString
+        Const : ' '
+    CommentString
+        Const : 'How frequently should the effects appear per unit? This can also be customized per-knockback'
+    CommentString
+        Const : ' '
+    SetVariable
+        Var   : Knockback2DDefaultFXRate
+        Const : 0.10
+    SetVariable
+        Var   : Knockback2DFXRate
+        Var   : Knockback2DDefaultFXRate
+    CommentString
+        Const : ' '
+    CommentString
+        Const : 'Create an item to help verify pathing throughout the game'
+    CommentString
+        Const : ' '
+    SetVariable
+        Var   : temp_point
+        Call  : Location
+            Var   : K2DX
+            Var   : K2DY
+    CreateItemLoc
+        Const : rag1
+        Var   : temp_point
+    SetVariable
+        Var   : K2DItem
+        Call  : GetLastCreatedItem
+    CommentString
+        Const : ' '
+    CommentString
+        Const : 'Create a harvest-capable unit to check if debris can be killed'
+    CommentString
+        Const : ' '
+    SetVariable
+        Var   : UnitIndexerEnabled
+        Const : false
+    CreateNUnitsAtLoc
+        Const : 1
+        Const : ugho
+        Preset: PlayerNP
+        Var   : temp_point
+        Const : 0.00
+    SetVariable
+        Var   : K2DDebrisKiller
+        Call  : GetLastCreatedUnit
+    CommentString
+        Const : ' '
+    CommentString
+        Const : 'End Configuration'
+    CommentString
+        Const : ' '
+    SetVariable
+        Var   : UnitIndexerEnabled
+        Const : true
+    CustomScriptCode
+        Const : 'call RemoveLocation(udg_temp_point)'
+    Preload
+        Var   : Knockback2DDefaultFX
+    SetItemVisibleBJ
+        Preset: ShowHideHide
+        Var   : K2DItem
+    ShowUnitHide
+        Var   : K2DDebrisKiller
+    PauseUnitBJ
+        Preset: PauseUnpauseOptionPause
+        Var   : K2DDebrisKiller
+    CustomScriptCode
+        Const : 'call UnitAddAbility(udg_K2DDebrisKiller, ''Aloc'')'
+    SetVariable
+        Var   : Radians_Turn
+        Call  : Deg2Rad
+            Const : 360.00
+    SetVariable
+        Var   : Radians_QuarterTurn
+        Call  : Deg2Rad
+            Const : 90.00
+    SetVariable
+        Var   : Radians_QuarterPi
+        Call  : Deg2Rad
+            Const : 45.00
+    SetVariable
+        Var   : K2DMaxDestRadius
+        Call  : OperatorReal
+            Var   : Knockback2DDefaultDestRadius
+            Preset: OperatorMultiply
+            Const : 2.00
+    CustomScriptCode
+        Const : 'call SetRect(udg_K2DRegion, 0.00, 0.00, udg_K2DMaxDestRadius, udg_K2DMaxDestRadius)'
+    SetVariable
+        Var   : K2DItemsFound
+        Const : false
+    SetVariable
+        Var   : K2DItemOffset
+        Const : false

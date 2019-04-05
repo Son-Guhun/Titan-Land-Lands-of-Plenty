@@ -1,0 +1,106 @@
+Event
+Condition
+    Disab: OperatorCompareBoolean
+        Call  : IsUnitType
+            Array : UDexUnits
+                Var   : UDex
+            Preset: UnitTypeStructure
+        Preset: OperatorEqualENE
+        Const : false
+    OperatorCompareInteger
+        Var   : UDex
+        Preset: OperatorNotEqual
+        Const : 0
+Action
+    CommentString
+        Const : -
+    CommentString
+        Const : 'This trigger''s conditions let you filter out units you don''t want detection for.'
+    CommentString
+        Const : 'NOTE: By default, units with Locust will not pass the check.'
+    CommentString
+        Const : 'TIP: The unit is called UDexUnits[UDex] and its custom value is UDex'
+    CommentString
+        Const : -
+    CommentString
+        Const : 'Copy the Cheat Death Ability from Object Editor into your map and set the following variable respectively:'
+    CommentString
+        Const : -
+    SetVariable
+        Var   : DamageBlockingAbility
+        Const : A01S
+    CommentString
+        Const : -
+    CommentString
+        Const : 'Copy the Detect Spell Damage Ability from Object Editor into your map and set the following variable respectively:'
+    CommentString
+        Const : -
+    SetVariable
+        Var   : SpellDamageAbility
+        Const : A01T
+    CommentString
+        Const : -
+    CommentString
+        Const : 'You can add extra classifications here if you want to differentiate between your triggered damage'
+    CommentString
+        Const : 'Use DamageTypeExplosive (or any negative value damage type) if you want a unit killed by that damage to explode'
+    CommentString
+        Const : -
+    SetVariable
+        Var   : DamageTypeExplosive
+        Const : -1
+    SetVariable
+        Var   : DamageTypeCriticalStrike
+        Const : 1
+    SetVariable
+        Var   : DamageTypeHeal
+        Const : 2
+    SetVariable
+        Var   : DamageTypeReduced
+        Const : 3
+    SetVariable
+        Var   : DamageTypeBlocked
+        Const : 4
+    CommentString
+        Const : -
+    CommentString
+        Const : 'Leave the next Set statement disabled if you modified the Spell Damage Reduction item ability to 1.67 reduction'
+    CommentString
+        Const : 'Otherwise, if you removed that ability from Runed Bracers, you''ll need to enable this line:'
+    CommentString
+        Const : -
+    CommentString
+        Const : -
+    CommentString
+        Const : 'Set the damage multiplication factor (1.00 being unmodified, increasing in damage over 1.00 and at 0 damage with 0.00)'
+    CommentString
+        Const : 'NOTE. With the default values, Runed Bracers is reduces 33%, Elune''s Grace reduces 20% and Ethereal increases 67%'
+    CommentString
+        Const : -
+    SetVariable
+        Var   : DAMAGE_FACTOR_BRACERS
+        Const : 0.67
+    SetVariable
+        Var   : DAMAGE_FACTOR_ELUNES
+        Const : 0.80
+    SetVariable
+        Var   : DAMAGE_FACTOR_ETHEREAL
+        Const : 1.67
+    CommentString
+        Const : -
+    CommentString
+        Const : 'Added 25 July 2017 to allow detection of things like Bash or Pulverize or AoESpread'
+    CommentString
+        Const : -
+    SetVariable
+        Var   : DamageEventAOE
+        Const : 1
+    SetVariable
+        Var   : DamageEventLevel
+        Const : 1
+    CommentString
+        Const : -
+    CommentString
+        Const : 'Do not enable any of the following lines as they are simply variable declarations to make copying easier'
+    CommentString
+        Const : -

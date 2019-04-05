@@ -1,0 +1,8 @@
+Settings can be toggled on/off by modifying the respective boolean variable.
+
++ CSS_PreloadBoolean: set to True to enable System Preload (recommended).
++ CSS_SocketingEnabled: set to True to enable Right Click Item Socketing.
++ CSS_GemBonusBoolean: set to True to allow Gems to show bonuses when wielded in inventory, else set to False.
++ CSS_CustomSwitch: set to True if you want the item to give bonus only when it is fully socketed.
+
++++ CSS_GemLevel sets a level identifier for your gem items. They must have a higher item level than this value to function properly. +++

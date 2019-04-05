@@ -1,0 +1,13 @@
+Event
+Condition
+Action
+    UnitDamageTargetBJ
+        Array : K2DSource
+            Var   : UDex
+        Array : UDexUnits
+            Var   : UDex
+        Const : 100.00
+        Preset: AttackTypeNormal
+        Preset: DamageTypeMagic
+    CustomScriptCode
+        Const : 'call AddTimedBonus(udg_UDexUnits[udg_UDex], 0, 0.5, 5)'

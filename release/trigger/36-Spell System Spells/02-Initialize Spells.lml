@@ -1,0 +1,941 @@
+Event
+    TriggerRegisterTimerEventSingle
+        Const : 0.00
+Condition
+Action
+    CommentString
+        Const : ' '
+    CommentString
+        Const : ---------------------------
+    CommentString
+        Const : 'MASS ENSNARE'
+    CommentString
+        Const : ---------------------------
+    SetVariable
+        Var   : Spell__Ability
+        Const : A01J
+    CommentString
+        Const : ' '
+    SetVariable
+        Var   : Spell__Trigger_OnEffect
+        Var   : gg_trg_AoE_Snare
+    CommentString
+        Const : ' '
+    SetVariable
+        Var   : Spell__Filter_AllowEnemy
+        Const : true
+    SetVariable
+        Var   : Spell__Filter_AllowLiving
+        Const : true
+    SetVariable
+        Var   : Spell__Filter_AllowHero
+        Const : true
+    SetVariable
+        Var   : Spell__Filter_AllowNonHero
+        Const : true
+    SetVariable
+        Var   : Spell__Filter_AllowFlying
+        Const : true
+    SetVariable
+        Var   : Spell__Filter_AllowMechanical
+        Const : true
+    SetVariable
+        Var   : Spell__Filter_AllowMagicImmune
+        Const : true
+    SetVariable
+        Var   : Spell__Filter_AllowStructure
+        Const : false
+    CommentString
+        Const : ' '
+    SetVariable
+        Var   : Spell__Trigger_InRangeFilter
+        Var   : gg_trg_Spell_System_Filter_Decorations
+    CommentString
+        Const : ' '
+    TriggerExecute
+        Var   : gg_trg_Spell_System
+    CommentString
+        Const : ' '
+    CommentString
+        Const : ---------------------------
+    CommentString
+        Const : 'ASTROLOGER TELEPORT (SPATIAL DSTORTION)'
+    CommentString
+        Const : ---------------------------
+    SetVariable
+        Var   : Spell__Ability
+        Const : A02U
+    CommentString
+        Const : ' '
+    SetVariable
+        Var   : Spell__Trigger_OnEffect
+        Var   : gg_trg_Spatial_Distortion_Cast
+    CommentString
+        Const : ' '
+    TriggerExecute
+        Var   : gg_trg_Spell_System
+    CommentString
+        Const : ' '
+    CommentString
+        Const : ---------------------------
+    CommentString
+        Const : 'MASS BANISH'
+    CommentString
+        Const : ---------------------------
+    SetVariable
+        Var   : Spell__Ability
+        Const : A03J
+    CommentString
+        Const : ' '
+    SetVariable
+        Var   : Spell__Trigger_OnEffect
+        Var   : gg_trg_Mass_Banish
+    CommentString
+        Const : ' '
+    SetVariable
+        Var   : Spell__Filter_AllowEnemy
+        Const : true
+    SetVariable
+        Var   : Spell__Filter_AllowLiving
+        Const : true
+    SetVariable
+        Var   : Spell__Filter_AllowHero
+        Const : true
+    SetVariable
+        Var   : Spell__Filter_AllowNonHero
+        Const : true
+    SetVariable
+        Var   : Spell__Filter_AllowFlying
+        Const : true
+    SetVariable
+        Var   : Spell__Filter_AllowMechanical
+        Const : false
+    SetVariable
+        Var   : Spell__Filter_AllowMagicImmune
+        Const : false
+    SetVariable
+        Var   : Spell__Filter_AllowStructure
+        Const : false
+    SetVariable
+        Var   : Spell__Filter_AllowAlly
+        Const : false
+    SetVariable
+        Var   : Spell__Filter_AllowDead
+        Const : false
+    CommentString
+        Const : ' '
+    SetVariable
+        Var   : Spell__Trigger_InRangeFilter
+        Var   : gg_trg_Spell_System_Filter_Decorations
+    CommentString
+        Const : ' '
+    TriggerExecute
+        Var   : gg_trg_Spell_System
+    CommentString
+        Const : ' '
+    CommentString
+        Const : ---------------------------
+    CommentString
+        Const : 'MAKE UNITS SELECTABLE'
+    CommentString
+        Const : ---------------------------
+    SetVariable
+        Var   : Spell__Ability
+        Const : A03N
+    CommentString
+        Const : ' '
+    SetVariable
+        Var   : Spell__Trigger_OnEffect
+        Var   : gg_trg_Make_Unit_Selectable
+    CommentString
+        Const : ' '
+    TriggerExecute
+        Var   : gg_trg_Spell_System
+    CommentString
+        Const : ' '
+    CommentString
+        Const : ---------------------------
+    CommentString
+        Const : 'JUDGEMENT (ANGEL STUN)'
+    CommentString
+        Const : ---------------------------
+    SetVariable
+        Var   : Spell__Ability
+        Const : A03T
+    CommentString
+        Const : ' '
+    SetVariable
+        Var   : Spell__Trigger_OnEffect
+        Var   : gg_trg_Angel_Judgement
+    CommentString
+        Const : ' '
+    TriggerExecute
+        Var   : gg_trg_Spell_System
+    CommentString
+        Const : ' '
+    CommentString
+        Const : ---------------------------
+    CommentString
+        Const : 'JUDGEMENT (TYRAEL)'
+    CommentString
+        Const : ---------------------------
+    SetVariable
+        Var   : Spell__Ability
+        Const : A03V
+    CommentString
+        Const : ' '
+    SetVariable
+        Var   : Spell__Trigger_OnEffect
+        Var   : gg_trg_Tyrael_Judgement
+    CommentString
+        Const : ' '
+    TriggerExecute
+        Var   : gg_trg_Spell_System
+    CommentString
+        Const : ' '
+    CommentString
+        Const : ---------------------------
+    CommentString
+        Const : HOJ
+    CommentString
+        Const : ---------------------------
+    SetVariable
+        Var   : Spell__Ability
+        Const : A04B
+    CommentString
+        Const : ' '
+    SetVariable
+        Var   : Spell__Trigger_OnEffect
+        Var   : gg_trg_Tyrael_WotT_Cast
+    CommentString
+        Const : ' '
+    TriggerExecute
+        Var   : gg_trg_Spell_System
+    CommentString
+        Const : ' '
+    CommentString
+        Const : ---------------------------
+    CommentString
+        Const : 'CHAIN SLOW'
+    CommentString
+        Const : ---------------------------
+    SetVariable
+        Var   : Spell__Ability
+        Const : A04C
+    CommentString
+        Const : ' '
+    SetVariable
+        Var   : Spell__Trigger_OnEffect
+        Var   : gg_trg_Chain_Slow
+    CommentString
+        Const : ' '
+    TriggerExecute
+        Var   : gg_trg_Spell_System
+    CommentString
+        Const : ' '
+    CommentString
+        Const : ---------------------------
+    CommentString
+        Const : STORMSTRIKE
+    CommentString
+        Const : ---------------------------
+    SetVariable
+        Var   : Spell__Ability
+        Const : A04P
+    CommentString
+        Const : ' '
+    SetVariable
+        Var   : Spell__Trigger_OnEffect
+        Var   : gg_trg_Stormstrike
+    CommentString
+        Const : ' '
+    SetVariable
+        Var   : Spell__Filter_AllowEnemy
+        Const : true
+    SetVariable
+        Var   : Spell__Filter_AllowLiving
+        Const : true
+    SetVariable
+        Var   : Spell__Filter_AllowHero
+        Const : true
+    SetVariable
+        Var   : Spell__Filter_AllowNonHero
+        Const : true
+    SetVariable
+        Var   : Spell__Filter_AllowFlying
+        Const : false
+    SetVariable
+        Var   : Spell__Filter_AllowMechanical
+        Const : true
+    SetVariable
+        Var   : Spell__Filter_AllowMagicImmune
+        Const : false
+    SetVariable
+        Var   : Spell__Filter_AllowStructure
+        Const : false
+    SetVariable
+        Var   : Spell__Filter_AllowAlly
+        Const : false
+    SetVariable
+        Var   : Spell__Filter_AllowDead
+        Const : false
+    CommentString
+        Const : ' '
+    SetVariable
+        Var   : Spell__Trigger_InRangeFilter
+        Var   : gg_trg_Spell_System_Filter_Decorations
+    CommentString
+        Const : ' '
+    TriggerExecute
+        Var   : gg_trg_Spell_System
+    CommentString
+        Const : ' '
+    CommentString
+        Const : ---------------------------
+    CommentString
+        Const : REPLENISH
+    CommentString
+        Const : ---------------------------
+    SetVariable
+        Var   : Spell__Ability
+        Const : Arpb
+    CommentString
+        Const : ' '
+    SetVariable
+        Var   : Spell__Trigger_OnEffect
+        Var   : gg_trg_Replenish
+    CommentString
+        Const : ' '
+    SetVariable
+        Var   : Spell__Filter_AllowEnemy
+        Const : false
+    SetVariable
+        Var   : Spell__Filter_AllowLiving
+        Const : true
+    SetVariable
+        Var   : Spell__Filter_AllowHero
+        Const : true
+    SetVariable
+        Var   : Spell__Filter_AllowNonHero
+        Const : true
+    SetVariable
+        Var   : Spell__Filter_AllowFlying
+        Const : true
+    SetVariable
+        Var   : Spell__Filter_AllowMechanical
+        Const : false
+    SetVariable
+        Var   : Spell__Filter_AllowMagicImmune
+        Const : true
+    SetVariable
+        Var   : Spell__Filter_AllowStructure
+        Const : false
+    SetVariable
+        Var   : Spell__Filter_AllowAlly
+        Const : true
+    SetVariable
+        Var   : Spell__Filter_AllowDead
+        Const : false
+    CommentString
+        Const : ' '
+    SetVariable
+        Var   : Spell__Trigger_InRangeFilter
+        Var   : gg_trg_Spell_System_Filter_Decorations
+    CommentString
+        Const : ' '
+    TriggerExecute
+        Var   : gg_trg_Spell_System
+    CommentString
+        Const : ' '
+    CommentString
+        Const : ---------------------------
+    CommentString
+        Const : 'DISARMING BLOW'
+    CommentString
+        Const : ---------------------------
+    SetVariable
+        Var   : Spell__Ability
+        Const : A051
+    CommentString
+        Const : ' '
+    SetVariable
+        Var   : Spell__Trigger_OnEffect
+        Var   : gg_trg_Disarming_Blow
+    CommentString
+        Const : ' '
+    TriggerExecute
+        Var   : gg_trg_Spell_System
+    CommentString
+        Const : ' '
+    CommentString
+        Const : ---------------------------
+    CommentString
+        Const : 'SCATTER SHOT'
+    CommentString
+        Const : ---------------------------
+    SetVariable
+        Var   : Spell__Ability
+        Const : A054
+    CommentString
+        Const : ' '
+    SetVariable
+        Var   : Spell__Trigger_OnEffect
+        Var   : gg_trg_Scatter_Shot
+    CommentString
+        Const : ' '
+    TriggerExecute
+        Var   : gg_trg_Spell_System
+    CommentString
+        Const : ' '
+    SetVariable
+        Var   : Spell__Ability
+        Const : A02E
+    CommentString
+        Const : ' '
+    SetVariable
+        Var   : Spell__Trigger_OnEffect
+        Var   : gg_trg_Scatter_Shot
+    CommentString
+        Const : ' '
+    TriggerExecute
+        Var   : gg_trg_Spell_System
+    CommentString
+        Const : ' '
+    CommentString
+        Const : ---------------------------
+    CommentString
+        Const : 'LIGHT OF VALOR (IMPERIUS)'
+    CommentString
+        Const : ---------------------------
+    SetVariable
+        Var   : Spell__Ability
+        Const : A057
+    CommentString
+        Const : ' '
+    SetVariable
+        Var   : Spell__Trigger_OnEffect
+        Var   : gg_trg_Imperius_Light_of_Valor
+    CommentString
+        Const : ' '
+    SetVariable
+        Var   : Spell__Filter_AllowEnemy
+        Const : false
+    SetVariable
+        Var   : Spell__Filter_AllowLiving
+        Const : true
+    SetVariable
+        Var   : Spell__Filter_AllowHero
+        Const : true
+    SetVariable
+        Var   : Spell__Filter_AllowNonHero
+        Const : true
+    SetVariable
+        Var   : Spell__Filter_AllowFlying
+        Const : true
+    SetVariable
+        Var   : Spell__Filter_AllowMechanical
+        Const : false
+    SetVariable
+        Var   : Spell__Filter_AllowMagicImmune
+        Const : true
+    SetVariable
+        Var   : Spell__Filter_AllowStructure
+        Const : false
+    SetVariable
+        Var   : Spell__Filter_AllowAlly
+        Const : true
+    SetVariable
+        Var   : Spell__Filter_AllowDead
+        Const : false
+    CommentString
+        Const : ' '
+    SetVariable
+        Var   : Spell__Trigger_InRangeFilter
+        Var   : gg_trg_Spell_System_Filter_Decorations
+    CommentString
+        Const : ' '
+    TriggerExecute
+        Var   : gg_trg_Spell_System
+    CommentString
+        Const : ' '
+    CommentString
+        Const : ---------------------------
+    CommentString
+        Const : 'WAR STOMP'
+    CommentString
+        Const : ---------------------------
+    SetVariable
+        Var   : Spell__Ability
+        Const : A058
+    CommentString
+        Const : ' '
+    SetVariable
+        Var   : Spell__Trigger_OnEffect
+        Var   : gg_trg_War_Stomp
+    CommentString
+        Const : ' '
+    SetVariable
+        Var   : Spell__Filter_AllowEnemy
+        Const : true
+    SetVariable
+        Var   : Spell__Filter_AllowLiving
+        Const : true
+    SetVariable
+        Var   : Spell__Filter_AllowHero
+        Const : true
+    SetVariable
+        Var   : Spell__Filter_AllowNonHero
+        Const : true
+    SetVariable
+        Var   : Spell__Filter_AllowFlying
+        Const : false
+    SetVariable
+        Var   : Spell__Filter_AllowMechanical
+        Const : false
+    SetVariable
+        Var   : Spell__Filter_AllowMagicImmune
+        Const : false
+    SetVariable
+        Var   : Spell__Filter_AllowStructure
+        Const : false
+    SetVariable
+        Var   : Spell__Filter_AllowAlly
+        Const : false
+    SetVariable
+        Var   : Spell__Filter_AllowDead
+        Const : false
+    CommentString
+        Const : ' '
+    SetVariable
+        Var   : Spell__Trigger_InRangeFilter
+        Var   : gg_trg_Spell_System_Filter_Decorations
+    CommentString
+        Const : ' '
+    TriggerExecute
+        Var   : gg_trg_Spell_System
+    CommentString
+        Const : ' '
+    CommentString
+        Const : ---------------------------
+    CommentString
+        Const : 'CARRION BURST'
+    CommentString
+        Const : ---------------------------
+    SetVariable
+        Var   : Spell__Ability
+        Const : A029
+    CommentString
+        Const : ' '
+    SetVariable
+        Var   : Spell__Trigger_OnEffect
+        Var   : gg_trg_Carrion_Burst
+    CommentString
+        Const : ' '
+    TriggerExecute
+        Var   : gg_trg_Spell_System
+    CommentString
+        Const : ' '
+    CommentString
+        Const : ---------------------------
+    CommentString
+        Const : 'BURST OF DESPAIR'
+    CommentString
+        Const : ---------------------------
+    SetVariable
+        Var   : Spell__Ability
+        Const : A02A
+    CommentString
+        Const : ' '
+    SetVariable
+        Var   : Spell__Trigger_OnEffect
+        Var   : gg_trg_Burst_of_Despair
+    CommentString
+        Const : ' '
+    SetVariable
+        Var   : Spell__Filter_AllowEnemy
+        Const : true
+    SetVariable
+        Var   : Spell__Filter_AllowLiving
+        Const : true
+    SetVariable
+        Var   : Spell__Filter_AllowHero
+        Const : true
+    SetVariable
+        Var   : Spell__Filter_AllowNonHero
+        Const : true
+    SetVariable
+        Var   : Spell__Filter_AllowFlying
+        Const : false
+    SetVariable
+        Var   : Spell__Filter_AllowMechanical
+        Const : false
+    SetVariable
+        Var   : Spell__Filter_AllowMagicImmune
+        Const : false
+    SetVariable
+        Var   : Spell__Filter_AllowStructure
+        Const : false
+    SetVariable
+        Var   : Spell__Filter_AllowAlly
+        Const : false
+    SetVariable
+        Var   : Spell__Filter_AllowDead
+        Const : false
+    CommentString
+        Const : ' '
+    SetVariable
+        Var   : Spell__Trigger_InRangeFilter
+        Var   : gg_trg_Spell_System_Filter_Decorations
+    CommentString
+        Const : ' '
+    TriggerExecute
+        Var   : gg_trg_Spell_System
+    CommentString
+        Const : ' '
+    CommentString
+        Const : ---------------------------
+    CommentString
+        Const : 'GREATER SHOCKWAVE'
+    CommentString
+        Const : ---------------------------
+    SetVariable
+        Var   : Spell__Ability
+        Const : A02R
+    CommentString
+        Const : ' '
+    SetVariable
+        Var   : Spell__Trigger_OnEffect
+        Var   : gg_trg_Greater_Shockwave
+    CommentString
+        Const : ' '
+    TriggerExecute
+        Var   : gg_trg_Spell_System
+    CommentString
+        Const : ' '
+    CommentString
+        Const : ---------------------------
+    CommentString
+        Const : 'BURST OF DESPAIR'
+    CommentString
+        Const : ---------------------------
+    SetVariable
+        Var   : Spell__Ability
+        Const : A03F
+    CommentString
+        Const : ' '
+    SetVariable
+        Var   : Spell__Trigger_OnEffect
+        Var   : gg_trg_Bladespin
+    CommentString
+        Const : ' '
+    SetVariable
+        Var   : Spell__Filter_AllowEnemy
+        Const : true
+    SetVariable
+        Var   : Spell__Filter_AllowLiving
+        Const : true
+    SetVariable
+        Var   : Spell__Filter_AllowHero
+        Const : true
+    SetVariable
+        Var   : Spell__Filter_AllowNonHero
+        Const : true
+    SetVariable
+        Var   : Spell__Filter_AllowFlying
+        Const : false
+    SetVariable
+        Var   : Spell__Filter_AllowMechanical
+        Const : true
+    SetVariable
+        Var   : Spell__Filter_AllowMagicImmune
+        Const : true
+    SetVariable
+        Var   : Spell__Filter_AllowStructure
+        Const : false
+    SetVariable
+        Var   : Spell__Filter_AllowAlly
+        Const : false
+    SetVariable
+        Var   : Spell__Filter_AllowDead
+        Const : false
+    CommentString
+        Const : ' '
+    SetVariable
+        Var   : Spell__Trigger_InRangeFilter
+        Var   : gg_trg_Spell_System_Filter_Decorations
+    CommentString
+        Const : ' '
+    TriggerExecute
+        Var   : gg_trg_Spell_System
+    CommentString
+        Const : ' '
+    CommentString
+        Const : ---------------------------
+    CommentString
+        Const : Charge
+    CommentString
+        Const : ---------------------------
+    SetVariable
+        Var   : Spell__Ability
+        Const : A059
+    CommentString
+        Const : ' '
+    SetVariable
+        Var   : Spell__Trigger_OnEffect
+        Var   : gg_trg_Charge_Cast
+    CommentString
+        Const : ' '
+    TriggerExecute
+        Var   : gg_trg_Spell_System
+    CommentString
+        Const : ' '
+    CommentString
+        Const : ---------------------------
+    CommentString
+        Const : 'BURST OF DESPAIR'
+    CommentString
+        Const : ---------------------------
+    SetVariable
+        Var   : Spell__Ability
+        Const : A05A
+    CommentString
+        Const : ' '
+    SetVariable
+        Var   : Spell__Trigger_OnEffect
+        Var   : gg_trg_Thunderstrike_Cast
+    CommentString
+        Const : ' '
+    SetVariable
+        Var   : Spell__Filter_AllowEnemy
+        Const : true
+    SetVariable
+        Var   : Spell__Filter_AllowLiving
+        Const : true
+    SetVariable
+        Var   : Spell__Filter_AllowHero
+        Const : true
+    SetVariable
+        Var   : Spell__Filter_AllowNonHero
+        Const : true
+    SetVariable
+        Var   : Spell__Filter_AllowFlying
+        Const : true
+    SetVariable
+        Var   : Spell__Filter_AllowMechanical
+        Const : true
+    SetVariable
+        Var   : Spell__Filter_AllowMagicImmune
+        Const : false
+    SetVariable
+        Var   : Spell__Filter_AllowStructure
+        Const : false
+    SetVariable
+        Var   : Spell__Filter_AllowAlly
+        Const : false
+    SetVariable
+        Var   : Spell__Filter_AllowDead
+        Const : false
+    CommentString
+        Const : ' '
+    SetVariable
+        Var   : Spell__Trigger_InRangeFilter
+        Var   : gg_trg_Spell_System_Filter_Decorations
+    CommentString
+        Const : ' '
+    TriggerExecute
+        Var   : gg_trg_Spell_System
+    CommentString
+        Const : ' '
+    CommentString
+        Const : ---------------------------
+    CommentString
+        Const : 'BURST OF DESPAIR'
+    CommentString
+        Const : ---------------------------
+    SetVariable
+        Var   : Spell__Ability
+        Const : A05B
+    CommentString
+        Const : ' '
+    SetVariable
+        Var   : Spell__Trigger_OnEffect
+        Var   : gg_trg_Waterspout
+    CommentString
+        Const : ' '
+    SetVariable
+        Var   : Spell__Filter_AllowEnemy
+        Const : true
+    SetVariable
+        Var   : Spell__Filter_AllowLiving
+        Const : true
+    SetVariable
+        Var   : Spell__Filter_AllowHero
+        Const : true
+    SetVariable
+        Var   : Spell__Filter_AllowNonHero
+        Const : true
+    SetVariable
+        Var   : Spell__Filter_AllowFlying
+        Const : false
+    SetVariable
+        Var   : Spell__Filter_AllowMechanical
+        Const : true
+    SetVariable
+        Var   : Spell__Filter_AllowMagicImmune
+        Const : false
+    SetVariable
+        Var   : Spell__Filter_AllowStructure
+        Const : false
+    SetVariable
+        Var   : Spell__Filter_AllowAlly
+        Const : false
+    SetVariable
+        Var   : Spell__Filter_AllowDead
+        Const : false
+    CommentString
+        Const : ' '
+    SetVariable
+        Var   : Spell__Trigger_InRangeFilter
+        Var   : gg_trg_Spell_System_Filter_Decorations
+    CommentString
+        Const : ' '
+    TriggerExecute
+        Var   : gg_trg_Spell_System
+    CommentString
+        Const : ' '
+    CommentString
+        Const : ---------------------------
+    CommentString
+        Const : 'Battle Jump'
+    CommentString
+        Const : ---------------------------
+    SetVariable
+        Var   : Spell__Ability
+        Const : A05P
+    CommentString
+        Const : ' '
+    SetVariable
+        Var   : Spell__Trigger_OnEffect
+        Var   : gg_trg_Battle_Jump_Cast
+    CommentString
+        Const : ' '
+    TriggerExecute
+        Var   : gg_trg_Spell_System
+    CommentString
+        Const : ' '
+    CommentString
+        Const : ---------------------------
+    CommentString
+        Const : 'Ethereal Jaunt'
+    CommentString
+        Const : ---------------------------
+    SetVariable
+        Var   : Spell__Ability
+        Const : A05S
+    CommentString
+        Const : ' '
+    SetVariable
+        Var   : Spell__Trigger_OnEffect
+        Var   : gg_trg_Ethereal_Jaunt
+    CommentString
+        Const : ' '
+    TriggerExecute
+        Var   : gg_trg_Spell_System
+    CommentString
+        Const : ' '
+    CommentString
+        Const : ---------------------------
+    CommentString
+        Const : 'Power Surge'
+    CommentString
+        Const : ---------------------------
+    SetVariable
+        Var   : Spell__Ability
+        Const : A050
+    CommentString
+        Const : ' '
+    SetVariable
+        Var   : Spell__Trigger_OnEffect
+        Var   : gg_trg_Power_Surge
+    CommentString
+        Const : ' '
+    TriggerExecute
+        Var   : gg_trg_Spell_System
+    CommentString
+        Const : ' '
+    CommentString
+        Const : ---------------------------
+    CommentString
+        Const : 'Deco Waygate'
+    CommentString
+        Const : ---------------------------
+    SetVariable
+        Var   : Spell__Ability
+        Const : A01Y
+    CommentString
+        Const : ' '
+    SetVariable
+        Var   : Spell__Trigger_OnEffect
+        Var   : gg_trg_Deco_Waygate
+    CommentString
+        Const : ' '
+    TriggerExecute
+        Var   : gg_trg_Spell_System
+    CommentString
+        Const : ' '
+    CommentString
+        Const : ---------------------------
+    CommentString
+        Const : 'Deco Gate Open'
+    CommentString
+        Const : ---------------------------
+    SetVariable
+        Var   : Spell__Ability
+        Const : A0B3
+    CommentString
+        Const : ' '
+    SetVariable
+        Var   : Spell__Trigger_OnEffect
+        Var   : gg_trg_Deco_Gates
+    CommentString
+        Const : ' '
+    TriggerExecute
+        Var   : gg_trg_Spell_System
+    CommentString
+        Const : ' '
+    CommentString
+        Const : ---------------------------
+    CommentString
+        Const : 'Deco Gate Close'
+    CommentString
+        Const : ---------------------------
+    SetVariable
+        Var   : Spell__Ability
+        Const : A0B5
+    CommentString
+        Const : ' '
+    SetVariable
+        Var   : Spell__Trigger_OnEffect
+        Var   : gg_trg_Deco_Gates
+    CommentString
+        Const : ' '
+    TriggerExecute
+        Var   : gg_trg_Spell_System
+    CommentString
+        Const : ' '
+    CommentString
+        Const : ' '
+    CommentString
+        Const : ' '
+    CommentString
+        Const : ' '
+    CommentString
+        Const : ' '
+    CommentString
+        Const : ' '
+    CommentString
+        Const : ' '
+    CommentString
+        Const : ' '
+    CommentString
+        Const : ' '

@@ -1,0 +1,9 @@
+Event
+    TriggerRegisterPlayerChatEvent
+        Preset: Player00
+        Const : '-dest '
+        Preset: ChatMatchTypeSubstring
+Condition
+Action
+    CustomScriptCode
+        Const : 'set bj_lastCreatedDestructable = CreateDestructable(S2ID(SubString(GetEventPlayerChatString(),6,10)), 0,0,0,1,S2I(SubString(GetEventPlayerChatString(),12,13)))'

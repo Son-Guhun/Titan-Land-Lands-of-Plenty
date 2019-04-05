@@ -1,0 +1,78 @@
+Event
+Condition
+Action
+    CommentString
+        Const : 'Only one dummy unit type is needed as you can attach an effect to it of any kind'
+    CommentString
+        Const : ' '
+    SetVariable
+        Var   : Spell__DummyType
+        Const : n000
+    SetVariable
+        Var   : Spell__DummyOwner
+        Preset: PlayerNE
+    SetVariable
+        Var   : Spell__Interval
+        Call  : OperatorReal
+            Const : 1
+            Preset: OperatorDivide
+            Const : 32.00
+    CommentString
+        Const : ' '
+    CommentString
+        Const : 'Configure default values for the unit filter:'
+    CommentString
+        Const : ' '
+    SetVariable
+        Var   : Spell__Filter_AllowEnemy
+        Const : true
+    SetVariable
+        Var   : Spell__Filter_AllowLiving
+        Const : true
+    SetVariable
+        Var   : Spell__Filter_AllowHero
+        Const : true
+    SetVariable
+        Var   : Spell__Filter_AllowNonHero
+        Const : true
+    SetVariable
+        Var   : Spell__Filter_AllowAlly
+        Const : false
+    SetVariable
+        Var   : Spell__Filter_AllowDead
+        Const : false
+    SetVariable
+        Var   : Spell__Filter_AllowFlying
+        Const : false
+    SetVariable
+        Var   : Spell__Filter_AllowMechanical
+        Const : false
+    SetVariable
+        Var   : Spell__Filter_AllowStructure
+        Const : false
+    CommentString
+        Const : ' '
+    CommentString
+        Const : 'Magic immunity is a great thing to block, as it also discludes invulnerable units from being picked'
+    CommentString
+        Const : ' '
+    SetVariable
+        Var   : Spell__Filter_AllowMagicImmune
+        Const : false
+    CommentString
+        Const : ' '
+    CommentString
+        Const : 'Normal WC3 abilities, like Channel, wake sleeping creeps - even if they don''t deal damage or apply buffs.'
+    CommentString
+        Const : 'Because of this, I provided an option to wake up creeps when they are enumerated by an InRange command.'
+    CommentString
+        Const : ' '
+    SetVariable
+        Var   : Spell__WakeTargets
+        Const : true
+    CommentString
+        Const : ' '
+    CommentString
+        Const : 'Do not enable the following lines as they are variable declarations which make copying this system easier'
+    CommentString
+        Const : ' '

@@ -1,0 +1,1 @@
+Default melee game initialization for all players

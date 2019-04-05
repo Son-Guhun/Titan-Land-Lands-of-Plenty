@@ -1,0 +1,51 @@
+Event
+    TriggerRegisterAnyUnitEventBJ
+        Preset: PlayerUnitEventSpellEffect
+Condition
+    OperatorCompareAbilityId
+        Call  : GetSpellAbilityId
+        Preset: OperatorEqualENE
+        Const : A049
+Action
+    CustomScriptCode
+        Const : 'local location udg_temp_point'
+    CustomScriptCode
+        Const : 'local location udg_temp_point2'
+    SetVariable
+        Var   : temp_point
+        Call  : GetUnitLoc
+            Call  : GetSpellAbilityUnit
+    ForLoopVarMultiple
+        Var   : ItemAbilityForInteger
+        Const : 1
+        Const : 20
+        Action
+            SetVariable
+                Var   : temp_point2
+                Call  : PolarProjectionBJ
+                    Var   : temp_point
+                    Const : 400.00
+                    Call  : OperatorReal
+                        Const : 18.00
+                        Preset: OperatorMultiply
+                        Call  : I2R
+                            Var   : ItemAbilityForInteger
+            CreateNUnitsAtLoc
+                Const : 1
+                Const : o003
+                Call  : GetOwningPlayer
+                    Call  : GetSpellAbilityUnit
+                Var   : temp_point2
+                Preset: RealUnitFacing
+            UnitApplyTimedLifeBJ
+                Const : 0.00
+                Preset: TimedLifeBuffCodeGeneric
+                Call  : GetLastCreatedUnit
+            CustomScriptCode
+                Const : 'call RemoveLocation(udg_temp_point2)'
+    CustomScriptCode
+        Const : 'set udg_temp_point2 = null'
+    CustomScriptCode
+        Const : 'call RemoveLocation(udg_temp_point)'
+    CustomScriptCode
+        Const : 'set udg_temp_point = null'

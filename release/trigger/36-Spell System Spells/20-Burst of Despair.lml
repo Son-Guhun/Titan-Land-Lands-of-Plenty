@@ -1,0 +1,45 @@
+Event
+Condition
+Action
+    CustomScriptCode
+        Const : 'local integer udg_temp_integer'
+    CustomScriptCode
+        Const : 'local integer circId'
+    CustomScriptCode
+        Const : 'set circId = CreateGCOS(0, GetLocationX(udg_Spell__TargetPoint), GetLocationY(udg_Spell__TargetPoint), 100, 100, 8, 0, 0)'
+    ForLoopVarMultiple
+        Var   : temp_integer
+        Const : 1
+        Const : 8
+        Action
+            CustomScriptCode
+                Const : 'set bj_lastCreatedEffect = AddSpecialEffect( "Abilities\\Spells\\Undead\\AnimateDead\\AnimateDeadTarget.mdl", GetGCOSPointX(circId, udg_temp_integer), GetGCOSPointY(circId, udg_temp_integer) )'
+            DestroyEffectBJ
+                Call  : GetLastCreatedEffectBJ
+    CustomScriptCode
+        Const : 'call DestroyGCOS(circId)'
+    SetVariable
+        Var   : Spell__InRangePoint
+        Var   : Spell__TargetPoint
+    SetVariable
+        Var   : Spell__InRange
+        Const : 200.00
+    ForGroupMultiple
+        Var   : Spell__InRangeGroup
+        Action
+            SetVariable
+                Array : TimerBonuses
+                    Const : 0
+                Const : -3
+            SetVariable
+                Array : TimerBonuses
+                    Const : 2
+                Const : -25
+            UnitDamageTargetBJ
+                Var   : Spell__Caster
+                Call  : GetEnumUnit
+                Const : 300.00
+                Preset: AttackTypeNormal
+                Preset: DamageTypeMagic
+            CustomScriptCode
+                Const : 'call AddTimedBonus(GetEnumUnit(), 0, 1, 5)'

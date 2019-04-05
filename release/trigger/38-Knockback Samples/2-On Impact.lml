@@ -1,0 +1,10 @@
+Event
+Condition
+Action
+    AddSpecialEffectTargetUnitBJ
+        Const : origin
+        Array : UDexUnits
+            Var   : UDex
+        Const : Objects\Spawnmodels\Undead\ImpaleTargetDust\ImpaleTargetDust.mdl
+    DestroyEffectBJ
+        Call  : GetLastCreatedEffectBJ

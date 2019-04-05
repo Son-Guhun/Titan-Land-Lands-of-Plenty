@@ -1,6 +1,0 @@
-Instant removal upon death + cleanup:
--Decorations
--Dummies
--Deco Builders
-
-System_UnitHasBeenRemovedBool -> this variable is used by the System Cleanup UnitGroups trigger

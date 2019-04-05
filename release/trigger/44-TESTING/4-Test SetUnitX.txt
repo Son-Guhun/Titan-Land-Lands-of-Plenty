@@ -1,0 +1,4 @@
+Bugs:
+
+-SetUnitX to set unit outside of Grid only works with buildings that have root/uproot
+-If you use setunitX on such a building, while the building does not have 'Amov', the native will again no longer work

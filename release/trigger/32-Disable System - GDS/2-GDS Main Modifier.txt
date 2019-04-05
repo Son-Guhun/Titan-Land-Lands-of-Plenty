@@ -1,0 +1,15 @@
+This trigger . This makes it easy to declare conditions that change the behaviour of effetcs, allowing you to make stun resistance abilities, snare resistance abiltiies, etc.
+
+
+To have an effect ignore your conditions, simply run the Main trigger instead of running this modifier trigger.
+
+    set udg_GDS_cSTUN = 0
+    set udg_GDS_cSILENCE = 1
+    set udg_GDS_cDISARM_R = 2
+    set udg_GDS_cDISARM_M = 3
+    set udg_GDS_cDISARM_B = 4
+    set udg_GDS_cSNARE = 5
+    set udg_GDS_cSUPERSILENCE = 6
+    set udg_GDS_cSLEEP = 7
+    set udg_GDS_cENTANGLE = 8
+    set udg_GDS_cETHEREAL = 9

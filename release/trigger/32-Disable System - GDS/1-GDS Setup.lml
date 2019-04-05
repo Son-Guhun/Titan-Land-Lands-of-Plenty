@@ -1,0 +1,260 @@
+Event
+    MapInitializationEvent
+Condition
+Action
+    InitHashtableBJ
+    SetVariable
+        Var   : GDS_Hashtable
+        Call  : GetLastCreatedHashtableBJ
+    CustomScriptCode
+        Const : 'call SaveLocationHandle(udg_GDS_Hashtable, 2 , 99 , GetRectCenter(bj_mapInitialPlayableArea))'
+    SetVariable
+        Var   : GDS_cSTUN
+        Const : 0
+    SetVariable
+        Var   : GDS_cSILENCE
+        Const : 1
+    SetVariable
+        Var   : GDS_cDISARM_R
+        Const : 2
+    SetVariable
+        Var   : GDS_cDISARM_M
+        Const : 3
+    SetVariable
+        Var   : GDS_cDISARM_B
+        Const : 4
+    SetVariable
+        Var   : GDS_cSNARE
+        Const : 5
+    SetVariable
+        Var   : GDS_cSUPERSILENCE
+        Const : 6
+    SetVariable
+        Var   : GDS_cSLEEP
+        Const : 7
+    SetVariable
+        Var   : GDS_cENTANGLE
+        Const : 8
+    SetVariable
+        Var   : GDS_cETHEREAL
+        Const : 9
+    CommentString
+        Const : -
+    CommentString
+        Const : 'SET THE CORRECT PARAMETERS HERE'
+    CommentString
+        Const : -
+    SetVariable
+        Array : GDS_ABIL
+            Var   : GDS_cSTUN
+        Const : A00Q
+    SetVariable
+        Array : GDS_BUFF
+            Var   : GDS_cSTUN
+        Const : B00K
+    CommentString
+        Const : -
+    SetVariable
+        Array : GDS_ABIL
+            Var   : GDS_cSILENCE
+        Const : A00U
+    SetVariable
+        Array : GDS_BUFF
+            Var   : GDS_cSILENCE
+        Const : B01K
+    CommentString
+        Const : -
+    SetVariable
+        Array : GDS_ABIL
+            Var   : GDS_cDISARM_R
+        Const : A01E
+    SetVariable
+        Array : GDS_BUFF
+            Var   : GDS_cDISARM_R
+        Const : B01J
+    CommentString
+        Const : -
+    SetVariable
+        Array : GDS_ABIL
+            Var   : GDS_cDISARM_M
+        Const : A01H
+    SetVariable
+        Array : GDS_BUFF
+            Var   : GDS_cDISARM_M
+        Const : B00W
+    CommentString
+        Const : -
+    SetVariable
+        Array : GDS_ABIL
+            Var   : GDS_cDISARM_B
+        Const : A01I
+    SetVariable
+        Array : GDS_BUFF
+            Var   : GDS_cDISARM_B
+        Const : B00L
+    CommentString
+        Const : -
+    SetVariable
+        Array : GDS_ABIL
+            Var   : GDS_cSNARE
+        Const : A00S
+    SetVariable
+        Array : GDS_BUFF
+            Var   : GDS_cSNARE
+        Const : B01R
+    CommentString
+        Const : -
+    SetVariable
+        Array : GDS_ABIL
+            Var   : GDS_cSUPERSILENCE
+        Const : A00R
+    SetVariable
+        Array : GDS_BUFF
+            Var   : GDS_cSUPERSILENCE
+        Const : B01S
+    CommentString
+        Const : -
+    SetVariable
+        Array : GDS_ABIL
+            Var   : GDS_cSLEEP
+        Const : A03L
+    SetVariable
+        Array : GDS_BUFF
+            Var   : GDS_cSLEEP
+        Const : B02W
+    CommentString
+        Const : -
+    SetVariable
+        Array : GDS_ABIL
+            Var   : GDS_cENTANGLE
+        Const : A03M
+    SetVariable
+        Array : GDS_BUFF
+            Var   : GDS_cENTANGLE
+        Const : B02S
+    CommentString
+        Const : -
+    SetVariable
+        Array : GDS_ABIL
+            Var   : GDS_cETHEREAL
+        Const : A03K
+    SetVariable
+        Array : GDS_BUFF
+            Var   : GDS_cETHEREAL
+        Const : B02V
+    CommentString
+        Const : -
+    ForLoopAMultiple
+        Const : 0
+        Const : 9
+        Action
+            CreateNUnitsAtLoc
+                Const : 1
+                Const : h07Q
+                Preset: PlayerNE
+                Call  : LoadLocationHandleBJ
+                    Const : 99
+                    Const : 2
+                    Var   : GDS_Hashtable
+                Preset: RealUnitFacing
+            UnitAddAbilityBJ
+                Array : GDS_ABIL
+                    Call  : GetForLoopIndexA
+                Call  : GetLastCreatedUnit
+            SetVariable
+                Array : GDS_DUMMY
+                    Call  : GetForLoopIndexA
+                Call  : GetLastCreatedUnit
+    CustomScriptCode
+        Const : 'call RemoveLocation(LoadLocationHandle(udg_GDS_Hashtable, 2, 99))'
+    CommentString
+        Const : -
+    CommentString
+        Const : 'YOU SHOULDN''T TOUCH ANYTHING BELOW THIS'
+    CommentString
+        Const : -
+    CommentString
+        Const : 'Order Strings'
+    SetVariable
+        Array : GDS_ORDERS
+            Const : 0
+        Const : thunderbolt
+    SetVariable
+        Array : GDS_ORDERS
+            Const : 1
+        Const : soulburn
+    SetVariable
+        Array : GDS_ORDERS
+            Const : 2
+        Const : drunkenhaze
+    SetVariable
+        Array : GDS_ORDERS
+            Const : 3
+        Const : drunkenhaze
+    SetVariable
+        Array : GDS_ORDERS
+            Const : 4
+        Const : drunkenhaze
+    SetVariable
+        Array : GDS_ORDERS
+            Const : 5
+        Const : ensnare
+    SetVariable
+        Array : GDS_ORDERS
+            Const : 6
+        Const : doom
+    SetVariable
+        Array : GDS_ORDERS
+            Const : 7
+        Const : sleep
+    SetVariable
+        Array : GDS_ORDERS
+            Const : 8
+        Const : entanglingroots
+    SetVariable
+        Array : GDS_ORDERS
+            Const : 9
+        Const : banish
+    CommentString
+        Const : -
+    SetForceAllianceStateBJ
+        Call  : GetPlayersAll
+        Call  : GetForceOfPlayer
+            Call  : GetOwningPlayer
+                Array : GDS_DUMMY
+                    Const : 0
+        Preset: AllianceSettingUnalliedVision
+    SetForceAllianceStateBJ
+        Call  : GetForceOfPlayer
+            Call  : GetOwningPlayer
+                Array : GDS_DUMMY
+                    Const : 0
+        Call  : GetPlayersAll
+        Preset: AllianceSettingUnallied
+    SetVariable
+        Var   : GDS_DebuffEvent
+        Const : 0.40
+    CustomScriptCode
+        Const : 'set udg_GDS_zMIN = 0.006'
+    ReturnAction
+    SetVariable
+        Var   : GDS_Duration
+        Const : 0.00
+    SetVariable
+        Var   : GDS_Remaining
+        Const : 0.00
+    SetVariable
+        Var   : GDS_Target
+        Preset: UnitNull
+    SetVariable
+        Var   : GDS_Type
+        Const : 0
+    SetVariable
+        Var   : GDS_zMIN
+        Const : 0.00
+    SetVariable
+        Var   : GDS_Permanent
+        Const : false
+    SetVariable
+        Var   : GDS_RegisterDisable
+        Const : false

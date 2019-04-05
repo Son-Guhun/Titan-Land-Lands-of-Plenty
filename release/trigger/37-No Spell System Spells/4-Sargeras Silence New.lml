@@ -1,0 +1,25 @@
+Event
+    TriggerRegisterAnyUnitEventBJ
+        Preset: PlayerUnitEventSpellCast
+Condition
+    OperatorCompareBoolean
+        Call  : UnitHasBuffBJ
+            Call  : GetTriggerUnit
+            Const : B01V
+        Preset: OperatorEqualENE
+        Const : true
+Action
+    IssueImmediateOrder
+        Call  : GetTriggerUnit
+        Preset: UnitOrderStop
+    SetVariable
+        Var   : GDS_Target
+        Call  : GetTriggerUnit
+    SetVariable
+        Var   : GDS_Duration
+        Const : 10.00
+    SetVariable
+        Var   : GDS_Type
+        Var   : GDS_cSILENCE
+    TriggerExecute
+        Var   : gg_trg_GDS_Main_Modifier

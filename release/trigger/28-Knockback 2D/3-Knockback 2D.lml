@@ -1,0 +1,538 @@
+Event
+Condition
+    OperatorCompareReal
+        Call  : GetUnitDefaultMoveSpeed
+            Var   : Knockback2DUnit
+        Preset: OperatorNotEqual
+        Const : 0.00
+    OperatorCompareBoolean
+        Array : K2DOverride
+            Call  : GetUnitUserData
+                Var   : Knockback2DUnit
+        Preset: OperatorEqualENE
+        Const : false
+Action
+    CustomScriptCode
+        Const : 'local integer pdex = udg_UDex'
+    SetVariable
+        Var   : UDex
+        Call  : GetUnitUserData
+            Var   : Knockback2DUnit
+    CommentString
+        Const : 'PREVENT DECORATIONS AND OTHER UNIDEXED UNITS FROM BEING KNOCKED BACK'
+    IfThenElseMultiple
+        Condition
+            OperatorCompareInteger
+                Var   : UDex
+                Preset: OperatorEqual
+                Const : 0
+        Action
+            CustomScriptCode
+                Const : 'set udg_UDex = pdex'
+            ReturnAction
+    CommentString
+        Const : 'START OF ACTUAL SYSTEM BELOW'
+    IfThenElseMultiple
+        Condition
+            OperatorCompareBoolean
+                Array : IsUnitBeingKnockedBack
+                    Var   : UDex
+                Preset: OperatorEqualENE
+                Const : true
+        Action
+            IfThenElseMultiple
+                Condition
+                    OperatorCompareBoolean
+                        Var   : Knockback2DOverride
+                        Preset: OperatorEqualENE
+                        Const : false
+                Action
+                    SetVariable
+                        Array : K2DAngle
+                            Var   : UDex
+                        Call  : Rad2Deg
+                            Array : K2DAngle
+                                Var   : UDex
+                    SetVariable
+                        Var   : Knockback2DAngle
+                        Call  : OperatorReal
+                            Call  : OperatorReal
+                                Var   : Knockback2DAngle
+                                Preset: OperatorAdd
+                                Array : K2DAngle
+                                    Var   : UDex
+                            Preset: OperatorMultiply
+                            Const : 0.50
+                    SetVariable
+                        Var   : Knockback2DDistance
+                        Call  : OperatorReal
+                            Call  : OperatorReal
+                                Array : K2DDistanceLeft
+                                    Var   : UDex
+                                Preset: OperatorAdd
+                                Var   : Knockback2DDistance
+                            Preset: OperatorMultiply
+                            Const : 0.50
+                    SetVariable
+                        Var   : Knockback2DTime
+                        Call  : OperatorReal
+                            Call  : OperatorReal
+                                Array : K2DTimeLeft
+                                    Var   : UDex
+                                Preset: OperatorAdd
+                                Var   : Knockback2DTime
+                            Preset: OperatorMultiply
+                            Const : 0.50
+            TriggerExecute
+                Var   : gg_trg_Knockback_2D_Destroy
+    IfThenElseMultiple
+        Condition
+            OperatorCompareInteger
+                Array : K2DNext
+                    Const : 0
+                Preset: OperatorEqual
+                Const : 0
+        Action
+            CustomScriptCode
+                Const : 'call ExecuteFunc("StartKnockback2DTimer")'
+    SetVariable
+        Array : IsUnitBeingKnockedBack
+            Var   : UDex
+        Const : true
+    SetVariable
+        Array : K2DPrev
+            Array : K2DNext
+                Const : 0
+        Var   : UDex
+    SetVariable
+        Array : K2DNext
+            Var   : UDex
+        Array : K2DNext
+            Const : 0
+    SetVariable
+        Array : K2DNext
+            Const : 0
+        Var   : UDex
+    IfThenElseMultiple
+        Condition
+            OperatorCompareReal
+                Var   : Knockback2DHeight
+                Preset: OperatorNotEqual
+                Const : 0.00
+        Action
+            SetVariable
+                Array : K2DHeight
+                    Var   : UDex
+                Var   : Knockback2DHeight
+            CustomScriptCode
+                Const : 'if UnitAddAbility(udg_Knockback2DUnit, ''Amrf'') then'
+            CustomScriptCode
+                Const : '    call UnitRemoveAbility(udg_Knockback2DUnit, ''Amrf'')'
+            CustomScriptCode
+                Const : endif
+            SetUnitFlyHeightBJ
+                Var   : Knockback2DUnit
+                Call  : OperatorReal
+                    Call  : GetUnitDefaultFlyHeight
+                        Var   : Knockback2DUnit
+                    Preset: OperatorAdd
+                    Var   : Knockback2DHeight
+                Call  : OperatorReal
+                    Call  : OperatorReal
+                        Var   : Knockback2DHeight
+                        Preset: OperatorSubtract
+                        Call  : GetUnitDefaultFlyHeight
+                            Var   : Knockback2DUnit
+                    Preset: OperatorDivide
+                    Call  : OperatorReal
+                        Var   : Knockback2DGravity
+                        Preset: OperatorMultiply
+                        Var   : Knockback2DTime
+            SetVariable
+                Array : K2DHeightThreshold
+                    Var   : UDex
+                Call  : OperatorReal
+                    Call  : OperatorReal
+                        Const : 1
+                        Preset: OperatorSubtract
+                        Var   : Knockback2DGravity
+                    Preset: OperatorMultiply
+                    Var   : Knockback2DTime
+            SetVariable
+                Var   : Knockback2DHeight
+                Const : 0.00
+        Action
+            SetVariable
+                Array : K2DHeight
+                    Var   : UDex
+                Const : 0.00
+    CustomScriptCode
+        Const : 'set udg_K2DX = GetUnitX(udg_Knockback2DUnit)'
+    CustomScriptCode
+        Const : 'set udg_K2DY = GetUnitY(udg_Knockback2DUnit)'
+    IfThenElseMultiple
+        Condition
+            OperatorCompareBoolean
+                Var   : Knockback2DPause
+                Preset: OperatorEqualENE
+                Const : true
+        Action
+            SetVariable
+                Array : K2DLastX
+                    Var   : UDex
+                Var   : K2DX
+            SetVariable
+                Array : K2DLastY
+                    Var   : UDex
+                Var   : K2DY
+    SetVariable
+        Array : K2DAngle
+            Var   : UDex
+        Call  : Deg2Rad
+            Var   : Knockback2DAngle
+    SetVariable
+        Array : K2DCos
+            Var   : UDex
+        Call  : CosBJ
+            Var   : Knockback2DAngle
+    SetVariable
+        Array : K2DSin
+            Var   : UDex
+        Call  : SinBJ
+            Var   : Knockback2DAngle
+    IfThenElseMultiple
+        Condition
+            OperatorCompareBoolean
+                Call  : IsUnitType
+                    Var   : Knockback2DUnit
+                    Preset: UnitTypeFlying
+                Preset: OperatorEqualENE
+                Const : true
+        Action
+            SetVariable
+                Array : K2DFlying
+                    Var   : UDex
+                Const : true
+        Action
+            SetVariable
+                Array : K2DFlying
+                    Var   : UDex
+                Const : false
+            IfThenElseMultiple
+                Condition
+                    OperatorCompareInteger
+                        Var   : Knockback2DRobustPathing
+                        Preset: OperatorGreater
+                        Const : 0
+                Action
+                    CommentString
+                        Const : ' '
+                    CommentString
+                        Const : 'Handle the pathing checker based on the unit''s collision size'
+                    CommentString
+                        Const : ' '
+                    CustomScriptCode
+                        Const : 'if not IsUnitInRangeXY(udg_Knockback2DUnit, udg_K2DX + 17, udg_K2DY, 0) then'
+                    SetVariable
+                        Array : K2DRadius
+                            Var   : UDex
+                        Const : 0
+                    CustomScriptCode
+                        Const : else
+                    CustomScriptCode
+                        Const : 'if not IsUnitInRangeXY(udg_Knockback2DUnit, udg_K2DX + 25, udg_K2DY, 0) then'
+                    SetVariable
+                        Array : K2DRadius
+                            Var   : UDex
+                        Const : 8
+                    CustomScriptCode
+                        Const : 'elseif not IsUnitInRangeXY(udg_Knockback2DUnit, udg_K2DX + 33, udg_K2DY, 0) then'
+                    SetVariable
+                        Array : K2DRadius
+                            Var   : UDex
+                        Const : 16
+                    CustomScriptCode
+                        Const : 'elseif not IsUnitInRangeXY(udg_Knockback2DUnit, udg_K2DX + 49, udg_K2DY, 0) then'
+                    SetVariable
+                        Array : K2DRadius
+                            Var   : UDex
+                        Const : 32
+                    CustomScriptCode
+                        Const : else
+                    SetVariable
+                        Array : K2DRadius
+                            Var   : UDex
+                        Const : 48
+                    CustomScriptCode
+                        Const : endif
+                    SetVariable
+                        Var   : Knockback2DAngle
+                        Call  : ModuloReal
+                            Call  : OperatorReal
+                                Var   : Knockback2DAngle
+                                Preset: OperatorAdd
+                                Const : 90.00
+                            Const : 360.00
+                    SetVariable
+                        Array : K2DCosH
+                            Var   : UDex
+                        Call  : CosBJ
+                            Var   : Knockback2DAngle
+                    SetVariable
+                        Array : K2DSinH
+                            Var   : UDex
+                        Call  : SinBJ
+                            Var   : Knockback2DAngle
+                    IfThenElseMultiple
+                        Condition
+                            OperatorCompareInteger
+                                Var   : Knockback2DRobustPathing
+                                Preset: OperatorEqual
+                                Const : 2
+                            OperatorCompareInteger
+                                Array : K2DRadius
+                                    Var   : UDex
+                                Preset: OperatorGreater
+                                Const : 16
+                        Action
+                            SetVariable
+                                Var   : Knockback2DAngle
+                                Call  : ModuloReal
+                                    Call  : OperatorReal
+                                        Var   : Knockback2DAngle
+                                        Preset: OperatorAdd
+                                        Const : 45.00
+                                    Const : 360.00
+                            SetVariable
+                                Array : K2DCosD1
+                                    Var   : UDex
+                                Call  : CosBJ
+                                    Var   : Knockback2DAngle
+                            SetVariable
+                                Array : K2DSinD1
+                                    Var   : UDex
+                                Call  : SinBJ
+                                    Var   : Knockback2DAngle
+                            SetVariable
+                                Var   : Knockback2DAngle
+                                Call  : ModuloReal
+                                    Call  : OperatorReal
+                                        Var   : Knockback2DAngle
+                                        Preset: OperatorAdd
+                                        Const : 90.00
+                                    Const : 360.00
+                            SetVariable
+                                Array : K2DCosD2
+                                    Var   : UDex
+                                Call  : CosBJ
+                                    Var   : Knockback2DAngle
+                            SetVariable
+                                Array : K2DSinD2
+                                    Var   : UDex
+                                Call  : SinBJ
+                                    Var   : Knockback2DAngle
+                    CustomScriptCode
+                        Const : endif
+    SetVariable
+        Array : K2DDistanceLeft
+            Var   : UDex
+        Var   : Knockback2DDistance
+    SetVariable
+        Var   : Knockback2DDistance
+        Call  : OperatorReal
+            Call  : OperatorReal
+                Call  : OperatorReal
+                    Const : 1.00
+                    Preset: OperatorAdd
+                    Var   : Knockback2DFriction
+                Preset: OperatorMultiply
+                Var   : Knockback2DDistance
+            Preset: OperatorDivide
+            Var   : Knockback2DTime
+    SetVariable
+        Array : K2DFriction
+            Var   : UDex
+        Call  : OperatorReal
+            Call  : OperatorReal
+                Var   : Knockback2DDistance
+                Preset: OperatorDivide
+                Var   : Knockback2DTime
+            Preset: OperatorMultiply
+            Call  : OperatorReal
+                Call  : OperatorReal
+                    Const : 1.00
+                    Preset: OperatorSubtract
+                    Call  : OperatorReal
+                        Const : 1
+                        Preset: OperatorSubtract
+                        Var   : Knockback2DFriction
+                Preset: OperatorMultiply
+                Call  : OperatorReal
+                    Var   : K2DTimeout
+                    Preset: OperatorMultiply
+                    Var   : K2DTimeout
+    SetVariable
+        Array : K2DVelocity
+            Var   : UDex
+        Call  : OperatorReal
+            Var   : Knockback2DDistance
+            Preset: OperatorMultiply
+            Var   : K2DTimeout
+    CommentString
+        Const : ' '
+    SetVariable
+        Array : K2DKillTrees
+            Var   : UDex
+        Var   : Knockback2DKillTrees
+    IfThenElseMultiple
+        Condition
+            OperatorCompareBoolean
+                Var   : Knockback2DKillTrees
+                Preset: OperatorEqualENE
+                Const : true
+        Action
+            CommentString
+                Const : 'Square the radius so we don''t have to use SquareRoot when comparing distance.'
+            SetVariable
+                Array : K2DDestRadius
+                    Var   : UDex
+                Call  : OperatorReal
+                    Var   : Knockback2DDestRadius
+                    Preset: OperatorMultiply
+                    Var   : Knockback2DDestRadius
+            IfThenElseMultiple
+                Condition
+                    OperatorCompareReal
+                        Call  : OperatorReal
+                            Var   : Knockback2DDestRadius
+                            Preset: OperatorMultiply
+                            Const : 2.00
+                        Preset: OperatorGreater
+                        Var   : K2DMaxDestRadius
+                Action
+                    CommentString
+                        Const : 'Update the size of the enumerating rect to compensate for the desired extra radius.'
+                    SetVariable
+                        Var   : K2DMaxDestRadius
+                        Call  : OperatorReal
+                            Var   : Knockback2DDestRadius
+                            Preset: OperatorMultiply
+                            Const : 2.00
+                    CustomScriptCode
+                        Const : 'call SetRect(udg_K2DRegion, 0.00, 0.00, udg_K2DMaxDestRadius, udg_K2DMaxDestRadius)'
+            SetVariable
+                Var   : Knockback2DDestRadius
+                Var   : Knockback2DDefaultDestRadius
+    CommentString
+        Const : ' '
+    SetVariable
+        Array : K2DAmphibious
+            Var   : UDex
+        Var   : Knockback2DAmphibious
+    SetVariable
+        Array : K2DBounce
+            Var   : UDex
+        Var   : Knockback2DBounces
+    SetVariable
+        Array : K2DCollision
+            Var   : UDex
+        Var   : Knockback2DCollision
+    SetVariable
+        Array : K2DFreeze
+            Var   : UDex
+        Const : false
+    SetVariable
+        Array : K2DFXModel
+            Var   : UDex
+        Var   : Knockback2DLoopFX
+    SetVariable
+        Array : K2DFXRate
+            Var   : UDex
+        Var   : Knockback2DFXRate
+    SetVariable
+        Array : K2DFXTimeLeft
+            Var   : UDex
+        Var   : Knockback2DFXRate
+    SetVariable
+        Array : K2DImpact
+            Var   : UDex
+        Var   : Knockback2DOnImpact
+    SetVariable
+        Array : K2DCollide
+            Var   : UDex
+        Var   : Knockback2DOnCollide
+    SetVariable
+        Array : K2DEnd
+            Var   : UDex
+        Var   : Knockback2DOnEnd
+    SetVariable
+        Array : K2DOverride
+            Var   : UDex
+        Var   : Knockback2DOverride
+    SetVariable
+        Array : K2DPause
+            Var   : UDex
+        Var   : Knockback2DPause
+    SetVariable
+        Array : K2DSimple
+            Var   : UDex
+        Var   : Knockback2DSimple
+    SetVariable
+        Array : K2DSource
+            Var   : UDex
+        Var   : Knockback2DSource
+    SetVariable
+        Array : K2DTimeLeft
+            Var   : UDex
+        Var   : Knockback2DTime
+    SetVariable
+        Array : K2DUnbiasedCollision
+            Var   : UDex
+        Var   : Knockback2DUnbiasedCollision
+    SetVariable
+        Var   : Knockback2DAmphibious
+        Const : false
+    SetVariable
+        Var   : Knockback2DBounces
+        Var   : Knockback2DDefaultBounce
+    SetVariable
+        Var   : Knockback2DCollision
+        Const : 0.00
+    SetVariable
+        Var   : Knockback2DFriction
+        Var   : Knockback2DDefaultFriction
+    SetVariable
+        Var   : Knockback2DFXRate
+        Var   : Knockback2DDefaultFXRate
+    SetVariable
+        Var   : Knockback2DGravity
+        Var   : Knockback2DDefaultGravity
+    SetVariable
+        Var   : Knockback2DKillTrees
+        Var   : Knockback2DDefaultKillTrees
+    SetVariable
+        Var   : Knockback2DLoopFX
+        Var   : Knockback2DDefaultFX
+    CustomScriptCode
+        Const : 'set udg_Knockback2DOnImpact = null'
+    CustomScriptCode
+        Const : 'set udg_Knockback2DOnCollide = null'
+    CustomScriptCode
+        Const : 'set udg_Knockback2DOnEnd = null'
+    SetVariable
+        Var   : Knockback2DOverride
+        Const : false
+    SetVariable
+        Var   : Knockback2DPause
+        Var   : Knockback2DDefaultPause
+    SetVariable
+        Var   : Knockback2DSimple
+        Const : false
+    SetVariable
+        Var   : Knockback2DSource
+        Preset: UnitNull
+    SetVariable
+        Var   : Knockback2DUnbiasedCollision
+        Const : false
+    CustomScriptCode
+        Const : 'set udg_UDex = pdex'

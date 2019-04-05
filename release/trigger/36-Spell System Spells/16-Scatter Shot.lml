@@ -1,0 +1,22 @@
+Event
+Condition
+Action
+    SetVariable
+        Array : TimerBonuses
+            Const : 0
+        Const : -7
+    UnitDamageTargetBJ
+        Var   : Spell__Caster
+        Var   : Spell__Target
+        Const : 400.00
+        Preset: AttackTypeNormal
+        Preset: DamageTypeMagic
+    PlaySoundOnUnitBJ
+        Var   : gg_snd_RiflemanAttack1
+        Const : 100
+        Var   : Spell__Caster
+    CustomScriptCode
+        Const : 'call AddTimedBonus(udg_Spell__Target, 0, 0.5, 5)'
+    ReturnAction
+    KillSoundWhenDoneBJ
+        Call  : GetLastPlayedSound

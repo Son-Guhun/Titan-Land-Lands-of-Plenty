@@ -1,0 +1,23 @@
+Event
+Condition
+Action
+    SetVariable
+        Var   : GDS_Type
+        Var   : GDS_cSNARE
+    SetVariable
+        Var   : GDS_Duration
+        Const : 10.00
+    SetVariable
+        Var   : Spell__InRangePoint
+        Var   : Spell__CastPoint
+    SetVariable
+        Var   : Spell__InRange
+        Const : 1000.00
+    ForGroupMultiple
+        Var   : Spell__InRangeGroup
+        Action
+            SetVariable
+                Var   : GDS_Target
+                Call  : GetEnumUnit
+            TriggerExecute
+                Var   : gg_trg_GDS_Main_Modifier

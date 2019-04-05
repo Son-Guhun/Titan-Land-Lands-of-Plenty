@@ -1,0 +1,7 @@
+--Inspired by Gate Triggers from Titan Land RoK v3.83--
+Thanks to GHH (I believe these were mabe by him)
+
+
+ALL GATE UNIT TYPE HASHTABLE VALUES ARE SAVED IN THE "Init 0 seconds" TRIGGER
+
+THE GATE SYSTEM USES HASHTABLE_1

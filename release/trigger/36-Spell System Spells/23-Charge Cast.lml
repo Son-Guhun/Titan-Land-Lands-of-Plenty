@@ -1,0 +1,57 @@
+Event
+Condition
+Action
+    SetVariable
+        Var   : Knockback2DAngle
+        Call  : AngleBetweenPoints
+            Var   : Spell__CastPoint
+            Var   : Spell__TargetPoint
+    SetVariable
+        Var   : Knockback2DDistance
+        Call  : DistanceBetweenPoints
+            Var   : Spell__CastPoint
+            Var   : Spell__TargetPoint
+    SetVariable
+        Var   : Knockback2DTime
+        Call  : OperatorReal
+            Var   : Knockback2DDistance
+            Preset: OperatorDivide
+            Const : 800.00
+    SetVariable
+        Var   : Knockback2DUnit
+        Var   : Spell__Caster
+    SetVariable
+        Var   : Knockback2DPause
+        Const : true
+    SetVariable
+        Var   : Knockback2DSimple
+        Const : true
+    SetVariable
+        Var   : Knockback2DSource
+        Var   : Spell__Caster
+    SetVariable
+        Var   : Knockback2DFriction
+        Const : 0.00
+    SetVariable
+        Var   : Knockback2DOnCollide
+        Var   : gg_trg_Charge_Collision
+    SetVariable
+        Var   : Knockback2DOnEnd
+        Var   : gg_trg_Charge_End
+    SetVariable
+        Var   : Knockback2DOverride
+        Const : true
+    SetVariable
+        Var   : Knockback2DUnbiasedCollision
+        Const : true
+    AddSpecialEffectLocBJ
+        Var   : Spell__TargetPoint
+        Const : Abilities\Spells\NightElf\TrueshotAura\TrueshotAura.mdl
+    DestroyEffectBJ
+        Call  : GetLastCreatedEffectBJ
+    ConditionalTriggerExecute
+        Var   : gg_trg_Knockback_2D
+    IssuePointOrderLoc
+        Var   : Spell__Caster
+        Preset: UnitOrderAttackGround
+        Var   : Spell__TargetPoint

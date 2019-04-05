@@ -1,0 +1,8 @@
+This trigger handles:
+-removing trees
+-destroying trees/bridges
+-reviving trees/birdges
+
+Check if unit is Deco Special so this trigger is not run for every unit that casts a ability
+
+(sorry for the if chain)

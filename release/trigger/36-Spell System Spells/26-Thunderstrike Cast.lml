@@ -1,0 +1,91 @@
+Event
+Condition
+Action
+    AddSpecialEffectLocBJ
+        Var   : Spell__CastPoint
+        Const : Abilities\Spells\Other\Monsoon\MonsoonBoltTarget.mdl
+    DestroyEffectBJ
+        Call  : GetLastCreatedEffectBJ
+    AddSpecialEffectLocBJ
+        Var   : Spell__CastPoint
+        Const : Abilities\Spells\Human\Thunderclap\ThunderClapCaster.mdl
+    DestroyEffectBJ
+        Call  : GetLastCreatedEffectBJ
+    SetVariable
+        Var   : Spell__InRangePoint
+        Var   : Spell__TargetPoint
+    SetVariable
+        Var   : Spell__InRange
+        Const : 200.00
+    ForGroupMultiple
+        Var   : Spell__InRangeGroup
+        Action
+            CustomScriptCode
+                Const : 'local location udg_temp_point'
+            SetVariable
+                Var   : temp_point
+                Call  : GetUnitLoc
+                    Call  : GetEnumUnit
+            UnitDamageTargetBJ
+                Var   : Spell__Caster
+                Call  : GetEnumUnit
+                Const : 200.00
+                Preset: AttackTypeNormal
+                Preset: DamageTypeUniversal
+            IfThenElseMultiple
+                Condition
+                    OrMultiple
+                        Condition
+                            OperatorCompareBoolean
+                                Call  : IsUnitType
+                                    Call  : GetEnumUnit
+                                    Preset: UnitTypeHero
+                                Preset: OperatorEqualENE
+                                Const : true
+                            OperatorCompareBoolean
+                                Call  : IsUnitType
+                                    Call  : GetEnumUnit
+                                    Preset: UnitTypeResistant
+                                Preset: OperatorEqualENE
+                                Const : true
+                Action
+                    CustomScriptCode
+                        Const : 'call AddTimedBonus(GetEnumUnit(), 0, 0.5, 3)'
+                Action
+                    CustomScriptCode
+                        Const : 'call AddTimedBonus(GetEnumUnit(), 0, 0.5, 5)'
+            SetVariable
+                Var   : Knockback2DAngle
+                Call  : AngleBetweenPoints
+                    Var   : Spell__CastPoint
+                    Var   : temp_point
+            SetVariable
+                Var   : Knockback2DDistance
+                Const : 750.00
+            SetVariable
+                Var   : Knockback2DTime
+                Const : 1.00
+            SetVariable
+                Var   : Knockback2DUnit
+                Call  : GetEnumUnit
+            SetVariable
+                Var   : Knockback2DPause
+                Const : true
+            SetVariable
+                Var   : Knockback2DBounces
+                Const : false
+            SetVariable
+                Var   : Knockback2DOnImpact
+                Var   : gg_trg_Thunderstrike_Impact
+            SetVariable
+                Var   : Knockback2DSource
+                Var   : Spell__Caster
+            SetVariable
+                Var   : Knockback2DFriction
+                Const : 0.00
+            ConditionalTriggerExecute
+                Var   : gg_trg_Knockback_2D
+            CustomScriptCode
+                Const : 'call RemoveLocation(udg_temp_point)'
+            CustomScriptCode
+                Const : 'set udg_temp_point = null'

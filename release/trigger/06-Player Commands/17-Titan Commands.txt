@@ -1,0 +1,2 @@
+TODO:
+	Unify all Titan commands into a single wrapper function(wrapper trigger) in order to avoid firing off tons of events every time a player types a message (can slow down loading bases, possibly)

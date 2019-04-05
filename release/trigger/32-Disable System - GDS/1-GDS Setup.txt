@@ -1,0 +1,3 @@
+Set each GDS_ABIL to the correct ability.
+Set each GDS_BUFF to the correct buff.
+Set the created unit type to GDS_Dummy (in Custom->Human->Melee->Buildings).

@@ -1,0 +1,8 @@
+====Disable System version 2.4.1==== (fixed timer cleanup)
+
+Created by Guhun
+
+Credits: 
+
+Menag for making the system that gave me the idea to make this one ("[WurstScript] Status Handler")
+Reventhous for thinking of the "Disable" name

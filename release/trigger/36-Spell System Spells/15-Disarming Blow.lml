@@ -1,0 +1,20 @@
+Event
+Condition
+Action
+    SetVariable
+        Var   : GDS_Type
+        Var   : GDS_cDISARM_M
+    SetVariable
+        Var   : GDS_Duration
+        Const : 5.00
+    SetVariable
+        Var   : GDS_Target
+        Var   : Spell__Target
+    UnitDamageTargetBJ
+        Var   : Spell__Caster
+        Var   : Spell__Target
+        Const : 150.00
+        Preset: AttackTypeNormal
+        Preset: DamageTypeMagic
+    TriggerExecute
+        Var   : gg_trg_GDS_Main_Modifier

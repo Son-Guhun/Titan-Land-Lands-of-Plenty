@@ -1,0 +1,50 @@
+Event
+Condition
+Action
+    SetVariable
+        Var   : Spell__InRangePoint
+        Var   : Spell__CastPoint
+    SetVariable
+        Var   : Spell__InRange
+        Const : 350.00
+    ForGroupMultiple
+        Var   : Spell__InRangeGroup
+        Action
+            IfThenElseMultiple
+                Condition
+                    OrMultiple
+                        Condition
+                            OperatorCompareBoolean
+                                Call  : IsUnitType
+                                    Call  : GetEnumUnit
+                                    Preset: UnitTypeHero
+                                Preset: OperatorEqualENE
+                                Const : true
+                            OperatorCompareBoolean
+                                Call  : IsUnitType
+                                    Call  : GetEnumUnit
+                                    Preset: UnitTypeResistant
+                                Preset: OperatorEqualENE
+                                Const : true
+                Action
+                    SetVariable
+                        Var   : GDS_Duration
+                        Const : 4.50
+                Action
+                    SetVariable
+                        Var   : GDS_Duration
+                        Const : 6.00
+            SetVariable
+                Var   : GDS_Type
+                Var   : GDS_cSTUN
+            SetVariable
+                Var   : GDS_Target
+                Call  : GetEnumUnit
+            TriggerExecute
+                Var   : gg_trg_GDS_Main_Modifier
+            UnitDamageTargetBJ
+                Var   : Spell__Caster
+                Call  : GetEnumUnit
+                Const : 100.00
+                Preset: AttackTypeNormal
+                Preset: DamageTypeMagic

@@ -1,0 +1,54 @@
+Event
+    TriggerRegisterAnyUnitEventBJ
+        Preset: PlayerUnitEventSpellEffect
+Condition
+Action
+    CustomScriptCode
+        Const : 'local integer udg_temp_integer'
+    CustomScriptCode
+        Const : 'local real udg_temp_real = 1.'
+    CustomScriptCode
+        Const : 'if IsOrderMorph(GetUnitCurrentOrder(GetTriggerUnit())) then'
+    CustomScriptCode
+        Const : return
+    CustomScriptCode
+        Const : endif
+    IfThenElseMultiple
+        Condition
+            OperatorCompareInteger
+                Call  : GetUnitAbilityLevelSwapped
+                    Const : A0C6
+                    Call  : GetTriggerUnit
+                Preset: OperatorEqual
+                Const : 0
+        Action
+            SetVariable
+                Var   : temp_integer
+                Call  : GetUnitAbilityLevelSwapped
+                    Call  : GetSpellAbilityId
+                    Call  : GetTriggerUnit
+            IfThenElseMultiple
+                Condition
+                    OperatorCompareBoolean
+                        Call  : UnitHasBuffBJ
+                            Call  : GetTriggerUnit
+                            Const : B033
+                        Preset: OperatorEqualENE
+                        Const : true
+                Action
+                    SetVariable
+                        Var   : temp_real
+                        Call  : OperatorReal
+                            Var   : temp_real
+                            Preset: OperatorMultiply
+                            Const : 0.25
+            BlzSetUnitAbilityCooldown
+                Call  : GetTriggerUnit
+                Call  : GetSpellAbilityId
+                Var   : temp_integer
+                Call  : OperatorReal
+                    Var   : temp_real
+                    Preset: OperatorMultiply
+                    Call  : BlzGetAbilityCooldown
+                        Call  : GetSpellAbilityId
+                        Var   : temp_integer

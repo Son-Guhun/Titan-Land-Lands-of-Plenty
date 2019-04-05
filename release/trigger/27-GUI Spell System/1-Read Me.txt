@@ -1,0 +1,31 @@
+GUI Spell System by Bribe from HiveWorkshop.com
+version 1.6.0.0
+
+The main goal of this system is to have organized, readable, intuitive spells that don't have to have the same components rewritten for each spell.
+
+To set up a spell to work with this system, there are a few necessary things to keep in mind. You must have a configuration trigger with the event "map initialization" to set up the spell. You must set the ability you base your spell on to the variable Spell__Ability. You must set the trigger(s) you want to run during an event of the spell to a Spell__Trigger_OnEvent variable. Finally, you must run the trigger Spell System <gen> once all of your variables are set.
+
+Each configuration for a spell is going to include a minimum of this (though you only need one of the four Spell__Trigger_OnEvent variables):
+
+Spell Configuration
+    Events
+        Map initialization
+    Conditions
+    Actions
+        Set Spell__Ability = <Your Ability>
+
+        Set Spell__Trigger_OnChannel = <When a unit starts channeling an ability>
+        Set Spell__Trigger_OnCast = <When a unit starts casting an ability>
+        Set Spell__Trigger_OnEffect = <When a unit starts the effect of an ability>
+        Set Spell__Trigger_OnFinish = <When a unit stops casting an ability>
+
+        Trigger - Run Spell System <gen> (ignoring conditions)
+
+Unlike the configuration trigger, an event trigger isn't required to do anything specific with its variables. Here is what you need for an OnEvent trigger:
+
+OnEvent Trigger
+    Events
+    Conditions
+    Actions
+
+For a full list of configurable variables and functional variables, review the two triggers under "Sample Triggers" in the GUI Spell System trigger category on the left sidebar. I've commented the code wherever I've felt it was needed, though I can add more if requested. For those savvy in JASS, there are a load of comments in the all-JASS Spell System trigger.

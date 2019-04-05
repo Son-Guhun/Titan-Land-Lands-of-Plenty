@@ -1,0 +1,202 @@
+Event
+Condition
+Action
+    CommentString
+        Const : LOCALS
+    CustomScriptCode
+        Const : 'local group udg_temp_group = CreateGroup()'
+    CustomScriptCode
+        Const : 'local unit udg_temp_unit'
+    CustomScriptCode
+        Const : 'local location udg_temp_point'
+    CustomScriptCode
+        Const : 'local integer udg_temp_integer'
+    CustomScriptCode
+        Const : 'local integer udg_temp_integer2 = bj_MAX_PLAYERS'
+    CommentString
+        Const : LOCALS
+    IfThenElseMultiple
+        Condition
+            OperatorCompareString
+                Call  : GetEventPlayerChatString
+                Preset: OperatorEqualENE
+                Const : '-load center'
+        Action
+            CommentString
+                Const : 'CENTER COMMAND'
+            SetVariable
+                Var   : temp_integer
+                Call  : GetConvertedPlayerId
+                    Call  : GetTriggerPlayer
+            CustomScriptCode
+                Const : 'call GroupEnumUnitsSelected(udg_temp_group, GetTriggerPlayer(), null)'
+            SetVariable
+                Var   : temp_unit
+                Call  : GroupPickRandomUnit
+                    Var   : temp_group
+            CustomScriptCode
+                Const : 'if IsUnitType(udg_temp_unit, UNIT_TYPE_STRUCTURE) then'
+            SetVariable
+                Var   : temp_point
+                Call  : GetUnitRallyPoint
+                    Var   : temp_unit
+            CustomScriptCode
+                Const : 'if udg_temp_point == null then'
+            SetVariable
+                Var   : temp_point
+                Call  : GetUnitLoc
+                    Call  : GetUnitRallyUnit
+                        Var   : temp_unit
+            CustomScriptCode
+                Const : endif
+            CustomScriptCode
+                Const : else
+            SetVariable
+                Var   : temp_point
+                Call  : GetUnitLoc
+                    Var   : temp_unit
+            CustomScriptCode
+                Const : endif
+            SetVariable
+                Array : load_center
+                    Var   : temp_integer
+                Call  : GetLocationX
+                    Var   : temp_point
+            SetVariable
+                Array : load_center
+                    Call  : OperatorInt
+                        Var   : temp_integer
+                        Preset: OperatorAdd
+                        Var   : temp_integer2
+                Call  : GetLocationY
+                    Var   : temp_point
+            DisplayTextToForce
+                Array : FORCES_PLAYER
+                    Call  : OperatorInt
+                        Call  : GetConvertedPlayerId
+                            Call  : GetTriggerPlayer
+                        Preset: OperatorSubtract
+                        Const : 1
+                Call  : OperatorString
+                    Const : 'Successfully set the center of future unit loads to '
+                    Call  : OperatorString
+                        Const : (
+                        Call  : OperatorString
+                            Call  : OperatorString
+                                Call  : R2S
+                                    Array : load_center
+                                        Var   : temp_integer
+                                Const : |
+                            Call  : OperatorString
+                                Call  : R2S
+                                    Array : load_center
+                                        Call  : OperatorInt
+                                            Var   : temp_integer
+                                            Preset: OperatorAdd
+                                            Var   : temp_integer2
+                                Const : )
+            CustomScriptCode
+                Const : 'call RemoveLocation (udg_temp_point)'
+            CustomScriptCode
+                Const : 'call DestroyGroup (udg_temp_group)'
+            CustomScriptCode
+                Const : 'set udg_temp_group = null'
+            CustomScriptCode
+                Const : 'set udg_temp_unit = null'
+            CustomScriptCode
+                Const : 'set udg_temp_point = null'
+            CommentString
+                Const : 'CENTER COMMAND'
+        Action
+            IfThenElseMultiple
+                Condition
+                    OperatorCompareString
+                        Call  : GetEventPlayerChatString
+                        Preset: OperatorEqualENE
+                        Const : '-nosave units'
+                Action
+                    Disab: CommentString
+                        Const : 'DON''T SAVE UNITS COMMAND'
+                    Disab: IfThenElseMultiple
+                        Condition
+                            Disab: OperatorCompareBoolean
+                                Array : save_load_boolean
+                                    Call  : OperatorInt
+                                        Call  : GetConvertedPlayerId
+                                            Call  : GetTriggerPlayer
+                                        Preset: OperatorAdd
+                                        Call  : OperatorInt
+                                            Const : 2
+                                            Preset: OperatorMultiply
+                                            Var   : temp_integer2
+                                Preset: OperatorEqualENE
+                                Const : false
+                        Action
+                            Disab: SetVariable
+                                Array : save_load_boolean
+                                    Call  : OperatorInt
+                                        Call  : GetConvertedPlayerId
+                                            Call  : GetTriggerPlayer
+                                        Preset: OperatorAdd
+                                        Call  : OperatorInt
+                                            Const : 2
+                                            Preset: OperatorMultiply
+                                            Var   : temp_integer2
+                                Const : true
+                            Disab: DisplayTextToForce
+                                Array : FORCES_PLAYER
+                                    Call  : OperatorInt
+                                        Call  : GetConvertedPlayerId
+                                            Call  : GetTriggerPlayer
+                                        Preset: OperatorSubtract
+                                        Const : 1
+                                Const : 'Units are now NOT being saved'
+                        Action
+                            Disab: SetVariable
+                                Array : save_load_boolean
+                                    Call  : OperatorInt
+                                        Call  : GetConvertedPlayerId
+                                            Call  : GetTriggerPlayer
+                                        Preset: OperatorAdd
+                                        Call  : OperatorInt
+                                            Const : 2
+                                            Preset: OperatorMultiply
+                                            Var   : temp_integer2
+                                Const : false
+                            Disab: DisplayTextToForce
+                                Array : FORCES_PLAYER
+                                    Call  : OperatorInt
+                                        Call  : GetConvertedPlayerId
+                                            Call  : GetTriggerPlayer
+                                        Preset: OperatorSubtract
+                                        Const : 1
+                                Const : 'Units are now being saved'
+                    Disab: CommentString
+                        Const : 'DON''T SAVE UNITS COMMAND'
+                Action
+                    CommentString
+                        Const : 'SET LOAD LIMIT COMMAND'
+                    IfThenElseMultiple
+                        Condition
+                            OperatorComparePlayer
+                                Call  : GetTriggerPlayer
+                                Preset: OperatorEqualENE
+                                Var   : GAME_MASTER
+                        Action
+                            SetVariable
+                                Var   : load_limit
+                                Call  : S2I
+                                    Call  : SubStringBJ
+                                        Call  : GetEventPlayerChatString
+                                        Const : 13
+                                        Const : 16
+                            DisplayTextToForce
+                                Call  : GetPlayersAll
+                                Call  : OperatorString
+                                    Const : 'Unit Load Limit has been set to '
+                                    Call  : I2S
+                                        Var   : load_limit
+                            CommentString
+                                Const : 'Double conversion ensures that, if for some reason the first conversion did not work out, the players won''t receive the correct message'
+                    CommentString
+                        Const : 'SET LOAD LIMIT COMMAND'

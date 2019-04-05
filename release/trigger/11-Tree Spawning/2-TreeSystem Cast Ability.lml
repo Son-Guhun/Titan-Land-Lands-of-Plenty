@@ -1,0 +1,129 @@
+Event
+    TriggerRegisterAnyUnitEventBJ
+        Preset: PlayerUnitEventSpellEffect
+Condition
+    OperatorCompareUnitCode
+        Call  : GetUnitTypeId
+            Call  : GetTriggerUnit
+        Preset: OperatorEqualENE
+        Const : u015
+Action
+    CustomScriptCode
+        Const : 'local location udg_temp_point'
+    IfThenElseMultiple
+        Condition
+            OperatorCompareAbilityId
+                Call  : GetSpellAbilityId
+                Preset: OperatorEqualENE
+                Const : A000
+        Action
+            SetVariable
+                Var   : temp_point
+                Call  : GetSpellTargetLoc
+            EnumDestructablesInCircleBJMultiple
+                Call  : OperatorReal
+                    Array : TreeSystem_Space
+                        Call  : GetConvertedPlayerId
+                            Call  : GetOwningPlayer
+                                Call  : GetTriggerUnit
+                    Preset: OperatorMultiply
+                    Call  : I2R
+                        Array : DecoSystem_Value
+                            Call  : GetConvertedPlayerId
+                                Call  : GetOwningPlayer
+                                    Call  : GetTriggerUnit
+                Var   : temp_point
+                Action
+                    IfThenElseMultiple
+                        Condition
+                            OrMultiple
+                                Condition
+                                    OperatorCompareBoolean
+                                        Call  : LoadBooleanBJ
+                                            Const : 0
+                                            Call  : GetHandleIdBJ
+                                                Call  : GetEnumDestructable
+                                            Var   : Hashtable_1
+                                        Preset: OperatorEqualENE
+                                        Const : false
+                                    OperatorComparePlayer
+                                        Call  : GetOwningPlayer
+                                            Call  : GetTriggerUnit
+                                        Preset: OperatorEqualENE
+                                        Var   : GAME_MASTER
+                        Action
+                            KillDestructable
+                                Call  : GetEnumDestructable
+            CustomScriptCode
+                Const : 'call RemoveLocation(udg_temp_point)'
+            CustomScriptCode
+                Const : 'set udg_temp_point = null'
+        Action
+            IfThenElseMultiple
+                Condition
+                    OperatorCompareAbilityId
+                        Call  : GetSpellAbilityId
+                        Preset: OperatorEqualENE
+                        Const : A004
+                Action
+                    SetVariable
+                        Var   : temp_point
+                        Call  : GetSpellTargetLoc
+                    EnumDestructablesInCircleBJMultiple
+                        Call  : OperatorReal
+                            Array : TreeSystem_Space
+                                Call  : GetConvertedPlayerId
+                                    Call  : GetOwningPlayer
+                                        Call  : GetTriggerUnit
+                            Preset: OperatorMultiply
+                            Call  : I2R
+                                Array : DecoSystem_Value
+                                    Call  : GetConvertedPlayerId
+                                        Call  : GetOwningPlayer
+                                            Call  : GetTriggerUnit
+                        Var   : temp_point
+                        Action
+                            DestructableRestoreLife
+                                Call  : GetEnumDestructable
+                                Call  : GetDestructableMaxLife
+                                    Call  : GetEnumDestructable
+                                Preset: ShowHideShow
+                    CustomScriptCode
+                        Const : 'call RemoveLocation(udg_temp_point)'
+                    CustomScriptCode
+                        Const : 'set udg_temp_point = null'
+                Action
+                    IfThenElseMultiple
+                        Condition
+                            OperatorCompareAbilityId
+                                Call  : GetSpellAbilityId
+                                Preset: OperatorEqualENE
+                                Const : A005
+                        Action
+                            SetVariable
+                                Var   : temp_point
+                                Call  : GetSpellTargetLoc
+                            EnumDestructablesInCircleBJMultiple
+                                Call  : OperatorReal
+                                    Array : TreeSystem_Space
+                                        Call  : GetConvertedPlayerId
+                                            Call  : GetOwningPlayer
+                                                Call  : GetTriggerUnit
+                                    Preset: OperatorMultiply
+                                    Call  : I2R
+                                        Array : DecoSystem_Value
+                                            Call  : GetConvertedPlayerId
+                                                Call  : GetOwningPlayer
+                                                    Call  : GetTriggerUnit
+                                Var   : temp_point
+                                Action
+                                    CustomScriptCode
+                                        Const : 'if IsDestructableTree(GetEnumDestructable()) then'
+                                    RemoveDestructable
+                                        Call  : GetEnumDestructable
+                                    CustomScriptCode
+                                        Const : endif
+                            CustomScriptCode
+                                Const : 'call RemoveLocation(udg_temp_point)'
+                            CustomScriptCode
+                                Const : 'set udg_temp_point = null'

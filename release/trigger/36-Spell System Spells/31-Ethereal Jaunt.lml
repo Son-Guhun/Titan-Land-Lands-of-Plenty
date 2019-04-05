@@ -1,0 +1,16 @@
+Event
+Condition
+Action
+    CustomScriptCode
+        Const : 'call AddTimedBonus(udg_Spell__Caster, 0, 2, 8)'
+    SetVariable
+        Var   : GDS_Duration
+        Const : 8.00
+    SetVariable
+        Var   : GDS_Type
+        Var   : GDS_cETHEREAL
+    SetVariable
+        Var   : GDS_Target
+        Var   : Spell__Caster
+    TriggerExecute
+        Var   : gg_trg_GDS_Main_Modifier

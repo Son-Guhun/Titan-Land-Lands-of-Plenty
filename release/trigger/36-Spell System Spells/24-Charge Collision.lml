@@ -1,0 +1,29 @@
+Event
+Condition
+Action
+    IfThenElseMultiple
+        Condition
+            OperatorCompareBoolean
+                Call  : IsPlayerAlly
+                    Call  : GetOwningPlayer
+                        Var   : Knockback2DSource
+                    Call  : GetOwningPlayer
+                        Var   : Knockback2DUnit
+                Preset: OperatorEqualENE
+                Const : false
+        Action
+            CustomScriptCode
+                Const : 'if not HaveSavedInteger(udg_Hashtable_2, -GetUnitUserData(udg_Knockback2DSource),  -GetUnitUserData(udg_Knockback2DUnit) ) then'
+            UnitDamageTargetBJ
+                Var   : Knockback2DSource
+                Var   : Knockback2DUnit
+                Const : 100.00
+                Preset: AttackTypeNormal
+                Preset: DamageTypeMagic
+            CustomScriptCode
+                Const : 'call SaveInteger(udg_Hashtable_2, -GetUnitUserData(udg_Knockback2DSource),  -GetUnitUserData(udg_Knockback2DUnit), 1)'
+            CustomScriptCode
+                Const : endif
+    SetVariable
+        Var   : Knockback2DDistance
+        Const : 100.00

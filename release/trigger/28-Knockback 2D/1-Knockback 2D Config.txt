@@ -1,0 +1,5 @@
+Knockback 2D version 4.2.3.1
+
+Flying units now display special effect art attached to their "origin". Simplified the pathing check for flying units to only check for air unit pathability.
+
+For the full list of changes, please review the Knockback 2D Spell resource on HiveWorkshop.com

@@ -1,0 +1,39 @@
+Event
+    TriggerRegisterPlayerChatEvent
+        Preset: Player00
+        Const : x
+        Preset: ChatMatchTypeExact
+Condition
+Action
+    CustomScriptCode
+        Const : 'local unit udg_temp_unit'
+    CustomScriptCode
+        Const : 'local integer genId'
+    CustomScriptCode
+        Const : 'local group udg_temp_group = CreateGroup()'
+    CustomScriptCode
+        Const : 'call GroupEnumUnitsSelected(udg_temp_group, GetTriggerPlayer(), null)'
+    CommentString
+        Const : 'IF BLOCK: PLAYER HAS RECT GENERATOR SELECTED'
+    CustomScriptCode
+        Const : 'set udg_temp_unit = FirstOfGroup(udg_temp_group)'
+    CustomScriptCode
+        Const : 'set genId = GetHandleId(udg_temp_unit)'
+    CustomScriptCode
+        Const : 'if HaveSavedHandle(udg_GUDR_Hashtable, genId, 0) then'
+    CustomScriptCode
+        Const : 'call DestroyGroup(udg_temp_group)'
+    CustomScriptCode
+        Const : 'set udg_temp_group = CreateGroup()'
+    CustomScriptCode
+        Const : 'call  GroupEnumUnitsInRect(udg_temp_group,LoadRectHandle(udg_GUDR_Hashtable, genId, 0),null)'
+    GroupRemoveUnitSimple
+        Var   : temp_unit
+        Var   : temp_group
+    CustomScriptCode
+        Const : endif
+    ForGroupMultiple
+        Var   : temp_group
+        Action
+            CustomScriptCode
+                Const : 'call SetUnitX(GetEnumUnit(), GetUnitX(GetEnumUnit()) + 16)'

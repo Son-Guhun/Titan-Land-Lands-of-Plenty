@@ -1,0 +1,107 @@
+Event
+    MapInitializationEvent
+Condition
+Action
+    CommentString
+        Const : ' '
+    CommentString
+        Const : 'Copy Unit Event Ability from Object Editor, then set DetectRemoveAbility to it as follows:'
+    CommentString
+        Const : ' '
+    SetVariable
+        Var   : DetectRemoveAbility
+        Const : A01R
+    CommentString
+        Const : ' '
+    CommentString
+        Const : 'Paste it a second time, then set DetectTransformAbility to it as follows:'
+    CommentString
+        Const : ' '
+    SetVariable
+        Var   : DetectTransformAbility
+        Const : A01P
+    CommentString
+        Const : ' '
+    CommentString
+        Const : 'Don''t enable the following lines as they exist simply to make copying the system easier'
+    CommentString
+        Const : ' '
+    Disab: SetVariable
+        Var   : WorldMaxX
+        Var   : WorldMaxY
+    Disab: SetVariable
+        Array : CargoTransportUnit
+            Const : 0
+        Call  : GroupPickRandomUnit
+            Array : CargoTransportGroup
+                Const : 0
+    Disab: SetVariable
+        Array : CheckDeathList
+            Var   : UDexMax
+        Array : UDexNext
+            Array : UDexPrev
+                Var   : UDexLastRecycled
+    Disab: SetVariable
+        Array : UDexUnits
+            Var   : UDex
+        Array : SummonerOfUnit
+            Const : 0
+    Disab: PauseTimerBJ
+        Preset: PauseResumePause
+        Var   : CheckDeathTimer
+    Disab: SetVariable
+        Var   : UnitIndexEvent
+        Call  : OperatorReal
+            Var   : CargoEvent
+            Preset: OperatorAdd
+            Call  : OperatorReal
+                Var   : DeathEvent
+                Preset: OperatorAdd
+                Var   : UnitTypeEvent
+    Disab: SetVariable
+        Array : IsUnitAlive
+            Const : 0
+        Array : IsUnitBeingUnloaded
+            Const : 0
+    Disab: SetVariable
+        Array : IsUnitNew
+            Const : 0
+        Array : IsUnitReincarnating
+            Const : 0
+    Disab: SetVariable
+        Array : IsUnitRemoved
+            Const : 0
+        Var   : UnitIndexerEnabled
+    Disab: SetVariable
+        Array : KillerOfUnit
+            Const : 0
+        Preset: UnitNull
+    Disab: SetVariable
+        Array : UnitTypeOf
+            Const : 0
+        Preset: UnitTypeNull
+    CommentString
+        Const : 'One additional event to run right before Unit Indexer initializes, added 29 May 2017 for ZiBitheWand3r3r '
+    SetVariable
+        Var   : UnitIndexEvent
+        Const : -1.00
+    CommentString
+        Const : ' '
+    CommentString
+        Const : 'Initialize Unit Event now that all the InitTrig_ functions have run'
+    CommentString
+        Const : ' '
+    SetVariable
+        Array : IsUnitPreplaced
+            Const : 0
+        Const : true
+    CustomScriptCode
+        Const : 'call ExecuteFunc("UnitEventInit")'
+    SetVariable
+        Var   : UnitIndexEvent
+        Const : 3.00
+    SetVariable
+        Array : IsUnitPreplaced
+            Const : 0
+        Array : IsUnitTransforming
+            Const : 0

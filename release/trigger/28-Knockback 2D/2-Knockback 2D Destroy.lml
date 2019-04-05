@@ -1,0 +1,70 @@
+Event
+    TriggerRegisterVariableEvent
+        Var   : UnitIndexEvent
+        Preset: LimitOpEqual
+        Const : 2.00
+Condition
+    OperatorCompareBoolean
+        Array : IsUnitBeingKnockedBack
+            Var   : UDex
+        Preset: OperatorEqualENE
+        Const : true
+Action
+    CommentString
+        Const : ' '
+    CommentString
+        Const : 'This trigger destroys any knockback; you can execute it yourself by first setting UDex to the custom value'
+    CommentString
+        Const : ' '
+    SetVariable
+        Array : IsUnitBeingKnockedBack
+            Var   : UDex
+        Const : false
+    SetVariable
+        Array : K2DNext
+            Array : K2DPrev
+                Var   : UDex
+        Array : K2DNext
+            Var   : UDex
+    SetVariable
+        Array : K2DPrev
+            Array : K2DNext
+                Var   : UDex
+        Array : K2DPrev
+            Var   : UDex
+    SetVariable
+        Array : K2DPrev
+            Var   : UDex
+        Const : 0
+    IfThenElseMultiple
+        Condition
+            OperatorCompareInteger
+                Array : K2DNext
+                    Const : 0
+                Preset: OperatorEqual
+                Const : 0
+        Action
+            PauseTimerBJ
+                Preset: PauseResumePause
+                Var   : K2DTimer
+    IfThenElseMultiple
+        Condition
+            OperatorCompareReal
+                Array : K2DHeight
+                    Var   : UDex
+                Preset: OperatorNotEqual
+                Const : 0.00
+        Action
+            SetUnitFlyHeightBJ
+                Var   : Knockback2DUnit
+                Call  : GetUnitDefaultFlyHeight
+                    Var   : Knockback2DUnit
+                Const : 0.00
+    SetVariable
+        Array : K2DOverride
+            Var   : UDex
+        Const : false
+    SetVariable
+        Array : K2DSource
+            Var   : UDex
+        Preset: UnitNull

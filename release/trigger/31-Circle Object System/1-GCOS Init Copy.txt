@@ -1,0 +1,15 @@
+Hashtable
+Key:
+0>Default Angle
+1>x Center
+2>y Center
+3>x Radius
+4>y Radius
+5>Number of Points
+6>Tilt
+7>Rotation
+
+-Key:
+positive >x
+negative>y
+0>Current Angle

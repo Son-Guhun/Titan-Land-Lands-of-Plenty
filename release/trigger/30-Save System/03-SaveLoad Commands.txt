@@ -1,0 +1,1 @@
+Putting everything in one trigger is less readable but  more efficient for player chat event performance

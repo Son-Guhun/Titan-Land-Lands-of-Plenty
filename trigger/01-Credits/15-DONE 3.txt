@@ -1,6 +1,0 @@
-0.11.0
-
--Power Surge mana replenishment reduced from 100% to 67%.
--Royal Inspiration mana replensihment reduced from 100 to 67.
--Innvervate mana replenishment reduced from 200 to 150.
--Greater Healing Ward HP reduced from 100 to 60.

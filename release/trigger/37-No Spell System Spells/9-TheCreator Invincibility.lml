@@ -1,0 +1,25 @@
+Event
+    TriggerRegisterAnyUnitEventBJ
+        Preset: PlayerUnitEventDeath
+Condition
+    OperatorCompareUnit
+        Call  : GetDyingUnit
+        Preset: OperatorEqualENE
+        Var   : gg_unit_H00S_0141
+Action
+    CustomScriptCode
+        Const : 'local location temp_point'
+    TriggerSleepAction
+        Const : 1.00
+    SetVariable
+        Var   : temp_point
+        Call  : GetUnitLoc
+            Var   : gg_unit_H00S_0141
+    ReviveHeroLoc
+        Call  : GetDyingUnit
+        Var   : temp_point
+        Preset: ShowHideHide
+    CustomScriptCode
+        Const : 'call RemoveLocation(udg_temp_point)'
+    CustomScriptCode
+        Const : 'set udg_temp_point = null'

@@ -1,0 +1,12 @@
+Event
+    MapInitializationEvent
+Condition
+Action
+    InitHashtableBJ
+    SetVariable
+        Var   : GCOS_Hashtable
+        Call  : GetLastCreatedHashtableBJ
+    SetVariable
+        Array : GCOS_InstanceArray
+            Const : 0
+        Const : 1

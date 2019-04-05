@@ -1,0 +1,75 @@
+Event
+    TriggerRegisterPlayerUnitEventSimple
+        Preset: Player00
+        Preset: PlayerUnitEventIssued_Point_Order
+    TriggerRegisterPlayerUnitEventSimple
+        Preset: Player00
+        Preset: PlayerUnitEventIssued_Unit_Order
+Condition
+Action
+    Disab: UnitAddAbilityBJ
+        Const : Aeth
+        Call  : GetTriggerUnit
+    CustomScriptCode
+        Const : 'call UnitAddAbility(GetTriggerUnit(), ''Aloc'')'
+    IfThenElseMultiple
+        Condition
+            OperatorCompareUnit
+                Call  : GetOrderTargetUnit
+                Preset: OperatorNotEqualENE
+                Preset: UnitNull
+        Action
+            Disab: SetVariable
+                Disab: 
+                Call  : GetUnitLoc
+                    Call  : GetOrderTargetUnit
+        Action
+            Disab: SetVariable
+                Disab: 
+                Call  : GetOrderPointLoc
+    Disab: CustomScriptCode
+        Const : 'call GroupEnumUnitsInRangeOfLoc(udg_LeaklessGroup, udg_TargetPoint, 128.00, null)'
+    Disab: ForGroupMultiple
+        Var   : LeaklessGroup
+        Action
+            UnitAddAbilityBJ
+                Const : Aeth
+                Call  : GetEnumUnit
+            Disab: ShowUnitHide
+                Call  : GetEnumUnit
+    Disab: SetUnitPositionLoc
+        Call  : GetTriggerUnit
+        Disab: 
+    Disab: UnitRemoveAbilityBJ
+        Const : Aeth
+        Call  : GetTriggerUnit
+    CustomScriptCode
+        Const : 'call RemoveLocation(udg_TargetPoint)'
+    Disab: SetVariable
+        Disab: 
+        Call  : GetUnitLoc
+            Call  : GetTriggerUnit
+    Disab: AddSpecialEffectLocBJ
+        Disab: 
+        Const : Abilities\Spells\NightElf\Blink\BlinkTarget.mdl
+    DestroyEffectBJ
+        Call  : GetLastCreatedEffectBJ
+    CustomScriptCode
+        Const : 'call RemoveLocation(udg_TargetPoint)'
+    Disab: TriggerSleepAction
+        Const : 0.00
+    Disab: ForGroupMultiple
+        Var   : LeaklessGroup
+        Action
+            IfThenElseMultiple
+                Condition
+                    OperatorCompareUnit
+                        Call  : GetEnumUnit
+                        Preset: OperatorNotEqualENE
+                        Call  : GetTriggerUnit
+                Action
+                    UnitRemoveAbilityBJ
+                        Const : Aeth
+                        Call  : GetEnumUnit
+            Disab: ShowUnitShow
+                Call  : GetEnumUnit

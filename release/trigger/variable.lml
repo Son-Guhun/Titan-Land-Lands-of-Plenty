@@ -1,0 +1,564 @@
+ALL_PLAYERS_FORCE: force
+RootUnit: unit
+ItemAbilityForInteger: integer
+WholeMapRegion: rect
+CometUnit: unit
+LegendaryScrollSpellGroup: group
+LegendaryScrollSpellInteger: integer
+RealNames: string
+    Array : 1
+PathWayForInteger: integer
+SoulPactDefenseEffect: effect
+temp_integer: integer
+save_password: string
+    Array : 1
+save_grp: group
+    Array : 1
+save_unit_nmbr: integer
+    Array : 1
+save_load_boolean: boolean
+    Array : 1
+temp_unit: unit
+load_number: integer
+    Array : 1
+temp_group: group
+temp_point: location
+load_center: real
+    Array : 1
+load_limit: integer
+GAME_MASTER: player
+    Def   : Player00
+save_LoadUnitType: unitcode
+temp_point2: location
+Hashtable_1: hashtable
+PLAYER_LOCATIONS: location
+    Array : 1
+FORCES_PLAYER: force
+    Array : 12
+TileSystem_TILES: terraintype
+    Array : 1
+TileSystem_ABILITIES: abilcode
+    Array : 1
+DecoSystem_Value: integer
+    Array : 1
+    Def   : 1
+TreeSystem_TREES: destructablecode
+    Array : 1
+TreeSystem_ABILITIES: abilcode
+    Array : 1
+temp_integer2: integer
+TreeSystem_Space: real
+    Array : 13
+    Def   : 128.00
+temp_real: real
+ColorSystem_Red: real
+    Array : 1
+    Def   : 100.00
+ColorSystem_Green: real
+    Array : 1
+    Def   : 100.00
+ColorSystem_Blue: real
+    Array : 1
+    Def   : 100.00
+ColorSystem_Alpha: real
+    Array : 1
+DecoSystem_Scale: real
+    Array : 1
+    Def   : 100.00
+DecoSystem_Facing: real
+    Array : 1
+DecoSystem_Height: real
+    Array : 1
+DecoSystem_animSpeed: real
+    Array : 1
+DecoSystem_Anims: string
+    Array : 1
+temp_ability: abilcode
+temp_player: player
+PowerSystem_Player: player
+    Def   : Player00
+PowerSystem_allFlag: boolean
+ScrollSystem_learnAbilities: abilcode
+    Array : 1
+ScrollSystem_realAbilities: abilcode
+    Array : 1
+GDS_cSTUN: integer
+GDS_cSILENCE: integer
+GDS_cDISARM_R: integer
+GDS_cDISARM_M: integer
+GDS_cDISARM_B: integer
+GDS_cSNARE: integer
+GDS_cSUPERSILENCE: integer
+GDS_cSLEEP: integer
+GDS_cENTANGLE: integer
+GDS_cETHEREAL: integer
+GDS_ABIL: abilcode
+    Array : 1
+GDS_BUFF: buffcode
+    Array : 1
+GDS_DUMMY: unit
+    Array : 1
+GDS_zMIN: real
+GDS_ORDERS: string
+    Array : 1
+GDS_Hashtable: hashtable
+GDS_Duration: real
+GDS_Remaining: real
+GDS_Target: unit
+GDS_Type: integer
+GDS_DurMul: real
+    Def   : 1.00
+GDS_DurAdd: real
+udg_GDS_DurMin: real
+GDS_DurMin: real
+Spell__DummyType: unitcode
+Spell__DummyOwner: player
+Spell__Interval: real
+Spell__Filter_AllowEnemy: boolean
+Spell__Filter_AllowLiving: boolean
+Spell__Filter_AllowHero: boolean
+Spell__Filter_AllowNonHero: boolean
+Spell__Filter_AllowAlly: boolean
+Spell__Filter_AllowDead: boolean
+Spell__Filter_AllowFlying: boolean
+Spell__Filter_AllowMechanical: boolean
+Spell__Filter_AllowStructure: boolean
+Spell__Filter_AllowMagicImmune: boolean
+Spell__WakeTargets: boolean
+Spell__LevelMultiplier: real
+Spell_i_Level: integer
+    Array : 1
+Spell__Level: integer
+Spell__CasterOwner: player
+Spell__Time: real
+Spell_i_Time: real
+    Array : 1
+Spell_i_TargetY: real
+    Array : 1
+Spell_i_TargetX: real
+    Array : 1
+Spell__CastPoint: location
+Spell__TargetPoint: location
+Spell__Caster: unit
+Spell__Target: unit
+Spell_i_Target: unit
+    Array : 1
+Spell_i_Caster: unit
+    Array : 1
+Spell_i_TargetGroup: group
+    Array : 1
+Spell__TargetGroup: group
+Spell__Running: boolean
+Spell__UseTargetGroup: boolean
+Spell__Completed: boolean
+Spell_i_Timer: timer
+Spell_i_UseTG: boolean
+    Array : 1
+Spell_i_Completed: boolean
+    Array : 1
+Spell_i_EventType: integer
+    Array : 1
+Spell_i_Linked: boolean
+    Array : 1
+Spell__Trigger_OnLoop: trigger
+Spell__Hash: hashtable
+Spell_i_OnLoopStack: trigger
+    Array : 1
+Spell__Trigger_OnFinish: trigger
+Spell__Index: integer
+Spell_i_OnFinishStack: trigger
+    Array : 1
+Spell__Trigger_OnEffect: trigger
+Spell_i_OnEffectStack: trigger
+    Array : 1
+Spell__Trigger_OnChannel: trigger
+Spell_i_OnChannelStack: trigger
+    Array : 1
+Spell__Trigger_OnCast: trigger
+Spell_i_Recycle: integer
+Spell_i_OnCastStack: trigger
+    Array : 1
+Spell_i_Instances: integer
+Spell_i_StackN: integer
+Spell_i_StackRef: integer
+    Array : 1
+Spell_i_Stack: integer
+    Array : 1
+Spell_i_RecycleList: integer
+    Array : 1
+Spell_i_Head: integer
+    Array : 1
+Spell_i_PreloadDummy: unit
+Spell__Ability: abilcode
+Spell__InRangeGroup: group
+Spell__InRange: real
+Spell__InRangePoint: location
+Spell_i_AllowAlly: boolean
+    Array : 1
+Spell_i_AllowDead: boolean
+    Array : 1
+Spell_i_AllowEnemy: boolean
+    Array : 1
+Spell_i_AllowFlying: boolean
+    Array : 1
+Spell_i_AllowHero: boolean
+    Array : 1
+Spell_i_AllowMagicImmune: boolean
+    Array : 1
+Spell_i_AllowMechanical: boolean
+    Array : 1
+Spell_i_AllowNonHero: boolean
+    Array : 1
+Spell_i_AllowStructure: boolean
+    Array : 1
+Spell_i_AllowLiving: boolean
+    Array : 1
+Spell__Channeling: boolean
+Spell_i_Channeling: boolean
+    Array : 1
+Spell_i_GroupN: integer
+Spell_i_GroupStack: group
+    Array : 1
+Spell__InRangeCount: integer
+Spell__InRangeUnits: unit
+    Array : 1
+Spell__Duration: real
+Spell__DurationPerLevel: real
+Spell_i_Duration: real
+    Array : 1
+Spell_i_LastTime: real
+    Array : 1
+Spell__Expired: boolean
+Spell__StartDuration: boolean
+Spell__InRangeMax: integer
+Spell__InRangeUnit: unit
+Spell__Trigger_InRangeFilter: trigger
+Spell_i_InRangeFilter: trigger
+    Array : 1
+DetectRemoveAbility: abilcode
+DetectTransformAbility: abilcode
+WorldMaxX: real
+WorldMaxY: real
+CargoTransportUnit: unit
+    Array : 1
+CargoTransportGroup: group
+    Array : 1
+UDexMax: integer
+CheckDeathList: integer
+    Array : 1
+UDexLastRecycled: integer
+UDexPrev: integer
+    Array : 1
+UDexNext: integer
+    Array : 1
+UDex: integer
+UDexUnits: unit
+    Array : 1
+SummonerOfUnit: unit
+    Array : 1
+CheckDeathTimer: timer
+UnitIndexEvent: real
+CargoEvent: real
+DeathEvent: real
+UnitTypeEvent: real
+IsUnitAlive: boolean
+    Array : 1
+IsUnitBeingUnloaded: boolean
+    Array : 1
+IsUnitNew: boolean
+    Array : 1
+IsUnitReincarnating: boolean
+    Array : 1
+IsUnitRemoved: boolean
+    Array : 1
+UnitIndexerEnabled: boolean
+DamageBlockingAbility: abilcode
+SpellDamageAbility: abilcode
+DamageTypeExplosive: integer
+DamageTypeCriticalStrike: integer
+DamageTypeHeal: integer
+DamageTypeReduced: integer
+DamageTypeBlocked: integer
+DmgEvBracers: itemcode
+DAMAGE_FACTOR_BRACERS: real
+DAMAGE_FACTOR_ELUNES: real
+DAMAGE_FACTOR_ETHEREAL: real
+AfterDamageEvent: real
+DamageEvent: real
+DamageModifierEvent: real
+ClearDamageEvent: trigger
+DamageEventAmount: real
+DamageEventPrevAmt: real
+DamageEventOverride: boolean
+NextDamageOverride: boolean
+DamageEventSource: unit
+DamageEventTarget: unit
+DamageEventTrigger: trigger
+DmgEvTrig: trigger
+DamageEventType: integer
+LastDmgPrevType: integer
+    Array : 1
+NextDamageType: integer
+DamageEventsWasted: integer
+DmgEvRecursionN: integer
+DmgEvRunning: boolean
+DmgEvStarted: boolean
+IsDamageSpell: boolean
+LastDmgWasSpell: boolean
+    Array : 1
+LastDamageHP: real
+DmgEvTimer: timer
+LastDmgPrevAmount: real
+    Array : 1
+LastDmgValue: real
+    Array : 1
+LastDmgSource: unit
+    Array : 1
+LastDmgTarget: unit
+    Array : 1
+HideDamageFrom: boolean
+    Array : 1
+UnitDamageRegistered: boolean
+    Array : 1
+System_PlayerArmy: integer
+    Array : 1
+System_PArmyLimit: integer
+    Array : 1
+    Def   : 0
+Commands_Integer: integer
+System_LimitUnitCategory: integer
+    Array : 1
+System_DecoGrid: real
+    Array : 1
+DecoSystem_PlayerColor: integer
+    Array : 1
+save_localPlayerBool: boolean
+System_searchStr: string
+save_XYminmaxcur: real
+    Array : 1
+System_NeutralUnits: group
+    Array : 1
+Damage_Mod_Multiplier: real
+Damage_Mod_Add: real
+Damage_Mod_Minimum: real
+Damage_Mod_Maximum: real
+GDS_DebuffEvent: real
+GDS_Permanent: boolean
+GDS_RegisterDisable: boolean
+Player_ControlGroup: group
+    Array : 1
+System_ProtectedGroup: group
+DecoUnitTypes: unitcode
+    Array : 1
+System_DecoTotal: integer
+save_WholeMapRect: rect
+Hashtable_2: hashtable
+Damage_Mod_Reset: boolean
+    Def   : true
+Damage_Mod_AllowReflect: boolean
+    Def   : true
+CSS_Abilities: abilcode
+    Array : 1
+CSS_GemBonusBoolean: boolean
+CSS_GemLevel: integer
+CSS_Hashtable: hashtable
+CSS_Power: integer
+    Array : 1
+CSS_PreloadBoolean: boolean
+    Def   : true
+CSS_SocketingEnabled: boolean
+EVENT_SOCKET_FINISH: real
+CSS_EventMainItem: item
+CSS_EventSocketItem: item
+CSS_EventUnit: unit
+CSS_EventMainItemStacked: item
+    Array : 1
+CSS_EventSocketItemStacked: item
+    Array : 1
+CSS_EventUnitStacked: unit
+    Array : 1
+CSS_Counter: integer
+CSS_CustomSwitch: boolean
+CSS_String: string
+    Array : 1
+GCOS_Hashtable: hashtable
+GCOS_InstanceArray: integer
+    Array : 1
+GCOS_Instance: integer
+DamageTypeSpell: boolean
+TimerBonuses: integer
+    Array : 1
+TileSystem_Var: integer
+    Array : 1
+K2DTimeout: real
+Knockback2DRobustPathing: integer
+Knockback2DDefaultFriction: real
+Knockback2DFriction: real
+Knockback2DDefaultBounce: boolean
+Knockback2DBounces: boolean
+Knockback2DDefaultPause: boolean
+Knockback2DPause: boolean
+Knockback2DDefaultKillTrees: boolean
+Knockback2DKillTrees: boolean
+Knockback2DDefaultDestRadius: real
+Knockback2DDestRadius: real
+Knockback2DTreeOrDebris: string
+Knockback2DDefaultGravity: real
+Knockback2DGravity: real
+Knockback2DDefaultFX: string
+Knockback2DLoopFX: string
+Knockback2DDefaultFXRate: real
+Knockback2DFXRate: real
+K2DX: real
+K2DY: real
+K2DItem: item
+K2DDebrisKiller: unit
+Radians_Turn: real
+Radians_QuarterTurn: real
+Radians_QuarterPi: real
+K2DRegion: rect
+K2DMaxX: real
+K2DMaxY: real
+K2DMinX: real
+K2DMinY: real
+K2DMaxDestRadius: real
+K2DItemsFound: boolean
+K2DItemOffset: boolean
+IsUnitBeingKnockedBack: boolean
+    Array : 1
+K2DPrev: integer
+    Array : 1
+K2DNext: integer
+    Array : 1
+K2DTimer: timer
+Knockback2DUnit: unit
+K2DHeight: real
+    Array : 1
+K2DFreeze: boolean
+    Array : 1
+K2DImpact: trigger
+    Array : 1
+K2DOverride: boolean
+    Array : 1
+K2DSource: unit
+    Array : 1
+K2DAngle: real
+    Array : 1
+Knockback2DAngle: real
+Knockback2DDistance: real
+K2DDistanceLeft: real
+    Array : 1
+Knockback2DTime: real
+K2DTimeLeft: real
+    Array : 1
+Knockback2DOverride: boolean
+Knockback2DHeight: real
+K2DHeightThreshold: real
+    Array : 1
+K2DLastX: real
+    Array : 1
+K2DLastY: real
+    Array : 1
+K2DCos: real
+    Array : 1
+K2DSin: real
+    Array : 1
+K2DFlying: boolean
+    Array : 1
+K2DRadius: integer
+    Array : 1
+K2DCosH: real
+    Array : 1
+K2DSinH: real
+    Array : 1
+K2DCosD1: real
+    Array : 1
+K2DSinD1: real
+    Array : 1
+K2DCosD2: real
+    Array : 1
+K2DSinD2: real
+    Array : 1
+K2DFriction: real
+    Array : 1
+K2DVelocity: real
+    Array : 1
+K2DKillTrees: boolean
+    Array : 1
+K2DDestRadius: real
+    Array : 1
+K2DAmphibious: boolean
+    Array : 1
+Knockback2DAmphibious: boolean
+K2DBounce: boolean
+    Array : 1
+K2DCollision: real
+    Array : 1
+Knockback2DCollision: real
+K2DFXModel: string
+    Array : 1
+K2DFXRate: real
+    Array : 1
+K2DFXTimeLeft: real
+    Array : 1
+Knockback2DOnImpact: trigger
+K2DCollide: trigger
+    Array : 1
+Knockback2DOnCollide: trigger
+K2DEnd: trigger
+    Array : 1
+Knockback2DOnEnd: trigger
+K2DPause: boolean
+    Array : 1
+K2DSimple: boolean
+    Array : 1
+Knockback2DSimple: boolean
+Knockback2DSource: unit
+K2DUnbiasedCollision: boolean
+    Array : 1
+Knockback2DUnbiasedCollision: boolean
+LoopInt: integer
+Tauren_WarStomp: boolean
+    Array : 1
+Tauren_Shockwave: boolean
+    Array : 1
+LeaklessGroup: group
+save_LastLoadedUnit: unit
+    Array : 1
+System_AutonameBoolean: boolean
+    Array : 1
+Abilities_AoRest_DmgDone: real
+    Array : 1
+Abilities_AoRest_UnitGroup: group
+PreventSave_Dialog: dialog
+PreventSave_Timer: timer
+Commands_Counter: integer
+Commands_Counter_Max: integer
+KillerOfUnit: unit
+    Array : 1
+UnitTypeOf: unitcode
+    Array : 1
+IsUnitPreplaced: boolean
+    Array : 1
+IsUnitTransforming: boolean
+    Array : 1
+DamageEventAOE: integer
+DamageEventLevel: integer
+DamageEventAOEGroup: group
+EnhancedDamageTarget: unit
+AOEDamageEvent: real
+Spell_i_Abil: abilcode
+    Array : 1
+Spell__AutoAddTargets: boolean
+Spell_i_AutoAddTargets: boolean
+    Array : 1
+Spell__BuffOrder: ordercode
+Spell_i_BuffOrder: ordercode
+    Array : 1
+Spell__BuffAbility: abilcode
+Spell_i_BuffAbil: abilcode
+    Array : 1
+System_FP_Units: unit
+    Array : 1
+System_PlayerColor: integer
+    Array : 1

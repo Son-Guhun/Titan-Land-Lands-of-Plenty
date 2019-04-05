@@ -1,0 +1,70 @@
+Event
+    TriggerRegisterUnitEvent
+        Var   : gg_unit_H00V_0359
+        Preset: UnitEventSpellEffect
+Condition
+    OperatorCompareAbilityId
+        Call  : GetSpellAbilityId
+        Preset: OperatorEqualENE
+        Const : A015
+Action
+    CustomScriptCode
+        Const : 'local group udg_temp_group'
+    SetVariable
+        Var   : temp_group
+        Call  : GetUnitsInRectAll
+            Var   : WholeMapRegion
+    GroupRemoveUnitSimple
+        Var   : gg_unit_H00V_0359
+        Var   : temp_group
+    GroupRemoveUnitSimple
+        Var   : gg_unit_H00S_0141
+        Var   : temp_group
+    ForGroupMultiple
+        Var   : temp_group
+        Action
+            CustomScriptCode
+                Const : 'if GUMSGetUnitAnimSpeed(GetEnumUnit()) == "D" then'
+            SetUnitTimeScalePercent
+                Call  : GetEnumUnit
+                Const : 0.00
+            CustomScriptCode
+                Const : endif
+            PauseUnitBJ
+                Preset: PauseUnpauseOptionPause
+                Call  : GetEnumUnit
+    Disab: SetTimeOfDayScalePercentBJ
+        Const : 0.00
+    EnableTrigger
+        Var   : gg_trg_Cosmosis_StTm_Noise
+    TriggerSleepAction
+        Const : 1.00
+    WaitForCondition
+        Condition: OperatorCompareBoolean
+            Call  : UnitHasBuffBJ
+                Var   : gg_unit_H00V_0359
+                Const : B00C
+            Preset: OperatorEqualENE
+            Const : false
+        Const : 0.50
+    ForGroupMultiple
+        Var   : temp_group
+        Action
+            CustomScriptCode
+                Const : 'if GUMSGetUnitAnimSpeed(GetEnumUnit()) == "D" then'
+            SetUnitTimeScalePercent
+                Call  : GetEnumUnit
+                Const : 100.00
+            CustomScriptCode
+                Const : endif
+            PauseUnitBJ
+                Preset: PauseUnpauseOptionUnpause
+                Call  : GetEnumUnit
+    Disab: SetTimeOfDayScalePercentBJ
+        Const : 100.00
+    DisableTrigger
+        Var   : gg_trg_Cosmosis_StTm_Noise
+    CustomScriptCode
+        Const : 'call DestroyGroup(udg_temp_group)'
+    CustomScriptCode
+        Const : 'set udg_temp_group = null'

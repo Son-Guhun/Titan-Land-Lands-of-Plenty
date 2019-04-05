@@ -1,0 +1,16 @@
+Event
+Condition
+Action
+    SetUnitManaBJ
+        Var   : Spell__Caster
+        Call  : OperatorReal
+            Call  : GetUnitStateSwap
+                Preset: UnitStateMana
+                Var   : Spell__Caster
+            Preset: OperatorAdd
+            Call  : OperatorReal
+                Const : 0.67
+                Preset: OperatorMultiply
+                Call  : GetUnitStateSwap
+                    Preset: UnitStateMaxMana
+                    Var   : Spell__Caster

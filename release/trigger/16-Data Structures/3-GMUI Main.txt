@@ -1,0 +1,9 @@
+Double-recycling recycler
+
+1: A hashtable with many recycling arrays
+2: Each recycling array has an index. (recycle key)  The index is the value of the array itself in the hashtable.
+CreateRecycleKey()
+DestroyRecycleKey()
+
+GetIndex(integer RecycleKey)
+RecycleIndex(integer RecycleKey)

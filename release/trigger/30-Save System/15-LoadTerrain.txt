@@ -1,0 +1,2 @@
+save_LoadUnitType refers to the unit that is being loaded.
+Use the conditions in this trigger to filter which units can or cannot be loaded (by comparing unit types)

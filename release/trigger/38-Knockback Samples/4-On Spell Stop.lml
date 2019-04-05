@@ -1,0 +1,40 @@
+Event
+    TriggerRegisterPlayerUnitEventSimple
+        Preset: Player00
+        Preset: PlayerUnitEventSpellEndCast
+Condition
+Action
+    UnitResetCooldown
+        Call  : GetTriggerUnit
+    SetUnitManaPercentBJ
+        Call  : GetTriggerUnit
+        Const : 100
+    IfThenElseMultiple
+        Condition
+            OperatorCompareAbilityId
+                Call  : GetSpellAbilityId
+                Preset: OperatorEqualENE
+                Const : AOsh
+        Action
+            CommentString
+                Const : 'In case the unit had other damaging spells, we don''t want those spells to trigger an unwanted knockback'
+            SetVariable
+                Array : Tauren_Shockwave
+                    Call  : GetUnitUserData
+                        Call  : GetTriggerUnit
+                Const : false
+        Action
+            IfThenElseMultiple
+                Condition
+                    OperatorCompareAbilityId
+                        Call  : GetSpellAbilityId
+                        Preset: OperatorEqualENE
+                        Const : AOws
+                Action
+                    CommentString
+                        Const : 'Same goes for here'
+                    SetVariable
+                        Array : Tauren_WarStomp
+                            Call  : GetUnitUserData
+                                Call  : GetTriggerUnit
+                        Const : false

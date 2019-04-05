@@ -1,0 +1,27 @@
+0.9.5
+-Set female nihonjin vilalger scaling value to 0.8
+-Split special builder into 2 builders
+-Set nihonjin female hero size to normal
+-Map now supports 24 players once more
+
+0.9.6
+-Fixed ally and unally commands, they now work for players 13+
+-Magic sentry is no longer researched, it's now unavailable for all players
+-Titan's -delete command should now display a warning when it overflows
+-Goblin Shop added to Titan Palace
+-Fixed quest log and changed it to JASS code: Quests should no longer bug whenever I copy their code
+-The Creator can no longer be deleted or copied
+-Unit limit system has been fixed (again, this time for reals)
+-Added compatibility for new SetUnitName and GetUnitName behaviour in patch 1.29.2
+-Icon positions of Repair, Repair (Human), Restore and Renew abilities have been changed to x=3 and y=2
+-Cleaned up useless regions in the TItan Palace
+-My shadow mapping software is not working, so the map will not have terrain shadows until I figure something out
+-Added Deco Builders to the main structure of many races since so many people can't be bothered to actually check out the map's features
+-Added cannon unit to pirates, at the behest of Isodif
+-Fixed tooltips for many different heroes, and removed the default extended tooltips from most of the units in the map
+-Added abilities to: Leoric, Fleshless General, Sauron, Sargeras
+-Removed deprecated Town Controller unit and changed code accodingly
+-Fixed a bug caused by a change I made to Bribe's Knockback system that would cause (Get Playable Map Area) to not function
+-Cosmosis' Stop Time spell should now function, and it will not fuck up the animation speed of units that had their anim. speed set with the -speed command
+-Deleted many useless abilities in the Object Editor
+

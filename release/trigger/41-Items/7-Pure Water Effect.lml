@@ -1,0 +1,23 @@
+Event
+    TriggerRegisterAnyUnitEventBJ
+        Preset: PlayerUnitEventSpellEffect
+Condition
+    OperatorCompareAbilityId
+        Call  : GetSpellAbilityId
+        Preset: OperatorEqualENE
+        Const : A04W
+Action
+    CustomScriptCode
+        Const : 'local location udg_temp_point'
+    SetVariable
+        Var   : temp_point
+        Call  : GetSpellTargetLoc
+    AddSpecialEffectLocBJ
+        Var   : temp_point
+        Const : Objects\Spawnmodels\Naga\NagaDeath\NagaDeath.mdl
+    DestroyEffectBJ
+        Call  : GetLastCreatedEffectBJ
+    CustomScriptCode
+        Const : 'call RemoveLocation(udg_temp_point)'
+    CustomScriptCode
+        Const : 'set udg_temp_point = null'

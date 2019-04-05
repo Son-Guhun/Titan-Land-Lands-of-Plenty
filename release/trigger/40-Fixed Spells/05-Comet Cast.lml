@@ -1,0 +1,29 @@
+Event
+    TriggerRegisterAnyUnitEventBJ
+        Preset: PlayerUnitEventSpellEffect
+Condition
+    OperatorCompareAbilityId
+        Call  : GetSpellAbilityId
+        Preset: OperatorEqualENE
+        Const : A04J
+Action
+    CustomScriptCode
+        Const : 'local location udg_temp_point'
+    SetVariable
+        Var   : temp_point
+        Call  : GetSpellTargetLoc
+    CreateNUnitsAtLoc
+        Const : 1
+        Const : o00C
+        Call  : GetOwningPlayer
+            Call  : GetSpellAbilityUnit
+        Var   : temp_point
+        Preset: RealUnitFacing
+    UnitApplyTimedLifeBJ
+        Const : 5.00
+        Preset: TimedLifeBuffCodeGeneric
+        Call  : GetLastCreatedUnit
+    CustomScriptCode
+        Const : 'call RemoveLocation(udg_temp_point)'
+    CustomScriptCode
+        Const : 'set udg_temp_point = null'

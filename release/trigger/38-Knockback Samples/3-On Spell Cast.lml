@@ -1,0 +1,86 @@
+Event
+    TriggerRegisterPlayerUnitEventSimple
+        Preset: Player00
+        Preset: PlayerUnitEventSpellEffect
+Condition
+Action
+    IfThenElseMultiple
+        Condition
+            OperatorCompareAbilityId
+                Call  : GetSpellAbilityId
+                Preset: OperatorEqualENE
+                Const : AOsh
+        Action
+            SetVariable
+                Array : Tauren_Shockwave
+                    Call  : GetUnitUserData
+                        Call  : GetTriggerUnit
+                Const : true
+            CommentString
+                Const : ---------------------
+            Disab: SetVariable
+                Disab: 
+                Call  : GetUnitLoc
+                    Call  : GetTriggerUnit
+            Disab: SetVariable
+                Disab: 
+                Call  : GetSpellTargetLoc
+            Disab: SetVariable
+                Var   : Knockback2DAngle
+                Call  : AngleBetweenPoints
+                    Disab: 
+                    Disab: 
+            Disab: SetVariable
+                Var   : Knockback2DDistance
+                Call  : DistanceBetweenPoints
+                    Disab: 
+                    Disab: 
+            SetVariable
+                Var   : Knockback2DDistance
+                Const : 800.00
+            CustomScriptCode
+                Const : 'call RemoveLocation(udg_CenterPoint)'
+            CustomScriptCode
+                Const : 'call RemoveLocation(udg_TargetPoint)'
+            SetVariable
+                Var   : Knockback2DTime
+                Const : 0.90
+            SetVariable
+                Var   : Knockback2DUnit
+                Call  : GetTriggerUnit
+            SetVariable
+                Var   : Knockback2DPause
+                Const : true
+            SetVariable
+                Var   : Knockback2DSimple
+                Const : true
+            SetVariable
+                Var   : Knockback2DSource
+                Var   : DamageEventSource
+            SetVariable
+                Var   : Knockback2DFriction
+                Const : 0.00
+            Disab: SetVariable
+                Var   : Knockback2DOnCollide
+                Var   : gg_trg_Charge_Collision
+            Disab: SetVariable
+                Var   : Knockback2DOnEnd
+                Var   : gg_trg_Charge_End
+            SetVariable
+                Var   : Knockback2DOverride
+                Const : true
+            ConditionalTriggerExecute
+                Var   : gg_trg_Knockback_2D
+        Action
+            IfThenElseMultiple
+                Condition
+                    OperatorCompareAbilityId
+                        Call  : GetSpellAbilityId
+                        Preset: OperatorEqualENE
+                        Const : AOws
+                Action
+                    SetVariable
+                        Array : Tauren_WarStomp
+                            Call  : GetUnitUserData
+                                Call  : GetTriggerUnit
+                        Const : true

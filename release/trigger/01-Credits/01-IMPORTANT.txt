@@ -1,0 +1,12 @@
+Custom models to import:
+
+Lantern statue (also has other night elf stuff)
+Destroyed town hall
+Magical message (magicletter)
+picture frame
+.
+
+
+Some abilities that rely on dummies may get cast multiple times when a dummy is created for neutral hostile
+Fix (no performance hit, not possible when multile castings are required): Set dummy ability cooldown (obj editor)
+Fix (performance hit, always works): Set ability cooldown (obj editor), use BlzEndUnitAbilityCooldown to reset the cooldown when needed

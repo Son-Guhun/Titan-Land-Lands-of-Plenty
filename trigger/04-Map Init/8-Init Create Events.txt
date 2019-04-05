@@ -1,3 +1,0 @@
-This trigger creates events after map initialization.
-
-Main usage is creating events for player chat commands, without having to add a shitton of events to each trigger in the world editor. This also helps in avoiding the OP limit.
