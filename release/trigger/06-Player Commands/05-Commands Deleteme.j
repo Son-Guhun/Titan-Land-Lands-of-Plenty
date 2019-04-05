@@ -1,6 +1,6 @@
 function GroupEnum_RemoveOutsidePalace takes nothing returns boolean
-    if not RectContainsUnit(gg_rct_Titan_Palace, GetEnumUnit()) and Commands_CheckOverflow() then
-        call LoP_RemoveUnit(GetEnumUnit())
+    if not RectContainsUnit(gg_rct_Titan_Palace, GetFilterUnit()) and Commands_CheckOverflow() then
+        call LoP_RemoveUnit(GetFilterUnit())
     endif
     return false
 endfunction
