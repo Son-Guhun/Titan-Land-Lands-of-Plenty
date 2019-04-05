@@ -5,31 +5,39 @@ scope DecoModAbils
     endfunction
 
     public function Trig_DecoSystem_Cast_Ability_Conditions takes nothing returns boolean
-        local unit trigU = GetSpellTargetUnit()
+        local unit trigU = GetTriggerUnit()
         local integer spellId = GetSpellAbilityId()
-        local integer playerNumber = GetConvertedPlayerId(GetOwningPlayer(GetTriggerUnit()))
-    
-        // Performance: check if unit is Special Deco
-        if not ( GetUnitTypeId(trigU) == 'u015' ) then
-            set trigU = null
-            return false
-        endif
+        local player owner = GetOwningPlayer(trigU)
+        local integer playerNumber = GetPlayerId(owner) + 1
+        local unit targetU = GetSpellTargetUnit()
+
+        if GetUnitTypeId(trigU) != 'u015' then
+            // Do nothing if unit is not Special Deco (performance)
+        elseif GetOwningPlayer(targetU) != owner then
+            // Do nothing if target owner is not same as caster owner
         
-        if ( udg_temp_ability == 'A0C0' ) then
-            call GUMSSetUnitScale(trigU, udg_DecoSystem_Scale[PlayerNumber(trigU)]/100)
-        elseif ( udg_temp_ability == 'A04A' ) then
-            call GUMSSetUnitFlyHeight(trigU, udg_DecoSystem_Height[PlayerNumber(trigU)])
-        elseif ( udg_temp_ability == 'A0C4' ) then
-            call GUMSSetUnitFacing(trigU, udg_DecoSystem_Facing[PlayerNumber(trigU)])
-        elseif ( udg_temp_ability == 'A0C3' ) then
-            call GUMSSetUnitVertexColor(trigU, udg_ColorSystem_Red[playerNumber], udg_ColorSystem_Green[playerNumber], udg_ColorSystem_Blue[playerNumber], udg_ColorSystem_Alpha[playerNumber])
-        elseif ( udg_temp_ability == 'A0C1' ) then
-            call SetUnitAnimation( trigU, udg_DecoSystem_Anims[PlayerNumber(trigU)] )
-        elseif ( udg_temp_ability == 'A0C2' ) then
-            call GUMSSetUnitAnimSpeed(trigU, udg_DecoSystem_animSpeed[PlayerNumber(trigU)]/100)
+        
+        elseif spellId == 'A0C0' then
+            call GUMSSetUnitScale(targetU, udg_DecoSystem_Scale[playerNumber]/100)
+            
+        elseif spellId == 'A04A' then
+            call GUMSSetUnitFlyHeight(targetU, udg_DecoSystem_Height[playerNumber])
+            
+        elseif spellId == 'A0C4' then
+            call GUMSSetUnitFacing(targetU, udg_DecoSystem_Facing[playerNumber])
+            
+        elseif spellId == 'A0C3' then
+            call GUMSSetUnitVertexColor(targetU, udg_ColorSystem_Red[playerNumber], udg_ColorSystem_Green[playerNumber], udg_ColorSystem_Blue[playerNumber], udg_ColorSystem_Alpha[playerNumber])
+        
+        elseif spellId == 'A0C1' then
+            call SetUnitAnimation( targetU, udg_DecoSystem_Anims[playerNumber] )
+            
+        elseif spellId == 'A0C2' then
+            call GUMSSetUnitAnimSpeed(targetU, udg_DecoSystem_animSpeed[playerNumber]/100)
         endif
         
         set trigU = null
+        set targetU = null
         return false
     endfunction
     
