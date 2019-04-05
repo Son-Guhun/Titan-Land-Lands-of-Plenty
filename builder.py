@@ -43,6 +43,18 @@ def optimize(which):
     subprocess.Popen([p['paths']['w2l'],'slk',os.path.abspath(which)])
 
 
+import shutil
+def transfer(dirs = ['table', 'trigger', 'w3x2lni']):
+    release= 'release/'
+    development = 'development/'
+    for directory in dirs:
+        shutil.rmtree(release+directory)
+        shutil.copytree(development+directory, release+directory)
+
+def transfer_all():
+    transfer(['map', 'table', 'trigger', 'w3x2lni'])
+
+
 
 def test_full():
     optimize(DEVELOPMENT)

@@ -34,6 +34,7 @@
         Comment
 '02-External Commands': 'External Commands'
     '1-Generate Missing Doodad Globals': 'Generate Missing Doodad Globals'
+        Disab
     '2-External Set Tiles': 'External Set Tiles'
         Disab
     '3-External Import All Files': 'External Import All Files'
