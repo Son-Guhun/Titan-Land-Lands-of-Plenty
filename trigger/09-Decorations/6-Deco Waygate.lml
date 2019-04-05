@@ -1,0 +1,9 @@
+Event
+Condition
+Action
+    WaygateSetDestinationLocBJ
+        Var   : Spell__Caster
+        Var   : Spell__TargetPoint
+    WaygateActivateBJ
+        Preset: EnableDisableEnable
+        Var   : Spell__Caster

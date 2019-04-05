@@ -1,0 +1,1 @@
+These triggers clean up Hashtable data to help reduce in-game crashes

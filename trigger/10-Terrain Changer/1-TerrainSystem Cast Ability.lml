@@ -1,0 +1,98 @@
+Event
+    TriggerRegisterAnyUnitEventBJ
+        Preset: PlayerUnitEventSpellEffect
+Condition
+    OperatorCompareUnitCode
+        Call  : GetUnitTypeId
+            Call  : GetTriggerUnit
+        Preset: OperatorEqualENE
+        Const : u02E
+Action
+    CustomScriptCode
+        Const : 'local location udg_temp_point'
+    CustomScriptCode
+        Const : 'local integer udg_temp_integer'
+    CustomScriptCode
+        Const : 'local integer my_ability = GetSpellAbilityId()'
+    SetVariable
+        Var   : temp_point
+        Call  : GetSpellTargetLoc
+    ForLoopVarMultiple
+        Var   : temp_integer
+        Const : 0
+        Const : 15
+        Action
+            CustomScriptCode
+                Const : 'if my_ability == udg_TileSystem_ABILITIES[udg_temp_integer] then'
+            SetTerrainTypeBJ
+                Var   : temp_point
+                Array : TileSystem_TILES
+                    Var   : temp_integer
+                Array : TileSystem_Var
+                    Call  : GetConvertedPlayerId
+                        Call  : GetOwningPlayer
+                            Call  : GetTriggerUnit
+                Array : DecoSystem_Value
+                    Call  : GetConvertedPlayerId
+                        Call  : GetOwningPlayer
+                            Call  : GetTriggerUnit
+                Preset: TerrainShapeCircle
+            SetVariable
+                Var   : temp_integer
+                Const : 15
+            CustomScriptCode
+                Const : endif
+    IfThenElseMultiple
+        Condition
+            OperatorCompareAbilityId
+                Call  : GetSpellAbilityId
+                Preset: OperatorEqualENE
+                Const : A0BR
+        Action
+            SetTerrainTypeBJ
+                Var   : temp_point
+                Array : TileSystem_TILES
+                    Const : 4
+                Const : -1
+                Array : DecoSystem_Value
+                    Call  : GetConvertedPlayerId
+                        Call  : GetOwningPlayer
+                            Call  : GetTriggerUnit
+                Preset: TerrainShapeCircle
+            SetBlightRadiusLocBJ
+                Preset: CreateRemoveCreate
+                Call  : GetOwningPlayer
+                    Call  : GetTriggerUnit
+                Var   : temp_point
+                Call  : OperatorReal
+                    Const : 64.00
+                    Preset: OperatorMultiply
+                    Call  : I2R
+                        Array : DecoSystem_Value
+                            Call  : GetConvertedPlayerId
+                                Call  : GetOwningPlayer
+                                    Call  : GetTriggerUnit
+    IfThenElseMultiple
+        Condition
+            OperatorCompareAbilityId
+                Call  : GetSpellAbilityId
+                Preset: OperatorEqualENE
+                Const : A002
+        Action
+            SetBlightRadiusLocBJ
+                Preset: CreateRemoveRemove
+                Call  : GetOwningPlayer
+                    Call  : GetTriggerUnit
+                Var   : temp_point
+                Call  : OperatorReal
+                    Const : 64.00
+                    Preset: OperatorMultiply
+                    Call  : I2R
+                        Array : DecoSystem_Value
+                            Call  : GetConvertedPlayerId
+                                Call  : GetOwningPlayer
+                                    Call  : GetTriggerUnit
+    CustomScriptCode
+        Const : 'call RemoveLocation(udg_temp_point)'
+    CustomScriptCode
+        Const : 'set udg_temp_point = null'

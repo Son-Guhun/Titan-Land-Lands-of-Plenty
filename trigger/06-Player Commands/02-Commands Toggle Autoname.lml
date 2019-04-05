@@ -1,0 +1,39 @@
+Event
+Condition
+Action
+    IfThenElseMultiple
+        Condition
+            OperatorCompareBoolean
+                Array : System_AutonameBoolean
+                    Call  : GetConvertedPlayerId
+                        Call  : GetTriggerPlayer
+                Preset: OperatorEqualENE
+                Const : true
+        Action
+            SetVariable
+                Array : System_AutonameBoolean
+                    Call  : GetConvertedPlayerId
+                        Call  : GetTriggerPlayer
+                Const : false
+            DisplayTextToForce
+                Array : FORCES_PLAYER
+                    Call  : OperatorInt
+                        Call  : GetConvertedPlayerId
+                            Call  : GetTriggerPlayer
+                        Preset: OperatorSubtract
+                        Const : 1
+                Const : 'Autoname has been disabled.'
+        Action
+            SetVariable
+                Array : System_AutonameBoolean
+                    Call  : GetConvertedPlayerId
+                        Call  : GetTriggerPlayer
+                Const : true
+            DisplayTextToForce
+                Array : FORCES_PLAYER
+                    Call  : OperatorInt
+                        Call  : GetConvertedPlayerId
+                            Call  : GetTriggerPlayer
+                        Preset: OperatorSubtract
+                        Const : 1
+                Const : 'Autoname has been enabled.'

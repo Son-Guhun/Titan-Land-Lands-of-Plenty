@@ -1,0 +1,5 @@
+This trigger disables movement for all units that are marked as decorations (have the "ZZIsDecoration" ability in Custom->Humans->Items)
+
+
+It also gives an ability based on Root (zz_Enable/Disable Fly in Custom->Special->Units) to any structures, which allows them to have a flying height.
+

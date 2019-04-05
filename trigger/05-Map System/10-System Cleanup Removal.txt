@@ -1,0 +1,1 @@
+System_UnitHasBeenRemovedBool -> this variable is used by the System Cleanup UnitGroups trigger

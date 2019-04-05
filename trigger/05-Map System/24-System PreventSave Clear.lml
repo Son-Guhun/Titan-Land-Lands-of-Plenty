@@ -1,0 +1,19 @@
+Event
+    TriggerRegisterTimerExpireEventBJ
+        Var   : PreventSave_Timer
+Condition
+Action
+    CustomScriptCode
+        Const : 'local integer udg_temp_integer'
+    CustomScriptCode
+        Const : 'local integer udg_temp_integer2 = bj_MAX_PLAYERS'
+    ForLoopVarMultiple
+        Var   : temp_integer
+        Const : 1
+        Var   : temp_integer2
+        Action
+            DialogDisplayBJ
+                Preset: ShowHideHide
+                Var   : PreventSave_Dialog
+                Call  : ConvertedPlayer
+                    Var   : temp_integer

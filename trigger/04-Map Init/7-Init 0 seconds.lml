@@ -1,0 +1,520 @@
+Event
+    TriggerRegisterTimerEventSingle
+        Const : 0.00
+Condition
+Action
+    CustomScriptCode
+        Const : 'local integer temp_integer'
+    CustomScriptCode
+        Const : 'debug call BJDebugMsg("\n\n|c00ffff00Titan Land LoP|r DEBUG BUILD")'
+    CommentString
+        Const : 'CREATE REGIONS AND EVENTS FOR THE "GIVE CIRCLES" IN THE TITAN PALACE'
+    CustomScriptCode
+        Const : 'call InitPlayerCircles()'
+    CommentString
+        Const : ---------------
+    CommentString
+        Const : 'Create Quests'
+    CommentString
+        Const : ---------------
+    CreateQuestBJ
+        Preset: QuestTypeReqDiscovered
+        Const : 'First Person Camera'
+        Const : 'This map employs Guhun''s First Person Camera system, for a more immersive experience!
+
+To enter first person perspective, select a unit and then double-click the |c00ffff00Esc|r key. You will see a help message when you do this the first time.
+
+Commands:
+|c00ffff00-first person|r and |c00ffff00-third person|r: Alternatives to double-clicking |c00ffff00Esc.|r
+|c00ffff00-fixed camera|r and |c00ffff00-free camera|r: Alternatives to clicking |c00ffff00Esc|r while in first person.
+|c00ffff00-help camera|r: Displays help text for the system.'
+        Const : ReplaceableTextures\CommandButtons\BTNAmbush.blp
+    CustomScriptCode
+        Const : 'call InitQuests()'
+    CreateQuestBJ
+        Preset: QuestTypeOptDiscovered
+        Const : 'Changelog
+'
+        Const : 'Version 1.0.0 Features:
+-Custom Races:
+Humans,Orcs,Undead,Fleshless,Night Elves, Elves, Ogres, Bandits, Pirates, Murlocs, Naga
+-Save/Load System
+-Expanded terrain and a few tweaks to original
+-New decos'
+        Const : ReplaceableTextures\CommandButtons\BTNSpellBookBLS.blp
+    CreateQuestBJ
+        Preset: QuestTypeOptDiscovered
+        Const : 'Contact Me'
+        Const : 'I''m mostly working on this project alone, so I would appreciate any help you can give me, any suggestions or any bug reports (please don''t report buggy tooltips/icons yet)
+
+songuhun@hotmail.com
+You can find me on The Hive Wokrshop: _Guhun_
+And discord: SonGuhun#4510'
+        Const : ReplaceableTextures\CommandButtons\BTNSnazzyScroll.blp
+    CommentString
+        Const : ---------------
+    CommentString
+        Const : ---------------
+    CommentString
+        Const : 'SCROLL SYSTEM SET ARRAYS'
+    SetVariable
+        Array : ScrollSystem_learnAbilities
+            Const : 0
+        Const : A063
+    SetVariable
+        Array : ScrollSystem_learnAbilities
+            Const : 1
+        Const : A04V
+    SetVariable
+        Array : ScrollSystem_learnAbilities
+            Const : 2
+        Const : A04K
+    SetVariable
+        Array : ScrollSystem_learnAbilities
+            Const : 3
+        Const : A061
+    SetVariable
+        Array : ScrollSystem_learnAbilities
+            Const : 4
+        Const : A060
+    SetVariable
+        Array : ScrollSystem_learnAbilities
+            Const : 5
+        Const : A069
+    SetVariable
+        Array : ScrollSystem_learnAbilities
+            Const : 6
+        Const : A04R
+    SetVariable
+        Array : ScrollSystem_realAbilities
+            Const : 0
+        Const : A062
+    SetVariable
+        Array : ScrollSystem_realAbilities
+            Const : 1
+        Const : A04U
+    SetVariable
+        Array : ScrollSystem_realAbilities
+            Const : 2
+        Const : A04J
+    SetVariable
+        Array : ScrollSystem_realAbilities
+            Const : 3
+        Const : A05Y
+    SetVariable
+        Array : ScrollSystem_realAbilities
+            Const : 5
+        Const : A06A
+    SetVariable
+        Array : ScrollSystem_realAbilities
+            Const : 6
+        Const : A04S
+    EnumDestructablesInRectAllMultiple
+        Var   : gg_rct_Titan_Palace
+        Action
+            SaveBooleanBJ
+                Const : true
+                Const : 0
+                Call  : GetHandleIdBJ
+                    Call  : GetEnumDestructable
+                Var   : Hashtable_1
+    CommentString
+        Const : ---------------------
+    CommentString
+        Const : ---------------------
+    SetTimeOfDay
+        Const : 7.00
+    UseTimeOfDayBJ
+        Preset: OnOffOff
+    CommentString
+        Const : ---------------------
+    CommentString
+        Const : ---------------------
+    CommentString
+        Const : ---------------------
+    CommentString
+        Const : Gates
+    CustomScriptCode
+        Const : 'call SaveInteger(udg_Hashtable_1, ''h0AQ'', 0, ''h00C'')'
+    CustomScriptCode
+        Const : 'call SaveInteger(udg_Hashtable_1, ''h009'', 0, ''h00B'')'
+    CommentString
+        Const : -
+    CustomScriptCode
+        Const : 'call SaveInteger(udg_Hashtable_1,  ''h00C'', 0, ''h0AQ'')'
+    CustomScriptCode
+        Const : 'call SaveInteger(udg_Hashtable_1, ''h00B'', 0, ''h009'')'
+    CommentString
+        Const : 'Demonic Gates'
+    CustomScriptCode
+        Const : 'call SaveInteger(udg_Hashtable_1, ''h0AP'', 0, ''h0AR'')'
+    CustomScriptCode
+        Const : 'call SaveInteger(udg_Hashtable_1, ''h00A'', 0, ''h0AS'')'
+    CommentString
+        Const : -
+    CustomScriptCode
+        Const : 'call SaveInteger(udg_Hashtable_1,  ''h0AR'', 0, ''h0AP'')'
+    CustomScriptCode
+        Const : 'call SaveInteger(udg_Hashtable_1, ''h0AS'', 0,  ''h00A'')'
+    CommentString
+        Const : 'Dungeon Gates'
+    CustomScriptCode
+        Const : 'call SaveInteger(udg_Hashtable_1, ''1Dgt'', 0, ''0Dgt'')'
+    CustomScriptCode
+        Const : 'call SaveInteger(udg_Hashtable_1, ''3Dgt'', 0, ''2Dgt'')'
+    CommentString
+        Const : -
+    CustomScriptCode
+        Const : 'call SaveInteger(udg_Hashtable_1,  ''0Dgt'', 0, ''1Dgt'')'
+    CustomScriptCode
+        Const : 'call SaveInteger(udg_Hashtable_1, ''2Dgt'', 0,  ''3Dgt'')'
+    CommentString
+        Const : 'Mansion Gates'
+    CustomScriptCode
+        Const : 'call SaveInteger(udg_Hashtable_1, ''h0AZ'', 0, ''h0B0'')'
+    CustomScriptCode
+        Const : 'call SaveInteger(udg_Hashtable_1, ''h0B0'', 0, ''h0AZ'')'
+    CommentString
+        Const : ---------------------
+    CustomScriptCode
+        Const : 'call SaveInteger(udg_Hashtable_1, ''h0JA'', 0, ''h0JB'')'
+    CustomScriptCode
+        Const : 'call SaveInteger(udg_Hashtable_1, ''h0JB'', 0, ''h0JA'')'
+    CommentString
+        Const : 'Arabian Gates'
+    CustomScriptCode
+        Const : 'call SaveInteger(udg_Hashtable_1, ''h0IB'', 0, ''h0IC'')'
+    CustomScriptCode
+        Const : 'call SaveInteger(udg_Hashtable_1, ''h0IC'', 0, ''h0IB'')'
+    CommentString
+        Const : 'Icecrown Gates'
+    CustomScriptCode
+        Const : 'call SaveInteger(udg_Hashtable_1, ''h0NR'', 0, ''h0NS'')'
+    CustomScriptCode
+        Const : 'call SaveInteger(udg_Hashtable_1, ''h0NS'', 0, ''h0NR'')'
+    CommentString
+        Const : 'Ice Rock Gates'
+    CustomScriptCode
+        Const : 'call SaveInteger(udg_Hashtable_1, ''h0NT'', 0, ''h0NU'')'
+    CustomScriptCode
+        Const : 'call SaveInteger(udg_Hashtable_1, ''h0NU'', 0, ''h0NT'')'
+    CommentString
+        Const : ---------------------
+    CommentString
+        Const : ---------------------
+    CommentString
+        Const : ---------------------
+    CommentString
+        Const : ---------------------
+    CommentString
+        Const : ---------------------
+    CustomScriptCode
+        Const : 'set bj_wantDestroyGroup = true'
+    ForGroupMultiple
+        Call  : GetUnitsInRectMatching
+            Call  : GetPlayableMapRect
+            Condition: OperatorCompareInteger
+                Call  : GetUnitAbilityLevelSwapped
+                    Const : A0C6
+                    Call  : GetFilterUnit
+                Preset: OperatorNotEqual
+                Const : 0
+        Action
+            CustomScriptCode
+                Const : 'call UnitRemoveAbility(GetEnumUnit(), ''Amov'')'
+            CustomScriptCode
+                Const : 'call UnitRemoveAbility(GetEnumUnit(), ''Aatk'')'
+    CommentString
+        Const : 'CREATE PROTECTION GROUP'
+    CustomScriptCode
+        Const : 'call InitDecoTents()'
+    SetVariable
+        Var   : System_ProtectedGroup
+        Call  : GetUnitsInRectAll
+            Var   : gg_rct_Titan_Palace
+    ForGroupMultiple
+        Var   : System_ProtectedGroup
+        Action
+            IfThenElseMultiple
+                Condition
+                    OrMultiple
+                        Condition
+                            AndMultiple
+                                Condition
+                                    OperatorCompareBoolean
+                                        Call  : IsUnitType
+                                            Call  : GetEnumUnit
+                                            Preset: UnitTypeStructure
+                                        Preset: OperatorEqualENE
+                                        Const : true
+                                    OperatorComparePlayer
+                                        Call  : GetOwningPlayer
+                                            Call  : GetEnumUnit
+                                        Preset: OperatorEqualENE
+                                        Preset: PlayerNP
+                            OperatorCompareUnit
+                                Call  : GetEnumUnit
+                                Preset: OperatorEqualENE
+                                Var   : gg_unit_H00V_0359
+                            OperatorCompareUnit
+                                Call  : GetEnumUnit
+                                Preset: OperatorEqualENE
+                                Var   : gg_unit_H00S_0141
+                            OperatorCompareUnit
+                                Call  : GetEnumUnit
+                                Preset: OperatorEqualENE
+                                Var   : gg_unit_e00B_0405
+                            OperatorCompareUnit
+                                Call  : GetEnumUnit
+                                Preset: OperatorEqualENE
+                                Var   : gg_unit_e009_0407
+                            OperatorCompareUnit
+                                Call  : GetEnumUnit
+                                Preset: OperatorEqualENE
+                                Var   : gg_unit_e008_0406
+                            OperatorCompareUnit
+                                Call  : GetEnumUnit
+                                Preset: OperatorEqualENE
+                                Var   : gg_unit_e00D_0409
+                            OperatorCompareUnit
+                                Call  : GetEnumUnit
+                                Preset: OperatorEqualENE
+                                Var   : gg_unit_e00A_0411
+                            OperatorCompareUnit
+                                Call  : GetEnumUnit
+                                Preset: OperatorEqualENE
+                                Var   : gg_unit_e00C_0408
+                            OperatorCompareUnit
+                                Call  : GetEnumUnit
+                                Preset: OperatorEqualENE
+                                Var   : gg_unit_e007_0410
+                Action
+                Action
+                    GroupRemoveUnitSimple
+                        Call  : GetEnumUnit
+                        Var   : System_ProtectedGroup
+    ShowUnitHide
+        Var   : gg_unit_H00S_0141
+    CommentString
+        Const : 'CREATE STRING HASHES FOR PLAYER COLOR STRINGS'
+    SaveIntegerBJ
+        Const : 1
+        Call  : StringHashBJ
+            Const : RED
+        Const : 0
+        Var   : Hashtable_1
+    SaveIntegerBJ
+        Const : 2
+        Call  : StringHashBJ
+            Const : BLUE
+        Const : 0
+        Var   : Hashtable_1
+    SaveIntegerBJ
+        Const : 3
+        Call  : StringHashBJ
+            Const : teal
+        Const : 0
+        Var   : Hashtable_1
+    SaveIntegerBJ
+        Const : 4
+        Call  : StringHashBJ
+            Const : purple
+        Const : 0
+        Var   : Hashtable_1
+    SaveIntegerBJ
+        Const : 5
+        Call  : StringHashBJ
+            Const : yellow
+        Const : 0
+        Var   : Hashtable_1
+    SaveIntegerBJ
+        Const : 6
+        Call  : StringHashBJ
+            Const : orange
+        Const : 0
+        Var   : Hashtable_1
+    SaveIntegerBJ
+        Const : 6
+        Call  : StringHashBJ
+            Const : oj
+        Const : 0
+        Var   : Hashtable_1
+    SaveIntegerBJ
+        Const : 7
+        Call  : StringHashBJ
+            Const : GREEN
+        Const : 0
+        Var   : Hashtable_1
+    SaveIntegerBJ
+        Const : 8
+        Call  : StringHashBJ
+            Const : pink
+        Const : 0
+        Var   : Hashtable_1
+    SaveIntegerBJ
+        Const : 9
+        Call  : StringHashBJ
+            Const : gray
+        Const : 0
+        Var   : Hashtable_1
+    SaveIntegerBJ
+        Const : 9
+        Call  : StringHashBJ
+            Const : grey
+        Const : 0
+        Var   : Hashtable_1
+    SaveIntegerBJ
+        Const : 10
+        Call  : StringHashBJ
+            Const : 'light blue'
+        Const : 0
+        Var   : Hashtable_1
+    SaveIntegerBJ
+        Const : 10
+        Call  : StringHashBJ
+            Const : lightblue
+        Const : 0
+        Var   : Hashtable_1
+    SaveIntegerBJ
+        Const : 10
+        Call  : StringHashBJ
+            Const : lb
+        Const : 0
+        Var   : Hashtable_1
+    SaveIntegerBJ
+        Const : 11
+        Call  : StringHashBJ
+            Const : 'dark green'
+        Const : 0
+        Var   : Hashtable_1
+    SaveIntegerBJ
+        Const : 11
+        Call  : StringHashBJ
+            Const : darkgreen
+        Const : 0
+        Var   : Hashtable_1
+    SaveIntegerBJ
+        Const : 11
+        Call  : StringHashBJ
+            Const : dg
+        Const : 0
+        Var   : Hashtable_1
+    SaveIntegerBJ
+        Const : 12
+        Call  : StringHashBJ
+            Const : brown
+        Const : 0
+        Var   : Hashtable_1
+    SaveIntegerBJ
+        Const : 13
+        Call  : StringHashBJ
+            Const : maroon
+        Const : 0
+        Var   : Hashtable_1
+    SaveIntegerBJ
+        Const : 14
+        Call  : StringHashBJ
+            Const : navy
+        Const : 0
+        Var   : Hashtable_1
+    SaveIntegerBJ
+        Const : 15
+        Call  : StringHashBJ
+            Const : turquoise
+        Const : 0
+        Var   : Hashtable_1
+    SaveIntegerBJ
+        Const : 15
+        Call  : StringHashBJ
+            Const : tq
+        Const : 0
+        Var   : Hashtable_1
+    SaveIntegerBJ
+        Const : 16
+        Call  : StringHashBJ
+            Const : violet
+        Const : 0
+        Var   : Hashtable_1
+    SaveIntegerBJ
+        Const : 17
+        Call  : StringHashBJ
+            Const : wheat
+        Const : 0
+        Var   : Hashtable_1
+    SaveIntegerBJ
+        Const : 18
+        Call  : StringHashBJ
+            Const : peach
+        Const : 0
+        Var   : Hashtable_1
+    SaveIntegerBJ
+        Const : 19
+        Call  : StringHashBJ
+            Const : mint
+        Const : 0
+        Var   : Hashtable_1
+    SaveIntegerBJ
+        Const : 20
+        Call  : StringHashBJ
+            Const : lavender
+        Const : 0
+        Var   : Hashtable_1
+    SaveIntegerBJ
+        Const : 21
+        Call  : StringHashBJ
+            Const : coal
+        Const : 0
+        Var   : Hashtable_1
+    SaveIntegerBJ
+        Const : 22
+        Call  : StringHashBJ
+            Const : snow
+        Const : 0
+        Var   : Hashtable_1
+    SaveIntegerBJ
+        Const : 23
+        Call  : StringHashBJ
+            Const : emerald
+        Const : 0
+        Var   : Hashtable_1
+    SaveIntegerBJ
+        Const : 24
+        Call  : StringHashBJ
+            Const : peanut
+        Const : 0
+        Var   : Hashtable_1
+    SaveIntegerBJ
+        Call  : GetConvertedPlayerId
+            Preset: PlayerNA
+        Call  : StringHashBJ
+            Const : hostile
+        Const : 0
+        Var   : Hashtable_1
+    SaveIntegerBJ
+        Call  : GetConvertedPlayerId
+            Preset: PlayerNV
+        Call  : StringHashBJ
+            Const : victim
+        Const : 0
+        Var   : Hashtable_1
+    SaveIntegerBJ
+        Call  : GetConvertedPlayerId
+            Preset: PlayerNE
+        Call  : StringHashBJ
+            Const : extra
+        Const : 0
+        Var   : Hashtable_1
+    SaveIntegerBJ
+        Call  : GetConvertedPlayerId
+            Preset: PlayerNP
+        Call  : StringHashBJ
+            Const : neutral
+        Const : 0
+        Var   : Hashtable_1
+    SaveIntegerBJ
+        Call  : GetConvertedPlayerId
+            Preset: PlayerNP
+        Call  : StringHashBJ
+            Const : passive
+        Const : 0
+        Var   : Hashtable_1

@@ -1,0 +1,24 @@
+Event
+    TriggerRegisterAnyUnitEventBJ
+        Preset: PlayerUnitEventSell
+Condition
+    OperatorCompareBoolean
+        Call  : RectContainsUnit
+            Var   : gg_rct_Titan_Palace
+            Call  : GetSoldUnit
+        Preset: OperatorEqualENE
+        Const : true
+    OperatorCompareBoolean
+        Call  : IsUnitType
+            Call  : GetSoldUnit
+            Preset: UnitTypeHero
+        Preset: OperatorEqualENE
+        Const : true
+Action
+    CreateItemLoc
+        Const : I004
+        Array : PLAYER_LOCATIONS
+            Const : 1
+    UnitAddItemSwapped
+        Call  : GetLastCreatedItem
+        Call  : GetSoldUnit

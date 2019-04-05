@@ -1,0 +1,1 @@
+Every 10 seconds, if a unit has been removed from the game (Detected by Cleanup Death and Cleanup Removal triggers), then this trigger will refresh all the player-specific Global groups, removing any units that have been removed from the game from those groups.

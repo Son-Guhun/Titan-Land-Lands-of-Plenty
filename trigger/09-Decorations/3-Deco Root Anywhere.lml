@@ -1,0 +1,20 @@
+Event
+    TriggerRegisterAnyUnitEventBJ
+        Preset: PlayerUnitEventIssued_Point_Order
+Condition
+    OperatorCompareInteger
+        Call  : GetUnitAbilityLevelSwapped
+            Const : A0C6
+            Call  : GetTriggerUnit
+        Preset: OperatorNotEqual
+        Const : 0
+    OperatorCompareOrderCode
+        Call  : GetIssuedOrderIdBJ
+        Preset: OperatorEqualENE
+        Call  : String2OrderIdBJ
+            Const : root
+Action
+    CustomScriptCode
+        Const : 'call SetUnitX(GetTriggerUnit(),GetOrderPointX())'
+    CustomScriptCode
+        Const : 'call SetUnitY(GetTriggerUnit(),GetOrderPointY())'

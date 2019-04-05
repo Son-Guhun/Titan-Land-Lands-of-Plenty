@@ -1,0 +1,93 @@
+Event
+Condition
+Action
+    CustomScriptCode
+        Const : 'local real udg_temp_real = S2R(Commands_GetArguments())'
+    CustomScriptCode
+        Const : 'if not Commands_StartsWithCommand() then'
+    ReturnAction
+    CustomScriptCode
+        Const : endif
+    IfThenElseMultiple
+        Condition
+            OperatorCompareString
+                Call  : GetEventPlayerChatString
+                Preset: OperatorEqualENE
+                Const : -rect
+        Action
+            CreateNUnitsAtLoc
+                Const : 1
+                Const : udr0
+                Call  : GetTriggerPlayer
+                Array : PLAYER_LOCATIONS
+                    Call  : GetConvertedPlayerId
+                        Call  : GetTriggerPlayer
+                Preset: RealUnitFacing
+        Action
+            IfThenElseMultiple
+                Condition
+                    OperatorCompareString
+                        Call  : GetEventPlayerChatString
+                        Preset: OperatorEqualENE
+                        Const : -start
+                Action
+                    CreateNUnitsAtLoc
+                        Const : 1
+                        Const : e000
+                        Call  : GetTriggerPlayer
+                        Array : PLAYER_LOCATIONS
+                            Call  : GetConvertedPlayerId
+                                Call  : GetTriggerPlayer
+                        Preset: RealUnitFacing
+                Action
+                    IfThenElseMultiple
+                        Condition
+                            OperatorCompareString
+                                Call  : GetEventPlayerChatStringMatched
+                                Preset: OperatorEqualENE
+                                Const : '-zoom '
+                        Action
+                            SetCameraFieldForPlayer
+                                Call  : GetTriggerPlayer
+                                Preset: CameraFieldTargetDistance
+                                Var   : temp_real
+                                Const : 0
+                        Action
+                            IfThenElseMultiple
+                                Condition
+                                    OperatorCompareString
+                                        Call  : GetEventPlayerChatStringMatched
+                                        Preset: OperatorEqualENE
+                                        Const : '-rotate '
+                                Action
+                                    SetCameraFieldForPlayer
+                                        Call  : GetTriggerPlayer
+                                        Preset: CameraFieldRotation
+                                        Var   : temp_real
+                                        Const : 0
+                                Action
+                                    IfThenElseMultiple
+                                        Condition
+                                            OperatorCompareString
+                                                Call  : GetEventPlayerChatStringMatched
+                                                Preset: OperatorEqualENE
+                                                Const : '-roll '
+                                        Action
+                                            SetCameraFieldForPlayer
+                                                Call  : GetTriggerPlayer
+                                                Preset: CameraFieldRoll
+                                                Var   : temp_real
+                                                Const : 0
+                                        Action
+                                            IfThenElseMultiple
+                                                Condition
+                                                    OperatorCompareString
+                                                        Call  : GetEventPlayerChatStringMatched
+                                                        Preset: OperatorEqualENE
+                                                        Const : '-pitch '
+                                                Action
+                                                    SetCameraFieldForPlayer
+                                                        Call  : GetTriggerPlayer
+                                                        Preset: CameraFieldAOA
+                                                        Var   : temp_real
+                                                        Const : 0

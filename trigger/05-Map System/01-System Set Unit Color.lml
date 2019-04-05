@@ -1,0 +1,11 @@
+Event
+    TriggerRegisterEnterRectSimple
+        Call  : GetEntireMapRect
+Condition
+Action
+    CustomScriptCode
+        Const : 'if GUMSGetUnitColor(GetTriggerUnit()) == "D" then'
+    CustomScriptCode
+        Const : 'call SetUnitColor(GetTriggerUnit(), GUMS_I2PlayerColor(udg_System_PlayerColor[GetConvertedPlayerId(GetOwningPlayer(GetTriggerUnit()))]))'
+    CustomScriptCode
+        Const : endif

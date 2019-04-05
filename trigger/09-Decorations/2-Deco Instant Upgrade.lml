@@ -1,0 +1,14 @@
+Event
+    TriggerRegisterAnyUnitEventBJ
+        Preset: PlayerUnitEventUpgrade_Start
+Condition
+    OperatorCompareInteger
+        Call  : GetUnitAbilityLevelSwapped
+            Const : A0C6
+            Call  : GetTriggerUnit
+        Preset: OperatorNotEqual
+        Const : 0
+Action
+    UnitSetUpgradeProgress
+        Call  : GetTriggerUnit
+        Const : 100

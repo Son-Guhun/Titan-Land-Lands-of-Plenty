@@ -1,0 +1,23 @@
+Event
+    TriggerRegisterVariableEvent
+        Var   : UnitIndexEvent
+        Preset: LimitOpEqual
+        Const : 1.00
+    TriggerRegisterVariableEvent
+        Var   : DeathEvent
+        Preset: LimitOpEqual
+        Const : 2.00
+Condition
+    OperatorCompareInteger
+        Call  : GetUnitAbilityLevelSwapped
+            Const : A00J
+            Call  : GetTriggerUnit
+        Preset: OperatorGreater
+        Const : 0
+Action
+    CustomScriptCode
+        Const : 'local integer playerNumber = GetPlayerId( GetOwningPlayer( GetTriggerUnit() ) )  + 1'
+    CustomScriptCode
+        Const : 'local integer unitType = GetUnitTypeId(GetTriggerUnit())'
+    CustomScriptCode
+        Const : 'call SaveInteger(udg_Hashtable_2, playerNumber, unitType, LoadInteger(udg_Hashtable_2, playerNumber, unitType ) + 1)'

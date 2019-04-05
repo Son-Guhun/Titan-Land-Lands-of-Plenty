@@ -1,0 +1,26 @@
+Event
+    TriggerRegisterGameSavedEventBJ
+Condition
+Action
+    CustomScriptCode
+        Const : 'local integer udg_temp_integer'
+    CustomScriptCode
+        Const : 'local integer udg_temp_integer2 = bj_MAX_PLAYERS'
+    DisplayTextToForce
+        Call  : GetPlayersAll
+        Const : 'Someone has attempted to save the game! Do NOT do this, for it can cause crashes!
+Save aborted.'
+    ForLoopVarMultiple
+        Var   : temp_integer
+        Const : 1
+        Var   : temp_integer2
+        Action
+            DialogDisplayBJ
+                Preset: ShowHideShow
+                Var   : PreventSave_Dialog
+                Call  : ConvertedPlayer
+                    Var   : temp_integer
+    StartTimerBJ
+        Var   : PreventSave_Timer
+        Preset: PeriodicOptionOneTime
+        Const : 0.00

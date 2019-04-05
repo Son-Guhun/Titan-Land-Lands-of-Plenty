@@ -1,0 +1,107 @@
+Event
+    TriggerRegisterAnyUnitEventBJ
+        Preset: PlayerUnitEventSpellEffect
+    TriggerRegisterAnyUnitEventBJ
+        Preset: PlayerUnitEventIssued_Point_Order
+Condition
+    OperatorCompareBoolean
+        Call  : IsUnitType
+            Call  : GetTriggerUnit
+            Preset: UnitTypePeon
+        Preset: OperatorEqualENE
+        Const : true
+Action
+    CustomScriptCode
+        Const : 'local location udg_temp_point'
+    IfThenElseMultiple
+        Condition
+            OperatorCompareOrderCode
+                Call  : GetIssuedOrderIdBJ
+                Preset: OperatorEqualENE
+                Call  : String2OrderIdBJ
+                    Const : smart
+            OperatorCompareInteger
+                Call  : GetUnitAbilityLevelSwapped
+                    Const : A0CA
+                    Call  : GetTriggerUnit
+                Preset: OperatorNotEqual
+                Const : 0
+        Action
+            SetVariable
+                Var   : temp_point
+                Call  : GetOrderPointLoc
+            SetUnitPositionLoc
+                Call  : GetTriggerUnit
+                Var   : temp_point
+            CustomScriptCode
+                Const : 'call RemoveLocation(udg_temp_point)'
+            CustomScriptCode
+                Const : 'set udg_temp_point = null'
+    IfThenElseMultiple
+        Condition
+            OperatorCompareAbilityId
+                Call  : GetSpellAbilityId
+                Preset: OperatorEqualENE
+                Const : A0C7
+        Action
+            SetUnitPathing
+                Call  : GetTriggerUnit
+                Preset: PathingOff
+            SetUnitMoveSpeed
+                Call  : GetTriggerUnit
+                Const : 522.00
+            UnitRemoveAbilityBJ
+                Const : A0C7
+                Call  : GetTriggerUnit
+            UnitAddAbilityBJ
+                Const : A0C8
+                Call  : GetTriggerUnit
+        Action
+            IfThenElseMultiple
+                Condition
+                    OperatorCompareAbilityId
+                        Call  : GetSpellAbilityId
+                        Preset: OperatorEqualENE
+                        Const : A0C8
+                Action
+                    SetUnitPathing
+                        Call  : GetTriggerUnit
+                        Preset: PathingOn
+                    SetUnitMoveSpeed
+                        Call  : GetTriggerUnit
+                        Call  : GetUnitDefaultMoveSpeed
+                            Call  : GetTriggerUnit
+                    UnitRemoveAbilityBJ
+                        Const : A0C8
+                        Call  : GetTriggerUnit
+                    UnitAddAbilityBJ
+                        Const : A0C7
+                        Call  : GetTriggerUnit
+                Action
+                    IfThenElseMultiple
+                        Condition
+                            OperatorCompareAbilityId
+                                Call  : GetSpellAbilityId
+                                Preset: OperatorEqualENE
+                                Const : A0C9
+                        Action
+                            UnitRemoveAbilityBJ
+                                Const : A0C9
+                                Call  : GetTriggerUnit
+                            UnitAddAbilityBJ
+                                Const : A0CA
+                                Call  : GetTriggerUnit
+                        Action
+                            IfThenElseMultiple
+                                Condition
+                                    OperatorCompareAbilityId
+                                        Call  : GetSpellAbilityId
+                                        Preset: OperatorEqualENE
+                                        Const : A0CA
+                                Action
+                                    UnitRemoveAbilityBJ
+                                        Const : A0CA
+                                        Call  : GetTriggerUnit
+                                    UnitAddAbilityBJ
+                                        Const : A0C9
+                                        Call  : GetTriggerUnit

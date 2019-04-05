@@ -1,0 +1,387 @@
+Event
+    MapInitializationEvent
+Condition
+Action
+    CustomScriptCode
+        Const : 'local integer udg_temp_integer'
+    CustomScriptCode
+        Const : 'local integer udg_temp_integer2'
+    CustomScriptCode
+        Const : 'local integer udg_Commands_Integer'
+    CustomScriptCode
+        Const : 'local player udg_temp_player'
+    SetVariable
+        Var   : WholeMapRegion
+        Call  : GetEntireMapRect
+    SetVariable
+        Array : System_PArmyLimit
+            Const : 1
+        Const : 150
+    SetVariable
+        Array : System_PArmyLimit
+            Const : 2
+        Const : 24
+    SetVariable
+        Array : System_PArmyLimit
+            Const : 3
+        Const : 150
+    CustomScriptCode
+        Const : 'call InitDecoUnitTypeArray()'
+    CommentString
+        Const : 'Create Hashtables'
+    CustomScriptCode
+        Const : 'if udg_Hashtable_1 == null then'
+    CustomScriptCode
+        Const : 'set udg_Hashtable_1 = InitHashtable()'
+    CustomScriptCode
+        Const : endif
+    CustomScriptCode
+        Const : 'if udg_Hashtable_2 == null then'
+    CustomScriptCode
+        Const : 'set udg_Hashtable_2 = InitHashtable()'
+    CustomScriptCode
+        Const : endif
+    CommentString
+        Const : 'Make destructibles invulnerable'
+    SetDestructableInvulnerableBJ
+        Var   : gg_dest_ATg1_0003
+        Preset: InvulnerabilityInvulnerable
+    SetDestructableInvulnerableBJ
+        Var   : gg_dest_ATg3_0004
+        Preset: InvulnerabilityInvulnerable
+    SetDestructableInvulnerableBJ
+        Var   : gg_dest_DTg5_0008
+        Preset: InvulnerabilityInvulnerable
+    SetDestructableInvulnerableBJ
+        Var   : gg_dest_DTg5_0007
+        Preset: InvulnerabilityInvulnerable
+    SetDestructableInvulnerableBJ
+        Var   : gg_dest_LTe3_0005
+        Preset: InvulnerabilityInvulnerable
+    CommentString
+        Const : ---------------
+    CommentString
+        Const : 'Ally Players and Create Spawns'
+    CommentString
+        Const : ---------------
+    CreateFogModifierRectBJ
+        Preset: EnabledDisabledEnabled
+        Preset: PlayerNP
+        Preset: FogStateVisible
+        Call  : GetPlayableMapRect
+    CustomScriptCode
+        Const : 'set udg_Commands_Integer = bj_MAX_PLAYERS'
+    ForLoopVarMultiple
+        Var   : temp_integer
+        Const : 1
+        Var   : Commands_Integer
+        Action
+            SetVariable
+                Var   : temp_player
+                Call  : ConvertedPlayer
+                    Var   : temp_integer
+            SetVariable
+                Array : FORCES_PLAYER
+                    Call  : OperatorInt
+                        Var   : temp_integer
+                        Preset: OperatorSubtract
+                        Const : 1
+                Call  : GetForceOfPlayer
+                    Var   : temp_player
+            SetVariable
+                Array : System_PlayerColor
+                    Var   : temp_integer
+                Var   : temp_integer
+            ForceAddPlayerSimple
+                Var   : temp_player
+                Var   : ALL_PLAYERS_FORCE
+            ForLoopVarMultiple
+                Var   : temp_integer2
+                Const : 1
+                Var   : Commands_Integer
+                Action
+                    CustomScriptCode
+                        Const : 'if udg_temp_integer != udg_temp_integer2 then'
+                    SetPlayerAllianceStateBJ
+                        Var   : temp_player
+                        Call  : ConvertedPlayer
+                            Var   : temp_integer2
+                        Preset: AllianceSettingAlliedVision
+                    CustomScriptCode
+                        Const : endif
+    SetVariable
+        Var   : Commands_Integer
+        Call  : OperatorInt
+            Var   : Commands_Integer
+            Preset: OperatorAdd
+            Const : 1
+    ForLoopVarMultiple
+        Var   : temp_integer
+        Var   : Commands_Integer
+        Call  : OperatorInt
+            Var   : Commands_Integer
+            Preset: OperatorAdd
+            Const : 3
+        Action
+            SetVariable
+                Array : System_PlayerColor
+                    Var   : temp_integer
+                Var   : Commands_Integer
+    ForForceMultiple
+        Call  : GetPlayersAll
+        Action
+            CustomScriptCode
+                Const : 'local integer udg_temp_integer = GetPlayerId(GetEnumPlayer()) + 1'
+            CustomScriptCode
+                Const : 'local player udg_temp_player'
+            SetVariable
+                Var   : temp_player
+                Call  : ConvertedPlayer
+                    Var   : temp_integer
+            CreateFogModifierRectBJ
+                Preset: EnabledDisabledEnabled
+                Var   : temp_player
+                Preset: FogStateVisible
+                Call  : GetPlayableMapRect
+            CommentString
+                Const : 'Possession causes crashes because of unit ownership change detection'
+            SetPlayerAbilityAvailableBJ
+                Preset: EnableDisableDisable
+                Const : Apos
+                Var   : temp_player
+            SetPlayerAbilityAvailableBJ
+                Preset: EnableDisableDisable
+                Const : Aps2
+                Var   : temp_player
+            SetPlayerAbilityAvailableBJ
+                Preset: EnableDisableDisable
+                Const : ACps
+                Var   : temp_player
+            SetPlayerHandicapXPBJ
+                Var   : temp_player
+                Const : 0.00
+            AdjustPlayerStateBJ
+                Const : 1000000000
+                Var   : temp_player
+                Preset: PlayerStateGold
+            AdjustPlayerStateBJ
+                Const : 1000000000
+                Var   : temp_player
+                Preset: PlayerStateLumber
+            SetPlayerMaxHeroesAllowed
+                Const : -1
+                Var   : temp_player
+            CommentString
+                Const : --
+            SetVariable
+                Array : RealNames
+                    Var   : temp_integer
+                Call  : GetPlayerName
+                    Var   : temp_player
+            SetVariable
+                Array : System_DecoGrid
+                    Var   : temp_integer
+                Const : 16.00
+            SetVariable
+                Array : TreeSystem_TREES
+                    Var   : temp_integer
+                Const : LTlt
+            SetVariable
+                Array : PLAYER_LOCATIONS
+                    Var   : temp_integer
+                Call  : GetPlayerStartLocationLoc
+                    Var   : temp_player
+            CustomScriptCode
+                Const : 'set udg_System_NeutralUnits[udg_temp_integer - 1] = CreateGroup()'
+            CustomScriptCode
+                Const : 'set udg_Player_ControlGroup[udg_temp_integer] = CreateGroup()'
+            SetVariable
+                Array : DecoSystem_Scale
+                    Var   : temp_integer
+                Const : 100.00
+            SetVariable
+                Array : DecoSystem_Value
+                    Var   : temp_integer
+                Const : 1
+            SetVariable
+                Array : TreeSystem_Space
+                    Var   : temp_integer
+                Const : 128.00
+            SetVariable
+                Array : ColorSystem_Blue
+                    Var   : temp_integer
+                Const : 100.00
+            SetVariable
+                Array : ColorSystem_Green
+                    Var   : temp_integer
+                Const : 100.00
+            SetVariable
+                Array : ColorSystem_Red
+                    Var   : temp_integer
+                Const : 100.00
+            CommentString
+                Const : --
+    CommentString
+        Const : 'Terrain Settings'
+    SetVariable
+        Array : TileSystem_ABILITIES
+            Const : 0
+        Const : A0BH
+    SetVariable
+        Array : TileSystem_TILES
+            Const : 0
+        Preset: TerrainTypeYgsb
+    SetVariable
+        Array : TileSystem_ABILITIES
+            Const : 1
+        Const : A0BK
+    SetVariable
+        Array : TileSystem_TILES
+            Const : 1
+        Preset: TerrainTypeNgrs
+    SetVariable
+        Array : TileSystem_ABILITIES
+            Const : 2
+        Const : A0BE
+    CustomScriptCode
+        Const : 'set udg_TileSystem_TILES[2] = ''cIc2'''
+    SetVariable
+        Array : TileSystem_ABILITIES
+            Const : 3
+        Const : A0BI
+    SetVariable
+        Array : TileSystem_TILES
+            Const : 3
+        Preset: TerrainTypeYhdg
+    SetVariable
+        Array : TileSystem_ABILITIES
+            Const : 4
+        Const : A0BF
+    SetVariable
+        Array : TileSystem_TILES
+            Const : 4
+        Preset: TerrainTypeYdrt
+    SetVariable
+        Array : TileSystem_ABILITIES
+            Const : 5
+        Const : A0BM
+    SetVariable
+        Array : TileSystem_TILES
+            Const : 5
+        Preset: TerrainTypeFrok
+    SetVariable
+        Array : TileSystem_ABILITIES
+            Const : 6
+        Const : A0BO
+    SetVariable
+        Array : TileSystem_TILES
+            Const : 6
+        Preset: TerrainTypecWc1
+    SetVariable
+        Array : TileSystem_ABILITIES
+            Const : 7
+        Const : A0BN
+    SetVariable
+        Array : TileSystem_TILES
+            Const : 7
+        Preset: TerrainTypeNrck
+    SetVariable
+        Array : TileSystem_ABILITIES
+            Const : 8
+        Const : A0BJ
+    SetVariable
+        Array : TileSystem_TILES
+            Const : 8
+        Preset: TerrainTypeNice
+    SetVariable
+        Array : TileSystem_ABILITIES
+            Const : 9
+        Const : A0BL
+    SetVariable
+        Array : TileSystem_TILES
+            Const : 9
+        Preset: TerrainTypeCvin
+    SetVariable
+        Array : TileSystem_ABILITIES
+            Const : 10
+        Const : A0BP
+    SetVariable
+        Array : TileSystem_TILES
+            Const : 10
+        Preset: TerrainTypeAdrd
+    SetVariable
+        Array : TileSystem_ABILITIES
+            Const : 11
+        Const : A0BQ
+    SetVariable
+        Array : TileSystem_TILES
+            Const : 11
+        Preset: TerrainTypeOlgb
+    SetVariable
+        Array : TileSystem_ABILITIES
+            Const : 12
+        Const : A0BT
+    SetVariable
+        Array : TileSystem_TILES
+            Const : 12
+        Preset: TerrainTypeZsan
+    SetVariable
+        Array : TileSystem_ABILITIES
+            Const : 13
+        Const : A0BS
+    SetVariable
+        Array : TileSystem_TILES
+            Const : 13
+        Preset: TerrainTypeYwmb
+    SetVariable
+        Array : TileSystem_ABILITIES
+            Const : 14
+        Const : A0BU
+    SetVariable
+        Array : TileSystem_TILES
+            Const : 14
+        Preset: TerrainTypeYrtl
+    SetVariable
+        Array : TileSystem_ABILITIES
+            Const : 15
+        Const : A0BG
+    SetVariable
+        Array : TileSystem_TILES
+            Const : 15
+        Preset: TerrainTypeYsqd
+    CommentString
+        Const : 'Setup Starting Units'
+    SetHeroLevel
+        Var   : gg_unit_H00V_0359
+        Const : 100
+        Preset: ShowHideHide
+    UnitAddItemByIdSwapped
+        Const : I00D
+        Var   : gg_unit_H00V_0359
+    CustomScriptCode
+        Const : 'set bj_wantDestroyGroup = true'
+    ForGroupMultiple
+        Call  : GetUnitsOfPlayerMatching
+            Preset: Player00
+            Condition: GetBooleanAnd
+                Condition: OperatorCompareBoolean
+                    Call  : IsUnitType
+                        Call  : GetFilterUnit
+                        Preset: UnitTypeStructure
+                    Preset: OperatorEqualENE
+                    Const : true
+                Condition: OperatorCompareBoolean
+                    Call  : RectContainsUnit
+                        Var   : gg_rct_Titan_Palace
+                        Call  : GetFilterUnit
+                    Preset: OperatorEqualENE
+                    Const : false
+        Action
+            SetUnitOwner
+                Call  : GetEnumUnit
+                Preset: PlayerNP
+                Preset: ChangeColorTrue
+    DisplayTextToForce
+        Call  : GetPlayersAll
+        Const : 'Map Initialization was Successful! Welcome to the Land of Plenty!
+Check out F9 for new commands or if you never played Titan Land before.'

@@ -1,0 +1,91 @@
+Event
+Condition
+    OrMultiple
+        Condition
+            OperatorComparePlayer
+                Call  : GetTriggerPlayer
+                Preset: OperatorEqualENE
+                Var   : GAME_MASTER
+            OperatorComparePlayer
+                Call  : GetTriggerPlayer
+                Preset: OperatorEqualENE
+                Preset: Player00
+Action
+    CustomScriptCode
+        Const : 'local integer udg_temp_integer'
+    CustomScriptCode
+        Const : 'set udg_temp_integer = Commands_GetChatMessagePlayerNumber(Commands_GetArguments())'
+    CustomScriptCode
+        Const : 'if not PlayerNumberIsNotNeutral(udg_temp_integer) then'
+    CustomScriptCode
+        Const : return
+    CustomScriptCode
+        Const : endif
+    SetVariable
+        Var   : GAME_MASTER
+        Call  : ConvertedPlayer
+            Var   : temp_integer
+    IfThenElseMultiple
+        Condition
+            OperatorComparePlayerSlotStatus
+                Call  : GetPlayerSlotState
+                    Var   : GAME_MASTER
+                Preset: OperatorEqualENE
+                Preset: PlayerSlotStatePlaying
+        Action
+            SetUnitOwner
+                Var   : gg_unit_H00V_0359
+                Var   : GAME_MASTER
+                Preset: ChangeColorFalse
+            IfThenElseMultiple
+                Condition
+                    OperatorComparePlayer
+                        Call  : GetOwningPlayer
+                            Var   : gg_unit_H00S_0141
+                        Preset: OperatorNotEqualENE
+                        Preset: PlayerNP
+                Action
+                    SetUnitOwner
+                        Var   : gg_unit_H00S_0141
+                        Var   : GAME_MASTER
+                        Preset: ChangeColorFalse
+            SetUnitOwner
+                Var   : gg_unit_e00B_0405
+                Var   : GAME_MASTER
+                Preset: ChangeColorFalse
+            SetUnitOwner
+                Var   : gg_unit_e009_0407
+                Var   : GAME_MASTER
+                Preset: ChangeColorFalse
+            SetUnitOwner
+                Var   : gg_unit_e008_0406
+                Var   : GAME_MASTER
+                Preset: ChangeColorFalse
+            SetUnitOwner
+                Var   : gg_unit_e00D_0409
+                Var   : GAME_MASTER
+                Preset: ChangeColorFalse
+            SetUnitOwner
+                Var   : gg_unit_e00A_0411
+                Var   : GAME_MASTER
+                Preset: ChangeColorFalse
+            SetUnitOwner
+                Var   : gg_unit_e00C_0408
+                Var   : GAME_MASTER
+                Preset: ChangeColorFalse
+            SetUnitOwner
+                Var   : gg_unit_e007_0410
+                Var   : GAME_MASTER
+                Preset: ChangeColorFalse
+        Action
+            SetVariable
+                Var   : GAME_MASTER
+                Call  : GetTriggerPlayer
+            DisplayTextToForce
+                Array : FORCES_PLAYER
+                    Call  : OperatorInt
+                        Call  : GetConvertedPlayerId
+                            Call  : GetTriggerPlayer
+                        Preset: OperatorSubtract
+                        Const : 1
+                Const : 'There is no player currently playing in this slot!'

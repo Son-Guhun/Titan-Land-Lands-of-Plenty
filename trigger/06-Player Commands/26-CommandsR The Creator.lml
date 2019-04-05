@@ -1,0 +1,25 @@
+Event
+Condition
+    OperatorComparePlayer
+        Call  : GetTriggerPlayer
+        Preset: OperatorEqualENE
+        Var   : GAME_MASTER
+Action
+    ShowUnitShow
+        Var   : gg_unit_H00S_0141
+    SetUnitOwner
+        Var   : gg_unit_H00S_0141
+        Var   : GAME_MASTER
+        Preset: ChangeColorFalse
+    SetHeroLevel
+        Var   : gg_unit_H00S_0141
+        Const : 100
+        Preset: ShowHideHide
+    UnitAddItemByIdSwapped
+        Const : I00N
+        Var   : gg_unit_H00S_0141
+    UnitAddItemByIdSwapped
+        Const : I00O
+        Var   : gg_unit_H00S_0141
+    DisableTrigger
+        Call  : GetTriggeringTrigger

@@ -1,0 +1,30 @@
+Event
+Condition
+    OperatorComparePlayer
+        Call  : GetTriggerPlayer
+        Preset: OperatorEqualENE
+        Var   : GAME_MASTER
+Action
+    IfThenElseMultiple
+        Condition
+            OperatorCompareBoolean
+                Call  : IsTriggerEnabled
+                    Var   : gg_trg_System_Titan_Palace_Prot
+                Preset: OperatorEqualENE
+                Const : true
+        Action
+            DisplayTextToForce
+                Call  : GetPlayersAll
+                Const : 'Titan Palace Protection has been disabled.'
+            DisableTrigger
+                Var   : gg_trg_System_Titan_Palace_Prot
+            DisableTrigger
+                Var   : gg_trg_System_Titan_Palace_Item_Prot
+        Action
+            DisplayTextToForce
+                Call  : GetPlayersAll
+                Const : 'Titan Palace Protection has been enabled.'
+            EnableTrigger
+                Var   : gg_trg_System_Titan_Palace_Prot
+            EnableTrigger
+                Var   : gg_trg_System_Titan_Palace_Item_Prot

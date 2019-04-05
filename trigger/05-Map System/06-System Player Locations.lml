@@ -1,0 +1,24 @@
+Event
+    TriggerRegisterAnyUnitEventBJ
+        Preset: PlayerUnitEventConstruct_Start
+Condition
+    OperatorCompareUnitCode
+        Call  : GetUnitTypeId
+            Call  : GetTriggerUnit
+        Preset: OperatorEqualENE
+        Const : e001
+Action
+    CustomScriptCode
+        Const : 'local integer udg_temp_integer'
+    SetVariable
+        Var   : temp_integer
+        Call  : GetConvertedPlayerId
+            Call  : GetOwningPlayer
+                Call  : GetTriggerUnit
+    CustomScriptCode
+        Const : 'call RemoveLocation(udg_PLAYER_LOCATIONS[udg_temp_integer])'
+    SetVariable
+        Array : PLAYER_LOCATIONS
+            Var   : temp_integer
+        Call  : GetUnitLoc
+            Call  : GetTriggerUnit

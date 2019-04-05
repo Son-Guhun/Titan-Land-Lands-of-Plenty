@@ -1,0 +1,44 @@
+Event
+Condition
+Action
+    CustomScriptCode
+        Const : 'local integer udg_temp_integer = S2I(Commands_GetArguments())'
+    CustomScriptCode
+        Const : 'if not Commands_StartsWithCommand() then'
+    ReturnAction
+    CustomScriptCode
+        Const : endif
+    SetVariable
+        Array : TileSystem_Var
+            Call  : GetConvertedPlayerId
+                Call  : GetTriggerPlayer
+        Var   : temp_integer
+    IfThenElseMultiple
+        Condition
+            OperatorCompareInteger
+                Array : TileSystem_Var
+                    Call  : GetConvertedPlayerId
+                        Call  : GetTriggerPlayer
+                Preset: OperatorLess
+                Const : 0
+        Action
+            SetVariable
+                Array : TileSystem_Var
+                    Call  : GetConvertedPlayerId
+                        Call  : GetTriggerPlayer
+                Const : -1
+        Action
+            IfThenElseMultiple
+                Condition
+                    OperatorCompareInteger
+                        Array : TileSystem_Var
+                            Call  : GetConvertedPlayerId
+                                Call  : GetTriggerPlayer
+                        Preset: OperatorGreater
+                        Const : 17
+                Action
+                    SetVariable
+                        Array : TileSystem_Var
+                            Call  : GetConvertedPlayerId
+                                Call  : GetTriggerPlayer
+                        Const : 17
