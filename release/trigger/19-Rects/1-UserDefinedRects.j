@@ -308,7 +308,6 @@ function GroupGUDR takes unit whichUnit,  boolean unlock  returns boolean
     
     //We only want to add new units to the group if the user doesn't want to unlock it
     if not unlock then 
-        call BJDebugMsg(" G Test" )
         set bj_forceRandomCurrentPick = GetOwningPlayer(whichUnit)
         call GroupEnumUnitsInRect(g, GUDR_GetGeneratorIdRect(unitId), Condition(function GroupGUDRFilter))
         set bj_forceRandomCurrentPick = storeGlobal
