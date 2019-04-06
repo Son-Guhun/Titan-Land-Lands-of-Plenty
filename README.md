@@ -1,4 +1,4 @@
-# Titan-Land-Lands-of-Plenty
+# Titan Land: Lands of Plenty (TL: LoP)
 A WC3 sandbox roleplaying map inspired by those that came before.
 
 
@@ -14,7 +14,11 @@ Because of this, the builder script copies all files from the 'release' folder i
 Command routine:
 
 pull() => Creates the development folder (or updates it, if you have directly made changes in the release folder)
+
 build(DEVELOPMENT) = > Creates the obj file of the development folder.
+
 // Do stuff on the testmap
+
 commit(DEVELOPMENT) = > Creates the slk file of the development OBJ file, overwriting the development folder.
+
 push() => Updates the release folder with all the changes made to the development folder.
