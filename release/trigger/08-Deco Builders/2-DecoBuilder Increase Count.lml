@@ -11,13 +11,18 @@ Condition
     OperatorCompareInteger
         Call  : GetUnitAbilityLevelSwapped
             Const : A00J
-            Call  : GetTriggerUnit
+            Array : UDexUnits
+                Var   : UDex
         Preset: OperatorGreater
         Const : 0
 Action
     CustomScriptCode
-        Const : 'local integer playerNumber = GetPlayerId( GetOwningPlayer( GetTriggerUnit() ) )  + 1'
+        Const : 'local unit u = udg_UDexUnits[udg_UDex]'
     CustomScriptCode
-        Const : 'local integer unitType = GetUnitTypeId(GetTriggerUnit())'
+        Const : 'local integer playerNumber = GetPlayerId( GetOwningPlayer( u ) )  + 1'
+    CustomScriptCode
+        Const : 'local integer unitType = GetUnitTypeId(u)'
     CustomScriptCode
         Const : 'call SaveInteger(udg_Hashtable_2, playerNumber, unitType, LoadInteger(udg_Hashtable_2, playerNumber, unitType ) + 1)'
+    CustomScriptCode
+        Const : 'set u = null'
