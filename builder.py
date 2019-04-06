@@ -21,10 +21,17 @@ def convert(which, type):
     subprocess.Popen([p['paths']['war3'],'-loadfile',os.path.abspath(which)])
 
 
-def build_config():
-    if not os.path.exists('config.ini'):
-        with open('config.ini','w') as f:
-            pass
+config_values = {
+    'paths': {'w2l':'',
+              'war3':'',
+              'worldedit': ''}
+    }
+def generate_config(path='config.ini'):
+    if not os.path.exists(path):
+        writer = configparser.ConfigParser()
+        writer.read_dict(config_values)
+        with open(path,'w') as f:
+            writer.write(f)
 
 from shutil import copyfile
 
