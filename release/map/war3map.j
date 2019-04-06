@@ -106,8 +106,8 @@ integer Table___more= 8190
     //Configure it if you use more than 8190 "key" variables in your map (this will never happen though).
    
 hashtable Table___ht= InitHashtable()
-constant integer Table___sizeK=4
-constant integer Table___listK=6
+constant integer Table___sizeK=7
+constant integer Table___listK=8
 //endglobals from Table
 //globals from ThirdPersonCamera:
 constant boolean LIBRARY_ThirdPersonCamera=true
@@ -186,7 +186,7 @@ constant real DummyRecycler___FACING_OFFSET= 180.0 / DummyRecycler___ANGLES_COUN
 //endglobals from DummyRecycler
 //globals from Lists:
 constant boolean LIBRARY_Lists=true
-constant integer Lists_RECYCLE_KEY=8
+constant integer Lists_RECYCLE_KEY=9
 constant boolean Lists_ENABLE_GUI= false
 hashtable Lists___hashTable= InitHashtable()
 //endglobals from Lists
@@ -300,6 +300,20 @@ constant boolean LIBRARY_GameTime=true
 //endglobals from GameTime
 //globals from LoPInitDecoBuilders:
 constant boolean LIBRARY_LoPInitDecoBuilders=true
+constant integer Special_RED= 255
+constant integer Special_GREEN= 165
+constant integer Special_BLUE= 0
+constant integer Special_ALPHA= 255
+    
+constant integer Basic_RED= 255
+constant integer Basic_GREEN= 255
+constant integer Basic_BLUE= 255
+constant integer Basic_ALPHA= 255
+    
+constant integer Adv_RED= 255
+constant integer Adv_GREEN= 0
+constant integer Adv_BLUE= 0
+constant integer Adv_ALPHA= 255
 //endglobals from LoPInitDecoBuilders
 //globals from UserDefinedRects:
 constant boolean LIBRARY_UserDefinedRects=true
@@ -1211,37 +1225,38 @@ constant integer si__FilterTransformations_Globals=101
 integer si__FilterTransformations_Globals_F=0
 integer si__FilterTransformations_Globals_I=0
 integer array si__FilterTransformations_Globals_V
-constant integer s__FilterTransformations_Globals_data_impl=12
+constant integer s__FilterTransformations_Globals_data_impl=11
 constant integer si__LoP_DecoBuilders=102
-constant integer s__LoP_DecoBuilders_static_members_key=14
-constant integer s__LoP_DecoBuilders_SpecialDecoLastIndex_impl=16
-constant integer s__LoP_DecoBuilders_BasicDecoFirstIndex_impl=18
-constant integer s__LoP_DecoBuilders_BasicDecoLastIndex_impl=20
-constant integer s__LoP_DecoBuilders_AdvDecoFirstIndex_impl=22
-constant integer s__LoP_DecoBuilders_DecoLastIndex_impl=24
+constant integer s__LoP_DecoBuilders_static_members_key=12
+constant integer s__LoP_DecoBuilders_SpecialDecoLastIndex_impl=13
+constant integer s__LoP_DecoBuilders_BasicDecoFirstIndex_impl=14
+constant integer s__LoP_DecoBuilders_BasicDecoLastIndex_impl=15
+constant integer s__LoP_DecoBuilders_AdvDecoFirstIndex_impl=16
+constant integer s__LoP_DecoBuilders_AdvDecoLastIndex_impl=17
+constant integer s__LoP_DecoBuilders_DecoLastIndex_impl=18
 constant integer si__LoPInit_Globals=103
 integer si__LoPInit_Globals_F=0
 integer si__LoPInit_Globals_I=0
 integer array si__LoPInit_Globals_V
-constant integer s__LoPInit_Globals_regionTable_impl=26
+constant integer s__LoPInit_Globals_regionTable_impl=19
 constant integer si__MultiBoard=104
-constant integer s__MultiBoard_items_impl=28
-constant integer s__MultiBoard_cols_impl=30
-constant integer s__MultiBoard_rows_impl=32
-constant integer s__MultiBoard_multiboard_impl=34
+constant integer s__MultiBoard_items_impl=20
+constant integer s__MultiBoard_cols_impl=21
+constant integer s__MultiBoard_rows_impl=22
+constant integer s__MultiBoard_multiboard_impl=23
 constant integer si__TerrainFog=105
 constant integer s__TerrainFog_LINEAR= 0
 constant integer s__TerrainFog_EXPONENTIAL= 1
 constant integer s__TerrainFog_EXPONENTIAL2= 2
-constant integer s__TerrainFog_style_impl=36
-constant integer s__TerrainFog_zStart_impl=38
-constant integer s__TerrainFog_zEnd_impl=40
-constant integer s__TerrainFog_density_impl=42
-constant integer s__TerrainFog_red_impl=44
-constant integer s__TerrainFog_green_impl=46
-constant integer s__TerrainFog_blue_impl=48
+constant integer s__TerrainFog_style_impl=24
+constant integer s__TerrainFog_zStart_impl=25
+constant integer s__TerrainFog_zEnd_impl=26
+constant integer s__TerrainFog_density_impl=27
+constant integer s__TerrainFog_red_impl=28
+constant integer s__TerrainFog_green_impl=29
+constant integer s__TerrainFog_blue_impl=30
 constant integer si__RectEnvironment=106
-constant integer s__RectEnvironment_fog_impl=50
+constant integer s__RectEnvironment_fog_impl=31
 constant integer si__UnitVisualMods___data_reals=107
 constant integer si__UnitVisualMods___data_booleans=108
 constant integer si__UnitVisualMods___data_strings=109
@@ -1292,28 +1307,28 @@ constant integer si__TerrainType2Id=153
 constant integer s__TerrainType2Id_KEY= - 2
 constant integer si__UnitVisuals=154
 constant integer si__AutoRectEnvironment___Globals=155
-constant integer s__AutoRectEnvironment___Globals_static_members_key=52
-constant integer s__AutoRectEnvironment___Globals_lastCameraX_impl=54
-constant integer s__AutoRectEnvironment___Globals_lastCameraY_impl=56
-constant integer s__AutoRectEnvironment___Globals_rectWasMoved_impl=58
-constant integer s__AutoRectEnvironment___Globals_lastCameraRect_impl=60
-constant integer s__AutoRectEnvironment___Globals_allRects_impl=62
-constant integer s__AutoRectEnvironment___Globals_rects_impl=64
-constant integer s__AutoRectEnvironment___Globals_id2_impl=66
+constant integer s__AutoRectEnvironment___Globals_static_members_key=32
+constant integer s__AutoRectEnvironment___Globals_lastCameraX_impl=33
+constant integer s__AutoRectEnvironment___Globals_lastCameraY_impl=34
+constant integer s__AutoRectEnvironment___Globals_rectWasMoved_impl=35
+constant integer s__AutoRectEnvironment___Globals_lastCameraRect_impl=36
+constant integer s__AutoRectEnvironment___Globals_allRects_impl=37
+constant integer s__AutoRectEnvironment___Globals_rects_impl=38
+constant integer s__AutoRectEnvironment___Globals_id2_impl=39
 constant integer si__AutoRectEnvironment___InitStruct=156
 constant integer si__GameTime=157
 integer s__GameTime_a
-constant integer s__GameTime_static_members_key=68
-constant integer s__GameTime_hours_impl=70
-constant integer s__GameTime_minutes_impl=72
-constant integer s__GameTime_seconds_impl=74
-constant integer s__GameTime_timer_impl=76
-constant integer s__GameTime_multiboard_impl=78
+constant integer s__GameTime_static_members_key=40
+constant integer s__GameTime_hours_impl=41
+constant integer s__GameTime_minutes_impl=42
+constant integer s__GameTime_seconds_impl=43
+constant integer s__GameTime_timer_impl=44
+constant integer s__GameTime_multiboard_impl=45
 constant integer si__UserDefinedRects___Indices=158
 constant integer si__RectGenerator___FogStyle=159
-constant integer s__RectGenerator___FogStyle_strings_impl=80
-constant integer s__RectGenerator___FogStyle_linkedListNext_impl=82
-constant integer s__RectGenerator___FogStyle_linkedListPrev_impl=84
+constant integer s__RectGenerator___FogStyle_strings_impl=46
+constant integer s__RectGenerator___FogStyle_linkedListNext_impl=47
+constant integer s__RectGenerator___FogStyle_linkedListPrev_impl=48
 trigger st__Table___reals__getindex
 trigger st__Table___reals__setindex
 trigger st__Table___units__getindex
@@ -4449,7 +4464,7 @@ endfunction
 		
 		
 //Implemented from module WorldBounds___WorldBoundInit:
-  function s__WorldBounds_WorldBounds___WorldBoundInit___onInit takes nothing returns nothing
+  function s__WorldBounds_WorldBounds___WorldBoundInit__onInit takes nothing returns nothing
 			set s__WorldBounds_world=GetWorldBounds()
 			
 			set s__WorldBounds_maxX=R2I(GetRectMaxX(s__WorldBounds_world))
@@ -5346,7 +5361,7 @@ endfunction
 
 
      
-        function s__DummyRecycler___S_DummyRecycler___M___onInit takes nothing returns nothing
+        function s__DummyRecycler___S_DummyRecycler___M__onInit takes nothing returns nothing
             local real add= 360.0 / DummyRecycler___ANGLES_COUNT
             local real a= 0
             local integer this= DummyRecycler___ANGLES_COUNT
@@ -6039,7 +6054,7 @@ endfunction
        
        
 //Implemented from module TileDefinition___Init:
-            function s__TileDefinition___TileDefinition_TileDefinition___Init___onInit takes nothing returns nothing
+            function s__TileDefinition___TileDefinition_TileDefinition___Init__onInit takes nothing returns nothing
                 set WorldTilesX=R2I(s__WorldBounds_maxX - s__WorldBounds_minX) / 128 + 1
                 set WorldTilesY=R2I(s__WorldBounds_maxY - s__WorldBounds_minY) / 128 + 1
             endfunction
@@ -6643,7 +6658,9 @@ endfunction
         return 0
     endfunction
     
-//textmacro instance: TableStruct_NewReadonlyStaticPrimitiveField("SpecialDecoLastIndex","integer")
+    
+    // TODO => These must be readonly
+//textmacro instance: TableStruct_NewStaticPrimitiveField("SpecialDecoLastIndex","integer")
     function s__LoP_DecoBuilders__get_SpecialDecoLastIndex takes nothing returns integer
         return (LoadInteger(ConstTable___ht, (((((s__LoP_DecoBuilders_static_members_key))))), (s__LoP_DecoBuilders_SpecialDecoLastIndex_impl))) // INLINED!!
     endfunction
@@ -6655,12 +6672,8 @@ endfunction
     function s__LoP_DecoBuilders_SpecialDecoLastIndexClear takes nothing returns nothing
         call RemoveSavedInteger(ConstTable___ht, (((((s__LoP_DecoBuilders_static_members_key))))), (s__LoP_DecoBuilders_SpecialDecoLastIndex_impl)) // INLINED!!
     endfunction
-    
-    function s__LoP_DecoBuilders_SpecialDecoLastIndexExists takes nothing returns boolean
-        return (HaveSavedInteger(ConstTable___ht, (((((s__LoP_DecoBuilders_static_members_key))))), (s__LoP_DecoBuilders_SpecialDecoLastIndex_impl))) // INLINED!!
-    endfunction
-//end of: TableStruct_NewReadonlyStaticPrimitiveField("SpecialDecoLastIndex","integer")
-//textmacro instance: TableStruct_NewReadonlyStaticPrimitiveField("BasicDecoFirstIndex","integer")
+//end of: TableStruct_NewStaticPrimitiveField("SpecialDecoLastIndex","integer")
+//textmacro instance: TableStruct_NewStaticPrimitiveField("BasicDecoFirstIndex","integer")
     function s__LoP_DecoBuilders__get_BasicDecoFirstIndex takes nothing returns integer
         return (LoadInteger(ConstTable___ht, (((((s__LoP_DecoBuilders_static_members_key))))), (s__LoP_DecoBuilders_BasicDecoFirstIndex_impl))) // INLINED!!
     endfunction
@@ -6672,12 +6685,8 @@ endfunction
     function s__LoP_DecoBuilders_BasicDecoFirstIndexClear takes nothing returns nothing
         call RemoveSavedInteger(ConstTable___ht, (((((s__LoP_DecoBuilders_static_members_key))))), (s__LoP_DecoBuilders_BasicDecoFirstIndex_impl)) // INLINED!!
     endfunction
-    
-    function s__LoP_DecoBuilders_BasicDecoFirstIndexExists takes nothing returns boolean
-        return (HaveSavedInteger(ConstTable___ht, (((((s__LoP_DecoBuilders_static_members_key))))), (s__LoP_DecoBuilders_BasicDecoFirstIndex_impl))) // INLINED!!
-    endfunction
-//end of: TableStruct_NewReadonlyStaticPrimitiveField("BasicDecoFirstIndex","integer")
-//textmacro instance: TableStruct_NewReadonlyStaticPrimitiveField("BasicDecoLastIndex","integer")
+//end of: TableStruct_NewStaticPrimitiveField("BasicDecoFirstIndex","integer")
+//textmacro instance: TableStruct_NewStaticPrimitiveField("BasicDecoLastIndex","integer")
     function s__LoP_DecoBuilders__get_BasicDecoLastIndex takes nothing returns integer
         return (LoadInteger(ConstTable___ht, (((((s__LoP_DecoBuilders_static_members_key))))), (s__LoP_DecoBuilders_BasicDecoLastIndex_impl))) // INLINED!!
     endfunction
@@ -6689,12 +6698,8 @@ endfunction
     function s__LoP_DecoBuilders_BasicDecoLastIndexClear takes nothing returns nothing
         call RemoveSavedInteger(ConstTable___ht, (((((s__LoP_DecoBuilders_static_members_key))))), (s__LoP_DecoBuilders_BasicDecoLastIndex_impl)) // INLINED!!
     endfunction
-    
-    function s__LoP_DecoBuilders_BasicDecoLastIndexExists takes nothing returns boolean
-        return (HaveSavedInteger(ConstTable___ht, (((((s__LoP_DecoBuilders_static_members_key))))), (s__LoP_DecoBuilders_BasicDecoLastIndex_impl))) // INLINED!!
-    endfunction
-//end of: TableStruct_NewReadonlyStaticPrimitiveField("BasicDecoLastIndex","integer")
-//textmacro instance: TableStruct_NewReadonlyStaticPrimitiveField("AdvDecoFirstIndex","integer")
+//end of: TableStruct_NewStaticPrimitiveField("BasicDecoLastIndex","integer")
+//textmacro instance: TableStruct_NewStaticPrimitiveField("AdvDecoFirstIndex","integer")
     function s__LoP_DecoBuilders__get_AdvDecoFirstIndex takes nothing returns integer
         return (LoadInteger(ConstTable___ht, (((((s__LoP_DecoBuilders_static_members_key))))), (s__LoP_DecoBuilders_AdvDecoFirstIndex_impl))) // INLINED!!
     endfunction
@@ -6706,12 +6711,21 @@ endfunction
     function s__LoP_DecoBuilders_AdvDecoFirstIndexClear takes nothing returns nothing
         call RemoveSavedInteger(ConstTable___ht, (((((s__LoP_DecoBuilders_static_members_key))))), (s__LoP_DecoBuilders_AdvDecoFirstIndex_impl)) // INLINED!!
     endfunction
-    
-    function s__LoP_DecoBuilders_AdvDecoFirstIndexExists takes nothing returns boolean
-        return (HaveSavedInteger(ConstTable___ht, (((((s__LoP_DecoBuilders_static_members_key))))), (s__LoP_DecoBuilders_AdvDecoFirstIndex_impl))) // INLINED!!
+//end of: TableStruct_NewStaticPrimitiveField("AdvDecoFirstIndex","integer")
+//textmacro instance: TableStruct_NewStaticPrimitiveField("AdvDecoLastIndex","integer")
+    function s__LoP_DecoBuilders__get_AdvDecoLastIndex takes nothing returns integer
+        return (LoadInteger(ConstTable___ht, (((((s__LoP_DecoBuilders_static_members_key))))), (s__LoP_DecoBuilders_AdvDecoLastIndex_impl))) // INLINED!!
     endfunction
-//end of: TableStruct_NewReadonlyStaticPrimitiveField("AdvDecoFirstIndex","integer")
-//textmacro instance: TableStruct_NewReadonlyStaticPrimitiveField("DecoLastIndex","integer")
+    
+    function s__LoP_DecoBuilders__set_AdvDecoLastIndex takes integer new_AdvDecoLastIndex returns nothing
+        call SaveInteger(ConstTable___ht, (((((s__LoP_DecoBuilders_static_members_key))))), (s__LoP_DecoBuilders_AdvDecoLastIndex_impl), ( new_AdvDecoLastIndex)) // INLINED!!
+    endfunction
+    
+    function s__LoP_DecoBuilders_AdvDecoLastIndexClear takes nothing returns nothing
+        call RemoveSavedInteger(ConstTable___ht, (((((s__LoP_DecoBuilders_static_members_key))))), (s__LoP_DecoBuilders_AdvDecoLastIndex_impl)) // INLINED!!
+    endfunction
+//end of: TableStruct_NewStaticPrimitiveField("AdvDecoLastIndex","integer")
+//textmacro instance: TableStruct_NewStaticPrimitiveField("DecoLastIndex","integer")
     function s__LoP_DecoBuilders__get_DecoLastIndex takes nothing returns integer
         return (LoadInteger(ConstTable___ht, (((((s__LoP_DecoBuilders_static_members_key))))), (s__LoP_DecoBuilders_DecoLastIndex_impl))) // INLINED!!
     endfunction
@@ -6723,11 +6737,7 @@ endfunction
     function s__LoP_DecoBuilders_DecoLastIndexClear takes nothing returns nothing
         call RemoveSavedInteger(ConstTable___ht, (((((s__LoP_DecoBuilders_static_members_key))))), (s__LoP_DecoBuilders_DecoLastIndex_impl)) // INLINED!!
     endfunction
-    
-    function s__LoP_DecoBuilders_DecoLastIndexExists takes nothing returns boolean
-        return (HaveSavedInteger(ConstTable___ht, (((((s__LoP_DecoBuilders_static_members_key))))), (s__LoP_DecoBuilders_DecoLastIndex_impl))) // INLINED!!
-    endfunction
-//end of: TableStruct_NewReadonlyStaticPrimitiveField("DecoLastIndex","integer")
+//end of: TableStruct_NewStaticPrimitiveField("DecoLastIndex","integer")
     
 
 
@@ -8995,7 +9005,7 @@ endfunction
 
 
 //Implemented from module AutoRectEnvironment___InitModule:
-    function s__AutoRectEnvironment___InitStruct_AutoRectEnvironment___InitModule___onInit takes nothing returns nothing
+    function s__AutoRectEnvironment___InitStruct_AutoRectEnvironment___InitModule__onInit takes nothing returns nothing
         local timer t= CreateTimer()
         call SaveInteger(ConstTable___ht, (((s__AutoRectEnvironment___Globals_static_members_key))), (s__AutoRectEnvironment___Globals_rects_impl), ( ((GMUI_GetIndex((Lists_RECYCLE_KEY)))))) // INLINED!!
         
@@ -9193,6 +9203,7 @@ endfunction
 
 
 
+
 // This function is called in Init 0 seconds
 function InitDecoTents takes nothing returns nothing
     local rect decoRect= gg_rct_Deco_Tents_Rect
@@ -9215,17 +9226,20 @@ function InitDecoTents takes nothing returns nothing
     
     local integer i
     
-    local integer decoTentCount= 1
+    local integer decoTentCount
     
+    
+//textmacro instance: DecoBuilders_MakeTents("Special")
+    set decoTentCount=1
     loop
-    exitwhen decoNumber > (2) // INLINED!!
+    exitwhen decoNumber > (LoadInteger(ConstTable___ht, (((((s__LoP_DecoBuilders_static_members_key))))), (s__LoP_DecoBuilders_SpecialDecoLastIndex_impl))) // INLINED!!
         set decoTent=CreateUnit(Player(PLAYER_NEUTRAL_PASSIVE), 'n03H', xCur, yCur, bj_UNIT_FACING)
         call BlzSetUnitName(decoTent, "Deco Tent Special " + I2S(decoTentCount))
-        call SetUnitVertexColor(decoTent, 255, 165, 0, 255)
+        call SetUnitVertexColor(decoTent, Special_RED, Special_GREEN, Special_BLUE, Special_ALPHA)
         
         set i=0
         loop
-        exitwhen i >= bj_MAX_STOCK_UNIT_SLOTS or decoNumber > (2) // INLINED!!
+        exitwhen i >= bj_MAX_STOCK_UNIT_SLOTS or decoNumber > (LoadInteger(ConstTable___ht, (((((s__LoP_DecoBuilders_static_members_key))))), (s__LoP_DecoBuilders_SpecialDecoLastIndex_impl))) // INLINED!!
             call AddUnitToStock(decoTent, udg_DecoUnitTypes[decoNumber], 1, 3)
             set i=i + 1
             set decoNumber=decoNumber + 1
@@ -9239,17 +9253,18 @@ function InitDecoTents takes nothing returns nothing
         set decoTentCount=decoTentCount + 1
 
     endloop
-    
+//end of: DecoBuilders_MakeTents("Special")
+//textmacro instance: DecoBuilders_MakeTents("Basic")
     set decoTentCount=1
-    
     loop
-    exitwhen decoNumber > udg_System_DecoTotal
+    exitwhen decoNumber > (LoadInteger(ConstTable___ht, (((((s__LoP_DecoBuilders_static_members_key))))), (s__LoP_DecoBuilders_BasicDecoLastIndex_impl))) // INLINED!!
         set decoTent=CreateUnit(Player(PLAYER_NEUTRAL_PASSIVE), 'n03H', xCur, yCur, bj_UNIT_FACING)
-        call BlzSetUnitName(decoTent, "Deco Tent " + I2S(decoTentCount))
+        call BlzSetUnitName(decoTent, "Deco Tent Basic " + I2S(decoTentCount))
+        call SetUnitVertexColor(decoTent, Basic_RED, Basic_GREEN, Basic_BLUE, Basic_ALPHA)
         
         set i=0
         loop
-        exitwhen i >= bj_MAX_STOCK_UNIT_SLOTS or decoNumber > udg_System_DecoTotal
+        exitwhen i >= bj_MAX_STOCK_UNIT_SLOTS or decoNumber > (LoadInteger(ConstTable___ht, (((((s__LoP_DecoBuilders_static_members_key))))), (s__LoP_DecoBuilders_BasicDecoLastIndex_impl))) // INLINED!!
             call AddUnitToStock(decoTent, udg_DecoUnitTypes[decoNumber], 1, 3)
             set i=i + 1
             set decoNumber=decoNumber + 1
@@ -9263,6 +9278,32 @@ function InitDecoTents takes nothing returns nothing
         set decoTentCount=decoTentCount + 1
 
     endloop
+//end of: DecoBuilders_MakeTents("Basic")
+//textmacro instance: DecoBuilders_MakeTents("Adv")
+    set decoTentCount=1
+    loop
+    exitwhen decoNumber > (LoadInteger(ConstTable___ht, (((((s__LoP_DecoBuilders_static_members_key))))), (s__LoP_DecoBuilders_AdvDecoLastIndex_impl))) // INLINED!!
+        set decoTent=CreateUnit(Player(PLAYER_NEUTRAL_PASSIVE), 'n03H', xCur, yCur, bj_UNIT_FACING)
+        call BlzSetUnitName(decoTent, "Deco Tent Adv " + I2S(decoTentCount))
+        call SetUnitVertexColor(decoTent, Adv_RED, Adv_GREEN, Adv_BLUE, Adv_ALPHA)
+        
+        set i=0
+        loop
+        exitwhen i >= bj_MAX_STOCK_UNIT_SLOTS or decoNumber > (LoadInteger(ConstTable___ht, (((((s__LoP_DecoBuilders_static_members_key))))), (s__LoP_DecoBuilders_AdvDecoLastIndex_impl))) // INLINED!!
+            call AddUnitToStock(decoTent, udg_DecoUnitTypes[decoNumber], 1, 3)
+            set i=i + 1
+            set decoNumber=decoNumber + 1
+        endloop
+        
+        set xCur=xCur + xStep
+        if xCur > xMax then
+            set yCur=yCur + yStep
+            set xCur=xStart
+        endif
+        set decoTentCount=decoTentCount + 1
+
+    endloop
+//end of: DecoBuilders_MakeTents("Adv")
 endfunction
 
 // This function is called in Init Main
@@ -9286,7 +9327,7 @@ function InitDecoUnitTypeArray takes nothing returns nothing
     set i=( i + 1 )
     set udg_DecoUnitTypes[i]='u00W'
     
-    
+    call SaveInteger(ConstTable___ht, (((((s__LoP_DecoBuilders_static_members_key))))), (s__LoP_DecoBuilders_SpecialDecoLastIndex_impl), ( (i))) // INLINED!!
     // ---------
     // Basic Decos
     // ---------
@@ -9341,9 +9382,6 @@ function InitDecoUnitTypeArray takes nothing returns nothing
     // Statue 1
     set i=( i + 1 )
     set udg_DecoUnitTypes[i]='u01N'
-    // Statue 2
-    set i=( i + 1 )
-    set udg_DecoUnitTypes[i]='u023'
     // Walls (Wood)
     set i=( i + 1 )
     set udg_DecoUnitTypes[i]='u000'
@@ -9360,7 +9398,10 @@ function InitDecoUnitTypeArray takes nothing returns nothing
     set i=( i + 1 )
     set udg_DecoUnitTypes[i]='u02P'
     
-    
+    call SaveInteger(ConstTable___ht, (((((s__LoP_DecoBuilders_static_members_key))))), (s__LoP_DecoBuilders_BasicDecoLastIndex_impl), ( (i))) // INLINED!!
+    // ---------
+    // Advanced Decos
+    // ---------
     // Arabian 1
     set i=( i + 1 )
     set udg_DecoUnitTypes[i]='u02G'
@@ -9457,6 +9498,9 @@ function InitDecoUnitTypeArray takes nothing returns nothing
     // Runic
     set i=( i + 1 )
     set udg_DecoUnitTypes[i]='u02M'
+    // Statue 2
+    set i=( i + 1 )
+    set udg_DecoUnitTypes[i]='u023'
     // Trees
     set i=( i + 1 )
     set udg_DecoUnitTypes[i]='u01B'
@@ -9473,7 +9517,10 @@ function InitDecoUnitTypeArray takes nothing returns nothing
     set i=( i + 1 )
     set udg_DecoUnitTypes[i]='u010'
     
+    call SaveInteger(ConstTable___ht, (((((s__LoP_DecoBuilders_static_members_key))))), (s__LoP_DecoBuilders_AdvDecoLastIndex_impl), ( (i))) // INLINED!!
+    // ---------
     // End of Deco Creation
+    // ---------
     set udg_System_DecoTotal=i
 endfunction
 
@@ -11515,7 +11562,7 @@ endfunction
 // 
 //   Warcraft III map script
 //   Generated by the Warcraft III World Editor
-//   Date: Sat Apr  6 11:55:02 2019
+//   Date: Sat Apr  6 13:00:55 2019
 //   Map Author: Guhun
 // 
 //===========================================================================
@@ -26759,7 +26806,7 @@ function main takes nothing returns nothing
     call CreateAllUnits()
     call InitBlizzard()
 
-call ExecuteFunc("jasshelper__initstructs865443562")
+call ExecuteFunc("jasshelper__initstructs869397265")
 call ExecuteFunc("CombatTag__onInit")
 call ExecuteFunc("DestructableLib___Initialization")
 call ExecuteFunc("MultiPatrol___onInit")
@@ -26880,7 +26927,7 @@ local real value=f__arg_real1
    return true
 endfunction
 
-function jasshelper__initstructs865443562 takes nothing returns nothing
+function jasshelper__initstructs869397265 takes nothing returns nothing
     set st__Table__get_real=CreateTrigger()
     call TriggerAddCondition(st__Table__get_real,Condition( function sa__Table__get_real))
     set st__Table__get_unit=CreateTrigger()
@@ -26947,7 +26994,7 @@ function jasshelper__initstructs865443562 takes nothing returns nothing
 
 
 
-call ExecuteFunc("s__WorldBounds_WorldBounds___WorldBoundInit___onInit")
+call ExecuteFunc("s__WorldBounds_WorldBounds___WorldBoundInit__onInit")
 
 
 
@@ -26995,9 +27042,9 @@ call ExecuteFunc("s__WorldBounds_WorldBounds___WorldBoundInit___onInit")
 
 
 
-call ExecuteFunc("s__DummyRecycler___S_DummyRecycler___M___onInit")
+call ExecuteFunc("s__DummyRecycler___S_DummyRecycler___M__onInit")
 
-call ExecuteFunc("s__TileDefinition___TileDefinition_TileDefinition___Init___onInit")
+call ExecuteFunc("s__TileDefinition___TileDefinition_TileDefinition___Init__onInit")
 
 
 
@@ -27056,7 +27103,7 @@ call ExecuteFunc("s__TileDefinition___TileDefinition_TileDefinition___Init___onI
 
 
 
-call ExecuteFunc("s__AutoRectEnvironment___InitStruct_AutoRectEnvironment___InitModule___onInit")
+call ExecuteFunc("s__AutoRectEnvironment___InitStruct_AutoRectEnvironment___InitModule__onInit")
 
 
 

@@ -7,11 +7,14 @@ library LoPDecoBuilders requires TableStruct
     endmethod
     
     private static key static_members_key
-    //! runtextmacro TableStruct_NewReadonlyStaticPrimitiveField("SpecialDecoLastIndex","integer")
-    //! runtextmacro TableStruct_NewReadonlyStaticPrimitiveField("BasicDecoFirstIndex","integer")
-    //! runtextmacro TableStruct_NewReadonlyStaticPrimitiveField("BasicDecoLastIndex","integer")
-    //! runtextmacro TableStruct_NewReadonlyStaticPrimitiveField("AdvDecoFirstIndex","integer")
-    //! runtextmacro TableStruct_NewReadonlyStaticPrimitiveField("DecoLastIndex","integer")
+    
+    // TODO => These must be readonly
+    //! runtextmacro TableStruct_NewStaticPrimitiveField("SpecialDecoLastIndex","integer")
+    //! runtextmacro TableStruct_NewStaticPrimitiveField("BasicDecoFirstIndex","integer")
+    //! runtextmacro TableStruct_NewStaticPrimitiveField("BasicDecoLastIndex","integer")
+    //! runtextmacro TableStruct_NewStaticPrimitiveField("AdvDecoFirstIndex","integer")
+    //! runtextmacro TableStruct_NewStaticPrimitiveField("AdvDecoLastIndex","integer")
+    //! runtextmacro TableStruct_NewStaticPrimitiveField("DecoLastIndex","integer")
     
     endstruct
 
@@ -41,6 +44,23 @@ are listed first, though.
 
 // The number of Basic Deco Builders
 
+globals
+    constant integer Special_RED = 255
+    constant integer Special_GREEN = 165
+    constant integer Special_BLUE = 0
+    constant integer Special_ALPHA = 255
+    
+    constant integer Basic_RED = 255
+    constant integer Basic_GREEN = 255
+    constant integer Basic_BLUE = 255
+    constant integer Basic_ALPHA = 255
+    
+    constant integer Adv_RED = 255
+    constant integer Adv_GREEN = 0
+    constant integer Adv_BLUE = 0
+    constant integer Adv_ALPHA = 255
+endglobals
+
 
 
 // This function is called in Init 0 seconds
@@ -65,41 +85,19 @@ function InitDecoTents takes nothing returns nothing
     
     local integer i
     
-    local integer decoTentCount = 1
+    local integer decoTentCount
     
-    loop
-    exitwhen decoNumber > SpecialDecoTotal()
-        set decoTent = CreateUnit(Player(PLAYER_NEUTRAL_PASSIVE), 'n03H', xCur, yCur, bj_UNIT_FACING)
-        call BlzSetUnitName(decoTent, "Deco Tent Special "+ I2S(decoTentCount))
-        call SetUnitVertexColor(decoTent, 255, 165, 0, 255)
-        
-        set i = 0
-        loop
-        exitwhen i >= bj_MAX_STOCK_UNIT_SLOTS or decoNumber > SpecialDecoTotal()
-            call AddUnitToStock(decoTent, udg_DecoUnitTypes[decoNumber], 1, 3)
-            set i = i + 1
-            set decoNumber = decoNumber + 1
-        endloop
-        
-        set xCur = xCur + xStep
-        if xCur > xMax then
-            set yCur = yCur + yStep
-            set xCur = xStart
-        endif
-        set decoTentCount = decoTentCount + 1
-
-    endloop
-    
+    //! textmacro DecoBuilders_MakeTents takes name
     set decoTentCount = 1
-    
     loop
-    exitwhen decoNumber > udg_System_DecoTotal
+    exitwhen decoNumber > LoP_DecoBuilders.$name$DecoLastIndex
         set decoTent = CreateUnit(Player(PLAYER_NEUTRAL_PASSIVE), 'n03H', xCur, yCur, bj_UNIT_FACING)
-        call BlzSetUnitName(decoTent, "Deco Tent "+ I2S(decoTentCount))
+        call BlzSetUnitName(decoTent, "Deco Tent $name$ "+ I2S(decoTentCount))
+        call SetUnitVertexColor(decoTent, $name$_RED, $name$_GREEN, $name$_BLUE, $name$_ALPHA)
         
         set i = 0
         loop
-        exitwhen i >= bj_MAX_STOCK_UNIT_SLOTS or decoNumber > udg_System_DecoTotal
+        exitwhen i >= bj_MAX_STOCK_UNIT_SLOTS or decoNumber > LoP_DecoBuilders.$name$DecoLastIndex
             call AddUnitToStock(decoTent, udg_DecoUnitTypes[decoNumber], 1, 3)
             set i = i + 1
             set decoNumber = decoNumber + 1
@@ -113,6 +111,11 @@ function InitDecoTents takes nothing returns nothing
         set decoTentCount = decoTentCount + 1
 
     endloop
+    //! endtextmacro
+    
+    //! runtextmacro DecoBuilders_MakeTents("Special")
+    //! runtextmacro DecoBuilders_MakeTents("Basic")
+    //! runtextmacro DecoBuilders_MakeTents("Adv")
 endfunction
 
 // This function is called in Init Main
@@ -136,7 +139,7 @@ function InitDecoUnitTypeArray takes nothing returns nothing
     set i = ( i + 1 )
     set udg_DecoUnitTypes[i] = 'u00W'
     
-    
+    set LoP_DecoBuilders.SpecialDecoLastIndex = i
     // ---------
     // Basic Decos
     // ---------
@@ -191,9 +194,6 @@ function InitDecoUnitTypeArray takes nothing returns nothing
     // Statue 1
     set i = ( i + 1 )
     set udg_DecoUnitTypes[i] = 'u01N'
-    // Statue 2
-    set i = ( i + 1 )
-    set udg_DecoUnitTypes[i] = 'u023'
     // Walls (Wood)
     set i = ( i + 1 )
     set udg_DecoUnitTypes[i] = 'u000'
@@ -210,7 +210,10 @@ function InitDecoUnitTypeArray takes nothing returns nothing
     set i = ( i + 1 )
     set udg_DecoUnitTypes[i] = 'u02P'
     
-    
+    set LoP_DecoBuilders.BasicDecoLastIndex = i
+    // ---------
+    // Advanced Decos
+    // ---------
     // Arabian 1
     set i = ( i + 1 )
     set udg_DecoUnitTypes[i] = 'u02G'
@@ -307,6 +310,9 @@ function InitDecoUnitTypeArray takes nothing returns nothing
     // Runic
     set i = ( i + 1 )
     set udg_DecoUnitTypes[i] = 'u02M'
+    // Statue 2
+    set i = ( i + 1 )
+    set udg_DecoUnitTypes[i] = 'u023'
     // Trees
     set i = ( i + 1 )
     set udg_DecoUnitTypes[i] = 'u01B'
@@ -323,7 +329,10 @@ function InitDecoUnitTypeArray takes nothing returns nothing
     set i = ( i + 1 )
     set udg_DecoUnitTypes[i] = 'u010'
     
+    set LoP_DecoBuilders.AdvDecoLastIndex = i
+    // ---------
     // End of Deco Creation
+    // ---------
     set udg_System_DecoTotal = i
 endfunction
 endlibrary
