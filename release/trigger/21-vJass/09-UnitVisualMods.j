@@ -1,20 +1,17 @@
-library UnitVisualMods requires CutToComma
+library UnitVisualMods initializer onInit requires CutToComma, /*
+
+    */ /*optional*/ HashtableWrapper,  /* Required to initialize a hashtable.
+    
+    */ optional Table, /*  Required if a hashtable is not intialized.
+    
+    */ optional ConstTable  // If present, then ConstHashTable is used instead of HashTable.
 //////////////////////////////////////////////////////
 //Guhun's Unit Modification System v1.21
-
-
-//Requires:
-//  -CutToComma
 
 
 //Hashtable values:
 // -2  -> Intended angle for the unit to reach in the GroupFunction
 // -1  -> temporary integer to count how many times a  unit has been looped through in the GroupFunction
-// 0   -> scale
-// 1-5 -> red, green, blue, alpha, playercolor
-// 6   -> animation speed
-// 7   -> animation tag
-// 8   -> selection type
 
 //////////////////////////////////////////////////////
 // CONFIGURATION
@@ -35,10 +32,50 @@ library UnitVisualMods requires CutToComma
 
 
 globals
-    private playercolor array I2PC
+    private playercolor array I2PC  // can't save playercolor to hashtables
     private hashtable hashTable = null
     private group loopGroup = CreateGroup()
+    
+    private constant boolean INIT_HASHTABLE = true // DOES NOT WORK YET! NEED TO CHANGE FUNCTIONS THAT USE HASGTABLE API
 endglobals
+
+//==================================================================================================
+//                                     Hashtable Declaration
+//==================================================================================================
+
+// Never use keyword to declare the hashtable at the bottom of the library. That generates callers
+// that are unnecessary.
+
+static if LIBRARY_HashtableWrapper and INIT_HASHTABLE then
+    //! runtextmacro optional DeclareParentHashtableWrapperModule("hashTable","true", "data","private")
+else
+    //! runtextmacro DeclareHashTableWrapperModule("data")
+endif
+
+private struct data extends array
+    static if LIBRARY_HashtableWrapper and INIT_HASHTABLE then
+        implement optional data_ParentHashtableWrapper
+    else
+        implement data_HashTableWrapper
+    endif
+endstruct
+
+struct TerrainType2Id extends array
+    private static constant integer KEY = -2
+    
+    static method operator[] takes integer key returns integer
+        return data[KEY][key]
+    endmethod
+    
+    static method operator[]= takes integer key, integer value returns nothing
+        set data[KEY][key] = value
+    endmethod
+
+endstruct
+
+//==================================================================================================
+//                                        Source Code
+//==================================================================================================
 
 function GUMS_I2PlayerColor takes integer i returns playercolor
     return I2PC[i]
@@ -78,52 +115,26 @@ endfunction
 
 //==========================================
 //CONSTANT FUNCTIONS FOR HASHTABLE ADDRESSES
-constant function GUMS_SCALE takes nothing returns integer
-    return 0
-endfunction
+globals
+    private constant integer SCALE  = 0
+    private constant integer RED    = 1
+    private constant integer GREEN  = 2
+    private constant integer BLUE   = 3
+    private constant integer ALPHA  = 4
+    private constant integer COLOR  = 5
+    private constant integer ASPEED = 6
+    private constant integer ATAG   = 7
+    private constant integer SELECT = 8
+    private constant integer NAME   = 9
 
-constant function GUMS_RED takes nothing returns integer
-    return 1
-endfunction
-
-constant function GUMS_GREEN takes nothing returns integer
-    return 2
-endfunction
-
-constant function GUMS_BLUE takes nothing returns integer 
-    return 3
-endfunction
-
-constant function GUMS_ALPHA takes nothing returns integer
-    return 4
-endfunction
-
-constant function GUMS_COLOR takes nothing returns integer
-    return 5
-endfunction
-
-constant function GUMS_ASPEED takes nothing returns integer
-    return 6
-endfunction
-
-constant function GUMS_ATAG takes nothing returns integer
-    return 7
-endfunction
-
-constant function GUMS_SELECT takes nothing returns integer
-    return 8
-endfunction
-
-constant function GUMS_NAME takes nothing returns integer
-    return 9
-endfunction
+endglobals
 
 function GUMS_GetUnitSelectionType takes unit whichUnit returns integer
-    return LoadInteger(hashTable, GetHandleId(whichUnit), GUMS_SELECT())
+    return LoadInteger(hashTable, GetHandleId(whichUnit), SELECT)
 endfunction
 
 function GUMS_GetTerrainTileIndex takes integer terrainType returns integer
-    return LoadInteger(hashTable, terrainType, 0)
+    return TerrainType2Id[terrainType]
 endfunction
 //==========================================
 //GUMS SELECTION TYPE CONSTANTS
@@ -303,7 +314,7 @@ endfunction
 //Set Scale
 function GUMSSetUnitScale takes unit whichUnit, real scale returns nothing
     call SetUnitScale(whichUnit, scale, scale, scale)
-    call SaveReal(hashTable, GetHandleId(whichUnit), GUMS_SCALE(), scale)
+    call SaveReal(hashTable, GetHandleId(whichUnit), SCALE, scale)
 endfunction
 
 //Set Vertex Color
@@ -314,19 +325,19 @@ function GUMSSetUnitVertexColor takes unit whichUnit, real red, real green, real
     local integer intAlpha = R2I(2.55 * (100. - trans))
     
     call SetUnitVertexColor(whichUnit, intRed, intGreen, intBlue, intAlpha)
-    call SaveInteger(hashTable, GetHandleId(whichUnit), GUMS_RED(), intRed)
-    call SaveInteger(hashTable, GetHandleId(whichUnit), GUMS_GREEN(), intGreen)
-    call SaveInteger(hashTable, GetHandleId(whichUnit), GUMS_BLUE(), intBlue)
-    call SaveInteger(hashTable, GetHandleId(whichUnit), GUMS_ALPHA(), intAlpha)
+    call SaveInteger(hashTable, GetHandleId(whichUnit), RED, intRed)
+    call SaveInteger(hashTable, GetHandleId(whichUnit), GREEN, intGreen)
+    call SaveInteger(hashTable, GetHandleId(whichUnit), BLUE, intBlue)
+    call SaveInteger(hashTable, GetHandleId(whichUnit), ALPHA, intAlpha)
 endfunction
 
 //Set Player Color (why in hell can't this be retrieved with natives?!)
 function GUMSSetUnitColor takes unit whichUnit, integer color returns nothing
     if color <= bj_MAX_PLAYER_SLOTS and color >= 1 then
-        call SaveInteger(hashTable, GetHandleId(whichUnit), GUMS_COLOR(), color)
+        call SaveInteger(hashTable, GetHandleId(whichUnit), COLOR, color)
         call SetUnitColor(whichUnit, I2PC[color])
     else
-        call RemoveSavedInteger(hashTable, GetHandleId(whichUnit), GUMS_COLOR())
+        call RemoveSavedInteger(hashTable, GetHandleId(whichUnit), COLOR)
         //! novjass
         call GUMS_Config_ResetColorFunc(whichUnit)
         //! endnovjass
@@ -337,29 +348,122 @@ endfunction
 //Set Animation Speed
 function GUMSSetUnitAnimSpeed takes unit whichUnit, real speedMultiplier returns nothing
     call SetUnitTimeScale(whichUnit, speedMultiplier)
-    call SaveReal(hashTable, GetHandleId(whichUnit), GUMS_ASPEED(), speedMultiplier)
+    call SaveReal(hashTable, GetHandleId(whichUnit), ASPEED, speedMultiplier)
 endfunction
 
 //Set Animation Tag
 function GUMSAddUnitAnimationTag takes unit whichUnit, string whichTag returns nothing
     local integer unitId = GetHandleId(whichUnit)
-    local string oldTag = GUMSConvertTags(LoadStr(hashTable, unitId, GUMS_ATAG()))
-    call RemoveSavedString(hashTable, unitId, GUMS_ATAG())
+    local string oldTag = GUMSConvertTags(LoadStr(hashTable, unitId, ATAG))
+    call RemoveSavedString(hashTable, unitId, ATAG)
     call AddUnitAnimationProperties(whichUnit, oldTag, false)
     if whichTag != "" then
         
         call AddUnitAnimationProperties(whichUnit, whichTag, true)
         set whichTag = GUMSConvertTags(whichTag)
         //call BJDebugMsg(whichTag)
-        call SaveStr(hashTable, unitId, GUMS_ATAG(), whichTag)
+        call SaveStr(hashTable, unitId, ATAG, whichTag)
     endif
 endfunction
 
 //==========================================
 // GUMS Getters
 
+struct UnitVisuals extends array
+    
+    static if LIBRARY_ConstTable and INIT_HASHTABLE then
+        private method operator values takes nothing returns data_Child
+            return data[this]
+        endmethod
+    else
+        private method operator values takes nothing returns Table
+            return data[this]
+        endmethod
+    endif
+    
+    static method get takes unit whichUnit returns UnitVisuals
+        return GetHandleId(whichUnit)
+    endmethod
+    
+    method hasScale takes nothing returns boolean
+        return .values.real.has(SCALE)
+    endmethod
+    
+    method hasVertexColor takes integer whichChannel returns boolean
+        return .values.has(whichChannel)
+    endmethod
+    
+    method hasColor takes nothing returns boolean
+        return .values.has(COLOR)
+    endmethod
+    
+    method hasAnimSpeed takes nothing returns boolean
+        return .values.real.has(ASPEED)
+    endmethod
+    
+    method hasAnimTag takes nothing returns boolean
+        return .values.string.has(ATAG)
+    endmethod
+    
+    method getScale takes nothing returns string
+        if .hasScale() then
+            return R2S(.values.real[SCALE])
+        else
+            return "D" //D stands for default
+        endif
+    endmethod
+    
+    method getVertexColor takes integer r1g2b3a4 returns string
+        if .hasVertexColor(r1g2b3a4) then
+            return I2S(.values[r1g2b3a4])
+        else
+            return "D"
+        endif
+    endmethod
+    
+    method getVertexRed takes nothing returns string
+        return .getVertexColor(RED)
+    endmethod
+    
+    method getVertexGreen takes nothing returns string
+        return .getVertexColor(GREEN)
+    endmethod
+    
+    method getVertexBlue takes nothing returns string
+        return .getVertexColor(BLUE)
+    endmethod
+    
+    method getVertexAlpha takes nothing returns string
+        return .getVertexColor(ALPHA)
+    endmethod
+    
+    method getColor takes nothing returns string
+        if .hasColor() then
+            return I2S(.values[COLOR])
+        else
+            return "D"
+        endif
+    endmethod
+    
+    method getAnimSpeed takes nothing returns string
+        if .hasAnimSpeed() then
+            return R2S(values.real[ASPEED])
+        else
+            return "D"
+        endif
+    endmethod
+    
+    method getAnimTag takes nothing returns string
+        if .hasAnimTag() then
+            return .values.string[ATAG]
+        else
+            return "D"
+        endif
+    endmethod
+endstruct
+
 function GUMS_HaveSavedScale takes unit whichUnit returns boolean
-    return HaveSavedReal(hashTable, GetHandleId(whichUnit), GUMS_SCALE())
+    return HaveSavedReal(hashTable, GetHandleId(whichUnit), SCALE)
 endfunction
 
 function GUMS_HaveSavedVertexColor takes unit whichUnit, integer r1b2g3a4 returns boolean
@@ -367,61 +471,41 @@ function GUMS_HaveSavedVertexColor takes unit whichUnit, integer r1b2g3a4 return
 endfunction
 
 function GUMS_HaveSavedColor takes unit whichUnit returns boolean
-    return HaveSavedInteger(hashTable, GetHandleId(whichUnit), GUMS_COLOR())
+    return HaveSavedInteger(hashTable, GetHandleId(whichUnit), COLOR)
 endfunction
 
 function GUMS_HaveSavedAnimSpeed takes unit whichUnit returns boolean
-    return HaveSavedReal(hashTable, GetHandleId(whichUnit), GUMS_ASPEED())
+    return HaveSavedReal(hashTable, GetHandleId(whichUnit), ASPEED)
 endfunction
 
 function GUMS_HaveSavedAnimationTag takes unit whichUnit returns boolean
-    return HaveSavedString(hashTable, GetHandleId(whichUnit), GUMS_ATAG())
+    return HaveSavedString(hashTable, GetHandleId(whichUnit), ATAG)
 endfunction 
 
 //THESE FUNCTIONS RETRIEVE THE SAVED VALUES IN THE HASHTABLE OR RETURN "D" IF THERE IS NO SAVED VALUE
 //GET Scale
 function GUMSGetUnitScale takes unit whichUnit returns string
-    if GUMS_HaveSavedScale(whichUnit) then
-        return R2S(LoadReal(hashTable, GetHandleId(whichUnit), 0))
-    else
-        return "D" //D stands for default
-    endif
+    return UnitVisuals.get(whichUnit).getScale()
 endfunction
 
 //GET Vertex Color
 function GUMSGetUnitVertexColor takes unit whichUnit, integer r1g2b3a4  returns string
-    if GUMS_HaveSavedVertexColor(whichUnit, r1g2b3a4) then
-        return I2S(LoadInteger(hashTable, GetHandleId(whichUnit), r1g2b3a4))
-    else
-        return "D"
-    endif
+    return UnitVisuals.get(whichUnit).getVertexColor(r1g2b3a4)
 endfunction
 
 //GET Player Color (why in hell can't this be retrieved with natives?!)
 function GUMSGetUnitColor takes unit whichUnit returns string
-    if GUMS_HaveSavedColor(whichUnit) then
-        return I2S(LoadInteger(hashTable, GetHandleId(whichUnit), 5))
-    else
-        return "D"
-    endif
+    return UnitVisuals.get(whichUnit).getColor()
 endfunction
 
 //GET Animation Speed
 function GUMSGetUnitAnimSpeed takes unit whichUnit returns string
-    if GUMS_HaveSavedAnimSpeed(whichUnit) then
-        return R2S(LoadReal(hashTable, GetHandleId(whichUnit), 6))
-    else
-        return "D"
-    endif
+    return UnitVisuals.get(whichUnit).getAnimSpeed()
 endfunction
 
 //GET Animation Tag
 function GUMSGetUnitAnimationTag takes unit whichUnit returns string
-    if GUMS_HaveSavedAnimationTag(whichUnit) then
-        return LoadStr(hashTable, GetHandleId(whichUnit), 7)
-    else
-        return "D"
-    endif
+    return UnitVisuals.get(whichUnit).getAnimTag()
 endfunction
 
 ///////////////////////////
@@ -431,11 +515,11 @@ endfunction
 ///////////////////////////
 
 function GUMSUnitHasCustomName takes integer unitHandle returns boolean
-    return HaveSavedString(hashTable, unitHandle , GUMS_NAME())
+    return HaveSavedString(hashTable, unitHandle , NAME)
 endfunction
 
 function GUMSGetDefaultName takes integer unitHandle returns string
-    return LoadStr(hashTable, unitHandle, GUMS_NAME())
+    return LoadStr(hashTable, unitHandle, NAME)
 endfunction
 
 function GUMSResetUnitName takes unit whichUnit returns nothing
@@ -447,19 +531,19 @@ function GUMSResetUnitName takes unit whichUnit returns nothing
         call BlzSetUnitName(whichUnit, GUMSGetDefaultName(unitHandle))
     endif
     
-    call RemoveSavedString(hashTable, unitHandle, GUMS_NAME())
+    call RemoveSavedString(hashTable, unitHandle, NAME)
 endfunction
 
 function GUMSSetUnitName takes unit whichUnit, string name returns nothing
     if name != "" then
         if IsUnitType(whichUnit, UNIT_TYPE_HERO) then
             if not GUMSUnitHasCustomName(GetHandleId(whichUnit)) then
-                call SaveStr(hashTable, GetHandleId(whichUnit), GUMS_NAME(), GetHeroProperName(whichUnit))
+                call SaveStr(hashTable, GetHandleId(whichUnit), NAME, GetHeroProperName(whichUnit))
             endif
             call BlzSetHeroProperName(whichUnit, GUMSConvertToCustomName(name))
         else
             if not GUMSUnitHasCustomName(GetHandleId(whichUnit)) then
-                call SaveStr(hashTable, GetHandleId(whichUnit), GUMS_NAME(), GetUnitName(whichUnit))
+                call SaveStr(hashTable, GetHandleId(whichUnit), NAME, GetUnitName(whichUnit))
             endif
             call BlzSetUnitName(whichUnit, GUMSConvertToCustomName(name))
         endif
@@ -535,6 +619,8 @@ endfunction
 // Copies all GUMS values from one source unit to a target unit.
 function GUMSCopyValues takes unit source, unit target returns nothing
     local real fangle = GetUnitFacing(source)
+    local UnitVisuals sourceId = GetHandleId(source)
+    
     if UnitAddAbility(target, 'Amrf') then
         call UnitRemoveAbility(target, 'Amrf')
     endif
@@ -558,20 +644,24 @@ function GUMSCopyValues takes unit source, unit target returns nothing
 //        call GroupAddUnit(loopGroup, bj_lastCreatedUnit)
 //    endif
     //EndofFix
-        if GUMSGetUnitScale(source) != "D" then
-        call GUMSSetUnitScale(target, S2R(GUMSGetUnitScale(source)))
+    if sourceId.hasScale() then
+        call GUMSSetUnitScale(target, data[sourceId].real[SCALE])
     endif
-    if GUMSGetUnitVertexColor(source,GUMS_RED()) != "D" then
-        call GUMSSetUnitVertexColor(target, S2I(GUMSGetUnitVertexColor(source,GUMS_RED()))/2.55,S2I(GUMSGetUnitVertexColor(source,GUMS_GREEN()))/2.55, S2I(GUMSGetUnitVertexColor(source,GUMS_BLUE()))/2.55, (255 - S2I(GUMSGetUnitVertexColor(source,GUMS_ALPHA())))/2.55)
+    if sourceId.hasVertexColor(RED) then
+        call GUMSSetUnitVertexColor(target, /*
+                                */  data[sourceId][RED]/2.55, /*
+                                */  data[sourceId][GREEN]/2.55, /*
+                                */  data[sourceId][BLUE]/2.55, /*
+                                */  (255 - data[sourceId][ALPHA])/2.55)
     endif
-    if GUMSGetUnitColor(source) != "D" then
-        call GUMSSetUnitColor(target, S2I(GUMSGetUnitColor(source)))
+    if sourceId.hasColor() then
+        call GUMSSetUnitColor(target, data[sourceId][COLOR])
     endif
-    if GUMSGetUnitAnimSpeed(source) != "D" then
-        call GUMSSetUnitAnimSpeed(target, S2R(GUMSGetUnitAnimSpeed(source)))
+    if sourceId.hasAnimSpeed() then
+        call GUMSSetUnitAnimSpeed(target, data[sourceId].real[ASPEED])
     endif
-    if GUMSGetUnitAnimationTag(source) != "D" then
-        call GUMSAddUnitAnimationTag(target, GUMSConvertTags(GUMSGetUnitAnimationTag(source)))
+    if sourceId.hasAnimTag() then
+        call GUMSAddUnitAnimationTag(target, data[sourceId].string[ATAG])
     endif
 endfunction
 
@@ -580,7 +670,7 @@ endfunction
 
 function GUMSMakeUnitUnSelectable takes unit whichUnit returns nothing
     local integer unitId = GetHandleId(whichUnit)
-    local integer selectionType = LoadInteger(hashTable, unitId, GUMS_SELECT())
+    local integer selectionType = LoadInteger(hashTable, unitId, SELECT)
 
     if selectionType == GUMS_SELECTION_UNSELECTABLE() then
         return //Unit is already unselectable, do nothing.
@@ -588,14 +678,14 @@ function GUMSMakeUnitUnSelectable takes unit whichUnit returns nothing
 
     if UnitAddAbility(whichUnit,'Aloc') then //Do nothing is unit has locust by default.
         call UnitRemoveAbility(whichUnit,'Aloc')
-        call SaveInteger(hashTable, unitId, GUMS_SELECT(), GUMS_SELECTION_UNSELECTABLE())
+        call SaveInteger(hashTable, unitId, SELECT, GUMS_SELECTION_UNSELECTABLE())
         call SetUnitInvulnerable(whichUnit, true)
     endif
 endfunction
 
 function GUMSMakeUnitDragSelectable takes unit whichUnit returns nothing
     local integer unitId = GetHandleId(whichUnit)
-    local integer selectionType = LoadInteger(hashTable, unitId, GUMS_SELECT())
+    local integer selectionType = LoadInteger(hashTable, unitId, SELECT)
 
     if selectionType == GUMS_SELECTION_DRAG() then
         return //Unit is already drag-selectable, do nothing.
@@ -604,7 +694,7 @@ function GUMSMakeUnitDragSelectable takes unit whichUnit returns nothing
     if selectionType != GUMS_SELECTION_UNSELECTABLE() then //Check if unit is already unselectable.
         if UnitAddAbility(whichUnit,'Aloc') then //Do nothing is unit has locust by default.
             call UnitRemoveAbility(whichUnit,'Aloc')
-            call SaveInteger(hashTable, unitId, GUMS_SELECT(), GUMS_SELECTION_DRAG())
+            call SaveInteger(hashTable, unitId, SELECT, GUMS_SELECTION_DRAG())
         else
             return
         endif
@@ -619,7 +709,7 @@ endfunction
 
 function GUMSMakeUnitSelectable takes unit whichUnit returns nothing
     local integer unitId = GetHandleId(whichUnit)
-    local integer selectionType = LoadInteger(hashTable, unitId, GUMS_SELECT())
+    local integer selectionType = LoadInteger(hashTable, unitId, SELECT)
     
     if selectionType == GUMS_SELECTION_DEFAULT() then
         return //Unit has not been give a special selection type, do nothing.
@@ -675,42 +765,77 @@ endfunction
 
 
 
-//===========================================================================
-function Trig_GUMS_Actions takes nothing returns nothing
-    local timer t = CreateTimer()
-    local integer i
-    
-    set hashTable = InitHashtable()
-    
-    set i = 1
-    loop
-        exitwhen i >  bj_MAX_PLAYER_SLOTS
-        set I2PC[i] = GetPlayerColor(ConvertedPlayer(i))
-        set i = i + 1
-    endloop
-    call TimerStart( t, 0.1, true, function GUMSTimerFunction)
-    set i = 0
-    loop
-        exitwhen i > 15
-        call SaveInteger(hashTable, udg_TileSystem_TILES[i], 0, i)
-        set i = i + 1
-    endloop
-endfunction
+//==================================================================================================
+//                                        Initialization
+//==================================================================================================
 
+// When a unit cancels of finishes an upgrade, reapply its Visual modifications.
 function GUMS_FixUpgrades takes nothing returns nothing
     call GUMSCopyValues(GetTriggerUnit(), GetTriggerUnit())
 endfunction
 
 
-function InitTrig_UnitVisualMods takes nothing returns nothing
+private function onInit takes nothing returns nothing
     local trigger fixUpgrades = CreateTrigger()
+    local integer i
+    local timer t = CreateTimer()
     
     call TriggerRegisterAnyUnitEventBJ( fixUpgrades, EVENT_PLAYER_UNIT_UPGRADE_CANCEL )
     call TriggerRegisterAnyUnitEventBJ( fixUpgrades, EVENT_PLAYER_UNIT_UPGRADE_FINISH )
     call TriggerAddAction( fixUpgrades, function GUMS_FixUpgrades )
     
-    set gg_trg_UnitVisualMods = CreateTrigger(  )
-    call TriggerRegisterTimerEventSingle( gg_trg_UnitVisualMods, 0.00 )
-    call TriggerAddAction( gg_trg_UnitVisualMods, function Trig_GUMS_Actions )
+    static if INIT_HASHTABLE /*and LIBRARY_HashtableWrapper */ then
+        set hashTable = InitHashtable()
+    endif
+    
+    set i = 1
+    loop
+        exitwhen i >  bj_MAX_PLAYER_SLOTS
+        set I2PC[i] = GetPlayerColor(Player(i-1))
+        set i = i + 1
+    endloop
+    
+    call TimerStart( t, 0.1, true, function GUMSTimerFunction)
+    
+    set i = 0
+    loop
+        exitwhen i > 15
+        set TerrainType2Id[udg_TileSystem_TILES[i]] = i
+        set i = i + 1
+    endloop
 endfunction
+
+//==================================================================================================
+//! textmacro_once DeclareHashTableWrapperModule takes NAME
+
+    module $NAME$_HashTableWrapper
+        private static key table
+        
+        static if LIBRARY_ConstTable then
+            static method operator [] takes integer index returns Table
+                return ConstHashTable(table)[index]
+            endmethod
+            
+            static method remove takes integer index returns nothing
+                call ConstHashTable(table).remove(index)
+            endmethod
+            
+            static method operator ConstHashTable takes nothing returns ConstHashTable
+                return table
+            endmethod
+        else
+            static method operator [] takes integer index returns Table
+                return HashTable(table)[index]
+            endmethod
+            
+            static method remove takes integer index returns nothing
+                call HashTable(table).remove(index)
+            endmethod
+            
+            static method operator HashTable takes nothing returns HashTable
+                return table
+            endmethod
+        endif
+    endmodule
+//! endtextmacro
 endlibrary
