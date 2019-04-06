@@ -62,7 +62,7 @@ def push(dirs = ['table', 'trigger', 'w3x2lni']):
         shutil.copytree(development+directory, release+directory)
 
 def push_all():
-    transfer(['map', 'table', 'trigger', 'w3x2lni'])
+    push(['map', 'table', 'trigger', 'w3x2lni'])
 
 def pull():
     pass
