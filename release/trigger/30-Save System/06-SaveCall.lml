@@ -10,6 +10,8 @@ Condition
 Action
     CustomScriptCode
         Const : 'local integer udg_temp_integer'
+    CustomScriptCode
+        Const : 'call SaveLoopStartTimer()'
     SetVariable
         Var   : temp_integer
         Call  : GetConvertedPlayerId
@@ -71,17 +73,19 @@ Action
         Action
             IfThenElseMultiple
                 Condition
-                    OperatorCompareBoolean
-                        Call  : RectContainsUnit
-                            Var   : gg_rct_Titan_Palace
-                            Call  : GetEnumUnit
-                        Preset: OperatorEqualENE
-                        Const : true
-                    OperatorCompareUnitCode
-                        Call  : GetUnitTypeId
-                            Call  : GetEnumUnit
-                        Preset: OperatorEqualENE
-                        Const : h07Q
+                    OrMultiple
+                        Condition
+                            OperatorCompareBoolean
+                                Call  : RectContainsUnit
+                                    Var   : gg_rct_Titan_Palace
+                                    Call  : GetEnumUnit
+                                Preset: OperatorEqualENE
+                                Const : true
+                            OperatorCompareUnitCode
+                                Call  : GetUnitTypeId
+                                    Call  : GetEnumUnit
+                                Preset: OperatorEqualENE
+                                Const : h07Q
                 Action
                     GroupRemoveUnitSimple
                         Call  : GetEnumUnit

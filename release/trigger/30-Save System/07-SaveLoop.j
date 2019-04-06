@@ -1,3 +1,11 @@
+library SaveUnit requires SaveNLoad
+
+globals
+    force ENUM_FORCE = CreateForce()
+    boolean stillSaving = false
+    timer loopTimer
+endglobals
+
 function IsUnitWaygate takes unit whichUnit returns boolean
     return GetUnitAbilityLevel(whichUnit, 'Awrp') > 0
 endfunction
@@ -24,9 +32,10 @@ function SaveForceLoop takes nothing returns boolean
     local integer saveUnitCount = 0
     local boolean isLocalPlayer = false
     local string saveString
-    local integer unitHandleId
+    local UnitVisuals unitHandleId
     
     if udg_save_load_boolean[playerNumber] == true then
+        set stillSaving = true
         if ( GetLocalPlayer() == Player(playerNumber - 1) ) then
             set isLocalPlayer = true
             call PreloadGenStart()
@@ -41,7 +50,23 @@ function SaveForceLoop takes nothing returns boolean
             //Check if Unit has been removed
             if GetUnitTypeId(saveUnit) != 0 then
                 if isLocalPlayer then
-                    call Preload(ID2S((GetUnitTypeId(saveUnit))) + "," + R2S(GetUnitX(saveUnit) - Save_GetCenterX(playerId))+","+ R2S(GetUnitY(saveUnit) - Save_GetCenterY(playerId)) + "," + R2S(GetUnitFlyHeight(saveUnit)) + "," + R2S(GetUnitFacing(saveUnit)) + "," + GUMSGetUnitScale(saveUnit) + "," + GUMSGetUnitVertexColor(saveUnit,1) + "," + GUMSGetUnitVertexColor(saveUnit,2) + "," + GUMSGetUnitVertexColor(saveUnit,3) + "," + GUMSGetUnitVertexColor(saveUnit,4) + "," + GUMSGetUnitColor(saveUnit) + "," + GUMSGetUnitAnimSpeed(saveUnit) + "," + GUMSGetUnitAnimationTag(saveUnit) + "," + I2S(GUMS_GetUnitSelectionType(saveUnit)))
+                    call Preload(ID2S((GetUnitTypeId(saveUnit))) + "," + /*
+                            */   R2S(GetUnitX(saveUnit) - Save_GetCenterX(playerId))+","+  /*
+                            */   R2S(GetUnitY(saveUnit) - Save_GetCenterY(playerId)) + "," + /*
+                            */   R2S(GetUnitFlyHeight(saveUnit)) + "," + /*
+                            */   R2S(GetUnitFacing(saveUnit)) + "," + /*
+                            */   unitHandleId.getScale() + "," + /*
+                            */   unitHandleId.getVertexRed() + "," + /*
+                            */   unitHandleId.getVertexGreen() + "," + /*
+                            */   unitHandleId.getVertexBlue() + "," + /*
+                            */   unitHandleId.getVertexAlpha() + "," + /*
+                            */   unitHandleId.getColor() + "," + /*
+                            */   unitHandleId.getAnimSpeed() + "," + /*
+                            */   unitHandleId.getAnimTag() + "," + /*
+                            */   I2S(GUMS_GetUnitSelectionType(saveUnit)))
+                    
+                    
+                    
                     if GUMSUnitHasCustomName(unitHandleId) then
                         call Preload("=n " + GUMSGetUnitName(saveUnit))
                     endif
@@ -95,18 +120,32 @@ function SaveForceLoop takes nothing returns boolean
 endfunction
 
 function SaveLoopActions takes nothing returns nothing
-    local force savePlayers = CreateForce()
+
+    debug call BJDebugMsg("SaveLoop Timer executed")
+
+    set stillSaving = false
+    call ForceEnumPlayers(ENUM_FORCE, Condition(function SaveForceLoop))
     
-    call ForceEnumPlayers(savePlayers, Condition(function SaveForceLoop))
-    
-    call DestroyForce(savePlayers)
-    set savePlayers = null
+    if not stillSaving then
+        call PauseTimer(GetExpiredTimer())
+    endif
+
 endfunction
+
+function SaveLoopStartTimer takes nothing returns nothing
+    
+    if not stillSaving then
+        call TimerStart(loopTimer, 0.5, true, function SaveLoopActions)
+    endif
+    
+endfunction
+
 
 //===========================================================================
 function InitTrig_SaveLoop takes nothing returns nothing
-    set gg_trg_SaveLoop = CreateTrigger(  )
-    call TriggerRegisterTimerEventPeriodic( gg_trg_SaveLoop, 0.50 )
-    call TriggerAddAction( gg_trg_SaveLoop, function SaveLoopActions )
+    set loopTimer = CreateTimer()
+    
+    call TimerStart(loopTimer, 0.5, true, function SaveLoopActions)
 endfunction
+endlibrary
 
