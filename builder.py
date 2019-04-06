@@ -41,29 +41,55 @@ def copy():
 
 
 def build(which):
+    """Creates an OBJ from an LNI map"""
     subprocess.Popen([p['paths']['w2l'],'obj',os.path.abspath(which)])
 
 def commit(which):
+    """Creates an LNI from an OBJ map"""
     subprocess.Popen([p['paths']['w2l'],'lni',os.path.abspath(which)])
 
 def optimize(which):
+    """Create an SLK from an OBJ"""
     subprocess.Popen([p['paths']['w2l'],'slk',os.path.abspath(which)])
 
 
 import shutil
-def transfer(dirs = ['table', 'trigger', 'w3x2lni']):
+def push(dirs = ['table', 'trigger', 'w3x2lni']):
     release= 'release/'
     development = 'development/'
     for directory in dirs:
         shutil.rmtree(release+directory)
         shutil.copytree(development+directory, release+directory)
 
-def transfer_all():
+def push_all():
     transfer(['map', 'table', 'trigger', 'w3x2lni'])
 
-
+def pull():
+    pass
+    # if path does not exist => create the folder
+    # copytree for each one of these: map, table, trigger, w3xlni
 
 def test_full():
     optimize(DEVELOPMENT)
     test('slk')
     
+import webbrowser
+
+def show_gui(file):
+    webbrowser.open(os.path.dirname(p['paths'][file]))
+
+
+import types
+# __doc__ = '\n================\n'.join([(f).__doc__ for f in globals().values() if type(f) == types.FunctionType])
+
+def helpme():
+    for f in [(f) for f in globals().values() if type(f) == types.FunctionType]:
+        help(f)
+        print("==============================")
+
+
+def ls():
+    for f in [(f) for f in globals().values() if type(f) == types.FunctionType]:
+        print (str(f).split()[1])
+
+print('For help type ls()')
