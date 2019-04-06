@@ -3,3 +3,4 @@ development/
 development.w3x
 config.ini
 development_slk.w3x
+*.pyc
