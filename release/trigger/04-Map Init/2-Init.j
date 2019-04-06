@@ -1,11 +1,8 @@
-library LoPInit requires ConstTable
+library LoPInit requires TableStruct
 
 public struct Globals
 
-    private static key region_table_impl
-    static method operator regionTable takes nothing returns ConstTable
-        return region_table_impl
-    endmethod
+    //! runtextmacro TableStruct_NewConstTableField("", "regionTable")
 
 endstruct
 // This function is called in Init Main
