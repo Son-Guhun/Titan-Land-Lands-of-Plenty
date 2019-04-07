@@ -1,26 +1,26 @@
 library LoPDecoBuilders requires TableStruct
     /*
-    This library defines functions to initialize the values of the udg_DecoUnitTypes[] array, which
+    This library defines functions to initialize the values of the rawcodes[] array, which
 should contain the rawcodes of all existing Deco Builders, in alphabetical order. Special builders 
 are listed first, though.
 */
-    private module InitModule
-        private method onInit takes nothing returns nothing
+    private module InitModule    
+        private static method onInit takes nothing returns nothing
             local integer i = 0
             // ---------
             // Special Decos
             // ---------
             // Units and Trees
-            set udg_DecoUnitTypes[i] = 'u015'
+            set rawcodes[i] = 'u015'
             // Terrain
             set i = ( i + 1 )
-            set udg_DecoUnitTypes[i] = 'u02E'
+            set rawcodes[i] = 'u02E'
             // Docks
             set i = ( i + 1 )
-            set udg_DecoUnitTypes[i] = 'u003'
+            set rawcodes[i] = 'u003'
             // Misc
             set i = ( i + 1 )
-            set udg_DecoUnitTypes[i] = 'u00W'
+            set rawcodes[i] = 'u00W'
             
             set LoP_DecoBuilders.SpecialDecoLastIndex = i
             // ---------
@@ -28,70 +28,70 @@ are listed first, though.
             // ---------
             // Archways
             set i = ( i + 1 )
-            set udg_DecoUnitTypes[i] = 'u014'
+            set rawcodes[i] = 'u014'
             // Bushes
             set i = ( i + 1 )
-            set udg_DecoUnitTypes[i] = 'u00A'
+            set rawcodes[i] = 'u00A'
             // Camp
             set i = ( i + 1 )
-            set udg_DecoUnitTypes[i] = 'u035'
+            set rawcodes[i] = 'u035'
             // City 1
             set i = ( i + 1 )
-            set udg_DecoUnitTypes[i] = 'u016'
+            set rawcodes[i] = 'u016'
             // City 2
             set i = ( i + 1 )
-            set udg_DecoUnitTypes[i] = 'u017'
+            set rawcodes[i] = 'u017'
             // City 3
             set i = ( i + 1 )
-            set udg_DecoUnitTypes[i] = 'u01T'
+            set rawcodes[i] = 'u01T'
             // Corpses
             set i = ( i + 1 )
-            set udg_DecoUnitTypes[i] = 'u00N'
+            set rawcodes[i] = 'u00N'
             // Crops
             set i = ( i + 1 )
-            set udg_DecoUnitTypes[i] = 'u00B'
+            set rawcodes[i] = 'u00B'
             // Dungeon
             set i = ( i + 1 )
-            set udg_DecoUnitTypes[i] = 'u01P'
+            set rawcodes[i] = 'u01P'
             // Effects
             set i = ( i + 1 )
-            set udg_DecoUnitTypes[i] = 'u036'
+            set rawcodes[i] = 'u036'
             // Fire
             set i = ( i + 1 )
-            set udg_DecoUnitTypes[i] = 'u01C'
+            set rawcodes[i] = 'u01C'
             // Furniture Deco
             set i = ( i + 1 )
-            set udg_DecoUnitTypes[i] = 'u03Q'
+            set rawcodes[i] = 'u03Q'
             // Gates
             set i = ( i + 1 )
-            set udg_DecoUnitTypes[i] = 'u00V'
+            set rawcodes[i] = 'u00V'
             // Ice
             set i = ( i + 1 )
-            set udg_DecoUnitTypes[i] = 'u03P'
+            set rawcodes[i] = 'u03P'
             // Rocks
             set i = ( i + 1 )
-            set udg_DecoUnitTypes[i] = 'u013'
+            set rawcodes[i] = 'u013'
             // Seats
             set i = ( i + 1 )
-            set udg_DecoUnitTypes[i] = 'u01R'
+            set rawcodes[i] = 'u01R'
             // Statue 1
             set i = ( i + 1 )
-            set udg_DecoUnitTypes[i] = 'u01N'
+            set rawcodes[i] = 'u01N'
             // Walls (Wood)
             set i = ( i + 1 )
-            set udg_DecoUnitTypes[i] = 'u000'
+            set rawcodes[i] = 'u000'
             // Walls 1
             set i = ( i + 1 )
-            set udg_DecoUnitTypes[i] = 'u02J'
+            set rawcodes[i] = 'u02J'
             // Walls 2
             set i = ( i + 1 )
-            set udg_DecoUnitTypes[i] = 'u02K'
+            set rawcodes[i] = 'u02K'
             // Water
             set i = ( i + 1 )
-            set udg_DecoUnitTypes[i] = 'u00Z'
+            set rawcodes[i] = 'u00Z'
             // Webs
             set i = ( i + 1 )
-            set udg_DecoUnitTypes[i] = 'u02P'
+            set rawcodes[i] = 'u02P'
             
             set LoP_DecoBuilders.BasicDecoLastIndex = i
             // ---------
@@ -99,128 +99,130 @@ are listed first, though.
             // ---------
             // Arabian 1
             set i = ( i + 1 )
-            set udg_DecoUnitTypes[i] = 'u02G'
+            set rawcodes[i] = 'u02G'
             // Arabian 2
             set i = ( i + 1 )
-            set udg_DecoUnitTypes[i] = 'u02H'
+            set rawcodes[i] = 'u02H'
             // Blacksmith
             set i = ( i + 1 )
-            set udg_DecoUnitTypes[i] = 'u01E'
+            set rawcodes[i] = 'u01E'
             // Blocks
             set i = ( i + 1 )
-            set udg_DecoUnitTypes[i] = 'u03A'
+            set rawcodes[i] = 'u03A'
             // Celtic
             set i = ( i + 1 )
-            set udg_DecoUnitTypes[i] = 'u029'
+            set rawcodes[i] = 'u029'
             // Chaos
             set i = ( i + 1 )
-            set udg_DecoUnitTypes[i] = 'u039'
+            set rawcodes[i] = 'u039'
             // Chess
             set i = ( i + 1 )
-            set udg_DecoUnitTypes[i] = 'u027'
+            set rawcodes[i] = 'u027'
             // Dalaran
             set i = ( i + 1 )
-            set udg_DecoUnitTypes[i] = 'u02D'
+            set rawcodes[i] = 'u02D'
             // Draenei
             set i = ( i + 1 )
-            set udg_DecoUnitTypes[i] = 'u02O'
+            set rawcodes[i] = 'u02O'
             // Elves
             set i = ( i + 1 )
-            set udg_DecoUnitTypes[i] = 'u02A'
+            set rawcodes[i] = 'u02A'
             // Fence
             set i = ( i + 1 )
-            set udg_DecoUnitTypes[i] = 'u03I'
+            set rawcodes[i] = 'u03I'
             // Flags
             set i = ( i + 1 )
-            set udg_DecoUnitTypes[i] = 'u005'
+            set rawcodes[i] = 'u005'
             // Floors
             set i = ( i + 1 )
-            set udg_DecoUnitTypes[i] = 'u02C'
+            set rawcodes[i] = 'u02C'
             // Flowers 1
             set i = ( i + 1 )
-            set udg_DecoUnitTypes[i] = 'u004'
+            set rawcodes[i] = 'u004'
             // Flowers 2
             set i = ( i + 1 )
-            set udg_DecoUnitTypes[i] = 'u006'
+            set rawcodes[i] = 'u006'
             // Forsaken
             set i = ( i + 1 )
-            set udg_DecoUnitTypes[i] = 'u025'
+            set rawcodes[i] = 'u025'
             // Goblin
             set i = ( i + 1 )
-            set udg_DecoUnitTypes[i] = 'u02R'
+            set rawcodes[i] = 'u02R'
             // Gravestones
             set i = ( i + 1 )
-            set udg_DecoUnitTypes[i] = 'u02S'
+            set rawcodes[i] = 'u02S'
             // Mansion
             set i = ( i + 1 )
-            set udg_DecoUnitTypes[i] = 'u02I'
+            set rawcodes[i] = 'u02I'
             // Market
             set i = ( i + 1 )
-            set udg_DecoUnitTypes[i] = 'u01D'
+            set rawcodes[i] = 'u01D'
             // Medieval 1
             set i = ( i + 1 )
-            set udg_DecoUnitTypes[i] = 'u01S'
+            set rawcodes[i] = 'u01S'
             // Medieval 2
             set i = ( i + 1 )
-            set udg_DecoUnitTypes[i] = 'u02L'
+            set rawcodes[i] = 'u02L'
             // Naga
             set i = ( i + 1 )
-            set udg_DecoUnitTypes[i] = 'u03R'
+            set rawcodes[i] = 'u03R'
             // Nordic
             set i = ( i + 1 )
-            set udg_DecoUnitTypes[i] = 'u03S'
+            set rawcodes[i] = 'u03S'
             // Obelisks
             set i = ( i + 1 )
-            set udg_DecoUnitTypes[i] = 'u00Y'
+            set rawcodes[i] = 'u00Y'
             // Pandaren
             set i = ( i + 1 )
-            set udg_DecoUnitTypes[i] = 'u02N'
+            set rawcodes[i] = 'u02N'
             // Quilboar
             set i = ( i + 1 )
-            set udg_DecoUnitTypes[i] = 'u026'
+            set rawcodes[i] = 'u026'
             // Rostrodle
             set i = ( i + 1 )
-            set udg_DecoUnitTypes[i] = 'u02Q'
+            set rawcodes[i] = 'u02Q'
             // Ruined
             set i = ( i + 1 )
-            set udg_DecoUnitTypes[i] = 'u02T'
+            set rawcodes[i] = 'u02T'
             // Ruins
             set i = ( i + 1 )
-            set udg_DecoUnitTypes[i] = 'u00X'
+            set rawcodes[i] = 'u00X'
             // Runes
             set i = ( i + 1 )
-            set udg_DecoUnitTypes[i] = 'u001'
+            set rawcodes[i] = 'u001'
             // Runic
             set i = ( i + 1 )
-            set udg_DecoUnitTypes[i] = 'u02M'
+            set rawcodes[i] = 'u02M'
             // Statue 2
             set i = ( i + 1 )
-            set udg_DecoUnitTypes[i] = 'u023'
+            set rawcodes[i] = 'u023'
             // Trees
             set i = ( i + 1 )
-            set udg_DecoUnitTypes[i] = 'u01B'
+            set rawcodes[i] = 'u01B'
             // Village
             set i = ( i + 1 )
-            set udg_DecoUnitTypes[i] = 'u01O'
+            set rawcodes[i] = 'u01O'
             // Walls (Icecrown)
             set i = ( i + 1 )
-            set udg_DecoUnitTypes[i] = 'u011'
+            set rawcodes[i] = 'u011'
             // Walls (Ruins)
             set i = ( i + 1 )
-            set udg_DecoUnitTypes[i] = 'u012'
+            set rawcodes[i] = 'u012'
             // Walls (Stone)
             set i = ( i + 1 )
-            set udg_DecoUnitTypes[i] = 'u010'
+            set rawcodes[i] = 'u010'
             
             set LoP_DecoBuilders.AdvDecoLastIndex = i
             // ---------
             // End of Deco Creation
             // ---------
-            set udg_System_DecoTotal = i
+            set LoP_DecoBuilders.DecoLastIndex = i
         endmethod
     endmodule
     
     struct LoP_DecoBuilders extends array
+    
+        static integer array rawcodes
     
         static constant method operator SpecialDecoFirstIndex takes nothing returns integer
             return 0
@@ -300,7 +302,7 @@ function InitDecoTents takes nothing returns nothing
         set i = 0
         loop
         exitwhen i >= bj_MAX_STOCK_UNIT_SLOTS or decoNumber > LoP_DecoBuilders.$name$DecoLastIndex
-            call AddUnitToStock(decoTent, udg_DecoUnitTypes[decoNumber], 1, 3)
+            call AddUnitToStock(decoTent, LoP_DecoBuilders.rawcodes[decoNumber], 1, 3)
             set i = i + 1
             set decoNumber = decoNumber + 1
         endloop

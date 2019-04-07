@@ -1,7 +1,7 @@
 function MissingDecos_HelpMessage takes nothing returns string
 
     return "
-Hey there! In LoP, there are a total of |c00ffff00" + I2S(udg_System_DecoTotal) + "|r Deco Builders.
+Hey there! In LoP, there are a total of |c00ffff00" + I2S(LoP_DecoBuilders.DecoLastIndex+1) + "|r Deco Builders.
 
 This can make it quite hard for newer players to decide what to build and get going. It is recommended, if you have never played the game before, to go with only the basic deco builders. Please supply arguments to this command:
 
@@ -22,8 +22,8 @@ function Commands_CreateMissingDecos takes player whichPlayer, integer firstInde
 
     loop
     exitwhen firstIndex > lastIndex
-        if LoadInteger(udg_Hashtable_2, playerNumber, udg_DecoUnitTypes[firstIndex] ) == 0 then
-            call CreateUnitAtLoc( whichPlayer, udg_DecoUnitTypes[firstIndex], udg_PLAYER_LOCATIONS[playerNumber], bj_UNIT_FACING )
+        if LoadInteger(udg_Hashtable_2, playerNumber, LoP_DecoBuilders.rawcodes[firstIndex] ) == 0 then
+            call CreateUnitAtLoc( whichPlayer, LoP_DecoBuilders.rawcodes[firstIndex], udg_PLAYER_LOCATIONS[playerNumber], bj_UNIT_FACING )
         endif
         set firstIndex = firstIndex + 1
     endloop
