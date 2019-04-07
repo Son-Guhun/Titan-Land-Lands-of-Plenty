@@ -17,10 +17,6 @@ def test(version=''):
 DEVELOPMENT = 'development.w3x'
 RELEASE = 'release.w3x'
 
-def convert(which, type):
-    subprocess.Popen([p['paths']['war3'],'-loadfile',os.path.abspath(which)])
-
-
 config_values = {
     'paths': {'w2l':'',
               'war3':'',
@@ -42,15 +38,15 @@ def copy():
 
 def build(which):
     """Creates an OBJ from an LNI map"""
-    subprocess.Popen([p['paths']['w2l'],'obj',os.path.abspath(which)])
+    return subprocess.Popen([p['paths']['w2l'],'obj',os.path.abspath(which)]).wait()
 
 def commit(which):
     """Creates an LNI from an OBJ map"""
-    subprocess.Popen([p['paths']['w2l'],'lni',os.path.abspath(which)])
+    return subprocess.Popen([p['paths']['w2l'],'lni',os.path.abspath(which)]).wait()
 
 def optimize(which):
     """Create an SLK from an OBJ"""
-    subprocess.Popen([p['paths']['w2l'],'slk',os.path.abspath(which)])
+    return subprocess.Popen([p['paths']['w2l'],'slk',os.path.abspath(which)]).wait()
 
 
 import shutil
@@ -64,7 +60,19 @@ def push(dirs = ['table', 'trigger', 'w3x2lni']):
 def push_all():
     push(['map', 'table', 'trigger', 'w3x2lni'])
 
-def pull():
+def pull(dirs = ['map','table', 'trigger', 'w3x2lni']):
+    release= 'release/'
+    development = 'development/'
+
+    if not os.path.exists(development):
+        os.mkdir(development)
+
+    for directory in dirs:
+        if os.path.exists(development+directory):
+            shutil.rmtree(release+directory)
+        shutil.copytree(release+directory,development+directory)
+    shutil.copy(release+'.w3x',development+'.w3x')
+
     pass
     # if path does not exist => create the folder
     # copytree for each one of these: map, table, trigger, w3xlni
