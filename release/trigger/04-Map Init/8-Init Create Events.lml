@@ -67,7 +67,7 @@ Action
                 Event: TriggerRegisterPlayerChatEvent
                     Var   : temp_player
                     Const : -decos
-                    Preset: ChatMatchTypeExact
+                    Preset: ChatMatchTypeSubstring
             AddTriggerEvent
                 Var   : gg_trg_Commands_Hide_Decos
                 Event: TriggerRegisterPlayerChatEvent
