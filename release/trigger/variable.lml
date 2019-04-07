@@ -348,9 +348,6 @@ GDS_RegisterDisable: boolean
 Player_ControlGroup: group
     Array : 1
 System_ProtectedGroup: group
-DecoUnitTypes: unitcode
-    Array : 1
-System_DecoTotal: integer
 save_WholeMapRect: rect
 Hashtable_2: hashtable
 Damage_Mod_Reset: boolean
