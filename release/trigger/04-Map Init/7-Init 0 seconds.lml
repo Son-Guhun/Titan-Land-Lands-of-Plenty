@@ -293,6 +293,11 @@ And discord: SonGuhun#4510'
                     GroupRemoveUnitSimple
                         Call  : GetEnumUnit
                         Var   : System_ProtectedGroup
+    EnumDestructablesInRectAllMultiple
+        Var   : gg_rct_Titan_Palace_Inner
+        Action
+            CustomScriptCode
+                Const : 'call LoP_ProtectDestructable(GetEnumDestructable())'
     ShowUnitHide
         Var   : gg_unit_H00S_0141
     CommentString

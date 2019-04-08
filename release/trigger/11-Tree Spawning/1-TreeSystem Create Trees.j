@@ -1,13 +1,6 @@
-function Trig_Infinite_Seed_Bag_Copy_Conditions takes nothing returns boolean
-    if  (GetUnitTypeId(GetTriggerUnit()) == 'u015') then
-        if ( GetSpellAbilityId() == 'A00A' ) then
-            return true
-        endif
-    endif
-    return false
-endfunction
+library TreeSystemCreateTrees
 
-function Trig_Infinite_Seed_Bag_Copy_Actions takes nothing returns nothing
+function TreeSystemCreateTrees takes nothing returns nothing
     local integer playerNumber = GetPlayerId(GetOwningPlayer(GetTriggerUnit())) + 1
     local integer val = udg_DecoSystem_Value[playerNumber] - 1
     local real X = GetSpellTargetX()
@@ -27,11 +20,5 @@ function Trig_Infinite_Seed_Bag_Copy_Actions takes nothing returns nothing
     endloop
 endfunction
 
-//===========================================================================
-function InitTrig_TreeSystem_Create_Trees takes nothing returns nothing
-    set gg_trg_TreeSystem_Create_Trees = CreateTrigger(  )
-    call TriggerRegisterAnyUnitEventBJ( gg_trg_TreeSystem_Create_Trees, EVENT_PLAYER_UNIT_SPELL_EFFECT )
-    call TriggerAddCondition( gg_trg_TreeSystem_Create_Trees, Condition( function Trig_Infinite_Seed_Bag_Copy_Conditions ) )
-    call TriggerAddAction( gg_trg_TreeSystem_Create_Trees, function Trig_Infinite_Seed_Bag_Copy_Actions )
-endfunction
+endlibrary
 
