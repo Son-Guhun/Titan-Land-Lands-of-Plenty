@@ -6,7 +6,7 @@ library UnitVisualMods initializer onInit requires CutToComma, /*
     
     */ optional ConstTable  // If present, then ConstHashTable is used instead of HashTable.
 //////////////////////////////////////////////////////
-//Guhun's Unit Modification System v1.21
+//Guhun's Unit Modification System v1.31
 
 
 //Hashtable values:
@@ -571,49 +571,59 @@ endfunction
 // Creates a new unit and copies all the GUMS values from the old unit to the newly created one.
 // bj_lastCreatedUnit is set to the newly created unit.
 // If the specified newType is nonpositive, then the created unit will have the same type as the copied one
-function GUMSCopyUnit takes unit whichUnit, player owner, integer newType returns nothing
+function GUMSCopyUnit takes unit whichUnit, player owner, integer newType returns unit
     local real fangle = GetUnitFacing(whichUnit)
+    local unit newUnit
+    
     if newType < 1 then
         set newType = GetUnitTypeId(whichUnit)
     endif
-    set bj_lastCreatedUnit = CreateUnit( owner, newType, GetUnitX(whichUnit), GetUnitY(whichUnit), fangle)
-    if UnitAddAbility(bj_lastCreatedUnit, 'Amrf') then
-        call UnitRemoveAbility(bj_lastCreatedUnit, 'Amrf')
+    set newUnit = CreateUnit( owner, newType, GetUnitX(whichUnit), GetUnitY(whichUnit), fangle)
+    if UnitAddAbility(newUnit, 'Amrf') then
+        call UnitRemoveAbility(newUnit, 'Amrf')
     endif
-    call SetUnitFlyHeight(bj_lastCreatedUnit, GetUnitFlyHeight(whichUnit), 0)
+    call SetUnitFlyHeight(newUnit, GetUnitFlyHeight(whichUnit), 0)
     //Fix Flying (TLLOP SPECIFIC)
-    if GetUnitAbilityLevel(bj_lastCreatedUnit, 'Amov') == 0 then
-        if IsUnitType(bj_lastCreatedUnit, UNIT_TYPE_STRUCTURE) then
+    if GetUnitAbilityLevel(newUnit, 'Amov') == 0 then
+        if IsUnitType(newUnit, UNIT_TYPE_STRUCTURE) then
             if GetUnitFlyHeight(whichUnit) > 0.5 then
-                call SaveReal(hashTable, GetHandleId(bj_lastCreatedUnit), -2, fangle)
-                call UnitAddAbility(bj_lastCreatedUnit,'DEDF')
-                call IssueImmediateOrder(bj_lastCreatedUnit, "unroot")
-                call SetUnitFacingTimed(bj_lastCreatedUnit, fangle, 0)
+                call SaveReal(hashTable, GetHandleId(newUnit), -2, fangle)
+                call UnitAddAbility(newUnit,'DEDF')
+                call IssueImmediateOrder(newUnit, "unroot")
+                call SetUnitFacingTimed(newUnit, fangle, 0)
             endif
         endif   
-        call GroupAddUnit(loopGroup, bj_lastCreatedUnit)
+        call GroupAddUnit(loopGroup, newUnit)
     endif
     //EndofFix
     //FIX Flying (ANY MAP)
-//    if GetUnitAbilityLevel(bj_lastCreatedUnit, 'Amov') == 0 then
-//        call GroupAddUnit(loopGroup, bj_lastCreatedUnit)
+//    if GetUnitAbilityLevel(newUnit, 'Amov') == 0 then
+//        call GroupAddUnit(loopGroup, newUnit)
 //    endif
     //EndofFix
         if GUMSGetUnitScale(whichUnit) != "D" then
-        call GUMSSetUnitScale(bj_lastCreatedUnit, S2R(GUMSGetUnitScale(whichUnit)))
+        call GUMSSetUnitScale(newUnit, S2R(GUMSGetUnitScale(whichUnit)))
     endif
     if GUMSGetUnitVertexColor(whichUnit,1) != "D" then
-        call GUMSSetUnitVertexColor(bj_lastCreatedUnit, S2I(GUMSGetUnitVertexColor(whichUnit,1))/2.55,S2I(GUMSGetUnitVertexColor(whichUnit,2))/2.55, S2I(GUMSGetUnitVertexColor(whichUnit,3))/2.55, (255 - S2I(GUMSGetUnitVertexColor(whichUnit,4)))/2.55)
+        call GUMSSetUnitVertexColor(newUnit, S2I(GUMSGetUnitVertexColor(whichUnit,1))/2.55,S2I(GUMSGetUnitVertexColor(whichUnit,2))/2.55, S2I(GUMSGetUnitVertexColor(whichUnit,3))/2.55, (255 - S2I(GUMSGetUnitVertexColor(whichUnit,4)))/2.55)
     endif
     if GUMSGetUnitColor(whichUnit) != "D" then
-        call GUMSSetUnitColor(bj_lastCreatedUnit, S2I(GUMSGetUnitColor(whichUnit)))
+        call GUMSSetUnitColor(newUnit, S2I(GUMSGetUnitColor(whichUnit)))
     endif
     if GUMSGetUnitAnimSpeed(whichUnit) != "D" then
-        call GUMSSetUnitAnimSpeed(bj_lastCreatedUnit, S2R(GUMSGetUnitAnimSpeed(whichUnit)))
+        call GUMSSetUnitAnimSpeed(newUnit, S2R(GUMSGetUnitAnimSpeed(whichUnit)))
     endif
     if GUMSGetUnitAnimationTag(whichUnit) != "D" then
-        call GUMSAddUnitAnimationTag(bj_lastCreatedUnit, GUMSConvertTags(GUMSGetUnitAnimationTag(whichUnit)))
+        call GUMSAddUnitAnimationTag(newUnit, GUMSConvertTags(GUMSGetUnitAnimationTag(whichUnit)))
     endif
+    
+    set bj_lastCreatedUnit = newUnit
+    set newUnit = null
+    return bj_lastCreatedUnit
+endfunction
+
+function GUMSCopyUnitSameType takes unit whichUnit, player owner returns unit
+    return GUMSCopyUnit(whichUnit, owner, 0)
 endfunction
 
 // Copies all GUMS values from one source unit to a target unit.

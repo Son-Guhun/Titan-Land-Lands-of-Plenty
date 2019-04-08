@@ -1,17 +1,17 @@
 function Trig_Commands_Copy_Func016A takes nothing returns nothing
-    call GUMSCopyUnit(GetEnumUnit(), GetTriggerPlayer(),0)
+    call GUMSCopyUnitSameType(GetEnumUnit(), GetTriggerPlayer())
 endfunction
 
 function Trig_Commands_Copy_Actions takes nothing returns nothing
     local group g = CreateGroup()  // Initialize group to get selected units
-    local boolean destroyGrp = true
+    local unit generator = null
 
     call GroupEnumUnitsSelected(g, GetTriggerPlayer(), null)
 
     if GUDR_GeneratorHasGroup(FirstOfGroup(g))  then
-        set destroyGrp = false
+        set generator = FirstOfGroup(g)
         call DestroyGroup(g)
-        set g = GUDR_GetGeneratorGroup(FirstOfGroup(g))
+        set g = GUDR_GetGeneratorGroup(generator)
     endif
 
     call GroupRemoveGroup( udg_System_ProtectedGroup, g )
@@ -21,8 +21,10 @@ function Trig_Commands_Copy_Actions takes nothing returns nothing
         call DisplayTextToPlayer(GetTriggerPlayer(),0,0, "You are attempting to copy too many units.\nMax: 500" )
     endif
     
-    if destroyGrp then
+    if generator == null then  // Don't destroy a RectGenerator's group...
         call DestroyGroup(g)
+    else
+        set generator = null
     endif
     set g = null
 endfunction
