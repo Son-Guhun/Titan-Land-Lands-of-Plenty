@@ -1,6 +1,7 @@
 
 development/
 development.w3x
+release/resource
 config.ini
 development_slk.w3x
 *.pyc
