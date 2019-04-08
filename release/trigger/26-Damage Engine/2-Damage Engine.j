@@ -26,6 +26,9 @@
 // ranges from -1 upwards. "udg_DmgEvRecursionN" ranges from 0 upwards.
 // "integer i" is always 1 less than "udg_DmgEvRecursionN"
 //
+
+// EDITS BY GUHUN (look for GuhunEdit_ prefix)
+
 function DmgEvResetVars takes nothing returns nothing
     local integer i = udg_DmgEvRecursionN - 2
     set udg_DmgEvRecursionN = i + 1
@@ -260,6 +263,25 @@ function CreateDmgEvTrg takes nothing returns nothing
     set udg_DamageEventTrigger = CreateTrigger()
     call TriggerAddCondition(udg_DamageEventTrigger, Filter(function OnUnitDamage))
 endfunction
+function GuhunEdit_RecreateTrigger takes nothing returns nothing
+    local integer i = udg_UDexNext[0]
+    
+    set udg_DamageEventsWasted = 0
+    
+    //Rebuild the mass EVENT_UNIT_DAMAGED trigger:
+    call DestroyTrigger(udg_DamageEventTrigger)
+    call CreateDmgEvTrg()
+    loop
+        exitwhen i == 0
+        if udg_UnitDamageRegistered[i] then
+            call TriggerRegisterUnitEvent(udg_DamageEventTrigger, udg_UDexUnits[i], EVENT_UNIT_DAMAGED)
+        endif
+        set i = udg_UDexNext[i]
+    endloop
+    
+    call BJDebugMsg("onDamage trigger rebuilt")
+    call DestroyTimer(GetExpiredTimer())
+endfunction
 function SetupDmgEv takes nothing returns boolean
     local integer i = udg_UDex
     local unit u
@@ -278,19 +300,9 @@ function SetupDmgEv takes nothing returns boolean
             set udg_UnitDamageRegistered[i] = false
             set udg_DamageEventsWasted = udg_DamageEventsWasted + 1
             if udg_DamageEventsWasted == 32 then //After 32 registered units have been removed...
-                set udg_DamageEventsWasted = 0
-               
-                //Rebuild the mass EVENT_UNIT_DAMAGED trigger:
-                call DestroyTrigger(udg_DamageEventTrigger)
-                call CreateDmgEvTrg()
-                set i = udg_UDexNext[0]
-                loop
-                    exitwhen i == 0
-                    if udg_UnitDamageRegistered[i] then
-                        call TriggerRegisterUnitEvent(udg_DamageEventTrigger, udg_UDexUnits[i], EVENT_UNIT_DAMAGED)
-                    endif
-                    set i = udg_UDexNext[i]
-                endloop
+            
+                // Rebuild onDamage trigger. But only once per game-frame (so mass-removals are less laggy)
+                call TimerStart(CreateTimer(), 0, false, function GuhunEdit_RecreateTrigger)
             endif
         endif
     endif

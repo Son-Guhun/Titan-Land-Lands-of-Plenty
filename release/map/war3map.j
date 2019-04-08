@@ -37,11 +37,11 @@ constant boolean LIBRARY_DecoBuilderCount=true
 //endglobals from DecoBuilderCount
 //globals from DestructableLib:
 constant boolean LIBRARY_DestructableLib=true
-constant integer DestructableLib__DUMMY_UNIT_ID= 'hfoo'
-constant integer DestructableLib__HARVEST_ID= 'Ahrl'
-constant player DestructableLib__OWNING_PLAYER= Player(PLAYER_NEUTRAL_PASSIVE)
+constant integer DestructableLib___DUMMY_UNIT_ID= 'hfoo'
+constant integer DestructableLib___HARVEST_ID= 'Ahrl'
+constant player DestructableLib___OWNING_PLAYER= Player(PLAYER_NEUTRAL_PASSIVE)
     
-unit DestructableLib__dummy= null
+unit DestructableLib___dummy= null
 //endglobals from DestructableLib
 //globals from GMUI:
 constant boolean LIBRARY_GMUI=true
@@ -55,12 +55,12 @@ integer GMUI_Init_Funcs_Size= 0
 //globals from GroupTools:
 constant boolean LIBRARY_GroupTools=true
         // The highest collision size you're using in your map.
-constant real GroupTools__MAX_COLLISION_SIZE= 197.
+constant real GroupTools___MAX_COLLISION_SIZE= 197.
         // Data Variables
-group array GroupTools__groups
-group GroupTools__gT= null
-integer GroupTools__gN= 0
-boolean GroupTools__f= false
+group array GroupTools___groups
+group GroupTools___gT= null
+integer GroupTools___gN= 0
+boolean GroupTools___f= false
         // Global Group (Change it to CreateGroup() if you want)
 group ENUM_GROUP= bj_lastCreatedGroup
 //endglobals from GroupTools
@@ -76,22 +76,22 @@ constant boolean LIBRARY_LoPInitQuests=true
 //globals from MultiPatrol:
 constant boolean LIBRARY_MultiPatrol=true
     // Maximum number of patrol points a single unit can have.
-constant integer MultiPatrol__MAX_POINTS= 128
+constant integer MultiPatrol___MAX_POINTS= 128
     
     // Determines how close a unit must get to a patrol point before moving onto the next.
-constant real MultiPatrol__RANGE= 32.
+constant real MultiPatrol___RANGE= 32.
     
     // Determines the minimum distance between two consecutive patrol points.
-constant real MultiPatrol__MINIMUM_DISTANCE= 100.
+constant real MultiPatrol___MINIMUM_DISTANCE= 100.
 constant integer MultiPatrol_ERROR_OVERFLOW= 2
 constant integer MultiPatrol_ERROR_NULL_POINTER= 3
 constant integer MultiPatrol_ERROR_TOO_CLOSE= 1
 constant integer MultiPatrol_ERROR_NONE= 0
-hashtable MultiPatrol__data= InitHashtable()
-boolean MultiPatrol__orderBool= false
-rect MultiPatrol__ptrlRect
+hashtable MultiPatrol___data= InitHashtable()
+boolean MultiPatrol___orderBool= false
+rect MultiPatrol___ptrlRect
     
-constant integer MultiPatrol__INDEX_DISPLAY= 9999
+constant integer MultiPatrol___INDEX_DISPLAY= 9999
 //endglobals from MultiPatrol
 //globals from PlayerUnitLimit:
 constant boolean LIBRARY_PlayerUnitLimit=true
@@ -101,94 +101,94 @@ constant boolean LIBRARY_Rawcode2String=true
 //endglobals from Rawcode2String
 //globals from Table:
 constant boolean LIBRARY_Table=true
-integer Table__less= 0
-integer Table__more= 8190
+integer Table___less= 0
+integer Table___more= 8190
     //Configure it if you use more than 8190 "key" variables in your map (this will never happen though).
    
-hashtable Table__ht= InitHashtable()
-constant integer Table__sizeK=8
-constant integer Table__listK=9
+hashtable Table___ht= InitHashtable()
+constant integer Table___sizeK=4
+constant integer Table___listK=5
 //endglobals from Table
 //globals from ThirdPersonCamera:
 constant boolean LIBRARY_ThirdPersonCamera=true
-hashtable ThirdPersonCamera__data= InitHashtable()
+hashtable ThirdPersonCamera___data= InitHashtable()
     
-trigger ThirdPersonCamera__triggerMouse= CreateTrigger()
-trigger ThirdPersonCamera__triggerLeft= CreateTrigger()
-trigger ThirdPersonCamera__triggerRight= CreateTrigger()
-trigger ThirdPersonCamera__triggerEsc= CreateTrigger()
-trigger ThirdPersonCamera__triggerCleanup= CreateTrigger()
+trigger ThirdPersonCamera___triggerMouse= CreateTrigger()
+trigger ThirdPersonCamera___triggerLeft= CreateTrigger()
+trigger ThirdPersonCamera___triggerRight= CreateTrigger()
+trigger ThirdPersonCamera___triggerEsc= CreateTrigger()
+trigger ThirdPersonCamera___triggerCleanup= CreateTrigger()
     
-unit array ThirdPersonCamera__focusUnits
+unit array ThirdPersonCamera___focusUnits
 //endglobals from ThirdPersonCamera
 //globals from WorldBounds:
 constant boolean LIBRARY_WorldBounds=true
 //endglobals from WorldBounds
 //globals from ConstTable:
 constant boolean LIBRARY_ConstTable=true
-hashtable ConstTable__ht= InitHashtable()
+hashtable ConstTable___ht= InitHashtable()
 //endglobals from ConstTable
 //globals from DummyRecycler:
 constant boolean LIBRARY_DummyRecycler=true
         //The rawcode of the Dummy Unit
-constant integer DummyRecycler__DUMMY_ID= 'h07Q'
+constant integer DummyRecycler___DUMMY_ID= 'h07Q'
      
         //The owner of the Dummy Unit
-constant player DummyRecycler__OWNER= Player(bj_PLAYER_NEUTRAL_VICTIM)
+constant player DummyRecycler___OWNER= Player(bj_PLAYER_NEUTRAL_VICTIM)
      
         //The number of indexed angle. The higher the value the:
         // - Lesser the turning time for the Dummy Units.
         // - Higher the total number of Dummy Units created at Map Initialization.
         //          Recommended Value: 10 (Max difference of 18 degrees)
-constant integer DummyRecycler__ANGLES_COUNT= 10
+constant integer DummyRecycler___ANGLES_COUNT= 10
      
         //The number of Dummy units per ANGLES_COUNT. The higher the value the:
         // - Higher the number of units that can be recycled per angle, when
         //   no more units are in queue, the system will resort to use CreateUnit.
         // - Higher the total number of Dummy Units created at Map Initialization.
         //    Recommended Value: 3 to 5 (for less overhead in Map Loading Screen)
-constant integer DummyRecycler__STORED_UNIT_COUNT= 3
+constant integer DummyRecycler___STORED_UNIT_COUNT= 3
      
         //The maximum number of Dummy units that can exist. When the system resort
         //to using CreateUnit, the unit will be permanently added to the Dummy
         //List. To avoid spamming Dummy Units and having too much free Dummy
         //Units to allocate, the maximum number of Dummy Units is capped.
         //               Recommended Value: 80 to 120
-constant integer DummyRecycler__MAX_DUMMY_COUNT= 100
+constant integer DummyRecycler___MAX_DUMMY_COUNT= 100
      
         //When a certain angle have less than BORROW_REQUEST units in its list,
         //it will start to borrow Dummy Units from the list with the highest
         //Dummy Unit count.
         //      Recommended Value: Half of maximum STORED_UNIT_COUNT
-constant integer DummyRecycler__BORROW_REQUEST= 5
+constant integer DummyRecycler___BORROW_REQUEST= 5
      
         //It will only return a Dummy if the current dummy is close
         //to it's appropriate facing angle. This is to avoid returning
         //a Dummy which is still turning to face it's list angle.
-constant real DummyRecycler__ANGLE_TOLERANCE= 10.0
+constant real DummyRecycler___ANGLE_TOLERANCE= 10.0
      
         //An additional option to automatically hide recycled dummy units in the
         //corner of the map camera bounds
-constant boolean DummyRecycler__HIDE_ON_MAP_CORNER= true
-integer DummyRecycler__dummyCount= DummyRecycler__ANGLES_COUNT * DummyRecycler__STORED_UNIT_COUNT
-real array DummyRecycler__angle
-integer array DummyRecycler__count
-integer array DummyRecycler__countHead
-integer array DummyRecycler__countNext
-integer array DummyRecycler__countPrev
-integer array DummyRecycler__next
-integer array DummyRecycler__prev
-unit array DummyRecycler__dummy
-integer DummyRecycler__upper
-integer DummyRecycler__lower
-integer DummyRecycler__lastInstance
-constant real DummyRecycler__FACING_OFFSET= 180.0 / DummyRecycler__ANGLES_COUNT
+constant boolean DummyRecycler___HIDE_ON_MAP_CORNER= true
+integer DummyRecycler___dummyCount= DummyRecycler___ANGLES_COUNT * DummyRecycler___STORED_UNIT_COUNT
+real array DummyRecycler___angle
+integer array DummyRecycler___count
+integer array DummyRecycler___countHead
+integer array DummyRecycler___countNext
+integer array DummyRecycler___countPrev
+integer array DummyRecycler___next
+integer array DummyRecycler___prev
+unit array DummyRecycler___dummy
+integer DummyRecycler___upper
+integer DummyRecycler___lower
+integer DummyRecycler___lastInstance
+constant real DummyRecycler___FACING_OFFSET= 180.0 / DummyRecycler___ANGLES_COUNT
 //endglobals from DummyRecycler
 //globals from Lists:
 constant boolean LIBRARY_Lists=true
-constant integer Lists_RECYCLE_KEY=10
+constant integer Lists_RECYCLE_KEY=6
 constant boolean Lists_ENABLE_GUI= false
-hashtable Lists__hashTable= InitHashtable()
+hashtable Lists___hashTable= InitHashtable()
 //endglobals from Lists
 //globals from MoveSpeedBonus:
 constant boolean LIBRARY_MoveSpeedBonus=true
@@ -206,8 +206,8 @@ constant boolean MoveSpeedBonus_INIT_HASHTABLE= false
     // Automatically clean up unit data by removing any data when a unit is created that has an ID that was previously used
     // If you disable this, then you must call GMSS_ClearData whenever a unit enters the game or is removed from it
 constant boolean MoveSpeedBonus_AUTO_CLEANUP= false
-integer MoveSpeedBonus__data
-hashtable MoveSpeedBonus__hashTable= null
+integer MoveSpeedBonus___data
+hashtable MoveSpeedBonus___hashTable= null
 //endglobals from MoveSpeedBonus
 //globals from StructureTileDefinition:
 constant boolean LIBRARY_StructureTileDefinition=true
@@ -217,7 +217,7 @@ constant boolean LIBRARY_TileDefinition=true
     
     // If you do not use these functions, setting this to false will spare you 2 global variables and an init function
     // Requires WorldBounds.
-constant boolean TileDefinition__ENABLE_ID_FUNCTIONS= true
+constant boolean TileDefinition___ENABLE_ID_FUNCTIONS= true
 
 integer WorldTilesX
 integer WorldTilesY
@@ -257,8 +257,6 @@ constant boolean LIBRARY_FilterTransformations=true
 //endglobals from FilterTransformations
 //globals from LoPDecoBuilders:
 constant boolean LIBRARY_LoPDecoBuilders=true
-    
-    
 //endglobals from LoPDecoBuilders
 //globals from LoPInit:
 constant boolean LIBRARY_LoPInit=true
@@ -271,56 +269,56 @@ constant boolean LIBRARY_RectEnvironment=true
 //endglobals from RectEnvironment
 //globals from UnitVisualMods:
 constant boolean LIBRARY_UnitVisualMods=true
-playercolor array UnitVisualMods__I2PC
-hashtable UnitVisualMods__hashTable= null
-group UnitVisualMods__loopGroup= CreateGroup()
+playercolor array UnitVisualMods___I2PC
+hashtable UnitVisualMods___hashTable= null
+group UnitVisualMods___loopGroup= CreateGroup()
     
-constant boolean UnitVisualMods__INIT_HASHTABLE= true
-constant integer UnitVisualMods__SCALE= 0
-constant integer UnitVisualMods__RED= 1
-constant integer UnitVisualMods__GREEN= 2
-constant integer UnitVisualMods__BLUE= 3
-constant integer UnitVisualMods__ALPHA= 4
-constant integer UnitVisualMods__COLOR= 5
-constant integer UnitVisualMods__ASPEED= 6
-constant integer UnitVisualMods__ATAG= 7
-constant integer UnitVisualMods__SELECT= 8
-constant integer UnitVisualMods__NAME= 9
+constant boolean UnitVisualMods___INIT_HASHTABLE= true
+constant integer UnitVisualMods___SCALE= 0
+constant integer UnitVisualMods___RED= 1
+constant integer UnitVisualMods___GREEN= 2
+constant integer UnitVisualMods___BLUE= 3
+constant integer UnitVisualMods___ALPHA= 4
+constant integer UnitVisualMods___COLOR= 5
+constant integer UnitVisualMods___ASPEED= 6
+constant integer UnitVisualMods___ATAG= 7
+constant integer UnitVisualMods___SELECT= 8
+constant integer UnitVisualMods___NAME= 9
 
 //endglobals from UnitVisualMods
 //globals from AutoRectEnvironment:
 constant boolean LIBRARY_AutoRectEnvironment=true
-constant boolean AutoRectEnvironment__ENABLE_SET_HOOK= false
-constant boolean AutoRectEnvironment__ENABLE_MOVE_HOOK= false
-constant boolean AutoRectEnvironment__ENABLE_REMOVE_HOOK= false
-constant real AutoRectEnvironment__PERIOD= 0.03
+constant boolean AutoRectEnvironment___ENABLE_SET_HOOK= false
+constant boolean AutoRectEnvironment___ENABLE_MOVE_HOOK= false
+constant boolean AutoRectEnvironment___ENABLE_REMOVE_HOOK= false
+constant real AutoRectEnvironment___PERIOD= 0.03
 //endglobals from AutoRectEnvironment
 //globals from GameTime:
 constant boolean LIBRARY_GameTime=true
 //endglobals from GameTime
-//globals from LoPInitDecoBuilders:
-constant boolean LIBRARY_LoPInitDecoBuilders=true
+//globals from LoPInitDecoTents:
+constant boolean LIBRARY_LoPInitDecoTents=true
 constant integer Special_RED= 255
 constant integer Special_GREEN= 165
 constant integer Special_BLUE= 0
 constant integer Special_ALPHA= 255
-    
+        
 constant integer Basic_RED= 255
 constant integer Basic_GREEN= 255
 constant integer Basic_BLUE= 255
 constant integer Basic_ALPHA= 255
-    
+        
 constant integer Adv_RED= 255
 constant integer Adv_GREEN= 0
 constant integer Adv_BLUE= 0
 constant integer Adv_ALPHA= 255
-//endglobals from LoPInitDecoBuilders
+//endglobals from LoPInitDecoTents
 //globals from UserDefinedRects:
 constant boolean LIBRARY_UserDefinedRects=true
-hashtable UserDefinedRects__hashTable= InitHashtable()
-weathereffect array UserDefinedRects__weatherEffects
-constant integer UserDefinedRects__RECYCLE_KEY=11
-integer array UserDefinedRects__instances
+hashtable UserDefinedRects___hashTable= InitHashtable()
+weathereffect array UserDefinedRects___weatherEffects
+constant integer UserDefinedRects___RECYCLE_KEY=7
+integer array UserDefinedRects___instances
 //endglobals from UserDefinedRects
 //globals from LoPHeader:
 constant boolean LIBRARY_LoPHeader=true
@@ -382,11 +380,11 @@ constant integer RectGenerator_FOG_GREEN_DOWN= 'UDRH'
 constant integer RectGenerator_FOG_BLUE_UP= 'UDRE'
 constant integer RectGenerator_FOG_BLUE_DOWN= 'UDRF'
     // This is the maximum number of units that can be moved at a time with a GUDR (high limits may cause crashes)
-constant integer RectGenerator__MAXIMUM_MOVE_LIMIT= 300
+constant integer RectGenerator___MAXIMUM_MOVE_LIMIT= 300
     
     // If this is set to false, you will need to manually remove 'Amov' and 'Aatk' when a generator enters the map
     // You will also need to automatically set it's abilities by calling //! runtextmacro GUDR_FirstPage("ADD"," unitVar" )
-constant boolean RectGenerator__AUTOMATIC_ON_SPAWN= false
+constant boolean RectGenerator___AUTOMATIC_ON_SPAWN= false
 //endglobals from RectGenerator
 //globals from SaveNLoad:
 constant boolean LIBRARY_SaveNLoad=true
@@ -656,8 +654,6 @@ boolean udg_GDS_Permanent= false
 boolean udg_GDS_RegisterDisable= false
 group array udg_Player_ControlGroup
 group udg_System_ProtectedGroup= null
-integer array udg_DecoUnitTypes
-integer udg_System_DecoTotal= 0
 rect udg_save_WholeMapRect= null
 hashtable udg_Hashtable_2= null
 boolean udg_Damage_Mod_Reset= false
@@ -885,7 +881,7 @@ trigger gg_trg_Commands_Toggle_Autoname= null
 trigger gg_trg_Commands_Name_Unit= null
 trigger gg_trg_Commands_Give= null
 trigger gg_trg_Commands_Deleteme= null
-trigger gg_trg_Commands_Deco_Spawn= null
+trigger gg_trg_Commands_Spawn_Decos= null
 trigger gg_trg_Commands_Hide_Decos= null
 trigger gg_trg_Commands_Select_Search= null
 trigger gg_trg_Commands_Neutral= null
@@ -900,7 +896,6 @@ trigger gg_trg_CommandsR_Toggle_Prot= null
 trigger gg_trg_CommandsR_Make_Titan= null
 trigger gg_trg_CommandsR_Set_Limits_for_Units= null
 trigger gg_trg_CommandsR_Delete= null
-trigger gg_trg_CommandsR_Fog= null
 trigger gg_trg_CommandsR_Water_Color= null
 trigger gg_trg_CommandsR_Mind= null
 trigger gg_trg_CommandsR_Kick= null
@@ -988,6 +983,7 @@ trigger gg_trg_SaveLoad_Setup= null
 trigger gg_trg_SaveLoad_Commands= null
 trigger gg_trg_SaveLoad_Set_Center_Numbers= null
 trigger gg_trg_SaveCall= null
+trigger gg_trg_SaveLoop= null
 trigger gg_trg_SaveLoop_Dest= null
 trigger gg_trg_SaveLoop_Terrain= null
 trigger gg_trg_LoadRequest= null
@@ -1082,7 +1078,7 @@ destructable gg_dest_ATg3_0004= null
 destructable gg_dest_LTe3_0005= null
 destructable gg_dest_DTg5_0007= null
 destructable gg_dest_DTg5_0008= null
-trigger gg_trg_SaveLoop= null
+trigger gg_trg_CommandsR_Fog= null
 boolean g_unitHasBeenRemoved= false
 constant integer DecoMovement_CONTROLLER= 'h0KD'
         
@@ -1098,9 +1094,9 @@ constant integer DecoMovement_FACE= 'A00T'
 constant integer DecoMovement_COPY= 'A012'
 constant integer DecoMovement_ROTATE= 'A011'
     // The time between each player's selection being enumerated.
-constant real MultiPatrolDisplayOnSelect__PERIOD= 0.25
+constant real MultiPatrolDisplayOnSelect___PERIOD= 0.25
 
-group MultiPatrolDisplayOnSelect__stack_grp= CreateGroup()
+group MultiPatrolDisplayOnSelect___stack_grp= CreateGroup()
 
 boolean ENABLE_TAGS= false
 
@@ -1109,51 +1105,51 @@ trigger l__library_init
 
 //JASSHelper struct globals:
 constant integer si__Iterator=1
-constant integer si__Table__dex=2
-constant integer si__Table__handles=3
-constant integer si__Table__agents=4
-constant integer si__Table__reals=5
-constant integer si__Table__booleans=6
-constant integer si__Table__strings=7
-constant integer si__Table__integers=8
-constant integer si__Table__players=9
-constant integer si__Table__widgets=10
-constant integer si__Table__destructables=11
-constant integer si__Table__items=12
-constant integer si__Table__units=13
-constant integer si__Table__abilitys=14
-constant integer si__Table__timers=15
-constant integer si__Table__triggers=16
-constant integer si__Table__triggerconditions=17
-constant integer si__Table__triggeractions=18
-constant integer si__Table__events=19
-constant integer si__Table__forces=20
-constant integer si__Table__groups=21
-constant integer si__Table__locations=22
-constant integer si__Table__rects=23
-constant integer si__Table__boolexprs=24
-constant integer si__Table__sounds=25
-constant integer si__Table__effects=26
-constant integer si__Table__unitpools=27
-constant integer si__Table__itempools=28
-constant integer si__Table__quests=29
-constant integer si__Table__questitems=30
-constant integer si__Table__defeatconditions=31
-constant integer si__Table__timerdialogs=32
-constant integer si__Table__leaderboards=33
-constant integer si__Table__multiboards=34
-constant integer si__Table__multiboarditems=35
-constant integer si__Table__trackables=36
-constant integer si__Table__dialogs=37
-constant integer si__Table__buttons=38
-constant integer si__Table__texttags=39
-constant integer si__Table__lightnings=40
-constant integer si__Table__images=41
-constant integer si__Table__ubersplats=42
-constant integer si__Table__regions=43
-constant integer si__Table__fogstates=44
-constant integer si__Table__fogmodifiers=45
-constant integer si__Table__hashtables=46
+constant integer si__Table___dex=2
+constant integer si__Table___handles=3
+constant integer si__Table___agents=4
+constant integer si__Table___reals=5
+constant integer si__Table___booleans=6
+constant integer si__Table___strings=7
+constant integer si__Table___integers=8
+constant integer si__Table___players=9
+constant integer si__Table___widgets=10
+constant integer si__Table___destructables=11
+constant integer si__Table___items=12
+constant integer si__Table___units=13
+constant integer si__Table___abilitys=14
+constant integer si__Table___timers=15
+constant integer si__Table___triggers=16
+constant integer si__Table___triggerconditions=17
+constant integer si__Table___triggeractions=18
+constant integer si__Table___events=19
+constant integer si__Table___forces=20
+constant integer si__Table___groups=21
+constant integer si__Table___locations=22
+constant integer si__Table___rects=23
+constant integer si__Table___boolexprs=24
+constant integer si__Table___sounds=25
+constant integer si__Table___effects=26
+constant integer si__Table___unitpools=27
+constant integer si__Table___itempools=28
+constant integer si__Table___quests=29
+constant integer si__Table___questitems=30
+constant integer si__Table___defeatconditions=31
+constant integer si__Table___timerdialogs=32
+constant integer si__Table___leaderboards=33
+constant integer si__Table___multiboards=34
+constant integer si__Table___multiboarditems=35
+constant integer si__Table___trackables=36
+constant integer si__Table___dialogs=37
+constant integer si__Table___buttons=38
+constant integer si__Table___texttags=39
+constant integer si__Table___lightnings=40
+constant integer si__Table___images=41
+constant integer si__Table___ubersplats=42
+constant integer si__Table___regions=43
+constant integer si__Table___fogstates=44
+constant integer si__Table___fogmodifiers=45
+constant integer si__Table___hashtables=46
 constant integer si__Table=47
 constant integer si__TableArray=48
 integer s__TableArray_tempTable
@@ -1168,55 +1164,55 @@ integer s__WorldBounds_centerX
 integer s__WorldBounds_centerY
 rect s__WorldBounds_world
 region s__WorldBounds_worldRegion
-constant integer si__ConstTable__handles=51
-constant integer si__ConstTable__agents=52
-constant integer si__ConstTable__reals=53
-constant integer si__ConstTable__booleans=54
-constant integer si__ConstTable__strings=55
-constant integer si__ConstTable__integers=56
-constant integer si__ConstTable__players=57
-constant integer si__ConstTable__widgets=58
-constant integer si__ConstTable__destructables=59
-constant integer si__ConstTable__items=60
-constant integer si__ConstTable__units=61
-constant integer si__ConstTable__abilitys=62
-constant integer si__ConstTable__timers=63
-constant integer si__ConstTable__triggers=64
-constant integer si__ConstTable__triggerconditions=65
-constant integer si__ConstTable__triggeractions=66
-constant integer si__ConstTable__events=67
-constant integer si__ConstTable__forces=68
-constant integer si__ConstTable__groups=69
-constant integer si__ConstTable__locations=70
-constant integer si__ConstTable__rects=71
-constant integer si__ConstTable__boolexprs=72
-constant integer si__ConstTable__sounds=73
-constant integer si__ConstTable__effects=74
-constant integer si__ConstTable__unitpools=75
-constant integer si__ConstTable__itempools=76
-constant integer si__ConstTable__quests=77
-constant integer si__ConstTable__questitems=78
-constant integer si__ConstTable__defeatconditions=79
-constant integer si__ConstTable__timerdialogs=80
-constant integer si__ConstTable__leaderboards=81
-constant integer si__ConstTable__multiboards=82
-constant integer si__ConstTable__multiboarditems=83
-constant integer si__ConstTable__trackables=84
-constant integer si__ConstTable__dialogs=85
-constant integer si__ConstTable__buttons=86
-constant integer si__ConstTable__texttags=87
-constant integer si__ConstTable__lightnings=88
-constant integer si__ConstTable__images=89
-constant integer si__ConstTable__ubersplats=90
-constant integer si__ConstTable__regions=91
-constant integer si__ConstTable__fogstates=92
-constant integer si__ConstTable__fogmodifiers=93
-constant integer si__ConstTable__hashtables=94
+constant integer si__ConstTable___handles=51
+constant integer si__ConstTable___agents=52
+constant integer si__ConstTable___reals=53
+constant integer si__ConstTable___booleans=54
+constant integer si__ConstTable___strings=55
+constant integer si__ConstTable___integers=56
+constant integer si__ConstTable___players=57
+constant integer si__ConstTable___widgets=58
+constant integer si__ConstTable___destructables=59
+constant integer si__ConstTable___items=60
+constant integer si__ConstTable___units=61
+constant integer si__ConstTable___abilitys=62
+constant integer si__ConstTable___timers=63
+constant integer si__ConstTable___triggers=64
+constant integer si__ConstTable___triggerconditions=65
+constant integer si__ConstTable___triggeractions=66
+constant integer si__ConstTable___events=67
+constant integer si__ConstTable___forces=68
+constant integer si__ConstTable___groups=69
+constant integer si__ConstTable___locations=70
+constant integer si__ConstTable___rects=71
+constant integer si__ConstTable___boolexprs=72
+constant integer si__ConstTable___sounds=73
+constant integer si__ConstTable___effects=74
+constant integer si__ConstTable___unitpools=75
+constant integer si__ConstTable___itempools=76
+constant integer si__ConstTable___quests=77
+constant integer si__ConstTable___questitems=78
+constant integer si__ConstTable___defeatconditions=79
+constant integer si__ConstTable___timerdialogs=80
+constant integer si__ConstTable___leaderboards=81
+constant integer si__ConstTable___multiboards=82
+constant integer si__ConstTable___multiboarditems=83
+constant integer si__ConstTable___trackables=84
+constant integer si__ConstTable___dialogs=85
+constant integer si__ConstTable___buttons=86
+constant integer si__ConstTable___texttags=87
+constant integer si__ConstTable___lightnings=88
+constant integer si__ConstTable___images=89
+constant integer si__ConstTable___ubersplats=90
+constant integer si__ConstTable___regions=91
+constant integer si__ConstTable___fogstates=92
+constant integer si__ConstTable___fogmodifiers=93
+constant integer si__ConstTable___hashtables=94
 constant integer si__ConstTable=95
 constant integer si__ConstHashTable=96
-constant integer si__DummyRecycler__S=97
-integer s__DummyRecycler__S_tb
-constant integer si__TileDefinition__TileDefinition=98
+constant integer si__DummyRecycler___S=97
+integer s__DummyRecycler___S_tb
+constant integer si__TileDefinition___TileDefinition=98
 constant integer si__LinkedHashSet=99
 integer s__LinkedHashSet_enumElement= 0
 integer s__LinkedHashSet_enumSet= 0
@@ -1225,115 +1221,116 @@ constant integer si__FilterTransformations_Globals=101
 integer si__FilterTransformations_Globals_F=0
 integer si__FilterTransformations_Globals_I=0
 integer array si__FilterTransformations_Globals_V
-constant integer s__FilterTransformations_Globals_data_impl=12
+constant integer s__FilterTransformations_Globals_data_impl=8
 constant integer si__LoP_DecoBuilders=102
-constant integer s__LoP_DecoBuilders_static_members_key=13
-constant integer s__LoP_DecoBuilders_SpecialDecoLastIndex_impl=14
-constant integer s__LoP_DecoBuilders_BasicDecoFirstIndex_impl=15
-constant integer s__LoP_DecoBuilders_BasicDecoLastIndex_impl=16
-constant integer s__LoP_DecoBuilders_AdvDecoFirstIndex_impl=17
-constant integer s__LoP_DecoBuilders_AdvDecoLastIndex_impl=18
-constant integer s__LoP_DecoBuilders_DecoLastIndex_impl=19
+integer array s__LoP_DecoBuilders_rawcodes
+constant integer s__LoP_DecoBuilders_static_members_key=9
+constant integer s__LoP_DecoBuilders_SpecialDecoLastIndex_impl=10
+constant integer s__LoP_DecoBuilders_BasicDecoFirstIndex_impl=11
+constant integer s__LoP_DecoBuilders_BasicDecoLastIndex_impl=12
+constant integer s__LoP_DecoBuilders_AdvDecoFirstIndex_impl=13
+constant integer s__LoP_DecoBuilders_AdvDecoLastIndex_impl=14
+constant integer s__LoP_DecoBuilders_DecoLastIndex_impl=15
 constant integer si__LoPInit_Globals=103
 integer si__LoPInit_Globals_F=0
 integer si__LoPInit_Globals_I=0
 integer array si__LoPInit_Globals_V
-constant integer s__LoPInit_Globals_regionTable_impl=20
+constant integer s__LoPInit_Globals_regionTable_impl=16
 constant integer si__MultiBoard=104
-constant integer s__MultiBoard_items_impl=21
-constant integer s__MultiBoard_cols_impl=22
-constant integer s__MultiBoard_rows_impl=23
+constant integer s__MultiBoard_items_impl=18
+constant integer s__MultiBoard_cols_impl=20
+constant integer s__MultiBoard_rows_impl=22
 constant integer s__MultiBoard_multiboard_impl=24
 constant integer si__TerrainFog=105
 constant integer s__TerrainFog_LINEAR= 0
 constant integer s__TerrainFog_EXPONENTIAL= 1
 constant integer s__TerrainFog_EXPONENTIAL2= 2
-constant integer s__TerrainFog_style_impl=25
-constant integer s__TerrainFog_zStart_impl=26
-constant integer s__TerrainFog_zEnd_impl=27
-constant integer s__TerrainFog_density_impl=28
-constant integer s__TerrainFog_red_impl=29
-constant integer s__TerrainFog_green_impl=30
-constant integer s__TerrainFog_blue_impl=31
+constant integer s__TerrainFog_style_impl=26
+constant integer s__TerrainFog_zStart_impl=28
+constant integer s__TerrainFog_zEnd_impl=30
+constant integer s__TerrainFog_density_impl=32
+constant integer s__TerrainFog_red_impl=34
+constant integer s__TerrainFog_green_impl=36
+constant integer s__TerrainFog_blue_impl=38
 constant integer si__RectEnvironment=106
-constant integer s__RectEnvironment_fog_impl=32
-constant integer si__UnitVisualMods__data_reals=107
-constant integer si__UnitVisualMods__data_booleans=108
-constant integer si__UnitVisualMods__data_strings=109
-constant integer si__UnitVisualMods__data_integers=110
-constant integer si__UnitVisualMods__data_handles=111
-constant integer si__UnitVisualMods__data_agents=112
-constant integer si__UnitVisualMods__data_players=113
-constant integer si__UnitVisualMods__data_widgets=114
-constant integer si__UnitVisualMods__data_destructables=115
-constant integer si__UnitVisualMods__data_items=116
-constant integer si__UnitVisualMods__data_units=117
-constant integer si__UnitVisualMods__data_abilitys=118
-constant integer si__UnitVisualMods__data_timers=119
-constant integer si__UnitVisualMods__data_triggers=120
-constant integer si__UnitVisualMods__data_triggerconditions=121
-constant integer si__UnitVisualMods__data_triggeractions=122
-constant integer si__UnitVisualMods__data_events=123
-constant integer si__UnitVisualMods__data_forces=124
-constant integer si__UnitVisualMods__data_groups=125
-constant integer si__UnitVisualMods__data_locations=126
-constant integer si__UnitVisualMods__data_rects=127
-constant integer si__UnitVisualMods__data_boolexprs=128
-constant integer si__UnitVisualMods__data_sounds=129
-constant integer si__UnitVisualMods__data_effects=130
-constant integer si__UnitVisualMods__data_unitpools=131
-constant integer si__UnitVisualMods__data_itempools=132
-constant integer si__UnitVisualMods__data_quests=133
-constant integer si__UnitVisualMods__data_questitems=134
-constant integer si__UnitVisualMods__data_defeatconditions=135
-constant integer si__UnitVisualMods__data_timerdialogs=136
-constant integer si__UnitVisualMods__data_leaderboards=137
-constant integer si__UnitVisualMods__data_multiboards=138
-constant integer si__UnitVisualMods__data_multiboarditems=139
-constant integer si__UnitVisualMods__data_trackables=140
-constant integer si__UnitVisualMods__data_dialogs=141
-constant integer si__UnitVisualMods__data_buttons=142
-constant integer si__UnitVisualMods__data_texttags=143
-constant integer si__UnitVisualMods__data_lightnings=144
-constant integer si__UnitVisualMods__data_images=145
-constant integer si__UnitVisualMods__data_ubersplats=146
-constant integer si__UnitVisualMods__data_regions=147
-constant integer si__UnitVisualMods__data_fogstates=148
-constant integer si__UnitVisualMods__data_fogmodifiers=149
-constant integer si__UnitVisualMods__data_hashtables=150
-constant integer si__UnitVisualMods__data_Child=151
-constant integer si__UnitVisualMods__data=152
+constant integer s__RectEnvironment_fog_impl=40
+constant integer si__UnitVisualMods___data_reals=107
+constant integer si__UnitVisualMods___data_booleans=108
+constant integer si__UnitVisualMods___data_strings=109
+constant integer si__UnitVisualMods___data_integers=110
+constant integer si__UnitVisualMods___data_handles=111
+constant integer si__UnitVisualMods___data_agents=112
+constant integer si__UnitVisualMods___data_players=113
+constant integer si__UnitVisualMods___data_widgets=114
+constant integer si__UnitVisualMods___data_destructables=115
+constant integer si__UnitVisualMods___data_items=116
+constant integer si__UnitVisualMods___data_units=117
+constant integer si__UnitVisualMods___data_abilitys=118
+constant integer si__UnitVisualMods___data_timers=119
+constant integer si__UnitVisualMods___data_triggers=120
+constant integer si__UnitVisualMods___data_triggerconditions=121
+constant integer si__UnitVisualMods___data_triggeractions=122
+constant integer si__UnitVisualMods___data_events=123
+constant integer si__UnitVisualMods___data_forces=124
+constant integer si__UnitVisualMods___data_groups=125
+constant integer si__UnitVisualMods___data_locations=126
+constant integer si__UnitVisualMods___data_rects=127
+constant integer si__UnitVisualMods___data_boolexprs=128
+constant integer si__UnitVisualMods___data_sounds=129
+constant integer si__UnitVisualMods___data_effects=130
+constant integer si__UnitVisualMods___data_unitpools=131
+constant integer si__UnitVisualMods___data_itempools=132
+constant integer si__UnitVisualMods___data_quests=133
+constant integer si__UnitVisualMods___data_questitems=134
+constant integer si__UnitVisualMods___data_defeatconditions=135
+constant integer si__UnitVisualMods___data_timerdialogs=136
+constant integer si__UnitVisualMods___data_leaderboards=137
+constant integer si__UnitVisualMods___data_multiboards=138
+constant integer si__UnitVisualMods___data_multiboarditems=139
+constant integer si__UnitVisualMods___data_trackables=140
+constant integer si__UnitVisualMods___data_dialogs=141
+constant integer si__UnitVisualMods___data_buttons=142
+constant integer si__UnitVisualMods___data_texttags=143
+constant integer si__UnitVisualMods___data_lightnings=144
+constant integer si__UnitVisualMods___data_images=145
+constant integer si__UnitVisualMods___data_ubersplats=146
+constant integer si__UnitVisualMods___data_regions=147
+constant integer si__UnitVisualMods___data_fogstates=148
+constant integer si__UnitVisualMods___data_fogmodifiers=149
+constant integer si__UnitVisualMods___data_hashtables=150
+constant integer si__UnitVisualMods___data_Child=151
+constant integer si__UnitVisualMods___data=152
 constant integer si__TerrainType2Id=153
 constant integer s__TerrainType2Id_KEY= - 2
 constant integer si__UnitVisuals=154
-constant integer si__AutoRectEnvironment__Globals=155
-constant integer s__AutoRectEnvironment__Globals_static_members_key=33
-constant integer s__AutoRectEnvironment__Globals_lastCameraX_impl=34
-constant integer s__AutoRectEnvironment__Globals_lastCameraY_impl=35
-constant integer s__AutoRectEnvironment__Globals_rectWasMoved_impl=36
-constant integer s__AutoRectEnvironment__Globals_lastCameraRect_impl=37
-constant integer s__AutoRectEnvironment__Globals_allRects_impl=38
-constant integer s__AutoRectEnvironment__Globals_rects_impl=39
-constant integer s__AutoRectEnvironment__Globals_id2_impl=40
-constant integer si__AutoRectEnvironment__InitStruct=156
+constant integer si__AutoRectEnvironment___Globals=155
+constant integer s__AutoRectEnvironment___Globals_static_members_key=42
+constant integer s__AutoRectEnvironment___Globals_lastCameraX_impl=44
+constant integer s__AutoRectEnvironment___Globals_lastCameraY_impl=46
+constant integer s__AutoRectEnvironment___Globals_rectWasMoved_impl=48
+constant integer s__AutoRectEnvironment___Globals_lastCameraRect_impl=50
+constant integer s__AutoRectEnvironment___Globals_allRects_impl=52
+constant integer s__AutoRectEnvironment___Globals_rects_impl=54
+constant integer s__AutoRectEnvironment___Globals_id2_impl=56
+constant integer si__AutoRectEnvironment___InitStruct=156
 constant integer si__GameTime=157
 integer s__GameTime_a
-constant integer s__GameTime_static_members_key=41
-constant integer s__GameTime_hours_impl=42
-constant integer s__GameTime_minutes_impl=43
-constant integer s__GameTime_seconds_impl=44
-constant integer s__GameTime_timer_impl=45
-constant integer s__GameTime_multiboard_impl=46
-constant integer si__UserDefinedRects__Indices=158
-constant integer si__RectGenerator__FogStyle=159
-constant integer s__RectGenerator__FogStyle_strings_impl=47
-constant integer s__RectGenerator__FogStyle_linkedListNext_impl=48
-constant integer s__RectGenerator__FogStyle_linkedListPrev_impl=49
-trigger st__Table__reals__getindex
-trigger st__Table__reals__setindex
-trigger st__Table__units__getindex
-trigger st__Table__units__setindex
-trigger st__Table__units_remove
+constant integer s__GameTime_static_members_key=58
+constant integer s__GameTime_hours_impl=60
+constant integer s__GameTime_minutes_impl=62
+constant integer s__GameTime_seconds_impl=64
+constant integer s__GameTime_timer_impl=66
+constant integer s__GameTime_multiboard_impl=68
+constant integer si__UserDefinedRects___Indices=158
+constant integer si__RectGenerator___FogStyle=159
+constant integer s__RectGenerator___FogStyle_strings_impl=70
+constant integer s__RectGenerator___FogStyle_linkedListNext_impl=72
+constant integer s__RectGenerator___FogStyle_linkedListPrev_impl=74
+trigger st__Table___reals__getindex
+trigger st__Table___reals__setindex
+trigger st__Table___units__getindex
+trigger st__Table___units__setindex
+trigger st__Table___units_remove
 trigger st__Table__get_real
 trigger st__Table__get_unit
 trigger st__Table_create
@@ -1420,29 +1417,29 @@ function sc__Table_create takes nothing returns integer
  return f__result_integer
 endfunction
 
-//Generated method caller for Table__units._getindex
-function sc__Table__units__getindex takes integer this,integer key returns unit
-        return LoadUnitHandle(Table__ht, this, key)
+//Generated method caller for Table___units._getindex
+function sc__Table___units__getindex takes integer this,integer key returns unit
+        return LoadUnitHandle(Table___ht, this, key)
 endfunction
 
-//Generated method caller for Table__units._setindex
-function sc__Table__units__setindex takes integer this,integer key,unit value returns nothing
-        call SaveUnitHandle(Table__ht, this, key, value)
+//Generated method caller for Table___units._setindex
+function sc__Table___units__setindex takes integer this,integer key,unit value returns nothing
+        call SaveUnitHandle(Table___ht, this, key, value)
 endfunction
 
-//Generated method caller for Table__units.remove
-function sc__Table__units_remove takes integer this,integer key returns nothing
-        call RemoveSavedHandle(Table__ht, this, key)
+//Generated method caller for Table___units.remove
+function sc__Table___units_remove takes integer this,integer key returns nothing
+        call RemoveSavedHandle(Table___ht, this, key)
 endfunction
 
-//Generated method caller for Table__reals._getindex
-function sc__Table__reals__getindex takes integer this,integer key returns real
-        return LoadReal(Table__ht, this, key)
+//Generated method caller for Table___reals._getindex
+function sc__Table___reals__getindex takes integer this,integer key returns real
+        return LoadReal(Table___ht, this, key)
 endfunction
 
-//Generated method caller for Table__reals._setindex
-function sc__Table__reals__setindex takes integer this,integer key,real value returns nothing
-        call SaveReal(Table__ht, this, key, value)
+//Generated method caller for Table___reals._setindex
+function sc__Table___reals__setindex takes integer this,integer key,real value returns nothing
+        call SaveReal(Table___ht, this, key, value)
 endfunction
 
 //library ArrayAgent:
@@ -1786,40 +1783,40 @@ endfunction
 function CombatTag___ShowText takes nothing returns nothing
     local timer t= GetExpiredTimer()
     local integer tId= GetHandleId(t)
-    local unit u= (LoadUnitHandle(Table__ht, (((CombatTag___timerData))), (tId))) // INLINED!!
+    local unit u= (LoadUnitHandle(Table___ht, (((CombatTag___timerData))), (tId))) // INLINED!!
     local integer uId= GetUnitUserData(u)
     
     local real z_offset= 50
     
-    if (LoadReal(Table__ht, (((CombatTag_PHYS_DAMAGE))), (uId))) > 0. then // INLINED!!
-        call CreateTextTagUnitBJ(I2S(R2I((LoadReal(Table__ht, (((CombatTag_PHYS_DAMAGE))), (uId))))), u, z_offset, 13.00, CombatTag_PHYSICAL_RED, CombatTag_PHYSICAL_GREEN, CombatTag_PHYSICAL_BLUE, 0) // INLINED!!
+    if (LoadReal(Table___ht, (((CombatTag_PHYS_DAMAGE))), (uId))) > 0. then // INLINED!!
+        call CreateTextTagUnitBJ(I2S(R2I((LoadReal(Table___ht, (((CombatTag_PHYS_DAMAGE))), (uId))))), u, z_offset, 13.00, CombatTag_PHYSICAL_RED, CombatTag_PHYSICAL_GREEN, CombatTag_PHYSICAL_BLUE, 0) // INLINED!!
         call SetTextTagVelocityBJ(bj_lastCreatedTextTag, 75.00, 90.00)
         call SetTextTagPermanent(bj_lastCreatedTextTag, false)
         call SetTextTagLifespan(bj_lastCreatedTextTag, 3.50)
         call SetTextTagFadepoint(bj_lastCreatedTextTag, 1.40)
         set z_offset=z_offset + 50.0
-        call SaveReal(Table__ht, (((CombatTag_PHYS_DAMAGE))), (uId), (( 0.)*1.0)) // INLINED!!
+        call SaveReal(Table___ht, (((CombatTag_PHYS_DAMAGE))), (uId), (( 0.)*1.0)) // INLINED!!
     endif
-    if (LoadReal(Table__ht, (((CombatTag_SPELL_DAMAGE))), (uId))) > 0. then // INLINED!!
-        call CreateTextTagUnitBJ(I2S(R2I((LoadReal(Table__ht, (((CombatTag_SPELL_DAMAGE))), (uId))))), u, z_offset, 13.00, CombatTag_SPELL_RED, CombatTag_SPELL_GREEN, CombatTag_SPELL_BLUE, 0) // INLINED!!
+    if (LoadReal(Table___ht, (((CombatTag_SPELL_DAMAGE))), (uId))) > 0. then // INLINED!!
+        call CreateTextTagUnitBJ(I2S(R2I((LoadReal(Table___ht, (((CombatTag_SPELL_DAMAGE))), (uId))))), u, z_offset, 13.00, CombatTag_SPELL_RED, CombatTag_SPELL_GREEN, CombatTag_SPELL_BLUE, 0) // INLINED!!
         call SetTextTagVelocityBJ(bj_lastCreatedTextTag, 75.00, 90.00)
         call SetTextTagPermanent(bj_lastCreatedTextTag, false)
         call SetTextTagLifespan(bj_lastCreatedTextTag, 3.50)
         call SetTextTagFadepoint(bj_lastCreatedTextTag, 1.40)
         set z_offset=z_offset + 50.0
-        call SaveReal(Table__ht, (((CombatTag_SPELL_DAMAGE))), (uId), (( 0.)*1.0)) // INLINED!!
+        call SaveReal(Table___ht, (((CombatTag_SPELL_DAMAGE))), (uId), (( 0.)*1.0)) // INLINED!!
     endif
     
     call PauseTimer(t)
     call DestroyTimer(t)
-    call RemoveSavedHandle(Table__ht, (((CombatTag___timerData))), (tId)) // INLINED!!
+    call RemoveSavedHandle(Table___ht, (((CombatTag___timerData))), (tId)) // INLINED!!
     set t=null
     set u=null
 endfunction
 
 function CombatTag_Register takes unit whichUnit,real value,integer whichType returns nothing
     local integer uId= GetUnitUserData(whichUnit)
-    local real amount= (LoadReal(Table__ht, (((whichType))), (uId))) // INLINED!!
+    local real amount= (LoadReal(Table___ht, (((whichType))), (uId))) // INLINED!!
     local timer t
     
     if value <= 0. then
@@ -1829,11 +1826,11 @@ function CombatTag_Register takes unit whichUnit,real value,integer whichType re
     if amount <= 0. then
         set t=CreateTimer()
         call TimerStart(t, 0, false, function CombatTag___ShowText)
-        call SaveUnitHandle(Table__ht, (((CombatTag___timerData))), (GetHandleId(t)), ( whichUnit)) // INLINED!!
+        call SaveUnitHandle(Table___ht, (((CombatTag___timerData))), (GetHandleId(t)), ( whichUnit)) // INLINED!!
         set t=null
     endif
         
-    call SaveReal(Table__ht, (((whichType))), (uId), (( amount + value)*1.0)) // INLINED!!
+    call SaveReal(Table___ht, (((whichType))), (uId), (( amount + value)*1.0)) // INLINED!!
 endfunction
 
 function CombatTag___onInit takes nothing returns nothing
@@ -2118,19 +2115,19 @@ endfunction
 function IsDestructableTree takes destructable dest returns boolean
     local boolean result= false
     if ( dest != null ) then
-        call PauseUnit(DestructableLib__dummy, false)
-        set result=IssueTargetOrder(DestructableLib__dummy, "harvest", dest)
-        call PauseUnit(DestructableLib__dummy, true) // stops order
+        call PauseUnit(DestructableLib___dummy, false)
+        set result=IssueTargetOrder(DestructableLib___dummy, "harvest", dest)
+        call PauseUnit(DestructableLib___dummy, true) // stops order
     endif
     return result
 endfunction
 
-function DestructableLib__Initialization takes nothing returns nothing
-    set DestructableLib__dummy=CreateUnit(DestructableLib__OWNING_PLAYER, DestructableLib__DUMMY_UNIT_ID, 0.0, 0.0, 0.0)
-    call ShowUnit(DestructableLib__dummy, false) // cannot enumerate
-    call UnitAddAbility(DestructableLib__dummy, DestructableLib__HARVEST_ID)
-    call UnitAddAbility(DestructableLib__dummy, 'Aloc') // unselectable, invulnerable
-    call PauseUnit(DestructableLib__dummy, true)
+function DestructableLib___Initialization takes nothing returns nothing
+    set DestructableLib___dummy=CreateUnit(DestructableLib___OWNING_PLAYER, DestructableLib___DUMMY_UNIT_ID, 0.0, 0.0, 0.0)
+    call ShowUnit(DestructableLib___dummy, false) // cannot enumerate
+    call UnitAddAbility(DestructableLib___dummy, DestructableLib___HARVEST_ID)
+    call UnitAddAbility(DestructableLib___dummy, 'Aloc') // unselectable, invulnerable
+    call PauseUnit(DestructableLib___dummy, true)
 endfunction
 
 //library DestructableLib ends
@@ -2229,40 +2226,40 @@ endfunction
 
 
    
-    function GroupTools__AE takes nothing returns nothing
-        if ( GroupTools__f ) then
-            call GroupClear(GroupTools__gT)
-            set GroupTools__f=false
+    function GroupTools___AE takes nothing returns nothing
+        if ( GroupTools___f ) then
+            call GroupClear(GroupTools___gT)
+            set GroupTools___f=false
         endif
-        call GroupAddUnit(GroupTools__gT, GetEnumUnit())
+        call GroupAddUnit(GroupTools___gT, GetEnumUnit())
     endfunction
    
     function GroupRefresh takes group g returns nothing
-        set GroupTools__f=true
-        set GroupTools__gT=g
-        call ForGroup(GroupTools__gT, function GroupTools__AE)
-        if ( GroupTools__f ) then
+        set GroupTools___f=true
+        set GroupTools___gT=g
+        call ForGroup(GroupTools___gT, function GroupTools___AE)
+        if ( GroupTools___f ) then
             call GroupClear(g)
         endif
     endfunction
    
     function NewGroup takes nothing returns group
-        if 0 == GroupTools__gN then
+        if 0 == GroupTools___gN then
             return CreateGroup()
         endif
-        set GroupTools__gN=GroupTools__gN - 1
-        return GroupTools__groups[GroupTools__gN]
+        set GroupTools___gN=GroupTools___gN - 1
+        return GroupTools___groups[GroupTools___gN]
     endfunction
    
     function ReleaseGroup takes group g returns nothing
         call GroupClear(g)
-        set GroupTools__groups[GroupTools__gN]=g
-        set GroupTools__gN=GroupTools__gN + 1
+        set GroupTools___groups[GroupTools___gN]=g
+        set GroupTools___gN=GroupTools___gN + 1
     endfunction
    
     function GroupUnitsInArea takes group whichGroup,real x,real y,real radius returns nothing
         local unit u
-        call GroupEnumUnitsInRange(ENUM_GROUP, x, y, radius + GroupTools__MAX_COLLISION_SIZE, null)
+        call GroupEnumUnitsInRange(ENUM_GROUP, x, y, radius + GroupTools___MAX_COLLISION_SIZE, null)
         loop
             set u=FirstOfGroup(ENUM_GROUP)
             exitwhen null == u
@@ -2401,23 +2398,23 @@ endfunction
 //==================================================================================================
 
 // Constants
-constant function MultiPatrol__Patrol_MinDistance takes nothing returns real
+constant function MultiPatrol___Patrol_MinDistance takes nothing returns real
     return 100.
 endfunction
 
-constant function MultiPatrol__Patrol_POINT_CURRENT takes nothing returns integer
+constant function MultiPatrol___Patrol_POINT_CURRENT takes nothing returns integer
     return 9996
 endfunction
 
-constant function MultiPatrol__Patrol_POINT_TOTAL takes nothing returns integer
+constant function MultiPatrol___Patrol_POINT_TOTAL takes nothing returns integer
     return 9997
 endfunction
 
-constant function MultiPatrol__Patrol_REGION takes nothing returns integer
+constant function MultiPatrol___Patrol_REGION takes nothing returns integer
     return 9998
 endfunction
 
-constant function MultiPatrol__Patrol_TRIGGER takes nothing returns integer
+constant function MultiPatrol___Patrol_TRIGGER takes nothing returns integer
     return 9999
 endfunction
 //==================================================================================================
@@ -2427,108 +2424,108 @@ endfunction
 //=====================
 // Points
 function Patrol_GetPointX takes integer unitHandleId,integer pointNumber returns real
-    return LoadReal(MultiPatrol__data, unitHandleId, pointNumber)
+    return LoadReal(MultiPatrol___data, unitHandleId, pointNumber)
 endfunction
 
 function Patrol_GetPointY takes integer unitHandleId,integer pointNumber returns real
-    return LoadReal(MultiPatrol__data, unitHandleId, - pointNumber)
+    return LoadReal(MultiPatrol___data, unitHandleId, - pointNumber)
 endfunction
 
 function Patrol_SetPointX takes integer unitHandleId,integer pointNumber,real newX returns nothing
-    call SaveReal(MultiPatrol__data, unitHandleId, pointNumber, newX)
+    call SaveReal(MultiPatrol___data, unitHandleId, pointNumber, newX)
 endfunction
 
 function Patrol_SetPointY takes integer unitHandleId,integer pointNumber,real newY returns nothing
-    call SaveReal(MultiPatrol__data, unitHandleId, - pointNumber, newY)
+    call SaveReal(MultiPatrol___data, unitHandleId, - pointNumber, newY)
 endfunction
 //=====================
 // Current Point and Total Points
 function Patrol_GetCurrentPatrolPoint takes integer unitHandleId returns integer
-    return LoadInteger(MultiPatrol__data, - unitHandleId, (9996)) // INLINED!!
+    return LoadInteger(MultiPatrol___data, - unitHandleId, (9996)) // INLINED!!
 endfunction
 
 function Patrol_GetTotalPatrolPoints takes integer unitHandleId returns integer
-    return LoadInteger(MultiPatrol__data, - unitHandleId, (9997)) // INLINED!!
+    return LoadInteger(MultiPatrol___data, - unitHandleId, (9997)) // INLINED!!
 endfunction
 
 function Patrol_SetCurrentPatrolPoint takes integer unitHandleId,integer pointNumber returns nothing
-    call SaveInteger(MultiPatrol__data, - unitHandleId, (9996), pointNumber) // INLINED!!
+    call SaveInteger(MultiPatrol___data, - unitHandleId, (9996), pointNumber) // INLINED!!
 endfunction
 
 function Patrol_SetTotalPatrolPoints takes integer unitHandleId,integer newTotal returns nothing
-    call SaveInteger(MultiPatrol__data, - unitHandleId, (9997), newTotal) // INLINED!!
+    call SaveInteger(MultiPatrol___data, - unitHandleId, (9997), newTotal) // INLINED!!
 endfunction
 //=====================
 // Region and Trigger
-function MultiPatrol__Patrol_GetRegion takes integer unitHandleId returns region
-    return LoadRegionHandle(MultiPatrol__data, - unitHandleId, (9998)) // INLINED!!
+function MultiPatrol___Patrol_GetRegion takes integer unitHandleId returns region
+    return LoadRegionHandle(MultiPatrol___data, - unitHandleId, (9998)) // INLINED!!
 endfunction
 
-function MultiPatrol__Patrol_GetTrigger takes integer unitHandleId returns trigger
-    return LoadTriggerHandle(MultiPatrol__data, - unitHandleId, (9999)) // INLINED!!
+function MultiPatrol___Patrol_GetTrigger takes integer unitHandleId returns trigger
+    return LoadTriggerHandle(MultiPatrol___data, - unitHandleId, (9999)) // INLINED!!
 endfunction
 
-function MultiPatrol__Patrol_SetRegion takes integer unitHandleId,region newRegion returns nothing
-    call SaveRegionHandle(MultiPatrol__data, - unitHandleId, (9998), newRegion) // INLINED!!
+function MultiPatrol___Patrol_SetRegion takes integer unitHandleId,region newRegion returns nothing
+    call SaveRegionHandle(MultiPatrol___data, - unitHandleId, (9998), newRegion) // INLINED!!
 endfunction
 
-function MultiPatrol__Patrol_SetTrigger takes integer unitHandleId,trigger newTrigger returns nothing
-    call SaveTriggerHandle(MultiPatrol__data, - unitHandleId, (9999), newTrigger) // INLINED!!
+function MultiPatrol___Patrol_SetTrigger takes integer unitHandleId,trigger newTrigger returns nothing
+    call SaveTriggerHandle(MultiPatrol___data, - unitHandleId, (9999), newTrigger) // INLINED!!
 endfunction
 
 //=====================
 // Text Tags and Special Effects for displaying patrol points
-function MultiPatrol__Patrol_SetPointEffect takes integer uId,integer point,effect spEffect returns nothing
-    call SaveEffectHandle(MultiPatrol__data, uId, MultiPatrol__INDEX_DISPLAY + point, spEffect)
+function MultiPatrol___Patrol_SetPointEffect takes integer uId,integer point,effect spEffect returns nothing
+    call SaveEffectHandle(MultiPatrol___data, uId, MultiPatrol___INDEX_DISPLAY + point, spEffect)
 endfunction
 
-function MultiPatrol__Patrol_SetPointTag takes integer uId,integer point,texttag tag returns nothing
-    call SaveTextTagHandle(MultiPatrol__data, uId, - MultiPatrol__INDEX_DISPLAY - point, tag)
+function MultiPatrol___Patrol_SetPointTag takes integer uId,integer point,texttag tag returns nothing
+    call SaveTextTagHandle(MultiPatrol___data, uId, - MultiPatrol___INDEX_DISPLAY - point, tag)
 endfunction
 
-function MultiPatrol__Patrol_GetPointEffect takes integer uId,integer point returns effect
-    return LoadEffectHandle(MultiPatrol__data, uId, MultiPatrol__INDEX_DISPLAY + point)
+function MultiPatrol___Patrol_GetPointEffect takes integer uId,integer point returns effect
+    return LoadEffectHandle(MultiPatrol___data, uId, MultiPatrol___INDEX_DISPLAY + point)
 endfunction
 
-function MultiPatrol__Patrol_GetPointTag takes integer uId,integer point returns texttag
-    return LoadTextTagHandle(MultiPatrol__data, uId, - MultiPatrol__INDEX_DISPLAY - point)
+function MultiPatrol___Patrol_GetPointTag takes integer uId,integer point returns texttag
+    return LoadTextTagHandle(MultiPatrol___data, uId, - MultiPatrol___INDEX_DISPLAY - point)
 endfunction
 
-function MultiPatrol__Patrol_RemovePointEffect takes integer uId,integer point returns nothing
-    call RemoveSavedHandle(MultiPatrol__data, uId, MultiPatrol__INDEX_DISPLAY + point)
+function MultiPatrol___Patrol_RemovePointEffect takes integer uId,integer point returns nothing
+    call RemoveSavedHandle(MultiPatrol___data, uId, MultiPatrol___INDEX_DISPLAY + point)
 endfunction
 
-function MultiPatrol__Patrol_RemovePointTag takes integer uId,integer point returns nothing
-    call RemoveSavedHandle(MultiPatrol__data, uId, - MultiPatrol__INDEX_DISPLAY - point)
+function MultiPatrol___Patrol_RemovePointTag takes integer uId,integer point returns nothing
+    call RemoveSavedHandle(MultiPatrol___data, uId, - MultiPatrol___INDEX_DISPLAY - point)
 endfunction
 //==================================================================================================
 
 // Uitilities
-function MultiPatrol__Patrol_Distance takes real x,real y returns real
+function MultiPatrol___Patrol_Distance takes real x,real y returns real
     return SquareRoot(Pow(x, 2) + Pow(y, 2))
 endfunction
 
 //==================================================================================================
 
-function MultiPatrol__Patrol_PointReached takes nothing returns boolean
+function MultiPatrol___Patrol_PointReached takes nothing returns boolean
     local unit trigU= GetTriggerUnit()
     local integer u_handle= GetHandleId(trigU)
-    local integer currentPtrl= (LoadInteger(MultiPatrol__data, - (u_handle), (9996))) // INLINED!!
+    local integer currentPtrl= (LoadInteger(MultiPatrol___data, - (u_handle), (9996))) // INLINED!!
     local region ptrlReg= GetTriggeringRegion()
     local real oldX
     local real oldY
     local real newX
     local real newY
-    if trigU != LoadUnitHandle(MultiPatrol__data, GetHandleId(GetTriggeringTrigger()), 0) then
+    if trigU != LoadUnitHandle(MultiPatrol___data, GetHandleId(GetTriggeringTrigger()), 0) then
         set trigU=null
         set ptrlReg=null
         return false
     endif
 //
-    call MoveRectTo(MultiPatrol__ptrlRect, (LoadReal(MultiPatrol__data, (u_handle ), ( currentPtrl))), (LoadReal(MultiPatrol__data, (u_handle ), - ( currentPtrl)))) // INLINED!!
-    call RegionClearRect(ptrlReg, MultiPatrol__ptrlRect)
+    call MoveRectTo(MultiPatrol___ptrlRect, (LoadReal(MultiPatrol___data, (u_handle ), ( currentPtrl))), (LoadReal(MultiPatrol___data, (u_handle ), - ( currentPtrl)))) // INLINED!!
+    call RegionClearRect(ptrlReg, MultiPatrol___ptrlRect)
 //
-    if currentPtrl == (LoadInteger(MultiPatrol__data, - (u_handle), (9997))) then // INLINED!!
+    if currentPtrl == (LoadInteger(MultiPatrol___data, - (u_handle), (9997))) then // INLINED!!
         set currentPtrl=1
     else
         set currentPtrl=currentPtrl + 1
@@ -2536,23 +2533,23 @@ function MultiPatrol__Patrol_PointReached takes nothing returns boolean
     
     set oldX=GetUnitX(trigU)
     set oldY=GetUnitY(trigU)
-    set newX=(LoadReal(MultiPatrol__data, (u_handle ), ( currentPtrl))) // INLINED!!
-    set newY=(LoadReal(MultiPatrol__data, (u_handle ), - ( currentPtrl))) // INLINED!!
+    set newX=(LoadReal(MultiPatrol___data, (u_handle ), ( currentPtrl))) // INLINED!!
+    set newY=(LoadReal(MultiPatrol___data, (u_handle ), - ( currentPtrl))) // INLINED!!
             
     //TODO:System can still bug even if it's not the first point, if a unit is blocking the path
-    if (SquareRoot(Pow(((newX - oldX )*1.0), 2) + Pow((( newY - oldY)*1.0), 2))) <= MultiPatrol__MINIMUM_DISTANCE then // INLINED!!
+    if (SquareRoot(Pow(((newX - oldX )*1.0), 2) + Pow((( newY - oldY)*1.0), 2))) <= MultiPatrol___MINIMUM_DISTANCE then // INLINED!!
         set currentPtrl=currentPtrl + 1
     endif
     
-    call SaveInteger(MultiPatrol__data, - (u_handle ), (9996), ( currentPtrl)) // INLINED!!
+    call SaveInteger(MultiPatrol___data, - (u_handle ), (9996), ( currentPtrl)) // INLINED!!
 //
-    call MoveRectTo(MultiPatrol__ptrlRect, (LoadReal(MultiPatrol__data, (u_handle ), ( currentPtrl))), (LoadReal(MultiPatrol__data, (u_handle ), - ( currentPtrl)))) // INLINED!!
-    call RegionAddRect(ptrlReg, MultiPatrol__ptrlRect)
+    call MoveRectTo(MultiPatrol___ptrlRect, (LoadReal(MultiPatrol___data, (u_handle ), ( currentPtrl))), (LoadReal(MultiPatrol___data, (u_handle ), - ( currentPtrl)))) // INLINED!!
+    call RegionAddRect(ptrlReg, MultiPatrol___ptrlRect)
 //
-    set MultiPatrol__orderBool=true
-    if IssuePointOrder(trigU, "patrol", (LoadReal(MultiPatrol__data, (u_handle ), ( currentPtrl))), (LoadReal(MultiPatrol__data, (u_handle ), - ( currentPtrl)))) then // INLINED!!
+    set MultiPatrol___orderBool=true
+    if IssuePointOrder(trigU, "patrol", (LoadReal(MultiPatrol___data, (u_handle ), ( currentPtrl))), (LoadReal(MultiPatrol___data, (u_handle ), - ( currentPtrl)))) then // INLINED!!
     else
-        set MultiPatrol__orderBool=false
+        set MultiPatrol___orderBool=false
     endif
     
     set trigU=null
@@ -2567,37 +2564,37 @@ endfunction
 //===================
 
 function Patrol_UnitIdHasPatrolPoints takes integer unitHandleId returns boolean
-    return (LoadInteger(MultiPatrol__data, - (unitHandleId), (9996))) != 0 // INLINED!!
+    return (LoadInteger(MultiPatrol___data, - (unitHandleId), (9996))) != 0 // INLINED!!
 endfunction
 
 function Patrol_UnitHasPatrolPoints takes unit whichUnit returns boolean
-    return ((LoadInteger(MultiPatrol__data, - ((GetHandleId(whichUnit))), (9996))) != 0) // INLINED!!
+    return ((LoadInteger(MultiPatrol___data, - ((GetHandleId(whichUnit))), (9996))) != 0) // INLINED!!
 endfunction
 
 function Patrol_DestroyIdPoints takes integer u_handle returns nothing
-    local integer pnts_number= (LoadInteger(MultiPatrol__data, - (u_handle), (9997))) // INLINED!!
+    local integer pnts_number= (LoadInteger(MultiPatrol___data, - (u_handle), (9997))) // INLINED!!
     local integer i= 1
     
     loop
-    exitwhen i > pnts_number or (LoadEffectHandle(MultiPatrol__data, (u_handle ), MultiPatrol__INDEX_DISPLAY + ( i))) == null // INLINED!!
-        call BlzSetSpecialEffectAlpha((LoadEffectHandle(MultiPatrol__data, (u_handle ), MultiPatrol__INDEX_DISPLAY + ( i))), 0) // INLINED!!
-        call DestroyEffect((LoadEffectHandle(MultiPatrol__data, (u_handle ), MultiPatrol__INDEX_DISPLAY + ( i)))) // INLINED!!
-        call DestroyTextTag((LoadTextTagHandle(MultiPatrol__data, (u_handle ), - MultiPatrol__INDEX_DISPLAY - ( i)))) // INLINED!!
-        call RemoveSavedHandle(MultiPatrol__data, (u_handle ), MultiPatrol__INDEX_DISPLAY + ( i)) // INLINED!!
-        call RemoveSavedHandle(MultiPatrol__data, (u_handle ), - MultiPatrol__INDEX_DISPLAY - ( i)) // INLINED!!
+    exitwhen i > pnts_number or (LoadEffectHandle(MultiPatrol___data, (u_handle ), MultiPatrol___INDEX_DISPLAY + ( i))) == null // INLINED!!
+        call BlzSetSpecialEffectAlpha((LoadEffectHandle(MultiPatrol___data, (u_handle ), MultiPatrol___INDEX_DISPLAY + ( i))), 0) // INLINED!!
+        call DestroyEffect((LoadEffectHandle(MultiPatrol___data, (u_handle ), MultiPatrol___INDEX_DISPLAY + ( i)))) // INLINED!!
+        call DestroyTextTag((LoadTextTagHandle(MultiPatrol___data, (u_handle ), - MultiPatrol___INDEX_DISPLAY - ( i)))) // INLINED!!
+        call RemoveSavedHandle(MultiPatrol___data, (u_handle ), MultiPatrol___INDEX_DISPLAY + ( i)) // INLINED!!
+        call RemoveSavedHandle(MultiPatrol___data, (u_handle ), - MultiPatrol___INDEX_DISPLAY - ( i)) // INLINED!!
         
         set i=i + 1
     endloop
 endfunction
 
 function Patrol_ClearUnitIdData takes integer unitHandleId returns nothing
-    local trigger patrolTrig= (LoadTriggerHandle(MultiPatrol__data, - (unitHandleId), (9999))) // INLINED!!
+    local trigger patrolTrig= (LoadTriggerHandle(MultiPatrol___data, - (unitHandleId), (9999))) // INLINED!!
     
     call Patrol_DestroyIdPoints(unitHandleId)
-    call FlushChildHashtable(MultiPatrol__data, GetHandleId(patrolTrig))
-    call FlushChildHashtable(MultiPatrol__data, unitHandleId) // Clear patrol points
-    call FlushChildHashtable(MultiPatrol__data, - unitHandleId) // Clear other stuff
-    call RemoveRegion((LoadRegionHandle(MultiPatrol__data, - (unitHandleId), (9998)))) // INLINED!!
+    call FlushChildHashtable(MultiPatrol___data, GetHandleId(patrolTrig))
+    call FlushChildHashtable(MultiPatrol___data, unitHandleId) // Clear patrol points
+    call FlushChildHashtable(MultiPatrol___data, - unitHandleId) // Clear other stuff
+    call RemoveRegion((LoadRegionHandle(MultiPatrol___data, - (unitHandleId), (9998)))) // INLINED!!
     call DestroyTrigger(patrolTrig)
     
     set patrolTrig=null
@@ -2613,8 +2610,8 @@ function Patrol_IsValidPatrolOrder takes integer orderId returns boolean
     endif
     
     // Handle recursion
-    if MultiPatrol__orderBool then
-        set MultiPatrol__orderBool=false
+    if MultiPatrol___orderBool then
+        set MultiPatrol___orderBool=false
         return false
     endif
     
@@ -2623,7 +2620,7 @@ endfunction
 
 function Patrol_DisplayPoints takes unit whichUnit returns nothing
     local integer u_handle= GetHandleId(whichUnit)
-    local integer pnts_number= (LoadInteger(MultiPatrol__data, - (u_handle), (9997))) // INLINED!!
+    local integer pnts_number= (LoadInteger(MultiPatrol___data, - (u_handle), (9997))) // INLINED!!
     local integer i= 1
     local real x
     local real y
@@ -2632,16 +2629,16 @@ function Patrol_DisplayPoints takes unit whichUnit returns nothing
     
     loop
     exitwhen i > pnts_number
-        if (LoadEffectHandle(MultiPatrol__data, (u_handle ), MultiPatrol__INDEX_DISPLAY + ( i))) == null then // INLINED!!
-            set x=(LoadReal(MultiPatrol__data, (u_handle ), ( i))) // INLINED!!
-            set y=(LoadReal(MultiPatrol__data, (u_handle ), - ( i))) // INLINED!!
+        if (LoadEffectHandle(MultiPatrol___data, (u_handle ), MultiPatrol___INDEX_DISPLAY + ( i))) == null then // INLINED!!
+            set x=(LoadReal(MultiPatrol___data, (u_handle ), ( i))) // INLINED!!
+            set y=(LoadReal(MultiPatrol___data, (u_handle ), - ( i))) // INLINED!!
         
             set tag=CreateTextTag()
             set spEffect=AddSpecialEffect("UI\\Feedback\\RallyPoint\\RallyPoint.mdl", x, y)
             call SetTextTagText(tag, I2S(i), 0.023)
             call SetTextTagPos(tag, x - 32, y, 0)
-            call SaveEffectHandle(MultiPatrol__data, (u_handle ), MultiPatrol__INDEX_DISPLAY + ( i ), ( spEffect)) // INLINED!!
-            call SaveTextTagHandle(MultiPatrol__data, (u_handle ), - MultiPatrol__INDEX_DISPLAY - ( i ), ( tag)) // INLINED!!
+            call SaveEffectHandle(MultiPatrol___data, (u_handle ), MultiPatrol___INDEX_DISPLAY + ( i ), ( spEffect)) // INLINED!!
+            call SaveTextTagHandle(MultiPatrol___data, (u_handle ), - MultiPatrol___INDEX_DISPLAY - ( i ), ( tag)) // INLINED!!
             if GetLocalPlayer() != GetOwningPlayer(whichUnit) then
                 call SetTextTagVisibility(tag, false)
                 call BlzSetSpecialEffectAlpha(spEffect, 0)
@@ -2660,22 +2657,22 @@ endfunction
 
 function Patrol_ResumePatrol takes unit whichUnit returns nothing
     local integer u_handle= GetHandleId(whichUnit)
-    local integer currentPtrl= (LoadInteger(MultiPatrol__data, - (u_handle), (9996))) // INLINED!!
-    local real patrolX= (LoadReal(MultiPatrol__data, (u_handle ), ( currentPtrl))) // INLINED!!
-    local real patrolY= (LoadReal(MultiPatrol__data, (u_handle ), - ( currentPtrl))) // INLINED!!
+    local integer currentPtrl= (LoadInteger(MultiPatrol___data, - (u_handle), (9996))) // INLINED!!
+    local real patrolX= (LoadReal(MultiPatrol___data, (u_handle ), ( currentPtrl))) // INLINED!!
+    local real patrolY= (LoadReal(MultiPatrol___data, (u_handle ), - ( currentPtrl))) // INLINED!!
     
-    if not ((LoadInteger(MultiPatrol__data, - ((u_handle)), (9996))) != 0) then //currentPtrl == 0 then // INLINED!!
+    if not ((LoadInteger(MultiPatrol___data, - ((u_handle)), (9996))) != 0) then //currentPtrl == 0 then // INLINED!!
         return
     endif
     
-    set MultiPatrol__orderBool=true
-    if (SquareRoot(Pow(((patrolX - GetUnitX(whichUnit) )*1.0), 2) + Pow((( patrolY - GetUnitY(whichUnit))*1.0), 2))) > MultiPatrol__MINIMUM_DISTANCE then // INLINED!!
+    set MultiPatrol___orderBool=true
+    if (SquareRoot(Pow(((patrolX - GetUnitX(whichUnit) )*1.0), 2) + Pow((( patrolY - GetUnitY(whichUnit))*1.0), 2))) > MultiPatrol___MINIMUM_DISTANCE then // INLINED!!
         if not IssuePointOrder(whichUnit, "patrol", patrolX, patrolY) then
-            set MultiPatrol__orderBool=false
+            set MultiPatrol___orderBool=false
         endif
     else
         if not IssuePointOrder(whichUnit, "move", patrolX, patrolY) then
-            set MultiPatrol__orderBool=false
+            set MultiPatrol___orderBool=false
         endif
     endif
 endfunction
@@ -2685,25 +2682,25 @@ function Patrol_Create takes unit whichUnit,real x0,real y0,real x,real y return
     local trigger dynTrig
     local region ptrlReg
     
-    if (SquareRoot(Pow(((x - x0 )*1.0), 2) + Pow((( y - y0)*1.0), 2))) > MultiPatrol__MINIMUM_DISTANCE then // INLINED!!
+    if (SquareRoot(Pow(((x - x0 )*1.0), 2) + Pow((( y - y0)*1.0), 2))) > MultiPatrol___MINIMUM_DISTANCE then // INLINED!!
         set dynTrig=CreateTrigger()
         set ptrlReg=CreateRegion()
         
-        call SaveInteger(MultiPatrol__data, - (u_handle ), (9997), ( 2)) // INLINED!!
-        call SaveInteger(MultiPatrol__data, - (u_handle ), (9996), ( 2)) // INLINED!!
-        call SaveReal(MultiPatrol__data, (u_handle ), ( 1 ), (( x0)*1.0)) // INLINED!!
-        call SaveReal(MultiPatrol__data, (u_handle ), - ( 1 ), (( y0)*1.0)) // INLINED!!
-        call SaveReal(MultiPatrol__data, (u_handle ), ( 2 ), (( x)*1.0)) // INLINED!!
-        call SaveReal(MultiPatrol__data, (u_handle ), - ( 2 ), (( y)*1.0)) // INLINED!!
-        call SaveTriggerHandle(MultiPatrol__data, - (u_handle ), (9999), ( dynTrig)) // INLINED!!
-        call SaveRegionHandle(MultiPatrol__data, - (u_handle ), (9998), ( ptrlReg)) // INLINED!!
+        call SaveInteger(MultiPatrol___data, - (u_handle ), (9997), ( 2)) // INLINED!!
+        call SaveInteger(MultiPatrol___data, - (u_handle ), (9996), ( 2)) // INLINED!!
+        call SaveReal(MultiPatrol___data, (u_handle ), ( 1 ), (( x0)*1.0)) // INLINED!!
+        call SaveReal(MultiPatrol___data, (u_handle ), - ( 1 ), (( y0)*1.0)) // INLINED!!
+        call SaveReal(MultiPatrol___data, (u_handle ), ( 2 ), (( x)*1.0)) // INLINED!!
+        call SaveReal(MultiPatrol___data, (u_handle ), - ( 2 ), (( y)*1.0)) // INLINED!!
+        call SaveTriggerHandle(MultiPatrol___data, - (u_handle ), (9999), ( dynTrig)) // INLINED!!
+        call SaveRegionHandle(MultiPatrol___data, - (u_handle ), (9998), ( ptrlReg)) // INLINED!!
         
-        call MoveRectTo(MultiPatrol__ptrlRect, x, y)
-        call RegionAddRect(ptrlReg, MultiPatrol__ptrlRect)
+        call MoveRectTo(MultiPatrol___ptrlRect, x, y)
+        call RegionAddRect(ptrlReg, MultiPatrol___ptrlRect)
         
         call TriggerRegisterEnterRegion(dynTrig, ptrlReg, null)
-        call TriggerAddCondition(dynTrig, Condition(function MultiPatrol__Patrol_PointReached))
-        call SaveUnitHandle(MultiPatrol__data, GetHandleId(dynTrig), 0, whichUnit)
+        call TriggerAddCondition(dynTrig, Condition(function MultiPatrol___Patrol_PointReached))
+        call SaveUnitHandle(MultiPatrol___data, GetHandleId(dynTrig), 0, whichUnit)
 
         set dynTrig=null
         set ptrlReg=null
@@ -2715,22 +2712,22 @@ endfunction
 
 function Patrol_AddPoint takes unit whichUnit,real newX,real newY returns integer
     local integer u_handle= GetHandleId(whichUnit)
-    local integer pnts_number= (LoadInteger(MultiPatrol__data, - (u_handle), (9997))) // INLINED!!
+    local integer pnts_number= (LoadInteger(MultiPatrol___data, - (u_handle), (9997))) // INLINED!!
     local real oldX
     local real oldY
     
-    if pnts_number > MultiPatrol__MAX_POINTS then
+    if pnts_number > MultiPatrol___MAX_POINTS then
         return MultiPatrol_ERROR_OVERFLOW
     
     elseif pnts_number > 0 then
-        set oldX=(LoadReal(MultiPatrol__data, (u_handle ), ( pnts_number))) // INLINED!!
-        set oldY=(LoadReal(MultiPatrol__data, (u_handle ), - ( pnts_number))) // INLINED!!
+        set oldX=(LoadReal(MultiPatrol___data, (u_handle ), ( pnts_number))) // INLINED!!
+        set oldY=(LoadReal(MultiPatrol___data, (u_handle ), - ( pnts_number))) // INLINED!!
         
-        if (SquareRoot(Pow(((newX - oldX )*1.0), 2) + Pow((( newY - oldY)*1.0), 2))) > MultiPatrol__MINIMUM_DISTANCE then // INLINED!!
+        if (SquareRoot(Pow(((newX - oldX )*1.0), 2) + Pow((( newY - oldY)*1.0), 2))) > MultiPatrol___MINIMUM_DISTANCE then // INLINED!!
             set pnts_number=pnts_number + 1
-            call SaveInteger(MultiPatrol__data, - (u_handle ), (9997), ( pnts_number)) // INLINED!!
-            call SaveReal(MultiPatrol__data, (u_handle ), ( pnts_number ), (( newX)*1.0)) // INLINED!!
-            call SaveReal(MultiPatrol__data, (u_handle ), - ( pnts_number ), (( newY)*1.0)) // INLINED!!
+            call SaveInteger(MultiPatrol___data, - (u_handle ), (9997), ( pnts_number)) // INLINED!!
+            call SaveReal(MultiPatrol___data, (u_handle ), ( pnts_number ), (( newX)*1.0)) // INLINED!!
+            call SaveReal(MultiPatrol___data, (u_handle ), - ( pnts_number ), (( newY)*1.0)) // INLINED!!
         else
             return MultiPatrol_ERROR_TOO_CLOSE
         endif
@@ -2759,8 +2756,8 @@ endfunction
 //  ------------------------
 // ||END OF PATROL SYSTEM ||
 //  
-function MultiPatrol__onInit takes nothing returns nothing
-    set MultiPatrol__ptrlRect=Rect(0, 0, MultiPatrol__RANGE, MultiPatrol__RANGE)
+function MultiPatrol___onInit takes nothing returns nothing
+    set MultiPatrol___ptrlRect=Rect(0, 0, MultiPatrol___RANGE, MultiPatrol___RANGE)
 endfunction
 
 
@@ -2954,22 +2951,22 @@ endfunction
 //library Table:
    
    
-    function s__Table__dex__get_size takes nothing returns integer
-        return Table__sizeK
+    function s__Table___dex__get_size takes nothing returns integer
+        return Table___sizeK
     endfunction
-    function s__Table__dex__get_list takes nothing returns integer
-        return Table__listK
-    endfunction
-   
-    function s__Table__handles_has takes integer this,integer key returns boolean
-        return HaveSavedHandle(Table__ht, this, key)
-    endfunction
-    function s__Table__handles_remove takes integer this,integer key returns nothing
-        call RemoveSavedHandle(Table__ht, this, key)
+    function s__Table___dex__get_list takes nothing returns integer
+        return Table___listK
     endfunction
    
-    function s__Table__agents__setindex takes integer this,integer key,agent value returns nothing
-        call SaveAgentHandle(Table__ht, this, key, value)
+    function s__Table___handles_has takes integer this,integer key returns boolean
+        return HaveSavedHandle(Table___ht, this, key)
+    endfunction
+    function s__Table___handles_remove takes integer this,integer key returns nothing
+        call RemoveSavedHandle(Table___ht, this, key)
+    endfunction
+   
+    function s__Table___agents__setindex takes integer this,integer key,agent value returns nothing
+        call SaveAgentHandle(Table___ht, this, key, value)
     endfunction
    
    
@@ -2978,763 +2975,763 @@ endfunction
 //Don't be intimidated by the number of macros - Vexorian's map optimizer is
 //supposed to kill functions which inline (all of these functions inline).
 //textmacro instance: NEW_ARRAY_BASIC("Real", "Real", "real")
-    function s__Table__reals__getindex takes integer this,integer key returns real
-        return LoadReal(Table__ht, this, key)
+    function s__Table___reals__getindex takes integer this,integer key returns real
+        return LoadReal(Table___ht, this, key)
     endfunction
-    function s__Table__reals__setindex takes integer this,integer key,real value returns nothing
-        call SaveReal(Table__ht, this, key, value)
+    function s__Table___reals__setindex takes integer this,integer key,real value returns nothing
+        call SaveReal(Table___ht, this, key, value)
     endfunction
-    function s__Table__reals_has takes integer this,integer key returns boolean
-        return HaveSavedReal(Table__ht, this, key)
+    function s__Table___reals_has takes integer this,integer key returns boolean
+        return HaveSavedReal(Table___ht, this, key)
     endfunction
-    function s__Table__reals_remove takes integer this,integer key returns nothing
-        call RemoveSavedReal(Table__ht, this, key)
+    function s__Table___reals_remove takes integer this,integer key returns nothing
+        call RemoveSavedReal(Table___ht, this, key)
     endfunction
 //end of: NEW_ARRAY_BASIC("Real", "Real", "real")
 //textmacro instance: NEW_ARRAY_BASIC("Boolean", "Boolean", "boolean")
-    function s__Table__booleans__getindex takes integer this,integer key returns boolean
-        return LoadBoolean(Table__ht, this, key)
+    function s__Table___booleans__getindex takes integer this,integer key returns boolean
+        return LoadBoolean(Table___ht, this, key)
     endfunction
-    function s__Table__booleans__setindex takes integer this,integer key,boolean value returns nothing
-        call SaveBoolean(Table__ht, this, key, value)
+    function s__Table___booleans__setindex takes integer this,integer key,boolean value returns nothing
+        call SaveBoolean(Table___ht, this, key, value)
     endfunction
-    function s__Table__booleans_has takes integer this,integer key returns boolean
-        return HaveSavedBoolean(Table__ht, this, key)
+    function s__Table___booleans_has takes integer this,integer key returns boolean
+        return HaveSavedBoolean(Table___ht, this, key)
     endfunction
-    function s__Table__booleans_remove takes integer this,integer key returns nothing
-        call RemoveSavedBoolean(Table__ht, this, key)
+    function s__Table___booleans_remove takes integer this,integer key returns nothing
+        call RemoveSavedBoolean(Table___ht, this, key)
     endfunction
 //end of: NEW_ARRAY_BASIC("Boolean", "Boolean", "boolean")
 //textmacro instance: NEW_ARRAY_BASIC("String", "Str", "string")
-    function s__Table__strings__getindex takes integer this,integer key returns string
-        return LoadStr(Table__ht, this, key)
+    function s__Table___strings__getindex takes integer this,integer key returns string
+        return LoadStr(Table___ht, this, key)
     endfunction
-    function s__Table__strings__setindex takes integer this,integer key,string value returns nothing
-        call SaveStr(Table__ht, this, key, value)
+    function s__Table___strings__setindex takes integer this,integer key,string value returns nothing
+        call SaveStr(Table___ht, this, key, value)
     endfunction
-    function s__Table__strings_has takes integer this,integer key returns boolean
-        return HaveSavedString(Table__ht, this, key)
+    function s__Table___strings_has takes integer this,integer key returns boolean
+        return HaveSavedString(Table___ht, this, key)
     endfunction
-    function s__Table__strings_remove takes integer this,integer key returns nothing
-        call RemoveSavedString(Table__ht, this, key)
+    function s__Table___strings_remove takes integer this,integer key returns nothing
+        call RemoveSavedString(Table___ht, this, key)
     endfunction
 //end of: NEW_ARRAY_BASIC("String", "Str", "string")
 //New textmacro to allow table.integer[] syntax for compatibility with textmacros that might desire it.
 //textmacro instance: NEW_ARRAY_BASIC("Integer", "Integer", "integer")
-    function s__Table__integers__getindex takes integer this,integer key returns integer
-        return LoadInteger(Table__ht, this, key)
+    function s__Table___integers__getindex takes integer this,integer key returns integer
+        return LoadInteger(Table___ht, this, key)
     endfunction
-    function s__Table__integers__setindex takes integer this,integer key,integer value returns nothing
-        call SaveInteger(Table__ht, this, key, value)
+    function s__Table___integers__setindex takes integer this,integer key,integer value returns nothing
+        call SaveInteger(Table___ht, this, key, value)
     endfunction
-    function s__Table__integers_has takes integer this,integer key returns boolean
-        return HaveSavedInteger(Table__ht, this, key)
+    function s__Table___integers_has takes integer this,integer key returns boolean
+        return HaveSavedInteger(Table___ht, this, key)
     endfunction
-    function s__Table__integers_remove takes integer this,integer key returns nothing
-        call RemoveSavedInteger(Table__ht, this, key)
+    function s__Table___integers_remove takes integer this,integer key returns nothing
+        call RemoveSavedInteger(Table___ht, this, key)
     endfunction
 //end of: NEW_ARRAY_BASIC("Integer", "Integer", "integer")
    
 //textmacro instance: NEW_ARRAY("Player", "player")
-    function s__Table__players__getindex takes integer this,integer key returns player
-        return LoadPlayerHandle(Table__ht, this, key)
+    function s__Table___players__getindex takes integer this,integer key returns player
+        return LoadPlayerHandle(Table___ht, this, key)
     endfunction
-    function s__Table__players__setindex takes integer this,integer key,player value returns nothing
-        call SavePlayerHandle(Table__ht, this, key, value)
+    function s__Table___players__setindex takes integer this,integer key,player value returns nothing
+        call SavePlayerHandle(Table___ht, this, key, value)
     endfunction
-    function s__Table__players_has takes integer this,integer key returns boolean
-        return HaveSavedHandle(Table__ht, this, key)
+    function s__Table___players_has takes integer this,integer key returns boolean
+        return HaveSavedHandle(Table___ht, this, key)
     endfunction
-    function s__Table__players_remove takes integer this,integer key returns nothing
-        call RemoveSavedHandle(Table__ht, this, key)
+    function s__Table___players_remove takes integer this,integer key returns nothing
+        call RemoveSavedHandle(Table___ht, this, key)
     endfunction
 //end of: NEW_ARRAY("Player", "player")
 //textmacro instance: NEW_ARRAY("Widget", "widget")
-    function s__Table__widgets__getindex takes integer this,integer key returns widget
-        return LoadWidgetHandle(Table__ht, this, key)
+    function s__Table___widgets__getindex takes integer this,integer key returns widget
+        return LoadWidgetHandle(Table___ht, this, key)
     endfunction
-    function s__Table__widgets__setindex takes integer this,integer key,widget value returns nothing
-        call SaveWidgetHandle(Table__ht, this, key, value)
+    function s__Table___widgets__setindex takes integer this,integer key,widget value returns nothing
+        call SaveWidgetHandle(Table___ht, this, key, value)
     endfunction
-    function s__Table__widgets_has takes integer this,integer key returns boolean
-        return HaveSavedHandle(Table__ht, this, key)
+    function s__Table___widgets_has takes integer this,integer key returns boolean
+        return HaveSavedHandle(Table___ht, this, key)
     endfunction
-    function s__Table__widgets_remove takes integer this,integer key returns nothing
-        call RemoveSavedHandle(Table__ht, this, key)
+    function s__Table___widgets_remove takes integer this,integer key returns nothing
+        call RemoveSavedHandle(Table___ht, this, key)
     endfunction
 //end of: NEW_ARRAY("Widget", "widget")
 //textmacro instance: NEW_ARRAY("Destructable", "destructable")
-    function s__Table__destructables__getindex takes integer this,integer key returns destructable
-        return LoadDestructableHandle(Table__ht, this, key)
+    function s__Table___destructables__getindex takes integer this,integer key returns destructable
+        return LoadDestructableHandle(Table___ht, this, key)
     endfunction
-    function s__Table__destructables__setindex takes integer this,integer key,destructable value returns nothing
-        call SaveDestructableHandle(Table__ht, this, key, value)
+    function s__Table___destructables__setindex takes integer this,integer key,destructable value returns nothing
+        call SaveDestructableHandle(Table___ht, this, key, value)
     endfunction
-    function s__Table__destructables_has takes integer this,integer key returns boolean
-        return HaveSavedHandle(Table__ht, this, key)
+    function s__Table___destructables_has takes integer this,integer key returns boolean
+        return HaveSavedHandle(Table___ht, this, key)
     endfunction
-    function s__Table__destructables_remove takes integer this,integer key returns nothing
-        call RemoveSavedHandle(Table__ht, this, key)
+    function s__Table___destructables_remove takes integer this,integer key returns nothing
+        call RemoveSavedHandle(Table___ht, this, key)
     endfunction
 //end of: NEW_ARRAY("Destructable", "destructable")
 //textmacro instance: NEW_ARRAY("Item", "item")
-    function s__Table__items__getindex takes integer this,integer key returns item
-        return LoadItemHandle(Table__ht, this, key)
+    function s__Table___items__getindex takes integer this,integer key returns item
+        return LoadItemHandle(Table___ht, this, key)
     endfunction
-    function s__Table__items__setindex takes integer this,integer key,item value returns nothing
-        call SaveItemHandle(Table__ht, this, key, value)
+    function s__Table___items__setindex takes integer this,integer key,item value returns nothing
+        call SaveItemHandle(Table___ht, this, key, value)
     endfunction
-    function s__Table__items_has takes integer this,integer key returns boolean
-        return HaveSavedHandle(Table__ht, this, key)
+    function s__Table___items_has takes integer this,integer key returns boolean
+        return HaveSavedHandle(Table___ht, this, key)
     endfunction
-    function s__Table__items_remove takes integer this,integer key returns nothing
-        call RemoveSavedHandle(Table__ht, this, key)
+    function s__Table___items_remove takes integer this,integer key returns nothing
+        call RemoveSavedHandle(Table___ht, this, key)
     endfunction
 //end of: NEW_ARRAY("Item", "item")
 //textmacro instance: NEW_ARRAY("Unit", "unit")
-    function s__Table__units__getindex takes integer this,integer key returns unit
-        return LoadUnitHandle(Table__ht, this, key)
+    function s__Table___units__getindex takes integer this,integer key returns unit
+        return LoadUnitHandle(Table___ht, this, key)
     endfunction
-    function s__Table__units__setindex takes integer this,integer key,unit value returns nothing
-        call SaveUnitHandle(Table__ht, this, key, value)
+    function s__Table___units__setindex takes integer this,integer key,unit value returns nothing
+        call SaveUnitHandle(Table___ht, this, key, value)
     endfunction
-    function s__Table__units_has takes integer this,integer key returns boolean
-        return HaveSavedHandle(Table__ht, this, key)
+    function s__Table___units_has takes integer this,integer key returns boolean
+        return HaveSavedHandle(Table___ht, this, key)
     endfunction
-    function s__Table__units_remove takes integer this,integer key returns nothing
-        call RemoveSavedHandle(Table__ht, this, key)
+    function s__Table___units_remove takes integer this,integer key returns nothing
+        call RemoveSavedHandle(Table___ht, this, key)
     endfunction
 //end of: NEW_ARRAY("Unit", "unit")
 //textmacro instance: NEW_ARRAY("Ability", "ability")
-    function s__Table__abilitys__getindex takes integer this,integer key returns ability
-        return LoadAbilityHandle(Table__ht, this, key)
+    function s__Table___abilitys__getindex takes integer this,integer key returns ability
+        return LoadAbilityHandle(Table___ht, this, key)
     endfunction
-    function s__Table__abilitys__setindex takes integer this,integer key,ability value returns nothing
-        call SaveAbilityHandle(Table__ht, this, key, value)
+    function s__Table___abilitys__setindex takes integer this,integer key,ability value returns nothing
+        call SaveAbilityHandle(Table___ht, this, key, value)
     endfunction
-    function s__Table__abilitys_has takes integer this,integer key returns boolean
-        return HaveSavedHandle(Table__ht, this, key)
+    function s__Table___abilitys_has takes integer this,integer key returns boolean
+        return HaveSavedHandle(Table___ht, this, key)
     endfunction
-    function s__Table__abilitys_remove takes integer this,integer key returns nothing
-        call RemoveSavedHandle(Table__ht, this, key)
+    function s__Table___abilitys_remove takes integer this,integer key returns nothing
+        call RemoveSavedHandle(Table___ht, this, key)
     endfunction
 //end of: NEW_ARRAY("Ability", "ability")
 //textmacro instance: NEW_ARRAY("Timer", "timer")
-    function s__Table__timers__getindex takes integer this,integer key returns timer
-        return LoadTimerHandle(Table__ht, this, key)
+    function s__Table___timers__getindex takes integer this,integer key returns timer
+        return LoadTimerHandle(Table___ht, this, key)
     endfunction
-    function s__Table__timers__setindex takes integer this,integer key,timer value returns nothing
-        call SaveTimerHandle(Table__ht, this, key, value)
+    function s__Table___timers__setindex takes integer this,integer key,timer value returns nothing
+        call SaveTimerHandle(Table___ht, this, key, value)
     endfunction
-    function s__Table__timers_has takes integer this,integer key returns boolean
-        return HaveSavedHandle(Table__ht, this, key)
+    function s__Table___timers_has takes integer this,integer key returns boolean
+        return HaveSavedHandle(Table___ht, this, key)
     endfunction
-    function s__Table__timers_remove takes integer this,integer key returns nothing
-        call RemoveSavedHandle(Table__ht, this, key)
+    function s__Table___timers_remove takes integer this,integer key returns nothing
+        call RemoveSavedHandle(Table___ht, this, key)
     endfunction
 //end of: NEW_ARRAY("Timer", "timer")
 //textmacro instance: NEW_ARRAY("Trigger", "trigger")
-    function s__Table__triggers__getindex takes integer this,integer key returns trigger
-        return LoadTriggerHandle(Table__ht, this, key)
+    function s__Table___triggers__getindex takes integer this,integer key returns trigger
+        return LoadTriggerHandle(Table___ht, this, key)
     endfunction
-    function s__Table__triggers__setindex takes integer this,integer key,trigger value returns nothing
-        call SaveTriggerHandle(Table__ht, this, key, value)
+    function s__Table___triggers__setindex takes integer this,integer key,trigger value returns nothing
+        call SaveTriggerHandle(Table___ht, this, key, value)
     endfunction
-    function s__Table__triggers_has takes integer this,integer key returns boolean
-        return HaveSavedHandle(Table__ht, this, key)
+    function s__Table___triggers_has takes integer this,integer key returns boolean
+        return HaveSavedHandle(Table___ht, this, key)
     endfunction
-    function s__Table__triggers_remove takes integer this,integer key returns nothing
-        call RemoveSavedHandle(Table__ht, this, key)
+    function s__Table___triggers_remove takes integer this,integer key returns nothing
+        call RemoveSavedHandle(Table___ht, this, key)
     endfunction
 //end of: NEW_ARRAY("Trigger", "trigger")
 //textmacro instance: NEW_ARRAY("TriggerCondition", "triggercondition")
-    function s__Table__triggerconditions__getindex takes integer this,integer key returns triggercondition
-        return LoadTriggerConditionHandle(Table__ht, this, key)
+    function s__Table___triggerconditions__getindex takes integer this,integer key returns triggercondition
+        return LoadTriggerConditionHandle(Table___ht, this, key)
     endfunction
-    function s__Table__triggerconditions__setindex takes integer this,integer key,triggercondition value returns nothing
-        call SaveTriggerConditionHandle(Table__ht, this, key, value)
+    function s__Table___triggerconditions__setindex takes integer this,integer key,triggercondition value returns nothing
+        call SaveTriggerConditionHandle(Table___ht, this, key, value)
     endfunction
-    function s__Table__triggerconditions_has takes integer this,integer key returns boolean
-        return HaveSavedHandle(Table__ht, this, key)
+    function s__Table___triggerconditions_has takes integer this,integer key returns boolean
+        return HaveSavedHandle(Table___ht, this, key)
     endfunction
-    function s__Table__triggerconditions_remove takes integer this,integer key returns nothing
-        call RemoveSavedHandle(Table__ht, this, key)
+    function s__Table___triggerconditions_remove takes integer this,integer key returns nothing
+        call RemoveSavedHandle(Table___ht, this, key)
     endfunction
 //end of: NEW_ARRAY("TriggerCondition", "triggercondition")
 //textmacro instance: NEW_ARRAY("TriggerAction", "triggeraction")
-    function s__Table__triggeractions__getindex takes integer this,integer key returns triggeraction
-        return LoadTriggerActionHandle(Table__ht, this, key)
+    function s__Table___triggeractions__getindex takes integer this,integer key returns triggeraction
+        return LoadTriggerActionHandle(Table___ht, this, key)
     endfunction
-    function s__Table__triggeractions__setindex takes integer this,integer key,triggeraction value returns nothing
-        call SaveTriggerActionHandle(Table__ht, this, key, value)
+    function s__Table___triggeractions__setindex takes integer this,integer key,triggeraction value returns nothing
+        call SaveTriggerActionHandle(Table___ht, this, key, value)
     endfunction
-    function s__Table__triggeractions_has takes integer this,integer key returns boolean
-        return HaveSavedHandle(Table__ht, this, key)
+    function s__Table___triggeractions_has takes integer this,integer key returns boolean
+        return HaveSavedHandle(Table___ht, this, key)
     endfunction
-    function s__Table__triggeractions_remove takes integer this,integer key returns nothing
-        call RemoveSavedHandle(Table__ht, this, key)
+    function s__Table___triggeractions_remove takes integer this,integer key returns nothing
+        call RemoveSavedHandle(Table___ht, this, key)
     endfunction
 //end of: NEW_ARRAY("TriggerAction", "triggeraction")
 //textmacro instance: NEW_ARRAY("TriggerEvent", "event")
-    function s__Table__events__getindex takes integer this,integer key returns event
-        return LoadTriggerEventHandle(Table__ht, this, key)
+    function s__Table___events__getindex takes integer this,integer key returns event
+        return LoadTriggerEventHandle(Table___ht, this, key)
     endfunction
-    function s__Table__events__setindex takes integer this,integer key,event value returns nothing
-        call SaveTriggerEventHandle(Table__ht, this, key, value)
+    function s__Table___events__setindex takes integer this,integer key,event value returns nothing
+        call SaveTriggerEventHandle(Table___ht, this, key, value)
     endfunction
-    function s__Table__events_has takes integer this,integer key returns boolean
-        return HaveSavedHandle(Table__ht, this, key)
+    function s__Table___events_has takes integer this,integer key returns boolean
+        return HaveSavedHandle(Table___ht, this, key)
     endfunction
-    function s__Table__events_remove takes integer this,integer key returns nothing
-        call RemoveSavedHandle(Table__ht, this, key)
+    function s__Table___events_remove takes integer this,integer key returns nothing
+        call RemoveSavedHandle(Table___ht, this, key)
     endfunction
 //end of: NEW_ARRAY("TriggerEvent", "event")
 //textmacro instance: NEW_ARRAY("Force", "force")
-    function s__Table__forces__getindex takes integer this,integer key returns force
-        return LoadForceHandle(Table__ht, this, key)
+    function s__Table___forces__getindex takes integer this,integer key returns force
+        return LoadForceHandle(Table___ht, this, key)
     endfunction
-    function s__Table__forces__setindex takes integer this,integer key,force value returns nothing
-        call SaveForceHandle(Table__ht, this, key, value)
+    function s__Table___forces__setindex takes integer this,integer key,force value returns nothing
+        call SaveForceHandle(Table___ht, this, key, value)
     endfunction
-    function s__Table__forces_has takes integer this,integer key returns boolean
-        return HaveSavedHandle(Table__ht, this, key)
+    function s__Table___forces_has takes integer this,integer key returns boolean
+        return HaveSavedHandle(Table___ht, this, key)
     endfunction
-    function s__Table__forces_remove takes integer this,integer key returns nothing
-        call RemoveSavedHandle(Table__ht, this, key)
+    function s__Table___forces_remove takes integer this,integer key returns nothing
+        call RemoveSavedHandle(Table___ht, this, key)
     endfunction
 //end of: NEW_ARRAY("Force", "force")
 //textmacro instance: NEW_ARRAY("Group", "group")
-    function s__Table__groups__getindex takes integer this,integer key returns group
-        return LoadGroupHandle(Table__ht, this, key)
+    function s__Table___groups__getindex takes integer this,integer key returns group
+        return LoadGroupHandle(Table___ht, this, key)
     endfunction
-    function s__Table__groups__setindex takes integer this,integer key,group value returns nothing
-        call SaveGroupHandle(Table__ht, this, key, value)
+    function s__Table___groups__setindex takes integer this,integer key,group value returns nothing
+        call SaveGroupHandle(Table___ht, this, key, value)
     endfunction
-    function s__Table__groups_has takes integer this,integer key returns boolean
-        return HaveSavedHandle(Table__ht, this, key)
+    function s__Table___groups_has takes integer this,integer key returns boolean
+        return HaveSavedHandle(Table___ht, this, key)
     endfunction
-    function s__Table__groups_remove takes integer this,integer key returns nothing
-        call RemoveSavedHandle(Table__ht, this, key)
+    function s__Table___groups_remove takes integer this,integer key returns nothing
+        call RemoveSavedHandle(Table___ht, this, key)
     endfunction
 //end of: NEW_ARRAY("Group", "group")
 //textmacro instance: NEW_ARRAY("Location", "location")
-    function s__Table__locations__getindex takes integer this,integer key returns location
-        return LoadLocationHandle(Table__ht, this, key)
+    function s__Table___locations__getindex takes integer this,integer key returns location
+        return LoadLocationHandle(Table___ht, this, key)
     endfunction
-    function s__Table__locations__setindex takes integer this,integer key,location value returns nothing
-        call SaveLocationHandle(Table__ht, this, key, value)
+    function s__Table___locations__setindex takes integer this,integer key,location value returns nothing
+        call SaveLocationHandle(Table___ht, this, key, value)
     endfunction
-    function s__Table__locations_has takes integer this,integer key returns boolean
-        return HaveSavedHandle(Table__ht, this, key)
+    function s__Table___locations_has takes integer this,integer key returns boolean
+        return HaveSavedHandle(Table___ht, this, key)
     endfunction
-    function s__Table__locations_remove takes integer this,integer key returns nothing
-        call RemoveSavedHandle(Table__ht, this, key)
+    function s__Table___locations_remove takes integer this,integer key returns nothing
+        call RemoveSavedHandle(Table___ht, this, key)
     endfunction
 //end of: NEW_ARRAY("Location", "location")
 //textmacro instance: NEW_ARRAY("Rect", "rect")
-    function s__Table__rects__getindex takes integer this,integer key returns rect
-        return LoadRectHandle(Table__ht, this, key)
+    function s__Table___rects__getindex takes integer this,integer key returns rect
+        return LoadRectHandle(Table___ht, this, key)
     endfunction
-    function s__Table__rects__setindex takes integer this,integer key,rect value returns nothing
-        call SaveRectHandle(Table__ht, this, key, value)
+    function s__Table___rects__setindex takes integer this,integer key,rect value returns nothing
+        call SaveRectHandle(Table___ht, this, key, value)
     endfunction
-    function s__Table__rects_has takes integer this,integer key returns boolean
-        return HaveSavedHandle(Table__ht, this, key)
+    function s__Table___rects_has takes integer this,integer key returns boolean
+        return HaveSavedHandle(Table___ht, this, key)
     endfunction
-    function s__Table__rects_remove takes integer this,integer key returns nothing
-        call RemoveSavedHandle(Table__ht, this, key)
+    function s__Table___rects_remove takes integer this,integer key returns nothing
+        call RemoveSavedHandle(Table___ht, this, key)
     endfunction
 //end of: NEW_ARRAY("Rect", "rect")
 //textmacro instance: NEW_ARRAY("BooleanExpr", "boolexpr")
-    function s__Table__boolexprs__getindex takes integer this,integer key returns boolexpr
-        return LoadBooleanExprHandle(Table__ht, this, key)
+    function s__Table___boolexprs__getindex takes integer this,integer key returns boolexpr
+        return LoadBooleanExprHandle(Table___ht, this, key)
     endfunction
-    function s__Table__boolexprs__setindex takes integer this,integer key,boolexpr value returns nothing
-        call SaveBooleanExprHandle(Table__ht, this, key, value)
+    function s__Table___boolexprs__setindex takes integer this,integer key,boolexpr value returns nothing
+        call SaveBooleanExprHandle(Table___ht, this, key, value)
     endfunction
-    function s__Table__boolexprs_has takes integer this,integer key returns boolean
-        return HaveSavedHandle(Table__ht, this, key)
+    function s__Table___boolexprs_has takes integer this,integer key returns boolean
+        return HaveSavedHandle(Table___ht, this, key)
     endfunction
-    function s__Table__boolexprs_remove takes integer this,integer key returns nothing
-        call RemoveSavedHandle(Table__ht, this, key)
+    function s__Table___boolexprs_remove takes integer this,integer key returns nothing
+        call RemoveSavedHandle(Table___ht, this, key)
     endfunction
 //end of: NEW_ARRAY("BooleanExpr", "boolexpr")
 //textmacro instance: NEW_ARRAY("Sound", "sound")
-    function s__Table__sounds__getindex takes integer this,integer key returns sound
-        return LoadSoundHandle(Table__ht, this, key)
+    function s__Table___sounds__getindex takes integer this,integer key returns sound
+        return LoadSoundHandle(Table___ht, this, key)
     endfunction
-    function s__Table__sounds__setindex takes integer this,integer key,sound value returns nothing
-        call SaveSoundHandle(Table__ht, this, key, value)
+    function s__Table___sounds__setindex takes integer this,integer key,sound value returns nothing
+        call SaveSoundHandle(Table___ht, this, key, value)
     endfunction
-    function s__Table__sounds_has takes integer this,integer key returns boolean
-        return HaveSavedHandle(Table__ht, this, key)
+    function s__Table___sounds_has takes integer this,integer key returns boolean
+        return HaveSavedHandle(Table___ht, this, key)
     endfunction
-    function s__Table__sounds_remove takes integer this,integer key returns nothing
-        call RemoveSavedHandle(Table__ht, this, key)
+    function s__Table___sounds_remove takes integer this,integer key returns nothing
+        call RemoveSavedHandle(Table___ht, this, key)
     endfunction
 //end of: NEW_ARRAY("Sound", "sound")
 //textmacro instance: NEW_ARRAY("Effect", "effect")
-    function s__Table__effects__getindex takes integer this,integer key returns effect
-        return LoadEffectHandle(Table__ht, this, key)
+    function s__Table___effects__getindex takes integer this,integer key returns effect
+        return LoadEffectHandle(Table___ht, this, key)
     endfunction
-    function s__Table__effects__setindex takes integer this,integer key,effect value returns nothing
-        call SaveEffectHandle(Table__ht, this, key, value)
+    function s__Table___effects__setindex takes integer this,integer key,effect value returns nothing
+        call SaveEffectHandle(Table___ht, this, key, value)
     endfunction
-    function s__Table__effects_has takes integer this,integer key returns boolean
-        return HaveSavedHandle(Table__ht, this, key)
+    function s__Table___effects_has takes integer this,integer key returns boolean
+        return HaveSavedHandle(Table___ht, this, key)
     endfunction
-    function s__Table__effects_remove takes integer this,integer key returns nothing
-        call RemoveSavedHandle(Table__ht, this, key)
+    function s__Table___effects_remove takes integer this,integer key returns nothing
+        call RemoveSavedHandle(Table___ht, this, key)
     endfunction
 //end of: NEW_ARRAY("Effect", "effect")
 //textmacro instance: NEW_ARRAY("UnitPool", "unitpool")
-    function s__Table__unitpools__getindex takes integer this,integer key returns unitpool
-        return LoadUnitPoolHandle(Table__ht, this, key)
+    function s__Table___unitpools__getindex takes integer this,integer key returns unitpool
+        return LoadUnitPoolHandle(Table___ht, this, key)
     endfunction
-    function s__Table__unitpools__setindex takes integer this,integer key,unitpool value returns nothing
-        call SaveUnitPoolHandle(Table__ht, this, key, value)
+    function s__Table___unitpools__setindex takes integer this,integer key,unitpool value returns nothing
+        call SaveUnitPoolHandle(Table___ht, this, key, value)
     endfunction
-    function s__Table__unitpools_has takes integer this,integer key returns boolean
-        return HaveSavedHandle(Table__ht, this, key)
+    function s__Table___unitpools_has takes integer this,integer key returns boolean
+        return HaveSavedHandle(Table___ht, this, key)
     endfunction
-    function s__Table__unitpools_remove takes integer this,integer key returns nothing
-        call RemoveSavedHandle(Table__ht, this, key)
+    function s__Table___unitpools_remove takes integer this,integer key returns nothing
+        call RemoveSavedHandle(Table___ht, this, key)
     endfunction
 //end of: NEW_ARRAY("UnitPool", "unitpool")
 //textmacro instance: NEW_ARRAY("ItemPool", "itempool")
-    function s__Table__itempools__getindex takes integer this,integer key returns itempool
-        return LoadItemPoolHandle(Table__ht, this, key)
+    function s__Table___itempools__getindex takes integer this,integer key returns itempool
+        return LoadItemPoolHandle(Table___ht, this, key)
     endfunction
-    function s__Table__itempools__setindex takes integer this,integer key,itempool value returns nothing
-        call SaveItemPoolHandle(Table__ht, this, key, value)
+    function s__Table___itempools__setindex takes integer this,integer key,itempool value returns nothing
+        call SaveItemPoolHandle(Table___ht, this, key, value)
     endfunction
-    function s__Table__itempools_has takes integer this,integer key returns boolean
-        return HaveSavedHandle(Table__ht, this, key)
+    function s__Table___itempools_has takes integer this,integer key returns boolean
+        return HaveSavedHandle(Table___ht, this, key)
     endfunction
-    function s__Table__itempools_remove takes integer this,integer key returns nothing
-        call RemoveSavedHandle(Table__ht, this, key)
+    function s__Table___itempools_remove takes integer this,integer key returns nothing
+        call RemoveSavedHandle(Table___ht, this, key)
     endfunction
 //end of: NEW_ARRAY("ItemPool", "itempool")
 //textmacro instance: NEW_ARRAY("Quest", "quest")
-    function s__Table__quests__getindex takes integer this,integer key returns quest
-        return LoadQuestHandle(Table__ht, this, key)
+    function s__Table___quests__getindex takes integer this,integer key returns quest
+        return LoadQuestHandle(Table___ht, this, key)
     endfunction
-    function s__Table__quests__setindex takes integer this,integer key,quest value returns nothing
-        call SaveQuestHandle(Table__ht, this, key, value)
+    function s__Table___quests__setindex takes integer this,integer key,quest value returns nothing
+        call SaveQuestHandle(Table___ht, this, key, value)
     endfunction
-    function s__Table__quests_has takes integer this,integer key returns boolean
-        return HaveSavedHandle(Table__ht, this, key)
+    function s__Table___quests_has takes integer this,integer key returns boolean
+        return HaveSavedHandle(Table___ht, this, key)
     endfunction
-    function s__Table__quests_remove takes integer this,integer key returns nothing
-        call RemoveSavedHandle(Table__ht, this, key)
+    function s__Table___quests_remove takes integer this,integer key returns nothing
+        call RemoveSavedHandle(Table___ht, this, key)
     endfunction
 //end of: NEW_ARRAY("Quest", "quest")
 //textmacro instance: NEW_ARRAY("QuestItem", "questitem")
-    function s__Table__questitems__getindex takes integer this,integer key returns questitem
-        return LoadQuestItemHandle(Table__ht, this, key)
+    function s__Table___questitems__getindex takes integer this,integer key returns questitem
+        return LoadQuestItemHandle(Table___ht, this, key)
     endfunction
-    function s__Table__questitems__setindex takes integer this,integer key,questitem value returns nothing
-        call SaveQuestItemHandle(Table__ht, this, key, value)
+    function s__Table___questitems__setindex takes integer this,integer key,questitem value returns nothing
+        call SaveQuestItemHandle(Table___ht, this, key, value)
     endfunction
-    function s__Table__questitems_has takes integer this,integer key returns boolean
-        return HaveSavedHandle(Table__ht, this, key)
+    function s__Table___questitems_has takes integer this,integer key returns boolean
+        return HaveSavedHandle(Table___ht, this, key)
     endfunction
-    function s__Table__questitems_remove takes integer this,integer key returns nothing
-        call RemoveSavedHandle(Table__ht, this, key)
+    function s__Table___questitems_remove takes integer this,integer key returns nothing
+        call RemoveSavedHandle(Table___ht, this, key)
     endfunction
 //end of: NEW_ARRAY("QuestItem", "questitem")
 //textmacro instance: NEW_ARRAY("DefeatCondition", "defeatcondition")
-    function s__Table__defeatconditions__getindex takes integer this,integer key returns defeatcondition
-        return LoadDefeatConditionHandle(Table__ht, this, key)
+    function s__Table___defeatconditions__getindex takes integer this,integer key returns defeatcondition
+        return LoadDefeatConditionHandle(Table___ht, this, key)
     endfunction
-    function s__Table__defeatconditions__setindex takes integer this,integer key,defeatcondition value returns nothing
-        call SaveDefeatConditionHandle(Table__ht, this, key, value)
+    function s__Table___defeatconditions__setindex takes integer this,integer key,defeatcondition value returns nothing
+        call SaveDefeatConditionHandle(Table___ht, this, key, value)
     endfunction
-    function s__Table__defeatconditions_has takes integer this,integer key returns boolean
-        return HaveSavedHandle(Table__ht, this, key)
+    function s__Table___defeatconditions_has takes integer this,integer key returns boolean
+        return HaveSavedHandle(Table___ht, this, key)
     endfunction
-    function s__Table__defeatconditions_remove takes integer this,integer key returns nothing
-        call RemoveSavedHandle(Table__ht, this, key)
+    function s__Table___defeatconditions_remove takes integer this,integer key returns nothing
+        call RemoveSavedHandle(Table___ht, this, key)
     endfunction
 //end of: NEW_ARRAY("DefeatCondition", "defeatcondition")
 //textmacro instance: NEW_ARRAY("TimerDialog", "timerdialog")
-    function s__Table__timerdialogs__getindex takes integer this,integer key returns timerdialog
-        return LoadTimerDialogHandle(Table__ht, this, key)
+    function s__Table___timerdialogs__getindex takes integer this,integer key returns timerdialog
+        return LoadTimerDialogHandle(Table___ht, this, key)
     endfunction
-    function s__Table__timerdialogs__setindex takes integer this,integer key,timerdialog value returns nothing
-        call SaveTimerDialogHandle(Table__ht, this, key, value)
+    function s__Table___timerdialogs__setindex takes integer this,integer key,timerdialog value returns nothing
+        call SaveTimerDialogHandle(Table___ht, this, key, value)
     endfunction
-    function s__Table__timerdialogs_has takes integer this,integer key returns boolean
-        return HaveSavedHandle(Table__ht, this, key)
+    function s__Table___timerdialogs_has takes integer this,integer key returns boolean
+        return HaveSavedHandle(Table___ht, this, key)
     endfunction
-    function s__Table__timerdialogs_remove takes integer this,integer key returns nothing
-        call RemoveSavedHandle(Table__ht, this, key)
+    function s__Table___timerdialogs_remove takes integer this,integer key returns nothing
+        call RemoveSavedHandle(Table___ht, this, key)
     endfunction
 //end of: NEW_ARRAY("TimerDialog", "timerdialog")
 //textmacro instance: NEW_ARRAY("Leaderboard", "leaderboard")
-    function s__Table__leaderboards__getindex takes integer this,integer key returns leaderboard
-        return LoadLeaderboardHandle(Table__ht, this, key)
+    function s__Table___leaderboards__getindex takes integer this,integer key returns leaderboard
+        return LoadLeaderboardHandle(Table___ht, this, key)
     endfunction
-    function s__Table__leaderboards__setindex takes integer this,integer key,leaderboard value returns nothing
-        call SaveLeaderboardHandle(Table__ht, this, key, value)
+    function s__Table___leaderboards__setindex takes integer this,integer key,leaderboard value returns nothing
+        call SaveLeaderboardHandle(Table___ht, this, key, value)
     endfunction
-    function s__Table__leaderboards_has takes integer this,integer key returns boolean
-        return HaveSavedHandle(Table__ht, this, key)
+    function s__Table___leaderboards_has takes integer this,integer key returns boolean
+        return HaveSavedHandle(Table___ht, this, key)
     endfunction
-    function s__Table__leaderboards_remove takes integer this,integer key returns nothing
-        call RemoveSavedHandle(Table__ht, this, key)
+    function s__Table___leaderboards_remove takes integer this,integer key returns nothing
+        call RemoveSavedHandle(Table___ht, this, key)
     endfunction
 //end of: NEW_ARRAY("Leaderboard", "leaderboard")
 //textmacro instance: NEW_ARRAY("Multiboard", "multiboard")
-    function s__Table__multiboards__getindex takes integer this,integer key returns multiboard
-        return LoadMultiboardHandle(Table__ht, this, key)
+    function s__Table___multiboards__getindex takes integer this,integer key returns multiboard
+        return LoadMultiboardHandle(Table___ht, this, key)
     endfunction
-    function s__Table__multiboards__setindex takes integer this,integer key,multiboard value returns nothing
-        call SaveMultiboardHandle(Table__ht, this, key, value)
+    function s__Table___multiboards__setindex takes integer this,integer key,multiboard value returns nothing
+        call SaveMultiboardHandle(Table___ht, this, key, value)
     endfunction
-    function s__Table__multiboards_has takes integer this,integer key returns boolean
-        return HaveSavedHandle(Table__ht, this, key)
+    function s__Table___multiboards_has takes integer this,integer key returns boolean
+        return HaveSavedHandle(Table___ht, this, key)
     endfunction
-    function s__Table__multiboards_remove takes integer this,integer key returns nothing
-        call RemoveSavedHandle(Table__ht, this, key)
+    function s__Table___multiboards_remove takes integer this,integer key returns nothing
+        call RemoveSavedHandle(Table___ht, this, key)
     endfunction
 //end of: NEW_ARRAY("Multiboard", "multiboard")
 //textmacro instance: NEW_ARRAY("MultiboardItem", "multiboarditem")
-    function s__Table__multiboarditems__getindex takes integer this,integer key returns multiboarditem
-        return LoadMultiboardItemHandle(Table__ht, this, key)
+    function s__Table___multiboarditems__getindex takes integer this,integer key returns multiboarditem
+        return LoadMultiboardItemHandle(Table___ht, this, key)
     endfunction
-    function s__Table__multiboarditems__setindex takes integer this,integer key,multiboarditem value returns nothing
-        call SaveMultiboardItemHandle(Table__ht, this, key, value)
+    function s__Table___multiboarditems__setindex takes integer this,integer key,multiboarditem value returns nothing
+        call SaveMultiboardItemHandle(Table___ht, this, key, value)
     endfunction
-    function s__Table__multiboarditems_has takes integer this,integer key returns boolean
-        return HaveSavedHandle(Table__ht, this, key)
+    function s__Table___multiboarditems_has takes integer this,integer key returns boolean
+        return HaveSavedHandle(Table___ht, this, key)
     endfunction
-    function s__Table__multiboarditems_remove takes integer this,integer key returns nothing
-        call RemoveSavedHandle(Table__ht, this, key)
+    function s__Table___multiboarditems_remove takes integer this,integer key returns nothing
+        call RemoveSavedHandle(Table___ht, this, key)
     endfunction
 //end of: NEW_ARRAY("MultiboardItem", "multiboarditem")
 //textmacro instance: NEW_ARRAY("Trackable", "trackable")
-    function s__Table__trackables__getindex takes integer this,integer key returns trackable
-        return LoadTrackableHandle(Table__ht, this, key)
+    function s__Table___trackables__getindex takes integer this,integer key returns trackable
+        return LoadTrackableHandle(Table___ht, this, key)
     endfunction
-    function s__Table__trackables__setindex takes integer this,integer key,trackable value returns nothing
-        call SaveTrackableHandle(Table__ht, this, key, value)
+    function s__Table___trackables__setindex takes integer this,integer key,trackable value returns nothing
+        call SaveTrackableHandle(Table___ht, this, key, value)
     endfunction
-    function s__Table__trackables_has takes integer this,integer key returns boolean
-        return HaveSavedHandle(Table__ht, this, key)
+    function s__Table___trackables_has takes integer this,integer key returns boolean
+        return HaveSavedHandle(Table___ht, this, key)
     endfunction
-    function s__Table__trackables_remove takes integer this,integer key returns nothing
-        call RemoveSavedHandle(Table__ht, this, key)
+    function s__Table___trackables_remove takes integer this,integer key returns nothing
+        call RemoveSavedHandle(Table___ht, this, key)
     endfunction
 //end of: NEW_ARRAY("Trackable", "trackable")
 //textmacro instance: NEW_ARRAY("Dialog", "dialog")
-    function s__Table__dialogs__getindex takes integer this,integer key returns dialog
-        return LoadDialogHandle(Table__ht, this, key)
+    function s__Table___dialogs__getindex takes integer this,integer key returns dialog
+        return LoadDialogHandle(Table___ht, this, key)
     endfunction
-    function s__Table__dialogs__setindex takes integer this,integer key,dialog value returns nothing
-        call SaveDialogHandle(Table__ht, this, key, value)
+    function s__Table___dialogs__setindex takes integer this,integer key,dialog value returns nothing
+        call SaveDialogHandle(Table___ht, this, key, value)
     endfunction
-    function s__Table__dialogs_has takes integer this,integer key returns boolean
-        return HaveSavedHandle(Table__ht, this, key)
+    function s__Table___dialogs_has takes integer this,integer key returns boolean
+        return HaveSavedHandle(Table___ht, this, key)
     endfunction
-    function s__Table__dialogs_remove takes integer this,integer key returns nothing
-        call RemoveSavedHandle(Table__ht, this, key)
+    function s__Table___dialogs_remove takes integer this,integer key returns nothing
+        call RemoveSavedHandle(Table___ht, this, key)
     endfunction
 //end of: NEW_ARRAY("Dialog", "dialog")
 //textmacro instance: NEW_ARRAY("Button", "button")
-    function s__Table__buttons__getindex takes integer this,integer key returns button
-        return LoadButtonHandle(Table__ht, this, key)
+    function s__Table___buttons__getindex takes integer this,integer key returns button
+        return LoadButtonHandle(Table___ht, this, key)
     endfunction
-    function s__Table__buttons__setindex takes integer this,integer key,button value returns nothing
-        call SaveButtonHandle(Table__ht, this, key, value)
+    function s__Table___buttons__setindex takes integer this,integer key,button value returns nothing
+        call SaveButtonHandle(Table___ht, this, key, value)
     endfunction
-    function s__Table__buttons_has takes integer this,integer key returns boolean
-        return HaveSavedHandle(Table__ht, this, key)
+    function s__Table___buttons_has takes integer this,integer key returns boolean
+        return HaveSavedHandle(Table___ht, this, key)
     endfunction
-    function s__Table__buttons_remove takes integer this,integer key returns nothing
-        call RemoveSavedHandle(Table__ht, this, key)
+    function s__Table___buttons_remove takes integer this,integer key returns nothing
+        call RemoveSavedHandle(Table___ht, this, key)
     endfunction
 //end of: NEW_ARRAY("Button", "button")
 //textmacro instance: NEW_ARRAY("TextTag", "texttag")
-    function s__Table__texttags__getindex takes integer this,integer key returns texttag
-        return LoadTextTagHandle(Table__ht, this, key)
+    function s__Table___texttags__getindex takes integer this,integer key returns texttag
+        return LoadTextTagHandle(Table___ht, this, key)
     endfunction
-    function s__Table__texttags__setindex takes integer this,integer key,texttag value returns nothing
-        call SaveTextTagHandle(Table__ht, this, key, value)
+    function s__Table___texttags__setindex takes integer this,integer key,texttag value returns nothing
+        call SaveTextTagHandle(Table___ht, this, key, value)
     endfunction
-    function s__Table__texttags_has takes integer this,integer key returns boolean
-        return HaveSavedHandle(Table__ht, this, key)
+    function s__Table___texttags_has takes integer this,integer key returns boolean
+        return HaveSavedHandle(Table___ht, this, key)
     endfunction
-    function s__Table__texttags_remove takes integer this,integer key returns nothing
-        call RemoveSavedHandle(Table__ht, this, key)
+    function s__Table___texttags_remove takes integer this,integer key returns nothing
+        call RemoveSavedHandle(Table___ht, this, key)
     endfunction
 //end of: NEW_ARRAY("TextTag", "texttag")
 //textmacro instance: NEW_ARRAY("Lightning", "lightning")
-    function s__Table__lightnings__getindex takes integer this,integer key returns lightning
-        return LoadLightningHandle(Table__ht, this, key)
+    function s__Table___lightnings__getindex takes integer this,integer key returns lightning
+        return LoadLightningHandle(Table___ht, this, key)
     endfunction
-    function s__Table__lightnings__setindex takes integer this,integer key,lightning value returns nothing
-        call SaveLightningHandle(Table__ht, this, key, value)
+    function s__Table___lightnings__setindex takes integer this,integer key,lightning value returns nothing
+        call SaveLightningHandle(Table___ht, this, key, value)
     endfunction
-    function s__Table__lightnings_has takes integer this,integer key returns boolean
-        return HaveSavedHandle(Table__ht, this, key)
+    function s__Table___lightnings_has takes integer this,integer key returns boolean
+        return HaveSavedHandle(Table___ht, this, key)
     endfunction
-    function s__Table__lightnings_remove takes integer this,integer key returns nothing
-        call RemoveSavedHandle(Table__ht, this, key)
+    function s__Table___lightnings_remove takes integer this,integer key returns nothing
+        call RemoveSavedHandle(Table___ht, this, key)
     endfunction
 //end of: NEW_ARRAY("Lightning", "lightning")
 //textmacro instance: NEW_ARRAY("Image", "image")
-    function s__Table__images__getindex takes integer this,integer key returns image
-        return LoadImageHandle(Table__ht, this, key)
+    function s__Table___images__getindex takes integer this,integer key returns image
+        return LoadImageHandle(Table___ht, this, key)
     endfunction
-    function s__Table__images__setindex takes integer this,integer key,image value returns nothing
-        call SaveImageHandle(Table__ht, this, key, value)
+    function s__Table___images__setindex takes integer this,integer key,image value returns nothing
+        call SaveImageHandle(Table___ht, this, key, value)
     endfunction
-    function s__Table__images_has takes integer this,integer key returns boolean
-        return HaveSavedHandle(Table__ht, this, key)
+    function s__Table___images_has takes integer this,integer key returns boolean
+        return HaveSavedHandle(Table___ht, this, key)
     endfunction
-    function s__Table__images_remove takes integer this,integer key returns nothing
-        call RemoveSavedHandle(Table__ht, this, key)
+    function s__Table___images_remove takes integer this,integer key returns nothing
+        call RemoveSavedHandle(Table___ht, this, key)
     endfunction
 //end of: NEW_ARRAY("Image", "image")
 //textmacro instance: NEW_ARRAY("Ubersplat", "ubersplat")
-    function s__Table__ubersplats__getindex takes integer this,integer key returns ubersplat
-        return LoadUbersplatHandle(Table__ht, this, key)
+    function s__Table___ubersplats__getindex takes integer this,integer key returns ubersplat
+        return LoadUbersplatHandle(Table___ht, this, key)
     endfunction
-    function s__Table__ubersplats__setindex takes integer this,integer key,ubersplat value returns nothing
-        call SaveUbersplatHandle(Table__ht, this, key, value)
+    function s__Table___ubersplats__setindex takes integer this,integer key,ubersplat value returns nothing
+        call SaveUbersplatHandle(Table___ht, this, key, value)
     endfunction
-    function s__Table__ubersplats_has takes integer this,integer key returns boolean
-        return HaveSavedHandle(Table__ht, this, key)
+    function s__Table___ubersplats_has takes integer this,integer key returns boolean
+        return HaveSavedHandle(Table___ht, this, key)
     endfunction
-    function s__Table__ubersplats_remove takes integer this,integer key returns nothing
-        call RemoveSavedHandle(Table__ht, this, key)
+    function s__Table___ubersplats_remove takes integer this,integer key returns nothing
+        call RemoveSavedHandle(Table___ht, this, key)
     endfunction
 //end of: NEW_ARRAY("Ubersplat", "ubersplat")
 //textmacro instance: NEW_ARRAY("Region", "region")
-    function s__Table__regions__getindex takes integer this,integer key returns region
-        return LoadRegionHandle(Table__ht, this, key)
+    function s__Table___regions__getindex takes integer this,integer key returns region
+        return LoadRegionHandle(Table___ht, this, key)
     endfunction
-    function s__Table__regions__setindex takes integer this,integer key,region value returns nothing
-        call SaveRegionHandle(Table__ht, this, key, value)
+    function s__Table___regions__setindex takes integer this,integer key,region value returns nothing
+        call SaveRegionHandle(Table___ht, this, key, value)
     endfunction
-    function s__Table__regions_has takes integer this,integer key returns boolean
-        return HaveSavedHandle(Table__ht, this, key)
+    function s__Table___regions_has takes integer this,integer key returns boolean
+        return HaveSavedHandle(Table___ht, this, key)
     endfunction
-    function s__Table__regions_remove takes integer this,integer key returns nothing
-        call RemoveSavedHandle(Table__ht, this, key)
+    function s__Table___regions_remove takes integer this,integer key returns nothing
+        call RemoveSavedHandle(Table___ht, this, key)
     endfunction
 //end of: NEW_ARRAY("Region", "region")
 //textmacro instance: NEW_ARRAY("FogState", "fogstate")
-    function s__Table__fogstates__getindex takes integer this,integer key returns fogstate
-        return LoadFogStateHandle(Table__ht, this, key)
+    function s__Table___fogstates__getindex takes integer this,integer key returns fogstate
+        return LoadFogStateHandle(Table___ht, this, key)
     endfunction
-    function s__Table__fogstates__setindex takes integer this,integer key,fogstate value returns nothing
-        call SaveFogStateHandle(Table__ht, this, key, value)
+    function s__Table___fogstates__setindex takes integer this,integer key,fogstate value returns nothing
+        call SaveFogStateHandle(Table___ht, this, key, value)
     endfunction
-    function s__Table__fogstates_has takes integer this,integer key returns boolean
-        return HaveSavedHandle(Table__ht, this, key)
+    function s__Table___fogstates_has takes integer this,integer key returns boolean
+        return HaveSavedHandle(Table___ht, this, key)
     endfunction
-    function s__Table__fogstates_remove takes integer this,integer key returns nothing
-        call RemoveSavedHandle(Table__ht, this, key)
+    function s__Table___fogstates_remove takes integer this,integer key returns nothing
+        call RemoveSavedHandle(Table___ht, this, key)
     endfunction
 //end of: NEW_ARRAY("FogState", "fogstate")
 //textmacro instance: NEW_ARRAY("FogModifier", "fogmodifier")
-    function s__Table__fogmodifiers__getindex takes integer this,integer key returns fogmodifier
-        return LoadFogModifierHandle(Table__ht, this, key)
+    function s__Table___fogmodifiers__getindex takes integer this,integer key returns fogmodifier
+        return LoadFogModifierHandle(Table___ht, this, key)
     endfunction
-    function s__Table__fogmodifiers__setindex takes integer this,integer key,fogmodifier value returns nothing
-        call SaveFogModifierHandle(Table__ht, this, key, value)
+    function s__Table___fogmodifiers__setindex takes integer this,integer key,fogmodifier value returns nothing
+        call SaveFogModifierHandle(Table___ht, this, key, value)
     endfunction
-    function s__Table__fogmodifiers_has takes integer this,integer key returns boolean
-        return HaveSavedHandle(Table__ht, this, key)
+    function s__Table___fogmodifiers_has takes integer this,integer key returns boolean
+        return HaveSavedHandle(Table___ht, this, key)
     endfunction
-    function s__Table__fogmodifiers_remove takes integer this,integer key returns nothing
-        call RemoveSavedHandle(Table__ht, this, key)
+    function s__Table___fogmodifiers_remove takes integer this,integer key returns nothing
+        call RemoveSavedHandle(Table___ht, this, key)
     endfunction
 //end of: NEW_ARRAY("FogModifier", "fogmodifier")
 //textmacro instance: NEW_ARRAY("Hashtable", "hashtable")
-    function s__Table__hashtables__getindex takes integer this,integer key returns hashtable
-        return LoadHashtableHandle(Table__ht, this, key)
+    function s__Table___hashtables__getindex takes integer this,integer key returns hashtable
+        return LoadHashtableHandle(Table___ht, this, key)
     endfunction
-    function s__Table__hashtables__setindex takes integer this,integer key,hashtable value returns nothing
-        call SaveHashtableHandle(Table__ht, this, key, value)
+    function s__Table___hashtables__setindex takes integer this,integer key,hashtable value returns nothing
+        call SaveHashtableHandle(Table___ht, this, key, value)
     endfunction
-    function s__Table__hashtables_has takes integer this,integer key returns boolean
-        return HaveSavedHandle(Table__ht, this, key)
+    function s__Table___hashtables_has takes integer this,integer key returns boolean
+        return HaveSavedHandle(Table___ht, this, key)
     endfunction
-    function s__Table__hashtables_remove takes integer this,integer key returns nothing
-        call RemoveSavedHandle(Table__ht, this, key)
+    function s__Table___hashtables_remove takes integer this,integer key returns nothing
+        call RemoveSavedHandle(Table___ht, this, key)
     endfunction
 //end of: NEW_ARRAY("Hashtable", "hashtable")
    
    
     // Implement modules for intuitive syntax (tb.handle; tb.unit; etc.)
-//Implemented from module Table__realm:
+//Implemented from module Table___realm:
     function s__Table__get_real takes integer this returns integer
         return this
     endfunction
-//Implemented from module Table__integerm:
+//Implemented from module Table___integerm:
     function s__Table__get_integer takes integer this returns integer
         return this
     endfunction
-//Implemented from module Table__booleanm:
+//Implemented from module Table___booleanm:
     function s__Table__get_boolean takes integer this returns integer
         return this
     endfunction
-//Implemented from module Table__stringm:
+//Implemented from module Table___stringm:
     function s__Table__get_string takes integer this returns integer
         return this
     endfunction
-//Implemented from module Table__playerm:
+//Implemented from module Table___playerm:
     function s__Table__get_player takes integer this returns integer
         return this
     endfunction
-//Implemented from module Table__widgetm:
+//Implemented from module Table___widgetm:
     function s__Table__get_widget takes integer this returns integer
         return this
     endfunction
-//Implemented from module Table__destructablem:
+//Implemented from module Table___destructablem:
     function s__Table__get_destructable takes integer this returns integer
         return this
     endfunction
-//Implemented from module Table__itemm:
+//Implemented from module Table___itemm:
     function s__Table__get_item takes integer this returns integer
         return this
     endfunction
-//Implemented from module Table__unitm:
+//Implemented from module Table___unitm:
     function s__Table__get_unit takes integer this returns integer
         return this
     endfunction
-//Implemented from module Table__abilitym:
+//Implemented from module Table___abilitym:
     function s__Table__get_ability takes integer this returns integer
         return this
     endfunction
-//Implemented from module Table__timerm:
+//Implemented from module Table___timerm:
     function s__Table__get_timer takes integer this returns integer
         return this
     endfunction
-//Implemented from module Table__triggerm:
+//Implemented from module Table___triggerm:
     function s__Table__get_trigger takes integer this returns integer
         return this
     endfunction
-//Implemented from module Table__triggerconditionm:
+//Implemented from module Table___triggerconditionm:
     function s__Table__get_triggercondition takes integer this returns integer
         return this
     endfunction
-//Implemented from module Table__triggeractionm:
+//Implemented from module Table___triggeractionm:
     function s__Table__get_triggeraction takes integer this returns integer
         return this
     endfunction
-//Implemented from module Table__eventm:
+//Implemented from module Table___eventm:
     function s__Table__get_event takes integer this returns integer
         return this
     endfunction
-//Implemented from module Table__forcem:
+//Implemented from module Table___forcem:
     function s__Table__get_force takes integer this returns integer
         return this
     endfunction
-//Implemented from module Table__groupm:
+//Implemented from module Table___groupm:
     function s__Table__get_group takes integer this returns integer
         return this
     endfunction
-//Implemented from module Table__locationm:
+//Implemented from module Table___locationm:
     function s__Table__get_location takes integer this returns integer
         return this
     endfunction
-//Implemented from module Table__rectm:
+//Implemented from module Table___rectm:
     function s__Table__get_rect takes integer this returns integer
         return this
     endfunction
-//Implemented from module Table__boolexprm:
+//Implemented from module Table___boolexprm:
     function s__Table__get_boolexpr takes integer this returns integer
         return this
     endfunction
-//Implemented from module Table__soundm:
+//Implemented from module Table___soundm:
     function s__Table__get_sound takes integer this returns integer
         return this
     endfunction
-//Implemented from module Table__effectm:
+//Implemented from module Table___effectm:
     function s__Table__get_effect takes integer this returns integer
         return this
     endfunction
-//Implemented from module Table__unitpoolm:
+//Implemented from module Table___unitpoolm:
     function s__Table__get_unitpool takes integer this returns integer
         return this
     endfunction
-//Implemented from module Table__itempoolm:
+//Implemented from module Table___itempoolm:
     function s__Table__get_itempool takes integer this returns integer
         return this
     endfunction
-//Implemented from module Table__questm:
+//Implemented from module Table___questm:
     function s__Table__get_quest takes integer this returns integer
         return this
     endfunction
-//Implemented from module Table__questitemm:
+//Implemented from module Table___questitemm:
     function s__Table__get_questitem takes integer this returns integer
         return this
     endfunction
-//Implemented from module Table__defeatconditionm:
+//Implemented from module Table___defeatconditionm:
     function s__Table__get_defeatcondition takes integer this returns integer
         return this
     endfunction
-//Implemented from module Table__timerdialogm:
+//Implemented from module Table___timerdialogm:
     function s__Table__get_timerdialog takes integer this returns integer
         return this
     endfunction
-//Implemented from module Table__leaderboardm:
+//Implemented from module Table___leaderboardm:
     function s__Table__get_leaderboard takes integer this returns integer
         return this
     endfunction
-//Implemented from module Table__multiboardm:
+//Implemented from module Table___multiboardm:
     function s__Table__get_multiboard takes integer this returns integer
         return this
     endfunction
-//Implemented from module Table__multiboarditemm:
+//Implemented from module Table___multiboarditemm:
     function s__Table__get_multiboarditem takes integer this returns integer
         return this
     endfunction
-//Implemented from module Table__trackablem:
+//Implemented from module Table___trackablem:
     function s__Table__get_trackable takes integer this returns integer
         return this
     endfunction
-//Implemented from module Table__dialogm:
+//Implemented from module Table___dialogm:
     function s__Table__get_dialog takes integer this returns integer
         return this
     endfunction
-//Implemented from module Table__buttonm:
+//Implemented from module Table___buttonm:
     function s__Table__get_button takes integer this returns integer
         return this
     endfunction
-//Implemented from module Table__texttagm:
+//Implemented from module Table___texttagm:
     function s__Table__get_texttag takes integer this returns integer
         return this
     endfunction
-//Implemented from module Table__lightningm:
+//Implemented from module Table___lightningm:
     function s__Table__get_lightning takes integer this returns integer
         return this
     endfunction
-//Implemented from module Table__imagem:
+//Implemented from module Table___imagem:
     function s__Table__get_image takes integer this returns integer
         return this
     endfunction
-//Implemented from module Table__ubersplatm:
+//Implemented from module Table___ubersplatm:
     function s__Table__get_ubersplat takes integer this returns integer
         return this
     endfunction
-//Implemented from module Table__regionm:
+//Implemented from module Table___regionm:
     function s__Table__get_region takes integer this returns integer
         return this
     endfunction
-//Implemented from module Table__fogstatem:
+//Implemented from module Table___fogstatem:
     function s__Table__get_fogstate takes integer this returns integer
         return this
     endfunction
-//Implemented from module Table__fogmodifierm:
+//Implemented from module Table___fogmodifierm:
     function s__Table__get_fogmodifier takes integer this returns integer
         return this
     endfunction
-//Implemented from module Table__hashtablem:
+//Implemented from module Table___hashtablem:
     function s__Table__get_hashtable takes integer this returns integer
         return this
     endfunction
@@ -3749,39 +3746,39 @@ endfunction
    
     //set this = tb[GetSpellAbilityId()]
     function s__Table__getindex takes integer this,integer key returns integer
-        return LoadInteger(Table__ht, this, key) //return this.integer[key]
+        return LoadInteger(Table___ht, this, key) //return this.integer[key]
     endfunction
    
     //set tb[389034] = 8192
     function s__Table__setindex takes integer this,integer key,integer tb returns nothing
-        call SaveInteger(Table__ht, this, key, tb) //set this.integer[key] = tb
+        call SaveInteger(Table___ht, this, key, tb) //set this.integer[key] = tb
     endfunction
    
     //set b = tb.has(2493223)
     function s__Table_has takes integer this,integer key returns boolean
-        return HaveSavedInteger(Table__ht, this, key) //return this.integer.has(key)
+        return HaveSavedInteger(Table___ht, this, key) //return this.integer.has(key)
     endfunction
    
     //call tb.remove(294080)
     function s__Table_remove takes integer this,integer key returns nothing
-        call RemoveSavedInteger(Table__ht, this, key) //call this.integer.remove(key)
+        call RemoveSavedInteger(Table___ht, this, key) //call this.integer.remove(key)
     endfunction
    
     //Remove all data from a Table instance
     function s__Table_flush takes integer this returns nothing
-        call FlushChildHashtable(Table__ht, this)
+        call FlushChildHashtable(Table___ht, this)
     endfunction
    
     //local Table tb = Table.create()
     function s__Table_create takes nothing returns integer
-        local integer this= (LoadInteger(Table__ht, ((Table__listK)), (0))) // INLINED!!
+        local integer this= (LoadInteger(Table___ht, ((Table___listK)), (0))) // INLINED!!
        
         if this == 0 then
-            set this=Table__more + 1
-            set Table__more=this
+            set this=Table___more + 1
+            set Table___more=this
         else
-            call SaveInteger(Table__ht, ((Table__listK)), (0), ( (LoadInteger(Table__ht, ((Table__listK)), (this))))) // INLINED!!
-            call RemoveSavedInteger(Table__ht, ((Table__listK)), (this)) //Clear hashed memory // INLINED!!
+            call SaveInteger(Table___ht, ((Table___listK)), (0), ( (LoadInteger(Table___ht, ((Table___listK)), (this))))) // INLINED!!
+            call RemoveSavedInteger(Table___ht, ((Table___listK)), (this)) //Clear hashed memory // INLINED!!
         endif
        
         return this
@@ -3793,10 +3790,10 @@ endfunction
     //
     function s__Table_destroy takes integer this returns nothing
        
-        call FlushChildHashtable(Table__ht, (this)) // INLINED!!
+        call FlushChildHashtable(Table___ht, (this)) // INLINED!!
        
-        call SaveInteger(Table__ht, ((Table__listK)), (this), ( (LoadInteger(Table__ht, ((Table__listK)), (0))))) // INLINED!!
-        call SaveInteger(Table__ht, ((Table__listK)), (0), ( this)) // INLINED!!
+        call SaveInteger(Table___ht, ((Table___listK)), (this), ( (LoadInteger(Table___ht, ((Table___listK)), (0))))) // INLINED!!
+        call SaveInteger(Table___ht, ((Table___listK)), (0), ( this)) // INLINED!!
     endfunction
    
 //ignored textmacro command: TABLE_BC_METHODS()
@@ -3809,25 +3806,25 @@ endfunction
     //    local TableArray ta = TableArray[array_size]
     //
     function s__TableArray__staticgetindex takes integer array_size returns integer
-        local integer tb= (LoadInteger(Table__ht, ((Table__sizeK)), (array_size))) // INLINED!!
-        local integer this= (LoadInteger(Table__ht, (tb), (0))) // INLINED!!
+        local integer tb= (LoadInteger(Table___ht, ((Table___sizeK)), (array_size))) // INLINED!!
+        local integer this= (LoadInteger(Table___ht, (tb), (0))) // INLINED!!
        
        
         if this == 0 then
-            set this=Table__less - array_size
-            set Table__less=this
+            set this=Table___less - array_size
+            set Table___less=this
         else
-            call SaveInteger(Table__ht, (tb), (0), ( (LoadInteger(Table__ht, (tb), (this))))) //Set the last destroyed to the last-last destroyed // INLINED!!
-            call RemoveSavedInteger(Table__ht, (tb), (this)) //Clear hashed memory // INLINED!!
+            call SaveInteger(Table___ht, (tb), (0), ( (LoadInteger(Table___ht, (tb), (this))))) //Set the last destroyed to the last-last destroyed // INLINED!!
+            call RemoveSavedInteger(Table___ht, (tb), (this)) //Clear hashed memory // INLINED!!
         endif
        
-        call SaveInteger(Table__ht, ((Table__sizeK)), (this), ( array_size)) //This remembers the array size // INLINED!!
+        call SaveInteger(Table___ht, ((Table___sizeK)), (this), ( array_size)) //This remembers the array size // INLINED!!
         return this
     endfunction
    
     //Returns the size of the TableArray
     function s__TableArray__get_size takes integer this returns integer
-        return (LoadInteger(Table__ht, ((Table__sizeK)), (this))) // INLINED!!
+        return (LoadInteger(Table___ht, ((Table___sizeK)), (this))) // INLINED!!
     endfunction
    
     //This magic method enables two-dimensional[array][syntax] for Tables,
@@ -3859,19 +3856,19 @@ endfunction
     //need to (ie. if you were flushing all child-keys as you used them).
     //
     function s__TableArray_destroy takes integer this returns nothing
-        local integer tb= (LoadInteger(Table__ht, ((Table__sizeK)), ((LoadInteger(Table__ht, ((Table__sizeK)), ((this))))))) // INLINED!!
+        local integer tb= (LoadInteger(Table___ht, ((Table___sizeK)), ((LoadInteger(Table___ht, ((Table___sizeK)), ((this))))))) // INLINED!!
        
        
         if tb == 0 then
             //Create a Table to index recycled instances with their array size
             set tb=s__Table_create()
-            call SaveInteger(Table__ht, ((Table__sizeK)), ((LoadInteger(Table__ht, ((Table__sizeK)), ((this))))), ( tb)) // INLINED!!
+            call SaveInteger(Table___ht, ((Table___sizeK)), ((LoadInteger(Table___ht, ((Table___sizeK)), ((this))))), ( tb)) // INLINED!!
         endif
        
-        call RemoveSavedInteger(Table__ht, ((Table__sizeK)), (this)) //Clear the array size from hash memory // INLINED!!
+        call RemoveSavedInteger(Table___ht, ((Table___sizeK)), (this)) //Clear the array size from hash memory // INLINED!!
        
-        call SaveInteger(Table__ht, (tb), (this), ( (LoadInteger(Table__ht, (tb), (0))))) // INLINED!!
-        call SaveInteger(Table__ht, (tb), (0), ( this)) // INLINED!!
+        call SaveInteger(Table___ht, (tb), (this), ( (LoadInteger(Table___ht, (tb), (0))))) // INLINED!!
+        call SaveInteger(Table___ht, (tb), (0), ( this)) // INLINED!!
     endfunction
    
    
@@ -3886,7 +3883,7 @@ endfunction
             set end=s__TableArray_tempEnd
         endif
         loop
-            call FlushChildHashtable(Table__ht, (tb)) // INLINED!!
+            call FlushChildHashtable(Table___ht, (tb)) // INLINED!!
             set tb=tb + 1
             exitwhen tb == end
         endloop
@@ -3897,7 +3894,7 @@ endfunction
     //
     function s__TableArray_flush takes integer this returns nothing
         set s__TableArray_tempTable=this
-        set s__TableArray_tempEnd=this + (LoadInteger(Table__ht, ((Table__sizeK)), ((this)))) // INLINED!!
+        set s__TableArray_tempEnd=this + (LoadInteger(Table___ht, ((Table___sizeK)), ((this)))) // INLINED!!
         call ForForce(bj_FORCE_PLAYER[0], function s__TableArray_clean)
         call s__TableArray_destroy(this)
     endfunction
@@ -3910,10 +3907,10 @@ endfunction
     //Basically, it creates a Table in the place of the parent key if
     //it didn't already get created earlier.
     function s__HashTable__getindex takes integer this,integer index returns integer
-        local integer t= (LoadInteger(Table__ht, ((this)), (index))) // INLINED!!
+        local integer t= (LoadInteger(Table___ht, ((this)), (index))) // INLINED!!
         if t == 0 then
             set t=s__Table_create()
-            call SaveInteger(Table__ht, ((this)), (index), ( t)) //whoops! Forgot that line. I'm out of practice! // INLINED!!
+            call SaveInteger(Table___ht, ((this)), (index), ( t)) //whoops! Forgot that line. I'm out of practice! // INLINED!!
         endif
         return t
     endfunction
@@ -3921,16 +3918,16 @@ endfunction
     //You need to call this on each parent key that you used if you
     //intend to destroy the HashTable or simply no longer need that key.
     function s__HashTable_remove takes integer this,integer index returns nothing
-        local integer t= (LoadInteger(Table__ht, ((this)), (index))) // INLINED!!
+        local integer t= (LoadInteger(Table___ht, ((this)), (index))) // INLINED!!
         if t != 0 then
             call s__Table_destroy(t)
-            call RemoveSavedInteger(Table__ht, ((this)), (index)) // INLINED!!
+            call RemoveSavedInteger(Table___ht, ((this)), (index)) // INLINED!!
         endif
     endfunction
    
     //Added in version 4.1
     function s__HashTable_has takes integer this,integer index returns boolean
-        return (HaveSavedInteger(Table__ht, ((this)), (index))) // INLINED!!
+        return (HaveSavedInteger(Table___ht, ((this)), (index))) // INLINED!!
     endfunction
    
     //HashTables are just fancy Table indices.
@@ -4066,49 +4063,49 @@ endfunction
 //===============
 // Setters
 function Camera_SetDefaultRotator takes integer playerId,unit whichUnit returns nothing
-    set ThirdPersonCamera__focusUnits[playerId + 2 * bj_MAX_PLAYERS]=whichUnit
+    set ThirdPersonCamera___focusUnits[playerId + 2 * bj_MAX_PLAYERS]=whichUnit
 endfunction
 
 function Camera_SetRotator takes integer playerId,unit whichUnit returns nothing
-    set ThirdPersonCamera__focusUnits[playerId + bj_MAX_PLAYERS]=whichUnit
+    set ThirdPersonCamera___focusUnits[playerId + bj_MAX_PLAYERS]=whichUnit
 endfunction
 
 function Camera_SetTarget takes integer playerId,unit whichUnit returns nothing
-    set ThirdPersonCamera__focusUnits[playerId]=whichUnit
+    set ThirdPersonCamera___focusUnits[playerId]=whichUnit
 endfunction
 
 //===============
 // Getters
 function Camera_GetDefaultRotator takes integer playerId returns unit
-    return ThirdPersonCamera__focusUnits[playerId + 2 * bj_MAX_PLAYERS]
+    return ThirdPersonCamera___focusUnits[playerId + 2 * bj_MAX_PLAYERS]
 endfunction
 
 function Camera_GetRotator takes integer playerId returns unit
-    return ThirdPersonCamera__focusUnits[playerId + bj_MAX_PLAYERS]
+    return ThirdPersonCamera___focusUnits[playerId + bj_MAX_PLAYERS]
 endfunction
 
 function Camera_GetTarget takes integer playerId returns unit
-    return ThirdPersonCamera__focusUnits[playerId]
+    return ThirdPersonCamera___focusUnits[playerId]
 endfunction
 //===========================================================================
 // API
 //===============
 function Camera_WasHelpSeen takes integer playerId returns boolean
-    return not HaveSavedBoolean(ThirdPersonCamera__data, playerId, - 1)
+    return not HaveSavedBoolean(ThirdPersonCamera___data, playerId, - 1)
 endfunction
 
 function Camera_SetHelpSeen takes integer playerId,boolean flag returns nothing
     if flag then
-        call RemoveSavedBoolean(ThirdPersonCamera__data, playerId, - 1)
+        call RemoveSavedBoolean(ThirdPersonCamera___data, playerId, - 1)
     else
-        call SaveBoolean(ThirdPersonCamera__data, playerId, - 1, true)
+        call SaveBoolean(ThirdPersonCamera___data, playerId, - 1, true)
     endif
 endfunction
 
 function Camera_SetFirstPerson takes player whichPlayer,unit whichUnit returns nothing
     local real sleepTime
     
-    if not (not HaveSavedBoolean(ThirdPersonCamera__data, (GetPlayerId(whichPlayer)), - 1)) then // INLINED!!
+    if not (not HaveSavedBoolean(ThirdPersonCamera___data, (GetPlayerId(whichPlayer)), - 1)) then // INLINED!!
         call DisplayTextToPlayer(whichPlayer, 0, 0, ("First Person Camera Enabled!\n\nTo leave this perspective, double-click the |c00ffff00Esc|r key.\nTo fix the camera to the unit's facing, click the |c00ffff00Esc|r key.\nTo allow the camera to move independently, click the |c00ffff00Esc|r key.\n\nYou can use the |c00ffff00left|r and |c00ffff00right|r arrow keys to move the camera.\nYou can find the commands for the camera by pressing |c00ffff00F9|r.")) // INLINED!!
         call Camera_SetHelpSeen(GetPlayerId(whichPlayer) , true)
     endif
@@ -4130,12 +4127,12 @@ function Camera_SetFirstPerson takes player whichPlayer,unit whichUnit returns n
         endif
     endif
     
-    set ThirdPersonCamera__focusUnits[(GetPlayerId(whichPlayer) )]=( whichUnit) // INLINED!!
-    set ThirdPersonCamera__focusUnits[(GetPlayerId(whichPlayer) ) + bj_MAX_PLAYERS]=( (ThirdPersonCamera__focusUnits[(GetPlayerId(whichPlayer)) + 2 * bj_MAX_PLAYERS])) // INLINED!!
+    set ThirdPersonCamera___focusUnits[(GetPlayerId(whichPlayer) )]=( whichUnit) // INLINED!!
+    set ThirdPersonCamera___focusUnits[(GetPlayerId(whichPlayer) ) + bj_MAX_PLAYERS]=( (ThirdPersonCamera___focusUnits[(GetPlayerId(whichPlayer)) + 2 * bj_MAX_PLAYERS])) // INLINED!!
 endfunction
 
 function Camera_SetThirdPerson takes player whichPlayer returns nothing
-    set ThirdPersonCamera__focusUnits[(GetPlayerId(whichPlayer) )]=( null) // INLINED!!
+    set ThirdPersonCamera___focusUnits[(GetPlayerId(whichPlayer) )]=( null) // INLINED!!
     if GetLocalPlayer() == whichPlayer then
         call StopCamera()
         call ResetToGameCamera((1.0)) // INLINED!!
@@ -4160,27 +4157,27 @@ function Camera_ClearPlayerData takes player whichPlayer returns nothing
     local integer playerId= GetPlayerId(whichPlayer)
 
     // Flushing this will also destroy timers for arrow keys
-    call FlushChildHashtable(ThirdPersonCamera__data, playerId)
+    call FlushChildHashtable(ThirdPersonCamera___data, playerId)
     
     // Remove useless unit and null everything to avoid handle reference leaks
-    call RemoveUnit((ThirdPersonCamera__focusUnits[(playerId) + 2 * bj_MAX_PLAYERS])) // INLINED!!
-    set ThirdPersonCamera__focusUnits[(playerId ) + 2 * bj_MAX_PLAYERS]=( null) // INLINED!!
-    set ThirdPersonCamera__focusUnits[(playerId ) + bj_MAX_PLAYERS]=( null) // INLINED!!
-    set ThirdPersonCamera__focusUnits[(playerId )]=( null) // INLINED!!
+    call RemoveUnit((ThirdPersonCamera___focusUnits[(playerId) + 2 * bj_MAX_PLAYERS])) // INLINED!!
+    set ThirdPersonCamera___focusUnits[(playerId ) + 2 * bj_MAX_PLAYERS]=( null) // INLINED!!
+    set ThirdPersonCamera___focusUnits[(playerId ) + bj_MAX_PLAYERS]=( null) // INLINED!!
+    set ThirdPersonCamera___focusUnits[(playerId )]=( null) // INLINED!!
 endfunction
 //===========================================================================
 // Key Event Handling: Left and Right arrows
 //===============
 // Utility
 function Camera_IsKeyPressed takes integer playerId,integer whichKey returns boolean
-    return HaveSavedBoolean(ThirdPersonCamera__data, playerId, whichKey)
+    return HaveSavedBoolean(ThirdPersonCamera___data, playerId, whichKey)
 endfunction
 
 function Camera_SetKeyPressed takes integer playerId,integer whichKey,boolean flag returns nothing
     if flag then
-        call SaveBoolean(ThirdPersonCamera__data, playerId, whichKey, true)
+        call SaveBoolean(ThirdPersonCamera___data, playerId, whichKey, true)
     else
-        call RemoveSavedBoolean(ThirdPersonCamera__data, playerId, whichKey)
+        call RemoveSavedBoolean(ThirdPersonCamera___data, playerId, whichKey)
     endif
 endfunction
 
@@ -4189,10 +4186,10 @@ endfunction
 function Camera_TimerFunc2 takes nothing returns nothing
     local unit u
     local timer t= GetExpiredTimer()
-    local integer playerId= LoadInteger(ThirdPersonCamera__data, GetHandleId(t), 0)
+    local integer playerId= LoadInteger(ThirdPersonCamera___data, GetHandleId(t), 0)
     
-    if ( (HaveSavedBoolean(ThirdPersonCamera__data, (playerId ), ( (1)))) ) then // INLINED!!
-        set u=(ThirdPersonCamera__focusUnits[(playerId) + bj_MAX_PLAYERS]) // INLINED!!
+    if ( (HaveSavedBoolean(ThirdPersonCamera___data, (playerId ), ( (1)))) ) then // INLINED!!
+        set u=(ThirdPersonCamera___focusUnits[(playerId) + bj_MAX_PLAYERS]) // INLINED!!
         call SetUnitFacing(u, GetUnitFacing(u) + 10.)
         set u=null
     else
@@ -4205,14 +4202,14 @@ endfunction
 function Camera_TimerFunc_RightArrow takes nothing returns nothing
     local unit u
     local timer t= GetExpiredTimer()
-    local integer playerId= LoadInteger(ThirdPersonCamera__data, GetHandleId(t), 0)
+    local integer playerId= LoadInteger(ThirdPersonCamera___data, GetHandleId(t), 0)
     
-    if ( (HaveSavedBoolean(ThirdPersonCamera__data, (playerId ), ( (2)))) ) then // INLINED!!
-        set u=(ThirdPersonCamera__focusUnits[(playerId) + bj_MAX_PLAYERS]) // INLINED!!
+    if ( (HaveSavedBoolean(ThirdPersonCamera___data, (playerId ), ( (2)))) ) then // INLINED!!
+        set u=(ThirdPersonCamera___focusUnits[(playerId) + bj_MAX_PLAYERS]) // INLINED!!
         call SetUnitFacing(u, GetUnitFacing(u) - 10.)
         set u=null
     else
-        call FlushChildHashtable(ThirdPersonCamera__data, GetHandleId(t))
+        call FlushChildHashtable(ThirdPersonCamera___data, GetHandleId(t))
         call PauseTimer(t)
         call DestroyTimer(t)
     endif
@@ -4224,18 +4221,18 @@ endfunction
 function SideArrowPress takes integer playerId,integer whichKey,code handlerFunc returns nothing
     local timer t
     
-    if (ThirdPersonCamera__focusUnits[(playerId)]) == null then // INLINED!!
+    if (ThirdPersonCamera___focusUnits[(playerId)]) == null then // INLINED!!
         return
     endif
     
-    if (HaveSavedBoolean(ThirdPersonCamera__data, (playerId ), ( whichKey))) then // INLINED!!
+    if (HaveSavedBoolean(ThirdPersonCamera___data, (playerId ), ( whichKey))) then // INLINED!!
         call Camera_SetKeyPressed(playerId , whichKey , false)
     else
         call Camera_SetKeyPressed(playerId , whichKey , true)
         
         set t=CreateTimer()
         call TimerStart(t, 0.03, true, handlerFunc)
-        call SaveInteger(ThirdPersonCamera__data, GetHandleId(t), 0, playerId)
+        call SaveInteger(ThirdPersonCamera___data, GetHandleId(t), 0, playerId)
         set t=null
     endif
 endfunction
@@ -4252,35 +4249,35 @@ endfunction
 // Key Event Handling: Esc
 //===============
 function Camera_GetEscClicks takes integer playerId returns integer
-    return LoadInteger(ThirdPersonCamera__data, playerId, (0)) // INLINED!!
+    return LoadInteger(ThirdPersonCamera___data, playerId, (0)) // INLINED!!
 endfunction
 
 function Camera_SetEscClicks takes integer playerId,integer value returns nothing
-    call SaveInteger(ThirdPersonCamera__data, playerId, (0), value) // INLINED!!
+    call SaveInteger(ThirdPersonCamera___data, playerId, (0), value) // INLINED!!
 endfunction
 
 function Camera_ResetEscClicks takes integer playerId returns nothing
-    call RemoveSavedInteger(ThirdPersonCamera__data, playerId, (0)) // INLINED!!
+    call RemoveSavedInteger(ThirdPersonCamera___data, playerId, (0)) // INLINED!!
 endfunction
 
 function Camera_Trig_Esc_Actions takes nothing returns nothing
     local player p= GetTriggerPlayer()
     local integer pId= GetPlayerId(p)
-    local integer count= (LoadInteger(ThirdPersonCamera__data, (pId), (0))) // INLINED!!
+    local integer count= (LoadInteger(ThirdPersonCamera___data, (pId), (0))) // INLINED!!
     
     if count == 0 then
-        if (ThirdPersonCamera__focusUnits[(pId) + bj_MAX_PLAYERS]) == (ThirdPersonCamera__focusUnits[(pId)]) then // INLINED!!
-            set ThirdPersonCamera__focusUnits[(pId ) + bj_MAX_PLAYERS]=( (ThirdPersonCamera__focusUnits[(pId) + 2 * bj_MAX_PLAYERS])) // INLINED!!
+        if (ThirdPersonCamera___focusUnits[(pId) + bj_MAX_PLAYERS]) == (ThirdPersonCamera___focusUnits[(pId)]) then // INLINED!!
+            set ThirdPersonCamera___focusUnits[(pId ) + bj_MAX_PLAYERS]=( (ThirdPersonCamera___focusUnits[(pId) + 2 * bj_MAX_PLAYERS])) // INLINED!!
         else
-            set ThirdPersonCamera__focusUnits[(pId ) + bj_MAX_PLAYERS]=( (ThirdPersonCamera__focusUnits[(pId)])) // INLINED!!
+            set ThirdPersonCamera___focusUnits[(pId ) + bj_MAX_PLAYERS]=( (ThirdPersonCamera___focusUnits[(pId)])) // INLINED!!
         endif
         
-        call SaveInteger(ThirdPersonCamera__data, (pId ), (0), ( count + 1)) // INLINED!!
+        call SaveInteger(ThirdPersonCamera___data, (pId ), (0), ( count + 1)) // INLINED!!
         call TriggerSleepAction(.4)
-        call RemoveSavedInteger(ThirdPersonCamera__data, (pId), (0)) // INLINED!!
+        call RemoveSavedInteger(ThirdPersonCamera___data, (pId), (0)) // INLINED!!
     elseif count == 1 then
-        call SaveInteger(ThirdPersonCamera__data, (pId ), (0), ( count + 1)) // INLINED!!
-        if (ThirdPersonCamera__focusUnits[(pId)]) != null then // INLINED!!
+        call SaveInteger(ThirdPersonCamera___data, (pId ), (0), ( count + 1)) // INLINED!!
+        if (ThirdPersonCamera___focusUnits[(pId)]) != null then // INLINED!!
             call Camera_SetThirdPerson(p)
         else
             call Camera_SetFirstPersonSelected(p) // There is a wait in this function
@@ -4295,13 +4292,13 @@ endfunction
 // Returns the minimum angle between mouse and unit for camera to turn.
 // This is a per-player setting, since it may vary with screen resolution.
 function Camera_GetMinAngle takes integer playerId returns real
-    return LoadReal(ThirdPersonCamera__data, playerId, (3)) // INLINED!!
+    return LoadReal(ThirdPersonCamera___data, playerId, (3)) // INLINED!!
 endfunction
 
 // Sets the minimum angle between mouse and unit for camera to turn.
 // This is a per-player setting, since it may vary with screen resolution.
 function Camera_SetMinAngle takes integer playerId,real angle returns nothing
-    call SaveReal(ThirdPersonCamera__data, playerId, (3), angle) // INLINED!!
+    call SaveReal(ThirdPersonCamera___data, playerId, (3), angle) // INLINED!!
 endfunction
 
 function Camera_AngleToMouse takes unit u,integer playerId,real x,real y returns real
@@ -4309,18 +4306,18 @@ function Camera_AngleToMouse takes unit u,integer playerId,real x,real y returns
     local real mouseY= BlzGetTriggerPlayerMouseY()
     local real newAngle= bj_RADTODEG * Atan2(mouseY - y, mouseX - x)
     local real difference
-    local real minAngle= (LoadReal(ThirdPersonCamera__data, (playerId), (3))) // INLINED!!
+    local real minAngle= (LoadReal(ThirdPersonCamera___data, (playerId), (3))) // INLINED!!
     
     if newAngle < 0 then
         set newAngle=360 + newAngle // Convert negative angles to positive, since GetUnitFacing always returns positives
     endif
-    set difference=newAngle - GetUnitFacing((ThirdPersonCamera__focusUnits[(playerId) + bj_MAX_PLAYERS])) // INLINED!!
+    set difference=newAngle - GetUnitFacing((ThirdPersonCamera___focusUnits[(playerId) + bj_MAX_PLAYERS])) // INLINED!!
     
     // If both mouseX and Y are 0, then the mouse is (probably) on the UI
     if ( difference > minAngle or difference < - minAngle ) and ( mouseX != 0 and mouseY != 0 ) then
         return newAngle
     else
-        return GetUnitFacing((ThirdPersonCamera__focusUnits[(playerId) + bj_MAX_PLAYERS])) // INLINED!!
+        return GetUnitFacing((ThirdPersonCamera___focusUnits[(playerId) + bj_MAX_PLAYERS])) // INLINED!!
     endif
 endfunction
 
@@ -4328,10 +4325,10 @@ endfunction
 function Trig_CameraMouse_Actions takes nothing returns nothing
     local player trigPlayer= GetTriggerPlayer()
     local integer playerId= GetPlayerId(trigPlayer)
-    local unit u= (ThirdPersonCamera__focusUnits[(playerId)]) // INLINED!!
+    local unit u= (ThirdPersonCamera___focusUnits[(playerId)]) // INLINED!!
     
     if u != null then
-        call SetUnitFacing((ThirdPersonCamera__focusUnits[(playerId) + bj_MAX_PLAYERS]), Camera_AngleToMouse(u , playerId , GetUnitX(u) , GetUnitY(u))) // INLINED!!
+        call SetUnitFacing((ThirdPersonCamera___focusUnits[(playerId) + bj_MAX_PLAYERS]), Camera_AngleToMouse(u , playerId , GetUnitX(u) , GetUnitY(u))) // INLINED!!
         set u=null
     endif
 endfunction
@@ -4348,13 +4345,13 @@ function Trig_Commands_First_Person_Actions takes nothing returns nothing
     elseif chatStr == ("-third person") then // INLINED!!
         call Camera_SetThirdPerson(p)
     elseif chatStr == ("-fixed camera") then // INLINED!!
-        set ThirdPersonCamera__focusUnits[(GetPlayerId(p) ) + bj_MAX_PLAYERS]=( (ThirdPersonCamera__focusUnits[(GetPlayerId(p))])) // INLINED!!
+        set ThirdPersonCamera___focusUnits[(GetPlayerId(p) ) + bj_MAX_PLAYERS]=( (ThirdPersonCamera___focusUnits[(GetPlayerId(p))])) // INLINED!!
     elseif chatStr == ("-free camera") then // INLINED!!
-        set ThirdPersonCamera__focusUnits[(GetPlayerId(p) ) + bj_MAX_PLAYERS]=( (ThirdPersonCamera__focusUnits[(GetPlayerId(p)) + 2 * bj_MAX_PLAYERS])) // INLINED!!
+        set ThirdPersonCamera___focusUnits[(GetPlayerId(p) ) + bj_MAX_PLAYERS]=( (ThirdPersonCamera___focusUnits[(GetPlayerId(p)) + 2 * bj_MAX_PLAYERS])) // INLINED!!
     elseif chatStr == ("-help camera") then // INLINED!!
         call DisplayTextToPlayer(p, 0, 0, ("First Person Camera Enabled!\n\nTo leave this perspective, double-click the |c00ffff00Esc|r key.\nTo fix the camera to the unit's facing, click the |c00ffff00Esc|r key.\nTo allow the camera to move independently, click the |c00ffff00Esc|r key.\n\nYou can use the |c00ffff00left|r and |c00ffff00right|r arrow keys to move the camera.\nYou can find the commands for the camera by pressing |c00ffff00F9|r.")) // INLINED!!
     else
-        call SaveReal(ThirdPersonCamera__data, (GetPlayerId(p) ), (3), (( S2R(SubString(chatStr, StringLength(GetEventPlayerChatStringMatched()), StringLength(chatStr))))*1.0)) // INLINED!!
+        call SaveReal(ThirdPersonCamera___data, (GetPlayerId(p) ), (3), (( S2R(SubString(chatStr, StringLength(GetEventPlayerChatStringMatched()), StringLength(chatStr))))*1.0)) // INLINED!!
     endif
 endfunction
 
@@ -4367,11 +4364,11 @@ function Camera_TimerFunc takes nothing returns nothing
     local player localPlayer= GetLocalPlayer()
     local integer playerId= GetPlayerId(localPlayer)
     
-    if ThirdPersonCamera__focusUnits[playerId] != null then
-        call SetCameraField(CAMERA_FIELD_ROTATION, GetUnitFacing(ThirdPersonCamera__focusUnits[playerId + bj_MAX_PLAYERS]), 0)
+    if ThirdPersonCamera___focusUnits[playerId] != null then
+        call SetCameraField(CAMERA_FIELD_ROTATION, GetUnitFacing(ThirdPersonCamera___focusUnits[playerId + bj_MAX_PLAYERS]), 0)
         call SetCameraField(CAMERA_FIELD_ANGLE_OF_ATTACK, 350.00, 0)
         call SetCameraField(CAMERA_FIELD_TARGET_DISTANCE, 140.00, 0)
-        call SetCameraField(CAMERA_FIELD_ZOFFSET, ( GetUnitFlyHeight(ThirdPersonCamera__focusUnits[playerId]) + 125.00 ), 0.01)
+        call SetCameraField(CAMERA_FIELD_ZOFFSET, ( GetUnitFlyHeight(ThirdPersonCamera___focusUnits[playerId]) + 125.00 ), 0.01)
     endif
 endfunction
 
@@ -4391,26 +4388,26 @@ function Camera_ForForce_Init takes nothing returns nothing
             call TriggerRegisterPlayerChatEvent(gg_trg_Camera_System, enumPlayer, ("-help camera"), true) // INLINED!!
             call TriggerRegisterPlayerChatEvent(gg_trg_Camera_System, enumPlayer, ("-sensitivity "), false) // INLINED!!
         endif
-        call TriggerRegisterPlayerMouseEventBJ(ThirdPersonCamera__triggerMouse, enumPlayer, bj_MOUSEEVENTTYPE_MOVE)
+        call TriggerRegisterPlayerMouseEventBJ(ThirdPersonCamera___triggerMouse, enumPlayer, bj_MOUSEEVENTTYPE_MOVE)
         
-        call TriggerRegisterPlayerEvent(ThirdPersonCamera__triggerLeft, enumPlayer, EVENT_PLAYER_ARROW_LEFT_DOWN)
-        call TriggerRegisterPlayerEvent(ThirdPersonCamera__triggerLeft, enumPlayer, EVENT_PLAYER_ARROW_LEFT_UP)
+        call TriggerRegisterPlayerEvent(ThirdPersonCamera___triggerLeft, enumPlayer, EVENT_PLAYER_ARROW_LEFT_DOWN)
+        call TriggerRegisterPlayerEvent(ThirdPersonCamera___triggerLeft, enumPlayer, EVENT_PLAYER_ARROW_LEFT_UP)
     
-        call TriggerRegisterPlayerEvent(ThirdPersonCamera__triggerRight, enumPlayer, EVENT_PLAYER_ARROW_RIGHT_DOWN)
-        call TriggerRegisterPlayerEvent(ThirdPersonCamera__triggerRight, enumPlayer, EVENT_PLAYER_ARROW_RIGHT_UP)
+        call TriggerRegisterPlayerEvent(ThirdPersonCamera___triggerRight, enumPlayer, EVENT_PLAYER_ARROW_RIGHT_DOWN)
+        call TriggerRegisterPlayerEvent(ThirdPersonCamera___triggerRight, enumPlayer, EVENT_PLAYER_ARROW_RIGHT_UP)
         
-        call TriggerRegisterPlayerEvent(ThirdPersonCamera__triggerEsc, enumPlayer, EVENT_PLAYER_END_CINEMATIC)
+        call TriggerRegisterPlayerEvent(ThirdPersonCamera___triggerEsc, enumPlayer, EVENT_PLAYER_END_CINEMATIC)
         
-        call TriggerRegisterPlayerEvent(ThirdPersonCamera__triggerCleanup, enumPlayer, EVENT_PLAYER_LEAVE)
+        call TriggerRegisterPlayerEvent(ThirdPersonCamera___triggerCleanup, enumPlayer, EVENT_PLAYER_LEAVE)
         
         set u=CreateUnit((Player(bj_PLAYER_NEUTRAL_EXTRA)), ('nvil'), (0.0), (0.0), bj_UNIT_FACING) // INLINED!!
         call UnitAddAbility(u, 'Aloc')
         call SetUnitInvulnerable(u, true)
         call ShowUnit(u, false)
         call SetUnitTurnSpeed(u, 3.)
-        set ThirdPersonCamera__focusUnits[(GetPlayerId(enumPlayer) ) + 2 * bj_MAX_PLAYERS]=( u) // INLINED!!
-        set ThirdPersonCamera__focusUnits[(GetPlayerId(enumPlayer) ) + bj_MAX_PLAYERS]=( u) // INLINED!!
-        call SaveReal(ThirdPersonCamera__data, (GetPlayerId(enumPlayer) ), (3), (( 39.0)*1.0)) // INLINED!!
+        set ThirdPersonCamera___focusUnits[(GetPlayerId(enumPlayer) ) + 2 * bj_MAX_PLAYERS]=( u) // INLINED!!
+        set ThirdPersonCamera___focusUnits[(GetPlayerId(enumPlayer) ) + bj_MAX_PLAYERS]=( u) // INLINED!!
+        call SaveReal(ThirdPersonCamera___data, (GetPlayerId(enumPlayer) ), (3), (( 39.0)*1.0)) // INLINED!!
         
         call Camera_SetHelpSeen(GetPlayerId(enumPlayer) , false)
         
@@ -4427,26 +4424,26 @@ function InitTrig_Camera_System takes nothing returns nothing
     local timer t= CreateTimer()
     call TimerStart(t, 0.03, true, function Camera_TimerFunc)
     
-    set ThirdPersonCamera__data=InitHashtable()
+    set ThirdPersonCamera___data=InitHashtable()
     
     if ("-first person") != "" then // INLINED!!
         set gg_trg_Camera_System=CreateTrigger()
         call TriggerAddAction(gg_trg_Camera_System, function Trig_Commands_First_Person_Actions)
     endif
 
-    set ThirdPersonCamera__triggerLeft=CreateTrigger()
-    set ThirdPersonCamera__triggerRight=CreateTrigger()
-    call TriggerAddAction(ThirdPersonCamera__triggerLeft, function Camera_Trig_LeftArrow_Actions)
-    call TriggerAddAction(ThirdPersonCamera__triggerRight, function Camera_Trig_RightArrow_Actions)
+    set ThirdPersonCamera___triggerLeft=CreateTrigger()
+    set ThirdPersonCamera___triggerRight=CreateTrigger()
+    call TriggerAddAction(ThirdPersonCamera___triggerLeft, function Camera_Trig_LeftArrow_Actions)
+    call TriggerAddAction(ThirdPersonCamera___triggerRight, function Camera_Trig_RightArrow_Actions)
     
-    set ThirdPersonCamera__triggerEsc=CreateTrigger()
-    call TriggerAddAction(ThirdPersonCamera__triggerEsc, function Camera_Trig_Esc_Actions)
+    set ThirdPersonCamera___triggerEsc=CreateTrigger()
+    call TriggerAddAction(ThirdPersonCamera___triggerEsc, function Camera_Trig_Esc_Actions)
     
-    set ThirdPersonCamera__triggerMouse=CreateTrigger()
-    call TriggerAddAction(ThirdPersonCamera__triggerMouse, function Trig_CameraMouse_Actions)
+    set ThirdPersonCamera___triggerMouse=CreateTrigger()
+    call TriggerAddAction(ThirdPersonCamera___triggerMouse, function Trig_CameraMouse_Actions)
     
-    set ThirdPersonCamera__triggerCleanup=CreateTrigger()
-    call TriggerAddAction(ThirdPersonCamera__triggerCleanup, function Camera_Trig_PlayerLeaves)
+    set ThirdPersonCamera___triggerCleanup=CreateTrigger()
+    call TriggerAddAction(ThirdPersonCamera___triggerCleanup, function Camera_Trig_PlayerLeaves)
     
     call ForForce(GetPlayersAll(), function Camera_ForForce_Init)
     
@@ -4463,8 +4460,8 @@ endfunction
 		
 		
 		
-//Implemented from module WorldBounds__WorldBoundInit:
-  function s__WorldBounds_WorldBounds__WorldBoundInit__onInit takes nothing returns nothing
+//Implemented from module WorldBounds___WorldBoundInit:
+  function s__WorldBounds_WorldBounds___WorldBoundInit__onInit takes nothing returns nothing
 			set s__WorldBounds_world=GetWorldBounds()
 			
 			set s__WorldBounds_maxX=R2I(GetRectMaxX(s__WorldBounds_world))
@@ -4485,778 +4482,778 @@ endfunction
 // By Guhun
    
    
-    function s__ConstTable__handles_has takes integer this,integer key returns boolean
-        return HaveSavedHandle(ConstTable__ht, this, key)
+    function s__ConstTable___handles_has takes integer this,integer key returns boolean
+        return HaveSavedHandle(ConstTable___ht, this, key)
     endfunction
-    function s__ConstTable__handles_remove takes integer this,integer key returns nothing
-        call RemoveSavedHandle(ConstTable__ht, this, key)
+    function s__ConstTable___handles_remove takes integer this,integer key returns nothing
+        call RemoveSavedHandle(ConstTable___ht, this, key)
     endfunction
    
-    function s__ConstTable__agents__setindex takes integer this,integer key,agent value returns nothing
-        call SaveAgentHandle(ConstTable__ht, this, key, value)
+    function s__ConstTable___agents__setindex takes integer this,integer key,agent value returns nothing
+        call SaveAgentHandle(ConstTable___ht, this, key, value)
     endfunction
    
 //Run these textmacros to include the entire hashtable API as wrappers.
 //Don't be intimidated by the number of macros - Vexorian's map optimizer is
 //supposed to kill functions which inline (all of these functions inline).
 //textmacro instance: NEW_ARRAY_BASIC("Real", "Real", "real")
-    function s__ConstTable__reals__getindex takes integer this,integer key returns real
-        return LoadReal(ConstTable__ht, this, key)
+    function s__ConstTable___reals__getindex takes integer this,integer key returns real
+        return LoadReal(ConstTable___ht, this, key)
     endfunction
-    function s__ConstTable__reals__setindex takes integer this,integer key,real value returns nothing
-        call SaveReal(ConstTable__ht, this, key, value)
+    function s__ConstTable___reals__setindex takes integer this,integer key,real value returns nothing
+        call SaveReal(ConstTable___ht, this, key, value)
     endfunction
-    function s__ConstTable__reals_has takes integer this,integer key returns boolean
-        return HaveSavedReal(ConstTable__ht, this, key)
+    function s__ConstTable___reals_has takes integer this,integer key returns boolean
+        return HaveSavedReal(ConstTable___ht, this, key)
     endfunction
-    function s__ConstTable__reals_remove takes integer this,integer key returns nothing
-        call RemoveSavedReal(ConstTable__ht, this, key)
+    function s__ConstTable___reals_remove takes integer this,integer key returns nothing
+        call RemoveSavedReal(ConstTable___ht, this, key)
     endfunction
 //end of: NEW_ARRAY_BASIC("Real", "Real", "real")
 //textmacro instance: NEW_ARRAY_BASIC("Boolean", "Boolean", "boolean")
-    function s__ConstTable__booleans__getindex takes integer this,integer key returns boolean
-        return LoadBoolean(ConstTable__ht, this, key)
+    function s__ConstTable___booleans__getindex takes integer this,integer key returns boolean
+        return LoadBoolean(ConstTable___ht, this, key)
     endfunction
-    function s__ConstTable__booleans__setindex takes integer this,integer key,boolean value returns nothing
-        call SaveBoolean(ConstTable__ht, this, key, value)
+    function s__ConstTable___booleans__setindex takes integer this,integer key,boolean value returns nothing
+        call SaveBoolean(ConstTable___ht, this, key, value)
     endfunction
-    function s__ConstTable__booleans_has takes integer this,integer key returns boolean
-        return HaveSavedBoolean(ConstTable__ht, this, key)
+    function s__ConstTable___booleans_has takes integer this,integer key returns boolean
+        return HaveSavedBoolean(ConstTable___ht, this, key)
     endfunction
-    function s__ConstTable__booleans_remove takes integer this,integer key returns nothing
-        call RemoveSavedBoolean(ConstTable__ht, this, key)
+    function s__ConstTable___booleans_remove takes integer this,integer key returns nothing
+        call RemoveSavedBoolean(ConstTable___ht, this, key)
     endfunction
 //end of: NEW_ARRAY_BASIC("Boolean", "Boolean", "boolean")
 //textmacro instance: NEW_ARRAY_BASIC("String", "Str", "string")
-    function s__ConstTable__strings__getindex takes integer this,integer key returns string
-        return LoadStr(ConstTable__ht, this, key)
+    function s__ConstTable___strings__getindex takes integer this,integer key returns string
+        return LoadStr(ConstTable___ht, this, key)
     endfunction
-    function s__ConstTable__strings__setindex takes integer this,integer key,string value returns nothing
-        call SaveStr(ConstTable__ht, this, key, value)
+    function s__ConstTable___strings__setindex takes integer this,integer key,string value returns nothing
+        call SaveStr(ConstTable___ht, this, key, value)
     endfunction
-    function s__ConstTable__strings_has takes integer this,integer key returns boolean
-        return HaveSavedString(ConstTable__ht, this, key)
+    function s__ConstTable___strings_has takes integer this,integer key returns boolean
+        return HaveSavedString(ConstTable___ht, this, key)
     endfunction
-    function s__ConstTable__strings_remove takes integer this,integer key returns nothing
-        call RemoveSavedString(ConstTable__ht, this, key)
+    function s__ConstTable___strings_remove takes integer this,integer key returns nothing
+        call RemoveSavedString(ConstTable___ht, this, key)
     endfunction
 //end of: NEW_ARRAY_BASIC("String", "Str", "string")
 //New textmacro to allow table.integer[] syntax for compatibility with textmacros that might desire it.
 //textmacro instance: NEW_ARRAY_BASIC("Integer", "Integer", "integer")
-    function s__ConstTable__integers__getindex takes integer this,integer key returns integer
-        return LoadInteger(ConstTable__ht, this, key)
+    function s__ConstTable___integers__getindex takes integer this,integer key returns integer
+        return LoadInteger(ConstTable___ht, this, key)
     endfunction
-    function s__ConstTable__integers__setindex takes integer this,integer key,integer value returns nothing
-        call SaveInteger(ConstTable__ht, this, key, value)
+    function s__ConstTable___integers__setindex takes integer this,integer key,integer value returns nothing
+        call SaveInteger(ConstTable___ht, this, key, value)
     endfunction
-    function s__ConstTable__integers_has takes integer this,integer key returns boolean
-        return HaveSavedInteger(ConstTable__ht, this, key)
+    function s__ConstTable___integers_has takes integer this,integer key returns boolean
+        return HaveSavedInteger(ConstTable___ht, this, key)
     endfunction
-    function s__ConstTable__integers_remove takes integer this,integer key returns nothing
-        call RemoveSavedInteger(ConstTable__ht, this, key)
+    function s__ConstTable___integers_remove takes integer this,integer key returns nothing
+        call RemoveSavedInteger(ConstTable___ht, this, key)
     endfunction
 //end of: NEW_ARRAY_BASIC("Integer", "Integer", "integer")
    
 //textmacro instance: NEW_ARRAY("Player", "player")
-    function s__ConstTable__players__getindex takes integer this,integer key returns player
-        return LoadPlayerHandle(ConstTable__ht, this, key)
+    function s__ConstTable___players__getindex takes integer this,integer key returns player
+        return LoadPlayerHandle(ConstTable___ht, this, key)
     endfunction
-    function s__ConstTable__players__setindex takes integer this,integer key,player value returns nothing
-        call SavePlayerHandle(ConstTable__ht, this, key, value)
+    function s__ConstTable___players__setindex takes integer this,integer key,player value returns nothing
+        call SavePlayerHandle(ConstTable___ht, this, key, value)
     endfunction
-    function s__ConstTable__players_has takes integer this,integer key returns boolean
-        return HaveSavedHandle(ConstTable__ht, this, key)
+    function s__ConstTable___players_has takes integer this,integer key returns boolean
+        return HaveSavedHandle(ConstTable___ht, this, key)
     endfunction
-    function s__ConstTable__players_remove takes integer this,integer key returns nothing
-        call RemoveSavedHandle(ConstTable__ht, this, key)
+    function s__ConstTable___players_remove takes integer this,integer key returns nothing
+        call RemoveSavedHandle(ConstTable___ht, this, key)
     endfunction
 //end of: NEW_ARRAY("Player", "player")
 //textmacro instance: NEW_ARRAY("Widget", "widget")
-    function s__ConstTable__widgets__getindex takes integer this,integer key returns widget
-        return LoadWidgetHandle(ConstTable__ht, this, key)
+    function s__ConstTable___widgets__getindex takes integer this,integer key returns widget
+        return LoadWidgetHandle(ConstTable___ht, this, key)
     endfunction
-    function s__ConstTable__widgets__setindex takes integer this,integer key,widget value returns nothing
-        call SaveWidgetHandle(ConstTable__ht, this, key, value)
+    function s__ConstTable___widgets__setindex takes integer this,integer key,widget value returns nothing
+        call SaveWidgetHandle(ConstTable___ht, this, key, value)
     endfunction
-    function s__ConstTable__widgets_has takes integer this,integer key returns boolean
-        return HaveSavedHandle(ConstTable__ht, this, key)
+    function s__ConstTable___widgets_has takes integer this,integer key returns boolean
+        return HaveSavedHandle(ConstTable___ht, this, key)
     endfunction
-    function s__ConstTable__widgets_remove takes integer this,integer key returns nothing
-        call RemoveSavedHandle(ConstTable__ht, this, key)
+    function s__ConstTable___widgets_remove takes integer this,integer key returns nothing
+        call RemoveSavedHandle(ConstTable___ht, this, key)
     endfunction
 //end of: NEW_ARRAY("Widget", "widget")
 //textmacro instance: NEW_ARRAY("Destructable", "destructable")
-    function s__ConstTable__destructables__getindex takes integer this,integer key returns destructable
-        return LoadDestructableHandle(ConstTable__ht, this, key)
+    function s__ConstTable___destructables__getindex takes integer this,integer key returns destructable
+        return LoadDestructableHandle(ConstTable___ht, this, key)
     endfunction
-    function s__ConstTable__destructables__setindex takes integer this,integer key,destructable value returns nothing
-        call SaveDestructableHandle(ConstTable__ht, this, key, value)
+    function s__ConstTable___destructables__setindex takes integer this,integer key,destructable value returns nothing
+        call SaveDestructableHandle(ConstTable___ht, this, key, value)
     endfunction
-    function s__ConstTable__destructables_has takes integer this,integer key returns boolean
-        return HaveSavedHandle(ConstTable__ht, this, key)
+    function s__ConstTable___destructables_has takes integer this,integer key returns boolean
+        return HaveSavedHandle(ConstTable___ht, this, key)
     endfunction
-    function s__ConstTable__destructables_remove takes integer this,integer key returns nothing
-        call RemoveSavedHandle(ConstTable__ht, this, key)
+    function s__ConstTable___destructables_remove takes integer this,integer key returns nothing
+        call RemoveSavedHandle(ConstTable___ht, this, key)
     endfunction
 //end of: NEW_ARRAY("Destructable", "destructable")
 //textmacro instance: NEW_ARRAY("Item", "item")
-    function s__ConstTable__items__getindex takes integer this,integer key returns item
-        return LoadItemHandle(ConstTable__ht, this, key)
+    function s__ConstTable___items__getindex takes integer this,integer key returns item
+        return LoadItemHandle(ConstTable___ht, this, key)
     endfunction
-    function s__ConstTable__items__setindex takes integer this,integer key,item value returns nothing
-        call SaveItemHandle(ConstTable__ht, this, key, value)
+    function s__ConstTable___items__setindex takes integer this,integer key,item value returns nothing
+        call SaveItemHandle(ConstTable___ht, this, key, value)
     endfunction
-    function s__ConstTable__items_has takes integer this,integer key returns boolean
-        return HaveSavedHandle(ConstTable__ht, this, key)
+    function s__ConstTable___items_has takes integer this,integer key returns boolean
+        return HaveSavedHandle(ConstTable___ht, this, key)
     endfunction
-    function s__ConstTable__items_remove takes integer this,integer key returns nothing
-        call RemoveSavedHandle(ConstTable__ht, this, key)
+    function s__ConstTable___items_remove takes integer this,integer key returns nothing
+        call RemoveSavedHandle(ConstTable___ht, this, key)
     endfunction
 //end of: NEW_ARRAY("Item", "item")
 //textmacro instance: NEW_ARRAY("Unit", "unit")
-    function s__ConstTable__units__getindex takes integer this,integer key returns unit
-        return LoadUnitHandle(ConstTable__ht, this, key)
+    function s__ConstTable___units__getindex takes integer this,integer key returns unit
+        return LoadUnitHandle(ConstTable___ht, this, key)
     endfunction
-    function s__ConstTable__units__setindex takes integer this,integer key,unit value returns nothing
-        call SaveUnitHandle(ConstTable__ht, this, key, value)
+    function s__ConstTable___units__setindex takes integer this,integer key,unit value returns nothing
+        call SaveUnitHandle(ConstTable___ht, this, key, value)
     endfunction
-    function s__ConstTable__units_has takes integer this,integer key returns boolean
-        return HaveSavedHandle(ConstTable__ht, this, key)
+    function s__ConstTable___units_has takes integer this,integer key returns boolean
+        return HaveSavedHandle(ConstTable___ht, this, key)
     endfunction
-    function s__ConstTable__units_remove takes integer this,integer key returns nothing
-        call RemoveSavedHandle(ConstTable__ht, this, key)
+    function s__ConstTable___units_remove takes integer this,integer key returns nothing
+        call RemoveSavedHandle(ConstTable___ht, this, key)
     endfunction
 //end of: NEW_ARRAY("Unit", "unit")
 //textmacro instance: NEW_ARRAY("Ability", "ability")
-    function s__ConstTable__abilitys__getindex takes integer this,integer key returns ability
-        return LoadAbilityHandle(ConstTable__ht, this, key)
+    function s__ConstTable___abilitys__getindex takes integer this,integer key returns ability
+        return LoadAbilityHandle(ConstTable___ht, this, key)
     endfunction
-    function s__ConstTable__abilitys__setindex takes integer this,integer key,ability value returns nothing
-        call SaveAbilityHandle(ConstTable__ht, this, key, value)
+    function s__ConstTable___abilitys__setindex takes integer this,integer key,ability value returns nothing
+        call SaveAbilityHandle(ConstTable___ht, this, key, value)
     endfunction
-    function s__ConstTable__abilitys_has takes integer this,integer key returns boolean
-        return HaveSavedHandle(ConstTable__ht, this, key)
+    function s__ConstTable___abilitys_has takes integer this,integer key returns boolean
+        return HaveSavedHandle(ConstTable___ht, this, key)
     endfunction
-    function s__ConstTable__abilitys_remove takes integer this,integer key returns nothing
-        call RemoveSavedHandle(ConstTable__ht, this, key)
+    function s__ConstTable___abilitys_remove takes integer this,integer key returns nothing
+        call RemoveSavedHandle(ConstTable___ht, this, key)
     endfunction
 //end of: NEW_ARRAY("Ability", "ability")
 //textmacro instance: NEW_ARRAY("Timer", "timer")
-    function s__ConstTable__timers__getindex takes integer this,integer key returns timer
-        return LoadTimerHandle(ConstTable__ht, this, key)
+    function s__ConstTable___timers__getindex takes integer this,integer key returns timer
+        return LoadTimerHandle(ConstTable___ht, this, key)
     endfunction
-    function s__ConstTable__timers__setindex takes integer this,integer key,timer value returns nothing
-        call SaveTimerHandle(ConstTable__ht, this, key, value)
+    function s__ConstTable___timers__setindex takes integer this,integer key,timer value returns nothing
+        call SaveTimerHandle(ConstTable___ht, this, key, value)
     endfunction
-    function s__ConstTable__timers_has takes integer this,integer key returns boolean
-        return HaveSavedHandle(ConstTable__ht, this, key)
+    function s__ConstTable___timers_has takes integer this,integer key returns boolean
+        return HaveSavedHandle(ConstTable___ht, this, key)
     endfunction
-    function s__ConstTable__timers_remove takes integer this,integer key returns nothing
-        call RemoveSavedHandle(ConstTable__ht, this, key)
+    function s__ConstTable___timers_remove takes integer this,integer key returns nothing
+        call RemoveSavedHandle(ConstTable___ht, this, key)
     endfunction
 //end of: NEW_ARRAY("Timer", "timer")
 //textmacro instance: NEW_ARRAY("Trigger", "trigger")
-    function s__ConstTable__triggers__getindex takes integer this,integer key returns trigger
-        return LoadTriggerHandle(ConstTable__ht, this, key)
+    function s__ConstTable___triggers__getindex takes integer this,integer key returns trigger
+        return LoadTriggerHandle(ConstTable___ht, this, key)
     endfunction
-    function s__ConstTable__triggers__setindex takes integer this,integer key,trigger value returns nothing
-        call SaveTriggerHandle(ConstTable__ht, this, key, value)
+    function s__ConstTable___triggers__setindex takes integer this,integer key,trigger value returns nothing
+        call SaveTriggerHandle(ConstTable___ht, this, key, value)
     endfunction
-    function s__ConstTable__triggers_has takes integer this,integer key returns boolean
-        return HaveSavedHandle(ConstTable__ht, this, key)
+    function s__ConstTable___triggers_has takes integer this,integer key returns boolean
+        return HaveSavedHandle(ConstTable___ht, this, key)
     endfunction
-    function s__ConstTable__triggers_remove takes integer this,integer key returns nothing
-        call RemoveSavedHandle(ConstTable__ht, this, key)
+    function s__ConstTable___triggers_remove takes integer this,integer key returns nothing
+        call RemoveSavedHandle(ConstTable___ht, this, key)
     endfunction
 //end of: NEW_ARRAY("Trigger", "trigger")
 //textmacro instance: NEW_ARRAY("TriggerCondition", "triggercondition")
-    function s__ConstTable__triggerconditions__getindex takes integer this,integer key returns triggercondition
-        return LoadTriggerConditionHandle(ConstTable__ht, this, key)
+    function s__ConstTable___triggerconditions__getindex takes integer this,integer key returns triggercondition
+        return LoadTriggerConditionHandle(ConstTable___ht, this, key)
     endfunction
-    function s__ConstTable__triggerconditions__setindex takes integer this,integer key,triggercondition value returns nothing
-        call SaveTriggerConditionHandle(ConstTable__ht, this, key, value)
+    function s__ConstTable___triggerconditions__setindex takes integer this,integer key,triggercondition value returns nothing
+        call SaveTriggerConditionHandle(ConstTable___ht, this, key, value)
     endfunction
-    function s__ConstTable__triggerconditions_has takes integer this,integer key returns boolean
-        return HaveSavedHandle(ConstTable__ht, this, key)
+    function s__ConstTable___triggerconditions_has takes integer this,integer key returns boolean
+        return HaveSavedHandle(ConstTable___ht, this, key)
     endfunction
-    function s__ConstTable__triggerconditions_remove takes integer this,integer key returns nothing
-        call RemoveSavedHandle(ConstTable__ht, this, key)
+    function s__ConstTable___triggerconditions_remove takes integer this,integer key returns nothing
+        call RemoveSavedHandle(ConstTable___ht, this, key)
     endfunction
 //end of: NEW_ARRAY("TriggerCondition", "triggercondition")
 //textmacro instance: NEW_ARRAY("TriggerAction", "triggeraction")
-    function s__ConstTable__triggeractions__getindex takes integer this,integer key returns triggeraction
-        return LoadTriggerActionHandle(ConstTable__ht, this, key)
+    function s__ConstTable___triggeractions__getindex takes integer this,integer key returns triggeraction
+        return LoadTriggerActionHandle(ConstTable___ht, this, key)
     endfunction
-    function s__ConstTable__triggeractions__setindex takes integer this,integer key,triggeraction value returns nothing
-        call SaveTriggerActionHandle(ConstTable__ht, this, key, value)
+    function s__ConstTable___triggeractions__setindex takes integer this,integer key,triggeraction value returns nothing
+        call SaveTriggerActionHandle(ConstTable___ht, this, key, value)
     endfunction
-    function s__ConstTable__triggeractions_has takes integer this,integer key returns boolean
-        return HaveSavedHandle(ConstTable__ht, this, key)
+    function s__ConstTable___triggeractions_has takes integer this,integer key returns boolean
+        return HaveSavedHandle(ConstTable___ht, this, key)
     endfunction
-    function s__ConstTable__triggeractions_remove takes integer this,integer key returns nothing
-        call RemoveSavedHandle(ConstTable__ht, this, key)
+    function s__ConstTable___triggeractions_remove takes integer this,integer key returns nothing
+        call RemoveSavedHandle(ConstTable___ht, this, key)
     endfunction
 //end of: NEW_ARRAY("TriggerAction", "triggeraction")
 //textmacro instance: NEW_ARRAY("TriggerEvent", "event")
-    function s__ConstTable__events__getindex takes integer this,integer key returns event
-        return LoadTriggerEventHandle(ConstTable__ht, this, key)
+    function s__ConstTable___events__getindex takes integer this,integer key returns event
+        return LoadTriggerEventHandle(ConstTable___ht, this, key)
     endfunction
-    function s__ConstTable__events__setindex takes integer this,integer key,event value returns nothing
-        call SaveTriggerEventHandle(ConstTable__ht, this, key, value)
+    function s__ConstTable___events__setindex takes integer this,integer key,event value returns nothing
+        call SaveTriggerEventHandle(ConstTable___ht, this, key, value)
     endfunction
-    function s__ConstTable__events_has takes integer this,integer key returns boolean
-        return HaveSavedHandle(ConstTable__ht, this, key)
+    function s__ConstTable___events_has takes integer this,integer key returns boolean
+        return HaveSavedHandle(ConstTable___ht, this, key)
     endfunction
-    function s__ConstTable__events_remove takes integer this,integer key returns nothing
-        call RemoveSavedHandle(ConstTable__ht, this, key)
+    function s__ConstTable___events_remove takes integer this,integer key returns nothing
+        call RemoveSavedHandle(ConstTable___ht, this, key)
     endfunction
 //end of: NEW_ARRAY("TriggerEvent", "event")
 //textmacro instance: NEW_ARRAY("Force", "force")
-    function s__ConstTable__forces__getindex takes integer this,integer key returns force
-        return LoadForceHandle(ConstTable__ht, this, key)
+    function s__ConstTable___forces__getindex takes integer this,integer key returns force
+        return LoadForceHandle(ConstTable___ht, this, key)
     endfunction
-    function s__ConstTable__forces__setindex takes integer this,integer key,force value returns nothing
-        call SaveForceHandle(ConstTable__ht, this, key, value)
+    function s__ConstTable___forces__setindex takes integer this,integer key,force value returns nothing
+        call SaveForceHandle(ConstTable___ht, this, key, value)
     endfunction
-    function s__ConstTable__forces_has takes integer this,integer key returns boolean
-        return HaveSavedHandle(ConstTable__ht, this, key)
+    function s__ConstTable___forces_has takes integer this,integer key returns boolean
+        return HaveSavedHandle(ConstTable___ht, this, key)
     endfunction
-    function s__ConstTable__forces_remove takes integer this,integer key returns nothing
-        call RemoveSavedHandle(ConstTable__ht, this, key)
+    function s__ConstTable___forces_remove takes integer this,integer key returns nothing
+        call RemoveSavedHandle(ConstTable___ht, this, key)
     endfunction
 //end of: NEW_ARRAY("Force", "force")
 //textmacro instance: NEW_ARRAY("Group", "group")
-    function s__ConstTable__groups__getindex takes integer this,integer key returns group
-        return LoadGroupHandle(ConstTable__ht, this, key)
+    function s__ConstTable___groups__getindex takes integer this,integer key returns group
+        return LoadGroupHandle(ConstTable___ht, this, key)
     endfunction
-    function s__ConstTable__groups__setindex takes integer this,integer key,group value returns nothing
-        call SaveGroupHandle(ConstTable__ht, this, key, value)
+    function s__ConstTable___groups__setindex takes integer this,integer key,group value returns nothing
+        call SaveGroupHandle(ConstTable___ht, this, key, value)
     endfunction
-    function s__ConstTable__groups_has takes integer this,integer key returns boolean
-        return HaveSavedHandle(ConstTable__ht, this, key)
+    function s__ConstTable___groups_has takes integer this,integer key returns boolean
+        return HaveSavedHandle(ConstTable___ht, this, key)
     endfunction
-    function s__ConstTable__groups_remove takes integer this,integer key returns nothing
-        call RemoveSavedHandle(ConstTable__ht, this, key)
+    function s__ConstTable___groups_remove takes integer this,integer key returns nothing
+        call RemoveSavedHandle(ConstTable___ht, this, key)
     endfunction
 //end of: NEW_ARRAY("Group", "group")
 //textmacro instance: NEW_ARRAY("Location", "location")
-    function s__ConstTable__locations__getindex takes integer this,integer key returns location
-        return LoadLocationHandle(ConstTable__ht, this, key)
+    function s__ConstTable___locations__getindex takes integer this,integer key returns location
+        return LoadLocationHandle(ConstTable___ht, this, key)
     endfunction
-    function s__ConstTable__locations__setindex takes integer this,integer key,location value returns nothing
-        call SaveLocationHandle(ConstTable__ht, this, key, value)
+    function s__ConstTable___locations__setindex takes integer this,integer key,location value returns nothing
+        call SaveLocationHandle(ConstTable___ht, this, key, value)
     endfunction
-    function s__ConstTable__locations_has takes integer this,integer key returns boolean
-        return HaveSavedHandle(ConstTable__ht, this, key)
+    function s__ConstTable___locations_has takes integer this,integer key returns boolean
+        return HaveSavedHandle(ConstTable___ht, this, key)
     endfunction
-    function s__ConstTable__locations_remove takes integer this,integer key returns nothing
-        call RemoveSavedHandle(ConstTable__ht, this, key)
+    function s__ConstTable___locations_remove takes integer this,integer key returns nothing
+        call RemoveSavedHandle(ConstTable___ht, this, key)
     endfunction
 //end of: NEW_ARRAY("Location", "location")
 //textmacro instance: NEW_ARRAY("Rect", "rect")
-    function s__ConstTable__rects__getindex takes integer this,integer key returns rect
-        return LoadRectHandle(ConstTable__ht, this, key)
+    function s__ConstTable___rects__getindex takes integer this,integer key returns rect
+        return LoadRectHandle(ConstTable___ht, this, key)
     endfunction
-    function s__ConstTable__rects__setindex takes integer this,integer key,rect value returns nothing
-        call SaveRectHandle(ConstTable__ht, this, key, value)
+    function s__ConstTable___rects__setindex takes integer this,integer key,rect value returns nothing
+        call SaveRectHandle(ConstTable___ht, this, key, value)
     endfunction
-    function s__ConstTable__rects_has takes integer this,integer key returns boolean
-        return HaveSavedHandle(ConstTable__ht, this, key)
+    function s__ConstTable___rects_has takes integer this,integer key returns boolean
+        return HaveSavedHandle(ConstTable___ht, this, key)
     endfunction
-    function s__ConstTable__rects_remove takes integer this,integer key returns nothing
-        call RemoveSavedHandle(ConstTable__ht, this, key)
+    function s__ConstTable___rects_remove takes integer this,integer key returns nothing
+        call RemoveSavedHandle(ConstTable___ht, this, key)
     endfunction
 //end of: NEW_ARRAY("Rect", "rect")
 //textmacro instance: NEW_ARRAY("BooleanExpr", "boolexpr")
-    function s__ConstTable__boolexprs__getindex takes integer this,integer key returns boolexpr
-        return LoadBooleanExprHandle(ConstTable__ht, this, key)
+    function s__ConstTable___boolexprs__getindex takes integer this,integer key returns boolexpr
+        return LoadBooleanExprHandle(ConstTable___ht, this, key)
     endfunction
-    function s__ConstTable__boolexprs__setindex takes integer this,integer key,boolexpr value returns nothing
-        call SaveBooleanExprHandle(ConstTable__ht, this, key, value)
+    function s__ConstTable___boolexprs__setindex takes integer this,integer key,boolexpr value returns nothing
+        call SaveBooleanExprHandle(ConstTable___ht, this, key, value)
     endfunction
-    function s__ConstTable__boolexprs_has takes integer this,integer key returns boolean
-        return HaveSavedHandle(ConstTable__ht, this, key)
+    function s__ConstTable___boolexprs_has takes integer this,integer key returns boolean
+        return HaveSavedHandle(ConstTable___ht, this, key)
     endfunction
-    function s__ConstTable__boolexprs_remove takes integer this,integer key returns nothing
-        call RemoveSavedHandle(ConstTable__ht, this, key)
+    function s__ConstTable___boolexprs_remove takes integer this,integer key returns nothing
+        call RemoveSavedHandle(ConstTable___ht, this, key)
     endfunction
 //end of: NEW_ARRAY("BooleanExpr", "boolexpr")
 //textmacro instance: NEW_ARRAY("Sound", "sound")
-    function s__ConstTable__sounds__getindex takes integer this,integer key returns sound
-        return LoadSoundHandle(ConstTable__ht, this, key)
+    function s__ConstTable___sounds__getindex takes integer this,integer key returns sound
+        return LoadSoundHandle(ConstTable___ht, this, key)
     endfunction
-    function s__ConstTable__sounds__setindex takes integer this,integer key,sound value returns nothing
-        call SaveSoundHandle(ConstTable__ht, this, key, value)
+    function s__ConstTable___sounds__setindex takes integer this,integer key,sound value returns nothing
+        call SaveSoundHandle(ConstTable___ht, this, key, value)
     endfunction
-    function s__ConstTable__sounds_has takes integer this,integer key returns boolean
-        return HaveSavedHandle(ConstTable__ht, this, key)
+    function s__ConstTable___sounds_has takes integer this,integer key returns boolean
+        return HaveSavedHandle(ConstTable___ht, this, key)
     endfunction
-    function s__ConstTable__sounds_remove takes integer this,integer key returns nothing
-        call RemoveSavedHandle(ConstTable__ht, this, key)
+    function s__ConstTable___sounds_remove takes integer this,integer key returns nothing
+        call RemoveSavedHandle(ConstTable___ht, this, key)
     endfunction
 //end of: NEW_ARRAY("Sound", "sound")
 //textmacro instance: NEW_ARRAY("Effect", "effect")
-    function s__ConstTable__effects__getindex takes integer this,integer key returns effect
-        return LoadEffectHandle(ConstTable__ht, this, key)
+    function s__ConstTable___effects__getindex takes integer this,integer key returns effect
+        return LoadEffectHandle(ConstTable___ht, this, key)
     endfunction
-    function s__ConstTable__effects__setindex takes integer this,integer key,effect value returns nothing
-        call SaveEffectHandle(ConstTable__ht, this, key, value)
+    function s__ConstTable___effects__setindex takes integer this,integer key,effect value returns nothing
+        call SaveEffectHandle(ConstTable___ht, this, key, value)
     endfunction
-    function s__ConstTable__effects_has takes integer this,integer key returns boolean
-        return HaveSavedHandle(ConstTable__ht, this, key)
+    function s__ConstTable___effects_has takes integer this,integer key returns boolean
+        return HaveSavedHandle(ConstTable___ht, this, key)
     endfunction
-    function s__ConstTable__effects_remove takes integer this,integer key returns nothing
-        call RemoveSavedHandle(ConstTable__ht, this, key)
+    function s__ConstTable___effects_remove takes integer this,integer key returns nothing
+        call RemoveSavedHandle(ConstTable___ht, this, key)
     endfunction
 //end of: NEW_ARRAY("Effect", "effect")
 //textmacro instance: NEW_ARRAY("UnitPool", "unitpool")
-    function s__ConstTable__unitpools__getindex takes integer this,integer key returns unitpool
-        return LoadUnitPoolHandle(ConstTable__ht, this, key)
+    function s__ConstTable___unitpools__getindex takes integer this,integer key returns unitpool
+        return LoadUnitPoolHandle(ConstTable___ht, this, key)
     endfunction
-    function s__ConstTable__unitpools__setindex takes integer this,integer key,unitpool value returns nothing
-        call SaveUnitPoolHandle(ConstTable__ht, this, key, value)
+    function s__ConstTable___unitpools__setindex takes integer this,integer key,unitpool value returns nothing
+        call SaveUnitPoolHandle(ConstTable___ht, this, key, value)
     endfunction
-    function s__ConstTable__unitpools_has takes integer this,integer key returns boolean
-        return HaveSavedHandle(ConstTable__ht, this, key)
+    function s__ConstTable___unitpools_has takes integer this,integer key returns boolean
+        return HaveSavedHandle(ConstTable___ht, this, key)
     endfunction
-    function s__ConstTable__unitpools_remove takes integer this,integer key returns nothing
-        call RemoveSavedHandle(ConstTable__ht, this, key)
+    function s__ConstTable___unitpools_remove takes integer this,integer key returns nothing
+        call RemoveSavedHandle(ConstTable___ht, this, key)
     endfunction
 //end of: NEW_ARRAY("UnitPool", "unitpool")
 //textmacro instance: NEW_ARRAY("ItemPool", "itempool")
-    function s__ConstTable__itempools__getindex takes integer this,integer key returns itempool
-        return LoadItemPoolHandle(ConstTable__ht, this, key)
+    function s__ConstTable___itempools__getindex takes integer this,integer key returns itempool
+        return LoadItemPoolHandle(ConstTable___ht, this, key)
     endfunction
-    function s__ConstTable__itempools__setindex takes integer this,integer key,itempool value returns nothing
-        call SaveItemPoolHandle(ConstTable__ht, this, key, value)
+    function s__ConstTable___itempools__setindex takes integer this,integer key,itempool value returns nothing
+        call SaveItemPoolHandle(ConstTable___ht, this, key, value)
     endfunction
-    function s__ConstTable__itempools_has takes integer this,integer key returns boolean
-        return HaveSavedHandle(ConstTable__ht, this, key)
+    function s__ConstTable___itempools_has takes integer this,integer key returns boolean
+        return HaveSavedHandle(ConstTable___ht, this, key)
     endfunction
-    function s__ConstTable__itempools_remove takes integer this,integer key returns nothing
-        call RemoveSavedHandle(ConstTable__ht, this, key)
+    function s__ConstTable___itempools_remove takes integer this,integer key returns nothing
+        call RemoveSavedHandle(ConstTable___ht, this, key)
     endfunction
 //end of: NEW_ARRAY("ItemPool", "itempool")
 //textmacro instance: NEW_ARRAY("Quest", "quest")
-    function s__ConstTable__quests__getindex takes integer this,integer key returns quest
-        return LoadQuestHandle(ConstTable__ht, this, key)
+    function s__ConstTable___quests__getindex takes integer this,integer key returns quest
+        return LoadQuestHandle(ConstTable___ht, this, key)
     endfunction
-    function s__ConstTable__quests__setindex takes integer this,integer key,quest value returns nothing
-        call SaveQuestHandle(ConstTable__ht, this, key, value)
+    function s__ConstTable___quests__setindex takes integer this,integer key,quest value returns nothing
+        call SaveQuestHandle(ConstTable___ht, this, key, value)
     endfunction
-    function s__ConstTable__quests_has takes integer this,integer key returns boolean
-        return HaveSavedHandle(ConstTable__ht, this, key)
+    function s__ConstTable___quests_has takes integer this,integer key returns boolean
+        return HaveSavedHandle(ConstTable___ht, this, key)
     endfunction
-    function s__ConstTable__quests_remove takes integer this,integer key returns nothing
-        call RemoveSavedHandle(ConstTable__ht, this, key)
+    function s__ConstTable___quests_remove takes integer this,integer key returns nothing
+        call RemoveSavedHandle(ConstTable___ht, this, key)
     endfunction
 //end of: NEW_ARRAY("Quest", "quest")
 //textmacro instance: NEW_ARRAY("QuestItem", "questitem")
-    function s__ConstTable__questitems__getindex takes integer this,integer key returns questitem
-        return LoadQuestItemHandle(ConstTable__ht, this, key)
+    function s__ConstTable___questitems__getindex takes integer this,integer key returns questitem
+        return LoadQuestItemHandle(ConstTable___ht, this, key)
     endfunction
-    function s__ConstTable__questitems__setindex takes integer this,integer key,questitem value returns nothing
-        call SaveQuestItemHandle(ConstTable__ht, this, key, value)
+    function s__ConstTable___questitems__setindex takes integer this,integer key,questitem value returns nothing
+        call SaveQuestItemHandle(ConstTable___ht, this, key, value)
     endfunction
-    function s__ConstTable__questitems_has takes integer this,integer key returns boolean
-        return HaveSavedHandle(ConstTable__ht, this, key)
+    function s__ConstTable___questitems_has takes integer this,integer key returns boolean
+        return HaveSavedHandle(ConstTable___ht, this, key)
     endfunction
-    function s__ConstTable__questitems_remove takes integer this,integer key returns nothing
-        call RemoveSavedHandle(ConstTable__ht, this, key)
+    function s__ConstTable___questitems_remove takes integer this,integer key returns nothing
+        call RemoveSavedHandle(ConstTable___ht, this, key)
     endfunction
 //end of: NEW_ARRAY("QuestItem", "questitem")
 //textmacro instance: NEW_ARRAY("DefeatCondition", "defeatcondition")
-    function s__ConstTable__defeatconditions__getindex takes integer this,integer key returns defeatcondition
-        return LoadDefeatConditionHandle(ConstTable__ht, this, key)
+    function s__ConstTable___defeatconditions__getindex takes integer this,integer key returns defeatcondition
+        return LoadDefeatConditionHandle(ConstTable___ht, this, key)
     endfunction
-    function s__ConstTable__defeatconditions__setindex takes integer this,integer key,defeatcondition value returns nothing
-        call SaveDefeatConditionHandle(ConstTable__ht, this, key, value)
+    function s__ConstTable___defeatconditions__setindex takes integer this,integer key,defeatcondition value returns nothing
+        call SaveDefeatConditionHandle(ConstTable___ht, this, key, value)
     endfunction
-    function s__ConstTable__defeatconditions_has takes integer this,integer key returns boolean
-        return HaveSavedHandle(ConstTable__ht, this, key)
+    function s__ConstTable___defeatconditions_has takes integer this,integer key returns boolean
+        return HaveSavedHandle(ConstTable___ht, this, key)
     endfunction
-    function s__ConstTable__defeatconditions_remove takes integer this,integer key returns nothing
-        call RemoveSavedHandle(ConstTable__ht, this, key)
+    function s__ConstTable___defeatconditions_remove takes integer this,integer key returns nothing
+        call RemoveSavedHandle(ConstTable___ht, this, key)
     endfunction
 //end of: NEW_ARRAY("DefeatCondition", "defeatcondition")
 //textmacro instance: NEW_ARRAY("TimerDialog", "timerdialog")
-    function s__ConstTable__timerdialogs__getindex takes integer this,integer key returns timerdialog
-        return LoadTimerDialogHandle(ConstTable__ht, this, key)
+    function s__ConstTable___timerdialogs__getindex takes integer this,integer key returns timerdialog
+        return LoadTimerDialogHandle(ConstTable___ht, this, key)
     endfunction
-    function s__ConstTable__timerdialogs__setindex takes integer this,integer key,timerdialog value returns nothing
-        call SaveTimerDialogHandle(ConstTable__ht, this, key, value)
+    function s__ConstTable___timerdialogs__setindex takes integer this,integer key,timerdialog value returns nothing
+        call SaveTimerDialogHandle(ConstTable___ht, this, key, value)
     endfunction
-    function s__ConstTable__timerdialogs_has takes integer this,integer key returns boolean
-        return HaveSavedHandle(ConstTable__ht, this, key)
+    function s__ConstTable___timerdialogs_has takes integer this,integer key returns boolean
+        return HaveSavedHandle(ConstTable___ht, this, key)
     endfunction
-    function s__ConstTable__timerdialogs_remove takes integer this,integer key returns nothing
-        call RemoveSavedHandle(ConstTable__ht, this, key)
+    function s__ConstTable___timerdialogs_remove takes integer this,integer key returns nothing
+        call RemoveSavedHandle(ConstTable___ht, this, key)
     endfunction
 //end of: NEW_ARRAY("TimerDialog", "timerdialog")
 //textmacro instance: NEW_ARRAY("Leaderboard", "leaderboard")
-    function s__ConstTable__leaderboards__getindex takes integer this,integer key returns leaderboard
-        return LoadLeaderboardHandle(ConstTable__ht, this, key)
+    function s__ConstTable___leaderboards__getindex takes integer this,integer key returns leaderboard
+        return LoadLeaderboardHandle(ConstTable___ht, this, key)
     endfunction
-    function s__ConstTable__leaderboards__setindex takes integer this,integer key,leaderboard value returns nothing
-        call SaveLeaderboardHandle(ConstTable__ht, this, key, value)
+    function s__ConstTable___leaderboards__setindex takes integer this,integer key,leaderboard value returns nothing
+        call SaveLeaderboardHandle(ConstTable___ht, this, key, value)
     endfunction
-    function s__ConstTable__leaderboards_has takes integer this,integer key returns boolean
-        return HaveSavedHandle(ConstTable__ht, this, key)
+    function s__ConstTable___leaderboards_has takes integer this,integer key returns boolean
+        return HaveSavedHandle(ConstTable___ht, this, key)
     endfunction
-    function s__ConstTable__leaderboards_remove takes integer this,integer key returns nothing
-        call RemoveSavedHandle(ConstTable__ht, this, key)
+    function s__ConstTable___leaderboards_remove takes integer this,integer key returns nothing
+        call RemoveSavedHandle(ConstTable___ht, this, key)
     endfunction
 //end of: NEW_ARRAY("Leaderboard", "leaderboard")
 //textmacro instance: NEW_ARRAY("Multiboard", "multiboard")
-    function s__ConstTable__multiboards__getindex takes integer this,integer key returns multiboard
-        return LoadMultiboardHandle(ConstTable__ht, this, key)
+    function s__ConstTable___multiboards__getindex takes integer this,integer key returns multiboard
+        return LoadMultiboardHandle(ConstTable___ht, this, key)
     endfunction
-    function s__ConstTable__multiboards__setindex takes integer this,integer key,multiboard value returns nothing
-        call SaveMultiboardHandle(ConstTable__ht, this, key, value)
+    function s__ConstTable___multiboards__setindex takes integer this,integer key,multiboard value returns nothing
+        call SaveMultiboardHandle(ConstTable___ht, this, key, value)
     endfunction
-    function s__ConstTable__multiboards_has takes integer this,integer key returns boolean
-        return HaveSavedHandle(ConstTable__ht, this, key)
+    function s__ConstTable___multiboards_has takes integer this,integer key returns boolean
+        return HaveSavedHandle(ConstTable___ht, this, key)
     endfunction
-    function s__ConstTable__multiboards_remove takes integer this,integer key returns nothing
-        call RemoveSavedHandle(ConstTable__ht, this, key)
+    function s__ConstTable___multiboards_remove takes integer this,integer key returns nothing
+        call RemoveSavedHandle(ConstTable___ht, this, key)
     endfunction
 //end of: NEW_ARRAY("Multiboard", "multiboard")
 //textmacro instance: NEW_ARRAY("MultiboardItem", "multiboarditem")
-    function s__ConstTable__multiboarditems__getindex takes integer this,integer key returns multiboarditem
-        return LoadMultiboardItemHandle(ConstTable__ht, this, key)
+    function s__ConstTable___multiboarditems__getindex takes integer this,integer key returns multiboarditem
+        return LoadMultiboardItemHandle(ConstTable___ht, this, key)
     endfunction
-    function s__ConstTable__multiboarditems__setindex takes integer this,integer key,multiboarditem value returns nothing
-        call SaveMultiboardItemHandle(ConstTable__ht, this, key, value)
+    function s__ConstTable___multiboarditems__setindex takes integer this,integer key,multiboarditem value returns nothing
+        call SaveMultiboardItemHandle(ConstTable___ht, this, key, value)
     endfunction
-    function s__ConstTable__multiboarditems_has takes integer this,integer key returns boolean
-        return HaveSavedHandle(ConstTable__ht, this, key)
+    function s__ConstTable___multiboarditems_has takes integer this,integer key returns boolean
+        return HaveSavedHandle(ConstTable___ht, this, key)
     endfunction
-    function s__ConstTable__multiboarditems_remove takes integer this,integer key returns nothing
-        call RemoveSavedHandle(ConstTable__ht, this, key)
+    function s__ConstTable___multiboarditems_remove takes integer this,integer key returns nothing
+        call RemoveSavedHandle(ConstTable___ht, this, key)
     endfunction
 //end of: NEW_ARRAY("MultiboardItem", "multiboarditem")
 //textmacro instance: NEW_ARRAY("Trackable", "trackable")
-    function s__ConstTable__trackables__getindex takes integer this,integer key returns trackable
-        return LoadTrackableHandle(ConstTable__ht, this, key)
+    function s__ConstTable___trackables__getindex takes integer this,integer key returns trackable
+        return LoadTrackableHandle(ConstTable___ht, this, key)
     endfunction
-    function s__ConstTable__trackables__setindex takes integer this,integer key,trackable value returns nothing
-        call SaveTrackableHandle(ConstTable__ht, this, key, value)
+    function s__ConstTable___trackables__setindex takes integer this,integer key,trackable value returns nothing
+        call SaveTrackableHandle(ConstTable___ht, this, key, value)
     endfunction
-    function s__ConstTable__trackables_has takes integer this,integer key returns boolean
-        return HaveSavedHandle(ConstTable__ht, this, key)
+    function s__ConstTable___trackables_has takes integer this,integer key returns boolean
+        return HaveSavedHandle(ConstTable___ht, this, key)
     endfunction
-    function s__ConstTable__trackables_remove takes integer this,integer key returns nothing
-        call RemoveSavedHandle(ConstTable__ht, this, key)
+    function s__ConstTable___trackables_remove takes integer this,integer key returns nothing
+        call RemoveSavedHandle(ConstTable___ht, this, key)
     endfunction
 //end of: NEW_ARRAY("Trackable", "trackable")
 //textmacro instance: NEW_ARRAY("Dialog", "dialog")
-    function s__ConstTable__dialogs__getindex takes integer this,integer key returns dialog
-        return LoadDialogHandle(ConstTable__ht, this, key)
+    function s__ConstTable___dialogs__getindex takes integer this,integer key returns dialog
+        return LoadDialogHandle(ConstTable___ht, this, key)
     endfunction
-    function s__ConstTable__dialogs__setindex takes integer this,integer key,dialog value returns nothing
-        call SaveDialogHandle(ConstTable__ht, this, key, value)
+    function s__ConstTable___dialogs__setindex takes integer this,integer key,dialog value returns nothing
+        call SaveDialogHandle(ConstTable___ht, this, key, value)
     endfunction
-    function s__ConstTable__dialogs_has takes integer this,integer key returns boolean
-        return HaveSavedHandle(ConstTable__ht, this, key)
+    function s__ConstTable___dialogs_has takes integer this,integer key returns boolean
+        return HaveSavedHandle(ConstTable___ht, this, key)
     endfunction
-    function s__ConstTable__dialogs_remove takes integer this,integer key returns nothing
-        call RemoveSavedHandle(ConstTable__ht, this, key)
+    function s__ConstTable___dialogs_remove takes integer this,integer key returns nothing
+        call RemoveSavedHandle(ConstTable___ht, this, key)
     endfunction
 //end of: NEW_ARRAY("Dialog", "dialog")
 //textmacro instance: NEW_ARRAY("Button", "button")
-    function s__ConstTable__buttons__getindex takes integer this,integer key returns button
-        return LoadButtonHandle(ConstTable__ht, this, key)
+    function s__ConstTable___buttons__getindex takes integer this,integer key returns button
+        return LoadButtonHandle(ConstTable___ht, this, key)
     endfunction
-    function s__ConstTable__buttons__setindex takes integer this,integer key,button value returns nothing
-        call SaveButtonHandle(ConstTable__ht, this, key, value)
+    function s__ConstTable___buttons__setindex takes integer this,integer key,button value returns nothing
+        call SaveButtonHandle(ConstTable___ht, this, key, value)
     endfunction
-    function s__ConstTable__buttons_has takes integer this,integer key returns boolean
-        return HaveSavedHandle(ConstTable__ht, this, key)
+    function s__ConstTable___buttons_has takes integer this,integer key returns boolean
+        return HaveSavedHandle(ConstTable___ht, this, key)
     endfunction
-    function s__ConstTable__buttons_remove takes integer this,integer key returns nothing
-        call RemoveSavedHandle(ConstTable__ht, this, key)
+    function s__ConstTable___buttons_remove takes integer this,integer key returns nothing
+        call RemoveSavedHandle(ConstTable___ht, this, key)
     endfunction
 //end of: NEW_ARRAY("Button", "button")
 //textmacro instance: NEW_ARRAY("TextTag", "texttag")
-    function s__ConstTable__texttags__getindex takes integer this,integer key returns texttag
-        return LoadTextTagHandle(ConstTable__ht, this, key)
+    function s__ConstTable___texttags__getindex takes integer this,integer key returns texttag
+        return LoadTextTagHandle(ConstTable___ht, this, key)
     endfunction
-    function s__ConstTable__texttags__setindex takes integer this,integer key,texttag value returns nothing
-        call SaveTextTagHandle(ConstTable__ht, this, key, value)
+    function s__ConstTable___texttags__setindex takes integer this,integer key,texttag value returns nothing
+        call SaveTextTagHandle(ConstTable___ht, this, key, value)
     endfunction
-    function s__ConstTable__texttags_has takes integer this,integer key returns boolean
-        return HaveSavedHandle(ConstTable__ht, this, key)
+    function s__ConstTable___texttags_has takes integer this,integer key returns boolean
+        return HaveSavedHandle(ConstTable___ht, this, key)
     endfunction
-    function s__ConstTable__texttags_remove takes integer this,integer key returns nothing
-        call RemoveSavedHandle(ConstTable__ht, this, key)
+    function s__ConstTable___texttags_remove takes integer this,integer key returns nothing
+        call RemoveSavedHandle(ConstTable___ht, this, key)
     endfunction
 //end of: NEW_ARRAY("TextTag", "texttag")
 //textmacro instance: NEW_ARRAY("Lightning", "lightning")
-    function s__ConstTable__lightnings__getindex takes integer this,integer key returns lightning
-        return LoadLightningHandle(ConstTable__ht, this, key)
+    function s__ConstTable___lightnings__getindex takes integer this,integer key returns lightning
+        return LoadLightningHandle(ConstTable___ht, this, key)
     endfunction
-    function s__ConstTable__lightnings__setindex takes integer this,integer key,lightning value returns nothing
-        call SaveLightningHandle(ConstTable__ht, this, key, value)
+    function s__ConstTable___lightnings__setindex takes integer this,integer key,lightning value returns nothing
+        call SaveLightningHandle(ConstTable___ht, this, key, value)
     endfunction
-    function s__ConstTable__lightnings_has takes integer this,integer key returns boolean
-        return HaveSavedHandle(ConstTable__ht, this, key)
+    function s__ConstTable___lightnings_has takes integer this,integer key returns boolean
+        return HaveSavedHandle(ConstTable___ht, this, key)
     endfunction
-    function s__ConstTable__lightnings_remove takes integer this,integer key returns nothing
-        call RemoveSavedHandle(ConstTable__ht, this, key)
+    function s__ConstTable___lightnings_remove takes integer this,integer key returns nothing
+        call RemoveSavedHandle(ConstTable___ht, this, key)
     endfunction
 //end of: NEW_ARRAY("Lightning", "lightning")
 //textmacro instance: NEW_ARRAY("Image", "image")
-    function s__ConstTable__images__getindex takes integer this,integer key returns image
-        return LoadImageHandle(ConstTable__ht, this, key)
+    function s__ConstTable___images__getindex takes integer this,integer key returns image
+        return LoadImageHandle(ConstTable___ht, this, key)
     endfunction
-    function s__ConstTable__images__setindex takes integer this,integer key,image value returns nothing
-        call SaveImageHandle(ConstTable__ht, this, key, value)
+    function s__ConstTable___images__setindex takes integer this,integer key,image value returns nothing
+        call SaveImageHandle(ConstTable___ht, this, key, value)
     endfunction
-    function s__ConstTable__images_has takes integer this,integer key returns boolean
-        return HaveSavedHandle(ConstTable__ht, this, key)
+    function s__ConstTable___images_has takes integer this,integer key returns boolean
+        return HaveSavedHandle(ConstTable___ht, this, key)
     endfunction
-    function s__ConstTable__images_remove takes integer this,integer key returns nothing
-        call RemoveSavedHandle(ConstTable__ht, this, key)
+    function s__ConstTable___images_remove takes integer this,integer key returns nothing
+        call RemoveSavedHandle(ConstTable___ht, this, key)
     endfunction
 //end of: NEW_ARRAY("Image", "image")
 //textmacro instance: NEW_ARRAY("Ubersplat", "ubersplat")
-    function s__ConstTable__ubersplats__getindex takes integer this,integer key returns ubersplat
-        return LoadUbersplatHandle(ConstTable__ht, this, key)
+    function s__ConstTable___ubersplats__getindex takes integer this,integer key returns ubersplat
+        return LoadUbersplatHandle(ConstTable___ht, this, key)
     endfunction
-    function s__ConstTable__ubersplats__setindex takes integer this,integer key,ubersplat value returns nothing
-        call SaveUbersplatHandle(ConstTable__ht, this, key, value)
+    function s__ConstTable___ubersplats__setindex takes integer this,integer key,ubersplat value returns nothing
+        call SaveUbersplatHandle(ConstTable___ht, this, key, value)
     endfunction
-    function s__ConstTable__ubersplats_has takes integer this,integer key returns boolean
-        return HaveSavedHandle(ConstTable__ht, this, key)
+    function s__ConstTable___ubersplats_has takes integer this,integer key returns boolean
+        return HaveSavedHandle(ConstTable___ht, this, key)
     endfunction
-    function s__ConstTable__ubersplats_remove takes integer this,integer key returns nothing
-        call RemoveSavedHandle(ConstTable__ht, this, key)
+    function s__ConstTable___ubersplats_remove takes integer this,integer key returns nothing
+        call RemoveSavedHandle(ConstTable___ht, this, key)
     endfunction
 //end of: NEW_ARRAY("Ubersplat", "ubersplat")
 //textmacro instance: NEW_ARRAY("Region", "region")
-    function s__ConstTable__regions__getindex takes integer this,integer key returns region
-        return LoadRegionHandle(ConstTable__ht, this, key)
+    function s__ConstTable___regions__getindex takes integer this,integer key returns region
+        return LoadRegionHandle(ConstTable___ht, this, key)
     endfunction
-    function s__ConstTable__regions__setindex takes integer this,integer key,region value returns nothing
-        call SaveRegionHandle(ConstTable__ht, this, key, value)
+    function s__ConstTable___regions__setindex takes integer this,integer key,region value returns nothing
+        call SaveRegionHandle(ConstTable___ht, this, key, value)
     endfunction
-    function s__ConstTable__regions_has takes integer this,integer key returns boolean
-        return HaveSavedHandle(ConstTable__ht, this, key)
+    function s__ConstTable___regions_has takes integer this,integer key returns boolean
+        return HaveSavedHandle(ConstTable___ht, this, key)
     endfunction
-    function s__ConstTable__regions_remove takes integer this,integer key returns nothing
-        call RemoveSavedHandle(ConstTable__ht, this, key)
+    function s__ConstTable___regions_remove takes integer this,integer key returns nothing
+        call RemoveSavedHandle(ConstTable___ht, this, key)
     endfunction
 //end of: NEW_ARRAY("Region", "region")
 //textmacro instance: NEW_ARRAY("FogState", "fogstate")
-    function s__ConstTable__fogstates__getindex takes integer this,integer key returns fogstate
-        return LoadFogStateHandle(ConstTable__ht, this, key)
+    function s__ConstTable___fogstates__getindex takes integer this,integer key returns fogstate
+        return LoadFogStateHandle(ConstTable___ht, this, key)
     endfunction
-    function s__ConstTable__fogstates__setindex takes integer this,integer key,fogstate value returns nothing
-        call SaveFogStateHandle(ConstTable__ht, this, key, value)
+    function s__ConstTable___fogstates__setindex takes integer this,integer key,fogstate value returns nothing
+        call SaveFogStateHandle(ConstTable___ht, this, key, value)
     endfunction
-    function s__ConstTable__fogstates_has takes integer this,integer key returns boolean
-        return HaveSavedHandle(ConstTable__ht, this, key)
+    function s__ConstTable___fogstates_has takes integer this,integer key returns boolean
+        return HaveSavedHandle(ConstTable___ht, this, key)
     endfunction
-    function s__ConstTable__fogstates_remove takes integer this,integer key returns nothing
-        call RemoveSavedHandle(ConstTable__ht, this, key)
+    function s__ConstTable___fogstates_remove takes integer this,integer key returns nothing
+        call RemoveSavedHandle(ConstTable___ht, this, key)
     endfunction
 //end of: NEW_ARRAY("FogState", "fogstate")
 //textmacro instance: NEW_ARRAY("FogModifier", "fogmodifier")
-    function s__ConstTable__fogmodifiers__getindex takes integer this,integer key returns fogmodifier
-        return LoadFogModifierHandle(ConstTable__ht, this, key)
+    function s__ConstTable___fogmodifiers__getindex takes integer this,integer key returns fogmodifier
+        return LoadFogModifierHandle(ConstTable___ht, this, key)
     endfunction
-    function s__ConstTable__fogmodifiers__setindex takes integer this,integer key,fogmodifier value returns nothing
-        call SaveFogModifierHandle(ConstTable__ht, this, key, value)
+    function s__ConstTable___fogmodifiers__setindex takes integer this,integer key,fogmodifier value returns nothing
+        call SaveFogModifierHandle(ConstTable___ht, this, key, value)
     endfunction
-    function s__ConstTable__fogmodifiers_has takes integer this,integer key returns boolean
-        return HaveSavedHandle(ConstTable__ht, this, key)
+    function s__ConstTable___fogmodifiers_has takes integer this,integer key returns boolean
+        return HaveSavedHandle(ConstTable___ht, this, key)
     endfunction
-    function s__ConstTable__fogmodifiers_remove takes integer this,integer key returns nothing
-        call RemoveSavedHandle(ConstTable__ht, this, key)
+    function s__ConstTable___fogmodifiers_remove takes integer this,integer key returns nothing
+        call RemoveSavedHandle(ConstTable___ht, this, key)
     endfunction
 //end of: NEW_ARRAY("FogModifier", "fogmodifier")
 //textmacro instance: NEW_ARRAY("Hashtable", "hashtable")
-    function s__ConstTable__hashtables__getindex takes integer this,integer key returns hashtable
-        return LoadHashtableHandle(ConstTable__ht, this, key)
+    function s__ConstTable___hashtables__getindex takes integer this,integer key returns hashtable
+        return LoadHashtableHandle(ConstTable___ht, this, key)
     endfunction
-    function s__ConstTable__hashtables__setindex takes integer this,integer key,hashtable value returns nothing
-        call SaveHashtableHandle(ConstTable__ht, this, key, value)
+    function s__ConstTable___hashtables__setindex takes integer this,integer key,hashtable value returns nothing
+        call SaveHashtableHandle(ConstTable___ht, this, key, value)
     endfunction
-    function s__ConstTable__hashtables_has takes integer this,integer key returns boolean
-        return HaveSavedHandle(ConstTable__ht, this, key)
+    function s__ConstTable___hashtables_has takes integer this,integer key returns boolean
+        return HaveSavedHandle(ConstTable___ht, this, key)
     endfunction
-    function s__ConstTable__hashtables_remove takes integer this,integer key returns nothing
-        call RemoveSavedHandle(ConstTable__ht, this, key)
+    function s__ConstTable___hashtables_remove takes integer this,integer key returns nothing
+        call RemoveSavedHandle(ConstTable___ht, this, key)
     endfunction
 //end of: NEW_ARRAY("Hashtable", "hashtable")
    
    
     // Implement modules for intuitive syntax (tb.handle; tb.unit; etc.)
-//Implemented from module ConstTable__realm:
+//Implemented from module ConstTable___realm:
     function s__ConstTable__get_real takes integer this returns integer
         return this
     endfunction
-//Implemented from module ConstTable__integerm:
+//Implemented from module ConstTable___integerm:
     function s__ConstTable__get_integer takes integer this returns integer
         return this
     endfunction
-//Implemented from module ConstTable__booleanm:
+//Implemented from module ConstTable___booleanm:
     function s__ConstTable__get_boolean takes integer this returns integer
         return this
     endfunction
-//Implemented from module ConstTable__stringm:
+//Implemented from module ConstTable___stringm:
     function s__ConstTable__get_string takes integer this returns integer
         return this
     endfunction
-//Implemented from module ConstTable__playerm:
+//Implemented from module ConstTable___playerm:
     function s__ConstTable__get_player takes integer this returns integer
         return this
     endfunction
-//Implemented from module ConstTable__widgetm:
+//Implemented from module ConstTable___widgetm:
     function s__ConstTable__get_widget takes integer this returns integer
         return this
     endfunction
-//Implemented from module ConstTable__destructablem:
+//Implemented from module ConstTable___destructablem:
     function s__ConstTable__get_destructable takes integer this returns integer
         return this
     endfunction
-//Implemented from module ConstTable__itemm:
+//Implemented from module ConstTable___itemm:
     function s__ConstTable__get_item takes integer this returns integer
         return this
     endfunction
-//Implemented from module ConstTable__unitm:
+//Implemented from module ConstTable___unitm:
     function s__ConstTable__get_unit takes integer this returns integer
         return this
     endfunction
-//Implemented from module ConstTable__abilitym:
+//Implemented from module ConstTable___abilitym:
     function s__ConstTable__get_ability takes integer this returns integer
         return this
     endfunction
-//Implemented from module ConstTable__timerm:
+//Implemented from module ConstTable___timerm:
     function s__ConstTable__get_timer takes integer this returns integer
         return this
     endfunction
-//Implemented from module ConstTable__triggerm:
+//Implemented from module ConstTable___triggerm:
     function s__ConstTable__get_trigger takes integer this returns integer
         return this
     endfunction
-//Implemented from module ConstTable__triggerconditionm:
+//Implemented from module ConstTable___triggerconditionm:
     function s__ConstTable__get_triggercondition takes integer this returns integer
         return this
     endfunction
-//Implemented from module ConstTable__triggeractionm:
+//Implemented from module ConstTable___triggeractionm:
     function s__ConstTable__get_triggeraction takes integer this returns integer
         return this
     endfunction
-//Implemented from module ConstTable__eventm:
+//Implemented from module ConstTable___eventm:
     function s__ConstTable__get_event takes integer this returns integer
         return this
     endfunction
-//Implemented from module ConstTable__forcem:
+//Implemented from module ConstTable___forcem:
     function s__ConstTable__get_force takes integer this returns integer
         return this
     endfunction
-//Implemented from module ConstTable__groupm:
+//Implemented from module ConstTable___groupm:
     function s__ConstTable__get_group takes integer this returns integer
         return this
     endfunction
-//Implemented from module ConstTable__locationm:
+//Implemented from module ConstTable___locationm:
     function s__ConstTable__get_location takes integer this returns integer
         return this
     endfunction
-//Implemented from module ConstTable__rectm:
+//Implemented from module ConstTable___rectm:
     function s__ConstTable__get_rect takes integer this returns integer
         return this
     endfunction
-//Implemented from module ConstTable__boolexprm:
+//Implemented from module ConstTable___boolexprm:
     function s__ConstTable__get_boolexpr takes integer this returns integer
         return this
     endfunction
-//Implemented from module ConstTable__soundm:
+//Implemented from module ConstTable___soundm:
     function s__ConstTable__get_sound takes integer this returns integer
         return this
     endfunction
-//Implemented from module ConstTable__effectm:
+//Implemented from module ConstTable___effectm:
     function s__ConstTable__get_effect takes integer this returns integer
         return this
     endfunction
-//Implemented from module ConstTable__unitpoolm:
+//Implemented from module ConstTable___unitpoolm:
     function s__ConstTable__get_unitpool takes integer this returns integer
         return this
     endfunction
-//Implemented from module ConstTable__itempoolm:
+//Implemented from module ConstTable___itempoolm:
     function s__ConstTable__get_itempool takes integer this returns integer
         return this
     endfunction
-//Implemented from module ConstTable__questm:
+//Implemented from module ConstTable___questm:
     function s__ConstTable__get_quest takes integer this returns integer
         return this
     endfunction
-//Implemented from module ConstTable__questitemm:
+//Implemented from module ConstTable___questitemm:
     function s__ConstTable__get_questitem takes integer this returns integer
         return this
     endfunction
-//Implemented from module ConstTable__defeatconditionm:
+//Implemented from module ConstTable___defeatconditionm:
     function s__ConstTable__get_defeatcondition takes integer this returns integer
         return this
     endfunction
-//Implemented from module ConstTable__timerdialogm:
+//Implemented from module ConstTable___timerdialogm:
     function s__ConstTable__get_timerdialog takes integer this returns integer
         return this
     endfunction
-//Implemented from module ConstTable__leaderboardm:
+//Implemented from module ConstTable___leaderboardm:
     function s__ConstTable__get_leaderboard takes integer this returns integer
         return this
     endfunction
-//Implemented from module ConstTable__multiboardm:
+//Implemented from module ConstTable___multiboardm:
     function s__ConstTable__get_multiboard takes integer this returns integer
         return this
     endfunction
-//Implemented from module ConstTable__multiboarditemm:
+//Implemented from module ConstTable___multiboarditemm:
     function s__ConstTable__get_multiboarditem takes integer this returns integer
         return this
     endfunction
-//Implemented from module ConstTable__trackablem:
+//Implemented from module ConstTable___trackablem:
     function s__ConstTable__get_trackable takes integer this returns integer
         return this
     endfunction
-//Implemented from module ConstTable__dialogm:
+//Implemented from module ConstTable___dialogm:
     function s__ConstTable__get_dialog takes integer this returns integer
         return this
     endfunction
-//Implemented from module ConstTable__buttonm:
+//Implemented from module ConstTable___buttonm:
     function s__ConstTable__get_button takes integer this returns integer
         return this
     endfunction
-//Implemented from module ConstTable__texttagm:
+//Implemented from module ConstTable___texttagm:
     function s__ConstTable__get_texttag takes integer this returns integer
         return this
     endfunction
-//Implemented from module ConstTable__lightningm:
+//Implemented from module ConstTable___lightningm:
     function s__ConstTable__get_lightning takes integer this returns integer
         return this
     endfunction
-//Implemented from module ConstTable__imagem:
+//Implemented from module ConstTable___imagem:
     function s__ConstTable__get_image takes integer this returns integer
         return this
     endfunction
-//Implemented from module ConstTable__ubersplatm:
+//Implemented from module ConstTable___ubersplatm:
     function s__ConstTable__get_ubersplat takes integer this returns integer
         return this
     endfunction
-//Implemented from module ConstTable__regionm:
+//Implemented from module ConstTable___regionm:
     function s__ConstTable__get_region takes integer this returns integer
         return this
     endfunction
-//Implemented from module ConstTable__fogstatem:
+//Implemented from module ConstTable___fogstatem:
     function s__ConstTable__get_fogstate takes integer this returns integer
         return this
     endfunction
-//Implemented from module ConstTable__fogmodifierm:
+//Implemented from module ConstTable___fogmodifierm:
     function s__ConstTable__get_fogmodifier takes integer this returns integer
         return this
     endfunction
-//Implemented from module ConstTable__hashtablem:
+//Implemented from module ConstTable___hashtablem:
     function s__ConstTable__get_hashtable takes integer this returns integer
         return this
     endfunction
@@ -5270,23 +5267,23 @@ endfunction
     endfunction
    
     function s__ConstTable__getindex takes integer this,integer key returns integer
-        return LoadInteger(ConstTable__ht, this, key) //return this.integer[key]
+        return LoadInteger(ConstTable___ht, this, key) //return this.integer[key]
     endfunction
    
     function s__ConstTable__setindex takes integer this,integer key,integer tb returns nothing
-        call SaveInteger(ConstTable__ht, this, key, tb) //set this.integer[key] = tb
+        call SaveInteger(ConstTable___ht, this, key, tb) //set this.integer[key] = tb
     endfunction
    
     function s__ConstTable_has takes integer this,integer key returns boolean
-        return HaveSavedInteger(ConstTable__ht, this, key) //return this.integer.has(key)
+        return HaveSavedInteger(ConstTable___ht, this, key) //return this.integer.has(key)
     endfunction
    
     function s__ConstTable_remove takes integer this,integer key returns nothing
-        call RemoveSavedInteger(ConstTable__ht, this, key) //call this.integer.remove(key)
+        call RemoveSavedInteger(ConstTable___ht, this, key) //call this.integer.remove(key)
     endfunction
    
     function s__ConstTable_flush takes integer this returns nothing
-        call FlushChildHashtable(ConstTable__ht, this)
+        call FlushChildHashtable(ConstTable___ht, this)
     endfunction
 
 
@@ -5294,10 +5291,10 @@ endfunction
     //Basically, it creates a Table in the place of the parent key if
     //it didn't already get created earlier.
     function s__ConstHashTable__getindex takes integer this,integer index returns integer
-        local integer t= (LoadInteger(ConstTable__ht, ((this)), (index))) // INLINED!!
+        local integer t= (LoadInteger(ConstTable___ht, ((this)), (index))) // INLINED!!
         if t == 0 then
             set t=s__Table_create()
-            call SaveInteger(ConstTable__ht, ((this)), (index), ( t)) // INLINED!!
+            call SaveInteger(ConstTable___ht, ((this)), (index), ( t)) // INLINED!!
         endif
         return t
     endfunction
@@ -5305,10 +5302,10 @@ endfunction
     //You need to call this on each parent key that you used if you
     //intend to destroy the HashTable or simply no longer need that key.
     function s__ConstHashTable_remove takes integer this,integer index returns nothing
-        local integer t= (LoadInteger(ConstTable__ht, ((this)), (index))) // INLINED!!
+        local integer t= (LoadInteger(ConstTable___ht, ((this)), (index))) // INLINED!!
         if t != 0 then
             call s__Table_destroy(t)
-            call RemoveSavedInteger(ConstTable__ht, ((this)), (index)) // INLINED!!
+            call RemoveSavedInteger(ConstTable___ht, ((this)), (index)) // INLINED!!
         endif
     endfunction
     
@@ -5318,7 +5315,7 @@ endfunction
     endfunction
    
     function s__ConstHashTable_has takes integer this,integer index returns boolean
-        return (HaveSavedInteger(ConstTable__ht, ((this)), (index))) // INLINED!!
+        return (HaveSavedInteger(ConstTable___ht, ((this)), (index))) // INLINED!!
     endfunction
 
 //library ConstTable ends
@@ -5354,68 +5351,68 @@ endfunction
 
  
  
-//Implemented from module DummyRecycler__M:
+//Implemented from module DummyRecycler___M:
      
 
 
 
 
      
-        function s__DummyRecycler__S_DummyRecycler__M__onInit takes nothing returns nothing
-            local real add= 360.0 / DummyRecycler__ANGLES_COUNT
+        function s__DummyRecycler___S_DummyRecycler___M__onInit takes nothing returns nothing
+            local real add= 360.0 / DummyRecycler___ANGLES_COUNT
             local real a= 0
-            local integer this= DummyRecycler__ANGLES_COUNT
+            local integer this= DummyRecycler___ANGLES_COUNT
             local integer head= 0
             local integer cHead= JASS_MAX_ARRAY_SIZE - 1
-            local integer i= R2I(DummyRecycler__MAX_DUMMY_COUNT / DummyRecycler__ANGLES_COUNT + 0.5)
-            set DummyRecycler__upper=DummyRecycler__STORED_UNIT_COUNT
-            set DummyRecycler__lower=DummyRecycler__STORED_UNIT_COUNT
+            local integer i= R2I(DummyRecycler___MAX_DUMMY_COUNT / DummyRecycler___ANGLES_COUNT + 0.5)
+            set DummyRecycler___upper=DummyRecycler___STORED_UNIT_COUNT
+            set DummyRecycler___lower=DummyRecycler___STORED_UNIT_COUNT
 
-                set s__DummyRecycler__S_tb=s__Table_create()
+                set s__DummyRecycler___S_tb=s__Table_create()
 
             //Initialize countHeads
             loop
                 exitwhen i < 0
-                set DummyRecycler__countNext[cHead]=cHead
-                set DummyRecycler__countPrev[cHead]=cHead
-                set DummyRecycler__countHead[i]=cHead
+                set DummyRecycler___countNext[cHead]=cHead
+                set DummyRecycler___countPrev[cHead]=cHead
+                set DummyRecycler___countHead[i]=cHead
                 set cHead=cHead - 1
                 set i=i - 1
             endloop
-            set cHead=DummyRecycler__countHead[DummyRecycler__STORED_UNIT_COUNT] //All heads will be inserted here initially
+            set cHead=DummyRecycler___countHead[DummyRecycler___STORED_UNIT_COUNT] //All heads will be inserted here initially
             //Create the Dummy units
             loop
                 exitwhen a >= 360
                 //Initialize head
-                set DummyRecycler__next[head]=head
-                set DummyRecycler__prev[head]=head
-                set DummyRecycler__count[head]=DummyRecycler__STORED_UNIT_COUNT
-                set DummyRecycler__angle[head]=a
+                set DummyRecycler___next[head]=head
+                set DummyRecycler___prev[head]=head
+                set DummyRecycler___count[head]=DummyRecycler___STORED_UNIT_COUNT
+                set DummyRecycler___angle[head]=a
                 //Insert head in the Count List
-                set DummyRecycler__countNext[head]=cHead
-                set DummyRecycler__countPrev[head]=DummyRecycler__countPrev[cHead]
-                set DummyRecycler__countNext[DummyRecycler__countPrev[head]]=head
-                set DummyRecycler__countPrev[DummyRecycler__countNext[head]]=head
+                set DummyRecycler___countNext[head]=cHead
+                set DummyRecycler___countPrev[head]=DummyRecycler___countPrev[cHead]
+                set DummyRecycler___countNext[DummyRecycler___countPrev[head]]=head
+                set DummyRecycler___countPrev[DummyRecycler___countNext[head]]=head
                 set i=0
                 loop
-                    exitwhen i >= DummyRecycler__STORED_UNIT_COUNT
+                    exitwhen i >= DummyRecycler___STORED_UNIT_COUNT
                     //Queued Linked List
-                    set DummyRecycler__next[this]=head
-                    set DummyRecycler__prev[this]=DummyRecycler__prev[head]
-                    set DummyRecycler__next[DummyRecycler__prev[this]]=this
-                    set DummyRecycler__prev[DummyRecycler__next[this]]=this
+                    set DummyRecycler___next[this]=head
+                    set DummyRecycler___prev[this]=DummyRecycler___prev[head]
+                    set DummyRecycler___next[DummyRecycler___prev[this]]=this
+                    set DummyRecycler___prev[DummyRecycler___next[this]]=this
 
 
-                            set DummyRecycler__dummy[this]=CreateUnit(DummyRecycler__OWNER, DummyRecycler__DUMMY_ID, s__WorldBounds_maxX, s__WorldBounds_maxY, a)
-
-
-
+                            set DummyRecycler___dummy[this]=CreateUnit(DummyRecycler___OWNER, DummyRecycler___DUMMY_ID, s__WorldBounds_maxX, s__WorldBounds_maxY, a)
 
 
 
-                    call PauseUnit(DummyRecycler__dummy[this], true)
 
-                        call SaveInteger(Table__ht, (s__DummyRecycler__S_tb), (GetHandleId(DummyRecycler__dummy[this])), ( this)) // INLINED!!
+
+
+                    call PauseUnit(DummyRecycler___dummy[this], true)
+
+                        call SaveInteger(Table___ht, (s__DummyRecycler___S_tb), (GetHandleId(DummyRecycler___dummy[this])), ( this)) // INLINED!!
 
 
 
@@ -5425,24 +5422,24 @@ endfunction
                 set head=head + 1
                 set a=a + add
             endloop
-            set DummyRecycler__lastInstance=this
+            set DummyRecycler___lastInstance=this
         endfunction
      
  
-    function DummyRecycler__GetHead takes integer facing returns integer
+    function DummyRecycler___GetHead takes integer facing returns integer
         if facing < 0 or facing >= 360 then
             set facing=facing - ( facing / 360 ) * 360
             if facing < 0 then
                 set facing=facing + 360
             endif
         endif
-        return R2I(( facing * DummyRecycler__ANGLES_COUNT / 360.0 ))
+        return R2I(( facing * DummyRecycler___ANGLES_COUNT / 360.0 ))
     endfunction
  
     function ShowDummy takes unit u,boolean flag returns nothing
         if IsUnitHidden(u) == flag then
             call ShowUnit(u, flag)
-            if flag and GetUnitTypeId(u) == DummyRecycler__DUMMY_ID then
+            if flag and GetUnitTypeId(u) == DummyRecycler___DUMMY_ID then
                 call UnitRemoveAbility(u, 'Aloc')
                 call UnitAddAbility(u, 'Aloc')
             endif
@@ -5450,19 +5447,19 @@ endfunction
     endfunction
  
     function GetRecycledDummy takes real x,real y,real z,real facing returns unit
-        local integer head= DummyRecycler__GetHead(R2I(facing + DummyRecycler__FACING_OFFSET))
-        local integer this= DummyRecycler__next[head]
+        local integer head= DummyRecycler___GetHead(R2I(facing + DummyRecycler___FACING_OFFSET))
+        local integer this= DummyRecycler___next[head]
         local integer cHead
      
         //If there are Dummy Units in the Queue List already facing close to the appropriate angle
-        if this != head and RAbsBJ(GetUnitFacing(DummyRecycler__dummy[this]) - DummyRecycler__angle[head]) <= DummyRecycler__ANGLE_TOLERANCE then
+        if this != head and RAbsBJ(GetUnitFacing(DummyRecycler___dummy[this]) - DummyRecycler___angle[head]) <= DummyRecycler___ANGLE_TOLERANCE then
             //Remove from the Queue List
-            set DummyRecycler__next[DummyRecycler__prev[this]]=DummyRecycler__next[this]
-            set DummyRecycler__prev[DummyRecycler__next[this]]=DummyRecycler__prev[this]
+            set DummyRecycler___next[DummyRecycler___prev[this]]=DummyRecycler___next[this]
+            set DummyRecycler___prev[DummyRecycler___next[this]]=DummyRecycler___prev[this]
             //For double free protection
-            set DummyRecycler__next[this]=- 1
+            set DummyRecycler___next[this]=- 1
             //Unit Properties
-            set bj_lastCreatedUnit=DummyRecycler__dummy[this]
+            set bj_lastCreatedUnit=DummyRecycler___dummy[this]
             call SetUnitX(bj_lastCreatedUnit, x)
             call SetUnitY(bj_lastCreatedUnit, y)
             call SetUnitFacing(bj_lastCreatedUnit, facing)
@@ -5474,67 +5471,67 @@ endfunction
         call ShowDummy(bj_lastCreatedUnit , true)
 //end of: DUMMY_UNIT_RESET()
             //Update Count and Bounds
-            set DummyRecycler__count[head]=DummyRecycler__count[head] - 1
+            set DummyRecycler___count[head]=DummyRecycler___count[head] - 1
          
             //------------------------------------------------
             //                 Unit Sharing
             //------------------------------------------------
-            if DummyRecycler__count[head] < DummyRecycler__BORROW_REQUEST and DummyRecycler__count[DummyRecycler__countNext[DummyRecycler__countHead[DummyRecycler__upper]]] > DummyRecycler__count[head] then
-                set DummyRecycler__count[head]=DummyRecycler__count[head] + 1
-                set this=DummyRecycler__next[DummyRecycler__countNext[DummyRecycler__countHead[DummyRecycler__upper]]]
-                call SetUnitFacing(DummyRecycler__dummy[this], DummyRecycler__angle[head])
+            if DummyRecycler___count[head] < DummyRecycler___BORROW_REQUEST and DummyRecycler___count[DummyRecycler___countNext[DummyRecycler___countHead[DummyRecycler___upper]]] > DummyRecycler___count[head] then
+                set DummyRecycler___count[head]=DummyRecycler___count[head] + 1
+                set this=DummyRecycler___next[DummyRecycler___countNext[DummyRecycler___countHead[DummyRecycler___upper]]]
+                call SetUnitFacing(DummyRecycler___dummy[this], DummyRecycler___angle[head])
                 //Remove
-                set DummyRecycler__next[DummyRecycler__prev[this]]=DummyRecycler__next[this]
-                set DummyRecycler__prev[DummyRecycler__next[this]]=DummyRecycler__prev[this]
+                set DummyRecycler___next[DummyRecycler___prev[this]]=DummyRecycler___next[this]
+                set DummyRecycler___prev[DummyRecycler___next[this]]=DummyRecycler___prev[this]
                 //Add to the Current List
-                set DummyRecycler__next[this]=head
-                set DummyRecycler__prev[this]=DummyRecycler__prev[head]
-                set DummyRecycler__next[DummyRecycler__prev[this]]=this
-                set DummyRecycler__prev[DummyRecycler__next[this]]=this
-                set head=DummyRecycler__countNext[DummyRecycler__countHead[DummyRecycler__upper]]
-                set DummyRecycler__count[head]=DummyRecycler__count[head] - 1
+                set DummyRecycler___next[this]=head
+                set DummyRecycler___prev[this]=DummyRecycler___prev[head]
+                set DummyRecycler___next[DummyRecycler___prev[this]]=this
+                set DummyRecycler___prev[DummyRecycler___next[this]]=this
+                set head=DummyRecycler___countNext[DummyRecycler___countHead[DummyRecycler___upper]]
+                set DummyRecycler___count[head]=DummyRecycler___count[head] - 1
             endif
          
             //---------------------------
             //Update Count Lists
             //---------------------------
             //Remove from the current Count List
-            set DummyRecycler__countNext[DummyRecycler__countPrev[head]]=DummyRecycler__countNext[head]
-            set DummyRecycler__countPrev[DummyRecycler__countNext[head]]=DummyRecycler__countPrev[head]
+            set DummyRecycler___countNext[DummyRecycler___countPrev[head]]=DummyRecycler___countNext[head]
+            set DummyRecycler___countPrev[DummyRecycler___countNext[head]]=DummyRecycler___countPrev[head]
             //Add to the new Count List
-            set cHead=DummyRecycler__countHead[DummyRecycler__count[head]]
-            set DummyRecycler__countNext[head]=cHead
-            set DummyRecycler__countPrev[head]=DummyRecycler__countPrev[cHead]
-            set DummyRecycler__countNext[DummyRecycler__countPrev[head]]=head
-            set DummyRecycler__countPrev[DummyRecycler__countNext[head]]=head
+            set cHead=DummyRecycler___countHead[DummyRecycler___count[head]]
+            set DummyRecycler___countNext[head]=cHead
+            set DummyRecycler___countPrev[head]=DummyRecycler___countPrev[cHead]
+            set DummyRecycler___countNext[DummyRecycler___countPrev[head]]=head
+            set DummyRecycler___countPrev[DummyRecycler___countNext[head]]=head
          
             //---------------------------
             //  Update Bounds
             //---------------------------
-            set cHead=DummyRecycler__countHead[DummyRecycler__upper]
-            if DummyRecycler__countNext[cHead] == cHead then
-                set DummyRecycler__upper=DummyRecycler__upper - 1
+            set cHead=DummyRecycler___countHead[DummyRecycler___upper]
+            if DummyRecycler___countNext[cHead] == cHead then
+                set DummyRecycler___upper=DummyRecycler___upper - 1
             endif
-            if DummyRecycler__count[head] < DummyRecycler__lower then
-                set DummyRecycler__lower=DummyRecycler__count[head]
+            if DummyRecycler___count[head] < DummyRecycler___lower then
+                set DummyRecycler___lower=DummyRecycler___count[head]
             endif
         else
-            set bj_lastCreatedUnit=CreateUnit(DummyRecycler__OWNER, DummyRecycler__DUMMY_ID, x, y, facing)
+            set bj_lastCreatedUnit=CreateUnit(DummyRecycler___OWNER, DummyRecycler___DUMMY_ID, x, y, facing)
             call PauseUnit(bj_lastCreatedUnit, true)
             call SetUnitFlyHeight(bj_lastCreatedUnit, z, 0)
-            if DummyRecycler__dummyCount < DummyRecycler__MAX_DUMMY_COUNT then
-                set this=DummyRecycler__lastInstance
+            if DummyRecycler___dummyCount < DummyRecycler___MAX_DUMMY_COUNT then
+                set this=DummyRecycler___lastInstance
                 //For double free protection
-                set DummyRecycler__next[this]=- 1
-                set DummyRecycler__dummy[this]=bj_lastCreatedUnit
+                set DummyRecycler___next[this]=- 1
+                set DummyRecycler___dummy[this]=bj_lastCreatedUnit
 
-                    call SaveInteger(Table__ht, (s__DummyRecycler__S_tb), (GetHandleId(bj_lastCreatedUnit)), ( this)) // INLINED!!
+                    call SaveInteger(Table___ht, (s__DummyRecycler___S_tb), (GetHandleId(bj_lastCreatedUnit)), ( this)) // INLINED!!
 
 
 
-                set DummyRecycler__lastInstance=DummyRecycler__lastInstance + 1
+                set DummyRecycler___lastInstance=DummyRecycler___lastInstance + 1
             endif
-            set DummyRecycler__dummyCount=DummyRecycler__dummyCount + 1
+            set DummyRecycler___dummyCount=DummyRecycler___dummyCount + 1
         endif
 
         return bj_lastCreatedUnit
@@ -5542,7 +5539,7 @@ endfunction
  
     function RecycleDummy takes unit u returns nothing
 
-            local integer this= (LoadInteger(Table__ht, (s__DummyRecycler__S_tb), (GetHandleId(u)))) // INLINED!!
+            local integer this= (LoadInteger(Table___ht, (s__DummyRecycler___S_tb), (GetHandleId(u)))) // INLINED!!
 
 
 
@@ -5550,17 +5547,17 @@ endfunction
         local integer cHead
      
         //If the unit is a legit Dummy Unit
-        if this > 0 and DummyRecycler__next[this] == - 1 then
+        if this > 0 and DummyRecycler___next[this] == - 1 then
             //Find where to insert based on the list having the least number of units
-            set head=DummyRecycler__countNext[DummyRecycler__countHead[DummyRecycler__lower]]
-            set DummyRecycler__next[this]=head
-            set DummyRecycler__prev[this]=DummyRecycler__prev[head]
-            set DummyRecycler__next[DummyRecycler__prev[this]]=this
-            set DummyRecycler__prev[DummyRecycler__next[this]]=this
+            set head=DummyRecycler___countNext[DummyRecycler___countHead[DummyRecycler___lower]]
+            set DummyRecycler___next[this]=head
+            set DummyRecycler___prev[this]=DummyRecycler___prev[head]
+            set DummyRecycler___next[DummyRecycler___prev[this]]=this
+            set DummyRecycler___prev[DummyRecycler___next[this]]=this
             //Update Status
-            call SetUnitFacing(u, DummyRecycler__angle[head])
+            call SetUnitFacing(u, DummyRecycler___angle[head])
             call PauseUnit(u, true)
-            call SetUnitOwner(u, DummyRecycler__OWNER, false)
+            call SetUnitOwner(u, DummyRecycler___OWNER, false)
 
 
                     call SetUnitX(u, s__WorldBounds_maxX)
@@ -5573,30 +5570,30 @@ endfunction
 
 
 
-            set DummyRecycler__count[head]=DummyRecycler__count[head] + 1
+            set DummyRecycler___count[head]=DummyRecycler___count[head] + 1
          
             //---------------------------
             //    Update Count Lists
             //---------------------------
             //Remove
-            set DummyRecycler__countNext[DummyRecycler__countPrev[head]]=DummyRecycler__countNext[head]
-            set DummyRecycler__countPrev[DummyRecycler__countNext[head]]=DummyRecycler__countPrev[head]
+            set DummyRecycler___countNext[DummyRecycler___countPrev[head]]=DummyRecycler___countNext[head]
+            set DummyRecycler___countPrev[DummyRecycler___countNext[head]]=DummyRecycler___countPrev[head]
             //Add to the new Count List
-            set cHead=DummyRecycler__countHead[DummyRecycler__count[head]]
-            set DummyRecycler__countNext[head]=cHead
-            set DummyRecycler__countPrev[head]=DummyRecycler__countPrev[cHead]
-            set DummyRecycler__countNext[DummyRecycler__countPrev[head]]=head
-            set DummyRecycler__countPrev[DummyRecycler__countNext[head]]=head
+            set cHead=DummyRecycler___countHead[DummyRecycler___count[head]]
+            set DummyRecycler___countNext[head]=cHead
+            set DummyRecycler___countPrev[head]=DummyRecycler___countPrev[cHead]
+            set DummyRecycler___countNext[DummyRecycler___countPrev[head]]=head
+            set DummyRecycler___countPrev[DummyRecycler___countNext[head]]=head
          
             //---------------------------
             //  Update Bounds
             //---------------------------
-            set cHead=DummyRecycler__countHead[DummyRecycler__lower]
-            if DummyRecycler__countNext[cHead] == cHead then
-                set DummyRecycler__lower=DummyRecycler__lower + 1
+            set cHead=DummyRecycler___countHead[DummyRecycler___lower]
+            if DummyRecycler___countNext[cHead] == cHead then
+                set DummyRecycler___lower=DummyRecycler___lower + 1
             endif
-            if DummyRecycler__count[head] > DummyRecycler__upper then
-                set DummyRecycler__upper=DummyRecycler__count[head]
+            if DummyRecycler___count[head] > DummyRecycler___upper then
+                set DummyRecycler___upper=DummyRecycler___count[head]
             endif
         elseif this == 0 then
             call RemoveUnit(u)
@@ -5604,12 +5601,12 @@ endfunction
      
     endfunction
  
-    function DummyRecycler__Expires takes nothing returns nothing
+    function DummyRecycler___Expires takes nothing returns nothing
         local timer t= GetExpiredTimer()
         local integer id= GetHandleId(t)
 
-            call RecycleDummy((LoadUnitHandle(Table__ht, (((s__DummyRecycler__S_tb))), (id)))) // INLINED!!
-            call RemoveSavedHandle(Table__ht, (((s__DummyRecycler__S_tb))), (id)) // INLINED!!
+            call RecycleDummy((LoadUnitHandle(Table___ht, (((s__DummyRecycler___S_tb))), (id)))) // INLINED!!
+            call RemoveSavedHandle(Table___ht, (((s__DummyRecycler___S_tb))), (id)) // INLINED!!
 
 
 
@@ -5621,16 +5618,16 @@ endfunction
     function DummyAddRecycleTimer takes unit u,real time returns nothing
         local timer t= CreateTimer()
 
-            call SaveUnitHandle(Table__ht, (((s__DummyRecycler__S_tb))), (GetHandleId(t)), ( u)) // INLINED!!
+            call SaveUnitHandle(Table___ht, (((s__DummyRecycler___S_tb))), (GetHandleId(t)), ( u)) // INLINED!!
 
 
 
-        call TimerStart(t, time, false, function DummyRecycler__Expires)
+        call TimerStart(t, time, false, function DummyRecycler___Expires)
         set t=null
     endfunction
  
     function GetRecycledDummyAnyAngle takes real x,real y,real z returns unit
-        return GetRecycledDummy(x , y , z , DummyRecycler__angle[DummyRecycler__countNext[DummyRecycler__countHead[DummyRecycler__upper]]])
+        return GetRecycledDummy(x , y , z , DummyRecycler___angle[DummyRecycler___countNext[DummyRecycler___countHead[DummyRecycler___upper]]])
     endfunction
  
     // runtextmacro DUMMY_DEBUG_TOOLS()
@@ -5649,7 +5646,7 @@ endfunction
 
 function Lists_GetHashtable takes nothing returns hashtable
 
-        return Lists__hashTable
+        return Lists___hashTable
 
 
 
@@ -5729,7 +5726,7 @@ endfunction
 //Positive Unit Handle ID > Move Bonus
 //Negative Unit Handle ID > Move Multiplier
 
-function MoveSpeedBonus__KEY takes nothing returns integer
+function MoveSpeedBonus___KEY takes nothing returns integer
 
 
 
@@ -5739,11 +5736,11 @@ function MoveSpeedBonus__KEY takes nothing returns integer
 
 endfunction
 
-function MoveSpeedBonus__GetUnitId takes unit whichUnit returns integer
+function MoveSpeedBonus___GetUnitId takes unit whichUnit returns integer
     return GetHandleId(whichUnit)
 endfunction
 
-function MoveSpeedBonus__LoadMultiplier takes integer uId returns real
+function MoveSpeedBonus___LoadMultiplier takes integer uId returns real
 
 
 
@@ -5752,7 +5749,7 @@ function MoveSpeedBonus__LoadMultiplier takes integer uId returns real
 
 endfunction
 
-function MoveSpeedBonus__LoadBonus takes integer uId returns real
+function MoveSpeedBonus___LoadBonus takes integer uId returns real
 
 
 
@@ -5760,7 +5757,7 @@ function MoveSpeedBonus__LoadBonus takes integer uId returns real
 
 endfunction
 
-function MoveSpeedBonus__RemoveMultiplier takes integer uId returns nothing
+function MoveSpeedBonus___RemoveMultiplier takes integer uId returns nothing
 
 
 
@@ -5768,7 +5765,7 @@ function MoveSpeedBonus__RemoveMultiplier takes integer uId returns nothing
 
 endfunction
 
-function MoveSpeedBonus__RemoveBonus takes integer uId returns nothing
+function MoveSpeedBonus___RemoveBonus takes integer uId returns nothing
 
 
 
@@ -5776,7 +5773,7 @@ function MoveSpeedBonus__RemoveBonus takes integer uId returns nothing
 
 endfunction
 
-function MoveSpeedBonus__SaveMultiplier takes integer uId,real value returns nothing
+function MoveSpeedBonus___SaveMultiplier takes integer uId,real value returns nothing
 
 
 
@@ -5784,7 +5781,7 @@ function MoveSpeedBonus__SaveMultiplier takes integer uId,real value returns not
 
 endfunction
 
-function MoveSpeedBonus__SaveBonus takes integer uId,real value returns nothing
+function MoveSpeedBonus___SaveBonus takes integer uId,real value returns nothing
 
 
 
@@ -6053,8 +6050,8 @@ endfunction
         endfunction
        
        
-//Implemented from module TileDefinition__Init:
-            function s__TileDefinition__TileDefinition_TileDefinition__Init__onInit takes nothing returns nothing
+//Implemented from module TileDefinition___Init:
+            function s__TileDefinition___TileDefinition_TileDefinition___Init__onInit takes nothing returns nothing
                 set WorldTilesX=R2I(s__WorldBounds_maxX - s__WorldBounds_minX) / 128 + 1
                 set WorldTilesY=R2I(s__WorldBounds_maxY - s__WorldBounds_minY) / 128 + 1
             endfunction
@@ -6123,7 +6120,7 @@ function DummyDmg_CreateDummyEx takes unit spellCaster,integer unitId,integer ab
     local unit realSpellCaster= spellCaster
     
     //set spellCaster = CreateUnit(GetOwningPlayer(spellCaster), unitId, x, y, bj_UNIT_FACING)
-    set spellCaster=(GetRecycledDummy(((x )*1.0) , (( y )*1.0) , (( 0)*1.0) , DummyRecycler__angle[DummyRecycler__countNext[DummyRecycler__countHead[DummyRecycler__upper]]])) // INLINED!!
+    set spellCaster=(GetRecycledDummy(((x )*1.0) , (( y )*1.0) , (( 0)*1.0) , DummyRecycler___angle[DummyRecycler___countNext[DummyRecycler___countHead[DummyRecycler___upper]]])) // INLINED!!
     call FlushChildHashtable((ArrayAgent_hashTable), ((- GetHandleId((spellCaster))))) // INLINED!!
     call PauseUnit(spellCaster, false)
     call SetUnitOwner(spellCaster, GetOwningPlayer(realSpellCaster), false)
@@ -6172,46 +6169,46 @@ endfunction
 //==============================================
 
 // If a negative setKey is specified, this will actually set the previous element of the positive setKey
-function GLHS__SetNext takes integer setKey,integer data,integer next returns nothing
-    call SaveInteger((Lists__hashTable), setKey, data, next) // INLINED!!
+function GLHS___SetNext takes integer setKey,integer data,integer next returns nothing
+    call SaveInteger((Lists___hashTable), setKey, data, next) // INLINED!!
 endfunction
 
 // If a negative setKey is specified, this will actually set the next element of the positive setKey
-function GLHS__SetPrev takes integer setKey,integer data,integer prev returns nothing
-    call SaveInteger((Lists__hashTable), - setKey, data, prev) // INLINED!!
+function GLHS___SetPrev takes integer setKey,integer data,integer prev returns nothing
+    call SaveInteger((Lists___hashTable), - setKey, data, prev) // INLINED!!
 endfunction
 
 // These functions clear the link data of an element (used to remove stuff from the list)
-function GLHS__ClearNext takes integer setKey,integer data returns nothing
-    call RemoveSavedInteger((Lists__hashTable), setKey, data) // INLINED!!
+function GLHS___ClearNext takes integer setKey,integer data returns nothing
+    call RemoveSavedInteger((Lists___hashTable), setKey, data) // INLINED!!
 endfunction
     
-function GLHS__ClearPrev takes integer setKey,integer data returns nothing
-    call RemoveSavedInteger((Lists__hashTable), - setKey, data) // INLINED!!
+function GLHS___ClearPrev takes integer setKey,integer data returns nothing
+    call RemoveSavedInteger((Lists___hashTable), - setKey, data) // INLINED!!
 endfunction
 
 //Returns the next element after the specified "data" in the set
 //To get the first element, pass "0" as the parameter "data"
-function GLHS__GetNext takes integer setKey,integer data returns integer
-    return LoadInteger((Lists__hashTable), setKey, data) // INLINED!!
+function GLHS___GetNext takes integer setKey,integer data returns integer
+    return LoadInteger((Lists___hashTable), setKey, data) // INLINED!!
 endfunction
 
 //Returns the element that preceeds the specified "data" in the set
 //To get the last element, pass "0" as the parameter "data"
-function GLHS__GetPrev takes integer setKey,integer data returns integer
-    return LoadInteger((Lists__hashTable), - setKey, data) // INLINED!!
+function GLHS___GetPrev takes integer setKey,integer data returns integer
+    return LoadInteger((Lists___hashTable), - setKey, data) // INLINED!!
 endfunction
 
 //Adds an element to a set, in the position preceeding the element passed as the second parameter
 //If data is already present in set, behaviour is undefined
-function GLHS__AddBefore takes integer setKey,integer next,integer data returns nothing
-    local integer prev= (LoadInteger((Lists__hashTable), - (setKey ), ( next))) // INLINED!!
+function GLHS___AddBefore takes integer setKey,integer next,integer data returns nothing
+    local integer prev= (LoadInteger((Lists___hashTable), - (setKey ), ( next))) // INLINED!!
     
-    call SaveInteger((Lists__hashTable), (setKey ), ( prev ), ( data)) // INLINED!!
-    call SaveInteger((Lists__hashTable), - (setKey ), ( next ), ( data)) // INLINED!!
+    call SaveInteger((Lists___hashTable), (setKey ), ( prev ), ( data)) // INLINED!!
+    call SaveInteger((Lists___hashTable), - (setKey ), ( next ), ( data)) // INLINED!!
     
-    call SaveInteger((Lists__hashTable), (setKey ), ( data ), ( next)) // INLINED!!
-    call SaveInteger((Lists__hashTable), - (setKey ), ( data ), ( prev)) // INLINED!!
+    call SaveInteger((Lists___hashTable), (setKey ), ( data ), ( next)) // INLINED!!
+    call SaveInteger((Lists___hashTable), - (setKey ), ( data ), ( prev)) // INLINED!!
 endfunction
 
 //==============================================
@@ -6221,7 +6218,7 @@ endfunction
 
 
     function s__LinkedHashSet_begin takes integer this returns integer
-        return (LoadInteger((Lists__hashTable), (this ), ( 0))) // INLINED!!
+        return (LoadInteger((Lists___hashTable), (this ), ( 0))) // INLINED!!
     endfunction
     
     function s__LinkedHashSet_end takes nothing returns integer
@@ -6229,7 +6226,7 @@ endfunction
     endfunction
     
     function s__LinkedHashSet_rBegin takes integer this returns integer
-        return (LoadInteger((Lists__hashTable), - (this ), ( 0))) // INLINED!!
+        return (LoadInteger((Lists___hashTable), - (this ), ( 0))) // INLINED!!
     endfunction
     
     function s__LinkedHashSet_rEnd takes nothing returns integer
@@ -6237,30 +6234,30 @@ endfunction
     endfunction
     
     function s__LinkedHashSet_next takes integer this,integer i returns integer
-        return (LoadInteger((Lists__hashTable), (this ), ( i))) // INLINED!!
+        return (LoadInteger((Lists___hashTable), (this ), ( i))) // INLINED!!
     endfunction
     
     function s__LinkedHashSet_prev takes integer this,integer i returns integer
-        return (LoadInteger((Lists__hashTable), - (this ), ( i))) // INLINED!!
+        return (LoadInteger((Lists___hashTable), - (this ), ( i))) // INLINED!!
     endfunction
     
     function s__LinkedHashSet_setNext takes integer this,integer i,integer next returns nothing
-        call SaveInteger((Lists__hashTable), (this ), ( i ), ( next)) // INLINED!!
+        call SaveInteger((Lists___hashTable), (this ), ( i ), ( next)) // INLINED!!
     endfunction
     
     function s__LinkedHashSet_setPrev takes integer this,integer i,integer prev returns nothing
-        call SaveInteger((Lists__hashTable), - (this ), ( i ), ( prev)) // INLINED!!
+        call SaveInteger((Lists___hashTable), - (this ), ( i ), ( prev)) // INLINED!!
     endfunction
     
     function s__LinkedHashSet_delete takes integer this,integer i returns nothing
-        local integer next= (LoadInteger((Lists__hashTable), (this ), ( i))) // INLINED!!
-        local integer prev= (LoadInteger((Lists__hashTable), - (this ), ( i))) // INLINED!!
+        local integer next= (LoadInteger((Lists___hashTable), (this ), ( i))) // INLINED!!
+        local integer prev= (LoadInteger((Lists___hashTable), - (this ), ( i))) // INLINED!!
     
-        call SaveInteger((Lists__hashTable), - (this ), ( next ), ( prev)) // INLINED!!
-        call SaveInteger((Lists__hashTable), (this ), ( prev ), ( next)) // INLINED!!
+        call SaveInteger((Lists___hashTable), - (this ), ( next ), ( prev)) // INLINED!!
+        call SaveInteger((Lists___hashTable), (this ), ( prev ), ( next)) // INLINED!!
             
-        call RemoveSavedInteger((Lists__hashTable), (this ), ( i)) // INLINED!!
-        call RemoveSavedInteger((Lists__hashTable), - (this ), ( i)) // INLINED!!
+        call RemoveSavedInteger((Lists___hashTable), (this ), ( i)) // INLINED!!
+        call RemoveSavedInteger((Lists___hashTable), - (this ), ( i)) // INLINED!!
     endfunction
 
     constant function s__LinkedHashSet_RECYCLE_KEY takes nothing returns integer
@@ -6293,22 +6290,22 @@ endfunction
     
     
     function s__LinkedHashSet_addBefore takes integer this,integer oldData,integer newData returns nothing
-        call GLHS__AddBefore(this , oldData , newData)
+        call GLHS___AddBefore(this , oldData , newData)
     endfunction
     
     
     function s__LinkedHashSet_addAfter takes integer this,integer oldData,integer newData returns nothing
-        call GLHS__AddBefore(- this , oldData , newData)
+        call GLHS___AddBefore(- this , oldData , newData)
     endfunction
 
     
     function s__LinkedHashSet_append takes integer this,integer data returns nothing
-        call GLHS__AddBefore((this) , (0 ) , ( data)) // INLINED!!
+        call GLHS___AddBefore((this) , (0 ) , ( data)) // INLINED!!
     endfunction
     
     
     function s__LinkedHashSet_prepend takes integer this,integer data returns nothing
-        call GLHS__AddBefore(- (this) , (0 ) , ( data)) // INLINED!!
+        call GLHS___AddBefore(- (this) , (0 ) , ( data)) // INLINED!!
     endfunction
     
     
@@ -6318,39 +6315,39 @@ endfunction
     
     
     function s__LinkedHashSet_clear takes integer this returns nothing
-        call FlushChildHashtable((Lists__hashTable), this) // INLINED!!
-        call FlushChildHashtable((Lists__hashTable), - this) // INLINED!!
+        call FlushChildHashtable((Lists___hashTable), this) // INLINED!!
+        call FlushChildHashtable((Lists___hashTable), - this) // INLINED!!
     endfunction
     
     
     function s__LinkedHashSet_getFirst takes integer this returns integer
-        return (LoadInteger((Lists__hashTable), ((this) ), ( 0))) // INLINED!!
+        return (LoadInteger((Lists___hashTable), ((this) ), ( 0))) // INLINED!!
     endfunction
     
     
     function s__LinkedHashSet_getLast takes integer this returns integer
-        return (LoadInteger((Lists__hashTable), - ((this) ), ( 0))) // INLINED!!
+        return (LoadInteger((Lists___hashTable), - ((this) ), ( 0))) // INLINED!!
     endfunction
     
     
     function s__LinkedHashSet_isEmpty takes integer this returns boolean
-        return (LoadInteger((Lists__hashTable), ((this) ), ( 0))) != (0) // INLINED!!
+        return (LoadInteger((Lists___hashTable), ((this) ), ( 0))) != (0) // INLINED!!
     endfunction
     
     
     function s__LinkedHashSet_contains takes integer this,integer data returns boolean
-        return HaveSavedInteger((Lists__hashTable), this, data) // INLINED!!
+        return HaveSavedInteger((Lists___hashTable), this, data) // INLINED!!
     endfunction
     
     
     function s__LinkedHashSet_size takes integer this returns integer
-        local integer data= (LoadInteger((Lists__hashTable), ((this) ), ( 0))) // INLINED!!
+        local integer data= (LoadInteger((Lists___hashTable), ((this) ), ( 0))) // INLINED!!
         local integer count= 0
         
         loop
         exitwhen data == (0) // INLINED!!
             set count=count + 1
-            set data=(LoadInteger((Lists__hashTable), ((this) ), ( (data)))) // INLINED!!
+            set data=(LoadInteger((Lists___hashTable), ((this) ), ( (data)))) // INLINED!!
         endloop
         
         return count
@@ -6358,14 +6355,14 @@ endfunction
     
     //This function loops through a Set and executes a trigger for each element, setting the udg_List variables to their relevant equivalents each time
     function s__LinkedHashSet_forEach takes integer this,trigger trig returns nothing
-        local integer data= (LoadInteger((Lists__hashTable), ((this) ), ( 0))) // INLINED!!
+        local integer data= (LoadInteger((Lists___hashTable), ((this) ), ( 0))) // INLINED!!
         
         loop
         exitwhen data == (0) // INLINED!!
             set s__LinkedHashSet_enumElement=data
             set s__LinkedHashSet_enumSet=this
             
-            set data=(LoadInteger((Lists__hashTable), ((this) ), ( (data)))) // INLINED!!
+            set data=(LoadInteger((Lists___hashTable), ((this) ), ( (data)))) // INLINED!!
             
             if IsTriggerEnabled(trig) and TriggerEvaluate(trig) then
                 call TriggerExecute(trig)
@@ -6375,7 +6372,7 @@ endfunction
     
     //If 'until' parameter is a non-negative number, then the loop will break after iterating over that many elements
     function s__LinkedHashSet_forEachCounted takes integer this,trigger trig,integer until returns nothing
-        local integer data= (LoadInteger((Lists__hashTable), ((this) ), ( 0))) // INLINED!!
+        local integer data= (LoadInteger((Lists___hashTable), ((this) ), ( 0))) // INLINED!!
         local integer count= 0
             
         loop
@@ -6383,7 +6380,7 @@ endfunction
             set s__LinkedHashSet_enumElement=data
             set s__LinkedHashSet_enumSet=this
             
-            set data=(LoadInteger((Lists__hashTable), ((this) ), ( (data)))) // INLINED!!
+            set data=(LoadInteger((Lists___hashTable), ((this) ), ( (data)))) // INLINED!!
             
             if IsTriggerEnabled(trig) and TriggerEvaluate(trig) then
                 call TriggerExecute(trig)
@@ -6395,14 +6392,14 @@ endfunction
     
     // You may specify a code that will run in a ForPlayer loop instead of a trigger
     function s__LinkedHashSet_forEachCode takes integer this,code func returns nothing
-        local integer data= (LoadInteger((Lists__hashTable), ((this) ), ( 0))) // INLINED!!
+        local integer data= (LoadInteger((Lists___hashTable), ((this) ), ( 0))) // INLINED!!
         
         loop
         exitwhen data == (0) // INLINED!!
             set s__LinkedHashSet_enumElement=data
             set s__LinkedHashSet_enumSet=this
             
-            set data=(LoadInteger((Lists__hashTable), ((this) ), ( (data)))) // INLINED!!
+            set data=(LoadInteger((Lists___hashTable), ((this) ), ( (data)))) // INLINED!!
             
             call ForForce(bj_FORCE_PLAYER[0], func)
         endloop
@@ -6410,7 +6407,7 @@ endfunction
     
     
     function s__LinkedHashSet_forEachCodeCounted takes integer this,code func,integer until returns nothing
-        local integer data= (LoadInteger((Lists__hashTable), ((this) ), ( 0))) // INLINED!!
+        local integer data= (LoadInteger((Lists___hashTable), ((this) ), ( 0))) // INLINED!!
         local integer count= 0
             
         loop
@@ -6418,7 +6415,7 @@ endfunction
             set s__LinkedHashSet_enumElement=data
             set s__LinkedHashSet_enumSet=this
             
-            set data=(LoadInteger((Lists__hashTable), ((this) ), ( (data)))) // INLINED!!
+            set data=(LoadInteger((Lists___hashTable), ((this) ), ( (data)))) // INLINED!!
             
             call ForForce(bj_FORCE_PLAYER[0], func)
             
@@ -6427,17 +6424,17 @@ endfunction
     endfunction
     
     function s__LinkedHashSet_forEachWipe takes integer this,integer start,integer finish,code func returns integer
-        local integer data= (LoadInteger((Lists__hashTable), (this ), ( start))) // INLINED!!
+        local integer data= (LoadInteger((Lists___hashTable), (this ), ( start))) // INLINED!!
         local integer nextData
         local integer countRemoved= 0
             
         loop
         exitwhen data == finish or data == 0
         
-            set nextData=(LoadInteger((Lists__hashTable), (this ), ( data))) // INLINED!!
+            set nextData=(LoadInteger((Lists___hashTable), (this ), ( data))) // INLINED!!
 
-            call RemoveSavedInteger((Lists__hashTable), (this ), ( data)) // INLINED!!
-            call RemoveSavedInteger((Lists__hashTable), - (- this ), ( data)) // INLINED!!
+            call RemoveSavedInteger((Lists___hashTable), (this ), ( data)) // INLINED!!
+            call RemoveSavedInteger((Lists___hashTable), - (- this ), ( data)) // INLINED!!
             
             set s__LinkedHashSet_enumElement=data
             set s__LinkedHashSet_enumSet=this
@@ -6447,8 +6444,8 @@ endfunction
             set countRemoved=countRemoved + 1
         endloop
         
-        call SaveInteger((Lists__hashTable), - (this ), ( data ), ( start)) // INLINED!!
-        call SaveInteger((Lists__hashTable), (this ), ( start ), ( data)) // INLINED!!
+        call SaveInteger((Lists___hashTable), - (this ), ( data ), ( start)) // INLINED!!
+        call SaveInteger((Lists___hashTable), (this ), ( start ), ( data)) // INLINED!!
 
         return countRemoved
     endfunction
@@ -6460,8 +6457,8 @@ endfunction
     
     
     function s__LinkedHashSet_destroy takes integer this returns nothing
-        call FlushChildHashtable((Lists__hashTable), this) // INLINED!!
-        call FlushChildHashtable((Lists__hashTable), - this) // INLINED!!
+        call FlushChildHashtable((Lists___hashTable), this) // INLINED!!
+        call FlushChildHashtable((Lists___hashTable), - this) // INLINED!!
 //Implemented from module GMUI_deallocate_this:
 //textmacro instance: GMUI_RecycleIndex("this","thistype.RECYCLE_KEY()")
     call SaveInteger(GMUI_hashTable, (Lists_RECYCLE_KEY), this, LoadInteger(GMUI_hashTable, (Lists_RECYCLE_KEY), 0)) // INLINED!!
@@ -6503,7 +6500,7 @@ endfunction
 
 
 
-//Implemented from module TableStruct__Const:
+//Implemented from module TableStruct___Const:
         function s__TableStruct_type takes integer i returns integer
             return i
         endfunction
@@ -6516,17 +6513,17 @@ endfunction
     
     function s__TableStruct_setHandle takes integer parent,integer child,handle h returns nothing
         if h != null then
-            call SaveFogStateHandle(ConstTable__ht, (((((parent))))), (child), ( ConvertFogState(GetHandleId(h)))) // INLINED!!
+            call SaveFogStateHandle(ConstTable___ht, (((((parent))))), (child), ( ConvertFogState(GetHandleId(h)))) // INLINED!!
         else
-            call RemoveSavedHandle(ConstTable__ht, (((((parent))))), (child)) // INLINED!!
+            call RemoveSavedHandle(ConstTable___ht, (((((parent))))), (child)) // INLINED!!
         endif
     endfunction
     
     function s__TableStruct_setAgent takes integer parent,integer child,agent a returns nothing
         if a != null then
-            call SaveAgentHandle(ConstTable__ht, (((((parent))))), (child), ( a)) // INLINED!!
+            call SaveAgentHandle(ConstTable___ht, (((((parent))))), (child), ( a)) // INLINED!!
         else
-            call RemoveSavedHandle(ConstTable__ht, (((((parent))))), (child)) // INLINED!!
+            call RemoveSavedHandle(ConstTable___ht, (((((parent))))), (child)) // INLINED!!
         endif
     endfunction
 
@@ -6623,30 +6620,30 @@ endfunction
 
 
 function IsOrderMorph takes integer orderId returns boolean
-    return (HaveSavedBoolean(ConstTable__ht, ((((s__FilterTransformations_Globals_data_impl)))), (orderId))) // INLINED!!
+    return (HaveSavedBoolean(ConstTable___ht, ((((s__FilterTransformations_Globals_data_impl)))), (orderId))) // INLINED!!
 endfunction
 
 
-function FilterTransformations___onInit takes nothing returns nothing
-       call SaveBoolean(ConstTable__ht, ((((s__FilterTransformations_Globals_data_impl)))), (OrderId("burrow")), ( true)) // INLINED!!
-       call SaveBoolean(ConstTable__ht, ((((s__FilterTransformations_Globals_data_impl)))), (OrderId("unburrow")), ( true)) // INLINED!!
-       call SaveBoolean(ConstTable__ht, ((((s__FilterTransformations_Globals_data_impl)))), (OrderId("sphinxform")), ( true)) // INLINED!!
-       call SaveBoolean(ConstTable__ht, ((((s__FilterTransformations_Globals_data_impl)))), (OrderId("unsphinxform")), ( true)) // INLINED!!
-       call SaveBoolean(ConstTable__ht, ((((s__FilterTransformations_Globals_data_impl)))), (OrderId("bearform")), ( true)) // INLINED!!
-       call SaveBoolean(ConstTable__ht, ((((s__FilterTransformations_Globals_data_impl)))), (OrderId("unbearform")), ( true)) // INLINED!!
-       call SaveBoolean(ConstTable__ht, ((((s__FilterTransformations_Globals_data_impl)))), (OrderId("ravenform")), ( true)) // INLINED!!
-       call SaveBoolean(ConstTable__ht, ((((s__FilterTransformations_Globals_data_impl)))), (OrderId("unravenform")), ( true)) // INLINED!!
-       call SaveBoolean(ConstTable__ht, ((((s__FilterTransformations_Globals_data_impl)))), (OrderId("root")), ( true)) // INLINED!!
-       call SaveBoolean(ConstTable__ht, ((((s__FilterTransformations_Globals_data_impl)))), (OrderId("unroot")), ( true)) // INLINED!!
-       call SaveBoolean(ConstTable__ht, ((((s__FilterTransformations_Globals_data_impl)))), (OrderId("etherealform")), ( true)) // INLINED!!
-       call SaveBoolean(ConstTable__ht, ((((s__FilterTransformations_Globals_data_impl)))), (OrderId("unetherealform")), ( true)) // INLINED!!
-       call SaveBoolean(ConstTable__ht, ((((s__FilterTransformations_Globals_data_impl)))), (OrderId("corporealform")), ( true)) // INLINED!!
-       call SaveBoolean(ConstTable__ht, ((((s__FilterTransformations_Globals_data_impl)))), (OrderId("uncorporealform")), ( true)) // INLINED!!
-       call SaveBoolean(ConstTable__ht, ((((s__FilterTransformations_Globals_data_impl)))), (OrderId("submerge")), ( true)) // INLINED!!
-       call SaveBoolean(ConstTable__ht, ((((s__FilterTransformations_Globals_data_impl)))), (OrderId("unsubmerge")), ( true)) // INLINED!!
-       call SaveBoolean(ConstTable__ht, ((((s__FilterTransformations_Globals_data_impl)))), (OrderId("robogoblin")), ( true)) // INLINED!!
-       call SaveBoolean(ConstTable__ht, ((((s__FilterTransformations_Globals_data_impl)))), (OrderId("unrobogoblin")), ( true)) // INLINED!!
-       call SaveBoolean(ConstTable__ht, ((((s__FilterTransformations_Globals_data_impl)))), (OrderId("metamorphosis")), ( true)) // INLINED!!
+function FilterTransformations__onInit takes nothing returns nothing
+       call SaveBoolean(ConstTable___ht, ((((s__FilterTransformations_Globals_data_impl)))), (OrderId("burrow")), ( true)) // INLINED!!
+       call SaveBoolean(ConstTable___ht, ((((s__FilterTransformations_Globals_data_impl)))), (OrderId("unburrow")), ( true)) // INLINED!!
+       call SaveBoolean(ConstTable___ht, ((((s__FilterTransformations_Globals_data_impl)))), (OrderId("sphinxform")), ( true)) // INLINED!!
+       call SaveBoolean(ConstTable___ht, ((((s__FilterTransformations_Globals_data_impl)))), (OrderId("unsphinxform")), ( true)) // INLINED!!
+       call SaveBoolean(ConstTable___ht, ((((s__FilterTransformations_Globals_data_impl)))), (OrderId("bearform")), ( true)) // INLINED!!
+       call SaveBoolean(ConstTable___ht, ((((s__FilterTransformations_Globals_data_impl)))), (OrderId("unbearform")), ( true)) // INLINED!!
+       call SaveBoolean(ConstTable___ht, ((((s__FilterTransformations_Globals_data_impl)))), (OrderId("ravenform")), ( true)) // INLINED!!
+       call SaveBoolean(ConstTable___ht, ((((s__FilterTransformations_Globals_data_impl)))), (OrderId("unravenform")), ( true)) // INLINED!!
+       call SaveBoolean(ConstTable___ht, ((((s__FilterTransformations_Globals_data_impl)))), (OrderId("root")), ( true)) // INLINED!!
+       call SaveBoolean(ConstTable___ht, ((((s__FilterTransformations_Globals_data_impl)))), (OrderId("unroot")), ( true)) // INLINED!!
+       call SaveBoolean(ConstTable___ht, ((((s__FilterTransformations_Globals_data_impl)))), (OrderId("etherealform")), ( true)) // INLINED!!
+       call SaveBoolean(ConstTable___ht, ((((s__FilterTransformations_Globals_data_impl)))), (OrderId("unetherealform")), ( true)) // INLINED!!
+       call SaveBoolean(ConstTable___ht, ((((s__FilterTransformations_Globals_data_impl)))), (OrderId("corporealform")), ( true)) // INLINED!!
+       call SaveBoolean(ConstTable___ht, ((((s__FilterTransformations_Globals_data_impl)))), (OrderId("uncorporealform")), ( true)) // INLINED!!
+       call SaveBoolean(ConstTable___ht, ((((s__FilterTransformations_Globals_data_impl)))), (OrderId("submerge")), ( true)) // INLINED!!
+       call SaveBoolean(ConstTable___ht, ((((s__FilterTransformations_Globals_data_impl)))), (OrderId("unsubmerge")), ( true)) // INLINED!!
+       call SaveBoolean(ConstTable___ht, ((((s__FilterTransformations_Globals_data_impl)))), (OrderId("robogoblin")), ( true)) // INLINED!!
+       call SaveBoolean(ConstTable___ht, ((((s__FilterTransformations_Globals_data_impl)))), (OrderId("unrobogoblin")), ( true)) // INLINED!!
+       call SaveBoolean(ConstTable___ht, ((((s__FilterTransformations_Globals_data_impl)))), (OrderId("metamorphosis")), ( true)) // INLINED!!
 endfunction
 
 
@@ -6654,98 +6651,333 @@ endfunction
 //library LoPDecoBuilders:
     
     
-    constant function s__LoP_DecoBuilders__get_SpecialDecoFirstIndex takes nothing returns integer
-        return 0
-    endfunction
     
     
-    // TODO => These must be readonly
-//textmacro instance: TableStruct_NewStaticPrimitiveField("SpecialDecoLastIndex","integer")
+        constant function s__LoP_DecoBuilders__get_SpecialDecoFirstIndex takes nothing returns integer
+            return 0
+        endfunction
+        
+//textmacro instance: TableStruct_NewReadonlyStaticPrimitiveField("SpecialDecoLastIndex","integer")
     function s__LoP_DecoBuilders__get_SpecialDecoLastIndex takes nothing returns integer
-        return (LoadInteger(ConstTable__ht, (((((s__LoP_DecoBuilders_static_members_key))))), (s__LoP_DecoBuilders_SpecialDecoLastIndex_impl))) // INLINED!!
+        return (LoadInteger(ConstTable___ht, (((((s__LoP_DecoBuilders_static_members_key))))), (s__LoP_DecoBuilders_SpecialDecoLastIndex_impl))) // INLINED!!
     endfunction
     
     function s__LoP_DecoBuilders__set_SpecialDecoLastIndex takes integer new_SpecialDecoLastIndex returns nothing
-        call SaveInteger(ConstTable__ht, (((((s__LoP_DecoBuilders_static_members_key))))), (s__LoP_DecoBuilders_SpecialDecoLastIndex_impl), ( new_SpecialDecoLastIndex)) // INLINED!!
+        call SaveInteger(ConstTable___ht, (((((s__LoP_DecoBuilders_static_members_key))))), (s__LoP_DecoBuilders_SpecialDecoLastIndex_impl), ( new_SpecialDecoLastIndex)) // INLINED!!
     endfunction
     
     function s__LoP_DecoBuilders_SpecialDecoLastIndexClear takes nothing returns nothing
-        call RemoveSavedInteger(ConstTable__ht, (((((s__LoP_DecoBuilders_static_members_key))))), (s__LoP_DecoBuilders_SpecialDecoLastIndex_impl)) // INLINED!!
+        call RemoveSavedInteger(ConstTable___ht, (((((s__LoP_DecoBuilders_static_members_key))))), (s__LoP_DecoBuilders_SpecialDecoLastIndex_impl)) // INLINED!!
     endfunction
-//end of: TableStruct_NewStaticPrimitiveField("SpecialDecoLastIndex","integer")
-//textmacro instance: TableStruct_NewStaticPrimitiveField("BasicDecoFirstIndex","integer")
+    
+    function s__LoP_DecoBuilders_SpecialDecoLastIndexExists takes nothing returns boolean
+        return (HaveSavedInteger(ConstTable___ht, (((((s__LoP_DecoBuilders_static_members_key))))), (s__LoP_DecoBuilders_SpecialDecoLastIndex_impl))) // INLINED!!
+    endfunction
+//end of: TableStruct_NewReadonlyStaticPrimitiveField("SpecialDecoLastIndex","integer")
+//textmacro instance: TableStruct_NewReadonlyStaticPrimitiveField("BasicDecoFirstIndex","integer")
     function s__LoP_DecoBuilders__get_BasicDecoFirstIndex takes nothing returns integer
-        return (LoadInteger(ConstTable__ht, (((((s__LoP_DecoBuilders_static_members_key))))), (s__LoP_DecoBuilders_BasicDecoFirstIndex_impl))) // INLINED!!
+        return (LoadInteger(ConstTable___ht, (((((s__LoP_DecoBuilders_static_members_key))))), (s__LoP_DecoBuilders_BasicDecoFirstIndex_impl))) // INLINED!!
     endfunction
     
     function s__LoP_DecoBuilders__set_BasicDecoFirstIndex takes integer new_BasicDecoFirstIndex returns nothing
-        call SaveInteger(ConstTable__ht, (((((s__LoP_DecoBuilders_static_members_key))))), (s__LoP_DecoBuilders_BasicDecoFirstIndex_impl), ( new_BasicDecoFirstIndex)) // INLINED!!
+        call SaveInteger(ConstTable___ht, (((((s__LoP_DecoBuilders_static_members_key))))), (s__LoP_DecoBuilders_BasicDecoFirstIndex_impl), ( new_BasicDecoFirstIndex)) // INLINED!!
     endfunction
     
     function s__LoP_DecoBuilders_BasicDecoFirstIndexClear takes nothing returns nothing
-        call RemoveSavedInteger(ConstTable__ht, (((((s__LoP_DecoBuilders_static_members_key))))), (s__LoP_DecoBuilders_BasicDecoFirstIndex_impl)) // INLINED!!
+        call RemoveSavedInteger(ConstTable___ht, (((((s__LoP_DecoBuilders_static_members_key))))), (s__LoP_DecoBuilders_BasicDecoFirstIndex_impl)) // INLINED!!
     endfunction
-//end of: TableStruct_NewStaticPrimitiveField("BasicDecoFirstIndex","integer")
-//textmacro instance: TableStruct_NewStaticPrimitiveField("BasicDecoLastIndex","integer")
+    
+    function s__LoP_DecoBuilders_BasicDecoFirstIndexExists takes nothing returns boolean
+        return (HaveSavedInteger(ConstTable___ht, (((((s__LoP_DecoBuilders_static_members_key))))), (s__LoP_DecoBuilders_BasicDecoFirstIndex_impl))) // INLINED!!
+    endfunction
+//end of: TableStruct_NewReadonlyStaticPrimitiveField("BasicDecoFirstIndex","integer")
+//textmacro instance: TableStruct_NewReadonlyStaticPrimitiveField("BasicDecoLastIndex","integer")
     function s__LoP_DecoBuilders__get_BasicDecoLastIndex takes nothing returns integer
-        return (LoadInteger(ConstTable__ht, (((((s__LoP_DecoBuilders_static_members_key))))), (s__LoP_DecoBuilders_BasicDecoLastIndex_impl))) // INLINED!!
+        return (LoadInteger(ConstTable___ht, (((((s__LoP_DecoBuilders_static_members_key))))), (s__LoP_DecoBuilders_BasicDecoLastIndex_impl))) // INLINED!!
     endfunction
     
     function s__LoP_DecoBuilders__set_BasicDecoLastIndex takes integer new_BasicDecoLastIndex returns nothing
-        call SaveInteger(ConstTable__ht, (((((s__LoP_DecoBuilders_static_members_key))))), (s__LoP_DecoBuilders_BasicDecoLastIndex_impl), ( new_BasicDecoLastIndex)) // INLINED!!
+        call SaveInteger(ConstTable___ht, (((((s__LoP_DecoBuilders_static_members_key))))), (s__LoP_DecoBuilders_BasicDecoLastIndex_impl), ( new_BasicDecoLastIndex)) // INLINED!!
     endfunction
     
     function s__LoP_DecoBuilders_BasicDecoLastIndexClear takes nothing returns nothing
-        call RemoveSavedInteger(ConstTable__ht, (((((s__LoP_DecoBuilders_static_members_key))))), (s__LoP_DecoBuilders_BasicDecoLastIndex_impl)) // INLINED!!
+        call RemoveSavedInteger(ConstTable___ht, (((((s__LoP_DecoBuilders_static_members_key))))), (s__LoP_DecoBuilders_BasicDecoLastIndex_impl)) // INLINED!!
     endfunction
-//end of: TableStruct_NewStaticPrimitiveField("BasicDecoLastIndex","integer")
-//textmacro instance: TableStruct_NewStaticPrimitiveField("AdvDecoFirstIndex","integer")
+    
+    function s__LoP_DecoBuilders_BasicDecoLastIndexExists takes nothing returns boolean
+        return (HaveSavedInteger(ConstTable___ht, (((((s__LoP_DecoBuilders_static_members_key))))), (s__LoP_DecoBuilders_BasicDecoLastIndex_impl))) // INLINED!!
+    endfunction
+//end of: TableStruct_NewReadonlyStaticPrimitiveField("BasicDecoLastIndex","integer")
+//textmacro instance: TableStruct_NewReadonlyStaticPrimitiveField("AdvDecoFirstIndex","integer")
     function s__LoP_DecoBuilders__get_AdvDecoFirstIndex takes nothing returns integer
-        return (LoadInteger(ConstTable__ht, (((((s__LoP_DecoBuilders_static_members_key))))), (s__LoP_DecoBuilders_AdvDecoFirstIndex_impl))) // INLINED!!
+        return (LoadInteger(ConstTable___ht, (((((s__LoP_DecoBuilders_static_members_key))))), (s__LoP_DecoBuilders_AdvDecoFirstIndex_impl))) // INLINED!!
     endfunction
     
     function s__LoP_DecoBuilders__set_AdvDecoFirstIndex takes integer new_AdvDecoFirstIndex returns nothing
-        call SaveInteger(ConstTable__ht, (((((s__LoP_DecoBuilders_static_members_key))))), (s__LoP_DecoBuilders_AdvDecoFirstIndex_impl), ( new_AdvDecoFirstIndex)) // INLINED!!
+        call SaveInteger(ConstTable___ht, (((((s__LoP_DecoBuilders_static_members_key))))), (s__LoP_DecoBuilders_AdvDecoFirstIndex_impl), ( new_AdvDecoFirstIndex)) // INLINED!!
     endfunction
     
     function s__LoP_DecoBuilders_AdvDecoFirstIndexClear takes nothing returns nothing
-        call RemoveSavedInteger(ConstTable__ht, (((((s__LoP_DecoBuilders_static_members_key))))), (s__LoP_DecoBuilders_AdvDecoFirstIndex_impl)) // INLINED!!
+        call RemoveSavedInteger(ConstTable___ht, (((((s__LoP_DecoBuilders_static_members_key))))), (s__LoP_DecoBuilders_AdvDecoFirstIndex_impl)) // INLINED!!
     endfunction
-//end of: TableStruct_NewStaticPrimitiveField("AdvDecoFirstIndex","integer")
-//textmacro instance: TableStruct_NewStaticPrimitiveField("AdvDecoLastIndex","integer")
+    
+    function s__LoP_DecoBuilders_AdvDecoFirstIndexExists takes nothing returns boolean
+        return (HaveSavedInteger(ConstTable___ht, (((((s__LoP_DecoBuilders_static_members_key))))), (s__LoP_DecoBuilders_AdvDecoFirstIndex_impl))) // INLINED!!
+    endfunction
+//end of: TableStruct_NewReadonlyStaticPrimitiveField("AdvDecoFirstIndex","integer")
+//textmacro instance: TableStruct_NewReadonlyStaticPrimitiveField("AdvDecoLastIndex","integer")
     function s__LoP_DecoBuilders__get_AdvDecoLastIndex takes nothing returns integer
-        return (LoadInteger(ConstTable__ht, (((((s__LoP_DecoBuilders_static_members_key))))), (s__LoP_DecoBuilders_AdvDecoLastIndex_impl))) // INLINED!!
+        return (LoadInteger(ConstTable___ht, (((((s__LoP_DecoBuilders_static_members_key))))), (s__LoP_DecoBuilders_AdvDecoLastIndex_impl))) // INLINED!!
     endfunction
     
     function s__LoP_DecoBuilders__set_AdvDecoLastIndex takes integer new_AdvDecoLastIndex returns nothing
-        call SaveInteger(ConstTable__ht, (((((s__LoP_DecoBuilders_static_members_key))))), (s__LoP_DecoBuilders_AdvDecoLastIndex_impl), ( new_AdvDecoLastIndex)) // INLINED!!
+        call SaveInteger(ConstTable___ht, (((((s__LoP_DecoBuilders_static_members_key))))), (s__LoP_DecoBuilders_AdvDecoLastIndex_impl), ( new_AdvDecoLastIndex)) // INLINED!!
     endfunction
     
     function s__LoP_DecoBuilders_AdvDecoLastIndexClear takes nothing returns nothing
-        call RemoveSavedInteger(ConstTable__ht, (((((s__LoP_DecoBuilders_static_members_key))))), (s__LoP_DecoBuilders_AdvDecoLastIndex_impl)) // INLINED!!
+        call RemoveSavedInteger(ConstTable___ht, (((((s__LoP_DecoBuilders_static_members_key))))), (s__LoP_DecoBuilders_AdvDecoLastIndex_impl)) // INLINED!!
     endfunction
-//end of: TableStruct_NewStaticPrimitiveField("AdvDecoLastIndex","integer")
-//textmacro instance: TableStruct_NewStaticPrimitiveField("DecoLastIndex","integer")
+    
+    function s__LoP_DecoBuilders_AdvDecoLastIndexExists takes nothing returns boolean
+        return (HaveSavedInteger(ConstTable___ht, (((((s__LoP_DecoBuilders_static_members_key))))), (s__LoP_DecoBuilders_AdvDecoLastIndex_impl))) // INLINED!!
+    endfunction
+//end of: TableStruct_NewReadonlyStaticPrimitiveField("AdvDecoLastIndex","integer")
+//textmacro instance: TableStruct_NewReadonlyStaticPrimitiveField("DecoLastIndex","integer")
     function s__LoP_DecoBuilders__get_DecoLastIndex takes nothing returns integer
-        return (LoadInteger(ConstTable__ht, (((((s__LoP_DecoBuilders_static_members_key))))), (s__LoP_DecoBuilders_DecoLastIndex_impl))) // INLINED!!
+        return (LoadInteger(ConstTable___ht, (((((s__LoP_DecoBuilders_static_members_key))))), (s__LoP_DecoBuilders_DecoLastIndex_impl))) // INLINED!!
     endfunction
     
     function s__LoP_DecoBuilders__set_DecoLastIndex takes integer new_DecoLastIndex returns nothing
-        call SaveInteger(ConstTable__ht, (((((s__LoP_DecoBuilders_static_members_key))))), (s__LoP_DecoBuilders_DecoLastIndex_impl), ( new_DecoLastIndex)) // INLINED!!
+        call SaveInteger(ConstTable___ht, (((((s__LoP_DecoBuilders_static_members_key))))), (s__LoP_DecoBuilders_DecoLastIndex_impl), ( new_DecoLastIndex)) // INLINED!!
     endfunction
     
     function s__LoP_DecoBuilders_DecoLastIndexClear takes nothing returns nothing
-        call RemoveSavedInteger(ConstTable__ht, (((((s__LoP_DecoBuilders_static_members_key))))), (s__LoP_DecoBuilders_DecoLastIndex_impl)) // INLINED!!
-    endfunction
-//end of: TableStruct_NewStaticPrimitiveField("DecoLastIndex","integer")
-    
-
-
-    // The number of Deco Builders inside of the Special Deco Tent.
-    constant function SpecialDecoTotal takes nothing returns integer
-        return 2 // This is actually 1 less than the total to be in line with udg_System_DecoTotal
+        call RemoveSavedInteger(ConstTable___ht, (((((s__LoP_DecoBuilders_static_members_key))))), (s__LoP_DecoBuilders_DecoLastIndex_impl)) // INLINED!!
     endfunction
     
+    function s__LoP_DecoBuilders_DecoLastIndexExists takes nothing returns boolean
+        return (HaveSavedInteger(ConstTable___ht, (((((s__LoP_DecoBuilders_static_members_key))))), (s__LoP_DecoBuilders_DecoLastIndex_impl))) // INLINED!!
+    endfunction
+//end of: TableStruct_NewReadonlyStaticPrimitiveField("DecoLastIndex","integer")
+
+
+    
+//Implemented from module LoPDecoBuilders__InitModule:
+        function s__LoP_DecoBuilders_LoPDecoBuilders__InitModule__onInit takes nothing returns nothing
+            local integer i= 0
+            // ---------
+            // Special Decos
+            // ---------
+            // Units and Trees
+            set s__LoP_DecoBuilders_rawcodes[i]='u015'
+            // Terrain
+            set i=( i + 1 )
+            set s__LoP_DecoBuilders_rawcodes[i]='u02E'
+            // Docks
+            set i=( i + 1 )
+            set s__LoP_DecoBuilders_rawcodes[i]='u003'
+            // Misc
+            set i=( i + 1 )
+            set s__LoP_DecoBuilders_rawcodes[i]='u00W'
+            
+            call SaveInteger(ConstTable___ht, (((((s__LoP_DecoBuilders_static_members_key))))), (s__LoP_DecoBuilders_SpecialDecoLastIndex_impl), ( (i))) // INLINED!!
+            // ---------
+            // Basic Decos
+            // ---------
+            // Archways
+            set i=( i + 1 )
+            set s__LoP_DecoBuilders_rawcodes[i]='u014'
+            // Bushes
+            set i=( i + 1 )
+            set s__LoP_DecoBuilders_rawcodes[i]='u00A'
+            // Camp
+            set i=( i + 1 )
+            set s__LoP_DecoBuilders_rawcodes[i]='u035'
+            // City 1
+            set i=( i + 1 )
+            set s__LoP_DecoBuilders_rawcodes[i]='u016'
+            // City 2
+            set i=( i + 1 )
+            set s__LoP_DecoBuilders_rawcodes[i]='u017'
+            // City 3
+            set i=( i + 1 )
+            set s__LoP_DecoBuilders_rawcodes[i]='u01T'
+            // Corpses
+            set i=( i + 1 )
+            set s__LoP_DecoBuilders_rawcodes[i]='u00N'
+            // Crops
+            set i=( i + 1 )
+            set s__LoP_DecoBuilders_rawcodes[i]='u00B'
+            // Dungeon
+            set i=( i + 1 )
+            set s__LoP_DecoBuilders_rawcodes[i]='u01P'
+            // Effects
+            set i=( i + 1 )
+            set s__LoP_DecoBuilders_rawcodes[i]='u036'
+            // Fire
+            set i=( i + 1 )
+            set s__LoP_DecoBuilders_rawcodes[i]='u01C'
+            // Furniture Deco
+            set i=( i + 1 )
+            set s__LoP_DecoBuilders_rawcodes[i]='u03Q'
+            // Gates
+            set i=( i + 1 )
+            set s__LoP_DecoBuilders_rawcodes[i]='u00V'
+            // Ice
+            set i=( i + 1 )
+            set s__LoP_DecoBuilders_rawcodes[i]='u03P'
+            // Rocks
+            set i=( i + 1 )
+            set s__LoP_DecoBuilders_rawcodes[i]='u013'
+            // Seats
+            set i=( i + 1 )
+            set s__LoP_DecoBuilders_rawcodes[i]='u01R'
+            // Statue 1
+            set i=( i + 1 )
+            set s__LoP_DecoBuilders_rawcodes[i]='u01N'
+            // Walls (Wood)
+            set i=( i + 1 )
+            set s__LoP_DecoBuilders_rawcodes[i]='u000'
+            // Walls 1
+            set i=( i + 1 )
+            set s__LoP_DecoBuilders_rawcodes[i]='u02J'
+            // Walls 2
+            set i=( i + 1 )
+            set s__LoP_DecoBuilders_rawcodes[i]='u02K'
+            // Water
+            set i=( i + 1 )
+            set s__LoP_DecoBuilders_rawcodes[i]='u00Z'
+            // Webs
+            set i=( i + 1 )
+            set s__LoP_DecoBuilders_rawcodes[i]='u02P'
+            
+            call SaveInteger(ConstTable___ht, (((((s__LoP_DecoBuilders_static_members_key))))), (s__LoP_DecoBuilders_BasicDecoLastIndex_impl), ( (i))) // INLINED!!
+            // ---------
+            // Advanced Decos
+            // ---------
+            // Arabian 1
+            set i=( i + 1 )
+            set s__LoP_DecoBuilders_rawcodes[i]='u02G'
+            // Arabian 2
+            set i=( i + 1 )
+            set s__LoP_DecoBuilders_rawcodes[i]='u02H'
+            // Blacksmith
+            set i=( i + 1 )
+            set s__LoP_DecoBuilders_rawcodes[i]='u01E'
+            // Blocks
+            set i=( i + 1 )
+            set s__LoP_DecoBuilders_rawcodes[i]='u03A'
+            // Celtic
+            set i=( i + 1 )
+            set s__LoP_DecoBuilders_rawcodes[i]='u029'
+            // Chaos
+            set i=( i + 1 )
+            set s__LoP_DecoBuilders_rawcodes[i]='u039'
+            // Chess
+            set i=( i + 1 )
+            set s__LoP_DecoBuilders_rawcodes[i]='u027'
+            // Dalaran
+            set i=( i + 1 )
+            set s__LoP_DecoBuilders_rawcodes[i]='u02D'
+            // Draenei
+            set i=( i + 1 )
+            set s__LoP_DecoBuilders_rawcodes[i]='u02O'
+            // Elves
+            set i=( i + 1 )
+            set s__LoP_DecoBuilders_rawcodes[i]='u02A'
+            // Fence
+            set i=( i + 1 )
+            set s__LoP_DecoBuilders_rawcodes[i]='u03I'
+            // Flags
+            set i=( i + 1 )
+            set s__LoP_DecoBuilders_rawcodes[i]='u005'
+            // Floors
+            set i=( i + 1 )
+            set s__LoP_DecoBuilders_rawcodes[i]='u02C'
+            // Flowers 1
+            set i=( i + 1 )
+            set s__LoP_DecoBuilders_rawcodes[i]='u004'
+            // Flowers 2
+            set i=( i + 1 )
+            set s__LoP_DecoBuilders_rawcodes[i]='u006'
+            // Forsaken
+            set i=( i + 1 )
+            set s__LoP_DecoBuilders_rawcodes[i]='u025'
+            // Goblin
+            set i=( i + 1 )
+            set s__LoP_DecoBuilders_rawcodes[i]='u02R'
+            // Gravestones
+            set i=( i + 1 )
+            set s__LoP_DecoBuilders_rawcodes[i]='u02S'
+            // Mansion
+            set i=( i + 1 )
+            set s__LoP_DecoBuilders_rawcodes[i]='u02I'
+            // Market
+            set i=( i + 1 )
+            set s__LoP_DecoBuilders_rawcodes[i]='u01D'
+            // Medieval 1
+            set i=( i + 1 )
+            set s__LoP_DecoBuilders_rawcodes[i]='u01S'
+            // Medieval 2
+            set i=( i + 1 )
+            set s__LoP_DecoBuilders_rawcodes[i]='u02L'
+            // Naga
+            set i=( i + 1 )
+            set s__LoP_DecoBuilders_rawcodes[i]='u03R'
+            // Nordic
+            set i=( i + 1 )
+            set s__LoP_DecoBuilders_rawcodes[i]='u03S'
+            // Obelisks
+            set i=( i + 1 )
+            set s__LoP_DecoBuilders_rawcodes[i]='u00Y'
+            // Pandaren
+            set i=( i + 1 )
+            set s__LoP_DecoBuilders_rawcodes[i]='u02N'
+            // Quilboar
+            set i=( i + 1 )
+            set s__LoP_DecoBuilders_rawcodes[i]='u026'
+            // Rostrodle
+            set i=( i + 1 )
+            set s__LoP_DecoBuilders_rawcodes[i]='u02Q'
+            // Ruined
+            set i=( i + 1 )
+            set s__LoP_DecoBuilders_rawcodes[i]='u02T'
+            // Ruins
+            set i=( i + 1 )
+            set s__LoP_DecoBuilders_rawcodes[i]='u00X'
+            // Runes
+            set i=( i + 1 )
+            set s__LoP_DecoBuilders_rawcodes[i]='u001'
+            // Runic
+            set i=( i + 1 )
+            set s__LoP_DecoBuilders_rawcodes[i]='u02M'
+            // Statue 2
+            set i=( i + 1 )
+            set s__LoP_DecoBuilders_rawcodes[i]='u023'
+            // Trees
+            set i=( i + 1 )
+            set s__LoP_DecoBuilders_rawcodes[i]='u01B'
+            // Village
+            set i=( i + 1 )
+            set s__LoP_DecoBuilders_rawcodes[i]='u01O'
+            // Walls (Icecrown)
+            set i=( i + 1 )
+            set s__LoP_DecoBuilders_rawcodes[i]='u011'
+            // Walls (Ruins)
+            set i=( i + 1 )
+            set s__LoP_DecoBuilders_rawcodes[i]='u012'
+            // Walls (Stone)
+            set i=( i + 1 )
+            set s__LoP_DecoBuilders_rawcodes[i]='u010'
+            
+            call SaveInteger(ConstTable___ht, (((((s__LoP_DecoBuilders_static_members_key))))), (s__LoP_DecoBuilders_AdvDecoLastIndex_impl), ( (i))) // INLINED!!
+            // ---------
+            // End of Deco Creation
+            // ---------
+            call SaveInteger(ConstTable___ht, (((((s__LoP_DecoBuilders_static_members_key))))), (s__LoP_DecoBuilders_DecoLastIndex_impl), ( (i))) // INLINED!!
+        endfunction
+    
+
 
 
 //library LoPDecoBuilders ends
@@ -6768,117 +7000,117 @@ endfunction
 function InitPlayerCircles takes nothing returns nothing
     local region tempRegion= CreateRegion()
     call RegionAddRect(tempRegion, gg_rct_GiveTo_Blue)
-    call SavePlayerHandle(ConstTable__ht, ((((s__LoPInit_Globals_regionTable_impl)))), (GetHandleId(tempRegion)), ( Player(1))) // INLINED!!
+    call SavePlayerHandle(ConstTable___ht, ((((s__LoPInit_Globals_regionTable_impl)))), (GetHandleId(tempRegion)), ( Player(1))) // INLINED!!
     call TriggerRegisterEnterRegion(gg_trg_System_Titan_GiveUnit, tempRegion, null)
     // =========
     set tempRegion=CreateRegion()
     call RegionAddRect(tempRegion, gg_rct_GiveTo_Teal)
-    call SavePlayerHandle(ConstTable__ht, ((((s__LoPInit_Globals_regionTable_impl)))), (GetHandleId(tempRegion)), ( Player(2))) // INLINED!!
+    call SavePlayerHandle(ConstTable___ht, ((((s__LoPInit_Globals_regionTable_impl)))), (GetHandleId(tempRegion)), ( Player(2))) // INLINED!!
     call TriggerRegisterEnterRegion(gg_trg_System_Titan_GiveUnit, tempRegion, null)
     // =========
     set tempRegion=CreateRegion()
     call RegionAddRect(tempRegion, gg_rct_GiveTo_Purple)
-    call SavePlayerHandle(ConstTable__ht, ((((s__LoPInit_Globals_regionTable_impl)))), (GetHandleId(tempRegion)), ( Player(3))) // INLINED!!
+    call SavePlayerHandle(ConstTable___ht, ((((s__LoPInit_Globals_regionTable_impl)))), (GetHandleId(tempRegion)), ( Player(3))) // INLINED!!
     call TriggerRegisterEnterRegion(gg_trg_System_Titan_GiveUnit, tempRegion, null)
     // =========
     set tempRegion=CreateRegion()
     call RegionAddRect(tempRegion, gg_rct_GiveTo_Yellow)
-    call SavePlayerHandle(ConstTable__ht, ((((s__LoPInit_Globals_regionTable_impl)))), (GetHandleId(tempRegion)), ( Player(4))) // INLINED!!
+    call SavePlayerHandle(ConstTable___ht, ((((s__LoPInit_Globals_regionTable_impl)))), (GetHandleId(tempRegion)), ( Player(4))) // INLINED!!
     call TriggerRegisterEnterRegion(gg_trg_System_Titan_GiveUnit, tempRegion, null)
     // =========
     set tempRegion=CreateRegion()
     call RegionAddRect(tempRegion, gg_rct_GiveTo_Orange)
-    call SavePlayerHandle(ConstTable__ht, ((((s__LoPInit_Globals_regionTable_impl)))), (GetHandleId(tempRegion)), ( Player(5))) // INLINED!!
+    call SavePlayerHandle(ConstTable___ht, ((((s__LoPInit_Globals_regionTable_impl)))), (GetHandleId(tempRegion)), ( Player(5))) // INLINED!!
     call TriggerRegisterEnterRegion(gg_trg_System_Titan_GiveUnit, tempRegion, null)
     // =========
     set tempRegion=CreateRegion()
     call RegionAddRect(tempRegion, gg_rct_GiveTo_Green)
-    call SavePlayerHandle(ConstTable__ht, ((((s__LoPInit_Globals_regionTable_impl)))), (GetHandleId(tempRegion)), ( Player(6))) // INLINED!!
+    call SavePlayerHandle(ConstTable___ht, ((((s__LoPInit_Globals_regionTable_impl)))), (GetHandleId(tempRegion)), ( Player(6))) // INLINED!!
     call TriggerRegisterEnterRegion(gg_trg_System_Titan_GiveUnit, tempRegion, null)
     // =========
     set tempRegion=CreateRegion()
     call RegionAddRect(tempRegion, gg_rct_GiveTo_Pink)
-    call SavePlayerHandle(ConstTable__ht, ((((s__LoPInit_Globals_regionTable_impl)))), (GetHandleId(tempRegion)), ( Player(7))) // INLINED!!
+    call SavePlayerHandle(ConstTable___ht, ((((s__LoPInit_Globals_regionTable_impl)))), (GetHandleId(tempRegion)), ( Player(7))) // INLINED!!
     call TriggerRegisterEnterRegion(gg_trg_System_Titan_GiveUnit, tempRegion, null)
     // =========
     set tempRegion=CreateRegion()
     call RegionAddRect(tempRegion, gg_rct_GiveTo_Gray)
-    call SavePlayerHandle(ConstTable__ht, ((((s__LoPInit_Globals_regionTable_impl)))), (GetHandleId(tempRegion)), ( Player(8))) // INLINED!!
+    call SavePlayerHandle(ConstTable___ht, ((((s__LoPInit_Globals_regionTable_impl)))), (GetHandleId(tempRegion)), ( Player(8))) // INLINED!!
     call TriggerRegisterEnterRegion(gg_trg_System_Titan_GiveUnit, tempRegion, null)
     // =========
     set tempRegion=CreateRegion()
     call RegionAddRect(tempRegion, gg_rct_GiveTo_Light_Blue)
-    call SavePlayerHandle(ConstTable__ht, ((((s__LoPInit_Globals_regionTable_impl)))), (GetHandleId(tempRegion)), ( Player(9))) // INLINED!!
+    call SavePlayerHandle(ConstTable___ht, ((((s__LoPInit_Globals_regionTable_impl)))), (GetHandleId(tempRegion)), ( Player(9))) // INLINED!!
     call TriggerRegisterEnterRegion(gg_trg_System_Titan_GiveUnit, tempRegion, null)
     // =========
     set tempRegion=CreateRegion()
     call RegionAddRect(tempRegion, gg_rct_GiveTo_Dark_Green)
-    call SavePlayerHandle(ConstTable__ht, ((((s__LoPInit_Globals_regionTable_impl)))), (GetHandleId(tempRegion)), ( Player(10))) // INLINED!!
+    call SavePlayerHandle(ConstTable___ht, ((((s__LoPInit_Globals_regionTable_impl)))), (GetHandleId(tempRegion)), ( Player(10))) // INLINED!!
     call TriggerRegisterEnterRegion(gg_trg_System_Titan_GiveUnit, tempRegion, null)
     // =========
     set tempRegion=CreateRegion()
     call RegionAddRect(tempRegion, gg_rct_GiveTo_Brown)
-    call SavePlayerHandle(ConstTable__ht, ((((s__LoPInit_Globals_regionTable_impl)))), (GetHandleId(tempRegion)), ( Player(11))) // INLINED!!
+    call SavePlayerHandle(ConstTable___ht, ((((s__LoPInit_Globals_regionTable_impl)))), (GetHandleId(tempRegion)), ( Player(11))) // INLINED!!
     call TriggerRegisterEnterRegion(gg_trg_System_Titan_GiveUnit, tempRegion, null)
     // =========
     set tempRegion=CreateRegion()
     call RegionAddRect(tempRegion, gg_rct_GiveTo_Maroon)
-    call SavePlayerHandle(ConstTable__ht, ((((s__LoPInit_Globals_regionTable_impl)))), (GetHandleId(tempRegion)), ( Player(12))) // INLINED!!
+    call SavePlayerHandle(ConstTable___ht, ((((s__LoPInit_Globals_regionTable_impl)))), (GetHandleId(tempRegion)), ( Player(12))) // INLINED!!
     call TriggerRegisterEnterRegion(gg_trg_System_Titan_GiveUnit, tempRegion, null)
     // =========
     set tempRegion=CreateRegion()
     call RegionAddRect(tempRegion, gg_rct_GiveTo_Navy)
-    call SavePlayerHandle(ConstTable__ht, ((((s__LoPInit_Globals_regionTable_impl)))), (GetHandleId(tempRegion)), ( Player(13))) // INLINED!!
+    call SavePlayerHandle(ConstTable___ht, ((((s__LoPInit_Globals_regionTable_impl)))), (GetHandleId(tempRegion)), ( Player(13))) // INLINED!!
     call TriggerRegisterEnterRegion(gg_trg_System_Titan_GiveUnit, tempRegion, null)
     // =========
     set tempRegion=CreateRegion()
     call RegionAddRect(tempRegion, gg_rct_GiveTo_Turquoise)
-    call SavePlayerHandle(ConstTable__ht, ((((s__LoPInit_Globals_regionTable_impl)))), (GetHandleId(tempRegion)), ( Player(14))) // INLINED!!
+    call SavePlayerHandle(ConstTable___ht, ((((s__LoPInit_Globals_regionTable_impl)))), (GetHandleId(tempRegion)), ( Player(14))) // INLINED!!
     call TriggerRegisterEnterRegion(gg_trg_System_Titan_GiveUnit, tempRegion, null)
     // =========
     set tempRegion=CreateRegion()
     call RegionAddRect(tempRegion, gg_rct_GiveTo_Violet)
-    call SavePlayerHandle(ConstTable__ht, ((((s__LoPInit_Globals_regionTable_impl)))), (GetHandleId(tempRegion)), ( Player(15))) // INLINED!!
+    call SavePlayerHandle(ConstTable___ht, ((((s__LoPInit_Globals_regionTable_impl)))), (GetHandleId(tempRegion)), ( Player(15))) // INLINED!!
     call TriggerRegisterEnterRegion(gg_trg_System_Titan_GiveUnit, tempRegion, null)
     // =========
     set tempRegion=CreateRegion()
     call RegionAddRect(tempRegion, gg_rct_GiveTo_Wheat)
-    call SavePlayerHandle(ConstTable__ht, ((((s__LoPInit_Globals_regionTable_impl)))), (GetHandleId(tempRegion)), ( Player(16))) // INLINED!!
+    call SavePlayerHandle(ConstTable___ht, ((((s__LoPInit_Globals_regionTable_impl)))), (GetHandleId(tempRegion)), ( Player(16))) // INLINED!!
     call TriggerRegisterEnterRegion(gg_trg_System_Titan_GiveUnit, tempRegion, null)
     // =========
     set tempRegion=CreateRegion()
     call RegionAddRect(tempRegion, gg_rct_GiveTo_Peach)
-    call SavePlayerHandle(ConstTable__ht, ((((s__LoPInit_Globals_regionTable_impl)))), (GetHandleId(tempRegion)), ( Player(17))) // INLINED!!
+    call SavePlayerHandle(ConstTable___ht, ((((s__LoPInit_Globals_regionTable_impl)))), (GetHandleId(tempRegion)), ( Player(17))) // INLINED!!
     call TriggerRegisterEnterRegion(gg_trg_System_Titan_GiveUnit, tempRegion, null)
     // =========
     set tempRegion=CreateRegion()
     call RegionAddRect(tempRegion, gg_rct_GiveTo_Mint)
-    call SavePlayerHandle(ConstTable__ht, ((((s__LoPInit_Globals_regionTable_impl)))), (GetHandleId(tempRegion)), ( Player(18))) // INLINED!!
+    call SavePlayerHandle(ConstTable___ht, ((((s__LoPInit_Globals_regionTable_impl)))), (GetHandleId(tempRegion)), ( Player(18))) // INLINED!!
     call TriggerRegisterEnterRegion(gg_trg_System_Titan_GiveUnit, tempRegion, null)
     // =========
     set tempRegion=CreateRegion()
     call RegionAddRect(tempRegion, gg_rct_GiveTo_Lavender)
-    call SavePlayerHandle(ConstTable__ht, ((((s__LoPInit_Globals_regionTable_impl)))), (GetHandleId(tempRegion)), ( Player(19))) // INLINED!!
+    call SavePlayerHandle(ConstTable___ht, ((((s__LoPInit_Globals_regionTable_impl)))), (GetHandleId(tempRegion)), ( Player(19))) // INLINED!!
     call TriggerRegisterEnterRegion(gg_trg_System_Titan_GiveUnit, tempRegion, null)
     // =========
     set tempRegion=CreateRegion()
     call RegionAddRect(tempRegion, gg_rct_GiveTo_Coal)
-    call SavePlayerHandle(ConstTable__ht, ((((s__LoPInit_Globals_regionTable_impl)))), (GetHandleId(tempRegion)), ( Player(20))) // INLINED!!
+    call SavePlayerHandle(ConstTable___ht, ((((s__LoPInit_Globals_regionTable_impl)))), (GetHandleId(tempRegion)), ( Player(20))) // INLINED!!
     call TriggerRegisterEnterRegion(gg_trg_System_Titan_GiveUnit, tempRegion, null)
     // =========
     set tempRegion=CreateRegion()
     call RegionAddRect(tempRegion, gg_rct_GiveTo_Snow)
-    call SavePlayerHandle(ConstTable__ht, ((((s__LoPInit_Globals_regionTable_impl)))), (GetHandleId(tempRegion)), ( Player(21))) // INLINED!!
+    call SavePlayerHandle(ConstTable___ht, ((((s__LoPInit_Globals_regionTable_impl)))), (GetHandleId(tempRegion)), ( Player(21))) // INLINED!!
     call TriggerRegisterEnterRegion(gg_trg_System_Titan_GiveUnit, tempRegion, null)
     // =========
     set tempRegion=CreateRegion()
     call RegionAddRect(tempRegion, gg_rct_GiveTo_Emerald)
-    call SavePlayerHandle(ConstTable__ht, ((((s__LoPInit_Globals_regionTable_impl)))), (GetHandleId(tempRegion)), ( Player(22))) // INLINED!!
+    call SavePlayerHandle(ConstTable___ht, ((((s__LoPInit_Globals_regionTable_impl)))), (GetHandleId(tempRegion)), ( Player(22))) // INLINED!!
     call TriggerRegisterEnterRegion(gg_trg_System_Titan_GiveUnit, tempRegion, null)
     // =========
     set tempRegion=CreateRegion()
     call RegionAddRect(tempRegion, gg_rct_GiveTo_Peanut)
-    call SavePlayerHandle(ConstTable__ht, ((((s__LoPInit_Globals_regionTable_impl)))), (GetHandleId(tempRegion)), ( Player(23))) // INLINED!!
+    call SavePlayerHandle(ConstTable___ht, ((((s__LoPInit_Globals_regionTable_impl)))), (GetHandleId(tempRegion)), ( Player(23))) // INLINED!!
     call TriggerRegisterEnterRegion(gg_trg_System_Titan_GiveUnit, tempRegion, null)
     // =========
     // End
@@ -6894,48 +7126,48 @@ endfunction
 
 //textmacro instance: TableStruct_NewReadonlyStructField("items", "Table")
     function s__MultiBoard__get_items takes integer this returns integer
-        return (LoadInteger(ConstTable__ht, (((s__MultiBoard_items_impl))), (this))) // INLINED!!
+        return (LoadInteger(ConstTable___ht, (((s__MultiBoard_items_impl))), (this))) // INLINED!!
     endfunction
     
     function s__MultiBoard__set_items takes integer this,integer new_items returns nothing
-        call SaveInteger(ConstTable__ht, (((s__MultiBoard_items_impl))), (this), ( new_items)) // INLINED!!
+        call SaveInteger(ConstTable___ht, (((s__MultiBoard_items_impl))), (this), ( new_items)) // INLINED!!
     endfunction
     
     function s__MultiBoard_itemsClear takes integer this returns nothing
-        call RemoveSavedInteger(ConstTable__ht, (((s__MultiBoard_items_impl))), (this)) // INLINED!!
+        call RemoveSavedInteger(ConstTable___ht, (((s__MultiBoard_items_impl))), (this)) // INLINED!!
     endfunction
 //end of: TableStruct_NewReadonlyStructField("items", "Table")
     
 //textmacro instance: TableStruct_NewReadonlyPrimitiveField("cols", "integer")
     function s__MultiBoard__get_cols takes integer this returns integer
-        return (LoadInteger(ConstTable__ht, (((((s__MultiBoard_cols_impl))))), (this))) // INLINED!!
+        return (LoadInteger(ConstTable___ht, (((((s__MultiBoard_cols_impl))))), (this))) // INLINED!!
     endfunction
     
     function s__MultiBoard__set_cols takes integer this,integer new_cols returns nothing
-        call SaveInteger(ConstTable__ht, (((((s__MultiBoard_cols_impl))))), (this), ( new_cols)) // INLINED!!
+        call SaveInteger(ConstTable___ht, (((((s__MultiBoard_cols_impl))))), (this), ( new_cols)) // INLINED!!
     endfunction
     
     function s__MultiBoard_colsClear takes integer this returns nothing
-        call RemoveSavedInteger(ConstTable__ht, (((((s__MultiBoard_cols_impl))))), (this)) // INLINED!!
+        call RemoveSavedInteger(ConstTable___ht, (((((s__MultiBoard_cols_impl))))), (this)) // INLINED!!
     endfunction
 //end of: TableStruct_NewReadonlyPrimitiveField("cols", "integer")
 //textmacro instance: TableStruct_NewReadonlyPrimitiveField("rows", "integer")
     function s__MultiBoard__get_rows takes integer this returns integer
-        return (LoadInteger(ConstTable__ht, (((((s__MultiBoard_rows_impl))))), (this))) // INLINED!!
+        return (LoadInteger(ConstTable___ht, (((((s__MultiBoard_rows_impl))))), (this))) // INLINED!!
     endfunction
     
     function s__MultiBoard__set_rows takes integer this,integer new_rows returns nothing
-        call SaveInteger(ConstTable__ht, (((((s__MultiBoard_rows_impl))))), (this), ( new_rows)) // INLINED!!
+        call SaveInteger(ConstTable___ht, (((((s__MultiBoard_rows_impl))))), (this), ( new_rows)) // INLINED!!
     endfunction
     
     function s__MultiBoard_rowsClear takes integer this returns nothing
-        call RemoveSavedInteger(ConstTable__ht, (((((s__MultiBoard_rows_impl))))), (this)) // INLINED!!
+        call RemoveSavedInteger(ConstTable___ht, (((((s__MultiBoard_rows_impl))))), (this)) // INLINED!!
     endfunction
 //end of: TableStruct_NewReadonlyPrimitiveField("rows", "integer")
     
 //textmacro instance: TableStruct_NewReadonlyHandleField("multiboard", "multiboard")
     function s__MultiBoard__get_multiboard takes integer this returns multiboard
-        return (LoadMultiboardHandle(ConstTable__ht, (((((s__MultiBoard_multiboard_impl))))), (this))) // INLINED!!
+        return (LoadMultiboardHandle(ConstTable___ht, (((((s__MultiBoard_multiboard_impl))))), (this))) // INLINED!!
     endfunction
     
     function s__MultiBoard__set_multiboard takes integer this,multiboard new_multiboard returns nothing
@@ -6943,32 +7175,32 @@ endfunction
     endfunction
     
     function s__MultiBoard_multiboardClear takes integer this returns nothing
-        call RemoveSavedHandle(ConstTable__ht, (((((s__MultiBoard_multiboard_impl))))), (this)) // INLINED!!
+        call RemoveSavedHandle(ConstTable___ht, (((((s__MultiBoard_multiboard_impl))))), (this)) // INLINED!!
     endfunction
 //end of: TableStruct_NewReadonlyHandleField("multiboard", "multiboard")
     
     function s__MultiBoard_get takes integer this,integer i,integer j returns multiboarditem
-        return (LoadMultiboardItemHandle(Table__ht, ((((LoadInteger(Table__ht, ((LoadInteger(ConstTable__ht, (((s__MultiBoard_items_impl))), ((this))))), (i)))))), (j))) // INLINED!!
+        return (LoadMultiboardItemHandle(Table___ht, ((((LoadInteger(Table___ht, ((LoadInteger(ConstTable___ht, (((s__MultiBoard_items_impl))), ((this))))), (i)))))), (j))) // INLINED!!
     endfunction
     
     function s__MultiBoard_setValue takes integer this,integer i,integer j,string value returns nothing
-        call MultiboardSetItemValue((LoadMultiboardItemHandle(Table__ht, ((((LoadInteger(Table__ht, ((LoadInteger(ConstTable__ht, (((s__MultiBoard_items_impl))), (((this)))))), ((i ))))))), (( j)))), value) // INLINED!!
+        call MultiboardSetItemValue((LoadMultiboardItemHandle(Table___ht, ((((LoadInteger(Table___ht, ((LoadInteger(ConstTable___ht, (((s__MultiBoard_items_impl))), (((this)))))), ((i ))))))), (( j)))), value) // INLINED!!
     endfunction
     
     function s__MultiBoard_setValueColor takes integer this,integer i,integer j,integer r,integer g,integer b,integer a returns nothing
-        call MultiboardSetItemValueColor((LoadMultiboardItemHandle(Table__ht, ((((LoadInteger(Table__ht, ((LoadInteger(ConstTable__ht, (((s__MultiBoard_items_impl))), (((this)))))), ((i ))))))), (( j)))), r, g, b, a) // INLINED!!
+        call MultiboardSetItemValueColor((LoadMultiboardItemHandle(Table___ht, ((((LoadInteger(Table___ht, ((LoadInteger(ConstTable___ht, (((s__MultiBoard_items_impl))), (((this)))))), ((i ))))))), (( j)))), r, g, b, a) // INLINED!!
     endfunction
     
     function s__MultiBoard_setIcon takes integer this,integer i,integer j,string iconFileName returns nothing
-        call MultiboardSetItemIcon((LoadMultiboardItemHandle(Table__ht, ((((LoadInteger(Table__ht, ((LoadInteger(ConstTable__ht, (((s__MultiBoard_items_impl))), (((this)))))), ((i ))))))), (( j)))), iconFileName) // INLINED!!
+        call MultiboardSetItemIcon((LoadMultiboardItemHandle(Table___ht, ((((LoadInteger(Table___ht, ((LoadInteger(ConstTable___ht, (((s__MultiBoard_items_impl))), (((this)))))), ((i ))))))), (( j)))), iconFileName) // INLINED!!
     endfunction
     
     function s__MultiBoard_setStyle takes integer this,integer i,integer j,boolean showValue,boolean showIcon returns nothing
-        call MultiboardSetItemStyle((LoadMultiboardItemHandle(Table__ht, ((((LoadInteger(Table__ht, ((LoadInteger(ConstTable__ht, (((s__MultiBoard_items_impl))), (((this)))))), ((i ))))))), (( j)))), showValue, showIcon) // INLINED!!
+        call MultiboardSetItemStyle((LoadMultiboardItemHandle(Table___ht, ((((LoadInteger(Table___ht, ((LoadInteger(ConstTable___ht, (((s__MultiBoard_items_impl))), (((this)))))), ((i ))))))), (( j)))), showValue, showIcon) // INLINED!!
     endfunction
     
     function s__MultiBoard_setWidth takes integer this,integer i,integer j,real width returns nothing
-        call MultiboardSetItemWidth((LoadMultiboardItemHandle(Table__ht, ((((LoadInteger(Table__ht, ((LoadInteger(ConstTable__ht, (((s__MultiBoard_items_impl))), (((this)))))), ((i ))))))), (( j)))), width) // INLINED!!
+        call MultiboardSetItemWidth((LoadMultiboardItemHandle(Table___ht, ((((LoadInteger(Table___ht, ((LoadInteger(ConstTable___ht, (((s__MultiBoard_items_impl))), (((this)))))), ((i ))))))), (( j)))), width) // INLINED!!
     endfunction
     
     function s__MultiBoard_refresh takes multiboard mb returns integer
@@ -6976,36 +7208,36 @@ endfunction
         local integer rows= MultiboardGetRowCount(mb)
         local integer cols= MultiboardGetColumnCount(mb)
         
-        local integer oldCols= (LoadInteger(ConstTable__ht, (((((s__MultiBoard_cols_impl))))), ((this)))) // INLINED!!
-        local integer oldRows= (LoadInteger(ConstTable__ht, (((((s__MultiBoard_rows_impl))))), ((this)))) // INLINED!!
+        local integer oldCols= (LoadInteger(ConstTable___ht, (((((s__MultiBoard_cols_impl))))), ((this)))) // INLINED!!
+        local integer oldRows= (LoadInteger(ConstTable___ht, (((((s__MultiBoard_rows_impl))))), ((this)))) // INLINED!!
         
         local integer i= 0
         local integer j
         
-        if (LoadInteger(ConstTable__ht, (((s__MultiBoard_items_impl))), ((this)))) == 0 then // INLINED!!
-            call SaveInteger(ConstTable__ht, (((s__MultiBoard_items_impl))), ((this)), ( (s__Table_create()))) // INLINED!!
+        if (LoadInteger(ConstTable___ht, (((s__MultiBoard_items_impl))), ((this)))) == 0 then // INLINED!!
+            call SaveInteger(ConstTable___ht, (((s__MultiBoard_items_impl))), ((this)), ( (s__Table_create()))) // INLINED!!
             call s__TableStruct_setHandle(s__MultiBoard_multiboard_impl , (this) , (mb)) // INLINED!!
         endif
 
         loop
         exitwhen i >= rows
             if i >= oldRows then
-                call SaveInteger(Table__ht, ((LoadInteger(ConstTable__ht, (((s__MultiBoard_items_impl))), ((this))))), (i), ( s__Table_create())) // INLINED!!
+                call SaveInteger(Table___ht, ((LoadInteger(ConstTable___ht, (((s__MultiBoard_items_impl))), ((this))))), (i), ( s__Table_create())) // INLINED!!
                 set j=0
             else
                 set j=cols
                 loop
                 exitwhen j >= oldCols
-                    call MultiboardReleaseItem((LoadMultiboardItemHandle(Table__ht, ((((LoadInteger(Table__ht, ((LoadInteger(ConstTable__ht, (((s__MultiBoard_items_impl))), ((this))))), (i)))))), (j)))) // INLINED!!
-                    call RemoveSavedHandle(Table__ht, ((((LoadInteger(Table__ht, ((LoadInteger(ConstTable__ht, (((s__MultiBoard_items_impl))), ((this))))), (i)))))), (j)) // INLINED!!
+                    call MultiboardReleaseItem((LoadMultiboardItemHandle(Table___ht, ((((LoadInteger(Table___ht, ((LoadInteger(ConstTable___ht, (((s__MultiBoard_items_impl))), ((this))))), (i)))))), (j)))) // INLINED!!
+                    call RemoveSavedHandle(Table___ht, ((((LoadInteger(Table___ht, ((LoadInteger(ConstTable___ht, (((s__MultiBoard_items_impl))), ((this))))), (i)))))), (j)) // INLINED!!
                     set j=j + 1
                 endloop
                 set j=oldCols
             endif
-            call SaveInteger(Table__ht, ((LoadInteger(ConstTable__ht, (((s__MultiBoard_items_impl))), ((this))))), (0), ( s__Table_create())) // INLINED!!
+            call SaveInteger(Table___ht, ((LoadInteger(ConstTable___ht, (((s__MultiBoard_items_impl))), ((this))))), (0), ( s__Table_create())) // INLINED!!
             loop
             exitwhen j >= cols
-                call SaveMultiboardItemHandle(Table__ht, ((((LoadInteger(Table__ht, ((LoadInteger(ConstTable__ht, (((s__MultiBoard_items_impl))), ((this))))), (i)))))), (j), ( MultiboardGetItem(mb, i, j))) // INLINED!!
+                call SaveMultiboardItemHandle(Table___ht, ((((LoadInteger(Table___ht, ((LoadInteger(ConstTable___ht, (((s__MultiBoard_items_impl))), ((this))))), (i)))))), (j), ( MultiboardGetItem(mb, i, j))) // INLINED!!
                 set j=j + 1
             endloop
             set i=i + 1
@@ -7016,25 +7248,25 @@ endfunction
             set j=0
             loop
                 exitwhen j >= oldCols
-                call MultiboardReleaseItem((LoadMultiboardItemHandle(Table__ht, ((((LoadInteger(Table__ht, ((LoadInteger(ConstTable__ht, (((s__MultiBoard_items_impl))), ((this))))), (i)))))), (j)))) // INLINED!!
+                call MultiboardReleaseItem((LoadMultiboardItemHandle(Table___ht, ((((LoadInteger(Table___ht, ((LoadInteger(ConstTable___ht, (((s__MultiBoard_items_impl))), ((this))))), (i)))))), (j)))) // INLINED!!
                 set j=j + 1
             endloop
-            call s__Table_destroy((LoadInteger(Table__ht, ((LoadInteger(ConstTable__ht, (((s__MultiBoard_items_impl))), ((this))))), (i)))) // INLINED!!
+            call s__Table_destroy((LoadInteger(Table___ht, ((LoadInteger(ConstTable___ht, (((s__MultiBoard_items_impl))), ((this))))), (i)))) // INLINED!!
             set i=i + 1
         endloop
         
-        call SaveInteger(ConstTable__ht, (((((s__MultiBoard_cols_impl))))), ((this)), ( (cols))) // INLINED!!
-        call SaveInteger(ConstTable__ht, (((((s__MultiBoard_rows_impl))))), ((this)), ( (rows))) // INLINED!!
+        call SaveInteger(ConstTable___ht, (((((s__MultiBoard_cols_impl))))), ((this)), ( (cols))) // INLINED!!
+        call SaveInteger(ConstTable___ht, (((((s__MultiBoard_rows_impl))))), ((this)), ( (rows))) // INLINED!!
     
         return this
     endfunction
     
     // TODO:
     function s__MultiBoard_destroy takes integer this returns nothing
-        call RemoveSavedInteger(ConstTable__ht, (((s__MultiBoard_items_impl))), ((this))) // INLINED!!
-        call RemoveSavedInteger(ConstTable__ht, (((((s__MultiBoard_rows_impl))))), ((this))) // INLINED!!
-        call RemoveSavedInteger(ConstTable__ht, (((((s__MultiBoard_cols_impl))))), ((this))) // INLINED!!
-        call RemoveSavedHandle(ConstTable__ht, (((((s__MultiBoard_multiboard_impl))))), ((this))) // INLINED!!
+        call RemoveSavedInteger(ConstTable___ht, (((s__MultiBoard_items_impl))), ((this))) // INLINED!!
+        call RemoveSavedInteger(ConstTable___ht, (((((s__MultiBoard_rows_impl))))), ((this))) // INLINED!!
+        call RemoveSavedInteger(ConstTable___ht, (((((s__MultiBoard_cols_impl))))), ((this))) // INLINED!!
+        call RemoveSavedHandle(ConstTable___ht, (((((s__MultiBoard_multiboard_impl))))), ((this))) // INLINED!!
     endfunction
 
 
@@ -7060,104 +7292,104 @@ endfunction
     
 //textmacro instance: TableStruct_NewPrimitiveField("style", "integer")
     function s__TerrainFog__get_style takes integer this returns integer
-        return (LoadInteger(ConstTable__ht, (((((s__TerrainFog_style_impl))))), (this))) // INLINED!!
+        return (LoadInteger(ConstTable___ht, (((((s__TerrainFog_style_impl))))), (this))) // INLINED!!
     endfunction
     
     function s__TerrainFog__set_style takes integer this,integer new_style returns nothing
-        call SaveInteger(ConstTable__ht, (((((s__TerrainFog_style_impl))))), (this), ( new_style)) // INLINED!!
+        call SaveInteger(ConstTable___ht, (((((s__TerrainFog_style_impl))))), (this), ( new_style)) // INLINED!!
     endfunction
     
     function s__TerrainFog_styleClear takes integer this returns nothing
-        call RemoveSavedInteger(ConstTable__ht, (((((s__TerrainFog_style_impl))))), (this)) // INLINED!!
+        call RemoveSavedInteger(ConstTable___ht, (((((s__TerrainFog_style_impl))))), (this)) // INLINED!!
     endfunction
 //end of: TableStruct_NewPrimitiveField("style", "integer")
 //textmacro instance: TableStruct_NewPrimitiveField("zStart", "real")
     function s__TerrainFog__get_zStart takes integer this returns real
-        return (LoadReal(ConstTable__ht, (((((s__TerrainFog_zStart_impl))))), (this))) // INLINED!!
+        return (LoadReal(ConstTable___ht, (((((s__TerrainFog_zStart_impl))))), (this))) // INLINED!!
     endfunction
     
     function s__TerrainFog__set_zStart takes integer this,real new_zStart returns nothing
-        call SaveReal(ConstTable__ht, (((((s__TerrainFog_zStart_impl))))), (this), (( new_zStart)*1.0)) // INLINED!!
+        call SaveReal(ConstTable___ht, (((((s__TerrainFog_zStart_impl))))), (this), (( new_zStart)*1.0)) // INLINED!!
     endfunction
     
     function s__TerrainFog_zStartClear takes integer this returns nothing
-        call RemoveSavedReal(ConstTable__ht, (((((s__TerrainFog_zStart_impl))))), (this)) // INLINED!!
+        call RemoveSavedReal(ConstTable___ht, (((((s__TerrainFog_zStart_impl))))), (this)) // INLINED!!
     endfunction
 //end of: TableStruct_NewPrimitiveField("zStart", "real")
 //textmacro instance: TableStruct_NewPrimitiveField("zEnd", "real")
     function s__TerrainFog__get_zEnd takes integer this returns real
-        return (LoadReal(ConstTable__ht, (((((s__TerrainFog_zEnd_impl))))), (this))) // INLINED!!
+        return (LoadReal(ConstTable___ht, (((((s__TerrainFog_zEnd_impl))))), (this))) // INLINED!!
     endfunction
     
     function s__TerrainFog__set_zEnd takes integer this,real new_zEnd returns nothing
-        call SaveReal(ConstTable__ht, (((((s__TerrainFog_zEnd_impl))))), (this), (( new_zEnd)*1.0)) // INLINED!!
+        call SaveReal(ConstTable___ht, (((((s__TerrainFog_zEnd_impl))))), (this), (( new_zEnd)*1.0)) // INLINED!!
     endfunction
     
     function s__TerrainFog_zEndClear takes integer this returns nothing
-        call RemoveSavedReal(ConstTable__ht, (((((s__TerrainFog_zEnd_impl))))), (this)) // INLINED!!
+        call RemoveSavedReal(ConstTable___ht, (((((s__TerrainFog_zEnd_impl))))), (this)) // INLINED!!
     endfunction
 //end of: TableStruct_NewPrimitiveField("zEnd", "real")
 //textmacro instance: TableStruct_NewPrimitiveField("density", "real")
     function s__TerrainFog__get_density takes integer this returns real
-        return (LoadReal(ConstTable__ht, (((((s__TerrainFog_density_impl))))), (this))) // INLINED!!
+        return (LoadReal(ConstTable___ht, (((((s__TerrainFog_density_impl))))), (this))) // INLINED!!
     endfunction
     
     function s__TerrainFog__set_density takes integer this,real new_density returns nothing
-        call SaveReal(ConstTable__ht, (((((s__TerrainFog_density_impl))))), (this), (( new_density)*1.0)) // INLINED!!
+        call SaveReal(ConstTable___ht, (((((s__TerrainFog_density_impl))))), (this), (( new_density)*1.0)) // INLINED!!
     endfunction
     
     function s__TerrainFog_densityClear takes integer this returns nothing
-        call RemoveSavedReal(ConstTable__ht, (((((s__TerrainFog_density_impl))))), (this)) // INLINED!!
+        call RemoveSavedReal(ConstTable___ht, (((((s__TerrainFog_density_impl))))), (this)) // INLINED!!
     endfunction
 //end of: TableStruct_NewPrimitiveField("density", "real")
 //textmacro instance: TableStruct_NewPrimitiveField("red", "real")
     function s__TerrainFog__get_red takes integer this returns real
-        return (LoadReal(ConstTable__ht, (((((s__TerrainFog_red_impl))))), (this))) // INLINED!!
+        return (LoadReal(ConstTable___ht, (((((s__TerrainFog_red_impl))))), (this))) // INLINED!!
     endfunction
     
     function s__TerrainFog__set_red takes integer this,real new_red returns nothing
-        call SaveReal(ConstTable__ht, (((((s__TerrainFog_red_impl))))), (this), (( new_red)*1.0)) // INLINED!!
+        call SaveReal(ConstTable___ht, (((((s__TerrainFog_red_impl))))), (this), (( new_red)*1.0)) // INLINED!!
     endfunction
     
     function s__TerrainFog_redClear takes integer this returns nothing
-        call RemoveSavedReal(ConstTable__ht, (((((s__TerrainFog_red_impl))))), (this)) // INLINED!!
+        call RemoveSavedReal(ConstTable___ht, (((((s__TerrainFog_red_impl))))), (this)) // INLINED!!
     endfunction
 //end of: TableStruct_NewPrimitiveField("red", "real")
 //textmacro instance: TableStruct_NewPrimitiveField("green", "real")
     function s__TerrainFog__get_green takes integer this returns real
-        return (LoadReal(ConstTable__ht, (((((s__TerrainFog_green_impl))))), (this))) // INLINED!!
+        return (LoadReal(ConstTable___ht, (((((s__TerrainFog_green_impl))))), (this))) // INLINED!!
     endfunction
     
     function s__TerrainFog__set_green takes integer this,real new_green returns nothing
-        call SaveReal(ConstTable__ht, (((((s__TerrainFog_green_impl))))), (this), (( new_green)*1.0)) // INLINED!!
+        call SaveReal(ConstTable___ht, (((((s__TerrainFog_green_impl))))), (this), (( new_green)*1.0)) // INLINED!!
     endfunction
     
     function s__TerrainFog_greenClear takes integer this returns nothing
-        call RemoveSavedReal(ConstTable__ht, (((((s__TerrainFog_green_impl))))), (this)) // INLINED!!
+        call RemoveSavedReal(ConstTable___ht, (((((s__TerrainFog_green_impl))))), (this)) // INLINED!!
     endfunction
 //end of: TableStruct_NewPrimitiveField("green", "real")
 //textmacro instance: TableStruct_NewPrimitiveField("blue", "real")
     function s__TerrainFog__get_blue takes integer this returns real
-        return (LoadReal(ConstTable__ht, (((((s__TerrainFog_blue_impl))))), (this))) // INLINED!!
+        return (LoadReal(ConstTable___ht, (((((s__TerrainFog_blue_impl))))), (this))) // INLINED!!
     endfunction
     
     function s__TerrainFog__set_blue takes integer this,real new_blue returns nothing
-        call SaveReal(ConstTable__ht, (((((s__TerrainFog_blue_impl))))), (this), (( new_blue)*1.0)) // INLINED!!
+        call SaveReal(ConstTable___ht, (((((s__TerrainFog_blue_impl))))), (this), (( new_blue)*1.0)) // INLINED!!
     endfunction
     
     function s__TerrainFog_blueClear takes integer this returns nothing
-        call RemoveSavedReal(ConstTable__ht, (((((s__TerrainFog_blue_impl))))), (this)) // INLINED!!
+        call RemoveSavedReal(ConstTable___ht, (((((s__TerrainFog_blue_impl))))), (this)) // INLINED!!
     endfunction
 //end of: TableStruct_NewPrimitiveField("blue", "real")
     
     function s__TerrainFog_applyForPlayer takes integer this,player whichPlayer returns nothing
         if GetLocalPlayer() == whichPlayer then
-            call SetTerrainFogEx((LoadInteger(ConstTable__ht, (((((s__TerrainFog_style_impl))))), ((this)))), (LoadReal(ConstTable__ht, (((((s__TerrainFog_zStart_impl))))), ((this)))), (LoadReal(ConstTable__ht, (((((s__TerrainFog_zEnd_impl))))), ((this)))), (LoadReal(ConstTable__ht, (((((s__TerrainFog_density_impl))))), ((this)))), (LoadReal(ConstTable__ht, (((((s__TerrainFog_red_impl))))), ((this)))), (LoadReal(ConstTable__ht, (((((s__TerrainFog_green_impl))))), ((this)))), (LoadReal(ConstTable__ht, (((((s__TerrainFog_blue_impl))))), ((this))))) // INLINED!!
+            call SetTerrainFogEx((LoadInteger(ConstTable___ht, (((((s__TerrainFog_style_impl))))), ((this)))), (LoadReal(ConstTable___ht, (((((s__TerrainFog_zStart_impl))))), ((this)))), (LoadReal(ConstTable___ht, (((((s__TerrainFog_zEnd_impl))))), ((this)))), (LoadReal(ConstTable___ht, (((((s__TerrainFog_density_impl))))), ((this)))), (LoadReal(ConstTable___ht, (((((s__TerrainFog_red_impl))))), ((this)))), (LoadReal(ConstTable___ht, (((((s__TerrainFog_green_impl))))), ((this)))), (LoadReal(ConstTable___ht, (((((s__TerrainFog_blue_impl))))), ((this))))) // INLINED!!
         endif
     endfunction
     
     function s__TerrainFog_apply takes integer this returns nothing
-        call SetTerrainFogEx((LoadInteger(ConstTable__ht, (((((s__TerrainFog_style_impl))))), ((this)))), (LoadReal(ConstTable__ht, (((((s__TerrainFog_zStart_impl))))), ((this)))), (LoadReal(ConstTable__ht, (((((s__TerrainFog_zEnd_impl))))), ((this)))), (LoadReal(ConstTable__ht, (((((s__TerrainFog_density_impl))))), ((this)))), (LoadReal(ConstTable__ht, (((((s__TerrainFog_red_impl))))), ((this)))), (LoadReal(ConstTable__ht, (((((s__TerrainFog_green_impl))))), ((this)))), (LoadReal(ConstTable__ht, (((((s__TerrainFog_blue_impl))))), ((this))))) // INLINED!!
+        call SetTerrainFogEx((LoadInteger(ConstTable___ht, (((((s__TerrainFog_style_impl))))), ((this)))), (LoadReal(ConstTable___ht, (((((s__TerrainFog_zStart_impl))))), ((this)))), (LoadReal(ConstTable___ht, (((((s__TerrainFog_zEnd_impl))))), ((this)))), (LoadReal(ConstTable___ht, (((((s__TerrainFog_density_impl))))), ((this)))), (LoadReal(ConstTable___ht, (((((s__TerrainFog_red_impl))))), ((this)))), (LoadReal(ConstTable___ht, (((((s__TerrainFog_green_impl))))), ((this)))), (LoadReal(ConstTable___ht, (((((s__TerrainFog_blue_impl))))), ((this))))) // INLINED!!
     endfunction
         
     function s__TerrainFog_create takes nothing returns integer
@@ -7165,13 +7397,13 @@ endfunction
     endfunction
     
     function s__TerrainFog_destroy takes integer this returns nothing
-        call RemoveSavedInteger(ConstTable__ht, (((((s__TerrainFog_style_impl))))), ((this))) // INLINED!!
-        call RemoveSavedReal(ConstTable__ht, (((((s__TerrainFog_zStart_impl))))), ((this))) // INLINED!!
-        call RemoveSavedReal(ConstTable__ht, (((((s__TerrainFog_zEnd_impl))))), ((this))) // INLINED!!
-        call RemoveSavedReal(ConstTable__ht, (((((s__TerrainFog_density_impl))))), ((this))) // INLINED!!
-        call RemoveSavedReal(ConstTable__ht, (((((s__TerrainFog_red_impl))))), ((this))) // INLINED!!
-        call RemoveSavedReal(ConstTable__ht, (((((s__TerrainFog_green_impl))))), ((this))) // INLINED!!
-        call RemoveSavedReal(ConstTable__ht, (((((s__TerrainFog_blue_impl))))), ((this))) // INLINED!!
+        call RemoveSavedInteger(ConstTable___ht, (((((s__TerrainFog_style_impl))))), ((this))) // INLINED!!
+        call RemoveSavedReal(ConstTable___ht, (((((s__TerrainFog_zStart_impl))))), ((this))) // INLINED!!
+        call RemoveSavedReal(ConstTable___ht, (((((s__TerrainFog_zEnd_impl))))), ((this))) // INLINED!!
+        call RemoveSavedReal(ConstTable___ht, (((((s__TerrainFog_density_impl))))), ((this))) // INLINED!!
+        call RemoveSavedReal(ConstTable___ht, (((((s__TerrainFog_red_impl))))), ((this))) // INLINED!!
+        call RemoveSavedReal(ConstTable___ht, (((((s__TerrainFog_green_impl))))), ((this))) // INLINED!!
+        call RemoveSavedReal(ConstTable___ht, (((((s__TerrainFog_blue_impl))))), ((this))) // INLINED!!
         call GMUI_RecycleIndex((GMUI_GENERIC_KEY) , (this)) // INLINED!!
     endfunction
     
@@ -7181,22 +7413,22 @@ endfunction
 
 //textmacro instance: TableStruct_NewStructField("fog", "TerrainFog")
     function s__RectEnvironment__get_fog takes integer this returns integer
-        return (LoadInteger(ConstTable__ht, (((s__RectEnvironment_fog_impl))), (this))) // INLINED!!
+        return (LoadInteger(ConstTable___ht, (((s__RectEnvironment_fog_impl))), (this))) // INLINED!!
     endfunction
     
     function s__RectEnvironment__set_fog takes integer this,integer new_fog returns nothing
-        call SaveInteger(ConstTable__ht, (((s__RectEnvironment_fog_impl))), (this), ( new_fog)) // INLINED!!
+        call SaveInteger(ConstTable___ht, (((s__RectEnvironment_fog_impl))), (this), ( new_fog)) // INLINED!!
     endfunction
     
     function s__RectEnvironment_fogClear takes integer this returns nothing
-        call RemoveSavedInteger(ConstTable__ht, (((s__RectEnvironment_fog_impl))), (this)) // INLINED!!
+        call RemoveSavedInteger(ConstTable___ht, (((s__RectEnvironment_fog_impl))), (this)) // INLINED!!
     endfunction
 //end of: TableStruct_NewStructField("fog", "TerrainFog")
     
     function s__RectEnvironment_apply takes integer this returns nothing
-        local integer fog= (LoadInteger(ConstTable__ht, (((s__RectEnvironment_fog_impl))), ((this)))) // INLINED!!
-        if (LoadInteger(ConstTable__ht, (((s__RectEnvironment_fog_impl))), ((this)))) != 0 then // INLINED!!
-            call s__TerrainFog_apply((LoadInteger(ConstTable__ht, (((s__RectEnvironment_fog_impl))), ((this))))) // INLINED!!
+        local integer fog= (LoadInteger(ConstTable___ht, (((s__RectEnvironment_fog_impl))), ((this)))) // INLINED!!
+        if (LoadInteger(ConstTable___ht, (((s__RectEnvironment_fog_impl))), ((this)))) != 0 then // INLINED!!
+            call s__TerrainFog_apply((LoadInteger(ConstTable___ht, (((s__RectEnvironment_fog_impl))), ((this))))) // INLINED!!
         else
             call ResetTerrainFog()
         endif
@@ -7207,14 +7439,14 @@ endfunction
     endfunction
     
     function s__RectEnvironment_destroy takes integer this returns nothing
-        call RemoveSavedInteger(ConstTable__ht, (((s__RectEnvironment_fog_impl))), ((this))) // INLINED!!
+        call RemoveSavedInteger(ConstTable___ht, (((s__RectEnvironment_fog_impl))), ((this))) // INLINED!!
     endfunction
 
 
 //library RectEnvironment ends
 //library UnitVisualMods:
 //////////////////////////////////////////////////////
-//Guhun's Unit Modification System v1.21
+//Guhun's Unit Modification System v1.31
 
 
 //Hashtable values:
@@ -7242,775 +7474,775 @@ endfunction
 
 
 //textmacro instance: DeclareParentHashtableWrapperModule("hashTable","true", "data","private")
-function UnitVisualMods__data_GetWrappedHashtable takes nothing returns hashtable
-    return UnitVisualMods__hashTable
+function UnitVisualMods___data_GetWrappedHashtable takes nothing returns hashtable
+    return UnitVisualMods___hashTable
 endfunction
 
 
-    function s__UnitVisualMods__data_reals__getindex takes integer this,integer key returns real
-        return LoadReal((UnitVisualMods__hashTable), this, key) // INLINED!!
+    function s__UnitVisualMods___data_reals__getindex takes integer this,integer key returns real
+        return LoadReal((UnitVisualMods___hashTable), this, key) // INLINED!!
     endfunction
-    function s__UnitVisualMods__data_reals__setindex takes integer this,integer key,real value returns nothing
-        call SaveReal((UnitVisualMods__hashTable), this, key, value) // INLINED!!
+    function s__UnitVisualMods___data_reals__setindex takes integer this,integer key,real value returns nothing
+        call SaveReal((UnitVisualMods___hashTable), this, key, value) // INLINED!!
     endfunction
-    function s__UnitVisualMods__data_reals_has takes integer this,integer key returns boolean
-        return HaveSavedReal((UnitVisualMods__hashTable), this, key) // INLINED!!
+    function s__UnitVisualMods___data_reals_has takes integer this,integer key returns boolean
+        return HaveSavedReal((UnitVisualMods___hashTable), this, key) // INLINED!!
     endfunction
-    function s__UnitVisualMods__data_reals_remove takes integer this,integer key returns nothing
-        call RemoveSavedReal((UnitVisualMods__hashTable), this, key) // INLINED!!
-    endfunction
-
-    function s__UnitVisualMods__data_booleans__getindex takes integer this,integer key returns boolean
-        return LoadBoolean((UnitVisualMods__hashTable), this, key) // INLINED!!
-    endfunction
-    function s__UnitVisualMods__data_booleans__setindex takes integer this,integer key,boolean value returns nothing
-        call SaveBoolean((UnitVisualMods__hashTable), this, key, value) // INLINED!!
-    endfunction
-    function s__UnitVisualMods__data_booleans_has takes integer this,integer key returns boolean
-        return HaveSavedBoolean((UnitVisualMods__hashTable), this, key) // INLINED!!
-    endfunction
-    function s__UnitVisualMods__data_booleans_remove takes integer this,integer key returns nothing
-        call RemoveSavedBoolean((UnitVisualMods__hashTable), this, key) // INLINED!!
+    function s__UnitVisualMods___data_reals_remove takes integer this,integer key returns nothing
+        call RemoveSavedReal((UnitVisualMods___hashTable), this, key) // INLINED!!
     endfunction
 
-    function s__UnitVisualMods__data_strings__getindex takes integer this,integer key returns string
-        return LoadStr((UnitVisualMods__hashTable), this, key) // INLINED!!
+    function s__UnitVisualMods___data_booleans__getindex takes integer this,integer key returns boolean
+        return LoadBoolean((UnitVisualMods___hashTable), this, key) // INLINED!!
     endfunction
-    function s__UnitVisualMods__data_strings__setindex takes integer this,integer key,string value returns nothing
-        call SaveStr((UnitVisualMods__hashTable), this, key, value) // INLINED!!
+    function s__UnitVisualMods___data_booleans__setindex takes integer this,integer key,boolean value returns nothing
+        call SaveBoolean((UnitVisualMods___hashTable), this, key, value) // INLINED!!
     endfunction
-    function s__UnitVisualMods__data_strings_has takes integer this,integer key returns boolean
-        return HaveSavedString((UnitVisualMods__hashTable), this, key) // INLINED!!
+    function s__UnitVisualMods___data_booleans_has takes integer this,integer key returns boolean
+        return HaveSavedBoolean((UnitVisualMods___hashTable), this, key) // INLINED!!
     endfunction
-    function s__UnitVisualMods__data_strings_remove takes integer this,integer key returns nothing
-        call RemoveSavedString((UnitVisualMods__hashTable), this, key) // INLINED!!
-    endfunction
-
-    function s__UnitVisualMods__data_integers__getindex takes integer this,integer key returns integer
-        return LoadInteger((UnitVisualMods__hashTable), this, key) // INLINED!!
-    endfunction
-    function s__UnitVisualMods__data_integers__setindex takes integer this,integer key,integer value returns nothing
-        call SaveInteger((UnitVisualMods__hashTable), this, key, value) // INLINED!!
-    endfunction
-    function s__UnitVisualMods__data_integers_has takes integer this,integer key returns boolean
-        return HaveSavedInteger((UnitVisualMods__hashTable), this, key) // INLINED!!
-    endfunction
-    function s__UnitVisualMods__data_integers_remove takes integer this,integer key returns nothing
-        call RemoveSavedInteger((UnitVisualMods__hashTable), this, key) // INLINED!!
+    function s__UnitVisualMods___data_booleans_remove takes integer this,integer key returns nothing
+        call RemoveSavedBoolean((UnitVisualMods___hashTable), this, key) // INLINED!!
     endfunction
 
-    function s__UnitVisualMods__data_handles_has takes integer this,integer key returns boolean
-        return HaveSavedHandle((UnitVisualMods__hashTable), this, key) // INLINED!!
+    function s__UnitVisualMods___data_strings__getindex takes integer this,integer key returns string
+        return LoadStr((UnitVisualMods___hashTable), this, key) // INLINED!!
     endfunction
-    function s__UnitVisualMods__data_handles_remove takes integer this,integer key returns nothing
-        call RemoveSavedHandle((UnitVisualMods__hashTable), this, key) // INLINED!!
+    function s__UnitVisualMods___data_strings__setindex takes integer this,integer key,string value returns nothing
+        call SaveStr((UnitVisualMods___hashTable), this, key, value) // INLINED!!
+    endfunction
+    function s__UnitVisualMods___data_strings_has takes integer this,integer key returns boolean
+        return HaveSavedString((UnitVisualMods___hashTable), this, key) // INLINED!!
+    endfunction
+    function s__UnitVisualMods___data_strings_remove takes integer this,integer key returns nothing
+        call RemoveSavedString((UnitVisualMods___hashTable), this, key) // INLINED!!
+    endfunction
+
+    function s__UnitVisualMods___data_integers__getindex takes integer this,integer key returns integer
+        return LoadInteger((UnitVisualMods___hashTable), this, key) // INLINED!!
+    endfunction
+    function s__UnitVisualMods___data_integers__setindex takes integer this,integer key,integer value returns nothing
+        call SaveInteger((UnitVisualMods___hashTable), this, key, value) // INLINED!!
+    endfunction
+    function s__UnitVisualMods___data_integers_has takes integer this,integer key returns boolean
+        return HaveSavedInteger((UnitVisualMods___hashTable), this, key) // INLINED!!
+    endfunction
+    function s__UnitVisualMods___data_integers_remove takes integer this,integer key returns nothing
+        call RemoveSavedInteger((UnitVisualMods___hashTable), this, key) // INLINED!!
+    endfunction
+
+    function s__UnitVisualMods___data_handles_has takes integer this,integer key returns boolean
+        return HaveSavedHandle((UnitVisualMods___hashTable), this, key) // INLINED!!
+    endfunction
+    function s__UnitVisualMods___data_handles_remove takes integer this,integer key returns nothing
+        call RemoveSavedHandle((UnitVisualMods___hashTable), this, key) // INLINED!!
     endfunction
 
 
-        function s__UnitVisualMods__data_agents__setindex takes integer this,integer key,agent value returns nothing
-            call SaveAgentHandle((UnitVisualMods__hashTable), this, key, value) // INLINED!!
+        function s__UnitVisualMods___data_agents__setindex takes integer this,integer key,agent value returns nothing
+            call SaveAgentHandle((UnitVisualMods___hashTable), this, key, value) // INLINED!!
         endfunction
 
-        function s__UnitVisualMods__data_players__getindex takes integer this,integer key returns player
-            return LoadPlayerHandle((UnitVisualMods__hashTable), this, key) // INLINED!!
+        function s__UnitVisualMods___data_players__getindex takes integer this,integer key returns player
+            return LoadPlayerHandle((UnitVisualMods___hashTable), this, key) // INLINED!!
         endfunction
-        function s__UnitVisualMods__data_players__setindex takes integer this,integer key,player value returns nothing
-            call SavePlayerHandle((UnitVisualMods__hashTable), this, key, value) // INLINED!!
+        function s__UnitVisualMods___data_players__setindex takes integer this,integer key,player value returns nothing
+            call SavePlayerHandle((UnitVisualMods___hashTable), this, key, value) // INLINED!!
         endfunction
-        function s__UnitVisualMods__data_players_has takes integer this,integer key returns boolean
-            return HaveSavedHandle((UnitVisualMods__hashTable), this, key) // INLINED!!
+        function s__UnitVisualMods___data_players_has takes integer this,integer key returns boolean
+            return HaveSavedHandle((UnitVisualMods___hashTable), this, key) // INLINED!!
         endfunction
-        function s__UnitVisualMods__data_players_remove takes integer this,integer key returns nothing
-            call RemoveSavedHandle((UnitVisualMods__hashTable), this, key) // INLINED!!
-        endfunction
-
-        function s__UnitVisualMods__data_widgets__getindex takes integer this,integer key returns widget
-            return LoadWidgetHandle((UnitVisualMods__hashTable), this, key) // INLINED!!
-        endfunction
-        function s__UnitVisualMods__data_widgets__setindex takes integer this,integer key,widget value returns nothing
-            call SaveWidgetHandle((UnitVisualMods__hashTable), this, key, value) // INLINED!!
-        endfunction
-        function s__UnitVisualMods__data_widgets_has takes integer this,integer key returns boolean
-            return HaveSavedHandle((UnitVisualMods__hashTable), this, key) // INLINED!!
-        endfunction
-        function s__UnitVisualMods__data_widgets_remove takes integer this,integer key returns nothing
-            call RemoveSavedHandle((UnitVisualMods__hashTable), this, key) // INLINED!!
+        function s__UnitVisualMods___data_players_remove takes integer this,integer key returns nothing
+            call RemoveSavedHandle((UnitVisualMods___hashTable), this, key) // INLINED!!
         endfunction
 
-        function s__UnitVisualMods__data_destructables__getindex takes integer this,integer key returns destructable
-            return LoadDestructableHandle((UnitVisualMods__hashTable), this, key) // INLINED!!
+        function s__UnitVisualMods___data_widgets__getindex takes integer this,integer key returns widget
+            return LoadWidgetHandle((UnitVisualMods___hashTable), this, key) // INLINED!!
         endfunction
-        function s__UnitVisualMods__data_destructables__setindex takes integer this,integer key,destructable value returns nothing
-            call SaveDestructableHandle((UnitVisualMods__hashTable), this, key, value) // INLINED!!
+        function s__UnitVisualMods___data_widgets__setindex takes integer this,integer key,widget value returns nothing
+            call SaveWidgetHandle((UnitVisualMods___hashTable), this, key, value) // INLINED!!
         endfunction
-        function s__UnitVisualMods__data_destructables_has takes integer this,integer key returns boolean
-            return HaveSavedHandle((UnitVisualMods__hashTable), this, key) // INLINED!!
+        function s__UnitVisualMods___data_widgets_has takes integer this,integer key returns boolean
+            return HaveSavedHandle((UnitVisualMods___hashTable), this, key) // INLINED!!
         endfunction
-        function s__UnitVisualMods__data_destructables_remove takes integer this,integer key returns nothing
-            call RemoveSavedHandle((UnitVisualMods__hashTable), this, key) // INLINED!!
-        endfunction
-
-        function s__UnitVisualMods__data_items__getindex takes integer this,integer key returns item
-            return LoadItemHandle((UnitVisualMods__hashTable), this, key) // INLINED!!
-        endfunction
-        function s__UnitVisualMods__data_items__setindex takes integer this,integer key,item value returns nothing
-            call SaveItemHandle((UnitVisualMods__hashTable), this, key, value) // INLINED!!
-        endfunction
-        function s__UnitVisualMods__data_items_has takes integer this,integer key returns boolean
-            return HaveSavedHandle((UnitVisualMods__hashTable), this, key) // INLINED!!
-        endfunction
-        function s__UnitVisualMods__data_items_remove takes integer this,integer key returns nothing
-            call RemoveSavedHandle((UnitVisualMods__hashTable), this, key) // INLINED!!
+        function s__UnitVisualMods___data_widgets_remove takes integer this,integer key returns nothing
+            call RemoveSavedHandle((UnitVisualMods___hashTable), this, key) // INLINED!!
         endfunction
 
-        function s__UnitVisualMods__data_units__getindex takes integer this,integer key returns unit
-            return LoadUnitHandle((UnitVisualMods__hashTable), this, key) // INLINED!!
+        function s__UnitVisualMods___data_destructables__getindex takes integer this,integer key returns destructable
+            return LoadDestructableHandle((UnitVisualMods___hashTable), this, key) // INLINED!!
         endfunction
-        function s__UnitVisualMods__data_units__setindex takes integer this,integer key,unit value returns nothing
-            call SaveUnitHandle((UnitVisualMods__hashTable), this, key, value) // INLINED!!
+        function s__UnitVisualMods___data_destructables__setindex takes integer this,integer key,destructable value returns nothing
+            call SaveDestructableHandle((UnitVisualMods___hashTable), this, key, value) // INLINED!!
         endfunction
-        function s__UnitVisualMods__data_units_has takes integer this,integer key returns boolean
-            return HaveSavedHandle((UnitVisualMods__hashTable), this, key) // INLINED!!
+        function s__UnitVisualMods___data_destructables_has takes integer this,integer key returns boolean
+            return HaveSavedHandle((UnitVisualMods___hashTable), this, key) // INLINED!!
         endfunction
-        function s__UnitVisualMods__data_units_remove takes integer this,integer key returns nothing
-            call RemoveSavedHandle((UnitVisualMods__hashTable), this, key) // INLINED!!
-        endfunction
-
-        function s__UnitVisualMods__data_abilitys__getindex takes integer this,integer key returns ability
-            return LoadAbilityHandle((UnitVisualMods__hashTable), this, key) // INLINED!!
-        endfunction
-        function s__UnitVisualMods__data_abilitys__setindex takes integer this,integer key,ability value returns nothing
-            call SaveAbilityHandle((UnitVisualMods__hashTable), this, key, value) // INLINED!!
-        endfunction
-        function s__UnitVisualMods__data_abilitys_has takes integer this,integer key returns boolean
-            return HaveSavedHandle((UnitVisualMods__hashTable), this, key) // INLINED!!
-        endfunction
-        function s__UnitVisualMods__data_abilitys_remove takes integer this,integer key returns nothing
-            call RemoveSavedHandle((UnitVisualMods__hashTable), this, key) // INLINED!!
+        function s__UnitVisualMods___data_destructables_remove takes integer this,integer key returns nothing
+            call RemoveSavedHandle((UnitVisualMods___hashTable), this, key) // INLINED!!
         endfunction
 
-        function s__UnitVisualMods__data_timers__getindex takes integer this,integer key returns timer
-            return LoadTimerHandle((UnitVisualMods__hashTable), this, key) // INLINED!!
+        function s__UnitVisualMods___data_items__getindex takes integer this,integer key returns item
+            return LoadItemHandle((UnitVisualMods___hashTable), this, key) // INLINED!!
         endfunction
-        function s__UnitVisualMods__data_timers__setindex takes integer this,integer key,timer value returns nothing
-            call SaveTimerHandle((UnitVisualMods__hashTable), this, key, value) // INLINED!!
+        function s__UnitVisualMods___data_items__setindex takes integer this,integer key,item value returns nothing
+            call SaveItemHandle((UnitVisualMods___hashTable), this, key, value) // INLINED!!
         endfunction
-        function s__UnitVisualMods__data_timers_has takes integer this,integer key returns boolean
-            return HaveSavedHandle((UnitVisualMods__hashTable), this, key) // INLINED!!
+        function s__UnitVisualMods___data_items_has takes integer this,integer key returns boolean
+            return HaveSavedHandle((UnitVisualMods___hashTable), this, key) // INLINED!!
         endfunction
-        function s__UnitVisualMods__data_timers_remove takes integer this,integer key returns nothing
-            call RemoveSavedHandle((UnitVisualMods__hashTable), this, key) // INLINED!!
-        endfunction
-
-        function s__UnitVisualMods__data_triggers__getindex takes integer this,integer key returns trigger
-            return LoadTriggerHandle((UnitVisualMods__hashTable), this, key) // INLINED!!
-        endfunction
-        function s__UnitVisualMods__data_triggers__setindex takes integer this,integer key,trigger value returns nothing
-            call SaveTriggerHandle((UnitVisualMods__hashTable), this, key, value) // INLINED!!
-        endfunction
-        function s__UnitVisualMods__data_triggers_has takes integer this,integer key returns boolean
-            return HaveSavedHandle((UnitVisualMods__hashTable), this, key) // INLINED!!
-        endfunction
-        function s__UnitVisualMods__data_triggers_remove takes integer this,integer key returns nothing
-            call RemoveSavedHandle((UnitVisualMods__hashTable), this, key) // INLINED!!
+        function s__UnitVisualMods___data_items_remove takes integer this,integer key returns nothing
+            call RemoveSavedHandle((UnitVisualMods___hashTable), this, key) // INLINED!!
         endfunction
 
-        function s__UnitVisualMods__data_triggerconditions__getindex takes integer this,integer key returns triggercondition
-            return LoadTriggerConditionHandle((UnitVisualMods__hashTable), this, key) // INLINED!!
+        function s__UnitVisualMods___data_units__getindex takes integer this,integer key returns unit
+            return LoadUnitHandle((UnitVisualMods___hashTable), this, key) // INLINED!!
         endfunction
-        function s__UnitVisualMods__data_triggerconditions__setindex takes integer this,integer key,triggercondition value returns nothing
-            call SaveTriggerConditionHandle((UnitVisualMods__hashTable), this, key, value) // INLINED!!
+        function s__UnitVisualMods___data_units__setindex takes integer this,integer key,unit value returns nothing
+            call SaveUnitHandle((UnitVisualMods___hashTable), this, key, value) // INLINED!!
         endfunction
-        function s__UnitVisualMods__data_triggerconditions_has takes integer this,integer key returns boolean
-            return HaveSavedHandle((UnitVisualMods__hashTable), this, key) // INLINED!!
+        function s__UnitVisualMods___data_units_has takes integer this,integer key returns boolean
+            return HaveSavedHandle((UnitVisualMods___hashTable), this, key) // INLINED!!
         endfunction
-        function s__UnitVisualMods__data_triggerconditions_remove takes integer this,integer key returns nothing
-            call RemoveSavedHandle((UnitVisualMods__hashTable), this, key) // INLINED!!
-        endfunction
-
-        function s__UnitVisualMods__data_triggeractions__getindex takes integer this,integer key returns triggeraction
-            return LoadTriggerActionHandle((UnitVisualMods__hashTable), this, key) // INLINED!!
-        endfunction
-        function s__UnitVisualMods__data_triggeractions__setindex takes integer this,integer key,triggeraction value returns nothing
-            call SaveTriggerActionHandle((UnitVisualMods__hashTable), this, key, value) // INLINED!!
-        endfunction
-        function s__UnitVisualMods__data_triggeractions_has takes integer this,integer key returns boolean
-            return HaveSavedHandle((UnitVisualMods__hashTable), this, key) // INLINED!!
-        endfunction
-        function s__UnitVisualMods__data_triggeractions_remove takes integer this,integer key returns nothing
-            call RemoveSavedHandle((UnitVisualMods__hashTable), this, key) // INLINED!!
+        function s__UnitVisualMods___data_units_remove takes integer this,integer key returns nothing
+            call RemoveSavedHandle((UnitVisualMods___hashTable), this, key) // INLINED!!
         endfunction
 
-        function s__UnitVisualMods__data_events__getindex takes integer this,integer key returns event
-            return LoadTriggerEventHandle((UnitVisualMods__hashTable), this, key) // INLINED!!
+        function s__UnitVisualMods___data_abilitys__getindex takes integer this,integer key returns ability
+            return LoadAbilityHandle((UnitVisualMods___hashTable), this, key) // INLINED!!
         endfunction
-        function s__UnitVisualMods__data_events__setindex takes integer this,integer key,event value returns nothing
-            call SaveTriggerEventHandle((UnitVisualMods__hashTable), this, key, value) // INLINED!!
+        function s__UnitVisualMods___data_abilitys__setindex takes integer this,integer key,ability value returns nothing
+            call SaveAbilityHandle((UnitVisualMods___hashTable), this, key, value) // INLINED!!
         endfunction
-        function s__UnitVisualMods__data_events_has takes integer this,integer key returns boolean
-            return HaveSavedHandle((UnitVisualMods__hashTable), this, key) // INLINED!!
+        function s__UnitVisualMods___data_abilitys_has takes integer this,integer key returns boolean
+            return HaveSavedHandle((UnitVisualMods___hashTable), this, key) // INLINED!!
         endfunction
-        function s__UnitVisualMods__data_events_remove takes integer this,integer key returns nothing
-            call RemoveSavedHandle((UnitVisualMods__hashTable), this, key) // INLINED!!
-        endfunction
-
-        function s__UnitVisualMods__data_forces__getindex takes integer this,integer key returns force
-            return LoadForceHandle((UnitVisualMods__hashTable), this, key) // INLINED!!
-        endfunction
-        function s__UnitVisualMods__data_forces__setindex takes integer this,integer key,force value returns nothing
-            call SaveForceHandle((UnitVisualMods__hashTable), this, key, value) // INLINED!!
-        endfunction
-        function s__UnitVisualMods__data_forces_has takes integer this,integer key returns boolean
-            return HaveSavedHandle((UnitVisualMods__hashTable), this, key) // INLINED!!
-        endfunction
-        function s__UnitVisualMods__data_forces_remove takes integer this,integer key returns nothing
-            call RemoveSavedHandle((UnitVisualMods__hashTable), this, key) // INLINED!!
+        function s__UnitVisualMods___data_abilitys_remove takes integer this,integer key returns nothing
+            call RemoveSavedHandle((UnitVisualMods___hashTable), this, key) // INLINED!!
         endfunction
 
-        function s__UnitVisualMods__data_groups__getindex takes integer this,integer key returns group
-            return LoadGroupHandle((UnitVisualMods__hashTable), this, key) // INLINED!!
+        function s__UnitVisualMods___data_timers__getindex takes integer this,integer key returns timer
+            return LoadTimerHandle((UnitVisualMods___hashTable), this, key) // INLINED!!
         endfunction
-        function s__UnitVisualMods__data_groups__setindex takes integer this,integer key,group value returns nothing
-            call SaveGroupHandle((UnitVisualMods__hashTable), this, key, value) // INLINED!!
+        function s__UnitVisualMods___data_timers__setindex takes integer this,integer key,timer value returns nothing
+            call SaveTimerHandle((UnitVisualMods___hashTable), this, key, value) // INLINED!!
         endfunction
-        function s__UnitVisualMods__data_groups_has takes integer this,integer key returns boolean
-            return HaveSavedHandle((UnitVisualMods__hashTable), this, key) // INLINED!!
+        function s__UnitVisualMods___data_timers_has takes integer this,integer key returns boolean
+            return HaveSavedHandle((UnitVisualMods___hashTable), this, key) // INLINED!!
         endfunction
-        function s__UnitVisualMods__data_groups_remove takes integer this,integer key returns nothing
-            call RemoveSavedHandle((UnitVisualMods__hashTable), this, key) // INLINED!!
-        endfunction
-
-        function s__UnitVisualMods__data_locations__getindex takes integer this,integer key returns location
-            return LoadLocationHandle((UnitVisualMods__hashTable), this, key) // INLINED!!
-        endfunction
-        function s__UnitVisualMods__data_locations__setindex takes integer this,integer key,location value returns nothing
-            call SaveLocationHandle((UnitVisualMods__hashTable), this, key, value) // INLINED!!
-        endfunction
-        function s__UnitVisualMods__data_locations_has takes integer this,integer key returns boolean
-            return HaveSavedHandle((UnitVisualMods__hashTable), this, key) // INLINED!!
-        endfunction
-        function s__UnitVisualMods__data_locations_remove takes integer this,integer key returns nothing
-            call RemoveSavedHandle((UnitVisualMods__hashTable), this, key) // INLINED!!
+        function s__UnitVisualMods___data_timers_remove takes integer this,integer key returns nothing
+            call RemoveSavedHandle((UnitVisualMods___hashTable), this, key) // INLINED!!
         endfunction
 
-        function s__UnitVisualMods__data_rects__getindex takes integer this,integer key returns rect
-            return LoadRectHandle((UnitVisualMods__hashTable), this, key) // INLINED!!
+        function s__UnitVisualMods___data_triggers__getindex takes integer this,integer key returns trigger
+            return LoadTriggerHandle((UnitVisualMods___hashTable), this, key) // INLINED!!
         endfunction
-        function s__UnitVisualMods__data_rects__setindex takes integer this,integer key,rect value returns nothing
-            call SaveRectHandle((UnitVisualMods__hashTable), this, key, value) // INLINED!!
+        function s__UnitVisualMods___data_triggers__setindex takes integer this,integer key,trigger value returns nothing
+            call SaveTriggerHandle((UnitVisualMods___hashTable), this, key, value) // INLINED!!
         endfunction
-        function s__UnitVisualMods__data_rects_has takes integer this,integer key returns boolean
-            return HaveSavedHandle((UnitVisualMods__hashTable), this, key) // INLINED!!
+        function s__UnitVisualMods___data_triggers_has takes integer this,integer key returns boolean
+            return HaveSavedHandle((UnitVisualMods___hashTable), this, key) // INLINED!!
         endfunction
-        function s__UnitVisualMods__data_rects_remove takes integer this,integer key returns nothing
-            call RemoveSavedHandle((UnitVisualMods__hashTable), this, key) // INLINED!!
-        endfunction
-
-        function s__UnitVisualMods__data_boolexprs__getindex takes integer this,integer key returns boolexpr
-            return LoadBooleanExprHandle((UnitVisualMods__hashTable), this, key) // INLINED!!
-        endfunction
-        function s__UnitVisualMods__data_boolexprs__setindex takes integer this,integer key,boolexpr value returns nothing
-            call SaveBooleanExprHandle((UnitVisualMods__hashTable), this, key, value) // INLINED!!
-        endfunction
-        function s__UnitVisualMods__data_boolexprs_has takes integer this,integer key returns boolean
-            return HaveSavedHandle((UnitVisualMods__hashTable), this, key) // INLINED!!
-        endfunction
-        function s__UnitVisualMods__data_boolexprs_remove takes integer this,integer key returns nothing
-            call RemoveSavedHandle((UnitVisualMods__hashTable), this, key) // INLINED!!
+        function s__UnitVisualMods___data_triggers_remove takes integer this,integer key returns nothing
+            call RemoveSavedHandle((UnitVisualMods___hashTable), this, key) // INLINED!!
         endfunction
 
-        function s__UnitVisualMods__data_sounds__getindex takes integer this,integer key returns sound
-            return LoadSoundHandle((UnitVisualMods__hashTable), this, key) // INLINED!!
+        function s__UnitVisualMods___data_triggerconditions__getindex takes integer this,integer key returns triggercondition
+            return LoadTriggerConditionHandle((UnitVisualMods___hashTable), this, key) // INLINED!!
         endfunction
-        function s__UnitVisualMods__data_sounds__setindex takes integer this,integer key,sound value returns nothing
-            call SaveSoundHandle((UnitVisualMods__hashTable), this, key, value) // INLINED!!
+        function s__UnitVisualMods___data_triggerconditions__setindex takes integer this,integer key,triggercondition value returns nothing
+            call SaveTriggerConditionHandle((UnitVisualMods___hashTable), this, key, value) // INLINED!!
         endfunction
-        function s__UnitVisualMods__data_sounds_has takes integer this,integer key returns boolean
-            return HaveSavedHandle((UnitVisualMods__hashTable), this, key) // INLINED!!
+        function s__UnitVisualMods___data_triggerconditions_has takes integer this,integer key returns boolean
+            return HaveSavedHandle((UnitVisualMods___hashTable), this, key) // INLINED!!
         endfunction
-        function s__UnitVisualMods__data_sounds_remove takes integer this,integer key returns nothing
-            call RemoveSavedHandle((UnitVisualMods__hashTable), this, key) // INLINED!!
-        endfunction
-
-        function s__UnitVisualMods__data_effects__getindex takes integer this,integer key returns effect
-            return LoadEffectHandle((UnitVisualMods__hashTable), this, key) // INLINED!!
-        endfunction
-        function s__UnitVisualMods__data_effects__setindex takes integer this,integer key,effect value returns nothing
-            call SaveEffectHandle((UnitVisualMods__hashTable), this, key, value) // INLINED!!
-        endfunction
-        function s__UnitVisualMods__data_effects_has takes integer this,integer key returns boolean
-            return HaveSavedHandle((UnitVisualMods__hashTable), this, key) // INLINED!!
-        endfunction
-        function s__UnitVisualMods__data_effects_remove takes integer this,integer key returns nothing
-            call RemoveSavedHandle((UnitVisualMods__hashTable), this, key) // INLINED!!
+        function s__UnitVisualMods___data_triggerconditions_remove takes integer this,integer key returns nothing
+            call RemoveSavedHandle((UnitVisualMods___hashTable), this, key) // INLINED!!
         endfunction
 
-        function s__UnitVisualMods__data_unitpools__getindex takes integer this,integer key returns unitpool
-            return LoadUnitPoolHandle((UnitVisualMods__hashTable), this, key) // INLINED!!
+        function s__UnitVisualMods___data_triggeractions__getindex takes integer this,integer key returns triggeraction
+            return LoadTriggerActionHandle((UnitVisualMods___hashTable), this, key) // INLINED!!
         endfunction
-        function s__UnitVisualMods__data_unitpools__setindex takes integer this,integer key,unitpool value returns nothing
-            call SaveUnitPoolHandle((UnitVisualMods__hashTable), this, key, value) // INLINED!!
+        function s__UnitVisualMods___data_triggeractions__setindex takes integer this,integer key,triggeraction value returns nothing
+            call SaveTriggerActionHandle((UnitVisualMods___hashTable), this, key, value) // INLINED!!
         endfunction
-        function s__UnitVisualMods__data_unitpools_has takes integer this,integer key returns boolean
-            return HaveSavedHandle((UnitVisualMods__hashTable), this, key) // INLINED!!
+        function s__UnitVisualMods___data_triggeractions_has takes integer this,integer key returns boolean
+            return HaveSavedHandle((UnitVisualMods___hashTable), this, key) // INLINED!!
         endfunction
-        function s__UnitVisualMods__data_unitpools_remove takes integer this,integer key returns nothing
-            call RemoveSavedHandle((UnitVisualMods__hashTable), this, key) // INLINED!!
-        endfunction
-
-        function s__UnitVisualMods__data_itempools__getindex takes integer this,integer key returns itempool
-            return LoadItemPoolHandle((UnitVisualMods__hashTable), this, key) // INLINED!!
-        endfunction
-        function s__UnitVisualMods__data_itempools__setindex takes integer this,integer key,itempool value returns nothing
-            call SaveItemPoolHandle((UnitVisualMods__hashTable), this, key, value) // INLINED!!
-        endfunction
-        function s__UnitVisualMods__data_itempools_has takes integer this,integer key returns boolean
-            return HaveSavedHandle((UnitVisualMods__hashTable), this, key) // INLINED!!
-        endfunction
-        function s__UnitVisualMods__data_itempools_remove takes integer this,integer key returns nothing
-            call RemoveSavedHandle((UnitVisualMods__hashTable), this, key) // INLINED!!
+        function s__UnitVisualMods___data_triggeractions_remove takes integer this,integer key returns nothing
+            call RemoveSavedHandle((UnitVisualMods___hashTable), this, key) // INLINED!!
         endfunction
 
-        function s__UnitVisualMods__data_quests__getindex takes integer this,integer key returns quest
-            return LoadQuestHandle((UnitVisualMods__hashTable), this, key) // INLINED!!
+        function s__UnitVisualMods___data_events__getindex takes integer this,integer key returns event
+            return LoadTriggerEventHandle((UnitVisualMods___hashTable), this, key) // INLINED!!
         endfunction
-        function s__UnitVisualMods__data_quests__setindex takes integer this,integer key,quest value returns nothing
-            call SaveQuestHandle((UnitVisualMods__hashTable), this, key, value) // INLINED!!
+        function s__UnitVisualMods___data_events__setindex takes integer this,integer key,event value returns nothing
+            call SaveTriggerEventHandle((UnitVisualMods___hashTable), this, key, value) // INLINED!!
         endfunction
-        function s__UnitVisualMods__data_quests_has takes integer this,integer key returns boolean
-            return HaveSavedHandle((UnitVisualMods__hashTable), this, key) // INLINED!!
+        function s__UnitVisualMods___data_events_has takes integer this,integer key returns boolean
+            return HaveSavedHandle((UnitVisualMods___hashTable), this, key) // INLINED!!
         endfunction
-        function s__UnitVisualMods__data_quests_remove takes integer this,integer key returns nothing
-            call RemoveSavedHandle((UnitVisualMods__hashTable), this, key) // INLINED!!
-        endfunction
-
-        function s__UnitVisualMods__data_questitems__getindex takes integer this,integer key returns questitem
-            return LoadQuestItemHandle((UnitVisualMods__hashTable), this, key) // INLINED!!
-        endfunction
-        function s__UnitVisualMods__data_questitems__setindex takes integer this,integer key,questitem value returns nothing
-            call SaveQuestItemHandle((UnitVisualMods__hashTable), this, key, value) // INLINED!!
-        endfunction
-        function s__UnitVisualMods__data_questitems_has takes integer this,integer key returns boolean
-            return HaveSavedHandle((UnitVisualMods__hashTable), this, key) // INLINED!!
-        endfunction
-        function s__UnitVisualMods__data_questitems_remove takes integer this,integer key returns nothing
-            call RemoveSavedHandle((UnitVisualMods__hashTable), this, key) // INLINED!!
+        function s__UnitVisualMods___data_events_remove takes integer this,integer key returns nothing
+            call RemoveSavedHandle((UnitVisualMods___hashTable), this, key) // INLINED!!
         endfunction
 
-        function s__UnitVisualMods__data_defeatconditions__getindex takes integer this,integer key returns defeatcondition
-            return LoadDefeatConditionHandle((UnitVisualMods__hashTable), this, key) // INLINED!!
+        function s__UnitVisualMods___data_forces__getindex takes integer this,integer key returns force
+            return LoadForceHandle((UnitVisualMods___hashTable), this, key) // INLINED!!
         endfunction
-        function s__UnitVisualMods__data_defeatconditions__setindex takes integer this,integer key,defeatcondition value returns nothing
-            call SaveDefeatConditionHandle((UnitVisualMods__hashTable), this, key, value) // INLINED!!
+        function s__UnitVisualMods___data_forces__setindex takes integer this,integer key,force value returns nothing
+            call SaveForceHandle((UnitVisualMods___hashTable), this, key, value) // INLINED!!
         endfunction
-        function s__UnitVisualMods__data_defeatconditions_has takes integer this,integer key returns boolean
-            return HaveSavedHandle((UnitVisualMods__hashTable), this, key) // INLINED!!
+        function s__UnitVisualMods___data_forces_has takes integer this,integer key returns boolean
+            return HaveSavedHandle((UnitVisualMods___hashTable), this, key) // INLINED!!
         endfunction
-        function s__UnitVisualMods__data_defeatconditions_remove takes integer this,integer key returns nothing
-            call RemoveSavedHandle((UnitVisualMods__hashTable), this, key) // INLINED!!
-        endfunction
-
-        function s__UnitVisualMods__data_timerdialogs__getindex takes integer this,integer key returns timerdialog
-            return LoadTimerDialogHandle((UnitVisualMods__hashTable), this, key) // INLINED!!
-        endfunction
-        function s__UnitVisualMods__data_timerdialogs__setindex takes integer this,integer key,timerdialog value returns nothing
-            call SaveTimerDialogHandle((UnitVisualMods__hashTable), this, key, value) // INLINED!!
-        endfunction
-        function s__UnitVisualMods__data_timerdialogs_has takes integer this,integer key returns boolean
-            return HaveSavedHandle((UnitVisualMods__hashTable), this, key) // INLINED!!
-        endfunction
-        function s__UnitVisualMods__data_timerdialogs_remove takes integer this,integer key returns nothing
-            call RemoveSavedHandle((UnitVisualMods__hashTable), this, key) // INLINED!!
+        function s__UnitVisualMods___data_forces_remove takes integer this,integer key returns nothing
+            call RemoveSavedHandle((UnitVisualMods___hashTable), this, key) // INLINED!!
         endfunction
 
-        function s__UnitVisualMods__data_leaderboards__getindex takes integer this,integer key returns leaderboard
-            return LoadLeaderboardHandle((UnitVisualMods__hashTable), this, key) // INLINED!!
+        function s__UnitVisualMods___data_groups__getindex takes integer this,integer key returns group
+            return LoadGroupHandle((UnitVisualMods___hashTable), this, key) // INLINED!!
         endfunction
-        function s__UnitVisualMods__data_leaderboards__setindex takes integer this,integer key,leaderboard value returns nothing
-            call SaveLeaderboardHandle((UnitVisualMods__hashTable), this, key, value) // INLINED!!
+        function s__UnitVisualMods___data_groups__setindex takes integer this,integer key,group value returns nothing
+            call SaveGroupHandle((UnitVisualMods___hashTable), this, key, value) // INLINED!!
         endfunction
-        function s__UnitVisualMods__data_leaderboards_has takes integer this,integer key returns boolean
-            return HaveSavedHandle((UnitVisualMods__hashTable), this, key) // INLINED!!
+        function s__UnitVisualMods___data_groups_has takes integer this,integer key returns boolean
+            return HaveSavedHandle((UnitVisualMods___hashTable), this, key) // INLINED!!
         endfunction
-        function s__UnitVisualMods__data_leaderboards_remove takes integer this,integer key returns nothing
-            call RemoveSavedHandle((UnitVisualMods__hashTable), this, key) // INLINED!!
-        endfunction
-
-        function s__UnitVisualMods__data_multiboards__getindex takes integer this,integer key returns multiboard
-            return LoadMultiboardHandle((UnitVisualMods__hashTable), this, key) // INLINED!!
-        endfunction
-        function s__UnitVisualMods__data_multiboards__setindex takes integer this,integer key,multiboard value returns nothing
-            call SaveMultiboardHandle((UnitVisualMods__hashTable), this, key, value) // INLINED!!
-        endfunction
-        function s__UnitVisualMods__data_multiboards_has takes integer this,integer key returns boolean
-            return HaveSavedHandle((UnitVisualMods__hashTable), this, key) // INLINED!!
-        endfunction
-        function s__UnitVisualMods__data_multiboards_remove takes integer this,integer key returns nothing
-            call RemoveSavedHandle((UnitVisualMods__hashTable), this, key) // INLINED!!
+        function s__UnitVisualMods___data_groups_remove takes integer this,integer key returns nothing
+            call RemoveSavedHandle((UnitVisualMods___hashTable), this, key) // INLINED!!
         endfunction
 
-        function s__UnitVisualMods__data_multiboarditems__getindex takes integer this,integer key returns multiboarditem
-            return LoadMultiboardItemHandle((UnitVisualMods__hashTable), this, key) // INLINED!!
+        function s__UnitVisualMods___data_locations__getindex takes integer this,integer key returns location
+            return LoadLocationHandle((UnitVisualMods___hashTable), this, key) // INLINED!!
         endfunction
-        function s__UnitVisualMods__data_multiboarditems__setindex takes integer this,integer key,multiboarditem value returns nothing
-            call SaveMultiboardItemHandle((UnitVisualMods__hashTable), this, key, value) // INLINED!!
+        function s__UnitVisualMods___data_locations__setindex takes integer this,integer key,location value returns nothing
+            call SaveLocationHandle((UnitVisualMods___hashTable), this, key, value) // INLINED!!
         endfunction
-        function s__UnitVisualMods__data_multiboarditems_has takes integer this,integer key returns boolean
-            return HaveSavedHandle((UnitVisualMods__hashTable), this, key) // INLINED!!
+        function s__UnitVisualMods___data_locations_has takes integer this,integer key returns boolean
+            return HaveSavedHandle((UnitVisualMods___hashTable), this, key) // INLINED!!
         endfunction
-        function s__UnitVisualMods__data_multiboarditems_remove takes integer this,integer key returns nothing
-            call RemoveSavedHandle((UnitVisualMods__hashTable), this, key) // INLINED!!
-        endfunction
-
-        function s__UnitVisualMods__data_trackables__getindex takes integer this,integer key returns trackable
-            return LoadTrackableHandle((UnitVisualMods__hashTable), this, key) // INLINED!!
-        endfunction
-        function s__UnitVisualMods__data_trackables__setindex takes integer this,integer key,trackable value returns nothing
-            call SaveTrackableHandle((UnitVisualMods__hashTable), this, key, value) // INLINED!!
-        endfunction
-        function s__UnitVisualMods__data_trackables_has takes integer this,integer key returns boolean
-            return HaveSavedHandle((UnitVisualMods__hashTable), this, key) // INLINED!!
-        endfunction
-        function s__UnitVisualMods__data_trackables_remove takes integer this,integer key returns nothing
-            call RemoveSavedHandle((UnitVisualMods__hashTable), this, key) // INLINED!!
+        function s__UnitVisualMods___data_locations_remove takes integer this,integer key returns nothing
+            call RemoveSavedHandle((UnitVisualMods___hashTable), this, key) // INLINED!!
         endfunction
 
-        function s__UnitVisualMods__data_dialogs__getindex takes integer this,integer key returns dialog
-            return LoadDialogHandle((UnitVisualMods__hashTable), this, key) // INLINED!!
+        function s__UnitVisualMods___data_rects__getindex takes integer this,integer key returns rect
+            return LoadRectHandle((UnitVisualMods___hashTable), this, key) // INLINED!!
         endfunction
-        function s__UnitVisualMods__data_dialogs__setindex takes integer this,integer key,dialog value returns nothing
-            call SaveDialogHandle((UnitVisualMods__hashTable), this, key, value) // INLINED!!
+        function s__UnitVisualMods___data_rects__setindex takes integer this,integer key,rect value returns nothing
+            call SaveRectHandle((UnitVisualMods___hashTable), this, key, value) // INLINED!!
         endfunction
-        function s__UnitVisualMods__data_dialogs_has takes integer this,integer key returns boolean
-            return HaveSavedHandle((UnitVisualMods__hashTable), this, key) // INLINED!!
+        function s__UnitVisualMods___data_rects_has takes integer this,integer key returns boolean
+            return HaveSavedHandle((UnitVisualMods___hashTable), this, key) // INLINED!!
         endfunction
-        function s__UnitVisualMods__data_dialogs_remove takes integer this,integer key returns nothing
-            call RemoveSavedHandle((UnitVisualMods__hashTable), this, key) // INLINED!!
-        endfunction
-
-        function s__UnitVisualMods__data_buttons__getindex takes integer this,integer key returns button
-            return LoadButtonHandle((UnitVisualMods__hashTable), this, key) // INLINED!!
-        endfunction
-        function s__UnitVisualMods__data_buttons__setindex takes integer this,integer key,button value returns nothing
-            call SaveButtonHandle((UnitVisualMods__hashTable), this, key, value) // INLINED!!
-        endfunction
-        function s__UnitVisualMods__data_buttons_has takes integer this,integer key returns boolean
-            return HaveSavedHandle((UnitVisualMods__hashTable), this, key) // INLINED!!
-        endfunction
-        function s__UnitVisualMods__data_buttons_remove takes integer this,integer key returns nothing
-            call RemoveSavedHandle((UnitVisualMods__hashTable), this, key) // INLINED!!
+        function s__UnitVisualMods___data_rects_remove takes integer this,integer key returns nothing
+            call RemoveSavedHandle((UnitVisualMods___hashTable), this, key) // INLINED!!
         endfunction
 
-        function s__UnitVisualMods__data_texttags__getindex takes integer this,integer key returns texttag
-            return LoadTextTagHandle((UnitVisualMods__hashTable), this, key) // INLINED!!
+        function s__UnitVisualMods___data_boolexprs__getindex takes integer this,integer key returns boolexpr
+            return LoadBooleanExprHandle((UnitVisualMods___hashTable), this, key) // INLINED!!
         endfunction
-        function s__UnitVisualMods__data_texttags__setindex takes integer this,integer key,texttag value returns nothing
-            call SaveTextTagHandle((UnitVisualMods__hashTable), this, key, value) // INLINED!!
+        function s__UnitVisualMods___data_boolexprs__setindex takes integer this,integer key,boolexpr value returns nothing
+            call SaveBooleanExprHandle((UnitVisualMods___hashTable), this, key, value) // INLINED!!
         endfunction
-        function s__UnitVisualMods__data_texttags_has takes integer this,integer key returns boolean
-            return HaveSavedHandle((UnitVisualMods__hashTable), this, key) // INLINED!!
+        function s__UnitVisualMods___data_boolexprs_has takes integer this,integer key returns boolean
+            return HaveSavedHandle((UnitVisualMods___hashTable), this, key) // INLINED!!
         endfunction
-        function s__UnitVisualMods__data_texttags_remove takes integer this,integer key returns nothing
-            call RemoveSavedHandle((UnitVisualMods__hashTable), this, key) // INLINED!!
-        endfunction
-
-        function s__UnitVisualMods__data_lightnings__getindex takes integer this,integer key returns lightning
-            return LoadLightningHandle((UnitVisualMods__hashTable), this, key) // INLINED!!
-        endfunction
-        function s__UnitVisualMods__data_lightnings__setindex takes integer this,integer key,lightning value returns nothing
-            call SaveLightningHandle((UnitVisualMods__hashTable), this, key, value) // INLINED!!
-        endfunction
-        function s__UnitVisualMods__data_lightnings_has takes integer this,integer key returns boolean
-            return HaveSavedHandle((UnitVisualMods__hashTable), this, key) // INLINED!!
-        endfunction
-        function s__UnitVisualMods__data_lightnings_remove takes integer this,integer key returns nothing
-            call RemoveSavedHandle((UnitVisualMods__hashTable), this, key) // INLINED!!
+        function s__UnitVisualMods___data_boolexprs_remove takes integer this,integer key returns nothing
+            call RemoveSavedHandle((UnitVisualMods___hashTable), this, key) // INLINED!!
         endfunction
 
-        function s__UnitVisualMods__data_images__getindex takes integer this,integer key returns image
-            return LoadImageHandle((UnitVisualMods__hashTable), this, key) // INLINED!!
+        function s__UnitVisualMods___data_sounds__getindex takes integer this,integer key returns sound
+            return LoadSoundHandle((UnitVisualMods___hashTable), this, key) // INLINED!!
         endfunction
-        function s__UnitVisualMods__data_images__setindex takes integer this,integer key,image value returns nothing
-            call SaveImageHandle((UnitVisualMods__hashTable), this, key, value) // INLINED!!
+        function s__UnitVisualMods___data_sounds__setindex takes integer this,integer key,sound value returns nothing
+            call SaveSoundHandle((UnitVisualMods___hashTable), this, key, value) // INLINED!!
         endfunction
-        function s__UnitVisualMods__data_images_has takes integer this,integer key returns boolean
-            return HaveSavedHandle((UnitVisualMods__hashTable), this, key) // INLINED!!
+        function s__UnitVisualMods___data_sounds_has takes integer this,integer key returns boolean
+            return HaveSavedHandle((UnitVisualMods___hashTable), this, key) // INLINED!!
         endfunction
-        function s__UnitVisualMods__data_images_remove takes integer this,integer key returns nothing
-            call RemoveSavedHandle((UnitVisualMods__hashTable), this, key) // INLINED!!
-        endfunction
-
-        function s__UnitVisualMods__data_ubersplats__getindex takes integer this,integer key returns ubersplat
-            return LoadUbersplatHandle((UnitVisualMods__hashTable), this, key) // INLINED!!
-        endfunction
-        function s__UnitVisualMods__data_ubersplats__setindex takes integer this,integer key,ubersplat value returns nothing
-            call SaveUbersplatHandle((UnitVisualMods__hashTable), this, key, value) // INLINED!!
-        endfunction
-        function s__UnitVisualMods__data_ubersplats_has takes integer this,integer key returns boolean
-            return HaveSavedHandle((UnitVisualMods__hashTable), this, key) // INLINED!!
-        endfunction
-        function s__UnitVisualMods__data_ubersplats_remove takes integer this,integer key returns nothing
-            call RemoveSavedHandle((UnitVisualMods__hashTable), this, key) // INLINED!!
+        function s__UnitVisualMods___data_sounds_remove takes integer this,integer key returns nothing
+            call RemoveSavedHandle((UnitVisualMods___hashTable), this, key) // INLINED!!
         endfunction
 
-        function s__UnitVisualMods__data_regions__getindex takes integer this,integer key returns region
-            return LoadRegionHandle((UnitVisualMods__hashTable), this, key) // INLINED!!
+        function s__UnitVisualMods___data_effects__getindex takes integer this,integer key returns effect
+            return LoadEffectHandle((UnitVisualMods___hashTable), this, key) // INLINED!!
         endfunction
-        function s__UnitVisualMods__data_regions__setindex takes integer this,integer key,region value returns nothing
-            call SaveRegionHandle((UnitVisualMods__hashTable), this, key, value) // INLINED!!
+        function s__UnitVisualMods___data_effects__setindex takes integer this,integer key,effect value returns nothing
+            call SaveEffectHandle((UnitVisualMods___hashTable), this, key, value) // INLINED!!
         endfunction
-        function s__UnitVisualMods__data_regions_has takes integer this,integer key returns boolean
-            return HaveSavedHandle((UnitVisualMods__hashTable), this, key) // INLINED!!
+        function s__UnitVisualMods___data_effects_has takes integer this,integer key returns boolean
+            return HaveSavedHandle((UnitVisualMods___hashTable), this, key) // INLINED!!
         endfunction
-        function s__UnitVisualMods__data_regions_remove takes integer this,integer key returns nothing
-            call RemoveSavedHandle((UnitVisualMods__hashTable), this, key) // INLINED!!
-        endfunction
-
-        function s__UnitVisualMods__data_fogstates__getindex takes integer this,integer key returns fogstate
-            return LoadFogStateHandle((UnitVisualMods__hashTable), this, key) // INLINED!!
-        endfunction
-        function s__UnitVisualMods__data_fogstates__setindex takes integer this,integer key,fogstate value returns nothing
-            call SaveFogStateHandle((UnitVisualMods__hashTable), this, key, value) // INLINED!!
-        endfunction
-        function s__UnitVisualMods__data_fogstates_has takes integer this,integer key returns boolean
-            return HaveSavedHandle((UnitVisualMods__hashTable), this, key) // INLINED!!
-        endfunction
-        function s__UnitVisualMods__data_fogstates_remove takes integer this,integer key returns nothing
-            call RemoveSavedHandle((UnitVisualMods__hashTable), this, key) // INLINED!!
+        function s__UnitVisualMods___data_effects_remove takes integer this,integer key returns nothing
+            call RemoveSavedHandle((UnitVisualMods___hashTable), this, key) // INLINED!!
         endfunction
 
-        function s__UnitVisualMods__data_fogmodifiers__getindex takes integer this,integer key returns fogmodifier
-            return LoadFogModifierHandle((UnitVisualMods__hashTable), this, key) // INLINED!!
+        function s__UnitVisualMods___data_unitpools__getindex takes integer this,integer key returns unitpool
+            return LoadUnitPoolHandle((UnitVisualMods___hashTable), this, key) // INLINED!!
         endfunction
-        function s__UnitVisualMods__data_fogmodifiers__setindex takes integer this,integer key,fogmodifier value returns nothing
-            call SaveFogModifierHandle((UnitVisualMods__hashTable), this, key, value) // INLINED!!
+        function s__UnitVisualMods___data_unitpools__setindex takes integer this,integer key,unitpool value returns nothing
+            call SaveUnitPoolHandle((UnitVisualMods___hashTable), this, key, value) // INLINED!!
         endfunction
-        function s__UnitVisualMods__data_fogmodifiers_has takes integer this,integer key returns boolean
-            return HaveSavedHandle((UnitVisualMods__hashTable), this, key) // INLINED!!
+        function s__UnitVisualMods___data_unitpools_has takes integer this,integer key returns boolean
+            return HaveSavedHandle((UnitVisualMods___hashTable), this, key) // INLINED!!
         endfunction
-        function s__UnitVisualMods__data_fogmodifiers_remove takes integer this,integer key returns nothing
-            call RemoveSavedHandle((UnitVisualMods__hashTable), this, key) // INLINED!!
+        function s__UnitVisualMods___data_unitpools_remove takes integer this,integer key returns nothing
+            call RemoveSavedHandle((UnitVisualMods___hashTable), this, key) // INLINED!!
         endfunction
 
-        function s__UnitVisualMods__data_hashtables__getindex takes integer this,integer key returns hashtable
-            return LoadHashtableHandle((UnitVisualMods__hashTable), this, key) // INLINED!!
+        function s__UnitVisualMods___data_itempools__getindex takes integer this,integer key returns itempool
+            return LoadItemPoolHandle((UnitVisualMods___hashTable), this, key) // INLINED!!
         endfunction
-        function s__UnitVisualMods__data_hashtables__setindex takes integer this,integer key,hashtable value returns nothing
-            call SaveHashtableHandle((UnitVisualMods__hashTable), this, key, value) // INLINED!!
+        function s__UnitVisualMods___data_itempools__setindex takes integer this,integer key,itempool value returns nothing
+            call SaveItemPoolHandle((UnitVisualMods___hashTable), this, key, value) // INLINED!!
         endfunction
-        function s__UnitVisualMods__data_hashtables_has takes integer this,integer key returns boolean
-            return HaveSavedHandle((UnitVisualMods__hashTable), this, key) // INLINED!!
+        function s__UnitVisualMods___data_itempools_has takes integer this,integer key returns boolean
+            return HaveSavedHandle((UnitVisualMods___hashTable), this, key) // INLINED!!
         endfunction
-        function s__UnitVisualMods__data_hashtables_remove takes integer this,integer key returns nothing
-            call RemoveSavedHandle((UnitVisualMods__hashTable), this, key) // INLINED!!
+        function s__UnitVisualMods___data_itempools_remove takes integer this,integer key returns nothing
+            call RemoveSavedHandle((UnitVisualMods___hashTable), this, key) // INLINED!!
+        endfunction
+
+        function s__UnitVisualMods___data_quests__getindex takes integer this,integer key returns quest
+            return LoadQuestHandle((UnitVisualMods___hashTable), this, key) // INLINED!!
+        endfunction
+        function s__UnitVisualMods___data_quests__setindex takes integer this,integer key,quest value returns nothing
+            call SaveQuestHandle((UnitVisualMods___hashTable), this, key, value) // INLINED!!
+        endfunction
+        function s__UnitVisualMods___data_quests_has takes integer this,integer key returns boolean
+            return HaveSavedHandle((UnitVisualMods___hashTable), this, key) // INLINED!!
+        endfunction
+        function s__UnitVisualMods___data_quests_remove takes integer this,integer key returns nothing
+            call RemoveSavedHandle((UnitVisualMods___hashTable), this, key) // INLINED!!
+        endfunction
+
+        function s__UnitVisualMods___data_questitems__getindex takes integer this,integer key returns questitem
+            return LoadQuestItemHandle((UnitVisualMods___hashTable), this, key) // INLINED!!
+        endfunction
+        function s__UnitVisualMods___data_questitems__setindex takes integer this,integer key,questitem value returns nothing
+            call SaveQuestItemHandle((UnitVisualMods___hashTable), this, key, value) // INLINED!!
+        endfunction
+        function s__UnitVisualMods___data_questitems_has takes integer this,integer key returns boolean
+            return HaveSavedHandle((UnitVisualMods___hashTable), this, key) // INLINED!!
+        endfunction
+        function s__UnitVisualMods___data_questitems_remove takes integer this,integer key returns nothing
+            call RemoveSavedHandle((UnitVisualMods___hashTable), this, key) // INLINED!!
+        endfunction
+
+        function s__UnitVisualMods___data_defeatconditions__getindex takes integer this,integer key returns defeatcondition
+            return LoadDefeatConditionHandle((UnitVisualMods___hashTable), this, key) // INLINED!!
+        endfunction
+        function s__UnitVisualMods___data_defeatconditions__setindex takes integer this,integer key,defeatcondition value returns nothing
+            call SaveDefeatConditionHandle((UnitVisualMods___hashTable), this, key, value) // INLINED!!
+        endfunction
+        function s__UnitVisualMods___data_defeatconditions_has takes integer this,integer key returns boolean
+            return HaveSavedHandle((UnitVisualMods___hashTable), this, key) // INLINED!!
+        endfunction
+        function s__UnitVisualMods___data_defeatconditions_remove takes integer this,integer key returns nothing
+            call RemoveSavedHandle((UnitVisualMods___hashTable), this, key) // INLINED!!
+        endfunction
+
+        function s__UnitVisualMods___data_timerdialogs__getindex takes integer this,integer key returns timerdialog
+            return LoadTimerDialogHandle((UnitVisualMods___hashTable), this, key) // INLINED!!
+        endfunction
+        function s__UnitVisualMods___data_timerdialogs__setindex takes integer this,integer key,timerdialog value returns nothing
+            call SaveTimerDialogHandle((UnitVisualMods___hashTable), this, key, value) // INLINED!!
+        endfunction
+        function s__UnitVisualMods___data_timerdialogs_has takes integer this,integer key returns boolean
+            return HaveSavedHandle((UnitVisualMods___hashTable), this, key) // INLINED!!
+        endfunction
+        function s__UnitVisualMods___data_timerdialogs_remove takes integer this,integer key returns nothing
+            call RemoveSavedHandle((UnitVisualMods___hashTable), this, key) // INLINED!!
+        endfunction
+
+        function s__UnitVisualMods___data_leaderboards__getindex takes integer this,integer key returns leaderboard
+            return LoadLeaderboardHandle((UnitVisualMods___hashTable), this, key) // INLINED!!
+        endfunction
+        function s__UnitVisualMods___data_leaderboards__setindex takes integer this,integer key,leaderboard value returns nothing
+            call SaveLeaderboardHandle((UnitVisualMods___hashTable), this, key, value) // INLINED!!
+        endfunction
+        function s__UnitVisualMods___data_leaderboards_has takes integer this,integer key returns boolean
+            return HaveSavedHandle((UnitVisualMods___hashTable), this, key) // INLINED!!
+        endfunction
+        function s__UnitVisualMods___data_leaderboards_remove takes integer this,integer key returns nothing
+            call RemoveSavedHandle((UnitVisualMods___hashTable), this, key) // INLINED!!
+        endfunction
+
+        function s__UnitVisualMods___data_multiboards__getindex takes integer this,integer key returns multiboard
+            return LoadMultiboardHandle((UnitVisualMods___hashTable), this, key) // INLINED!!
+        endfunction
+        function s__UnitVisualMods___data_multiboards__setindex takes integer this,integer key,multiboard value returns nothing
+            call SaveMultiboardHandle((UnitVisualMods___hashTable), this, key, value) // INLINED!!
+        endfunction
+        function s__UnitVisualMods___data_multiboards_has takes integer this,integer key returns boolean
+            return HaveSavedHandle((UnitVisualMods___hashTable), this, key) // INLINED!!
+        endfunction
+        function s__UnitVisualMods___data_multiboards_remove takes integer this,integer key returns nothing
+            call RemoveSavedHandle((UnitVisualMods___hashTable), this, key) // INLINED!!
+        endfunction
+
+        function s__UnitVisualMods___data_multiboarditems__getindex takes integer this,integer key returns multiboarditem
+            return LoadMultiboardItemHandle((UnitVisualMods___hashTable), this, key) // INLINED!!
+        endfunction
+        function s__UnitVisualMods___data_multiboarditems__setindex takes integer this,integer key,multiboarditem value returns nothing
+            call SaveMultiboardItemHandle((UnitVisualMods___hashTable), this, key, value) // INLINED!!
+        endfunction
+        function s__UnitVisualMods___data_multiboarditems_has takes integer this,integer key returns boolean
+            return HaveSavedHandle((UnitVisualMods___hashTable), this, key) // INLINED!!
+        endfunction
+        function s__UnitVisualMods___data_multiboarditems_remove takes integer this,integer key returns nothing
+            call RemoveSavedHandle((UnitVisualMods___hashTable), this, key) // INLINED!!
+        endfunction
+
+        function s__UnitVisualMods___data_trackables__getindex takes integer this,integer key returns trackable
+            return LoadTrackableHandle((UnitVisualMods___hashTable), this, key) // INLINED!!
+        endfunction
+        function s__UnitVisualMods___data_trackables__setindex takes integer this,integer key,trackable value returns nothing
+            call SaveTrackableHandle((UnitVisualMods___hashTable), this, key, value) // INLINED!!
+        endfunction
+        function s__UnitVisualMods___data_trackables_has takes integer this,integer key returns boolean
+            return HaveSavedHandle((UnitVisualMods___hashTable), this, key) // INLINED!!
+        endfunction
+        function s__UnitVisualMods___data_trackables_remove takes integer this,integer key returns nothing
+            call RemoveSavedHandle((UnitVisualMods___hashTable), this, key) // INLINED!!
+        endfunction
+
+        function s__UnitVisualMods___data_dialogs__getindex takes integer this,integer key returns dialog
+            return LoadDialogHandle((UnitVisualMods___hashTable), this, key) // INLINED!!
+        endfunction
+        function s__UnitVisualMods___data_dialogs__setindex takes integer this,integer key,dialog value returns nothing
+            call SaveDialogHandle((UnitVisualMods___hashTable), this, key, value) // INLINED!!
+        endfunction
+        function s__UnitVisualMods___data_dialogs_has takes integer this,integer key returns boolean
+            return HaveSavedHandle((UnitVisualMods___hashTable), this, key) // INLINED!!
+        endfunction
+        function s__UnitVisualMods___data_dialogs_remove takes integer this,integer key returns nothing
+            call RemoveSavedHandle((UnitVisualMods___hashTable), this, key) // INLINED!!
+        endfunction
+
+        function s__UnitVisualMods___data_buttons__getindex takes integer this,integer key returns button
+            return LoadButtonHandle((UnitVisualMods___hashTable), this, key) // INLINED!!
+        endfunction
+        function s__UnitVisualMods___data_buttons__setindex takes integer this,integer key,button value returns nothing
+            call SaveButtonHandle((UnitVisualMods___hashTable), this, key, value) // INLINED!!
+        endfunction
+        function s__UnitVisualMods___data_buttons_has takes integer this,integer key returns boolean
+            return HaveSavedHandle((UnitVisualMods___hashTable), this, key) // INLINED!!
+        endfunction
+        function s__UnitVisualMods___data_buttons_remove takes integer this,integer key returns nothing
+            call RemoveSavedHandle((UnitVisualMods___hashTable), this, key) // INLINED!!
+        endfunction
+
+        function s__UnitVisualMods___data_texttags__getindex takes integer this,integer key returns texttag
+            return LoadTextTagHandle((UnitVisualMods___hashTable), this, key) // INLINED!!
+        endfunction
+        function s__UnitVisualMods___data_texttags__setindex takes integer this,integer key,texttag value returns nothing
+            call SaveTextTagHandle((UnitVisualMods___hashTable), this, key, value) // INLINED!!
+        endfunction
+        function s__UnitVisualMods___data_texttags_has takes integer this,integer key returns boolean
+            return HaveSavedHandle((UnitVisualMods___hashTable), this, key) // INLINED!!
+        endfunction
+        function s__UnitVisualMods___data_texttags_remove takes integer this,integer key returns nothing
+            call RemoveSavedHandle((UnitVisualMods___hashTable), this, key) // INLINED!!
+        endfunction
+
+        function s__UnitVisualMods___data_lightnings__getindex takes integer this,integer key returns lightning
+            return LoadLightningHandle((UnitVisualMods___hashTable), this, key) // INLINED!!
+        endfunction
+        function s__UnitVisualMods___data_lightnings__setindex takes integer this,integer key,lightning value returns nothing
+            call SaveLightningHandle((UnitVisualMods___hashTable), this, key, value) // INLINED!!
+        endfunction
+        function s__UnitVisualMods___data_lightnings_has takes integer this,integer key returns boolean
+            return HaveSavedHandle((UnitVisualMods___hashTable), this, key) // INLINED!!
+        endfunction
+        function s__UnitVisualMods___data_lightnings_remove takes integer this,integer key returns nothing
+            call RemoveSavedHandle((UnitVisualMods___hashTable), this, key) // INLINED!!
+        endfunction
+
+        function s__UnitVisualMods___data_images__getindex takes integer this,integer key returns image
+            return LoadImageHandle((UnitVisualMods___hashTable), this, key) // INLINED!!
+        endfunction
+        function s__UnitVisualMods___data_images__setindex takes integer this,integer key,image value returns nothing
+            call SaveImageHandle((UnitVisualMods___hashTable), this, key, value) // INLINED!!
+        endfunction
+        function s__UnitVisualMods___data_images_has takes integer this,integer key returns boolean
+            return HaveSavedHandle((UnitVisualMods___hashTable), this, key) // INLINED!!
+        endfunction
+        function s__UnitVisualMods___data_images_remove takes integer this,integer key returns nothing
+            call RemoveSavedHandle((UnitVisualMods___hashTable), this, key) // INLINED!!
+        endfunction
+
+        function s__UnitVisualMods___data_ubersplats__getindex takes integer this,integer key returns ubersplat
+            return LoadUbersplatHandle((UnitVisualMods___hashTable), this, key) // INLINED!!
+        endfunction
+        function s__UnitVisualMods___data_ubersplats__setindex takes integer this,integer key,ubersplat value returns nothing
+            call SaveUbersplatHandle((UnitVisualMods___hashTable), this, key, value) // INLINED!!
+        endfunction
+        function s__UnitVisualMods___data_ubersplats_has takes integer this,integer key returns boolean
+            return HaveSavedHandle((UnitVisualMods___hashTable), this, key) // INLINED!!
+        endfunction
+        function s__UnitVisualMods___data_ubersplats_remove takes integer this,integer key returns nothing
+            call RemoveSavedHandle((UnitVisualMods___hashTable), this, key) // INLINED!!
+        endfunction
+
+        function s__UnitVisualMods___data_regions__getindex takes integer this,integer key returns region
+            return LoadRegionHandle((UnitVisualMods___hashTable), this, key) // INLINED!!
+        endfunction
+        function s__UnitVisualMods___data_regions__setindex takes integer this,integer key,region value returns nothing
+            call SaveRegionHandle((UnitVisualMods___hashTable), this, key, value) // INLINED!!
+        endfunction
+        function s__UnitVisualMods___data_regions_has takes integer this,integer key returns boolean
+            return HaveSavedHandle((UnitVisualMods___hashTable), this, key) // INLINED!!
+        endfunction
+        function s__UnitVisualMods___data_regions_remove takes integer this,integer key returns nothing
+            call RemoveSavedHandle((UnitVisualMods___hashTable), this, key) // INLINED!!
+        endfunction
+
+        function s__UnitVisualMods___data_fogstates__getindex takes integer this,integer key returns fogstate
+            return LoadFogStateHandle((UnitVisualMods___hashTable), this, key) // INLINED!!
+        endfunction
+        function s__UnitVisualMods___data_fogstates__setindex takes integer this,integer key,fogstate value returns nothing
+            call SaveFogStateHandle((UnitVisualMods___hashTable), this, key, value) // INLINED!!
+        endfunction
+        function s__UnitVisualMods___data_fogstates_has takes integer this,integer key returns boolean
+            return HaveSavedHandle((UnitVisualMods___hashTable), this, key) // INLINED!!
+        endfunction
+        function s__UnitVisualMods___data_fogstates_remove takes integer this,integer key returns nothing
+            call RemoveSavedHandle((UnitVisualMods___hashTable), this, key) // INLINED!!
+        endfunction
+
+        function s__UnitVisualMods___data_fogmodifiers__getindex takes integer this,integer key returns fogmodifier
+            return LoadFogModifierHandle((UnitVisualMods___hashTable), this, key) // INLINED!!
+        endfunction
+        function s__UnitVisualMods___data_fogmodifiers__setindex takes integer this,integer key,fogmodifier value returns nothing
+            call SaveFogModifierHandle((UnitVisualMods___hashTable), this, key, value) // INLINED!!
+        endfunction
+        function s__UnitVisualMods___data_fogmodifiers_has takes integer this,integer key returns boolean
+            return HaveSavedHandle((UnitVisualMods___hashTable), this, key) // INLINED!!
+        endfunction
+        function s__UnitVisualMods___data_fogmodifiers_remove takes integer this,integer key returns nothing
+            call RemoveSavedHandle((UnitVisualMods___hashTable), this, key) // INLINED!!
+        endfunction
+
+        function s__UnitVisualMods___data_hashtables__getindex takes integer this,integer key returns hashtable
+            return LoadHashtableHandle((UnitVisualMods___hashTable), this, key) // INLINED!!
+        endfunction
+        function s__UnitVisualMods___data_hashtables__setindex takes integer this,integer key,hashtable value returns nothing
+            call SaveHashtableHandle((UnitVisualMods___hashTable), this, key, value) // INLINED!!
+        endfunction
+        function s__UnitVisualMods___data_hashtables_has takes integer this,integer key returns boolean
+            return HaveSavedHandle((UnitVisualMods___hashTable), this, key) // INLINED!!
+        endfunction
+        function s__UnitVisualMods___data_hashtables_remove takes integer this,integer key returns nothing
+            call RemoveSavedHandle((UnitVisualMods___hashTable), this, key) // INLINED!!
         endfunction
 
 
     
-//Implemented from module UnitVisualMods__data_realm:
-    function s__UnitVisualMods__data_Child__get_real takes integer this returns integer
+//Implemented from module UnitVisualMods___data_realm:
+    function s__UnitVisualMods___data_Child__get_real takes integer this returns integer
         return this
     endfunction
-//Implemented from module UnitVisualMods__data_integerm:
-    function s__UnitVisualMods__data_Child__get_integer takes integer this returns integer
+//Implemented from module UnitVisualMods___data_integerm:
+    function s__UnitVisualMods___data_Child__get_integer takes integer this returns integer
         return this
     endfunction
-//Implemented from module UnitVisualMods__data_booleanm:
-    function s__UnitVisualMods__data_Child__get_boolean takes integer this returns integer
+//Implemented from module UnitVisualMods___data_booleanm:
+    function s__UnitVisualMods___data_Child__get_boolean takes integer this returns integer
         return this
     endfunction
-//Implemented from module UnitVisualMods__data_stringm:
-    function s__UnitVisualMods__data_Child__get_string takes integer this returns integer
+//Implemented from module UnitVisualMods___data_stringm:
+    function s__UnitVisualMods___data_Child__get_string takes integer this returns integer
         return this
     endfunction
     
 
-        function s__UnitVisualMods__data_Child__get_handle takes integer this returns integer
+        function s__UnitVisualMods___data_Child__get_handle takes integer this returns integer
             return this
         endfunction
     
-        function s__UnitVisualMods__data_Child__get_agent takes integer this returns integer
+        function s__UnitVisualMods___data_Child__get_agent takes integer this returns integer
             return this
         endfunction
 
-//Implemented from module UnitVisualMods__data_playerm:
-        function s__UnitVisualMods__data_Child__get_player takes integer this returns integer
+//Implemented from module UnitVisualMods___data_playerm:
+        function s__UnitVisualMods___data_Child__get_player takes integer this returns integer
             return this
         endfunction
-//Implemented from module UnitVisualMods__data_widgetm:
-        function s__UnitVisualMods__data_Child__get_widget takes integer this returns integer
+//Implemented from module UnitVisualMods___data_widgetm:
+        function s__UnitVisualMods___data_Child__get_widget takes integer this returns integer
             return this
         endfunction
-//Implemented from module UnitVisualMods__data_destructablem:
-        function s__UnitVisualMods__data_Child__get_destructable takes integer this returns integer
+//Implemented from module UnitVisualMods___data_destructablem:
+        function s__UnitVisualMods___data_Child__get_destructable takes integer this returns integer
             return this
         endfunction
-//Implemented from module UnitVisualMods__data_itemm:
-        function s__UnitVisualMods__data_Child__get_item takes integer this returns integer
+//Implemented from module UnitVisualMods___data_itemm:
+        function s__UnitVisualMods___data_Child__get_item takes integer this returns integer
             return this
         endfunction
-//Implemented from module UnitVisualMods__data_unitm:
-        function s__UnitVisualMods__data_Child__get_unit takes integer this returns integer
+//Implemented from module UnitVisualMods___data_unitm:
+        function s__UnitVisualMods___data_Child__get_unit takes integer this returns integer
             return this
         endfunction
-//Implemented from module UnitVisualMods__data_abilitym:
-        function s__UnitVisualMods__data_Child__get_ability takes integer this returns integer
+//Implemented from module UnitVisualMods___data_abilitym:
+        function s__UnitVisualMods___data_Child__get_ability takes integer this returns integer
             return this
         endfunction
-//Implemented from module UnitVisualMods__data_timerm:
-        function s__UnitVisualMods__data_Child__get_timer takes integer this returns integer
+//Implemented from module UnitVisualMods___data_timerm:
+        function s__UnitVisualMods___data_Child__get_timer takes integer this returns integer
             return this
         endfunction
-//Implemented from module UnitVisualMods__data_triggerm:
-        function s__UnitVisualMods__data_Child__get_trigger takes integer this returns integer
+//Implemented from module UnitVisualMods___data_triggerm:
+        function s__UnitVisualMods___data_Child__get_trigger takes integer this returns integer
             return this
         endfunction
-//Implemented from module UnitVisualMods__data_triggerconditionm:
-        function s__UnitVisualMods__data_Child__get_triggercondition takes integer this returns integer
+//Implemented from module UnitVisualMods___data_triggerconditionm:
+        function s__UnitVisualMods___data_Child__get_triggercondition takes integer this returns integer
             return this
         endfunction
-//Implemented from module UnitVisualMods__data_triggeractionm:
-        function s__UnitVisualMods__data_Child__get_triggeraction takes integer this returns integer
+//Implemented from module UnitVisualMods___data_triggeractionm:
+        function s__UnitVisualMods___data_Child__get_triggeraction takes integer this returns integer
             return this
         endfunction
-//Implemented from module UnitVisualMods__data_eventm:
-        function s__UnitVisualMods__data_Child__get_event takes integer this returns integer
+//Implemented from module UnitVisualMods___data_eventm:
+        function s__UnitVisualMods___data_Child__get_event takes integer this returns integer
             return this
         endfunction
-//Implemented from module UnitVisualMods__data_forcem:
-        function s__UnitVisualMods__data_Child__get_force takes integer this returns integer
+//Implemented from module UnitVisualMods___data_forcem:
+        function s__UnitVisualMods___data_Child__get_force takes integer this returns integer
             return this
         endfunction
-//Implemented from module UnitVisualMods__data_groupm:
-        function s__UnitVisualMods__data_Child__get_group takes integer this returns integer
+//Implemented from module UnitVisualMods___data_groupm:
+        function s__UnitVisualMods___data_Child__get_group takes integer this returns integer
             return this
         endfunction
-//Implemented from module UnitVisualMods__data_locationm:
-        function s__UnitVisualMods__data_Child__get_location takes integer this returns integer
+//Implemented from module UnitVisualMods___data_locationm:
+        function s__UnitVisualMods___data_Child__get_location takes integer this returns integer
             return this
         endfunction
-//Implemented from module UnitVisualMods__data_rectm:
-        function s__UnitVisualMods__data_Child__get_rect takes integer this returns integer
+//Implemented from module UnitVisualMods___data_rectm:
+        function s__UnitVisualMods___data_Child__get_rect takes integer this returns integer
             return this
         endfunction
-//Implemented from module UnitVisualMods__data_boolexprm:
-        function s__UnitVisualMods__data_Child__get_boolexpr takes integer this returns integer
+//Implemented from module UnitVisualMods___data_boolexprm:
+        function s__UnitVisualMods___data_Child__get_boolexpr takes integer this returns integer
             return this
         endfunction
-//Implemented from module UnitVisualMods__data_soundm:
-        function s__UnitVisualMods__data_Child__get_sound takes integer this returns integer
+//Implemented from module UnitVisualMods___data_soundm:
+        function s__UnitVisualMods___data_Child__get_sound takes integer this returns integer
             return this
         endfunction
-//Implemented from module UnitVisualMods__data_effectm:
-        function s__UnitVisualMods__data_Child__get_effect takes integer this returns integer
+//Implemented from module UnitVisualMods___data_effectm:
+        function s__UnitVisualMods___data_Child__get_effect takes integer this returns integer
             return this
         endfunction
-//Implemented from module UnitVisualMods__data_unitpoolm:
-        function s__UnitVisualMods__data_Child__get_unitpool takes integer this returns integer
+//Implemented from module UnitVisualMods___data_unitpoolm:
+        function s__UnitVisualMods___data_Child__get_unitpool takes integer this returns integer
             return this
         endfunction
-//Implemented from module UnitVisualMods__data_itempoolm:
-        function s__UnitVisualMods__data_Child__get_itempool takes integer this returns integer
+//Implemented from module UnitVisualMods___data_itempoolm:
+        function s__UnitVisualMods___data_Child__get_itempool takes integer this returns integer
             return this
         endfunction
-//Implemented from module UnitVisualMods__data_questm:
-        function s__UnitVisualMods__data_Child__get_quest takes integer this returns integer
+//Implemented from module UnitVisualMods___data_questm:
+        function s__UnitVisualMods___data_Child__get_quest takes integer this returns integer
             return this
         endfunction
-//Implemented from module UnitVisualMods__data_questitemm:
-        function s__UnitVisualMods__data_Child__get_questitem takes integer this returns integer
+//Implemented from module UnitVisualMods___data_questitemm:
+        function s__UnitVisualMods___data_Child__get_questitem takes integer this returns integer
             return this
         endfunction
-//Implemented from module UnitVisualMods__data_defeatconditionm:
-        function s__UnitVisualMods__data_Child__get_defeatcondition takes integer this returns integer
+//Implemented from module UnitVisualMods___data_defeatconditionm:
+        function s__UnitVisualMods___data_Child__get_defeatcondition takes integer this returns integer
             return this
         endfunction
-//Implemented from module UnitVisualMods__data_timerdialogm:
-        function s__UnitVisualMods__data_Child__get_timerdialog takes integer this returns integer
+//Implemented from module UnitVisualMods___data_timerdialogm:
+        function s__UnitVisualMods___data_Child__get_timerdialog takes integer this returns integer
             return this
         endfunction
-//Implemented from module UnitVisualMods__data_leaderboardm:
-        function s__UnitVisualMods__data_Child__get_leaderboard takes integer this returns integer
+//Implemented from module UnitVisualMods___data_leaderboardm:
+        function s__UnitVisualMods___data_Child__get_leaderboard takes integer this returns integer
             return this
         endfunction
-//Implemented from module UnitVisualMods__data_multiboardm:
-        function s__UnitVisualMods__data_Child__get_multiboard takes integer this returns integer
+//Implemented from module UnitVisualMods___data_multiboardm:
+        function s__UnitVisualMods___data_Child__get_multiboard takes integer this returns integer
             return this
         endfunction
-//Implemented from module UnitVisualMods__data_multiboarditemm:
-        function s__UnitVisualMods__data_Child__get_multiboarditem takes integer this returns integer
+//Implemented from module UnitVisualMods___data_multiboarditemm:
+        function s__UnitVisualMods___data_Child__get_multiboarditem takes integer this returns integer
             return this
         endfunction
-//Implemented from module UnitVisualMods__data_trackablem:
-        function s__UnitVisualMods__data_Child__get_trackable takes integer this returns integer
+//Implemented from module UnitVisualMods___data_trackablem:
+        function s__UnitVisualMods___data_Child__get_trackable takes integer this returns integer
             return this
         endfunction
-//Implemented from module UnitVisualMods__data_dialogm:
-        function s__UnitVisualMods__data_Child__get_dialog takes integer this returns integer
+//Implemented from module UnitVisualMods___data_dialogm:
+        function s__UnitVisualMods___data_Child__get_dialog takes integer this returns integer
             return this
         endfunction
-//Implemented from module UnitVisualMods__data_buttonm:
-        function s__UnitVisualMods__data_Child__get_button takes integer this returns integer
+//Implemented from module UnitVisualMods___data_buttonm:
+        function s__UnitVisualMods___data_Child__get_button takes integer this returns integer
             return this
         endfunction
-//Implemented from module UnitVisualMods__data_texttagm:
-        function s__UnitVisualMods__data_Child__get_texttag takes integer this returns integer
+//Implemented from module UnitVisualMods___data_texttagm:
+        function s__UnitVisualMods___data_Child__get_texttag takes integer this returns integer
             return this
         endfunction
-//Implemented from module UnitVisualMods__data_lightningm:
-        function s__UnitVisualMods__data_Child__get_lightning takes integer this returns integer
+//Implemented from module UnitVisualMods___data_lightningm:
+        function s__UnitVisualMods___data_Child__get_lightning takes integer this returns integer
             return this
         endfunction
-//Implemented from module UnitVisualMods__data_imagem:
-        function s__UnitVisualMods__data_Child__get_image takes integer this returns integer
+//Implemented from module UnitVisualMods___data_imagem:
+        function s__UnitVisualMods___data_Child__get_image takes integer this returns integer
             return this
         endfunction
-//Implemented from module UnitVisualMods__data_ubersplatm:
-        function s__UnitVisualMods__data_Child__get_ubersplat takes integer this returns integer
+//Implemented from module UnitVisualMods___data_ubersplatm:
+        function s__UnitVisualMods___data_Child__get_ubersplat takes integer this returns integer
             return this
         endfunction
-//Implemented from module UnitVisualMods__data_regionm:
-        function s__UnitVisualMods__data_Child__get_region takes integer this returns integer
+//Implemented from module UnitVisualMods___data_regionm:
+        function s__UnitVisualMods___data_Child__get_region takes integer this returns integer
             return this
         endfunction
-//Implemented from module UnitVisualMods__data_fogstatem:
-        function s__UnitVisualMods__data_Child__get_fogstate takes integer this returns integer
+//Implemented from module UnitVisualMods___data_fogstatem:
+        function s__UnitVisualMods___data_Child__get_fogstate takes integer this returns integer
             return this
         endfunction
-//Implemented from module UnitVisualMods__data_fogmodifierm:
-        function s__UnitVisualMods__data_Child__get_fogmodifier takes integer this returns integer
+//Implemented from module UnitVisualMods___data_fogmodifierm:
+        function s__UnitVisualMods___data_Child__get_fogmodifier takes integer this returns integer
             return this
         endfunction
-//Implemented from module UnitVisualMods__data_hashtablem:
-        function s__UnitVisualMods__data_Child__get_hashtable takes integer this returns integer
+//Implemented from module UnitVisualMods___data_hashtablem:
+        function s__UnitVisualMods___data_Child__get_hashtable takes integer this returns integer
             return this
         endfunction
-
-   
-
-        function s__UnitVisualMods__data_Child__getindex takes integer this,integer key returns integer
-            return LoadInteger((UnitVisualMods__hashTable), this, key) // INLINED!!
-        endfunction
-
-
-
-
 
    
-    function s__UnitVisualMods__data_Child__setindex takes integer this,integer key,integer tb returns nothing
-        call SaveInteger((UnitVisualMods__hashTable), this, key, tb) // INLINED!!
+
+        function s__UnitVisualMods___data_Child__getindex takes integer this,integer key returns integer
+            return LoadInteger((UnitVisualMods___hashTable), this, key) // INLINED!!
+        endfunction
+
+
+
+
+
+   
+    function s__UnitVisualMods___data_Child__setindex takes integer this,integer key,integer tb returns nothing
+        call SaveInteger((UnitVisualMods___hashTable), this, key, tb) // INLINED!!
     endfunction
    
-    function s__UnitVisualMods__data_Child_has takes integer this,integer key returns boolean
-        return HaveSavedInteger((UnitVisualMods__hashTable), this, key) // INLINED!!
+    function s__UnitVisualMods___data_Child_has takes integer this,integer key returns boolean
+        return HaveSavedInteger((UnitVisualMods___hashTable), this, key) // INLINED!!
     endfunction
    
-    function s__UnitVisualMods__data_Child_remove takes integer this,integer key returns nothing
-        call RemoveSavedInteger((UnitVisualMods__hashTable), this, key) // INLINED!!
+    function s__UnitVisualMods___data_Child_remove takes integer this,integer key returns nothing
+        call RemoveSavedInteger((UnitVisualMods___hashTable), this, key) // INLINED!!
     endfunction
    
-    function s__UnitVisualMods__data_Child_flush takes integer this returns nothing
-        call FlushChildHashtable((UnitVisualMods__hashTable), this) // INLINED!!
+    function s__UnitVisualMods___data_Child_flush takes integer this returns nothing
+        call FlushChildHashtable((UnitVisualMods___hashTable), this) // INLINED!!
     endfunction
 
 //end of: DeclareParentHashtableWrapperModule("hashTable","true", "data","private")
@@ -8021,21 +8253,21 @@ endfunction
 
 
 
-//Implemented from module UnitVisualMods__data_ParentHashtableWrapper:
-    function s__UnitVisualMods__data__staticgetindex takes integer key returns integer
+//Implemented from module UnitVisualMods___data_ParentHashtableWrapper:
+    function s__UnitVisualMods___data__staticgetindex takes integer key returns integer
         return key
     endfunction
     
-    function s__UnitVisualMods__data_flushChild takes integer key returns nothing
-        call FlushChildHashtable((UnitVisualMods__hashTable), key) // INLINED!!
+    function s__UnitVisualMods___data_flushChild takes integer key returns nothing
+        call FlushChildHashtable((UnitVisualMods___hashTable), key) // INLINED!!
     endfunction
     
-    function s__UnitVisualMods__data_flush takes nothing returns nothing
-        call FlushParentHashtable((UnitVisualMods__hashTable)) // INLINED!!
+    function s__UnitVisualMods___data_flush takes nothing returns nothing
+        call FlushParentHashtable((UnitVisualMods___hashTable)) // INLINED!!
     endfunction
     
-    function s__UnitVisualMods__data_hashtable takes nothing returns hashtable
-        return (UnitVisualMods__hashTable) // INLINED!!
+    function s__UnitVisualMods___data_hashtable takes nothing returns hashtable
+        return (UnitVisualMods___hashTable) // INLINED!!
     endfunction
 
 
@@ -8070,11 +8302,11 @@ endfunction
 
     
     function s__TerrainType2Id__staticgetindex takes integer key returns integer
-        return (LoadInteger((UnitVisualMods__hashTable), (((s__TerrainType2Id_KEY))), (key))) // INLINED!!
+        return (LoadInteger((UnitVisualMods___hashTable), (((s__TerrainType2Id_KEY))), (key))) // INLINED!!
     endfunction
     
     function s__TerrainType2Id__staticsetindex takes integer key,integer value returns nothing
-        call SaveInteger((UnitVisualMods__hashTable), (((s__TerrainType2Id_KEY))), (key), ( value)) // INLINED!!
+        call SaveInteger((UnitVisualMods___hashTable), (((s__TerrainType2Id_KEY))), (key), ( value)) // INLINED!!
     endfunction
 
 
@@ -8083,26 +8315,26 @@ endfunction
 //==================================================================================================
 
 function GUMS_I2PlayerColor takes integer i returns playercolor
-    return UnitVisualMods__I2PC[i]
+    return UnitVisualMods___I2PC[i]
 endfunction
 
 function GUMS_AddStructureFlightAbility takes unit structure returns nothing
     local real facing
 
-    if not HaveSavedReal(UnitVisualMods__hashTable, GetHandleId(structure), - 2) then
+    if not HaveSavedReal(UnitVisualMods___hashTable, GetHandleId(structure), - 2) then
         set facing=GetUnitFacing(structure)
-        call SaveReal(UnitVisualMods__hashTable, GetHandleId(structure), - 2, facing)
+        call SaveReal(UnitVisualMods___hashTable, GetHandleId(structure), - 2, facing)
         call UnitAddAbility(structure, 'DEDF')
         call SetUnitFacingTimed(structure, facing, 0)
-        call GroupAddUnit(UnitVisualMods__loopGroup, structure)
+        call GroupAddUnit(UnitVisualMods___loopGroup, structure)
     else
         call UnitAddAbility(structure, 'DEDF')
-        call SetUnitFacingTimed(structure, LoadReal(UnitVisualMods__hashTable, GetHandleId(structure), - 2), 0)
+        call SetUnitFacingTimed(structure, LoadReal(UnitVisualMods___hashTable, GetHandleId(structure), - 2), 0)
     endif
 endfunction
 
 function GUMS_RegisterImmovableUnit takes unit whichUnit returns nothing
-    call GroupAddUnit(UnitVisualMods__loopGroup, whichUnit)
+    call GroupAddUnit(UnitVisualMods___loopGroup, whichUnit)
 endfunction
 
 //////////////////////////////////////////////////////
@@ -8122,11 +8354,11 @@ endfunction
 //CONSTANT FUNCTIONS FOR HASHTABLE ADDRESSES
 
 function GUMS_GetUnitSelectionType takes unit whichUnit returns integer
-    return LoadInteger(UnitVisualMods__hashTable, GetHandleId(whichUnit), UnitVisualMods__SELECT)
+    return LoadInteger(UnitVisualMods___hashTable, GetHandleId(whichUnit), UnitVisualMods___SELECT)
 endfunction
 
 function GUMS_GetTerrainTileIndex takes integer terrainType returns integer
-    return (LoadInteger((UnitVisualMods__hashTable), (((s__TerrainType2Id_KEY))), ((terrainType)))) // INLINED!!
+    return (LoadInteger((UnitVisualMods___hashTable), (((s__TerrainType2Id_KEY))), ((terrainType)))) // INLINED!!
 endfunction
 //==========================================
 //GUMS SELECTION TYPE CONSTANTS
@@ -8258,26 +8490,26 @@ function GUMSGroupFunction takes nothing returns nothing
     
     
     //Check if unit is having it's facing changed and apply values accordingly
-    if not HaveSavedReal(UnitVisualMods__hashTable, unitId, - 2) then
+    if not HaveSavedReal(UnitVisualMods___hashTable, unitId, - 2) then
         set face=GetUnitFacing(enumUnit)
         set removeReal=false
     else
-        set face=LoadReal(UnitVisualMods__hashTable, unitId, - 2)
+        set face=LoadReal(UnitVisualMods___hashTable, unitId, - 2)
         set removeReal=true
     endif
     
     //Move unit to it's own position to fix flying height and facing
-    if not HaveSavedInteger(UnitVisualMods__hashTable, unitId, - 1) then
-        call SaveInteger(UnitVisualMods__hashTable, unitId, - 1, 0)
+    if not HaveSavedInteger(UnitVisualMods___hashTable, unitId, - 1) then
+        call SaveInteger(UnitVisualMods___hashTable, unitId, - 1, 0)
         call SetUnitPosition(enumUnit, GetUnitX(enumUnit), GetUnitY(enumUnit))
     elseif GetUnitFacing(enumUnit) < face - 0.001 or GetUnitFacing(enumUnit) > face + 0.001 then
         call SetUnitPosition(enumUnit, GetUnitX(enumUnit), GetUnitY(enumUnit))
     else
-        call RemoveSavedInteger(UnitVisualMods__hashTable, unitId, - 1)
+        call RemoveSavedInteger(UnitVisualMods___hashTable, unitId, - 1)
         if removeReal then //Not sure if removing unexisting stuff can cause crashes, but might as well avoid it
-            call RemoveSavedReal(UnitVisualMods__hashTable, unitId, - 2)
+            call RemoveSavedReal(UnitVisualMods___hashTable, unitId, - 2)
         endif
-        call GroupRemoveUnit(UnitVisualMods__loopGroup, enumUnit)
+        call GroupRemoveUnit(UnitVisualMods___loopGroup, enumUnit)
         call SetUnitPosition(enumUnit, GetUnitX(enumUnit), GetUnitY(enumUnit))
     endif
 
@@ -8286,7 +8518,7 @@ endfunction
 
 //THIS FUNCTION IS RUN ON A TIMER THAT CALLS THE FUNCTION ABOVE
 function GUMSTimerFunction takes nothing returns nothing
-    call ForGroup(UnitVisualMods__loopGroup, function GUMSGroupFunction)
+    call ForGroup(UnitVisualMods___loopGroup, function GUMSGroupFunction)
 endfunction
 //==========================================
 
@@ -8295,8 +8527,8 @@ endfunction
 //==========================================
 
 function GUMSClearUnitData takes unit whichUnit returns nothing
-    call GroupRemoveUnit(UnitVisualMods__loopGroup, whichUnit)
-    call FlushChildHashtable(UnitVisualMods__hashTable, GetHandleId(whichUnit))
+    call GroupRemoveUnit(UnitVisualMods___loopGroup, whichUnit)
+    call FlushChildHashtable(UnitVisualMods___hashTable, GetHandleId(whichUnit))
 endfunction
 
 //==========================================
@@ -8305,7 +8537,7 @@ endfunction
 //Set Scale
 function GUMSSetUnitScale takes unit whichUnit,real scale returns nothing
     call SetUnitScale(whichUnit, scale, scale, scale)
-    call SaveReal(UnitVisualMods__hashTable, GetHandleId(whichUnit), UnitVisualMods__SCALE, scale)
+    call SaveReal(UnitVisualMods___hashTable, GetHandleId(whichUnit), UnitVisualMods___SCALE, scale)
 endfunction
 
 //Set Vertex Color
@@ -8316,25 +8548,25 @@ function GUMSSetUnitVertexColor takes unit whichUnit,real red,real green,real bl
     local integer intAlpha= R2I(2.55 * ( 100. - trans ))
     
     call SetUnitVertexColor(whichUnit, intRed, intGreen, intBlue, intAlpha)
-    call SaveInteger(UnitVisualMods__hashTable, GetHandleId(whichUnit), UnitVisualMods__RED, intRed)
-    call SaveInteger(UnitVisualMods__hashTable, GetHandleId(whichUnit), UnitVisualMods__GREEN, intGreen)
-    call SaveInteger(UnitVisualMods__hashTable, GetHandleId(whichUnit), UnitVisualMods__BLUE, intBlue)
-    call SaveInteger(UnitVisualMods__hashTable, GetHandleId(whichUnit), UnitVisualMods__ALPHA, intAlpha)
+    call SaveInteger(UnitVisualMods___hashTable, GetHandleId(whichUnit), UnitVisualMods___RED, intRed)
+    call SaveInteger(UnitVisualMods___hashTable, GetHandleId(whichUnit), UnitVisualMods___GREEN, intGreen)
+    call SaveInteger(UnitVisualMods___hashTable, GetHandleId(whichUnit), UnitVisualMods___BLUE, intBlue)
+    call SaveInteger(UnitVisualMods___hashTable, GetHandleId(whichUnit), UnitVisualMods___ALPHA, intAlpha)
 endfunction
 
 //Set Player Color (why in hell can't this be retrieved with natives?!)
 function GUMSSetUnitColor takes unit whichUnit,integer color returns nothing
     if color <= bj_MAX_PLAYER_SLOTS and color >= 1 then
-        call SaveInteger(UnitVisualMods__hashTable, GetHandleId(whichUnit), UnitVisualMods__COLOR, color)
-        call SetUnitColor(whichUnit, UnitVisualMods__I2PC[color])
+        call SaveInteger(UnitVisualMods___hashTable, GetHandleId(whichUnit), UnitVisualMods___COLOR, color)
+        call SetUnitColor(whichUnit, UnitVisualMods___I2PC[color])
     else
-        call RemoveSavedInteger(UnitVisualMods__hashTable, GetHandleId(whichUnit), UnitVisualMods__COLOR)
+        call RemoveSavedInteger(UnitVisualMods___hashTable, GetHandleId(whichUnit), UnitVisualMods___COLOR)
 //textmacro instance: GUMS_Config_ResetColorFunc()
     // DEFAULT
     //call SetUnitColor(whichUnit, GetPlayerColor(GetOwningPlayer(whichUnit)))
     
     // LOP
-    call SetUnitColor(whichUnit, UnitVisualMods__I2PC[udg_System_PlayerColor[GetPlayerId(GetOwningPlayer(whichUnit)) + 1]])
+    call SetUnitColor(whichUnit, UnitVisualMods___I2PC[udg_System_PlayerColor[GetPlayerId(GetOwningPlayer(whichUnit)) + 1]])
 //end of: GUMS_Config_ResetColorFunc()
     endif
 endfunction
@@ -8342,21 +8574,21 @@ endfunction
 //Set Animation Speed
 function GUMSSetUnitAnimSpeed takes unit whichUnit,real speedMultiplier returns nothing
     call SetUnitTimeScale(whichUnit, speedMultiplier)
-    call SaveReal(UnitVisualMods__hashTable, GetHandleId(whichUnit), UnitVisualMods__ASPEED, speedMultiplier)
+    call SaveReal(UnitVisualMods___hashTable, GetHandleId(whichUnit), UnitVisualMods___ASPEED, speedMultiplier)
 endfunction
 
 //Set Animation Tag
 function GUMSAddUnitAnimationTag takes unit whichUnit,string whichTag returns nothing
     local integer unitId= GetHandleId(whichUnit)
-    local string oldTag= GUMSConvertTags(LoadStr(UnitVisualMods__hashTable, unitId, UnitVisualMods__ATAG))
-    call RemoveSavedString(UnitVisualMods__hashTable, unitId, UnitVisualMods__ATAG)
+    local string oldTag= GUMSConvertTags(LoadStr(UnitVisualMods___hashTable, unitId, UnitVisualMods___ATAG))
+    call RemoveSavedString(UnitVisualMods___hashTable, unitId, UnitVisualMods___ATAG)
     call AddUnitAnimationProperties(whichUnit, oldTag, false)
     if whichTag != "" then
         
         call AddUnitAnimationProperties(whichUnit, whichTag, true)
         set whichTag=GUMSConvertTags(whichTag)
         //call BJDebugMsg(whichTag)
-        call SaveStr(UnitVisualMods__hashTable, unitId, UnitVisualMods__ATAG, whichTag)
+        call SaveStr(UnitVisualMods___hashTable, unitId, UnitVisualMods___ATAG, whichTag)
     endif
 endfunction
 
@@ -8379,99 +8611,99 @@ endfunction
     endfunction
     
     function s__UnitVisuals_hasScale takes integer this returns boolean
-        return (HaveSavedReal((UnitVisualMods__hashTable), (((((this))))), (UnitVisualMods__SCALE))) // INLINED!!
+        return (HaveSavedReal((UnitVisualMods___hashTable), (((((this))))), (UnitVisualMods___SCALE))) // INLINED!!
     endfunction
     
     function s__UnitVisuals_hasVertexColor takes integer this,integer whichChannel returns boolean
-        return (HaveSavedInteger((UnitVisualMods__hashTable), (((this))), (whichChannel))) // INLINED!!
+        return (HaveSavedInteger((UnitVisualMods___hashTable), (((this))), (whichChannel))) // INLINED!!
     endfunction
     
     function s__UnitVisuals_hasColor takes integer this returns boolean
-        return (HaveSavedInteger((UnitVisualMods__hashTable), (((this))), (UnitVisualMods__COLOR))) // INLINED!!
+        return (HaveSavedInteger((UnitVisualMods___hashTable), (((this))), (UnitVisualMods___COLOR))) // INLINED!!
     endfunction
     
     function s__UnitVisuals_hasAnimSpeed takes integer this returns boolean
-        return (HaveSavedReal((UnitVisualMods__hashTable), (((((this))))), (UnitVisualMods__ASPEED))) // INLINED!!
+        return (HaveSavedReal((UnitVisualMods___hashTable), (((((this))))), (UnitVisualMods___ASPEED))) // INLINED!!
     endfunction
     
     function s__UnitVisuals_hasAnimTag takes integer this returns boolean
-        return (HaveSavedString((UnitVisualMods__hashTable), (((((this))))), (UnitVisualMods__ATAG))) // INLINED!!
+        return (HaveSavedString((UnitVisualMods___hashTable), (((((this))))), (UnitVisualMods___ATAG))) // INLINED!!
     endfunction
     
     function s__UnitVisuals_getScale takes integer this returns string
-        if (HaveSavedReal((UnitVisualMods__hashTable), ((((((this)))))), (UnitVisualMods__SCALE))) then // INLINED!!
-            return R2S((LoadReal((UnitVisualMods__hashTable), (((((this))))), (UnitVisualMods__SCALE)))) // INLINED!!
+        if (HaveSavedReal((UnitVisualMods___hashTable), ((((((this)))))), (UnitVisualMods___SCALE))) then // INLINED!!
+            return R2S((LoadReal((UnitVisualMods___hashTable), (((((this))))), (UnitVisualMods___SCALE)))) // INLINED!!
         else
             return "D" //D stands for default
         endif
     endfunction
     
     function s__UnitVisuals_getVertexColor takes integer this,integer r1g2b3a4 returns string
-        if (HaveSavedInteger((UnitVisualMods__hashTable), ((((this)))), ((r1g2b3a4)))) then // INLINED!!
-            return I2S((LoadInteger((UnitVisualMods__hashTable), (((this))), (r1g2b3a4)))) // INLINED!!
+        if (HaveSavedInteger((UnitVisualMods___hashTable), ((((this)))), ((r1g2b3a4)))) then // INLINED!!
+            return I2S((LoadInteger((UnitVisualMods___hashTable), (((this))), (r1g2b3a4)))) // INLINED!!
         else
             return "D"
         endif
     endfunction
     
     function s__UnitVisuals_getVertexRed takes integer this returns string
-        return s__UnitVisuals_getVertexColor(this,UnitVisualMods__RED)
+        return s__UnitVisuals_getVertexColor(this,UnitVisualMods___RED)
     endfunction
     
     function s__UnitVisuals_getVertexGreen takes integer this returns string
-        return s__UnitVisuals_getVertexColor(this,UnitVisualMods__GREEN)
+        return s__UnitVisuals_getVertexColor(this,UnitVisualMods___GREEN)
     endfunction
     
     function s__UnitVisuals_getVertexBlue takes integer this returns string
-        return s__UnitVisuals_getVertexColor(this,UnitVisualMods__BLUE)
+        return s__UnitVisuals_getVertexColor(this,UnitVisualMods___BLUE)
     endfunction
     
     function s__UnitVisuals_getVertexAlpha takes integer this returns string
-        return s__UnitVisuals_getVertexColor(this,UnitVisualMods__ALPHA)
+        return s__UnitVisuals_getVertexColor(this,UnitVisualMods___ALPHA)
     endfunction
     
     function s__UnitVisuals_getColor takes integer this returns string
-        if (HaveSavedInteger((UnitVisualMods__hashTable), ((((this)))), (UnitVisualMods__COLOR))) then // INLINED!!
-            return I2S((LoadInteger((UnitVisualMods__hashTable), (((this))), (UnitVisualMods__COLOR)))) // INLINED!!
+        if (HaveSavedInteger((UnitVisualMods___hashTable), ((((this)))), (UnitVisualMods___COLOR))) then // INLINED!!
+            return I2S((LoadInteger((UnitVisualMods___hashTable), (((this))), (UnitVisualMods___COLOR)))) // INLINED!!
         else
             return "D"
         endif
     endfunction
     
     function s__UnitVisuals_getAnimSpeed takes integer this returns string
-        if (HaveSavedReal((UnitVisualMods__hashTable), ((((((this)))))), (UnitVisualMods__ASPEED))) then // INLINED!!
-            return R2S((LoadReal((UnitVisualMods__hashTable), (((((this))))), (UnitVisualMods__ASPEED)))) // INLINED!!
+        if (HaveSavedReal((UnitVisualMods___hashTable), ((((((this)))))), (UnitVisualMods___ASPEED))) then // INLINED!!
+            return R2S((LoadReal((UnitVisualMods___hashTable), (((((this))))), (UnitVisualMods___ASPEED)))) // INLINED!!
         else
             return "D"
         endif
     endfunction
     
     function s__UnitVisuals_getAnimTag takes integer this returns string
-        if (HaveSavedString((UnitVisualMods__hashTable), ((((((this)))))), (UnitVisualMods__ATAG))) then // INLINED!!
-            return (LoadStr((UnitVisualMods__hashTable), (((((this))))), (UnitVisualMods__ATAG))) // INLINED!!
+        if (HaveSavedString((UnitVisualMods___hashTable), ((((((this)))))), (UnitVisualMods___ATAG))) then // INLINED!!
+            return (LoadStr((UnitVisualMods___hashTable), (((((this))))), (UnitVisualMods___ATAG))) // INLINED!!
         else
             return "D"
         endif
     endfunction
 
 function GUMS_HaveSavedScale takes unit whichUnit returns boolean
-    return HaveSavedReal(UnitVisualMods__hashTable, GetHandleId(whichUnit), UnitVisualMods__SCALE)
+    return HaveSavedReal(UnitVisualMods___hashTable, GetHandleId(whichUnit), UnitVisualMods___SCALE)
 endfunction
 
 function GUMS_HaveSavedVertexColor takes unit whichUnit,integer r1b2g3a4 returns boolean
-    return HaveSavedInteger(UnitVisualMods__hashTable, GetHandleId(whichUnit), r1b2g3a4)
+    return HaveSavedInteger(UnitVisualMods___hashTable, GetHandleId(whichUnit), r1b2g3a4)
 endfunction
 
 function GUMS_HaveSavedColor takes unit whichUnit returns boolean
-    return HaveSavedInteger(UnitVisualMods__hashTable, GetHandleId(whichUnit), UnitVisualMods__COLOR)
+    return HaveSavedInteger(UnitVisualMods___hashTable, GetHandleId(whichUnit), UnitVisualMods___COLOR)
 endfunction
 
 function GUMS_HaveSavedAnimSpeed takes unit whichUnit returns boolean
-    return HaveSavedReal(UnitVisualMods__hashTable, GetHandleId(whichUnit), UnitVisualMods__ASPEED)
+    return HaveSavedReal(UnitVisualMods___hashTable, GetHandleId(whichUnit), UnitVisualMods___ASPEED)
 endfunction
 
 function GUMS_HaveSavedAnimationTag takes unit whichUnit returns boolean
-    return HaveSavedString(UnitVisualMods__hashTable, GetHandleId(whichUnit), UnitVisualMods__ATAG)
+    return HaveSavedString(UnitVisualMods___hashTable, GetHandleId(whichUnit), UnitVisualMods___ATAG)
 endfunction 
 
 //THESE FUNCTIONS RETRIEVE THE SAVED VALUES IN THE HASHTABLE OR RETURN "D" IF THERE IS NO SAVED VALUE
@@ -8507,35 +8739,35 @@ endfunction
 ///////////////////////////
 
 function GUMSUnitHasCustomName takes integer unitHandle returns boolean
-    return HaveSavedString(UnitVisualMods__hashTable, unitHandle, UnitVisualMods__NAME)
+    return HaveSavedString(UnitVisualMods___hashTable, unitHandle, UnitVisualMods___NAME)
 endfunction
 
 function GUMSGetDefaultName takes integer unitHandle returns string
-    return LoadStr(UnitVisualMods__hashTable, unitHandle, UnitVisualMods__NAME)
+    return LoadStr(UnitVisualMods___hashTable, unitHandle, UnitVisualMods___NAME)
 endfunction
 
 function GUMSResetUnitName takes unit whichUnit returns nothing
     local integer unitHandle= GetHandleId(whichUnit)
     
     if IsUnitType(whichUnit, UNIT_TYPE_HERO) then
-        call BlzSetHeroProperName(whichUnit, (LoadStr(UnitVisualMods__hashTable, (unitHandle), UnitVisualMods__NAME))) // INLINED!!
+        call BlzSetHeroProperName(whichUnit, (LoadStr(UnitVisualMods___hashTable, (unitHandle), UnitVisualMods___NAME))) // INLINED!!
     else
-        call BlzSetUnitName(whichUnit, (LoadStr(UnitVisualMods__hashTable, (unitHandle), UnitVisualMods__NAME))) // INLINED!!
+        call BlzSetUnitName(whichUnit, (LoadStr(UnitVisualMods___hashTable, (unitHandle), UnitVisualMods___NAME))) // INLINED!!
     endif
     
-    call RemoveSavedString(UnitVisualMods__hashTable, unitHandle, UnitVisualMods__NAME)
+    call RemoveSavedString(UnitVisualMods___hashTable, unitHandle, UnitVisualMods___NAME)
 endfunction
 
 function GUMSSetUnitName takes unit whichUnit,string name returns nothing
     if name != "" then
         if IsUnitType(whichUnit, UNIT_TYPE_HERO) then
-            if not (HaveSavedString(UnitVisualMods__hashTable, (GetHandleId(whichUnit)), UnitVisualMods__NAME)) then // INLINED!!
-                call SaveStr(UnitVisualMods__hashTable, GetHandleId(whichUnit), UnitVisualMods__NAME, GetHeroProperName(whichUnit))
+            if not (HaveSavedString(UnitVisualMods___hashTable, (GetHandleId(whichUnit)), UnitVisualMods___NAME)) then // INLINED!!
+                call SaveStr(UnitVisualMods___hashTable, GetHandleId(whichUnit), UnitVisualMods___NAME, GetHeroProperName(whichUnit))
             endif
             call BlzSetHeroProperName(whichUnit, (("|cffffcc00") + (name) + "|r")) // INLINED!!
         else
-            if not (HaveSavedString(UnitVisualMods__hashTable, (GetHandleId(whichUnit)), UnitVisualMods__NAME)) then // INLINED!!
-                call SaveStr(UnitVisualMods__hashTable, GetHandleId(whichUnit), UnitVisualMods__NAME, GetUnitName(whichUnit))
+            if not (HaveSavedString(UnitVisualMods___hashTable, (GetHandleId(whichUnit)), UnitVisualMods___NAME)) then // INLINED!!
+                call SaveStr(UnitVisualMods___hashTable, GetHandleId(whichUnit), UnitVisualMods___NAME, GetUnitName(whichUnit))
             endif
             call BlzSetUnitName(whichUnit, (("|cffffcc00") + (name) + "|r")) // INLINED!!
         endif
@@ -8563,49 +8795,59 @@ endfunction
 // Creates a new unit and copies all the GUMS values from the old unit to the newly created one.
 // bj_lastCreatedUnit is set to the newly created unit.
 // If the specified newType is nonpositive, then the created unit will have the same type as the copied one
-function GUMSCopyUnit takes unit whichUnit,player owner,integer newType returns nothing
+function GUMSCopyUnit takes unit whichUnit,player owner,integer newType returns unit
     local real fangle= GetUnitFacing(whichUnit)
+    local unit newUnit
+    
     if newType < 1 then
         set newType=GetUnitTypeId(whichUnit)
     endif
-    set bj_lastCreatedUnit=CreateUnit(owner, newType, GetUnitX(whichUnit), GetUnitY(whichUnit), fangle)
-    if UnitAddAbility(bj_lastCreatedUnit, 'Amrf') then
-        call UnitRemoveAbility(bj_lastCreatedUnit, 'Amrf')
+    set newUnit=CreateUnit(owner, newType, GetUnitX(whichUnit), GetUnitY(whichUnit), fangle)
+    if UnitAddAbility(newUnit, 'Amrf') then
+        call UnitRemoveAbility(newUnit, 'Amrf')
     endif
-    call SetUnitFlyHeight(bj_lastCreatedUnit, GetUnitFlyHeight(whichUnit), 0)
+    call SetUnitFlyHeight(newUnit, GetUnitFlyHeight(whichUnit), 0)
     //Fix Flying (TLLOP SPECIFIC)
-    if GetUnitAbilityLevel(bj_lastCreatedUnit, 'Amov') == 0 then
-        if IsUnitType(bj_lastCreatedUnit, UNIT_TYPE_STRUCTURE) then
+    if GetUnitAbilityLevel(newUnit, 'Amov') == 0 then
+        if IsUnitType(newUnit, UNIT_TYPE_STRUCTURE) then
             if GetUnitFlyHeight(whichUnit) > 0.5 then
-                call SaveReal(UnitVisualMods__hashTable, GetHandleId(bj_lastCreatedUnit), - 2, fangle)
-                call UnitAddAbility(bj_lastCreatedUnit, 'DEDF')
-                call IssueImmediateOrder(bj_lastCreatedUnit, "unroot")
-                call SetUnitFacingTimed(bj_lastCreatedUnit, fangle, 0)
+                call SaveReal(UnitVisualMods___hashTable, GetHandleId(newUnit), - 2, fangle)
+                call UnitAddAbility(newUnit, 'DEDF')
+                call IssueImmediateOrder(newUnit, "unroot")
+                call SetUnitFacingTimed(newUnit, fangle, 0)
             endif
         endif
-        call GroupAddUnit(UnitVisualMods__loopGroup, bj_lastCreatedUnit)
+        call GroupAddUnit(UnitVisualMods___loopGroup, newUnit)
     endif
     //EndofFix
     //FIX Flying (ANY MAP)
-//    if GetUnitAbilityLevel(bj_lastCreatedUnit, 'Amov') == 0 then
-//        call GroupAddUnit(loopGroup, bj_lastCreatedUnit)
+//    if GetUnitAbilityLevel(newUnit, 'Amov') == 0 then
+//        call GroupAddUnit(loopGroup, newUnit)
 //    endif
     //EndofFix
         if (s__UnitVisuals_getScale((GetHandleId(((whichUnit)))))) != "D" then // INLINED!!
-        call GUMSSetUnitScale(bj_lastCreatedUnit , S2R((s__UnitVisuals_getScale((GetHandleId(((whichUnit)))))))) // INLINED!!
+        call GUMSSetUnitScale(newUnit , S2R((s__UnitVisuals_getScale((GetHandleId(((whichUnit)))))))) // INLINED!!
     endif
     if (s__UnitVisuals_getVertexColor((GetHandleId(((whichUnit )))),( 1))) != "D" then // INLINED!!
-        call GUMSSetUnitVertexColor(bj_lastCreatedUnit , S2I((s__UnitVisuals_getVertexColor((GetHandleId(((whichUnit )))),( 1)))) / 2.55 , S2I((s__UnitVisuals_getVertexColor((GetHandleId(((whichUnit )))),( 2)))) / 2.55 , S2I((s__UnitVisuals_getVertexColor((GetHandleId(((whichUnit )))),( 3)))) / 2.55 , ( 255 - S2I((s__UnitVisuals_getVertexColor((GetHandleId(((whichUnit )))),( 4)))) ) / 2.55) // INLINED!!
+        call GUMSSetUnitVertexColor(newUnit , S2I((s__UnitVisuals_getVertexColor((GetHandleId(((whichUnit )))),( 1)))) / 2.55 , S2I((s__UnitVisuals_getVertexColor((GetHandleId(((whichUnit )))),( 2)))) / 2.55 , S2I((s__UnitVisuals_getVertexColor((GetHandleId(((whichUnit )))),( 3)))) / 2.55 , ( 255 - S2I((s__UnitVisuals_getVertexColor((GetHandleId(((whichUnit )))),( 4)))) ) / 2.55) // INLINED!!
     endif
     if (s__UnitVisuals_getColor((GetHandleId(((whichUnit)))))) != "D" then // INLINED!!
-        call GUMSSetUnitColor(bj_lastCreatedUnit , S2I((s__UnitVisuals_getColor((GetHandleId(((whichUnit)))))))) // INLINED!!
+        call GUMSSetUnitColor(newUnit , S2I((s__UnitVisuals_getColor((GetHandleId(((whichUnit)))))))) // INLINED!!
     endif
     if (s__UnitVisuals_getAnimSpeed((GetHandleId(((whichUnit)))))) != "D" then // INLINED!!
-        call GUMSSetUnitAnimSpeed(bj_lastCreatedUnit , S2R((s__UnitVisuals_getAnimSpeed((GetHandleId(((whichUnit)))))))) // INLINED!!
+        call GUMSSetUnitAnimSpeed(newUnit , S2R((s__UnitVisuals_getAnimSpeed((GetHandleId(((whichUnit)))))))) // INLINED!!
     endif
     if (s__UnitVisuals_getAnimTag((GetHandleId(((whichUnit)))))) != "D" then // INLINED!!
-        call GUMSAddUnitAnimationTag(bj_lastCreatedUnit , GUMSConvertTags((s__UnitVisuals_getAnimTag((GetHandleId(((whichUnit)))))))) // INLINED!!
+        call GUMSAddUnitAnimationTag(newUnit , GUMSConvertTags((s__UnitVisuals_getAnimTag((GetHandleId(((whichUnit)))))))) // INLINED!!
     endif
+    
+    set bj_lastCreatedUnit=newUnit
+    set newUnit=null
+    return bj_lastCreatedUnit
+endfunction
+
+function GUMSCopyUnitSameType takes unit whichUnit,player owner returns unit
+    return GUMSCopyUnit(whichUnit , owner , 0)
 endfunction
 
 // Copies all GUMS values from one source unit to a target unit.
@@ -8620,7 +8862,7 @@ function GUMSCopyValues takes unit source,unit target returns nothing
     if GetUnitAbilityLevel(target, 'Amov') == 0 then
         if IsUnitType(target, UNIT_TYPE_STRUCTURE) then
             if GetUnitFlyHeight(source) > 0.5 then
-            call SaveReal(UnitVisualMods__hashTable, GetHandleId(target), - 2, fangle)
+            call SaveReal(UnitVisualMods___hashTable, GetHandleId(target), - 2, fangle)
                 if UnitAddAbility(target, 'DEDF') then
                     
                 endif
@@ -8628,7 +8870,7 @@ function GUMSCopyValues takes unit source,unit target returns nothing
                 call SetUnitFacingTimed(target, fangle, 0)
             endif
         endif
-        call GroupAddUnit(UnitVisualMods__loopGroup, target)
+        call GroupAddUnit(UnitVisualMods___loopGroup, target)
     endif
     //EndofFix
     //FIX Flying (ANY MAP)
@@ -8636,20 +8878,20 @@ function GUMSCopyValues takes unit source,unit target returns nothing
 //        call GroupAddUnit(loopGroup, bj_lastCreatedUnit)
 //    endif
     //EndofFix
-    if (HaveSavedReal((UnitVisualMods__hashTable), ((((((sourceId)))))), (UnitVisualMods__SCALE))) then // INLINED!!
-        call GUMSSetUnitScale(target , (LoadReal((UnitVisualMods__hashTable), (((((sourceId))))), (UnitVisualMods__SCALE)))) // INLINED!!
+    if (HaveSavedReal((UnitVisualMods___hashTable), ((((((sourceId)))))), (UnitVisualMods___SCALE))) then // INLINED!!
+        call GUMSSetUnitScale(target , (LoadReal((UnitVisualMods___hashTable), (((((sourceId))))), (UnitVisualMods___SCALE)))) // INLINED!!
     endif
-    if (HaveSavedInteger((UnitVisualMods__hashTable), ((((sourceId)))), ((UnitVisualMods__RED)))) then // INLINED!!
-        call GUMSSetUnitVertexColor(target , (LoadInteger((UnitVisualMods__hashTable), (((sourceId))), (UnitVisualMods__RED))) / 2.55 , (LoadInteger((UnitVisualMods__hashTable), (((sourceId))), (UnitVisualMods__GREEN))) / 2.55 , (LoadInteger((UnitVisualMods__hashTable), (((sourceId))), (UnitVisualMods__BLUE))) / 2.55 , ( 255 - (LoadInteger((UnitVisualMods__hashTable), (((sourceId))), (UnitVisualMods__ALPHA))) ) / 2.55) // INLINED!!
+    if (HaveSavedInteger((UnitVisualMods___hashTable), ((((sourceId)))), ((UnitVisualMods___RED)))) then // INLINED!!
+        call GUMSSetUnitVertexColor(target , (LoadInteger((UnitVisualMods___hashTable), (((sourceId))), (UnitVisualMods___RED))) / 2.55 , (LoadInteger((UnitVisualMods___hashTable), (((sourceId))), (UnitVisualMods___GREEN))) / 2.55 , (LoadInteger((UnitVisualMods___hashTable), (((sourceId))), (UnitVisualMods___BLUE))) / 2.55 , ( 255 - (LoadInteger((UnitVisualMods___hashTable), (((sourceId))), (UnitVisualMods___ALPHA))) ) / 2.55) // INLINED!!
     endif
-    if (HaveSavedInteger((UnitVisualMods__hashTable), ((((sourceId)))), (UnitVisualMods__COLOR))) then // INLINED!!
-        call GUMSSetUnitColor(target , (LoadInteger((UnitVisualMods__hashTable), (((sourceId))), (UnitVisualMods__COLOR)))) // INLINED!!
+    if (HaveSavedInteger((UnitVisualMods___hashTable), ((((sourceId)))), (UnitVisualMods___COLOR))) then // INLINED!!
+        call GUMSSetUnitColor(target , (LoadInteger((UnitVisualMods___hashTable), (((sourceId))), (UnitVisualMods___COLOR)))) // INLINED!!
     endif
-    if (HaveSavedReal((UnitVisualMods__hashTable), ((((((sourceId)))))), (UnitVisualMods__ASPEED))) then // INLINED!!
-        call GUMSSetUnitAnimSpeed(target , (LoadReal((UnitVisualMods__hashTable), (((((sourceId))))), (UnitVisualMods__ASPEED)))) // INLINED!!
+    if (HaveSavedReal((UnitVisualMods___hashTable), ((((((sourceId)))))), (UnitVisualMods___ASPEED))) then // INLINED!!
+        call GUMSSetUnitAnimSpeed(target , (LoadReal((UnitVisualMods___hashTable), (((((sourceId))))), (UnitVisualMods___ASPEED)))) // INLINED!!
     endif
-    if (HaveSavedString((UnitVisualMods__hashTable), ((((((sourceId)))))), (UnitVisualMods__ATAG))) then // INLINED!!
-        call GUMSAddUnitAnimationTag(target , (LoadStr((UnitVisualMods__hashTable), (((((sourceId))))), (UnitVisualMods__ATAG)))) // INLINED!!
+    if (HaveSavedString((UnitVisualMods___hashTable), ((((((sourceId)))))), (UnitVisualMods___ATAG))) then // INLINED!!
+        call GUMSAddUnitAnimationTag(target , (LoadStr((UnitVisualMods___hashTable), (((((sourceId))))), (UnitVisualMods___ATAG)))) // INLINED!!
     endif
 endfunction
 
@@ -8658,7 +8900,7 @@ endfunction
 
 function GUMSMakeUnitUnSelectable takes unit whichUnit returns nothing
     local integer unitId= GetHandleId(whichUnit)
-    local integer selectionType= LoadInteger(UnitVisualMods__hashTable, unitId, UnitVisualMods__SELECT)
+    local integer selectionType= LoadInteger(UnitVisualMods___hashTable, unitId, UnitVisualMods___SELECT)
 
     if selectionType == (2) then // INLINED!!
         return //Unit is already unselectable, do nothing.
@@ -8666,14 +8908,14 @@ function GUMSMakeUnitUnSelectable takes unit whichUnit returns nothing
 
     if UnitAddAbility(whichUnit, 'Aloc') then //Do nothing is unit has locust by default.
         call UnitRemoveAbility(whichUnit, 'Aloc')
-        call SaveInteger(UnitVisualMods__hashTable, unitId, UnitVisualMods__SELECT, (2)) // INLINED!!
+        call SaveInteger(UnitVisualMods___hashTable, unitId, UnitVisualMods___SELECT, (2)) // INLINED!!
         call SetUnitInvulnerable(whichUnit, true)
     endif
 endfunction
 
 function GUMSMakeUnitDragSelectable takes unit whichUnit returns nothing
     local integer unitId= GetHandleId(whichUnit)
-    local integer selectionType= LoadInteger(UnitVisualMods__hashTable, unitId, UnitVisualMods__SELECT)
+    local integer selectionType= LoadInteger(UnitVisualMods___hashTable, unitId, UnitVisualMods___SELECT)
 
     if selectionType == (1) then // INLINED!!
         return //Unit is already drag-selectable, do nothing.
@@ -8682,7 +8924,7 @@ function GUMSMakeUnitDragSelectable takes unit whichUnit returns nothing
     if selectionType != (2) then //Check if unit is already unselectable. // INLINED!!
         if UnitAddAbility(whichUnit, 'Aloc') then //Do nothing is unit has locust by default.
             call UnitRemoveAbility(whichUnit, 'Aloc')
-            call SaveInteger(UnitVisualMods__hashTable, unitId, UnitVisualMods__SELECT, (1)) // INLINED!!
+            call SaveInteger(UnitVisualMods___hashTable, unitId, UnitVisualMods___SELECT, (1)) // INLINED!!
         else
             return
         endif
@@ -8697,7 +8939,7 @@ endfunction
 
 function GUMSMakeUnitSelectable takes unit whichUnit returns nothing
     local integer unitId= GetHandleId(whichUnit)
-    local integer selectionType= LoadInteger(UnitVisualMods__hashTable, unitId, UnitVisualMods__SELECT)
+    local integer selectionType= LoadInteger(UnitVisualMods___hashTable, unitId, UnitVisualMods___SELECT)
     
     if selectionType == (0) then // INLINED!!
         return //Unit has not been give a special selection type, do nothing.
@@ -8715,8 +8957,8 @@ endfunction
 function GUMSSetUnitFacing takes unit whichUnit,real newAngle returns nothing
     call SetUnitPosition(whichUnit, GetUnitX(whichUnit), GetUnitY(whichUnit))
     call SetUnitFacing(whichUnit, newAngle)
-    call GroupAddUnit(UnitVisualMods__loopGroup, whichUnit)
-    call SaveReal(UnitVisualMods__hashTable, GetHandleId(whichUnit), - 2, ModuloReal(newAngle, 360))
+    call GroupAddUnit(UnitVisualMods___loopGroup, whichUnit)
+    call SaveReal(UnitVisualMods___hashTable, GetHandleId(whichUnit), - 2, ModuloReal(newAngle, 360))
 endfunction
 
 function GUMSSetUnitFlyHeight takes unit whichUnit,real newHeight returns nothing
@@ -8725,7 +8967,7 @@ function GUMSSetUnitFlyHeight takes unit whichUnit,real newHeight returns nothin
     endif
     call SetUnitFlyHeight(whichUnit, newHeight, 99999.00)
     call SetUnitPosition(whichUnit, GetUnitX(whichUnit), GetUnitY(whichUnit))
-    call GroupAddUnit(UnitVisualMods__loopGroup, whichUnit)
+    call GroupAddUnit(UnitVisualMods___loopGroup, whichUnit)
 endfunction
 
 function GUMSSetUnitVertexColorString takes unit whichUnit,string args,string separator returns nothing
@@ -8763,7 +9005,7 @@ function GUMS_FixUpgrades takes nothing returns nothing
 endfunction
 
 
-function UnitVisualMods__onInit takes nothing returns nothing
+function UnitVisualMods___onInit takes nothing returns nothing
     local trigger fixUpgrades= CreateTrigger()
     local integer i
     local timer t= CreateTimer()
@@ -8773,13 +9015,13 @@ function UnitVisualMods__onInit takes nothing returns nothing
     call TriggerAddAction(fixUpgrades, function GUMS_FixUpgrades)
     
 
-        set UnitVisualMods__hashTable=InitHashtable()
+        set UnitVisualMods___hashTable=InitHashtable()
 
     
     set i=1
     loop
         exitwhen i > bj_MAX_PLAYER_SLOTS
-        set UnitVisualMods__I2PC[i]=GetPlayerColor(Player(i - 1))
+        set UnitVisualMods___I2PC[i]=GetPlayerColor(Player(i - 1))
         set i=i + 1
     endloop
     
@@ -8788,7 +9030,7 @@ function UnitVisualMods__onInit takes nothing returns nothing
     set i=0
     loop
         exitwhen i > 15
-        call SaveInteger((UnitVisualMods__hashTable), (((s__TerrainType2Id_KEY))), ((udg_TileSystem_TILES[i])), ( ( i))) // INLINED!!
+        call SaveInteger((UnitVisualMods___hashTable), (((s__TerrainType2Id_KEY))), ((udg_TileSystem_TILES[i])), ( ( i))) // INLINED!!
         set i=i + 1
     endloop
 endfunction
@@ -8800,94 +9042,94 @@ endfunction
 
 
 //textmacro instance: TableStruct_NewStaticPrimitiveField("lastCameraX", "real")
-    function s__AutoRectEnvironment__Globals__get_lastCameraX takes nothing returns real
-        return (LoadReal(ConstTable__ht, (((((s__AutoRectEnvironment__Globals_static_members_key))))), (s__AutoRectEnvironment__Globals_lastCameraX_impl))) // INLINED!!
+    function s__AutoRectEnvironment___Globals__get_lastCameraX takes nothing returns real
+        return (LoadReal(ConstTable___ht, (((((s__AutoRectEnvironment___Globals_static_members_key))))), (s__AutoRectEnvironment___Globals_lastCameraX_impl))) // INLINED!!
     endfunction
     
-    function s__AutoRectEnvironment__Globals__set_lastCameraX takes real new_lastCameraX returns nothing
-        call SaveReal(ConstTable__ht, (((((s__AutoRectEnvironment__Globals_static_members_key))))), (s__AutoRectEnvironment__Globals_lastCameraX_impl), (( new_lastCameraX)*1.0)) // INLINED!!
+    function s__AutoRectEnvironment___Globals__set_lastCameraX takes real new_lastCameraX returns nothing
+        call SaveReal(ConstTable___ht, (((((s__AutoRectEnvironment___Globals_static_members_key))))), (s__AutoRectEnvironment___Globals_lastCameraX_impl), (( new_lastCameraX)*1.0)) // INLINED!!
     endfunction
     
-    function s__AutoRectEnvironment__Globals_lastCameraXClear takes nothing returns nothing
-        call RemoveSavedReal(ConstTable__ht, (((((s__AutoRectEnvironment__Globals_static_members_key))))), (s__AutoRectEnvironment__Globals_lastCameraX_impl)) // INLINED!!
+    function s__AutoRectEnvironment___Globals_lastCameraXClear takes nothing returns nothing
+        call RemoveSavedReal(ConstTable___ht, (((((s__AutoRectEnvironment___Globals_static_members_key))))), (s__AutoRectEnvironment___Globals_lastCameraX_impl)) // INLINED!!
     endfunction
 //end of: TableStruct_NewStaticPrimitiveField("lastCameraX", "real")
 //textmacro instance: TableStruct_NewStaticPrimitiveField("lastCameraY", "real")
-    function s__AutoRectEnvironment__Globals__get_lastCameraY takes nothing returns real
-        return (LoadReal(ConstTable__ht, (((((s__AutoRectEnvironment__Globals_static_members_key))))), (s__AutoRectEnvironment__Globals_lastCameraY_impl))) // INLINED!!
+    function s__AutoRectEnvironment___Globals__get_lastCameraY takes nothing returns real
+        return (LoadReal(ConstTable___ht, (((((s__AutoRectEnvironment___Globals_static_members_key))))), (s__AutoRectEnvironment___Globals_lastCameraY_impl))) // INLINED!!
     endfunction
     
-    function s__AutoRectEnvironment__Globals__set_lastCameraY takes real new_lastCameraY returns nothing
-        call SaveReal(ConstTable__ht, (((((s__AutoRectEnvironment__Globals_static_members_key))))), (s__AutoRectEnvironment__Globals_lastCameraY_impl), (( new_lastCameraY)*1.0)) // INLINED!!
+    function s__AutoRectEnvironment___Globals__set_lastCameraY takes real new_lastCameraY returns nothing
+        call SaveReal(ConstTable___ht, (((((s__AutoRectEnvironment___Globals_static_members_key))))), (s__AutoRectEnvironment___Globals_lastCameraY_impl), (( new_lastCameraY)*1.0)) // INLINED!!
     endfunction
     
-    function s__AutoRectEnvironment__Globals_lastCameraYClear takes nothing returns nothing
-        call RemoveSavedReal(ConstTable__ht, (((((s__AutoRectEnvironment__Globals_static_members_key))))), (s__AutoRectEnvironment__Globals_lastCameraY_impl)) // INLINED!!
+    function s__AutoRectEnvironment___Globals_lastCameraYClear takes nothing returns nothing
+        call RemoveSavedReal(ConstTable___ht, (((((s__AutoRectEnvironment___Globals_static_members_key))))), (s__AutoRectEnvironment___Globals_lastCameraY_impl)) // INLINED!!
     endfunction
 //end of: TableStruct_NewStaticPrimitiveField("lastCameraY", "real")
 //textmacro instance: TableStruct_NewStaticPrimitiveField("rectWasMoved", "boolean")
-    function s__AutoRectEnvironment__Globals__get_rectWasMoved takes nothing returns boolean
-        return (LoadBoolean(ConstTable__ht, (((((s__AutoRectEnvironment__Globals_static_members_key))))), (s__AutoRectEnvironment__Globals_rectWasMoved_impl))) // INLINED!!
+    function s__AutoRectEnvironment___Globals__get_rectWasMoved takes nothing returns boolean
+        return (LoadBoolean(ConstTable___ht, (((((s__AutoRectEnvironment___Globals_static_members_key))))), (s__AutoRectEnvironment___Globals_rectWasMoved_impl))) // INLINED!!
     endfunction
     
-    function s__AutoRectEnvironment__Globals__set_rectWasMoved takes boolean new_rectWasMoved returns nothing
-        call SaveBoolean(ConstTable__ht, (((((s__AutoRectEnvironment__Globals_static_members_key))))), (s__AutoRectEnvironment__Globals_rectWasMoved_impl), ( new_rectWasMoved)) // INLINED!!
+    function s__AutoRectEnvironment___Globals__set_rectWasMoved takes boolean new_rectWasMoved returns nothing
+        call SaveBoolean(ConstTable___ht, (((((s__AutoRectEnvironment___Globals_static_members_key))))), (s__AutoRectEnvironment___Globals_rectWasMoved_impl), ( new_rectWasMoved)) // INLINED!!
     endfunction
     
-    function s__AutoRectEnvironment__Globals_rectWasMovedClear takes nothing returns nothing
-        call RemoveSavedBoolean(ConstTable__ht, (((((s__AutoRectEnvironment__Globals_static_members_key))))), (s__AutoRectEnvironment__Globals_rectWasMoved_impl)) // INLINED!!
+    function s__AutoRectEnvironment___Globals_rectWasMovedClear takes nothing returns nothing
+        call RemoveSavedBoolean(ConstTable___ht, (((((s__AutoRectEnvironment___Globals_static_members_key))))), (s__AutoRectEnvironment___Globals_rectWasMoved_impl)) // INLINED!!
     endfunction
 //end of: TableStruct_NewStaticPrimitiveField("rectWasMoved", "boolean")
     
 //textmacro instance: TableStruct_NewStaticHandleField("lastCameraRect", "rect")
-    function s__AutoRectEnvironment__Globals__get_lastCameraRect takes nothing returns rect
-        return (LoadRectHandle(ConstTable__ht, (((((s__AutoRectEnvironment__Globals_static_members_key))))), (s__AutoRectEnvironment__Globals_lastCameraRect_impl))) // INLINED!!
+    function s__AutoRectEnvironment___Globals__get_lastCameraRect takes nothing returns rect
+        return (LoadRectHandle(ConstTable___ht, (((((s__AutoRectEnvironment___Globals_static_members_key))))), (s__AutoRectEnvironment___Globals_lastCameraRect_impl))) // INLINED!!
     endfunction
     
-    function s__AutoRectEnvironment__Globals__set_lastCameraRect takes rect new_lastCameraRect returns nothing
-        call s__TableStruct_setHandle(s__AutoRectEnvironment__Globals_static_members_key , s__AutoRectEnvironment__Globals_lastCameraRect_impl , new_lastCameraRect)
+    function s__AutoRectEnvironment___Globals__set_lastCameraRect takes rect new_lastCameraRect returns nothing
+        call s__TableStruct_setHandle(s__AutoRectEnvironment___Globals_static_members_key , s__AutoRectEnvironment___Globals_lastCameraRect_impl , new_lastCameraRect)
     endfunction
     
-    function s__AutoRectEnvironment__Globals_lastCameraRectClear takes nothing returns nothing
-        call RemoveSavedHandle(ConstTable__ht, (((((s__AutoRectEnvironment__Globals_static_members_key))))), (s__AutoRectEnvironment__Globals_lastCameraRect_impl)) // INLINED!!
+    function s__AutoRectEnvironment___Globals_lastCameraRectClear takes nothing returns nothing
+        call RemoveSavedHandle(ConstTable___ht, (((((s__AutoRectEnvironment___Globals_static_members_key))))), (s__AutoRectEnvironment___Globals_lastCameraRect_impl)) // INLINED!!
     endfunction
 //end of: TableStruct_NewStaticHandleField("lastCameraRect", "rect")
 //textmacro instance: TableStruct_NewStaticHandleField("allRects", "region")
-    function s__AutoRectEnvironment__Globals__get_allRects takes nothing returns region
-        return (LoadRegionHandle(ConstTable__ht, (((((s__AutoRectEnvironment__Globals_static_members_key))))), (s__AutoRectEnvironment__Globals_allRects_impl))) // INLINED!!
+    function s__AutoRectEnvironment___Globals__get_allRects takes nothing returns region
+        return (LoadRegionHandle(ConstTable___ht, (((((s__AutoRectEnvironment___Globals_static_members_key))))), (s__AutoRectEnvironment___Globals_allRects_impl))) // INLINED!!
     endfunction
     
-    function s__AutoRectEnvironment__Globals__set_allRects takes region new_allRects returns nothing
-        call s__TableStruct_setHandle(s__AutoRectEnvironment__Globals_static_members_key , s__AutoRectEnvironment__Globals_allRects_impl , new_allRects)
+    function s__AutoRectEnvironment___Globals__set_allRects takes region new_allRects returns nothing
+        call s__TableStruct_setHandle(s__AutoRectEnvironment___Globals_static_members_key , s__AutoRectEnvironment___Globals_allRects_impl , new_allRects)
     endfunction
     
-    function s__AutoRectEnvironment__Globals_allRectsClear takes nothing returns nothing
-        call RemoveSavedHandle(ConstTable__ht, (((((s__AutoRectEnvironment__Globals_static_members_key))))), (s__AutoRectEnvironment__Globals_allRects_impl)) // INLINED!!
+    function s__AutoRectEnvironment___Globals_allRectsClear takes nothing returns nothing
+        call RemoveSavedHandle(ConstTable___ht, (((((s__AutoRectEnvironment___Globals_static_members_key))))), (s__AutoRectEnvironment___Globals_allRects_impl)) // INLINED!!
     endfunction
 //end of: TableStruct_NewStaticHandleField("allRects", "region")
     
 //textmacro instance: TableStruct_NewStaticStructField("rects", "LinkedHashSet")
-    function s__AutoRectEnvironment__Globals__get_rects takes nothing returns integer
-        return (LoadInteger(ConstTable__ht, (((s__AutoRectEnvironment__Globals_static_members_key))), (s__AutoRectEnvironment__Globals_rects_impl))) // INLINED!!
+    function s__AutoRectEnvironment___Globals__get_rects takes nothing returns integer
+        return (LoadInteger(ConstTable___ht, (((s__AutoRectEnvironment___Globals_static_members_key))), (s__AutoRectEnvironment___Globals_rects_impl))) // INLINED!!
     endfunction
     
-    function s__AutoRectEnvironment__Globals__set_rects takes integer new_rects returns nothing
-        call SaveInteger(ConstTable__ht, (((s__AutoRectEnvironment__Globals_static_members_key))), (s__AutoRectEnvironment__Globals_rects_impl), ( new_rects)) // INLINED!!
+    function s__AutoRectEnvironment___Globals__set_rects takes integer new_rects returns nothing
+        call SaveInteger(ConstTable___ht, (((s__AutoRectEnvironment___Globals_static_members_key))), (s__AutoRectEnvironment___Globals_rects_impl), ( new_rects)) // INLINED!!
     endfunction
     
-    function s__AutoRectEnvironment__Globals_rectsClear takes nothing returns nothing
-        call RemoveSavedInteger(ConstTable__ht, (((s__AutoRectEnvironment__Globals_static_members_key))), (s__AutoRectEnvironment__Globals_rects_impl)) // INLINED!!
+    function s__AutoRectEnvironment___Globals_rectsClear takes nothing returns nothing
+        call RemoveSavedInteger(ConstTable___ht, (((s__AutoRectEnvironment___Globals_static_members_key))), (s__AutoRectEnvironment___Globals_rects_impl)) // INLINED!!
     endfunction
     
-    function s__AutoRectEnvironment__Globals_rectsExists takes nothing returns boolean
-        return (HaveSavedInteger(ConstTable__ht, (((s__AutoRectEnvironment__Globals_static_members_key))), (s__AutoRectEnvironment__Globals_rects_impl))) // INLINED!!
+    function s__AutoRectEnvironment___Globals_rectsExists takes nothing returns boolean
+        return (HaveSavedInteger(ConstTable___ht, (((s__AutoRectEnvironment___Globals_static_members_key))), (s__AutoRectEnvironment___Globals_rects_impl))) // INLINED!!
     endfunction
 //end of: TableStruct_NewStaticStructField("rects", "LinkedHashSet")
     
 //textmacro instance: TableStruct_NewConstTableField("public","id2")
 
-        constant function s__AutoRectEnvironment__Globals__get_id2 takes nothing returns integer
-            return s__AutoRectEnvironment__Globals_id2_impl
+        constant function s__AutoRectEnvironment___Globals__get_id2 takes nothing returns integer
+            return s__AutoRectEnvironment___Globals_id2_impl
         endfunction
 
 
@@ -8899,10 +9141,10 @@ endfunction
 function AutoRectEnvironment_RegisterRect takes rect r returns nothing
     local integer rId= GetHandleId(r)
     
-    if not (HaveSavedHandle(ConstTable__ht, ((((s__AutoRectEnvironment__Globals_id2_impl)))), (rId))) then // INLINED!!
-        call SaveRectHandle(ConstTable__ht, ((((s__AutoRectEnvironment__Globals_id2_impl)))), (rId), ( r)) // INLINED!!
-        call RegionAddRect((LoadRegionHandle(ConstTable__ht, (((((s__AutoRectEnvironment__Globals_static_members_key))))), (s__AutoRectEnvironment__Globals_allRects_impl))), r) // INLINED!!
-        call GLHS__AddBefore((((LoadInteger(ConstTable__ht, (((s__AutoRectEnvironment__Globals_static_members_key))), (s__AutoRectEnvironment__Globals_rects_impl))))) , (0 ) , ( (rId))) // INLINED!!
+    if not (HaveSavedHandle(ConstTable___ht, ((((s__AutoRectEnvironment___Globals_id2_impl)))), (rId))) then // INLINED!!
+        call SaveRectHandle(ConstTable___ht, ((((s__AutoRectEnvironment___Globals_id2_impl)))), (rId), ( r)) // INLINED!!
+        call RegionAddRect((LoadRegionHandle(ConstTable___ht, (((((s__AutoRectEnvironment___Globals_static_members_key))))), (s__AutoRectEnvironment___Globals_allRects_impl))), r) // INLINED!!
+        call GLHS___AddBefore((((LoadInteger(ConstTable___ht, (((s__AutoRectEnvironment___Globals_static_members_key))), (s__AutoRectEnvironment___Globals_rects_impl))))) , (0 ) , ( (rId))) // INLINED!!
     endif
 endfunction
 
@@ -8910,35 +9152,35 @@ function AutoRectEnvironment_DeRegisterRect takes rect r returns nothing
     local integer rId= GetHandleId(r)
     
     // This rect can be different for each player. Null the handle to reduce reference counter.
-    if r == (LoadRectHandle(ConstTable__ht, (((((s__AutoRectEnvironment__Globals_static_members_key))))), (s__AutoRectEnvironment__Globals_lastCameraRect_impl))) then // INLINED!!
-        call s__TableStruct_setHandle(s__AutoRectEnvironment__Globals_static_members_key , s__AutoRectEnvironment__Globals_lastCameraRect_impl , (null)) // This possibly avoids desyncs. // INLINED!!
+    if r == (LoadRectHandle(ConstTable___ht, (((((s__AutoRectEnvironment___Globals_static_members_key))))), (s__AutoRectEnvironment___Globals_lastCameraRect_impl))) then // INLINED!!
+        call s__TableStruct_setHandle(s__AutoRectEnvironment___Globals_static_members_key , s__AutoRectEnvironment___Globals_lastCameraRect_impl , (null)) // This possibly avoids desyncs. // INLINED!!
     endif
     
-    if (HaveSavedHandle(ConstTable__ht, ((((s__AutoRectEnvironment__Globals_id2_impl)))), (rId))) then // INLINED!!
-        call SaveBoolean(ConstTable__ht, (((((s__AutoRectEnvironment__Globals_static_members_key))))), (s__AutoRectEnvironment__Globals_rectWasMoved_impl), ( (true))) // INLINED!!
-        call RemoveSavedHandle(ConstTable__ht, ((((s__AutoRectEnvironment__Globals_id2_impl)))), (rId)) // INLINED!!
-        call RegionClearRect((LoadRegionHandle(ConstTable__ht, (((((s__AutoRectEnvironment__Globals_static_members_key))))), (s__AutoRectEnvironment__Globals_allRects_impl))), r) // INLINED!!
-        call s__LinkedHashSet_delete(((LoadInteger(ConstTable__ht, (((s__AutoRectEnvironment__Globals_static_members_key))), (s__AutoRectEnvironment__Globals_rects_impl)))),(rId)) // INLINED!!
+    if (HaveSavedHandle(ConstTable___ht, ((((s__AutoRectEnvironment___Globals_id2_impl)))), (rId))) then // INLINED!!
+        call SaveBoolean(ConstTable___ht, (((((s__AutoRectEnvironment___Globals_static_members_key))))), (s__AutoRectEnvironment___Globals_rectWasMoved_impl), ( (true))) // INLINED!!
+        call RemoveSavedHandle(ConstTable___ht, ((((s__AutoRectEnvironment___Globals_id2_impl)))), (rId)) // INLINED!!
+        call RegionClearRect((LoadRegionHandle(ConstTable___ht, (((((s__AutoRectEnvironment___Globals_static_members_key))))), (s__AutoRectEnvironment___Globals_allRects_impl))), r) // INLINED!!
+        call s__LinkedHashSet_delete(((LoadInteger(ConstTable___ht, (((s__AutoRectEnvironment___Globals_static_members_key))), (s__AutoRectEnvironment___Globals_rects_impl)))),(rId)) // INLINED!!
     endif
 endfunction
 
 function AutoRectEnvironment_MoveRect takes rect r,real newCenterX,real newCenterY returns nothing
 
-    if (HaveSavedHandle(ConstTable__ht, ((((s__AutoRectEnvironment__Globals_id2_impl)))), (GetHandleId(r)))) then // INLINED!!
-        call SaveBoolean(ConstTable__ht, (((((s__AutoRectEnvironment__Globals_static_members_key))))), (s__AutoRectEnvironment__Globals_rectWasMoved_impl), ( (true))) // INLINED!!
-        call RegionClearRect((LoadRegionHandle(ConstTable__ht, (((((s__AutoRectEnvironment__Globals_static_members_key))))), (s__AutoRectEnvironment__Globals_allRects_impl))), r) // INLINED!!
+    if (HaveSavedHandle(ConstTable___ht, ((((s__AutoRectEnvironment___Globals_id2_impl)))), (GetHandleId(r)))) then // INLINED!!
+        call SaveBoolean(ConstTable___ht, (((((s__AutoRectEnvironment___Globals_static_members_key))))), (s__AutoRectEnvironment___Globals_rectWasMoved_impl), ( (true))) // INLINED!!
+        call RegionClearRect((LoadRegionHandle(ConstTable___ht, (((((s__AutoRectEnvironment___Globals_static_members_key))))), (s__AutoRectEnvironment___Globals_allRects_impl))), r) // INLINED!!
         call MoveRectTo(r, newCenterX, newCenterY)
-        call RegionAddRect((LoadRegionHandle(ConstTable__ht, (((((s__AutoRectEnvironment__Globals_static_members_key))))), (s__AutoRectEnvironment__Globals_allRects_impl))), r) // INLINED!!
+        call RegionAddRect((LoadRegionHandle(ConstTable___ht, (((((s__AutoRectEnvironment___Globals_static_members_key))))), (s__AutoRectEnvironment___Globals_allRects_impl))), r) // INLINED!!
     endif
     
 endfunction
 
 function AutoRectEnvironment_SetRect takes rect r,real minx,real miny,real maxx,real maxy returns nothing
-    if (HaveSavedHandle(ConstTable__ht, ((((s__AutoRectEnvironment__Globals_id2_impl)))), (GetHandleId(r)))) then // INLINED!!
-        call SaveBoolean(ConstTable__ht, (((((s__AutoRectEnvironment__Globals_static_members_key))))), (s__AutoRectEnvironment__Globals_rectWasMoved_impl), ( (true))) // INLINED!!
-        call RegionClearRect((LoadRegionHandle(ConstTable__ht, (((((s__AutoRectEnvironment__Globals_static_members_key))))), (s__AutoRectEnvironment__Globals_allRects_impl))), r) // INLINED!!
+    if (HaveSavedHandle(ConstTable___ht, ((((s__AutoRectEnvironment___Globals_id2_impl)))), (GetHandleId(r)))) then // INLINED!!
+        call SaveBoolean(ConstTable___ht, (((((s__AutoRectEnvironment___Globals_static_members_key))))), (s__AutoRectEnvironment___Globals_rectWasMoved_impl), ( (true))) // INLINED!!
+        call RegionClearRect((LoadRegionHandle(ConstTable___ht, (((((s__AutoRectEnvironment___Globals_static_members_key))))), (s__AutoRectEnvironment___Globals_allRects_impl))), r) // INLINED!!
         call SetRect(r, minx, miny, maxx, maxy)
-        call RegionAddRect((LoadRegionHandle(ConstTable__ht, (((((s__AutoRectEnvironment__Globals_static_members_key))))), (s__AutoRectEnvironment__Globals_allRects_impl))), r) // INLINED!!
+        call RegionAddRect((LoadRegionHandle(ConstTable___ht, (((((s__AutoRectEnvironment___Globals_static_members_key))))), (s__AutoRectEnvironment___Globals_allRects_impl))), r) // INLINED!!
     endif
 endfunction
 
@@ -8959,39 +9201,39 @@ function onTimer takes nothing returns nothing
     local rect r
     local integer i
     
-    if (LoadRectHandle(ConstTable__ht, (((((s__AutoRectEnvironment__Globals_static_members_key))))), (s__AutoRectEnvironment__Globals_lastCameraRect_impl))) != null then // INLINED!!
-        if GetRectMinX((LoadRectHandle(ConstTable__ht, (((((s__AutoRectEnvironment__Globals_static_members_key))))), (s__AutoRectEnvironment__Globals_lastCameraRect_impl)))) <= x and x <= GetRectMaxX((LoadRectHandle(ConstTable__ht, (((((s__AutoRectEnvironment__Globals_static_members_key))))), (s__AutoRectEnvironment__Globals_lastCameraRect_impl)))) and GetRectMinY((LoadRectHandle(ConstTable__ht, (((((s__AutoRectEnvironment__Globals_static_members_key))))), (s__AutoRectEnvironment__Globals_lastCameraRect_impl)))) <= y and y <= GetRectMaxY((LoadRectHandle(ConstTable__ht, (((((s__AutoRectEnvironment__Globals_static_members_key))))), (s__AutoRectEnvironment__Globals_lastCameraRect_impl)))) then // INLINED!!
+    if (LoadRectHandle(ConstTable___ht, (((((s__AutoRectEnvironment___Globals_static_members_key))))), (s__AutoRectEnvironment___Globals_lastCameraRect_impl))) != null then // INLINED!!
+        if GetRectMinX((LoadRectHandle(ConstTable___ht, (((((s__AutoRectEnvironment___Globals_static_members_key))))), (s__AutoRectEnvironment___Globals_lastCameraRect_impl)))) <= x and x <= GetRectMaxX((LoadRectHandle(ConstTable___ht, (((((s__AutoRectEnvironment___Globals_static_members_key))))), (s__AutoRectEnvironment___Globals_lastCameraRect_impl)))) and GetRectMinY((LoadRectHandle(ConstTable___ht, (((((s__AutoRectEnvironment___Globals_static_members_key))))), (s__AutoRectEnvironment___Globals_lastCameraRect_impl)))) <= y and y <= GetRectMaxY((LoadRectHandle(ConstTable___ht, (((((s__AutoRectEnvironment___Globals_static_members_key))))), (s__AutoRectEnvironment___Globals_lastCameraRect_impl)))) then // INLINED!!
             //call BJDebugMsg("In last rect.")
-            call s__RectEnvironment_apply((GetHandleId(((LoadRectHandle(ConstTable__ht, (((((s__AutoRectEnvironment__Globals_static_members_key))))), (s__AutoRectEnvironment__Globals_lastCameraRect_impl))))))) // INLINED!!
+            call s__RectEnvironment_apply((GetHandleId(((LoadRectHandle(ConstTable___ht, (((((s__AutoRectEnvironment___Globals_static_members_key))))), (s__AutoRectEnvironment___Globals_lastCameraRect_impl))))))) // INLINED!!
             return
         else
             // Do not set Globals.lastCameraRect to null, it's likely the camera will soon return to the last rect.
         endif
     endif
     
-    if (LoadBoolean(ConstTable__ht, (((((s__AutoRectEnvironment__Globals_static_members_key))))), (s__AutoRectEnvironment__Globals_rectWasMoved_impl))) then // INLINED!!
-        call SaveBoolean(ConstTable__ht, (((((s__AutoRectEnvironment__Globals_static_members_key))))), (s__AutoRectEnvironment__Globals_rectWasMoved_impl), ( (false))) // INLINED!!
+    if (LoadBoolean(ConstTable___ht, (((((s__AutoRectEnvironment___Globals_static_members_key))))), (s__AutoRectEnvironment___Globals_rectWasMoved_impl))) then // INLINED!!
+        call SaveBoolean(ConstTable___ht, (((((s__AutoRectEnvironment___Globals_static_members_key))))), (s__AutoRectEnvironment___Globals_rectWasMoved_impl), ( (false))) // INLINED!!
     else
-        if (LoadReal(ConstTable__ht, (((((s__AutoRectEnvironment__Globals_static_members_key))))), (s__AutoRectEnvironment__Globals_lastCameraX_impl))) == x and (LoadReal(ConstTable__ht, (((((s__AutoRectEnvironment__Globals_static_members_key))))), (s__AutoRectEnvironment__Globals_lastCameraY_impl))) == y then // INLINED!!
+        if (LoadReal(ConstTable___ht, (((((s__AutoRectEnvironment___Globals_static_members_key))))), (s__AutoRectEnvironment___Globals_lastCameraX_impl))) == x and (LoadReal(ConstTable___ht, (((((s__AutoRectEnvironment___Globals_static_members_key))))), (s__AutoRectEnvironment___Globals_lastCameraY_impl))) == y then // INLINED!!
             //call BJDebugMsg("Camera did not move, no Globals.rects moved: do nothing.")
             return
         endif
     endif
     
-    if IsPointInRegion((LoadRegionHandle(ConstTable__ht, (((((s__AutoRectEnvironment__Globals_static_members_key))))), (s__AutoRectEnvironment__Globals_allRects_impl))), x, y) then // INLINED!!
-        set i=(LoadInteger((Lists__hashTable), (((LoadInteger(ConstTable__ht, (((s__AutoRectEnvironment__Globals_static_members_key))), (s__AutoRectEnvironment__Globals_rects_impl)))) ), ( 0))) // INLINED!!
+    if IsPointInRegion((LoadRegionHandle(ConstTable___ht, (((((s__AutoRectEnvironment___Globals_static_members_key))))), (s__AutoRectEnvironment___Globals_allRects_impl))), x, y) then // INLINED!!
+        set i=(LoadInteger((Lists___hashTable), (((LoadInteger(ConstTable___ht, (((s__AutoRectEnvironment___Globals_static_members_key))), (s__AutoRectEnvironment___Globals_rects_impl)))) ), ( 0))) // INLINED!!
             loop
                 exitwhen i == (0) // INLINED!!
-                set r=(LoadRectHandle(ConstTable__ht, ((((s__AutoRectEnvironment__Globals_id2_impl)))), (i))) // INLINED!!
+                set r=(LoadRectHandle(ConstTable___ht, ((((s__AutoRectEnvironment___Globals_id2_impl)))), (i))) // INLINED!!
                 
                 if GetRectMinX(r) <= x and x <= GetRectMaxX(r) and GetRectMinY(r) <= y and y <= GetRectMaxY(r) then
                     //call BJDebugMsg("Found rect!")
-                    call s__TableStruct_setHandle(s__AutoRectEnvironment__Globals_static_members_key , s__AutoRectEnvironment__Globals_lastCameraRect_impl , (r)) // INLINED!!
+                    call s__TableStruct_setHandle(s__AutoRectEnvironment___Globals_static_members_key , s__AutoRectEnvironment___Globals_lastCameraRect_impl , (r)) // INLINED!!
                     call s__RectEnvironment_apply((GetHandleId((r)))) // INLINED!!
                     exitwhen true
                 endif
             
-                set i=(LoadInteger((Lists__hashTable), (((LoadInteger(ConstTable__ht, (((s__AutoRectEnvironment__Globals_static_members_key))), (s__AutoRectEnvironment__Globals_rects_impl)))) ), ( (i)))) // INLINED!!
+                set i=(LoadInteger((Lists___hashTable), (((LoadInteger(ConstTable___ht, (((s__AutoRectEnvironment___Globals_static_members_key))), (s__AutoRectEnvironment___Globals_rects_impl)))) ), ( (i)))) // INLINED!!
             endloop
         set r=null
     else
@@ -8999,19 +9241,19 @@ function onTimer takes nothing returns nothing
         call s__RectEnvironment_apply((0))
     endif
     
-    call SaveReal(ConstTable__ht, (((((s__AutoRectEnvironment__Globals_static_members_key))))), (s__AutoRectEnvironment__Globals_lastCameraX_impl), (( ((x)*1.0))*1.0)) // INLINED!!
-    call SaveReal(ConstTable__ht, (((((s__AutoRectEnvironment__Globals_static_members_key))))), (s__AutoRectEnvironment__Globals_lastCameraY_impl), (( ((y)*1.0))*1.0)) // INLINED!!
+    call SaveReal(ConstTable___ht, (((((s__AutoRectEnvironment___Globals_static_members_key))))), (s__AutoRectEnvironment___Globals_lastCameraX_impl), (( ((x)*1.0))*1.0)) // INLINED!!
+    call SaveReal(ConstTable___ht, (((((s__AutoRectEnvironment___Globals_static_members_key))))), (s__AutoRectEnvironment___Globals_lastCameraY_impl), (( ((y)*1.0))*1.0)) // INLINED!!
 endfunction
 
 
-//Implemented from module AutoRectEnvironment__InitModule:
-    function s__AutoRectEnvironment__InitStruct_AutoRectEnvironment__InitModule__onInit takes nothing returns nothing
+//Implemented from module AutoRectEnvironment___InitModule:
+    function s__AutoRectEnvironment___InitStruct_AutoRectEnvironment___InitModule__onInit takes nothing returns nothing
         local timer t= CreateTimer()
-        call SaveInteger(ConstTable__ht, (((s__AutoRectEnvironment__Globals_static_members_key))), (s__AutoRectEnvironment__Globals_rects_impl), ( ((GMUI_GetIndex((Lists_RECYCLE_KEY)))))) // INLINED!!
+        call SaveInteger(ConstTable___ht, (((s__AutoRectEnvironment___Globals_static_members_key))), (s__AutoRectEnvironment___Globals_rects_impl), ( ((GMUI_GetIndex((Lists_RECYCLE_KEY)))))) // INLINED!!
         
-        call s__TableStruct_setHandle(s__AutoRectEnvironment__Globals_static_members_key , s__AutoRectEnvironment__Globals_allRects_impl , (CreateRegion())) // INLINED!!
+        call s__TableStruct_setHandle(s__AutoRectEnvironment___Globals_static_members_key , s__AutoRectEnvironment___Globals_allRects_impl , (CreateRegion())) // INLINED!!
         
-        call TimerStart(t, AutoRectEnvironment__PERIOD, true, function onTimer)
+        call TimerStart(t, AutoRectEnvironment___PERIOD, true, function onTimer)
     endfunction
 
 //library AutoRectEnvironment ends
@@ -9019,59 +9261,59 @@ endfunction
 
 //textmacro instance: TableStruct_NewReadonlyStaticPrimitiveField("hours", "integer")
     function s__GameTime__get_hours takes nothing returns integer
-        return (LoadInteger(ConstTable__ht, (((((s__GameTime_static_members_key))))), (s__GameTime_hours_impl))) // INLINED!!
+        return (LoadInteger(ConstTable___ht, (((((s__GameTime_static_members_key))))), (s__GameTime_hours_impl))) // INLINED!!
     endfunction
     
     function s__GameTime__set_hours takes integer new_hours returns nothing
-        call SaveInteger(ConstTable__ht, (((((s__GameTime_static_members_key))))), (s__GameTime_hours_impl), ( new_hours)) // INLINED!!
+        call SaveInteger(ConstTable___ht, (((((s__GameTime_static_members_key))))), (s__GameTime_hours_impl), ( new_hours)) // INLINED!!
     endfunction
     
     function s__GameTime_hoursClear takes nothing returns nothing
-        call RemoveSavedInteger(ConstTable__ht, (((((s__GameTime_static_members_key))))), (s__GameTime_hours_impl)) // INLINED!!
+        call RemoveSavedInteger(ConstTable___ht, (((((s__GameTime_static_members_key))))), (s__GameTime_hours_impl)) // INLINED!!
     endfunction
     
     function s__GameTime_hoursExists takes nothing returns boolean
-        return (HaveSavedInteger(ConstTable__ht, (((((s__GameTime_static_members_key))))), (s__GameTime_hours_impl))) // INLINED!!
+        return (HaveSavedInteger(ConstTable___ht, (((((s__GameTime_static_members_key))))), (s__GameTime_hours_impl))) // INLINED!!
     endfunction
 //end of: TableStruct_NewReadonlyStaticPrimitiveField("hours", "integer")
 //textmacro instance: TableStruct_NewReadonlyStaticPrimitiveField("minutes", "integer")
     function s__GameTime__get_minutes takes nothing returns integer
-        return (LoadInteger(ConstTable__ht, (((((s__GameTime_static_members_key))))), (s__GameTime_minutes_impl))) // INLINED!!
+        return (LoadInteger(ConstTable___ht, (((((s__GameTime_static_members_key))))), (s__GameTime_minutes_impl))) // INLINED!!
     endfunction
     
     function s__GameTime__set_minutes takes integer new_minutes returns nothing
-        call SaveInteger(ConstTable__ht, (((((s__GameTime_static_members_key))))), (s__GameTime_minutes_impl), ( new_minutes)) // INLINED!!
+        call SaveInteger(ConstTable___ht, (((((s__GameTime_static_members_key))))), (s__GameTime_minutes_impl), ( new_minutes)) // INLINED!!
     endfunction
     
     function s__GameTime_minutesClear takes nothing returns nothing
-        call RemoveSavedInteger(ConstTable__ht, (((((s__GameTime_static_members_key))))), (s__GameTime_minutes_impl)) // INLINED!!
+        call RemoveSavedInteger(ConstTable___ht, (((((s__GameTime_static_members_key))))), (s__GameTime_minutes_impl)) // INLINED!!
     endfunction
     
     function s__GameTime_minutesExists takes nothing returns boolean
-        return (HaveSavedInteger(ConstTable__ht, (((((s__GameTime_static_members_key))))), (s__GameTime_minutes_impl))) // INLINED!!
+        return (HaveSavedInteger(ConstTable___ht, (((((s__GameTime_static_members_key))))), (s__GameTime_minutes_impl))) // INLINED!!
     endfunction
 //end of: TableStruct_NewReadonlyStaticPrimitiveField("minutes", "integer")
 //textmacro instance: TableStruct_NewReadonlyStaticPrimitiveField("seconds", "integer")
     function s__GameTime__get_seconds takes nothing returns integer
-        return (LoadInteger(ConstTable__ht, (((((s__GameTime_static_members_key))))), (s__GameTime_seconds_impl))) // INLINED!!
+        return (LoadInteger(ConstTable___ht, (((((s__GameTime_static_members_key))))), (s__GameTime_seconds_impl))) // INLINED!!
     endfunction
     
     function s__GameTime__set_seconds takes integer new_seconds returns nothing
-        call SaveInteger(ConstTable__ht, (((((s__GameTime_static_members_key))))), (s__GameTime_seconds_impl), ( new_seconds)) // INLINED!!
+        call SaveInteger(ConstTable___ht, (((((s__GameTime_static_members_key))))), (s__GameTime_seconds_impl), ( new_seconds)) // INLINED!!
     endfunction
     
     function s__GameTime_secondsClear takes nothing returns nothing
-        call RemoveSavedInteger(ConstTable__ht, (((((s__GameTime_static_members_key))))), (s__GameTime_seconds_impl)) // INLINED!!
+        call RemoveSavedInteger(ConstTable___ht, (((((s__GameTime_static_members_key))))), (s__GameTime_seconds_impl)) // INLINED!!
     endfunction
     
     function s__GameTime_secondsExists takes nothing returns boolean
-        return (HaveSavedInteger(ConstTable__ht, (((((s__GameTime_static_members_key))))), (s__GameTime_seconds_impl))) // INLINED!!
+        return (HaveSavedInteger(ConstTable___ht, (((((s__GameTime_static_members_key))))), (s__GameTime_seconds_impl))) // INLINED!!
     endfunction
 //end of: TableStruct_NewReadonlyStaticPrimitiveField("seconds", "integer")
     
 //textmacro instance: TableStruct_NewReadonlyStaticHandleField("timer", "timer")
     function s__GameTime__get_timer takes nothing returns timer
-        return (LoadTimerHandle(ConstTable__ht, (((((s__GameTime_static_members_key))))), (s__GameTime_timer_impl))) // INLINED!!
+        return (LoadTimerHandle(ConstTable___ht, (((((s__GameTime_static_members_key))))), (s__GameTime_timer_impl))) // INLINED!!
     endfunction
     
     function s__GameTime__set_timer takes timer new_timer returns nothing
@@ -9079,16 +9321,16 @@ endfunction
     endfunction
     
     function s__GameTime_timerClear takes nothing returns nothing
-        call RemoveSavedHandle(ConstTable__ht, (((((s__GameTime_static_members_key))))), (s__GameTime_timer_impl)) // INLINED!!
+        call RemoveSavedHandle(ConstTable___ht, (((((s__GameTime_static_members_key))))), (s__GameTime_timer_impl)) // INLINED!!
     endfunction
     
     function s__GameTime_timerExists takes nothing returns boolean
-        return (HaveSavedHandle(ConstTable__ht, (((((s__GameTime_static_members_key))))), (s__GameTime_timer_impl))) // INLINED!!
+        return (HaveSavedHandle(ConstTable___ht, (((((s__GameTime_static_members_key))))), (s__GameTime_timer_impl))) // INLINED!!
     endfunction
 //end of: TableStruct_NewReadonlyStaticHandleField("timer", "timer")
 //textmacro instance: TableStruct_NewReadonlyStaticHandleField("multiboard", "multiboard")
     function s__GameTime__get_multiboard takes nothing returns multiboard
-        return (LoadMultiboardHandle(ConstTable__ht, (((((s__GameTime_static_members_key))))), (s__GameTime_multiboard_impl))) // INLINED!!
+        return (LoadMultiboardHandle(ConstTable___ht, (((((s__GameTime_static_members_key))))), (s__GameTime_multiboard_impl))) // INLINED!!
     endfunction
     
     function s__GameTime__set_multiboard takes multiboard new_multiboard returns nothing
@@ -9096,115 +9338,109 @@ endfunction
     endfunction
     
     function s__GameTime_multiboardClear takes nothing returns nothing
-        call RemoveSavedHandle(ConstTable__ht, (((((s__GameTime_static_members_key))))), (s__GameTime_multiboard_impl)) // INLINED!!
+        call RemoveSavedHandle(ConstTable___ht, (((((s__GameTime_static_members_key))))), (s__GameTime_multiboard_impl)) // INLINED!!
     endfunction
     
     function s__GameTime_multiboardExists takes nothing returns boolean
-        return (HaveSavedHandle(ConstTable__ht, (((((s__GameTime_static_members_key))))), (s__GameTime_multiboard_impl))) // INLINED!!
+        return (HaveSavedHandle(ConstTable___ht, (((((s__GameTime_static_members_key))))), (s__GameTime_multiboard_impl))) // INLINED!!
     endfunction
 //end of: TableStruct_NewReadonlyStaticHandleField("multiboard", "multiboard")
     
     function s__GameTime_toString takes nothing returns string
-        return I2S((LoadInteger(ConstTable__ht, (((((s__GameTime_static_members_key))))), (s__GameTime_hours_impl)))) + " : " + I2S((LoadInteger(ConstTable__ht, (((((s__GameTime_static_members_key))))), (s__GameTime_minutes_impl)))) + " : " + I2S((LoadInteger(ConstTable__ht, (((((s__GameTime_static_members_key))))), (s__GameTime_seconds_impl)))) // INLINED!!
+        return I2S((LoadInteger(ConstTable___ht, (((((s__GameTime_static_members_key))))), (s__GameTime_hours_impl)))) + " : " + I2S((LoadInteger(ConstTable___ht, (((((s__GameTime_static_members_key))))), (s__GameTime_minutes_impl)))) + " : " + I2S((LoadInteger(ConstTable___ht, (((((s__GameTime_static_members_key))))), (s__GameTime_seconds_impl)))) // INLINED!!
     endfunction
     
     function s__GameTime_toStringEx takes string sep returns string
-        return I2S((LoadInteger(ConstTable__ht, (((((s__GameTime_static_members_key))))), (s__GameTime_hours_impl)))) + sep + I2S((LoadInteger(ConstTable__ht, (((((s__GameTime_static_members_key))))), (s__GameTime_minutes_impl)))) + sep + I2S((LoadInteger(ConstTable__ht, (((((s__GameTime_static_members_key))))), (s__GameTime_seconds_impl)))) // INLINED!!
+        return I2S((LoadInteger(ConstTable___ht, (((((s__GameTime_static_members_key))))), (s__GameTime_hours_impl)))) + sep + I2S((LoadInteger(ConstTable___ht, (((((s__GameTime_static_members_key))))), (s__GameTime_minutes_impl)))) + sep + I2S((LoadInteger(ConstTable___ht, (((((s__GameTime_static_members_key))))), (s__GameTime_seconds_impl)))) // INLINED!!
     endfunction
     
     function s__GameTime_asMinutes takes nothing returns real
-        return 60. * (LoadInteger(ConstTable__ht, (((((s__GameTime_static_members_key))))), (s__GameTime_hours_impl))) + (LoadInteger(ConstTable__ht, (((((s__GameTime_static_members_key))))), (s__GameTime_minutes_impl))) + (LoadInteger(ConstTable__ht, (((((s__GameTime_static_members_key))))), (s__GameTime_seconds_impl))) / 60. // INLINED!!
+        return 60. * (LoadInteger(ConstTable___ht, (((((s__GameTime_static_members_key))))), (s__GameTime_hours_impl))) + (LoadInteger(ConstTable___ht, (((((s__GameTime_static_members_key))))), (s__GameTime_minutes_impl))) + (LoadInteger(ConstTable___ht, (((((s__GameTime_static_members_key))))), (s__GameTime_seconds_impl))) / 60. // INLINED!!
     endfunction
     
     function s__GameTime_asHours takes nothing returns real
-        return (LoadInteger(ConstTable__ht, (((((s__GameTime_static_members_key))))), (s__GameTime_hours_impl))) + (LoadInteger(ConstTable__ht, (((((s__GameTime_static_members_key))))), (s__GameTime_minutes_impl))) / 60. + (LoadInteger(ConstTable__ht, (((((s__GameTime_static_members_key))))), (s__GameTime_seconds_impl))) / 3600. // INLINED!!
+        return (LoadInteger(ConstTable___ht, (((((s__GameTime_static_members_key))))), (s__GameTime_hours_impl))) + (LoadInteger(ConstTable___ht, (((((s__GameTime_static_members_key))))), (s__GameTime_minutes_impl))) / 60. + (LoadInteger(ConstTable___ht, (((((s__GameTime_static_members_key))))), (s__GameTime_seconds_impl))) / 3600. // INLINED!!
     endfunction
     
     function s__GameTime_asSeconds takes nothing returns integer
-        return (LoadInteger(ConstTable__ht, (((((s__GameTime_static_members_key))))), (s__GameTime_hours_impl))) * 3600 + (LoadInteger(ConstTable__ht, (((((s__GameTime_static_members_key))))), (s__GameTime_minutes_impl))) * 60 + (LoadInteger(ConstTable__ht, (((((s__GameTime_static_members_key))))), (s__GameTime_seconds_impl))) // INLINED!!
+        return (LoadInteger(ConstTable___ht, (((((s__GameTime_static_members_key))))), (s__GameTime_hours_impl))) * 3600 + (LoadInteger(ConstTable___ht, (((((s__GameTime_static_members_key))))), (s__GameTime_minutes_impl))) * 60 + (LoadInteger(ConstTable___ht, (((((s__GameTime_static_members_key))))), (s__GameTime_seconds_impl))) // INLINED!!
     endfunction
     
     function s__GameTime_onTimer takes nothing returns nothing
-        local integer sec= (LoadInteger(ConstTable__ht, (((((s__GameTime_static_members_key))))), (s__GameTime_seconds_impl))) // INLINED!!
+        local integer sec= (LoadInteger(ConstTable___ht, (((((s__GameTime_static_members_key))))), (s__GameTime_seconds_impl))) // INLINED!!
         local string s
     
-        if sec == 0 and (LoadInteger(ConstTable__ht, (((((s__GameTime_static_members_key))))), (s__GameTime_minutes_impl))) == 0 and (LoadInteger(ConstTable__ht, (((((s__GameTime_static_members_key))))), (s__GameTime_hours_impl))) == 0 then // INLINED!!
+        if sec == 0 and (LoadInteger(ConstTable___ht, (((((s__GameTime_static_members_key))))), (s__GameTime_minutes_impl))) == 0 and (LoadInteger(ConstTable___ht, (((((s__GameTime_static_members_key))))), (s__GameTime_hours_impl))) == 0 then // INLINED!!
             call s__TableStruct_setHandle(s__GameTime_static_members_key , s__GameTime_multiboard_impl , (CreateMultiboard())) // INLINED!!
-            call MultiboardSetRowCount((LoadMultiboardHandle(ConstTable__ht, (((((s__GameTime_static_members_key))))), (s__GameTime_multiboard_impl))), 1) // INLINED!!
-            call MultiboardSetColumnCount((LoadMultiboardHandle(ConstTable__ht, (((((s__GameTime_static_members_key))))), (s__GameTime_multiboard_impl))), 5) // INLINED!!
-            call MultiboardSetTitleText((LoadMultiboardHandle(ConstTable__ht, (((((s__GameTime_static_members_key))))), (s__GameTime_multiboard_impl))), "Elapsed Time") // INLINED!!
+            call MultiboardSetRowCount((LoadMultiboardHandle(ConstTable___ht, (((((s__GameTime_static_members_key))))), (s__GameTime_multiboard_impl))), 1) // INLINED!!
+            call MultiboardSetColumnCount((LoadMultiboardHandle(ConstTable___ht, (((((s__GameTime_static_members_key))))), (s__GameTime_multiboard_impl))), 5) // INLINED!!
+            call MultiboardSetTitleText((LoadMultiboardHandle(ConstTable___ht, (((((s__GameTime_static_members_key))))), (s__GameTime_multiboard_impl))), "Elapsed Time") // INLINED!!
             
-            set sec=s__MultiBoard_refresh((LoadMultiboardHandle(ConstTable__ht, (((((s__GameTime_static_members_key))))), (s__GameTime_multiboard_impl)))) // INLINED!!
-            call MultiboardSetItemStyle((LoadMultiboardItemHandle(Table__ht, ((((LoadInteger(Table__ht, ((LoadInteger(ConstTable__ht, (((s__MultiBoard_items_impl))), ((((sec))))))), (((0 ) ))))))), (( ( 0 ))))), ( true ), ( false)) // INLINED!!
-            call MultiboardSetItemStyle((LoadMultiboardItemHandle(Table__ht, ((((LoadInteger(Table__ht, ((LoadInteger(ConstTable__ht, (((s__MultiBoard_items_impl))), ((((sec))))))), (((0 ) ))))))), (( ( 1 ))))), ( true ), ( false)) // INLINED!!
-            call MultiboardSetItemStyle((LoadMultiboardItemHandle(Table__ht, ((((LoadInteger(Table__ht, ((LoadInteger(ConstTable__ht, (((s__MultiBoard_items_impl))), ((((sec))))))), (((0 ) ))))))), (( ( 2 ))))), ( true ), ( false)) // INLINED!!
-            call MultiboardSetItemStyle((LoadMultiboardItemHandle(Table__ht, ((((LoadInteger(Table__ht, ((LoadInteger(ConstTable__ht, (((s__MultiBoard_items_impl))), ((((sec))))))), (((0 ) ))))))), (( ( 3 ))))), ( true ), ( false)) // INLINED!!
-            call MultiboardSetItemStyle((LoadMultiboardItemHandle(Table__ht, ((((LoadInteger(Table__ht, ((LoadInteger(ConstTable__ht, (((s__MultiBoard_items_impl))), ((((sec))))))), (((0 ) ))))))), (( ( 4 ))))), ( true ), ( false)) // INLINED!!
-            call MultiboardSetItemWidth((LoadMultiboardItemHandle(Table__ht, ((((LoadInteger(Table__ht, ((LoadInteger(ConstTable__ht, (((s__MultiBoard_items_impl))), ((((sec))))))), (((0 ) ))))))), (( ( 0 ))))), (( 0.015)*1.0)) // INLINED!!
-            call MultiboardSetItemWidth((LoadMultiboardItemHandle(Table__ht, ((((LoadInteger(Table__ht, ((LoadInteger(ConstTable__ht, (((s__MultiBoard_items_impl))), ((((sec))))))), (((0 ) ))))))), (( ( 1 ))))), (( 0.005)*1.0)) // INLINED!!
-            call MultiboardSetItemWidth((LoadMultiboardItemHandle(Table__ht, ((((LoadInteger(Table__ht, ((LoadInteger(ConstTable__ht, (((s__MultiBoard_items_impl))), ((((sec))))))), (((0 ) ))))))), (( ( 2 ))))), (( 0.015)*1.0)) // INLINED!!
-            call MultiboardSetItemWidth((LoadMultiboardItemHandle(Table__ht, ((((LoadInteger(Table__ht, ((LoadInteger(ConstTable__ht, (((s__MultiBoard_items_impl))), ((((sec))))))), (((0 ) ))))))), (( ( 3 ))))), (( 0.005)*1.0)) // INLINED!!
-            call MultiboardSetItemWidth((LoadMultiboardItemHandle(Table__ht, ((((LoadInteger(Table__ht, ((LoadInteger(ConstTable__ht, (((s__MultiBoard_items_impl))), ((((sec))))))), (((0 ) ))))))), (( ( 4 ))))), (( 0.015)*1.0)) // INLINED!!
+            set sec=s__MultiBoard_refresh((LoadMultiboardHandle(ConstTable___ht, (((((s__GameTime_static_members_key))))), (s__GameTime_multiboard_impl)))) // INLINED!!
+            call MultiboardSetItemStyle((LoadMultiboardItemHandle(Table___ht, ((((LoadInteger(Table___ht, ((LoadInteger(ConstTable___ht, (((s__MultiBoard_items_impl))), ((((sec))))))), (((0 ) ))))))), (( ( 0 ))))), ( true ), ( false)) // INLINED!!
+            call MultiboardSetItemStyle((LoadMultiboardItemHandle(Table___ht, ((((LoadInteger(Table___ht, ((LoadInteger(ConstTable___ht, (((s__MultiBoard_items_impl))), ((((sec))))))), (((0 ) ))))))), (( ( 1 ))))), ( true ), ( false)) // INLINED!!
+            call MultiboardSetItemStyle((LoadMultiboardItemHandle(Table___ht, ((((LoadInteger(Table___ht, ((LoadInteger(ConstTable___ht, (((s__MultiBoard_items_impl))), ((((sec))))))), (((0 ) ))))))), (( ( 2 ))))), ( true ), ( false)) // INLINED!!
+            call MultiboardSetItemStyle((LoadMultiboardItemHandle(Table___ht, ((((LoadInteger(Table___ht, ((LoadInteger(ConstTable___ht, (((s__MultiBoard_items_impl))), ((((sec))))))), (((0 ) ))))))), (( ( 3 ))))), ( true ), ( false)) // INLINED!!
+            call MultiboardSetItemStyle((LoadMultiboardItemHandle(Table___ht, ((((LoadInteger(Table___ht, ((LoadInteger(ConstTable___ht, (((s__MultiBoard_items_impl))), ((((sec))))))), (((0 ) ))))))), (( ( 4 ))))), ( true ), ( false)) // INLINED!!
+            call MultiboardSetItemWidth((LoadMultiboardItemHandle(Table___ht, ((((LoadInteger(Table___ht, ((LoadInteger(ConstTable___ht, (((s__MultiBoard_items_impl))), ((((sec))))))), (((0 ) ))))))), (( ( 0 ))))), (( 0.015)*1.0)) // INLINED!!
+            call MultiboardSetItemWidth((LoadMultiboardItemHandle(Table___ht, ((((LoadInteger(Table___ht, ((LoadInteger(ConstTable___ht, (((s__MultiBoard_items_impl))), ((((sec))))))), (((0 ) ))))))), (( ( 1 ))))), (( 0.005)*1.0)) // INLINED!!
+            call MultiboardSetItemWidth((LoadMultiboardItemHandle(Table___ht, ((((LoadInteger(Table___ht, ((LoadInteger(ConstTable___ht, (((s__MultiBoard_items_impl))), ((((sec))))))), (((0 ) ))))))), (( ( 2 ))))), (( 0.015)*1.0)) // INLINED!!
+            call MultiboardSetItemWidth((LoadMultiboardItemHandle(Table___ht, ((((LoadInteger(Table___ht, ((LoadInteger(ConstTable___ht, (((s__MultiBoard_items_impl))), ((((sec))))))), (((0 ) ))))))), (( ( 3 ))))), (( 0.005)*1.0)) // INLINED!!
+            call MultiboardSetItemWidth((LoadMultiboardItemHandle(Table___ht, ((((LoadInteger(Table___ht, ((LoadInteger(ConstTable___ht, (((s__MultiBoard_items_impl))), ((((sec))))))), (((0 ) ))))))), (( ( 4 ))))), (( 0.015)*1.0)) // INLINED!!
             
             set sec=0
         endif
     
         if sec == 60 then
-            if (LoadInteger(ConstTable__ht, (((((s__GameTime_static_members_key))))), (s__GameTime_minutes_impl))) == 60 then // INLINED!!
-                call SaveInteger(ConstTable__ht, (((((s__GameTime_static_members_key))))), (s__GameTime_hours_impl), ( ((LoadInteger(ConstTable__ht, (((((s__GameTime_static_members_key))))), (s__GameTime_hours_impl))) + 1))) // INLINED!!
-                call SaveInteger(ConstTable__ht, (((((s__GameTime_static_members_key))))), (s__GameTime_minutes_impl), ( (0))) // INLINED!!
+            if (LoadInteger(ConstTable___ht, (((((s__GameTime_static_members_key))))), (s__GameTime_minutes_impl))) == 60 then // INLINED!!
+                call SaveInteger(ConstTable___ht, (((((s__GameTime_static_members_key))))), (s__GameTime_hours_impl), ( ((LoadInteger(ConstTable___ht, (((((s__GameTime_static_members_key))))), (s__GameTime_hours_impl))) + 1))) // INLINED!!
+                call SaveInteger(ConstTable___ht, (((((s__GameTime_static_members_key))))), (s__GameTime_minutes_impl), ( (0))) // INLINED!!
             else
-                call SaveInteger(ConstTable__ht, (((((s__GameTime_static_members_key))))), (s__GameTime_minutes_impl), ( ((LoadInteger(ConstTable__ht, (((((s__GameTime_static_members_key))))), (s__GameTime_minutes_impl))) + 1))) // INLINED!!
+                call SaveInteger(ConstTable___ht, (((((s__GameTime_static_members_key))))), (s__GameTime_minutes_impl), ( ((LoadInteger(ConstTable___ht, (((((s__GameTime_static_members_key))))), (s__GameTime_minutes_impl))) + 1))) // INLINED!!
             endif
-            call SaveInteger(ConstTable__ht, (((((s__GameTime_static_members_key))))), (s__GameTime_seconds_impl), ( (0))) // INLINED!!
+            call SaveInteger(ConstTable___ht, (((((s__GameTime_static_members_key))))), (s__GameTime_seconds_impl), ( (0))) // INLINED!!
         else
-            call SaveInteger(ConstTable__ht, (((((s__GameTime_static_members_key))))), (s__GameTime_seconds_impl), ( (sec + 1))) // INLINED!!
+            call SaveInteger(ConstTable___ht, (((((s__GameTime_static_members_key))))), (s__GameTime_seconds_impl), ( (sec + 1))) // INLINED!!
         endif
         
-        set sec=GetHandleId((LoadMultiboardHandle(ConstTable__ht, (((((s__GameTime_static_members_key))))), (s__GameTime_multiboard_impl)))) // INLINED!!
+        set sec=GetHandleId((LoadMultiboardHandle(ConstTable___ht, (((((s__GameTime_static_members_key))))), (s__GameTime_multiboard_impl)))) // INLINED!!
         //call MultiboardSuppressDisplay(false)
         
-        set s=I2S((LoadInteger(ConstTable__ht, (((((s__GameTime_static_members_key))))), (s__GameTime_hours_impl)))) // INLINED!!
+        set s=I2S((LoadInteger(ConstTable___ht, (((((s__GameTime_static_members_key))))), (s__GameTime_hours_impl)))) // INLINED!!
         if StringLength(s) == 1 then
             set s="0" + s
         endif
-        call MultiboardSetItemValue((LoadMultiboardItemHandle(Table__ht, ((((LoadInteger(Table__ht, ((LoadInteger(ConstTable__ht, (((s__MultiBoard_items_impl))), ((((sec))))))), (((0 ) ))))))), (( ( 0 ))))), ( s)) // INLINED!!
-        call MultiboardSetItemValue((LoadMultiboardItemHandle(Table__ht, ((((LoadInteger(Table__ht, ((LoadInteger(ConstTable__ht, (((s__MultiBoard_items_impl))), ((((sec))))))), (((0 ) ))))))), (( ( 1 ))))), ( ":")) // INLINED!!
-        set s=I2S((LoadInteger(ConstTable__ht, (((((s__GameTime_static_members_key))))), (s__GameTime_minutes_impl)))) // INLINED!!
+        call MultiboardSetItemValue((LoadMultiboardItemHandle(Table___ht, ((((LoadInteger(Table___ht, ((LoadInteger(ConstTable___ht, (((s__MultiBoard_items_impl))), ((((sec))))))), (((0 ) ))))))), (( ( 0 ))))), ( s)) // INLINED!!
+        call MultiboardSetItemValue((LoadMultiboardItemHandle(Table___ht, ((((LoadInteger(Table___ht, ((LoadInteger(ConstTable___ht, (((s__MultiBoard_items_impl))), ((((sec))))))), (((0 ) ))))))), (( ( 1 ))))), ( ":")) // INLINED!!
+        set s=I2S((LoadInteger(ConstTable___ht, (((((s__GameTime_static_members_key))))), (s__GameTime_minutes_impl)))) // INLINED!!
         if StringLength(s) == 1 then
             set s="0" + s
         endif
-        call MultiboardSetItemValue((LoadMultiboardItemHandle(Table__ht, ((((LoadInteger(Table__ht, ((LoadInteger(ConstTable__ht, (((s__MultiBoard_items_impl))), ((((sec))))))), (((0 ) ))))))), (( ( 2 ))))), ( s)) // INLINED!!
-        call MultiboardSetItemValue((LoadMultiboardItemHandle(Table__ht, ((((LoadInteger(Table__ht, ((LoadInteger(ConstTable__ht, (((s__MultiBoard_items_impl))), ((((sec))))))), (((0 ) ))))))), (( ( 3 ))))), ( ":")) // INLINED!!
-        set s=I2S((LoadInteger(ConstTable__ht, (((((s__GameTime_static_members_key))))), (s__GameTime_seconds_impl)))) // INLINED!!
+        call MultiboardSetItemValue((LoadMultiboardItemHandle(Table___ht, ((((LoadInteger(Table___ht, ((LoadInteger(ConstTable___ht, (((s__MultiBoard_items_impl))), ((((sec))))))), (((0 ) ))))))), (( ( 2 ))))), ( s)) // INLINED!!
+        call MultiboardSetItemValue((LoadMultiboardItemHandle(Table___ht, ((((LoadInteger(Table___ht, ((LoadInteger(ConstTable___ht, (((s__MultiBoard_items_impl))), ((((sec))))))), (((0 ) ))))))), (( ( 3 ))))), ( ":")) // INLINED!!
+        set s=I2S((LoadInteger(ConstTable___ht, (((((s__GameTime_static_members_key))))), (s__GameTime_seconds_impl)))) // INLINED!!
         if StringLength(s) == 1 then
             set s="0" + s
         endif
-        call MultiboardSetItemValue((LoadMultiboardItemHandle(Table__ht, ((((LoadInteger(Table__ht, ((LoadInteger(ConstTable__ht, (((s__MultiBoard_items_impl))), ((((sec))))))), (((0 ) ))))))), (( ( 4 ))))), ( s)) // INLINED!!
+        call MultiboardSetItemValue((LoadMultiboardItemHandle(Table___ht, ((((LoadInteger(Table___ht, ((LoadInteger(ConstTable___ht, (((s__MultiBoard_items_impl))), ((((sec))))))), (((0 ) ))))))), (( ( 4 ))))), ( s)) // INLINED!!
         
-        call MultiboardDisplay((LoadMultiboardHandle(ConstTable__ht, (((((s__GameTime_static_members_key))))), (s__GameTime_multiboard_impl))), true) // INLINED!!
+        call MultiboardDisplay((LoadMultiboardHandle(ConstTable___ht, (((((s__GameTime_static_members_key))))), (s__GameTime_multiboard_impl))), true) // INLINED!!
     endfunction
     
     function s__GameTime_onInit takes nothing returns nothing
         call s__TableStruct_setHandle(s__GameTime_static_members_key , s__GameTime_timer_impl , (CreateTimer())) // INLINED!!
                 
         
-        call TimerStart((LoadTimerHandle(ConstTable__ht, (((((s__GameTime_static_members_key))))), (s__GameTime_timer_impl))), 1., true, function s__GameTime_onTimer) // INLINED!!
+        call TimerStart((LoadTimerHandle(ConstTable___ht, (((((s__GameTime_static_members_key))))), (s__GameTime_timer_impl))), 1., true, function s__GameTime_onTimer) // INLINED!!
     endfunction
 
 
 
 //library GameTime ends
-//library LoPInitDecoBuilders:
+//library LoPInitDecoTents:
 
 
-
-// The number of Basic Deco Builders
-
-
-
-
-// This function is called in Init 0 seconds
+// This function is called in Init 0 seconds (to reduce loading time)
 function InitDecoTents takes nothing returns nothing
     local rect decoRect= gg_rct_Deco_Tents_Rect
     
@@ -9232,15 +9468,15 @@ function InitDecoTents takes nothing returns nothing
 //textmacro instance: DecoBuilders_MakeTents("Special")
     set decoTentCount=1
     loop
-    exitwhen decoNumber > (LoadInteger(ConstTable__ht, (((((s__LoP_DecoBuilders_static_members_key))))), (s__LoP_DecoBuilders_SpecialDecoLastIndex_impl))) // INLINED!!
+    exitwhen decoNumber > (LoadInteger(ConstTable___ht, (((((s__LoP_DecoBuilders_static_members_key))))), (s__LoP_DecoBuilders_SpecialDecoLastIndex_impl))) // INLINED!!
         set decoTent=CreateUnit(Player(PLAYER_NEUTRAL_PASSIVE), 'n03H', xCur, yCur, bj_UNIT_FACING)
         call BlzSetUnitName(decoTent, "Deco Tent Special " + I2S(decoTentCount))
         call SetUnitVertexColor(decoTent, Special_RED, Special_GREEN, Special_BLUE, Special_ALPHA)
         
         set i=0
         loop
-        exitwhen i >= bj_MAX_STOCK_UNIT_SLOTS or decoNumber > (LoadInteger(ConstTable__ht, (((((s__LoP_DecoBuilders_static_members_key))))), (s__LoP_DecoBuilders_SpecialDecoLastIndex_impl))) // INLINED!!
-            call AddUnitToStock(decoTent, udg_DecoUnitTypes[decoNumber], 1, 3)
+        exitwhen i >= bj_MAX_STOCK_UNIT_SLOTS or decoNumber > (LoadInteger(ConstTable___ht, (((((s__LoP_DecoBuilders_static_members_key))))), (s__LoP_DecoBuilders_SpecialDecoLastIndex_impl))) // INLINED!!
+            call AddUnitToStock(decoTent, s__LoP_DecoBuilders_rawcodes[decoNumber], 1, 3)
             set i=i + 1
             set decoNumber=decoNumber + 1
         endloop
@@ -9257,15 +9493,15 @@ function InitDecoTents takes nothing returns nothing
 //textmacro instance: DecoBuilders_MakeTents("Basic")
     set decoTentCount=1
     loop
-    exitwhen decoNumber > (LoadInteger(ConstTable__ht, (((((s__LoP_DecoBuilders_static_members_key))))), (s__LoP_DecoBuilders_BasicDecoLastIndex_impl))) // INLINED!!
+    exitwhen decoNumber > (LoadInteger(ConstTable___ht, (((((s__LoP_DecoBuilders_static_members_key))))), (s__LoP_DecoBuilders_BasicDecoLastIndex_impl))) // INLINED!!
         set decoTent=CreateUnit(Player(PLAYER_NEUTRAL_PASSIVE), 'n03H', xCur, yCur, bj_UNIT_FACING)
         call BlzSetUnitName(decoTent, "Deco Tent Basic " + I2S(decoTentCount))
         call SetUnitVertexColor(decoTent, Basic_RED, Basic_GREEN, Basic_BLUE, Basic_ALPHA)
         
         set i=0
         loop
-        exitwhen i >= bj_MAX_STOCK_UNIT_SLOTS or decoNumber > (LoadInteger(ConstTable__ht, (((((s__LoP_DecoBuilders_static_members_key))))), (s__LoP_DecoBuilders_BasicDecoLastIndex_impl))) // INLINED!!
-            call AddUnitToStock(decoTent, udg_DecoUnitTypes[decoNumber], 1, 3)
+        exitwhen i >= bj_MAX_STOCK_UNIT_SLOTS or decoNumber > (LoadInteger(ConstTable___ht, (((((s__LoP_DecoBuilders_static_members_key))))), (s__LoP_DecoBuilders_BasicDecoLastIndex_impl))) // INLINED!!
+            call AddUnitToStock(decoTent, s__LoP_DecoBuilders_rawcodes[decoNumber], 1, 3)
             set i=i + 1
             set decoNumber=decoNumber + 1
         endloop
@@ -9282,15 +9518,15 @@ function InitDecoTents takes nothing returns nothing
 //textmacro instance: DecoBuilders_MakeTents("Adv")
     set decoTentCount=1
     loop
-    exitwhen decoNumber > (LoadInteger(ConstTable__ht, (((((s__LoP_DecoBuilders_static_members_key))))), (s__LoP_DecoBuilders_AdvDecoLastIndex_impl))) // INLINED!!
+    exitwhen decoNumber > (LoadInteger(ConstTable___ht, (((((s__LoP_DecoBuilders_static_members_key))))), (s__LoP_DecoBuilders_AdvDecoLastIndex_impl))) // INLINED!!
         set decoTent=CreateUnit(Player(PLAYER_NEUTRAL_PASSIVE), 'n03H', xCur, yCur, bj_UNIT_FACING)
         call BlzSetUnitName(decoTent, "Deco Tent Adv " + I2S(decoTentCount))
         call SetUnitVertexColor(decoTent, Adv_RED, Adv_GREEN, Adv_BLUE, Adv_ALPHA)
         
         set i=0
         loop
-        exitwhen i >= bj_MAX_STOCK_UNIT_SLOTS or decoNumber > (LoadInteger(ConstTable__ht, (((((s__LoP_DecoBuilders_static_members_key))))), (s__LoP_DecoBuilders_AdvDecoLastIndex_impl))) // INLINED!!
-            call AddUnitToStock(decoTent, udg_DecoUnitTypes[decoNumber], 1, 3)
+        exitwhen i >= bj_MAX_STOCK_UNIT_SLOTS or decoNumber > (LoadInteger(ConstTable___ht, (((((s__LoP_DecoBuilders_static_members_key))))), (s__LoP_DecoBuilders_AdvDecoLastIndex_impl))) // INLINED!!
+            call AddUnitToStock(decoTent, s__LoP_DecoBuilders_rawcodes[decoNumber], 1, 3)
             set i=i + 1
             set decoNumber=decoNumber + 1
         endloop
@@ -9306,225 +9542,9 @@ function InitDecoTents takes nothing returns nothing
 //end of: DecoBuilders_MakeTents("Adv")
 endfunction
 
-// This function is called in Init Main
-function InitDecoUnitTypeArray takes nothing returns nothing
-    local integer i= 0
-    // ---------
-    // Special Decos
-    // ---------
-    // Units and Trees
-    set udg_DecoUnitTypes[i]='u015'
-    // Terrain
-    set i=( i + 1 )
-    set udg_DecoUnitTypes[i]='u02E'
-    // Controller
-    // set i = ( i + 1 )
-    // set udg_DecoUnitTypes[i] = 'h0KD'
-    // Docks
-    set i=( i + 1 )
-    set udg_DecoUnitTypes[i]='u003'
-    // Misc
-    set i=( i + 1 )
-    set udg_DecoUnitTypes[i]='u00W'
-    
-    call SaveInteger(ConstTable__ht, (((((s__LoP_DecoBuilders_static_members_key))))), (s__LoP_DecoBuilders_SpecialDecoLastIndex_impl), ( (i))) // INLINED!!
-    // ---------
-    // Basic Decos
-    // ---------
-    // Archways
-    set i=( i + 1 )
-    set udg_DecoUnitTypes[i]='u014'
-    // Bushes
-    set i=( i + 1 )
-    set udg_DecoUnitTypes[i]='u00A'
-    // Camp
-    set i=( i + 1 )
-    set udg_DecoUnitTypes[i]='u035'
-    // City 1
-    set i=( i + 1 )
-    set udg_DecoUnitTypes[i]='u016'
-    // City 2
-    set i=( i + 1 )
-    set udg_DecoUnitTypes[i]='u017'
-    // City 3
-    set i=( i + 1 )
-    set udg_DecoUnitTypes[i]='u01T'
-    // Corpses
-    set i=( i + 1 )
-    set udg_DecoUnitTypes[i]='u00N'
-    // Crops
-    set i=( i + 1 )
-    set udg_DecoUnitTypes[i]='u00B'
-    // Dungeon
-    set i=( i + 1 )
-    set udg_DecoUnitTypes[i]='u01P'
-    // Effects
-    set i=( i + 1 )
-    set udg_DecoUnitTypes[i]='u036'
-    // Fire
-    set i=( i + 1 )
-    set udg_DecoUnitTypes[i]='u01C'
-    // Furniture Deco
-    set i=( i + 1 )
-    set udg_DecoUnitTypes[i]='u03Q'
-    // Gates
-    set i=( i + 1 )
-    set udg_DecoUnitTypes[i]='u00V'
-    // Ice
-    set i=( i + 1 )
-    set udg_DecoUnitTypes[i]='u03P'
-    // Rocks
-    set i=( i + 1 )
-    set udg_DecoUnitTypes[i]='u013'
-    // Seats
-    set i=( i + 1 )
-    set udg_DecoUnitTypes[i]='u01R'
-    // Statue 1
-    set i=( i + 1 )
-    set udg_DecoUnitTypes[i]='u01N'
-    // Walls (Wood)
-    set i=( i + 1 )
-    set udg_DecoUnitTypes[i]='u000'
-    // Walls 1
-    set i=( i + 1 )
-    set udg_DecoUnitTypes[i]='u02J'
-    // Walls 2
-    set i=( i + 1 )
-    set udg_DecoUnitTypes[i]='u02K'
-    // Water
-    set i=( i + 1 )
-    set udg_DecoUnitTypes[i]='u00Z'
-    // Webs
-    set i=( i + 1 )
-    set udg_DecoUnitTypes[i]='u02P'
-    
-    call SaveInteger(ConstTable__ht, (((((s__LoP_DecoBuilders_static_members_key))))), (s__LoP_DecoBuilders_BasicDecoLastIndex_impl), ( (i))) // INLINED!!
-    // ---------
-    // Advanced Decos
-    // ---------
-    // Arabian 1
-    set i=( i + 1 )
-    set udg_DecoUnitTypes[i]='u02G'
-    // Arabian 2
-    set i=( i + 1 )
-    set udg_DecoUnitTypes[i]='u02H'
-    // Blacksmith
-    set i=( i + 1 )
-    set udg_DecoUnitTypes[i]='u01E'
-    // Blocks
-    set i=( i + 1 )
-    set udg_DecoUnitTypes[i]='u03A'
-    // Celtic
-    set i=( i + 1 )
-    set udg_DecoUnitTypes[i]='u029'
-    // Chaos
-    set i=( i + 1 )
-    set udg_DecoUnitTypes[i]='u039'
-    // Chess
-    set i=( i + 1 )
-    set udg_DecoUnitTypes[i]='u027'
-    // Dalaran
-    set i=( i + 1 )
-    set udg_DecoUnitTypes[i]='u02D'
-    // Draenei
-    set i=( i + 1 )
-    set udg_DecoUnitTypes[i]='u02O'
-    // Elves
-    set i=( i + 1 )
-    set udg_DecoUnitTypes[i]='u02A'
-    // Fence
-    set i=( i + 1 )
-    set udg_DecoUnitTypes[i]='u03I'
-    // Flags
-    set i=( i + 1 )
-    set udg_DecoUnitTypes[i]='u005'
-    // Floors
-    set i=( i + 1 )
-    set udg_DecoUnitTypes[i]='u02C'
-    // Flowers 1
-    set i=( i + 1 )
-    set udg_DecoUnitTypes[i]='u004'
-    // Flowers 2
-    set i=( i + 1 )
-    set udg_DecoUnitTypes[i]='u006'
-    // Forsaken
-    set i=( i + 1 )
-    set udg_DecoUnitTypes[i]='u025'
-    // Goblin
-    set i=( i + 1 )
-    set udg_DecoUnitTypes[i]='u02R'
-    // Gravestones
-    set i=( i + 1 )
-    set udg_DecoUnitTypes[i]='u02S'
-    // Mansion
-    set i=( i + 1 )
-    set udg_DecoUnitTypes[i]='u02I'
-    // Market
-    set i=( i + 1 )
-    set udg_DecoUnitTypes[i]='u01D'
-    // Medieval 1
-    set i=( i + 1 )
-    set udg_DecoUnitTypes[i]='u01S'
-    // Medieval 2
-    set i=( i + 1 )
-    set udg_DecoUnitTypes[i]='u02L'
-    // Naga
-    set i=( i + 1 )
-    set udg_DecoUnitTypes[i]='u03R'
-    // Nordic
-    set i=( i + 1 )
-    set udg_DecoUnitTypes[i]='u03S'
-    // Obelisks
-    set i=( i + 1 )
-    set udg_DecoUnitTypes[i]='u00Y'
-    // Pandaren
-    set i=( i + 1 )
-    set udg_DecoUnitTypes[i]='u02N'
-    // Quilboar
-    set i=( i + 1 )
-    set udg_DecoUnitTypes[i]='u026'
-    // Rostrodle
-    set i=( i + 1 )
-    set udg_DecoUnitTypes[i]='u02Q'
-    // Ruined
-    set i=( i + 1 )
-    set udg_DecoUnitTypes[i]='u02T'
-    // Ruins
-    set i=( i + 1 )
-    set udg_DecoUnitTypes[i]='u00X'
-    // Runes
-    set i=( i + 1 )
-    set udg_DecoUnitTypes[i]='u001'
-    // Runic
-    set i=( i + 1 )
-    set udg_DecoUnitTypes[i]='u02M'
-    // Statue 2
-    set i=( i + 1 )
-    set udg_DecoUnitTypes[i]='u023'
-    // Trees
-    set i=( i + 1 )
-    set udg_DecoUnitTypes[i]='u01B'
-    // Village
-    set i=( i + 1 )
-    set udg_DecoUnitTypes[i]='u01O'
-    // Walls (Icecrown)
-    set i=( i + 1 )
-    set udg_DecoUnitTypes[i]='u011'
-    // Walls (Ruins)
-    set i=( i + 1 )
-    set udg_DecoUnitTypes[i]='u012'
-    // Walls (Stone)
-    set i=( i + 1 )
-    set udg_DecoUnitTypes[i]='u010'
-    
-    call SaveInteger(ConstTable__ht, (((((s__LoP_DecoBuilders_static_members_key))))), (s__LoP_DecoBuilders_AdvDecoLastIndex_impl), ( (i))) // INLINED!!
-    // ---------
-    // End of Deco Creation
-    // ---------
-    set udg_System_DecoTotal=i
-endfunction
 
-//library LoPInitDecoBuilders ends
+
+//library LoPInitDecoTents ends
 //library UserDefinedRects:
     
 //////////////////////////////////////////////////////
@@ -9543,127 +9563,127 @@ endfunction
 //CONSTANTS THAT RETURN THE INTEGER ADDRESS OF A GUDR MEMBER IN THE HASHTABLE
 
 //textmacro instance: GUDR_INDEX("RECT", "0")
-    constant function s__UserDefinedRects__Indices__get_RECT takes nothing returns integer
+    constant function s__UserDefinedRects___Indices__get_RECT takes nothing returns integer
         return 0
     endfunction
 //end of: GUDR_INDEX("RECT", "0")
 //textmacro instance: GUDR_INDEX("LIGHT_T", "1")
-    constant function s__UserDefinedRects__Indices__get_LIGHT_T takes nothing returns integer
+    constant function s__UserDefinedRects___Indices__get_LIGHT_T takes nothing returns integer
         return 1
     endfunction
 //end of: GUDR_INDEX("LIGHT_T", "1")
 //textmacro instance: GUDR_INDEX("LIGHT_B", "2")
-    constant function s__UserDefinedRects__Indices__get_LIGHT_B takes nothing returns integer
+    constant function s__UserDefinedRects___Indices__get_LIGHT_B takes nothing returns integer
         return 2
     endfunction
 //end of: GUDR_INDEX("LIGHT_B", "2")
 //textmacro instance: GUDR_INDEX("LIGHT_L", "3")
-    constant function s__UserDefinedRects__Indices__get_LIGHT_L takes nothing returns integer
+    constant function s__UserDefinedRects___Indices__get_LIGHT_L takes nothing returns integer
         return 3
     endfunction
 //end of: GUDR_INDEX("LIGHT_L", "3")
 //textmacro instance: GUDR_INDEX("LIGHT_R", "4")
-    constant function s__UserDefinedRects__Indices__get_LIGHT_R takes nothing returns integer
+    constant function s__UserDefinedRects___Indices__get_LIGHT_R takes nothing returns integer
         return 4
     endfunction
 //end of: GUDR_INDEX("LIGHT_R", "4")
 //textmacro instance: GUDR_INDEX("WEATHER", "5")
-    constant function s__UserDefinedRects__Indices__get_WEATHER takes nothing returns integer
+    constant function s__UserDefinedRects___Indices__get_WEATHER takes nothing returns integer
         return 5
     endfunction
 //end of: GUDR_INDEX("WEATHER", "5")
 //textmacro instance: GUDR_INDEX("GROUP", "6")
-    constant function s__UserDefinedRects__Indices__get_GROUP takes nothing returns integer
+    constant function s__UserDefinedRects___Indices__get_GROUP takes nothing returns integer
         return 6
     endfunction
 //end of: GUDR_INDEX("GROUP", "6")
 //textmacro instance: GUDR_INDEX("HIDDEN", "7")
-    constant function s__UserDefinedRects__Indices__get_HIDDEN takes nothing returns integer
+    constant function s__UserDefinedRects___Indices__get_HIDDEN takes nothing returns integer
         return 7
     endfunction
 //end of: GUDR_INDEX("HIDDEN", "7")
 //textmacro instance: GUDR_INDEX("WEATHER_TYPE", "8")
-    constant function s__UserDefinedRects__Indices__get_WEATHER_TYPE takes nothing returns integer
+    constant function s__UserDefinedRects___Indices__get_WEATHER_TYPE takes nothing returns integer
         return 8
     endfunction
 //end of: GUDR_INDEX("WEATHER_TYPE", "8")
 //=============================
 //FUNCTIONS THAT RETURN BOOLEANS
 function GUDR_IsUnitIdGenerator takes integer unitHandle returns boolean
-    return HaveSavedHandle(UserDefinedRects__hashTable, unitHandle, (0)) // INLINED!!
+    return HaveSavedHandle(UserDefinedRects___hashTable, unitHandle, (0)) // INLINED!!
 endfunction
 
 function GUDR_IsUnitGenerator takes unit whichUnit returns boolean
-    return (HaveSavedHandle(UserDefinedRects__hashTable, (GetHandleId(whichUnit)), (0))) // INLINED!!
+    return (HaveSavedHandle(UserDefinedRects___hashTable, (GetHandleId(whichUnit)), (0))) // INLINED!!
 endfunction
 
 function GUDR_IsGeneratorIdHidden takes integer generatorId returns boolean
-    return LoadBoolean(UserDefinedRects__hashTable, generatorId, (7)) // INLINED!!
+    return LoadBoolean(UserDefinedRects___hashTable, generatorId, (7)) // INLINED!!
 endfunction
 
 function GUDR_IsGeneratorHidden takes unit generator returns boolean
-    return (LoadBoolean(UserDefinedRects__hashTable, (GetHandleId(generator)), (7))) // INLINED!!
+    return (LoadBoolean(UserDefinedRects___hashTable, (GetHandleId(generator)), (7))) // INLINED!!
 endfunction
 
 function GUDR_GeneratorIdHasGroup takes integer generatorId returns boolean
-    return HaveSavedHandle(UserDefinedRects__hashTable, generatorId, (6)) // INLINED!!
+    return HaveSavedHandle(UserDefinedRects___hashTable, generatorId, (6)) // INLINED!!
 endfunction
 
 function GUDR_GeneratorHasGroup takes unit generator returns boolean
-    return (HaveSavedHandle(UserDefinedRects__hashTable, (GetHandleId(generator)), (6))) // INLINED!!
+    return (HaveSavedHandle(UserDefinedRects___hashTable, (GetHandleId(generator)), (6))) // INLINED!!
 endfunction
 
 function GUDR_GeneratorIdHasWeather takes integer generatorId returns boolean
-    return HaveSavedInteger(UserDefinedRects__hashTable, generatorId, (5)) // INLINED!!
+    return HaveSavedInteger(UserDefinedRects___hashTable, generatorId, (5)) // INLINED!!
 endfunction
 
 function GUDR_GeneratorHasWeather takes unit generator returns boolean
-    return (HaveSavedInteger(UserDefinedRects__hashTable, (GetHandleId(generator)), (5))) // INLINED!!
+    return (HaveSavedInteger(UserDefinedRects___hashTable, (GetHandleId(generator)), (5))) // INLINED!!
 endfunction
 //=============================
 //FUNCTIONS TO GET GUDR MEMBERS
 
 //Handle Id as parameter
 function GUDR_GetGeneratorIdRect takes integer generatorId returns rect
-    return LoadRectHandle(UserDefinedRects__hashTable, generatorId, (0)) // INLINED!!
+    return LoadRectHandle(UserDefinedRects___hashTable, generatorId, (0)) // INLINED!!
 endfunction
 
 function GUDR_GetGeneratorIdWeatherEffect takes integer generatorId returns weathereffect
-    return UserDefinedRects__weatherEffects[LoadInteger(UserDefinedRects__hashTable, generatorId, (5))] // INLINED!!
+    return UserDefinedRects___weatherEffects[LoadInteger(UserDefinedRects___hashTable, generatorId, (5))] // INLINED!!
 endfunction
 
 function GUDR_GetGeneratorIdGroup takes integer generatorId returns group
-    return LoadGroupHandle(UserDefinedRects__hashTable, generatorId, (6)) // INLINED!!
+    return LoadGroupHandle(UserDefinedRects___hashTable, generatorId, (6)) // INLINED!!
 endfunction
 
 function GUDR_GetGeneratorIdWeatherType takes integer generatorId returns integer
-    return LoadInteger(UserDefinedRects__hashTable, generatorId, (8)) // INLINED!!
+    return LoadInteger(UserDefinedRects___hashTable, generatorId, (8)) // INLINED!!
 endfunction
 
 //Unit as parameter
 
 function GUDR_GetGeneratorRect takes unit generator returns rect
-    return (LoadRectHandle(UserDefinedRects__hashTable, (GetHandleId(generator)), (0))) // INLINED!!
+    return (LoadRectHandle(UserDefinedRects___hashTable, (GetHandleId(generator)), (0))) // INLINED!!
 endfunction
 
 function GUDR_GetGeneratorWeatherEffect takes unit generator returns weathereffect
-    return (UserDefinedRects__weatherEffects[LoadInteger(UserDefinedRects__hashTable, (GetHandleId(generator)), (5))]) // INLINED!!
+    return (UserDefinedRects___weatherEffects[LoadInteger(UserDefinedRects___hashTable, (GetHandleId(generator)), (5))]) // INLINED!!
 endfunction
 
 function GUDR_GetGeneratorGroup takes unit generator returns group
-    return (LoadGroupHandle(UserDefinedRects__hashTable, (GetHandleId(generator)), (6))) // INLINED!!
+    return (LoadGroupHandle(UserDefinedRects___hashTable, (GetHandleId(generator)), (6))) // INLINED!!
 endfunction
 
 function GUDR_GetGeneratorWeatherType takes unit generator returns integer
-    return (LoadInteger(UserDefinedRects__hashTable, (GetHandleId(generator)), (8))) // INLINED!!
+    return (LoadInteger(UserDefinedRects___hashTable, (GetHandleId(generator)), (8))) // INLINED!!
 endfunction
 
 function GUDR_ConvertWeatherType takes integer weatherType returns integer
-    return LoadInteger(UserDefinedRects__hashTable, 0, weatherType)
+    return LoadInteger(UserDefinedRects___hashTable, 0, weatherType)
 endfunction
 
-function UserDefinedRects__GetGeneratorIdLightning takes integer genId,integer i returns lightning
-    return LoadLightningHandle(UserDefinedRects__hashTable, genId, i)
+function UserDefinedRects___GetGeneratorIdLightning takes integer genId,integer i returns lightning
+    return LoadLightningHandle(UserDefinedRects___hashTable, genId, i)
 endfunction
 
 //=============================
@@ -9675,11 +9695,11 @@ function GUDR_SwapGroup_UnitsInsideUDR takes group whichGroup,boolean includeGen
     set firstOfGroup=FirstOfGroup(whichGroup)
     set genId=GetHandleId(firstOfGroup)
     
-    if (HaveSavedHandle(UserDefinedRects__hashTable, (genId), (0))) then // INLINED!!
+    if (HaveSavedHandle(UserDefinedRects___hashTable, (genId), (0))) then // INLINED!!
         set bj_groupRandomCurrentPick=firstOfGroup
         
         call GroupClear(whichGroup)
-        call GroupEnumUnitsInRect(whichGroup, (LoadRectHandle(UserDefinedRects__hashTable, (genId), (0))), filter) // INLINED!!
+        call GroupEnumUnitsInRect(whichGroup, (LoadRectHandle(UserDefinedRects___hashTable, (genId), (0))), filter) // INLINED!!
         
         if not includeGenerator then
             call GroupRemoveUnit(whichGroup, firstOfGroup)
@@ -9706,7 +9726,7 @@ function GUDR_PlayerGetSelectedGeneratorId takes player whichPlayer returns inte
     call DestroyGroup(slctGrp)
     set slctGrp=null
     
-    if (HaveSavedHandle(UserDefinedRects__hashTable, (unitId), (0))) then // INLINED!!
+    if (HaveSavedHandle(UserDefinedRects___hashTable, (unitId), (0))) then // INLINED!!
         set bj_groupRandomCurrentPick=firstOfGroup
         return unitId
     endif
@@ -9720,12 +9740,12 @@ function ChangeGUDRWeatherNew takes unit whichUnit,integer changeWeather,integer
     local integer unitId= GetHandleId(whichUnit)
     local integer weatherId
     
-    if not (HaveSavedHandle(UserDefinedRects__hashTable, (unitId), (0))) then // INLINED!!
+    if not (HaveSavedHandle(UserDefinedRects___hashTable, (unitId), (0))) then // INLINED!!
         return 0
     endif
 
     if finalWeather < 1 or finalWeather > 21 then
-        set curWeather=(LoadInteger(UserDefinedRects__hashTable, (unitId), (8))) // INLINED!!
+        set curWeather=(LoadInteger(UserDefinedRects___hashTable, (unitId), (8))) // INLINED!!
         set finalWeather=curWeather + changeWeather
     endif
         
@@ -9742,15 +9762,15 @@ function ChangeGUDRWeatherNew takes unit whichUnit,integer changeWeather,integer
         endloop
     endif
     
-    call SaveInteger(UserDefinedRects__hashTable, unitId, (8), finalWeather) // INLINED!!
+    call SaveInteger(UserDefinedRects___hashTable, unitId, (8), finalWeather) // INLINED!!
     
     // Update Weather, if it exists.
-    set weatherId=LoadInteger(UserDefinedRects__hashTable, unitId, 5)
+    set weatherId=LoadInteger(UserDefinedRects___hashTable, unitId, 5)
     if weatherId > 0 then
-        call EnableWeatherEffect(UserDefinedRects__weatherEffects[weatherId], false) //BUG: If weather effect is not disabled before destruction, it's sound effect will remain
-        call RemoveWeatherEffect(UserDefinedRects__weatherEffects[weatherId])
-        set UserDefinedRects__weatherEffects[weatherId]=AddWeatherEffect((LoadRectHandle(UserDefinedRects__hashTable, (unitId), (0))), (LoadInteger(UserDefinedRects__hashTable, 0, (finalWeather)))) // INLINED!!
-        call EnableWeatherEffect(UserDefinedRects__weatherEffects[weatherId], true)
+        call EnableWeatherEffect(UserDefinedRects___weatherEffects[weatherId], false) //BUG: If weather effect is not disabled before destruction, it's sound effect will remain
+        call RemoveWeatherEffect(UserDefinedRects___weatherEffects[weatherId])
+        set UserDefinedRects___weatherEffects[weatherId]=AddWeatherEffect((LoadRectHandle(UserDefinedRects___hashTable, (unitId), (0))), (LoadInteger(UserDefinedRects___hashTable, 0, (finalWeather)))) // INLINED!!
+        call EnableWeatherEffect(UserDefinedRects___weatherEffects[weatherId], true)
     endif
     
     return finalWeather
@@ -9759,7 +9779,7 @@ endfunction
 function GroupGUDRFilter takes nothing returns boolean
     local unit filterUnit= GetFilterUnit()
     
-    if (HaveSavedHandle(UserDefinedRects__hashTable, (GetHandleId((filterUnit))), (0))) or GetOwningPlayer(filterUnit) != bj_forceRandomCurrentPick then // INLINED!!
+    if (HaveSavedHandle(UserDefinedRects___hashTable, (GetHandleId((filterUnit))), (0))) or GetOwningPlayer(filterUnit) != bj_forceRandomCurrentPick then // INLINED!!
         set filterUnit=null
         return false
     endif
@@ -9775,11 +9795,11 @@ function GroupGUDR takes unit whichUnit,boolean unlock returns boolean
     local unit firstUnit
     local player storeGlobal= bj_forceRandomCurrentPick
     
-    if not (HaveSavedHandle(UserDefinedRects__hashTable, (unitId), (0))) then // INLINED!!
+    if not (HaveSavedHandle(UserDefinedRects___hashTable, (unitId), (0))) then // INLINED!!
         return false
     endif
     
-    set g=(LoadGroupHandle(UserDefinedRects__hashTable, (unitId), (6))) // INLINED!!
+    set g=(LoadGroupHandle(UserDefinedRects___hashTable, (unitId), (6))) // INLINED!!
     
     //Save the GURD's owner in the Hashtable for use in the EnumFilter function
     set firstUnit=FirstOfGroup(g)
@@ -9799,7 +9819,7 @@ function GroupGUDR takes unit whichUnit,boolean unlock returns boolean
     //We only want to add new units to the group if the user doesn't want to unlock it
     if not unlock then
         set bj_forceRandomCurrentPick=GetOwningPlayer(whichUnit)
-        call GroupEnumUnitsInRect(g, (LoadRectHandle(UserDefinedRects__hashTable, (unitId), (0))), Condition(function GroupGUDRFilter)) // INLINED!!
+        call GroupEnumUnitsInRect(g, (LoadRectHandle(UserDefinedRects___hashTable, (unitId), (0))), Condition(function GroupGUDRFilter)) // INLINED!!
         set bj_forceRandomCurrentPick=storeGlobal
     endif
     
@@ -9813,7 +9833,7 @@ function CreateWeather takes unit whichUnit returns boolean
     local integer instance
     local integer genId= GetHandleId(whichUnit)
     
-    if not (HaveSavedHandle(UserDefinedRects__hashTable, (genId), (0))) then // INLINED!!
+    if not (HaveSavedHandle(UserDefinedRects___hashTable, (genId), (0))) then // INLINED!!
         return false
     endif
     
@@ -9826,34 +9846,34 @@ function CreateWeather takes unit whichUnit returns boolean
 
 
 
-        set instance=GMUI_GetIndex(UserDefinedRects__RECYCLE_KEY)
+        set instance=GMUI_GetIndex(UserDefinedRects___RECYCLE_KEY)
 
     
-    call SaveInteger(UserDefinedRects__hashTable, GetHandleId(whichUnit), (5), instance) // INLINED!!
-    set UserDefinedRects__weatherEffects[instance]=AddWeatherEffect((LoadRectHandle(UserDefinedRects__hashTable, (genId), (0))), (LoadInteger(UserDefinedRects__hashTable, 0, ((LoadInteger(UserDefinedRects__hashTable, (genId), (8))))))) // INLINED!!
-    call EnableWeatherEffect(UserDefinedRects__weatherEffects[instance], true)
+    call SaveInteger(UserDefinedRects___hashTable, GetHandleId(whichUnit), (5), instance) // INLINED!!
+    set UserDefinedRects___weatherEffects[instance]=AddWeatherEffect((LoadRectHandle(UserDefinedRects___hashTable, (genId), (0))), (LoadInteger(UserDefinedRects___hashTable, 0, ((LoadInteger(UserDefinedRects___hashTable, (genId), (8))))))) // INLINED!!
+    call EnableWeatherEffect(UserDefinedRects___weatherEffects[instance], true)
     
     return true
 endfunction
 
 function DestroyWeather takes unit whichUnit returns boolean
-    local integer instance= LoadInteger(UserDefinedRects__hashTable, GetHandleId(whichUnit), (5)) // INLINED!!
+    local integer instance= LoadInteger(UserDefinedRects___hashTable, GetHandleId(whichUnit), (5)) // INLINED!!
     
     if instance < 1 then
         return false // False for effect not destroyed, unit did not have weather attached.
     endif
     
-    call EnableWeatherEffect(UserDefinedRects__weatherEffects[instance], false) // BUG: If weather effect is not disabled before destruction, it's sound effect will remain
-    call RemoveWeatherEffect(UserDefinedRects__weatherEffects[instance])
-    set UserDefinedRects__weatherEffects[instance]=null // Null to free handles for other systems
-    call RemoveSavedInteger(UserDefinedRects__hashTable, GetHandleId(whichUnit), (5)) // INLINED!!
+    call EnableWeatherEffect(UserDefinedRects___weatherEffects[instance], false) // BUG: If weather effect is not disabled before destruction, it's sound effect will remain
+    call RemoveWeatherEffect(UserDefinedRects___weatherEffects[instance])
+    set UserDefinedRects___weatherEffects[instance]=null // Null to free handles for other systems
+    call RemoveSavedInteger(UserDefinedRects___hashTable, GetHandleId(whichUnit), (5)) // INLINED!!
     
     
 
 
 
 
-        call GMUI_RecycleIndex(UserDefinedRects__RECYCLE_KEY , instance)
+        call GMUI_RecycleIndex(UserDefinedRects___RECYCLE_KEY , instance)
 
     
     return true // True for effect destroyed.
@@ -9863,15 +9883,15 @@ function ToggleGUDRVisibility takes unit whichUnit,boolean toggle,boolean show r
     local real alpha
     local integer unitId= GetHandleId(whichUnit)
     
-    if not (HaveSavedHandle(UserDefinedRects__hashTable, (unitId), (0))) then // INLINED!!
+    if not (HaveSavedHandle(UserDefinedRects___hashTable, (unitId), (0))) then // INLINED!!
         return false
     endif
     
     if toggle then //If user wants to switch the current value, change the value of show to opposite of current value
-        set show=not LoadBoolean(UserDefinedRects__hashTable, unitId, (7)) // INLINED!!
+        set show=not LoadBoolean(UserDefinedRects___hashTable, unitId, (7)) // INLINED!!
     endif
     
-    call SaveBoolean(UserDefinedRects__hashTable, unitId, (7), show) //Save current show/hide boolean // INLINED!!
+    call SaveBoolean(UserDefinedRects___hashTable, unitId, (7), show) //Save current show/hide boolean // INLINED!!
     
     //Convert Boolean to Real T/F = 1/0
     if show then
@@ -9883,10 +9903,10 @@ function ToggleGUDRVisibility takes unit whichUnit,boolean toggle,boolean show r
 
     //After it has been decided if the GUDR should be shown or hidden, apply the choice
     call SetUnitVertexColor(whichUnit, 255, 255, 255, 255 * R2I(alpha))
-    call SetLightningColor(LoadLightningHandle(UserDefinedRects__hashTable, unitId, (1)), 1, 1, 1, alpha) // INLINED!!
-    call SetLightningColor(LoadLightningHandle(UserDefinedRects__hashTable, unitId, (2)), 1, 1, 1, alpha) // INLINED!!
-    call SetLightningColor(LoadLightningHandle(UserDefinedRects__hashTable, unitId, (3)), 1, 1, 1, alpha) // INLINED!!
-    call SetLightningColor(LoadLightningHandle(UserDefinedRects__hashTable, unitId, (4)), 1, 1, 1, alpha) // INLINED!!
+    call SetLightningColor(LoadLightningHandle(UserDefinedRects___hashTable, unitId, (1)), 1, 1, 1, alpha) // INLINED!!
+    call SetLightningColor(LoadLightningHandle(UserDefinedRects___hashTable, unitId, (2)), 1, 1, 1, alpha) // INLINED!!
+    call SetLightningColor(LoadLightningHandle(UserDefinedRects___hashTable, unitId, (3)), 1, 1, 1, alpha) // INLINED!!
+    call SetLightningColor(LoadLightningHandle(UserDefinedRects___hashTable, unitId, (4)), 1, 1, 1, alpha) // INLINED!!
     return true
 endfunction
 
@@ -9902,11 +9922,11 @@ function MoveGUDR takes unit centerUnit,real offsetX,real offsetY,boolean expand
     local real minY
     local real maxY
     
-    if not (HaveSavedHandle(UserDefinedRects__hashTable, (unitId), (0))) then // INLINED!!
+    if not (HaveSavedHandle(UserDefinedRects___hashTable, (unitId), (0))) then // INLINED!!
         return false
     endif
     
-    set userDefRect=(LoadRectHandle(UserDefinedRects__hashTable, (unitId), (0))) // INLINED!!
+    set userDefRect=(LoadRectHandle(UserDefinedRects___hashTable, (unitId), (0))) // INLINED!!
     
     //If user wants to expand or contract the current region, Load the current value of its borders
     if expand then
@@ -9921,10 +9941,10 @@ function MoveGUDR takes unit centerUnit,real offsetX,real offsetY,boolean expand
     set maxY=centerY + offsetY
     
     //Update Lightnings
-    call MoveLightning(LoadLightningHandle(UserDefinedRects__hashTable, unitId, (1)), true, minX, maxY, maxX, maxY) // INLINED!!
-    call MoveLightning(LoadLightningHandle(UserDefinedRects__hashTable, unitId, (2)), true, minX, minY, maxX, minY) // INLINED!!
-    call MoveLightning(LoadLightningHandle(UserDefinedRects__hashTable, unitId, (3)), true, minX, minY, minX, maxY) // INLINED!!
-    call MoveLightning(LoadLightningHandle(UserDefinedRects__hashTable, unitId, (4)), true, maxX, minY, maxX, maxY) // INLINED!!
+    call MoveLightning(LoadLightningHandle(UserDefinedRects___hashTable, unitId, (1)), true, minX, maxY, maxX, maxY) // INLINED!!
+    call MoveLightning(LoadLightningHandle(UserDefinedRects___hashTable, unitId, (2)), true, minX, minY, maxX, minY) // INLINED!!
+    call MoveLightning(LoadLightningHandle(UserDefinedRects___hashTable, unitId, (3)), true, minX, minY, minX, maxY) // INLINED!!
+    call MoveLightning(LoadLightningHandle(UserDefinedRects___hashTable, unitId, (4)), true, maxX, minY, maxX, maxY) // INLINED!!
     
     //Update Rect
 
@@ -9934,12 +9954,12 @@ function MoveGUDR takes unit centerUnit,real offsetX,real offsetY,boolean expand
 
     
     // Update Weather Effect
-    set weatherId=LoadInteger(UserDefinedRects__hashTable, unitId, 5)
+    set weatherId=LoadInteger(UserDefinedRects___hashTable, unitId, 5)
     if weatherId > 0 then
-        call EnableWeatherEffect(UserDefinedRects__weatherEffects[weatherId], false) //BUG: If weather effect is not disabled before destruction, it's sound effect will remain
-        call RemoveWeatherEffect(UserDefinedRects__weatherEffects[weatherId])
-        set UserDefinedRects__weatherEffects[weatherId]=AddWeatherEffect(userDefRect, (LoadInteger(UserDefinedRects__hashTable, 0, ((LoadInteger(UserDefinedRects__hashTable, (unitId), (8))))))) // INLINED!!
-        call EnableWeatherEffect(UserDefinedRects__weatherEffects[weatherId], true)
+        call EnableWeatherEffect(UserDefinedRects___weatherEffects[weatherId], false) //BUG: If weather effect is not disabled before destruction, it's sound effect will remain
+        call RemoveWeatherEffect(UserDefinedRects___weatherEffects[weatherId])
+        set UserDefinedRects___weatherEffects[weatherId]=AddWeatherEffect(userDefRect, (LoadInteger(UserDefinedRects___hashTable, 0, ((LoadInteger(UserDefinedRects___hashTable, (unitId), (8))))))) // INLINED!!
+        call EnableWeatherEffect(UserDefinedRects___weatherEffects[weatherId], true)
     endif
     
     set userDefRect=null
@@ -9957,7 +9977,7 @@ function CreateGUDR takes unit centerUnit returns boolean
         local integer fog
 
     
-    if (HaveSavedHandle(UserDefinedRects__hashTable, (unitId), (0))) then // INLINED!!
+    if (HaveSavedHandle(UserDefinedRects___hashTable, (unitId), (0))) then // INLINED!!
         return false
     endif
     
@@ -9965,19 +9985,19 @@ function CreateGUDR takes unit centerUnit returns boolean
     
 
         set fog=(GMUI_GetIndex((GMUI_GENERIC_KEY))) // INLINED!!
-        call SaveInteger(ConstTable__ht, (((s__RectEnvironment_fog_impl))), (((GetHandleId((userDefRect))))), ( (fog))) // INLINED!!
-        call SaveInteger(ConstTable__ht, (((((s__TerrainFog_style_impl))))), ((fog)), ( (s__TerrainFog_EXPONENTIAL))) // INLINED!!
+        call SaveInteger(ConstTable___ht, (((s__RectEnvironment_fog_impl))), (((GetHandleId((userDefRect))))), ( (fog))) // INLINED!!
+        call SaveInteger(ConstTable___ht, (((((s__TerrainFog_style_impl))))), ((fog)), ( (s__TerrainFog_EXPONENTIAL))) // INLINED!!
         call AutoRectEnvironment_RegisterRect(userDefRect)
 
     
-    call SaveRectHandle(UserDefinedRects__hashTable, unitId, (0), userDefRect) // INLINED!!
-    call SaveLightningHandle(UserDefinedRects__hashTable, unitId, (1), AddLightning("DRAM", true, centerX - 32, centerY + 32, centerX + 32, centerY + 32)) // INLINED!!
-    call SaveLightningHandle(UserDefinedRects__hashTable, unitId, (2), AddLightning("DRAM", true, centerX - 32, centerY - 32, centerX + 32, centerY - 32)) // INLINED!!
-    call SaveLightningHandle(UserDefinedRects__hashTable, unitId, (3), AddLightning("DRAM", true, centerX - 32, centerY - 32, centerX - 32, centerY + 32)) // INLINED!!
-    call SaveLightningHandle(UserDefinedRects__hashTable, unitId, (4), AddLightning("DRAM", true, centerX + 32, centerY - 32, centerX + 32, centerY + 32)) // INLINED!!
-    call SaveGroupHandle(UserDefinedRects__hashTable, unitId, (6), CreateGroup()) // INLINED!!
-    call SaveBoolean(UserDefinedRects__hashTable, unitId, (7), true) //Save show/hide boolean as true, because nothing is being hidden // INLINED!!
-    call SaveInteger(UserDefinedRects__hashTable, unitId, (8), 1) //Save 1 as it is the value of 'RAhr' // INLINED!!
+    call SaveRectHandle(UserDefinedRects___hashTable, unitId, (0), userDefRect) // INLINED!!
+    call SaveLightningHandle(UserDefinedRects___hashTable, unitId, (1), AddLightning("DRAM", true, centerX - 32, centerY + 32, centerX + 32, centerY + 32)) // INLINED!!
+    call SaveLightningHandle(UserDefinedRects___hashTable, unitId, (2), AddLightning("DRAM", true, centerX - 32, centerY - 32, centerX + 32, centerY - 32)) // INLINED!!
+    call SaveLightningHandle(UserDefinedRects___hashTable, unitId, (3), AddLightning("DRAM", true, centerX - 32, centerY - 32, centerX - 32, centerY + 32)) // INLINED!!
+    call SaveLightningHandle(UserDefinedRects___hashTable, unitId, (4), AddLightning("DRAM", true, centerX + 32, centerY - 32, centerX + 32, centerY + 32)) // INLINED!!
+    call SaveGroupHandle(UserDefinedRects___hashTable, unitId, (6), CreateGroup()) // INLINED!!
+    call SaveBoolean(UserDefinedRects___hashTable, unitId, (7), true) //Save show/hide boolean as true, because nothing is being hidden // INLINED!!
+    call SaveInteger(UserDefinedRects___hashTable, unitId, (8), 1) //Save 1 as it is the value of 'RAhr' // INLINED!!
     
     set userDefRect=null
     return true
@@ -9985,10 +10005,10 @@ endfunction
 
 function DestroyGUDR takes unit centerUnit returns nothing
     local integer unitId= GetHandleId(centerUnit)
-    local rect udr= (LoadRectHandle(UserDefinedRects__hashTable, (unitId), (0))) // INLINED!!
+    local rect udr= (LoadRectHandle(UserDefinedRects___hashTable, (unitId), (0))) // INLINED!!
     
 
-        local integer fog= (LoadInteger(ConstTable__ht, (((s__RectEnvironment_fog_impl))), (((GetHandleId((udr))))))) // INLINED!!
+        local integer fog= (LoadInteger(ConstTable___ht, (((s__RectEnvironment_fog_impl))), (((GetHandleId((udr))))))) // INLINED!!
 
     
     if udr == null then
@@ -10005,44 +10025,44 @@ function DestroyGUDR takes unit centerUnit returns nothing
 
     call DestroyWeather(centerUnit)
     call GroupGUDR(centerUnit , true)
-    call DestroyLightning((LoadLightningHandle(UserDefinedRects__hashTable, (unitId ), ( (1))))) // INLINED!!
-    call DestroyLightning((LoadLightningHandle(UserDefinedRects__hashTable, (unitId ), ( (2))))) // INLINED!!
-    call DestroyLightning((LoadLightningHandle(UserDefinedRects__hashTable, (unitId ), ( (3))))) // INLINED!!
-    call DestroyLightning((LoadLightningHandle(UserDefinedRects__hashTable, (unitId ), ( (4))))) // INLINED!!
+    call DestroyLightning((LoadLightningHandle(UserDefinedRects___hashTable, (unitId ), ( (1))))) // INLINED!!
+    call DestroyLightning((LoadLightningHandle(UserDefinedRects___hashTable, (unitId ), ( (2))))) // INLINED!!
+    call DestroyLightning((LoadLightningHandle(UserDefinedRects___hashTable, (unitId ), ( (3))))) // INLINED!!
+    call DestroyLightning((LoadLightningHandle(UserDefinedRects___hashTable, (unitId ), ( (4))))) // INLINED!!
     call RemoveRect(udr)
-    call DestroyGroup((LoadGroupHandle(UserDefinedRects__hashTable, (unitId), (6)))) // INLINED!!
+    call DestroyGroup((LoadGroupHandle(UserDefinedRects___hashTable, (unitId), (6)))) // INLINED!!
     
-    call FlushChildHashtable(UserDefinedRects__hashTable, unitId)
+    call FlushChildHashtable(UserDefinedRects___hashTable, unitId)
 
     set udr=null
 endfunction
 
-function UserDefinedRects__onInit takes nothing returns nothing
+function UserDefinedRects___onInit takes nothing returns nothing
 
 
 
     
-    call SaveInteger(UserDefinedRects__hashTable, 0, 1, 'RAhr')
-    call SaveInteger(UserDefinedRects__hashTable, 0, 2, 'RAlr')
-    call SaveInteger(UserDefinedRects__hashTable, 0, 3, 'MEds')
-    call SaveInteger(UserDefinedRects__hashTable, 0, 4, 'FDbh')
-    call SaveInteger(UserDefinedRects__hashTable, 0, 5, 'FDbl')
-    call SaveInteger(UserDefinedRects__hashTable, 0, 6, 'FDgh')
-    call SaveInteger(UserDefinedRects__hashTable, 0, 7, 'FDgl')
-    call SaveInteger(UserDefinedRects__hashTable, 0, 8, 'FDrh')
-    call SaveInteger(UserDefinedRects__hashTable, 0, 9, 'FDrl')
-    call SaveInteger(UserDefinedRects__hashTable, 0, 10, 'FDwh')
-    call SaveInteger(UserDefinedRects__hashTable, 0, 11, 'FDwl')
-    call SaveInteger(UserDefinedRects__hashTable, 0, 12, 'RLhr')
-    call SaveInteger(UserDefinedRects__hashTable, 0, 13, 'RLlr')
-    call SaveInteger(UserDefinedRects__hashTable, 0, 14, 'SNbs')
-    call SaveInteger(UserDefinedRects__hashTable, 0, 15, 'SNhs')
-    call SaveInteger(UserDefinedRects__hashTable, 0, 16, 'SNls')
-    call SaveInteger(UserDefinedRects__hashTable, 0, 17, 'WOcw')
-    call SaveInteger(UserDefinedRects__hashTable, 0, 18, 'WOlw')
-    call SaveInteger(UserDefinedRects__hashTable, 0, 19, 'LRaa')
-    call SaveInteger(UserDefinedRects__hashTable, 0, 20, 'LRma')
-    call SaveInteger(UserDefinedRects__hashTable, 0, 21, 'WNcw')
+    call SaveInteger(UserDefinedRects___hashTable, 0, 1, 'RAhr')
+    call SaveInteger(UserDefinedRects___hashTable, 0, 2, 'RAlr')
+    call SaveInteger(UserDefinedRects___hashTable, 0, 3, 'MEds')
+    call SaveInteger(UserDefinedRects___hashTable, 0, 4, 'FDbh')
+    call SaveInteger(UserDefinedRects___hashTable, 0, 5, 'FDbl')
+    call SaveInteger(UserDefinedRects___hashTable, 0, 6, 'FDgh')
+    call SaveInteger(UserDefinedRects___hashTable, 0, 7, 'FDgl')
+    call SaveInteger(UserDefinedRects___hashTable, 0, 8, 'FDrh')
+    call SaveInteger(UserDefinedRects___hashTable, 0, 9, 'FDrl')
+    call SaveInteger(UserDefinedRects___hashTable, 0, 10, 'FDwh')
+    call SaveInteger(UserDefinedRects___hashTable, 0, 11, 'FDwl')
+    call SaveInteger(UserDefinedRects___hashTable, 0, 12, 'RLhr')
+    call SaveInteger(UserDefinedRects___hashTable, 0, 13, 'RLlr')
+    call SaveInteger(UserDefinedRects___hashTable, 0, 14, 'SNbs')
+    call SaveInteger(UserDefinedRects___hashTable, 0, 15, 'SNhs')
+    call SaveInteger(UserDefinedRects___hashTable, 0, 16, 'SNls')
+    call SaveInteger(UserDefinedRects___hashTable, 0, 17, 'WOcw')
+    call SaveInteger(UserDefinedRects___hashTable, 0, 18, 'WOlw')
+    call SaveInteger(UserDefinedRects___hashTable, 0, 19, 'LRaa')
+    call SaveInteger(UserDefinedRects___hashTable, 0, 20, 'LRma')
+    call SaveInteger(UserDefinedRects___hashTable, 0, 21, 'WNcw')
 endfunction
 
 //////////////////////////////////////////////////////
@@ -10155,15 +10175,15 @@ endfunction
 
 
 
-function RectGenerator__InFirstPage takes unit u returns boolean
+function RectGenerator___InFirstPage takes unit u returns boolean
 	return GetUnitAbilityLevel(u, RectGenerator_CREATE_OR_DESTROY) > 0
 endfunction
 
-function RectGenerator__InSecondPage takes unit u returns boolean
+function RectGenerator___InSecondPage takes unit u returns boolean
 	return GetUnitAbilityLevel(u, RectGenerator_TOGGLE_WEATHER) > 0
 endfunction
 
-function RectGenerator__InThirdPage takes unit u returns boolean
+function RectGenerator___InThirdPage takes unit u returns boolean
 	return GetUnitAbilityLevel(u, RectGenerator_FOG_DENSITY_UP) > 0
 endfunction
 //===================================================
@@ -10174,8 +10194,8 @@ endfunction
 
 //textmacro instance: TableStruct_NewConstTableField("public","strings")
 
-        constant function s__RectGenerator__FogStyle__get_strings takes nothing returns integer
-            return s__RectGenerator__FogStyle_strings_impl
+        constant function s__RectGenerator___FogStyle__get_strings takes nothing returns integer
+            return s__RectGenerator___FogStyle_strings_impl
         endfunction
 
 
@@ -10185,8 +10205,8 @@ endfunction
 //end of: TableStruct_NewConstTableField("public","strings")
 //textmacro instance: TableStruct_NewConstTableField("private","linkedListNext")
 
-        constant function s__RectGenerator__FogStyle__get_linkedListNext takes nothing returns integer
-            return s__RectGenerator__FogStyle_linkedListNext_impl
+        constant function s__RectGenerator___FogStyle__get_linkedListNext takes nothing returns integer
+            return s__RectGenerator___FogStyle_linkedListNext_impl
         endfunction
 
 
@@ -10196,8 +10216,8 @@ endfunction
 //end of: TableStruct_NewConstTableField("private","linkedListNext")
 //textmacro instance: TableStruct_NewConstTableField("private","linkedListPrev")
 
-        constant function s__RectGenerator__FogStyle__get_linkedListPrev takes nothing returns integer
-            return s__RectGenerator__FogStyle_linkedListPrev_impl
+        constant function s__RectGenerator___FogStyle__get_linkedListPrev takes nothing returns integer
+            return s__RectGenerator___FogStyle_linkedListPrev_impl
         endfunction
 
 
@@ -10206,28 +10226,28 @@ endfunction
 
 //end of: TableStruct_NewConstTableField("private","linkedListPrev")
         
-        function s__RectGenerator__FogStyle_next takes integer this returns integer
-            return (LoadInteger(ConstTable__ht, ((s__RectGenerator__FogStyle_linkedListNext_impl)), (this))) // INLINED!!
+        function s__RectGenerator___FogStyle_next takes integer this returns integer
+            return (LoadInteger(ConstTable___ht, ((s__RectGenerator___FogStyle_linkedListNext_impl)), (this))) // INLINED!!
         endfunction
         
-        function s__RectGenerator__FogStyle_prev takes integer this returns integer
-            return (LoadInteger(ConstTable__ht, ((s__RectGenerator__FogStyle_linkedListPrev_impl)), (this))) // INLINED!!
+        function s__RectGenerator___FogStyle_prev takes integer this returns integer
+            return (LoadInteger(ConstTable___ht, ((s__RectGenerator___FogStyle_linkedListPrev_impl)), (this))) // INLINED!!
         endfunction
         
-        function s__RectGenerator__FogStyle_setNext takes integer this,integer nextStyle returns nothing
-            call SaveInteger(ConstTable__ht, ((s__RectGenerator__FogStyle_linkedListNext_impl)), (this), ( nextStyle)) // INLINED!!
+        function s__RectGenerator___FogStyle_setNext takes integer this,integer nextStyle returns nothing
+            call SaveInteger(ConstTable___ht, ((s__RectGenerator___FogStyle_linkedListNext_impl)), (this), ( nextStyle)) // INLINED!!
         endfunction
         
-        function s__RectGenerator__FogStyle_setPrev takes integer this,integer prevStyle returns nothing
-            call SaveInteger(ConstTable__ht, ((s__RectGenerator__FogStyle_linkedListPrev_impl)), (this), ( prevStyle)) // INLINED!!
+        function s__RectGenerator___FogStyle_setPrev takes integer this,integer prevStyle returns nothing
+            call SaveInteger(ConstTable___ht, ((s__RectGenerator___FogStyle_linkedListPrev_impl)), (this), ( prevStyle)) // INLINED!!
         endfunction
         
-        function s__RectGenerator__FogStyle_getString takes integer this returns string
-            return (LoadStr(ConstTable__ht, ((((s__RectGenerator__FogStyle_strings_impl)))), (this))) // INLINED!!
+        function s__RectGenerator___FogStyle_getString takes integer this returns string
+            return (LoadStr(ConstTable___ht, ((((s__RectGenerator___FogStyle_strings_impl)))), (this))) // INLINED!!
         endfunction
         
-        function s__RectGenerator__FogStyle_setString takes integer this,string str returns nothing
-            call SaveStr(ConstTable__ht, ((((s__RectGenerator__FogStyle_strings_impl)))), (this), ( str)) // INLINED!!
+        function s__RectGenerator___FogStyle_setString takes integer this,string str returns nothing
+            call SaveStr(ConstTable___ht, ((((s__RectGenerator___FogStyle_strings_impl)))), (this), ( str)) // INLINED!!
         endfunction
         
         
@@ -10236,12 +10256,12 @@ endfunction
 
 
 
-function RectGenerator__GroupLoop takes nothing returns nothing
+function RectGenerator___GroupLoop takes nothing returns nothing
     local unit udr= GetTriggerUnit()
     local unit enumUnit= GetEnumUnit()
     
-    if (HaveSavedHandle(UserDefinedRects__hashTable, (GetHandleId((enumUnit))), (0))) or GetOwningPlayer(enumUnit) != GetOwningPlayer(udr) then // INLINED!!
-        call GroupRemoveUnit((LoadGroupHandle(UserDefinedRects__hashTable, (GetHandleId((udr))), (6))), enumUnit) // INLINED!!
+    if (HaveSavedHandle(UserDefinedRects___hashTable, (GetHandleId((enumUnit))), (0))) or GetOwningPlayer(enumUnit) != GetOwningPlayer(udr) then // INLINED!!
+        call GroupRemoveUnit((LoadGroupHandle(UserDefinedRects___hashTable, (GetHandleId((udr))), (6))), enumUnit) // INLINED!!
     else
         call SetUnitPosition(enumUnit, GetUnitX(enumUnit) + GetSpellTargetX() - GetUnitX(udr), GetUnitY(enumUnit) + GetSpellTargetY() - GetUnitY(udr))
     endif
@@ -10251,12 +10271,12 @@ function RectGenerator__GroupLoop takes nothing returns nothing
 endfunction
 
 
-    function RectGenerator__GroupLoopTerrain takes nothing returns nothing
+    function RectGenerator___GroupLoopTerrain takes nothing returns nothing
         local unit udr= GetTriggerUnit()
         local unit enumUnit= GetEnumUnit()
         
-        if (HaveSavedHandle(UserDefinedRects__hashTable, (GetHandleId((enumUnit))), (0))) or GetOwningPlayer(enumUnit) != GetOwningPlayer(udr) then // INLINED!!
-            call GroupRemoveUnit((LoadGroupHandle(UserDefinedRects__hashTable, (GetHandleId((udr))), (6))), enumUnit) // INLINED!!
+        if (HaveSavedHandle(UserDefinedRects___hashTable, (GetHandleId((enumUnit))), (0))) or GetOwningPlayer(enumUnit) != GetOwningPlayer(udr) then // INLINED!!
+            call GroupRemoveUnit((LoadGroupHandle(UserDefinedRects___hashTable, (GetHandleId((udr))), (6))), enumUnit) // INLINED!!
         else
             call SetUnitPosition(enumUnit, GetUnitX(enumUnit) + GetTileCenterCoordinate(GetSpellTargetX()) - GetUnitX(udr), GetUnitY(enumUnit) + GetTileCenterCoordinate(GetSpellTargetY()) - GetUnitY(udr))
         endif
@@ -10266,12 +10286,12 @@ endfunction
     endfunction
 
 
-function RectGenerator__ColorMessage takes string color,real value returns string
+function RectGenerator___ColorMessage takes string color,real value returns string
     return "Fog " + color + " set to: " + I2S(R2I(value * 100. + .5)) + "%"
 endfunction
 
 
-function RectGenerator__onCast takes nothing returns boolean
+function RectGenerator___onCast takes nothing returns boolean
     local integer abilityId= GetSpellAbilityId()
     
     if not (GetUnitTypeId((GetTriggerUnit())) == RectGenerator_GENERATOR_ID) then // INLINED!!
@@ -10654,12 +10674,12 @@ function RectGenerator__onCast takes nothing returns boolean
             endif
 
             
-        if CountUnitsInGroup((LoadGroupHandle(UserDefinedRects__hashTable, (GetHandleId((GetTriggerUnit()))), (6)))) <= RectGenerator__MAXIMUM_MOVE_LIMIT then // INLINED!!
-            call ForGroup((LoadGroupHandle(UserDefinedRects__hashTable, (GetHandleId((GetTriggerUnit()))), (6))), function RectGenerator__GroupLoop) // INLINED!!
+        if CountUnitsInGroup((LoadGroupHandle(UserDefinedRects___hashTable, (GetHandleId((GetTriggerUnit()))), (6)))) <= RectGenerator___MAXIMUM_MOVE_LIMIT then // INLINED!!
+            call ForGroup((LoadGroupHandle(UserDefinedRects___hashTable, (GetHandleId((GetTriggerUnit()))), (6))), function RectGenerator___GroupLoop) // INLINED!!
             call SetUnitPosition(GetTriggerUnit(), GetSpellTargetX(), GetSpellTargetY())
             call MoveGUDR(GetTriggerUnit() , 0 , 0 , true)
         else
-            call DisplayTextToPlayer(GetOwningPlayer(GetTriggerUnit()), 0, 0, "Failed to move Rect Generator:\n Attached unit limit exceeded! (" + I2S(RectGenerator__MAXIMUM_MOVE_LIMIT) + ")")
+            call DisplayTextToPlayer(GetOwningPlayer(GetTriggerUnit()), 0, 0, "Failed to move Rect Generator:\n Attached unit limit exceeded! (" + I2S(RectGenerator___MAXIMUM_MOVE_LIMIT) + ")")
             call SetUnitPosition(GetTriggerUnit(), GetUnitX(GetTriggerUnit()), GetUnitY(GetTriggerUnit()))
             call MoveGUDR(GetTriggerUnit() , 0 , 0 , true)
         endif
@@ -10677,14 +10697,14 @@ function RectGenerator__onCast takes nothing returns boolean
         call ChangeGUDRWeatherNew(GetTriggerUnit() , - 1 , 0)
     
     elseif abilityId == RectGenerator_TOGGLE_WEATHER then
-        if (HaveSavedInteger(UserDefinedRects__hashTable, (GetHandleId((GetTriggerUnit()))), (5))) then // INLINED!!
+        if (HaveSavedInteger(UserDefinedRects___hashTable, (GetHandleId((GetTriggerUnit()))), (5))) then // INLINED!!
             call DestroyWeather(GetTriggerUnit())
         else
             call CreateWeather(GetTriggerUnit())
         endif
     
     elseif abilityId == RectGenerator_CREATE_OR_DESTROY then
-        if (HaveSavedHandle(UserDefinedRects__hashTable, (GetHandleId((GetTriggerUnit()))), (0))) then // INLINED!!
+        if (HaveSavedHandle(UserDefinedRects___hashTable, (GetHandleId((GetTriggerUnit()))), (0))) then // INLINED!!
             call DestroyGUDR(GetTriggerUnit())
         else
             call CreateGUDR(GetTriggerUnit())
@@ -10694,99 +10714,99 @@ function RectGenerator__onCast takes nothing returns boolean
         call GroupGUDR(GetTriggerUnit() , true)
     else
 
-            if (LoadInteger(ConstTable__ht, (((s__RectEnvironment_fog_impl))), (((GetHandleId(((LoadRectHandle(UserDefinedRects__hashTable, (GetHandleId((GetTriggerUnit()))), (0)))))))))) == 0 then // INLINED!!
+            if (LoadInteger(ConstTable___ht, (((s__RectEnvironment_fog_impl))), (((GetHandleId(((LoadRectHandle(UserDefinedRects___hashTable, (GetHandleId((GetTriggerUnit()))), (0)))))))))) == 0 then // INLINED!!
         
             elseif abilityId == RectGenerator_FOG_RED_UP then
-                if (LoadReal(ConstTable__ht, (((((s__TerrainFog_red_impl))))), (((LoadInteger(ConstTable__ht, (((s__RectEnvironment_fog_impl))), (((GetHandleId(((LoadRectHandle(UserDefinedRects__hashTable, (GetHandleId((GetTriggerUnit()))), (0)))))))))))))) <= .96 then // INLINED!!
-                    call SaveReal(ConstTable__ht, (((((s__TerrainFog_red_impl))))), (((LoadInteger(ConstTable__ht, (((s__RectEnvironment_fog_impl))), (((GetHandleId(((LoadRectHandle(UserDefinedRects__hashTable, (GetHandleId((GetTriggerUnit()))), (0)))))))))))), (( (((LoadReal(ConstTable__ht, (((((s__TerrainFog_red_impl))))), (((LoadInteger(ConstTable__ht, (((s__RectEnvironment_fog_impl))), (((GetHandleId(((LoadRectHandle(UserDefinedRects__hashTable, (GetHandleId((GetTriggerUnit()))), (0)))))))))))))) + .05)*1.0))*1.0)) // INLINED!!
+                if (LoadReal(ConstTable___ht, (((((s__TerrainFog_red_impl))))), (((LoadInteger(ConstTable___ht, (((s__RectEnvironment_fog_impl))), (((GetHandleId(((LoadRectHandle(UserDefinedRects___hashTable, (GetHandleId((GetTriggerUnit()))), (0)))))))))))))) <= .96 then // INLINED!!
+                    call SaveReal(ConstTable___ht, (((((s__TerrainFog_red_impl))))), (((LoadInteger(ConstTable___ht, (((s__RectEnvironment_fog_impl))), (((GetHandleId(((LoadRectHandle(UserDefinedRects___hashTable, (GetHandleId((GetTriggerUnit()))), (0)))))))))))), (( (((LoadReal(ConstTable___ht, (((((s__TerrainFog_red_impl))))), (((LoadInteger(ConstTable___ht, (((s__RectEnvironment_fog_impl))), (((GetHandleId(((LoadRectHandle(UserDefinedRects___hashTable, (GetHandleId((GetTriggerUnit()))), (0)))))))))))))) + .05)*1.0))*1.0)) // INLINED!!
                 else
-                    call SaveReal(ConstTable__ht, (((((s__TerrainFog_red_impl))))), (((LoadInteger(ConstTable__ht, (((s__RectEnvironment_fog_impl))), (((GetHandleId(((LoadRectHandle(UserDefinedRects__hashTable, (GetHandleId((GetTriggerUnit()))), (0)))))))))))), (( ((0.)*1.0))*1.0)) // INLINED!!
+                    call SaveReal(ConstTable___ht, (((((s__TerrainFog_red_impl))))), (((LoadInteger(ConstTable___ht, (((s__RectEnvironment_fog_impl))), (((GetHandleId(((LoadRectHandle(UserDefinedRects___hashTable, (GetHandleId((GetTriggerUnit()))), (0)))))))))))), (( ((0.)*1.0))*1.0)) // INLINED!!
                 endif
-                call DisplayTextToPlayer(GetOwningPlayer(GetTriggerUnit()), 0, 0, ("Fog " + ("|c00ff0000Red|r" ) + " set to: " + I2S(R2I((( (LoadReal(ConstTable__ht, (((((s__TerrainFog_red_impl))))), (((LoadInteger(ConstTable__ht, (((s__RectEnvironment_fog_impl))), (((GetHandleId(((LoadRectHandle(UserDefinedRects__hashTable, (GetHandleId((GetTriggerUnit()))), (0)))))))))))))))*1.0) * 100. + .5)) + "%")) // INLINED!!
+                call DisplayTextToPlayer(GetOwningPlayer(GetTriggerUnit()), 0, 0, ("Fog " + ("|c00ff0000Red|r" ) + " set to: " + I2S(R2I((( (LoadReal(ConstTable___ht, (((((s__TerrainFog_red_impl))))), (((LoadInteger(ConstTable___ht, (((s__RectEnvironment_fog_impl))), (((GetHandleId(((LoadRectHandle(UserDefinedRects___hashTable, (GetHandleId((GetTriggerUnit()))), (0)))))))))))))))*1.0) * 100. + .5)) + "%")) // INLINED!!
             
             elseif abilityId == RectGenerator_FOG_RED_DOWN then
-                if (LoadReal(ConstTable__ht, (((((s__TerrainFog_red_impl))))), (((LoadInteger(ConstTable__ht, (((s__RectEnvironment_fog_impl))), (((GetHandleId(((LoadRectHandle(UserDefinedRects__hashTable, (GetHandleId((GetTriggerUnit()))), (0)))))))))))))) >= 0.01 then // INLINED!!
-                    call SaveReal(ConstTable__ht, (((((s__TerrainFog_red_impl))))), (((LoadInteger(ConstTable__ht, (((s__RectEnvironment_fog_impl))), (((GetHandleId(((LoadRectHandle(UserDefinedRects__hashTable, (GetHandleId((GetTriggerUnit()))), (0)))))))))))), (( (((LoadReal(ConstTable__ht, (((((s__TerrainFog_red_impl))))), (((LoadInteger(ConstTable__ht, (((s__RectEnvironment_fog_impl))), (((GetHandleId(((LoadRectHandle(UserDefinedRects__hashTable, (GetHandleId((GetTriggerUnit()))), (0)))))))))))))) - .05)*1.0))*1.0)) // INLINED!!
+                if (LoadReal(ConstTable___ht, (((((s__TerrainFog_red_impl))))), (((LoadInteger(ConstTable___ht, (((s__RectEnvironment_fog_impl))), (((GetHandleId(((LoadRectHandle(UserDefinedRects___hashTable, (GetHandleId((GetTriggerUnit()))), (0)))))))))))))) >= 0.01 then // INLINED!!
+                    call SaveReal(ConstTable___ht, (((((s__TerrainFog_red_impl))))), (((LoadInteger(ConstTable___ht, (((s__RectEnvironment_fog_impl))), (((GetHandleId(((LoadRectHandle(UserDefinedRects___hashTable, (GetHandleId((GetTriggerUnit()))), (0)))))))))))), (( (((LoadReal(ConstTable___ht, (((((s__TerrainFog_red_impl))))), (((LoadInteger(ConstTable___ht, (((s__RectEnvironment_fog_impl))), (((GetHandleId(((LoadRectHandle(UserDefinedRects___hashTable, (GetHandleId((GetTriggerUnit()))), (0)))))))))))))) - .05)*1.0))*1.0)) // INLINED!!
                 else
-                    call SaveReal(ConstTable__ht, (((((s__TerrainFog_red_impl))))), (((LoadInteger(ConstTable__ht, (((s__RectEnvironment_fog_impl))), (((GetHandleId(((LoadRectHandle(UserDefinedRects__hashTable, (GetHandleId((GetTriggerUnit()))), (0)))))))))))), (( ((1.)*1.0))*1.0)) // INLINED!!
+                    call SaveReal(ConstTable___ht, (((((s__TerrainFog_red_impl))))), (((LoadInteger(ConstTable___ht, (((s__RectEnvironment_fog_impl))), (((GetHandleId(((LoadRectHandle(UserDefinedRects___hashTable, (GetHandleId((GetTriggerUnit()))), (0)))))))))))), (( ((1.)*1.0))*1.0)) // INLINED!!
                 endif
-                call DisplayTextToPlayer(GetOwningPlayer(GetTriggerUnit()), 0, 0, ("Fog " + ("|c00ff0000Red|r" ) + " set to: " + I2S(R2I((( (LoadReal(ConstTable__ht, (((((s__TerrainFog_red_impl))))), (((LoadInteger(ConstTable__ht, (((s__RectEnvironment_fog_impl))), (((GetHandleId(((LoadRectHandle(UserDefinedRects__hashTable, (GetHandleId((GetTriggerUnit()))), (0)))))))))))))))*1.0) * 100. + .5)) + "%")) // INLINED!!
+                call DisplayTextToPlayer(GetOwningPlayer(GetTriggerUnit()), 0, 0, ("Fog " + ("|c00ff0000Red|r" ) + " set to: " + I2S(R2I((( (LoadReal(ConstTable___ht, (((((s__TerrainFog_red_impl))))), (((LoadInteger(ConstTable___ht, (((s__RectEnvironment_fog_impl))), (((GetHandleId(((LoadRectHandle(UserDefinedRects___hashTable, (GetHandleId((GetTriggerUnit()))), (0)))))))))))))))*1.0) * 100. + .5)) + "%")) // INLINED!!
                 
             elseif abilityId == RectGenerator_FOG_BLUE_UP then
-                if (LoadReal(ConstTable__ht, (((((s__TerrainFog_blue_impl))))), (((LoadInteger(ConstTable__ht, (((s__RectEnvironment_fog_impl))), (((GetHandleId(((LoadRectHandle(UserDefinedRects__hashTable, (GetHandleId((GetTriggerUnit()))), (0)))))))))))))) <= .96 then // INLINED!!
-                    call SaveReal(ConstTable__ht, (((((s__TerrainFog_blue_impl))))), (((LoadInteger(ConstTable__ht, (((s__RectEnvironment_fog_impl))), (((GetHandleId(((LoadRectHandle(UserDefinedRects__hashTable, (GetHandleId((GetTriggerUnit()))), (0)))))))))))), (( (((LoadReal(ConstTable__ht, (((((s__TerrainFog_blue_impl))))), (((LoadInteger(ConstTable__ht, (((s__RectEnvironment_fog_impl))), (((GetHandleId(((LoadRectHandle(UserDefinedRects__hashTable, (GetHandleId((GetTriggerUnit()))), (0)))))))))))))) + .05)*1.0))*1.0)) // INLINED!!
+                if (LoadReal(ConstTable___ht, (((((s__TerrainFog_blue_impl))))), (((LoadInteger(ConstTable___ht, (((s__RectEnvironment_fog_impl))), (((GetHandleId(((LoadRectHandle(UserDefinedRects___hashTable, (GetHandleId((GetTriggerUnit()))), (0)))))))))))))) <= .96 then // INLINED!!
+                    call SaveReal(ConstTable___ht, (((((s__TerrainFog_blue_impl))))), (((LoadInteger(ConstTable___ht, (((s__RectEnvironment_fog_impl))), (((GetHandleId(((LoadRectHandle(UserDefinedRects___hashTable, (GetHandleId((GetTriggerUnit()))), (0)))))))))))), (( (((LoadReal(ConstTable___ht, (((((s__TerrainFog_blue_impl))))), (((LoadInteger(ConstTable___ht, (((s__RectEnvironment_fog_impl))), (((GetHandleId(((LoadRectHandle(UserDefinedRects___hashTable, (GetHandleId((GetTriggerUnit()))), (0)))))))))))))) + .05)*1.0))*1.0)) // INLINED!!
                 else
-                    call SaveReal(ConstTable__ht, (((((s__TerrainFog_blue_impl))))), (((LoadInteger(ConstTable__ht, (((s__RectEnvironment_fog_impl))), (((GetHandleId(((LoadRectHandle(UserDefinedRects__hashTable, (GetHandleId((GetTriggerUnit()))), (0)))))))))))), (( ((0.)*1.0))*1.0)) // INLINED!!
+                    call SaveReal(ConstTable___ht, (((((s__TerrainFog_blue_impl))))), (((LoadInteger(ConstTable___ht, (((s__RectEnvironment_fog_impl))), (((GetHandleId(((LoadRectHandle(UserDefinedRects___hashTable, (GetHandleId((GetTriggerUnit()))), (0)))))))))))), (( ((0.)*1.0))*1.0)) // INLINED!!
                 endif
-                call DisplayTextToPlayer(GetOwningPlayer(GetTriggerUnit()), 0, 0, ("Fog " + ("|c000000ffBlue|r" ) + " set to: " + I2S(R2I((( (LoadReal(ConstTable__ht, (((((s__TerrainFog_blue_impl))))), (((LoadInteger(ConstTable__ht, (((s__RectEnvironment_fog_impl))), (((GetHandleId(((LoadRectHandle(UserDefinedRects__hashTable, (GetHandleId((GetTriggerUnit()))), (0)))))))))))))))*1.0) * 100. + .5)) + "%")) // INLINED!!
+                call DisplayTextToPlayer(GetOwningPlayer(GetTriggerUnit()), 0, 0, ("Fog " + ("|c000000ffBlue|r" ) + " set to: " + I2S(R2I((( (LoadReal(ConstTable___ht, (((((s__TerrainFog_blue_impl))))), (((LoadInteger(ConstTable___ht, (((s__RectEnvironment_fog_impl))), (((GetHandleId(((LoadRectHandle(UserDefinedRects___hashTable, (GetHandleId((GetTriggerUnit()))), (0)))))))))))))))*1.0) * 100. + .5)) + "%")) // INLINED!!
             
             elseif abilityId == RectGenerator_FOG_BLUE_DOWN then
-                if (LoadReal(ConstTable__ht, (((((s__TerrainFog_blue_impl))))), (((LoadInteger(ConstTable__ht, (((s__RectEnvironment_fog_impl))), (((GetHandleId(((LoadRectHandle(UserDefinedRects__hashTable, (GetHandleId((GetTriggerUnit()))), (0)))))))))))))) >= 0.01 then // INLINED!!
-                    call SaveReal(ConstTable__ht, (((((s__TerrainFog_blue_impl))))), (((LoadInteger(ConstTable__ht, (((s__RectEnvironment_fog_impl))), (((GetHandleId(((LoadRectHandle(UserDefinedRects__hashTable, (GetHandleId((GetTriggerUnit()))), (0)))))))))))), (( (((LoadReal(ConstTable__ht, (((((s__TerrainFog_blue_impl))))), (((LoadInteger(ConstTable__ht, (((s__RectEnvironment_fog_impl))), (((GetHandleId(((LoadRectHandle(UserDefinedRects__hashTable, (GetHandleId((GetTriggerUnit()))), (0)))))))))))))) - .05)*1.0))*1.0)) // INLINED!!
+                if (LoadReal(ConstTable___ht, (((((s__TerrainFog_blue_impl))))), (((LoadInteger(ConstTable___ht, (((s__RectEnvironment_fog_impl))), (((GetHandleId(((LoadRectHandle(UserDefinedRects___hashTable, (GetHandleId((GetTriggerUnit()))), (0)))))))))))))) >= 0.01 then // INLINED!!
+                    call SaveReal(ConstTable___ht, (((((s__TerrainFog_blue_impl))))), (((LoadInteger(ConstTable___ht, (((s__RectEnvironment_fog_impl))), (((GetHandleId(((LoadRectHandle(UserDefinedRects___hashTable, (GetHandleId((GetTriggerUnit()))), (0)))))))))))), (( (((LoadReal(ConstTable___ht, (((((s__TerrainFog_blue_impl))))), (((LoadInteger(ConstTable___ht, (((s__RectEnvironment_fog_impl))), (((GetHandleId(((LoadRectHandle(UserDefinedRects___hashTable, (GetHandleId((GetTriggerUnit()))), (0)))))))))))))) - .05)*1.0))*1.0)) // INLINED!!
                 else
-                    call SaveReal(ConstTable__ht, (((((s__TerrainFog_blue_impl))))), (((LoadInteger(ConstTable__ht, (((s__RectEnvironment_fog_impl))), (((GetHandleId(((LoadRectHandle(UserDefinedRects__hashTable, (GetHandleId((GetTriggerUnit()))), (0)))))))))))), (( ((1.)*1.0))*1.0)) // INLINED!!
+                    call SaveReal(ConstTable___ht, (((((s__TerrainFog_blue_impl))))), (((LoadInteger(ConstTable___ht, (((s__RectEnvironment_fog_impl))), (((GetHandleId(((LoadRectHandle(UserDefinedRects___hashTable, (GetHandleId((GetTriggerUnit()))), (0)))))))))))), (( ((1.)*1.0))*1.0)) // INLINED!!
                 endif
-                call DisplayTextToPlayer(GetOwningPlayer(GetTriggerUnit()), 0, 0, ("Fog " + ("|c000000ffBlue|r" ) + " set to: " + I2S(R2I((( (LoadReal(ConstTable__ht, (((((s__TerrainFog_blue_impl))))), (((LoadInteger(ConstTable__ht, (((s__RectEnvironment_fog_impl))), (((GetHandleId(((LoadRectHandle(UserDefinedRects__hashTable, (GetHandleId((GetTriggerUnit()))), (0)))))))))))))))*1.0) * 100. + .5)) + "%")) // INLINED!!
+                call DisplayTextToPlayer(GetOwningPlayer(GetTriggerUnit()), 0, 0, ("Fog " + ("|c000000ffBlue|r" ) + " set to: " + I2S(R2I((( (LoadReal(ConstTable___ht, (((((s__TerrainFog_blue_impl))))), (((LoadInteger(ConstTable___ht, (((s__RectEnvironment_fog_impl))), (((GetHandleId(((LoadRectHandle(UserDefinedRects___hashTable, (GetHandleId((GetTriggerUnit()))), (0)))))))))))))))*1.0) * 100. + .5)) + "%")) // INLINED!!
             
             elseif abilityId == RectGenerator_FOG_GREEN_UP then
-                if (LoadReal(ConstTable__ht, (((((s__TerrainFog_green_impl))))), (((LoadInteger(ConstTable__ht, (((s__RectEnvironment_fog_impl))), (((GetHandleId(((LoadRectHandle(UserDefinedRects__hashTable, (GetHandleId((GetTriggerUnit()))), (0)))))))))))))) <= .96 then // INLINED!!
-                    call SaveReal(ConstTable__ht, (((((s__TerrainFog_green_impl))))), (((LoadInteger(ConstTable__ht, (((s__RectEnvironment_fog_impl))), (((GetHandleId(((LoadRectHandle(UserDefinedRects__hashTable, (GetHandleId((GetTriggerUnit()))), (0)))))))))))), (( (((LoadReal(ConstTable__ht, (((((s__TerrainFog_green_impl))))), (((LoadInteger(ConstTable__ht, (((s__RectEnvironment_fog_impl))), (((GetHandleId(((LoadRectHandle(UserDefinedRects__hashTable, (GetHandleId((GetTriggerUnit()))), (0)))))))))))))) + .05)*1.0))*1.0)) // INLINED!!
+                if (LoadReal(ConstTable___ht, (((((s__TerrainFog_green_impl))))), (((LoadInteger(ConstTable___ht, (((s__RectEnvironment_fog_impl))), (((GetHandleId(((LoadRectHandle(UserDefinedRects___hashTable, (GetHandleId((GetTriggerUnit()))), (0)))))))))))))) <= .96 then // INLINED!!
+                    call SaveReal(ConstTable___ht, (((((s__TerrainFog_green_impl))))), (((LoadInteger(ConstTable___ht, (((s__RectEnvironment_fog_impl))), (((GetHandleId(((LoadRectHandle(UserDefinedRects___hashTable, (GetHandleId((GetTriggerUnit()))), (0)))))))))))), (( (((LoadReal(ConstTable___ht, (((((s__TerrainFog_green_impl))))), (((LoadInteger(ConstTable___ht, (((s__RectEnvironment_fog_impl))), (((GetHandleId(((LoadRectHandle(UserDefinedRects___hashTable, (GetHandleId((GetTriggerUnit()))), (0)))))))))))))) + .05)*1.0))*1.0)) // INLINED!!
                 else
-                    call SaveReal(ConstTable__ht, (((((s__TerrainFog_green_impl))))), (((LoadInteger(ConstTable__ht, (((s__RectEnvironment_fog_impl))), (((GetHandleId(((LoadRectHandle(UserDefinedRects__hashTable, (GetHandleId((GetTriggerUnit()))), (0)))))))))))), (( ((0.)*1.0))*1.0)) // INLINED!!
+                    call SaveReal(ConstTable___ht, (((((s__TerrainFog_green_impl))))), (((LoadInteger(ConstTable___ht, (((s__RectEnvironment_fog_impl))), (((GetHandleId(((LoadRectHandle(UserDefinedRects___hashTable, (GetHandleId((GetTriggerUnit()))), (0)))))))))))), (( ((0.)*1.0))*1.0)) // INLINED!!
                 endif
-                call DisplayTextToPlayer(GetOwningPlayer(GetTriggerUnit()), 0, 0, ("Fog " + ("|c0000ff00Green|r" ) + " set to: " + I2S(R2I((( (LoadReal(ConstTable__ht, (((((s__TerrainFog_green_impl))))), (((LoadInteger(ConstTable__ht, (((s__RectEnvironment_fog_impl))), (((GetHandleId(((LoadRectHandle(UserDefinedRects__hashTable, (GetHandleId((GetTriggerUnit()))), (0)))))))))))))))*1.0) * 100. + .5)) + "%")) // INLINED!!
+                call DisplayTextToPlayer(GetOwningPlayer(GetTriggerUnit()), 0, 0, ("Fog " + ("|c0000ff00Green|r" ) + " set to: " + I2S(R2I((( (LoadReal(ConstTable___ht, (((((s__TerrainFog_green_impl))))), (((LoadInteger(ConstTable___ht, (((s__RectEnvironment_fog_impl))), (((GetHandleId(((LoadRectHandle(UserDefinedRects___hashTable, (GetHandleId((GetTriggerUnit()))), (0)))))))))))))))*1.0) * 100. + .5)) + "%")) // INLINED!!
             
             elseif abilityId == RectGenerator_FOG_GREEN_DOWN then
-                if (LoadReal(ConstTable__ht, (((((s__TerrainFog_green_impl))))), (((LoadInteger(ConstTable__ht, (((s__RectEnvironment_fog_impl))), (((GetHandleId(((LoadRectHandle(UserDefinedRects__hashTable, (GetHandleId((GetTriggerUnit()))), (0)))))))))))))) >= 0.01 then // INLINED!!
-                    call SaveReal(ConstTable__ht, (((((s__TerrainFog_green_impl))))), (((LoadInteger(ConstTable__ht, (((s__RectEnvironment_fog_impl))), (((GetHandleId(((LoadRectHandle(UserDefinedRects__hashTable, (GetHandleId((GetTriggerUnit()))), (0)))))))))))), (( (((LoadReal(ConstTable__ht, (((((s__TerrainFog_green_impl))))), (((LoadInteger(ConstTable__ht, (((s__RectEnvironment_fog_impl))), (((GetHandleId(((LoadRectHandle(UserDefinedRects__hashTable, (GetHandleId((GetTriggerUnit()))), (0)))))))))))))) - .05)*1.0))*1.0)) // INLINED!!
+                if (LoadReal(ConstTable___ht, (((((s__TerrainFog_green_impl))))), (((LoadInteger(ConstTable___ht, (((s__RectEnvironment_fog_impl))), (((GetHandleId(((LoadRectHandle(UserDefinedRects___hashTable, (GetHandleId((GetTriggerUnit()))), (0)))))))))))))) >= 0.01 then // INLINED!!
+                    call SaveReal(ConstTable___ht, (((((s__TerrainFog_green_impl))))), (((LoadInteger(ConstTable___ht, (((s__RectEnvironment_fog_impl))), (((GetHandleId(((LoadRectHandle(UserDefinedRects___hashTable, (GetHandleId((GetTriggerUnit()))), (0)))))))))))), (( (((LoadReal(ConstTable___ht, (((((s__TerrainFog_green_impl))))), (((LoadInteger(ConstTable___ht, (((s__RectEnvironment_fog_impl))), (((GetHandleId(((LoadRectHandle(UserDefinedRects___hashTable, (GetHandleId((GetTriggerUnit()))), (0)))))))))))))) - .05)*1.0))*1.0)) // INLINED!!
                 else
-                    call SaveReal(ConstTable__ht, (((((s__TerrainFog_green_impl))))), (((LoadInteger(ConstTable__ht, (((s__RectEnvironment_fog_impl))), (((GetHandleId(((LoadRectHandle(UserDefinedRects__hashTable, (GetHandleId((GetTriggerUnit()))), (0)))))))))))), (( ((1.)*1.0))*1.0)) // INLINED!!
+                    call SaveReal(ConstTable___ht, (((((s__TerrainFog_green_impl))))), (((LoadInteger(ConstTable___ht, (((s__RectEnvironment_fog_impl))), (((GetHandleId(((LoadRectHandle(UserDefinedRects___hashTable, (GetHandleId((GetTriggerUnit()))), (0)))))))))))), (( ((1.)*1.0))*1.0)) // INLINED!!
                 endif
-                call DisplayTextToPlayer(GetOwningPlayer(GetTriggerUnit()), 0, 0, ("Fog " + ("|c0000ff00Green|r" ) + " set to: " + I2S(R2I((( (LoadReal(ConstTable__ht, (((((s__TerrainFog_green_impl))))), (((LoadInteger(ConstTable__ht, (((s__RectEnvironment_fog_impl))), (((GetHandleId(((LoadRectHandle(UserDefinedRects__hashTable, (GetHandleId((GetTriggerUnit()))), (0)))))))))))))))*1.0) * 100. + .5)) + "%")) // INLINED!!
+                call DisplayTextToPlayer(GetOwningPlayer(GetTriggerUnit()), 0, 0, ("Fog " + ("|c0000ff00Green|r" ) + " set to: " + I2S(R2I((( (LoadReal(ConstTable___ht, (((((s__TerrainFog_green_impl))))), (((LoadInteger(ConstTable___ht, (((s__RectEnvironment_fog_impl))), (((GetHandleId(((LoadRectHandle(UserDefinedRects___hashTable, (GetHandleId((GetTriggerUnit()))), (0)))))))))))))))*1.0) * 100. + .5)) + "%")) // INLINED!!
             
             elseif abilityId == RectGenerator_FOG_DENSITY_UP then
-                call SaveReal(ConstTable__ht, (((((s__TerrainFog_density_impl))))), (((LoadInteger(ConstTable__ht, (((s__RectEnvironment_fog_impl))), (((GetHandleId(((LoadRectHandle(UserDefinedRects__hashTable, (GetHandleId((GetTriggerUnit()))), (0)))))))))))), (( (((LoadReal(ConstTable__ht, (((((s__TerrainFog_density_impl))))), (((LoadInteger(ConstTable__ht, (((s__RectEnvironment_fog_impl))), (((GetHandleId(((LoadRectHandle(UserDefinedRects__hashTable, (GetHandleId((GetTriggerUnit()))), (0)))))))))))))) + .00005)*1.0))*1.0)) // INLINED!!
-                call DisplayTextToPlayer(GetOwningPlayer(GetTriggerUnit()), 0, 0, "Fog Density set to: " + R2S((LoadReal(ConstTable__ht, (((((s__TerrainFog_density_impl))))), (((LoadInteger(ConstTable__ht, (((s__RectEnvironment_fog_impl))), (((GetHandleId(((LoadRectHandle(UserDefinedRects__hashTable, (GetHandleId((GetTriggerUnit()))), (0)))))))))))))) * 100) + "%") // INLINED!!
+                call SaveReal(ConstTable___ht, (((((s__TerrainFog_density_impl))))), (((LoadInteger(ConstTable___ht, (((s__RectEnvironment_fog_impl))), (((GetHandleId(((LoadRectHandle(UserDefinedRects___hashTable, (GetHandleId((GetTriggerUnit()))), (0)))))))))))), (( (((LoadReal(ConstTable___ht, (((((s__TerrainFog_density_impl))))), (((LoadInteger(ConstTable___ht, (((s__RectEnvironment_fog_impl))), (((GetHandleId(((LoadRectHandle(UserDefinedRects___hashTable, (GetHandleId((GetTriggerUnit()))), (0)))))))))))))) + .00005)*1.0))*1.0)) // INLINED!!
+                call DisplayTextToPlayer(GetOwningPlayer(GetTriggerUnit()), 0, 0, "Fog Density set to: " + R2S((LoadReal(ConstTable___ht, (((((s__TerrainFog_density_impl))))), (((LoadInteger(ConstTable___ht, (((s__RectEnvironment_fog_impl))), (((GetHandleId(((LoadRectHandle(UserDefinedRects___hashTable, (GetHandleId((GetTriggerUnit()))), (0)))))))))))))) * 100) + "%") // INLINED!!
             
             elseif abilityId == RectGenerator_FOG_DENSITY_DOWN then
-                if (LoadReal(ConstTable__ht, (((((s__TerrainFog_density_impl))))), (((LoadInteger(ConstTable__ht, (((s__RectEnvironment_fog_impl))), (((GetHandleId(((LoadRectHandle(UserDefinedRects__hashTable, (GetHandleId((GetTriggerUnit()))), (0)))))))))))))) >= 0.00006 then // INLINED!!
-                    call SaveReal(ConstTable__ht, (((((s__TerrainFog_density_impl))))), (((LoadInteger(ConstTable__ht, (((s__RectEnvironment_fog_impl))), (((GetHandleId(((LoadRectHandle(UserDefinedRects__hashTable, (GetHandleId((GetTriggerUnit()))), (0)))))))))))), (( (((LoadReal(ConstTable__ht, (((((s__TerrainFog_density_impl))))), (((LoadInteger(ConstTable__ht, (((s__RectEnvironment_fog_impl))), (((GetHandleId(((LoadRectHandle(UserDefinedRects__hashTable, (GetHandleId((GetTriggerUnit()))), (0)))))))))))))) - .00005)*1.0))*1.0)) // INLINED!!
+                if (LoadReal(ConstTable___ht, (((((s__TerrainFog_density_impl))))), (((LoadInteger(ConstTable___ht, (((s__RectEnvironment_fog_impl))), (((GetHandleId(((LoadRectHandle(UserDefinedRects___hashTable, (GetHandleId((GetTriggerUnit()))), (0)))))))))))))) >= 0.00006 then // INLINED!!
+                    call SaveReal(ConstTable___ht, (((((s__TerrainFog_density_impl))))), (((LoadInteger(ConstTable___ht, (((s__RectEnvironment_fog_impl))), (((GetHandleId(((LoadRectHandle(UserDefinedRects___hashTable, (GetHandleId((GetTriggerUnit()))), (0)))))))))))), (( (((LoadReal(ConstTable___ht, (((((s__TerrainFog_density_impl))))), (((LoadInteger(ConstTable___ht, (((s__RectEnvironment_fog_impl))), (((GetHandleId(((LoadRectHandle(UserDefinedRects___hashTable, (GetHandleId((GetTriggerUnit()))), (0)))))))))))))) - .00005)*1.0))*1.0)) // INLINED!!
                 else
-                    call SaveReal(ConstTable__ht, (((((s__TerrainFog_density_impl))))), (((LoadInteger(ConstTable__ht, (((s__RectEnvironment_fog_impl))), (((GetHandleId(((LoadRectHandle(UserDefinedRects__hashTable, (GetHandleId((GetTriggerUnit()))), (0)))))))))))), (( ((0.)*1.0))*1.0)) // INLINED!!
+                    call SaveReal(ConstTable___ht, (((((s__TerrainFog_density_impl))))), (((LoadInteger(ConstTable___ht, (((s__RectEnvironment_fog_impl))), (((GetHandleId(((LoadRectHandle(UserDefinedRects___hashTable, (GetHandleId((GetTriggerUnit()))), (0)))))))))))), (( ((0.)*1.0))*1.0)) // INLINED!!
                 endif
-                call DisplayTextToPlayer(GetOwningPlayer(GetTriggerUnit()), 0, 0, "Fog Density set to: " + R2S((LoadReal(ConstTable__ht, (((((s__TerrainFog_density_impl))))), (((LoadInteger(ConstTable__ht, (((s__RectEnvironment_fog_impl))), (((GetHandleId(((LoadRectHandle(UserDefinedRects__hashTable, (GetHandleId((GetTriggerUnit()))), (0)))))))))))))) * 100) + "%") // INLINED!!
+                call DisplayTextToPlayer(GetOwningPlayer(GetTriggerUnit()), 0, 0, "Fog Density set to: " + R2S((LoadReal(ConstTable___ht, (((((s__TerrainFog_density_impl))))), (((LoadInteger(ConstTable___ht, (((s__RectEnvironment_fog_impl))), (((GetHandleId(((LoadRectHandle(UserDefinedRects___hashTable, (GetHandleId((GetTriggerUnit()))), (0)))))))))))))) * 100) + "%") // INLINED!!
             
             elseif abilityId == RectGenerator_FOG_ZSTART_UP then
-                call SaveReal(ConstTable__ht, (((((s__TerrainFog_zStart_impl))))), (((LoadInteger(ConstTable__ht, (((s__RectEnvironment_fog_impl))), (((GetHandleId(((LoadRectHandle(UserDefinedRects__hashTable, (GetHandleId((GetTriggerUnit()))), (0)))))))))))), (( (((LoadReal(ConstTable__ht, (((((s__TerrainFog_zStart_impl))))), (((LoadInteger(ConstTable__ht, (((s__RectEnvironment_fog_impl))), (((GetHandleId(((LoadRectHandle(UserDefinedRects__hashTable, (GetHandleId((GetTriggerUnit()))), (0)))))))))))))) + 1000.)*1.0))*1.0)) // INLINED!!
-                call DisplayTextToPlayer(GetOwningPlayer(GetTriggerUnit()), 0, 0, ( "Fog zStart set to: " + R2S((LoadReal(ConstTable__ht, (((((s__TerrainFog_zStart_impl))))), (((LoadInteger(ConstTable__ht, (((s__RectEnvironment_fog_impl))), (((GetHandleId(((LoadRectHandle(UserDefinedRects__hashTable, (GetHandleId((GetTriggerUnit()))), (0))))))))))))))) )) // INLINED!!
+                call SaveReal(ConstTable___ht, (((((s__TerrainFog_zStart_impl))))), (((LoadInteger(ConstTable___ht, (((s__RectEnvironment_fog_impl))), (((GetHandleId(((LoadRectHandle(UserDefinedRects___hashTable, (GetHandleId((GetTriggerUnit()))), (0)))))))))))), (( (((LoadReal(ConstTable___ht, (((((s__TerrainFog_zStart_impl))))), (((LoadInteger(ConstTable___ht, (((s__RectEnvironment_fog_impl))), (((GetHandleId(((LoadRectHandle(UserDefinedRects___hashTable, (GetHandleId((GetTriggerUnit()))), (0)))))))))))))) + 1000.)*1.0))*1.0)) // INLINED!!
+                call DisplayTextToPlayer(GetOwningPlayer(GetTriggerUnit()), 0, 0, ( "Fog zStart set to: " + R2S((LoadReal(ConstTable___ht, (((((s__TerrainFog_zStart_impl))))), (((LoadInteger(ConstTable___ht, (((s__RectEnvironment_fog_impl))), (((GetHandleId(((LoadRectHandle(UserDefinedRects___hashTable, (GetHandleId((GetTriggerUnit()))), (0))))))))))))))) )) // INLINED!!
             
             elseif abilityId == RectGenerator_FOG_ZSTART_DOWN then
-                if (LoadReal(ConstTable__ht, (((((s__TerrainFog_zStart_impl))))), (((LoadInteger(ConstTable__ht, (((s__RectEnvironment_fog_impl))), (((GetHandleId(((LoadRectHandle(UserDefinedRects__hashTable, (GetHandleId((GetTriggerUnit()))), (0)))))))))))))) >= 1200. then // INLINED!!
-                    call SaveReal(ConstTable__ht, (((((s__TerrainFog_zStart_impl))))), (((LoadInteger(ConstTable__ht, (((s__RectEnvironment_fog_impl))), (((GetHandleId(((LoadRectHandle(UserDefinedRects__hashTable, (GetHandleId((GetTriggerUnit()))), (0)))))))))))), (( (((LoadReal(ConstTable__ht, (((((s__TerrainFog_zStart_impl))))), (((LoadInteger(ConstTable__ht, (((s__RectEnvironment_fog_impl))), (((GetHandleId(((LoadRectHandle(UserDefinedRects__hashTable, (GetHandleId((GetTriggerUnit()))), (0)))))))))))))) - 1000.)*1.0))*1.0)) // INLINED!!
+                if (LoadReal(ConstTable___ht, (((((s__TerrainFog_zStart_impl))))), (((LoadInteger(ConstTable___ht, (((s__RectEnvironment_fog_impl))), (((GetHandleId(((LoadRectHandle(UserDefinedRects___hashTable, (GetHandleId((GetTriggerUnit()))), (0)))))))))))))) >= 1200. then // INLINED!!
+                    call SaveReal(ConstTable___ht, (((((s__TerrainFog_zStart_impl))))), (((LoadInteger(ConstTable___ht, (((s__RectEnvironment_fog_impl))), (((GetHandleId(((LoadRectHandle(UserDefinedRects___hashTable, (GetHandleId((GetTriggerUnit()))), (0)))))))))))), (( (((LoadReal(ConstTable___ht, (((((s__TerrainFog_zStart_impl))))), (((LoadInteger(ConstTable___ht, (((s__RectEnvironment_fog_impl))), (((GetHandleId(((LoadRectHandle(UserDefinedRects___hashTable, (GetHandleId((GetTriggerUnit()))), (0)))))))))))))) - 1000.)*1.0))*1.0)) // INLINED!!
                 else
-                    call SaveReal(ConstTable__ht, (((((s__TerrainFog_zStart_impl))))), (((LoadInteger(ConstTable__ht, (((s__RectEnvironment_fog_impl))), (((GetHandleId(((LoadRectHandle(UserDefinedRects__hashTable, (GetHandleId((GetTriggerUnit()))), (0)))))))))))), (( ((0.)*1.0))*1.0)) // INLINED!!
+                    call SaveReal(ConstTable___ht, (((((s__TerrainFog_zStart_impl))))), (((LoadInteger(ConstTable___ht, (((s__RectEnvironment_fog_impl))), (((GetHandleId(((LoadRectHandle(UserDefinedRects___hashTable, (GetHandleId((GetTriggerUnit()))), (0)))))))))))), (( ((0.)*1.0))*1.0)) // INLINED!!
                 endif
-                call DisplayTextToPlayer(GetOwningPlayer(GetTriggerUnit()), 0, 0, ( "Fog zStart set to: " + R2S((LoadReal(ConstTable__ht, (((((s__TerrainFog_zStart_impl))))), (((LoadInteger(ConstTable__ht, (((s__RectEnvironment_fog_impl))), (((GetHandleId(((LoadRectHandle(UserDefinedRects__hashTable, (GetHandleId((GetTriggerUnit()))), (0))))))))))))))) )) // INLINED!!
+                call DisplayTextToPlayer(GetOwningPlayer(GetTriggerUnit()), 0, 0, ( "Fog zStart set to: " + R2S((LoadReal(ConstTable___ht, (((((s__TerrainFog_zStart_impl))))), (((LoadInteger(ConstTable___ht, (((s__RectEnvironment_fog_impl))), (((GetHandleId(((LoadRectHandle(UserDefinedRects___hashTable, (GetHandleId((GetTriggerUnit()))), (0))))))))))))))) )) // INLINED!!
             
             elseif abilityId == RectGenerator_FOG_ZEND_UP then
-                call SaveReal(ConstTable__ht, (((((s__TerrainFog_zEnd_impl))))), (((LoadInteger(ConstTable__ht, (((s__RectEnvironment_fog_impl))), (((GetHandleId(((LoadRectHandle(UserDefinedRects__hashTable, (GetHandleId((GetTriggerUnit()))), (0)))))))))))), (( (((LoadReal(ConstTable__ht, (((((s__TerrainFog_zEnd_impl))))), (((LoadInteger(ConstTable__ht, (((s__RectEnvironment_fog_impl))), (((GetHandleId(((LoadRectHandle(UserDefinedRects__hashTable, (GetHandleId((GetTriggerUnit()))), (0)))))))))))))) + 500.)*1.0))*1.0)) // INLINED!!
-                call DisplayTextToPlayer(GetOwningPlayer(GetTriggerUnit()), 0, 0, ( "Fog zEnd set to: " + R2S((LoadReal(ConstTable__ht, (((((s__TerrainFog_zEnd_impl))))), (((LoadInteger(ConstTable__ht, (((s__RectEnvironment_fog_impl))), (((GetHandleId(((LoadRectHandle(UserDefinedRects__hashTable, (GetHandleId((GetTriggerUnit()))), (0))))))))))))))) )) // INLINED!!
+                call SaveReal(ConstTable___ht, (((((s__TerrainFog_zEnd_impl))))), (((LoadInteger(ConstTable___ht, (((s__RectEnvironment_fog_impl))), (((GetHandleId(((LoadRectHandle(UserDefinedRects___hashTable, (GetHandleId((GetTriggerUnit()))), (0)))))))))))), (( (((LoadReal(ConstTable___ht, (((((s__TerrainFog_zEnd_impl))))), (((LoadInteger(ConstTable___ht, (((s__RectEnvironment_fog_impl))), (((GetHandleId(((LoadRectHandle(UserDefinedRects___hashTable, (GetHandleId((GetTriggerUnit()))), (0)))))))))))))) + 500.)*1.0))*1.0)) // INLINED!!
+                call DisplayTextToPlayer(GetOwningPlayer(GetTriggerUnit()), 0, 0, ( "Fog zEnd set to: " + R2S((LoadReal(ConstTable___ht, (((((s__TerrainFog_zEnd_impl))))), (((LoadInteger(ConstTable___ht, (((s__RectEnvironment_fog_impl))), (((GetHandleId(((LoadRectHandle(UserDefinedRects___hashTable, (GetHandleId((GetTriggerUnit()))), (0))))))))))))))) )) // INLINED!!
             
             elseif abilityId == RectGenerator_FOG_ZEND_DOWN then
-                if (LoadReal(ConstTable__ht, (((((s__TerrainFog_zEnd_impl))))), (((LoadInteger(ConstTable__ht, (((s__RectEnvironment_fog_impl))), (((GetHandleId(((LoadRectHandle(UserDefinedRects__hashTable, (GetHandleId((GetTriggerUnit()))), (0)))))))))))))) >= 1200. then // INLINED!!
-                    call SaveReal(ConstTable__ht, (((((s__TerrainFog_zEnd_impl))))), (((LoadInteger(ConstTable__ht, (((s__RectEnvironment_fog_impl))), (((GetHandleId(((LoadRectHandle(UserDefinedRects__hashTable, (GetHandleId((GetTriggerUnit()))), (0)))))))))))), (( (((LoadReal(ConstTable__ht, (((((s__TerrainFog_zEnd_impl))))), (((LoadInteger(ConstTable__ht, (((s__RectEnvironment_fog_impl))), (((GetHandleId(((LoadRectHandle(UserDefinedRects__hashTable, (GetHandleId((GetTriggerUnit()))), (0)))))))))))))) - 500.)*1.0))*1.0)) // INLINED!!
+                if (LoadReal(ConstTable___ht, (((((s__TerrainFog_zEnd_impl))))), (((LoadInteger(ConstTable___ht, (((s__RectEnvironment_fog_impl))), (((GetHandleId(((LoadRectHandle(UserDefinedRects___hashTable, (GetHandleId((GetTriggerUnit()))), (0)))))))))))))) >= 1200. then // INLINED!!
+                    call SaveReal(ConstTable___ht, (((((s__TerrainFog_zEnd_impl))))), (((LoadInteger(ConstTable___ht, (((s__RectEnvironment_fog_impl))), (((GetHandleId(((LoadRectHandle(UserDefinedRects___hashTable, (GetHandleId((GetTriggerUnit()))), (0)))))))))))), (( (((LoadReal(ConstTable___ht, (((((s__TerrainFog_zEnd_impl))))), (((LoadInteger(ConstTable___ht, (((s__RectEnvironment_fog_impl))), (((GetHandleId(((LoadRectHandle(UserDefinedRects___hashTable, (GetHandleId((GetTriggerUnit()))), (0)))))))))))))) - 500.)*1.0))*1.0)) // INLINED!!
                 else
-                    call SaveReal(ConstTable__ht, (((((s__TerrainFog_zEnd_impl))))), (((LoadInteger(ConstTable__ht, (((s__RectEnvironment_fog_impl))), (((GetHandleId(((LoadRectHandle(UserDefinedRects__hashTable, (GetHandleId((GetTriggerUnit()))), (0)))))))))))), (( ((0.)*1.0))*1.0)) // INLINED!!
+                    call SaveReal(ConstTable___ht, (((((s__TerrainFog_zEnd_impl))))), (((LoadInteger(ConstTable___ht, (((s__RectEnvironment_fog_impl))), (((GetHandleId(((LoadRectHandle(UserDefinedRects___hashTable, (GetHandleId((GetTriggerUnit()))), (0)))))))))))), (( ((0.)*1.0))*1.0)) // INLINED!!
                 endif
-                call DisplayTextToPlayer(GetOwningPlayer(GetTriggerUnit()), 0, 0, ( "Fog zEnd set to: " + R2S((LoadReal(ConstTable__ht, (((((s__TerrainFog_zEnd_impl))))), (((LoadInteger(ConstTable__ht, (((s__RectEnvironment_fog_impl))), (((GetHandleId(((LoadRectHandle(UserDefinedRects__hashTable, (GetHandleId((GetTriggerUnit()))), (0))))))))))))))) )) // INLINED!!
+                call DisplayTextToPlayer(GetOwningPlayer(GetTriggerUnit()), 0, 0, ( "Fog zEnd set to: " + R2S((LoadReal(ConstTable___ht, (((((s__TerrainFog_zEnd_impl))))), (((LoadInteger(ConstTable___ht, (((s__RectEnvironment_fog_impl))), (((GetHandleId(((LoadRectHandle(UserDefinedRects___hashTable, (GetHandleId((GetTriggerUnit()))), (0))))))))))))))) )) // INLINED!!
             
             elseif abilityId == RectGenerator_FOG_STYLE_UP then
-                call SaveInteger(ConstTable__ht, (((((s__TerrainFog_style_impl))))), (((LoadInteger(ConstTable__ht, (((s__RectEnvironment_fog_impl))), (((GetHandleId(((LoadRectHandle(UserDefinedRects__hashTable, (GetHandleId((GetTriggerUnit()))), (0)))))))))))), ( ((LoadInteger(ConstTable__ht, ((s__RectGenerator__FogStyle_linkedListNext_impl)), ((((LoadInteger(ConstTable__ht, (((((s__TerrainFog_style_impl))))), (((LoadInteger(ConstTable__ht, (((s__RectEnvironment_fog_impl))), (((GetHandleId(((LoadRectHandle(UserDefinedRects__hashTable, (GetHandleId((GetTriggerUnit()))), (0)))))))))))))))))))))) // INLINED!!
-                call DisplayTextToPlayer(GetOwningPlayer(GetTriggerUnit()), 0, 0, "Fog Style set to: " + (LoadStr(ConstTable__ht, ((((s__RectGenerator__FogStyle_strings_impl)))), ((((LoadInteger(ConstTable__ht, (((((s__TerrainFog_style_impl))))), (((LoadInteger(ConstTable__ht, (((s__RectEnvironment_fog_impl))), (((GetHandleId(((LoadRectHandle(UserDefinedRects__hashTable, (GetHandleId((GetTriggerUnit()))), (0)))))))))))))))))))) // INLINED!!
+                call SaveInteger(ConstTable___ht, (((((s__TerrainFog_style_impl))))), (((LoadInteger(ConstTable___ht, (((s__RectEnvironment_fog_impl))), (((GetHandleId(((LoadRectHandle(UserDefinedRects___hashTable, (GetHandleId((GetTriggerUnit()))), (0)))))))))))), ( ((LoadInteger(ConstTable___ht, ((s__RectGenerator___FogStyle_linkedListNext_impl)), ((((LoadInteger(ConstTable___ht, (((((s__TerrainFog_style_impl))))), (((LoadInteger(ConstTable___ht, (((s__RectEnvironment_fog_impl))), (((GetHandleId(((LoadRectHandle(UserDefinedRects___hashTable, (GetHandleId((GetTriggerUnit()))), (0)))))))))))))))))))))) // INLINED!!
+                call DisplayTextToPlayer(GetOwningPlayer(GetTriggerUnit()), 0, 0, "Fog Style set to: " + (LoadStr(ConstTable___ht, ((((s__RectGenerator___FogStyle_strings_impl)))), ((((LoadInteger(ConstTable___ht, (((((s__TerrainFog_style_impl))))), (((LoadInteger(ConstTable___ht, (((s__RectEnvironment_fog_impl))), (((GetHandleId(((LoadRectHandle(UserDefinedRects___hashTable, (GetHandleId((GetTriggerUnit()))), (0)))))))))))))))))))) // INLINED!!
             
             elseif abilityId == RectGenerator_FOG_STYLE_DOWN then
-                call SaveInteger(ConstTable__ht, (((((s__TerrainFog_style_impl))))), (((LoadInteger(ConstTable__ht, (((s__RectEnvironment_fog_impl))), (((GetHandleId(((LoadRectHandle(UserDefinedRects__hashTable, (GetHandleId((GetTriggerUnit()))), (0)))))))))))), ( ((LoadInteger(ConstTable__ht, ((s__RectGenerator__FogStyle_linkedListPrev_impl)), ((((LoadInteger(ConstTable__ht, (((((s__TerrainFog_style_impl))))), (((LoadInteger(ConstTable__ht, (((s__RectEnvironment_fog_impl))), (((GetHandleId(((LoadRectHandle(UserDefinedRects__hashTable, (GetHandleId((GetTriggerUnit()))), (0)))))))))))))))))))))) // INLINED!!
-                call DisplayTextToPlayer(GetOwningPlayer(GetTriggerUnit()), 0, 0, "Fog Style set to: " + (LoadStr(ConstTable__ht, ((((s__RectGenerator__FogStyle_strings_impl)))), ((((LoadInteger(ConstTable__ht, (((((s__TerrainFog_style_impl))))), (((LoadInteger(ConstTable__ht, (((s__RectEnvironment_fog_impl))), (((GetHandleId(((LoadRectHandle(UserDefinedRects__hashTable, (GetHandleId((GetTriggerUnit()))), (0)))))))))))))))))))) // INLINED!!
+                call SaveInteger(ConstTable___ht, (((((s__TerrainFog_style_impl))))), (((LoadInteger(ConstTable___ht, (((s__RectEnvironment_fog_impl))), (((GetHandleId(((LoadRectHandle(UserDefinedRects___hashTable, (GetHandleId((GetTriggerUnit()))), (0)))))))))))), ( ((LoadInteger(ConstTable___ht, ((s__RectGenerator___FogStyle_linkedListPrev_impl)), ((((LoadInteger(ConstTable___ht, (((((s__TerrainFog_style_impl))))), (((LoadInteger(ConstTable___ht, (((s__RectEnvironment_fog_impl))), (((GetHandleId(((LoadRectHandle(UserDefinedRects___hashTable, (GetHandleId((GetTriggerUnit()))), (0)))))))))))))))))))))) // INLINED!!
+                call DisplayTextToPlayer(GetOwningPlayer(GetTriggerUnit()), 0, 0, "Fog Style set to: " + (LoadStr(ConstTable___ht, ((((s__RectGenerator___FogStyle_strings_impl)))), ((((LoadInteger(ConstTable___ht, (((((s__TerrainFog_style_impl))))), (((LoadInteger(ConstTable___ht, (((s__RectEnvironment_fog_impl))), (((GetHandleId(((LoadRectHandle(UserDefinedRects___hashTable, (GetHandleId((GetTriggerUnit()))), (0)))))))))))))))))))) // INLINED!!
             endif
 
 
@@ -10798,12 +10818,12 @@ function RectGenerator__onCast takes nothing returns boolean
                     call SetUnitY(GetTriggerUnit(), GetUnitY(GetTriggerUnit()) - 32)
                 endif
             
-                if CountUnitsInGroup((LoadGroupHandle(UserDefinedRects__hashTable, (GetHandleId((GetTriggerUnit()))), (6)))) <= RectGenerator__MAXIMUM_MOVE_LIMIT then // INLINED!!
-                    call ForGroup((LoadGroupHandle(UserDefinedRects__hashTable, (GetHandleId((GetTriggerUnit()))), (6))), function RectGenerator__GroupLoopTerrain) // INLINED!!
+                if CountUnitsInGroup((LoadGroupHandle(UserDefinedRects___hashTable, (GetHandleId((GetTriggerUnit()))), (6)))) <= RectGenerator___MAXIMUM_MOVE_LIMIT then // INLINED!!
+                    call ForGroup((LoadGroupHandle(UserDefinedRects___hashTable, (GetHandleId((GetTriggerUnit()))), (6))), function RectGenerator___GroupLoopTerrain) // INLINED!!
                     call SetUnitPosition(GetTriggerUnit(), GetTileCenterCoordinate(GetSpellTargetX()), GetTileCenterCoordinate(GetSpellTargetY()))
                     call MoveGUDR(GetTriggerUnit() , 0 , 0 , true)
                 else
-                    call DisplayTextToPlayer(GetOwningPlayer(GetTriggerUnit()), 0, 0, "Failed to move Rect Generator:\n Attached unit limit exceeded! (" + I2S(RectGenerator__MAXIMUM_MOVE_LIMIT) + ")")
+                    call DisplayTextToPlayer(GetOwningPlayer(GetTriggerUnit()), 0, 0, "Failed to move Rect Generator:\n Attached unit limit exceeded! (" + I2S(RectGenerator___MAXIMUM_MOVE_LIMIT) + ")")
                     call SetUnitPosition(GetTriggerUnit(), GetUnitX(GetTriggerUnit()), GetUnitY(GetTriggerUnit()))
                     call MoveGUDR(GetTriggerUnit() , 0 , 0 , true)
                 endif
@@ -10814,7 +10834,7 @@ function RectGenerator__onCast takes nothing returns boolean
     return false
 endfunction
 
-function RectGenerator__onSpawn takes nothing returns boolean
+function RectGenerator___onSpawn takes nothing returns boolean
     local unit u= GetTriggerUnit()
     
     if u == null then
@@ -10850,13 +10870,13 @@ function RectGenerator__onSpawn takes nothing returns boolean
 endfunction
 
 //===========================================================================
-function RectGenerator__onInit takes nothing returns nothing
+function RectGenerator___onInit takes nothing returns nothing
     local trigger trig= CreateTrigger()
-    local boolexpr onSpawnFilter= Condition(function RectGenerator__onSpawn)
+    local boolexpr onSpawnFilter= Condition(function RectGenerator___onSpawn)
     local integer i= 0
     
     call TriggerRegisterAnyUnitEventBJ(trig, EVENT_PLAYER_UNIT_SPELL_CAST)
-    call TriggerAddCondition(trig, Condition(function RectGenerator__onCast))
+    call TriggerAddCondition(trig, Condition(function RectGenerator___onCast))
     
 
 
@@ -10877,21 +10897,21 @@ function RectGenerator__onInit takes nothing returns nothing
 
     
 
-        call SaveStr(ConstTable__ht, ((((s__RectGenerator__FogStyle_strings_impl)))), (((s__TerrainFog_LINEAR))), ( ("Linear"))) // INLINED!!
-        call SaveStr(ConstTable__ht, ((((s__RectGenerator__FogStyle_strings_impl)))), (((s__TerrainFog_EXPONENTIAL))), ( ("Exponential 1"))) // INLINED!!
-        call SaveStr(ConstTable__ht, ((((s__RectGenerator__FogStyle_strings_impl)))), (((s__TerrainFog_EXPONENTIAL2))), ( ("Exponential 2"))) // INLINED!!
+        call SaveStr(ConstTable___ht, ((((s__RectGenerator___FogStyle_strings_impl)))), (((s__TerrainFog_LINEAR))), ( ("Linear"))) // INLINED!!
+        call SaveStr(ConstTable___ht, ((((s__RectGenerator___FogStyle_strings_impl)))), (((s__TerrainFog_EXPONENTIAL))), ( ("Exponential 1"))) // INLINED!!
+        call SaveStr(ConstTable___ht, ((((s__RectGenerator___FogStyle_strings_impl)))), (((s__TerrainFog_EXPONENTIAL2))), ( ("Exponential 2"))) // INLINED!!
         
 //textmacro instance: udrAddon_LinkStyles("TerrainFog.LINEAR", "TerrainFog.EXPONENTIAL")
-        call SaveInteger(ConstTable__ht, ((s__RectGenerator__FogStyle_linkedListNext_impl)), (((s__TerrainFog_LINEAR))), ( (s__TerrainFog_EXPONENTIAL))) // INLINED!!
-        call SaveInteger(ConstTable__ht, ((s__RectGenerator__FogStyle_linkedListPrev_impl)), (((s__TerrainFog_EXPONENTIAL))), ( (s__TerrainFog_LINEAR))) // INLINED!!
+        call SaveInteger(ConstTable___ht, ((s__RectGenerator___FogStyle_linkedListNext_impl)), (((s__TerrainFog_LINEAR))), ( (s__TerrainFog_EXPONENTIAL))) // INLINED!!
+        call SaveInteger(ConstTable___ht, ((s__RectGenerator___FogStyle_linkedListPrev_impl)), (((s__TerrainFog_EXPONENTIAL))), ( (s__TerrainFog_LINEAR))) // INLINED!!
 //end of: udrAddon_LinkStyles("TerrainFog.LINEAR", "TerrainFog.EXPONENTIAL")
 //textmacro instance: udrAddon_LinkStyles("TerrainFog.EXPONENTIAL", "TerrainFog.EXPONENTIAL2")
-        call SaveInteger(ConstTable__ht, ((s__RectGenerator__FogStyle_linkedListNext_impl)), (((s__TerrainFog_EXPONENTIAL))), ( (s__TerrainFog_EXPONENTIAL2))) // INLINED!!
-        call SaveInteger(ConstTable__ht, ((s__RectGenerator__FogStyle_linkedListPrev_impl)), (((s__TerrainFog_EXPONENTIAL2))), ( (s__TerrainFog_EXPONENTIAL))) // INLINED!!
+        call SaveInteger(ConstTable___ht, ((s__RectGenerator___FogStyle_linkedListNext_impl)), (((s__TerrainFog_EXPONENTIAL))), ( (s__TerrainFog_EXPONENTIAL2))) // INLINED!!
+        call SaveInteger(ConstTable___ht, ((s__RectGenerator___FogStyle_linkedListPrev_impl)), (((s__TerrainFog_EXPONENTIAL2))), ( (s__TerrainFog_EXPONENTIAL))) // INLINED!!
 //end of: udrAddon_LinkStyles("TerrainFog.EXPONENTIAL", "TerrainFog.EXPONENTIAL2")
 //textmacro instance: udrAddon_LinkStyles("TerrainFog.EXPONENTIAL2", "TerrainFog.LINEAR")
-        call SaveInteger(ConstTable__ht, ((s__RectGenerator__FogStyle_linkedListNext_impl)), (((s__TerrainFog_EXPONENTIAL2))), ( (s__TerrainFog_LINEAR))) // INLINED!!
-        call SaveInteger(ConstTable__ht, ((s__RectGenerator__FogStyle_linkedListPrev_impl)), (((s__TerrainFog_LINEAR))), ( (s__TerrainFog_EXPONENTIAL2))) // INLINED!!
+        call SaveInteger(ConstTable___ht, ((s__RectGenerator___FogStyle_linkedListNext_impl)), (((s__TerrainFog_EXPONENTIAL2))), ( (s__TerrainFog_LINEAR))) // INLINED!!
+        call SaveInteger(ConstTable___ht, ((s__RectGenerator___FogStyle_linkedListPrev_impl)), (((s__TerrainFog_LINEAR))), ( (s__TerrainFog_EXPONENTIAL2))) // INLINED!!
 //end of: udrAddon_LinkStyles("TerrainFog.EXPONENTIAL2", "TerrainFog.LINEAR")
 
     
@@ -10961,11 +10981,11 @@ endfunction
         
 
     function Save_GetGUDRSaveString takes integer generatorId returns string
-        local rect userRect= (LoadRectHandle(UserDefinedRects__hashTable, (generatorId), (0))) // INLINED!!
+        local rect userRect= (LoadRectHandle(UserDefinedRects___hashTable, (generatorId), (0))) // INLINED!!
         
         local real length= GetRectMaxX(userRect) - GetRectCenterX(userRect)
         local real height= GetRectMaxY(userRect) - GetRectCenterY(userRect)
-        local integer weatherType= (LoadInteger(UserDefinedRects__hashTable, (generatorId), (8))) // INLINED!!
+        local integer weatherType= (LoadInteger(UserDefinedRects___hashTable, (generatorId), (8))) // INLINED!!
         local boolean hidden
         
         return R2S(length) + "=" + R2S(height) + "=" + I2S(weatherType) + "="
@@ -11138,7 +11158,7 @@ function LoadUnit takes string chat_str,player un_owner returns nothing
                 call GUMS_AddStructureFlightAbility(resultUnit)
                 call IssueImmediateOrder(resultUnit, "unroot")
             else
-                call GroupAddUnit(UnitVisualMods__loopGroup, (resultUnit)) // INLINED!!
+                call GroupAddUnit(UnitVisualMods___loopGroup, (resultUnit)) // INLINED!!
             endif
         endif
     endif
@@ -11330,11 +11350,11 @@ endfunction
 
 function Save_SaveUnitPatrolPoints takes integer unitHandleId returns nothing
     local integer i= 1
-    local integer totalPoints= (LoadInteger(MultiPatrol__data, - (unitHandleId), (9997))) // INLINED!!
+    local integer totalPoints= (LoadInteger(MultiPatrol___data, - (unitHandleId), (9997))) // INLINED!!
     
     loop
     exitwhen i > totalPoints
-        call Preload("=p " + R2S((((LoadReal(MultiPatrol__data, (unitHandleId ), ( i))) )*1.0)) + "=" + R2S((( (LoadReal(MultiPatrol__data, (unitHandleId ), - ( i))))*1.0))) // INLINED!!
+        call Preload("=p " + R2S((((LoadReal(MultiPatrol___data, (unitHandleId ), ( i))) )*1.0)) + "=" + R2S((( (LoadReal(MultiPatrol___data, (unitHandleId ), - ( i))))*1.0))) // INLINED!!
         set i=i + 1
     endloop
 endfunction
@@ -11364,14 +11384,14 @@ function SaveForceLoop takes nothing returns boolean
             //Check if Unit has been removed
             if GetUnitTypeId(saveUnit) != 0 then
                 if isLocalPlayer then
-                    call Preload(ID2S(( GetUnitTypeId(saveUnit) )) + "," + R2S(GetUnitX(saveUnit) - (udg_load_center[(playerId) + 1])) + "," + R2S(GetUnitY(saveUnit) - (udg_load_center[(playerId) + 1 + bj_MAX_PLAYERS])) + "," + R2S(GetUnitFlyHeight(saveUnit)) + "," + R2S(GetUnitFacing(saveUnit)) + "," + s__UnitVisuals_getScale(unitHandleId) + "," + (s__UnitVisuals_getVertexColor((unitHandleId),UnitVisualMods__RED)) + "," + (s__UnitVisuals_getVertexColor((unitHandleId),UnitVisualMods__GREEN)) + "," + (s__UnitVisuals_getVertexColor((unitHandleId),UnitVisualMods__BLUE)) + "," + (s__UnitVisuals_getVertexColor((unitHandleId),UnitVisualMods__ALPHA)) + "," + s__UnitVisuals_getColor(unitHandleId) + "," + s__UnitVisuals_getAnimSpeed(unitHandleId) + "," + s__UnitVisuals_getAnimTag(unitHandleId) + "," + I2S((LoadInteger(UnitVisualMods__hashTable, GetHandleId((saveUnit)), UnitVisualMods__SELECT)))) // INLINED!!
+                    call Preload(ID2S(( GetUnitTypeId(saveUnit) )) + "," + R2S(GetUnitX(saveUnit) - (udg_load_center[(playerId) + 1])) + "," + R2S(GetUnitY(saveUnit) - (udg_load_center[(playerId) + 1 + bj_MAX_PLAYERS])) + "," + R2S(GetUnitFlyHeight(saveUnit)) + "," + R2S(GetUnitFacing(saveUnit)) + "," + s__UnitVisuals_getScale(unitHandleId) + "," + (s__UnitVisuals_getVertexColor((unitHandleId),UnitVisualMods___RED)) + "," + (s__UnitVisuals_getVertexColor((unitHandleId),UnitVisualMods___GREEN)) + "," + (s__UnitVisuals_getVertexColor((unitHandleId),UnitVisualMods___BLUE)) + "," + (s__UnitVisuals_getVertexColor((unitHandleId),UnitVisualMods___ALPHA)) + "," + s__UnitVisuals_getColor(unitHandleId) + "," + s__UnitVisuals_getAnimSpeed(unitHandleId) + "," + s__UnitVisuals_getAnimTag(unitHandleId) + "," + I2S((LoadInteger(UnitVisualMods___hashTable, GetHandleId((saveUnit)), UnitVisualMods___SELECT)))) // INLINED!!
                     
                     
                     
-                    if (HaveSavedString(UnitVisualMods__hashTable, (unitHandleId), UnitVisualMods__NAME)) then // INLINED!!
+                    if (HaveSavedString(UnitVisualMods___hashTable, (unitHandleId), UnitVisualMods___NAME)) then // INLINED!!
                         call Preload("=n " + GUMSGetUnitName(saveUnit))
                     endif
-                    if (HaveSavedHandle(UserDefinedRects__hashTable, (unitHandleId), (0))) then // INLINED!!
+                    if (HaveSavedHandle(UserDefinedRects___hashTable, (unitHandleId), (0))) then // INLINED!!
                         call Preload(Save_GetGUDRSaveString(unitHandleId))
                     endif
                     if (GetUnitAbilityLevel((saveUnit), 'Awrp') > 0) then // INLINED!!
@@ -11381,7 +11401,7 @@ function SaveForceLoop takes nothing returns boolean
                             call Preload("=w " + R2S(WaygateGetDestinationX(saveUnit)) + "=" + R2S(WaygateGetDestinationY(saveUnit)) + "=F=")
                         endif
                     endif
-                    if ((LoadInteger(MultiPatrol__data, - ((unitHandleId)), (9996))) != 0) then // INLINED!!
+                    if ((LoadInteger(MultiPatrol___data, - ((unitHandleId)), (9996))) != 0) then // INLINED!!
                         call Save_SaveUnitPatrolPoints(unitHandleId)
                     endif
                 endif
@@ -11490,7 +11510,7 @@ function LoP_onChangeOwner takes unit whichUnit,player ownerOld returns nothing
     // If ownership was changed with -neut command, no need to change colors.
     if ( IsUnitInGroup(whichUnit, udg_System_NeutralUnits[GetPlayerId(ownerOld) + 1]) ) then
         if (s__UnitVisuals_getColor((GetHandleId(((whichUnit)))))) == "D" then // INLINED!!
-            call SetUnitColor(whichUnit, (UnitVisualMods__I2PC[(udg_System_PlayerColor[GetPlayerId(GetOwningPlayer(whichUnit)) + 1])])) // INLINED!!
+            call SetUnitColor(whichUnit, (UnitVisualMods___I2PC[(udg_System_PlayerColor[GetPlayerId(GetOwningPlayer(whichUnit)) + 1])])) // INLINED!!
         else
             call GUMSSetUnitColor(whichUnit , S2I((s__UnitVisuals_getColor((GetHandleId(((whichUnit)))))))) // INLINED!!
         endif
@@ -11561,7 +11581,7 @@ endfunction
 // 
 //   Warcraft III map script
 //   Generated by the Warcraft III World Editor
-//   Date: Sat Apr  6 14:18:24 2019
+//   Date: Sun Apr  7 21:01:10 2019
 //   Map Author: Guhun
 // 
 //===========================================================================
@@ -12176,7 +12196,6 @@ function InitGlobals takes nothing returns nothing
     endloop
 
     set udg_System_ProtectedGroup=CreateGroup()
-    set udg_System_DecoTotal=0
     set udg_Damage_Mod_Reset=true
     set udg_Damage_Mod_AllowReflect=true
     set udg_CSS_GemBonusBoolean=false
@@ -13559,7 +13578,7 @@ endfunction
 //===========================================================================
 // Trigger: Init Main
 //===========================================================================
-function Trig_Init_Main_Func032A takes nothing returns nothing
+function Trig_Init_Main_Func031A takes nothing returns nothing
     local integer l__udg_temp_integer= GetPlayerId(GetEnumPlayer()) + 1
     local player l__udg_temp_player
     set l__udg_temp_player=ConvertedPlayer(l__udg_temp_integer)
@@ -13588,19 +13607,19 @@ function Trig_Init_Main_Func032A takes nothing returns nothing
     // --
 endfunction
 
-function Trig_Init_Main_Func070001002001 takes nothing returns boolean
+function Trig_Init_Main_Func069001002001 takes nothing returns boolean
     return ( IsUnitType(GetFilterUnit(), UNIT_TYPE_STRUCTURE) == true )
 endfunction
 
-function Trig_Init_Main_Func070001002002 takes nothing returns boolean
+function Trig_Init_Main_Func069001002002 takes nothing returns boolean
     return ( RectContainsUnit(gg_rct_Titan_Palace, GetFilterUnit()) == false )
 endfunction
 
-function Trig_Init_Main_Func070001002 takes nothing returns boolean
+function Trig_Init_Main_Func069001002 takes nothing returns boolean
     return GetBooleanAnd((IsUnitType(GetFilterUnit(), UNIT_TYPE_STRUCTURE) == true), (RectContainsUnit(gg_rct_Titan_Palace, GetFilterUnit()) == false)) // INLINED!!
 endfunction
 
-function Trig_Init_Main_Func070A takes nothing returns nothing
+function Trig_Init_Main_Func069A takes nothing returns nothing
     call SetUnitOwner(GetEnumUnit(), Player(PLAYER_NEUTRAL_PASSIVE), true)
 endfunction
 
@@ -13613,7 +13632,6 @@ function Trig_Init_Main_Actions takes nothing returns nothing
     set udg_System_PArmyLimit[1]=150
     set udg_System_PArmyLimit[2]=24
     set udg_System_PArmyLimit[3]=150
-    call InitDecoUnitTypeArray()
     // Create Hashtables
     if udg_Hashtable_1 == null then
     set udg_Hashtable_1=InitHashtable()
@@ -13656,7 +13674,7 @@ function Trig_Init_Main_Actions takes nothing returns nothing
         set udg_System_PlayerColor[l__udg_temp_integer]=l__udg_Commands_Integer
         set l__udg_temp_integer=l__udg_temp_integer + 1
     endloop
-    call ForForce(GetPlayersAll(), function Trig_Init_Main_Func032A)
+    call ForForce(GetPlayersAll(), function Trig_Init_Main_Func031A)
     // Terrain Settings
     set udg_TileSystem_ABILITIES[0]='A0BH'
     set udg_TileSystem_TILES[0]='Ygsb'
@@ -13694,7 +13712,7 @@ function Trig_Init_Main_Actions takes nothing returns nothing
     call SetHeroLevelBJ(gg_unit_H00V_0359, 100, false)
     call UnitAddItemByIdSwapped('I00D', gg_unit_H00V_0359)
     set bj_wantDestroyGroup=true
-    call ForGroupBJ(GetUnitsOfPlayerMatching(Player(0), Condition(function Trig_Init_Main_Func070001002)), function Trig_Init_Main_Func070A)
+    call ForGroupBJ(GetUnitsOfPlayerMatching(Player(0), Condition(function Trig_Init_Main_Func069001002)), function Trig_Init_Main_Func069A)
     call DisplayTextToForce(GetPlayersAll(), "Map Initialization was Successful! Welcome to the Land of Plenty!
 Check out F9 for new commands or if you never played Titan Land before.")
 endfunction
@@ -13943,7 +13961,7 @@ function Trig_Init_Create_Events_Func004A takes nothing returns nothing
     call TriggerRegisterPlayerChatEvent(gg_trg_Commands_Name_Unit, l__udg_temp_player, "-nameunit ", false)
     call TriggerRegisterPlayerChatEvent(gg_trg_Commands_Give, l__udg_temp_player, "-give ", false)
     call TriggerRegisterPlayerChatEvent(gg_trg_Commands_Deleteme, l__udg_temp_player, "-deleteme", true)
-    call TriggerRegisterPlayerChatEvent(gg_trg_Commands_Deco_Spawn, l__udg_temp_player, "-decos", true)
+    call TriggerRegisterPlayerChatEvent(gg_trg_Commands_Spawn_Decos, l__udg_temp_player, "-decos", false)
     call TriggerRegisterPlayerChatEvent(gg_trg_Commands_Hide_Decos, l__udg_temp_player, "-hide all", true)
     call TriggerRegisterPlayerChatEvent(gg_trg_Commands_Hide_Decos, l__udg_temp_player, "-hide", true)
     call TriggerRegisterPlayerChatEvent(gg_trg_Commands_Select_Search, l__udg_temp_player, "-sele ", false)
@@ -14035,7 +14053,7 @@ endfunction
 //===========================================================================
 function Trig_System_Set_Unit_Color_Actions takes nothing returns nothing
     if (s__UnitVisuals_getColor((GetHandleId(((GetTriggerUnit())))))) == "D" then // INLINED!!
-    call SetUnitColor(GetTriggerUnit(), (UnitVisualMods__I2PC[(udg_System_PlayerColor[GetConvertedPlayerId(GetOwningPlayer(GetTriggerUnit()))])])) // INLINED!!
+    call SetUnitColor(GetTriggerUnit(), (UnitVisualMods___I2PC[(udg_System_PlayerColor[GetConvertedPlayerId(GetOwningPlayer(GetTriggerUnit()))])])) // INLINED!!
     endif
 endfunction
 
@@ -14080,7 +14098,7 @@ function Trig_System_Autoname_Actions takes nothing returns boolean
     local player trigPlayer= GetTriggerPlayer()
     local unit trigUnit= GetTriggerUnit()
 
-    if (HaveSavedString(UnitVisualMods__hashTable, (GetHandleId(trigUnit)), UnitVisualMods__NAME)) and GetOwningPlayer(trigUnit) == trigPlayer and udg_System_AutonameBoolean[GetPlayerId(trigPlayer) + 1] then // INLINED!!
+    if (HaveSavedString(UnitVisualMods___hashTable, (GetHandleId(trigUnit)), UnitVisualMods___NAME)) and GetOwningPlayer(trigUnit) == trigPlayer and udg_System_AutonameBoolean[GetPlayerId(trigPlayer) + 1] then // INLINED!!
         call SetPlayerName(trigPlayer, GUMSGetUnitName(trigUnit))
     endif
 
@@ -14368,11 +14386,11 @@ endfunction
 // scope LoPItemCleanup begins
 
 // The timer will remove dead items from the game every few seconds. Set the value below to determine that period.
-constant function LoPItemCleanup___CleaningPeriod takes nothing returns real
+constant function LoPItemCleanup__CleaningPeriod takes nothing returns real
     return 15.00
 endfunction
 
-function LoPItemCleanup___DestroyDeadItems takes nothing returns nothing
+function LoPItemCleanup__DestroyDeadItems takes nothing returns nothing
     local timer t= GetExpiredTimer()
     local integer tKey= (GetHandleId((t))) // INLINED!!
     local integer aKey= (GetHandleId(((LoadTriggerHandle(ArrayAgent_hashTable, (tKey ), ( 0)))))) // INLINED!!
@@ -14397,7 +14415,7 @@ function LoPItemCleanup___DestroyDeadItems takes nothing returns nothing
     set my_Item=null
 endfunction
 
-function LoPItemCleanup___ForItem takes nothing returns nothing
+function LoPItemCleanup__ForItem takes nothing returns nothing
     local integer aKey
     local integer size
     if GetWidgetLife(GetEnumItem()) == 0 then
@@ -14408,16 +14426,16 @@ function LoPItemCleanup___ForItem takes nothing returns nothing
     endif
 endfunction
 
-function LoPItemCleanup___TrigActions takes nothing returns nothing
+function LoPItemCleanup__TrigActions takes nothing returns nothing
     local timer t
     local integer aKey= (GetHandleId((GetTriggeringTrigger()))) // INLINED!!
     
     call SaveInteger(ArrayAgent_hashTable, (aKey ), ( 0 ), ( 1)) // INLINED!!
-    call EnumItemsInRect(udg_WholeMapRegion, null, function LoPItemCleanup___ForItem)
+    call EnumItemsInRect(udg_WholeMapRegion, null, function LoPItemCleanup__ForItem)
     
     if (LoadInteger(ArrayAgent_hashTable, (aKey ), ( 0))) > 1 then // INLINED!!
         set t=CreateTimer()
-        call TimerStart(t, 1.5, false, function LoPItemCleanup___DestroyDeadItems)
+        call TimerStart(t, 1.5, false, function LoPItemCleanup__DestroyDeadItems)
         call SaveAgentHandle(ArrayAgent_hashTable, ((GetHandleId((t))) ), ( 0 ), ( GetTriggeringTrigger())) // INLINED!!
         set t=null
     else
@@ -14425,11 +14443,11 @@ function LoPItemCleanup___TrigActions takes nothing returns nothing
     endif
 endfunction
 
-function LoPItemCleanup___onInit takes nothing returns nothing
+function LoPItemCleanup__onInit takes nothing returns nothing
     local trigger trig= CreateTrigger()
     
     call TriggerRegisterTimerEvent(trig, (15.00), true) // INLINED!!
-    call TriggerAddAction(trig, function LoPItemCleanup___TrigActions)
+    call TriggerAddAction(trig, function LoPItemCleanup__TrigActions)
 endfunction
 
 // scope LoPItemCleanup ends
@@ -14656,7 +14674,7 @@ function Trig_System_Titan_GiveUnit_Conditions takes nothing returns boolean
 endfunction
 
 function Trig_System_Titan_GiveUnit_Actions takes nothing returns nothing
-    local player l__udg_temp_player= (LoadPlayerHandle(ConstTable__ht, ((((s__LoPInit_Globals_regionTable_impl)))), (GetHandleId(GetTriggeringRegion())))) // INLINED!!
+    local player l__udg_temp_player= (LoadPlayerHandle(ConstTable___ht, ((((s__LoPInit_Globals_regionTable_impl)))), (GetHandleId(GetTriggeringRegion())))) // INLINED!!
     call SetUnitPositionLoc(GetTriggerUnit(), udg_PLAYER_LOCATIONS[GetConvertedPlayerId(l__udg_temp_player)])
     call SetUnitOwner(GetTriggerUnit(), l__udg_temp_player, true)
 endfunction
@@ -14704,14 +14722,14 @@ endfunction
 
 // scope TitanPowers begins
 
-function TitanPowers___GroupFilter takes nothing returns boolean
+function TitanPowers__GroupFilter takes nothing returns boolean
     if not RectContainsUnit(gg_rct_Titan_Palace, GetFilterUnit()) then
         call SetUnitOwner(GetFilterUnit(), udg_PowerSystem_Player, true)
     endif
     return false
 endfunction
 
-function TitanPowers___onOrder takes nothing returns boolean
+function TitanPowers__onOrder takes nothing returns boolean
     
     if GetIssuedOrderIdBJ() != String2OrderIdBJ("smart") then
         return false
@@ -14720,7 +14738,7 @@ function TitanPowers___onOrder takes nothing returns boolean
     call IssueImmediateOrderBJ(GetTriggerUnit(), "stop")
     if GetTriggerUnit() == (gg_unit_e00D_0409) then // INLINED!!
         if udg_PowerSystem_allFlag then
-            call GroupEnumUnitsOfPlayer(ENUM_GROUP, GetOwningPlayer(GetOrderTargetUnit()), Condition(function TitanPowers___GroupFilter))
+            call GroupEnumUnitsOfPlayer(ENUM_GROUP, GetOwningPlayer(GetOrderTargetUnit()), Condition(function TitanPowers__GroupFilter))
             set udg_PowerSystem_allFlag=false
         else
             call SetUnitOwner(GetOrderTargetUnit(), udg_PowerSystem_Player, true)
@@ -14745,7 +14763,7 @@ function TitanPowers___onOrder takes nothing returns boolean
 endfunction
 
 //===========================================================================
-function TitanPowers___onInit takes nothing returns nothing
+function TitanPowers__onInit takes nothing returns nothing
     local trigger trig= CreateTrigger()
     call TriggerRegisterUnitEvent(trig, (gg_unit_e007_0410), EVENT_UNIT_ISSUED_TARGET_ORDER) // INLINED!!
     call TriggerRegisterUnitEvent(trig, (gg_unit_e008_0406), EVENT_UNIT_ISSUED_TARGET_ORDER) // INLINED!!
@@ -14754,7 +14772,7 @@ function TitanPowers___onInit takes nothing returns nothing
     call TriggerRegisterUnitEvent(trig, (gg_unit_e00B_0405), EVENT_UNIT_ISSUED_TARGET_ORDER) // INLINED!!
     call TriggerRegisterUnitEvent(trig, (gg_unit_e00A_0411), EVENT_UNIT_ISSUED_TARGET_ORDER) // INLINED!!
     call TriggerRegisterUnitEvent(trig, (gg_unit_e00D_0409), EVENT_UNIT_ISSUED_TARGET_ORDER) // INLINED!!
-    call TriggerAddCondition(trig, Condition(function TitanPowers___onOrder))
+    call TriggerAddCondition(trig, Condition(function TitanPowers__onOrder))
 endfunction
 
 // scope TitanPowers ends
@@ -14813,7 +14831,7 @@ endfunction
 //===========================================================================
 function ForGroup_ChangeColor takes nothing returns nothing
     if (s__UnitVisuals_getColor((GetHandleId(((GetEnumUnit())))))) == "D" then // INLINED!!
-        call SetUnitColor(GetEnumUnit(), (UnitVisualMods__I2PC[(udg_System_PlayerColor[GetPlayerId(GetTriggerPlayer()) + 1])])) // INLINED!!
+        call SetUnitColor(GetEnumUnit(), (UnitVisualMods___I2PC[(udg_System_PlayerColor[GetPlayerId(GetTriggerPlayer()) + 1])])) // INLINED!!
     endif
 endfunction
 
@@ -14960,29 +14978,54 @@ function InitTrig_Commands_Deleteme takes nothing returns nothing
 endfunction
 
 //===========================================================================
-// Trigger: Commands Deco Spawn
+// Trigger: Commands Spawn Decos
 //===========================================================================
+function MissingDecos_HelpMessage takes nothing returns string
+
+    return "\nHey there! In LoP, there are a total of |c00ffff00" + I2S((LoadInteger(ConstTable___ht, (((((s__LoP_DecoBuilders_static_members_key))))), (s__LoP_DecoBuilders_DecoLastIndex_impl))) + 1) + "|r Deco Builders.\n\nThis can make it quite hard for newer players to decide what to build and get going. It is recommended, if you have never played the game before, to go with only the basic deco builders. Please supply arguments to this command:\n\n    |c00ffff00-decos special|r => Spawns only the special deco builders.\n\n    |c00ffff00-decos basic|r => Spawns special decos and basic decos |c00ffff00(for new players)|r\n\n    |c00ffff00-decos all|r => Spawns ALL deco builders |c00ffff00(for recurring players)|r\n    " // INLINED!!
+
+
+endfunction
+
+
 //Checks the deco counter for the player. If any counter is 0, create the missing deco.
-function Commands_CreateMissingDecos takes player whichPlayer returns nothing
+function Commands_CreateMissingDecos takes player whichPlayer,integer firstIndex,integer lastIndex returns nothing
     local integer playerNumber= GetPlayerId(whichPlayer) + 1
-    local integer i= 0
+
     loop
-    exitwhen i > udg_System_DecoTotal
-        if LoadInteger(udg_Hashtable_2, playerNumber, udg_DecoUnitTypes[i]) == 0 then
-            call CreateUnitAtLoc(whichPlayer, udg_DecoUnitTypes[i], udg_PLAYER_LOCATIONS[playerNumber], bj_UNIT_FACING)
+    exitwhen firstIndex > lastIndex
+        if LoadInteger(udg_Hashtable_2, playerNumber, s__LoP_DecoBuilders_rawcodes[firstIndex]) == 0 then
+            call CreateUnitAtLoc(whichPlayer, s__LoP_DecoBuilders_rawcodes[firstIndex], udg_PLAYER_LOCATIONS[playerNumber], bj_UNIT_FACING)
         endif
-        set i=i + 1
+        set firstIndex=firstIndex + 1
     endloop
 endfunction
 
 function Trig_Commands_Deco_Spawn_Actions takes nothing returns nothing
-    call Commands_CreateMissingDecos(GetTriggerPlayer())
+    local string arg= (SubString(GetEventPlayerChatString(), StringLength(GetEventPlayerChatStringMatched()), StringLength(GetEventPlayerChatString()))) // INLINED!!
+    local integer lastIndex
+
+    if arg == " special" then
+        set lastIndex=(LoadInteger(ConstTable___ht, (((((s__LoP_DecoBuilders_static_members_key))))), (s__LoP_DecoBuilders_SpecialDecoLastIndex_impl))) // INLINED!!
+        
+    elseif arg == " basic" then
+        set lastIndex=(LoadInteger(ConstTable___ht, (((((s__LoP_DecoBuilders_static_members_key))))), (s__LoP_DecoBuilders_BasicDecoLastIndex_impl))) // INLINED!!
+        
+    elseif arg == " advanced" or arg == " adv" or arg == " all" then
+        set lastIndex=(LoadInteger(ConstTable___ht, (((((s__LoP_DecoBuilders_static_members_key))))), (s__LoP_DecoBuilders_AdvDecoLastIndex_impl))) // INLINED!!
+        
+    else
+        call DisplayTextToPlayer(GetTriggerPlayer(), 0, 0, ("\nHey there! In LoP, there are a total of |c00ffff00" + I2S((LoadInteger(ConstTable___ht, (((((s__LoP_DecoBuilders_static_members_key))))), (s__LoP_DecoBuilders_DecoLastIndex_impl))) + 1) + "|r Deco Builders.\n\nThis can make it quite hard for newer players to decide what to build and get going. It is recommended, if you have never played the game before, to go with only the basic deco builders. Please supply arguments to this command:\n\n    |c00ffff00-decos special|r => Spawns only the special deco builders.\n\n    |c00ffff00-decos basic|r => Spawns special decos and basic decos |c00ffff00(for new players)|r\n\n    |c00ffff00-decos all|r => Spawns ALL deco builders |c00ffff00(for recurring players)|r\n    ")) // INLINED!!
+        return
+    endif
+
+    call Commands_CreateMissingDecos(GetTriggerPlayer() , 0 , lastIndex)
 endfunction
 
 //===========================================================================
-function InitTrig_Commands_Deco_Spawn takes nothing returns nothing
-    set gg_trg_Commands_Deco_Spawn=CreateTrigger()
-    call TriggerAddAction(gg_trg_Commands_Deco_Spawn, function Trig_Commands_Deco_Spawn_Actions)
+function InitTrig_Commands_Spawn_Decos takes nothing returns nothing
+    set gg_trg_Commands_Spawn_Decos=CreateTrigger()
+    call TriggerAddAction(gg_trg_Commands_Spawn_Decos, function Trig_Commands_Deco_Spawn_Actions)
 endfunction
 
 //===========================================================================
@@ -15323,19 +15366,19 @@ endfunction
 // Max: 500
 //===========================================================================
 function Trig_Commands_Copy_Func016A takes nothing returns nothing
-    call GUMSCopyUnit(GetEnumUnit() , GetTriggerPlayer() , 0)
+call GUMSCopyUnit((GetEnumUnit() ) , ( GetTriggerPlayer()) , 0) // INLINED!!
 endfunction
 
 function Trig_Commands_Copy_Actions takes nothing returns nothing
     local group g= CreateGroup()
-    local boolean destroyGrp= true
+    local unit generator= null
 
     call GroupEnumUnitsSelected(g, GetTriggerPlayer(), null)
 
-    if (HaveSavedHandle(UserDefinedRects__hashTable, (GetHandleId((FirstOfGroup(g)))), (6))) then // INLINED!!
-        set destroyGrp=false
+    if (HaveSavedHandle(UserDefinedRects___hashTable, (GetHandleId((FirstOfGroup(g)))), (6))) then // INLINED!!
+        set generator=FirstOfGroup(g)
         call DestroyGroup(g)
-        set g=(LoadGroupHandle(UserDefinedRects__hashTable, (GetHandleId((FirstOfGroup(g)))), (6))) // INLINED!!
+        set g=(LoadGroupHandle(UserDefinedRects___hashTable, (GetHandleId((generator))), (6))) // INLINED!!
     endif
 
     call GroupRemoveGroup(udg_System_ProtectedGroup, g)
@@ -15345,8 +15388,10 @@ function Trig_Commands_Copy_Actions takes nothing returns nothing
         call DisplayTextToPlayer(GetTriggerPlayer(), 0, 0, "You are attempting to copy too many units.\nMax: 500")
     endif
     
-    if destroyGrp then
+    if generator == null then // Don't destroy a RectGenerator's group...
         call DestroyGroup(g)
+    else
+        set generator=null
     endif
     set g=null
 endfunction
@@ -15741,62 +15786,6 @@ endfunction
 function InitTrig_CommandsR_Delete takes nothing returns nothing
     set gg_trg_CommandsR_Delete=CreateTrigger()
     call TriggerAddCondition(gg_trg_CommandsR_Delete, Condition(function Trig_CommandsR_Delete_Conditions))
-endfunction
-
-//===========================================================================
-// Trigger: CommandsR Fog
-//
-// -fog 
-//===========================================================================
-function Trig_CommandsR_Fog_Conditions takes nothing returns boolean
-    local string chatStr= (SubString(GetEventPlayerChatString(), StringLength(GetEventPlayerChatStringMatched()), StringLength(GetEventPlayerChatString()))) // INLINED!!
-    local integer style
-    local real zStart
-    local real zEnd
-    local real red
-    local real green
-    local real blue
-    local real density
-    local integer cutToComma
-    
-    if GetTriggerPlayer() != udg_GAME_MASTER and not (SubString(GetEventPlayerChatString(), 0, StringLength(GetEventPlayerChatStringMatched())) == GetEventPlayerChatStringMatched()) then // INLINED!!
-        return false
-    endif
-    
-    set cutToComma=CutToCharacter(chatStr , " ")
-    set style=S2I((SubString((chatStr ), 0, ( cutToComma)))) // INLINED!!
-    set chatStr=CutToCommaShorten(chatStr , cutToComma)
-    
-    set cutToComma=CutToCharacter(chatStr , " ")
-    set zStart=S2R((SubString((chatStr ), 0, ( cutToComma)))) // INLINED!!
-    set chatStr=CutToCommaShorten(chatStr , cutToComma)
-    
-    set cutToComma=CutToCharacter(chatStr , " ")
-    set zEnd=S2R((SubString((chatStr ), 0, ( cutToComma)))) // INLINED!!
-    set chatStr=CutToCommaShorten(chatStr , cutToComma)
-    
-    set cutToComma=CutToCharacter(chatStr , " ")
-    set red=S2R((SubString((chatStr ), 0, ( cutToComma)))) // INLINED!!
-    set chatStr=CutToCommaShorten(chatStr , cutToComma)
-    
-    set cutToComma=CutToCharacter(chatStr , " ")
-    set green=S2R((SubString((chatStr ), 0, ( cutToComma)))) // INLINED!!
-    set chatStr=CutToCommaShorten(chatStr , cutToComma)
-    
-    set cutToComma=CutToCharacter(chatStr , " ")
-    set blue=S2R((SubString((chatStr ), 0, ( cutToComma)))) // INLINED!!
-    set chatStr=CutToCommaShorten(chatStr , cutToComma)
-    
-    set density=S2R(SubString(chatStr, 0, StringLength(chatStr) + 1))
-    
-    call SetTerrainFogExBJ(style, zStart, zEnd, density, red, green, blue)
-    return false
-endfunction
-
-//===========================================================================
-function InitTrig_CommandsR_Fog takes nothing returns nothing
-    set gg_trg_CommandsR_Fog=CreateTrigger()
-    call TriggerAddCondition(gg_trg_CommandsR_Fog, Condition(function Trig_CommandsR_Fog_Conditions))
 endfunction
 
 //===========================================================================
@@ -16588,7 +16577,7 @@ endfunction
 //===========================================================================
 // scope DecoModAbils begins
 
-    function DecoModAbils__PlayerNumber takes unit whichUnit returns integer
+    function DecoModAbils___PlayerNumber takes unit whichUnit returns integer
         return GetPlayerId(GetOwningPlayer(whichUnit)) + 1
     endfunction
 
@@ -16640,78 +16629,84 @@ endfunction
 
 //===========================================================================
 // Trigger: Deco DisableMovement
-//
-// This trigger disables movement for all units that are marked as decorations (have the "ZZIsDecoration" ability in Custom->Humans->Items)
-// It also gives an ability based on Root (zz_Enable/Disable Fly in Custom->Special->Units) to any structures, which allows them to have a flying height.
 //===========================================================================
+// This trigger disables movement for all units that are marked as decorations 
+// (have the "ZZIsDecoration" ability in Custom->Humans->Items)
+
+
+// It also gives an ability based on Root (zz_Enable/Disable Fly in Custom->Special->Units) to any structures.
+// This ability allows them to have a flying height.
+
+
 function Trig_Deco_DisableMovement_Conditions takes nothing returns boolean
-    if ( not (GetUnitAbilityLevel((GetTriggerUnit()), 'A0C6') > 0) ) then // INLINED!!
+    local unit trigU
+
+    if not (GetUnitAbilityLevel((GetTriggerUnit()), 'A0C6') > 0) then // INLINED!!
         return false
     endif
-    return true
-endfunction
 
-function Trig_Deco_DisableMovement_Actions takes nothing returns nothing
-    local real l__udg_temp_real
-    local string str
+    set trigU=GetTriggerUnit()
+
     // -
     // REMOVE ATTACK AND MOVE ABILITIES
-    call UnitRemoveAbility(GetTriggerUnit(), 'Amov')
-    call UnitRemoveAbility(GetTriggerUnit(), 'Aatk')
-    if (GetUnitTypeId((GetTriggerUnit())) == RectGenerator_GENERATOR_ID) then // INLINED!!
-//textmacro instance: GUDR_FirstPage("Add","GetTriggerUnit()")
+    call UnitRemoveAbility(trigU, 'Amov')
+    call UnitRemoveAbility(trigU, 'Aatk')
+    if (GetUnitTypeId((trigU)) == RectGenerator_GENERATOR_ID) then // INLINED!!
+//textmacro instance: GUDR_FirstPage("Add","trigU")
 
-	call UnitAddAbility(GetTriggerUnit(), RectGenerator_CREATE_OR_DESTROY)
-	call UnitAddAbility(GetTriggerUnit(), RectGenerator_TOGGLE_VISIBILITY)
-	call UnitAddAbility(GetTriggerUnit(), RectGenerator_MOVE)
+	call UnitAddAbility(trigU, RectGenerator_CREATE_OR_DESTROY)
+	call UnitAddAbility(trigU, RectGenerator_TOGGLE_VISIBILITY)
+	call UnitAddAbility(trigU, RectGenerator_MOVE)
 
-        call UnitAddAbility(GetTriggerUnit(), RectGenerator_MOVE_TERRAIN)
+        call UnitAddAbility(trigU, RectGenerator_MOVE_TERRAIN)
 
 	
-	call UnitAddAbility(GetTriggerUnit(), RectGenerator_RETRACT_X)
-	call UnitAddAbility(GetTriggerUnit(), RectGenerator_EXPAND_X)
-	call UnitAddAbility(GetTriggerUnit(), RectGenerator_RETRACT_Y)
-	call UnitAddAbility(GetTriggerUnit(), RectGenerator_EXPAND_Y)
+	call UnitAddAbility(trigU, RectGenerator_RETRACT_X)
+	call UnitAddAbility(trigU, RectGenerator_EXPAND_X)
+	call UnitAddAbility(trigU, RectGenerator_RETRACT_Y)
+	call UnitAddAbility(trigU, RectGenerator_EXPAND_Y)
 	
-	call UnitAddAbility(GetTriggerUnit(), RectGenerator_LOCK_UNITS)
-	call UnitAddAbility(GetTriggerUnit(), RectGenerator_UNLOCK_UNITS)
+	call UnitAddAbility(trigU, RectGenerator_LOCK_UNITS)
+	call UnitAddAbility(trigU, RectGenerator_UNLOCK_UNITS)
 
-//end of: GUDR_FirstPage("Add","GetTriggerUnit()")
+//end of: GUDR_FirstPage("Add","trigU")
     endif
     // -
     // ADD ENABLE/DISABLE FLY TO STRUCTURES
-    if IsUnitType(GetTriggerUnit(), UNIT_TYPE_STRUCTURE) then
-        if GetUnitAbilityLevel(GetTriggerUnit(), 'A037') != 0 then
+    if IsUnitType(trigU, UNIT_TYPE_STRUCTURE) then
+        if GetUnitAbilityLevel(trigU, 'A037') != 0 then
         else
-            call GUMS_AddStructureFlightAbility(GetTriggerUnit())
+            call GUMS_AddStructureFlightAbility(trigU)
             // -
             // PLAY OPEN ANIMATION FOR OPENED GATES
             // OTHERWISE, PLAY STAND ANIMATION
-            if ( GetUnitAbilityLevel(GetTriggerUnit(), 'A0B5') != 0 ) then
-                if (HaveSavedString(UnitVisualMods__hashTable, GetHandleId((GetTriggerUnit())), UnitVisualMods__ATAG)) then // INLINED!!
-                    call SetUnitAnimation(GetTriggerUnit(), "death alternate " + GUMSConvertTags((s__UnitVisuals_getAnimTag((GetHandleId(((GetTriggerUnit())))))))) // INLINED!!
+            if ( GetUnitAbilityLevel(trigU, 'A0B5') != 0 ) then
+                if (HaveSavedString(UnitVisualMods___hashTable, GetHandleId((trigU)), UnitVisualMods___ATAG)) then // INLINED!!
+                    call SetUnitAnimation(trigU, "death alternate " + GUMSConvertTags((s__UnitVisuals_getAnimTag((GetHandleId(((trigU)))))))) // INLINED!!
                 else
-                    call SetUnitAnimation(GetTriggerUnit(), "death alternate")
+                    call SetUnitAnimation(trigU, "death alternate")
                 endif
             else
-                if (HaveSavedString(UnitVisualMods__hashTable, GetHandleId((GetTriggerUnit())), UnitVisualMods__ATAG)) then // INLINED!!
-                    call SetUnitAnimation(GetTriggerUnit(), "stand " + GUMSConvertTags((s__UnitVisuals_getAnimTag((GetHandleId(((GetTriggerUnit())))))))) // INLINED!!
+                if (HaveSavedString(UnitVisualMods___hashTable, GetHandleId((trigU)), UnitVisualMods___ATAG)) then // INLINED!!
+                    call SetUnitAnimation(trigU, "stand " + GUMSConvertTags((s__UnitVisuals_getAnimTag((GetHandleId(((trigU)))))))) // INLINED!!
                 else
-                    call SetUnitAnimation(GetTriggerUnit(), "stand")
+                    call SetUnitAnimation(trigU, "stand")
                 endif
             endif
         endif
-    else
     endif
+
+    set trigU=null
+    return false
 endfunction
 
 //===========================================================================
 function InitTrig_Deco_DisableMovement takes nothing returns nothing
     set gg_trg_Deco_DisableMovement=CreateTrigger()
+
     call TriggerRegisterEnterRectSimple(gg_trg_Deco_DisableMovement, GetEntireMapRect())
     call TriggerRegisterAnyUnitEventBJ(gg_trg_Deco_DisableMovement, EVENT_PLAYER_UNIT_UPGRADE_FINISH)
     call TriggerAddCondition(gg_trg_Deco_DisableMovement, Condition(function Trig_Deco_DisableMovement_Conditions))
-    call TriggerAddAction(gg_trg_Deco_DisableMovement, function Trig_Deco_DisableMovement_Actions)
 endfunction
 
 //===========================================================================
@@ -16768,15 +16763,15 @@ endfunction
 // scope DecoMovement begins
 
 
-    function DecoMovement__PlayerNumber takes unit whichUnit returns integer
+    function DecoMovement___PlayerNumber takes unit whichUnit returns integer
         return GetPlayerId(GetOwningPlayer(whichUnit)) + 1
     endfunction
     
-    function DecoMovement__X takes unit whichUnit returns real
+    function DecoMovement___X takes unit whichUnit returns real
         return GetUnitX(whichUnit)
     endfunction
     
-    function DecoMovement__Y takes unit whichUnit returns real
+    function DecoMovement___Y takes unit whichUnit returns real
         return GetUnitY(whichUnit)
     endfunction
     
@@ -16832,8 +16827,10 @@ endfunction
             return false
         endif
         
-        if ( GetUnitTypeId(trigU) == 'h0KD' ) then
+        if ( GetUnitTypeId(trigU) == DecoMovement_CONTROLLER ) then
             call ForGroup(udg_Player_ControlGroup[(GetPlayerId(GetOwningPlayer((trigU))) + 1)], function DecoMovement_Controller_ForGroupFunc) // INLINED!!
+			
+			
         elseif ( spellId == DecoMovement_MOVE_LEFT ) then
             call SetUnitPosition(trigU, (GetUnitX((trigU))) - udg_System_DecoGrid[(GetPlayerId(GetOwningPlayer((trigU))) + 1)], (GetUnitY((trigU)))) // INLINED!!
             
@@ -17279,7 +17276,7 @@ endfunction
 //===========================================================================
 // scope MultiPatrolCommands begins
 
-function MultiPatrolCommands__CommandActions takes nothing returns nothing
+function MultiPatrolCommands___CommandActions takes nothing returns nothing
     local group selectedGrp= CreateGroup()
     local unit u
 
@@ -17308,10 +17305,10 @@ function MultiPatrolCommands__CommandActions takes nothing returns nothing
     set u=null
 endfunction
 
-function MultiPatrolCommands__onInit takes nothing returns nothing
+function MultiPatrolCommands___onInit takes nothing returns nothing
     local trigger trig= CreateTrigger()
     local integer i= 0
-    call TriggerAddAction(trig, function MultiPatrolCommands__CommandActions)
+    call TriggerAddAction(trig, function MultiPatrolCommands___CommandActions)
     
     loop
     exitwhen i >= bj_MAX_PLAYERS
@@ -17326,7 +17323,7 @@ endfunction
 
 // scope MultiPatrolOrder begins
 
-function MultiPatrolOrder__IsUnitOnlySelected takes unit trigU returns boolean
+function MultiPatrolOrder___IsUnitOnlySelected takes unit trigU returns boolean
     local group selectedGrp= CreateGroup()
     local unit firstOfGrp
     local integer groupCounter= 0
@@ -17352,10 +17349,10 @@ function MultiPatrolOrder__IsUnitOnlySelected takes unit trigU returns boolean
     return groupCounter == 1 and trigUnitInSelection
 endfunction
 
-function MultiPatrolOrder__OnPatrolOrderCondition takes nothing returns boolean
+function MultiPatrolOrder___OnPatrolOrderCondition takes nothing returns boolean
     local unit trigU= GetTriggerUnit()
     
-    if Patrol_IsValidPatrolOrder(GetIssuedOrderId()) and MultiPatrolOrder__IsUnitOnlySelected(trigU) then
+    if Patrol_IsValidPatrolOrder(GetIssuedOrderId()) and MultiPatrolOrder___IsUnitOnlySelected(trigU) then
         call Patrol_RegisterPoint(trigU , GetOrderPointX() , GetOrderPointY())
     endif
     
@@ -17364,11 +17361,11 @@ function MultiPatrolOrder__OnPatrolOrderCondition takes nothing returns boolean
     return false
 endfunction
 
-function MultiPatrolOrder__onInit takes nothing returns nothing
+function MultiPatrolOrder___onInit takes nothing returns nothing
     local trigger trig= CreateTrigger()
     
     call TriggerRegisterAnyUnitEventBJ(trig, EVENT_PLAYER_UNIT_ISSUED_POINT_ORDER)
-    call TriggerAddCondition(trig, Condition(function MultiPatrolOrder__OnPatrolOrderCondition))
+    call TriggerAddCondition(trig, Condition(function MultiPatrolOrder___OnPatrolOrderCondition))
 endfunction
 
 // scope MultiPatrolOrder ends
@@ -17376,7 +17373,7 @@ endfunction
 // scope MultiPatrolDisplayOnSelect begins
 
 
-function MultiPatrolDisplayOnSelect__onSelect takes nothing returns nothing
+function MultiPatrolDisplayOnSelect___onSelect takes nothing returns nothing
     local unit u
     local integer i= 0
     local group selectedGrp= CreateGroup()
@@ -17389,14 +17386,14 @@ function MultiPatrolDisplayOnSelect__onSelect takes nothing returns nothing
         set i=i + 1
     endloop
     
-    set u=FirstOfGroup(MultiPatrolDisplayOnSelect__stack_grp)
+    set u=FirstOfGroup(MultiPatrolDisplayOnSelect___stack_grp)
     loop
         exitwhen u == null
             if not IsUnitInGroup(u, selectedGrp) then
                 call Patrol_DestroyIdPoints(GetHandleId((u))) // INLINED!!
             endif
-            call GroupRemoveUnit(MultiPatrolDisplayOnSelect__stack_grp, u)
-            set u=FirstOfGroup(MultiPatrolDisplayOnSelect__stack_grp)
+            call GroupRemoveUnit(MultiPatrolDisplayOnSelect___stack_grp, u)
+            set u=FirstOfGroup(MultiPatrolDisplayOnSelect___stack_grp)
     endloop
     
     set u=FirstOfGroup(selectedGrp)
@@ -17404,7 +17401,7 @@ function MultiPatrolDisplayOnSelect__onSelect takes nothing returns nothing
         exitwhen u == null
             call Patrol_DisplayPoints(u)
             call GroupRemoveUnit(selectedGrp, u)
-            call GroupAddUnit(MultiPatrolDisplayOnSelect__stack_grp, u)
+            call GroupAddUnit(MultiPatrolDisplayOnSelect___stack_grp, u)
             set u=FirstOfGroup(selectedGrp)
     endloop
     
@@ -17413,10 +17410,10 @@ function MultiPatrolDisplayOnSelect__onSelect takes nothing returns nothing
 endfunction
 
 //===========================================================================
-function MultiPatrolDisplayOnSelect__onInit takes nothing returns nothing
+function MultiPatrolDisplayOnSelect___onInit takes nothing returns nothing
     local trigger trig= CreateTrigger()
-    call TriggerRegisterTimerEvent(trig, MultiPatrolDisplayOnSelect__PERIOD, true)
-    call TriggerAddAction(trig, function MultiPatrolDisplayOnSelect__onSelect)
+    call TriggerRegisterTimerEvent(trig, MultiPatrolDisplayOnSelect___PERIOD, true)
+    call TriggerAddAction(trig, function MultiPatrolDisplayOnSelect___onSelect)
 endfunction
 
 // scope MultiPatrolDisplayOnSelect ends
@@ -17428,12 +17425,8 @@ endfunction
  
 //===========================================================================
 // Trigger: RectEnvironment
-//
-// Default melee game initialization for all players
 //===========================================================================
 // Trigger: AutoRectEnvironment
-//
-// Default melee game initialization for all players
 //===========================================================================
 // Trigger: TileDefinition
 //===========================================================================
@@ -17490,9 +17483,6 @@ endfunction
 //===========================================================================
 //===========================================================================
 // Trigger: LoPHeader
-//
-// This trigger should have its code placed above all others when the map is saved, so it can be used to write functions.
-// DO NOT DELETE AND RECREATE THIS TRIGGER OR THE MAP WILL BECOME UNSAVEABLE
 //===========================================================================
 //===========================================================================
 // Trigger: CustomStatSystem
@@ -18262,6 +18252,9 @@ endfunction
 // ranges from -1 upwards. "udg_DmgEvRecursionN" ranges from 0 upwards.
 // "integer i" is always 1 less than "udg_DmgEvRecursionN"
 //
+
+// EDITS BY GUHUN (look for GuhunEdit_ prefix)
+
 function DmgEvResetVars takes nothing returns nothing
     local integer i= udg_DmgEvRecursionN - 2
     set udg_DmgEvRecursionN=i + 1
@@ -18496,6 +18489,25 @@ function CreateDmgEvTrg takes nothing returns nothing
     set udg_DamageEventTrigger=CreateTrigger()
     call TriggerAddCondition(udg_DamageEventTrigger, Filter(function OnUnitDamage))
 endfunction
+function GuhunEdit_RecreateTrigger takes nothing returns nothing
+    local integer i= udg_UDexNext[0]
+    
+    set udg_DamageEventsWasted=0
+    
+    //Rebuild the mass EVENT_UNIT_DAMAGED trigger:
+    call DestroyTrigger(udg_DamageEventTrigger)
+    call CreateDmgEvTrg()
+    loop
+        exitwhen i == 0
+        if udg_UnitDamageRegistered[i] then
+            call TriggerRegisterUnitEvent(udg_DamageEventTrigger, udg_UDexUnits[i], EVENT_UNIT_DAMAGED)
+        endif
+        set i=udg_UDexNext[i]
+    endloop
+    
+    call BJDebugMsg("onDamage trigger rebuilt")
+    call DestroyTimer(GetExpiredTimer())
+endfunction
 function SetupDmgEv takes nothing returns boolean
     local integer i= udg_UDex
     local unit u
@@ -18514,19 +18526,9 @@ function SetupDmgEv takes nothing returns boolean
             set udg_UnitDamageRegistered[i]=false
             set udg_DamageEventsWasted=udg_DamageEventsWasted + 1
             if udg_DamageEventsWasted == 32 then //After 32 registered units have been removed...
-                set udg_DamageEventsWasted=0
-               
-                //Rebuild the mass EVENT_UNIT_DAMAGED trigger:
-                call DestroyTrigger(udg_DamageEventTrigger)
-                call CreateDmgEvTrg()
-                set i=udg_UDexNext[0]
-                loop
-                    exitwhen i == 0
-                    if udg_UnitDamageRegistered[i] then
-                        call TriggerRegisterUnitEvent(udg_DamageEventTrigger, udg_UDexUnits[i], EVENT_UNIT_DAMAGED)
-                    endif
-                    set i=udg_UDexNext[i]
-                endloop
+            
+                // Rebuild onDamage trigger. But only once per game-frame (so mass-removals are less laggy)
+                call TimerStart(CreateTimer(), 0, false, function GuhunEdit_RecreateTrigger)
             endif
         endif
     endif
@@ -20278,6 +20280,10 @@ function InitTrig_SaveCall takes nothing returns nothing
 endfunction
 
 //===========================================================================
+// Trigger: SaveLoop
+//===========================================================================
+
+//===========================================================================
 // Trigger: SaveLoop Dest
 //===========================================================================
 function SaveFilter takes nothing returns boolean
@@ -20309,7 +20315,7 @@ function SaveLoopActions2 takes nothing returns nothing
 
     
     
-    set rectangle=(LoadRectHandle(UserDefinedRects__hashTable, (genId), (0))) // INLINED!!
+    set rectangle=(LoadRectHandle(UserDefinedRects___hashTable, (genId), (0))) // INLINED!!
     if GetLocalPlayer() == saver then
         call PreloadGenClear()
         call PreloadGenStart()
@@ -20350,7 +20356,7 @@ function SaveTiles takes nothing returns boolean
             if udg_save_XYminmaxcur[playerNumber + 5 * bj_MAX_PLAYERS] > udg_save_XYminmaxcur[playerNumber + 4 * bj_MAX_PLAYERS] then
                 set i=121
             else
-                set saveStr=saveStr + LoadD2H((LoadInteger((UnitVisualMods__hashTable), (((s__TerrainType2Id_KEY))), (((GetTerrainType(udg_save_XYminmaxcur[playerNumber + 2 * bj_MAX_PLAYERS], udg_save_XYminmaxcur[playerNumber + 5 * bj_MAX_PLAYERS]))))))) + LoadD2H(GetTerrainVariance(udg_save_XYminmaxcur[playerNumber + 2 * bj_MAX_PLAYERS], udg_save_XYminmaxcur[playerNumber + 5 * bj_MAX_PLAYERS])) // INLINED!!
+                set saveStr=saveStr + LoadD2H((LoadInteger((UnitVisualMods___hashTable), (((s__TerrainType2Id_KEY))), (((GetTerrainType(udg_save_XYminmaxcur[playerNumber + 2 * bj_MAX_PLAYERS], udg_save_XYminmaxcur[playerNumber + 5 * bj_MAX_PLAYERS]))))))) + LoadD2H(GetTerrainVariance(udg_save_XYminmaxcur[playerNumber + 2 * bj_MAX_PLAYERS], udg_save_XYminmaxcur[playerNumber + 5 * bj_MAX_PLAYERS])) // INLINED!!
             endif
             set i=i + 1
             if udg_save_XYminmaxcur[playerNumber + 2 * bj_MAX_PLAYERS] > udg_save_XYminmaxcur[playerNumber + bj_MAX_PLAYERS] then
@@ -20385,7 +20391,7 @@ function SaveTerrain takes nothing returns nothing
         return
     endif
     
-    set saveRect=(LoadRectHandle(UserDefinedRects__hashTable, (genId), (0))) // INLINED!!
+    set saveRect=(LoadRectHandle(UserDefinedRects___hashTable, (genId), (0))) // INLINED!!
     set udg_save_XYminmaxcur[playerNumber]=GetRectMinX(saveRect)
     set udg_save_XYminmaxcur[playerNumber + bj_MAX_PLAYERS]=GetRectMaxX(saveRect)
     set udg_save_XYminmaxcur[playerNumber + 3 * bj_MAX_PLAYERS]=GetRectMinY(saveRect)
@@ -20513,9 +20519,9 @@ endfunction
         
         
         // TODO: Create function to set first patrol in the GPS library
-        if not ((LoadInteger(MultiPatrol__data, - ((GetHandleId((whichUnit)))), (9996))) != 0) then // INLINED!!
+        if not ((LoadInteger(MultiPatrol___data, - ((GetHandleId((whichUnit)))), (9996))) != 0) then // INLINED!!
             call SetUnitPosition(whichUnit, x, y)
-            call SaveInteger(MultiPatrol__data, - (GetHandleId(whichUnit) ), (9996), ( 1)) // INLINED!!
+            call SaveInteger(MultiPatrol___data, - (GetHandleId(whichUnit) ), (9996), ( 1)) // INLINED!!
         else
             call Patrol_RegisterPoint(whichUnit , x , y)
         endif
@@ -21588,7 +21594,7 @@ function Trig_Make_Unit_Selectable_Func003A takes nothing returns nothing
     local real locX= GetLocationX(udg_Spell__TargetPoint)
     local real locY= GetLocationY(udg_Spell__TargetPoint)
     if SquareRoot(( unitX - locX ) * ( unitX - locX ) + ( unitY - locY ) * ( unitY - locY )) <= 300 then
-        if (LoadInteger(UnitVisualMods__hashTable, GetHandleId((enumUnit)), UnitVisualMods__SELECT)) != 0 then // INLINED!!
+        if (LoadInteger(UnitVisualMods___hashTable, GetHandleId((enumUnit)), UnitVisualMods___SELECT)) != 0 then // INLINED!!
             call GUMSMakeUnitSelectable(enumUnit)
             call KillUnit(enumUnit)
         endif
@@ -22602,7 +22608,7 @@ endfunction
 function Trig_Ability_Cooldown_Actions takes nothing returns nothing
     local integer l__udg_temp_integer
     local real l__udg_temp_real= 1.
-    if (HaveSavedBoolean(ConstTable__ht, ((((s__FilterTransformations_Globals_data_impl)))), ((GetUnitCurrentOrder(GetTriggerUnit()))))) then // INLINED!!
+    if (HaveSavedBoolean(ConstTable___ht, ((((s__FilterTransformations_Globals_data_impl)))), ((GetUnitCurrentOrder(GetTriggerUnit()))))) then // INLINED!!
     return
     endif
     if ( Trig_Ability_Cooldown_Func007C() ) then
@@ -22982,8 +22988,89 @@ function InitTrig_ScrollSystem_Learn_Spell takes nothing returns nothing
 endfunction
 
 //===========================================================================
-// Trigger: SaveLoop
+// Trigger: CommandsR Fog
+//
+// -fog 
 //===========================================================================
+function Trig_CommandsR_Fog_Conditions takes nothing returns boolean
+    local string chatStr= (SubString(GetEventPlayerChatString(), StringLength(GetEventPlayerChatStringMatched()), StringLength(GetEventPlayerChatString()))) // INLINED!!
+    local integer style
+    local real zStart
+    local real zEnd
+    local real density
+    local real red
+    local real green
+    local real blue
+    local integer cutToComma
+    
+
+        local integer fog
+
+    
+    if GetTriggerPlayer() != udg_GAME_MASTER and not (SubString(GetEventPlayerChatString(), 0, StringLength(GetEventPlayerChatStringMatched())) == GetEventPlayerChatStringMatched()) then // INLINED!!
+        return false
+    endif
+    
+    if chatStr == "reset" then
+        call s__TerrainFog_destroy((LoadInteger(ConstTable___ht, (((s__RectEnvironment_fog_impl))), (((0)))))) // INLINED!!
+        call SaveInteger(ConstTable___ht, (((s__RectEnvironment_fog_impl))), (((0))), ( (0))) // INLINED!!
+        return false
+    endif
+    
+    set cutToComma=CutToCharacter(chatStr , " ")
+    set style=S2I((SubString((chatStr ), 0, ( cutToComma)))) // INLINED!!
+    set chatStr=CutToCommaShorten(chatStr , cutToComma)
+    
+    set cutToComma=CutToCharacter(chatStr , " ")
+    set zStart=S2R((SubString((chatStr ), 0, ( cutToComma)))) // INLINED!!
+    set chatStr=CutToCommaShorten(chatStr , cutToComma)
+    
+    set cutToComma=CutToCharacter(chatStr , " ")
+    set zEnd=S2R((SubString((chatStr ), 0, ( cutToComma)))) // INLINED!!
+    set chatStr=CutToCommaShorten(chatStr , cutToComma)
+    
+    set cutToComma=CutToCharacter(chatStr , " ")
+    set density=S2R((SubString((chatStr ), 0, ( cutToComma)))) // INLINED!!
+    set chatStr=CutToCommaShorten(chatStr , cutToComma)
+    
+    set cutToComma=CutToCharacter(chatStr , " ")
+    set red=S2R((SubString((chatStr ), 0, ( cutToComma)))) // INLINED!!
+    set chatStr=CutToCommaShorten(chatStr , cutToComma)
+    
+    set cutToComma=CutToCharacter(chatStr , " ")
+    set green=S2R((SubString((chatStr ), 0, ( cutToComma)))) // INLINED!!
+    set chatStr=CutToCommaShorten(chatStr , cutToComma)
+    
+    set cutToComma=CutToCharacter(chatStr , " ")
+    set blue=S2R((SubString((chatStr ), 0, ( cutToComma)))) // INLINED!!
+    set chatStr=CutToCommaShorten(chatStr , cutToComma)
+    
+
+        set fog=(LoadInteger(ConstTable___ht, (((s__RectEnvironment_fog_impl))), (((0))))) // INLINED!!
+        
+        if fog == 0 then
+            set fog=(GMUI_GetIndex((GMUI_GENERIC_KEY))) // INLINED!!
+            call SaveInteger(ConstTable___ht, (((s__RectEnvironment_fog_impl))), (((0))), ( (fog))) // INLINED!!
+        endif
+        
+        call SaveInteger(ConstTable___ht, (((((s__TerrainFog_style_impl))))), ((fog)), ( (style))) // INLINED!!
+        call SaveReal(ConstTable___ht, (((((s__TerrainFog_zStart_impl))))), ((fog)), (( ((zStart)*1.0))*1.0)) // INLINED!!
+        call SaveReal(ConstTable___ht, (((((s__TerrainFog_zEnd_impl))))), ((fog)), (( ((zEnd)*1.0))*1.0)) // INLINED!!
+        call SaveReal(ConstTable___ht, (((((s__TerrainFog_density_impl))))), ((fog)), (( ((density * 0.01)*1.0))*1.0)) // INLINED!!
+        call SaveReal(ConstTable___ht, (((((s__TerrainFog_red_impl))))), ((fog)), (( ((red * 0.01)*1.0))*1.0)) // INLINED!!
+        call SaveReal(ConstTable___ht, (((((s__TerrainFog_green_impl))))), ((fog)), (( ((green * 0.01)*1.0))*1.0)) // INLINED!!
+        call SaveReal(ConstTable___ht, (((((s__TerrainFog_blue_impl))))), ((fog)), (( ((blue * 0.01)*1.0))*1.0)) // INLINED!!
+
+
+
+    return false
+endfunction
+
+//===========================================================================
+function InitTrig_CommandsR_Fog takes nothing returns nothing
+    set gg_trg_CommandsR_Fog=CreateTrigger()
+    call TriggerAddCondition(gg_trg_CommandsR_Fog, Condition(function Trig_CommandsR_Fog_Conditions))
+endfunction
 
 //===========================================================================
 function InitCustomTriggers takes nothing returns nothing
@@ -23018,7 +23105,7 @@ function InitCustomTriggers takes nothing returns nothing
     call InitTrig_Commands_Name_Unit()
     call InitTrig_Commands_Give()
     call InitTrig_Commands_Deleteme()
-    call InitTrig_Commands_Deco_Spawn()
+    call InitTrig_Commands_Spawn_Decos()
     call InitTrig_Commands_Hide_Decos()
     call InitTrig_Commands_Select_Search()
     call InitTrig_Commands_Neutral()
@@ -23033,7 +23120,6 @@ function InitCustomTriggers takes nothing returns nothing
     call InitTrig_CommandsR_Make_Titan()
     call InitTrig_CommandsR_Set_Limits_for_Units()
     call InitTrig_CommandsR_Delete()
-    call InitTrig_CommandsR_Fog()
     call InitTrig_CommandsR_Water_Color()
     call InitTrig_CommandsR_Mind()
     call InitTrig_CommandsR_Kick()
@@ -23116,6 +23202,7 @@ function InitCustomTriggers takes nothing returns nothing
     call InitTrig_SaveLoad_Commands()
     call InitTrig_SaveLoad_Set_Center_Numbers()
     call InitTrig_SaveCall()
+    call InitTrig_SaveLoop()
     call InitTrig_SaveLoop_Dest()
     call InitTrig_SaveLoop_Terrain()
     call InitTrig_LoadRequest()
@@ -23171,7 +23258,7 @@ function InitCustomTriggers takes nothing returns nothing
     call InitTrig_Silver_Key_Trigger()
     call InitTrig_Pure_Water_Effect()
     call InitTrig_ScrollSystem_Learn_Spell()
-    call InitTrig_SaveLoop()
+    call InitTrig_CommandsR_Fog()
 endfunction
 
 //===========================================================================
@@ -26805,19 +26892,19 @@ function main takes nothing returns nothing
     call CreateAllUnits()
     call InitBlizzard()
 
-call ExecuteFunc("jasshelper__initstructs874046437")
+call ExecuteFunc("jasshelper__initstructs16272953")
 call ExecuteFunc("CombatTag___onInit")
-call ExecuteFunc("DestructableLib__Initialization")
-call ExecuteFunc("MultiPatrol__onInit")
-call ExecuteFunc("FilterTransformations___onInit")
-call ExecuteFunc("UnitVisualMods__onInit")
-call ExecuteFunc("UserDefinedRects__onInit")
-call ExecuteFunc("RectGenerator__onInit")
-call LoPItemCleanup___onInit()
-call TitanPowers___onInit()
-call MultiPatrolCommands__onInit()
-call MultiPatrolOrder__onInit()
-call MultiPatrolDisplayOnSelect__onInit()
+call ExecuteFunc("DestructableLib___Initialization")
+call ExecuteFunc("MultiPatrol___onInit")
+call ExecuteFunc("FilterTransformations__onInit")
+call ExecuteFunc("UnitVisualMods___onInit")
+call ExecuteFunc("UserDefinedRects___onInit")
+call ExecuteFunc("RectGenerator___onInit")
+call LoPItemCleanup__onInit()
+call TitanPowers__onInit()
+call MultiPatrolCommands___onInit()
+call MultiPatrolOrder___onInit()
+call MultiPatrolDisplayOnSelect___onInit()
 
     call InitGlobals()
     call InitCustomTriggers()
@@ -26885,64 +26972,64 @@ set f__result_integer= this
 endfunction
 function sa__Table_create takes nothing returns boolean
 
-        local integer this= (LoadInteger(Table__ht, ((Table__listK)), (0))) // INLINED!!
+        local integer this= (LoadInteger(Table___ht, ((Table___listK)), (0))) // INLINED!!
         if this == 0 then
-            set this=Table__more + 1
-            set Table__more=this
+            set this=Table___more + 1
+            set Table___more=this
         else
-            call SaveInteger(Table__ht, ((Table__listK)), (0), ( (LoadInteger(Table__ht, ((Table__listK)), (this))))) // INLINED!!
-            call RemoveSavedInteger(Table__ht, ((Table__listK)), (this)) //Clear hashed memory // INLINED!!
+            call SaveInteger(Table___ht, ((Table___listK)), (0), ( (LoadInteger(Table___ht, ((Table___listK)), (this))))) // INLINED!!
+            call RemoveSavedInteger(Table___ht, ((Table___listK)), (this)) //Clear hashed memory // INLINED!!
         endif
 set f__result_integer= this
    return true
 endfunction
-function sa__Table__units__getindex takes nothing returns boolean
+function sa__Table___units__getindex takes nothing returns boolean
 local integer this=f__arg_this
 local integer key=f__arg_integer1
-set f__result_unit= LoadUnitHandle(Table__ht, this, key)
+set f__result_unit= LoadUnitHandle(Table___ht, this, key)
    return true
 endfunction
-function sa__Table__units__setindex takes nothing returns boolean
-    call SaveUnitHandle(Table__ht, (f__arg_this), (f__arg_integer1), (f__arg_unit1)) // INLINED!!
+function sa__Table___units__setindex takes nothing returns boolean
+    call SaveUnitHandle(Table___ht, (f__arg_this), (f__arg_integer1), (f__arg_unit1)) // INLINED!!
    return true
 endfunction
-function sa__Table__units_remove takes nothing returns boolean
+function sa__Table___units_remove takes nothing returns boolean
 local integer this=f__arg_this
 local integer key=f__arg_integer1
-        call RemoveSavedHandle(Table__ht, this, key)
+        call RemoveSavedHandle(Table___ht, this, key)
    return true
 endfunction
-function sa__Table__reals__getindex takes nothing returns boolean
+function sa__Table___reals__getindex takes nothing returns boolean
 local integer this=f__arg_this
 local integer key=f__arg_integer1
-set f__result_real= LoadReal(Table__ht, this, key)
+set f__result_real= LoadReal(Table___ht, this, key)
    return true
 endfunction
-function sa__Table__reals__setindex takes nothing returns boolean
+function sa__Table___reals__setindex takes nothing returns boolean
 local integer this=f__arg_this
 local integer key=f__arg_integer1
 local real value=f__arg_real1
-        call SaveReal(Table__ht, this, key, value)
+        call SaveReal(Table___ht, this, key, value)
    return true
 endfunction
 
-function jasshelper__initstructs874046437 takes nothing returns nothing
+function jasshelper__initstructs16272953 takes nothing returns nothing
     set st__Table__get_real=CreateTrigger()
     call TriggerAddCondition(st__Table__get_real,Condition( function sa__Table__get_real))
     set st__Table__get_unit=CreateTrigger()
     call TriggerAddCondition(st__Table__get_unit,Condition( function sa__Table__get_unit))
     set st__Table_create=CreateTrigger()
     call TriggerAddCondition(st__Table_create,Condition( function sa__Table_create))
-    set st__Table__units__getindex=CreateTrigger()
-    call TriggerAddCondition(st__Table__units__getindex,Condition( function sa__Table__units__getindex))
-    set st__Table__units__setindex=CreateTrigger()
-    call TriggerAddCondition(st__Table__units__setindex,Condition( function sa__Table__units__setindex))
-    set st__Table__units_remove=CreateTrigger()
-    call TriggerAddCondition(st__Table__units_remove,Condition( function sa__Table__units_remove))
-    set st__Table__reals__getindex=CreateTrigger()
-    call TriggerAddCondition(st__Table__reals__getindex,Condition( function sa__Table__reals__getindex))
-    set st__Table__reals__setindex=CreateTrigger()
-    call TriggerAddCondition(st__Table__reals__setindex,Condition( function sa__Table__reals__setindex))
+    set st__Table___units__getindex=CreateTrigger()
+    call TriggerAddCondition(st__Table___units__getindex,Condition( function sa__Table___units__getindex))
+    set st__Table___units__setindex=CreateTrigger()
+    call TriggerAddCondition(st__Table___units__setindex,Condition( function sa__Table___units__setindex))
+    set st__Table___units_remove=CreateTrigger()
+    call TriggerAddCondition(st__Table___units_remove,Condition( function sa__Table___units_remove))
+    set st__Table___reals__getindex=CreateTrigger()
+    call TriggerAddCondition(st__Table___reals__getindex,Condition( function sa__Table___reals__getindex))
+    set st__Table___reals__setindex=CreateTrigger()
+    call TriggerAddCondition(st__Table___reals__setindex,Condition( function sa__Table___reals__setindex))
 
 
 
@@ -26993,7 +27080,7 @@ function jasshelper__initstructs874046437 takes nothing returns nothing
 
 
 
-call ExecuteFunc("s__WorldBounds_WorldBounds__WorldBoundInit__onInit")
+call ExecuteFunc("s__WorldBounds_WorldBounds___WorldBoundInit__onInit")
 
 
 
@@ -27041,13 +27128,14 @@ call ExecuteFunc("s__WorldBounds_WorldBounds__WorldBoundInit__onInit")
 
 
 
-call ExecuteFunc("s__DummyRecycler__S_DummyRecycler__M__onInit")
+call ExecuteFunc("s__DummyRecycler___S_DummyRecycler___M__onInit")
 
-call ExecuteFunc("s__TileDefinition__TileDefinition_TileDefinition__Init__onInit")
+call ExecuteFunc("s__TileDefinition___TileDefinition_TileDefinition___Init__onInit")
 
 
 
 
+call ExecuteFunc("s__LoP_DecoBuilders_LoPDecoBuilders__InitModule__onInit")
 
 
 
@@ -27102,7 +27190,7 @@ call ExecuteFunc("s__TileDefinition__TileDefinition_TileDefinition__Init__onInit
 
 
 
-call ExecuteFunc("s__AutoRectEnvironment__InitStruct_AutoRectEnvironment__InitModule__onInit")
+call ExecuteFunc("s__AutoRectEnvironment___InitStruct_AutoRectEnvironment___InitModule__onInit")
 
 
 
