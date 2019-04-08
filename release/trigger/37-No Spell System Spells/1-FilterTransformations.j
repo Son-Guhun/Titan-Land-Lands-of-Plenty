@@ -1,6 +1,6 @@
 library FilterTransformations initializer onInit requires TableStruct
 
-public struct Globals
+public struct Globals extends array
 
     //! runtextmacro TableStruct_NewConstTableField("", "data")
 
