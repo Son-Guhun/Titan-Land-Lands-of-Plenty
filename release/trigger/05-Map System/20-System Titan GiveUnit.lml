@@ -10,7 +10,7 @@ Condition
         Var   : gg_unit_H00S_0141
 Action
     CustomScriptCode
-        Const : 'local player udg_temp_player = LoPInit_Globals.regionTable.player[GetHandleId(GetTriggeringRegion())]'
+        Const : 'local player udg_temp_player = LoPInitPlayerCircles_Globals.regionTable.player[GetHandleId(GetTriggeringRegion())]'
     SetUnitPositionLoc
         Call  : GetTriggerUnit
         Array : PLAYER_LOCATIONS

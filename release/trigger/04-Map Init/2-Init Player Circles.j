@@ -1,6 +1,6 @@
-library LoPInit requires TableStruct
+library LoPInitPlayerCircles requires TableStruct
 
-public struct Globals
+public struct Globals extends array
 
     //! runtextmacro TableStruct_NewConstTableField("", "regionTable")
 
