@@ -94,6 +94,7 @@ endfunction
 
 endscope
 
+/*
 scope MultiPatrolDisplayOnSelect initializer onInit
 
 globals
@@ -147,3 +148,4 @@ private function onInit takes nothing returns nothing
 endfunction
 
 endscope
+*/
