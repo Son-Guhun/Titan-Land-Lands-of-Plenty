@@ -41,7 +41,11 @@
         Disab
 '03-Main Systems': 'Main Systems'
     Comment
-'04-Map Init': 'Map Init'
+'04-LoP Core': 'LoP Core'
+    1-LoPHeader: LoPHeader
+    2-LoPDecoBuilders: LoPDecoBuilders
+    3-LoPWidgets: LoPWidgets
+'05-Map Init': 'Map Init'
     1-Functions: Functions
         Comment
     '2-Init Player Circles': 'Init Player Circles'
@@ -53,7 +57,7 @@
         Run
     '7-Init 0 seconds': 'Init 0 seconds'
     '8-Init Create Events': 'Init Create Events'
-'05-Map System': 'Map System'
+'06-Map System': 'Map System'
     '01-System Set Unit Color': 'System Set Unit Color'
     '02-System Level Up Heroes': 'System Level Up Heroes'
     '03-System Autoname': 'System Autoname'
@@ -82,7 +86,7 @@
         Comment
     '23-System PreventSave Catch': 'System PreventSave Catch'
     '24-System PreventSave Clear': 'System PreventSave Clear'
-'06-Player Commands': 'Player Commands'
+'07-Player Commands': 'Player Commands'
     '01-Commands Set Color': 'Commands Set Color'
     '02-Commands Toggle Autoname': 'Commands Toggle Autoname'
     '03-Commands Name Unit': 'Commands Name Unit'
@@ -122,14 +126,14 @@
     '35-CommandsD Add Tag': 'CommandsD Add Tag'
     '36-CommandsD Locust': 'CommandsD Locust'
     '37-CommandsD Variation': 'CommandsD Variation'
-'07-Decoration Systems': 'Decoration Systems'
+'08-Decoration Systems': 'Decoration Systems'
     Comment
-'08-Deco Builders': 'Deco Builders'
+'09-Deco Builders': 'Deco Builders'
     '1-DecoBuilder Movement': 'DecoBuilder Movement'
     '2-DecoBuilder Increase Count': 'DecoBuilder Increase Count'
     '3-DecoBuilder RangedBuild': 'DecoBuilder RangedBuild'
     '4-DecoBuilder Cast Ability': 'DecoBuilder Cast Ability'
-09-Decorations: Decorations
+10-Decorations: Decorations
     '1-Deco DisableMovement': 'Deco DisableMovement'
     '2-Deco Instant Upgrade': 'Deco Instant Upgrade'
     '3-Deco Root Anywhere': 'Deco Root Anywhere'
@@ -138,25 +142,25 @@
     '5-Deco Movement': 'Deco Movement'
     '6-Deco Waygate': 'Deco Waygate'
     '7-Deco Gates': 'Deco Gates'
-'10-Terrain Changer': 'Terrain Changer'
+'11-Terrain Changer': 'Terrain Changer'
     '1-TerrainSystem Cast Ability': 'TerrainSystem Cast Ability'
-'11-Tree Spawning': 'Tree Spawning'
+'12-Tree Spawning': 'Tree Spawning'
     '1-TreeSystem Create Trees': 'TreeSystem Create Trees'
     '2-TreeSystem Cast Ability': 'TreeSystem Cast Ability'
     '3-TreeSystem Choose Tree': 'TreeSystem Choose Tree'
-12----------------------------------------: ---------------------------------------
+13----------------------------------------: ---------------------------------------
     Comment
-13-Systems: Systems
+14-Systems: Systems
     Comment
-14-------------------: ------------------
+15-------------------: ------------------
     Comment
-15-vJass: vJass
+16-vJass: vJass
     Comment
-'16-Data Structures': 'Data Structures'
+'17-Data Structures': 'Data Structures'
     1-Lists: Lists
     '2-GLHS Main': 'GLHS Main'
     '3-GMUI Main': 'GMUI Main'
-17-Tables: Tables
+18-Tables: Tables
     1-External: External
         Comment
     2-Table: Table
@@ -165,18 +169,18 @@
     4-ConstTable: ConstTable
     5-HashtableWrapper: HashtableWrapper
     6-TableStruct: TableStruct
-'18-Multipatrol (TODO)': 'Multipatrol (TODO)'
+'19-Multipatrol (TODO)': 'Multipatrol (TODO)'
     1-MultiPatrol: MultiPatrol
     '2-MultiPatrol Addons': 'MultiPatrol Addons'
-19-Rects: Rects
+20-Rects: Rects
     1-UserDefinedRects: UserDefinedRects
     2-RectGenerator: RectGenerator
     3-RectEnvironment: RectEnvironment
     4-AutoRectEnvironment: AutoRectEnvironment
-20-Tiles: Tiles
+21-Tiles: Tiles
     1-TileDefinition: TileDefinition
     2-StructureTileDefinition: StructureTileDefinition
-21-vJass: vJass
+22-vJass: vJass
     01-External: External
         Comment
     02-WorldBounds: WorldBounds
@@ -193,7 +197,7 @@
     '12-Move Speed Modification': 'Move Speed Modification'
     13-MultiBoard: MultiBoard
     14-GameTime: GameTime
-22-Map-specific: Map-specific
+23-Map-specific: Map-specific
     1-Debug: Debug
     2-ArrayAgent: ArrayAgent
     3-DummyDmg: DummyDmg
@@ -201,12 +205,9 @@
     5-TimedBonus: TimedBonus
     '6-Victim Tracker': 'Victim Tracker'
         Disab
-    7-LoPHeader: LoPHeader
-    8-LoPDecoBuilders: LoPDecoBuilders
-    9-LoPWidgets: LoPWidgets
-23-External: External
+24-External: External
     Comment
-'24-CSS System': 'CSS System'
+'25-CSS System': 'CSS System'
     01-CustomStatSystem: CustomStatSystem
     '02-BonusMod standalone': 'BonusMod standalone'
         Comment
@@ -224,22 +225,22 @@
         Comment
     '10-Item Declaration': 'Item Declaration'
         Disab
-'25-Unit Event': 'Unit Event'
+'26-Unit Event': 'Unit Event'
     '1-Unit Event Config': 'Unit Event Config'
     '2-Unit Event': 'Unit Event'
-'26-Damage Engine': 'Damage Engine'
+'27-Damage Engine': 'Damage Engine'
     '1-Damage Engine Config': 'Damage Engine Config'
     '2-Damage Engine': 'Damage Engine'
     '3-Life Drain Fix': 'Life Drain Fix'
     '4-Damage Tag': 'Damage Tag'
     5-Bash: Bash
     '6-Combat Tag': 'Combat Tag'
-'27-GUI Spell System': 'GUI Spell System'
+'28-GUI Spell System': 'GUI Spell System'
     '1-Read Me': 'Read Me'
         Comment
     '2-Spell System Config': 'Spell System Config'
     '3-Spell System': 'Spell System'
-'28-Knockback 2D': 'Knockback 2D'
+'29-Knockback 2D': 'Knockback 2D'
     '1-Knockback 2D Config': 'Knockback 2D Config'
     '2-Knockback 2D Destroy': 'Knockback 2D Destroy'
     '3-Knockback 2D': 'Knockback 2D'
@@ -248,9 +249,9 @@
         Disab
     '6-K2D OnLoop Template': 'K2D OnLoop Template'
         Disab
-'29-By Guhun': 'By Guhun'
+'30-By Guhun': 'By Guhun'
     Comment
-'30-Save System': 'Save System'
+'31-Save System': 'Save System'
     '01-How to Import': 'How to Import'
         Comment
     '02-SaveLoad Setup': 'SaveLoad Setup'
@@ -274,20 +275,20 @@
     16-vJass: vJass
         Comment
     17-SaveNLoad: SaveNLoad
-'31-Circle Object System': 'Circle Object System'
+'32-Circle Object System': 'Circle Object System'
     '1-GCOS Init Copy': 'GCOS Init Copy'
     '2-Circle Object System': 'Circle Object System'
-'32-Disable System - GDS': 'Disable System - GDS'
+'33-Disable System - GDS': 'Disable System - GDS'
     '1-GDS Setup': 'GDS Setup'
     '2-GDS Main Modifier': 'GDS Main Modifier'
     '3-GDS Main': 'GDS Main'
-33----------------------------------------: ---------------------------------------
+34----------------------------------------: ---------------------------------------
     Comment
-34-Spells: Spells
+35-Spells: Spells
     Comment
-35-------------------: ------------------
+36-------------------: ------------------
     Comment
-'36-Spell System Spells': 'Spell System Spells'
+'37-Spell System Spells': 'Spell System Spells'
     '01-Spell System Filter Decorations': 'Spell System Filter Decorations'
     '02-Initialize Spells': 'Initialize Spells'
     '03-Spell System Sample Config': 'Spell System Sample Config'
@@ -322,7 +323,7 @@
     '30-Battle Jump End': 'Battle Jump End'
     '31-Ethereal Jaunt': 'Ethereal Jaunt'
     '32-Power Surge': 'Power Surge'
-'37-No Spell System Spells': 'No Spell System Spells'
+'38-No Spell System Spells': 'No Spell System Spells'
     1-FilterTransformations: FilterTransformations
     '2-Ability Cooldown': 'Ability Cooldown'
     3-Summon: Summon
@@ -333,7 +334,7 @@
         Closed
     '8-Cosmosis Give Item': 'Cosmosis Give Item'
     '9-TheCreator Invincibility': 'TheCreator Invincibility'
-'38-Knockback Samples': 'Knockback Samples'
+'39-Knockback Samples': 'Knockback Samples'
     '1-On Damage': 'On Damage'
         Disab
     '2-On Impact': 'On Impact'
@@ -346,9 +347,9 @@
         Disab
     6-Test: Test
         Disab
-39-Items: Items
+40-Items: Items
     Comment
-'40-Fixed Spells': 'Fixed Spells'
+'41-Fixed Spells': 'Fixed Spells'
     '01-Flames of Azzinoth': 'Flames of Azzinoth'
         Comment
     02-FlamesOfAzzinoth: FlamesOfAzzinoth
@@ -373,7 +374,7 @@
         Disab
     '12-Pyroblast Effect 2': 'Pyroblast Effect 2'
         Disab
-41-Items: Items
+42-Items: Items
     '1-Glacius'' Ice Skull': 'Glacius'' Ice Skull'
         Comment
     '2-Frost Storm Casting': 'Frost Storm Casting'
@@ -390,13 +391,13 @@
         Comment
     9-Sword: Sword
         Disab
-'42-Legendary Scroll Spell': 'Legendary Scroll Spell'
+'43-Legendary Scroll Spell': 'Legendary Scroll Spell'
     '1-Legendary Scroll Spell': 'Legendary Scroll Spell'
         Comment
     '2-ScrollSystem Learn Spell': 'ScrollSystem Learn Spell'
-43----------------------------------------: ---------------------------------------
+44----------------------------------------: ---------------------------------------
     Comment
-44-TESTING: TESTING
+45-TESTING: TESTING
     Comment
     '1-Global Return Library': 'Global Return Library'
         Disab
@@ -406,7 +407,7 @@
         Disab
     '4-Test SetUnitX': 'Test SetUnitX'
         Disab
-'45-Destructable Systems': 'Destructable Systems'
+'46-Destructable Systems': 'Destructable Systems'
     '1-Untitled Trigger 002': 'Untitled Trigger 002'
         Disab
     '2-Create Destructable': 'Create Destructable'
