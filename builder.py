@@ -20,14 +20,27 @@ RELEASE = 'release.w3x'
 config_values = {
     'paths': {'w2l':'',
               'war3':'',
-              'worldedit': ''}
+              'worldedit': ''},
+    'jass-preprocessors': { # Accepts any number of programs, and executes them in order
+
+    },
+    'obj-postprocessors': {
+
+    },
+    'slk-postprocessors': {
+
+    },
     }
 def generate_config(path='config.ini'):
     if not os.path.exists(path):
         writer = configparser.ConfigParser()
         writer.read_dict(config_values)
-        with open(path,'w') as f:
-            writer.write(f)
+    else:
+        writer = configparser.ConfigParser()
+        writer.read_dict(config_values)
+        writer.read(path)
+    with open(path,'w') as f:
+        writer.write(f)
 
 from shutil import copyfile
 
