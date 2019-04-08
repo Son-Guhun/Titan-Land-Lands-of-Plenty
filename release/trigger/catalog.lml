@@ -44,8 +44,8 @@
 '04-Map Init': 'Map Init'
     1-Functions: Functions
         Comment
-    2-Init: Init
-    '3-Init Deco Builders': 'Init Deco Builders'
+    '2-Init Player Circles': 'Init Player Circles'
+    '3-Init Deco Tents': 'Init Deco Tents'
     '4-Init Quests': 'Init Quests'
     5-Triggers: Triggers
         Comment
@@ -202,6 +202,8 @@
     '6-Victim Tracker': 'Victim Tracker'
         Disab
     7-LoPHeader: LoPHeader
+    8-LoPDecoBuilders: LoPDecoBuilders
+    9-LoPWidgets: LoPWidgets
 23-External: External
     Comment
 '24-CSS System': 'CSS System'

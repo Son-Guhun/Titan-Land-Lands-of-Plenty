@@ -1,6 +1,6 @@
 library TableStruct requires Table, optional ConstTable
 // Defines Structs that use Table (or ConstTable) as a backend, instead of arrays.
-// You should use your own allocator.
+// You should use your own allocator (for non-static structs).
 
 static if LIBRARY_ConstTable then
     private module Const
