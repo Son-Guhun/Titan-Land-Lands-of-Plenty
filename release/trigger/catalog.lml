@@ -197,6 +197,7 @@
     '12-Move Speed Modification': 'Move Speed Modification'
     13-MultiBoard: MultiBoard
     14-GameTime: GameTime
+    15-ArgumentStack: ArgumentStack
 23-Map-specific: Map-specific
     1-Debug: Debug
     2-ArrayAgent: ArrayAgent
