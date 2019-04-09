@@ -279,7 +279,7 @@ function GuhunEdit_RecreateTrigger takes nothing returns nothing
         set i = udg_UDexNext[i]
     endloop
     
-    call BJDebugMsg("onDamage trigger rebuilt")
+    debug call BJDebugMsg("onDamage trigger rebuilt")
     call DestroyTimer(GetExpiredTimer())
 endfunction
 function SetupDmgEv takes nothing returns boolean
