@@ -5,3 +5,5 @@ release/resource
 config.ini
 development_slk.w3x
 *.pyc
+release.w3x
+release_slk.w3x
