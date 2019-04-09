@@ -6,16 +6,18 @@ p.read('config.ini')
 import subprocess
 import os
 
-def open_with_editor():
-    subprocess.Popen([p['paths']['worldedit'],'-loadfile',os.path.abspath('development.w3x')])
 
 
-def test(version=''):
-    subprocess.Popen([p['paths']['war3'],'-loadfile',os.path.abspath('development{}.w3x'.format('_' + version if version else ''))])
+
+def test(version='',build='development'):
+    subprocess.Popen([p['paths']['war3'],'-loadfile',os.path.abspath(build+'{}.w3x'.format('_' + version if version else ''))])
 
 
 DEVELOPMENT = 'development.w3x'
 RELEASE = 'release.w3x'
+
+def open_with_editor(file=DEVELOPMENT):
+    subprocess.Popen([p['paths']['worldedit'],'-loadfile',os.path.abspath(file)])
 
 config_values = {
     'paths': {'w2l':'',
@@ -90,9 +92,9 @@ def pull(dirs = ['map','table', 'trigger', 'w3x2lni']):
     # if path does not exist => create the folder
     # copytree for each one of these: map, table, trigger, w3xlni
 
-def test_full():
-    optimize(DEVELOPMENT)
-    test('slk')
+def test_full(build=DEVELOPMENT):
+    optimize(build)
+    test('slk',build[:build.rfind('.w3x')])
     
 import webbrowser
 
