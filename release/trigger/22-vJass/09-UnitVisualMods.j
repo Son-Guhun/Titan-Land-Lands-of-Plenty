@@ -735,19 +735,23 @@ endfunction
 //////////////////////////////////////////////////////
 
 function GUMSSetUnitFacing takes unit whichUnit, real newAngle returns nothing
-    call SetUnitPosition(whichUnit, GetUnitX(whichUnit), GetUnitY(whichUnit))
     call SetUnitFacing(whichUnit, newAngle)
-    call GroupAddUnit(loopGroup, whichUnit)
-    call SaveReal(hashTable, GetHandleId(whichUnit), -2, ModuloReal(newAngle, 360))
+    if GetUnitAbilityLevel(whichUnit, 'Amov') == 0 then
+        // call SetUnitPosition(whichUnit, GetUnitX(whichUnit), GetUnitY(whichUnit))
+        call GroupAddUnit(loopGroup, whichUnit)
+        call SaveReal(hashTable, GetHandleId(whichUnit), -2, ModuloReal(newAngle, 360))
+    endif
 endfunction
 
 function GUMSSetUnitFlyHeight takes unit whichUnit, real newHeight returns nothing
     if UnitAddAbility(whichUnit, 'Amrf' ) then
         call UnitRemoveAbility(whichUnit, 'Amrf')
     endif
-    call SetUnitFlyHeight( whichUnit, newHeight, 99999.00 )
-    call SetUnitPosition( whichUnit, GetUnitX(whichUnit), GetUnitY(whichUnit) )
-    call GroupAddUnit(loopGroup, whichUnit)
+    call SetUnitFlyHeight( whichUnit, newHeight, 0)
+    if GetUnitAbilityLevel(whichUnit, 'Amov') == 0 then
+        // call SetUnitPosition( whichUnit, GetUnitX(whichUnit), GetUnitY(whichUnit) )
+        call GroupAddUnit(loopGroup, whichUnit)
+    endif
 endfunction
 
 function GUMSSetUnitVertexColorString takes unit whichUnit, string args, string separator returns nothing
