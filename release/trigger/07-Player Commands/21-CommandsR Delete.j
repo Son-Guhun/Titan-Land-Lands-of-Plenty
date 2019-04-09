@@ -1,5 +1,5 @@
 function Trig_CommandsR_Delete_Func018A takes nothing returns nothing
-    if not RectContainsUnit(gg_rct_Titan_Palace, GetEnumUnit()) and Commands_CheckOverflow() then
+    if RectContainsUnit(gg_rct_Titan_Palace, GetEnumUnit()) == commandsDeleteInsideTitanPalace and Commands_CheckOverflow() then
         call LoP_RemoveUnit(GetEnumUnit())
     endif
 endfunction
@@ -15,9 +15,15 @@ function Trig_CommandsR_Delete_Conditions takes nothing returns boolean
     set udg_Commands_Counter = 0
     set udg_Commands_Counter_Max = 500
     if ( GetEventPlayerChatStringMatched() == "-delneu " ) then
+        set commandsDeleteInsideTitanPalace = false
         call ForGroup( udg_System_NeutralUnits[( playerNumber - 1 )], function Trig_CommandsR_Delete_Func018A )
         // Don't clear neutral group, protected units might be in it. Let automatic refresh take care of this.
+    elseif ( GetEventPlayerChatStringMatched() == "-delpal " ) then
+        set commandsDeleteInsideTitanPalace = true
+        call GroupEnumUnitsOfPlayer(ENUM_GROUP, Player(playerNumber - 1), Condition(function GroupEnum_RemoveOutsidePalace))
+        call ForGroup( udg_System_NeutralUnits[( playerNumber - 1 )], function Trig_CommandsR_Delete_Func018A )
     else
+        set commandsDeleteInsideTitanPalace = false
         call GroupEnumUnitsOfPlayer(ENUM_GROUP, Player(playerNumber - 1), Condition(function GroupEnum_RemoveOutsidePalace))
     endif
     

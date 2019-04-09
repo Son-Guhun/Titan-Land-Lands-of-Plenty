@@ -140,6 +140,12 @@ Action
                 Var   : gg_trg_CommandsR_Delete
                 Event: TriggerRegisterPlayerChatEvent
                     Var   : temp_player
+                    Const : '-delpal '
+                    Preset: ChatMatchTypeSubstring
+            AddTriggerEvent
+                Var   : gg_trg_CommandsR_Delete
+                Event: TriggerRegisterPlayerChatEvent
+                    Var   : temp_player
                     Const : '-delete '
                     Preset: ChatMatchTypeSubstring
             AddTriggerEvent
