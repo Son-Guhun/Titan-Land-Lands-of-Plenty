@@ -232,7 +232,19 @@ Action
                 Var   : gg_trg_CommandsD_Set_Parameters
                 Event: TriggerRegisterPlayerChatEvent
                     Var   : temp_player
+                    Const : '-h '
+                    Preset: ChatMatchTypeSubstring
+            AddTriggerEvent
+                Var   : gg_trg_CommandsD_Set_Parameters
+                Event: TriggerRegisterPlayerChatEvent
+                    Var   : temp_player
                     Const : '-face '
+                    Preset: ChatMatchTypeSubstring
+            AddTriggerEvent
+                Var   : gg_trg_CommandsD_Set_Parameters
+                Event: TriggerRegisterPlayerChatEvent
+                    Var   : temp_player
+                    Const : '-f '
                     Preset: ChatMatchTypeSubstring
             AddTriggerEvent
                 Var   : gg_trg_CommandsD_Set_Parameters
@@ -274,6 +286,12 @@ Action
                 Var   : gg_trg_CommandsD_Unit_Mods
                 Event: TriggerRegisterPlayerChatEvent
                     Var   : temp_player
+                    Const : '''h'
+                    Preset: ChatMatchTypeSubstring
+            AddTriggerEvent
+                Var   : gg_trg_CommandsD_Unit_Mods
+                Event: TriggerRegisterPlayerChatEvent
+                    Var   : temp_player
                     Const : '''rgb'
                     Preset: ChatMatchTypeSubstring
             AddTriggerEvent
@@ -281,6 +299,12 @@ Action
                 Event: TriggerRegisterPlayerChatEvent
                     Var   : temp_player
                     Const : '''face'
+                    Preset: ChatMatchTypeSubstring
+            AddTriggerEvent
+                Var   : gg_trg_CommandsD_Unit_Mods
+                Event: TriggerRegisterPlayerChatEvent
+                    Var   : temp_player
+                    Const : '''f'
                     Preset: ChatMatchTypeSubstring
             AddTriggerEvent
                 Var   : gg_trg_CommandsD_Unit_Mods

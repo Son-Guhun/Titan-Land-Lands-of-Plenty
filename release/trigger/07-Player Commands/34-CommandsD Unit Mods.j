@@ -35,13 +35,13 @@ function Trig_CommandsD_Unit_Mods_Copy_Func009A takes nothing returns nothing
         else
             call GUMSSetUnitScale(enumUnit, S2R(args)/100)
         endif
-    elseif ( command == "'fly" ) then
+    elseif ( command == "'fly" or command == "'h") then
         if args == "" then
             call GUMSSetUnitFlyHeight(enumUnit, udg_DecoSystem_Height[playerNumber])
         else
             call GUMSSetUnitFlyHeight(enumUnit, S2R(args))
         endif
-    elseif ( command == "'face" ) then
+    elseif ( command == "'face" or command == "'f") then
         if args == "" then
             call GUMSSetUnitFacing(enumUnit, udg_DecoSystem_Facing[playerNumber])
         else

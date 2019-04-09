@@ -7,10 +7,10 @@ function Trig_CommandsD_Set_Parameters_Actions takes nothing returns nothing
     if command == "-size " then
         call DisplayTextToPlayer(trigPlayer, 0, 0, "Size Set" )
         set udg_DecoSystem_Scale[playerNumber] = RMinBJ(S2R(args), 2000.)
-    elseif command == "-face " then
+    elseif command == "-face " or command == "-f " then
         call DisplayTextToPlayer(trigPlayer, 0, 0, "Facing Set" )
         set udg_DecoSystem_Facing[playerNumber] = S2R(args)
-    elseif command == "-fly " then
+    elseif command == "-fly " or command == "-h " then
         call DisplayTextToPlayer(trigPlayer, 0, 0, "Fly Height Set" )
         set udg_DecoSystem_Height[playerNumber] = RMinBJ(S2R(args), 10000.)
     elseif command == "-anim " then
