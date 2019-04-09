@@ -228,71 +228,8 @@ And discord: SonGuhun#4510'
         Const : 'CREATE PROTECTION GROUP'
     CustomScriptCode
         Const : 'call InitDecoTents()'
-    SetVariable
-        Var   : System_ProtectedGroup
-        Call  : GetUnitsInRectAll
-            Var   : gg_rct_Titan_Palace
-    ForGroupMultiple
-        Var   : System_ProtectedGroup
-        Action
-            IfThenElseMultiple
-                Condition
-                    OrMultiple
-                        Condition
-                            AndMultiple
-                                Condition
-                                    OperatorCompareBoolean
-                                        Call  : IsUnitType
-                                            Call  : GetEnumUnit
-                                            Preset: UnitTypeStructure
-                                        Preset: OperatorEqualENE
-                                        Const : true
-                                    OperatorComparePlayer
-                                        Call  : GetOwningPlayer
-                                            Call  : GetEnumUnit
-                                        Preset: OperatorEqualENE
-                                        Preset: PlayerNP
-                            OperatorCompareUnit
-                                Call  : GetEnumUnit
-                                Preset: OperatorEqualENE
-                                Var   : gg_unit_H00V_0359
-                            OperatorCompareUnit
-                                Call  : GetEnumUnit
-                                Preset: OperatorEqualENE
-                                Var   : gg_unit_H00S_0141
-                            OperatorCompareUnit
-                                Call  : GetEnumUnit
-                                Preset: OperatorEqualENE
-                                Var   : gg_unit_e00B_0405
-                            OperatorCompareUnit
-                                Call  : GetEnumUnit
-                                Preset: OperatorEqualENE
-                                Var   : gg_unit_e009_0407
-                            OperatorCompareUnit
-                                Call  : GetEnumUnit
-                                Preset: OperatorEqualENE
-                                Var   : gg_unit_e008_0406
-                            OperatorCompareUnit
-                                Call  : GetEnumUnit
-                                Preset: OperatorEqualENE
-                                Var   : gg_unit_e00D_0409
-                            OperatorCompareUnit
-                                Call  : GetEnumUnit
-                                Preset: OperatorEqualENE
-                                Var   : gg_unit_e00A_0411
-                            OperatorCompareUnit
-                                Call  : GetEnumUnit
-                                Preset: OperatorEqualENE
-                                Var   : gg_unit_e00C_0408
-                            OperatorCompareUnit
-                                Call  : GetEnumUnit
-                                Preset: OperatorEqualENE
-                                Var   : gg_unit_e007_0410
-                Action
-                Action
-                    GroupRemoveUnitSimple
-                        Call  : GetEnumUnit
-                        Var   : System_ProtectedGroup
+    CustomScriptCode
+        Const : 'call LoP_InitProtectedUnits()'
     EnumDestructablesInRectAllMultiple
         Var   : gg_rct_Titan_Palace_Inner
         Action

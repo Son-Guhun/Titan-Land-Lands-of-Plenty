@@ -1,33 +1,3 @@
-scope POWER
-    public function INVULNERABILITY takes nothing returns unit
-        return gg_unit_e00B_0405
-    endfunction
-    
-    public function VULNERABILITY takes nothing returns unit
-        return gg_unit_e00A_0411
-    endfunction
-    
-    public function KILL takes nothing returns unit
-        return gg_unit_e008_0406
-    endfunction
-    
-    public function LEVEL takes nothing returns unit
-        return gg_unit_e009_0407
-    endfunction
-    
-    public function DELEVEL takes nothing returns unit
-        return gg_unit_e00C_0408
-    endfunction
-    
-    public function MIND takes nothing returns unit
-        return gg_unit_e00D_0409
-    endfunction
-    
-    public function REMOVE takes nothing returns unit
-        return gg_unit_e007_0410
-    endfunction
-endscope
-
 library LoPthree requires LoPone, LoPtwo
 
 function LoP_RemoveUnit takes unit whichUnit returns nothing
