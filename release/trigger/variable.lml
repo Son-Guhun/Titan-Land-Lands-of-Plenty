@@ -557,5 +557,3 @@ Spell_i_BuffAbil: abilcode
     Array : 1
 System_FP_Units: unit
     Array : 1
-System_PlayerColor: integer
-    Array : 1

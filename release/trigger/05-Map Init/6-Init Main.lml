@@ -1,5 +1,9 @@
 Event
-    MapInitializationEvent
+    TriggerRegisterVariableEvent
+        Var   : UnitIndexEvent
+        Preset: LimitOpEqual
+        Const : -1.00
+    Disab: MapInitializationEvent
 Condition
 Action
     CustomScriptCode
@@ -86,10 +90,8 @@ Action
                         Const : 1
                 Call  : GetForceOfPlayer
                     Var   : temp_player
-            SetVariable
-                Array : System_PlayerColor
-                    Var   : temp_integer
-                Var   : temp_integer
+            CustomScriptCode
+                Const : 'set LoP_PlayerData.playerColors[udg_temp_integer - 1] = ConvertPlayerColor(udg_temp_integer-1)'
             ForceAddPlayerSimple
                 Var   : temp_player
                 Var   : ALL_PLAYERS_FORCE
@@ -121,10 +123,8 @@ Action
             Preset: OperatorAdd
             Const : 3
         Action
-            SetVariable
-                Array : System_PlayerColor
-                    Var   : temp_integer
-                Var   : Commands_Integer
+            CustomScriptCode
+                Const : 'set LoP_PlayerData.playerColors[udg_temp_integer - 1] = ConvertPlayerColor(udg_Commands_Integer-1)'
     ForForceMultiple
         Call  : GetPlayersAll
         Action

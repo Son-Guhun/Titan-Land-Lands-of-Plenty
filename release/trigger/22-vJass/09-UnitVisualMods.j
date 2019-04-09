@@ -1,4 +1,16 @@
-library UnitVisualMods initializer onInit requires CutToComma, /*
+library UnitVisualModsDefaults requires LoPPlayers
+    
+    globals
+        public constant boolean COLOR = true
+    endglobals
+
+    public function SetColor takes unit whichUnit, player owner returns nothing
+        call SetUnitColor(whichUnit, LoP_PlayerData.get(owner).getUnitColor())
+    endfunction
+
+endlibrary
+
+library UnitVisualMods initializer onInit requires CutToComma, optional UnitVisualModsDefaults/*
 
     */ /*optional*/ HashtableWrapper,  /* Required to initialize a hashtable.
     
@@ -23,16 +35,16 @@ library UnitVisualMods initializer onInit requires CutToComma, /*
 // NOTE: Hashtable data is automatically cleared when a non-player number argument is passed.
 // You can reference a whichUnit variable. Do not alter this variable.
 //! textmacro GUMS_Config_ResetColorFunc
-    // DEFAULT
-    //call SetUnitColor(whichUnit, GetPlayerColor(GetOwningPlayer(whichUnit)))
+    static if LIBRARY_UnitVisualModsDefaults and UnitVisualModsDefaults_COLOR then
+        call UnitVisualModsDefaults_SetColor(whichUnit, GetOwningPlayer(whichUnit))
+    else
+        call SetUnitColor(whichUnit, GetPlayerColor(GetOwningPlayer(whichUnit)))
+    endif
     
-    // LOP
-    call SetUnitColor(whichUnit, I2PC[udg_System_PlayerColor[GetPlayerId(GetOwningPlayer(whichUnit))+1]])
 //! endtextmacro
 
 
 globals
-    private playercolor array I2PC  // can't save playercolor to hashtables
     private hashtable hashTable = null
     private group loopGroup = CreateGroup()
     
@@ -76,10 +88,6 @@ endstruct
 //==================================================================================================
 //                                        Source Code
 //==================================================================================================
-
-function GUMS_I2PlayerColor takes integer i returns playercolor
-    return I2PC[i]
-endfunction
 
 function GUMS_AddStructureFlightAbility takes unit structure returns nothing
     local real facing
@@ -335,7 +343,7 @@ endfunction
 function GUMSSetUnitColor takes unit whichUnit, integer color returns nothing
     if color <= bj_MAX_PLAYER_SLOTS and color >= 1 then
         call SaveInteger(hashTable, GetHandleId(whichUnit), COLOR, color)
-        call SetUnitColor(whichUnit, I2PC[color])
+        call SetUnitColor(whichUnit, ConvertPlayerColor(color-1))
     else
         call RemoveSavedInteger(hashTable, GetHandleId(whichUnit), COLOR)
         //! novjass
@@ -369,6 +377,54 @@ endfunction
 //==========================================
 // GUMS Getters
 
+private struct UnitVisualsRaw extends array
+    static if LIBRARY_ConstTable and INIT_HASHTABLE then
+        private method operator values takes nothing returns data_Child
+            return data[this]
+        endmethod
+    else
+        private method operator values takes nothing returns Table
+            return data[this]
+        endmethod
+    endif
+    
+    method getScale takes nothing returns real
+        return (.values.real[SCALE])
+    endmethod
+    
+    method getVertexColor takes integer r1g2b3a4 returns integer
+        return (.values[r1g2b3a4])
+    endmethod
+    
+    method getVertexRed takes nothing returns integer
+        return .getVertexColor(RED)
+    endmethod
+    
+    method getVertexGreen takes nothing returns integer
+        return .getVertexColor(GREEN)
+    endmethod
+    
+    method getVertexBlue takes nothing returns integer
+        return .getVertexColor(BLUE)
+    endmethod
+    
+    method getVertexAlpha takes nothing returns integer
+        return .getVertexColor(ALPHA)
+    endmethod
+    
+    method getColor takes nothing returns integer
+        return (.values[COLOR])
+    endmethod
+    
+    method getAnimSpeed takes nothing returns real
+        return (values.real[ASPEED])
+    endmethod
+    
+    method getAnimTag takes nothing returns string
+        return .values.string[ATAG]
+    endmethod
+endstruct
+
 struct UnitVisuals extends array
     
     static if LIBRARY_ConstTable and INIT_HASHTABLE then
@@ -380,6 +436,10 @@ struct UnitVisuals extends array
             return data[this]
         endmethod
     endif
+    
+    method operator raw takes nothing returns UnitVisualsRaw
+        return this
+    endmethod
     
     static method get takes unit whichUnit returns UnitVisuals
         return GetHandleId(whichUnit)
@@ -801,13 +861,6 @@ private function onInit takes nothing returns nothing
     static if INIT_HASHTABLE /*and LIBRARY_HashtableWrapper */ then
         set hashTable = InitHashtable()
     endif
-    
-    set i = 1
-    loop
-        exitwhen i >  bj_MAX_PLAYER_SLOTS
-        set I2PC[i] = GetPlayerColor(Player(i-1))
-        set i = i + 1
-    endloop
     
     call TimerStart( t, 0.1, true, function GUMSTimerFunction)
     

@@ -19,6 +19,7 @@ endfunction
 
 function LoP_onChangeOwner takes unit whichUnit, player ownerOld returns nothing
     local player owner = GetOwningPlayer( whichUnit )
+    local UnitVisuals unitId = GetHandleId(whichUnit)
     
     if not LoP_IsUnitDecoration(whichUnit) then
     
@@ -38,11 +39,11 @@ function LoP_onChangeOwner takes unit whichUnit, player ownerOld returns nothing
     endif
     
     // If ownership was changed with -neut command, no need to change colors.
-    if ( IsUnitInGroup(whichUnit, udg_System_NeutralUnits[ GetPlayerId(ownerOld) + 1]) ) then
-        if GUMSGetUnitColor(whichUnit) == "D" then
-            call SetUnitColor( whichUnit, GUMS_I2PlayerColor(udg_System_PlayerColor[GetPlayerId(GetOwningPlayer(whichUnit)) + 1]))
+    if not IsUnitInGroup(whichUnit, udg_System_NeutralUnits[ GetPlayerId(ownerOld) + 1]) then
+        if unitId.hasColor() then
+            call SetUnitColor(whichUnit, LoP_PlayerData.get(GetOwningPlayer(whichUnit)).getUnitColor())
         else
-            call GUMSSetUnitColor(whichUnit, S2I(GUMSGetUnitColor(whichUnit)))
+            call GUMSSetUnitColor(whichUnit, unitId.raw.getColor())
         endif
     endif
 endfunction

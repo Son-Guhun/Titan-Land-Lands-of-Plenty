@@ -1,20 +1,15 @@
-function ForGroup_ChangeColor takes nothing returns nothing
-    if GUMSGetUnitColor(GetEnumUnit()) == "D" then
-        call SetUnitColor(GetEnumUnit(), GUMS_I2PlayerColor(udg_System_PlayerColor[GetPlayerId(GetTriggerPlayer())+1]))
-    endif
-endfunction
-
 function Trig_Commands_Toggle_Autoname_Copy_Actions takes nothing returns nothing
     local integer color = Commands_GetChatMessagePlayerNumber(Commands_GetArguments())
-    local group g = CreateGroup()
     local player p = GetTriggerPlayer()
     
-    set udg_System_PlayerColor[GetPlayerId(p)+1] = color
+    if color < 1 or color > bj_MAX_PLAYER_SLOTS then
+        call LoP_PlayerData.get(p).setUnitColor(GetPlayerColor(p))
+    else
+        // Safety warning: ConvertPlayerColor crashes with invalid arguments.
+        call LoP_PlayerData.get(p).setUnitColor(ConvertPlayerColor(color-1))
+    endif
     
-    call GroupEnumUnitsOfPlayer(g, p, null)
-    call ForGroup(g, function ForGroup_ChangeColor)
-    call DestroyGroup(g)
-    set g = null
+    call GroupEnumUnitsOfPlayer(ENUM_GROUP, p, Filter(function Filter_UnitSetPlayerColor))
 endfunction
 
 //===========================================================================
