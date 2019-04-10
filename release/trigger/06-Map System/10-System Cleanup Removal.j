@@ -46,6 +46,14 @@ function LoP_onRemoval takes unit whichUnit returns nothing
         if Limit_IsPlayerLimited(GetOwningPlayer(whichUnit)) and Limit_IsUnitLimited(whichUnit) then
             call Limit_UnregisterUnit(whichUnit)
         endif
+        
+        if LoP_UnitData.get(whichUnit).isHeroic then
+            call DisableTrigger(gg_trg_System_Cleanup_Owner_Change)
+            call SetUnitOwner(whichUnit, Player(bj_PLAYER_NEUTRAL_EXTRA), false)
+            call EnableTrigger(gg_trg_System_Cleanup_Owner_Change)
+        endif
+        
+        call LoP_UnitData.get(whichUnit).destroy()
     endif
 endfunction
 endlibrary

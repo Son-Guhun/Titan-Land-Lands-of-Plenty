@@ -39,6 +39,12 @@ Action
             CommentString
                 Const : 'Player Commands'
             AddTriggerEvent
+                Var   : gg_trg_Commands_Make_Hero
+                Event: TriggerRegisterPlayerChatEvent
+                    Var   : temp_player
+                    Const : -makehero
+                    Preset: ChatMatchTypeExact
+            AddTriggerEvent
                 Var   : gg_trg_Commands_Toggle_Autoname
                 Event: TriggerRegisterPlayerChatEvent
                     Var   : temp_player

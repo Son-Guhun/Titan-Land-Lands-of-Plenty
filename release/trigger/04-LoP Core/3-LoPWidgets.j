@@ -48,6 +48,18 @@ private struct Globals extends array
     
 endstruct
 
+struct LoP_UnitData extends array
+    static method get takes unit whichUnit returns LoP_UnitData
+        return GetHandleId(whichUnit)
+    endmethod
+
+    //! runtextmacro TableStruct_NewPrimitiveField("isHeroic","boolean")
+    
+    method destroy takes nothing returns nothing
+        call .isHeroicClear()
+    endmethod
+endstruct
+
 // Destructables
 function LoP_IsDestructableProtected takes destructable dest returns boolean
     return Globals.destructablesTab.boolean.has(GetHandleId(dest))

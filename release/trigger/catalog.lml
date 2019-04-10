@@ -127,6 +127,7 @@
     '35-CommandsD Add Tag': 'CommandsD Add Tag'
     '36-CommandsD Locust': 'CommandsD Locust'
     '37-CommandsD Variation': 'CommandsD Variation'
+    '38-Commands Make Hero': 'Commands Make Hero'
 '08-Decoration Systems': 'Decoration Systems'
     Comment
 '09-Deco Builders': 'Deco Builders'
@@ -199,6 +200,7 @@
     13-MultiBoard: MultiBoard
     14-GameTime: GameTime
     15-ArgumentStack: ArgumentStack
+    16-HeroicUnit: HeroicUnit
 23-Map-specific: Map-specific
     1-Debug: Debug
     2-ArrayAgent: ArrayAgent

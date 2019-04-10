@@ -9,7 +9,10 @@ function LoP_onDeath takes unit whichUnit returns nothing
     else
         if not LoP_IsUnitDecoration(whichUnit) then
         // DECO BUILDER DECREASE COUNT
-            if IsUnitDecoBuilder(whichUnit)  then
+            if LoP_UnitData.get(whichUnit).isHeroic then
+                call RemoveUnit(whichUnit)
+                
+            elseif IsUnitDecoBuilder(whichUnit)  then
                 call RemoveUnit(whichUnit)
             else
                 if ( Limit_IsPlayerLimited(GetOwningPlayer(whichUnit)) and Limit_IsUnitLimited(whichUnit) ) then

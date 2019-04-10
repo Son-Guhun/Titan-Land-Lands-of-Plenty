@@ -19,8 +19,8 @@ endfunction
 function LoP_KillUnit takes unit whichUnit returns nothing
      if not IsUnitInGroup(whichUnit, udg_System_ProtectedGroup) then
         call DisableTrigger(gg_trg_System_Cleanup_Death)
+        call KillUnit(whichUnit)  // More efficient to not even call this at all for decorations. TODO
         call LoP_onDeath(whichUnit)
-        call KillUnit(whichUnit)
         call EnableTrigger(gg_trg_System_Cleanup_Death)
     endif   
 endfunction
