@@ -88,46 +88,46 @@
     '23-System PreventSave Catch': 'System PreventSave Catch'
     '24-System PreventSave Clear': 'System PreventSave Clear'
 '07-Player Commands': 'Player Commands'
-    '01-Commands Set Color': 'Commands Set Color'
-    '02-Commands Toggle Autoname': 'Commands Toggle Autoname'
-    '03-Commands Name Unit': 'Commands Name Unit'
-    '04-Commands Give': 'Commands Give'
-    '05-Commands Deleteme': 'Commands Deleteme'
-    '06-Commands Spawn Decos': 'Commands Spawn Decos'
-    '07-Commands Hide Decos': 'Commands Hide Decos'
-    '08-Commands Select Search': 'Commands Select Search'
-    '09-Commands Neutral': 'Commands Neutral'
-    '10-Commands Take': 'Commands Take'
-    '11-Commands Copy': 'Commands Copy'
-    '12-Commands Remove Kill': 'Commands Remove Kill'
-    '13-Commands StartRectCamera': 'Commands StartRectCamera'
-    '14-Commands Set Alliance': 'Commands Set Alliance'
-    '15-Commands Set Name': 'Commands Set Name'
-    '16-Commands Real Name': 'Commands Real Name'
-    '17-Titan Commands': 'Titan Commands'
+    '01-Commands Make Hero': 'Commands Make Hero'
+    '02-Commands Set Color': 'Commands Set Color'
+    '03-Commands Toggle Autoname': 'Commands Toggle Autoname'
+    '04-Commands Name Unit': 'Commands Name Unit'
+    '05-Commands Give': 'Commands Give'
+    '06-Commands Deleteme': 'Commands Deleteme'
+    '07-Commands Spawn Decos': 'Commands Spawn Decos'
+    '08-Commands Hide Decos': 'Commands Hide Decos'
+    '09-Commands Select Search': 'Commands Select Search'
+    '10-Commands Neutral': 'Commands Neutral'
+    '11-Commands Take': 'Commands Take'
+    '12-Commands Copy': 'Commands Copy'
+    '13-Commands Remove Kill': 'Commands Remove Kill'
+    '14-Commands StartRectCamera': 'Commands StartRectCamera'
+    '15-Commands Set Alliance': 'Commands Set Alliance'
+    '16-Commands Set Name': 'Commands Set Name'
+    '17-Commands Real Name': 'Commands Real Name'
+    '18-Titan Commands': 'Titan Commands'
         Comment
-    '18-CommandsR Toggle Prot': 'CommandsR Toggle Prot'
-    '19-CommandsR Make Titan': 'CommandsR Make Titan'
-    '20-CommandsR Set Limits for Units': 'CommandsR Set Limits for Units'
-    '21-CommandsR Delete': 'CommandsR Delete'
-    '22-CommandsR Fog': 'CommandsR Fog'
-    '23-CommandsR Water Color': 'CommandsR Water Color'
-    '24-CommandsR Mind': 'CommandsR Mind'
-    '25-CommandsR Kick': 'CommandsR Kick'
-    '26-CommandsR The Creator': 'CommandsR The Creator'
-    '27-CommandsR Toggle Dmg Tags': 'CommandsR Toggle Dmg Tags'
-    '28-Decoration Commands': 'Decoration Commands'
+    '19-CommandsR Toggle Prot': 'CommandsR Toggle Prot'
+    '20-CommandsR Make Titan': 'CommandsR Make Titan'
+    '21-CommandsR Set Limits for Units': 'CommandsR Set Limits for Units'
+    '22-CommandsR Delete': 'CommandsR Delete'
+    '23-CommandsR Fog': 'CommandsR Fog'
+    '24-CommandsR Water Color': 'CommandsR Water Color'
+    '25-CommandsR Mind': 'CommandsR Mind'
+    '26-CommandsR Kick': 'CommandsR Kick'
+    '27-CommandsR The Creator': 'CommandsR The Creator'
+    '28-CommandsR Toggle Dmg Tags': 'CommandsR Toggle Dmg Tags'
+    '29-Decoration Commands': 'Decoration Commands'
         Comment
-    '29-CommandsD Control': 'CommandsD Control'
-    '30-CommandsD Set AoE': 'CommandsD Set AoE'
-    '31-CommandsD Set Tree Space': 'CommandsD Set Tree Space'
-    '32-CommandsD Set Parameters': 'CommandsD Set Parameters'
-    '33-CommandsD Set RGB': 'CommandsD Set RGB'
-    '34-CommandsD Unit Mods': 'CommandsD Unit Mods'
-    '35-CommandsD Add Tag': 'CommandsD Add Tag'
-    '36-CommandsD Locust': 'CommandsD Locust'
-    '37-CommandsD Variation': 'CommandsD Variation'
-    '38-Commands Make Hero': 'Commands Make Hero'
+    '30-CommandsD Control': 'CommandsD Control'
+    '31-CommandsD Set AoE': 'CommandsD Set AoE'
+    '32-CommandsD Set Tree Space': 'CommandsD Set Tree Space'
+    '33-CommandsD Set Parameters': 'CommandsD Set Parameters'
+    '34-CommandsD Set RGB': 'CommandsD Set RGB'
+    '35-CommandsD Unit Mods': 'CommandsD Unit Mods'
+    '36-CommandsD Add Tag': 'CommandsD Add Tag'
+    '37-CommandsD Locust': 'CommandsD Locust'
+    '38-CommandsD Variation': 'CommandsD Variation'
 '08-Decoration Systems': 'Decoration Systems'
     Comment
 '09-Deco Builders': 'Deco Builders'
@@ -190,17 +190,17 @@
     04-GroupTools: GroupTools
     05-DummyRecycler: DummyRecycler
     06-Id2String: Id2String
-    '07-By Guhun': 'By Guhun'
+    07-HeroicUnit: HeroicUnit
+    '08-By Guhun': 'By Guhun'
         Comment
-    08-CutToComma: CutToComma
-    09-UnitVisualMods: UnitVisualMods
-    '10-Camera System': 'Camera System'
-    11-MoveSpeedBonus: MoveSpeedBonus
-    '12-Move Speed Modification': 'Move Speed Modification'
-    13-MultiBoard: MultiBoard
-    14-GameTime: GameTime
-    15-ArgumentStack: ArgumentStack
-    16-HeroicUnit: HeroicUnit
+    09-CutToComma: CutToComma
+    10-UnitVisualMods: UnitVisualMods
+    '11-Camera System': 'Camera System'
+    12-MoveSpeedBonus: MoveSpeedBonus
+    '13-Move Speed Modification': 'Move Speed Modification'
+    14-MultiBoard: MultiBoard
+    15-GameTime: GameTime
+    16-ArgumentStack: ArgumentStack
 23-Map-specific: Map-specific
     1-Debug: Debug
     2-ArrayAgent: ArrayAgent

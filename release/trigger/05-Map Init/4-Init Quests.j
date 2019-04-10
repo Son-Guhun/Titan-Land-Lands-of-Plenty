@@ -41,7 +41,7 @@ passive, neutral = 28
     call CreateQuestBJ(questType, "Player Numbers & Colors", quest_text, "ReplaceableTextures\\CommandButtons\\BTNScrollOfRegenerationGreen.blp")
     // ----------
         
-    // Titan Commands
+    // Titan Commands 1
     set quest_text = "
 |cffffff00-mind|r <number>
 Will set the target player for Power: Mind. If you write just \"-mind\", it will flag changing ownership of all units on/off.
@@ -60,7 +60,25 @@ Sets the limit of how many terrain areas, units or doodads can be loaded at a ti
 Limits how many units players can have. <p> is for passive units (no attack), <a> is for air and <g> for ground.
 |cff0000ffDefaults: 150p | 24a | 150g|r
 "
-    call CreateQuestBJ(questType, "Titan Commands", quest_text, "ReplaceableTextures\\CommandButtons\\BTNScrollOfRegenerationGreen.blp")
+    call CreateQuestBJ(questType, "Titan Commands 1", quest_text, "ReplaceableTextures\\CommandButtons\\BTNScrollOfRegenerationGreen.blp")
+    // ----------
+    
+    // Titan Commands 2
+    set quest_text = "
+|cffffff00-water|r (red) [green] [blue] [alpha]
+Sets the global water color.
+|cffffff00-fog|r (style) [zend] [zstart] [density] [red] [green] [blue]
+Sets the global fog. Use the -rect command to spawn a rect generator and test out how fogs work.
+|cffffff00-titan|r
+Sets a new player as the titan. Player 1 (Red) can always use the -titan command, even if they aren't the Titan.
+|cffffff00-summon the creator|r
+A traditional Titan Land command.
+|cffffff00-combat tags|r
+Toggles combat tags on/off. Default: off.
+|cffffff00-makehero|r
+Makes the selected units heroes. This is an experimental command. Many restrictions apply.
+"
+    call CreateQuestBJ(questType, "Titan Commands 2", quest_text, "ReplaceableTextures\\CommandButtons\\BTNScrollOfRegenerationGreen.blp")
     // ----------
     
     // Unit Commands
