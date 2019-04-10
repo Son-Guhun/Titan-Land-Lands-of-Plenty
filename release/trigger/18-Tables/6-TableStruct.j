@@ -142,6 +142,10 @@ endstruct
     private static method $NAME$Clear takes nothing returns nothing
         call TableStruct.type(thistype.static_members_key).$TYPE$.remove(thistype.$NAME$_impl)
     endmethod
+    
+    private static method $NAME$Exists takes nothing returns boolean
+        return TableStruct.type(thistype.static_members_key).$TYPE$.has(thistype.$NAME$_impl)
+    endmethod
 //! endtextmacro
 
 //! textmacro TableStruct_NewStaticHandleField takes NAME, TYPE
@@ -156,6 +160,10 @@ endstruct
     
     private static method $NAME$Clear takes nothing returns nothing
         call TableStruct.type(thistype.static_members_key).$TYPE$.remove(thistype.$NAME$_impl)
+    endmethod
+    
+    private static method $NAME$Exists takes nothing returns boolean
+        return TableStruct.type(thistype.static_members_key).$TYPE$.has(thistype.$NAME$_impl)
     endmethod
 //! endtextmacro
 
@@ -173,6 +181,10 @@ endstruct
     private method $NAME$Clear takes nothing returns nothing
         call TableStruct.type(thistype.$NAME$_impl).remove(this)
     endmethod
+    
+    private method $NAME$Exists takes nothing returns boolean
+        return TableStruct.type(thistype.$NAME$_impl).has(this)
+    endmethod
 //! endtextmacro
 
 //! textmacro TableStruct_NewPrimitiveField takes NAME, TYPE
@@ -187,6 +199,10 @@ endstruct
     
     private method $NAME$Clear takes nothing returns nothing
         call TableStruct.type(thistype.$NAME$_impl).$TYPE$.remove(this)
+    endmethod
+    
+    private method $NAME$Exists takes nothing returns boolean
+        return TableStruct.type(thistype.$NAME$_impl).$TYPE$.has(this)
     endmethod
 //! endtextmacro
 
@@ -203,6 +219,10 @@ endstruct
     private method $NAME$Clear takes nothing returns nothing
         call TableStruct.type(thistype.$NAME$_impl).$TYPE$.remove(this)
     endmethod
+    
+    private method $NAME$Exists takes nothing returns boolean
+        return TableStruct.type(thistype.$NAME$_impl).$TYPE$.has(this)
+    endmethod
 //! endtextmacro
 
 //! textmacro TableStruct_NewReadonlyStructField takes NAME, TYPE
@@ -217,6 +237,10 @@ endstruct
     
     private method $NAME$Clear takes nothing returns nothing
         call TableStruct.type(thistype.$NAME$_impl).remove(this)
+    endmethod
+    
+    private method $NAME$Exists takes nothing returns boolean
+        return TableStruct.type(thistype.$NAME$_impl).has(this)
     endmethod
 //! endtextmacro
 
@@ -233,6 +257,10 @@ endstruct
     private method $NAME$Clear takes nothing returns nothing
         call TableStruct.type(thistype.$NAME$_impl).$TYPE$.remove(this)
     endmethod
+    
+    private method $NAME$Exists takes nothing returns boolean
+        return TableStruct.type(thistype.$NAME$_impl).$TYPE$.has(this)
+    endmethod
 //! endtextmacro
 
 //! textmacro TableStruct_NewReadonlyHandleField takes NAME, TYPE
@@ -247,6 +275,10 @@ endstruct
     
     private method $NAME$Clear takes nothing returns nothing
         call TableStruct.type(thistype.$NAME$_impl).$TYPE$.remove(this)
+    endmethod
+    
+    private method $NAME$Exists takes nothing returns boolean
+        return TableStruct.type(thistype.$NAME$_impl).$TYPE$.has(this)
     endmethod
 //! endtextmacro
 

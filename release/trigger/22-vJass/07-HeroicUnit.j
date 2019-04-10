@@ -13,7 +13,6 @@ function OnMorph() -> boolean
 {
     unit u = GetTriggerUnit();
     trigger t = GetTriggeringTrigger();
-    DisplayTextToPlayer(Player(0), 0, 0, "OnMorph");
     if (GetTriggerEventId() == EVENT_UNIT_STATE_LIMIT)
     {
         DisableTrigger(t);
