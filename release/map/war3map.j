@@ -24,7 +24,7 @@ integer CombatTag_PHYS_DAMAGE
 integer CombatTag_SPELL_DAMAGE
 integer CombatTag_HEALING
     
-integer CombatTag__timerData
+integer CombatTag___timerData
 //endglobals from CombatTag
 //globals from CustomStatSystem:
 constant boolean LIBRARY_CustomStatSystem=true
@@ -69,12 +69,12 @@ constant boolean LIBRARY_HERO=true
 //endglobals from HERO
 //globals from HeroicUnit:
 constant boolean LIBRARY_HeroicUnit=true
-constant integer HeroicUnit___HERO_ID='H0QU'
-constant integer HeroicUnit___SPELL_ID='A02B'
-constant integer HeroicUnit___ITEM_ID='I00R'
-constant integer HeroicUnit___BONUS_ID='AIs1'
-constant integer HeroicUnit___DETECTOR='Adef'
-constant integer HeroicUnit___ORDER=852056
+constant integer HeroicUnit__HERO_ID='H0QU'
+constant integer HeroicUnit__SPELL_ID='A02B'
+constant integer HeroicUnit__ITEM_ID='I00R'
+constant integer HeroicUnit__BONUS_ID='AIs1'
+constant integer HeroicUnit__DETECTOR='Adef'
+constant integer HeroicUnit__ORDER=852056
 //endglobals from HeroicUnit
 //globals from Iterator:
 constant boolean LIBRARY_Iterator=true
@@ -121,20 +121,20 @@ integer Table__more= 8190
     //Configure it if you use more than 8190 "key" variables in your map (this will never happen though).
    
 hashtable Table__ht= InitHashtable()
-constant integer Table__sizeK=4
-constant integer Table__listK=6
+constant integer Table__sizeK=8
+constant integer Table__listK=9
 //endglobals from Table
 //globals from ThirdPersonCamera:
 constant boolean LIBRARY_ThirdPersonCamera=true
-hashtable ThirdPersonCamera__data= InitHashtable()
+hashtable ThirdPersonCamera___data= InitHashtable()
     
-trigger ThirdPersonCamera__triggerMouse= CreateTrigger()
-trigger ThirdPersonCamera__triggerLeft= CreateTrigger()
-trigger ThirdPersonCamera__triggerRight= CreateTrigger()
-trigger ThirdPersonCamera__triggerEsc= CreateTrigger()
-trigger ThirdPersonCamera__triggerCleanup= CreateTrigger()
+trigger ThirdPersonCamera___triggerMouse= CreateTrigger()
+trigger ThirdPersonCamera___triggerLeft= CreateTrigger()
+trigger ThirdPersonCamera___triggerRight= CreateTrigger()
+trigger ThirdPersonCamera___triggerEsc= CreateTrigger()
+trigger ThirdPersonCamera___triggerCleanup= CreateTrigger()
     
-unit array ThirdPersonCamera__focusUnits
+unit array ThirdPersonCamera___focusUnits
 //endglobals from ThirdPersonCamera
 //globals from TreeSystemCreateTrees:
 constant boolean LIBRARY_TreeSystemCreateTrees=true
@@ -204,9 +204,9 @@ constant real DummyRecycler__FACING_OFFSET= 180.0 / DummyRecycler__ANGLES_COUNT
 //endglobals from DummyRecycler
 //globals from Lists:
 constant boolean LIBRARY_Lists=true
-constant integer Lists_RECYCLE_KEY=8
+constant integer Lists_RECYCLE_KEY=10
 constant boolean Lists_ENABLE_GUI= false
-hashtable Lists___hashTable= InitHashtable()
+hashtable Lists__hashTable= InitHashtable()
 //endglobals from Lists
 //globals from MoveSpeedBonus:
 constant boolean LIBRARY_MoveSpeedBonus=true
@@ -224,8 +224,8 @@ constant boolean MoveSpeedBonus_INIT_HASHTABLE= false
     // Automatically clean up unit data by removing any data when a unit is created that has an ID that was previously used
     // If you disable this, then you must call GMSS_ClearData whenever a unit enters the game or is removed from it
 constant boolean MoveSpeedBonus_AUTO_CLEANUP= false
-integer MoveSpeedBonus__data
-hashtable MoveSpeedBonus__hashTable= null
+integer MoveSpeedBonus___data
+hashtable MoveSpeedBonus___hashTable= null
 //endglobals from MoveSpeedBonus
 //globals from StructureTileDefinition:
 constant boolean LIBRARY_StructureTileDefinition=true
@@ -331,7 +331,7 @@ constant boolean UnitVisualModsDefaults_COLOR= true
 constant boolean LIBRARY_UserDefinedRects=true
 hashtable UserDefinedRects__hashTable= InitHashtable()
 weathereffect array UserDefinedRects__weatherEffects
-constant integer UserDefinedRects__RECYCLE_KEY=10
+constant integer UserDefinedRects__RECYCLE_KEY=11
 integer array UserDefinedRects__instances
 //endglobals from UserDefinedRects
 //globals from LoPHeader:
@@ -1251,119 +1251,119 @@ constant integer si__ConstHashTable=96
 constant integer si__DummyRecycler__S=97
 integer s__DummyRecycler__S_tb
 constant integer si__TileDefinition__TileDefinition=98
-constant integer si__ArgumentStack__table=99
+constant integer si__ArgumentStack___table=99
 constant integer si__Args=100
 constant integer s__Args_real_impl=12
-constant integer s__Args_integer_impl=14
-constant integer s__Args_boolean_impl=16
-constant integer s__Args_string_impl=18
-constant integer s__Args_player_impl=20
-constant integer s__Args_widget_impl=22
-constant integer s__Args_destructable_impl=24
-constant integer s__Args_item_impl=26
-constant integer s__Args_unit_impl=28
-constant integer s__Args_ability_impl=30
-constant integer s__Args_timer_impl=32
-constant integer s__Args_trigger_impl=34
-constant integer s__Args_triggercondition_impl=36
-constant integer s__Args_event_impl=38
-constant integer s__Args_force_impl=40
-constant integer s__Args_group_impl=42
-constant integer s__Args_location_impl=44
-constant integer s__Args_rect_impl=46
-constant integer s__Args_boolexpr_impl=48
-constant integer s__Args_sound_impl=50
-constant integer s__Args_effect_impl=52
-constant integer s__Args_quest_impl=54
-constant integer s__Args_questitem_impl=56
-constant integer s__Args_defeatcondition_impl=58
-constant integer s__Args_timerdialog_impl=60
-constant integer s__Args_leaderboard_impl=62
-constant integer s__Args_multiboard_impl=64
-constant integer s__Args_multiboarditem_impl=66
-constant integer s__Args_trackable_impl=68
-constant integer s__Args_dialog_impl=70
-constant integer s__Args_button_impl=72
-constant integer s__Args_region_impl=74
-constant integer s__Args_fogmodifier_impl=76
-constant integer s__Args_hashtable_impl=78
-constant integer s__Args_triggeraction_impl=80
-constant integer s__Args_unitpool_impl=82
-constant integer s__Args_itempool_impl=84
-constant integer s__Args_texttag_impl=86
-constant integer s__Args_lightning_impl=88
-constant integer s__Args_image_impl=90
-constant integer s__Args_ubersplat_impl=92
-constant integer s__Args_fogstate_impl=94
+constant integer s__Args_integer_impl=13
+constant integer s__Args_boolean_impl=14
+constant integer s__Args_string_impl=15
+constant integer s__Args_player_impl=16
+constant integer s__Args_widget_impl=17
+constant integer s__Args_destructable_impl=18
+constant integer s__Args_item_impl=19
+constant integer s__Args_unit_impl=20
+constant integer s__Args_ability_impl=21
+constant integer s__Args_timer_impl=22
+constant integer s__Args_trigger_impl=23
+constant integer s__Args_triggercondition_impl=24
+constant integer s__Args_event_impl=25
+constant integer s__Args_force_impl=26
+constant integer s__Args_group_impl=27
+constant integer s__Args_location_impl=28
+constant integer s__Args_rect_impl=29
+constant integer s__Args_boolexpr_impl=30
+constant integer s__Args_sound_impl=31
+constant integer s__Args_effect_impl=32
+constant integer s__Args_quest_impl=33
+constant integer s__Args_questitem_impl=34
+constant integer s__Args_defeatcondition_impl=35
+constant integer s__Args_timerdialog_impl=36
+constant integer s__Args_leaderboard_impl=37
+constant integer s__Args_multiboard_impl=38
+constant integer s__Args_multiboarditem_impl=39
+constant integer s__Args_trackable_impl=40
+constant integer s__Args_dialog_impl=41
+constant integer s__Args_button_impl=42
+constant integer s__Args_region_impl=43
+constant integer s__Args_fogmodifier_impl=44
+constant integer s__Args_hashtable_impl=45
+constant integer s__Args_triggeraction_impl=46
+constant integer s__Args_unitpool_impl=47
+constant integer s__Args_itempool_impl=48
+constant integer s__Args_texttag_impl=49
+constant integer s__Args_lightning_impl=50
+constant integer s__Args_image_impl=51
+constant integer s__Args_ubersplat_impl=52
+constant integer s__Args_fogstate_impl=53
 constant integer si__LinkedHashSet=101
 integer s__LinkedHashSet_enumElement= 0
 integer s__LinkedHashSet_enumSet= 0
 constant integer si__TableStruct=102
 constant integer si__FilterTransformations_Globals=103
-constant integer s__FilterTransformations_Globals_data_impl=96
+constant integer s__FilterTransformations_Globals_data_impl=54
 constant integer si__LoP_Command=104
-constant integer s__LoP_Command_boolexpr_impl=98
-constant integer s__LoP_Command_string_impl=100
-constant integer s__LoP_Command_accessLevel_impl=102
+constant integer s__LoP_Command_boolexpr_impl=55
+constant integer s__LoP_Command_string_impl=56
+constant integer s__LoP_Command_accessLevel_impl=57
 constant integer si__LoPCommands_Globals=105
-constant integer s__LoPCommands_Globals_static_members_key=104
-constant integer s__LoPCommands_Globals_trigger_impl=106
-constant integer s__LoPCommands_Globals_evaluator_impl=108
+constant integer s__LoPCommands_Globals_static_members_key=58
+constant integer s__LoPCommands_Globals_trigger_impl=59
+constant integer s__LoPCommands_Globals_evaluator_impl=60
 constant integer si__LoP_DecoBuilders=106
 integer array s__LoP_DecoBuilders_rawcodes
-constant integer s__LoP_DecoBuilders_static_members_key=110
-constant integer s__LoP_DecoBuilders_SpecialDecoLastIndex_impl=112
-constant integer s__LoP_DecoBuilders_BasicDecoFirstIndex_impl=114
-constant integer s__LoP_DecoBuilders_BasicDecoLastIndex_impl=116
-constant integer s__LoP_DecoBuilders_AdvDecoFirstIndex_impl=118
-constant integer s__LoP_DecoBuilders_AdvDecoLastIndex_impl=120
-constant integer s__LoP_DecoBuilders_DecoLastIndex_impl=122
+constant integer s__LoP_DecoBuilders_static_members_key=61
+constant integer s__LoP_DecoBuilders_SpecialDecoLastIndex_impl=62
+constant integer s__LoP_DecoBuilders_BasicDecoFirstIndex_impl=63
+constant integer s__LoP_DecoBuilders_BasicDecoLastIndex_impl=64
+constant integer s__LoP_DecoBuilders_AdvDecoFirstIndex_impl=65
+constant integer s__LoP_DecoBuilders_AdvDecoLastIndex_impl=66
+constant integer s__LoP_DecoBuilders_DecoLastIndex_impl=67
 constant integer si__LoPInitPlayerCircles_Globals=107
-constant integer s__LoPInitPlayerCircles_Globals_regionTable_impl=124
+constant integer s__LoPInitPlayerCircles_Globals_regionTable_impl=68
 constant integer si__LoP_PlayerData=108
 playercolor array s__LoP_PlayerData_playerColors
-constant integer s__LoP_PlayerData_commandsEnabled_internal_impl=126
+constant integer s__LoP_PlayerData_commandsEnabled_internal_impl=69
 constant integer si__MultiBoard=109
-constant integer s__MultiBoard_items_impl=128
-constant integer s__MultiBoard_cols_impl=130
-constant integer s__MultiBoard_rows_impl=132
-constant integer s__MultiBoard_multiboard_impl=134
+constant integer s__MultiBoard_items_impl=70
+constant integer s__MultiBoard_cols_impl=71
+constant integer s__MultiBoard_rows_impl=72
+constant integer s__MultiBoard_multiboard_impl=73
 constant integer si__TerrainFog=110
 constant integer s__TerrainFog_LINEAR= 0
 constant integer s__TerrainFog_EXPONENTIAL= 1
 constant integer s__TerrainFog_EXPONENTIAL2= 2
-constant integer s__TerrainFog_style_impl=136
-constant integer s__TerrainFog_zStart_impl=138
-constant integer s__TerrainFog_zEnd_impl=140
-constant integer s__TerrainFog_density_impl=142
-constant integer s__TerrainFog_red_impl=144
-constant integer s__TerrainFog_green_impl=146
-constant integer s__TerrainFog_blue_impl=148
+constant integer s__TerrainFog_style_impl=74
+constant integer s__TerrainFog_zStart_impl=75
+constant integer s__TerrainFog_zEnd_impl=76
+constant integer s__TerrainFog_density_impl=77
+constant integer s__TerrainFog_red_impl=78
+constant integer s__TerrainFog_green_impl=79
+constant integer s__TerrainFog_blue_impl=80
 constant integer si__RectEnvironment=111
-constant integer s__RectEnvironment_fog_impl=150
+constant integer s__RectEnvironment_fog_impl=81
 constant integer si__AutoRectEnvironment__Globals=112
-constant integer s__AutoRectEnvironment__Globals_static_members_key=152
-constant integer s__AutoRectEnvironment__Globals_lastCameraX_impl=154
-constant integer s__AutoRectEnvironment__Globals_lastCameraY_impl=156
-constant integer s__AutoRectEnvironment__Globals_rectWasMoved_impl=158
-constant integer s__AutoRectEnvironment__Globals_lastCameraRect_impl=160
-constant integer s__AutoRectEnvironment__Globals_allRects_impl=162
-constant integer s__AutoRectEnvironment__Globals_rects_impl=164
-constant integer s__AutoRectEnvironment__Globals_id2_impl=166
+constant integer s__AutoRectEnvironment__Globals_static_members_key=82
+constant integer s__AutoRectEnvironment__Globals_lastCameraX_impl=83
+constant integer s__AutoRectEnvironment__Globals_lastCameraY_impl=84
+constant integer s__AutoRectEnvironment__Globals_rectWasMoved_impl=85
+constant integer s__AutoRectEnvironment__Globals_lastCameraRect_impl=86
+constant integer s__AutoRectEnvironment__Globals_allRects_impl=87
+constant integer s__AutoRectEnvironment__Globals_rects_impl=88
+constant integer s__AutoRectEnvironment__Globals_id2_impl=89
 constant integer si__AutoRectEnvironment__InitStruct=113
 constant integer si__GameTime=114
 integer s__GameTime_a
-constant integer s__GameTime_static_members_key=168
-constant integer s__GameTime_hours_impl=170
-constant integer s__GameTime_minutes_impl=172
-constant integer s__GameTime_seconds_impl=174
-constant integer s__GameTime_timer_impl=176
-constant integer s__GameTime_multiboard_impl=178
+constant integer s__GameTime_static_members_key=90
+constant integer s__GameTime_hours_impl=91
+constant integer s__GameTime_minutes_impl=92
+constant integer s__GameTime_seconds_impl=93
+constant integer s__GameTime_timer_impl=94
+constant integer s__GameTime_multiboard_impl=95
 constant integer si__UserDefinedRects__Indices=115
 constant integer si__RectGenerator__FogStyle=116
-constant integer s__RectGenerator__FogStyle_strings_impl=180
-constant integer s__RectGenerator__FogStyle_linkedListNext_impl=182
-constant integer s__RectGenerator__FogStyle_linkedListPrev_impl=184
+constant integer s__RectGenerator__FogStyle_strings_impl=96
+constant integer s__RectGenerator__FogStyle_linkedListNext_impl=97
+constant integer s__RectGenerator__FogStyle_linkedListPrev_impl=98
 constant integer si__UnitVisualMods__data_reals=117
 constant integer si__UnitVisualMods__data_booleans=118
 constant integer si__UnitVisualMods__data_strings=119
@@ -1414,20 +1414,20 @@ constant integer si__TerrainType2Id=163
 constant integer s__TerrainType2Id_KEY= - 2
 constant integer si__UnitVisualMods__UnitVisualsRaw=164
 constant integer si__UnitVisuals=165
-constant integer si__LoPWidgets___Globals=166
-constant integer s__LoPWidgets___Globals_destructablesTab_impl=186
+constant integer si__LoPWidgets__Globals=166
+constant integer s__LoPWidgets__Globals_destructablesTab_impl=99
 constant integer si__LoP_UnitData=167
-constant integer s__LoP_UnitData_isHeroic_impl=188
-constant integer si__TreeSystemChooseTree___Globals=168
-constant integer s__TreeSystemChooseTree___Globals_timerData_impl=190
-constant integer si__SpatialDistortion__TimerData=169
-constant integer s__SpatialDistortion__TimerData_caster_impl=192
-constant integer s__SpatialDistortion__TimerData_counter_impl=194
-constant integer s__SpatialDistortion__TimerData_x_impl=196
-constant integer s__SpatialDistortion__TimerData_y_impl=198
+constant integer s__LoP_UnitData_isHeroic_impl=100
+constant integer si__TreeSystemChooseTree__Globals=168
+constant integer s__TreeSystemChooseTree__Globals_timerData_impl=101
+constant integer si__SpatialDistortion___TimerData=169
+constant integer s__SpatialDistortion___TimerData_caster_impl=102
+constant integer s__SpatialDistortion___TimerData_counter_impl=103
+constant integer s__SpatialDistortion___TimerData_x_impl=104
+constant integer s__SpatialDistortion___TimerData_y_impl=105
 constant integer si__MakeHeroic___Globals=170
-constant integer s__MakeHeroic___Globals_static_members_key=200
-constant integer s__MakeHeroic___Globals_dummy_impl=202
+constant integer s__MakeHeroic___Globals_static_members_key=106
+constant integer s__MakeHeroic___Globals_dummy_impl=107
 trigger st__Table__reals__getindex
 trigger st__Table__reals__setindex
 trigger st__Table__units__getindex
@@ -1842,10 +1842,10 @@ endfunction
 // scope CombatTag_HEAL ends
 
 
-function CombatTag__ShowText takes nothing returns nothing
+function CombatTag___ShowText takes nothing returns nothing
     local timer t= GetExpiredTimer()
     local integer tId= GetHandleId(t)
-    local unit u= (LoadUnitHandle(Table__ht, (((CombatTag__timerData))), (tId))) // INLINED!!
+    local unit u= (LoadUnitHandle(Table__ht, (((CombatTag___timerData))), (tId))) // INLINED!!
     local integer uId= GetUnitUserData(u)
     
     local real z_offset= 50
@@ -1871,7 +1871,7 @@ function CombatTag__ShowText takes nothing returns nothing
     
     call PauseTimer(t)
     call DestroyTimer(t)
-    call RemoveSavedHandle(Table__ht, (((CombatTag__timerData))), (tId)) // INLINED!!
+    call RemoveSavedHandle(Table__ht, (((CombatTag___timerData))), (tId)) // INLINED!!
     set t=null
     set u=null
 endfunction
@@ -1887,20 +1887,20 @@ function CombatTag_Register takes unit whichUnit,real value,integer whichType re
     
     if amount <= 0. then
         set t=CreateTimer()
-        call TimerStart(t, 0, false, function CombatTag__ShowText)
-        call SaveUnitHandle(Table__ht, (((CombatTag__timerData))), (GetHandleId(t)), ( whichUnit)) // INLINED!!
+        call TimerStart(t, 0, false, function CombatTag___ShowText)
+        call SaveUnitHandle(Table__ht, (((CombatTag___timerData))), (GetHandleId(t)), ( whichUnit)) // INLINED!!
         set t=null
     endif
         
     call SaveReal(Table__ht, (((whichType))), (uId), (( amount + value)*1.0)) // INLINED!!
 endfunction
 
-function CombatTag__onInit takes nothing returns nothing
+function CombatTag___onInit takes nothing returns nothing
     set CombatTag_PHYS_DAMAGE=sc__Table_create()
     set CombatTag_SPELL_DAMAGE=sc__Table_create()
     set CombatTag_HEALING=sc__Table_create()
     
-    set CombatTag__timerData=sc__Table_create()
+    set CombatTag___timerData=sc__Table_create()
 endfunction
 
 
@@ -2347,20 +2347,20 @@ endfunction
 
 //library HERO ends
 //library HeroicUnit:
-    function HeroicUnit___OnMorph takes nothing returns boolean
+    function HeroicUnit__OnMorph takes nothing returns boolean
         local unit u=GetTriggerUnit()
         local trigger t=GetTriggeringTrigger()
         if ( GetTriggerEventId() == EVENT_UNIT_STATE_LIMIT ) then
             call DisableTrigger(t)
-            call UnitRemoveAbility(u, HeroicUnit___SPELL_ID)
-        elseif ( GetUnitTypeId(u) != HeroicUnit___HERO_ID ) then
-            call UnitAddAbility(u, HeroicUnit___SPELL_ID)
-            call UnitAddAbility(u, HeroicUnit___BONUS_ID)
-            call UnitMakeAbilityPermanent(u, true, HeroicUnit___BONUS_ID)
+            call UnitRemoveAbility(u, HeroicUnit__SPELL_ID)
+        elseif ( GetUnitTypeId(u) != HeroicUnit__HERO_ID ) then
+            call UnitAddAbility(u, HeroicUnit__SPELL_ID)
+            call UnitAddAbility(u, HeroicUnit__BONUS_ID)
+            call UnitMakeAbilityPermanent(u, true, HeroicUnit__BONUS_ID)
             call TriggerRegisterUnitStateEvent(t, u, UNIT_STATE_LIFE, GREATER_THAN, GetWidgetLife(u) + 1.)
-            call RemoveItem(UnitAddItemById(u, HeroicUnit___ITEM_ID))
+            call RemoveItem(UnitAddItemById(u, HeroicUnit__ITEM_ID))
         else
-            call UnitAddAbility(u, HeroicUnit___DETECTOR)
+            call UnitAddAbility(u, HeroicUnit__DETECTOR)
         endif
         set t=null
         set u=null
@@ -2372,12 +2372,12 @@ endfunction
         local real mp=GetUnitState(u, UNIT_STATE_MANA)
         call SetWidgetLife(u, GetUnitState(u, UNIT_STATE_MAX_LIFE))
         call TriggerRegisterUnitEvent(t, u, EVENT_UNIT_ISSUED_ORDER)
-        call TriggerAddCondition(t, Condition(function HeroicUnit___OnMorph))
+        call TriggerAddCondition(t, Condition(function HeroicUnit__OnMorph))
         call UnitAddAbility(u, 'AInv')
-        call UnitAddAbility(u, HeroicUnit___DETECTOR)
-        call UnitAddAbility(u, HeroicUnit___BONUS_ID)
-        call RemoveItem(UnitAddItemById(u, HeroicUnit___ITEM_ID))
-        call UnitRemoveAbility(u, HeroicUnit___BONUS_ID)
+        call UnitAddAbility(u, HeroicUnit__DETECTOR)
+        call UnitAddAbility(u, HeroicUnit__BONUS_ID)
+        call RemoveItem(UnitAddItemById(u, HeroicUnit__ITEM_ID))
+        call UnitRemoveAbility(u, HeroicUnit__BONUS_ID)
         call SetWidgetLife(u, hp)
         call SetUnitState(u, UNIT_STATE_MANA, mp)
         call SetUnitAnimation(u, "stand")
@@ -4213,49 +4213,49 @@ endfunction
 //===============
 // Setters
 function Camera_SetDefaultRotator takes integer playerId,unit whichUnit returns nothing
-    set ThirdPersonCamera__focusUnits[playerId + 2 * bj_MAX_PLAYERS]=whichUnit
+    set ThirdPersonCamera___focusUnits[playerId + 2 * bj_MAX_PLAYERS]=whichUnit
 endfunction
 
 function Camera_SetRotator takes integer playerId,unit whichUnit returns nothing
-    set ThirdPersonCamera__focusUnits[playerId + bj_MAX_PLAYERS]=whichUnit
+    set ThirdPersonCamera___focusUnits[playerId + bj_MAX_PLAYERS]=whichUnit
 endfunction
 
 function Camera_SetTarget takes integer playerId,unit whichUnit returns nothing
-    set ThirdPersonCamera__focusUnits[playerId]=whichUnit
+    set ThirdPersonCamera___focusUnits[playerId]=whichUnit
 endfunction
 
 //===============
 // Getters
 function Camera_GetDefaultRotator takes integer playerId returns unit
-    return ThirdPersonCamera__focusUnits[playerId + 2 * bj_MAX_PLAYERS]
+    return ThirdPersonCamera___focusUnits[playerId + 2 * bj_MAX_PLAYERS]
 endfunction
 
 function Camera_GetRotator takes integer playerId returns unit
-    return ThirdPersonCamera__focusUnits[playerId + bj_MAX_PLAYERS]
+    return ThirdPersonCamera___focusUnits[playerId + bj_MAX_PLAYERS]
 endfunction
 
 function Camera_GetTarget takes integer playerId returns unit
-    return ThirdPersonCamera__focusUnits[playerId]
+    return ThirdPersonCamera___focusUnits[playerId]
 endfunction
 //===========================================================================
 // API
 //===============
 function Camera_WasHelpSeen takes integer playerId returns boolean
-    return not HaveSavedBoolean(ThirdPersonCamera__data, playerId, - 1)
+    return not HaveSavedBoolean(ThirdPersonCamera___data, playerId, - 1)
 endfunction
 
 function Camera_SetHelpSeen takes integer playerId,boolean flag returns nothing
     if flag then
-        call RemoveSavedBoolean(ThirdPersonCamera__data, playerId, - 1)
+        call RemoveSavedBoolean(ThirdPersonCamera___data, playerId, - 1)
     else
-        call SaveBoolean(ThirdPersonCamera__data, playerId, - 1, true)
+        call SaveBoolean(ThirdPersonCamera___data, playerId, - 1, true)
     endif
 endfunction
 
 function Camera_SetFirstPerson takes player whichPlayer,unit whichUnit returns nothing
     local real sleepTime
     
-    if not (not HaveSavedBoolean(ThirdPersonCamera__data, (GetPlayerId(whichPlayer)), - 1)) then // INLINED!!
+    if not (not HaveSavedBoolean(ThirdPersonCamera___data, (GetPlayerId(whichPlayer)), - 1)) then // INLINED!!
         call DisplayTextToPlayer(whichPlayer, 0, 0, ("First Person Camera Enabled!\n\nTo leave this perspective, double-click the |c00ffff00Esc|r key.\nTo fix the camera to the unit's facing, click the |c00ffff00Esc|r key.\nTo allow the camera to move independently, click the |c00ffff00Esc|r key.\n\nYou can use the |c00ffff00left|r and |c00ffff00right|r arrow keys to move the camera.\nYou can find the commands for the camera by pressing |c00ffff00F9|r.")) // INLINED!!
         call Camera_SetHelpSeen(GetPlayerId(whichPlayer) , true)
     endif
@@ -4277,12 +4277,12 @@ function Camera_SetFirstPerson takes player whichPlayer,unit whichUnit returns n
         endif
     endif
     
-    set ThirdPersonCamera__focusUnits[(GetPlayerId(whichPlayer) )]=( whichUnit) // INLINED!!
-    set ThirdPersonCamera__focusUnits[(GetPlayerId(whichPlayer) ) + bj_MAX_PLAYERS]=( (ThirdPersonCamera__focusUnits[(GetPlayerId(whichPlayer)) + 2 * bj_MAX_PLAYERS])) // INLINED!!
+    set ThirdPersonCamera___focusUnits[(GetPlayerId(whichPlayer) )]=( whichUnit) // INLINED!!
+    set ThirdPersonCamera___focusUnits[(GetPlayerId(whichPlayer) ) + bj_MAX_PLAYERS]=( (ThirdPersonCamera___focusUnits[(GetPlayerId(whichPlayer)) + 2 * bj_MAX_PLAYERS])) // INLINED!!
 endfunction
 
 function Camera_SetThirdPerson takes player whichPlayer returns nothing
-    set ThirdPersonCamera__focusUnits[(GetPlayerId(whichPlayer) )]=( null) // INLINED!!
+    set ThirdPersonCamera___focusUnits[(GetPlayerId(whichPlayer) )]=( null) // INLINED!!
     if GetLocalPlayer() == whichPlayer then
         call StopCamera()
         call ResetToGameCamera((1.0)) // INLINED!!
@@ -4307,27 +4307,27 @@ function Camera_ClearPlayerData takes player whichPlayer returns nothing
     local integer playerId= GetPlayerId(whichPlayer)
 
     // Flushing this will also destroy timers for arrow keys
-    call FlushChildHashtable(ThirdPersonCamera__data, playerId)
+    call FlushChildHashtable(ThirdPersonCamera___data, playerId)
     
     // Remove useless unit and null everything to avoid handle reference leaks
-    call RemoveUnit((ThirdPersonCamera__focusUnits[(playerId) + 2 * bj_MAX_PLAYERS])) // INLINED!!
-    set ThirdPersonCamera__focusUnits[(playerId ) + 2 * bj_MAX_PLAYERS]=( null) // INLINED!!
-    set ThirdPersonCamera__focusUnits[(playerId ) + bj_MAX_PLAYERS]=( null) // INLINED!!
-    set ThirdPersonCamera__focusUnits[(playerId )]=( null) // INLINED!!
+    call RemoveUnit((ThirdPersonCamera___focusUnits[(playerId) + 2 * bj_MAX_PLAYERS])) // INLINED!!
+    set ThirdPersonCamera___focusUnits[(playerId ) + 2 * bj_MAX_PLAYERS]=( null) // INLINED!!
+    set ThirdPersonCamera___focusUnits[(playerId ) + bj_MAX_PLAYERS]=( null) // INLINED!!
+    set ThirdPersonCamera___focusUnits[(playerId )]=( null) // INLINED!!
 endfunction
 //===========================================================================
 // Key Event Handling: Left and Right arrows
 //===============
 // Utility
 function Camera_IsKeyPressed takes integer playerId,integer whichKey returns boolean
-    return HaveSavedBoolean(ThirdPersonCamera__data, playerId, whichKey)
+    return HaveSavedBoolean(ThirdPersonCamera___data, playerId, whichKey)
 endfunction
 
 function Camera_SetKeyPressed takes integer playerId,integer whichKey,boolean flag returns nothing
     if flag then
-        call SaveBoolean(ThirdPersonCamera__data, playerId, whichKey, true)
+        call SaveBoolean(ThirdPersonCamera___data, playerId, whichKey, true)
     else
-        call RemoveSavedBoolean(ThirdPersonCamera__data, playerId, whichKey)
+        call RemoveSavedBoolean(ThirdPersonCamera___data, playerId, whichKey)
     endif
 endfunction
 
@@ -4336,10 +4336,10 @@ endfunction
 function Camera_TimerFunc2 takes nothing returns nothing
     local unit u
     local timer t= GetExpiredTimer()
-    local integer playerId= LoadInteger(ThirdPersonCamera__data, GetHandleId(t), 0)
+    local integer playerId= LoadInteger(ThirdPersonCamera___data, GetHandleId(t), 0)
     
-    if ( (HaveSavedBoolean(ThirdPersonCamera__data, (playerId ), ( (1)))) ) then // INLINED!!
-        set u=(ThirdPersonCamera__focusUnits[(playerId) + bj_MAX_PLAYERS]) // INLINED!!
+    if ( (HaveSavedBoolean(ThirdPersonCamera___data, (playerId ), ( (1)))) ) then // INLINED!!
+        set u=(ThirdPersonCamera___focusUnits[(playerId) + bj_MAX_PLAYERS]) // INLINED!!
         call SetUnitFacing(u, GetUnitFacing(u) + 10.)
         set u=null
     else
@@ -4352,14 +4352,14 @@ endfunction
 function Camera_TimerFunc_RightArrow takes nothing returns nothing
     local unit u
     local timer t= GetExpiredTimer()
-    local integer playerId= LoadInteger(ThirdPersonCamera__data, GetHandleId(t), 0)
+    local integer playerId= LoadInteger(ThirdPersonCamera___data, GetHandleId(t), 0)
     
-    if ( (HaveSavedBoolean(ThirdPersonCamera__data, (playerId ), ( (2)))) ) then // INLINED!!
-        set u=(ThirdPersonCamera__focusUnits[(playerId) + bj_MAX_PLAYERS]) // INLINED!!
+    if ( (HaveSavedBoolean(ThirdPersonCamera___data, (playerId ), ( (2)))) ) then // INLINED!!
+        set u=(ThirdPersonCamera___focusUnits[(playerId) + bj_MAX_PLAYERS]) // INLINED!!
         call SetUnitFacing(u, GetUnitFacing(u) - 10.)
         set u=null
     else
-        call FlushChildHashtable(ThirdPersonCamera__data, GetHandleId(t))
+        call FlushChildHashtable(ThirdPersonCamera___data, GetHandleId(t))
         call PauseTimer(t)
         call DestroyTimer(t)
     endif
@@ -4371,18 +4371,18 @@ endfunction
 function SideArrowPress takes integer playerId,integer whichKey,code handlerFunc returns nothing
     local timer t
     
-    if (ThirdPersonCamera__focusUnits[(playerId)]) == null then // INLINED!!
+    if (ThirdPersonCamera___focusUnits[(playerId)]) == null then // INLINED!!
         return
     endif
     
-    if (HaveSavedBoolean(ThirdPersonCamera__data, (playerId ), ( whichKey))) then // INLINED!!
+    if (HaveSavedBoolean(ThirdPersonCamera___data, (playerId ), ( whichKey))) then // INLINED!!
         call Camera_SetKeyPressed(playerId , whichKey , false)
     else
         call Camera_SetKeyPressed(playerId , whichKey , true)
         
         set t=CreateTimer()
         call TimerStart(t, 0.03, true, handlerFunc)
-        call SaveInteger(ThirdPersonCamera__data, GetHandleId(t), 0, playerId)
+        call SaveInteger(ThirdPersonCamera___data, GetHandleId(t), 0, playerId)
         set t=null
     endif
 endfunction
@@ -4399,35 +4399,35 @@ endfunction
 // Key Event Handling: Esc
 //===============
 function Camera_GetEscClicks takes integer playerId returns integer
-    return LoadInteger(ThirdPersonCamera__data, playerId, (0)) // INLINED!!
+    return LoadInteger(ThirdPersonCamera___data, playerId, (0)) // INLINED!!
 endfunction
 
 function Camera_SetEscClicks takes integer playerId,integer value returns nothing
-    call SaveInteger(ThirdPersonCamera__data, playerId, (0), value) // INLINED!!
+    call SaveInteger(ThirdPersonCamera___data, playerId, (0), value) // INLINED!!
 endfunction
 
 function Camera_ResetEscClicks takes integer playerId returns nothing
-    call RemoveSavedInteger(ThirdPersonCamera__data, playerId, (0)) // INLINED!!
+    call RemoveSavedInteger(ThirdPersonCamera___data, playerId, (0)) // INLINED!!
 endfunction
 
 function Camera_Trig_Esc_Actions takes nothing returns nothing
     local player p= GetTriggerPlayer()
     local integer pId= GetPlayerId(p)
-    local integer count= (LoadInteger(ThirdPersonCamera__data, (pId), (0))) // INLINED!!
+    local integer count= (LoadInteger(ThirdPersonCamera___data, (pId), (0))) // INLINED!!
     
     if count == 0 then
-        if (ThirdPersonCamera__focusUnits[(pId) + bj_MAX_PLAYERS]) == (ThirdPersonCamera__focusUnits[(pId)]) then // INLINED!!
-            set ThirdPersonCamera__focusUnits[(pId ) + bj_MAX_PLAYERS]=( (ThirdPersonCamera__focusUnits[(pId) + 2 * bj_MAX_PLAYERS])) // INLINED!!
+        if (ThirdPersonCamera___focusUnits[(pId) + bj_MAX_PLAYERS]) == (ThirdPersonCamera___focusUnits[(pId)]) then // INLINED!!
+            set ThirdPersonCamera___focusUnits[(pId ) + bj_MAX_PLAYERS]=( (ThirdPersonCamera___focusUnits[(pId) + 2 * bj_MAX_PLAYERS])) // INLINED!!
         else
-            set ThirdPersonCamera__focusUnits[(pId ) + bj_MAX_PLAYERS]=( (ThirdPersonCamera__focusUnits[(pId)])) // INLINED!!
+            set ThirdPersonCamera___focusUnits[(pId ) + bj_MAX_PLAYERS]=( (ThirdPersonCamera___focusUnits[(pId)])) // INLINED!!
         endif
         
-        call SaveInteger(ThirdPersonCamera__data, (pId ), (0), ( count + 1)) // INLINED!!
+        call SaveInteger(ThirdPersonCamera___data, (pId ), (0), ( count + 1)) // INLINED!!
         call TriggerSleepAction(.4)
-        call RemoveSavedInteger(ThirdPersonCamera__data, (pId), (0)) // INLINED!!
+        call RemoveSavedInteger(ThirdPersonCamera___data, (pId), (0)) // INLINED!!
     elseif count == 1 then
-        call SaveInteger(ThirdPersonCamera__data, (pId ), (0), ( count + 1)) // INLINED!!
-        if (ThirdPersonCamera__focusUnits[(pId)]) != null then // INLINED!!
+        call SaveInteger(ThirdPersonCamera___data, (pId ), (0), ( count + 1)) // INLINED!!
+        if (ThirdPersonCamera___focusUnits[(pId)]) != null then // INLINED!!
             call Camera_SetThirdPerson(p)
         else
             call Camera_SetFirstPersonSelected(p) // There is a wait in this function
@@ -4442,13 +4442,13 @@ endfunction
 // Returns the minimum angle between mouse and unit for camera to turn.
 // This is a per-player setting, since it may vary with screen resolution.
 function Camera_GetMinAngle takes integer playerId returns real
-    return LoadReal(ThirdPersonCamera__data, playerId, (3)) // INLINED!!
+    return LoadReal(ThirdPersonCamera___data, playerId, (3)) // INLINED!!
 endfunction
 
 // Sets the minimum angle between mouse and unit for camera to turn.
 // This is a per-player setting, since it may vary with screen resolution.
 function Camera_SetMinAngle takes integer playerId,real angle returns nothing
-    call SaveReal(ThirdPersonCamera__data, playerId, (3), angle) // INLINED!!
+    call SaveReal(ThirdPersonCamera___data, playerId, (3), angle) // INLINED!!
 endfunction
 
 function Camera_AngleToMouse takes unit u,integer playerId,real x,real y returns real
@@ -4456,18 +4456,18 @@ function Camera_AngleToMouse takes unit u,integer playerId,real x,real y returns
     local real mouseY= BlzGetTriggerPlayerMouseY()
     local real newAngle= bj_RADTODEG * Atan2(mouseY - y, mouseX - x)
     local real difference
-    local real minAngle= (LoadReal(ThirdPersonCamera__data, (playerId), (3))) // INLINED!!
+    local real minAngle= (LoadReal(ThirdPersonCamera___data, (playerId), (3))) // INLINED!!
     
     if newAngle < 0 then
         set newAngle=360 + newAngle // Convert negative angles to positive, since GetUnitFacing always returns positives
     endif
-    set difference=newAngle - GetUnitFacing((ThirdPersonCamera__focusUnits[(playerId) + bj_MAX_PLAYERS])) // INLINED!!
+    set difference=newAngle - GetUnitFacing((ThirdPersonCamera___focusUnits[(playerId) + bj_MAX_PLAYERS])) // INLINED!!
     
     // If both mouseX and Y are 0, then the mouse is (probably) on the UI
     if ( difference > minAngle or difference < - minAngle ) and ( mouseX != 0 and mouseY != 0 ) then
         return newAngle
     else
-        return GetUnitFacing((ThirdPersonCamera__focusUnits[(playerId) + bj_MAX_PLAYERS])) // INLINED!!
+        return GetUnitFacing((ThirdPersonCamera___focusUnits[(playerId) + bj_MAX_PLAYERS])) // INLINED!!
     endif
 endfunction
 
@@ -4475,10 +4475,10 @@ endfunction
 function Trig_CameraMouse_Actions takes nothing returns nothing
     local player trigPlayer= GetTriggerPlayer()
     local integer playerId= GetPlayerId(trigPlayer)
-    local unit u= (ThirdPersonCamera__focusUnits[(playerId)]) // INLINED!!
+    local unit u= (ThirdPersonCamera___focusUnits[(playerId)]) // INLINED!!
     
     if u != null then
-        call SetUnitFacing((ThirdPersonCamera__focusUnits[(playerId) + bj_MAX_PLAYERS]), Camera_AngleToMouse(u , playerId , GetUnitX(u) , GetUnitY(u))) // INLINED!!
+        call SetUnitFacing((ThirdPersonCamera___focusUnits[(playerId) + bj_MAX_PLAYERS]), Camera_AngleToMouse(u , playerId , GetUnitX(u) , GetUnitY(u))) // INLINED!!
         set u=null
     endif
 endfunction
@@ -4495,13 +4495,13 @@ function Trig_Commands_First_Person_Actions takes nothing returns nothing
     elseif chatStr == ("-third person") then // INLINED!!
         call Camera_SetThirdPerson(p)
     elseif chatStr == ("-fixed camera") then // INLINED!!
-        set ThirdPersonCamera__focusUnits[(GetPlayerId(p) ) + bj_MAX_PLAYERS]=( (ThirdPersonCamera__focusUnits[(GetPlayerId(p))])) // INLINED!!
+        set ThirdPersonCamera___focusUnits[(GetPlayerId(p) ) + bj_MAX_PLAYERS]=( (ThirdPersonCamera___focusUnits[(GetPlayerId(p))])) // INLINED!!
     elseif chatStr == ("-free camera") then // INLINED!!
-        set ThirdPersonCamera__focusUnits[(GetPlayerId(p) ) + bj_MAX_PLAYERS]=( (ThirdPersonCamera__focusUnits[(GetPlayerId(p)) + 2 * bj_MAX_PLAYERS])) // INLINED!!
+        set ThirdPersonCamera___focusUnits[(GetPlayerId(p) ) + bj_MAX_PLAYERS]=( (ThirdPersonCamera___focusUnits[(GetPlayerId(p)) + 2 * bj_MAX_PLAYERS])) // INLINED!!
     elseif chatStr == ("-help camera") then // INLINED!!
         call DisplayTextToPlayer(p, 0, 0, ("First Person Camera Enabled!\n\nTo leave this perspective, double-click the |c00ffff00Esc|r key.\nTo fix the camera to the unit's facing, click the |c00ffff00Esc|r key.\nTo allow the camera to move independently, click the |c00ffff00Esc|r key.\n\nYou can use the |c00ffff00left|r and |c00ffff00right|r arrow keys to move the camera.\nYou can find the commands for the camera by pressing |c00ffff00F9|r.")) // INLINED!!
     else
-        call SaveReal(ThirdPersonCamera__data, (GetPlayerId(p) ), (3), (( S2R(SubString(chatStr, StringLength(GetEventPlayerChatStringMatched()), StringLength(chatStr))))*1.0)) // INLINED!!
+        call SaveReal(ThirdPersonCamera___data, (GetPlayerId(p) ), (3), (( S2R(SubString(chatStr, StringLength(GetEventPlayerChatStringMatched()), StringLength(chatStr))))*1.0)) // INLINED!!
     endif
 endfunction
 
@@ -4514,11 +4514,11 @@ function Camera_TimerFunc takes nothing returns nothing
     local player localPlayer= GetLocalPlayer()
     local integer playerId= GetPlayerId(localPlayer)
     
-    if ThirdPersonCamera__focusUnits[playerId] != null then
-        call SetCameraField(CAMERA_FIELD_ROTATION, GetUnitFacing(ThirdPersonCamera__focusUnits[playerId + bj_MAX_PLAYERS]), 0)
+    if ThirdPersonCamera___focusUnits[playerId] != null then
+        call SetCameraField(CAMERA_FIELD_ROTATION, GetUnitFacing(ThirdPersonCamera___focusUnits[playerId + bj_MAX_PLAYERS]), 0)
         call SetCameraField(CAMERA_FIELD_ANGLE_OF_ATTACK, 350.00, 0)
         call SetCameraField(CAMERA_FIELD_TARGET_DISTANCE, 140.00, 0)
-        call SetCameraField(CAMERA_FIELD_ZOFFSET, ( GetUnitFlyHeight(ThirdPersonCamera__focusUnits[playerId]) + 125.00 ), 0.01)
+        call SetCameraField(CAMERA_FIELD_ZOFFSET, ( GetUnitFlyHeight(ThirdPersonCamera___focusUnits[playerId]) + 125.00 ), 0.01)
     endif
 endfunction
 
@@ -4538,26 +4538,26 @@ function Camera_ForForce_Init takes nothing returns nothing
             call TriggerRegisterPlayerChatEvent(gg_trg_Camera_System, enumPlayer, ("-help camera"), true) // INLINED!!
             call TriggerRegisterPlayerChatEvent(gg_trg_Camera_System, enumPlayer, ("-sensitivity "), false) // INLINED!!
         endif
-        call TriggerRegisterPlayerMouseEventBJ(ThirdPersonCamera__triggerMouse, enumPlayer, bj_MOUSEEVENTTYPE_MOVE)
+        call TriggerRegisterPlayerMouseEventBJ(ThirdPersonCamera___triggerMouse, enumPlayer, bj_MOUSEEVENTTYPE_MOVE)
         
-        call TriggerRegisterPlayerEvent(ThirdPersonCamera__triggerLeft, enumPlayer, EVENT_PLAYER_ARROW_LEFT_DOWN)
-        call TriggerRegisterPlayerEvent(ThirdPersonCamera__triggerLeft, enumPlayer, EVENT_PLAYER_ARROW_LEFT_UP)
+        call TriggerRegisterPlayerEvent(ThirdPersonCamera___triggerLeft, enumPlayer, EVENT_PLAYER_ARROW_LEFT_DOWN)
+        call TriggerRegisterPlayerEvent(ThirdPersonCamera___triggerLeft, enumPlayer, EVENT_PLAYER_ARROW_LEFT_UP)
     
-        call TriggerRegisterPlayerEvent(ThirdPersonCamera__triggerRight, enumPlayer, EVENT_PLAYER_ARROW_RIGHT_DOWN)
-        call TriggerRegisterPlayerEvent(ThirdPersonCamera__triggerRight, enumPlayer, EVENT_PLAYER_ARROW_RIGHT_UP)
+        call TriggerRegisterPlayerEvent(ThirdPersonCamera___triggerRight, enumPlayer, EVENT_PLAYER_ARROW_RIGHT_DOWN)
+        call TriggerRegisterPlayerEvent(ThirdPersonCamera___triggerRight, enumPlayer, EVENT_PLAYER_ARROW_RIGHT_UP)
         
-        call TriggerRegisterPlayerEvent(ThirdPersonCamera__triggerEsc, enumPlayer, EVENT_PLAYER_END_CINEMATIC)
+        call TriggerRegisterPlayerEvent(ThirdPersonCamera___triggerEsc, enumPlayer, EVENT_PLAYER_END_CINEMATIC)
         
-        call TriggerRegisterPlayerEvent(ThirdPersonCamera__triggerCleanup, enumPlayer, EVENT_PLAYER_LEAVE)
+        call TriggerRegisterPlayerEvent(ThirdPersonCamera___triggerCleanup, enumPlayer, EVENT_PLAYER_LEAVE)
         
         set u=CreateUnit((Player(bj_PLAYER_NEUTRAL_EXTRA)), ('nvil'), (0.0), (0.0), bj_UNIT_FACING) // INLINED!!
         call UnitAddAbility(u, 'Aloc')
         call SetUnitInvulnerable(u, true)
         call ShowUnit(u, false)
         call SetUnitTurnSpeed(u, 3.)
-        set ThirdPersonCamera__focusUnits[(GetPlayerId(enumPlayer) ) + 2 * bj_MAX_PLAYERS]=( u) // INLINED!!
-        set ThirdPersonCamera__focusUnits[(GetPlayerId(enumPlayer) ) + bj_MAX_PLAYERS]=( u) // INLINED!!
-        call SaveReal(ThirdPersonCamera__data, (GetPlayerId(enumPlayer) ), (3), (( 39.0)*1.0)) // INLINED!!
+        set ThirdPersonCamera___focusUnits[(GetPlayerId(enumPlayer) ) + 2 * bj_MAX_PLAYERS]=( u) // INLINED!!
+        set ThirdPersonCamera___focusUnits[(GetPlayerId(enumPlayer) ) + bj_MAX_PLAYERS]=( u) // INLINED!!
+        call SaveReal(ThirdPersonCamera___data, (GetPlayerId(enumPlayer) ), (3), (( 39.0)*1.0)) // INLINED!!
         
         call Camera_SetHelpSeen(GetPlayerId(enumPlayer) , false)
         
@@ -4574,26 +4574,26 @@ function InitTrig_Camera_System takes nothing returns nothing
     local timer t= CreateTimer()
     call TimerStart(t, 0.03, true, function Camera_TimerFunc)
     
-    set ThirdPersonCamera__data=InitHashtable()
+    set ThirdPersonCamera___data=InitHashtable()
     
     if ("-first person") != "" then // INLINED!!
         set gg_trg_Camera_System=CreateTrigger()
         call TriggerAddAction(gg_trg_Camera_System, function Trig_Commands_First_Person_Actions)
     endif
 
-    set ThirdPersonCamera__triggerLeft=CreateTrigger()
-    set ThirdPersonCamera__triggerRight=CreateTrigger()
-    call TriggerAddAction(ThirdPersonCamera__triggerLeft, function Camera_Trig_LeftArrow_Actions)
-    call TriggerAddAction(ThirdPersonCamera__triggerRight, function Camera_Trig_RightArrow_Actions)
+    set ThirdPersonCamera___triggerLeft=CreateTrigger()
+    set ThirdPersonCamera___triggerRight=CreateTrigger()
+    call TriggerAddAction(ThirdPersonCamera___triggerLeft, function Camera_Trig_LeftArrow_Actions)
+    call TriggerAddAction(ThirdPersonCamera___triggerRight, function Camera_Trig_RightArrow_Actions)
     
-    set ThirdPersonCamera__triggerEsc=CreateTrigger()
-    call TriggerAddAction(ThirdPersonCamera__triggerEsc, function Camera_Trig_Esc_Actions)
+    set ThirdPersonCamera___triggerEsc=CreateTrigger()
+    call TriggerAddAction(ThirdPersonCamera___triggerEsc, function Camera_Trig_Esc_Actions)
     
-    set ThirdPersonCamera__triggerMouse=CreateTrigger()
-    call TriggerAddAction(ThirdPersonCamera__triggerMouse, function Trig_CameraMouse_Actions)
+    set ThirdPersonCamera___triggerMouse=CreateTrigger()
+    call TriggerAddAction(ThirdPersonCamera___triggerMouse, function Trig_CameraMouse_Actions)
     
-    set ThirdPersonCamera__triggerCleanup=CreateTrigger()
-    call TriggerAddAction(ThirdPersonCamera__triggerCleanup, function Camera_Trig_PlayerLeaves)
+    set ThirdPersonCamera___triggerCleanup=CreateTrigger()
+    call TriggerAddAction(ThirdPersonCamera___triggerCleanup, function Camera_Trig_PlayerLeaves)
     
     call ForForce(GetPlayersAll(), function Camera_ForForce_Init)
     
@@ -5820,7 +5820,7 @@ endfunction
 
 function Lists_GetHashtable takes nothing returns hashtable
 
-        return Lists___hashTable
+        return Lists__hashTable
 
 
 
@@ -5900,7 +5900,7 @@ endfunction
 //Positive Unit Handle ID > Move Bonus
 //Negative Unit Handle ID > Move Multiplier
 
-function MoveSpeedBonus__KEY takes nothing returns integer
+function MoveSpeedBonus___KEY takes nothing returns integer
 
 
 
@@ -5910,11 +5910,11 @@ function MoveSpeedBonus__KEY takes nothing returns integer
 
 endfunction
 
-function MoveSpeedBonus__GetUnitId takes unit whichUnit returns integer
+function MoveSpeedBonus___GetUnitId takes unit whichUnit returns integer
     return GetHandleId(whichUnit)
 endfunction
 
-function MoveSpeedBonus__LoadMultiplier takes integer uId returns real
+function MoveSpeedBonus___LoadMultiplier takes integer uId returns real
 
 
 
@@ -5923,7 +5923,7 @@ function MoveSpeedBonus__LoadMultiplier takes integer uId returns real
 
 endfunction
 
-function MoveSpeedBonus__LoadBonus takes integer uId returns real
+function MoveSpeedBonus___LoadBonus takes integer uId returns real
 
 
 
@@ -5931,7 +5931,7 @@ function MoveSpeedBonus__LoadBonus takes integer uId returns real
 
 endfunction
 
-function MoveSpeedBonus__RemoveMultiplier takes integer uId returns nothing
+function MoveSpeedBonus___RemoveMultiplier takes integer uId returns nothing
 
 
 
@@ -5939,7 +5939,7 @@ function MoveSpeedBonus__RemoveMultiplier takes integer uId returns nothing
 
 endfunction
 
-function MoveSpeedBonus__RemoveBonus takes integer uId returns nothing
+function MoveSpeedBonus___RemoveBonus takes integer uId returns nothing
 
 
 
@@ -5947,7 +5947,7 @@ function MoveSpeedBonus__RemoveBonus takes integer uId returns nothing
 
 endfunction
 
-function MoveSpeedBonus__SaveMultiplier takes integer uId,real value returns nothing
+function MoveSpeedBonus___SaveMultiplier takes integer uId,real value returns nothing
 
 
 
@@ -5955,7 +5955,7 @@ function MoveSpeedBonus__SaveMultiplier takes integer uId,real value returns not
 
 endfunction
 
-function MoveSpeedBonus__SaveBonus takes integer uId,real value returns nothing
+function MoveSpeedBonus___SaveBonus takes integer uId,real value returns nothing
 
 
 
@@ -6244,8 +6244,8 @@ endfunction
 
 
 
-//Implemented from module ArgumentStack__Const:
-        function s__ArgumentStack__table_type takes integer i returns integer
+//Implemented from module ArgumentStack___Const:
+        function s__ArgumentStack___table_type takes integer i returns integer
             return i
         endfunction
 
@@ -7955,46 +7955,46 @@ endfunction
 //==============================================
 
 // If a negative setKey is specified, this will actually set the previous element of the positive setKey
-function GLHS___SetNext takes integer setKey,integer data,integer next returns nothing
-    call SaveInteger((Lists___hashTable), setKey, data, next) // INLINED!!
+function GLHS__SetNext takes integer setKey,integer data,integer next returns nothing
+    call SaveInteger((Lists__hashTable), setKey, data, next) // INLINED!!
 endfunction
 
 // If a negative setKey is specified, this will actually set the next element of the positive setKey
-function GLHS___SetPrev takes integer setKey,integer data,integer prev returns nothing
-    call SaveInteger((Lists___hashTable), - setKey, data, prev) // INLINED!!
+function GLHS__SetPrev takes integer setKey,integer data,integer prev returns nothing
+    call SaveInteger((Lists__hashTable), - setKey, data, prev) // INLINED!!
 endfunction
 
 // These functions clear the link data of an element (used to remove stuff from the list)
-function GLHS___ClearNext takes integer setKey,integer data returns nothing
-    call RemoveSavedInteger((Lists___hashTable), setKey, data) // INLINED!!
+function GLHS__ClearNext takes integer setKey,integer data returns nothing
+    call RemoveSavedInteger((Lists__hashTable), setKey, data) // INLINED!!
 endfunction
     
-function GLHS___ClearPrev takes integer setKey,integer data returns nothing
-    call RemoveSavedInteger((Lists___hashTable), - setKey, data) // INLINED!!
+function GLHS__ClearPrev takes integer setKey,integer data returns nothing
+    call RemoveSavedInteger((Lists__hashTable), - setKey, data) // INLINED!!
 endfunction
 
 //Returns the next element after the specified "data" in the set
 //To get the first element, pass "0" as the parameter "data"
-function GLHS___GetNext takes integer setKey,integer data returns integer
-    return LoadInteger((Lists___hashTable), setKey, data) // INLINED!!
+function GLHS__GetNext takes integer setKey,integer data returns integer
+    return LoadInteger((Lists__hashTable), setKey, data) // INLINED!!
 endfunction
 
 //Returns the element that preceeds the specified "data" in the set
 //To get the last element, pass "0" as the parameter "data"
-function GLHS___GetPrev takes integer setKey,integer data returns integer
-    return LoadInteger((Lists___hashTable), - setKey, data) // INLINED!!
+function GLHS__GetPrev takes integer setKey,integer data returns integer
+    return LoadInteger((Lists__hashTable), - setKey, data) // INLINED!!
 endfunction
 
 //Adds an element to a set, in the position preceeding the element passed as the second parameter
 //If data is already present in set, behaviour is undefined
-function GLHS___AddBefore takes integer setKey,integer next,integer data returns nothing
-    local integer prev= (LoadInteger((Lists___hashTable), - (setKey ), ( next))) // INLINED!!
+function GLHS__AddBefore takes integer setKey,integer next,integer data returns nothing
+    local integer prev= (LoadInteger((Lists__hashTable), - (setKey ), ( next))) // INLINED!!
     
-    call SaveInteger((Lists___hashTable), (setKey ), ( prev ), ( data)) // INLINED!!
-    call SaveInteger((Lists___hashTable), - (setKey ), ( next ), ( data)) // INLINED!!
+    call SaveInteger((Lists__hashTable), (setKey ), ( prev ), ( data)) // INLINED!!
+    call SaveInteger((Lists__hashTable), - (setKey ), ( next ), ( data)) // INLINED!!
     
-    call SaveInteger((Lists___hashTable), (setKey ), ( data ), ( next)) // INLINED!!
-    call SaveInteger((Lists___hashTable), - (setKey ), ( data ), ( prev)) // INLINED!!
+    call SaveInteger((Lists__hashTable), (setKey ), ( data ), ( next)) // INLINED!!
+    call SaveInteger((Lists__hashTable), - (setKey ), ( data ), ( prev)) // INLINED!!
 endfunction
 
 //==============================================
@@ -8004,7 +8004,7 @@ endfunction
 
 
     function s__LinkedHashSet_begin takes integer this returns integer
-        return (LoadInteger((Lists___hashTable), (this ), ( 0))) // INLINED!!
+        return (LoadInteger((Lists__hashTable), (this ), ( 0))) // INLINED!!
     endfunction
     
     function s__LinkedHashSet_end takes nothing returns integer
@@ -8012,7 +8012,7 @@ endfunction
     endfunction
     
     function s__LinkedHashSet_rBegin takes integer this returns integer
-        return (LoadInteger((Lists___hashTable), - (this ), ( 0))) // INLINED!!
+        return (LoadInteger((Lists__hashTable), - (this ), ( 0))) // INLINED!!
     endfunction
     
     function s__LinkedHashSet_rEnd takes nothing returns integer
@@ -8020,30 +8020,30 @@ endfunction
     endfunction
     
     function s__LinkedHashSet_next takes integer this,integer i returns integer
-        return (LoadInteger((Lists___hashTable), (this ), ( i))) // INLINED!!
+        return (LoadInteger((Lists__hashTable), (this ), ( i))) // INLINED!!
     endfunction
     
     function s__LinkedHashSet_prev takes integer this,integer i returns integer
-        return (LoadInteger((Lists___hashTable), - (this ), ( i))) // INLINED!!
+        return (LoadInteger((Lists__hashTable), - (this ), ( i))) // INLINED!!
     endfunction
     
     function s__LinkedHashSet_setNext takes integer this,integer i,integer next returns nothing
-        call SaveInteger((Lists___hashTable), (this ), ( i ), ( next)) // INLINED!!
+        call SaveInteger((Lists__hashTable), (this ), ( i ), ( next)) // INLINED!!
     endfunction
     
     function s__LinkedHashSet_setPrev takes integer this,integer i,integer prev returns nothing
-        call SaveInteger((Lists___hashTable), - (this ), ( i ), ( prev)) // INLINED!!
+        call SaveInteger((Lists__hashTable), - (this ), ( i ), ( prev)) // INLINED!!
     endfunction
     
     function s__LinkedHashSet_delete takes integer this,integer i returns nothing
-        local integer next= (LoadInteger((Lists___hashTable), (this ), ( i))) // INLINED!!
-        local integer prev= (LoadInteger((Lists___hashTable), - (this ), ( i))) // INLINED!!
+        local integer next= (LoadInteger((Lists__hashTable), (this ), ( i))) // INLINED!!
+        local integer prev= (LoadInteger((Lists__hashTable), - (this ), ( i))) // INLINED!!
     
-        call SaveInteger((Lists___hashTable), - (this ), ( next ), ( prev)) // INLINED!!
-        call SaveInteger((Lists___hashTable), (this ), ( prev ), ( next)) // INLINED!!
+        call SaveInteger((Lists__hashTable), - (this ), ( next ), ( prev)) // INLINED!!
+        call SaveInteger((Lists__hashTable), (this ), ( prev ), ( next)) // INLINED!!
             
-        call RemoveSavedInteger((Lists___hashTable), (this ), ( i)) // INLINED!!
-        call RemoveSavedInteger((Lists___hashTable), - (this ), ( i)) // INLINED!!
+        call RemoveSavedInteger((Lists__hashTable), (this ), ( i)) // INLINED!!
+        call RemoveSavedInteger((Lists__hashTable), - (this ), ( i)) // INLINED!!
     endfunction
 
     constant function s__LinkedHashSet_RECYCLE_KEY takes nothing returns integer
@@ -8076,22 +8076,22 @@ endfunction
     
     
     function s__LinkedHashSet_addBefore takes integer this,integer oldData,integer newData returns nothing
-        call GLHS___AddBefore(this , oldData , newData)
+        call GLHS__AddBefore(this , oldData , newData)
     endfunction
     
     
     function s__LinkedHashSet_addAfter takes integer this,integer oldData,integer newData returns nothing
-        call GLHS___AddBefore(- this , oldData , newData)
+        call GLHS__AddBefore(- this , oldData , newData)
     endfunction
 
     
     function s__LinkedHashSet_append takes integer this,integer data returns nothing
-        call GLHS___AddBefore((this) , (0 ) , ( data)) // INLINED!!
+        call GLHS__AddBefore((this) , (0 ) , ( data)) // INLINED!!
     endfunction
     
     
     function s__LinkedHashSet_prepend takes integer this,integer data returns nothing
-        call GLHS___AddBefore(- (this) , (0 ) , ( data)) // INLINED!!
+        call GLHS__AddBefore(- (this) , (0 ) , ( data)) // INLINED!!
     endfunction
     
     
@@ -8101,39 +8101,39 @@ endfunction
     
     
     function s__LinkedHashSet_clear takes integer this returns nothing
-        call FlushChildHashtable((Lists___hashTable), this) // INLINED!!
-        call FlushChildHashtable((Lists___hashTable), - this) // INLINED!!
+        call FlushChildHashtable((Lists__hashTable), this) // INLINED!!
+        call FlushChildHashtable((Lists__hashTable), - this) // INLINED!!
     endfunction
     
     
     function s__LinkedHashSet_getFirst takes integer this returns integer
-        return (LoadInteger((Lists___hashTable), ((this) ), ( 0))) // INLINED!!
+        return (LoadInteger((Lists__hashTable), ((this) ), ( 0))) // INLINED!!
     endfunction
     
     
     function s__LinkedHashSet_getLast takes integer this returns integer
-        return (LoadInteger((Lists___hashTable), - ((this) ), ( 0))) // INLINED!!
+        return (LoadInteger((Lists__hashTable), - ((this) ), ( 0))) // INLINED!!
     endfunction
     
     
     function s__LinkedHashSet_isEmpty takes integer this returns boolean
-        return (LoadInteger((Lists___hashTable), ((this) ), ( 0))) != (0) // INLINED!!
+        return (LoadInteger((Lists__hashTable), ((this) ), ( 0))) != (0) // INLINED!!
     endfunction
     
     
     function s__LinkedHashSet_contains takes integer this,integer data returns boolean
-        return HaveSavedInteger((Lists___hashTable), this, data) // INLINED!!
+        return HaveSavedInteger((Lists__hashTable), this, data) // INLINED!!
     endfunction
     
     
     function s__LinkedHashSet_size takes integer this returns integer
-        local integer data= (LoadInteger((Lists___hashTable), ((this) ), ( 0))) // INLINED!!
+        local integer data= (LoadInteger((Lists__hashTable), ((this) ), ( 0))) // INLINED!!
         local integer count= 0
         
         loop
         exitwhen data == (0) // INLINED!!
             set count=count + 1
-            set data=(LoadInteger((Lists___hashTable), ((this) ), ( (data)))) // INLINED!!
+            set data=(LoadInteger((Lists__hashTable), ((this) ), ( (data)))) // INLINED!!
         endloop
         
         return count
@@ -8141,14 +8141,14 @@ endfunction
     
     //This function loops through a Set and executes a trigger for each element, setting the udg_List variables to their relevant equivalents each time
     function s__LinkedHashSet_forEach takes integer this,trigger trig returns nothing
-        local integer data= (LoadInteger((Lists___hashTable), ((this) ), ( 0))) // INLINED!!
+        local integer data= (LoadInteger((Lists__hashTable), ((this) ), ( 0))) // INLINED!!
         
         loop
         exitwhen data == (0) // INLINED!!
             set s__LinkedHashSet_enumElement=data
             set s__LinkedHashSet_enumSet=this
             
-            set data=(LoadInteger((Lists___hashTable), ((this) ), ( (data)))) // INLINED!!
+            set data=(LoadInteger((Lists__hashTable), ((this) ), ( (data)))) // INLINED!!
             
             if IsTriggerEnabled(trig) and TriggerEvaluate(trig) then
                 call TriggerExecute(trig)
@@ -8158,7 +8158,7 @@ endfunction
     
     //If 'until' parameter is a non-negative number, then the loop will break after iterating over that many elements
     function s__LinkedHashSet_forEachCounted takes integer this,trigger trig,integer until returns nothing
-        local integer data= (LoadInteger((Lists___hashTable), ((this) ), ( 0))) // INLINED!!
+        local integer data= (LoadInteger((Lists__hashTable), ((this) ), ( 0))) // INLINED!!
         local integer count= 0
             
         loop
@@ -8166,7 +8166,7 @@ endfunction
             set s__LinkedHashSet_enumElement=data
             set s__LinkedHashSet_enumSet=this
             
-            set data=(LoadInteger((Lists___hashTable), ((this) ), ( (data)))) // INLINED!!
+            set data=(LoadInteger((Lists__hashTable), ((this) ), ( (data)))) // INLINED!!
             
             if IsTriggerEnabled(trig) and TriggerEvaluate(trig) then
                 call TriggerExecute(trig)
@@ -8178,14 +8178,14 @@ endfunction
     
     // You may specify a code that will run in a ForPlayer loop instead of a trigger
     function s__LinkedHashSet_forEachCode takes integer this,code func returns nothing
-        local integer data= (LoadInteger((Lists___hashTable), ((this) ), ( 0))) // INLINED!!
+        local integer data= (LoadInteger((Lists__hashTable), ((this) ), ( 0))) // INLINED!!
         
         loop
         exitwhen data == (0) // INLINED!!
             set s__LinkedHashSet_enumElement=data
             set s__LinkedHashSet_enumSet=this
             
-            set data=(LoadInteger((Lists___hashTable), ((this) ), ( (data)))) // INLINED!!
+            set data=(LoadInteger((Lists__hashTable), ((this) ), ( (data)))) // INLINED!!
             
             call ForForce(bj_FORCE_PLAYER[0], func)
         endloop
@@ -8193,7 +8193,7 @@ endfunction
     
     
     function s__LinkedHashSet_forEachCodeCounted takes integer this,code func,integer until returns nothing
-        local integer data= (LoadInteger((Lists___hashTable), ((this) ), ( 0))) // INLINED!!
+        local integer data= (LoadInteger((Lists__hashTable), ((this) ), ( 0))) // INLINED!!
         local integer count= 0
             
         loop
@@ -8201,7 +8201,7 @@ endfunction
             set s__LinkedHashSet_enumElement=data
             set s__LinkedHashSet_enumSet=this
             
-            set data=(LoadInteger((Lists___hashTable), ((this) ), ( (data)))) // INLINED!!
+            set data=(LoadInteger((Lists__hashTable), ((this) ), ( (data)))) // INLINED!!
             
             call ForForce(bj_FORCE_PLAYER[0], func)
             
@@ -8210,17 +8210,17 @@ endfunction
     endfunction
     
     function s__LinkedHashSet_forEachWipe takes integer this,integer start,integer finish,code func returns integer
-        local integer data= (LoadInteger((Lists___hashTable), (this ), ( start))) // INLINED!!
+        local integer data= (LoadInteger((Lists__hashTable), (this ), ( start))) // INLINED!!
         local integer nextData
         local integer countRemoved= 0
             
         loop
         exitwhen data == finish or data == 0
         
-            set nextData=(LoadInteger((Lists___hashTable), (this ), ( data))) // INLINED!!
+            set nextData=(LoadInteger((Lists__hashTable), (this ), ( data))) // INLINED!!
 
-            call RemoveSavedInteger((Lists___hashTable), (this ), ( data)) // INLINED!!
-            call RemoveSavedInteger((Lists___hashTable), - (- this ), ( data)) // INLINED!!
+            call RemoveSavedInteger((Lists__hashTable), (this ), ( data)) // INLINED!!
+            call RemoveSavedInteger((Lists__hashTable), - (- this ), ( data)) // INLINED!!
             
             set s__LinkedHashSet_enumElement=data
             set s__LinkedHashSet_enumSet=this
@@ -8230,8 +8230,8 @@ endfunction
             set countRemoved=countRemoved + 1
         endloop
         
-        call SaveInteger((Lists___hashTable), - (this ), ( data ), ( start)) // INLINED!!
-        call SaveInteger((Lists___hashTable), (this ), ( start ), ( data)) // INLINED!!
+        call SaveInteger((Lists__hashTable), - (this ), ( data ), ( start)) // INLINED!!
+        call SaveInteger((Lists__hashTable), (this ), ( start ), ( data)) // INLINED!!
 
         return countRemoved
     endfunction
@@ -8243,8 +8243,8 @@ endfunction
     
     
     function s__LinkedHashSet_destroy takes integer this returns nothing
-        call FlushChildHashtable((Lists___hashTable), this) // INLINED!!
-        call FlushChildHashtable((Lists___hashTable), - this) // INLINED!!
+        call FlushChildHashtable((Lists__hashTable), this) // INLINED!!
+        call FlushChildHashtable((Lists__hashTable), - this) // INLINED!!
 //Implemented from module GMUI_deallocate_this:
 //textmacro instance: GMUI_RecycleIndex("this","thistype.RECYCLE_KEY()")
     call SaveInteger(GMUI_hashTable, (Lists_RECYCLE_KEY), this, LoadInteger(GMUI_hashTable, (Lists_RECYCLE_KEY), 0)) // INLINED!!
@@ -8592,10 +8592,8 @@ function LoPCommands___onChatMessage takes nothing returns boolean
     endif
     
     
-    call BJDebugMsg("Command called")
     if beforeSpace == (LoadStr(ConstTable__ht, (((((s__LoP_Command_string_impl))))), ((command)))) and accessLevel >= (LoadInteger(ConstTable__ht, (((((s__LoP_Command_accessLevel_impl))))), ((command)))) then // INLINED!!
         set evaluator=(LoadTriggerHandle(ConstTable__ht, (((((s__LoPCommands_Globals_static_members_key))))), (s__LoPCommands_Globals_evaluator_impl))) // INLINED!!
-        call BJDebugMsg(beforeSpace)
         
         set condition=TriggerAddCondition(evaluator, (LoadBooleanExprHandle(ConstTable__ht, (((((s__LoP_Command_boolexpr_impl))))), ((command))))) // INLINED!!
         
@@ -8754,8 +8752,8 @@ endfunction
 
 
     
-//Implemented from module LoPDecoBuilders___InitModule:
-        function s__LoP_DecoBuilders_LoPDecoBuilders___InitModule__onInit takes nothing returns nothing
+//Implemented from module LoPDecoBuilders__InitModule:
+        function s__LoP_DecoBuilders_LoPDecoBuilders__InitModule__onInit takes nothing returns nothing
             local integer i= 0
             // ---------
             // Special Decos
@@ -9681,7 +9679,7 @@ function AutoRectEnvironment_RegisterRect takes rect r returns nothing
     if not (HaveSavedHandle(ConstTable__ht, ((((s__AutoRectEnvironment__Globals_id2_impl)))), (rId))) then // INLINED!!
         call SaveRectHandle(ConstTable__ht, ((((s__AutoRectEnvironment__Globals_id2_impl)))), (rId), ( r)) // INLINED!!
         call RegionAddRect((LoadRegionHandle(ConstTable__ht, (((((s__AutoRectEnvironment__Globals_static_members_key))))), (s__AutoRectEnvironment__Globals_allRects_impl))), r) // INLINED!!
-        call GLHS___AddBefore((((LoadInteger(ConstTable__ht, (((s__AutoRectEnvironment__Globals_static_members_key))), (s__AutoRectEnvironment__Globals_rects_impl))))) , (0 ) , ( (rId))) // INLINED!!
+        call GLHS__AddBefore((((LoadInteger(ConstTable__ht, (((s__AutoRectEnvironment__Globals_static_members_key))), (s__AutoRectEnvironment__Globals_rects_impl))))) , (0 ) , ( (rId))) // INLINED!!
     endif
 endfunction
 
@@ -9758,7 +9756,7 @@ function onTimer takes nothing returns nothing
     endif
     
     if IsPointInRegion((LoadRegionHandle(ConstTable__ht, (((((s__AutoRectEnvironment__Globals_static_members_key))))), (s__AutoRectEnvironment__Globals_allRects_impl))), x, y) then // INLINED!!
-        set i=(LoadInteger((Lists___hashTable), (((LoadInteger(ConstTable__ht, (((s__AutoRectEnvironment__Globals_static_members_key))), (s__AutoRectEnvironment__Globals_rects_impl)))) ), ( 0))) // INLINED!!
+        set i=(LoadInteger((Lists__hashTable), (((LoadInteger(ConstTable__ht, (((s__AutoRectEnvironment__Globals_static_members_key))), (s__AutoRectEnvironment__Globals_rects_impl)))) ), ( 0))) // INLINED!!
             loop
                 exitwhen i == (0) // INLINED!!
                 set r=(LoadRectHandle(ConstTable__ht, ((((s__AutoRectEnvironment__Globals_id2_impl)))), (i))) // INLINED!!
@@ -9770,7 +9768,7 @@ function onTimer takes nothing returns nothing
                     exitwhen true
                 endif
             
-                set i=(LoadInteger((Lists___hashTable), (((LoadInteger(ConstTable__ht, (((s__AutoRectEnvironment__Globals_static_members_key))), (s__AutoRectEnvironment__Globals_rects_impl)))) ), ( (i)))) // INLINED!!
+                set i=(LoadInteger((Lists__hashTable), (((LoadInteger(ConstTable__ht, (((s__AutoRectEnvironment__Globals_static_members_key))), (s__AutoRectEnvironment__Globals_rects_impl)))) ), ( (i)))) // INLINED!!
             endloop
         set r=null
     else
@@ -13108,8 +13106,8 @@ endfunction
     
 //textmacro instance: TableStruct_NewConstTableField("","destructablesTab")
 
-         constant function s__LoPWidgets___Globals__get_destructablesTab takes nothing returns integer
-            return s__LoPWidgets___Globals_destructablesTab_impl
+         constant function s__LoPWidgets__Globals__get_destructablesTab takes nothing returns integer
+            return s__LoPWidgets__Globals_destructablesTab_impl
         endfunction
 
 
@@ -13147,11 +13145,11 @@ endfunction
 
 // Destructables
 function LoP_IsDestructableProtected takes destructable dest returns boolean
-    return (HaveSavedBoolean(ConstTable__ht, ((((s__LoPWidgets___Globals_destructablesTab_impl)))), (GetHandleId(dest)))) // INLINED!!
+    return (HaveSavedBoolean(ConstTable__ht, ((((s__LoPWidgets__Globals_destructablesTab_impl)))), (GetHandleId(dest)))) // INLINED!!
 endfunction
 
 function LoP_ProtectDestructable takes destructable dest returns nothing
-    call SaveBoolean(ConstTable__ht, ((((s__LoPWidgets___Globals_destructablesTab_impl)))), (GetHandleId(dest)), ( true)) // INLINED!!
+    call SaveBoolean(ConstTable__ht, ((((s__LoPWidgets__Globals_destructablesTab_impl)))), (GetHandleId(dest)), ( true)) // INLINED!!
 endfunction
 
 // Units
@@ -13858,7 +13856,7 @@ endfunction
 // 
 //   Warcraft III map script
 //   Generated by the Warcraft III World Editor
-//   Date: Wed Apr 10 14:00:43 2019
+//   Date: Wed Apr 10 17:29:27 2019
 //   Map Author: Guhun
 // 
 //===========================================================================
@@ -16023,7 +16021,7 @@ function Trig_Init_0_seconds_Func076A takes nothing returns nothing
 endfunction
 
 function Trig_Init_0_seconds_Func080A takes nothing returns nothing
-    call SaveBoolean(ConstTable__ht, ((((s__LoPWidgets___Globals_destructablesTab_impl)))), (GetHandleId((GetEnumDestructable()))), ( true)) // INLINED!!
+    call SaveBoolean(ConstTable__ht, ((((s__LoPWidgets__Globals_destructablesTab_impl)))), (GetHandleId((GetEnumDestructable()))), ( true)) // INLINED!!
 endfunction
 
 function Trig_Init_0_seconds_Actions takes nothing returns nothing
@@ -16580,11 +16578,11 @@ endfunction
 // scope LoPItemCleanup begins
 
 // The timer will remove dead items from the game every few seconds. Set the value below to determine that period.
-constant function LoPItemCleanup___CleaningPeriod takes nothing returns real
+constant function LoPItemCleanup__CleaningPeriod takes nothing returns real
     return 15.00
 endfunction
 
-function LoPItemCleanup___DestroyDeadItems takes nothing returns nothing
+function LoPItemCleanup__DestroyDeadItems takes nothing returns nothing
     local timer t= GetExpiredTimer()
     local integer tKey= (GetHandleId((t))) // INLINED!!
     local integer aKey= (GetHandleId(((LoadTriggerHandle(ArrayAgent_hashTable, (tKey ), ( 0)))))) // INLINED!!
@@ -16609,7 +16607,7 @@ function LoPItemCleanup___DestroyDeadItems takes nothing returns nothing
     set my_Item=null
 endfunction
 
-function LoPItemCleanup___ForItem takes nothing returns nothing
+function LoPItemCleanup__ForItem takes nothing returns nothing
     local integer aKey
     local integer size
     if GetWidgetLife(GetEnumItem()) == 0 then
@@ -16620,16 +16618,16 @@ function LoPItemCleanup___ForItem takes nothing returns nothing
     endif
 endfunction
 
-function LoPItemCleanup___TrigActions takes nothing returns nothing
+function LoPItemCleanup__TrigActions takes nothing returns nothing
     local timer t
     local integer aKey= (GetHandleId((GetTriggeringTrigger()))) // INLINED!!
     
     call SaveInteger(ArrayAgent_hashTable, (aKey ), ( 0 ), ( 1)) // INLINED!!
-    call EnumItemsInRect(udg_WholeMapRegion, null, function LoPItemCleanup___ForItem)
+    call EnumItemsInRect(udg_WholeMapRegion, null, function LoPItemCleanup__ForItem)
     
     if (LoadInteger(ArrayAgent_hashTable, (aKey ), ( 0))) > 1 then // INLINED!!
         set t=CreateTimer()
-        call TimerStart(t, 1.5, false, function LoPItemCleanup___DestroyDeadItems)
+        call TimerStart(t, 1.5, false, function LoPItemCleanup__DestroyDeadItems)
         call SaveAgentHandle(ArrayAgent_hashTable, ((GetHandleId((t))) ), ( 0 ), ( GetTriggeringTrigger())) // INLINED!!
         set t=null
     else
@@ -16637,11 +16635,11 @@ function LoPItemCleanup___TrigActions takes nothing returns nothing
     endif
 endfunction
 
-function LoPItemCleanup___onInit takes nothing returns nothing
+function LoPItemCleanup__onInit takes nothing returns nothing
     local trigger trig= CreateTrigger()
     
     call TriggerRegisterTimerEvent(trig, (15.00), true) // INLINED!!
-    call TriggerAddAction(trig, function LoPItemCleanup___TrigActions)
+    call TriggerAddAction(trig, function LoPItemCleanup__TrigActions)
 endfunction
 
 // scope LoPItemCleanup ends
@@ -16886,14 +16884,14 @@ endfunction
 
 // scope TitanPowers begins
 
-function TitanPowers___GroupFilter takes nothing returns boolean
+function TitanPowers__GroupFilter takes nothing returns boolean
     if not RectContainsUnit(gg_rct_Titan_Palace, GetFilterUnit()) then
         call SetUnitOwner(GetFilterUnit(), udg_PowerSystem_Player, true)
     endif
     return false
 endfunction
 
-function TitanPowers___onOrder takes nothing returns boolean
+function TitanPowers__onOrder takes nothing returns boolean
     
     if GetIssuedOrderIdBJ() != String2OrderIdBJ("smart") then
         return false
@@ -16902,7 +16900,7 @@ function TitanPowers___onOrder takes nothing returns boolean
     call IssueImmediateOrderBJ(GetTriggerUnit(), "stop")
     if GetTriggerUnit() == (gg_unit_e00D_0409) then // INLINED!!
         if udg_PowerSystem_allFlag then
-            call GroupEnumUnitsOfPlayer(ENUM_GROUP, GetOwningPlayer(GetOrderTargetUnit()), Condition(function TitanPowers___GroupFilter))
+            call GroupEnumUnitsOfPlayer(ENUM_GROUP, GetOwningPlayer(GetOrderTargetUnit()), Condition(function TitanPowers__GroupFilter))
             set udg_PowerSystem_allFlag=false
         else
             call SetUnitOwner(GetOrderTargetUnit(), udg_PowerSystem_Player, true)
@@ -16927,7 +16925,7 @@ function TitanPowers___onOrder takes nothing returns boolean
 endfunction
 
 //===========================================================================
-function TitanPowers___onInit takes nothing returns nothing
+function TitanPowers__onInit takes nothing returns nothing
     local trigger trig= CreateTrigger()
     call TriggerRegisterUnitEvent(trig, (gg_unit_e007_0410), EVENT_UNIT_ISSUED_TARGET_ORDER) // INLINED!!
     call TriggerRegisterUnitEvent(trig, (gg_unit_e008_0406), EVENT_UNIT_ISSUED_TARGET_ORDER) // INLINED!!
@@ -16936,7 +16934,7 @@ function TitanPowers___onInit takes nothing returns nothing
     call TriggerRegisterUnitEvent(trig, (gg_unit_e00B_0405), EVENT_UNIT_ISSUED_TARGET_ORDER) // INLINED!!
     call TriggerRegisterUnitEvent(trig, (gg_unit_e00A_0411), EVENT_UNIT_ISSUED_TARGET_ORDER) // INLINED!!
     call TriggerRegisterUnitEvent(trig, (gg_unit_e00D_0409), EVENT_UNIT_ISSUED_TARGET_ORDER) // INLINED!!
-    call TriggerAddCondition(trig, Condition(function TitanPowers___onOrder))
+    call TriggerAddCondition(trig, Condition(function TitanPowers__onOrder))
 endfunction
 
 // scope TitanPowers ends
@@ -18833,7 +18831,7 @@ endfunction
 //===========================================================================
 // scope DecoModAbils begins
 
-    function DecoModAbils___PlayerNumber takes unit whichUnit returns integer
+    function DecoModAbils__PlayerNumber takes unit whichUnit returns integer
         return GetPlayerId(GetOwningPlayer(whichUnit)) + 1
     endfunction
 
@@ -19019,15 +19017,15 @@ endfunction
 // scope DecoMovement begins
 
 
-    function DecoMovement___PlayerNumber takes unit whichUnit returns integer
+    function DecoMovement__PlayerNumber takes unit whichUnit returns integer
         return GetPlayerId(GetOwningPlayer(whichUnit)) + 1
     endfunction
     
-    function DecoMovement___X takes unit whichUnit returns real
+    function DecoMovement__X takes unit whichUnit returns real
         return GetUnitX(whichUnit)
     endfunction
     
-    function DecoMovement___Y takes unit whichUnit returns real
+    function DecoMovement__Y takes unit whichUnit returns real
         return GetUnitY(whichUnit)
     endfunction
     
@@ -19247,7 +19245,7 @@ function Trig_TreeSystem_Cast_Ability_Conditions takes nothing returns boolean
 endfunction
 
 function Trig_TreeSystem_Cast_Ability_Func004Func003A takes nothing returns nothing
-    if not (HaveSavedBoolean(ConstTable__ht, ((((s__LoPWidgets___Globals_destructablesTab_impl)))), (GetHandleId((GetEnumDestructable()))))) then // INLINED!!
+    if not (HaveSavedBoolean(ConstTable__ht, ((((s__LoPWidgets__Globals_destructablesTab_impl)))), (GetHandleId((GetEnumDestructable()))))) then // INLINED!!
     call KillDestructable(GetEnumDestructable())
     endif
 endfunction
@@ -19271,7 +19269,7 @@ function Trig_TreeSystem_Cast_Ability_Func005C takes nothing returns boolean
 endfunction
 
 function Trig_TreeSystem_Cast_Ability_Func006Func003A takes nothing returns nothing
-    if IsDestructableTree(GetEnumDestructable()) and not (HaveSavedBoolean(ConstTable__ht, ((((s__LoPWidgets___Globals_destructablesTab_impl)))), (GetHandleId((GetEnumDestructable()))))) then // INLINED!!
+    if IsDestructableTree(GetEnumDestructable()) and not (HaveSavedBoolean(ConstTable__ht, ((((s__LoPWidgets__Globals_destructablesTab_impl)))), (GetHandleId((GetEnumDestructable()))))) then // INLINED!!
     call RemoveDestructable(GetEnumDestructable())
     endif
 endfunction
@@ -19338,8 +19336,8 @@ endfunction
 
 //textmacro instance: TableStruct_NewConstTableField("","timerData")
 
-         constant function s__TreeSystemChooseTree___Globals__get_timerData takes nothing returns integer
-            return s__TreeSystemChooseTree___Globals_timerData_impl
+         constant function s__TreeSystemChooseTree__Globals__get_timerData takes nothing returns integer
+            return s__TreeSystemChooseTree__Globals_timerData_impl
         endfunction
 
 
@@ -19351,14 +19349,14 @@ endfunction
 function TreeIssueStopOrder takes nothing returns nothing
     local timer t= GetExpiredTimer()
     local integer tId= GetHandleId(t)
-    local unit deco= (LoadUnitHandle(ConstTable__ht, ((((s__TreeSystemChooseTree___Globals_timerData_impl)))), (GetHandleId(t)))) // INLINED!!
+    local unit deco= (LoadUnitHandle(ConstTable__ht, ((((s__TreeSystemChooseTree__Globals_timerData_impl)))), (GetHandleId(t)))) // INLINED!!
     
     call IssueImmediateOrder(deco, "stop")
     
     call PauseTimer(t)
     call DestroyTimer(t)
     
-    call RemoveSavedHandle(ConstTable__ht, ((((s__TreeSystemChooseTree___Globals_timerData_impl)))), (tId)) // INLINED!!
+    call RemoveSavedHandle(ConstTable__ht, ((((s__TreeSystemChooseTree__Globals_timerData_impl)))), (tId)) // INLINED!!
     
     set t=null
     set deco=null
@@ -19374,7 +19372,7 @@ function Trig_TreeSystem_Choose_Tree_Conditions takes nothing returns boolean
             set t=CreateTimer()
             set udg_TreeSystem_TREES[GetPlayerId(GetOwningPlayer(GetTriggerUnit())) + 1]=GetDestructableTypeId(GetOrderTargetDestructable())
             call TimerStart(t, 0, false, function TreeIssueStopOrder)
-            call SaveUnitHandle(ConstTable__ht, ((((s__TreeSystemChooseTree___Globals_timerData_impl)))), (GetHandleId(t)), ( GetTriggerUnit())) // INLINED!!
+            call SaveUnitHandle(ConstTable__ht, ((((s__TreeSystemChooseTree__Globals_timerData_impl)))), (GetHandleId(t)), ( GetTriggerUnit())) // INLINED!!
             set t=null
         endif
     endif
@@ -20194,7 +20192,7 @@ function UnitEventEnter takes nothing returns boolean
     local integer i= udg_UDexLastRecycled
     local unit u= GetFilterUnit()
     //IF UNIT AS DECORATION ABILITY, DO NOT INDEX THIS UNIT
-    if GetUnitAbilityLevel(u, 'A0C6') != 0 then
+    if (GetUnitAbilityLevel((u), 'A0C6') > 0) then // INLINED!!
         call SetUnitUserData(u, 0)
         set u=null
         return false
@@ -23627,88 +23625,88 @@ endfunction
 
     
 //textmacro instance: TableStruct_NewHandleField("caster","unit")
-    function s__SpatialDistortion__TimerData__get_caster takes integer this returns unit
-        return (LoadUnitHandle(ConstTable__ht, (((((s__SpatialDistortion__TimerData_caster_impl))))), (this))) // INLINED!!
+    function s__SpatialDistortion___TimerData__get_caster takes integer this returns unit
+        return (LoadUnitHandle(ConstTable__ht, (((((s__SpatialDistortion___TimerData_caster_impl))))), (this))) // INLINED!!
     endfunction
     
-    function s__SpatialDistortion__TimerData__set_caster takes integer this,unit new_caster returns nothing
-        call s__TableStruct_setHandle(s__SpatialDistortion__TimerData_caster_impl , this , new_caster)
+    function s__SpatialDistortion___TimerData__set_caster takes integer this,unit new_caster returns nothing
+        call s__TableStruct_setHandle(s__SpatialDistortion___TimerData_caster_impl , this , new_caster)
     endfunction
     
-    function s__SpatialDistortion__TimerData_casterClear takes integer this returns nothing
-        call RemoveSavedHandle(ConstTable__ht, (((((s__SpatialDistortion__TimerData_caster_impl))))), (this)) // INLINED!!
+    function s__SpatialDistortion___TimerData_casterClear takes integer this returns nothing
+        call RemoveSavedHandle(ConstTable__ht, (((((s__SpatialDistortion___TimerData_caster_impl))))), (this)) // INLINED!!
     endfunction
     
-    function s__SpatialDistortion__TimerData_casterExists takes integer this returns boolean
-        return (HaveSavedHandle(ConstTable__ht, (((((s__SpatialDistortion__TimerData_caster_impl))))), (this))) // INLINED!!
+    function s__SpatialDistortion___TimerData_casterExists takes integer this returns boolean
+        return (HaveSavedHandle(ConstTable__ht, (((((s__SpatialDistortion___TimerData_caster_impl))))), (this))) // INLINED!!
     endfunction
 //end of: TableStruct_NewHandleField("caster","unit")
 //textmacro instance: TableStruct_NewPrimitiveField("counter","integer")
-    function s__SpatialDistortion__TimerData__get_counter takes integer this returns integer
-        return (LoadInteger(ConstTable__ht, (((((s__SpatialDistortion__TimerData_counter_impl))))), (this))) // INLINED!!
+    function s__SpatialDistortion___TimerData__get_counter takes integer this returns integer
+        return (LoadInteger(ConstTable__ht, (((((s__SpatialDistortion___TimerData_counter_impl))))), (this))) // INLINED!!
     endfunction
     
-    function s__SpatialDistortion__TimerData__set_counter takes integer this,integer new_counter returns nothing
-        call SaveInteger(ConstTable__ht, (((((s__SpatialDistortion__TimerData_counter_impl))))), (this), ( new_counter)) // INLINED!!
+    function s__SpatialDistortion___TimerData__set_counter takes integer this,integer new_counter returns nothing
+        call SaveInteger(ConstTable__ht, (((((s__SpatialDistortion___TimerData_counter_impl))))), (this), ( new_counter)) // INLINED!!
     endfunction
     
-    function s__SpatialDistortion__TimerData_counterClear takes integer this returns nothing
-        call RemoveSavedInteger(ConstTable__ht, (((((s__SpatialDistortion__TimerData_counter_impl))))), (this)) // INLINED!!
+    function s__SpatialDistortion___TimerData_counterClear takes integer this returns nothing
+        call RemoveSavedInteger(ConstTable__ht, (((((s__SpatialDistortion___TimerData_counter_impl))))), (this)) // INLINED!!
     endfunction
     
-    function s__SpatialDistortion__TimerData_counterExists takes integer this returns boolean
-        return (HaveSavedInteger(ConstTable__ht, (((((s__SpatialDistortion__TimerData_counter_impl))))), (this))) // INLINED!!
+    function s__SpatialDistortion___TimerData_counterExists takes integer this returns boolean
+        return (HaveSavedInteger(ConstTable__ht, (((((s__SpatialDistortion___TimerData_counter_impl))))), (this))) // INLINED!!
     endfunction
 //end of: TableStruct_NewPrimitiveField("counter","integer")
 //textmacro instance: TableStruct_NewPrimitiveField("x","real")
-    function s__SpatialDistortion__TimerData__get_x takes integer this returns real
-        return (LoadReal(ConstTable__ht, (((((s__SpatialDistortion__TimerData_x_impl))))), (this))) // INLINED!!
+    function s__SpatialDistortion___TimerData__get_x takes integer this returns real
+        return (LoadReal(ConstTable__ht, (((((s__SpatialDistortion___TimerData_x_impl))))), (this))) // INLINED!!
     endfunction
     
-    function s__SpatialDistortion__TimerData__set_x takes integer this,real new_x returns nothing
-        call SaveReal(ConstTable__ht, (((((s__SpatialDistortion__TimerData_x_impl))))), (this), (( new_x)*1.0)) // INLINED!!
+    function s__SpatialDistortion___TimerData__set_x takes integer this,real new_x returns nothing
+        call SaveReal(ConstTable__ht, (((((s__SpatialDistortion___TimerData_x_impl))))), (this), (( new_x)*1.0)) // INLINED!!
     endfunction
     
-    function s__SpatialDistortion__TimerData_xClear takes integer this returns nothing
-        call RemoveSavedReal(ConstTable__ht, (((((s__SpatialDistortion__TimerData_x_impl))))), (this)) // INLINED!!
+    function s__SpatialDistortion___TimerData_xClear takes integer this returns nothing
+        call RemoveSavedReal(ConstTable__ht, (((((s__SpatialDistortion___TimerData_x_impl))))), (this)) // INLINED!!
     endfunction
     
-    function s__SpatialDistortion__TimerData_xExists takes integer this returns boolean
-        return (HaveSavedReal(ConstTable__ht, (((((s__SpatialDistortion__TimerData_x_impl))))), (this))) // INLINED!!
+    function s__SpatialDistortion___TimerData_xExists takes integer this returns boolean
+        return (HaveSavedReal(ConstTable__ht, (((((s__SpatialDistortion___TimerData_x_impl))))), (this))) // INLINED!!
     endfunction
 //end of: TableStruct_NewPrimitiveField("x","real")
 //textmacro instance: TableStruct_NewPrimitiveField("y","real")
-    function s__SpatialDistortion__TimerData__get_y takes integer this returns real
-        return (LoadReal(ConstTable__ht, (((((s__SpatialDistortion__TimerData_y_impl))))), (this))) // INLINED!!
+    function s__SpatialDistortion___TimerData__get_y takes integer this returns real
+        return (LoadReal(ConstTable__ht, (((((s__SpatialDistortion___TimerData_y_impl))))), (this))) // INLINED!!
     endfunction
     
-    function s__SpatialDistortion__TimerData__set_y takes integer this,real new_y returns nothing
-        call SaveReal(ConstTable__ht, (((((s__SpatialDistortion__TimerData_y_impl))))), (this), (( new_y)*1.0)) // INLINED!!
+    function s__SpatialDistortion___TimerData__set_y takes integer this,real new_y returns nothing
+        call SaveReal(ConstTable__ht, (((((s__SpatialDistortion___TimerData_y_impl))))), (this), (( new_y)*1.0)) // INLINED!!
     endfunction
     
-    function s__SpatialDistortion__TimerData_yClear takes integer this returns nothing
-        call RemoveSavedReal(ConstTable__ht, (((((s__SpatialDistortion__TimerData_y_impl))))), (this)) // INLINED!!
+    function s__SpatialDistortion___TimerData_yClear takes integer this returns nothing
+        call RemoveSavedReal(ConstTable__ht, (((((s__SpatialDistortion___TimerData_y_impl))))), (this)) // INLINED!!
     endfunction
     
-    function s__SpatialDistortion__TimerData_yExists takes integer this returns boolean
-        return (HaveSavedReal(ConstTable__ht, (((((s__SpatialDistortion__TimerData_y_impl))))), (this))) // INLINED!!
+    function s__SpatialDistortion___TimerData_yExists takes integer this returns boolean
+        return (HaveSavedReal(ConstTable__ht, (((((s__SpatialDistortion___TimerData_y_impl))))), (this))) // INLINED!!
     endfunction
 //end of: TableStruct_NewPrimitiveField("y","real")
     
-    function s__SpatialDistortion__TimerData_flushCaster takes integer this returns nothing
-        call RemoveSavedHandle(ConstTable__ht, (((((s__SpatialDistortion__TimerData_caster_impl))))), ((this))) // INLINED!!
+    function s__SpatialDistortion___TimerData_flushCaster takes integer this returns nothing
+        call RemoveSavedHandle(ConstTable__ht, (((((s__SpatialDistortion___TimerData_caster_impl))))), ((this))) // INLINED!!
     endfunction
-    function s__SpatialDistortion__TimerData_flushCounter takes integer this returns nothing
-        call RemoveSavedInteger(ConstTable__ht, (((((s__SpatialDistortion__TimerData_counter_impl))))), ((this))) // INLINED!!
+    function s__SpatialDistortion___TimerData_flushCounter takes integer this returns nothing
+        call RemoveSavedInteger(ConstTable__ht, (((((s__SpatialDistortion___TimerData_counter_impl))))), ((this))) // INLINED!!
     endfunction
-    function s__SpatialDistortion__TimerData_flushX takes integer this returns nothing
-        call RemoveSavedReal(ConstTable__ht, (((((s__SpatialDistortion__TimerData_x_impl))))), ((this))) // INLINED!!
+    function s__SpatialDistortion___TimerData_flushX takes integer this returns nothing
+        call RemoveSavedReal(ConstTable__ht, (((((s__SpatialDistortion___TimerData_x_impl))))), ((this))) // INLINED!!
     endfunction
-    function s__SpatialDistortion__TimerData_flushY takes integer this returns nothing
-        call RemoveSavedReal(ConstTable__ht, (((((s__SpatialDistortion__TimerData_y_impl))))), ((this))) // INLINED!!
+    function s__SpatialDistortion___TimerData_flushY takes integer this returns nothing
+        call RemoveSavedReal(ConstTable__ht, (((((s__SpatialDistortion___TimerData_y_impl))))), ((this))) // INLINED!!
     endfunction
 
-function SpatialDistortion__onExpire_EnumInRange takes nothing returns nothing
+function SpatialDistortion___onExpire_EnumInRange takes nothing returns nothing
     local unit filterU= GetFilterUnit()
     local unit caster= s__Args_getUnit(0)
     
@@ -23722,29 +23720,29 @@ function SpatialDistortion__onExpire_EnumInRange takes nothing returns nothing
     set caster=null
 endfunction
 
-function SpatialDistortion__onExpire takes nothing returns nothing
+function SpatialDistortion___onExpire takes nothing returns nothing
     local timer t= GetExpiredTimer()
     local integer tData= GetHandleId(t)
-    local real x= (LoadReal(ConstTable__ht, (((((s__SpatialDistortion__TimerData_x_impl))))), ((tData)))) // INLINED!!
-    local real y= (LoadReal(ConstTable__ht, (((((s__SpatialDistortion__TimerData_y_impl))))), ((tData)))) // INLINED!!
+    local real x= (LoadReal(ConstTable__ht, (((((s__SpatialDistortion___TimerData_x_impl))))), ((tData)))) // INLINED!!
+    local real y= (LoadReal(ConstTable__ht, (((((s__SpatialDistortion___TimerData_y_impl))))), ((tData)))) // INLINED!!
     
-    call s__Args_setAgent(s__Args_unit_impl , (0 ) , ( (LoadUnitHandle(ConstTable__ht, (((((s__SpatialDistortion__TimerData_caster_impl))))), ((tData)))))) // INLINED!!
+    call s__Args_setAgent(s__Args_unit_impl , (0 ) , ( (LoadUnitHandle(ConstTable__ht, (((((s__SpatialDistortion___TimerData_caster_impl))))), ((tData)))))) // INLINED!!
     call s__Args_setReal(0 , x)
     call s__Args_setReal(1 , y)
-    call GroupEnumUnitsInRange(ENUM_GROUP, x, y, 400, Filter(function SpatialDistortion__onExpire_EnumInRange))
+    call GroupEnumUnitsInRange(ENUM_GROUP, x, y, 400, Filter(function SpatialDistortion___onExpire_EnumInRange))
     call s__Args_freeReal(0)
     call s__Args_freeReal(1)
     call s__Args_freeHandle(s__Args_unit_impl , (0)) // INLINED!!
     
-    if (LoadInteger(ConstTable__ht, (((((s__SpatialDistortion__TimerData_counter_impl))))), ((tData)))) >= 4 then // INLINED!!
-        call RemoveSavedHandle(ConstTable__ht, (((((s__SpatialDistortion__TimerData_caster_impl))))), (((tData)))) // INLINED!!
-        call RemoveSavedInteger(ConstTable__ht, (((((s__SpatialDistortion__TimerData_counter_impl))))), (((tData)))) // INLINED!!
-        call RemoveSavedReal(ConstTable__ht, (((((s__SpatialDistortion__TimerData_x_impl))))), (((tData)))) // INLINED!!
-        call RemoveSavedReal(ConstTable__ht, (((((s__SpatialDistortion__TimerData_y_impl))))), (((tData)))) // INLINED!!
+    if (LoadInteger(ConstTable__ht, (((((s__SpatialDistortion___TimerData_counter_impl))))), ((tData)))) >= 4 then // INLINED!!
+        call RemoveSavedHandle(ConstTable__ht, (((((s__SpatialDistortion___TimerData_caster_impl))))), (((tData)))) // INLINED!!
+        call RemoveSavedInteger(ConstTable__ht, (((((s__SpatialDistortion___TimerData_counter_impl))))), (((tData)))) // INLINED!!
+        call RemoveSavedReal(ConstTable__ht, (((((s__SpatialDistortion___TimerData_x_impl))))), (((tData)))) // INLINED!!
+        call RemoveSavedReal(ConstTable__ht, (((((s__SpatialDistortion___TimerData_y_impl))))), (((tData)))) // INLINED!!
         call PauseTimer(t)
         call DestroyTimer(t)
     else
-        call SaveInteger(ConstTable__ht, (((((s__SpatialDistortion__TimerData_counter_impl))))), ((tData)), ( ((LoadInteger(ConstTable__ht, (((((s__SpatialDistortion__TimerData_counter_impl))))), ((tData)))) + 1))) // INLINED!!
+        call SaveInteger(ConstTable__ht, (((((s__SpatialDistortion___TimerData_counter_impl))))), ((tData)), ( ((LoadInteger(ConstTable__ht, (((((s__SpatialDistortion___TimerData_counter_impl))))), ((tData)))) + 1))) // INLINED!!
     endif
     
     set t=null
@@ -23761,11 +23759,11 @@ function Trig_Spatial_Distortion_Cast_Conditions takes nothing returns boolean
     set t=CreateTimer()
     set tData=GetHandleId(t)
     
-    call s__TableStruct_setHandle(s__SpatialDistortion__TimerData_caster_impl , (tData) , (udg_Spell__Caster)) // INLINED!!
-    call SaveReal(ConstTable__ht, (((((s__SpatialDistortion__TimerData_x_impl))))), ((tData)), (( ((GetLocationX(udg_Spell__CastPoint))*1.0))*1.0)) // INLINED!!
-    call SaveReal(ConstTable__ht, (((((s__SpatialDistortion__TimerData_y_impl))))), ((tData)), (( ((GetLocationY(udg_Spell__CastPoint))*1.0))*1.0)) // INLINED!!
-    call SaveInteger(ConstTable__ht, (((((s__SpatialDistortion__TimerData_counter_impl))))), ((tData)), ( (0))) // INLINED!!
-    call TimerStart(t, 0.2, true, function SpatialDistortion__onExpire)
+    call s__TableStruct_setHandle(s__SpatialDistortion___TimerData_caster_impl , (tData) , (udg_Spell__Caster)) // INLINED!!
+    call SaveReal(ConstTable__ht, (((((s__SpatialDistortion___TimerData_x_impl))))), ((tData)), (( ((GetLocationX(udg_Spell__CastPoint))*1.0))*1.0)) // INLINED!!
+    call SaveReal(ConstTable__ht, (((((s__SpatialDistortion___TimerData_y_impl))))), ((tData)), (( ((GetLocationY(udg_Spell__CastPoint))*1.0))*1.0)) // INLINED!!
+    call SaveInteger(ConstTable__ht, (((((s__SpatialDistortion___TimerData_counter_impl))))), ((tData)), ( (0))) // INLINED!!
+    call TimerStart(t, 0.2, true, function SpatialDistortion___onExpire)
     
     set t=null
     return false
@@ -29156,8 +29154,8 @@ function main takes nothing returns nothing
     call CreateAllUnits()
     call InitBlizzard()
 
-call ExecuteFunc("jasshelper__initstructs97396437")
-call ExecuteFunc("CombatTag__onInit")
+call ExecuteFunc("jasshelper__initstructs109920703")
+call ExecuteFunc("CombatTag___onInit")
 call ExecuteFunc("DestructableLib__Initialization")
 call ExecuteFunc("MultiPatrol__onInit")
 call ExecuteFunc("FilterTransformations___onInit")
@@ -29165,8 +29163,8 @@ call ExecuteFunc("onInit")
 call ExecuteFunc("UserDefinedRects__onInit")
 call ExecuteFunc("RectGenerator__onInit")
 call ExecuteFunc("UnitVisualMods__onInit")
-call LoPItemCleanup___onInit()
-call TitanPowers___onInit()
+call LoPItemCleanup__onInit()
+call TitanPowers__onInit()
 call MultiPatrolCommands__onInit()
 call MultiPatrolOrder__onInit()
 
@@ -29287,7 +29285,7 @@ local real value=f__arg_real1
    return true
 endfunction
 
-function jasshelper__initstructs97396437 takes nothing returns nothing
+function jasshelper__initstructs109920703 takes nothing returns nothing
     set st__LoP_PlayerData_get=CreateTrigger()
     call TriggerAddCondition(st__LoP_PlayerData_get,Condition( function sa__LoP_PlayerData_get))
     set st__LoP_PlayerData__get_commandsEnabled=CreateTrigger()
@@ -29417,7 +29415,7 @@ call ExecuteFunc("s__TileDefinition__TileDefinition_TileDefinition__Init__onInit
 
 
 
-call ExecuteFunc("s__LoP_DecoBuilders_LoPDecoBuilders___InitModule__onInit")
+call ExecuteFunc("s__LoP_DecoBuilders_LoPDecoBuilders__InitModule__onInit")
 
 
 

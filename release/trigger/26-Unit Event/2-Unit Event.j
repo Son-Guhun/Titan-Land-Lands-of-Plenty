@@ -179,7 +179,7 @@ function UnitEventEnter takes nothing returns boolean
     local integer i = udg_UDexLastRecycled
     local unit u = GetFilterUnit()
     //IF UNIT AS DECORATION ABILITY, DO NOT INDEX THIS UNIT
-    if GetUnitAbilityLevel(u , 'A0C6') != 0 then
+    if LoP_IsUnitDecoration(u) then
         call SetUnitUserData(u, 0)
         set u = null
         return false

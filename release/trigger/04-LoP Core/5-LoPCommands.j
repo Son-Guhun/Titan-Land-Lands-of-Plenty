@@ -85,10 +85,10 @@ private function onChatMessage takes nothing returns boolean
     endif
     
     
-    call BJDebugMsg("Command called")
+    debug call BJDebugMsg("Command called")
     if beforeSpace == command.string and accessLevel >= command.accessLevel then
         set evaluator = Globals.evaluator
-        call BJDebugMsg(beforeSpace)
+        debug call BJDebugMsg(beforeSpace)
         
         set condition = TriggerAddCondition(evaluator, command.boolexpr)
         
