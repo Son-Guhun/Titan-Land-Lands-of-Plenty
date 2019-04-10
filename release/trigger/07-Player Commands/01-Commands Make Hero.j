@@ -26,7 +26,7 @@ private function FilterUnitsMakeHero takes nothing returns boolean
         elseif GetUnitAbilityLevel(filterU, 'Adef') > 0 then
             call DisplayTextToPlayer(udg_GAME_MASTER, 0, 0, "Units with the Defend ability cannot be heroes")
             
-        elseif GetUnitAbilityLevel(filterU, 'Aher') > 0 then
+        elseif GetUnitAbilityLevel(filterU, 'AHer') > 0 then
             call DisplayTextToPlayer(udg_GAME_MASTER, 0, 0, "This unit is already a hero.")
             
         elseif GetUnitAbilityLevel(filterU, 'AInv') > 0 then  // Detects all inventory skills.
@@ -54,7 +54,7 @@ private function FilterUnitsMakeHero takes nothing returns boolean
     return false
 endfunction
 
-function Trig_Commands_Make_Hero_Actions takes nothing returns nothing
+function Trig_Commands_Make_Hero_Conditions takes nothing returns nothing
     if GetTriggerPlayer() == udg_GAME_MASTER then
         call GroupEnumUnitsSelected(ENUM_GROUP, GetTriggerPlayer(), Condition(function FilterUnitsMakeHero))
     endif
@@ -62,8 +62,7 @@ endfunction
 
 //===========================================================================
 function InitTrig_Commands_Make_Hero takes nothing returns nothing
-    set gg_trg_Commands_Make_Hero = CreateTrigger(  )
-    call TriggerAddAction( gg_trg_Commands_Make_Hero, function Trig_Commands_Make_Hero_Actions )
+    call LoP_Command.create("-makehero", ACCESS_TITAN, Condition(function Trig_Commands_Make_Hero_Conditions ))
     set Globals.dummy = CreateUnit(Player(bj_PLAYER_NEUTRAL_EXTRA), 'Hpal', 0., 0., bj_UNIT_FACING )
 endfunction
 

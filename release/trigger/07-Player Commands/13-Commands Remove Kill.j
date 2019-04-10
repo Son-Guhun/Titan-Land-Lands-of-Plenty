@@ -12,17 +12,18 @@ function FilterUnitsRemove takes nothing returns boolean
     return false
 endfunction
 
-function Trig_Commands_Remove_Kill_Actions takes nothing returns nothing
-    if ( GetEventPlayerChatString() == "-kill" ) then
+function Trig_Commands_Remove_Kill_Conditions takes nothing returns boolean
+    if LoP_Command.getCommand() == "-kill" then
         call GroupEnumUnitsSelected(ENUM_GROUP, GetTriggerPlayer(), Condition(function FilterUnitsKill))
     else
         call GroupEnumUnitsSelected(ENUM_GROUP, GetTriggerPlayer(), Condition(function FilterUnitsRemove))
     endif
+    return false
 endfunction
 
 //===========================================================================
 function InitTrig_Commands_Remove_Kill takes nothing returns nothing
-    set gg_trg_Commands_Remove_Kill = CreateTrigger(  )
-    call TriggerAddAction( gg_trg_Commands_Remove_Kill, function Trig_Commands_Remove_Kill_Actions )
+    call LoP_Command.create("-kill", ACCESS_USER, Condition(function Trig_Commands_Remove_Kill_Conditions))
+    call LoP_Command.create("-remove", ACCESS_USER, Condition(function Trig_Commands_Remove_Kill_Conditions))
 endfunction
 

@@ -5,20 +5,21 @@ function Trig_CommandsR_Delete_Func018A takes nothing returns nothing
 endfunction
 
 function Trig_CommandsR_Delete_Conditions takes nothing returns boolean
-    local integer playerNumber = Commands_GetChatMessagePlayerNumber(Commands_GetArguments())
+    local integer playerNumber = Commands_GetChatMessagePlayerNumber(LoP_Command.getArguments())
+    local string command = LoP_Command.getCommand()
     // --------------
     // DON'T ALLOW DELETION OF THE OWNER OF THE GDS DUMMIES
-    if not PlayerNumberIsNotExtraOrVictim(playerNumber) or  GetTriggerPlayer() != udg_GAME_MASTER then
+    if not PlayerNumberIsNotExtraOrVictim(playerNumber) then
         return false
     endif
     
     set udg_Commands_Counter = 0
     set udg_Commands_Counter_Max = 500
-    if ( GetEventPlayerChatStringMatched() == "-delneu " ) then
+    if ( command == "-delneu" ) then
         set commandsDeleteInsideTitanPalace = false
         call ForGroup( udg_System_NeutralUnits[( playerNumber - 1 )], function Trig_CommandsR_Delete_Func018A )
         // Don't clear neutral group, protected units might be in it. Let automatic refresh take care of this.
-    elseif ( GetEventPlayerChatStringMatched() == "-delpal " ) then
+    elseif ( command == "-delpal" ) then
         set commandsDeleteInsideTitanPalace = true
         call GroupEnumUnitsOfPlayer(ENUM_GROUP, Player(playerNumber - 1), Condition(function GroupEnum_RemoveOutsidePalace))
         call ForGroup( udg_System_NeutralUnits[( playerNumber - 1 )], function Trig_CommandsR_Delete_Func018A )
@@ -32,7 +33,8 @@ endfunction
 
 //===========================================================================
 function InitTrig_CommandsR_Delete takes nothing returns nothing
-    set gg_trg_CommandsR_Delete = CreateTrigger(  )
-    call TriggerAddCondition( gg_trg_CommandsR_Delete, Condition( function Trig_CommandsR_Delete_Conditions ) )
+    call LoP_Command.create("-delete", ACCESS_TITAN, Condition(function Trig_CommandsR_Delete_Conditions))
+    call LoP_Command.create("-delneu", ACCESS_TITAN, Condition(function Trig_CommandsR_Delete_Conditions))
+    call LoP_Command.create("-delpal", ACCESS_TITAN, Condition(function Trig_CommandsR_Delete_Conditions))
 endfunction
 

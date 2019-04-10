@@ -6,22 +6,20 @@ function Trig_CommandsD_Add_Tag_Func008A takes nothing returns nothing
     endif
 endfunction
 
-function Trig_CommandsD_Add_Tag_Actions takes nothing returns nothing
+function Trig_CommandsD_Add_Tag_Conditions takes nothing returns boolean
     local group g = CreateGroup()
     
-    if Commands_StartsWithCommand() then
-        call Commands_EnumSelectedCheckForGenerator(g, GetTriggerPlayer(), null)
-        call ForGroup(g, function Trig_CommandsD_Add_Tag_Func008A )
-        
-        call DestroyGroup(g)
-    endif
+    call Commands_EnumSelectedCheckForGenerator(g, GetTriggerPlayer(), null)
+    call ForGroup(g, function Trig_CommandsD_Add_Tag_Func008A )
+    
+    call DestroyGroup(g)
 
     set g = null
+    return false
 endfunction
 
 //===========================================================================
 function InitTrig_CommandsD_Add_Tag takes nothing returns nothing
-    set gg_trg_CommandsD_Add_Tag = CreateTrigger(  )
-    call TriggerAddAction( gg_trg_CommandsD_Add_Tag, function Trig_CommandsD_Add_Tag_Actions )
+    call LoP_Command.create("-tag", ACCESS_USER, Condition(function Trig_CommandsD_Add_Tag_Conditions))
 endfunction
 

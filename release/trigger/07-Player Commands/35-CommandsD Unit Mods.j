@@ -3,31 +3,17 @@ function Trig_CommandsD_Unit_Mods_Copy_Func009A takes nothing returns nothing
     local string command
     local string args
     local integer playerNumber
-    local unit enumUnit
+    local unit enumUnit = GetEnumUnit()
     
-    if not Commands_StartsWithCommand() then
-        return
-    endif
-    
-    if ( not LoP_PlayerOwnsUnit(trigPlayer, GetEnumUnit()) ) then
+    if ( not LoP_PlayerOwnsUnit(trigPlayer, enumUnit) ) then
         call DisplayTextToPlayer( trigPlayer, 0, 0, "This is not your unit!" )
+        set enumUnit = null
         return
     endif
     
-    set args = Commands_GetArguments()
-    
-    if args != "" then
-        if SubString(args,0,1) != " " then
-            call DisplayTextToPlayer( trigPlayer, 0, 0,"Arguments must be passed after a space!")
-            return
-        else
-            set args = SubString(args, 1, StringLength(args))
-        endif
-    endif
-    
-    set enumUnit = GetEnumUnit()
+    set args = LoP_Command.getArguments()
     set playerNumber = GetPlayerId(trigPlayer) + 1
-    set command = GetEventPlayerChatStringMatched()
+    set command = LoP_Command.getCommand()
 
     if ( command == "'size" ) then
         if args == "" then
@@ -76,7 +62,7 @@ function Trig_CommandsD_Unit_Mods_Copy_Func009A takes nothing returns nothing
     set enumUnit = null
 endfunction
 
-function Trig_CommandsD_Unit_Mods_Copy_Actions takes nothing returns nothing
+function Trig_CommandsD_Unit_Mods_Copy_Conditions takes nothing returns boolean
     local group udg_temp_group
     local integer genId
     local unit enumUnit
@@ -89,11 +75,20 @@ function Trig_CommandsD_Unit_Mods_Copy_Actions takes nothing returns nothing
     call DestroyGroup(udg_temp_group)
     set udg_temp_group = null
     set enumUnit = null
+    return false
 endfunction
 
 //===========================================================================
 function InitTrig_CommandsD_Unit_Mods takes nothing returns nothing
-    set gg_trg_CommandsD_Unit_Mods = CreateTrigger(  )
-    call TriggerAddAction( gg_trg_CommandsD_Unit_Mods, function Trig_CommandsD_Unit_Mods_Copy_Actions )
+    call LoP_Command.create("'size", ACCESS_USER, Condition(function Trig_CommandsD_Unit_Mods_Copy_Conditions))
+    call LoP_Command.create("'face", ACCESS_USER, Condition(function Trig_CommandsD_Unit_Mods_Copy_Conditions))
+    call LoP_Command.create("'f", ACCESS_USER, Condition(function Trig_CommandsD_Unit_Mods_Copy_Conditions))
+    call LoP_Command.create("'fly", ACCESS_USER, Condition(function Trig_CommandsD_Unit_Mods_Copy_Conditions))
+    call LoP_Command.create("'h", ACCESS_USER, Condition(function Trig_CommandsD_Unit_Mods_Copy_Conditions))
+    call LoP_Command.create("'anim", ACCESS_USER, Condition(function Trig_CommandsD_Unit_Mods_Copy_Conditions))
+    call LoP_Command.create("'speed", ACCESS_USER, Condition(function Trig_CommandsD_Unit_Mods_Copy_Conditions))
+    call LoP_Command.create("'color", ACCESS_USER, Condition(function Trig_CommandsD_Unit_Mods_Copy_Conditions))
+    
+    call LoP_Command.create("'rgb", ACCESS_USER, Condition(function Trig_CommandsD_Unit_Mods_Copy_Conditions))
 endfunction
 

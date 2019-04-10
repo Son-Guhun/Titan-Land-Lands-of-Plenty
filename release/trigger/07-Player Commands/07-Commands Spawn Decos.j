@@ -29,30 +29,30 @@ function Commands_CreateMissingDecos takes player whichPlayer, integer firstInde
     endloop
 endfunction
 
-function Trig_Commands_Deco_Spawn_Actions takes nothing returns nothing
-    local string arg = Commands_GetArguments()
+function Trig_Commands_Deco_Spawn_Conditions takes nothing returns boolean
+    local string arg = LoP_Command.getArguments()
     local integer lastIndex
 
-    if arg == " special" then
+    if arg == "special" then
         set lastIndex = LoP_DecoBuilders.SpecialDecoLastIndex
         
-    elseif arg == " basic" then
+    elseif arg == "basic" then
         set lastIndex = LoP_DecoBuilders.BasicDecoLastIndex
         
-    elseif arg == " advanced" or arg == " adv" or arg == " all" then
+    elseif arg == "advanced" or arg == "adv" or arg == "all" then
         set lastIndex = LoP_DecoBuilders.AdvDecoLastIndex
         
     else
         call DisplayTextToPlayer(GetTriggerPlayer(), 0, 0, MissingDecos_HelpMessage())
-        return
+        return false
     endif
 
     call Commands_CreateMissingDecos(GetTriggerPlayer(), 0, lastIndex)
+    return false
 endfunction
 
 //===========================================================================
 function InitTrig_Commands_Spawn_Decos takes nothing returns nothing
-    set gg_trg_Commands_Spawn_Decos = CreateTrigger(  )
-    call TriggerAddAction( gg_trg_Commands_Spawn_Decos, function Trig_Commands_Deco_Spawn_Actions )
+    call LoP_Command.create("-decos", ACCESS_USER, Condition(function Trig_Commands_Deco_Spawn_Conditions ))
 endfunction
 

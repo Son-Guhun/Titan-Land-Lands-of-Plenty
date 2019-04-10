@@ -74,13 +74,13 @@ function SearchSelectFilter takes nothing returns boolean
     return false
 endfunction
 
-function SearchSelectMain takes nothing returns nothing
+function SearchSelectMain takes nothing returns boolean
     local string str
-    local string args = Commands_GetArguments()
+    local string args = LoP_Command.getArguments()
     local integer argsLength = StringLength(args)
     
     //Check for (clear selection) tag
-    if GetEventPlayerChatStringMatched() == "-seln " then
+    if LoP_Command.getCommand() == "-seln" then
         if GetLocalPlayer() == GetTriggerPlayer() then
             call ClearSelection()
         endif
@@ -94,11 +94,12 @@ function SearchSelectMain takes nothing returns nothing
         set udg_System_searchStr = str + StringCase(SubString(args, 1, argsLength),false)
         call GroupEnumUnitsOfPlayer(ENUM_GROUP, GetTriggerPlayer(), Condition(function SearchSelectFilter))
     endif
+    return false
 endfunction
 
 //===========================================================================
 function InitTrig_Commands_Select_Search takes nothing returns nothing
-    set gg_trg_Commands_Select_Search = CreateTrigger(  )
-    call TriggerAddAction( gg_trg_Commands_Select_Search, function SearchSelectMain )
+    call LoP_Command.create("-seln", ACCESS_USER, Condition(function SearchSelectMain ))
+    call LoP_Command.create("-sele", ACCESS_USER, Condition(function SearchSelectMain ))
 endfunction
 

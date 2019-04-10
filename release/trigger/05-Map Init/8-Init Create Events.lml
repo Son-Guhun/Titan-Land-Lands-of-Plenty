@@ -39,41 +39,11 @@ Action
             CommentString
                 Const : 'Player Commands'
             AddTriggerEvent
-                Var   : gg_trg_Commands_Make_Hero
-                Event: TriggerRegisterPlayerChatEvent
-                    Var   : temp_player
-                    Const : -makehero
-                    Preset: ChatMatchTypeExact
-            AddTriggerEvent
                 Var   : gg_trg_Commands_Toggle_Autoname
                 Event: TriggerRegisterPlayerChatEvent
                     Var   : temp_player
                     Const : -autoname
                     Preset: ChatMatchTypeExact
-            AddTriggerEvent
-                Var   : gg_trg_Commands_Name_Unit
-                Event: TriggerRegisterPlayerChatEvent
-                    Var   : temp_player
-                    Const : '-nameunit '
-                    Preset: ChatMatchTypeSubstring
-            AddTriggerEvent
-                Var   : gg_trg_Commands_Give
-                Event: TriggerRegisterPlayerChatEvent
-                    Var   : temp_player
-                    Const : '-give '
-                    Preset: ChatMatchTypeSubstring
-            AddTriggerEvent
-                Var   : gg_trg_Commands_Deleteme
-                Event: TriggerRegisterPlayerChatEvent
-                    Var   : temp_player
-                    Const : -deleteme
-                    Preset: ChatMatchTypeExact
-            AddTriggerEvent
-                Var   : gg_trg_Commands_Spawn_Decos
-                Event: TriggerRegisterPlayerChatEvent
-                    Var   : temp_player
-                    Const : -decos
-                    Preset: ChatMatchTypeSubstring
             AddTriggerEvent
                 Var   : gg_trg_Commands_Hide_Decos
                 Event: TriggerRegisterPlayerChatEvent
@@ -85,30 +55,6 @@ Action
                 Event: TriggerRegisterPlayerChatEvent
                     Var   : temp_player
                     Const : -hide
-                    Preset: ChatMatchTypeExact
-            AddTriggerEvent
-                Var   : gg_trg_Commands_Select_Search
-                Event: TriggerRegisterPlayerChatEvent
-                    Var   : temp_player
-                    Const : '-sele '
-                    Preset: ChatMatchTypeSubstring
-            AddTriggerEvent
-                Var   : gg_trg_Commands_Select_Search
-                Event: TriggerRegisterPlayerChatEvent
-                    Var   : temp_player
-                    Const : '-seln '
-                    Preset: ChatMatchTypeSubstring
-            AddTriggerEvent
-                Var   : gg_trg_Commands_Neutral
-                Event: TriggerRegisterPlayerChatEvent
-                    Var   : temp_player
-                    Const : '-neut decos'
-                    Preset: ChatMatchTypeExact
-            AddTriggerEvent
-                Var   : gg_trg_Commands_Neutral
-                Event: TriggerRegisterPlayerChatEvent
-                    Var   : temp_player
-                    Const : -neut
                     Preset: ChatMatchTypeExact
             AddTriggerEvent
                 Var   : gg_trg_Commands_Take
@@ -137,30 +83,6 @@ Action
                     Const : '-palace protection'
                     Preset: ChatMatchTypeExact
             AddTriggerEvent
-                Var   : gg_trg_CommandsR_Delete
-                Event: TriggerRegisterPlayerChatEvent
-                    Var   : temp_player
-                    Const : '-delneu '
-                    Preset: ChatMatchTypeSubstring
-            AddTriggerEvent
-                Var   : gg_trg_CommandsR_Delete
-                Event: TriggerRegisterPlayerChatEvent
-                    Var   : temp_player
-                    Const : '-delpal '
-                    Preset: ChatMatchTypeSubstring
-            AddTriggerEvent
-                Var   : gg_trg_CommandsR_Delete
-                Event: TriggerRegisterPlayerChatEvent
-                    Var   : temp_player
-                    Const : '-delete '
-                    Preset: ChatMatchTypeSubstring
-            AddTriggerEvent
-                Var   : gg_trg_CommandsR_Kick
-                Event: TriggerRegisterPlayerChatEvent
-                    Var   : temp_player
-                    Const : '-kick '
-                    Preset: ChatMatchTypeSubstring
-            AddTriggerEvent
                 Var   : gg_trg_CommandsR_Mind
                 Event: TriggerRegisterPlayerChatEvent
                     Var   : temp_player
@@ -179,29 +101,11 @@ Action
                     Const : '-Summon the Creator'
                     Preset: ChatMatchTypeExact
             AddTriggerEvent
-                Var   : gg_trg_CommandsR_Water_Color
-                Event: TriggerRegisterPlayerChatEvent
-                    Var   : temp_player
-                    Const : '-water '
-                    Preset: ChatMatchTypeSubstring
-            AddTriggerEvent
-                Var   : gg_trg_CommandsR_Fog
-                Event: TriggerRegisterPlayerChatEvent
-                    Var   : temp_player
-                    Const : '-fog '
-                    Preset: ChatMatchTypeSubstring
-            AddTriggerEvent
                 Var   : gg_trg_CommandsR_Set_Limits_for_Units
                 Event: TriggerRegisterPlayerChatEvent
                     Var   : temp_player
                     Const : '-limit '
                     Preset: ChatMatchTypeSubstring
-            AddTriggerEvent
-                Var   : gg_trg_CommandsR_Toggle_Dmg_Tags
-                Event: TriggerRegisterPlayerChatEvent
-                    Var   : temp_player
-                    Const : '-combat tags'
-                    Preset: ChatMatchTypeExact
             CommentString
                 Const : 'Deco Commands'
             AddTriggerEvent
@@ -217,181 +121,15 @@ Action
                     Const : -uncontrol
                     Preset: ChatMatchTypeSubstring
             AddTriggerEvent
-                Var   : gg_trg_CommandsD_Locust
-                Event: TriggerRegisterPlayerChatEvent
-                    Var   : temp_player
-                    Const : '-select no'
-                    Preset: ChatMatchTypeExact
-            AddTriggerEvent
-                Var   : gg_trg_CommandsD_Set_Parameters
-                Event: TriggerRegisterPlayerChatEvent
-                    Var   : temp_player
-                    Const : '-size '
-                    Preset: ChatMatchTypeSubstring
-            AddTriggerEvent
-                Var   : gg_trg_CommandsD_Set_Parameters
-                Event: TriggerRegisterPlayerChatEvent
-                    Var   : temp_player
-                    Const : '-fly '
-                    Preset: ChatMatchTypeSubstring
-            AddTriggerEvent
-                Var   : gg_trg_CommandsD_Set_Parameters
-                Event: TriggerRegisterPlayerChatEvent
-                    Var   : temp_player
-                    Const : '-h '
-                    Preset: ChatMatchTypeSubstring
-            AddTriggerEvent
-                Var   : gg_trg_CommandsD_Set_Parameters
-                Event: TriggerRegisterPlayerChatEvent
-                    Var   : temp_player
-                    Const : '-face '
-                    Preset: ChatMatchTypeSubstring
-            AddTriggerEvent
-                Var   : gg_trg_CommandsD_Set_Parameters
-                Event: TriggerRegisterPlayerChatEvent
-                    Var   : temp_player
-                    Const : '-f '
-                    Preset: ChatMatchTypeSubstring
-            AddTriggerEvent
-                Var   : gg_trg_CommandsD_Set_Parameters
-                Event: TriggerRegisterPlayerChatEvent
-                    Var   : temp_player
-                    Const : '-anim '
-                    Preset: ChatMatchTypeSubstring
-            AddTriggerEvent
-                Var   : gg_trg_CommandsD_Set_Parameters
-                Event: TriggerRegisterPlayerChatEvent
-                    Var   : temp_player
-                    Const : '-speed '
-                    Preset: ChatMatchTypeSubstring
-            AddTriggerEvent
-                Var   : gg_trg_CommandsD_Set_Parameters
-                Event: TriggerRegisterPlayerChatEvent
-                    Var   : temp_player
-                    Const : '-grid '
-                    Preset: ChatMatchTypeSubstring
-            AddTriggerEvent
-                Var   : gg_trg_CommandsD_Set_Parameters
-                Event: TriggerRegisterPlayerChatEvent
-                    Var   : temp_player
-                    Const : '-color '
-                    Preset: ChatMatchTypeSubstring
-            AddTriggerEvent
-                Var   : gg_trg_CommandsD_Unit_Mods
-                Event: TriggerRegisterPlayerChatEvent
-                    Var   : temp_player
-                    Const : '''size'
-                    Preset: ChatMatchTypeSubstring
-            AddTriggerEvent
-                Var   : gg_trg_CommandsD_Unit_Mods
-                Event: TriggerRegisterPlayerChatEvent
-                    Var   : temp_player
-                    Const : '''fly'
-                    Preset: ChatMatchTypeSubstring
-            AddTriggerEvent
-                Var   : gg_trg_CommandsD_Unit_Mods
-                Event: TriggerRegisterPlayerChatEvent
-                    Var   : temp_player
-                    Const : '''h'
-                    Preset: ChatMatchTypeSubstring
-            AddTriggerEvent
-                Var   : gg_trg_CommandsD_Unit_Mods
-                Event: TriggerRegisterPlayerChatEvent
-                    Var   : temp_player
-                    Const : '''rgb'
-                    Preset: ChatMatchTypeSubstring
-            AddTriggerEvent
-                Var   : gg_trg_CommandsD_Unit_Mods
-                Event: TriggerRegisterPlayerChatEvent
-                    Var   : temp_player
-                    Const : '''face'
-                    Preset: ChatMatchTypeSubstring
-            AddTriggerEvent
-                Var   : gg_trg_CommandsD_Unit_Mods
-                Event: TriggerRegisterPlayerChatEvent
-                    Var   : temp_player
-                    Const : '''f'
-                    Preset: ChatMatchTypeSubstring
-            AddTriggerEvent
-                Var   : gg_trg_CommandsD_Unit_Mods
-                Event: TriggerRegisterPlayerChatEvent
-                    Var   : temp_player
-                    Const : '''anim'
-                    Preset: ChatMatchTypeSubstring
-            AddTriggerEvent
-                Var   : gg_trg_CommandsD_Unit_Mods
-                Event: TriggerRegisterPlayerChatEvent
-                    Var   : temp_player
-                    Const : '''speed'
-                    Preset: ChatMatchTypeSubstring
-            AddTriggerEvent
-                Var   : gg_trg_CommandsD_Unit_Mods
-                Event: TriggerRegisterPlayerChatEvent
-                    Var   : temp_player
-                    Const : '''color'
-                    Preset: ChatMatchTypeSubstring
-            AddTriggerEvent
-                Var   : gg_trg_CommandsD_Add_Tag
-                Event: TriggerRegisterPlayerChatEvent
-                    Var   : temp_player
-                    Const : '-tag '
-                    Preset: ChatMatchTypeSubstring
-            AddTriggerEvent
-                Var   : gg_trg_CommandsD_Set_Tree_Space
-                Event: TriggerRegisterPlayerChatEvent
-                    Var   : temp_player
-                    Const : '-space '
-                    Preset: ChatMatchTypeSubstring
-            AddTriggerEvent
                 Var   : gg_trg_CommandsD_Variation
                 Event: TriggerRegisterPlayerChatEvent
                     Var   : temp_player
                     Const : '-var '
                     Preset: ChatMatchTypeSubstring
-            AddTriggerEvent
-                Var   : gg_trg_CommandsD_Set_AoE
-                Event: TriggerRegisterPlayerChatEvent
-                    Var   : temp_player
-                    Const : '-val '
-                    Preset: ChatMatchTypeSubstring
             SetVariable
                 Array : TileSystem_Var
                     Var   : temp_integer
                 Const : -1
-            CommentString
-                Const : Ally/Unally
-            AddTriggerEvent
-                Var   : gg_trg_Commands_Set_Alliance
-                Event: TriggerRegisterPlayerChatEvent
-                    Var   : temp_player
-                    Const : '-ally '
-                    Preset: ChatMatchTypeSubstring
-            AddTriggerEvent
-                Var   : gg_trg_Commands_Set_Alliance
-                Event: TriggerRegisterPlayerChatEvent
-                    Var   : temp_player
-                    Const : '-unally '
-                    Preset: ChatMatchTypeSubstring
-            AddTriggerEvent
-                Var   : gg_trg_Commands_Set_Alliance
-                Event: TriggerRegisterPlayerChatEvent
-                    Var   : temp_player
-                    Const : '-share '
-                    Preset: ChatMatchTypeSubstring
-            CommentString
-                Const : 'Set Commands'
-            AddTriggerEvent
-                Var   : gg_trg_Commands_Set_Color
-                Event: TriggerRegisterPlayerChatEvent
-                    Var   : temp_player
-                    Const : '-setcolor '
-                    Preset: ChatMatchTypeSubstring
-            AddTriggerEvent
-                Var   : gg_trg_Commands_Set_Name
-                Event: TriggerRegisterPlayerChatEvent
-                    Var   : temp_player
-                    Const : '-name '
-                    Preset: ChatMatchTypeSubstring
             CommentString
                 Const : 'Camera Commands'
             AddTriggerEvent
@@ -421,12 +159,6 @@ Action
             CommentString
                 Const : 'Other Commands'
             AddTriggerEvent
-                Var   : gg_trg_Commands_Copy
-                Event: TriggerRegisterPlayerChatEvent
-                    Var   : temp_player
-                    Const : -copy
-                    Preset: ChatMatchTypeExact
-            AddTriggerEvent
                 Var   : gg_trg_Commands_Real_Name
                 Event: TriggerRegisterPlayerChatEvent
                     Var   : temp_player
@@ -443,18 +175,6 @@ Action
                 Event: TriggerRegisterPlayerChatEvent
                     Var   : temp_player
                     Const : -rect
-                    Preset: ChatMatchTypeExact
-            AddTriggerEvent
-                Var   : gg_trg_Commands_Remove_Kill
-                Event: TriggerRegisterPlayerChatEvent
-                    Var   : temp_player
-                    Const : -kill
-                    Preset: ChatMatchTypeExact
-            AddTriggerEvent
-                Var   : gg_trg_Commands_Remove_Kill
-                Event: TriggerRegisterPlayerChatEvent
-                    Var   : temp_player
-                    Const : -remove
                     Preset: ChatMatchTypeExact
             CommentString
                 Const : Systems

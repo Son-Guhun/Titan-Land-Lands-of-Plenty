@@ -1,5 +1,5 @@
 function Trig_CommandsR_Fog_Conditions takes nothing returns boolean
-    local string chatStr = Commands_GetArguments()
+    local string chatStr = LoP_Command.getArguments()
     local integer style
     local real zStart
     local real zEnd
@@ -11,10 +11,6 @@ function Trig_CommandsR_Fog_Conditions takes nothing returns boolean
     
     static if LIBRARY_AutoRectEnvironment then
         local TerrainFog fog
-    endif
-    
-    if GetTriggerPlayer() != udg_GAME_MASTER and not Commands_StartsWithCommand() then
-        return false
     endif
     
     if chatStr == "reset" then
@@ -74,7 +70,6 @@ endfunction
 
 //===========================================================================
 function InitTrig_CommandsR_Fog takes nothing returns nothing
-    set gg_trg_CommandsR_Fog = CreateTrigger(  )
-    call TriggerAddCondition( gg_trg_CommandsR_Fog, Condition( function Trig_CommandsR_Fog_Conditions ) )
+    call LoP_Command.create("-fog", ACCESS_TITAN, Condition(function Trig_CommandsR_Fog_Conditions))
 endfunction
 

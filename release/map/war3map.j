@@ -24,7 +24,7 @@ integer CombatTag_PHYS_DAMAGE
 integer CombatTag_SPELL_DAMAGE
 integer CombatTag_HEALING
     
-integer CombatTag___timerData
+integer CombatTag__timerData
 //endglobals from CombatTag
 //globals from CustomStatSystem:
 constant boolean LIBRARY_CustomStatSystem=true
@@ -69,12 +69,12 @@ constant boolean LIBRARY_HERO=true
 //endglobals from HERO
 //globals from HeroicUnit:
 constant boolean LIBRARY_HeroicUnit=true
-constant integer HeroicUnit__HERO_ID='H0QU'
-constant integer HeroicUnit__SPELL_ID='A02B'
-constant integer HeroicUnit__ITEM_ID='I00R'
-constant integer HeroicUnit__BONUS_ID='AIs1'
-constant integer HeroicUnit__DETECTOR='Adef'
-constant integer HeroicUnit__ORDER=852056
+constant integer HeroicUnit___HERO_ID='H0QU'
+constant integer HeroicUnit___SPELL_ID='A02B'
+constant integer HeroicUnit___ITEM_ID='I00R'
+constant integer HeroicUnit___BONUS_ID='AIs1'
+constant integer HeroicUnit___DETECTOR='Adef'
+constant integer HeroicUnit___ORDER=852056
 //endglobals from HeroicUnit
 //globals from Iterator:
 constant boolean LIBRARY_Iterator=true
@@ -85,9 +85,6 @@ constant boolean LIBRARY_LoPDebug=true
 //globals from LoPInitQuests:
 constant boolean LIBRARY_LoPInitQuests=true
 //endglobals from LoPInitQuests
-//globals from LoPPlayers:
-constant boolean LIBRARY_LoPPlayers=true
-//endglobals from LoPPlayers
 //globals from MultiPatrol:
 constant boolean LIBRARY_MultiPatrol=true
     // Maximum number of patrol points a single unit can have.
@@ -124,8 +121,8 @@ integer Table__more= 8190
     //Configure it if you use more than 8190 "key" variables in your map (this will never happen though).
    
 hashtable Table__ht= InitHashtable()
-constant integer Table__sizeK=6
-constant integer Table__listK=8
+constant integer Table__sizeK=4
+constant integer Table__listK=6
 //endglobals from Table
 //globals from ThirdPersonCamera:
 constant boolean LIBRARY_ThirdPersonCamera=true
@@ -207,9 +204,9 @@ constant real DummyRecycler__FACING_OFFSET= 180.0 / DummyRecycler__ANGLES_COUNT
 //endglobals from DummyRecycler
 //globals from Lists:
 constant boolean LIBRARY_Lists=true
-constant integer Lists_RECYCLE_KEY=10
+constant integer Lists_RECYCLE_KEY=8
 constant boolean Lists_ENABLE_GUI= false
-hashtable Lists__hashTable= InitHashtable()
+hashtable Lists___hashTable= InitHashtable()
 //endglobals from Lists
 //globals from MoveSpeedBonus:
 constant boolean LIBRARY_MoveSpeedBonus=true
@@ -243,10 +240,6 @@ constant boolean TileDefinition__ENABLE_ID_FUNCTIONS= true
 integer WorldTilesX
 integer WorldTilesY
 //endglobals from TileDefinition
-//globals from UnitVisualModsDefaults:
-constant boolean LIBRARY_UnitVisualModsDefaults=true
-constant boolean UnitVisualModsDefaults_COLOR= true
-//endglobals from UnitVisualModsDefaults
 //globals from ArgumentStack:
 constant boolean LIBRARY_ArgumentStack=true
 //endglobals from ArgumentStack
@@ -283,36 +276,26 @@ constant integer CSS_SIGHT_RANGE= 10
 //globals from FilterTransformations:
 constant boolean LIBRARY_FilterTransformations=true
 //endglobals from FilterTransformations
+//globals from LoPCommands:
+constant boolean LIBRARY_LoPCommands=true
+constant integer ACCESS_TITAN= 1
+constant integer ACCESS_USER= 0
+//endglobals from LoPCommands
 //globals from LoPDecoBuilders:
 constant boolean LIBRARY_LoPDecoBuilders=true
 //endglobals from LoPDecoBuilders
 //globals from LoPInitPlayerCircles:
 constant boolean LIBRARY_LoPInitPlayerCircles=true
 //endglobals from LoPInitPlayerCircles
+//globals from LoPPlayers:
+constant boolean LIBRARY_LoPPlayers=true
+//endglobals from LoPPlayers
 //globals from MultiBoard:
 constant boolean LIBRARY_MultiBoard=true
 //endglobals from MultiBoard
 //globals from RectEnvironment:
 constant boolean LIBRARY_RectEnvironment=true
 //endglobals from RectEnvironment
-//globals from UnitVisualMods:
-constant boolean LIBRARY_UnitVisualMods=true
-hashtable UnitVisualMods__hashTable= null
-group UnitVisualMods__loopGroup= CreateGroup()
-    
-constant boolean UnitVisualMods__INIT_HASHTABLE= true
-constant integer UnitVisualMods__SCALE= 0
-constant integer UnitVisualMods__RED= 1
-constant integer UnitVisualMods__GREEN= 2
-constant integer UnitVisualMods__BLUE= 3
-constant integer UnitVisualMods__ALPHA= 4
-constant integer UnitVisualMods__COLOR= 5
-constant integer UnitVisualMods__ASPEED= 6
-constant integer UnitVisualMods__ATAG= 7
-constant integer UnitVisualMods__SELECT= 8
-constant integer UnitVisualMods__NAME= 9
-
-//endglobals from UnitVisualMods
 //globals from AutoRectEnvironment:
 constant boolean LIBRARY_AutoRectEnvironment=true
 constant boolean AutoRectEnvironment__ENABLE_SET_HOOK= false
@@ -340,11 +323,15 @@ constant integer Adv_GREEN= 0
 constant integer Adv_BLUE= 0
 constant integer Adv_ALPHA= 255
 //endglobals from LoPInitDecoTents
+//globals from UnitVisualModsDefaults:
+constant boolean LIBRARY_UnitVisualModsDefaults=true
+constant boolean UnitVisualModsDefaults_COLOR= true
+//endglobals from UnitVisualModsDefaults
 //globals from UserDefinedRects:
 constant boolean LIBRARY_UserDefinedRects=true
 hashtable UserDefinedRects__hashTable= InitHashtable()
 weathereffect array UserDefinedRects__weatherEffects
-constant integer UserDefinedRects__RECYCLE_KEY=12
+constant integer UserDefinedRects__RECYCLE_KEY=10
 integer array UserDefinedRects__instances
 //endglobals from UserDefinedRects
 //globals from LoPHeader:
@@ -413,27 +400,45 @@ constant integer RectGenerator__MAXIMUM_MOVE_LIMIT= 300
     // You will also need to automatically set it's abilities by calling //! runtextmacro GUDR_FirstPage("ADD"," unitVar" )
 constant boolean RectGenerator__AUTOMATIC_ON_SPAWN= false
 //endglobals from RectGenerator
-//globals from SaveNLoad:
-constant boolean LIBRARY_SaveNLoad=true
-//endglobals from SaveNLoad
+//globals from UnitVisualMods:
+constant boolean LIBRARY_UnitVisualMods=true
+hashtable UnitVisualMods__hashTable= null
+group UnitVisualMods__loopGroup= CreateGroup()
+    
+constant boolean UnitVisualMods__INIT_HASHTABLE= true
+constant integer UnitVisualMods__SCALE= 0
+constant integer UnitVisualMods__RED= 1
+constant integer UnitVisualMods__GREEN= 2
+constant integer UnitVisualMods__BLUE= 3
+constant integer UnitVisualMods__ALPHA= 4
+constant integer UnitVisualMods__COLOR= 5
+constant integer UnitVisualMods__ASPEED= 6
+constant integer UnitVisualMods__ATAG= 7
+constant integer UnitVisualMods__SELECT= 8
+constant integer UnitVisualMods__NAME= 9
+
+//endglobals from UnitVisualMods
 //globals from LoPWidgets:
 constant boolean LIBRARY_LoPWidgets=true
 //endglobals from LoPWidgets
 //globals from LoPone:
 constant boolean LIBRARY_LoPone=true
 //endglobals from LoPone
-//globals from SaveUnit:
-constant boolean LIBRARY_SaveUnit=true
-force ENUM_FORCE= CreateForce()
-boolean stillSaving= false
-timer loopTimer
-//endglobals from SaveUnit
+//globals from SaveNLoad:
+constant boolean LIBRARY_SaveNLoad=true
+//endglobals from SaveNLoad
 //globals from LoPfour:
 constant boolean LIBRARY_LoPfour=true
 //endglobals from LoPfour
 //globals from LoPtwo:
 constant boolean LIBRARY_LoPtwo=true
 //endglobals from LoPtwo
+//globals from SaveUnit:
+constant boolean LIBRARY_SaveUnit=true
+force ENUM_FORCE= CreateForce()
+boolean stillSaving= false
+timer loopTimer
+//endglobals from SaveUnit
 //globals from LoPthree:
 constant boolean LIBRARY_LoPthree=true
 //endglobals from LoPthree
@@ -1114,6 +1119,7 @@ destructable gg_dest_LTe3_0005= null
 destructable gg_dest_DTg5_0007= null
 destructable gg_dest_DTg5_0008= null
 trigger gg_trg_Commands_Make_Hero= null
+trigger gg_trg_LoPCommands= null
 boolean g_unitHasBeenRemoved= false
 boolean commandsDeleteInsideTitanPalace= false
 constant integer DecoMovement_CONTROLLER= 'h0KD'
@@ -1137,59 +1143,57 @@ trigger l__library_init
 
 //JASSHelper struct globals:
 constant integer si__Iterator=1
-constant integer si__LoP_PlayerData=2
-playercolor array s__LoP_PlayerData_playerColors
-constant integer si__Table__dex=3
-constant integer si__Table__handles=4
-constant integer si__Table__agents=5
-constant integer si__Table__reals=6
-constant integer si__Table__booleans=7
-constant integer si__Table__strings=8
-constant integer si__Table__integers=9
-constant integer si__Table__players=10
-constant integer si__Table__widgets=11
-constant integer si__Table__destructables=12
-constant integer si__Table__items=13
-constant integer si__Table__units=14
-constant integer si__Table__abilitys=15
-constant integer si__Table__timers=16
-constant integer si__Table__triggers=17
-constant integer si__Table__triggerconditions=18
-constant integer si__Table__triggeractions=19
-constant integer si__Table__events=20
-constant integer si__Table__forces=21
-constant integer si__Table__groups=22
-constant integer si__Table__locations=23
-constant integer si__Table__rects=24
-constant integer si__Table__boolexprs=25
-constant integer si__Table__sounds=26
-constant integer si__Table__effects=27
-constant integer si__Table__unitpools=28
-constant integer si__Table__itempools=29
-constant integer si__Table__quests=30
-constant integer si__Table__questitems=31
-constant integer si__Table__defeatconditions=32
-constant integer si__Table__timerdialogs=33
-constant integer si__Table__leaderboards=34
-constant integer si__Table__multiboards=35
-constant integer si__Table__multiboarditems=36
-constant integer si__Table__trackables=37
-constant integer si__Table__dialogs=38
-constant integer si__Table__buttons=39
-constant integer si__Table__texttags=40
-constant integer si__Table__lightnings=41
-constant integer si__Table__images=42
-constant integer si__Table__ubersplats=43
-constant integer si__Table__regions=44
-constant integer si__Table__fogstates=45
-constant integer si__Table__fogmodifiers=46
-constant integer si__Table__hashtables=47
-constant integer si__Table=48
-constant integer si__TableArray=49
+constant integer si__Table__dex=2
+constant integer si__Table__handles=3
+constant integer si__Table__agents=4
+constant integer si__Table__reals=5
+constant integer si__Table__booleans=6
+constant integer si__Table__strings=7
+constant integer si__Table__integers=8
+constant integer si__Table__players=9
+constant integer si__Table__widgets=10
+constant integer si__Table__destructables=11
+constant integer si__Table__items=12
+constant integer si__Table__units=13
+constant integer si__Table__abilitys=14
+constant integer si__Table__timers=15
+constant integer si__Table__triggers=16
+constant integer si__Table__triggerconditions=17
+constant integer si__Table__triggeractions=18
+constant integer si__Table__events=19
+constant integer si__Table__forces=20
+constant integer si__Table__groups=21
+constant integer si__Table__locations=22
+constant integer si__Table__rects=23
+constant integer si__Table__boolexprs=24
+constant integer si__Table__sounds=25
+constant integer si__Table__effects=26
+constant integer si__Table__unitpools=27
+constant integer si__Table__itempools=28
+constant integer si__Table__quests=29
+constant integer si__Table__questitems=30
+constant integer si__Table__defeatconditions=31
+constant integer si__Table__timerdialogs=32
+constant integer si__Table__leaderboards=33
+constant integer si__Table__multiboards=34
+constant integer si__Table__multiboarditems=35
+constant integer si__Table__trackables=36
+constant integer si__Table__dialogs=37
+constant integer si__Table__buttons=38
+constant integer si__Table__texttags=39
+constant integer si__Table__lightnings=40
+constant integer si__Table__images=41
+constant integer si__Table__ubersplats=42
+constant integer si__Table__regions=43
+constant integer si__Table__fogstates=44
+constant integer si__Table__fogmodifiers=45
+constant integer si__Table__hashtables=46
+constant integer si__Table=47
+constant integer si__TableArray=48
 integer s__TableArray_tempTable
 integer s__TableArray_tempEnd
-constant integer si__HashTable=50
-constant integer si__WorldBounds=51
+constant integer si__HashTable=49
+constant integer si__WorldBounds=50
 integer s__WorldBounds_maxX
 integer s__WorldBounds_maxY
 integer s__WorldBounds_minX
@@ -1198,221 +1202,232 @@ integer s__WorldBounds_centerX
 integer s__WorldBounds_centerY
 rect s__WorldBounds_world
 region s__WorldBounds_worldRegion
-constant integer si__ConstTable__handles=52
-constant integer si__ConstTable__agents=53
-constant integer si__ConstTable__reals=54
-constant integer si__ConstTable__booleans=55
-constant integer si__ConstTable__strings=56
-constant integer si__ConstTable__integers=57
-constant integer si__ConstTable__players=58
-constant integer si__ConstTable__widgets=59
-constant integer si__ConstTable__destructables=60
-constant integer si__ConstTable__items=61
-constant integer si__ConstTable__units=62
-constant integer si__ConstTable__abilitys=63
-constant integer si__ConstTable__timers=64
-constant integer si__ConstTable__triggers=65
-constant integer si__ConstTable__triggerconditions=66
-constant integer si__ConstTable__triggeractions=67
-constant integer si__ConstTable__events=68
-constant integer si__ConstTable__forces=69
-constant integer si__ConstTable__groups=70
-constant integer si__ConstTable__locations=71
-constant integer si__ConstTable__rects=72
-constant integer si__ConstTable__boolexprs=73
-constant integer si__ConstTable__sounds=74
-constant integer si__ConstTable__effects=75
-constant integer si__ConstTable__unitpools=76
-constant integer si__ConstTable__itempools=77
-constant integer si__ConstTable__quests=78
-constant integer si__ConstTable__questitems=79
-constant integer si__ConstTable__defeatconditions=80
-constant integer si__ConstTable__timerdialogs=81
-constant integer si__ConstTable__leaderboards=82
-constant integer si__ConstTable__multiboards=83
-constant integer si__ConstTable__multiboarditems=84
-constant integer si__ConstTable__trackables=85
-constant integer si__ConstTable__dialogs=86
-constant integer si__ConstTable__buttons=87
-constant integer si__ConstTable__texttags=88
-constant integer si__ConstTable__lightnings=89
-constant integer si__ConstTable__images=90
-constant integer si__ConstTable__ubersplats=91
-constant integer si__ConstTable__regions=92
-constant integer si__ConstTable__fogstates=93
-constant integer si__ConstTable__fogmodifiers=94
-constant integer si__ConstTable__hashtables=95
-constant integer si__ConstTable=96
-constant integer si__ConstHashTable=97
-constant integer si__DummyRecycler__S=98
+constant integer si__ConstTable__handles=51
+constant integer si__ConstTable__agents=52
+constant integer si__ConstTable__reals=53
+constant integer si__ConstTable__booleans=54
+constant integer si__ConstTable__strings=55
+constant integer si__ConstTable__integers=56
+constant integer si__ConstTable__players=57
+constant integer si__ConstTable__widgets=58
+constant integer si__ConstTable__destructables=59
+constant integer si__ConstTable__items=60
+constant integer si__ConstTable__units=61
+constant integer si__ConstTable__abilitys=62
+constant integer si__ConstTable__timers=63
+constant integer si__ConstTable__triggers=64
+constant integer si__ConstTable__triggerconditions=65
+constant integer si__ConstTable__triggeractions=66
+constant integer si__ConstTable__events=67
+constant integer si__ConstTable__forces=68
+constant integer si__ConstTable__groups=69
+constant integer si__ConstTable__locations=70
+constant integer si__ConstTable__rects=71
+constant integer si__ConstTable__boolexprs=72
+constant integer si__ConstTable__sounds=73
+constant integer si__ConstTable__effects=74
+constant integer si__ConstTable__unitpools=75
+constant integer si__ConstTable__itempools=76
+constant integer si__ConstTable__quests=77
+constant integer si__ConstTable__questitems=78
+constant integer si__ConstTable__defeatconditions=79
+constant integer si__ConstTable__timerdialogs=80
+constant integer si__ConstTable__leaderboards=81
+constant integer si__ConstTable__multiboards=82
+constant integer si__ConstTable__multiboarditems=83
+constant integer si__ConstTable__trackables=84
+constant integer si__ConstTable__dialogs=85
+constant integer si__ConstTable__buttons=86
+constant integer si__ConstTable__texttags=87
+constant integer si__ConstTable__lightnings=88
+constant integer si__ConstTable__images=89
+constant integer si__ConstTable__ubersplats=90
+constant integer si__ConstTable__regions=91
+constant integer si__ConstTable__fogstates=92
+constant integer si__ConstTable__fogmodifiers=93
+constant integer si__ConstTable__hashtables=94
+constant integer si__ConstTable=95
+constant integer si__ConstHashTable=96
+constant integer si__DummyRecycler__S=97
 integer s__DummyRecycler__S_tb
-constant integer si__TileDefinition__TileDefinition=99
-constant integer si__ArgumentStack__table=100
-constant integer si__Args=101
-constant integer s__Args_real_impl=13
+constant integer si__TileDefinition__TileDefinition=98
+constant integer si__ArgumentStack__table=99
+constant integer si__Args=100
+constant integer s__Args_real_impl=12
 constant integer s__Args_integer_impl=14
-constant integer s__Args_boolean_impl=15
-constant integer s__Args_string_impl=16
-constant integer s__Args_player_impl=17
-constant integer s__Args_widget_impl=18
-constant integer s__Args_destructable_impl=19
-constant integer s__Args_item_impl=20
-constant integer s__Args_unit_impl=21
-constant integer s__Args_ability_impl=22
-constant integer s__Args_timer_impl=23
-constant integer s__Args_trigger_impl=24
-constant integer s__Args_triggercondition_impl=25
-constant integer s__Args_event_impl=26
-constant integer s__Args_force_impl=27
-constant integer s__Args_group_impl=28
-constant integer s__Args_location_impl=29
-constant integer s__Args_rect_impl=30
-constant integer s__Args_boolexpr_impl=31
-constant integer s__Args_sound_impl=32
-constant integer s__Args_effect_impl=33
-constant integer s__Args_quest_impl=34
-constant integer s__Args_questitem_impl=35
-constant integer s__Args_defeatcondition_impl=36
-constant integer s__Args_timerdialog_impl=37
-constant integer s__Args_leaderboard_impl=38
-constant integer s__Args_multiboard_impl=39
-constant integer s__Args_multiboarditem_impl=40
-constant integer s__Args_trackable_impl=41
-constant integer s__Args_dialog_impl=42
-constant integer s__Args_button_impl=43
-constant integer s__Args_region_impl=44
-constant integer s__Args_fogmodifier_impl=45
-constant integer s__Args_hashtable_impl=46
-constant integer s__Args_triggeraction_impl=47
-constant integer s__Args_unitpool_impl=48
-constant integer s__Args_itempool_impl=49
-constant integer s__Args_texttag_impl=50
-constant integer s__Args_lightning_impl=51
-constant integer s__Args_image_impl=52
-constant integer s__Args_ubersplat_impl=53
-constant integer s__Args_fogstate_impl=54
-constant integer si__LinkedHashSet=102
+constant integer s__Args_boolean_impl=16
+constant integer s__Args_string_impl=18
+constant integer s__Args_player_impl=20
+constant integer s__Args_widget_impl=22
+constant integer s__Args_destructable_impl=24
+constant integer s__Args_item_impl=26
+constant integer s__Args_unit_impl=28
+constant integer s__Args_ability_impl=30
+constant integer s__Args_timer_impl=32
+constant integer s__Args_trigger_impl=34
+constant integer s__Args_triggercondition_impl=36
+constant integer s__Args_event_impl=38
+constant integer s__Args_force_impl=40
+constant integer s__Args_group_impl=42
+constant integer s__Args_location_impl=44
+constant integer s__Args_rect_impl=46
+constant integer s__Args_boolexpr_impl=48
+constant integer s__Args_sound_impl=50
+constant integer s__Args_effect_impl=52
+constant integer s__Args_quest_impl=54
+constant integer s__Args_questitem_impl=56
+constant integer s__Args_defeatcondition_impl=58
+constant integer s__Args_timerdialog_impl=60
+constant integer s__Args_leaderboard_impl=62
+constant integer s__Args_multiboard_impl=64
+constant integer s__Args_multiboarditem_impl=66
+constant integer s__Args_trackable_impl=68
+constant integer s__Args_dialog_impl=70
+constant integer s__Args_button_impl=72
+constant integer s__Args_region_impl=74
+constant integer s__Args_fogmodifier_impl=76
+constant integer s__Args_hashtable_impl=78
+constant integer s__Args_triggeraction_impl=80
+constant integer s__Args_unitpool_impl=82
+constant integer s__Args_itempool_impl=84
+constant integer s__Args_texttag_impl=86
+constant integer s__Args_lightning_impl=88
+constant integer s__Args_image_impl=90
+constant integer s__Args_ubersplat_impl=92
+constant integer s__Args_fogstate_impl=94
+constant integer si__LinkedHashSet=101
 integer s__LinkedHashSet_enumElement= 0
 integer s__LinkedHashSet_enumSet= 0
-constant integer si__TableStruct=103
-constant integer si__FilterTransformations_Globals=104
-constant integer s__FilterTransformations_Globals_data_impl=55
-constant integer si__LoP_DecoBuilders=105
+constant integer si__TableStruct=102
+constant integer si__FilterTransformations_Globals=103
+constant integer s__FilterTransformations_Globals_data_impl=96
+constant integer si__LoP_Command=104
+constant integer s__LoP_Command_boolexpr_impl=98
+constant integer s__LoP_Command_string_impl=100
+constant integer s__LoP_Command_accessLevel_impl=102
+constant integer si__LoPCommands_Globals=105
+constant integer s__LoPCommands_Globals_static_members_key=104
+constant integer s__LoPCommands_Globals_trigger_impl=106
+constant integer s__LoPCommands_Globals_evaluator_impl=108
+constant integer si__LoP_DecoBuilders=106
 integer array s__LoP_DecoBuilders_rawcodes
-constant integer s__LoP_DecoBuilders_static_members_key=56
-constant integer s__LoP_DecoBuilders_SpecialDecoLastIndex_impl=57
-constant integer s__LoP_DecoBuilders_BasicDecoFirstIndex_impl=58
-constant integer s__LoP_DecoBuilders_BasicDecoLastIndex_impl=59
-constant integer s__LoP_DecoBuilders_AdvDecoFirstIndex_impl=60
-constant integer s__LoP_DecoBuilders_AdvDecoLastIndex_impl=61
-constant integer s__LoP_DecoBuilders_DecoLastIndex_impl=62
-constant integer si__LoPInitPlayerCircles_Globals=106
-constant integer s__LoPInitPlayerCircles_Globals_regionTable_impl=63
-constant integer si__MultiBoard=107
-constant integer s__MultiBoard_items_impl=64
-constant integer s__MultiBoard_cols_impl=65
-constant integer s__MultiBoard_rows_impl=66
-constant integer s__MultiBoard_multiboard_impl=67
-constant integer si__TerrainFog=108
+constant integer s__LoP_DecoBuilders_static_members_key=110
+constant integer s__LoP_DecoBuilders_SpecialDecoLastIndex_impl=112
+constant integer s__LoP_DecoBuilders_BasicDecoFirstIndex_impl=114
+constant integer s__LoP_DecoBuilders_BasicDecoLastIndex_impl=116
+constant integer s__LoP_DecoBuilders_AdvDecoFirstIndex_impl=118
+constant integer s__LoP_DecoBuilders_AdvDecoLastIndex_impl=120
+constant integer s__LoP_DecoBuilders_DecoLastIndex_impl=122
+constant integer si__LoPInitPlayerCircles_Globals=107
+constant integer s__LoPInitPlayerCircles_Globals_regionTable_impl=124
+constant integer si__LoP_PlayerData=108
+playercolor array s__LoP_PlayerData_playerColors
+constant integer s__LoP_PlayerData_commandsEnabled_internal_impl=126
+constant integer si__MultiBoard=109
+constant integer s__MultiBoard_items_impl=128
+constant integer s__MultiBoard_cols_impl=130
+constant integer s__MultiBoard_rows_impl=132
+constant integer s__MultiBoard_multiboard_impl=134
+constant integer si__TerrainFog=110
 constant integer s__TerrainFog_LINEAR= 0
 constant integer s__TerrainFog_EXPONENTIAL= 1
 constant integer s__TerrainFog_EXPONENTIAL2= 2
-constant integer s__TerrainFog_style_impl=68
-constant integer s__TerrainFog_zStart_impl=69
-constant integer s__TerrainFog_zEnd_impl=70
-constant integer s__TerrainFog_density_impl=71
-constant integer s__TerrainFog_red_impl=72
-constant integer s__TerrainFog_green_impl=73
-constant integer s__TerrainFog_blue_impl=74
-constant integer si__RectEnvironment=109
-constant integer s__RectEnvironment_fog_impl=75
-constant integer si__UnitVisualMods__data_reals=110
-constant integer si__UnitVisualMods__data_booleans=111
-constant integer si__UnitVisualMods__data_strings=112
-constant integer si__UnitVisualMods__data_integers=113
-constant integer si__UnitVisualMods__data_handles=114
-constant integer si__UnitVisualMods__data_agents=115
-constant integer si__UnitVisualMods__data_players=116
-constant integer si__UnitVisualMods__data_widgets=117
-constant integer si__UnitVisualMods__data_destructables=118
-constant integer si__UnitVisualMods__data_items=119
-constant integer si__UnitVisualMods__data_units=120
-constant integer si__UnitVisualMods__data_abilitys=121
-constant integer si__UnitVisualMods__data_timers=122
-constant integer si__UnitVisualMods__data_triggers=123
-constant integer si__UnitVisualMods__data_triggerconditions=124
-constant integer si__UnitVisualMods__data_triggeractions=125
-constant integer si__UnitVisualMods__data_events=126
-constant integer si__UnitVisualMods__data_forces=127
-constant integer si__UnitVisualMods__data_groups=128
-constant integer si__UnitVisualMods__data_locations=129
-constant integer si__UnitVisualMods__data_rects=130
-constant integer si__UnitVisualMods__data_boolexprs=131
-constant integer si__UnitVisualMods__data_sounds=132
-constant integer si__UnitVisualMods__data_effects=133
-constant integer si__UnitVisualMods__data_unitpools=134
-constant integer si__UnitVisualMods__data_itempools=135
-constant integer si__UnitVisualMods__data_quests=136
-constant integer si__UnitVisualMods__data_questitems=137
-constant integer si__UnitVisualMods__data_defeatconditions=138
-constant integer si__UnitVisualMods__data_timerdialogs=139
-constant integer si__UnitVisualMods__data_leaderboards=140
-constant integer si__UnitVisualMods__data_multiboards=141
-constant integer si__UnitVisualMods__data_multiboarditems=142
-constant integer si__UnitVisualMods__data_trackables=143
-constant integer si__UnitVisualMods__data_dialogs=144
-constant integer si__UnitVisualMods__data_buttons=145
-constant integer si__UnitVisualMods__data_texttags=146
-constant integer si__UnitVisualMods__data_lightnings=147
-constant integer si__UnitVisualMods__data_images=148
-constant integer si__UnitVisualMods__data_ubersplats=149
-constant integer si__UnitVisualMods__data_regions=150
-constant integer si__UnitVisualMods__data_fogstates=151
-constant integer si__UnitVisualMods__data_fogmodifiers=152
-constant integer si__UnitVisualMods__data_hashtables=153
-constant integer si__UnitVisualMods__data_Child=154
-constant integer si__UnitVisualMods__data=155
-constant integer si__TerrainType2Id=156
-constant integer s__TerrainType2Id_KEY= - 2
-constant integer si__UnitVisualMods__UnitVisualsRaw=157
-constant integer si__UnitVisuals=158
-constant integer si__AutoRectEnvironment__Globals=159
-constant integer s__AutoRectEnvironment__Globals_static_members_key=76
-constant integer s__AutoRectEnvironment__Globals_lastCameraX_impl=77
-constant integer s__AutoRectEnvironment__Globals_lastCameraY_impl=78
-constant integer s__AutoRectEnvironment__Globals_rectWasMoved_impl=79
-constant integer s__AutoRectEnvironment__Globals_lastCameraRect_impl=80
-constant integer s__AutoRectEnvironment__Globals_allRects_impl=81
-constant integer s__AutoRectEnvironment__Globals_rects_impl=82
-constant integer s__AutoRectEnvironment__Globals_id2_impl=83
-constant integer si__AutoRectEnvironment__InitStruct=160
-constant integer si__GameTime=161
+constant integer s__TerrainFog_style_impl=136
+constant integer s__TerrainFog_zStart_impl=138
+constant integer s__TerrainFog_zEnd_impl=140
+constant integer s__TerrainFog_density_impl=142
+constant integer s__TerrainFog_red_impl=144
+constant integer s__TerrainFog_green_impl=146
+constant integer s__TerrainFog_blue_impl=148
+constant integer si__RectEnvironment=111
+constant integer s__RectEnvironment_fog_impl=150
+constant integer si__AutoRectEnvironment__Globals=112
+constant integer s__AutoRectEnvironment__Globals_static_members_key=152
+constant integer s__AutoRectEnvironment__Globals_lastCameraX_impl=154
+constant integer s__AutoRectEnvironment__Globals_lastCameraY_impl=156
+constant integer s__AutoRectEnvironment__Globals_rectWasMoved_impl=158
+constant integer s__AutoRectEnvironment__Globals_lastCameraRect_impl=160
+constant integer s__AutoRectEnvironment__Globals_allRects_impl=162
+constant integer s__AutoRectEnvironment__Globals_rects_impl=164
+constant integer s__AutoRectEnvironment__Globals_id2_impl=166
+constant integer si__AutoRectEnvironment__InitStruct=113
+constant integer si__GameTime=114
 integer s__GameTime_a
-constant integer s__GameTime_static_members_key=84
-constant integer s__GameTime_hours_impl=85
-constant integer s__GameTime_minutes_impl=86
-constant integer s__GameTime_seconds_impl=87
-constant integer s__GameTime_timer_impl=88
-constant integer s__GameTime_multiboard_impl=89
-constant integer si__UserDefinedRects__Indices=162
-constant integer si__RectGenerator__FogStyle=163
-constant integer s__RectGenerator__FogStyle_strings_impl=90
-constant integer s__RectGenerator__FogStyle_linkedListNext_impl=91
-constant integer s__RectGenerator__FogStyle_linkedListPrev_impl=92
-constant integer si__LoPWidgets__Globals=164
-constant integer s__LoPWidgets__Globals_destructablesTab_impl=93
-constant integer si__LoP_UnitData=165
-constant integer s__LoP_UnitData_isHeroic_impl=94
-constant integer si__TreeSystemChooseTree__Globals=166
-constant integer s__TreeSystemChooseTree__Globals_timerData_impl=95
-constant integer si__SpatialDistortion___TimerData=167
-constant integer s__SpatialDistortion___TimerData_caster_impl=96
-constant integer s__SpatialDistortion___TimerData_counter_impl=97
-constant integer s__SpatialDistortion___TimerData_x_impl=98
-constant integer s__SpatialDistortion___TimerData_y_impl=99
-constant integer si__MakeHeroic___Globals=168
-constant integer s__MakeHeroic___Globals_static_members_key=100
-constant integer s__MakeHeroic___Globals_dummy_impl=101
+constant integer s__GameTime_static_members_key=168
+constant integer s__GameTime_hours_impl=170
+constant integer s__GameTime_minutes_impl=172
+constant integer s__GameTime_seconds_impl=174
+constant integer s__GameTime_timer_impl=176
+constant integer s__GameTime_multiboard_impl=178
+constant integer si__UserDefinedRects__Indices=115
+constant integer si__RectGenerator__FogStyle=116
+constant integer s__RectGenerator__FogStyle_strings_impl=180
+constant integer s__RectGenerator__FogStyle_linkedListNext_impl=182
+constant integer s__RectGenerator__FogStyle_linkedListPrev_impl=184
+constant integer si__UnitVisualMods__data_reals=117
+constant integer si__UnitVisualMods__data_booleans=118
+constant integer si__UnitVisualMods__data_strings=119
+constant integer si__UnitVisualMods__data_integers=120
+constant integer si__UnitVisualMods__data_handles=121
+constant integer si__UnitVisualMods__data_agents=122
+constant integer si__UnitVisualMods__data_players=123
+constant integer si__UnitVisualMods__data_widgets=124
+constant integer si__UnitVisualMods__data_destructables=125
+constant integer si__UnitVisualMods__data_items=126
+constant integer si__UnitVisualMods__data_units=127
+constant integer si__UnitVisualMods__data_abilitys=128
+constant integer si__UnitVisualMods__data_timers=129
+constant integer si__UnitVisualMods__data_triggers=130
+constant integer si__UnitVisualMods__data_triggerconditions=131
+constant integer si__UnitVisualMods__data_triggeractions=132
+constant integer si__UnitVisualMods__data_events=133
+constant integer si__UnitVisualMods__data_forces=134
+constant integer si__UnitVisualMods__data_groups=135
+constant integer si__UnitVisualMods__data_locations=136
+constant integer si__UnitVisualMods__data_rects=137
+constant integer si__UnitVisualMods__data_boolexprs=138
+constant integer si__UnitVisualMods__data_sounds=139
+constant integer si__UnitVisualMods__data_effects=140
+constant integer si__UnitVisualMods__data_unitpools=141
+constant integer si__UnitVisualMods__data_itempools=142
+constant integer si__UnitVisualMods__data_quests=143
+constant integer si__UnitVisualMods__data_questitems=144
+constant integer si__UnitVisualMods__data_defeatconditions=145
+constant integer si__UnitVisualMods__data_timerdialogs=146
+constant integer si__UnitVisualMods__data_leaderboards=147
+constant integer si__UnitVisualMods__data_multiboards=148
+constant integer si__UnitVisualMods__data_multiboarditems=149
+constant integer si__UnitVisualMods__data_trackables=150
+constant integer si__UnitVisualMods__data_dialogs=151
+constant integer si__UnitVisualMods__data_buttons=152
+constant integer si__UnitVisualMods__data_texttags=153
+constant integer si__UnitVisualMods__data_lightnings=154
+constant integer si__UnitVisualMods__data_images=155
+constant integer si__UnitVisualMods__data_ubersplats=156
+constant integer si__UnitVisualMods__data_regions=157
+constant integer si__UnitVisualMods__data_fogstates=158
+constant integer si__UnitVisualMods__data_fogmodifiers=159
+constant integer si__UnitVisualMods__data_hashtables=160
+constant integer si__UnitVisualMods__data_Child=161
+constant integer si__UnitVisualMods__data=162
+constant integer si__TerrainType2Id=163
+constant integer s__TerrainType2Id_KEY= - 2
+constant integer si__UnitVisualMods__UnitVisualsRaw=164
+constant integer si__UnitVisuals=165
+constant integer si__LoPWidgets___Globals=166
+constant integer s__LoPWidgets___Globals_destructablesTab_impl=186
+constant integer si__LoP_UnitData=167
+constant integer s__LoP_UnitData_isHeroic_impl=188
+constant integer si__TreeSystemChooseTree___Globals=168
+constant integer s__TreeSystemChooseTree___Globals_timerData_impl=190
+constant integer si__SpatialDistortion__TimerData=169
+constant integer s__SpatialDistortion__TimerData_caster_impl=192
+constant integer s__SpatialDistortion__TimerData_counter_impl=194
+constant integer s__SpatialDistortion__TimerData_x_impl=196
+constant integer s__SpatialDistortion__TimerData_y_impl=198
+constant integer si__MakeHeroic___Globals=170
+constant integer s__MakeHeroic___Globals_static_members_key=200
+constant integer s__MakeHeroic___Globals_dummy_impl=202
 trigger st__Table__reals__getindex
 trigger st__Table__reals__setindex
 trigger st__Table__units__getindex
@@ -1421,16 +1436,32 @@ trigger st__Table__units_remove
 trigger st__Table__get_real
 trigger st__Table__get_unit
 trigger st__Table_create
+trigger st__LoP_PlayerData_get
+trigger st__LoP_PlayerData__get_commandsEnabled
 integer f__arg_integer1
 real f__arg_real1
 unit f__arg_unit1
+player f__arg_player1
 integer f__arg_this
 real f__result_real
 unit f__result_unit
 integer f__result_integer
+boolean f__result_boolean
 
 endglobals
 
+
+//Generated method caller for LoP_PlayerData.get
+function sc__LoP_PlayerData_get takes player whichPlayer returns integer
+        return GetPlayerId(whichPlayer)
+endfunction
+
+//Generated method caller for LoP_PlayerData._get_commandsEnabled
+function sc__LoP_PlayerData__get_commandsEnabled takes integer this returns boolean
+    set f__arg_this=this
+    call TriggerEvaluate(st__LoP_PlayerData__get_commandsEnabled)
+ return f__result_boolean
+endfunction
 
 //Generated method caller for Table._get_real
 function sc__Table__get_real takes integer this returns integer
@@ -1811,10 +1842,10 @@ endfunction
 // scope CombatTag_HEAL ends
 
 
-function CombatTag___ShowText takes nothing returns nothing
+function CombatTag__ShowText takes nothing returns nothing
     local timer t= GetExpiredTimer()
     local integer tId= GetHandleId(t)
-    local unit u= (LoadUnitHandle(Table__ht, (((CombatTag___timerData))), (tId))) // INLINED!!
+    local unit u= (LoadUnitHandle(Table__ht, (((CombatTag__timerData))), (tId))) // INLINED!!
     local integer uId= GetUnitUserData(u)
     
     local real z_offset= 50
@@ -1840,7 +1871,7 @@ function CombatTag___ShowText takes nothing returns nothing
     
     call PauseTimer(t)
     call DestroyTimer(t)
-    call RemoveSavedHandle(Table__ht, (((CombatTag___timerData))), (tId)) // INLINED!!
+    call RemoveSavedHandle(Table__ht, (((CombatTag__timerData))), (tId)) // INLINED!!
     set t=null
     set u=null
 endfunction
@@ -1856,20 +1887,20 @@ function CombatTag_Register takes unit whichUnit,real value,integer whichType re
     
     if amount <= 0. then
         set t=CreateTimer()
-        call TimerStart(t, 0, false, function CombatTag___ShowText)
-        call SaveUnitHandle(Table__ht, (((CombatTag___timerData))), (GetHandleId(t)), ( whichUnit)) // INLINED!!
+        call TimerStart(t, 0, false, function CombatTag__ShowText)
+        call SaveUnitHandle(Table__ht, (((CombatTag__timerData))), (GetHandleId(t)), ( whichUnit)) // INLINED!!
         set t=null
     endif
         
     call SaveReal(Table__ht, (((whichType))), (uId), (( amount + value)*1.0)) // INLINED!!
 endfunction
 
-function CombatTag___onInit takes nothing returns nothing
+function CombatTag__onInit takes nothing returns nothing
     set CombatTag_PHYS_DAMAGE=sc__Table_create()
     set CombatTag_SPELL_DAMAGE=sc__Table_create()
     set CombatTag_HEALING=sc__Table_create()
     
-    set CombatTag___timerData=sc__Table_create()
+    set CombatTag__timerData=sc__Table_create()
 endfunction
 
 
@@ -2316,21 +2347,20 @@ endfunction
 
 //library HERO ends
 //library HeroicUnit:
-    function HeroicUnit__OnMorph takes nothing returns boolean
+    function HeroicUnit___OnMorph takes nothing returns boolean
         local unit u=GetTriggerUnit()
         local trigger t=GetTriggeringTrigger()
-        call DisplayTextToPlayer(Player(0), 0, 0, "OnMorph")
         if ( GetTriggerEventId() == EVENT_UNIT_STATE_LIMIT ) then
             call DisableTrigger(t)
-            call UnitRemoveAbility(u, HeroicUnit__SPELL_ID)
-        elseif ( GetUnitTypeId(u) != HeroicUnit__HERO_ID ) then
-            call UnitAddAbility(u, HeroicUnit__SPELL_ID)
-            call UnitAddAbility(u, HeroicUnit__BONUS_ID)
-            call UnitMakeAbilityPermanent(u, true, HeroicUnit__BONUS_ID)
+            call UnitRemoveAbility(u, HeroicUnit___SPELL_ID)
+        elseif ( GetUnitTypeId(u) != HeroicUnit___HERO_ID ) then
+            call UnitAddAbility(u, HeroicUnit___SPELL_ID)
+            call UnitAddAbility(u, HeroicUnit___BONUS_ID)
+            call UnitMakeAbilityPermanent(u, true, HeroicUnit___BONUS_ID)
             call TriggerRegisterUnitStateEvent(t, u, UNIT_STATE_LIFE, GREATER_THAN, GetWidgetLife(u) + 1.)
-            call RemoveItem(UnitAddItemById(u, HeroicUnit__ITEM_ID))
+            call RemoveItem(UnitAddItemById(u, HeroicUnit___ITEM_ID))
         else
-            call UnitAddAbility(u, HeroicUnit__DETECTOR)
+            call UnitAddAbility(u, HeroicUnit___DETECTOR)
         endif
         set t=null
         set u=null
@@ -2342,12 +2372,12 @@ endfunction
         local real mp=GetUnitState(u, UNIT_STATE_MANA)
         call SetWidgetLife(u, GetUnitState(u, UNIT_STATE_MAX_LIFE))
         call TriggerRegisterUnitEvent(t, u, EVENT_UNIT_ISSUED_ORDER)
-        call TriggerAddCondition(t, Condition(function HeroicUnit__OnMorph))
+        call TriggerAddCondition(t, Condition(function HeroicUnit___OnMorph))
         call UnitAddAbility(u, 'AInv')
-        call UnitAddAbility(u, HeroicUnit__DETECTOR)
-        call UnitAddAbility(u, HeroicUnit__BONUS_ID)
-        call RemoveItem(UnitAddItemById(u, HeroicUnit__ITEM_ID))
-        call UnitRemoveAbility(u, HeroicUnit__BONUS_ID)
+        call UnitAddAbility(u, HeroicUnit___DETECTOR)
+        call UnitAddAbility(u, HeroicUnit___BONUS_ID)
+        call RemoveItem(UnitAddItemById(u, HeroicUnit___ITEM_ID))
+        call UnitRemoveAbility(u, HeroicUnit___BONUS_ID)
         call SetWidgetLife(u, hp)
         call SetUnitState(u, UNIT_STATE_MANA, mp)
         call SetUnitAnimation(u, "stand")
@@ -2456,38 +2486,6 @@ function InitQuests takes nothing returns nothing
 endfunction
 
 //library LoPInitQuests ends
-//library LoPPlayers:
-
-    
-    // Initialized in Init Main (probably should make an initializer module here, but... ^_^)
-    
-    function s__LoP_PlayerData_get takes player whichPlayer returns integer
-        return GetPlayerId(whichPlayer)
-    endfunction
-    
-    function s__LoP_PlayerData_toPlayerId takes integer this returns integer
-        return this
-    endfunction
-    
-    function s__LoP_PlayerData_toPlayerNumber takes integer this returns integer
-        return this + 1
-    endfunction
-
-    // Why use an array and not ConvertPlayerColor? Because ConvertPlayerColor can crash.
-    // Would make finding any bugs caused by this really hard, since it could happen anywhere.
-    function s__LoP_PlayerData_getUnitColor takes integer this returns playercolor
-        return s__LoP_PlayerData_playerColors[this]
-    endfunction
-    
-    function s__LoP_PlayerData_setUnitColor takes integer this,playercolor color returns nothing
-        set s__LoP_PlayerData_playerColors[this]=color
-    endfunction
-
-
-
-
-
-//library LoPPlayers ends
 //library MultiPatrol:
 
 // TODO: Still interfaces badly with the save system,  which is using a private function.
@@ -5822,7 +5820,7 @@ endfunction
 
 function Lists_GetHashtable takes nothing returns hashtable
 
-        return Lists__hashTable
+        return Lists___hashTable
 
 
 
@@ -6235,15 +6233,6 @@ endfunction
    
 
 //library TileDefinition ends
-//library UnitVisualModsDefaults:
-    
-
-    function UnitVisualModsDefaults_SetColor takes unit whichUnit,player owner returns nothing
-        call SetUnitColor(whichUnit, (s__LoP_PlayerData_playerColors[((GetPlayerId((owner))))])) // INLINED!!
-    endfunction
-
-
-//library UnitVisualModsDefaults ends
 //library ArgumentStack:
 
 
@@ -7966,46 +7955,46 @@ endfunction
 //==============================================
 
 // If a negative setKey is specified, this will actually set the previous element of the positive setKey
-function GLHS__SetNext takes integer setKey,integer data,integer next returns nothing
-    call SaveInteger((Lists__hashTable), setKey, data, next) // INLINED!!
+function GLHS___SetNext takes integer setKey,integer data,integer next returns nothing
+    call SaveInteger((Lists___hashTable), setKey, data, next) // INLINED!!
 endfunction
 
 // If a negative setKey is specified, this will actually set the next element of the positive setKey
-function GLHS__SetPrev takes integer setKey,integer data,integer prev returns nothing
-    call SaveInteger((Lists__hashTable), - setKey, data, prev) // INLINED!!
+function GLHS___SetPrev takes integer setKey,integer data,integer prev returns nothing
+    call SaveInteger((Lists___hashTable), - setKey, data, prev) // INLINED!!
 endfunction
 
 // These functions clear the link data of an element (used to remove stuff from the list)
-function GLHS__ClearNext takes integer setKey,integer data returns nothing
-    call RemoveSavedInteger((Lists__hashTable), setKey, data) // INLINED!!
+function GLHS___ClearNext takes integer setKey,integer data returns nothing
+    call RemoveSavedInteger((Lists___hashTable), setKey, data) // INLINED!!
 endfunction
     
-function GLHS__ClearPrev takes integer setKey,integer data returns nothing
-    call RemoveSavedInteger((Lists__hashTable), - setKey, data) // INLINED!!
+function GLHS___ClearPrev takes integer setKey,integer data returns nothing
+    call RemoveSavedInteger((Lists___hashTable), - setKey, data) // INLINED!!
 endfunction
 
 //Returns the next element after the specified "data" in the set
 //To get the first element, pass "0" as the parameter "data"
-function GLHS__GetNext takes integer setKey,integer data returns integer
-    return LoadInteger((Lists__hashTable), setKey, data) // INLINED!!
+function GLHS___GetNext takes integer setKey,integer data returns integer
+    return LoadInteger((Lists___hashTable), setKey, data) // INLINED!!
 endfunction
 
 //Returns the element that preceeds the specified "data" in the set
 //To get the last element, pass "0" as the parameter "data"
-function GLHS__GetPrev takes integer setKey,integer data returns integer
-    return LoadInteger((Lists__hashTable), - setKey, data) // INLINED!!
+function GLHS___GetPrev takes integer setKey,integer data returns integer
+    return LoadInteger((Lists___hashTable), - setKey, data) // INLINED!!
 endfunction
 
 //Adds an element to a set, in the position preceeding the element passed as the second parameter
 //If data is already present in set, behaviour is undefined
-function GLHS__AddBefore takes integer setKey,integer next,integer data returns nothing
-    local integer prev= (LoadInteger((Lists__hashTable), - (setKey ), ( next))) // INLINED!!
+function GLHS___AddBefore takes integer setKey,integer next,integer data returns nothing
+    local integer prev= (LoadInteger((Lists___hashTable), - (setKey ), ( next))) // INLINED!!
     
-    call SaveInteger((Lists__hashTable), (setKey ), ( prev ), ( data)) // INLINED!!
-    call SaveInteger((Lists__hashTable), - (setKey ), ( next ), ( data)) // INLINED!!
+    call SaveInteger((Lists___hashTable), (setKey ), ( prev ), ( data)) // INLINED!!
+    call SaveInteger((Lists___hashTable), - (setKey ), ( next ), ( data)) // INLINED!!
     
-    call SaveInteger((Lists__hashTable), (setKey ), ( data ), ( next)) // INLINED!!
-    call SaveInteger((Lists__hashTable), - (setKey ), ( data ), ( prev)) // INLINED!!
+    call SaveInteger((Lists___hashTable), (setKey ), ( data ), ( next)) // INLINED!!
+    call SaveInteger((Lists___hashTable), - (setKey ), ( data ), ( prev)) // INLINED!!
 endfunction
 
 //==============================================
@@ -8015,7 +8004,7 @@ endfunction
 
 
     function s__LinkedHashSet_begin takes integer this returns integer
-        return (LoadInteger((Lists__hashTable), (this ), ( 0))) // INLINED!!
+        return (LoadInteger((Lists___hashTable), (this ), ( 0))) // INLINED!!
     endfunction
     
     function s__LinkedHashSet_end takes nothing returns integer
@@ -8023,7 +8012,7 @@ endfunction
     endfunction
     
     function s__LinkedHashSet_rBegin takes integer this returns integer
-        return (LoadInteger((Lists__hashTable), - (this ), ( 0))) // INLINED!!
+        return (LoadInteger((Lists___hashTable), - (this ), ( 0))) // INLINED!!
     endfunction
     
     function s__LinkedHashSet_rEnd takes nothing returns integer
@@ -8031,30 +8020,30 @@ endfunction
     endfunction
     
     function s__LinkedHashSet_next takes integer this,integer i returns integer
-        return (LoadInteger((Lists__hashTable), (this ), ( i))) // INLINED!!
+        return (LoadInteger((Lists___hashTable), (this ), ( i))) // INLINED!!
     endfunction
     
     function s__LinkedHashSet_prev takes integer this,integer i returns integer
-        return (LoadInteger((Lists__hashTable), - (this ), ( i))) // INLINED!!
+        return (LoadInteger((Lists___hashTable), - (this ), ( i))) // INLINED!!
     endfunction
     
     function s__LinkedHashSet_setNext takes integer this,integer i,integer next returns nothing
-        call SaveInteger((Lists__hashTable), (this ), ( i ), ( next)) // INLINED!!
+        call SaveInteger((Lists___hashTable), (this ), ( i ), ( next)) // INLINED!!
     endfunction
     
     function s__LinkedHashSet_setPrev takes integer this,integer i,integer prev returns nothing
-        call SaveInteger((Lists__hashTable), - (this ), ( i ), ( prev)) // INLINED!!
+        call SaveInteger((Lists___hashTable), - (this ), ( i ), ( prev)) // INLINED!!
     endfunction
     
     function s__LinkedHashSet_delete takes integer this,integer i returns nothing
-        local integer next= (LoadInteger((Lists__hashTable), (this ), ( i))) // INLINED!!
-        local integer prev= (LoadInteger((Lists__hashTable), - (this ), ( i))) // INLINED!!
+        local integer next= (LoadInteger((Lists___hashTable), (this ), ( i))) // INLINED!!
+        local integer prev= (LoadInteger((Lists___hashTable), - (this ), ( i))) // INLINED!!
     
-        call SaveInteger((Lists__hashTable), - (this ), ( next ), ( prev)) // INLINED!!
-        call SaveInteger((Lists__hashTable), (this ), ( prev ), ( next)) // INLINED!!
+        call SaveInteger((Lists___hashTable), - (this ), ( next ), ( prev)) // INLINED!!
+        call SaveInteger((Lists___hashTable), (this ), ( prev ), ( next)) // INLINED!!
             
-        call RemoveSavedInteger((Lists__hashTable), (this ), ( i)) // INLINED!!
-        call RemoveSavedInteger((Lists__hashTable), - (this ), ( i)) // INLINED!!
+        call RemoveSavedInteger((Lists___hashTable), (this ), ( i)) // INLINED!!
+        call RemoveSavedInteger((Lists___hashTable), - (this ), ( i)) // INLINED!!
     endfunction
 
     constant function s__LinkedHashSet_RECYCLE_KEY takes nothing returns integer
@@ -8087,22 +8076,22 @@ endfunction
     
     
     function s__LinkedHashSet_addBefore takes integer this,integer oldData,integer newData returns nothing
-        call GLHS__AddBefore(this , oldData , newData)
+        call GLHS___AddBefore(this , oldData , newData)
     endfunction
     
     
     function s__LinkedHashSet_addAfter takes integer this,integer oldData,integer newData returns nothing
-        call GLHS__AddBefore(- this , oldData , newData)
+        call GLHS___AddBefore(- this , oldData , newData)
     endfunction
 
     
     function s__LinkedHashSet_append takes integer this,integer data returns nothing
-        call GLHS__AddBefore((this) , (0 ) , ( data)) // INLINED!!
+        call GLHS___AddBefore((this) , (0 ) , ( data)) // INLINED!!
     endfunction
     
     
     function s__LinkedHashSet_prepend takes integer this,integer data returns nothing
-        call GLHS__AddBefore(- (this) , (0 ) , ( data)) // INLINED!!
+        call GLHS___AddBefore(- (this) , (0 ) , ( data)) // INLINED!!
     endfunction
     
     
@@ -8112,39 +8101,39 @@ endfunction
     
     
     function s__LinkedHashSet_clear takes integer this returns nothing
-        call FlushChildHashtable((Lists__hashTable), this) // INLINED!!
-        call FlushChildHashtable((Lists__hashTable), - this) // INLINED!!
+        call FlushChildHashtable((Lists___hashTable), this) // INLINED!!
+        call FlushChildHashtable((Lists___hashTable), - this) // INLINED!!
     endfunction
     
     
     function s__LinkedHashSet_getFirst takes integer this returns integer
-        return (LoadInteger((Lists__hashTable), ((this) ), ( 0))) // INLINED!!
+        return (LoadInteger((Lists___hashTable), ((this) ), ( 0))) // INLINED!!
     endfunction
     
     
     function s__LinkedHashSet_getLast takes integer this returns integer
-        return (LoadInteger((Lists__hashTable), - ((this) ), ( 0))) // INLINED!!
+        return (LoadInteger((Lists___hashTable), - ((this) ), ( 0))) // INLINED!!
     endfunction
     
     
     function s__LinkedHashSet_isEmpty takes integer this returns boolean
-        return (LoadInteger((Lists__hashTable), ((this) ), ( 0))) != (0) // INLINED!!
+        return (LoadInteger((Lists___hashTable), ((this) ), ( 0))) != (0) // INLINED!!
     endfunction
     
     
     function s__LinkedHashSet_contains takes integer this,integer data returns boolean
-        return HaveSavedInteger((Lists__hashTable), this, data) // INLINED!!
+        return HaveSavedInteger((Lists___hashTable), this, data) // INLINED!!
     endfunction
     
     
     function s__LinkedHashSet_size takes integer this returns integer
-        local integer data= (LoadInteger((Lists__hashTable), ((this) ), ( 0))) // INLINED!!
+        local integer data= (LoadInteger((Lists___hashTable), ((this) ), ( 0))) // INLINED!!
         local integer count= 0
         
         loop
         exitwhen data == (0) // INLINED!!
             set count=count + 1
-            set data=(LoadInteger((Lists__hashTable), ((this) ), ( (data)))) // INLINED!!
+            set data=(LoadInteger((Lists___hashTable), ((this) ), ( (data)))) // INLINED!!
         endloop
         
         return count
@@ -8152,14 +8141,14 @@ endfunction
     
     //This function loops through a Set and executes a trigger for each element, setting the udg_List variables to their relevant equivalents each time
     function s__LinkedHashSet_forEach takes integer this,trigger trig returns nothing
-        local integer data= (LoadInteger((Lists__hashTable), ((this) ), ( 0))) // INLINED!!
+        local integer data= (LoadInteger((Lists___hashTable), ((this) ), ( 0))) // INLINED!!
         
         loop
         exitwhen data == (0) // INLINED!!
             set s__LinkedHashSet_enumElement=data
             set s__LinkedHashSet_enumSet=this
             
-            set data=(LoadInteger((Lists__hashTable), ((this) ), ( (data)))) // INLINED!!
+            set data=(LoadInteger((Lists___hashTable), ((this) ), ( (data)))) // INLINED!!
             
             if IsTriggerEnabled(trig) and TriggerEvaluate(trig) then
                 call TriggerExecute(trig)
@@ -8169,7 +8158,7 @@ endfunction
     
     //If 'until' parameter is a non-negative number, then the loop will break after iterating over that many elements
     function s__LinkedHashSet_forEachCounted takes integer this,trigger trig,integer until returns nothing
-        local integer data= (LoadInteger((Lists__hashTable), ((this) ), ( 0))) // INLINED!!
+        local integer data= (LoadInteger((Lists___hashTable), ((this) ), ( 0))) // INLINED!!
         local integer count= 0
             
         loop
@@ -8177,7 +8166,7 @@ endfunction
             set s__LinkedHashSet_enumElement=data
             set s__LinkedHashSet_enumSet=this
             
-            set data=(LoadInteger((Lists__hashTable), ((this) ), ( (data)))) // INLINED!!
+            set data=(LoadInteger((Lists___hashTable), ((this) ), ( (data)))) // INLINED!!
             
             if IsTriggerEnabled(trig) and TriggerEvaluate(trig) then
                 call TriggerExecute(trig)
@@ -8189,14 +8178,14 @@ endfunction
     
     // You may specify a code that will run in a ForPlayer loop instead of a trigger
     function s__LinkedHashSet_forEachCode takes integer this,code func returns nothing
-        local integer data= (LoadInteger((Lists__hashTable), ((this) ), ( 0))) // INLINED!!
+        local integer data= (LoadInteger((Lists___hashTable), ((this) ), ( 0))) // INLINED!!
         
         loop
         exitwhen data == (0) // INLINED!!
             set s__LinkedHashSet_enumElement=data
             set s__LinkedHashSet_enumSet=this
             
-            set data=(LoadInteger((Lists__hashTable), ((this) ), ( (data)))) // INLINED!!
+            set data=(LoadInteger((Lists___hashTable), ((this) ), ( (data)))) // INLINED!!
             
             call ForForce(bj_FORCE_PLAYER[0], func)
         endloop
@@ -8204,7 +8193,7 @@ endfunction
     
     
     function s__LinkedHashSet_forEachCodeCounted takes integer this,code func,integer until returns nothing
-        local integer data= (LoadInteger((Lists__hashTable), ((this) ), ( 0))) // INLINED!!
+        local integer data= (LoadInteger((Lists___hashTable), ((this) ), ( 0))) // INLINED!!
         local integer count= 0
             
         loop
@@ -8212,7 +8201,7 @@ endfunction
             set s__LinkedHashSet_enumElement=data
             set s__LinkedHashSet_enumSet=this
             
-            set data=(LoadInteger((Lists__hashTable), ((this) ), ( (data)))) // INLINED!!
+            set data=(LoadInteger((Lists___hashTable), ((this) ), ( (data)))) // INLINED!!
             
             call ForForce(bj_FORCE_PLAYER[0], func)
             
@@ -8221,17 +8210,17 @@ endfunction
     endfunction
     
     function s__LinkedHashSet_forEachWipe takes integer this,integer start,integer finish,code func returns integer
-        local integer data= (LoadInteger((Lists__hashTable), (this ), ( start))) // INLINED!!
+        local integer data= (LoadInteger((Lists___hashTable), (this ), ( start))) // INLINED!!
         local integer nextData
         local integer countRemoved= 0
             
         loop
         exitwhen data == finish or data == 0
         
-            set nextData=(LoadInteger((Lists__hashTable), (this ), ( data))) // INLINED!!
+            set nextData=(LoadInteger((Lists___hashTable), (this ), ( data))) // INLINED!!
 
-            call RemoveSavedInteger((Lists__hashTable), (this ), ( data)) // INLINED!!
-            call RemoveSavedInteger((Lists__hashTable), - (- this ), ( data)) // INLINED!!
+            call RemoveSavedInteger((Lists___hashTable), (this ), ( data)) // INLINED!!
+            call RemoveSavedInteger((Lists___hashTable), - (- this ), ( data)) // INLINED!!
             
             set s__LinkedHashSet_enumElement=data
             set s__LinkedHashSet_enumSet=this
@@ -8241,8 +8230,8 @@ endfunction
             set countRemoved=countRemoved + 1
         endloop
         
-        call SaveInteger((Lists__hashTable), - (this ), ( data ), ( start)) // INLINED!!
-        call SaveInteger((Lists__hashTable), (this ), ( start ), ( data)) // INLINED!!
+        call SaveInteger((Lists___hashTable), - (this ), ( data ), ( start)) // INLINED!!
+        call SaveInteger((Lists___hashTable), (this ), ( start ), ( data)) // INLINED!!
 
         return countRemoved
     endfunction
@@ -8254,8 +8243,8 @@ endfunction
     
     
     function s__LinkedHashSet_destroy takes integer this returns nothing
-        call FlushChildHashtable((Lists__hashTable), this) // INLINED!!
-        call FlushChildHashtable((Lists__hashTable), - this) // INLINED!!
+        call FlushChildHashtable((Lists___hashTable), this) // INLINED!!
+        call FlushChildHashtable((Lists___hashTable), - this) // INLINED!!
 //Implemented from module GMUI_deallocate_this:
 //textmacro instance: GMUI_RecycleIndex("this","thistype.RECYCLE_KEY()")
     call SaveInteger(GMUI_hashTable, (Lists_RECYCLE_KEY), this, LoadInteger(GMUI_hashTable, (Lists_RECYCLE_KEY), 0)) // INLINED!!
@@ -8445,6 +8434,212 @@ endfunction
 
 
 //library FilterTransformations ends
+//library LoPCommands:
+
+// Save string. MUST MATCH.
+
+
+
+
+
+    
+    function s__LoP_Command_fromString takes string str returns integer
+        return StringHash(str)
+    endfunction
+
+//textmacro instance: TableStruct_NewHandleField("boolexpr","boolexpr")
+    function s__LoP_Command__get_boolexpr takes integer this returns boolexpr
+        return (LoadBooleanExprHandle(ConstTable__ht, (((((s__LoP_Command_boolexpr_impl))))), (this))) // INLINED!!
+    endfunction
+    
+    function s__LoP_Command__set_boolexpr takes integer this,boolexpr new_boolexpr returns nothing
+        call s__TableStruct_setHandle(s__LoP_Command_boolexpr_impl , this , new_boolexpr)
+    endfunction
+    
+    function s__LoP_Command_boolexprClear takes integer this returns nothing
+        call RemoveSavedHandle(ConstTable__ht, (((((s__LoP_Command_boolexpr_impl))))), (this)) // INLINED!!
+    endfunction
+    
+    function s__LoP_Command_boolexprExists takes integer this returns boolean
+        return (HaveSavedHandle(ConstTable__ht, (((((s__LoP_Command_boolexpr_impl))))), (this))) // INLINED!!
+    endfunction
+//end of: TableStruct_NewHandleField("boolexpr","boolexpr")
+//textmacro instance: TableStruct_NewPrimitiveField("string","string")
+    function s__LoP_Command__get_string takes integer this returns string
+        return (LoadStr(ConstTable__ht, (((((s__LoP_Command_string_impl))))), (this))) // INLINED!!
+    endfunction
+    
+    function s__LoP_Command__set_string takes integer this,string new_string returns nothing
+        call SaveStr(ConstTable__ht, (((((s__LoP_Command_string_impl))))), (this), ( new_string)) // INLINED!!
+    endfunction
+    
+    function s__LoP_Command_stringClear takes integer this returns nothing
+        call RemoveSavedString(ConstTable__ht, (((((s__LoP_Command_string_impl))))), (this)) // INLINED!!
+    endfunction
+    
+    function s__LoP_Command_stringExists takes integer this returns boolean
+        return (HaveSavedString(ConstTable__ht, (((((s__LoP_Command_string_impl))))), (this))) // INLINED!!
+    endfunction
+//end of: TableStruct_NewPrimitiveField("string","string")
+//textmacro instance: TableStruct_NewPrimitiveField("accessLevel","integer")
+    function s__LoP_Command__get_accessLevel takes integer this returns integer
+        return (LoadInteger(ConstTable__ht, (((((s__LoP_Command_accessLevel_impl))))), (this))) // INLINED!!
+    endfunction
+    
+    function s__LoP_Command__set_accessLevel takes integer this,integer new_accessLevel returns nothing
+        call SaveInteger(ConstTable__ht, (((((s__LoP_Command_accessLevel_impl))))), (this), ( new_accessLevel)) // INLINED!!
+    endfunction
+    
+    function s__LoP_Command_accessLevelClear takes integer this returns nothing
+        call RemoveSavedInteger(ConstTable__ht, (((((s__LoP_Command_accessLevel_impl))))), (this)) // INLINED!!
+    endfunction
+    
+    function s__LoP_Command_accessLevelExists takes integer this returns boolean
+        return (HaveSavedInteger(ConstTable__ht, (((((s__LoP_Command_accessLevel_impl))))), (this))) // INLINED!!
+    endfunction
+//end of: TableStruct_NewPrimitiveField("accessLevel","integer")
+    
+    function s__LoP_Command_create takes string str,integer access,boolexpr expr returns integer
+        local integer this= (StringHash((str))) // INLINED!!
+        if not (HaveSavedString(ConstTable__ht, (((((s__LoP_Command_string_impl))))), ((this)))) then // INLINED!!
+            call s__TableStruct_setHandle(s__LoP_Command_boolexpr_impl , (this) , (expr)) // INLINED!!
+            call SaveStr(ConstTable__ht, (((((s__LoP_Command_string_impl))))), ((this)), ( (str))) // INLINED!!
+            call SaveInteger(ConstTable__ht, (((((s__LoP_Command_accessLevel_impl))))), ((this)), ( (access))) // INLINED!!
+        elseif (LoadStr(ConstTable__ht, (((((s__LoP_Command_string_impl))))), ((this)))) == str then // INLINED!!
+            // Updating command.
+        else
+            // Hash collision
+        endif
+        return this
+    endfunction
+    
+    function s__LoP_Command_getCommand takes nothing returns string
+        return s__Args_getString(0)
+    endfunction
+    
+    function s__LoP_Command_getArguments takes nothing returns string
+        return s__Args_getString(1)
+    endfunction
+
+
+//textmacro instance: TableStruct_NewStaticHandleField("trigger","trigger")
+    function s__LoPCommands_Globals__get_trigger takes nothing returns trigger
+        return (LoadTriggerHandle(ConstTable__ht, (((((s__LoPCommands_Globals_static_members_key))))), (s__LoPCommands_Globals_trigger_impl))) // INLINED!!
+    endfunction
+    
+    function s__LoPCommands_Globals__set_trigger takes trigger new_trigger returns nothing
+        call s__TableStruct_setHandle(s__LoPCommands_Globals_static_members_key , s__LoPCommands_Globals_trigger_impl , new_trigger)
+    endfunction
+    
+    function s__LoPCommands_Globals_triggerClear takes nothing returns nothing
+        call RemoveSavedHandle(ConstTable__ht, (((((s__LoPCommands_Globals_static_members_key))))), (s__LoPCommands_Globals_trigger_impl)) // INLINED!!
+    endfunction
+    
+    function s__LoPCommands_Globals_triggerExists takes nothing returns boolean
+        return (HaveSavedHandle(ConstTable__ht, (((((s__LoPCommands_Globals_static_members_key))))), (s__LoPCommands_Globals_trigger_impl))) // INLINED!!
+    endfunction
+//end of: TableStruct_NewStaticHandleField("trigger","trigger")
+//textmacro instance: TableStruct_NewStaticHandleField("evaluator","trigger")
+    function s__LoPCommands_Globals__get_evaluator takes nothing returns trigger
+        return (LoadTriggerHandle(ConstTable__ht, (((((s__LoPCommands_Globals_static_members_key))))), (s__LoPCommands_Globals_evaluator_impl))) // INLINED!!
+    endfunction
+    
+    function s__LoPCommands_Globals__set_evaluator takes trigger new_evaluator returns nothing
+        call s__TableStruct_setHandle(s__LoPCommands_Globals_static_members_key , s__LoPCommands_Globals_evaluator_impl , new_evaluator)
+    endfunction
+    
+    function s__LoPCommands_Globals_evaluatorClear takes nothing returns nothing
+        call RemoveSavedHandle(ConstTable__ht, (((((s__LoPCommands_Globals_static_members_key))))), (s__LoPCommands_Globals_evaluator_impl)) // INLINED!!
+    endfunction
+    
+    function s__LoPCommands_Globals_evaluatorExists takes nothing returns boolean
+        return (HaveSavedHandle(ConstTable__ht, (((((s__LoPCommands_Globals_static_members_key))))), (s__LoPCommands_Globals_evaluator_impl))) // INLINED!!
+    endfunction
+//end of: TableStruct_NewStaticHandleField("evaluator","trigger")
+
+
+
+function LoPCommands___onChatMessage takes nothing returns boolean
+    local string chatMsg
+    local integer cutToComma
+    local string beforeSpace
+    local string arguments
+    local integer command
+    local triggercondition condition
+    local trigger evaluator
+    
+    local integer accessLevel
+    
+    if not sc__LoP_PlayerData__get_commandsEnabled((GetPlayerId((GetTriggerPlayer())))) then // INLINED!!
+        return false
+    endif
+    
+    set chatMsg=GetEventPlayerChatString()
+    set cutToComma=CutToCharacter(chatMsg , " ")
+    set beforeSpace=SubString(chatMsg, 0, cutToComma)
+    if cutToComma < StringLength(chatMsg) then
+        set arguments=SubString(chatMsg, cutToComma + 1, StringLength(chatMsg))
+    else
+        set arguments=""
+    endif
+    set command=StringHash(beforeSpace)
+    
+    
+    if GetTriggerPlayer() == udg_GAME_MASTER then
+        set accessLevel=1
+    else
+        set accessLevel=0
+    endif
+    
+    
+    call BJDebugMsg("Command called")
+    if beforeSpace == (LoadStr(ConstTable__ht, (((((s__LoP_Command_string_impl))))), ((command)))) and accessLevel >= (LoadInteger(ConstTable__ht, (((((s__LoP_Command_accessLevel_impl))))), ((command)))) then // INLINED!!
+        set evaluator=(LoadTriggerHandle(ConstTable__ht, (((((s__LoPCommands_Globals_static_members_key))))), (s__LoPCommands_Globals_evaluator_impl))) // INLINED!!
+        call BJDebugMsg(beforeSpace)
+        
+        set condition=TriggerAddCondition(evaluator, (LoadBooleanExprHandle(ConstTable__ht, (((((s__LoP_Command_boolexpr_impl))))), ((command))))) // INLINED!!
+        
+        call s__Args_setString(0 , beforeSpace)
+        call s__Args_setString(1 , arguments)
+        call TriggerEvaluate(evaluator)
+        call s__Args_freeString(0)
+        call s__Args_freeString(1)
+        call TriggerRemoveCondition(evaluator, condition)
+    endif
+
+    set condition=null
+    set evaluator=null
+    return false
+endfunction
+
+
+
+
+function onInit takes nothing returns nothing
+    local integer playerId= 0
+    local trigger trig= CreateTrigger()
+    
+    call s__TableStruct_setHandle(s__LoPCommands_Globals_static_members_key , s__LoPCommands_Globals_trigger_impl , (trig)) // INLINED!!
+    call s__TableStruct_setHandle(s__LoPCommands_Globals_static_members_key , s__LoPCommands_Globals_evaluator_impl , (CreateTrigger())) // INLINED!!
+    
+    loop
+    exitwhen playerId == bj_MAX_PLAYERS
+        if GetPlayerSlotState(Player(playerId)) == PLAYER_SLOT_STATE_PLAYING then
+            call TriggerRegisterPlayerChatEvent(trig, Player(playerId), "'", false)
+            call TriggerRegisterPlayerChatEvent(trig, Player(playerId), "-", false)
+        endif
+        set playerId=playerId + 1
+    endloop
+    call TriggerAddCondition(trig, Condition(function LoPCommands___onChatMessage))
+
+    set trig=null
+endfunction
+
+
+
+
+
+//library LoPCommands ends
 //library LoPDecoBuilders:
     
     
@@ -8559,8 +8754,8 @@ endfunction
 
 
     
-//Implemented from module LoPDecoBuilders__InitModule:
-        function s__LoP_DecoBuilders_LoPDecoBuilders__InitModule__onInit takes nothing returns nothing
+//Implemented from module LoPDecoBuilders___InitModule:
+        function s__LoP_DecoBuilders_LoPDecoBuilders___InitModule__onInit takes nothing returns nothing
             local integer i= 0
             // ---------
             // Special Decos
@@ -8917,6 +9112,77 @@ endfunction
 
 
 //library LoPInitPlayerCircles ends
+//library LoPPlayers:
+
+    
+    
+    
+    function s__LoP_PlayerData_get takes player whichPlayer returns integer
+        return GetPlayerId(whichPlayer)
+    endfunction
+    
+    function s__LoP_PlayerData_toPlayerId takes integer this returns integer
+        return this
+    endfunction
+    
+    function s__LoP_PlayerData_toPlayerNumber takes integer this returns integer
+        return this + 1
+    endfunction
+    
+    //==================================
+    
+    // Initialized in Init Main (probably should make an initializer module here, but... ^_^)
+
+    // Why use an array and not ConvertPlayerColor? Because ConvertPlayerColor can crash.
+    // Would make finding any bugs caused by this really hard, since it could happen anywhere.
+    function s__LoP_PlayerData_getUnitColor takes integer this returns playercolor
+        return s__LoP_PlayerData_playerColors[this]
+    endfunction
+    
+    function s__LoP_PlayerData_setUnitColor takes integer this,playercolor color returns nothing
+        set s__LoP_PlayerData_playerColors[this]=color
+    endfunction
+    
+    //==================================
+    // Enable/Disable function (to be called by the Save System when loading)
+    
+    
+    // Should add a timer to check if player finished loading, because they might not type -load end
+    
+    // Alternative: create seperate command trigger for each player. Disable it or destroy it when they leave the game.
+//textmacro instance: TableStruct_NewReadonlyPrimitiveField("commandsEnabled_internal","boolean")
+    function s__LoP_PlayerData__get_commandsEnabled_internal takes integer this returns boolean
+        return (LoadBoolean(ConstTable__ht, (((((s__LoP_PlayerData_commandsEnabled_internal_impl))))), (this))) // INLINED!!
+    endfunction
+    
+    function s__LoP_PlayerData__set_commandsEnabled_internal takes integer this,boolean new_commandsEnabled_internal returns nothing
+        call SaveBoolean(ConstTable__ht, (((((s__LoP_PlayerData_commandsEnabled_internal_impl))))), (this), ( new_commandsEnabled_internal)) // INLINED!!
+    endfunction
+    
+    function s__LoP_PlayerData_commandsEnabled_internalClear takes integer this returns nothing
+        call RemoveSavedBoolean(ConstTable__ht, (((((s__LoP_PlayerData_commandsEnabled_internal_impl))))), (this)) // INLINED!!
+    endfunction
+    
+    function s__LoP_PlayerData_commandsEnabled_internalExists takes integer this returns boolean
+        return (HaveSavedBoolean(ConstTable__ht, (((((s__LoP_PlayerData_commandsEnabled_internal_impl))))), (this))) // INLINED!!
+    endfunction
+//end of: TableStruct_NewReadonlyPrimitiveField("commandsEnabled_internal","boolean")
+    function s__LoP_PlayerData_enableCommands takes integer this returns nothing
+        call RemoveSavedBoolean(ConstTable__ht, (((((s__LoP_PlayerData_commandsEnabled_internal_impl))))), ((this))) // INLINED!!
+    endfunction
+    function s__LoP_PlayerData_disableCommands takes integer this returns nothing
+        call SaveBoolean(ConstTable__ht, (((((s__LoP_PlayerData_commandsEnabled_internal_impl))))), ((this)), ( (true))) // INLINED!!
+    endfunction
+    function s__LoP_PlayerData__get_commandsEnabled takes integer this returns boolean
+        return not (HaveSavedBoolean(ConstTable__ht, (((((s__LoP_PlayerData_commandsEnabled_internal_impl))))), ((this)))) // INLINED!!
+    endfunction
+    
+
+
+
+
+
+//library LoPPlayers ends
 //library MultiBoard:
 
 
@@ -8933,6 +9199,10 @@ endfunction
     function s__MultiBoard_itemsClear takes integer this returns nothing
         call RemoveSavedInteger(ConstTable__ht, (((s__MultiBoard_items_impl))), (this)) // INLINED!!
     endfunction
+    
+    function s__MultiBoard_itemsExists takes integer this returns boolean
+        return (HaveSavedInteger(ConstTable__ht, (((s__MultiBoard_items_impl))), (this))) // INLINED!!
+    endfunction
 //end of: TableStruct_NewReadonlyStructField("items", "Table")
     
 //textmacro instance: TableStruct_NewReadonlyPrimitiveField("cols", "integer")
@@ -8947,6 +9217,10 @@ endfunction
     function s__MultiBoard_colsClear takes integer this returns nothing
         call RemoveSavedInteger(ConstTable__ht, (((((s__MultiBoard_cols_impl))))), (this)) // INLINED!!
     endfunction
+    
+    function s__MultiBoard_colsExists takes integer this returns boolean
+        return (HaveSavedInteger(ConstTable__ht, (((((s__MultiBoard_cols_impl))))), (this))) // INLINED!!
+    endfunction
 //end of: TableStruct_NewReadonlyPrimitiveField("cols", "integer")
 //textmacro instance: TableStruct_NewReadonlyPrimitiveField("rows", "integer")
     function s__MultiBoard__get_rows takes integer this returns integer
@@ -8959,6 +9233,10 @@ endfunction
     
     function s__MultiBoard_rowsClear takes integer this returns nothing
         call RemoveSavedInteger(ConstTable__ht, (((((s__MultiBoard_rows_impl))))), (this)) // INLINED!!
+    endfunction
+    
+    function s__MultiBoard_rowsExists takes integer this returns boolean
+        return (HaveSavedInteger(ConstTable__ht, (((((s__MultiBoard_rows_impl))))), (this))) // INLINED!!
     endfunction
 //end of: TableStruct_NewReadonlyPrimitiveField("rows", "integer")
     
@@ -8973,6 +9251,10 @@ endfunction
     
     function s__MultiBoard_multiboardClear takes integer this returns nothing
         call RemoveSavedHandle(ConstTable__ht, (((((s__MultiBoard_multiboard_impl))))), (this)) // INLINED!!
+    endfunction
+    
+    function s__MultiBoard_multiboardExists takes integer this returns boolean
+        return (HaveSavedHandle(ConstTable__ht, (((((s__MultiBoard_multiboard_impl))))), (this))) // INLINED!!
     endfunction
 //end of: TableStruct_NewReadonlyHandleField("multiboard", "multiboard")
     
@@ -9099,6 +9381,10 @@ endfunction
     function s__TerrainFog_styleClear takes integer this returns nothing
         call RemoveSavedInteger(ConstTable__ht, (((((s__TerrainFog_style_impl))))), (this)) // INLINED!!
     endfunction
+    
+    function s__TerrainFog_styleExists takes integer this returns boolean
+        return (HaveSavedInteger(ConstTable__ht, (((((s__TerrainFog_style_impl))))), (this))) // INLINED!!
+    endfunction
 //end of: TableStruct_NewPrimitiveField("style", "integer")
 //textmacro instance: TableStruct_NewPrimitiveField("zStart", "real")
     function s__TerrainFog__get_zStart takes integer this returns real
@@ -9111,6 +9397,10 @@ endfunction
     
     function s__TerrainFog_zStartClear takes integer this returns nothing
         call RemoveSavedReal(ConstTable__ht, (((((s__TerrainFog_zStart_impl))))), (this)) // INLINED!!
+    endfunction
+    
+    function s__TerrainFog_zStartExists takes integer this returns boolean
+        return (HaveSavedReal(ConstTable__ht, (((((s__TerrainFog_zStart_impl))))), (this))) // INLINED!!
     endfunction
 //end of: TableStruct_NewPrimitiveField("zStart", "real")
 //textmacro instance: TableStruct_NewPrimitiveField("zEnd", "real")
@@ -9125,6 +9415,10 @@ endfunction
     function s__TerrainFog_zEndClear takes integer this returns nothing
         call RemoveSavedReal(ConstTable__ht, (((((s__TerrainFog_zEnd_impl))))), (this)) // INLINED!!
     endfunction
+    
+    function s__TerrainFog_zEndExists takes integer this returns boolean
+        return (HaveSavedReal(ConstTable__ht, (((((s__TerrainFog_zEnd_impl))))), (this))) // INLINED!!
+    endfunction
 //end of: TableStruct_NewPrimitiveField("zEnd", "real")
 //textmacro instance: TableStruct_NewPrimitiveField("density", "real")
     function s__TerrainFog__get_density takes integer this returns real
@@ -9137,6 +9431,10 @@ endfunction
     
     function s__TerrainFog_densityClear takes integer this returns nothing
         call RemoveSavedReal(ConstTable__ht, (((((s__TerrainFog_density_impl))))), (this)) // INLINED!!
+    endfunction
+    
+    function s__TerrainFog_densityExists takes integer this returns boolean
+        return (HaveSavedReal(ConstTable__ht, (((((s__TerrainFog_density_impl))))), (this))) // INLINED!!
     endfunction
 //end of: TableStruct_NewPrimitiveField("density", "real")
 //textmacro instance: TableStruct_NewPrimitiveField("red", "real")
@@ -9151,6 +9449,10 @@ endfunction
     function s__TerrainFog_redClear takes integer this returns nothing
         call RemoveSavedReal(ConstTable__ht, (((((s__TerrainFog_red_impl))))), (this)) // INLINED!!
     endfunction
+    
+    function s__TerrainFog_redExists takes integer this returns boolean
+        return (HaveSavedReal(ConstTable__ht, (((((s__TerrainFog_red_impl))))), (this))) // INLINED!!
+    endfunction
 //end of: TableStruct_NewPrimitiveField("red", "real")
 //textmacro instance: TableStruct_NewPrimitiveField("green", "real")
     function s__TerrainFog__get_green takes integer this returns real
@@ -9164,6 +9466,10 @@ endfunction
     function s__TerrainFog_greenClear takes integer this returns nothing
         call RemoveSavedReal(ConstTable__ht, (((((s__TerrainFog_green_impl))))), (this)) // INLINED!!
     endfunction
+    
+    function s__TerrainFog_greenExists takes integer this returns boolean
+        return (HaveSavedReal(ConstTable__ht, (((((s__TerrainFog_green_impl))))), (this))) // INLINED!!
+    endfunction
 //end of: TableStruct_NewPrimitiveField("green", "real")
 //textmacro instance: TableStruct_NewPrimitiveField("blue", "real")
     function s__TerrainFog__get_blue takes integer this returns real
@@ -9176,6 +9482,10 @@ endfunction
     
     function s__TerrainFog_blueClear takes integer this returns nothing
         call RemoveSavedReal(ConstTable__ht, (((((s__TerrainFog_blue_impl))))), (this)) // INLINED!!
+    endfunction
+    
+    function s__TerrainFog_blueExists takes integer this returns boolean
+        return (HaveSavedReal(ConstTable__ht, (((((s__TerrainFog_blue_impl))))), (this))) // INLINED!!
     endfunction
 //end of: TableStruct_NewPrimitiveField("blue", "real")
     
@@ -9220,6 +9530,10 @@ endfunction
     function s__RectEnvironment_fogClear takes integer this returns nothing
         call RemoveSavedInteger(ConstTable__ht, (((s__RectEnvironment_fog_impl))), (this)) // INLINED!!
     endfunction
+    
+    function s__RectEnvironment_fogExists takes integer this returns boolean
+        return (HaveSavedInteger(ConstTable__ht, (((s__RectEnvironment_fog_impl))), (this))) // INLINED!!
+    endfunction
 //end of: TableStruct_NewStructField("fog", "TerrainFog")
     
     function s__RectEnvironment_apply takes integer this returns nothing
@@ -9241,6 +9555,1916 @@ endfunction
 
 
 //library RectEnvironment ends
+//library AutoRectEnvironment:
+
+
+//textmacro instance: TableStruct_NewStaticPrimitiveField("lastCameraX", "real")
+    function s__AutoRectEnvironment__Globals__get_lastCameraX takes nothing returns real
+        return (LoadReal(ConstTable__ht, (((((s__AutoRectEnvironment__Globals_static_members_key))))), (s__AutoRectEnvironment__Globals_lastCameraX_impl))) // INLINED!!
+    endfunction
+    
+    function s__AutoRectEnvironment__Globals__set_lastCameraX takes real new_lastCameraX returns nothing
+        call SaveReal(ConstTable__ht, (((((s__AutoRectEnvironment__Globals_static_members_key))))), (s__AutoRectEnvironment__Globals_lastCameraX_impl), (( new_lastCameraX)*1.0)) // INLINED!!
+    endfunction
+    
+    function s__AutoRectEnvironment__Globals_lastCameraXClear takes nothing returns nothing
+        call RemoveSavedReal(ConstTable__ht, (((((s__AutoRectEnvironment__Globals_static_members_key))))), (s__AutoRectEnvironment__Globals_lastCameraX_impl)) // INLINED!!
+    endfunction
+    
+    function s__AutoRectEnvironment__Globals_lastCameraXExists takes nothing returns boolean
+        return (HaveSavedReal(ConstTable__ht, (((((s__AutoRectEnvironment__Globals_static_members_key))))), (s__AutoRectEnvironment__Globals_lastCameraX_impl))) // INLINED!!
+    endfunction
+//end of: TableStruct_NewStaticPrimitiveField("lastCameraX", "real")
+//textmacro instance: TableStruct_NewStaticPrimitiveField("lastCameraY", "real")
+    function s__AutoRectEnvironment__Globals__get_lastCameraY takes nothing returns real
+        return (LoadReal(ConstTable__ht, (((((s__AutoRectEnvironment__Globals_static_members_key))))), (s__AutoRectEnvironment__Globals_lastCameraY_impl))) // INLINED!!
+    endfunction
+    
+    function s__AutoRectEnvironment__Globals__set_lastCameraY takes real new_lastCameraY returns nothing
+        call SaveReal(ConstTable__ht, (((((s__AutoRectEnvironment__Globals_static_members_key))))), (s__AutoRectEnvironment__Globals_lastCameraY_impl), (( new_lastCameraY)*1.0)) // INLINED!!
+    endfunction
+    
+    function s__AutoRectEnvironment__Globals_lastCameraYClear takes nothing returns nothing
+        call RemoveSavedReal(ConstTable__ht, (((((s__AutoRectEnvironment__Globals_static_members_key))))), (s__AutoRectEnvironment__Globals_lastCameraY_impl)) // INLINED!!
+    endfunction
+    
+    function s__AutoRectEnvironment__Globals_lastCameraYExists takes nothing returns boolean
+        return (HaveSavedReal(ConstTable__ht, (((((s__AutoRectEnvironment__Globals_static_members_key))))), (s__AutoRectEnvironment__Globals_lastCameraY_impl))) // INLINED!!
+    endfunction
+//end of: TableStruct_NewStaticPrimitiveField("lastCameraY", "real")
+//textmacro instance: TableStruct_NewStaticPrimitiveField("rectWasMoved", "boolean")
+    function s__AutoRectEnvironment__Globals__get_rectWasMoved takes nothing returns boolean
+        return (LoadBoolean(ConstTable__ht, (((((s__AutoRectEnvironment__Globals_static_members_key))))), (s__AutoRectEnvironment__Globals_rectWasMoved_impl))) // INLINED!!
+    endfunction
+    
+    function s__AutoRectEnvironment__Globals__set_rectWasMoved takes boolean new_rectWasMoved returns nothing
+        call SaveBoolean(ConstTable__ht, (((((s__AutoRectEnvironment__Globals_static_members_key))))), (s__AutoRectEnvironment__Globals_rectWasMoved_impl), ( new_rectWasMoved)) // INLINED!!
+    endfunction
+    
+    function s__AutoRectEnvironment__Globals_rectWasMovedClear takes nothing returns nothing
+        call RemoveSavedBoolean(ConstTable__ht, (((((s__AutoRectEnvironment__Globals_static_members_key))))), (s__AutoRectEnvironment__Globals_rectWasMoved_impl)) // INLINED!!
+    endfunction
+    
+    function s__AutoRectEnvironment__Globals_rectWasMovedExists takes nothing returns boolean
+        return (HaveSavedBoolean(ConstTable__ht, (((((s__AutoRectEnvironment__Globals_static_members_key))))), (s__AutoRectEnvironment__Globals_rectWasMoved_impl))) // INLINED!!
+    endfunction
+//end of: TableStruct_NewStaticPrimitiveField("rectWasMoved", "boolean")
+    
+//textmacro instance: TableStruct_NewStaticHandleField("lastCameraRect", "rect")
+    function s__AutoRectEnvironment__Globals__get_lastCameraRect takes nothing returns rect
+        return (LoadRectHandle(ConstTable__ht, (((((s__AutoRectEnvironment__Globals_static_members_key))))), (s__AutoRectEnvironment__Globals_lastCameraRect_impl))) // INLINED!!
+    endfunction
+    
+    function s__AutoRectEnvironment__Globals__set_lastCameraRect takes rect new_lastCameraRect returns nothing
+        call s__TableStruct_setHandle(s__AutoRectEnvironment__Globals_static_members_key , s__AutoRectEnvironment__Globals_lastCameraRect_impl , new_lastCameraRect)
+    endfunction
+    
+    function s__AutoRectEnvironment__Globals_lastCameraRectClear takes nothing returns nothing
+        call RemoveSavedHandle(ConstTable__ht, (((((s__AutoRectEnvironment__Globals_static_members_key))))), (s__AutoRectEnvironment__Globals_lastCameraRect_impl)) // INLINED!!
+    endfunction
+    
+    function s__AutoRectEnvironment__Globals_lastCameraRectExists takes nothing returns boolean
+        return (HaveSavedHandle(ConstTable__ht, (((((s__AutoRectEnvironment__Globals_static_members_key))))), (s__AutoRectEnvironment__Globals_lastCameraRect_impl))) // INLINED!!
+    endfunction
+//end of: TableStruct_NewStaticHandleField("lastCameraRect", "rect")
+//textmacro instance: TableStruct_NewStaticHandleField("allRects", "region")
+    function s__AutoRectEnvironment__Globals__get_allRects takes nothing returns region
+        return (LoadRegionHandle(ConstTable__ht, (((((s__AutoRectEnvironment__Globals_static_members_key))))), (s__AutoRectEnvironment__Globals_allRects_impl))) // INLINED!!
+    endfunction
+    
+    function s__AutoRectEnvironment__Globals__set_allRects takes region new_allRects returns nothing
+        call s__TableStruct_setHandle(s__AutoRectEnvironment__Globals_static_members_key , s__AutoRectEnvironment__Globals_allRects_impl , new_allRects)
+    endfunction
+    
+    function s__AutoRectEnvironment__Globals_allRectsClear takes nothing returns nothing
+        call RemoveSavedHandle(ConstTable__ht, (((((s__AutoRectEnvironment__Globals_static_members_key))))), (s__AutoRectEnvironment__Globals_allRects_impl)) // INLINED!!
+    endfunction
+    
+    function s__AutoRectEnvironment__Globals_allRectsExists takes nothing returns boolean
+        return (HaveSavedHandle(ConstTable__ht, (((((s__AutoRectEnvironment__Globals_static_members_key))))), (s__AutoRectEnvironment__Globals_allRects_impl))) // INLINED!!
+    endfunction
+//end of: TableStruct_NewStaticHandleField("allRects", "region")
+    
+//textmacro instance: TableStruct_NewStaticStructField("rects", "LinkedHashSet")
+    function s__AutoRectEnvironment__Globals__get_rects takes nothing returns integer
+        return (LoadInteger(ConstTable__ht, (((s__AutoRectEnvironment__Globals_static_members_key))), (s__AutoRectEnvironment__Globals_rects_impl))) // INLINED!!
+    endfunction
+    
+    function s__AutoRectEnvironment__Globals__set_rects takes integer new_rects returns nothing
+        call SaveInteger(ConstTable__ht, (((s__AutoRectEnvironment__Globals_static_members_key))), (s__AutoRectEnvironment__Globals_rects_impl), ( new_rects)) // INLINED!!
+    endfunction
+    
+    function s__AutoRectEnvironment__Globals_rectsClear takes nothing returns nothing
+        call RemoveSavedInteger(ConstTable__ht, (((s__AutoRectEnvironment__Globals_static_members_key))), (s__AutoRectEnvironment__Globals_rects_impl)) // INLINED!!
+    endfunction
+    
+    function s__AutoRectEnvironment__Globals_rectsExists takes nothing returns boolean
+        return (HaveSavedInteger(ConstTable__ht, (((s__AutoRectEnvironment__Globals_static_members_key))), (s__AutoRectEnvironment__Globals_rects_impl))) // INLINED!!
+    endfunction
+//end of: TableStruct_NewStaticStructField("rects", "LinkedHashSet")
+    
+//textmacro instance: TableStruct_NewConstTableField("public","id2")
+
+        constant function s__AutoRectEnvironment__Globals__get_id2 takes nothing returns integer
+            return s__AutoRectEnvironment__Globals_id2_impl
+        endfunction
+
+
+
+
+
+//end of: TableStruct_NewConstTableField("public","id2")
+
+function AutoRectEnvironment_RegisterRect takes rect r returns nothing
+    local integer rId= GetHandleId(r)
+    
+    if not (HaveSavedHandle(ConstTable__ht, ((((s__AutoRectEnvironment__Globals_id2_impl)))), (rId))) then // INLINED!!
+        call SaveRectHandle(ConstTable__ht, ((((s__AutoRectEnvironment__Globals_id2_impl)))), (rId), ( r)) // INLINED!!
+        call RegionAddRect((LoadRegionHandle(ConstTable__ht, (((((s__AutoRectEnvironment__Globals_static_members_key))))), (s__AutoRectEnvironment__Globals_allRects_impl))), r) // INLINED!!
+        call GLHS___AddBefore((((LoadInteger(ConstTable__ht, (((s__AutoRectEnvironment__Globals_static_members_key))), (s__AutoRectEnvironment__Globals_rects_impl))))) , (0 ) , ( (rId))) // INLINED!!
+    endif
+endfunction
+
+function AutoRectEnvironment_DeRegisterRect takes rect r returns nothing
+    local integer rId= GetHandleId(r)
+    
+    // This rect can be different for each player. Null the handle to reduce reference counter.
+    if r == (LoadRectHandle(ConstTable__ht, (((((s__AutoRectEnvironment__Globals_static_members_key))))), (s__AutoRectEnvironment__Globals_lastCameraRect_impl))) then // INLINED!!
+        call s__TableStruct_setHandle(s__AutoRectEnvironment__Globals_static_members_key , s__AutoRectEnvironment__Globals_lastCameraRect_impl , (null)) // This possibly avoids desyncs. // INLINED!!
+    endif
+    
+    if (HaveSavedHandle(ConstTable__ht, ((((s__AutoRectEnvironment__Globals_id2_impl)))), (rId))) then // INLINED!!
+        call SaveBoolean(ConstTable__ht, (((((s__AutoRectEnvironment__Globals_static_members_key))))), (s__AutoRectEnvironment__Globals_rectWasMoved_impl), ( (true))) // INLINED!!
+        call RemoveSavedHandle(ConstTable__ht, ((((s__AutoRectEnvironment__Globals_id2_impl)))), (rId)) // INLINED!!
+        call RegionClearRect((LoadRegionHandle(ConstTable__ht, (((((s__AutoRectEnvironment__Globals_static_members_key))))), (s__AutoRectEnvironment__Globals_allRects_impl))), r) // INLINED!!
+        call s__LinkedHashSet_delete(((LoadInteger(ConstTable__ht, (((s__AutoRectEnvironment__Globals_static_members_key))), (s__AutoRectEnvironment__Globals_rects_impl)))),(rId)) // INLINED!!
+    endif
+endfunction
+
+function AutoRectEnvironment_MoveRect takes rect r,real newCenterX,real newCenterY returns nothing
+
+    if (HaveSavedHandle(ConstTable__ht, ((((s__AutoRectEnvironment__Globals_id2_impl)))), (GetHandleId(r)))) then // INLINED!!
+        call SaveBoolean(ConstTable__ht, (((((s__AutoRectEnvironment__Globals_static_members_key))))), (s__AutoRectEnvironment__Globals_rectWasMoved_impl), ( (true))) // INLINED!!
+        call RegionClearRect((LoadRegionHandle(ConstTable__ht, (((((s__AutoRectEnvironment__Globals_static_members_key))))), (s__AutoRectEnvironment__Globals_allRects_impl))), r) // INLINED!!
+        call MoveRectTo(r, newCenterX, newCenterY)
+        call RegionAddRect((LoadRegionHandle(ConstTable__ht, (((((s__AutoRectEnvironment__Globals_static_members_key))))), (s__AutoRectEnvironment__Globals_allRects_impl))), r) // INLINED!!
+    endif
+    
+endfunction
+
+function AutoRectEnvironment_SetRect takes rect r,real minx,real miny,real maxx,real maxy returns nothing
+    if (HaveSavedHandle(ConstTable__ht, ((((s__AutoRectEnvironment__Globals_id2_impl)))), (GetHandleId(r)))) then // INLINED!!
+        call SaveBoolean(ConstTable__ht, (((((s__AutoRectEnvironment__Globals_static_members_key))))), (s__AutoRectEnvironment__Globals_rectWasMoved_impl), ( (true))) // INLINED!!
+        call RegionClearRect((LoadRegionHandle(ConstTable__ht, (((((s__AutoRectEnvironment__Globals_static_members_key))))), (s__AutoRectEnvironment__Globals_allRects_impl))), r) // INLINED!!
+        call SetRect(r, minx, miny, maxx, maxy)
+        call RegionAddRect((LoadRegionHandle(ConstTable__ht, (((((s__AutoRectEnvironment__Globals_static_members_key))))), (s__AutoRectEnvironment__Globals_allRects_impl))), r) // INLINED!!
+    endif
+endfunction
+
+
+
+
+
+
+
+
+
+
+
+
+function onTimer takes nothing returns nothing
+    local real x= GetCameraTargetPositionX()
+    local real y= GetCameraTargetPositionY()
+    local rect r
+    local integer i
+    
+    if (LoadRectHandle(ConstTable__ht, (((((s__AutoRectEnvironment__Globals_static_members_key))))), (s__AutoRectEnvironment__Globals_lastCameraRect_impl))) != null then // INLINED!!
+        if GetRectMinX((LoadRectHandle(ConstTable__ht, (((((s__AutoRectEnvironment__Globals_static_members_key))))), (s__AutoRectEnvironment__Globals_lastCameraRect_impl)))) <= x and x <= GetRectMaxX((LoadRectHandle(ConstTable__ht, (((((s__AutoRectEnvironment__Globals_static_members_key))))), (s__AutoRectEnvironment__Globals_lastCameraRect_impl)))) and GetRectMinY((LoadRectHandle(ConstTable__ht, (((((s__AutoRectEnvironment__Globals_static_members_key))))), (s__AutoRectEnvironment__Globals_lastCameraRect_impl)))) <= y and y <= GetRectMaxY((LoadRectHandle(ConstTable__ht, (((((s__AutoRectEnvironment__Globals_static_members_key))))), (s__AutoRectEnvironment__Globals_lastCameraRect_impl)))) then // INLINED!!
+            //call BJDebugMsg("In last rect.")
+            call s__RectEnvironment_apply((GetHandleId(((LoadRectHandle(ConstTable__ht, (((((s__AutoRectEnvironment__Globals_static_members_key))))), (s__AutoRectEnvironment__Globals_lastCameraRect_impl))))))) // INLINED!!
+            return
+        else
+            // Do not set Globals.lastCameraRect to null, it's likely the camera will soon return to the last rect.
+        endif
+    endif
+    
+    if (LoadBoolean(ConstTable__ht, (((((s__AutoRectEnvironment__Globals_static_members_key))))), (s__AutoRectEnvironment__Globals_rectWasMoved_impl))) then // INLINED!!
+        call SaveBoolean(ConstTable__ht, (((((s__AutoRectEnvironment__Globals_static_members_key))))), (s__AutoRectEnvironment__Globals_rectWasMoved_impl), ( (false))) // INLINED!!
+    else
+        if (LoadReal(ConstTable__ht, (((((s__AutoRectEnvironment__Globals_static_members_key))))), (s__AutoRectEnvironment__Globals_lastCameraX_impl))) == x and (LoadReal(ConstTable__ht, (((((s__AutoRectEnvironment__Globals_static_members_key))))), (s__AutoRectEnvironment__Globals_lastCameraY_impl))) == y then // INLINED!!
+            //call BJDebugMsg("Camera did not move, no Globals.rects moved: do nothing.")
+            return
+        endif
+    endif
+    
+    if IsPointInRegion((LoadRegionHandle(ConstTable__ht, (((((s__AutoRectEnvironment__Globals_static_members_key))))), (s__AutoRectEnvironment__Globals_allRects_impl))), x, y) then // INLINED!!
+        set i=(LoadInteger((Lists___hashTable), (((LoadInteger(ConstTable__ht, (((s__AutoRectEnvironment__Globals_static_members_key))), (s__AutoRectEnvironment__Globals_rects_impl)))) ), ( 0))) // INLINED!!
+            loop
+                exitwhen i == (0) // INLINED!!
+                set r=(LoadRectHandle(ConstTable__ht, ((((s__AutoRectEnvironment__Globals_id2_impl)))), (i))) // INLINED!!
+                
+                if GetRectMinX(r) <= x and x <= GetRectMaxX(r) and GetRectMinY(r) <= y and y <= GetRectMaxY(r) then
+                    //call BJDebugMsg("Found rect!")
+                    call s__TableStruct_setHandle(s__AutoRectEnvironment__Globals_static_members_key , s__AutoRectEnvironment__Globals_lastCameraRect_impl , (r)) // INLINED!!
+                    call s__RectEnvironment_apply((GetHandleId((r)))) // INLINED!!
+                    exitwhen true
+                endif
+            
+                set i=(LoadInteger((Lists___hashTable), (((LoadInteger(ConstTable__ht, (((s__AutoRectEnvironment__Globals_static_members_key))), (s__AutoRectEnvironment__Globals_rects_impl)))) ), ( (i)))) // INLINED!!
+            endloop
+        set r=null
+    else
+        //call BJDebugMsg("Camera not in region.")
+        call s__RectEnvironment_apply((0))
+    endif
+    
+    call SaveReal(ConstTable__ht, (((((s__AutoRectEnvironment__Globals_static_members_key))))), (s__AutoRectEnvironment__Globals_lastCameraX_impl), (( ((x)*1.0))*1.0)) // INLINED!!
+    call SaveReal(ConstTable__ht, (((((s__AutoRectEnvironment__Globals_static_members_key))))), (s__AutoRectEnvironment__Globals_lastCameraY_impl), (( ((y)*1.0))*1.0)) // INLINED!!
+endfunction
+
+
+//Implemented from module AutoRectEnvironment__InitModule:
+    function s__AutoRectEnvironment__InitStruct_AutoRectEnvironment__InitModule__onInit takes nothing returns nothing
+        local timer t= CreateTimer()
+        call SaveInteger(ConstTable__ht, (((s__AutoRectEnvironment__Globals_static_members_key))), (s__AutoRectEnvironment__Globals_rects_impl), ( ((GMUI_GetIndex((Lists_RECYCLE_KEY)))))) // INLINED!!
+        
+        call s__TableStruct_setHandle(s__AutoRectEnvironment__Globals_static_members_key , s__AutoRectEnvironment__Globals_allRects_impl , (CreateRegion())) // INLINED!!
+        
+        call TimerStart(t, AutoRectEnvironment__PERIOD, true, function onTimer)
+    endfunction
+
+//library AutoRectEnvironment ends
+//library GameTime:
+
+//textmacro instance: TableStruct_NewReadonlyStaticPrimitiveField("hours", "integer")
+    function s__GameTime__get_hours takes nothing returns integer
+        return (LoadInteger(ConstTable__ht, (((((s__GameTime_static_members_key))))), (s__GameTime_hours_impl))) // INLINED!!
+    endfunction
+    
+    function s__GameTime__set_hours takes integer new_hours returns nothing
+        call SaveInteger(ConstTable__ht, (((((s__GameTime_static_members_key))))), (s__GameTime_hours_impl), ( new_hours)) // INLINED!!
+    endfunction
+    
+    function s__GameTime_hoursClear takes nothing returns nothing
+        call RemoveSavedInteger(ConstTable__ht, (((((s__GameTime_static_members_key))))), (s__GameTime_hours_impl)) // INLINED!!
+    endfunction
+    
+    function s__GameTime_hoursExists takes nothing returns boolean
+        return (HaveSavedInteger(ConstTable__ht, (((((s__GameTime_static_members_key))))), (s__GameTime_hours_impl))) // INLINED!!
+    endfunction
+//end of: TableStruct_NewReadonlyStaticPrimitiveField("hours", "integer")
+//textmacro instance: TableStruct_NewReadonlyStaticPrimitiveField("minutes", "integer")
+    function s__GameTime__get_minutes takes nothing returns integer
+        return (LoadInteger(ConstTable__ht, (((((s__GameTime_static_members_key))))), (s__GameTime_minutes_impl))) // INLINED!!
+    endfunction
+    
+    function s__GameTime__set_minutes takes integer new_minutes returns nothing
+        call SaveInteger(ConstTable__ht, (((((s__GameTime_static_members_key))))), (s__GameTime_minutes_impl), ( new_minutes)) // INLINED!!
+    endfunction
+    
+    function s__GameTime_minutesClear takes nothing returns nothing
+        call RemoveSavedInteger(ConstTable__ht, (((((s__GameTime_static_members_key))))), (s__GameTime_minutes_impl)) // INLINED!!
+    endfunction
+    
+    function s__GameTime_minutesExists takes nothing returns boolean
+        return (HaveSavedInteger(ConstTable__ht, (((((s__GameTime_static_members_key))))), (s__GameTime_minutes_impl))) // INLINED!!
+    endfunction
+//end of: TableStruct_NewReadonlyStaticPrimitiveField("minutes", "integer")
+//textmacro instance: TableStruct_NewReadonlyStaticPrimitiveField("seconds", "integer")
+    function s__GameTime__get_seconds takes nothing returns integer
+        return (LoadInteger(ConstTable__ht, (((((s__GameTime_static_members_key))))), (s__GameTime_seconds_impl))) // INLINED!!
+    endfunction
+    
+    function s__GameTime__set_seconds takes integer new_seconds returns nothing
+        call SaveInteger(ConstTable__ht, (((((s__GameTime_static_members_key))))), (s__GameTime_seconds_impl), ( new_seconds)) // INLINED!!
+    endfunction
+    
+    function s__GameTime_secondsClear takes nothing returns nothing
+        call RemoveSavedInteger(ConstTable__ht, (((((s__GameTime_static_members_key))))), (s__GameTime_seconds_impl)) // INLINED!!
+    endfunction
+    
+    function s__GameTime_secondsExists takes nothing returns boolean
+        return (HaveSavedInteger(ConstTable__ht, (((((s__GameTime_static_members_key))))), (s__GameTime_seconds_impl))) // INLINED!!
+    endfunction
+//end of: TableStruct_NewReadonlyStaticPrimitiveField("seconds", "integer")
+    
+//textmacro instance: TableStruct_NewReadonlyStaticHandleField("timer", "timer")
+    function s__GameTime__get_timer takes nothing returns timer
+        return (LoadTimerHandle(ConstTable__ht, (((((s__GameTime_static_members_key))))), (s__GameTime_timer_impl))) // INLINED!!
+    endfunction
+    
+    function s__GameTime__set_timer takes timer new_timer returns nothing
+        call s__TableStruct_setHandle(s__GameTime_static_members_key , s__GameTime_timer_impl , new_timer)
+    endfunction
+    
+    function s__GameTime_timerClear takes nothing returns nothing
+        call RemoveSavedHandle(ConstTable__ht, (((((s__GameTime_static_members_key))))), (s__GameTime_timer_impl)) // INLINED!!
+    endfunction
+    
+    function s__GameTime_timerExists takes nothing returns boolean
+        return (HaveSavedHandle(ConstTable__ht, (((((s__GameTime_static_members_key))))), (s__GameTime_timer_impl))) // INLINED!!
+    endfunction
+//end of: TableStruct_NewReadonlyStaticHandleField("timer", "timer")
+//textmacro instance: TableStruct_NewReadonlyStaticHandleField("multiboard", "multiboard")
+    function s__GameTime__get_multiboard takes nothing returns multiboard
+        return (LoadMultiboardHandle(ConstTable__ht, (((((s__GameTime_static_members_key))))), (s__GameTime_multiboard_impl))) // INLINED!!
+    endfunction
+    
+    function s__GameTime__set_multiboard takes multiboard new_multiboard returns nothing
+        call s__TableStruct_setHandle(s__GameTime_static_members_key , s__GameTime_multiboard_impl , new_multiboard)
+    endfunction
+    
+    function s__GameTime_multiboardClear takes nothing returns nothing
+        call RemoveSavedHandle(ConstTable__ht, (((((s__GameTime_static_members_key))))), (s__GameTime_multiboard_impl)) // INLINED!!
+    endfunction
+    
+    function s__GameTime_multiboardExists takes nothing returns boolean
+        return (HaveSavedHandle(ConstTable__ht, (((((s__GameTime_static_members_key))))), (s__GameTime_multiboard_impl))) // INLINED!!
+    endfunction
+//end of: TableStruct_NewReadonlyStaticHandleField("multiboard", "multiboard")
+    
+    function s__GameTime_toString takes nothing returns string
+        return I2S((LoadInteger(ConstTable__ht, (((((s__GameTime_static_members_key))))), (s__GameTime_hours_impl)))) + " : " + I2S((LoadInteger(ConstTable__ht, (((((s__GameTime_static_members_key))))), (s__GameTime_minutes_impl)))) + " : " + I2S((LoadInteger(ConstTable__ht, (((((s__GameTime_static_members_key))))), (s__GameTime_seconds_impl)))) // INLINED!!
+    endfunction
+    
+    function s__GameTime_toStringEx takes string sep returns string
+        return I2S((LoadInteger(ConstTable__ht, (((((s__GameTime_static_members_key))))), (s__GameTime_hours_impl)))) + sep + I2S((LoadInteger(ConstTable__ht, (((((s__GameTime_static_members_key))))), (s__GameTime_minutes_impl)))) + sep + I2S((LoadInteger(ConstTable__ht, (((((s__GameTime_static_members_key))))), (s__GameTime_seconds_impl)))) // INLINED!!
+    endfunction
+    
+    function s__GameTime_asMinutes takes nothing returns real
+        return 60. * (LoadInteger(ConstTable__ht, (((((s__GameTime_static_members_key))))), (s__GameTime_hours_impl))) + (LoadInteger(ConstTable__ht, (((((s__GameTime_static_members_key))))), (s__GameTime_minutes_impl))) + (LoadInteger(ConstTable__ht, (((((s__GameTime_static_members_key))))), (s__GameTime_seconds_impl))) / 60. // INLINED!!
+    endfunction
+    
+    function s__GameTime_asHours takes nothing returns real
+        return (LoadInteger(ConstTable__ht, (((((s__GameTime_static_members_key))))), (s__GameTime_hours_impl))) + (LoadInteger(ConstTable__ht, (((((s__GameTime_static_members_key))))), (s__GameTime_minutes_impl))) / 60. + (LoadInteger(ConstTable__ht, (((((s__GameTime_static_members_key))))), (s__GameTime_seconds_impl))) / 3600. // INLINED!!
+    endfunction
+    
+    function s__GameTime_asSeconds takes nothing returns integer
+        return (LoadInteger(ConstTable__ht, (((((s__GameTime_static_members_key))))), (s__GameTime_hours_impl))) * 3600 + (LoadInteger(ConstTable__ht, (((((s__GameTime_static_members_key))))), (s__GameTime_minutes_impl))) * 60 + (LoadInteger(ConstTable__ht, (((((s__GameTime_static_members_key))))), (s__GameTime_seconds_impl))) // INLINED!!
+    endfunction
+    
+    function s__GameTime_onTimer takes nothing returns nothing
+        local integer sec= (LoadInteger(ConstTable__ht, (((((s__GameTime_static_members_key))))), (s__GameTime_seconds_impl))) // INLINED!!
+        local string s
+    
+        if sec == 0 and (LoadInteger(ConstTable__ht, (((((s__GameTime_static_members_key))))), (s__GameTime_minutes_impl))) == 0 and (LoadInteger(ConstTable__ht, (((((s__GameTime_static_members_key))))), (s__GameTime_hours_impl))) == 0 then // INLINED!!
+            call s__TableStruct_setHandle(s__GameTime_static_members_key , s__GameTime_multiboard_impl , (CreateMultiboard())) // INLINED!!
+            call MultiboardSetRowCount((LoadMultiboardHandle(ConstTable__ht, (((((s__GameTime_static_members_key))))), (s__GameTime_multiboard_impl))), 1) // INLINED!!
+            call MultiboardSetColumnCount((LoadMultiboardHandle(ConstTable__ht, (((((s__GameTime_static_members_key))))), (s__GameTime_multiboard_impl))), 5) // INLINED!!
+            call MultiboardSetTitleText((LoadMultiboardHandle(ConstTable__ht, (((((s__GameTime_static_members_key))))), (s__GameTime_multiboard_impl))), "Elapsed Time") // INLINED!!
+            
+            set sec=s__MultiBoard_refresh((LoadMultiboardHandle(ConstTable__ht, (((((s__GameTime_static_members_key))))), (s__GameTime_multiboard_impl)))) // INLINED!!
+            call MultiboardSetItemStyle((LoadMultiboardItemHandle(Table__ht, ((((LoadInteger(Table__ht, ((LoadInteger(ConstTable__ht, (((s__MultiBoard_items_impl))), ((((sec))))))), (((0 ) ))))))), (( ( 0 ))))), ( true ), ( false)) // INLINED!!
+            call MultiboardSetItemStyle((LoadMultiboardItemHandle(Table__ht, ((((LoadInteger(Table__ht, ((LoadInteger(ConstTable__ht, (((s__MultiBoard_items_impl))), ((((sec))))))), (((0 ) ))))))), (( ( 1 ))))), ( true ), ( false)) // INLINED!!
+            call MultiboardSetItemStyle((LoadMultiboardItemHandle(Table__ht, ((((LoadInteger(Table__ht, ((LoadInteger(ConstTable__ht, (((s__MultiBoard_items_impl))), ((((sec))))))), (((0 ) ))))))), (( ( 2 ))))), ( true ), ( false)) // INLINED!!
+            call MultiboardSetItemStyle((LoadMultiboardItemHandle(Table__ht, ((((LoadInteger(Table__ht, ((LoadInteger(ConstTable__ht, (((s__MultiBoard_items_impl))), ((((sec))))))), (((0 ) ))))))), (( ( 3 ))))), ( true ), ( false)) // INLINED!!
+            call MultiboardSetItemStyle((LoadMultiboardItemHandle(Table__ht, ((((LoadInteger(Table__ht, ((LoadInteger(ConstTable__ht, (((s__MultiBoard_items_impl))), ((((sec))))))), (((0 ) ))))))), (( ( 4 ))))), ( true ), ( false)) // INLINED!!
+            call MultiboardSetItemWidth((LoadMultiboardItemHandle(Table__ht, ((((LoadInteger(Table__ht, ((LoadInteger(ConstTable__ht, (((s__MultiBoard_items_impl))), ((((sec))))))), (((0 ) ))))))), (( ( 0 ))))), (( 0.015)*1.0)) // INLINED!!
+            call MultiboardSetItemWidth((LoadMultiboardItemHandle(Table__ht, ((((LoadInteger(Table__ht, ((LoadInteger(ConstTable__ht, (((s__MultiBoard_items_impl))), ((((sec))))))), (((0 ) ))))))), (( ( 1 ))))), (( 0.005)*1.0)) // INLINED!!
+            call MultiboardSetItemWidth((LoadMultiboardItemHandle(Table__ht, ((((LoadInteger(Table__ht, ((LoadInteger(ConstTable__ht, (((s__MultiBoard_items_impl))), ((((sec))))))), (((0 ) ))))))), (( ( 2 ))))), (( 0.015)*1.0)) // INLINED!!
+            call MultiboardSetItemWidth((LoadMultiboardItemHandle(Table__ht, ((((LoadInteger(Table__ht, ((LoadInteger(ConstTable__ht, (((s__MultiBoard_items_impl))), ((((sec))))))), (((0 ) ))))))), (( ( 3 ))))), (( 0.005)*1.0)) // INLINED!!
+            call MultiboardSetItemWidth((LoadMultiboardItemHandle(Table__ht, ((((LoadInteger(Table__ht, ((LoadInteger(ConstTable__ht, (((s__MultiBoard_items_impl))), ((((sec))))))), (((0 ) ))))))), (( ( 4 ))))), (( 0.015)*1.0)) // INLINED!!
+            
+            set sec=0
+        endif
+    
+        if sec == 60 then
+            if (LoadInteger(ConstTable__ht, (((((s__GameTime_static_members_key))))), (s__GameTime_minutes_impl))) == 60 then // INLINED!!
+                call SaveInteger(ConstTable__ht, (((((s__GameTime_static_members_key))))), (s__GameTime_hours_impl), ( ((LoadInteger(ConstTable__ht, (((((s__GameTime_static_members_key))))), (s__GameTime_hours_impl))) + 1))) // INLINED!!
+                call SaveInteger(ConstTable__ht, (((((s__GameTime_static_members_key))))), (s__GameTime_minutes_impl), ( (0))) // INLINED!!
+            else
+                call SaveInteger(ConstTable__ht, (((((s__GameTime_static_members_key))))), (s__GameTime_minutes_impl), ( ((LoadInteger(ConstTable__ht, (((((s__GameTime_static_members_key))))), (s__GameTime_minutes_impl))) + 1))) // INLINED!!
+            endif
+            call SaveInteger(ConstTable__ht, (((((s__GameTime_static_members_key))))), (s__GameTime_seconds_impl), ( (0))) // INLINED!!
+        else
+            call SaveInteger(ConstTable__ht, (((((s__GameTime_static_members_key))))), (s__GameTime_seconds_impl), ( (sec + 1))) // INLINED!!
+        endif
+        
+        set sec=GetHandleId((LoadMultiboardHandle(ConstTable__ht, (((((s__GameTime_static_members_key))))), (s__GameTime_multiboard_impl)))) // INLINED!!
+        //call MultiboardSuppressDisplay(false)
+        
+        set s=I2S((LoadInteger(ConstTable__ht, (((((s__GameTime_static_members_key))))), (s__GameTime_hours_impl)))) // INLINED!!
+        if StringLength(s) == 1 then
+            set s="0" + s
+        endif
+        call MultiboardSetItemValue((LoadMultiboardItemHandle(Table__ht, ((((LoadInteger(Table__ht, ((LoadInteger(ConstTable__ht, (((s__MultiBoard_items_impl))), ((((sec))))))), (((0 ) ))))))), (( ( 0 ))))), ( s)) // INLINED!!
+        call MultiboardSetItemValue((LoadMultiboardItemHandle(Table__ht, ((((LoadInteger(Table__ht, ((LoadInteger(ConstTable__ht, (((s__MultiBoard_items_impl))), ((((sec))))))), (((0 ) ))))))), (( ( 1 ))))), ( ":")) // INLINED!!
+        set s=I2S((LoadInteger(ConstTable__ht, (((((s__GameTime_static_members_key))))), (s__GameTime_minutes_impl)))) // INLINED!!
+        if StringLength(s) == 1 then
+            set s="0" + s
+        endif
+        call MultiboardSetItemValue((LoadMultiboardItemHandle(Table__ht, ((((LoadInteger(Table__ht, ((LoadInteger(ConstTable__ht, (((s__MultiBoard_items_impl))), ((((sec))))))), (((0 ) ))))))), (( ( 2 ))))), ( s)) // INLINED!!
+        call MultiboardSetItemValue((LoadMultiboardItemHandle(Table__ht, ((((LoadInteger(Table__ht, ((LoadInteger(ConstTable__ht, (((s__MultiBoard_items_impl))), ((((sec))))))), (((0 ) ))))))), (( ( 3 ))))), ( ":")) // INLINED!!
+        set s=I2S((LoadInteger(ConstTable__ht, (((((s__GameTime_static_members_key))))), (s__GameTime_seconds_impl)))) // INLINED!!
+        if StringLength(s) == 1 then
+            set s="0" + s
+        endif
+        call MultiboardSetItemValue((LoadMultiboardItemHandle(Table__ht, ((((LoadInteger(Table__ht, ((LoadInteger(ConstTable__ht, (((s__MultiBoard_items_impl))), ((((sec))))))), (((0 ) ))))))), (( ( 4 ))))), ( s)) // INLINED!!
+        
+        call MultiboardDisplay((LoadMultiboardHandle(ConstTable__ht, (((((s__GameTime_static_members_key))))), (s__GameTime_multiboard_impl))), true) // INLINED!!
+    endfunction
+    
+    function s__GameTime_onInit takes nothing returns nothing
+        call s__TableStruct_setHandle(s__GameTime_static_members_key , s__GameTime_timer_impl , (CreateTimer())) // INLINED!!
+                
+        
+        call TimerStart((LoadTimerHandle(ConstTable__ht, (((((s__GameTime_static_members_key))))), (s__GameTime_timer_impl))), 1., true, function s__GameTime_onTimer) // INLINED!!
+    endfunction
+
+
+
+//library GameTime ends
+//library LoPInitDecoTents:
+
+
+// This function is called in Init 0 seconds (to reduce loading time)
+function InitDecoTents takes nothing returns nothing
+    local rect decoRect= gg_rct_Deco_Tents_Rect
+    
+    local real xStep= 256.
+    local real yStep= 192.
+    
+    local real xMax= GetRectMaxX(decoRect) - xStep
+    local real xMin= GetRectMinX(decoRect)
+    local real yMax= GetRectMaxY(decoRect)
+    local real yMin= GetRectMinY(decoRect)
+    
+    local real xStart= xMin + xStep / 2.
+    local real yStart= yMin + yStep / 2.
+    local real xCur= xStart
+    local real yCur= yStart
+        
+    local unit decoTent= null
+    local integer decoNumber= 0
+    
+    local integer i
+    
+    local integer decoTentCount
+    
+    
+//textmacro instance: DecoBuilders_MakeTents("Special")
+    set decoTentCount=1
+    loop
+    exitwhen decoNumber > (LoadInteger(ConstTable__ht, (((((s__LoP_DecoBuilders_static_members_key))))), (s__LoP_DecoBuilders_SpecialDecoLastIndex_impl))) // INLINED!!
+        set decoTent=CreateUnit(Player(PLAYER_NEUTRAL_PASSIVE), 'n03H', xCur, yCur, bj_UNIT_FACING)
+        call BlzSetUnitName(decoTent, "Deco Tent Special " + I2S(decoTentCount))
+        call SetUnitVertexColor(decoTent, Special_RED, Special_GREEN, Special_BLUE, Special_ALPHA)
+        
+        set i=0
+        loop
+        exitwhen i >= bj_MAX_STOCK_UNIT_SLOTS or decoNumber > (LoadInteger(ConstTable__ht, (((((s__LoP_DecoBuilders_static_members_key))))), (s__LoP_DecoBuilders_SpecialDecoLastIndex_impl))) // INLINED!!
+            call AddUnitToStock(decoTent, s__LoP_DecoBuilders_rawcodes[decoNumber], 1, 3)
+            set i=i + 1
+            set decoNumber=decoNumber + 1
+        endloop
+        
+        set xCur=xCur + xStep
+        if xCur > xMax then
+            set yCur=yCur + yStep
+            set xCur=xStart
+        endif
+        set decoTentCount=decoTentCount + 1
+
+    endloop
+//end of: DecoBuilders_MakeTents("Special")
+//textmacro instance: DecoBuilders_MakeTents("Basic")
+    set decoTentCount=1
+    loop
+    exitwhen decoNumber > (LoadInteger(ConstTable__ht, (((((s__LoP_DecoBuilders_static_members_key))))), (s__LoP_DecoBuilders_BasicDecoLastIndex_impl))) // INLINED!!
+        set decoTent=CreateUnit(Player(PLAYER_NEUTRAL_PASSIVE), 'n03H', xCur, yCur, bj_UNIT_FACING)
+        call BlzSetUnitName(decoTent, "Deco Tent Basic " + I2S(decoTentCount))
+        call SetUnitVertexColor(decoTent, Basic_RED, Basic_GREEN, Basic_BLUE, Basic_ALPHA)
+        
+        set i=0
+        loop
+        exitwhen i >= bj_MAX_STOCK_UNIT_SLOTS or decoNumber > (LoadInteger(ConstTable__ht, (((((s__LoP_DecoBuilders_static_members_key))))), (s__LoP_DecoBuilders_BasicDecoLastIndex_impl))) // INLINED!!
+            call AddUnitToStock(decoTent, s__LoP_DecoBuilders_rawcodes[decoNumber], 1, 3)
+            set i=i + 1
+            set decoNumber=decoNumber + 1
+        endloop
+        
+        set xCur=xCur + xStep
+        if xCur > xMax then
+            set yCur=yCur + yStep
+            set xCur=xStart
+        endif
+        set decoTentCount=decoTentCount + 1
+
+    endloop
+//end of: DecoBuilders_MakeTents("Basic")
+//textmacro instance: DecoBuilders_MakeTents("Adv")
+    set decoTentCount=1
+    loop
+    exitwhen decoNumber > (LoadInteger(ConstTable__ht, (((((s__LoP_DecoBuilders_static_members_key))))), (s__LoP_DecoBuilders_AdvDecoLastIndex_impl))) // INLINED!!
+        set decoTent=CreateUnit(Player(PLAYER_NEUTRAL_PASSIVE), 'n03H', xCur, yCur, bj_UNIT_FACING)
+        call BlzSetUnitName(decoTent, "Deco Tent Adv " + I2S(decoTentCount))
+        call SetUnitVertexColor(decoTent, Adv_RED, Adv_GREEN, Adv_BLUE, Adv_ALPHA)
+        
+        set i=0
+        loop
+        exitwhen i >= bj_MAX_STOCK_UNIT_SLOTS or decoNumber > (LoadInteger(ConstTable__ht, (((((s__LoP_DecoBuilders_static_members_key))))), (s__LoP_DecoBuilders_AdvDecoLastIndex_impl))) // INLINED!!
+            call AddUnitToStock(decoTent, s__LoP_DecoBuilders_rawcodes[decoNumber], 1, 3)
+            set i=i + 1
+            set decoNumber=decoNumber + 1
+        endloop
+        
+        set xCur=xCur + xStep
+        if xCur > xMax then
+            set yCur=yCur + yStep
+            set xCur=xStart
+        endif
+        set decoTentCount=decoTentCount + 1
+
+    endloop
+//end of: DecoBuilders_MakeTents("Adv")
+endfunction
+
+
+
+//library LoPInitDecoTents ends
+//library UnitVisualModsDefaults:
+    
+
+    function UnitVisualModsDefaults_SetColor takes unit whichUnit,player owner returns nothing
+        call SetUnitColor(whichUnit, (s__LoP_PlayerData_playerColors[((GetPlayerId((owner))))])) // INLINED!!
+    endfunction
+
+
+//library UnitVisualModsDefaults ends
+//library UserDefinedRects:
+    
+//////////////////////////////////////////////////////
+//Guhun's User Defined Rect System v1.2.0
+
+
+// TODO: check if bj_groupRandomCurrentPick is being used somewhere in LoP. If not, make this system use a differnt global.
+
+
+
+
+
+
+
+//=============================
+//CONSTANTS THAT RETURN THE INTEGER ADDRESS OF A GUDR MEMBER IN THE HASHTABLE
+
+//textmacro instance: GUDR_INDEX("RECT", "0")
+    constant function s__UserDefinedRects__Indices__get_RECT takes nothing returns integer
+        return 0
+    endfunction
+//end of: GUDR_INDEX("RECT", "0")
+//textmacro instance: GUDR_INDEX("LIGHT_T", "1")
+    constant function s__UserDefinedRects__Indices__get_LIGHT_T takes nothing returns integer
+        return 1
+    endfunction
+//end of: GUDR_INDEX("LIGHT_T", "1")
+//textmacro instance: GUDR_INDEX("LIGHT_B", "2")
+    constant function s__UserDefinedRects__Indices__get_LIGHT_B takes nothing returns integer
+        return 2
+    endfunction
+//end of: GUDR_INDEX("LIGHT_B", "2")
+//textmacro instance: GUDR_INDEX("LIGHT_L", "3")
+    constant function s__UserDefinedRects__Indices__get_LIGHT_L takes nothing returns integer
+        return 3
+    endfunction
+//end of: GUDR_INDEX("LIGHT_L", "3")
+//textmacro instance: GUDR_INDEX("LIGHT_R", "4")
+    constant function s__UserDefinedRects__Indices__get_LIGHT_R takes nothing returns integer
+        return 4
+    endfunction
+//end of: GUDR_INDEX("LIGHT_R", "4")
+//textmacro instance: GUDR_INDEX("WEATHER", "5")
+    constant function s__UserDefinedRects__Indices__get_WEATHER takes nothing returns integer
+        return 5
+    endfunction
+//end of: GUDR_INDEX("WEATHER", "5")
+//textmacro instance: GUDR_INDEX("GROUP", "6")
+    constant function s__UserDefinedRects__Indices__get_GROUP takes nothing returns integer
+        return 6
+    endfunction
+//end of: GUDR_INDEX("GROUP", "6")
+//textmacro instance: GUDR_INDEX("HIDDEN", "7")
+    constant function s__UserDefinedRects__Indices__get_HIDDEN takes nothing returns integer
+        return 7
+    endfunction
+//end of: GUDR_INDEX("HIDDEN", "7")
+//textmacro instance: GUDR_INDEX("WEATHER_TYPE", "8")
+    constant function s__UserDefinedRects__Indices__get_WEATHER_TYPE takes nothing returns integer
+        return 8
+    endfunction
+//end of: GUDR_INDEX("WEATHER_TYPE", "8")
+//=============================
+//FUNCTIONS THAT RETURN BOOLEANS
+function GUDR_IsUnitIdGenerator takes integer unitHandle returns boolean
+    return HaveSavedHandle(UserDefinedRects__hashTable, unitHandle, (0)) // INLINED!!
+endfunction
+
+function GUDR_IsUnitGenerator takes unit whichUnit returns boolean
+    return (HaveSavedHandle(UserDefinedRects__hashTable, (GetHandleId(whichUnit)), (0))) // INLINED!!
+endfunction
+
+function GUDR_IsGeneratorIdHidden takes integer generatorId returns boolean
+    return LoadBoolean(UserDefinedRects__hashTable, generatorId, (7)) // INLINED!!
+endfunction
+
+function GUDR_IsGeneratorHidden takes unit generator returns boolean
+    return (LoadBoolean(UserDefinedRects__hashTable, (GetHandleId(generator)), (7))) // INLINED!!
+endfunction
+
+function GUDR_GeneratorIdHasGroup takes integer generatorId returns boolean
+    return HaveSavedHandle(UserDefinedRects__hashTable, generatorId, (6)) // INLINED!!
+endfunction
+
+function GUDR_GeneratorHasGroup takes unit generator returns boolean
+    return (HaveSavedHandle(UserDefinedRects__hashTable, (GetHandleId(generator)), (6))) // INLINED!!
+endfunction
+
+function GUDR_GeneratorIdHasWeather takes integer generatorId returns boolean
+    return HaveSavedInteger(UserDefinedRects__hashTable, generatorId, (5)) // INLINED!!
+endfunction
+
+function GUDR_GeneratorHasWeather takes unit generator returns boolean
+    return (HaveSavedInteger(UserDefinedRects__hashTable, (GetHandleId(generator)), (5))) // INLINED!!
+endfunction
+//=============================
+//FUNCTIONS TO GET GUDR MEMBERS
+
+//Handle Id as parameter
+function GUDR_GetGeneratorIdRect takes integer generatorId returns rect
+    return LoadRectHandle(UserDefinedRects__hashTable, generatorId, (0)) // INLINED!!
+endfunction
+
+function GUDR_GetGeneratorIdWeatherEffect takes integer generatorId returns weathereffect
+    return UserDefinedRects__weatherEffects[LoadInteger(UserDefinedRects__hashTable, generatorId, (5))] // INLINED!!
+endfunction
+
+function GUDR_GetGeneratorIdGroup takes integer generatorId returns group
+    return LoadGroupHandle(UserDefinedRects__hashTable, generatorId, (6)) // INLINED!!
+endfunction
+
+function GUDR_GetGeneratorIdWeatherType takes integer generatorId returns integer
+    return LoadInteger(UserDefinedRects__hashTable, generatorId, (8)) // INLINED!!
+endfunction
+
+//Unit as parameter
+
+function GUDR_GetGeneratorRect takes unit generator returns rect
+    return (LoadRectHandle(UserDefinedRects__hashTable, (GetHandleId(generator)), (0))) // INLINED!!
+endfunction
+
+function GUDR_GetGeneratorWeatherEffect takes unit generator returns weathereffect
+    return (UserDefinedRects__weatherEffects[LoadInteger(UserDefinedRects__hashTable, (GetHandleId(generator)), (5))]) // INLINED!!
+endfunction
+
+function GUDR_GetGeneratorGroup takes unit generator returns group
+    return (LoadGroupHandle(UserDefinedRects__hashTable, (GetHandleId(generator)), (6))) // INLINED!!
+endfunction
+
+function GUDR_GetGeneratorWeatherType takes unit generator returns integer
+    return (LoadInteger(UserDefinedRects__hashTable, (GetHandleId(generator)), (8))) // INLINED!!
+endfunction
+
+function GUDR_ConvertWeatherType takes integer weatherType returns integer
+    return LoadInteger(UserDefinedRects__hashTable, 0, weatherType)
+endfunction
+
+function UserDefinedRects__GetGeneratorIdLightning takes integer genId,integer i returns lightning
+    return LoadLightningHandle(UserDefinedRects__hashTable, genId, i)
+endfunction
+
+//=============================
+
+function GUDR_SwapGroup_UnitsInsideUDR takes group whichGroup,boolean includeGenerator,boolexpr filter returns integer
+    local integer genId
+    local unit firstOfGroup
+    
+    set firstOfGroup=FirstOfGroup(whichGroup)
+    set genId=GetHandleId(firstOfGroup)
+    
+    if (HaveSavedHandle(UserDefinedRects__hashTable, (genId), (0))) then // INLINED!!
+        set bj_groupRandomCurrentPick=firstOfGroup
+        
+        call GroupClear(whichGroup)
+        call GroupEnumUnitsInRect(whichGroup, (LoadRectHandle(UserDefinedRects__hashTable, (genId), (0))), filter) // INLINED!!
+        
+        if not includeGenerator then
+            call GroupRemoveUnit(whichGroup, firstOfGroup)
+        endif
+    else
+        set genId=0
+    endif
+    
+    set firstOfGroup=null
+    return genId
+endfunction
+
+//Returns the Handle Id of an active UDR generator selected by a player
+//Additionally, the global bj_groupRandomCurrentPick will be set to the selected generator
+function GUDR_PlayerGetSelectedGeneratorId takes player whichPlayer returns integer
+    local unit firstOfGroup
+    local integer unitId
+    local group slctGrp= CreateGroup()
+    
+    call GroupEnumUnitsSelected(slctGrp, whichPlayer, null)
+    set firstOfGroup=FirstOfGroup(slctGrp)
+    set unitId=GetHandleId(firstOfGroup)
+    
+    call DestroyGroup(slctGrp)
+    set slctGrp=null
+    
+    if (HaveSavedHandle(UserDefinedRects__hashTable, (unitId), (0))) then // INLINED!!
+        set bj_groupRandomCurrentPick=firstOfGroup
+        return unitId
+    endif
+    
+    return 0
+endfunction
+
+
+function ChangeGUDRWeatherNew takes unit whichUnit,integer changeWeather,integer finalWeather returns integer
+    local integer curWeather
+    local integer unitId= GetHandleId(whichUnit)
+    local integer weatherId
+    
+    if not (HaveSavedHandle(UserDefinedRects__hashTable, (unitId), (0))) then // INLINED!!
+        return 0
+    endif
+
+    if finalWeather < 1 or finalWeather > 21 then
+        set curWeather=(LoadInteger(UserDefinedRects__hashTable, (unitId), (8))) // INLINED!!
+        set finalWeather=curWeather + changeWeather
+    endif
+        
+
+    if finalWeather > 21 then
+        loop
+        exitwhen finalWeather <= 21
+                set finalWeather=finalWeather - 21
+        endloop
+    elseif finalWeather < 1 then
+        loop
+        exitwhen finalWeather >= 1
+                set finalWeather=finalWeather + 21
+        endloop
+    endif
+    
+    call SaveInteger(UserDefinedRects__hashTable, unitId, (8), finalWeather) // INLINED!!
+    
+    // Update Weather, if it exists.
+    set weatherId=LoadInteger(UserDefinedRects__hashTable, unitId, 5)
+    if weatherId > 0 then
+        call EnableWeatherEffect(UserDefinedRects__weatherEffects[weatherId], false) //BUG: If weather effect is not disabled before destruction, it's sound effect will remain
+        call RemoveWeatherEffect(UserDefinedRects__weatherEffects[weatherId])
+        set UserDefinedRects__weatherEffects[weatherId]=AddWeatherEffect((LoadRectHandle(UserDefinedRects__hashTable, (unitId), (0))), (LoadInteger(UserDefinedRects__hashTable, 0, (finalWeather)))) // INLINED!!
+        call EnableWeatherEffect(UserDefinedRects__weatherEffects[weatherId], true)
+    endif
+    
+    return finalWeather
+endfunction
+
+function GroupGUDRFilter takes nothing returns boolean
+    local unit filterUnit= GetFilterUnit()
+    
+    if (HaveSavedHandle(UserDefinedRects__hashTable, (GetHandleId((filterUnit))), (0))) or GetOwningPlayer(filterUnit) != bj_forceRandomCurrentPick then // INLINED!!
+        set filterUnit=null
+        return false
+    endif
+    
+    call SetUnitPathing(filterUnit, false)
+    set filterUnit=null
+    return true
+endfunction
+
+function GroupGUDR takes unit whichUnit,boolean unlock returns boolean
+    local integer unitId= GetHandleId(whichUnit)
+    local group g
+    local unit firstUnit
+    local player storeGlobal= bj_forceRandomCurrentPick
+    
+    if not (HaveSavedHandle(UserDefinedRects__hashTable, (unitId), (0))) then // INLINED!!
+        return false
+    endif
+    
+    set g=(LoadGroupHandle(UserDefinedRects__hashTable, (unitId), (6))) // INLINED!!
+    
+    //Save the GURD's owner in the Hashtable for use in the EnumFilter function
+    set firstUnit=FirstOfGroup(g)
+    
+    //This loop clears the group and restores pathing and unpauses
+    loop
+    exitwhen firstUnit == null
+        if GetUnitTypeId(firstUnit) != 0 then
+            call SetUnitPathing(firstUnit, true)
+            call GroupRemoveUnit(g, firstUnit)
+        else
+            call GroupRefresh(g)
+        endif
+        set firstUnit=FirstOfGroup(g)
+    endloop
+    
+    //We only want to add new units to the group if the user doesn't want to unlock it
+    if not unlock then
+        set bj_forceRandomCurrentPick=GetOwningPlayer(whichUnit)
+        call GroupEnumUnitsInRect(g, (LoadRectHandle(UserDefinedRects__hashTable, (unitId), (0))), Condition(function GroupGUDRFilter)) // INLINED!!
+        set bj_forceRandomCurrentPick=storeGlobal
+    endif
+    
+    set g=null
+    set firstUnit=null
+    return true
+endfunction
+
+
+function CreateWeather takes unit whichUnit returns boolean
+    local integer instance
+    local integer genId= GetHandleId(whichUnit)
+    
+    if not (HaveSavedHandle(UserDefinedRects__hashTable, (genId), (0))) then // INLINED!!
+        return false
+    endif
+    
+
+
+
+
+
+
+
+
+
+        set instance=GMUI_GetIndex(UserDefinedRects__RECYCLE_KEY)
+
+    
+    call SaveInteger(UserDefinedRects__hashTable, GetHandleId(whichUnit), (5), instance) // INLINED!!
+    set UserDefinedRects__weatherEffects[instance]=AddWeatherEffect((LoadRectHandle(UserDefinedRects__hashTable, (genId), (0))), (LoadInteger(UserDefinedRects__hashTable, 0, ((LoadInteger(UserDefinedRects__hashTable, (genId), (8))))))) // INLINED!!
+    call EnableWeatherEffect(UserDefinedRects__weatherEffects[instance], true)
+    
+    return true
+endfunction
+
+function DestroyWeather takes unit whichUnit returns boolean
+    local integer instance= LoadInteger(UserDefinedRects__hashTable, GetHandleId(whichUnit), (5)) // INLINED!!
+    
+    if instance < 1 then
+        return false // False for effect not destroyed, unit did not have weather attached.
+    endif
+    
+    call EnableWeatherEffect(UserDefinedRects__weatherEffects[instance], false) // BUG: If weather effect is not disabled before destruction, it's sound effect will remain
+    call RemoveWeatherEffect(UserDefinedRects__weatherEffects[instance])
+    set UserDefinedRects__weatherEffects[instance]=null // Null to free handles for other systems
+    call RemoveSavedInteger(UserDefinedRects__hashTable, GetHandleId(whichUnit), (5)) // INLINED!!
+    
+    
+
+
+
+
+        call GMUI_RecycleIndex(UserDefinedRects__RECYCLE_KEY , instance)
+
+    
+    return true // True for effect destroyed.
+endfunction
+
+function ToggleGUDRVisibility takes unit whichUnit,boolean toggle,boolean show returns boolean
+    local real alpha
+    local integer unitId= GetHandleId(whichUnit)
+    
+    if not (HaveSavedHandle(UserDefinedRects__hashTable, (unitId), (0))) then // INLINED!!
+        return false
+    endif
+    
+    if toggle then //If user wants to switch the current value, change the value of show to opposite of current value
+        set show=not LoadBoolean(UserDefinedRects__hashTable, unitId, (7)) // INLINED!!
+    endif
+    
+    call SaveBoolean(UserDefinedRects__hashTable, unitId, (7), show) //Save current show/hide boolean // INLINED!!
+    
+    //Convert Boolean to Real T/F = 1/0
+    if show then
+        set alpha=1 //Show > Alpha = 100%
+    else
+        set alpha=0 //Hide > Alpha = 0%
+    endif
+    //End of Conversion
+
+    //After it has been decided if the GUDR should be shown or hidden, apply the choice
+    call SetUnitVertexColor(whichUnit, 255, 255, 255, 255 * R2I(alpha))
+    call SetLightningColor(LoadLightningHandle(UserDefinedRects__hashTable, unitId, (1)), 1, 1, 1, alpha) // INLINED!!
+    call SetLightningColor(LoadLightningHandle(UserDefinedRects__hashTable, unitId, (2)), 1, 1, 1, alpha) // INLINED!!
+    call SetLightningColor(LoadLightningHandle(UserDefinedRects__hashTable, unitId, (3)), 1, 1, 1, alpha) // INLINED!!
+    call SetLightningColor(LoadLightningHandle(UserDefinedRects__hashTable, unitId, (4)), 1, 1, 1, alpha) // INLINED!!
+    return true
+endfunction
+
+function MoveGUDR takes unit centerUnit,real offsetX,real offsetY,boolean expand returns boolean
+    local integer unitId= GetHandleId(centerUnit)
+    local real centerX= GetUnitX(centerUnit)
+    local real centerY= GetUnitY(centerUnit)
+    local rect userDefRect
+    local integer weatherId
+    
+    local real minX
+    local real maxX
+    local real minY
+    local real maxY
+    
+    if not (HaveSavedHandle(UserDefinedRects__hashTable, (unitId), (0))) then // INLINED!!
+        return false
+    endif
+    
+    set userDefRect=(LoadRectHandle(UserDefinedRects__hashTable, (unitId), (0))) // INLINED!!
+    
+    //If user wants to expand or contract the current region, Load the current value of its borders
+    if expand then
+        set offsetX=offsetX + GetRectMaxX(userDefRect) - GetRectCenterX(userDefRect)
+        set offsetY=offsetY + GetRectMaxY(userDefRect) - GetRectCenterY(userDefRect)
+    endif
+    
+    //Set the values of the borders based on the offsets
+    set minX=centerX - offsetX
+    set maxX=centerX + offsetX
+    set minY=centerY - offsetY
+    set maxY=centerY + offsetY
+    
+    //Update Lightnings
+    call MoveLightning(LoadLightningHandle(UserDefinedRects__hashTable, unitId, (1)), true, minX, maxY, maxX, maxY) // INLINED!!
+    call MoveLightning(LoadLightningHandle(UserDefinedRects__hashTable, unitId, (2)), true, minX, minY, maxX, minY) // INLINED!!
+    call MoveLightning(LoadLightningHandle(UserDefinedRects__hashTable, unitId, (3)), true, minX, minY, minX, maxY) // INLINED!!
+    call MoveLightning(LoadLightningHandle(UserDefinedRects__hashTable, unitId, (4)), true, maxX, minY, maxX, maxY) // INLINED!!
+    
+    //Update Rect
+
+        call AutoRectEnvironment_SetRect(userDefRect , minX , minY , maxX , maxY)
+
+
+
+    
+    // Update Weather Effect
+    set weatherId=LoadInteger(UserDefinedRects__hashTable, unitId, 5)
+    if weatherId > 0 then
+        call EnableWeatherEffect(UserDefinedRects__weatherEffects[weatherId], false) //BUG: If weather effect is not disabled before destruction, it's sound effect will remain
+        call RemoveWeatherEffect(UserDefinedRects__weatherEffects[weatherId])
+        set UserDefinedRects__weatherEffects[weatherId]=AddWeatherEffect(userDefRect, (LoadInteger(UserDefinedRects__hashTable, 0, ((LoadInteger(UserDefinedRects__hashTable, (unitId), (8))))))) // INLINED!!
+        call EnableWeatherEffect(UserDefinedRects__weatherEffects[weatherId], true)
+    endif
+    
+    set userDefRect=null
+    return true
+endfunction
+
+
+function CreateGUDR takes unit centerUnit returns boolean
+    local integer unitId= GetHandleId(centerUnit)
+    local real centerX= GetUnitX(centerUnit)
+    local real centerY= GetUnitY(centerUnit)
+    local rect userDefRect
+    
+
+        local integer fog
+
+    
+    if (HaveSavedHandle(UserDefinedRects__hashTable, (unitId), (0))) then // INLINED!!
+        return false
+    endif
+    
+    set userDefRect=Rect(centerX - 32, centerY - 32, centerX + 32, centerY + 32)
+    
+
+        set fog=(GMUI_GetIndex((GMUI_GENERIC_KEY))) // INLINED!!
+        call SaveInteger(ConstTable__ht, (((s__RectEnvironment_fog_impl))), (((GetHandleId((userDefRect))))), ( (fog))) // INLINED!!
+        call SaveInteger(ConstTable__ht, (((((s__TerrainFog_style_impl))))), ((fog)), ( (s__TerrainFog_EXPONENTIAL))) // INLINED!!
+        call AutoRectEnvironment_RegisterRect(userDefRect)
+
+    
+    call SaveRectHandle(UserDefinedRects__hashTable, unitId, (0), userDefRect) // INLINED!!
+    call SaveLightningHandle(UserDefinedRects__hashTable, unitId, (1), AddLightning("DRAM", true, centerX - 32, centerY + 32, centerX + 32, centerY + 32)) // INLINED!!
+    call SaveLightningHandle(UserDefinedRects__hashTable, unitId, (2), AddLightning("DRAM", true, centerX - 32, centerY - 32, centerX + 32, centerY - 32)) // INLINED!!
+    call SaveLightningHandle(UserDefinedRects__hashTable, unitId, (3), AddLightning("DRAM", true, centerX - 32, centerY - 32, centerX - 32, centerY + 32)) // INLINED!!
+    call SaveLightningHandle(UserDefinedRects__hashTable, unitId, (4), AddLightning("DRAM", true, centerX + 32, centerY - 32, centerX + 32, centerY + 32)) // INLINED!!
+    call SaveGroupHandle(UserDefinedRects__hashTable, unitId, (6), CreateGroup()) // INLINED!!
+    call SaveBoolean(UserDefinedRects__hashTable, unitId, (7), true) //Save show/hide boolean as true, because nothing is being hidden // INLINED!!
+    call SaveInteger(UserDefinedRects__hashTable, unitId, (8), 1) //Save 1 as it is the value of 'RAhr' // INLINED!!
+    
+    set userDefRect=null
+    return true
+endfunction
+
+function DestroyGUDR takes unit centerUnit returns nothing
+    local integer unitId= GetHandleId(centerUnit)
+    local rect udr= (LoadRectHandle(UserDefinedRects__hashTable, (unitId), (0))) // INLINED!!
+    
+
+        local integer fog= (LoadInteger(ConstTable__ht, (((s__RectEnvironment_fog_impl))), (((GetHandleId((udr))))))) // INLINED!!
+
+    
+    if udr == null then
+        return
+    endif
+    
+
+        call AutoRectEnvironment_DeRegisterRect(udr)
+        
+        if fog > 0 then
+            call s__TerrainFog_destroy(fog)
+        endif
+
+
+    call DestroyWeather(centerUnit)
+    call GroupGUDR(centerUnit , true)
+    call DestroyLightning((LoadLightningHandle(UserDefinedRects__hashTable, (unitId ), ( (1))))) // INLINED!!
+    call DestroyLightning((LoadLightningHandle(UserDefinedRects__hashTable, (unitId ), ( (2))))) // INLINED!!
+    call DestroyLightning((LoadLightningHandle(UserDefinedRects__hashTable, (unitId ), ( (3))))) // INLINED!!
+    call DestroyLightning((LoadLightningHandle(UserDefinedRects__hashTable, (unitId ), ( (4))))) // INLINED!!
+    call RemoveRect(udr)
+    call DestroyGroup((LoadGroupHandle(UserDefinedRects__hashTable, (unitId), (6)))) // INLINED!!
+    
+    call FlushChildHashtable(UserDefinedRects__hashTable, unitId)
+
+    set udr=null
+endfunction
+
+function UserDefinedRects__onInit takes nothing returns nothing
+
+
+
+    
+    call SaveInteger(UserDefinedRects__hashTable, 0, 1, 'RAhr')
+    call SaveInteger(UserDefinedRects__hashTable, 0, 2, 'RAlr')
+    call SaveInteger(UserDefinedRects__hashTable, 0, 3, 'MEds')
+    call SaveInteger(UserDefinedRects__hashTable, 0, 4, 'FDbh')
+    call SaveInteger(UserDefinedRects__hashTable, 0, 5, 'FDbl')
+    call SaveInteger(UserDefinedRects__hashTable, 0, 6, 'FDgh')
+    call SaveInteger(UserDefinedRects__hashTable, 0, 7, 'FDgl')
+    call SaveInteger(UserDefinedRects__hashTable, 0, 8, 'FDrh')
+    call SaveInteger(UserDefinedRects__hashTable, 0, 9, 'FDrl')
+    call SaveInteger(UserDefinedRects__hashTable, 0, 10, 'FDwh')
+    call SaveInteger(UserDefinedRects__hashTable, 0, 11, 'FDwl')
+    call SaveInteger(UserDefinedRects__hashTable, 0, 12, 'RLhr')
+    call SaveInteger(UserDefinedRects__hashTable, 0, 13, 'RLlr')
+    call SaveInteger(UserDefinedRects__hashTable, 0, 14, 'SNbs')
+    call SaveInteger(UserDefinedRects__hashTable, 0, 15, 'SNhs')
+    call SaveInteger(UserDefinedRects__hashTable, 0, 16, 'SNls')
+    call SaveInteger(UserDefinedRects__hashTable, 0, 17, 'WOcw')
+    call SaveInteger(UserDefinedRects__hashTable, 0, 18, 'WOlw')
+    call SaveInteger(UserDefinedRects__hashTable, 0, 19, 'LRaa')
+    call SaveInteger(UserDefinedRects__hashTable, 0, 20, 'LRma')
+    call SaveInteger(UserDefinedRects__hashTable, 0, 21, 'WNcw')
+endfunction
+
+//////////////////////////////////////////////////////
+//END OF GUDR
+//////////////////////////////////////////////////////
+
+//library UserDefinedRects ends
+//library LoPHeader:
+function LoP_IsUnitDecoration takes unit whichUnit returns boolean
+    return GetUnitAbilityLevel(whichUnit, 'A0C6') > 0
+endfunction
+
+function LoP_PlayerOwnsUnit takes player whichPlayer,unit whichUnit returns boolean
+    local player p= GetOwningPlayer(whichUnit)
+    
+    if p == whichPlayer then
+        return true
+    endif
+    return IsUnitInGroup(whichUnit, udg_System_NeutralUnits[GetPlayerId(whichPlayer)]) and p == Player(PLAYER_NEUTRAL_PASSIVE)
+endfunction
+
+function IsGroupEmpty takes group whichGroup returns boolean
+    local unit firstUnit= FirstOfGroup(whichGroup)
+    
+    // If unit was removed from the game, refresh the group
+    if GetUnitTypeId(firstUnit) == 0 then
+        call GroupRefresh(whichGroup)
+        set firstUnit=FirstOfGroup(whichGroup)
+    endif
+    
+    if firstUnit != null then
+        set firstUnit=null
+        return false
+    endif
+    
+    return true
+endfunction
+
+function Commands_GetArguments takes nothing returns string
+    return SubString(GetEventPlayerChatString(), StringLength(GetEventPlayerChatStringMatched()), StringLength(GetEventPlayerChatString()))
+endfunction
+
+function Commands_StartsWithCommand takes nothing returns boolean
+    return SubString(GetEventPlayerChatString(), 0, StringLength(GetEventPlayerChatStringMatched())) == GetEventPlayerChatStringMatched()
+endfunction
+
+function Commands_EnumSelectedCheckForGenerator takes group whichGroup,player whichPlayer,boolexpr filter returns integer
+    call GroupEnumUnitsSelected(whichGroup, whichPlayer, filter)
+    return GUDR_SwapGroup_UnitsInsideUDR(whichGroup , false , null)
+endfunction
+
+function Commands_GetChatMessagePlayerNumber takes string str returns integer
+    local integer s2i= S2I(str)
+    local integer strHash
+    if s2i == 0 then //and str != "0" then
+        set strHash=StringHash(str)
+        if HaveSavedInteger(udg_Hashtable_1, 0, strHash) then
+            return LoadInteger(udg_Hashtable_1, 0, strHash)
+        endif
+    endif
+    return s2i
+endfunction
+
+function PlayerNumberIsNotExtraOrVictim takes integer ID returns boolean
+    return ( ID <= bj_MAX_PLAYERS or ID == PLAYER_NEUTRAL_AGGRESSIVE + 1 or ID == PLAYER_NEUTRAL_PASSIVE + 1 ) and ( ID >= 1 )
+endfunction
+
+function PlayerNumberIsNotNeutral takes integer ID returns boolean
+    return ID <= bj_MAX_PLAYERS and ID > 0
+endfunction
+
+function CheckCommandOverflow takes nothing returns boolean
+    if udg_Commands_Counter < udg_Commands_Counter_Max then
+        set udg_Commands_Counter=( udg_Commands_Counter + 1 )
+        return true
+    elseif udg_Commands_Counter == udg_Commands_Counter_Max then
+        call DisplayTextToPlayer(GetTriggerPlayer(), 0, 0, "Command Overflow! Execution stopped.\n Run the command again until it is finished.")
+        set udg_Commands_Counter=( udg_Commands_Counter + 1 )
+    endif
+    return false
+endfunction
+
+function Commands_SetMaximumExecutions takes integer max returns nothing
+    set udg_Commands_Counter=0
+    set udg_Commands_Counter_Max=max
+endfunction
+
+function Commands_CheckOverflow takes nothing returns boolean
+    return CheckCommandOverflow()
+endfunction
+
+//library LoPHeader ends
+//library RectGenerator:
+
+// Import instructions after configuration.
+//===================================================
+// Simple configuration
+//===================================================
+
+//===================================================
+// Advanced configuration
+//===================================================
+
+// If this function returns true and AUTOMATIC_ON_SPAWN, the unit will have 'Amov' and 'Aatk' removed
+// upon entering the map. Additionally, the abilities will only trigger for units when this function
+// returns true upon being called with them as an argument.
+function RectGenerator_Conditions takes unit whichUnit returns boolean
+    return GetUnitTypeId(whichUnit) == RectGenerator_GENERATOR_ID // LoP_IsUnitDecoration(whichUnit)
+endfunction
+
+
+
+function RectGenerator__InFirstPage takes unit u returns boolean
+	return GetUnitAbilityLevel(u, RectGenerator_CREATE_OR_DESTROY) > 0
+endfunction
+
+function RectGenerator__InSecondPage takes unit u returns boolean
+	return GetUnitAbilityLevel(u, RectGenerator_TOGGLE_WEATHER) > 0
+endfunction
+
+function RectGenerator__InThirdPage takes unit u returns boolean
+	return GetUnitAbilityLevel(u, RectGenerator_FOG_DENSITY_UP) > 0
+endfunction
+//===================================================
+// Import instructions
+//===================================================
+
+
+
+//textmacro instance: TableStruct_NewConstTableField("public","strings")
+
+        constant function s__RectGenerator__FogStyle__get_strings takes nothing returns integer
+            return s__RectGenerator__FogStyle_strings_impl
+        endfunction
+
+
+
+
+
+//end of: TableStruct_NewConstTableField("public","strings")
+//textmacro instance: TableStruct_NewConstTableField("private","linkedListNext")
+
+        constant function s__RectGenerator__FogStyle__get_linkedListNext takes nothing returns integer
+            return s__RectGenerator__FogStyle_linkedListNext_impl
+        endfunction
+
+
+
+
+
+//end of: TableStruct_NewConstTableField("private","linkedListNext")
+//textmacro instance: TableStruct_NewConstTableField("private","linkedListPrev")
+
+        constant function s__RectGenerator__FogStyle__get_linkedListPrev takes nothing returns integer
+            return s__RectGenerator__FogStyle_linkedListPrev_impl
+        endfunction
+
+
+
+
+
+//end of: TableStruct_NewConstTableField("private","linkedListPrev")
+        
+        function s__RectGenerator__FogStyle_next takes integer this returns integer
+            return (LoadInteger(ConstTable__ht, ((s__RectGenerator__FogStyle_linkedListNext_impl)), (this))) // INLINED!!
+        endfunction
+        
+        function s__RectGenerator__FogStyle_prev takes integer this returns integer
+            return (LoadInteger(ConstTable__ht, ((s__RectGenerator__FogStyle_linkedListPrev_impl)), (this))) // INLINED!!
+        endfunction
+        
+        function s__RectGenerator__FogStyle_setNext takes integer this,integer nextStyle returns nothing
+            call SaveInteger(ConstTable__ht, ((s__RectGenerator__FogStyle_linkedListNext_impl)), (this), ( nextStyle)) // INLINED!!
+        endfunction
+        
+        function s__RectGenerator__FogStyle_setPrev takes integer this,integer prevStyle returns nothing
+            call SaveInteger(ConstTable__ht, ((s__RectGenerator__FogStyle_linkedListPrev_impl)), (this), ( prevStyle)) // INLINED!!
+        endfunction
+        
+        function s__RectGenerator__FogStyle_getString takes integer this returns string
+            return (LoadStr(ConstTable__ht, ((((s__RectGenerator__FogStyle_strings_impl)))), (this))) // INLINED!!
+        endfunction
+        
+        function s__RectGenerator__FogStyle_setString takes integer this,string str returns nothing
+            call SaveStr(ConstTable__ht, ((((s__RectGenerator__FogStyle_strings_impl)))), (this), ( str)) // INLINED!!
+        endfunction
+        
+        
+
+
+
+
+
+function RectGenerator__GroupLoop takes nothing returns nothing
+    local unit udr= GetTriggerUnit()
+    local unit enumUnit= GetEnumUnit()
+    
+    if (HaveSavedHandle(UserDefinedRects__hashTable, (GetHandleId((enumUnit))), (0))) or GetOwningPlayer(enumUnit) != GetOwningPlayer(udr) then // INLINED!!
+        call GroupRemoveUnit((LoadGroupHandle(UserDefinedRects__hashTable, (GetHandleId((udr))), (6))), enumUnit) // INLINED!!
+    else
+        call SetUnitPosition(enumUnit, GetUnitX(enumUnit) + GetSpellTargetX() - GetUnitX(udr), GetUnitY(enumUnit) + GetSpellTargetY() - GetUnitY(udr))
+    endif
+    
+    set udr=null
+    set enumUnit=null
+endfunction
+
+
+    function RectGenerator__GroupLoopTerrain takes nothing returns nothing
+        local unit udr= GetTriggerUnit()
+        local unit enumUnit= GetEnumUnit()
+        
+        if (HaveSavedHandle(UserDefinedRects__hashTable, (GetHandleId((enumUnit))), (0))) or GetOwningPlayer(enumUnit) != GetOwningPlayer(udr) then // INLINED!!
+            call GroupRemoveUnit((LoadGroupHandle(UserDefinedRects__hashTable, (GetHandleId((udr))), (6))), enumUnit) // INLINED!!
+        else
+            call SetUnitPosition(enumUnit, GetUnitX(enumUnit) + GetTileCenterCoordinate(GetSpellTargetX()) - GetUnitX(udr), GetUnitY(enumUnit) + GetTileCenterCoordinate(GetSpellTargetY()) - GetUnitY(udr))
+        endif
+        
+        set udr=null
+        set enumUnit=null
+    endfunction
+
+
+function RectGenerator__ColorMessage takes string color,real value returns string
+    return "Fog " + color + " set to: " + I2S(R2I(value * 100. + .5)) + "%"
+endfunction
+
+
+function RectGenerator__onCast takes nothing returns boolean
+    local integer abilityId= GetSpellAbilityId()
+    
+    if not (GetUnitTypeId((GetTriggerUnit())) == RectGenerator_GENERATOR_ID) then // INLINED!!
+        
+    elseif abilityId == RectGenerator_PAGE_NEXT then
+
+            if (GetUnitAbilityLevel((GetTriggerUnit()), RectGenerator_CREATE_OR_DESTROY) > 0) then // INLINED!!
+//textmacro instance: GUDR_FirstPage("Remove","GetTriggerUnit()")
+
+	call UnitRemoveAbility(GetTriggerUnit(), RectGenerator_CREATE_OR_DESTROY)
+	call UnitRemoveAbility(GetTriggerUnit(), RectGenerator_TOGGLE_VISIBILITY)
+	call UnitRemoveAbility(GetTriggerUnit(), RectGenerator_MOVE)
+
+        call UnitRemoveAbility(GetTriggerUnit(), RectGenerator_MOVE_TERRAIN)
+
+	
+	call UnitRemoveAbility(GetTriggerUnit(), RectGenerator_RETRACT_X)
+	call UnitRemoveAbility(GetTriggerUnit(), RectGenerator_EXPAND_X)
+	call UnitRemoveAbility(GetTriggerUnit(), RectGenerator_RETRACT_Y)
+	call UnitRemoveAbility(GetTriggerUnit(), RectGenerator_EXPAND_Y)
+	
+	call UnitRemoveAbility(GetTriggerUnit(), RectGenerator_LOCK_UNITS)
+	call UnitRemoveAbility(GetTriggerUnit(), RectGenerator_UNLOCK_UNITS)
+
+//end of: GUDR_FirstPage("Remove","GetTriggerUnit()")
+//textmacro instance: GUDR_SecondPage("Add","GetTriggerUnit()")
+
+	call UnitAddAbility(GetTriggerUnit(), RectGenerator_CHANGE_WEATHER_NEXT)
+	call UnitAddAbility(GetTriggerUnit(), RectGenerator_CHANGE_WEATHER_PREV)
+	call UnitAddAbility(GetTriggerUnit(), RectGenerator_TOGGLE_WEATHER)
+	
+
+        call UnitAddAbility(GetTriggerUnit(), RectGenerator_TOGGLE_FOG)
+        call UnitAddAbility(GetTriggerUnit(), RectGenerator_FOG_STYLE_UP)
+        call UnitAddAbility(GetTriggerUnit(), RectGenerator_FOG_STYLE_DOWN)
+        call UnitAddAbility(GetTriggerUnit(), RectGenerator_FOG_ZSTART_UP)
+        call UnitAddAbility(GetTriggerUnit(), RectGenerator_FOG_ZSTART_DOWN)
+        call UnitAddAbility(GetTriggerUnit(), RectGenerator_FOG_ZEND_UP)
+        call UnitAddAbility(GetTriggerUnit(), RectGenerator_FOG_ZEND_DOWN)
+
+
+//end of: GUDR_SecondPage("Add","GetTriggerUnit()")
+            elseif (GetUnitAbilityLevel((GetTriggerUnit()), RectGenerator_TOGGLE_WEATHER) > 0) then // INLINED!!
+//textmacro instance: GUDR_SecondPage("Remove","GetTriggerUnit()")
+
+	call UnitRemoveAbility(GetTriggerUnit(), RectGenerator_CHANGE_WEATHER_NEXT)
+	call UnitRemoveAbility(GetTriggerUnit(), RectGenerator_CHANGE_WEATHER_PREV)
+	call UnitRemoveAbility(GetTriggerUnit(), RectGenerator_TOGGLE_WEATHER)
+	
+
+        call UnitRemoveAbility(GetTriggerUnit(), RectGenerator_TOGGLE_FOG)
+        call UnitRemoveAbility(GetTriggerUnit(), RectGenerator_FOG_STYLE_UP)
+        call UnitRemoveAbility(GetTriggerUnit(), RectGenerator_FOG_STYLE_DOWN)
+        call UnitRemoveAbility(GetTriggerUnit(), RectGenerator_FOG_ZSTART_UP)
+        call UnitRemoveAbility(GetTriggerUnit(), RectGenerator_FOG_ZSTART_DOWN)
+        call UnitRemoveAbility(GetTriggerUnit(), RectGenerator_FOG_ZEND_UP)
+        call UnitRemoveAbility(GetTriggerUnit(), RectGenerator_FOG_ZEND_DOWN)
+
+
+//end of: GUDR_SecondPage("Remove","GetTriggerUnit()")
+//textmacro instance: GUDR_ThirdPage("Add","GetTriggerUnit()")
+
+	call UnitAddAbility(GetTriggerUnit(), RectGenerator_FOG_DENSITY_UP)
+	call UnitAddAbility(GetTriggerUnit(), RectGenerator_FOG_DENSITY_DOWN)
+	
+	call UnitAddAbility(GetTriggerUnit(), RectGenerator_FOG_RED_UP)
+	call UnitAddAbility(GetTriggerUnit(), RectGenerator_FOG_RED_DOWN)
+	call UnitAddAbility(GetTriggerUnit(), RectGenerator_FOG_GREEN_UP)
+	call UnitAddAbility(GetTriggerUnit(), RectGenerator_FOG_GREEN_DOWN)
+	call UnitAddAbility(GetTriggerUnit(), RectGenerator_FOG_BLUE_UP)
+	call UnitAddAbility(GetTriggerUnit(), RectGenerator_FOG_BLUE_DOWN)
+
+//end of: GUDR_ThirdPage("Add","GetTriggerUnit()")
+            else //if InThirdPage(GetTriggerUnit()) then
+//textmacro instance: GUDR_ThirdPage("Remove","GetTriggerUnit()")
+
+	call UnitRemoveAbility(GetTriggerUnit(), RectGenerator_FOG_DENSITY_UP)
+	call UnitRemoveAbility(GetTriggerUnit(), RectGenerator_FOG_DENSITY_DOWN)
+	
+	call UnitRemoveAbility(GetTriggerUnit(), RectGenerator_FOG_RED_UP)
+	call UnitRemoveAbility(GetTriggerUnit(), RectGenerator_FOG_RED_DOWN)
+	call UnitRemoveAbility(GetTriggerUnit(), RectGenerator_FOG_GREEN_UP)
+	call UnitRemoveAbility(GetTriggerUnit(), RectGenerator_FOG_GREEN_DOWN)
+	call UnitRemoveAbility(GetTriggerUnit(), RectGenerator_FOG_BLUE_UP)
+	call UnitRemoveAbility(GetTriggerUnit(), RectGenerator_FOG_BLUE_DOWN)
+
+//end of: GUDR_ThirdPage("Remove","GetTriggerUnit()")
+//textmacro instance: GUDR_FirstPage("Add","GetTriggerUnit()")
+
+	call UnitAddAbility(GetTriggerUnit(), RectGenerator_CREATE_OR_DESTROY)
+	call UnitAddAbility(GetTriggerUnit(), RectGenerator_TOGGLE_VISIBILITY)
+	call UnitAddAbility(GetTriggerUnit(), RectGenerator_MOVE)
+
+        call UnitAddAbility(GetTriggerUnit(), RectGenerator_MOVE_TERRAIN)
+
+	
+	call UnitAddAbility(GetTriggerUnit(), RectGenerator_RETRACT_X)
+	call UnitAddAbility(GetTriggerUnit(), RectGenerator_EXPAND_X)
+	call UnitAddAbility(GetTriggerUnit(), RectGenerator_RETRACT_Y)
+	call UnitAddAbility(GetTriggerUnit(), RectGenerator_EXPAND_Y)
+	
+	call UnitAddAbility(GetTriggerUnit(), RectGenerator_LOCK_UNITS)
+	call UnitAddAbility(GetTriggerUnit(), RectGenerator_UNLOCK_UNITS)
+
+//end of: GUDR_FirstPage("Add","GetTriggerUnit()")
+            endif
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+    elseif abilityId == RectGenerator_PAGE_PREV then
+
+            if (GetUnitAbilityLevel((GetTriggerUnit()), RectGenerator_CREATE_OR_DESTROY) > 0) then // INLINED!!
+//textmacro instance: GUDR_FirstPage("Remove","GetTriggerUnit()")
+
+	call UnitRemoveAbility(GetTriggerUnit(), RectGenerator_CREATE_OR_DESTROY)
+	call UnitRemoveAbility(GetTriggerUnit(), RectGenerator_TOGGLE_VISIBILITY)
+	call UnitRemoveAbility(GetTriggerUnit(), RectGenerator_MOVE)
+
+        call UnitRemoveAbility(GetTriggerUnit(), RectGenerator_MOVE_TERRAIN)
+
+	
+	call UnitRemoveAbility(GetTriggerUnit(), RectGenerator_RETRACT_X)
+	call UnitRemoveAbility(GetTriggerUnit(), RectGenerator_EXPAND_X)
+	call UnitRemoveAbility(GetTriggerUnit(), RectGenerator_RETRACT_Y)
+	call UnitRemoveAbility(GetTriggerUnit(), RectGenerator_EXPAND_Y)
+	
+	call UnitRemoveAbility(GetTriggerUnit(), RectGenerator_LOCK_UNITS)
+	call UnitRemoveAbility(GetTriggerUnit(), RectGenerator_UNLOCK_UNITS)
+
+//end of: GUDR_FirstPage("Remove","GetTriggerUnit()")
+//textmacro instance: GUDR_ThirdPage("Add","GetTriggerUnit()")
+
+	call UnitAddAbility(GetTriggerUnit(), RectGenerator_FOG_DENSITY_UP)
+	call UnitAddAbility(GetTriggerUnit(), RectGenerator_FOG_DENSITY_DOWN)
+	
+	call UnitAddAbility(GetTriggerUnit(), RectGenerator_FOG_RED_UP)
+	call UnitAddAbility(GetTriggerUnit(), RectGenerator_FOG_RED_DOWN)
+	call UnitAddAbility(GetTriggerUnit(), RectGenerator_FOG_GREEN_UP)
+	call UnitAddAbility(GetTriggerUnit(), RectGenerator_FOG_GREEN_DOWN)
+	call UnitAddAbility(GetTriggerUnit(), RectGenerator_FOG_BLUE_UP)
+	call UnitAddAbility(GetTriggerUnit(), RectGenerator_FOG_BLUE_DOWN)
+
+//end of: GUDR_ThirdPage("Add","GetTriggerUnit()")
+            elseif (GetUnitAbilityLevel((GetTriggerUnit()), RectGenerator_TOGGLE_WEATHER) > 0) then // INLINED!!
+//textmacro instance: GUDR_SecondPage("Remove","GetTriggerUnit()")
+
+	call UnitRemoveAbility(GetTriggerUnit(), RectGenerator_CHANGE_WEATHER_NEXT)
+	call UnitRemoveAbility(GetTriggerUnit(), RectGenerator_CHANGE_WEATHER_PREV)
+	call UnitRemoveAbility(GetTriggerUnit(), RectGenerator_TOGGLE_WEATHER)
+	
+
+        call UnitRemoveAbility(GetTriggerUnit(), RectGenerator_TOGGLE_FOG)
+        call UnitRemoveAbility(GetTriggerUnit(), RectGenerator_FOG_STYLE_UP)
+        call UnitRemoveAbility(GetTriggerUnit(), RectGenerator_FOG_STYLE_DOWN)
+        call UnitRemoveAbility(GetTriggerUnit(), RectGenerator_FOG_ZSTART_UP)
+        call UnitRemoveAbility(GetTriggerUnit(), RectGenerator_FOG_ZSTART_DOWN)
+        call UnitRemoveAbility(GetTriggerUnit(), RectGenerator_FOG_ZEND_UP)
+        call UnitRemoveAbility(GetTriggerUnit(), RectGenerator_FOG_ZEND_DOWN)
+
+
+//end of: GUDR_SecondPage("Remove","GetTriggerUnit()")
+//textmacro instance: GUDR_FirstPage("Add","GetTriggerUnit()")
+
+	call UnitAddAbility(GetTriggerUnit(), RectGenerator_CREATE_OR_DESTROY)
+	call UnitAddAbility(GetTriggerUnit(), RectGenerator_TOGGLE_VISIBILITY)
+	call UnitAddAbility(GetTriggerUnit(), RectGenerator_MOVE)
+
+        call UnitAddAbility(GetTriggerUnit(), RectGenerator_MOVE_TERRAIN)
+
+	
+	call UnitAddAbility(GetTriggerUnit(), RectGenerator_RETRACT_X)
+	call UnitAddAbility(GetTriggerUnit(), RectGenerator_EXPAND_X)
+	call UnitAddAbility(GetTriggerUnit(), RectGenerator_RETRACT_Y)
+	call UnitAddAbility(GetTriggerUnit(), RectGenerator_EXPAND_Y)
+	
+	call UnitAddAbility(GetTriggerUnit(), RectGenerator_LOCK_UNITS)
+	call UnitAddAbility(GetTriggerUnit(), RectGenerator_UNLOCK_UNITS)
+
+//end of: GUDR_FirstPage("Add","GetTriggerUnit()")
+            else //if InThirdPage(GetTriggerUnit()) then
+//textmacro instance: GUDR_ThirdPage("Remove","GetTriggerUnit()")
+
+	call UnitRemoveAbility(GetTriggerUnit(), RectGenerator_FOG_DENSITY_UP)
+	call UnitRemoveAbility(GetTriggerUnit(), RectGenerator_FOG_DENSITY_DOWN)
+	
+	call UnitRemoveAbility(GetTriggerUnit(), RectGenerator_FOG_RED_UP)
+	call UnitRemoveAbility(GetTriggerUnit(), RectGenerator_FOG_RED_DOWN)
+	call UnitRemoveAbility(GetTriggerUnit(), RectGenerator_FOG_GREEN_UP)
+	call UnitRemoveAbility(GetTriggerUnit(), RectGenerator_FOG_GREEN_DOWN)
+	call UnitRemoveAbility(GetTriggerUnit(), RectGenerator_FOG_BLUE_UP)
+	call UnitRemoveAbility(GetTriggerUnit(), RectGenerator_FOG_BLUE_DOWN)
+
+//end of: GUDR_ThirdPage("Remove","GetTriggerUnit()")
+//textmacro instance: GUDR_SecondPage("Add","GetTriggerUnit()")
+
+	call UnitAddAbility(GetTriggerUnit(), RectGenerator_CHANGE_WEATHER_NEXT)
+	call UnitAddAbility(GetTriggerUnit(), RectGenerator_CHANGE_WEATHER_PREV)
+	call UnitAddAbility(GetTriggerUnit(), RectGenerator_TOGGLE_WEATHER)
+	
+
+        call UnitAddAbility(GetTriggerUnit(), RectGenerator_TOGGLE_FOG)
+        call UnitAddAbility(GetTriggerUnit(), RectGenerator_FOG_STYLE_UP)
+        call UnitAddAbility(GetTriggerUnit(), RectGenerator_FOG_STYLE_DOWN)
+        call UnitAddAbility(GetTriggerUnit(), RectGenerator_FOG_ZSTART_UP)
+        call UnitAddAbility(GetTriggerUnit(), RectGenerator_FOG_ZSTART_DOWN)
+        call UnitAddAbility(GetTriggerUnit(), RectGenerator_FOG_ZEND_UP)
+        call UnitAddAbility(GetTriggerUnit(), RectGenerator_FOG_ZEND_DOWN)
+
+
+//end of: GUDR_SecondPage("Add","GetTriggerUnit()")
+            endif
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+           
+    elseif abilityId == RectGenerator_RETRACT_Y then
+        call MoveGUDR(GetTriggerUnit() , 0 , - 64 , true)
+        
+    elseif abilityId == RectGenerator_EXPAND_Y then
+        call MoveGUDR(GetTriggerUnit() , 0 , 64 , true)
+        
+    elseif abilityId == RectGenerator_EXPAND_X then
+        call MoveGUDR(GetTriggerUnit() , 64 , 0 , true)
+        
+    elseif abilityId == RectGenerator_RETRACT_X then
+        call MoveGUDR(GetTriggerUnit() , - 64 , 0 , true)
+    
+    elseif abilityId == RectGenerator_MOVE then
+
+            if GetUnitX(GetTriggerUnit()) != Get64TileCenterCoordinate(GetUnitX(GetTriggerUnit())) then
+                call SetUnitX(GetTriggerUnit(), GetUnitX(GetTriggerUnit()) + 32)
+            endif
+            if GetUnitY(GetTriggerUnit()) != Get64TileCenterCoordinate(GetUnitY(GetTriggerUnit())) then
+                call SetUnitY(GetTriggerUnit(), GetUnitY(GetTriggerUnit()) + 32)
+            endif
+
+            
+        if CountUnitsInGroup((LoadGroupHandle(UserDefinedRects__hashTable, (GetHandleId((GetTriggerUnit()))), (6)))) <= RectGenerator__MAXIMUM_MOVE_LIMIT then // INLINED!!
+            call ForGroup((LoadGroupHandle(UserDefinedRects__hashTable, (GetHandleId((GetTriggerUnit()))), (6))), function RectGenerator__GroupLoop) // INLINED!!
+            call SetUnitPosition(GetTriggerUnit(), GetSpellTargetX(), GetSpellTargetY())
+            call MoveGUDR(GetTriggerUnit() , 0 , 0 , true)
+        else
+            call DisplayTextToPlayer(GetOwningPlayer(GetTriggerUnit()), 0, 0, "Failed to move Rect Generator:\n Attached unit limit exceeded! (" + I2S(RectGenerator__MAXIMUM_MOVE_LIMIT) + ")")
+            call SetUnitPosition(GetTriggerUnit(), GetUnitX(GetTriggerUnit()), GetUnitY(GetTriggerUnit()))
+            call MoveGUDR(GetTriggerUnit() , 0 , 0 , true)
+        endif
+        
+    elseif abilityId == RectGenerator_LOCK_UNITS then
+        call GroupGUDR(GetTriggerUnit() , false)
+        
+    elseif abilityId == RectGenerator_TOGGLE_VISIBILITY then
+        call ToggleGUDRVisibility(GetTriggerUnit() , true , true)
+        
+    elseif abilityId == RectGenerator_CHANGE_WEATHER_NEXT then
+        call ChangeGUDRWeatherNew(GetTriggerUnit() , 1 , 0)
+    
+    elseif abilityId == RectGenerator_CHANGE_WEATHER_PREV then
+        call ChangeGUDRWeatherNew(GetTriggerUnit() , - 1 , 0)
+    
+    elseif abilityId == RectGenerator_TOGGLE_WEATHER then
+        if (HaveSavedInteger(UserDefinedRects__hashTable, (GetHandleId((GetTriggerUnit()))), (5))) then // INLINED!!
+            call DestroyWeather(GetTriggerUnit())
+        else
+            call CreateWeather(GetTriggerUnit())
+        endif
+    
+    elseif abilityId == RectGenerator_CREATE_OR_DESTROY then
+        if (HaveSavedHandle(UserDefinedRects__hashTable, (GetHandleId((GetTriggerUnit()))), (0))) then // INLINED!!
+            call DestroyGUDR(GetTriggerUnit())
+        else
+            call CreateGUDR(GetTriggerUnit())
+        endif
+    
+    elseif abilityId == RectGenerator_UNLOCK_UNITS then
+        call GroupGUDR(GetTriggerUnit() , true)
+    else
+
+            if (LoadInteger(ConstTable__ht, (((s__RectEnvironment_fog_impl))), (((GetHandleId(((LoadRectHandle(UserDefinedRects__hashTable, (GetHandleId((GetTriggerUnit()))), (0)))))))))) == 0 then // INLINED!!
+        
+            elseif abilityId == RectGenerator_FOG_RED_UP then
+                if (LoadReal(ConstTable__ht, (((((s__TerrainFog_red_impl))))), (((LoadInteger(ConstTable__ht, (((s__RectEnvironment_fog_impl))), (((GetHandleId(((LoadRectHandle(UserDefinedRects__hashTable, (GetHandleId((GetTriggerUnit()))), (0)))))))))))))) <= .96 then // INLINED!!
+                    call SaveReal(ConstTable__ht, (((((s__TerrainFog_red_impl))))), (((LoadInteger(ConstTable__ht, (((s__RectEnvironment_fog_impl))), (((GetHandleId(((LoadRectHandle(UserDefinedRects__hashTable, (GetHandleId((GetTriggerUnit()))), (0)))))))))))), (( (((LoadReal(ConstTable__ht, (((((s__TerrainFog_red_impl))))), (((LoadInteger(ConstTable__ht, (((s__RectEnvironment_fog_impl))), (((GetHandleId(((LoadRectHandle(UserDefinedRects__hashTable, (GetHandleId((GetTriggerUnit()))), (0)))))))))))))) + .05)*1.0))*1.0)) // INLINED!!
+                else
+                    call SaveReal(ConstTable__ht, (((((s__TerrainFog_red_impl))))), (((LoadInteger(ConstTable__ht, (((s__RectEnvironment_fog_impl))), (((GetHandleId(((LoadRectHandle(UserDefinedRects__hashTable, (GetHandleId((GetTriggerUnit()))), (0)))))))))))), (( ((0.)*1.0))*1.0)) // INLINED!!
+                endif
+                call DisplayTextToPlayer(GetOwningPlayer(GetTriggerUnit()), 0, 0, ("Fog " + ("|c00ff0000Red|r" ) + " set to: " + I2S(R2I((( (LoadReal(ConstTable__ht, (((((s__TerrainFog_red_impl))))), (((LoadInteger(ConstTable__ht, (((s__RectEnvironment_fog_impl))), (((GetHandleId(((LoadRectHandle(UserDefinedRects__hashTable, (GetHandleId((GetTriggerUnit()))), (0)))))))))))))))*1.0) * 100. + .5)) + "%")) // INLINED!!
+            
+            elseif abilityId == RectGenerator_FOG_RED_DOWN then
+                if (LoadReal(ConstTable__ht, (((((s__TerrainFog_red_impl))))), (((LoadInteger(ConstTable__ht, (((s__RectEnvironment_fog_impl))), (((GetHandleId(((LoadRectHandle(UserDefinedRects__hashTable, (GetHandleId((GetTriggerUnit()))), (0)))))))))))))) >= 0.01 then // INLINED!!
+                    call SaveReal(ConstTable__ht, (((((s__TerrainFog_red_impl))))), (((LoadInteger(ConstTable__ht, (((s__RectEnvironment_fog_impl))), (((GetHandleId(((LoadRectHandle(UserDefinedRects__hashTable, (GetHandleId((GetTriggerUnit()))), (0)))))))))))), (( (((LoadReal(ConstTable__ht, (((((s__TerrainFog_red_impl))))), (((LoadInteger(ConstTable__ht, (((s__RectEnvironment_fog_impl))), (((GetHandleId(((LoadRectHandle(UserDefinedRects__hashTable, (GetHandleId((GetTriggerUnit()))), (0)))))))))))))) - .05)*1.0))*1.0)) // INLINED!!
+                else
+                    call SaveReal(ConstTable__ht, (((((s__TerrainFog_red_impl))))), (((LoadInteger(ConstTable__ht, (((s__RectEnvironment_fog_impl))), (((GetHandleId(((LoadRectHandle(UserDefinedRects__hashTable, (GetHandleId((GetTriggerUnit()))), (0)))))))))))), (( ((1.)*1.0))*1.0)) // INLINED!!
+                endif
+                call DisplayTextToPlayer(GetOwningPlayer(GetTriggerUnit()), 0, 0, ("Fog " + ("|c00ff0000Red|r" ) + " set to: " + I2S(R2I((( (LoadReal(ConstTable__ht, (((((s__TerrainFog_red_impl))))), (((LoadInteger(ConstTable__ht, (((s__RectEnvironment_fog_impl))), (((GetHandleId(((LoadRectHandle(UserDefinedRects__hashTable, (GetHandleId((GetTriggerUnit()))), (0)))))))))))))))*1.0) * 100. + .5)) + "%")) // INLINED!!
+                
+            elseif abilityId == RectGenerator_FOG_BLUE_UP then
+                if (LoadReal(ConstTable__ht, (((((s__TerrainFog_blue_impl))))), (((LoadInteger(ConstTable__ht, (((s__RectEnvironment_fog_impl))), (((GetHandleId(((LoadRectHandle(UserDefinedRects__hashTable, (GetHandleId((GetTriggerUnit()))), (0)))))))))))))) <= .96 then // INLINED!!
+                    call SaveReal(ConstTable__ht, (((((s__TerrainFog_blue_impl))))), (((LoadInteger(ConstTable__ht, (((s__RectEnvironment_fog_impl))), (((GetHandleId(((LoadRectHandle(UserDefinedRects__hashTable, (GetHandleId((GetTriggerUnit()))), (0)))))))))))), (( (((LoadReal(ConstTable__ht, (((((s__TerrainFog_blue_impl))))), (((LoadInteger(ConstTable__ht, (((s__RectEnvironment_fog_impl))), (((GetHandleId(((LoadRectHandle(UserDefinedRects__hashTable, (GetHandleId((GetTriggerUnit()))), (0)))))))))))))) + .05)*1.0))*1.0)) // INLINED!!
+                else
+                    call SaveReal(ConstTable__ht, (((((s__TerrainFog_blue_impl))))), (((LoadInteger(ConstTable__ht, (((s__RectEnvironment_fog_impl))), (((GetHandleId(((LoadRectHandle(UserDefinedRects__hashTable, (GetHandleId((GetTriggerUnit()))), (0)))))))))))), (( ((0.)*1.0))*1.0)) // INLINED!!
+                endif
+                call DisplayTextToPlayer(GetOwningPlayer(GetTriggerUnit()), 0, 0, ("Fog " + ("|c000000ffBlue|r" ) + " set to: " + I2S(R2I((( (LoadReal(ConstTable__ht, (((((s__TerrainFog_blue_impl))))), (((LoadInteger(ConstTable__ht, (((s__RectEnvironment_fog_impl))), (((GetHandleId(((LoadRectHandle(UserDefinedRects__hashTable, (GetHandleId((GetTriggerUnit()))), (0)))))))))))))))*1.0) * 100. + .5)) + "%")) // INLINED!!
+            
+            elseif abilityId == RectGenerator_FOG_BLUE_DOWN then
+                if (LoadReal(ConstTable__ht, (((((s__TerrainFog_blue_impl))))), (((LoadInteger(ConstTable__ht, (((s__RectEnvironment_fog_impl))), (((GetHandleId(((LoadRectHandle(UserDefinedRects__hashTable, (GetHandleId((GetTriggerUnit()))), (0)))))))))))))) >= 0.01 then // INLINED!!
+                    call SaveReal(ConstTable__ht, (((((s__TerrainFog_blue_impl))))), (((LoadInteger(ConstTable__ht, (((s__RectEnvironment_fog_impl))), (((GetHandleId(((LoadRectHandle(UserDefinedRects__hashTable, (GetHandleId((GetTriggerUnit()))), (0)))))))))))), (( (((LoadReal(ConstTable__ht, (((((s__TerrainFog_blue_impl))))), (((LoadInteger(ConstTable__ht, (((s__RectEnvironment_fog_impl))), (((GetHandleId(((LoadRectHandle(UserDefinedRects__hashTable, (GetHandleId((GetTriggerUnit()))), (0)))))))))))))) - .05)*1.0))*1.0)) // INLINED!!
+                else
+                    call SaveReal(ConstTable__ht, (((((s__TerrainFog_blue_impl))))), (((LoadInteger(ConstTable__ht, (((s__RectEnvironment_fog_impl))), (((GetHandleId(((LoadRectHandle(UserDefinedRects__hashTable, (GetHandleId((GetTriggerUnit()))), (0)))))))))))), (( ((1.)*1.0))*1.0)) // INLINED!!
+                endif
+                call DisplayTextToPlayer(GetOwningPlayer(GetTriggerUnit()), 0, 0, ("Fog " + ("|c000000ffBlue|r" ) + " set to: " + I2S(R2I((( (LoadReal(ConstTable__ht, (((((s__TerrainFog_blue_impl))))), (((LoadInteger(ConstTable__ht, (((s__RectEnvironment_fog_impl))), (((GetHandleId(((LoadRectHandle(UserDefinedRects__hashTable, (GetHandleId((GetTriggerUnit()))), (0)))))))))))))))*1.0) * 100. + .5)) + "%")) // INLINED!!
+            
+            elseif abilityId == RectGenerator_FOG_GREEN_UP then
+                if (LoadReal(ConstTable__ht, (((((s__TerrainFog_green_impl))))), (((LoadInteger(ConstTable__ht, (((s__RectEnvironment_fog_impl))), (((GetHandleId(((LoadRectHandle(UserDefinedRects__hashTable, (GetHandleId((GetTriggerUnit()))), (0)))))))))))))) <= .96 then // INLINED!!
+                    call SaveReal(ConstTable__ht, (((((s__TerrainFog_green_impl))))), (((LoadInteger(ConstTable__ht, (((s__RectEnvironment_fog_impl))), (((GetHandleId(((LoadRectHandle(UserDefinedRects__hashTable, (GetHandleId((GetTriggerUnit()))), (0)))))))))))), (( (((LoadReal(ConstTable__ht, (((((s__TerrainFog_green_impl))))), (((LoadInteger(ConstTable__ht, (((s__RectEnvironment_fog_impl))), (((GetHandleId(((LoadRectHandle(UserDefinedRects__hashTable, (GetHandleId((GetTriggerUnit()))), (0)))))))))))))) + .05)*1.0))*1.0)) // INLINED!!
+                else
+                    call SaveReal(ConstTable__ht, (((((s__TerrainFog_green_impl))))), (((LoadInteger(ConstTable__ht, (((s__RectEnvironment_fog_impl))), (((GetHandleId(((LoadRectHandle(UserDefinedRects__hashTable, (GetHandleId((GetTriggerUnit()))), (0)))))))))))), (( ((0.)*1.0))*1.0)) // INLINED!!
+                endif
+                call DisplayTextToPlayer(GetOwningPlayer(GetTriggerUnit()), 0, 0, ("Fog " + ("|c0000ff00Green|r" ) + " set to: " + I2S(R2I((( (LoadReal(ConstTable__ht, (((((s__TerrainFog_green_impl))))), (((LoadInteger(ConstTable__ht, (((s__RectEnvironment_fog_impl))), (((GetHandleId(((LoadRectHandle(UserDefinedRects__hashTable, (GetHandleId((GetTriggerUnit()))), (0)))))))))))))))*1.0) * 100. + .5)) + "%")) // INLINED!!
+            
+            elseif abilityId == RectGenerator_FOG_GREEN_DOWN then
+                if (LoadReal(ConstTable__ht, (((((s__TerrainFog_green_impl))))), (((LoadInteger(ConstTable__ht, (((s__RectEnvironment_fog_impl))), (((GetHandleId(((LoadRectHandle(UserDefinedRects__hashTable, (GetHandleId((GetTriggerUnit()))), (0)))))))))))))) >= 0.01 then // INLINED!!
+                    call SaveReal(ConstTable__ht, (((((s__TerrainFog_green_impl))))), (((LoadInteger(ConstTable__ht, (((s__RectEnvironment_fog_impl))), (((GetHandleId(((LoadRectHandle(UserDefinedRects__hashTable, (GetHandleId((GetTriggerUnit()))), (0)))))))))))), (( (((LoadReal(ConstTable__ht, (((((s__TerrainFog_green_impl))))), (((LoadInteger(ConstTable__ht, (((s__RectEnvironment_fog_impl))), (((GetHandleId(((LoadRectHandle(UserDefinedRects__hashTable, (GetHandleId((GetTriggerUnit()))), (0)))))))))))))) - .05)*1.0))*1.0)) // INLINED!!
+                else
+                    call SaveReal(ConstTable__ht, (((((s__TerrainFog_green_impl))))), (((LoadInteger(ConstTable__ht, (((s__RectEnvironment_fog_impl))), (((GetHandleId(((LoadRectHandle(UserDefinedRects__hashTable, (GetHandleId((GetTriggerUnit()))), (0)))))))))))), (( ((1.)*1.0))*1.0)) // INLINED!!
+                endif
+                call DisplayTextToPlayer(GetOwningPlayer(GetTriggerUnit()), 0, 0, ("Fog " + ("|c0000ff00Green|r" ) + " set to: " + I2S(R2I((( (LoadReal(ConstTable__ht, (((((s__TerrainFog_green_impl))))), (((LoadInteger(ConstTable__ht, (((s__RectEnvironment_fog_impl))), (((GetHandleId(((LoadRectHandle(UserDefinedRects__hashTable, (GetHandleId((GetTriggerUnit()))), (0)))))))))))))))*1.0) * 100. + .5)) + "%")) // INLINED!!
+            
+            elseif abilityId == RectGenerator_FOG_DENSITY_UP then
+                call SaveReal(ConstTable__ht, (((((s__TerrainFog_density_impl))))), (((LoadInteger(ConstTable__ht, (((s__RectEnvironment_fog_impl))), (((GetHandleId(((LoadRectHandle(UserDefinedRects__hashTable, (GetHandleId((GetTriggerUnit()))), (0)))))))))))), (( (((LoadReal(ConstTable__ht, (((((s__TerrainFog_density_impl))))), (((LoadInteger(ConstTable__ht, (((s__RectEnvironment_fog_impl))), (((GetHandleId(((LoadRectHandle(UserDefinedRects__hashTable, (GetHandleId((GetTriggerUnit()))), (0)))))))))))))) + .00005)*1.0))*1.0)) // INLINED!!
+                call DisplayTextToPlayer(GetOwningPlayer(GetTriggerUnit()), 0, 0, "Fog Density set to: " + R2S((LoadReal(ConstTable__ht, (((((s__TerrainFog_density_impl))))), (((LoadInteger(ConstTable__ht, (((s__RectEnvironment_fog_impl))), (((GetHandleId(((LoadRectHandle(UserDefinedRects__hashTable, (GetHandleId((GetTriggerUnit()))), (0)))))))))))))) * 100) + "%") // INLINED!!
+            
+            elseif abilityId == RectGenerator_FOG_DENSITY_DOWN then
+                if (LoadReal(ConstTable__ht, (((((s__TerrainFog_density_impl))))), (((LoadInteger(ConstTable__ht, (((s__RectEnvironment_fog_impl))), (((GetHandleId(((LoadRectHandle(UserDefinedRects__hashTable, (GetHandleId((GetTriggerUnit()))), (0)))))))))))))) >= 0.00006 then // INLINED!!
+                    call SaveReal(ConstTable__ht, (((((s__TerrainFog_density_impl))))), (((LoadInteger(ConstTable__ht, (((s__RectEnvironment_fog_impl))), (((GetHandleId(((LoadRectHandle(UserDefinedRects__hashTable, (GetHandleId((GetTriggerUnit()))), (0)))))))))))), (( (((LoadReal(ConstTable__ht, (((((s__TerrainFog_density_impl))))), (((LoadInteger(ConstTable__ht, (((s__RectEnvironment_fog_impl))), (((GetHandleId(((LoadRectHandle(UserDefinedRects__hashTable, (GetHandleId((GetTriggerUnit()))), (0)))))))))))))) - .00005)*1.0))*1.0)) // INLINED!!
+                else
+                    call SaveReal(ConstTable__ht, (((((s__TerrainFog_density_impl))))), (((LoadInteger(ConstTable__ht, (((s__RectEnvironment_fog_impl))), (((GetHandleId(((LoadRectHandle(UserDefinedRects__hashTable, (GetHandleId((GetTriggerUnit()))), (0)))))))))))), (( ((0.)*1.0))*1.0)) // INLINED!!
+                endif
+                call DisplayTextToPlayer(GetOwningPlayer(GetTriggerUnit()), 0, 0, "Fog Density set to: " + R2S((LoadReal(ConstTable__ht, (((((s__TerrainFog_density_impl))))), (((LoadInteger(ConstTable__ht, (((s__RectEnvironment_fog_impl))), (((GetHandleId(((LoadRectHandle(UserDefinedRects__hashTable, (GetHandleId((GetTriggerUnit()))), (0)))))))))))))) * 100) + "%") // INLINED!!
+            
+            elseif abilityId == RectGenerator_FOG_ZSTART_UP then
+                call SaveReal(ConstTable__ht, (((((s__TerrainFog_zStart_impl))))), (((LoadInteger(ConstTable__ht, (((s__RectEnvironment_fog_impl))), (((GetHandleId(((LoadRectHandle(UserDefinedRects__hashTable, (GetHandleId((GetTriggerUnit()))), (0)))))))))))), (( (((LoadReal(ConstTable__ht, (((((s__TerrainFog_zStart_impl))))), (((LoadInteger(ConstTable__ht, (((s__RectEnvironment_fog_impl))), (((GetHandleId(((LoadRectHandle(UserDefinedRects__hashTable, (GetHandleId((GetTriggerUnit()))), (0)))))))))))))) + 1000.)*1.0))*1.0)) // INLINED!!
+                call DisplayTextToPlayer(GetOwningPlayer(GetTriggerUnit()), 0, 0, ( "Fog zStart set to: " + R2S((LoadReal(ConstTable__ht, (((((s__TerrainFog_zStart_impl))))), (((LoadInteger(ConstTable__ht, (((s__RectEnvironment_fog_impl))), (((GetHandleId(((LoadRectHandle(UserDefinedRects__hashTable, (GetHandleId((GetTriggerUnit()))), (0))))))))))))))) )) // INLINED!!
+            
+            elseif abilityId == RectGenerator_FOG_ZSTART_DOWN then
+                if (LoadReal(ConstTable__ht, (((((s__TerrainFog_zStart_impl))))), (((LoadInteger(ConstTable__ht, (((s__RectEnvironment_fog_impl))), (((GetHandleId(((LoadRectHandle(UserDefinedRects__hashTable, (GetHandleId((GetTriggerUnit()))), (0)))))))))))))) >= 1200. then // INLINED!!
+                    call SaveReal(ConstTable__ht, (((((s__TerrainFog_zStart_impl))))), (((LoadInteger(ConstTable__ht, (((s__RectEnvironment_fog_impl))), (((GetHandleId(((LoadRectHandle(UserDefinedRects__hashTable, (GetHandleId((GetTriggerUnit()))), (0)))))))))))), (( (((LoadReal(ConstTable__ht, (((((s__TerrainFog_zStart_impl))))), (((LoadInteger(ConstTable__ht, (((s__RectEnvironment_fog_impl))), (((GetHandleId(((LoadRectHandle(UserDefinedRects__hashTable, (GetHandleId((GetTriggerUnit()))), (0)))))))))))))) - 1000.)*1.0))*1.0)) // INLINED!!
+                else
+                    call SaveReal(ConstTable__ht, (((((s__TerrainFog_zStart_impl))))), (((LoadInteger(ConstTable__ht, (((s__RectEnvironment_fog_impl))), (((GetHandleId(((LoadRectHandle(UserDefinedRects__hashTable, (GetHandleId((GetTriggerUnit()))), (0)))))))))))), (( ((0.)*1.0))*1.0)) // INLINED!!
+                endif
+                call DisplayTextToPlayer(GetOwningPlayer(GetTriggerUnit()), 0, 0, ( "Fog zStart set to: " + R2S((LoadReal(ConstTable__ht, (((((s__TerrainFog_zStart_impl))))), (((LoadInteger(ConstTable__ht, (((s__RectEnvironment_fog_impl))), (((GetHandleId(((LoadRectHandle(UserDefinedRects__hashTable, (GetHandleId((GetTriggerUnit()))), (0))))))))))))))) )) // INLINED!!
+            
+            elseif abilityId == RectGenerator_FOG_ZEND_UP then
+                call SaveReal(ConstTable__ht, (((((s__TerrainFog_zEnd_impl))))), (((LoadInteger(ConstTable__ht, (((s__RectEnvironment_fog_impl))), (((GetHandleId(((LoadRectHandle(UserDefinedRects__hashTable, (GetHandleId((GetTriggerUnit()))), (0)))))))))))), (( (((LoadReal(ConstTable__ht, (((((s__TerrainFog_zEnd_impl))))), (((LoadInteger(ConstTable__ht, (((s__RectEnvironment_fog_impl))), (((GetHandleId(((LoadRectHandle(UserDefinedRects__hashTable, (GetHandleId((GetTriggerUnit()))), (0)))))))))))))) + 500.)*1.0))*1.0)) // INLINED!!
+                call DisplayTextToPlayer(GetOwningPlayer(GetTriggerUnit()), 0, 0, ( "Fog zEnd set to: " + R2S((LoadReal(ConstTable__ht, (((((s__TerrainFog_zEnd_impl))))), (((LoadInteger(ConstTable__ht, (((s__RectEnvironment_fog_impl))), (((GetHandleId(((LoadRectHandle(UserDefinedRects__hashTable, (GetHandleId((GetTriggerUnit()))), (0))))))))))))))) )) // INLINED!!
+            
+            elseif abilityId == RectGenerator_FOG_ZEND_DOWN then
+                if (LoadReal(ConstTable__ht, (((((s__TerrainFog_zEnd_impl))))), (((LoadInteger(ConstTable__ht, (((s__RectEnvironment_fog_impl))), (((GetHandleId(((LoadRectHandle(UserDefinedRects__hashTable, (GetHandleId((GetTriggerUnit()))), (0)))))))))))))) >= 1200. then // INLINED!!
+                    call SaveReal(ConstTable__ht, (((((s__TerrainFog_zEnd_impl))))), (((LoadInteger(ConstTable__ht, (((s__RectEnvironment_fog_impl))), (((GetHandleId(((LoadRectHandle(UserDefinedRects__hashTable, (GetHandleId((GetTriggerUnit()))), (0)))))))))))), (( (((LoadReal(ConstTable__ht, (((((s__TerrainFog_zEnd_impl))))), (((LoadInteger(ConstTable__ht, (((s__RectEnvironment_fog_impl))), (((GetHandleId(((LoadRectHandle(UserDefinedRects__hashTable, (GetHandleId((GetTriggerUnit()))), (0)))))))))))))) - 500.)*1.0))*1.0)) // INLINED!!
+                else
+                    call SaveReal(ConstTable__ht, (((((s__TerrainFog_zEnd_impl))))), (((LoadInteger(ConstTable__ht, (((s__RectEnvironment_fog_impl))), (((GetHandleId(((LoadRectHandle(UserDefinedRects__hashTable, (GetHandleId((GetTriggerUnit()))), (0)))))))))))), (( ((0.)*1.0))*1.0)) // INLINED!!
+                endif
+                call DisplayTextToPlayer(GetOwningPlayer(GetTriggerUnit()), 0, 0, ( "Fog zEnd set to: " + R2S((LoadReal(ConstTable__ht, (((((s__TerrainFog_zEnd_impl))))), (((LoadInteger(ConstTable__ht, (((s__RectEnvironment_fog_impl))), (((GetHandleId(((LoadRectHandle(UserDefinedRects__hashTable, (GetHandleId((GetTriggerUnit()))), (0))))))))))))))) )) // INLINED!!
+            
+            elseif abilityId == RectGenerator_FOG_STYLE_UP then
+                call SaveInteger(ConstTable__ht, (((((s__TerrainFog_style_impl))))), (((LoadInteger(ConstTable__ht, (((s__RectEnvironment_fog_impl))), (((GetHandleId(((LoadRectHandle(UserDefinedRects__hashTable, (GetHandleId((GetTriggerUnit()))), (0)))))))))))), ( ((LoadInteger(ConstTable__ht, ((s__RectGenerator__FogStyle_linkedListNext_impl)), ((((LoadInteger(ConstTable__ht, (((((s__TerrainFog_style_impl))))), (((LoadInteger(ConstTable__ht, (((s__RectEnvironment_fog_impl))), (((GetHandleId(((LoadRectHandle(UserDefinedRects__hashTable, (GetHandleId((GetTriggerUnit()))), (0)))))))))))))))))))))) // INLINED!!
+                call DisplayTextToPlayer(GetOwningPlayer(GetTriggerUnit()), 0, 0, "Fog Style set to: " + (LoadStr(ConstTable__ht, ((((s__RectGenerator__FogStyle_strings_impl)))), ((((LoadInteger(ConstTable__ht, (((((s__TerrainFog_style_impl))))), (((LoadInteger(ConstTable__ht, (((s__RectEnvironment_fog_impl))), (((GetHandleId(((LoadRectHandle(UserDefinedRects__hashTable, (GetHandleId((GetTriggerUnit()))), (0)))))))))))))))))))) // INLINED!!
+            
+            elseif abilityId == RectGenerator_FOG_STYLE_DOWN then
+                call SaveInteger(ConstTable__ht, (((((s__TerrainFog_style_impl))))), (((LoadInteger(ConstTable__ht, (((s__RectEnvironment_fog_impl))), (((GetHandleId(((LoadRectHandle(UserDefinedRects__hashTable, (GetHandleId((GetTriggerUnit()))), (0)))))))))))), ( ((LoadInteger(ConstTable__ht, ((s__RectGenerator__FogStyle_linkedListPrev_impl)), ((((LoadInteger(ConstTable__ht, (((((s__TerrainFog_style_impl))))), (((LoadInteger(ConstTable__ht, (((s__RectEnvironment_fog_impl))), (((GetHandleId(((LoadRectHandle(UserDefinedRects__hashTable, (GetHandleId((GetTriggerUnit()))), (0)))))))))))))))))))))) // INLINED!!
+                call DisplayTextToPlayer(GetOwningPlayer(GetTriggerUnit()), 0, 0, "Fog Style set to: " + (LoadStr(ConstTable__ht, ((((s__RectGenerator__FogStyle_strings_impl)))), ((((LoadInteger(ConstTable__ht, (((((s__TerrainFog_style_impl))))), (((LoadInteger(ConstTable__ht, (((s__RectEnvironment_fog_impl))), (((GetHandleId(((LoadRectHandle(UserDefinedRects__hashTable, (GetHandleId((GetTriggerUnit()))), (0)))))))))))))))))))) // INLINED!!
+            endif
+
+
+            if abilityId == RectGenerator_MOVE_TERRAIN then
+                if GetUnitX(GetTriggerUnit()) != GetTileCenterCoordinate(GetUnitX(GetTriggerUnit())) then
+                    call SetUnitX(GetTriggerUnit(), GetUnitX(GetTriggerUnit()) - 32)
+                endif
+                if GetUnitY(GetTriggerUnit()) != GetTileCenterCoordinate(GetUnitY(GetTriggerUnit())) then
+                    call SetUnitY(GetTriggerUnit(), GetUnitY(GetTriggerUnit()) - 32)
+                endif
+            
+                if CountUnitsInGroup((LoadGroupHandle(UserDefinedRects__hashTable, (GetHandleId((GetTriggerUnit()))), (6)))) <= RectGenerator__MAXIMUM_MOVE_LIMIT then // INLINED!!
+                    call ForGroup((LoadGroupHandle(UserDefinedRects__hashTable, (GetHandleId((GetTriggerUnit()))), (6))), function RectGenerator__GroupLoopTerrain) // INLINED!!
+                    call SetUnitPosition(GetTriggerUnit(), GetTileCenterCoordinate(GetSpellTargetX()), GetTileCenterCoordinate(GetSpellTargetY()))
+                    call MoveGUDR(GetTriggerUnit() , 0 , 0 , true)
+                else
+                    call DisplayTextToPlayer(GetOwningPlayer(GetTriggerUnit()), 0, 0, "Failed to move Rect Generator:\n Attached unit limit exceeded! (" + I2S(RectGenerator__MAXIMUM_MOVE_LIMIT) + ")")
+                    call SetUnitPosition(GetTriggerUnit(), GetUnitX(GetTriggerUnit()), GetUnitY(GetTriggerUnit()))
+                    call MoveGUDR(GetTriggerUnit() , 0 , 0 , true)
+                endif
+            endif
+
+    endif
+    
+    return false
+endfunction
+
+function RectGenerator__onSpawn takes nothing returns boolean
+    local unit u= GetTriggerUnit()
+    
+    if u == null then
+        set u=GetFilterUnit()
+    endif
+    
+    if (GetUnitTypeId((u)) == RectGenerator_GENERATOR_ID) then // INLINED!!
+//textmacro instance: GUDR_FirstPage("Add", "u")
+
+	call UnitAddAbility(u, RectGenerator_CREATE_OR_DESTROY)
+	call UnitAddAbility(u, RectGenerator_TOGGLE_VISIBILITY)
+	call UnitAddAbility(u, RectGenerator_MOVE)
+
+        call UnitAddAbility(u, RectGenerator_MOVE_TERRAIN)
+
+	
+	call UnitAddAbility(u, RectGenerator_RETRACT_X)
+	call UnitAddAbility(u, RectGenerator_EXPAND_X)
+	call UnitAddAbility(u, RectGenerator_RETRACT_Y)
+	call UnitAddAbility(u, RectGenerator_EXPAND_Y)
+	
+	call UnitAddAbility(u, RectGenerator_LOCK_UNITS)
+	call UnitAddAbility(u, RectGenerator_UNLOCK_UNITS)
+
+//end of: GUDR_FirstPage("Add", "u")
+    
+        call UnitRemoveAbility(u, 'Amov')
+        call UnitRemoveAbility(u, 'Aatk')
+    endif
+    
+    set u=null
+    return false
+endfunction
+
+//===========================================================================
+function RectGenerator__onInit takes nothing returns nothing
+    local trigger trig= CreateTrigger()
+    local boolexpr onSpawnFilter= Condition(function RectGenerator__onSpawn)
+    local integer i= 0
+    
+    call TriggerRegisterAnyUnitEventBJ(trig, EVENT_PLAYER_UNIT_SPELL_CAST)
+    call TriggerAddCondition(trig, Condition(function RectGenerator__onCast))
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    
+
+        call SaveStr(ConstTable__ht, ((((s__RectGenerator__FogStyle_strings_impl)))), (((s__TerrainFog_LINEAR))), ( ("Linear"))) // INLINED!!
+        call SaveStr(ConstTable__ht, ((((s__RectGenerator__FogStyle_strings_impl)))), (((s__TerrainFog_EXPONENTIAL))), ( ("Exponential 1"))) // INLINED!!
+        call SaveStr(ConstTable__ht, ((((s__RectGenerator__FogStyle_strings_impl)))), (((s__TerrainFog_EXPONENTIAL2))), ( ("Exponential 2"))) // INLINED!!
+        
+//textmacro instance: udrAddon_LinkStyles("TerrainFog.LINEAR", "TerrainFog.EXPONENTIAL")
+        call SaveInteger(ConstTable__ht, ((s__RectGenerator__FogStyle_linkedListNext_impl)), (((s__TerrainFog_LINEAR))), ( (s__TerrainFog_EXPONENTIAL))) // INLINED!!
+        call SaveInteger(ConstTable__ht, ((s__RectGenerator__FogStyle_linkedListPrev_impl)), (((s__TerrainFog_EXPONENTIAL))), ( (s__TerrainFog_LINEAR))) // INLINED!!
+//end of: udrAddon_LinkStyles("TerrainFog.LINEAR", "TerrainFog.EXPONENTIAL")
+//textmacro instance: udrAddon_LinkStyles("TerrainFog.EXPONENTIAL", "TerrainFog.EXPONENTIAL2")
+        call SaveInteger(ConstTable__ht, ((s__RectGenerator__FogStyle_linkedListNext_impl)), (((s__TerrainFog_EXPONENTIAL))), ( (s__TerrainFog_EXPONENTIAL2))) // INLINED!!
+        call SaveInteger(ConstTable__ht, ((s__RectGenerator__FogStyle_linkedListPrev_impl)), (((s__TerrainFog_EXPONENTIAL2))), ( (s__TerrainFog_EXPONENTIAL))) // INLINED!!
+//end of: udrAddon_LinkStyles("TerrainFog.EXPONENTIAL", "TerrainFog.EXPONENTIAL2")
+//textmacro instance: udrAddon_LinkStyles("TerrainFog.EXPONENTIAL2", "TerrainFog.LINEAR")
+        call SaveInteger(ConstTable__ht, ((s__RectGenerator__FogStyle_linkedListNext_impl)), (((s__TerrainFog_EXPONENTIAL2))), ( (s__TerrainFog_LINEAR))) // INLINED!!
+        call SaveInteger(ConstTable__ht, ((s__RectGenerator__FogStyle_linkedListPrev_impl)), (((s__TerrainFog_LINEAR))), ( (s__TerrainFog_EXPONENTIAL2))) // INLINED!!
+//end of: udrAddon_LinkStyles("TerrainFog.EXPONENTIAL2", "TerrainFog.LINEAR")
+
+    
+    set trig=null
+endfunction
+
+//library RectGenerator ends
 //library UnitVisualMods:
 //////////////////////////////////////////////////////
 //Guhun's Unit Modification System v1.31
@@ -10879,1887 +13103,119 @@ endfunction
 //==================================================================================================
 
 //library UnitVisualMods ends
-//library AutoRectEnvironment:
+//library LoPWidgets:
 
+    
+//textmacro instance: TableStruct_NewConstTableField("","destructablesTab")
 
-//textmacro instance: TableStruct_NewStaticPrimitiveField("lastCameraX", "real")
-    function s__AutoRectEnvironment__Globals__get_lastCameraX takes nothing returns real
-        return (LoadReal(ConstTable__ht, (((((s__AutoRectEnvironment__Globals_static_members_key))))), (s__AutoRectEnvironment__Globals_lastCameraX_impl))) // INLINED!!
-    endfunction
-    
-    function s__AutoRectEnvironment__Globals__set_lastCameraX takes real new_lastCameraX returns nothing
-        call SaveReal(ConstTable__ht, (((((s__AutoRectEnvironment__Globals_static_members_key))))), (s__AutoRectEnvironment__Globals_lastCameraX_impl), (( new_lastCameraX)*1.0)) // INLINED!!
-    endfunction
-    
-    function s__AutoRectEnvironment__Globals_lastCameraXClear takes nothing returns nothing
-        call RemoveSavedReal(ConstTable__ht, (((((s__AutoRectEnvironment__Globals_static_members_key))))), (s__AutoRectEnvironment__Globals_lastCameraX_impl)) // INLINED!!
-    endfunction
-//end of: TableStruct_NewStaticPrimitiveField("lastCameraX", "real")
-//textmacro instance: TableStruct_NewStaticPrimitiveField("lastCameraY", "real")
-    function s__AutoRectEnvironment__Globals__get_lastCameraY takes nothing returns real
-        return (LoadReal(ConstTable__ht, (((((s__AutoRectEnvironment__Globals_static_members_key))))), (s__AutoRectEnvironment__Globals_lastCameraY_impl))) // INLINED!!
-    endfunction
-    
-    function s__AutoRectEnvironment__Globals__set_lastCameraY takes real new_lastCameraY returns nothing
-        call SaveReal(ConstTable__ht, (((((s__AutoRectEnvironment__Globals_static_members_key))))), (s__AutoRectEnvironment__Globals_lastCameraY_impl), (( new_lastCameraY)*1.0)) // INLINED!!
-    endfunction
-    
-    function s__AutoRectEnvironment__Globals_lastCameraYClear takes nothing returns nothing
-        call RemoveSavedReal(ConstTable__ht, (((((s__AutoRectEnvironment__Globals_static_members_key))))), (s__AutoRectEnvironment__Globals_lastCameraY_impl)) // INLINED!!
-    endfunction
-//end of: TableStruct_NewStaticPrimitiveField("lastCameraY", "real")
-//textmacro instance: TableStruct_NewStaticPrimitiveField("rectWasMoved", "boolean")
-    function s__AutoRectEnvironment__Globals__get_rectWasMoved takes nothing returns boolean
-        return (LoadBoolean(ConstTable__ht, (((((s__AutoRectEnvironment__Globals_static_members_key))))), (s__AutoRectEnvironment__Globals_rectWasMoved_impl))) // INLINED!!
-    endfunction
-    
-    function s__AutoRectEnvironment__Globals__set_rectWasMoved takes boolean new_rectWasMoved returns nothing
-        call SaveBoolean(ConstTable__ht, (((((s__AutoRectEnvironment__Globals_static_members_key))))), (s__AutoRectEnvironment__Globals_rectWasMoved_impl), ( new_rectWasMoved)) // INLINED!!
-    endfunction
-    
-    function s__AutoRectEnvironment__Globals_rectWasMovedClear takes nothing returns nothing
-        call RemoveSavedBoolean(ConstTable__ht, (((((s__AutoRectEnvironment__Globals_static_members_key))))), (s__AutoRectEnvironment__Globals_rectWasMoved_impl)) // INLINED!!
-    endfunction
-//end of: TableStruct_NewStaticPrimitiveField("rectWasMoved", "boolean")
-    
-//textmacro instance: TableStruct_NewStaticHandleField("lastCameraRect", "rect")
-    function s__AutoRectEnvironment__Globals__get_lastCameraRect takes nothing returns rect
-        return (LoadRectHandle(ConstTable__ht, (((((s__AutoRectEnvironment__Globals_static_members_key))))), (s__AutoRectEnvironment__Globals_lastCameraRect_impl))) // INLINED!!
-    endfunction
-    
-    function s__AutoRectEnvironment__Globals__set_lastCameraRect takes rect new_lastCameraRect returns nothing
-        call s__TableStruct_setHandle(s__AutoRectEnvironment__Globals_static_members_key , s__AutoRectEnvironment__Globals_lastCameraRect_impl , new_lastCameraRect)
-    endfunction
-    
-    function s__AutoRectEnvironment__Globals_lastCameraRectClear takes nothing returns nothing
-        call RemoveSavedHandle(ConstTable__ht, (((((s__AutoRectEnvironment__Globals_static_members_key))))), (s__AutoRectEnvironment__Globals_lastCameraRect_impl)) // INLINED!!
-    endfunction
-//end of: TableStruct_NewStaticHandleField("lastCameraRect", "rect")
-//textmacro instance: TableStruct_NewStaticHandleField("allRects", "region")
-    function s__AutoRectEnvironment__Globals__get_allRects takes nothing returns region
-        return (LoadRegionHandle(ConstTable__ht, (((((s__AutoRectEnvironment__Globals_static_members_key))))), (s__AutoRectEnvironment__Globals_allRects_impl))) // INLINED!!
-    endfunction
-    
-    function s__AutoRectEnvironment__Globals__set_allRects takes region new_allRects returns nothing
-        call s__TableStruct_setHandle(s__AutoRectEnvironment__Globals_static_members_key , s__AutoRectEnvironment__Globals_allRects_impl , new_allRects)
-    endfunction
-    
-    function s__AutoRectEnvironment__Globals_allRectsClear takes nothing returns nothing
-        call RemoveSavedHandle(ConstTable__ht, (((((s__AutoRectEnvironment__Globals_static_members_key))))), (s__AutoRectEnvironment__Globals_allRects_impl)) // INLINED!!
-    endfunction
-//end of: TableStruct_NewStaticHandleField("allRects", "region")
-    
-//textmacro instance: TableStruct_NewStaticStructField("rects", "LinkedHashSet")
-    function s__AutoRectEnvironment__Globals__get_rects takes nothing returns integer
-        return (LoadInteger(ConstTable__ht, (((s__AutoRectEnvironment__Globals_static_members_key))), (s__AutoRectEnvironment__Globals_rects_impl))) // INLINED!!
-    endfunction
-    
-    function s__AutoRectEnvironment__Globals__set_rects takes integer new_rects returns nothing
-        call SaveInteger(ConstTable__ht, (((s__AutoRectEnvironment__Globals_static_members_key))), (s__AutoRectEnvironment__Globals_rects_impl), ( new_rects)) // INLINED!!
-    endfunction
-    
-    function s__AutoRectEnvironment__Globals_rectsClear takes nothing returns nothing
-        call RemoveSavedInteger(ConstTable__ht, (((s__AutoRectEnvironment__Globals_static_members_key))), (s__AutoRectEnvironment__Globals_rects_impl)) // INLINED!!
-    endfunction
-    
-    function s__AutoRectEnvironment__Globals_rectsExists takes nothing returns boolean
-        return (HaveSavedInteger(ConstTable__ht, (((s__AutoRectEnvironment__Globals_static_members_key))), (s__AutoRectEnvironment__Globals_rects_impl))) // INLINED!!
-    endfunction
-//end of: TableStruct_NewStaticStructField("rects", "LinkedHashSet")
-    
-//textmacro instance: TableStruct_NewConstTableField("public","id2")
-
-        constant function s__AutoRectEnvironment__Globals__get_id2 takes nothing returns integer
-            return s__AutoRectEnvironment__Globals_id2_impl
+         constant function s__LoPWidgets___Globals__get_destructablesTab takes nothing returns integer
+            return s__LoPWidgets___Globals_destructablesTab_impl
         endfunction
 
 
 
 
 
-//end of: TableStruct_NewConstTableField("public","id2")
-
-function AutoRectEnvironment_RegisterRect takes rect r returns nothing
-    local integer rId= GetHandleId(r)
+//end of: TableStruct_NewConstTableField("","destructablesTab")
     
-    if not (HaveSavedHandle(ConstTable__ht, ((((s__AutoRectEnvironment__Globals_id2_impl)))), (rId))) then // INLINED!!
-        call SaveRectHandle(ConstTable__ht, ((((s__AutoRectEnvironment__Globals_id2_impl)))), (rId), ( r)) // INLINED!!
-        call RegionAddRect((LoadRegionHandle(ConstTable__ht, (((((s__AutoRectEnvironment__Globals_static_members_key))))), (s__AutoRectEnvironment__Globals_allRects_impl))), r) // INLINED!!
-        call GLHS__AddBefore((((LoadInteger(ConstTable__ht, (((s__AutoRectEnvironment__Globals_static_members_key))), (s__AutoRectEnvironment__Globals_rects_impl))))) , (0 ) , ( (rId))) // INLINED!!
-    endif
+
+    function s__LoP_UnitData_get takes unit whichUnit returns integer
+        return GetHandleId(whichUnit)
+    endfunction
+
+//textmacro instance: TableStruct_NewPrimitiveField("isHeroic","boolean")
+    function s__LoP_UnitData__get_isHeroic takes integer this returns boolean
+        return (LoadBoolean(ConstTable__ht, (((((s__LoP_UnitData_isHeroic_impl))))), (this))) // INLINED!!
+    endfunction
+    
+    function s__LoP_UnitData__set_isHeroic takes integer this,boolean new_isHeroic returns nothing
+        call SaveBoolean(ConstTable__ht, (((((s__LoP_UnitData_isHeroic_impl))))), (this), ( new_isHeroic)) // INLINED!!
+    endfunction
+    
+    function s__LoP_UnitData_isHeroicClear takes integer this returns nothing
+        call RemoveSavedBoolean(ConstTable__ht, (((((s__LoP_UnitData_isHeroic_impl))))), (this)) // INLINED!!
+    endfunction
+    
+    function s__LoP_UnitData_isHeroicExists takes integer this returns boolean
+        return (HaveSavedBoolean(ConstTable__ht, (((((s__LoP_UnitData_isHeroic_impl))))), (this))) // INLINED!!
+    endfunction
+//end of: TableStruct_NewPrimitiveField("isHeroic","boolean")
+    
+    function s__LoP_UnitData_destroy takes integer this returns nothing
+        call RemoveSavedBoolean(ConstTable__ht, (((((s__LoP_UnitData_isHeroic_impl))))), ((this))) // INLINED!!
+    endfunction
+
+// Destructables
+function LoP_IsDestructableProtected takes destructable dest returns boolean
+    return (HaveSavedBoolean(ConstTable__ht, ((((s__LoPWidgets___Globals_destructablesTab_impl)))), (GetHandleId(dest)))) // INLINED!!
 endfunction
 
-function AutoRectEnvironment_DeRegisterRect takes rect r returns nothing
-    local integer rId= GetHandleId(r)
-    
-    // This rect can be different for each player. Null the handle to reduce reference counter.
-    if r == (LoadRectHandle(ConstTable__ht, (((((s__AutoRectEnvironment__Globals_static_members_key))))), (s__AutoRectEnvironment__Globals_lastCameraRect_impl))) then // INLINED!!
-        call s__TableStruct_setHandle(s__AutoRectEnvironment__Globals_static_members_key , s__AutoRectEnvironment__Globals_lastCameraRect_impl , (null)) // This possibly avoids desyncs. // INLINED!!
-    endif
-    
-    if (HaveSavedHandle(ConstTable__ht, ((((s__AutoRectEnvironment__Globals_id2_impl)))), (rId))) then // INLINED!!
-        call SaveBoolean(ConstTable__ht, (((((s__AutoRectEnvironment__Globals_static_members_key))))), (s__AutoRectEnvironment__Globals_rectWasMoved_impl), ( (true))) // INLINED!!
-        call RemoveSavedHandle(ConstTable__ht, ((((s__AutoRectEnvironment__Globals_id2_impl)))), (rId)) // INLINED!!
-        call RegionClearRect((LoadRegionHandle(ConstTable__ht, (((((s__AutoRectEnvironment__Globals_static_members_key))))), (s__AutoRectEnvironment__Globals_allRects_impl))), r) // INLINED!!
-        call s__LinkedHashSet_delete(((LoadInteger(ConstTable__ht, (((s__AutoRectEnvironment__Globals_static_members_key))), (s__AutoRectEnvironment__Globals_rects_impl)))),(rId)) // INLINED!!
-    endif
+function LoP_ProtectDestructable takes destructable dest returns nothing
+    call SaveBoolean(ConstTable__ht, ((((s__LoPWidgets___Globals_destructablesTab_impl)))), (GetHandleId(dest)), ( true)) // INLINED!!
 endfunction
 
-function AutoRectEnvironment_MoveRect takes rect r,real newCenterX,real newCenterY returns nothing
-
-    if (HaveSavedHandle(ConstTable__ht, ((((s__AutoRectEnvironment__Globals_id2_impl)))), (GetHandleId(r)))) then // INLINED!!
-        call SaveBoolean(ConstTable__ht, (((((s__AutoRectEnvironment__Globals_static_members_key))))), (s__AutoRectEnvironment__Globals_rectWasMoved_impl), ( (true))) // INLINED!!
-        call RegionClearRect((LoadRegionHandle(ConstTable__ht, (((((s__AutoRectEnvironment__Globals_static_members_key))))), (s__AutoRectEnvironment__Globals_allRects_impl))), r) // INLINED!!
-        call MoveRectTo(r, newCenterX, newCenterY)
-        call RegionAddRect((LoadRegionHandle(ConstTable__ht, (((((s__AutoRectEnvironment__Globals_static_members_key))))), (s__AutoRectEnvironment__Globals_allRects_impl))), r) // INLINED!!
-    endif
-    
+// Units
+function LoP_IsUnitDecoBuilder takes unit whichUnit returns boolean
+    return GetUnitAbilityLevel(whichUnit, 'A00J') > 0
 endfunction
 
-function AutoRectEnvironment_SetRect takes rect r,real minx,real miny,real maxx,real maxy returns nothing
-    if (HaveSavedHandle(ConstTable__ht, ((((s__AutoRectEnvironment__Globals_id2_impl)))), (GetHandleId(r)))) then // INLINED!!
-        call SaveBoolean(ConstTable__ht, (((((s__AutoRectEnvironment__Globals_static_members_key))))), (s__AutoRectEnvironment__Globals_rectWasMoved_impl), ( (true))) // INLINED!!
-        call RegionClearRect((LoadRegionHandle(ConstTable__ht, (((((s__AutoRectEnvironment__Globals_static_members_key))))), (s__AutoRectEnvironment__Globals_allRects_impl))), r) // INLINED!!
-        call SetRect(r, minx, miny, maxx, maxy)
-        call RegionAddRect((LoadRegionHandle(ConstTable__ht, (((((s__AutoRectEnvironment__Globals_static_members_key))))), (s__AutoRectEnvironment__Globals_allRects_impl))), r) // INLINED!!
+function LoP_IsUnitProtected takes unit whichUnit returns boolean
+    return IsUnitInGroup(whichUnit, udg_System_ProtectedGroup)
+endfunction
+
+function LoP_GetProtectedUnits takes nothing returns group
+    return udg_System_ProtectedGroup
+endfunction
+
+function LoP_InitProtectedUnitsFilter takes nothing returns boolean
+    local unit filterU= GetFilterUnit()
+    
+    if ( IsUnitType(filterU, UNIT_TYPE_STRUCTURE) and GetOwningPlayer(filterU) == Player(PLAYER_NEUTRAL_PASSIVE) ) or filterU == (gg_unit_H00V_0359) or filterU == (gg_unit_H00S_0141) or filterU == (gg_unit_e008_0406) or filterU == (gg_unit_e007_0410) or filterU == (gg_unit_e00A_0411) or filterU == (gg_unit_e00B_0405) or filterU == (gg_unit_e00D_0409) or filterU == (gg_unit_e009_0407) or filterU == (gg_unit_e00C_0408) or GetUnitTypeId(filterU) == 'n000' then // INLINED!!
+        set filterU=null
+        return true
     endif
+    set filterU=null
+    return false
+endfunction
+
+function LoP_InitProtectedUnits takes nothing returns nothing
+    call GroupEnumUnitsInRect(udg_System_ProtectedGroup, gg_rct_Titan_Palace, Filter(function LoP_InitProtectedUnitsFilter))
 endfunction
 
 
-
-
-
-
-
-
-
-
-
-
-function onTimer takes nothing returns nothing
-    local real x= GetCameraTargetPositionX()
-    local real y= GetCameraTargetPositionY()
-    local rect r
-    local integer i
+//library LoPWidgets ends
+//library LoPone:
+function LoP_onDeath takes unit whichUnit returns nothing
+    if ( GetUnitPointValue(whichUnit) == 37 ) then
     
-    if (LoadRectHandle(ConstTable__ht, (((((s__AutoRectEnvironment__Globals_static_members_key))))), (s__AutoRectEnvironment__Globals_lastCameraRect_impl))) != null then // INLINED!!
-        if GetRectMinX((LoadRectHandle(ConstTable__ht, (((((s__AutoRectEnvironment__Globals_static_members_key))))), (s__AutoRectEnvironment__Globals_lastCameraRect_impl)))) <= x and x <= GetRectMaxX((LoadRectHandle(ConstTable__ht, (((((s__AutoRectEnvironment__Globals_static_members_key))))), (s__AutoRectEnvironment__Globals_lastCameraRect_impl)))) and GetRectMinY((LoadRectHandle(ConstTable__ht, (((((s__AutoRectEnvironment__Globals_static_members_key))))), (s__AutoRectEnvironment__Globals_lastCameraRect_impl)))) <= y and y <= GetRectMaxY((LoadRectHandle(ConstTable__ht, (((((s__AutoRectEnvironment__Globals_static_members_key))))), (s__AutoRectEnvironment__Globals_lastCameraRect_impl)))) then // INLINED!!
-            //call BJDebugMsg("In last rect.")
-            call s__RectEnvironment_apply((GetHandleId(((LoadRectHandle(ConstTable__ht, (((((s__AutoRectEnvironment__Globals_static_members_key))))), (s__AutoRectEnvironment__Globals_lastCameraRect_impl))))))) // INLINED!!
-            return
-        else
-            // Do not set Globals.lastCameraRect to null, it's likely the camera will soon return to the last rect.
-        endif
-    endif
-    
-    if (LoadBoolean(ConstTable__ht, (((((s__AutoRectEnvironment__Globals_static_members_key))))), (s__AutoRectEnvironment__Globals_rectWasMoved_impl))) then // INLINED!!
-        call SaveBoolean(ConstTable__ht, (((((s__AutoRectEnvironment__Globals_static_members_key))))), (s__AutoRectEnvironment__Globals_rectWasMoved_impl), ( (false))) // INLINED!!
+        call FlushChildHashtable((ArrayAgent_hashTable), ((- GetHandleId((whichUnit))))) // INLINED!!
+        //call RemoveUnit( whichUnit )
+        
     else
-        if (LoadReal(ConstTable__ht, (((((s__AutoRectEnvironment__Globals_static_members_key))))), (s__AutoRectEnvironment__Globals_lastCameraX_impl))) == x and (LoadReal(ConstTable__ht, (((((s__AutoRectEnvironment__Globals_static_members_key))))), (s__AutoRectEnvironment__Globals_lastCameraY_impl))) == y then // INLINED!!
-            //call BJDebugMsg("Camera did not move, no Globals.rects moved: do nothing.")
-            return
-        endif
-    endif
-    
-    if IsPointInRegion((LoadRegionHandle(ConstTable__ht, (((((s__AutoRectEnvironment__Globals_static_members_key))))), (s__AutoRectEnvironment__Globals_allRects_impl))), x, y) then // INLINED!!
-        set i=(LoadInteger((Lists__hashTable), (((LoadInteger(ConstTable__ht, (((s__AutoRectEnvironment__Globals_static_members_key))), (s__AutoRectEnvironment__Globals_rects_impl)))) ), ( 0))) // INLINED!!
-            loop
-                exitwhen i == (0) // INLINED!!
-                set r=(LoadRectHandle(ConstTable__ht, ((((s__AutoRectEnvironment__Globals_id2_impl)))), (i))) // INLINED!!
+        if not (GetUnitAbilityLevel((whichUnit), 'A0C6') > 0) then // INLINED!!
+        // DECO BUILDER DECREASE COUNT
+            if (LoadBoolean(ConstTable__ht, (((((s__LoP_UnitData_isHeroic_impl))))), (((GetHandleId((whichUnit))))))) then // INLINED!!
+                call RemoveUnit(whichUnit)
                 
-                if GetRectMinX(r) <= x and x <= GetRectMaxX(r) and GetRectMinY(r) <= y and y <= GetRectMaxY(r) then
-                    //call BJDebugMsg("Found rect!")
-                    call s__TableStruct_setHandle(s__AutoRectEnvironment__Globals_static_members_key , s__AutoRectEnvironment__Globals_lastCameraRect_impl , (r)) // INLINED!!
-                    call s__RectEnvironment_apply((GetHandleId((r)))) // INLINED!!
-                    exitwhen true
-                endif
-            
-                set i=(LoadInteger((Lists__hashTable), (((LoadInteger(ConstTable__ht, (((s__AutoRectEnvironment__Globals_static_members_key))), (s__AutoRectEnvironment__Globals_rects_impl)))) ), ( (i)))) // INLINED!!
-            endloop
-        set r=null
-    else
-        //call BJDebugMsg("Camera not in region.")
-        call s__RectEnvironment_apply((0))
-    endif
-    
-    call SaveReal(ConstTable__ht, (((((s__AutoRectEnvironment__Globals_static_members_key))))), (s__AutoRectEnvironment__Globals_lastCameraX_impl), (( ((x)*1.0))*1.0)) // INLINED!!
-    call SaveReal(ConstTable__ht, (((((s__AutoRectEnvironment__Globals_static_members_key))))), (s__AutoRectEnvironment__Globals_lastCameraY_impl), (( ((y)*1.0))*1.0)) // INLINED!!
-endfunction
-
-
-//Implemented from module AutoRectEnvironment__InitModule:
-    function s__AutoRectEnvironment__InitStruct_AutoRectEnvironment__InitModule__onInit takes nothing returns nothing
-        local timer t= CreateTimer()
-        call SaveInteger(ConstTable__ht, (((s__AutoRectEnvironment__Globals_static_members_key))), (s__AutoRectEnvironment__Globals_rects_impl), ( ((GMUI_GetIndex((Lists_RECYCLE_KEY)))))) // INLINED!!
-        
-        call s__TableStruct_setHandle(s__AutoRectEnvironment__Globals_static_members_key , s__AutoRectEnvironment__Globals_allRects_impl , (CreateRegion())) // INLINED!!
-        
-        call TimerStart(t, AutoRectEnvironment__PERIOD, true, function onTimer)
-    endfunction
-
-//library AutoRectEnvironment ends
-//library GameTime:
-
-//textmacro instance: TableStruct_NewReadonlyStaticPrimitiveField("hours", "integer")
-    function s__GameTime__get_hours takes nothing returns integer
-        return (LoadInteger(ConstTable__ht, (((((s__GameTime_static_members_key))))), (s__GameTime_hours_impl))) // INLINED!!
-    endfunction
-    
-    function s__GameTime__set_hours takes integer new_hours returns nothing
-        call SaveInteger(ConstTable__ht, (((((s__GameTime_static_members_key))))), (s__GameTime_hours_impl), ( new_hours)) // INLINED!!
-    endfunction
-    
-    function s__GameTime_hoursClear takes nothing returns nothing
-        call RemoveSavedInteger(ConstTable__ht, (((((s__GameTime_static_members_key))))), (s__GameTime_hours_impl)) // INLINED!!
-    endfunction
-    
-    function s__GameTime_hoursExists takes nothing returns boolean
-        return (HaveSavedInteger(ConstTable__ht, (((((s__GameTime_static_members_key))))), (s__GameTime_hours_impl))) // INLINED!!
-    endfunction
-//end of: TableStruct_NewReadonlyStaticPrimitiveField("hours", "integer")
-//textmacro instance: TableStruct_NewReadonlyStaticPrimitiveField("minutes", "integer")
-    function s__GameTime__get_minutes takes nothing returns integer
-        return (LoadInteger(ConstTable__ht, (((((s__GameTime_static_members_key))))), (s__GameTime_minutes_impl))) // INLINED!!
-    endfunction
-    
-    function s__GameTime__set_minutes takes integer new_minutes returns nothing
-        call SaveInteger(ConstTable__ht, (((((s__GameTime_static_members_key))))), (s__GameTime_minutes_impl), ( new_minutes)) // INLINED!!
-    endfunction
-    
-    function s__GameTime_minutesClear takes nothing returns nothing
-        call RemoveSavedInteger(ConstTable__ht, (((((s__GameTime_static_members_key))))), (s__GameTime_minutes_impl)) // INLINED!!
-    endfunction
-    
-    function s__GameTime_minutesExists takes nothing returns boolean
-        return (HaveSavedInteger(ConstTable__ht, (((((s__GameTime_static_members_key))))), (s__GameTime_minutes_impl))) // INLINED!!
-    endfunction
-//end of: TableStruct_NewReadonlyStaticPrimitiveField("minutes", "integer")
-//textmacro instance: TableStruct_NewReadonlyStaticPrimitiveField("seconds", "integer")
-    function s__GameTime__get_seconds takes nothing returns integer
-        return (LoadInteger(ConstTable__ht, (((((s__GameTime_static_members_key))))), (s__GameTime_seconds_impl))) // INLINED!!
-    endfunction
-    
-    function s__GameTime__set_seconds takes integer new_seconds returns nothing
-        call SaveInteger(ConstTable__ht, (((((s__GameTime_static_members_key))))), (s__GameTime_seconds_impl), ( new_seconds)) // INLINED!!
-    endfunction
-    
-    function s__GameTime_secondsClear takes nothing returns nothing
-        call RemoveSavedInteger(ConstTable__ht, (((((s__GameTime_static_members_key))))), (s__GameTime_seconds_impl)) // INLINED!!
-    endfunction
-    
-    function s__GameTime_secondsExists takes nothing returns boolean
-        return (HaveSavedInteger(ConstTable__ht, (((((s__GameTime_static_members_key))))), (s__GameTime_seconds_impl))) // INLINED!!
-    endfunction
-//end of: TableStruct_NewReadonlyStaticPrimitiveField("seconds", "integer")
-    
-//textmacro instance: TableStruct_NewReadonlyStaticHandleField("timer", "timer")
-    function s__GameTime__get_timer takes nothing returns timer
-        return (LoadTimerHandle(ConstTable__ht, (((((s__GameTime_static_members_key))))), (s__GameTime_timer_impl))) // INLINED!!
-    endfunction
-    
-    function s__GameTime__set_timer takes timer new_timer returns nothing
-        call s__TableStruct_setHandle(s__GameTime_static_members_key , s__GameTime_timer_impl , new_timer)
-    endfunction
-    
-    function s__GameTime_timerClear takes nothing returns nothing
-        call RemoveSavedHandle(ConstTable__ht, (((((s__GameTime_static_members_key))))), (s__GameTime_timer_impl)) // INLINED!!
-    endfunction
-    
-    function s__GameTime_timerExists takes nothing returns boolean
-        return (HaveSavedHandle(ConstTable__ht, (((((s__GameTime_static_members_key))))), (s__GameTime_timer_impl))) // INLINED!!
-    endfunction
-//end of: TableStruct_NewReadonlyStaticHandleField("timer", "timer")
-//textmacro instance: TableStruct_NewReadonlyStaticHandleField("multiboard", "multiboard")
-    function s__GameTime__get_multiboard takes nothing returns multiboard
-        return (LoadMultiboardHandle(ConstTable__ht, (((((s__GameTime_static_members_key))))), (s__GameTime_multiboard_impl))) // INLINED!!
-    endfunction
-    
-    function s__GameTime__set_multiboard takes multiboard new_multiboard returns nothing
-        call s__TableStruct_setHandle(s__GameTime_static_members_key , s__GameTime_multiboard_impl , new_multiboard)
-    endfunction
-    
-    function s__GameTime_multiboardClear takes nothing returns nothing
-        call RemoveSavedHandle(ConstTable__ht, (((((s__GameTime_static_members_key))))), (s__GameTime_multiboard_impl)) // INLINED!!
-    endfunction
-    
-    function s__GameTime_multiboardExists takes nothing returns boolean
-        return (HaveSavedHandle(ConstTable__ht, (((((s__GameTime_static_members_key))))), (s__GameTime_multiboard_impl))) // INLINED!!
-    endfunction
-//end of: TableStruct_NewReadonlyStaticHandleField("multiboard", "multiboard")
-    
-    function s__GameTime_toString takes nothing returns string
-        return I2S((LoadInteger(ConstTable__ht, (((((s__GameTime_static_members_key))))), (s__GameTime_hours_impl)))) + " : " + I2S((LoadInteger(ConstTable__ht, (((((s__GameTime_static_members_key))))), (s__GameTime_minutes_impl)))) + " : " + I2S((LoadInteger(ConstTable__ht, (((((s__GameTime_static_members_key))))), (s__GameTime_seconds_impl)))) // INLINED!!
-    endfunction
-    
-    function s__GameTime_toStringEx takes string sep returns string
-        return I2S((LoadInteger(ConstTable__ht, (((((s__GameTime_static_members_key))))), (s__GameTime_hours_impl)))) + sep + I2S((LoadInteger(ConstTable__ht, (((((s__GameTime_static_members_key))))), (s__GameTime_minutes_impl)))) + sep + I2S((LoadInteger(ConstTable__ht, (((((s__GameTime_static_members_key))))), (s__GameTime_seconds_impl)))) // INLINED!!
-    endfunction
-    
-    function s__GameTime_asMinutes takes nothing returns real
-        return 60. * (LoadInteger(ConstTable__ht, (((((s__GameTime_static_members_key))))), (s__GameTime_hours_impl))) + (LoadInteger(ConstTable__ht, (((((s__GameTime_static_members_key))))), (s__GameTime_minutes_impl))) + (LoadInteger(ConstTable__ht, (((((s__GameTime_static_members_key))))), (s__GameTime_seconds_impl))) / 60. // INLINED!!
-    endfunction
-    
-    function s__GameTime_asHours takes nothing returns real
-        return (LoadInteger(ConstTable__ht, (((((s__GameTime_static_members_key))))), (s__GameTime_hours_impl))) + (LoadInteger(ConstTable__ht, (((((s__GameTime_static_members_key))))), (s__GameTime_minutes_impl))) / 60. + (LoadInteger(ConstTable__ht, (((((s__GameTime_static_members_key))))), (s__GameTime_seconds_impl))) / 3600. // INLINED!!
-    endfunction
-    
-    function s__GameTime_asSeconds takes nothing returns integer
-        return (LoadInteger(ConstTable__ht, (((((s__GameTime_static_members_key))))), (s__GameTime_hours_impl))) * 3600 + (LoadInteger(ConstTable__ht, (((((s__GameTime_static_members_key))))), (s__GameTime_minutes_impl))) * 60 + (LoadInteger(ConstTable__ht, (((((s__GameTime_static_members_key))))), (s__GameTime_seconds_impl))) // INLINED!!
-    endfunction
-    
-    function s__GameTime_onTimer takes nothing returns nothing
-        local integer sec= (LoadInteger(ConstTable__ht, (((((s__GameTime_static_members_key))))), (s__GameTime_seconds_impl))) // INLINED!!
-        local string s
-    
-        if sec == 0 and (LoadInteger(ConstTable__ht, (((((s__GameTime_static_members_key))))), (s__GameTime_minutes_impl))) == 0 and (LoadInteger(ConstTable__ht, (((((s__GameTime_static_members_key))))), (s__GameTime_hours_impl))) == 0 then // INLINED!!
-            call s__TableStruct_setHandle(s__GameTime_static_members_key , s__GameTime_multiboard_impl , (CreateMultiboard())) // INLINED!!
-            call MultiboardSetRowCount((LoadMultiboardHandle(ConstTable__ht, (((((s__GameTime_static_members_key))))), (s__GameTime_multiboard_impl))), 1) // INLINED!!
-            call MultiboardSetColumnCount((LoadMultiboardHandle(ConstTable__ht, (((((s__GameTime_static_members_key))))), (s__GameTime_multiboard_impl))), 5) // INLINED!!
-            call MultiboardSetTitleText((LoadMultiboardHandle(ConstTable__ht, (((((s__GameTime_static_members_key))))), (s__GameTime_multiboard_impl))), "Elapsed Time") // INLINED!!
-            
-            set sec=s__MultiBoard_refresh((LoadMultiboardHandle(ConstTable__ht, (((((s__GameTime_static_members_key))))), (s__GameTime_multiboard_impl)))) // INLINED!!
-            call MultiboardSetItemStyle((LoadMultiboardItemHandle(Table__ht, ((((LoadInteger(Table__ht, ((LoadInteger(ConstTable__ht, (((s__MultiBoard_items_impl))), ((((sec))))))), (((0 ) ))))))), (( ( 0 ))))), ( true ), ( false)) // INLINED!!
-            call MultiboardSetItemStyle((LoadMultiboardItemHandle(Table__ht, ((((LoadInteger(Table__ht, ((LoadInteger(ConstTable__ht, (((s__MultiBoard_items_impl))), ((((sec))))))), (((0 ) ))))))), (( ( 1 ))))), ( true ), ( false)) // INLINED!!
-            call MultiboardSetItemStyle((LoadMultiboardItemHandle(Table__ht, ((((LoadInteger(Table__ht, ((LoadInteger(ConstTable__ht, (((s__MultiBoard_items_impl))), ((((sec))))))), (((0 ) ))))))), (( ( 2 ))))), ( true ), ( false)) // INLINED!!
-            call MultiboardSetItemStyle((LoadMultiboardItemHandle(Table__ht, ((((LoadInteger(Table__ht, ((LoadInteger(ConstTable__ht, (((s__MultiBoard_items_impl))), ((((sec))))))), (((0 ) ))))))), (( ( 3 ))))), ( true ), ( false)) // INLINED!!
-            call MultiboardSetItemStyle((LoadMultiboardItemHandle(Table__ht, ((((LoadInteger(Table__ht, ((LoadInteger(ConstTable__ht, (((s__MultiBoard_items_impl))), ((((sec))))))), (((0 ) ))))))), (( ( 4 ))))), ( true ), ( false)) // INLINED!!
-            call MultiboardSetItemWidth((LoadMultiboardItemHandle(Table__ht, ((((LoadInteger(Table__ht, ((LoadInteger(ConstTable__ht, (((s__MultiBoard_items_impl))), ((((sec))))))), (((0 ) ))))))), (( ( 0 ))))), (( 0.015)*1.0)) // INLINED!!
-            call MultiboardSetItemWidth((LoadMultiboardItemHandle(Table__ht, ((((LoadInteger(Table__ht, ((LoadInteger(ConstTable__ht, (((s__MultiBoard_items_impl))), ((((sec))))))), (((0 ) ))))))), (( ( 1 ))))), (( 0.005)*1.0)) // INLINED!!
-            call MultiboardSetItemWidth((LoadMultiboardItemHandle(Table__ht, ((((LoadInteger(Table__ht, ((LoadInteger(ConstTable__ht, (((s__MultiBoard_items_impl))), ((((sec))))))), (((0 ) ))))))), (( ( 2 ))))), (( 0.015)*1.0)) // INLINED!!
-            call MultiboardSetItemWidth((LoadMultiboardItemHandle(Table__ht, ((((LoadInteger(Table__ht, ((LoadInteger(ConstTable__ht, (((s__MultiBoard_items_impl))), ((((sec))))))), (((0 ) ))))))), (( ( 3 ))))), (( 0.005)*1.0)) // INLINED!!
-            call MultiboardSetItemWidth((LoadMultiboardItemHandle(Table__ht, ((((LoadInteger(Table__ht, ((LoadInteger(ConstTable__ht, (((s__MultiBoard_items_impl))), ((((sec))))))), (((0 ) ))))))), (( ( 4 ))))), (( 0.015)*1.0)) // INLINED!!
-            
-            set sec=0
-        endif
-    
-        if sec == 60 then
-            if (LoadInteger(ConstTable__ht, (((((s__GameTime_static_members_key))))), (s__GameTime_minutes_impl))) == 60 then // INLINED!!
-                call SaveInteger(ConstTable__ht, (((((s__GameTime_static_members_key))))), (s__GameTime_hours_impl), ( ((LoadInteger(ConstTable__ht, (((((s__GameTime_static_members_key))))), (s__GameTime_hours_impl))) + 1))) // INLINED!!
-                call SaveInteger(ConstTable__ht, (((((s__GameTime_static_members_key))))), (s__GameTime_minutes_impl), ( (0))) // INLINED!!
+            elseif IsUnitDecoBuilder(whichUnit) then
+                call RemoveUnit(whichUnit)
             else
-                call SaveInteger(ConstTable__ht, (((((s__GameTime_static_members_key))))), (s__GameTime_minutes_impl), ( ((LoadInteger(ConstTable__ht, (((((s__GameTime_static_members_key))))), (s__GameTime_minutes_impl))) + 1))) // INLINED!!
+                if ( ((GetOwningPlayer(whichUnit)) != Player(PLAYER_NEUTRAL_PASSIVE)) and (not IsUnitType((whichUnit), UNIT_TYPE_STRUCTURE)) ) then // INLINED!!
+                    call Limit_UnregisterUnitEx((whichUnit) , null) // INLINED!!
+                endif
             endif
-            call SaveInteger(ConstTable__ht, (((((s__GameTime_static_members_key))))), (s__GameTime_seconds_impl), ( (0))) // INLINED!!
         else
-            call SaveInteger(ConstTable__ht, (((((s__GameTime_static_members_key))))), (s__GameTime_seconds_impl), ( (sec + 1))) // INLINED!!
-        endif
-        
-        set sec=GetHandleId((LoadMultiboardHandle(ConstTable__ht, (((((s__GameTime_static_members_key))))), (s__GameTime_multiboard_impl)))) // INLINED!!
-        //call MultiboardSuppressDisplay(false)
-        
-        set s=I2S((LoadInteger(ConstTable__ht, (((((s__GameTime_static_members_key))))), (s__GameTime_hours_impl)))) // INLINED!!
-        if StringLength(s) == 1 then
-            set s="0" + s
-        endif
-        call MultiboardSetItemValue((LoadMultiboardItemHandle(Table__ht, ((((LoadInteger(Table__ht, ((LoadInteger(ConstTable__ht, (((s__MultiBoard_items_impl))), ((((sec))))))), (((0 ) ))))))), (( ( 0 ))))), ( s)) // INLINED!!
-        call MultiboardSetItemValue((LoadMultiboardItemHandle(Table__ht, ((((LoadInteger(Table__ht, ((LoadInteger(ConstTable__ht, (((s__MultiBoard_items_impl))), ((((sec))))))), (((0 ) ))))))), (( ( 1 ))))), ( ":")) // INLINED!!
-        set s=I2S((LoadInteger(ConstTable__ht, (((((s__GameTime_static_members_key))))), (s__GameTime_minutes_impl)))) // INLINED!!
-        if StringLength(s) == 1 then
-            set s="0" + s
-        endif
-        call MultiboardSetItemValue((LoadMultiboardItemHandle(Table__ht, ((((LoadInteger(Table__ht, ((LoadInteger(ConstTable__ht, (((s__MultiBoard_items_impl))), ((((sec))))))), (((0 ) ))))))), (( ( 2 ))))), ( s)) // INLINED!!
-        call MultiboardSetItemValue((LoadMultiboardItemHandle(Table__ht, ((((LoadInteger(Table__ht, ((LoadInteger(ConstTable__ht, (((s__MultiBoard_items_impl))), ((((sec))))))), (((0 ) ))))))), (( ( 3 ))))), ( ":")) // INLINED!!
-        set s=I2S((LoadInteger(ConstTable__ht, (((((s__GameTime_static_members_key))))), (s__GameTime_seconds_impl)))) // INLINED!!
-        if StringLength(s) == 1 then
-            set s="0" + s
-        endif
-        call MultiboardSetItemValue((LoadMultiboardItemHandle(Table__ht, ((((LoadInteger(Table__ht, ((LoadInteger(ConstTable__ht, (((s__MultiBoard_items_impl))), ((((sec))))))), (((0 ) ))))))), (( ( 4 ))))), ( s)) // INLINED!!
-        
-        call MultiboardDisplay((LoadMultiboardHandle(ConstTable__ht, (((((s__GameTime_static_members_key))))), (s__GameTime_multiboard_impl))), true) // INLINED!!
-    endfunction
-    
-    function s__GameTime_onInit takes nothing returns nothing
-        call s__TableStruct_setHandle(s__GameTime_static_members_key , s__GameTime_timer_impl , (CreateTimer())) // INLINED!!
-                
-        
-        call TimerStart((LoadTimerHandle(ConstTable__ht, (((((s__GameTime_static_members_key))))), (s__GameTime_timer_impl))), 1., true, function s__GameTime_onTimer) // INLINED!!
-    endfunction
-
-
-
-//library GameTime ends
-//library LoPInitDecoTents:
-
-
-// This function is called in Init 0 seconds (to reduce loading time)
-function InitDecoTents takes nothing returns nothing
-    local rect decoRect= gg_rct_Deco_Tents_Rect
-    
-    local real xStep= 256.
-    local real yStep= 192.
-    
-    local real xMax= GetRectMaxX(decoRect) - xStep
-    local real xMin= GetRectMinX(decoRect)
-    local real yMax= GetRectMaxY(decoRect)
-    local real yMin= GetRectMinY(decoRect)
-    
-    local real xStart= xMin + xStep / 2.
-    local real yStart= yMin + yStep / 2.
-    local real xCur= xStart
-    local real yCur= yStart
-        
-    local unit decoTent= null
-    local integer decoNumber= 0
-    
-    local integer i
-    
-    local integer decoTentCount
-    
-    
-//textmacro instance: DecoBuilders_MakeTents("Special")
-    set decoTentCount=1
-    loop
-    exitwhen decoNumber > (LoadInteger(ConstTable__ht, (((((s__LoP_DecoBuilders_static_members_key))))), (s__LoP_DecoBuilders_SpecialDecoLastIndex_impl))) // INLINED!!
-        set decoTent=CreateUnit(Player(PLAYER_NEUTRAL_PASSIVE), 'n03H', xCur, yCur, bj_UNIT_FACING)
-        call BlzSetUnitName(decoTent, "Deco Tent Special " + I2S(decoTentCount))
-        call SetUnitVertexColor(decoTent, Special_RED, Special_GREEN, Special_BLUE, Special_ALPHA)
-        
-        set i=0
-        loop
-        exitwhen i >= bj_MAX_STOCK_UNIT_SLOTS or decoNumber > (LoadInteger(ConstTable__ht, (((((s__LoP_DecoBuilders_static_members_key))))), (s__LoP_DecoBuilders_SpecialDecoLastIndex_impl))) // INLINED!!
-            call AddUnitToStock(decoTent, s__LoP_DecoBuilders_rawcodes[decoNumber], 1, 3)
-            set i=i + 1
-            set decoNumber=decoNumber + 1
-        endloop
-        
-        set xCur=xCur + xStep
-        if xCur > xMax then
-            set yCur=yCur + yStep
-            set xCur=xStart
-        endif
-        set decoTentCount=decoTentCount + 1
-
-    endloop
-//end of: DecoBuilders_MakeTents("Special")
-//textmacro instance: DecoBuilders_MakeTents("Basic")
-    set decoTentCount=1
-    loop
-    exitwhen decoNumber > (LoadInteger(ConstTable__ht, (((((s__LoP_DecoBuilders_static_members_key))))), (s__LoP_DecoBuilders_BasicDecoLastIndex_impl))) // INLINED!!
-        set decoTent=CreateUnit(Player(PLAYER_NEUTRAL_PASSIVE), 'n03H', xCur, yCur, bj_UNIT_FACING)
-        call BlzSetUnitName(decoTent, "Deco Tent Basic " + I2S(decoTentCount))
-        call SetUnitVertexColor(decoTent, Basic_RED, Basic_GREEN, Basic_BLUE, Basic_ALPHA)
-        
-        set i=0
-        loop
-        exitwhen i >= bj_MAX_STOCK_UNIT_SLOTS or decoNumber > (LoadInteger(ConstTable__ht, (((((s__LoP_DecoBuilders_static_members_key))))), (s__LoP_DecoBuilders_BasicDecoLastIndex_impl))) // INLINED!!
-            call AddUnitToStock(decoTent, s__LoP_DecoBuilders_rawcodes[decoNumber], 1, 3)
-            set i=i + 1
-            set decoNumber=decoNumber + 1
-        endloop
-        
-        set xCur=xCur + xStep
-        if xCur > xMax then
-            set yCur=yCur + yStep
-            set xCur=xStart
-        endif
-        set decoTentCount=decoTentCount + 1
-
-    endloop
-//end of: DecoBuilders_MakeTents("Basic")
-//textmacro instance: DecoBuilders_MakeTents("Adv")
-    set decoTentCount=1
-    loop
-    exitwhen decoNumber > (LoadInteger(ConstTable__ht, (((((s__LoP_DecoBuilders_static_members_key))))), (s__LoP_DecoBuilders_AdvDecoLastIndex_impl))) // INLINED!!
-        set decoTent=CreateUnit(Player(PLAYER_NEUTRAL_PASSIVE), 'n03H', xCur, yCur, bj_UNIT_FACING)
-        call BlzSetUnitName(decoTent, "Deco Tent Adv " + I2S(decoTentCount))
-        call SetUnitVertexColor(decoTent, Adv_RED, Adv_GREEN, Adv_BLUE, Adv_ALPHA)
-        
-        set i=0
-        loop
-        exitwhen i >= bj_MAX_STOCK_UNIT_SLOTS or decoNumber > (LoadInteger(ConstTable__ht, (((((s__LoP_DecoBuilders_static_members_key))))), (s__LoP_DecoBuilders_AdvDecoLastIndex_impl))) // INLINED!!
-            call AddUnitToStock(decoTent, s__LoP_DecoBuilders_rawcodes[decoNumber], 1, 3)
-            set i=i + 1
-            set decoNumber=decoNumber + 1
-        endloop
-        
-        set xCur=xCur + xStep
-        if xCur > xMax then
-            set yCur=yCur + yStep
-            set xCur=xStart
-        endif
-        set decoTentCount=decoTentCount + 1
-
-    endloop
-//end of: DecoBuilders_MakeTents("Adv")
-endfunction
-
-
-
-//library LoPInitDecoTents ends
-//library UserDefinedRects:
-    
-//////////////////////////////////////////////////////
-//Guhun's User Defined Rect System v1.2.0
-
-
-// TODO: check if bj_groupRandomCurrentPick is being used somewhere in LoP. If not, make this system use a differnt global.
-
-
-
-
-
-
-
-//=============================
-//CONSTANTS THAT RETURN THE INTEGER ADDRESS OF A GUDR MEMBER IN THE HASHTABLE
-
-//textmacro instance: GUDR_INDEX("RECT", "0")
-    constant function s__UserDefinedRects__Indices__get_RECT takes nothing returns integer
-        return 0
-    endfunction
-//end of: GUDR_INDEX("RECT", "0")
-//textmacro instance: GUDR_INDEX("LIGHT_T", "1")
-    constant function s__UserDefinedRects__Indices__get_LIGHT_T takes nothing returns integer
-        return 1
-    endfunction
-//end of: GUDR_INDEX("LIGHT_T", "1")
-//textmacro instance: GUDR_INDEX("LIGHT_B", "2")
-    constant function s__UserDefinedRects__Indices__get_LIGHT_B takes nothing returns integer
-        return 2
-    endfunction
-//end of: GUDR_INDEX("LIGHT_B", "2")
-//textmacro instance: GUDR_INDEX("LIGHT_L", "3")
-    constant function s__UserDefinedRects__Indices__get_LIGHT_L takes nothing returns integer
-        return 3
-    endfunction
-//end of: GUDR_INDEX("LIGHT_L", "3")
-//textmacro instance: GUDR_INDEX("LIGHT_R", "4")
-    constant function s__UserDefinedRects__Indices__get_LIGHT_R takes nothing returns integer
-        return 4
-    endfunction
-//end of: GUDR_INDEX("LIGHT_R", "4")
-//textmacro instance: GUDR_INDEX("WEATHER", "5")
-    constant function s__UserDefinedRects__Indices__get_WEATHER takes nothing returns integer
-        return 5
-    endfunction
-//end of: GUDR_INDEX("WEATHER", "5")
-//textmacro instance: GUDR_INDEX("GROUP", "6")
-    constant function s__UserDefinedRects__Indices__get_GROUP takes nothing returns integer
-        return 6
-    endfunction
-//end of: GUDR_INDEX("GROUP", "6")
-//textmacro instance: GUDR_INDEX("HIDDEN", "7")
-    constant function s__UserDefinedRects__Indices__get_HIDDEN takes nothing returns integer
-        return 7
-    endfunction
-//end of: GUDR_INDEX("HIDDEN", "7")
-//textmacro instance: GUDR_INDEX("WEATHER_TYPE", "8")
-    constant function s__UserDefinedRects__Indices__get_WEATHER_TYPE takes nothing returns integer
-        return 8
-    endfunction
-//end of: GUDR_INDEX("WEATHER_TYPE", "8")
-//=============================
-//FUNCTIONS THAT RETURN BOOLEANS
-function GUDR_IsUnitIdGenerator takes integer unitHandle returns boolean
-    return HaveSavedHandle(UserDefinedRects__hashTable, unitHandle, (0)) // INLINED!!
-endfunction
-
-function GUDR_IsUnitGenerator takes unit whichUnit returns boolean
-    return (HaveSavedHandle(UserDefinedRects__hashTable, (GetHandleId(whichUnit)), (0))) // INLINED!!
-endfunction
-
-function GUDR_IsGeneratorIdHidden takes integer generatorId returns boolean
-    return LoadBoolean(UserDefinedRects__hashTable, generatorId, (7)) // INLINED!!
-endfunction
-
-function GUDR_IsGeneratorHidden takes unit generator returns boolean
-    return (LoadBoolean(UserDefinedRects__hashTable, (GetHandleId(generator)), (7))) // INLINED!!
-endfunction
-
-function GUDR_GeneratorIdHasGroup takes integer generatorId returns boolean
-    return HaveSavedHandle(UserDefinedRects__hashTable, generatorId, (6)) // INLINED!!
-endfunction
-
-function GUDR_GeneratorHasGroup takes unit generator returns boolean
-    return (HaveSavedHandle(UserDefinedRects__hashTable, (GetHandleId(generator)), (6))) // INLINED!!
-endfunction
-
-function GUDR_GeneratorIdHasWeather takes integer generatorId returns boolean
-    return HaveSavedInteger(UserDefinedRects__hashTable, generatorId, (5)) // INLINED!!
-endfunction
-
-function GUDR_GeneratorHasWeather takes unit generator returns boolean
-    return (HaveSavedInteger(UserDefinedRects__hashTable, (GetHandleId(generator)), (5))) // INLINED!!
-endfunction
-//=============================
-//FUNCTIONS TO GET GUDR MEMBERS
-
-//Handle Id as parameter
-function GUDR_GetGeneratorIdRect takes integer generatorId returns rect
-    return LoadRectHandle(UserDefinedRects__hashTable, generatorId, (0)) // INLINED!!
-endfunction
-
-function GUDR_GetGeneratorIdWeatherEffect takes integer generatorId returns weathereffect
-    return UserDefinedRects__weatherEffects[LoadInteger(UserDefinedRects__hashTable, generatorId, (5))] // INLINED!!
-endfunction
-
-function GUDR_GetGeneratorIdGroup takes integer generatorId returns group
-    return LoadGroupHandle(UserDefinedRects__hashTable, generatorId, (6)) // INLINED!!
-endfunction
-
-function GUDR_GetGeneratorIdWeatherType takes integer generatorId returns integer
-    return LoadInteger(UserDefinedRects__hashTable, generatorId, (8)) // INLINED!!
-endfunction
-
-//Unit as parameter
-
-function GUDR_GetGeneratorRect takes unit generator returns rect
-    return (LoadRectHandle(UserDefinedRects__hashTable, (GetHandleId(generator)), (0))) // INLINED!!
-endfunction
-
-function GUDR_GetGeneratorWeatherEffect takes unit generator returns weathereffect
-    return (UserDefinedRects__weatherEffects[LoadInteger(UserDefinedRects__hashTable, (GetHandleId(generator)), (5))]) // INLINED!!
-endfunction
-
-function GUDR_GetGeneratorGroup takes unit generator returns group
-    return (LoadGroupHandle(UserDefinedRects__hashTable, (GetHandleId(generator)), (6))) // INLINED!!
-endfunction
-
-function GUDR_GetGeneratorWeatherType takes unit generator returns integer
-    return (LoadInteger(UserDefinedRects__hashTable, (GetHandleId(generator)), (8))) // INLINED!!
-endfunction
-
-function GUDR_ConvertWeatherType takes integer weatherType returns integer
-    return LoadInteger(UserDefinedRects__hashTable, 0, weatherType)
-endfunction
-
-function UserDefinedRects__GetGeneratorIdLightning takes integer genId,integer i returns lightning
-    return LoadLightningHandle(UserDefinedRects__hashTable, genId, i)
-endfunction
-
-//=============================
-
-function GUDR_SwapGroup_UnitsInsideUDR takes group whichGroup,boolean includeGenerator,boolexpr filter returns integer
-    local integer genId
-    local unit firstOfGroup
-    
-    set firstOfGroup=FirstOfGroup(whichGroup)
-    set genId=GetHandleId(firstOfGroup)
-    
-    if (HaveSavedHandle(UserDefinedRects__hashTable, (genId), (0))) then // INLINED!!
-        set bj_groupRandomCurrentPick=firstOfGroup
-        
-        call GroupClear(whichGroup)
-        call GroupEnumUnitsInRect(whichGroup, (LoadRectHandle(UserDefinedRects__hashTable, (genId), (0))), filter) // INLINED!!
-        
-        if not includeGenerator then
-            call GroupRemoveUnit(whichGroup, firstOfGroup)
-        endif
-    else
-        set genId=0
-    endif
-    
-    set firstOfGroup=null
-    return genId
-endfunction
-
-//Returns the Handle Id of an active UDR generator selected by a player
-//Additionally, the global bj_groupRandomCurrentPick will be set to the selected generator
-function GUDR_PlayerGetSelectedGeneratorId takes player whichPlayer returns integer
-    local unit firstOfGroup
-    local integer unitId
-    local group slctGrp= CreateGroup()
-    
-    call GroupEnumUnitsSelected(slctGrp, whichPlayer, null)
-    set firstOfGroup=FirstOfGroup(slctGrp)
-    set unitId=GetHandleId(firstOfGroup)
-    
-    call DestroyGroup(slctGrp)
-    set slctGrp=null
-    
-    if (HaveSavedHandle(UserDefinedRects__hashTable, (unitId), (0))) then // INLINED!!
-        set bj_groupRandomCurrentPick=firstOfGroup
-        return unitId
-    endif
-    
-    return 0
-endfunction
-
-
-function ChangeGUDRWeatherNew takes unit whichUnit,integer changeWeather,integer finalWeather returns integer
-    local integer curWeather
-    local integer unitId= GetHandleId(whichUnit)
-    local integer weatherId
-    
-    if not (HaveSavedHandle(UserDefinedRects__hashTable, (unitId), (0))) then // INLINED!!
-        return 0
-    endif
-
-    if finalWeather < 1 or finalWeather > 21 then
-        set curWeather=(LoadInteger(UserDefinedRects__hashTable, (unitId), (8))) // INLINED!!
-        set finalWeather=curWeather + changeWeather
-    endif
-        
-
-    if finalWeather > 21 then
-        loop
-        exitwhen finalWeather <= 21
-                set finalWeather=finalWeather - 21
-        endloop
-    elseif finalWeather < 1 then
-        loop
-        exitwhen finalWeather >= 1
-                set finalWeather=finalWeather + 21
-        endloop
-    endif
-    
-    call SaveInteger(UserDefinedRects__hashTable, unitId, (8), finalWeather) // INLINED!!
-    
-    // Update Weather, if it exists.
-    set weatherId=LoadInteger(UserDefinedRects__hashTable, unitId, 5)
-    if weatherId > 0 then
-        call EnableWeatherEffect(UserDefinedRects__weatherEffects[weatherId], false) //BUG: If weather effect is not disabled before destruction, it's sound effect will remain
-        call RemoveWeatherEffect(UserDefinedRects__weatherEffects[weatherId])
-        set UserDefinedRects__weatherEffects[weatherId]=AddWeatherEffect((LoadRectHandle(UserDefinedRects__hashTable, (unitId), (0))), (LoadInteger(UserDefinedRects__hashTable, 0, (finalWeather)))) // INLINED!!
-        call EnableWeatherEffect(UserDefinedRects__weatherEffects[weatherId], true)
-    endif
-    
-    return finalWeather
-endfunction
-
-function GroupGUDRFilter takes nothing returns boolean
-    local unit filterUnit= GetFilterUnit()
-    
-    if (HaveSavedHandle(UserDefinedRects__hashTable, (GetHandleId((filterUnit))), (0))) or GetOwningPlayer(filterUnit) != bj_forceRandomCurrentPick then // INLINED!!
-        set filterUnit=null
-        return false
-    endif
-    
-    call SetUnitPathing(filterUnit, false)
-    set filterUnit=null
-    return true
-endfunction
-
-function GroupGUDR takes unit whichUnit,boolean unlock returns boolean
-    local integer unitId= GetHandleId(whichUnit)
-    local group g
-    local unit firstUnit
-    local player storeGlobal= bj_forceRandomCurrentPick
-    
-    if not (HaveSavedHandle(UserDefinedRects__hashTable, (unitId), (0))) then // INLINED!!
-        return false
-    endif
-    
-    set g=(LoadGroupHandle(UserDefinedRects__hashTable, (unitId), (6))) // INLINED!!
-    
-    //Save the GURD's owner in the Hashtable for use in the EnumFilter function
-    set firstUnit=FirstOfGroup(g)
-    
-    //This loop clears the group and restores pathing and unpauses
-    loop
-    exitwhen firstUnit == null
-        if GetUnitTypeId(firstUnit) != 0 then
-            call SetUnitPathing(firstUnit, true)
-            call GroupRemoveUnit(g, firstUnit)
-        else
-            call GroupRefresh(g)
-        endif
-        set firstUnit=FirstOfGroup(g)
-    endloop
-    
-    //We only want to add new units to the group if the user doesn't want to unlock it
-    if not unlock then
-        set bj_forceRandomCurrentPick=GetOwningPlayer(whichUnit)
-        call GroupEnumUnitsInRect(g, (LoadRectHandle(UserDefinedRects__hashTable, (unitId), (0))), Condition(function GroupGUDRFilter)) // INLINED!!
-        set bj_forceRandomCurrentPick=storeGlobal
-    endif
-    
-    set g=null
-    set firstUnit=null
-    return true
-endfunction
-
-
-function CreateWeather takes unit whichUnit returns boolean
-    local integer instance
-    local integer genId= GetHandleId(whichUnit)
-    
-    if not (HaveSavedHandle(UserDefinedRects__hashTable, (genId), (0))) then // INLINED!!
-        return false
-    endif
-    
-
-
-
-
-
-
-
-
-
-        set instance=GMUI_GetIndex(UserDefinedRects__RECYCLE_KEY)
-
-    
-    call SaveInteger(UserDefinedRects__hashTable, GetHandleId(whichUnit), (5), instance) // INLINED!!
-    set UserDefinedRects__weatherEffects[instance]=AddWeatherEffect((LoadRectHandle(UserDefinedRects__hashTable, (genId), (0))), (LoadInteger(UserDefinedRects__hashTable, 0, ((LoadInteger(UserDefinedRects__hashTable, (genId), (8))))))) // INLINED!!
-    call EnableWeatherEffect(UserDefinedRects__weatherEffects[instance], true)
-    
-    return true
-endfunction
-
-function DestroyWeather takes unit whichUnit returns boolean
-    local integer instance= LoadInteger(UserDefinedRects__hashTable, GetHandleId(whichUnit), (5)) // INLINED!!
-    
-    if instance < 1 then
-        return false // False for effect not destroyed, unit did not have weather attached.
-    endif
-    
-    call EnableWeatherEffect(UserDefinedRects__weatherEffects[instance], false) // BUG: If weather effect is not disabled before destruction, it's sound effect will remain
-    call RemoveWeatherEffect(UserDefinedRects__weatherEffects[instance])
-    set UserDefinedRects__weatherEffects[instance]=null // Null to free handles for other systems
-    call RemoveSavedInteger(UserDefinedRects__hashTable, GetHandleId(whichUnit), (5)) // INLINED!!
-    
-    
-
-
-
-
-        call GMUI_RecycleIndex(UserDefinedRects__RECYCLE_KEY , instance)
-
-    
-    return true // True for effect destroyed.
-endfunction
-
-function ToggleGUDRVisibility takes unit whichUnit,boolean toggle,boolean show returns boolean
-    local real alpha
-    local integer unitId= GetHandleId(whichUnit)
-    
-    if not (HaveSavedHandle(UserDefinedRects__hashTable, (unitId), (0))) then // INLINED!!
-        return false
-    endif
-    
-    if toggle then //If user wants to switch the current value, change the value of show to opposite of current value
-        set show=not LoadBoolean(UserDefinedRects__hashTable, unitId, (7)) // INLINED!!
-    endif
-    
-    call SaveBoolean(UserDefinedRects__hashTable, unitId, (7), show) //Save current show/hide boolean // INLINED!!
-    
-    //Convert Boolean to Real T/F = 1/0
-    if show then
-        set alpha=1 //Show > Alpha = 100%
-    else
-        set alpha=0 //Hide > Alpha = 0%
-    endif
-    //End of Conversion
-
-    //After it has been decided if the GUDR should be shown or hidden, apply the choice
-    call SetUnitVertexColor(whichUnit, 255, 255, 255, 255 * R2I(alpha))
-    call SetLightningColor(LoadLightningHandle(UserDefinedRects__hashTable, unitId, (1)), 1, 1, 1, alpha) // INLINED!!
-    call SetLightningColor(LoadLightningHandle(UserDefinedRects__hashTable, unitId, (2)), 1, 1, 1, alpha) // INLINED!!
-    call SetLightningColor(LoadLightningHandle(UserDefinedRects__hashTable, unitId, (3)), 1, 1, 1, alpha) // INLINED!!
-    call SetLightningColor(LoadLightningHandle(UserDefinedRects__hashTable, unitId, (4)), 1, 1, 1, alpha) // INLINED!!
-    return true
-endfunction
-
-function MoveGUDR takes unit centerUnit,real offsetX,real offsetY,boolean expand returns boolean
-    local integer unitId= GetHandleId(centerUnit)
-    local real centerX= GetUnitX(centerUnit)
-    local real centerY= GetUnitY(centerUnit)
-    local rect userDefRect
-    local integer weatherId
-    
-    local real minX
-    local real maxX
-    local real minY
-    local real maxY
-    
-    if not (HaveSavedHandle(UserDefinedRects__hashTable, (unitId), (0))) then // INLINED!!
-        return false
-    endif
-    
-    set userDefRect=(LoadRectHandle(UserDefinedRects__hashTable, (unitId), (0))) // INLINED!!
-    
-    //If user wants to expand or contract the current region, Load the current value of its borders
-    if expand then
-        set offsetX=offsetX + GetRectMaxX(userDefRect) - GetRectCenterX(userDefRect)
-        set offsetY=offsetY + GetRectMaxY(userDefRect) - GetRectCenterY(userDefRect)
-    endif
-    
-    //Set the values of the borders based on the offsets
-    set minX=centerX - offsetX
-    set maxX=centerX + offsetX
-    set minY=centerY - offsetY
-    set maxY=centerY + offsetY
-    
-    //Update Lightnings
-    call MoveLightning(LoadLightningHandle(UserDefinedRects__hashTable, unitId, (1)), true, minX, maxY, maxX, maxY) // INLINED!!
-    call MoveLightning(LoadLightningHandle(UserDefinedRects__hashTable, unitId, (2)), true, minX, minY, maxX, minY) // INLINED!!
-    call MoveLightning(LoadLightningHandle(UserDefinedRects__hashTable, unitId, (3)), true, minX, minY, minX, maxY) // INLINED!!
-    call MoveLightning(LoadLightningHandle(UserDefinedRects__hashTable, unitId, (4)), true, maxX, minY, maxX, maxY) // INLINED!!
-    
-    //Update Rect
-
-        call AutoRectEnvironment_SetRect(userDefRect , minX , minY , maxX , maxY)
-
-
-
-    
-    // Update Weather Effect
-    set weatherId=LoadInteger(UserDefinedRects__hashTable, unitId, 5)
-    if weatherId > 0 then
-        call EnableWeatherEffect(UserDefinedRects__weatherEffects[weatherId], false) //BUG: If weather effect is not disabled before destruction, it's sound effect will remain
-        call RemoveWeatherEffect(UserDefinedRects__weatherEffects[weatherId])
-        set UserDefinedRects__weatherEffects[weatherId]=AddWeatherEffect(userDefRect, (LoadInteger(UserDefinedRects__hashTable, 0, ((LoadInteger(UserDefinedRects__hashTable, (unitId), (8))))))) // INLINED!!
-        call EnableWeatherEffect(UserDefinedRects__weatherEffects[weatherId], true)
-    endif
-    
-    set userDefRect=null
-    return true
-endfunction
-
-
-function CreateGUDR takes unit centerUnit returns boolean
-    local integer unitId= GetHandleId(centerUnit)
-    local real centerX= GetUnitX(centerUnit)
-    local real centerY= GetUnitY(centerUnit)
-    local rect userDefRect
-    
-
-        local integer fog
-
-    
-    if (HaveSavedHandle(UserDefinedRects__hashTable, (unitId), (0))) then // INLINED!!
-        return false
-    endif
-    
-    set userDefRect=Rect(centerX - 32, centerY - 32, centerX + 32, centerY + 32)
-    
-
-        set fog=(GMUI_GetIndex((GMUI_GENERIC_KEY))) // INLINED!!
-        call SaveInteger(ConstTable__ht, (((s__RectEnvironment_fog_impl))), (((GetHandleId((userDefRect))))), ( (fog))) // INLINED!!
-        call SaveInteger(ConstTable__ht, (((((s__TerrainFog_style_impl))))), ((fog)), ( (s__TerrainFog_EXPONENTIAL))) // INLINED!!
-        call AutoRectEnvironment_RegisterRect(userDefRect)
-
-    
-    call SaveRectHandle(UserDefinedRects__hashTable, unitId, (0), userDefRect) // INLINED!!
-    call SaveLightningHandle(UserDefinedRects__hashTable, unitId, (1), AddLightning("DRAM", true, centerX - 32, centerY + 32, centerX + 32, centerY + 32)) // INLINED!!
-    call SaveLightningHandle(UserDefinedRects__hashTable, unitId, (2), AddLightning("DRAM", true, centerX - 32, centerY - 32, centerX + 32, centerY - 32)) // INLINED!!
-    call SaveLightningHandle(UserDefinedRects__hashTable, unitId, (3), AddLightning("DRAM", true, centerX - 32, centerY - 32, centerX - 32, centerY + 32)) // INLINED!!
-    call SaveLightningHandle(UserDefinedRects__hashTable, unitId, (4), AddLightning("DRAM", true, centerX + 32, centerY - 32, centerX + 32, centerY + 32)) // INLINED!!
-    call SaveGroupHandle(UserDefinedRects__hashTable, unitId, (6), CreateGroup()) // INLINED!!
-    call SaveBoolean(UserDefinedRects__hashTable, unitId, (7), true) //Save show/hide boolean as true, because nothing is being hidden // INLINED!!
-    call SaveInteger(UserDefinedRects__hashTable, unitId, (8), 1) //Save 1 as it is the value of 'RAhr' // INLINED!!
-    
-    set userDefRect=null
-    return true
-endfunction
-
-function DestroyGUDR takes unit centerUnit returns nothing
-    local integer unitId= GetHandleId(centerUnit)
-    local rect udr= (LoadRectHandle(UserDefinedRects__hashTable, (unitId), (0))) // INLINED!!
-    
-
-        local integer fog= (LoadInteger(ConstTable__ht, (((s__RectEnvironment_fog_impl))), (((GetHandleId((udr))))))) // INLINED!!
-
-    
-    if udr == null then
-        return
-    endif
-    
-
-        call AutoRectEnvironment_DeRegisterRect(udr)
-        
-        if fog > 0 then
-            call s__TerrainFog_destroy(fog)
-        endif
-
-
-    call DestroyWeather(centerUnit)
-    call GroupGUDR(centerUnit , true)
-    call DestroyLightning((LoadLightningHandle(UserDefinedRects__hashTable, (unitId ), ( (1))))) // INLINED!!
-    call DestroyLightning((LoadLightningHandle(UserDefinedRects__hashTable, (unitId ), ( (2))))) // INLINED!!
-    call DestroyLightning((LoadLightningHandle(UserDefinedRects__hashTable, (unitId ), ( (3))))) // INLINED!!
-    call DestroyLightning((LoadLightningHandle(UserDefinedRects__hashTable, (unitId ), ( (4))))) // INLINED!!
-    call RemoveRect(udr)
-    call DestroyGroup((LoadGroupHandle(UserDefinedRects__hashTable, (unitId), (6)))) // INLINED!!
-    
-    call FlushChildHashtable(UserDefinedRects__hashTable, unitId)
-
-    set udr=null
-endfunction
-
-function UserDefinedRects__onInit takes nothing returns nothing
-
-
-
-    
-    call SaveInteger(UserDefinedRects__hashTable, 0, 1, 'RAhr')
-    call SaveInteger(UserDefinedRects__hashTable, 0, 2, 'RAlr')
-    call SaveInteger(UserDefinedRects__hashTable, 0, 3, 'MEds')
-    call SaveInteger(UserDefinedRects__hashTable, 0, 4, 'FDbh')
-    call SaveInteger(UserDefinedRects__hashTable, 0, 5, 'FDbl')
-    call SaveInteger(UserDefinedRects__hashTable, 0, 6, 'FDgh')
-    call SaveInteger(UserDefinedRects__hashTable, 0, 7, 'FDgl')
-    call SaveInteger(UserDefinedRects__hashTable, 0, 8, 'FDrh')
-    call SaveInteger(UserDefinedRects__hashTable, 0, 9, 'FDrl')
-    call SaveInteger(UserDefinedRects__hashTable, 0, 10, 'FDwh')
-    call SaveInteger(UserDefinedRects__hashTable, 0, 11, 'FDwl')
-    call SaveInteger(UserDefinedRects__hashTable, 0, 12, 'RLhr')
-    call SaveInteger(UserDefinedRects__hashTable, 0, 13, 'RLlr')
-    call SaveInteger(UserDefinedRects__hashTable, 0, 14, 'SNbs')
-    call SaveInteger(UserDefinedRects__hashTable, 0, 15, 'SNhs')
-    call SaveInteger(UserDefinedRects__hashTable, 0, 16, 'SNls')
-    call SaveInteger(UserDefinedRects__hashTable, 0, 17, 'WOcw')
-    call SaveInteger(UserDefinedRects__hashTable, 0, 18, 'WOlw')
-    call SaveInteger(UserDefinedRects__hashTable, 0, 19, 'LRaa')
-    call SaveInteger(UserDefinedRects__hashTable, 0, 20, 'LRma')
-    call SaveInteger(UserDefinedRects__hashTable, 0, 21, 'WNcw')
-endfunction
-
-//////////////////////////////////////////////////////
-//END OF GUDR
-//////////////////////////////////////////////////////
-
-//library UserDefinedRects ends
-//library LoPHeader:
-function LoP_IsUnitDecoration takes unit whichUnit returns boolean
-    return GetUnitAbilityLevel(whichUnit, 'A0C6') > 0
-endfunction
-
-function LoP_PlayerOwnsUnit takes player whichPlayer,unit whichUnit returns boolean
-    local player p= GetOwningPlayer(whichUnit)
-    
-    if p == whichPlayer then
-        return true
-    endif
-    return IsUnitInGroup(whichUnit, udg_System_NeutralUnits[GetPlayerId(whichPlayer)]) and p == Player(PLAYER_NEUTRAL_PASSIVE)
-endfunction
-
-function IsGroupEmpty takes group whichGroup returns boolean
-    local unit firstUnit= FirstOfGroup(whichGroup)
-    
-    // If unit was removed from the game, refresh the group
-    if GetUnitTypeId(firstUnit) == 0 then
-        call GroupRefresh(whichGroup)
-        set firstUnit=FirstOfGroup(whichGroup)
-    endif
-    
-    if firstUnit != null then
-        set firstUnit=null
-        return false
-    endif
-    
-    return true
-endfunction
-
-function Commands_GetArguments takes nothing returns string
-    return SubString(GetEventPlayerChatString(), StringLength(GetEventPlayerChatStringMatched()), StringLength(GetEventPlayerChatString()))
-endfunction
-
-function Commands_StartsWithCommand takes nothing returns boolean
-    return SubString(GetEventPlayerChatString(), 0, StringLength(GetEventPlayerChatStringMatched())) == GetEventPlayerChatStringMatched()
-endfunction
-
-function Commands_EnumSelectedCheckForGenerator takes group whichGroup,player whichPlayer,boolexpr filter returns integer
-    call GroupEnumUnitsSelected(whichGroup, whichPlayer, filter)
-    return GUDR_SwapGroup_UnitsInsideUDR(whichGroup , false , null)
-endfunction
-
-function Commands_GetChatMessagePlayerNumber takes string str returns integer
-    local integer s2i= S2I(str)
-    local integer strHash
-    if s2i == 0 then //and str != "0" then
-        set strHash=StringHash(str)
-        if HaveSavedInteger(udg_Hashtable_1, 0, strHash) then
-            return LoadInteger(udg_Hashtable_1, 0, strHash)
-        endif
-    endif
-    return s2i
-endfunction
-
-function PlayerNumberIsNotExtraOrVictim takes integer ID returns boolean
-    return ( ID <= bj_MAX_PLAYERS or ID == PLAYER_NEUTRAL_AGGRESSIVE + 1 or ID == PLAYER_NEUTRAL_PASSIVE + 1 ) and ( ID >= 1 )
-endfunction
-
-function PlayerNumberIsNotNeutral takes integer ID returns boolean
-    return ID <= bj_MAX_PLAYERS and ID > 0
-endfunction
-
-function CheckCommandOverflow takes nothing returns boolean
-    if udg_Commands_Counter < udg_Commands_Counter_Max then
-        set udg_Commands_Counter=( udg_Commands_Counter + 1 )
-        return true
-    elseif udg_Commands_Counter == udg_Commands_Counter_Max then
-        call DisplayTextToPlayer(GetTriggerPlayer(), 0, 0, "Command Overflow! Execution stopped.\n Run the command again until it is finished.")
-        set udg_Commands_Counter=( udg_Commands_Counter + 1 )
-    endif
-    return false
-endfunction
-
-function Commands_SetMaximumExecutions takes integer max returns nothing
-    set udg_Commands_Counter=0
-    set udg_Commands_Counter_Max=max
-endfunction
-
-function Commands_CheckOverflow takes nothing returns boolean
-    return CheckCommandOverflow()
-endfunction
-
-//library LoPHeader ends
-//library RectGenerator:
-
-// Import instructions after configuration.
-//===================================================
-// Simple configuration
-//===================================================
-
-//===================================================
-// Advanced configuration
-//===================================================
-
-// If this function returns true and AUTOMATIC_ON_SPAWN, the unit will have 'Amov' and 'Aatk' removed
-// upon entering the map. Additionally, the abilities will only trigger for units when this function
-// returns true upon being called with them as an argument.
-function RectGenerator_Conditions takes unit whichUnit returns boolean
-    return GetUnitTypeId(whichUnit) == RectGenerator_GENERATOR_ID // LoP_IsUnitDecoration(whichUnit)
-endfunction
-
-
-
-function RectGenerator__InFirstPage takes unit u returns boolean
-	return GetUnitAbilityLevel(u, RectGenerator_CREATE_OR_DESTROY) > 0
-endfunction
-
-function RectGenerator__InSecondPage takes unit u returns boolean
-	return GetUnitAbilityLevel(u, RectGenerator_TOGGLE_WEATHER) > 0
-endfunction
-
-function RectGenerator__InThirdPage takes unit u returns boolean
-	return GetUnitAbilityLevel(u, RectGenerator_FOG_DENSITY_UP) > 0
-endfunction
-//===================================================
-// Import instructions
-//===================================================
-
-
-
-//textmacro instance: TableStruct_NewConstTableField("public","strings")
-
-        constant function s__RectGenerator__FogStyle__get_strings takes nothing returns integer
-            return s__RectGenerator__FogStyle_strings_impl
-        endfunction
-
-
-
-
-
-//end of: TableStruct_NewConstTableField("public","strings")
-//textmacro instance: TableStruct_NewConstTableField("private","linkedListNext")
-
-        constant function s__RectGenerator__FogStyle__get_linkedListNext takes nothing returns integer
-            return s__RectGenerator__FogStyle_linkedListNext_impl
-        endfunction
-
-
-
-
-
-//end of: TableStruct_NewConstTableField("private","linkedListNext")
-//textmacro instance: TableStruct_NewConstTableField("private","linkedListPrev")
-
-        constant function s__RectGenerator__FogStyle__get_linkedListPrev takes nothing returns integer
-            return s__RectGenerator__FogStyle_linkedListPrev_impl
-        endfunction
-
-
-
-
-
-//end of: TableStruct_NewConstTableField("private","linkedListPrev")
-        
-        function s__RectGenerator__FogStyle_next takes integer this returns integer
-            return (LoadInteger(ConstTable__ht, ((s__RectGenerator__FogStyle_linkedListNext_impl)), (this))) // INLINED!!
-        endfunction
-        
-        function s__RectGenerator__FogStyle_prev takes integer this returns integer
-            return (LoadInteger(ConstTable__ht, ((s__RectGenerator__FogStyle_linkedListPrev_impl)), (this))) // INLINED!!
-        endfunction
-        
-        function s__RectGenerator__FogStyle_setNext takes integer this,integer nextStyle returns nothing
-            call SaveInteger(ConstTable__ht, ((s__RectGenerator__FogStyle_linkedListNext_impl)), (this), ( nextStyle)) // INLINED!!
-        endfunction
-        
-        function s__RectGenerator__FogStyle_setPrev takes integer this,integer prevStyle returns nothing
-            call SaveInteger(ConstTable__ht, ((s__RectGenerator__FogStyle_linkedListPrev_impl)), (this), ( prevStyle)) // INLINED!!
-        endfunction
-        
-        function s__RectGenerator__FogStyle_getString takes integer this returns string
-            return (LoadStr(ConstTable__ht, ((((s__RectGenerator__FogStyle_strings_impl)))), (this))) // INLINED!!
-        endfunction
-        
-        function s__RectGenerator__FogStyle_setString takes integer this,string str returns nothing
-            call SaveStr(ConstTable__ht, ((((s__RectGenerator__FogStyle_strings_impl)))), (this), ( str)) // INLINED!!
-        endfunction
-        
-        
-
-
-
-
-
-function RectGenerator__GroupLoop takes nothing returns nothing
-    local unit udr= GetTriggerUnit()
-    local unit enumUnit= GetEnumUnit()
-    
-    if (HaveSavedHandle(UserDefinedRects__hashTable, (GetHandleId((enumUnit))), (0))) or GetOwningPlayer(enumUnit) != GetOwningPlayer(udr) then // INLINED!!
-        call GroupRemoveUnit((LoadGroupHandle(UserDefinedRects__hashTable, (GetHandleId((udr))), (6))), enumUnit) // INLINED!!
-    else
-        call SetUnitPosition(enumUnit, GetUnitX(enumUnit) + GetSpellTargetX() - GetUnitX(udr), GetUnitY(enumUnit) + GetSpellTargetY() - GetUnitY(udr))
-    endif
-    
-    set udr=null
-    set enumUnit=null
-endfunction
-
-
-    function RectGenerator__GroupLoopTerrain takes nothing returns nothing
-        local unit udr= GetTriggerUnit()
-        local unit enumUnit= GetEnumUnit()
-        
-        if (HaveSavedHandle(UserDefinedRects__hashTable, (GetHandleId((enumUnit))), (0))) or GetOwningPlayer(enumUnit) != GetOwningPlayer(udr) then // INLINED!!
-            call GroupRemoveUnit((LoadGroupHandle(UserDefinedRects__hashTable, (GetHandleId((udr))), (6))), enumUnit) // INLINED!!
-        else
-            call SetUnitPosition(enumUnit, GetUnitX(enumUnit) + GetTileCenterCoordinate(GetSpellTargetX()) - GetUnitX(udr), GetUnitY(enumUnit) + GetTileCenterCoordinate(GetSpellTargetY()) - GetUnitY(udr))
-        endif
-        
-        set udr=null
-        set enumUnit=null
-    endfunction
-
-
-function RectGenerator__ColorMessage takes string color,real value returns string
-    return "Fog " + color + " set to: " + I2S(R2I(value * 100. + .5)) + "%"
-endfunction
-
-
-function RectGenerator__onCast takes nothing returns boolean
-    local integer abilityId= GetSpellAbilityId()
-    
-    if not (GetUnitTypeId((GetTriggerUnit())) == RectGenerator_GENERATOR_ID) then // INLINED!!
-        
-    elseif abilityId == RectGenerator_PAGE_NEXT then
-
-            if (GetUnitAbilityLevel((GetTriggerUnit()), RectGenerator_CREATE_OR_DESTROY) > 0) then // INLINED!!
-//textmacro instance: GUDR_FirstPage("Remove","GetTriggerUnit()")
-
-	call UnitRemoveAbility(GetTriggerUnit(), RectGenerator_CREATE_OR_DESTROY)
-	call UnitRemoveAbility(GetTriggerUnit(), RectGenerator_TOGGLE_VISIBILITY)
-	call UnitRemoveAbility(GetTriggerUnit(), RectGenerator_MOVE)
-
-        call UnitRemoveAbility(GetTriggerUnit(), RectGenerator_MOVE_TERRAIN)
-
-	
-	call UnitRemoveAbility(GetTriggerUnit(), RectGenerator_RETRACT_X)
-	call UnitRemoveAbility(GetTriggerUnit(), RectGenerator_EXPAND_X)
-	call UnitRemoveAbility(GetTriggerUnit(), RectGenerator_RETRACT_Y)
-	call UnitRemoveAbility(GetTriggerUnit(), RectGenerator_EXPAND_Y)
-	
-	call UnitRemoveAbility(GetTriggerUnit(), RectGenerator_LOCK_UNITS)
-	call UnitRemoveAbility(GetTriggerUnit(), RectGenerator_UNLOCK_UNITS)
-
-//end of: GUDR_FirstPage("Remove","GetTriggerUnit()")
-//textmacro instance: GUDR_SecondPage("Add","GetTriggerUnit()")
-
-	call UnitAddAbility(GetTriggerUnit(), RectGenerator_CHANGE_WEATHER_NEXT)
-	call UnitAddAbility(GetTriggerUnit(), RectGenerator_CHANGE_WEATHER_PREV)
-	call UnitAddAbility(GetTriggerUnit(), RectGenerator_TOGGLE_WEATHER)
-	
-
-        call UnitAddAbility(GetTriggerUnit(), RectGenerator_TOGGLE_FOG)
-        call UnitAddAbility(GetTriggerUnit(), RectGenerator_FOG_STYLE_UP)
-        call UnitAddAbility(GetTriggerUnit(), RectGenerator_FOG_STYLE_DOWN)
-        call UnitAddAbility(GetTriggerUnit(), RectGenerator_FOG_ZSTART_UP)
-        call UnitAddAbility(GetTriggerUnit(), RectGenerator_FOG_ZSTART_DOWN)
-        call UnitAddAbility(GetTriggerUnit(), RectGenerator_FOG_ZEND_UP)
-        call UnitAddAbility(GetTriggerUnit(), RectGenerator_FOG_ZEND_DOWN)
-
-
-//end of: GUDR_SecondPage("Add","GetTriggerUnit()")
-            elseif (GetUnitAbilityLevel((GetTriggerUnit()), RectGenerator_TOGGLE_WEATHER) > 0) then // INLINED!!
-//textmacro instance: GUDR_SecondPage("Remove","GetTriggerUnit()")
-
-	call UnitRemoveAbility(GetTriggerUnit(), RectGenerator_CHANGE_WEATHER_NEXT)
-	call UnitRemoveAbility(GetTriggerUnit(), RectGenerator_CHANGE_WEATHER_PREV)
-	call UnitRemoveAbility(GetTriggerUnit(), RectGenerator_TOGGLE_WEATHER)
-	
-
-        call UnitRemoveAbility(GetTriggerUnit(), RectGenerator_TOGGLE_FOG)
-        call UnitRemoveAbility(GetTriggerUnit(), RectGenerator_FOG_STYLE_UP)
-        call UnitRemoveAbility(GetTriggerUnit(), RectGenerator_FOG_STYLE_DOWN)
-        call UnitRemoveAbility(GetTriggerUnit(), RectGenerator_FOG_ZSTART_UP)
-        call UnitRemoveAbility(GetTriggerUnit(), RectGenerator_FOG_ZSTART_DOWN)
-        call UnitRemoveAbility(GetTriggerUnit(), RectGenerator_FOG_ZEND_UP)
-        call UnitRemoveAbility(GetTriggerUnit(), RectGenerator_FOG_ZEND_DOWN)
-
-
-//end of: GUDR_SecondPage("Remove","GetTriggerUnit()")
-//textmacro instance: GUDR_ThirdPage("Add","GetTriggerUnit()")
-
-	call UnitAddAbility(GetTriggerUnit(), RectGenerator_FOG_DENSITY_UP)
-	call UnitAddAbility(GetTriggerUnit(), RectGenerator_FOG_DENSITY_DOWN)
-	
-	call UnitAddAbility(GetTriggerUnit(), RectGenerator_FOG_RED_UP)
-	call UnitAddAbility(GetTriggerUnit(), RectGenerator_FOG_RED_DOWN)
-	call UnitAddAbility(GetTriggerUnit(), RectGenerator_FOG_GREEN_UP)
-	call UnitAddAbility(GetTriggerUnit(), RectGenerator_FOG_GREEN_DOWN)
-	call UnitAddAbility(GetTriggerUnit(), RectGenerator_FOG_BLUE_UP)
-	call UnitAddAbility(GetTriggerUnit(), RectGenerator_FOG_BLUE_DOWN)
-
-//end of: GUDR_ThirdPage("Add","GetTriggerUnit()")
-            else //if InThirdPage(GetTriggerUnit()) then
-//textmacro instance: GUDR_ThirdPage("Remove","GetTriggerUnit()")
-
-	call UnitRemoveAbility(GetTriggerUnit(), RectGenerator_FOG_DENSITY_UP)
-	call UnitRemoveAbility(GetTriggerUnit(), RectGenerator_FOG_DENSITY_DOWN)
-	
-	call UnitRemoveAbility(GetTriggerUnit(), RectGenerator_FOG_RED_UP)
-	call UnitRemoveAbility(GetTriggerUnit(), RectGenerator_FOG_RED_DOWN)
-	call UnitRemoveAbility(GetTriggerUnit(), RectGenerator_FOG_GREEN_UP)
-	call UnitRemoveAbility(GetTriggerUnit(), RectGenerator_FOG_GREEN_DOWN)
-	call UnitRemoveAbility(GetTriggerUnit(), RectGenerator_FOG_BLUE_UP)
-	call UnitRemoveAbility(GetTriggerUnit(), RectGenerator_FOG_BLUE_DOWN)
-
-//end of: GUDR_ThirdPage("Remove","GetTriggerUnit()")
-//textmacro instance: GUDR_FirstPage("Add","GetTriggerUnit()")
-
-	call UnitAddAbility(GetTriggerUnit(), RectGenerator_CREATE_OR_DESTROY)
-	call UnitAddAbility(GetTriggerUnit(), RectGenerator_TOGGLE_VISIBILITY)
-	call UnitAddAbility(GetTriggerUnit(), RectGenerator_MOVE)
-
-        call UnitAddAbility(GetTriggerUnit(), RectGenerator_MOVE_TERRAIN)
-
-	
-	call UnitAddAbility(GetTriggerUnit(), RectGenerator_RETRACT_X)
-	call UnitAddAbility(GetTriggerUnit(), RectGenerator_EXPAND_X)
-	call UnitAddAbility(GetTriggerUnit(), RectGenerator_RETRACT_Y)
-	call UnitAddAbility(GetTriggerUnit(), RectGenerator_EXPAND_Y)
-	
-	call UnitAddAbility(GetTriggerUnit(), RectGenerator_LOCK_UNITS)
-	call UnitAddAbility(GetTriggerUnit(), RectGenerator_UNLOCK_UNITS)
-
-//end of: GUDR_FirstPage("Add","GetTriggerUnit()")
-            endif
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-        
-    elseif abilityId == RectGenerator_PAGE_PREV then
-
-            if (GetUnitAbilityLevel((GetTriggerUnit()), RectGenerator_CREATE_OR_DESTROY) > 0) then // INLINED!!
-//textmacro instance: GUDR_FirstPage("Remove","GetTriggerUnit()")
-
-	call UnitRemoveAbility(GetTriggerUnit(), RectGenerator_CREATE_OR_DESTROY)
-	call UnitRemoveAbility(GetTriggerUnit(), RectGenerator_TOGGLE_VISIBILITY)
-	call UnitRemoveAbility(GetTriggerUnit(), RectGenerator_MOVE)
-
-        call UnitRemoveAbility(GetTriggerUnit(), RectGenerator_MOVE_TERRAIN)
-
-	
-	call UnitRemoveAbility(GetTriggerUnit(), RectGenerator_RETRACT_X)
-	call UnitRemoveAbility(GetTriggerUnit(), RectGenerator_EXPAND_X)
-	call UnitRemoveAbility(GetTriggerUnit(), RectGenerator_RETRACT_Y)
-	call UnitRemoveAbility(GetTriggerUnit(), RectGenerator_EXPAND_Y)
-	
-	call UnitRemoveAbility(GetTriggerUnit(), RectGenerator_LOCK_UNITS)
-	call UnitRemoveAbility(GetTriggerUnit(), RectGenerator_UNLOCK_UNITS)
-
-//end of: GUDR_FirstPage("Remove","GetTriggerUnit()")
-//textmacro instance: GUDR_ThirdPage("Add","GetTriggerUnit()")
-
-	call UnitAddAbility(GetTriggerUnit(), RectGenerator_FOG_DENSITY_UP)
-	call UnitAddAbility(GetTriggerUnit(), RectGenerator_FOG_DENSITY_DOWN)
-	
-	call UnitAddAbility(GetTriggerUnit(), RectGenerator_FOG_RED_UP)
-	call UnitAddAbility(GetTriggerUnit(), RectGenerator_FOG_RED_DOWN)
-	call UnitAddAbility(GetTriggerUnit(), RectGenerator_FOG_GREEN_UP)
-	call UnitAddAbility(GetTriggerUnit(), RectGenerator_FOG_GREEN_DOWN)
-	call UnitAddAbility(GetTriggerUnit(), RectGenerator_FOG_BLUE_UP)
-	call UnitAddAbility(GetTriggerUnit(), RectGenerator_FOG_BLUE_DOWN)
-
-//end of: GUDR_ThirdPage("Add","GetTriggerUnit()")
-            elseif (GetUnitAbilityLevel((GetTriggerUnit()), RectGenerator_TOGGLE_WEATHER) > 0) then // INLINED!!
-//textmacro instance: GUDR_SecondPage("Remove","GetTriggerUnit()")
-
-	call UnitRemoveAbility(GetTriggerUnit(), RectGenerator_CHANGE_WEATHER_NEXT)
-	call UnitRemoveAbility(GetTriggerUnit(), RectGenerator_CHANGE_WEATHER_PREV)
-	call UnitRemoveAbility(GetTriggerUnit(), RectGenerator_TOGGLE_WEATHER)
-	
-
-        call UnitRemoveAbility(GetTriggerUnit(), RectGenerator_TOGGLE_FOG)
-        call UnitRemoveAbility(GetTriggerUnit(), RectGenerator_FOG_STYLE_UP)
-        call UnitRemoveAbility(GetTriggerUnit(), RectGenerator_FOG_STYLE_DOWN)
-        call UnitRemoveAbility(GetTriggerUnit(), RectGenerator_FOG_ZSTART_UP)
-        call UnitRemoveAbility(GetTriggerUnit(), RectGenerator_FOG_ZSTART_DOWN)
-        call UnitRemoveAbility(GetTriggerUnit(), RectGenerator_FOG_ZEND_UP)
-        call UnitRemoveAbility(GetTriggerUnit(), RectGenerator_FOG_ZEND_DOWN)
-
-
-//end of: GUDR_SecondPage("Remove","GetTriggerUnit()")
-//textmacro instance: GUDR_FirstPage("Add","GetTriggerUnit()")
-
-	call UnitAddAbility(GetTriggerUnit(), RectGenerator_CREATE_OR_DESTROY)
-	call UnitAddAbility(GetTriggerUnit(), RectGenerator_TOGGLE_VISIBILITY)
-	call UnitAddAbility(GetTriggerUnit(), RectGenerator_MOVE)
-
-        call UnitAddAbility(GetTriggerUnit(), RectGenerator_MOVE_TERRAIN)
-
-	
-	call UnitAddAbility(GetTriggerUnit(), RectGenerator_RETRACT_X)
-	call UnitAddAbility(GetTriggerUnit(), RectGenerator_EXPAND_X)
-	call UnitAddAbility(GetTriggerUnit(), RectGenerator_RETRACT_Y)
-	call UnitAddAbility(GetTriggerUnit(), RectGenerator_EXPAND_Y)
-	
-	call UnitAddAbility(GetTriggerUnit(), RectGenerator_LOCK_UNITS)
-	call UnitAddAbility(GetTriggerUnit(), RectGenerator_UNLOCK_UNITS)
-
-//end of: GUDR_FirstPage("Add","GetTriggerUnit()")
-            else //if InThirdPage(GetTriggerUnit()) then
-//textmacro instance: GUDR_ThirdPage("Remove","GetTriggerUnit()")
-
-	call UnitRemoveAbility(GetTriggerUnit(), RectGenerator_FOG_DENSITY_UP)
-	call UnitRemoveAbility(GetTriggerUnit(), RectGenerator_FOG_DENSITY_DOWN)
-	
-	call UnitRemoveAbility(GetTriggerUnit(), RectGenerator_FOG_RED_UP)
-	call UnitRemoveAbility(GetTriggerUnit(), RectGenerator_FOG_RED_DOWN)
-	call UnitRemoveAbility(GetTriggerUnit(), RectGenerator_FOG_GREEN_UP)
-	call UnitRemoveAbility(GetTriggerUnit(), RectGenerator_FOG_GREEN_DOWN)
-	call UnitRemoveAbility(GetTriggerUnit(), RectGenerator_FOG_BLUE_UP)
-	call UnitRemoveAbility(GetTriggerUnit(), RectGenerator_FOG_BLUE_DOWN)
-
-//end of: GUDR_ThirdPage("Remove","GetTriggerUnit()")
-//textmacro instance: GUDR_SecondPage("Add","GetTriggerUnit()")
-
-	call UnitAddAbility(GetTriggerUnit(), RectGenerator_CHANGE_WEATHER_NEXT)
-	call UnitAddAbility(GetTriggerUnit(), RectGenerator_CHANGE_WEATHER_PREV)
-	call UnitAddAbility(GetTriggerUnit(), RectGenerator_TOGGLE_WEATHER)
-	
-
-        call UnitAddAbility(GetTriggerUnit(), RectGenerator_TOGGLE_FOG)
-        call UnitAddAbility(GetTriggerUnit(), RectGenerator_FOG_STYLE_UP)
-        call UnitAddAbility(GetTriggerUnit(), RectGenerator_FOG_STYLE_DOWN)
-        call UnitAddAbility(GetTriggerUnit(), RectGenerator_FOG_ZSTART_UP)
-        call UnitAddAbility(GetTriggerUnit(), RectGenerator_FOG_ZSTART_DOWN)
-        call UnitAddAbility(GetTriggerUnit(), RectGenerator_FOG_ZEND_UP)
-        call UnitAddAbility(GetTriggerUnit(), RectGenerator_FOG_ZEND_DOWN)
-
-
-//end of: GUDR_SecondPage("Add","GetTriggerUnit()")
-            endif
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-           
-    elseif abilityId == RectGenerator_RETRACT_Y then
-        call MoveGUDR(GetTriggerUnit() , 0 , - 64 , true)
-        
-    elseif abilityId == RectGenerator_EXPAND_Y then
-        call MoveGUDR(GetTriggerUnit() , 0 , 64 , true)
-        
-    elseif abilityId == RectGenerator_EXPAND_X then
-        call MoveGUDR(GetTriggerUnit() , 64 , 0 , true)
-        
-    elseif abilityId == RectGenerator_RETRACT_X then
-        call MoveGUDR(GetTriggerUnit() , - 64 , 0 , true)
-    
-    elseif abilityId == RectGenerator_MOVE then
-
-            if GetUnitX(GetTriggerUnit()) != Get64TileCenterCoordinate(GetUnitX(GetTriggerUnit())) then
-                call SetUnitX(GetTriggerUnit(), GetUnitX(GetTriggerUnit()) + 32)
-            endif
-            if GetUnitY(GetTriggerUnit()) != Get64TileCenterCoordinate(GetUnitY(GetTriggerUnit())) then
-                call SetUnitY(GetTriggerUnit(), GetUnitY(GetTriggerUnit()) + 32)
-            endif
-
+            call DestroyGUDR(whichUnit)
+            call GUMSClearUnitData(whichUnit)
             
-        if CountUnitsInGroup((LoadGroupHandle(UserDefinedRects__hashTable, (GetHandleId((GetTriggerUnit()))), (6)))) <= RectGenerator__MAXIMUM_MOVE_LIMIT then // INLINED!!
-            call ForGroup((LoadGroupHandle(UserDefinedRects__hashTable, (GetHandleId((GetTriggerUnit()))), (6))), function RectGenerator__GroupLoop) // INLINED!!
-            call SetUnitPosition(GetTriggerUnit(), GetSpellTargetX(), GetSpellTargetY())
-            call MoveGUDR(GetTriggerUnit() , 0 , 0 , true)
-        else
-            call DisplayTextToPlayer(GetOwningPlayer(GetTriggerUnit()), 0, 0, "Failed to move Rect Generator:\n Attached unit limit exceeded! (" + I2S(RectGenerator__MAXIMUM_MOVE_LIMIT) + ")")
-            call SetUnitPosition(GetTriggerUnit(), GetUnitX(GetTriggerUnit()), GetUnitY(GetTriggerUnit()))
-            call MoveGUDR(GetTriggerUnit() , 0 , 0 , true)
+            // Performance: Instantly remove decorations from the game
+            set g_unitHasBeenRemoved=true
+            call RemoveUnit(whichUnit)
         endif
-        
-    elseif abilityId == RectGenerator_LOCK_UNITS then
-        call GroupGUDR(GetTriggerUnit() , false)
-        
-    elseif abilityId == RectGenerator_TOGGLE_VISIBILITY then
-        call ToggleGUDRVisibility(GetTriggerUnit() , true , true)
-        
-    elseif abilityId == RectGenerator_CHANGE_WEATHER_NEXT then
-        call ChangeGUDRWeatherNew(GetTriggerUnit() , 1 , 0)
-    
-    elseif abilityId == RectGenerator_CHANGE_WEATHER_PREV then
-        call ChangeGUDRWeatherNew(GetTriggerUnit() , - 1 , 0)
-    
-    elseif abilityId == RectGenerator_TOGGLE_WEATHER then
-        if (HaveSavedInteger(UserDefinedRects__hashTable, (GetHandleId((GetTriggerUnit()))), (5))) then // INLINED!!
-            call DestroyWeather(GetTriggerUnit())
-        else
-            call CreateWeather(GetTriggerUnit())
-        endif
-    
-    elseif abilityId == RectGenerator_CREATE_OR_DESTROY then
-        if (HaveSavedHandle(UserDefinedRects__hashTable, (GetHandleId((GetTriggerUnit()))), (0))) then // INLINED!!
-            call DestroyGUDR(GetTriggerUnit())
-        else
-            call CreateGUDR(GetTriggerUnit())
-        endif
-    
-    elseif abilityId == RectGenerator_UNLOCK_UNITS then
-        call GroupGUDR(GetTriggerUnit() , true)
-    else
-
-            if (LoadInteger(ConstTable__ht, (((s__RectEnvironment_fog_impl))), (((GetHandleId(((LoadRectHandle(UserDefinedRects__hashTable, (GetHandleId((GetTriggerUnit()))), (0)))))))))) == 0 then // INLINED!!
-        
-            elseif abilityId == RectGenerator_FOG_RED_UP then
-                if (LoadReal(ConstTable__ht, (((((s__TerrainFog_red_impl))))), (((LoadInteger(ConstTable__ht, (((s__RectEnvironment_fog_impl))), (((GetHandleId(((LoadRectHandle(UserDefinedRects__hashTable, (GetHandleId((GetTriggerUnit()))), (0)))))))))))))) <= .96 then // INLINED!!
-                    call SaveReal(ConstTable__ht, (((((s__TerrainFog_red_impl))))), (((LoadInteger(ConstTable__ht, (((s__RectEnvironment_fog_impl))), (((GetHandleId(((LoadRectHandle(UserDefinedRects__hashTable, (GetHandleId((GetTriggerUnit()))), (0)))))))))))), (( (((LoadReal(ConstTable__ht, (((((s__TerrainFog_red_impl))))), (((LoadInteger(ConstTable__ht, (((s__RectEnvironment_fog_impl))), (((GetHandleId(((LoadRectHandle(UserDefinedRects__hashTable, (GetHandleId((GetTriggerUnit()))), (0)))))))))))))) + .05)*1.0))*1.0)) // INLINED!!
-                else
-                    call SaveReal(ConstTable__ht, (((((s__TerrainFog_red_impl))))), (((LoadInteger(ConstTable__ht, (((s__RectEnvironment_fog_impl))), (((GetHandleId(((LoadRectHandle(UserDefinedRects__hashTable, (GetHandleId((GetTriggerUnit()))), (0)))))))))))), (( ((0.)*1.0))*1.0)) // INLINED!!
-                endif
-                call DisplayTextToPlayer(GetOwningPlayer(GetTriggerUnit()), 0, 0, ("Fog " + ("|c00ff0000Red|r" ) + " set to: " + I2S(R2I((( (LoadReal(ConstTable__ht, (((((s__TerrainFog_red_impl))))), (((LoadInteger(ConstTable__ht, (((s__RectEnvironment_fog_impl))), (((GetHandleId(((LoadRectHandle(UserDefinedRects__hashTable, (GetHandleId((GetTriggerUnit()))), (0)))))))))))))))*1.0) * 100. + .5)) + "%")) // INLINED!!
-            
-            elseif abilityId == RectGenerator_FOG_RED_DOWN then
-                if (LoadReal(ConstTable__ht, (((((s__TerrainFog_red_impl))))), (((LoadInteger(ConstTable__ht, (((s__RectEnvironment_fog_impl))), (((GetHandleId(((LoadRectHandle(UserDefinedRects__hashTable, (GetHandleId((GetTriggerUnit()))), (0)))))))))))))) >= 0.01 then // INLINED!!
-                    call SaveReal(ConstTable__ht, (((((s__TerrainFog_red_impl))))), (((LoadInteger(ConstTable__ht, (((s__RectEnvironment_fog_impl))), (((GetHandleId(((LoadRectHandle(UserDefinedRects__hashTable, (GetHandleId((GetTriggerUnit()))), (0)))))))))))), (( (((LoadReal(ConstTable__ht, (((((s__TerrainFog_red_impl))))), (((LoadInteger(ConstTable__ht, (((s__RectEnvironment_fog_impl))), (((GetHandleId(((LoadRectHandle(UserDefinedRects__hashTable, (GetHandleId((GetTriggerUnit()))), (0)))))))))))))) - .05)*1.0))*1.0)) // INLINED!!
-                else
-                    call SaveReal(ConstTable__ht, (((((s__TerrainFog_red_impl))))), (((LoadInteger(ConstTable__ht, (((s__RectEnvironment_fog_impl))), (((GetHandleId(((LoadRectHandle(UserDefinedRects__hashTable, (GetHandleId((GetTriggerUnit()))), (0)))))))))))), (( ((1.)*1.0))*1.0)) // INLINED!!
-                endif
-                call DisplayTextToPlayer(GetOwningPlayer(GetTriggerUnit()), 0, 0, ("Fog " + ("|c00ff0000Red|r" ) + " set to: " + I2S(R2I((( (LoadReal(ConstTable__ht, (((((s__TerrainFog_red_impl))))), (((LoadInteger(ConstTable__ht, (((s__RectEnvironment_fog_impl))), (((GetHandleId(((LoadRectHandle(UserDefinedRects__hashTable, (GetHandleId((GetTriggerUnit()))), (0)))))))))))))))*1.0) * 100. + .5)) + "%")) // INLINED!!
-                
-            elseif abilityId == RectGenerator_FOG_BLUE_UP then
-                if (LoadReal(ConstTable__ht, (((((s__TerrainFog_blue_impl))))), (((LoadInteger(ConstTable__ht, (((s__RectEnvironment_fog_impl))), (((GetHandleId(((LoadRectHandle(UserDefinedRects__hashTable, (GetHandleId((GetTriggerUnit()))), (0)))))))))))))) <= .96 then // INLINED!!
-                    call SaveReal(ConstTable__ht, (((((s__TerrainFog_blue_impl))))), (((LoadInteger(ConstTable__ht, (((s__RectEnvironment_fog_impl))), (((GetHandleId(((LoadRectHandle(UserDefinedRects__hashTable, (GetHandleId((GetTriggerUnit()))), (0)))))))))))), (( (((LoadReal(ConstTable__ht, (((((s__TerrainFog_blue_impl))))), (((LoadInteger(ConstTable__ht, (((s__RectEnvironment_fog_impl))), (((GetHandleId(((LoadRectHandle(UserDefinedRects__hashTable, (GetHandleId((GetTriggerUnit()))), (0)))))))))))))) + .05)*1.0))*1.0)) // INLINED!!
-                else
-                    call SaveReal(ConstTable__ht, (((((s__TerrainFog_blue_impl))))), (((LoadInteger(ConstTable__ht, (((s__RectEnvironment_fog_impl))), (((GetHandleId(((LoadRectHandle(UserDefinedRects__hashTable, (GetHandleId((GetTriggerUnit()))), (0)))))))))))), (( ((0.)*1.0))*1.0)) // INLINED!!
-                endif
-                call DisplayTextToPlayer(GetOwningPlayer(GetTriggerUnit()), 0, 0, ("Fog " + ("|c000000ffBlue|r" ) + " set to: " + I2S(R2I((( (LoadReal(ConstTable__ht, (((((s__TerrainFog_blue_impl))))), (((LoadInteger(ConstTable__ht, (((s__RectEnvironment_fog_impl))), (((GetHandleId(((LoadRectHandle(UserDefinedRects__hashTable, (GetHandleId((GetTriggerUnit()))), (0)))))))))))))))*1.0) * 100. + .5)) + "%")) // INLINED!!
-            
-            elseif abilityId == RectGenerator_FOG_BLUE_DOWN then
-                if (LoadReal(ConstTable__ht, (((((s__TerrainFog_blue_impl))))), (((LoadInteger(ConstTable__ht, (((s__RectEnvironment_fog_impl))), (((GetHandleId(((LoadRectHandle(UserDefinedRects__hashTable, (GetHandleId((GetTriggerUnit()))), (0)))))))))))))) >= 0.01 then // INLINED!!
-                    call SaveReal(ConstTable__ht, (((((s__TerrainFog_blue_impl))))), (((LoadInteger(ConstTable__ht, (((s__RectEnvironment_fog_impl))), (((GetHandleId(((LoadRectHandle(UserDefinedRects__hashTable, (GetHandleId((GetTriggerUnit()))), (0)))))))))))), (( (((LoadReal(ConstTable__ht, (((((s__TerrainFog_blue_impl))))), (((LoadInteger(ConstTable__ht, (((s__RectEnvironment_fog_impl))), (((GetHandleId(((LoadRectHandle(UserDefinedRects__hashTable, (GetHandleId((GetTriggerUnit()))), (0)))))))))))))) - .05)*1.0))*1.0)) // INLINED!!
-                else
-                    call SaveReal(ConstTable__ht, (((((s__TerrainFog_blue_impl))))), (((LoadInteger(ConstTable__ht, (((s__RectEnvironment_fog_impl))), (((GetHandleId(((LoadRectHandle(UserDefinedRects__hashTable, (GetHandleId((GetTriggerUnit()))), (0)))))))))))), (( ((1.)*1.0))*1.0)) // INLINED!!
-                endif
-                call DisplayTextToPlayer(GetOwningPlayer(GetTriggerUnit()), 0, 0, ("Fog " + ("|c000000ffBlue|r" ) + " set to: " + I2S(R2I((( (LoadReal(ConstTable__ht, (((((s__TerrainFog_blue_impl))))), (((LoadInteger(ConstTable__ht, (((s__RectEnvironment_fog_impl))), (((GetHandleId(((LoadRectHandle(UserDefinedRects__hashTable, (GetHandleId((GetTriggerUnit()))), (0)))))))))))))))*1.0) * 100. + .5)) + "%")) // INLINED!!
-            
-            elseif abilityId == RectGenerator_FOG_GREEN_UP then
-                if (LoadReal(ConstTable__ht, (((((s__TerrainFog_green_impl))))), (((LoadInteger(ConstTable__ht, (((s__RectEnvironment_fog_impl))), (((GetHandleId(((LoadRectHandle(UserDefinedRects__hashTable, (GetHandleId((GetTriggerUnit()))), (0)))))))))))))) <= .96 then // INLINED!!
-                    call SaveReal(ConstTable__ht, (((((s__TerrainFog_green_impl))))), (((LoadInteger(ConstTable__ht, (((s__RectEnvironment_fog_impl))), (((GetHandleId(((LoadRectHandle(UserDefinedRects__hashTable, (GetHandleId((GetTriggerUnit()))), (0)))))))))))), (( (((LoadReal(ConstTable__ht, (((((s__TerrainFog_green_impl))))), (((LoadInteger(ConstTable__ht, (((s__RectEnvironment_fog_impl))), (((GetHandleId(((LoadRectHandle(UserDefinedRects__hashTable, (GetHandleId((GetTriggerUnit()))), (0)))))))))))))) + .05)*1.0))*1.0)) // INLINED!!
-                else
-                    call SaveReal(ConstTable__ht, (((((s__TerrainFog_green_impl))))), (((LoadInteger(ConstTable__ht, (((s__RectEnvironment_fog_impl))), (((GetHandleId(((LoadRectHandle(UserDefinedRects__hashTable, (GetHandleId((GetTriggerUnit()))), (0)))))))))))), (( ((0.)*1.0))*1.0)) // INLINED!!
-                endif
-                call DisplayTextToPlayer(GetOwningPlayer(GetTriggerUnit()), 0, 0, ("Fog " + ("|c0000ff00Green|r" ) + " set to: " + I2S(R2I((( (LoadReal(ConstTable__ht, (((((s__TerrainFog_green_impl))))), (((LoadInteger(ConstTable__ht, (((s__RectEnvironment_fog_impl))), (((GetHandleId(((LoadRectHandle(UserDefinedRects__hashTable, (GetHandleId((GetTriggerUnit()))), (0)))))))))))))))*1.0) * 100. + .5)) + "%")) // INLINED!!
-            
-            elseif abilityId == RectGenerator_FOG_GREEN_DOWN then
-                if (LoadReal(ConstTable__ht, (((((s__TerrainFog_green_impl))))), (((LoadInteger(ConstTable__ht, (((s__RectEnvironment_fog_impl))), (((GetHandleId(((LoadRectHandle(UserDefinedRects__hashTable, (GetHandleId((GetTriggerUnit()))), (0)))))))))))))) >= 0.01 then // INLINED!!
-                    call SaveReal(ConstTable__ht, (((((s__TerrainFog_green_impl))))), (((LoadInteger(ConstTable__ht, (((s__RectEnvironment_fog_impl))), (((GetHandleId(((LoadRectHandle(UserDefinedRects__hashTable, (GetHandleId((GetTriggerUnit()))), (0)))))))))))), (( (((LoadReal(ConstTable__ht, (((((s__TerrainFog_green_impl))))), (((LoadInteger(ConstTable__ht, (((s__RectEnvironment_fog_impl))), (((GetHandleId(((LoadRectHandle(UserDefinedRects__hashTable, (GetHandleId((GetTriggerUnit()))), (0)))))))))))))) - .05)*1.0))*1.0)) // INLINED!!
-                else
-                    call SaveReal(ConstTable__ht, (((((s__TerrainFog_green_impl))))), (((LoadInteger(ConstTable__ht, (((s__RectEnvironment_fog_impl))), (((GetHandleId(((LoadRectHandle(UserDefinedRects__hashTable, (GetHandleId((GetTriggerUnit()))), (0)))))))))))), (( ((1.)*1.0))*1.0)) // INLINED!!
-                endif
-                call DisplayTextToPlayer(GetOwningPlayer(GetTriggerUnit()), 0, 0, ("Fog " + ("|c0000ff00Green|r" ) + " set to: " + I2S(R2I((( (LoadReal(ConstTable__ht, (((((s__TerrainFog_green_impl))))), (((LoadInteger(ConstTable__ht, (((s__RectEnvironment_fog_impl))), (((GetHandleId(((LoadRectHandle(UserDefinedRects__hashTable, (GetHandleId((GetTriggerUnit()))), (0)))))))))))))))*1.0) * 100. + .5)) + "%")) // INLINED!!
-            
-            elseif abilityId == RectGenerator_FOG_DENSITY_UP then
-                call SaveReal(ConstTable__ht, (((((s__TerrainFog_density_impl))))), (((LoadInteger(ConstTable__ht, (((s__RectEnvironment_fog_impl))), (((GetHandleId(((LoadRectHandle(UserDefinedRects__hashTable, (GetHandleId((GetTriggerUnit()))), (0)))))))))))), (( (((LoadReal(ConstTable__ht, (((((s__TerrainFog_density_impl))))), (((LoadInteger(ConstTable__ht, (((s__RectEnvironment_fog_impl))), (((GetHandleId(((LoadRectHandle(UserDefinedRects__hashTable, (GetHandleId((GetTriggerUnit()))), (0)))))))))))))) + .00005)*1.0))*1.0)) // INLINED!!
-                call DisplayTextToPlayer(GetOwningPlayer(GetTriggerUnit()), 0, 0, "Fog Density set to: " + R2S((LoadReal(ConstTable__ht, (((((s__TerrainFog_density_impl))))), (((LoadInteger(ConstTable__ht, (((s__RectEnvironment_fog_impl))), (((GetHandleId(((LoadRectHandle(UserDefinedRects__hashTable, (GetHandleId((GetTriggerUnit()))), (0)))))))))))))) * 100) + "%") // INLINED!!
-            
-            elseif abilityId == RectGenerator_FOG_DENSITY_DOWN then
-                if (LoadReal(ConstTable__ht, (((((s__TerrainFog_density_impl))))), (((LoadInteger(ConstTable__ht, (((s__RectEnvironment_fog_impl))), (((GetHandleId(((LoadRectHandle(UserDefinedRects__hashTable, (GetHandleId((GetTriggerUnit()))), (0)))))))))))))) >= 0.00006 then // INLINED!!
-                    call SaveReal(ConstTable__ht, (((((s__TerrainFog_density_impl))))), (((LoadInteger(ConstTable__ht, (((s__RectEnvironment_fog_impl))), (((GetHandleId(((LoadRectHandle(UserDefinedRects__hashTable, (GetHandleId((GetTriggerUnit()))), (0)))))))))))), (( (((LoadReal(ConstTable__ht, (((((s__TerrainFog_density_impl))))), (((LoadInteger(ConstTable__ht, (((s__RectEnvironment_fog_impl))), (((GetHandleId(((LoadRectHandle(UserDefinedRects__hashTable, (GetHandleId((GetTriggerUnit()))), (0)))))))))))))) - .00005)*1.0))*1.0)) // INLINED!!
-                else
-                    call SaveReal(ConstTable__ht, (((((s__TerrainFog_density_impl))))), (((LoadInteger(ConstTable__ht, (((s__RectEnvironment_fog_impl))), (((GetHandleId(((LoadRectHandle(UserDefinedRects__hashTable, (GetHandleId((GetTriggerUnit()))), (0)))))))))))), (( ((0.)*1.0))*1.0)) // INLINED!!
-                endif
-                call DisplayTextToPlayer(GetOwningPlayer(GetTriggerUnit()), 0, 0, "Fog Density set to: " + R2S((LoadReal(ConstTable__ht, (((((s__TerrainFog_density_impl))))), (((LoadInteger(ConstTable__ht, (((s__RectEnvironment_fog_impl))), (((GetHandleId(((LoadRectHandle(UserDefinedRects__hashTable, (GetHandleId((GetTriggerUnit()))), (0)))))))))))))) * 100) + "%") // INLINED!!
-            
-            elseif abilityId == RectGenerator_FOG_ZSTART_UP then
-                call SaveReal(ConstTable__ht, (((((s__TerrainFog_zStart_impl))))), (((LoadInteger(ConstTable__ht, (((s__RectEnvironment_fog_impl))), (((GetHandleId(((LoadRectHandle(UserDefinedRects__hashTable, (GetHandleId((GetTriggerUnit()))), (0)))))))))))), (( (((LoadReal(ConstTable__ht, (((((s__TerrainFog_zStart_impl))))), (((LoadInteger(ConstTable__ht, (((s__RectEnvironment_fog_impl))), (((GetHandleId(((LoadRectHandle(UserDefinedRects__hashTable, (GetHandleId((GetTriggerUnit()))), (0)))))))))))))) + 1000.)*1.0))*1.0)) // INLINED!!
-                call DisplayTextToPlayer(GetOwningPlayer(GetTriggerUnit()), 0, 0, ( "Fog zStart set to: " + R2S((LoadReal(ConstTable__ht, (((((s__TerrainFog_zStart_impl))))), (((LoadInteger(ConstTable__ht, (((s__RectEnvironment_fog_impl))), (((GetHandleId(((LoadRectHandle(UserDefinedRects__hashTable, (GetHandleId((GetTriggerUnit()))), (0))))))))))))))) )) // INLINED!!
-            
-            elseif abilityId == RectGenerator_FOG_ZSTART_DOWN then
-                if (LoadReal(ConstTable__ht, (((((s__TerrainFog_zStart_impl))))), (((LoadInteger(ConstTable__ht, (((s__RectEnvironment_fog_impl))), (((GetHandleId(((LoadRectHandle(UserDefinedRects__hashTable, (GetHandleId((GetTriggerUnit()))), (0)))))))))))))) >= 1200. then // INLINED!!
-                    call SaveReal(ConstTable__ht, (((((s__TerrainFog_zStart_impl))))), (((LoadInteger(ConstTable__ht, (((s__RectEnvironment_fog_impl))), (((GetHandleId(((LoadRectHandle(UserDefinedRects__hashTable, (GetHandleId((GetTriggerUnit()))), (0)))))))))))), (( (((LoadReal(ConstTable__ht, (((((s__TerrainFog_zStart_impl))))), (((LoadInteger(ConstTable__ht, (((s__RectEnvironment_fog_impl))), (((GetHandleId(((LoadRectHandle(UserDefinedRects__hashTable, (GetHandleId((GetTriggerUnit()))), (0)))))))))))))) - 1000.)*1.0))*1.0)) // INLINED!!
-                else
-                    call SaveReal(ConstTable__ht, (((((s__TerrainFog_zStart_impl))))), (((LoadInteger(ConstTable__ht, (((s__RectEnvironment_fog_impl))), (((GetHandleId(((LoadRectHandle(UserDefinedRects__hashTable, (GetHandleId((GetTriggerUnit()))), (0)))))))))))), (( ((0.)*1.0))*1.0)) // INLINED!!
-                endif
-                call DisplayTextToPlayer(GetOwningPlayer(GetTriggerUnit()), 0, 0, ( "Fog zStart set to: " + R2S((LoadReal(ConstTable__ht, (((((s__TerrainFog_zStart_impl))))), (((LoadInteger(ConstTable__ht, (((s__RectEnvironment_fog_impl))), (((GetHandleId(((LoadRectHandle(UserDefinedRects__hashTable, (GetHandleId((GetTriggerUnit()))), (0))))))))))))))) )) // INLINED!!
-            
-            elseif abilityId == RectGenerator_FOG_ZEND_UP then
-                call SaveReal(ConstTable__ht, (((((s__TerrainFog_zEnd_impl))))), (((LoadInteger(ConstTable__ht, (((s__RectEnvironment_fog_impl))), (((GetHandleId(((LoadRectHandle(UserDefinedRects__hashTable, (GetHandleId((GetTriggerUnit()))), (0)))))))))))), (( (((LoadReal(ConstTable__ht, (((((s__TerrainFog_zEnd_impl))))), (((LoadInteger(ConstTable__ht, (((s__RectEnvironment_fog_impl))), (((GetHandleId(((LoadRectHandle(UserDefinedRects__hashTable, (GetHandleId((GetTriggerUnit()))), (0)))))))))))))) + 500.)*1.0))*1.0)) // INLINED!!
-                call DisplayTextToPlayer(GetOwningPlayer(GetTriggerUnit()), 0, 0, ( "Fog zEnd set to: " + R2S((LoadReal(ConstTable__ht, (((((s__TerrainFog_zEnd_impl))))), (((LoadInteger(ConstTable__ht, (((s__RectEnvironment_fog_impl))), (((GetHandleId(((LoadRectHandle(UserDefinedRects__hashTable, (GetHandleId((GetTriggerUnit()))), (0))))))))))))))) )) // INLINED!!
-            
-            elseif abilityId == RectGenerator_FOG_ZEND_DOWN then
-                if (LoadReal(ConstTable__ht, (((((s__TerrainFog_zEnd_impl))))), (((LoadInteger(ConstTable__ht, (((s__RectEnvironment_fog_impl))), (((GetHandleId(((LoadRectHandle(UserDefinedRects__hashTable, (GetHandleId((GetTriggerUnit()))), (0)))))))))))))) >= 1200. then // INLINED!!
-                    call SaveReal(ConstTable__ht, (((((s__TerrainFog_zEnd_impl))))), (((LoadInteger(ConstTable__ht, (((s__RectEnvironment_fog_impl))), (((GetHandleId(((LoadRectHandle(UserDefinedRects__hashTable, (GetHandleId((GetTriggerUnit()))), (0)))))))))))), (( (((LoadReal(ConstTable__ht, (((((s__TerrainFog_zEnd_impl))))), (((LoadInteger(ConstTable__ht, (((s__RectEnvironment_fog_impl))), (((GetHandleId(((LoadRectHandle(UserDefinedRects__hashTable, (GetHandleId((GetTriggerUnit()))), (0)))))))))))))) - 500.)*1.0))*1.0)) // INLINED!!
-                else
-                    call SaveReal(ConstTable__ht, (((((s__TerrainFog_zEnd_impl))))), (((LoadInteger(ConstTable__ht, (((s__RectEnvironment_fog_impl))), (((GetHandleId(((LoadRectHandle(UserDefinedRects__hashTable, (GetHandleId((GetTriggerUnit()))), (0)))))))))))), (( ((0.)*1.0))*1.0)) // INLINED!!
-                endif
-                call DisplayTextToPlayer(GetOwningPlayer(GetTriggerUnit()), 0, 0, ( "Fog zEnd set to: " + R2S((LoadReal(ConstTable__ht, (((((s__TerrainFog_zEnd_impl))))), (((LoadInteger(ConstTable__ht, (((s__RectEnvironment_fog_impl))), (((GetHandleId(((LoadRectHandle(UserDefinedRects__hashTable, (GetHandleId((GetTriggerUnit()))), (0))))))))))))))) )) // INLINED!!
-            
-            elseif abilityId == RectGenerator_FOG_STYLE_UP then
-                call SaveInteger(ConstTable__ht, (((((s__TerrainFog_style_impl))))), (((LoadInteger(ConstTable__ht, (((s__RectEnvironment_fog_impl))), (((GetHandleId(((LoadRectHandle(UserDefinedRects__hashTable, (GetHandleId((GetTriggerUnit()))), (0)))))))))))), ( ((LoadInteger(ConstTable__ht, ((s__RectGenerator__FogStyle_linkedListNext_impl)), ((((LoadInteger(ConstTable__ht, (((((s__TerrainFog_style_impl))))), (((LoadInteger(ConstTable__ht, (((s__RectEnvironment_fog_impl))), (((GetHandleId(((LoadRectHandle(UserDefinedRects__hashTable, (GetHandleId((GetTriggerUnit()))), (0)))))))))))))))))))))) // INLINED!!
-                call DisplayTextToPlayer(GetOwningPlayer(GetTriggerUnit()), 0, 0, "Fog Style set to: " + (LoadStr(ConstTable__ht, ((((s__RectGenerator__FogStyle_strings_impl)))), ((((LoadInteger(ConstTable__ht, (((((s__TerrainFog_style_impl))))), (((LoadInteger(ConstTable__ht, (((s__RectEnvironment_fog_impl))), (((GetHandleId(((LoadRectHandle(UserDefinedRects__hashTable, (GetHandleId((GetTriggerUnit()))), (0)))))))))))))))))))) // INLINED!!
-            
-            elseif abilityId == RectGenerator_FOG_STYLE_DOWN then
-                call SaveInteger(ConstTable__ht, (((((s__TerrainFog_style_impl))))), (((LoadInteger(ConstTable__ht, (((s__RectEnvironment_fog_impl))), (((GetHandleId(((LoadRectHandle(UserDefinedRects__hashTable, (GetHandleId((GetTriggerUnit()))), (0)))))))))))), ( ((LoadInteger(ConstTable__ht, ((s__RectGenerator__FogStyle_linkedListPrev_impl)), ((((LoadInteger(ConstTable__ht, (((((s__TerrainFog_style_impl))))), (((LoadInteger(ConstTable__ht, (((s__RectEnvironment_fog_impl))), (((GetHandleId(((LoadRectHandle(UserDefinedRects__hashTable, (GetHandleId((GetTriggerUnit()))), (0)))))))))))))))))))))) // INLINED!!
-                call DisplayTextToPlayer(GetOwningPlayer(GetTriggerUnit()), 0, 0, "Fog Style set to: " + (LoadStr(ConstTable__ht, ((((s__RectGenerator__FogStyle_strings_impl)))), ((((LoadInteger(ConstTable__ht, (((((s__TerrainFog_style_impl))))), (((LoadInteger(ConstTable__ht, (((s__RectEnvironment_fog_impl))), (((GetHandleId(((LoadRectHandle(UserDefinedRects__hashTable, (GetHandleId((GetTriggerUnit()))), (0)))))))))))))))))))) // INLINED!!
-            endif
-
-
-            if abilityId == RectGenerator_MOVE_TERRAIN then
-                if GetUnitX(GetTriggerUnit()) != GetTileCenterCoordinate(GetUnitX(GetTriggerUnit())) then
-                    call SetUnitX(GetTriggerUnit(), GetUnitX(GetTriggerUnit()) - 32)
-                endif
-                if GetUnitY(GetTriggerUnit()) != GetTileCenterCoordinate(GetUnitY(GetTriggerUnit())) then
-                    call SetUnitY(GetTriggerUnit(), GetUnitY(GetTriggerUnit()) - 32)
-                endif
-            
-                if CountUnitsInGroup((LoadGroupHandle(UserDefinedRects__hashTable, (GetHandleId((GetTriggerUnit()))), (6)))) <= RectGenerator__MAXIMUM_MOVE_LIMIT then // INLINED!!
-                    call ForGroup((LoadGroupHandle(UserDefinedRects__hashTable, (GetHandleId((GetTriggerUnit()))), (6))), function RectGenerator__GroupLoopTerrain) // INLINED!!
-                    call SetUnitPosition(GetTriggerUnit(), GetTileCenterCoordinate(GetSpellTargetX()), GetTileCenterCoordinate(GetSpellTargetY()))
-                    call MoveGUDR(GetTriggerUnit() , 0 , 0 , true)
-                else
-                    call DisplayTextToPlayer(GetOwningPlayer(GetTriggerUnit()), 0, 0, "Failed to move Rect Generator:\n Attached unit limit exceeded! (" + I2S(RectGenerator__MAXIMUM_MOVE_LIMIT) + ")")
-                    call SetUnitPosition(GetTriggerUnit(), GetUnitX(GetTriggerUnit()), GetUnitY(GetTriggerUnit()))
-                    call MoveGUDR(GetTriggerUnit() , 0 , 0 , true)
-                endif
-            endif
-
     endif
-    
-    return false
 endfunction
 
-function RectGenerator__onSpawn takes nothing returns boolean
-    local unit u= GetTriggerUnit()
-    
-    if u == null then
-        set u=GetFilterUnit()
-    endif
-    
-    if (GetUnitTypeId((u)) == RectGenerator_GENERATOR_ID) then // INLINED!!
-//textmacro instance: GUDR_FirstPage("Add", "u")
-
-	call UnitAddAbility(u, RectGenerator_CREATE_OR_DESTROY)
-	call UnitAddAbility(u, RectGenerator_TOGGLE_VISIBILITY)
-	call UnitAddAbility(u, RectGenerator_MOVE)
-
-        call UnitAddAbility(u, RectGenerator_MOVE_TERRAIN)
-
-	
-	call UnitAddAbility(u, RectGenerator_RETRACT_X)
-	call UnitAddAbility(u, RectGenerator_EXPAND_X)
-	call UnitAddAbility(u, RectGenerator_RETRACT_Y)
-	call UnitAddAbility(u, RectGenerator_EXPAND_Y)
-	
-	call UnitAddAbility(u, RectGenerator_LOCK_UNITS)
-	call UnitAddAbility(u, RectGenerator_UNLOCK_UNITS)
-
-//end of: GUDR_FirstPage("Add", "u")
-    
-        call UnitRemoveAbility(u, 'Amov')
-        call UnitRemoveAbility(u, 'Aatk')
-    endif
-    
-    set u=null
-    return false
-endfunction
-
-//===========================================================================
-function RectGenerator__onInit takes nothing returns nothing
-    local trigger trig= CreateTrigger()
-    local boolexpr onSpawnFilter= Condition(function RectGenerator__onSpawn)
-    local integer i= 0
-    
-    call TriggerRegisterAnyUnitEventBJ(trig, EVENT_PLAYER_UNIT_SPELL_CAST)
-    call TriggerAddCondition(trig, Condition(function RectGenerator__onCast))
-    
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    
-
-        call SaveStr(ConstTable__ht, ((((s__RectGenerator__FogStyle_strings_impl)))), (((s__TerrainFog_LINEAR))), ( ("Linear"))) // INLINED!!
-        call SaveStr(ConstTable__ht, ((((s__RectGenerator__FogStyle_strings_impl)))), (((s__TerrainFog_EXPONENTIAL))), ( ("Exponential 1"))) // INLINED!!
-        call SaveStr(ConstTable__ht, ((((s__RectGenerator__FogStyle_strings_impl)))), (((s__TerrainFog_EXPONENTIAL2))), ( ("Exponential 2"))) // INLINED!!
-        
-//textmacro instance: udrAddon_LinkStyles("TerrainFog.LINEAR", "TerrainFog.EXPONENTIAL")
-        call SaveInteger(ConstTable__ht, ((s__RectGenerator__FogStyle_linkedListNext_impl)), (((s__TerrainFog_LINEAR))), ( (s__TerrainFog_EXPONENTIAL))) // INLINED!!
-        call SaveInteger(ConstTable__ht, ((s__RectGenerator__FogStyle_linkedListPrev_impl)), (((s__TerrainFog_EXPONENTIAL))), ( (s__TerrainFog_LINEAR))) // INLINED!!
-//end of: udrAddon_LinkStyles("TerrainFog.LINEAR", "TerrainFog.EXPONENTIAL")
-//textmacro instance: udrAddon_LinkStyles("TerrainFog.EXPONENTIAL", "TerrainFog.EXPONENTIAL2")
-        call SaveInteger(ConstTable__ht, ((s__RectGenerator__FogStyle_linkedListNext_impl)), (((s__TerrainFog_EXPONENTIAL))), ( (s__TerrainFog_EXPONENTIAL2))) // INLINED!!
-        call SaveInteger(ConstTable__ht, ((s__RectGenerator__FogStyle_linkedListPrev_impl)), (((s__TerrainFog_EXPONENTIAL2))), ( (s__TerrainFog_EXPONENTIAL))) // INLINED!!
-//end of: udrAddon_LinkStyles("TerrainFog.EXPONENTIAL", "TerrainFog.EXPONENTIAL2")
-//textmacro instance: udrAddon_LinkStyles("TerrainFog.EXPONENTIAL2", "TerrainFog.LINEAR")
-        call SaveInteger(ConstTable__ht, ((s__RectGenerator__FogStyle_linkedListNext_impl)), (((s__TerrainFog_EXPONENTIAL2))), ( (s__TerrainFog_LINEAR))) // INLINED!!
-        call SaveInteger(ConstTable__ht, ((s__RectGenerator__FogStyle_linkedListPrev_impl)), (((s__TerrainFog_LINEAR))), ( (s__TerrainFog_EXPONENTIAL2))) // INLINED!!
-//end of: udrAddon_LinkStyles("TerrainFog.EXPONENTIAL2", "TerrainFog.LINEAR")
-
-    
-    set trig=null
-endfunction
-
-//library RectGenerator ends
+//library LoPone ends
 //library SaveNLoad:
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 //SaveNLoad and required libraries v2.0
@@ -13149,115 +13605,94 @@ function LoadRequest takes string password returns nothing
 endfunction
 
 //library SaveNLoad ends
-//library LoPWidgets:
+//library LoPfour:
 
+function DecoCount_SwitchedPlayers_impl takes unit whichUnit,player ownerOld,integer decoCount returns nothing
+    local integer playerNumber= GetPlayerId(GetOwningPlayer(whichUnit)) + 1
+    local integer playerNumberOld= GetPlayerId(ownerOld) + 1
+    local integer unitType=  GetUnitTypeId(whichUnit)
     
-//textmacro instance: TableStruct_NewConstTableField("","destructablesTab")
-
-         constant function s__LoPWidgets__Globals__get_destructablesTab takes nothing returns integer
-            return s__LoPWidgets__Globals_destructablesTab_impl
-        endfunction
-
-
-
-
-
-//end of: TableStruct_NewConstTableField("","destructablesTab")
-    
-
-    function s__LoP_UnitData_get takes unit whichUnit returns integer
-        return GetHandleId(whichUnit)
-    endfunction
-
-//textmacro instance: TableStruct_NewPrimitiveField("isHeroic","boolean")
-    function s__LoP_UnitData__get_isHeroic takes integer this returns boolean
-        return (LoadBoolean(ConstTable__ht, (((((s__LoP_UnitData_isHeroic_impl))))), (this))) // INLINED!!
-    endfunction
-    
-    function s__LoP_UnitData__set_isHeroic takes integer this,boolean new_isHeroic returns nothing
-        call SaveBoolean(ConstTable__ht, (((((s__LoP_UnitData_isHeroic_impl))))), (this), ( new_isHeroic)) // INLINED!!
-    endfunction
-    
-    function s__LoP_UnitData_isHeroicClear takes integer this returns nothing
-        call RemoveSavedBoolean(ConstTable__ht, (((((s__LoP_UnitData_isHeroic_impl))))), (this)) // INLINED!!
-    endfunction
-//end of: TableStruct_NewPrimitiveField("isHeroic","boolean")
-    
-    function s__LoP_UnitData_destroy takes integer this returns nothing
-        call RemoveSavedBoolean(ConstTable__ht, (((((s__LoP_UnitData_isHeroic_impl))))), ((this))) // INLINED!!
-    endfunction
-
-// Destructables
-function LoP_IsDestructableProtected takes destructable dest returns boolean
-    return (HaveSavedBoolean(ConstTable__ht, ((((s__LoPWidgets__Globals_destructablesTab_impl)))), (GetHandleId(dest)))) // INLINED!!
+    call SaveInteger(udg_Hashtable_2, playerNumberOld, unitType, decoCount - 1)
+    call SaveInteger(udg_Hashtable_2, playerNumber, unitType, LoadInteger(udg_Hashtable_2, playerNumber, unitType) + 1)
 endfunction
 
-function LoP_ProtectDestructable takes destructable dest returns nothing
-    call SaveBoolean(ConstTable__ht, ((((s__LoPWidgets__Globals_destructablesTab_impl)))), (GetHandleId(dest)), ( true)) // INLINED!!
-endfunction
-
-// Units
-function LoP_IsUnitDecoBuilder takes unit whichUnit returns boolean
-    return GetUnitAbilityLevel(whichUnit, 'A00J') > 0
-endfunction
-
-function LoP_IsUnitProtected takes unit whichUnit returns boolean
-    return IsUnitInGroup(whichUnit, udg_System_ProtectedGroup)
-endfunction
-
-function LoP_GetProtectedUnits takes nothing returns group
-    return udg_System_ProtectedGroup
-endfunction
-
-function LoP_InitProtectedUnitsFilter takes nothing returns boolean
-    local unit filterU= GetFilterUnit()
+function DecoCount_SwitchedPlayers takes unit whichUnit,player oldOwner returns nothing
+    local integer decoCount= LoadInteger(udg_Hashtable_2, GetPlayerId(oldOwner) + 1, GetUnitTypeId(whichUnit))
     
-    if ( IsUnitType(filterU, UNIT_TYPE_STRUCTURE) and GetOwningPlayer(filterU) == Player(PLAYER_NEUTRAL_PASSIVE) ) or filterU == (gg_unit_H00V_0359) or filterU == (gg_unit_H00S_0141) or filterU == (gg_unit_e008_0406) or filterU == (gg_unit_e007_0410) or filterU == (gg_unit_e00A_0411) or filterU == (gg_unit_e00B_0405) or filterU == (gg_unit_e00D_0409) or filterU == (gg_unit_e009_0407) or filterU == (gg_unit_e00C_0408) or GetUnitTypeId(filterU) == 'n000' then // INLINED!!
-        set filterU=null
-        return true
+    if decoCount > 0 then
+        call DecoCount_SwitchedPlayers_impl(whichUnit , oldOwner , decoCount)
     endif
-    set filterU=null
-    return false
 endfunction
 
-function LoP_InitProtectedUnits takes nothing returns nothing
-    call GroupEnumUnitsInRect(udg_System_ProtectedGroup, gg_rct_Titan_Palace, Filter(function LoP_InitProtectedUnitsFilter))
-endfunction
-
-
-//library LoPWidgets ends
-//library LoPone:
-function LoP_onDeath takes unit whichUnit returns nothing
-    if ( GetUnitPointValue(whichUnit) == 37 ) then
+function LoP_onChangeOwner takes unit whichUnit,player ownerOld returns nothing
+    local player owner= GetOwningPlayer(whichUnit)
+    local integer unitId= GetHandleId(whichUnit)
     
-        call FlushChildHashtable((ArrayAgent_hashTable), ((- GetHandleId((whichUnit))))) // INLINED!!
-        //call RemoveUnit( whichUnit )
+    if not (GetUnitAbilityLevel((whichUnit), 'A0C6') > 0) then // INLINED!!
+    
+        if ( (not IsUnitType((whichUnit), UNIT_TYPE_STRUCTURE)) ) then // INLINED!!
         
-    else
-        if not (GetUnitAbilityLevel((whichUnit), 'A0C6') > 0) then // INLINED!!
-        // DECO BUILDER DECREASE COUNT
-            if (LoadBoolean(ConstTable__ht, (((((s__LoP_UnitData_isHeroic_impl))))), (((GetHandleId((whichUnit))))))) then // INLINED!!
-                call RemoveUnit(whichUnit)
-                
-            elseif IsUnitDecoBuilder(whichUnit) then
-                call RemoveUnit(whichUnit)
-            else
-                if ( ((GetOwningPlayer(whichUnit)) != Player(PLAYER_NEUTRAL_PASSIVE)) and (not IsUnitType((whichUnit), UNIT_TYPE_STRUCTURE)) ) then // INLINED!!
-                    call Limit_UnregisterUnitEx((whichUnit) , null) // INLINED!!
-                endif
+            if ((ownerOld) != Player(PLAYER_NEUTRAL_PASSIVE)) then // INLINED!!
+                call Limit_UnregisterUnitEx(whichUnit , ownerOld)
             endif
-        else
-            call DestroyGUDR(whichUnit)
-            call GUMSClearUnitData(whichUnit)
             
-            // Performance: Instantly remove decorations from the game
-            set g_unitHasBeenRemoved=true
-            call RemoveUnit(whichUnit)
+            if ((owner) != Player(PLAYER_NEUTRAL_PASSIVE)) then // INLINED!!
+                call Limit_RegisterUnit(whichUnit)
+            endif
+        endif
+        
+        // DECO BUILDER DECREASE AND INCREASE COUNT
+        call DecoCount_SwitchedPlayers(whichUnit , ownerOld)
+    endif
+    
+    // If ownership was changed with -neut command, no need to change colors.
+    if not IsUnitInGroup(whichUnit, udg_System_NeutralUnits[GetPlayerId(ownerOld) + 1]) then
+        if (HaveSavedInteger((UnitVisualMods__hashTable), ((((unitId)))), (UnitVisualMods__COLOR))) then // INLINED!!
+            call SetUnitColor(whichUnit, (s__LoP_PlayerData_playerColors[((GetPlayerId((GetOwningPlayer(whichUnit)))))])) // INLINED!!
+        else
+            call GUMSSetUnitColor(whichUnit , (LoadInteger((UnitVisualMods__hashTable), ((((((unitId)))))), (UnitVisualMods__COLOR)))) // INLINED!!
         endif
     endif
 endfunction
 
-//library LoPone ends
+
+//library LoPfour ends
+//library LoPtwo:
+function LoP_onRemoval takes unit whichUnit returns nothing
+    if (HaveSavedHandle((ArrayAgent_hashTable), ((- GetHandleId((whichUnit)))), 0)) then // INLINED!!
+    
+        //call DummyDmg_FlushKey(DummyDmg_GetKey(whichUnit))
+        
+    else
+
+        set g_unitHasBeenRemoved=true
+        // CLEAR KNOCKBACK DATA FOR SPELLS
+        call FlushChildHashtable(udg_Hashtable_2, - GetUnitUserData(whichUnit))
+        // CLEAR CUSTOM STAT HASHTABLE
+        call FlushChildHashtable(udg_CSS_Hashtable, GetHandleId(whichUnit))
+        // DECO BUILDER DECREASE COUNT
+        call DecoBuilderReduceCount(whichUnit)
+
+        
+        call GUMSClearUnitData(whichUnit)
+        call Patrol_ClearUnitIdData(GetHandleId((whichUnit))) // INLINED!!
+        call GMSS_ClearData(whichUnit)
+        
+        if ((GetOwningPlayer(whichUnit)) != Player(PLAYER_NEUTRAL_PASSIVE)) and (not IsUnitType((whichUnit), UNIT_TYPE_STRUCTURE)) then // INLINED!!
+            call Limit_UnregisterUnitEx((whichUnit) , null) // INLINED!!
+        endif
+        
+        if (LoadBoolean(ConstTable__ht, (((((s__LoP_UnitData_isHeroic_impl))))), (((GetHandleId((whichUnit))))))) then // INLINED!!
+            call DisableTrigger(gg_trg_System_Cleanup_Owner_Change)
+            call SetUnitOwner(whichUnit, Player(bj_PLAYER_NEUTRAL_EXTRA), false)
+            call EnableTrigger(gg_trg_System_Cleanup_Owner_Change)
+        endif
+        
+        call RemoveSavedBoolean(ConstTable__ht, (((((s__LoP_UnitData_isHeroic_impl))))), ((((GetHandleId((whichUnit))))))) // INLINED!!
+    endif
+endfunction
+
+//library LoPtwo ends
 //library SaveUnit:
 
 
@@ -13389,94 +13824,6 @@ function InitTrig_SaveLoop takes nothing returns nothing
 endfunction
 
 //library SaveUnit ends
-//library LoPfour:
-
-function DecoCount_SwitchedPlayers_impl takes unit whichUnit,player ownerOld,integer decoCount returns nothing
-    local integer playerNumber= GetPlayerId(GetOwningPlayer(whichUnit)) + 1
-    local integer playerNumberOld= GetPlayerId(ownerOld) + 1
-    local integer unitType=  GetUnitTypeId(whichUnit)
-    
-    call SaveInteger(udg_Hashtable_2, playerNumberOld, unitType, decoCount - 1)
-    call SaveInteger(udg_Hashtable_2, playerNumber, unitType, LoadInteger(udg_Hashtable_2, playerNumber, unitType) + 1)
-endfunction
-
-function DecoCount_SwitchedPlayers takes unit whichUnit,player oldOwner returns nothing
-    local integer decoCount= LoadInteger(udg_Hashtable_2, GetPlayerId(oldOwner) + 1, GetUnitTypeId(whichUnit))
-    
-    if decoCount > 0 then
-        call DecoCount_SwitchedPlayers_impl(whichUnit , oldOwner , decoCount)
-    endif
-endfunction
-
-function LoP_onChangeOwner takes unit whichUnit,player ownerOld returns nothing
-    local player owner= GetOwningPlayer(whichUnit)
-    local integer unitId= GetHandleId(whichUnit)
-    
-    if not (GetUnitAbilityLevel((whichUnit), 'A0C6') > 0) then // INLINED!!
-    
-        if ( (not IsUnitType((whichUnit), UNIT_TYPE_STRUCTURE)) ) then // INLINED!!
-        
-            if ((ownerOld) != Player(PLAYER_NEUTRAL_PASSIVE)) then // INLINED!!
-                call Limit_UnregisterUnitEx(whichUnit , ownerOld)
-            endif
-            
-            if ((owner) != Player(PLAYER_NEUTRAL_PASSIVE)) then // INLINED!!
-                call Limit_RegisterUnit(whichUnit)
-            endif
-        endif
-        
-        // DECO BUILDER DECREASE AND INCREASE COUNT
-        call DecoCount_SwitchedPlayers(whichUnit , ownerOld)
-    endif
-    
-    // If ownership was changed with -neut command, no need to change colors.
-    if not IsUnitInGroup(whichUnit, udg_System_NeutralUnits[GetPlayerId(ownerOld) + 1]) then
-        if (HaveSavedInteger((UnitVisualMods__hashTable), ((((unitId)))), (UnitVisualMods__COLOR))) then // INLINED!!
-            call SetUnitColor(whichUnit, (s__LoP_PlayerData_playerColors[((GetPlayerId((GetOwningPlayer(whichUnit)))))])) // INLINED!!
-        else
-            call GUMSSetUnitColor(whichUnit , (LoadInteger((UnitVisualMods__hashTable), ((((((unitId)))))), (UnitVisualMods__COLOR)))) // INLINED!!
-        endif
-    endif
-endfunction
-
-
-//library LoPfour ends
-//library LoPtwo:
-function LoP_onRemoval takes unit whichUnit returns nothing
-    if (HaveSavedHandle((ArrayAgent_hashTable), ((- GetHandleId((whichUnit)))), 0)) then // INLINED!!
-    
-        //call DummyDmg_FlushKey(DummyDmg_GetKey(whichUnit))
-        
-    else
-
-        set g_unitHasBeenRemoved=true
-        // CLEAR KNOCKBACK DATA FOR SPELLS
-        call FlushChildHashtable(udg_Hashtable_2, - GetUnitUserData(whichUnit))
-        // CLEAR CUSTOM STAT HASHTABLE
-        call FlushChildHashtable(udg_CSS_Hashtable, GetHandleId(whichUnit))
-        // DECO BUILDER DECREASE COUNT
-        call DecoBuilderReduceCount(whichUnit)
-
-        
-        call GUMSClearUnitData(whichUnit)
-        call Patrol_ClearUnitIdData(GetHandleId((whichUnit))) // INLINED!!
-        call GMSS_ClearData(whichUnit)
-        
-        if ((GetOwningPlayer(whichUnit)) != Player(PLAYER_NEUTRAL_PASSIVE)) and (not IsUnitType((whichUnit), UNIT_TYPE_STRUCTURE)) then // INLINED!!
-            call Limit_UnregisterUnitEx((whichUnit) , null) // INLINED!!
-        endif
-        
-        if (LoadBoolean(ConstTable__ht, (((((s__LoP_UnitData_isHeroic_impl))))), (((GetHandleId((whichUnit))))))) then // INLINED!!
-            call DisableTrigger(gg_trg_System_Cleanup_Owner_Change)
-            call SetUnitOwner(whichUnit, Player(bj_PLAYER_NEUTRAL_EXTRA), false)
-            call EnableTrigger(gg_trg_System_Cleanup_Owner_Change)
-        endif
-        
-        call RemoveSavedBoolean(ConstTable__ht, (((((s__LoP_UnitData_isHeroic_impl))))), ((((GetHandleId((whichUnit))))))) // INLINED!!
-    endif
-endfunction
-
-//library LoPtwo ends
 //library LoPthree:
 
 function LoP_RemoveUnit takes unit whichUnit returns nothing
@@ -13511,7 +13858,7 @@ endfunction
 // 
 //   Warcraft III map script
 //   Generated by the Warcraft III World Editor
-//   Date: Wed Apr 10 03:43:33 2019
+//   Date: Wed Apr 10 14:00:43 2019
 //   Map Author: Guhun
 // 
 //===========================================================================
@@ -15676,7 +16023,7 @@ function Trig_Init_0_seconds_Func076A takes nothing returns nothing
 endfunction
 
 function Trig_Init_0_seconds_Func080A takes nothing returns nothing
-    call SaveBoolean(ConstTable__ht, ((((s__LoPWidgets__Globals_destructablesTab_impl)))), (GetHandleId((GetEnumDestructable()))), ( true)) // INLINED!!
+    call SaveBoolean(ConstTable__ht, ((((s__LoPWidgets___Globals_destructablesTab_impl)))), (GetHandleId((GetEnumDestructable()))), ( true)) // INLINED!!
 endfunction
 
 function Trig_Init_0_seconds_Actions takes nothing returns nothing
@@ -15839,80 +16186,32 @@ function Trig_Init_Create_Events_Func004A takes nothing returns nothing
     set udg_System_AutonameBoolean[l__udg_temp_integer]=true
     // a
     // Player Commands
-    call TriggerRegisterPlayerChatEvent(gg_trg_Commands_Make_Hero, l__udg_temp_player, "-makehero", true)
     call TriggerRegisterPlayerChatEvent(gg_trg_Commands_Toggle_Autoname, l__udg_temp_player, "-autoname", true)
-    call TriggerRegisterPlayerChatEvent(gg_trg_Commands_Name_Unit, l__udg_temp_player, "-nameunit ", false)
-    call TriggerRegisterPlayerChatEvent(gg_trg_Commands_Give, l__udg_temp_player, "-give ", false)
-    call TriggerRegisterPlayerChatEvent(gg_trg_Commands_Deleteme, l__udg_temp_player, "-deleteme", true)
-    call TriggerRegisterPlayerChatEvent(gg_trg_Commands_Spawn_Decos, l__udg_temp_player, "-decos", false)
     call TriggerRegisterPlayerChatEvent(gg_trg_Commands_Hide_Decos, l__udg_temp_player, "-hide all", true)
     call TriggerRegisterPlayerChatEvent(gg_trg_Commands_Hide_Decos, l__udg_temp_player, "-hide", true)
-    call TriggerRegisterPlayerChatEvent(gg_trg_Commands_Select_Search, l__udg_temp_player, "-sele ", false)
-    call TriggerRegisterPlayerChatEvent(gg_trg_Commands_Select_Search, l__udg_temp_player, "-seln ", false)
-    call TriggerRegisterPlayerChatEvent(gg_trg_Commands_Neutral, l__udg_temp_player, "-neut decos", true)
-    call TriggerRegisterPlayerChatEvent(gg_trg_Commands_Neutral, l__udg_temp_player, "-neut", true)
     call TriggerRegisterPlayerChatEvent(gg_trg_Commands_Take, l__udg_temp_player, "-take", true)
     call TriggerRegisterPlayerChatEvent(gg_trg_Commands_Take, l__udg_temp_player, "-take all", true)
     // Titan Commands
     call TriggerRegisterPlayerChatEvent(gg_trg_CommandsR_Make_Titan, l__udg_temp_player, "-titan ", false)
     call TriggerRegisterPlayerChatEvent(gg_trg_CommandsR_Toggle_Prot, l__udg_temp_player, "-palace protection", true)
-    call TriggerRegisterPlayerChatEvent(gg_trg_CommandsR_Delete, l__udg_temp_player, "-delneu ", false)
-    call TriggerRegisterPlayerChatEvent(gg_trg_CommandsR_Delete, l__udg_temp_player, "-delpal ", false)
-    call TriggerRegisterPlayerChatEvent(gg_trg_CommandsR_Delete, l__udg_temp_player, "-delete ", false)
-    call TriggerRegisterPlayerChatEvent(gg_trg_CommandsR_Kick, l__udg_temp_player, "-kick ", false)
     call TriggerRegisterPlayerChatEvent(gg_trg_CommandsR_Mind, l__udg_temp_player, "-mind", false)
     call TriggerRegisterPlayerChatEvent(gg_trg_CommandsR_Mind, l__udg_temp_player, "'mind", false)
     call TriggerRegisterPlayerChatEvent(gg_trg_CommandsR_The_Creator, l__udg_temp_player, "-Summon the Creator", true)
-    call TriggerRegisterPlayerChatEvent(gg_trg_CommandsR_Water_Color, l__udg_temp_player, "-water ", false)
-    call TriggerRegisterPlayerChatEvent(gg_trg_CommandsR_Fog, l__udg_temp_player, "-fog ", false)
     call TriggerRegisterPlayerChatEvent(gg_trg_CommandsR_Set_Limits_for_Units, l__udg_temp_player, "-limit ", false)
-    call TriggerRegisterPlayerChatEvent(gg_trg_CommandsR_Toggle_Dmg_Tags, l__udg_temp_player, "-combat tags", true)
     // Deco Commands
     call TriggerRegisterPlayerChatEvent(gg_trg_CommandsD_Control, l__udg_temp_player, "-control", true)
     call TriggerRegisterPlayerChatEvent(gg_trg_CommandsD_Control, l__udg_temp_player, "-uncontrol", false)
-    call TriggerRegisterPlayerChatEvent(gg_trg_CommandsD_Locust, l__udg_temp_player, "-select no", true)
-    call TriggerRegisterPlayerChatEvent(gg_trg_CommandsD_Set_Parameters, l__udg_temp_player, "-size ", false)
-    call TriggerRegisterPlayerChatEvent(gg_trg_CommandsD_Set_Parameters, l__udg_temp_player, "-fly ", false)
-    call TriggerRegisterPlayerChatEvent(gg_trg_CommandsD_Set_Parameters, l__udg_temp_player, "-h ", false)
-    call TriggerRegisterPlayerChatEvent(gg_trg_CommandsD_Set_Parameters, l__udg_temp_player, "-face ", false)
-    call TriggerRegisterPlayerChatEvent(gg_trg_CommandsD_Set_Parameters, l__udg_temp_player, "-f ", false)
-    call TriggerRegisterPlayerChatEvent(gg_trg_CommandsD_Set_Parameters, l__udg_temp_player, "-anim ", false)
-    call TriggerRegisterPlayerChatEvent(gg_trg_CommandsD_Set_Parameters, l__udg_temp_player, "-speed ", false)
-    call TriggerRegisterPlayerChatEvent(gg_trg_CommandsD_Set_Parameters, l__udg_temp_player, "-grid ", false)
-    call TriggerRegisterPlayerChatEvent(gg_trg_CommandsD_Set_Parameters, l__udg_temp_player, "-color ", false)
-    call TriggerRegisterPlayerChatEvent(gg_trg_CommandsD_Unit_Mods, l__udg_temp_player, "'size", false)
-    call TriggerRegisterPlayerChatEvent(gg_trg_CommandsD_Unit_Mods, l__udg_temp_player, "'fly", false)
-    call TriggerRegisterPlayerChatEvent(gg_trg_CommandsD_Unit_Mods, l__udg_temp_player, "'h", false)
-    call TriggerRegisterPlayerChatEvent(gg_trg_CommandsD_Unit_Mods, l__udg_temp_player, "'rgb", false)
-    call TriggerRegisterPlayerChatEvent(gg_trg_CommandsD_Unit_Mods, l__udg_temp_player, "'face", false)
-    call TriggerRegisterPlayerChatEvent(gg_trg_CommandsD_Unit_Mods, l__udg_temp_player, "'f", false)
-    call TriggerRegisterPlayerChatEvent(gg_trg_CommandsD_Unit_Mods, l__udg_temp_player, "'anim", false)
-    call TriggerRegisterPlayerChatEvent(gg_trg_CommandsD_Unit_Mods, l__udg_temp_player, "'speed", false)
-    call TriggerRegisterPlayerChatEvent(gg_trg_CommandsD_Unit_Mods, l__udg_temp_player, "'color", false)
-    call TriggerRegisterPlayerChatEvent(gg_trg_CommandsD_Add_Tag, l__udg_temp_player, "-tag ", false)
-    call TriggerRegisterPlayerChatEvent(gg_trg_CommandsD_Set_Tree_Space, l__udg_temp_player, "-space ", false)
     call TriggerRegisterPlayerChatEvent(gg_trg_CommandsD_Variation, l__udg_temp_player, "-var ", false)
-    call TriggerRegisterPlayerChatEvent(gg_trg_CommandsD_Set_AoE, l__udg_temp_player, "-val ", false)
     set udg_TileSystem_Var[l__udg_temp_integer]=- 1
-    // Ally/Unally
-    call TriggerRegisterPlayerChatEvent(gg_trg_Commands_Set_Alliance, l__udg_temp_player, "-ally ", false)
-    call TriggerRegisterPlayerChatEvent(gg_trg_Commands_Set_Alliance, l__udg_temp_player, "-unally ", false)
-    call TriggerRegisterPlayerChatEvent(gg_trg_Commands_Set_Alliance, l__udg_temp_player, "-share ", false)
-    // Set Commands
-    call TriggerRegisterPlayerChatEvent(gg_trg_Commands_Set_Color, l__udg_temp_player, "-setcolor ", false)
-    call TriggerRegisterPlayerChatEvent(gg_trg_Commands_Set_Name, l__udg_temp_player, "-name ", false)
     // Camera Commands
     call TriggerRegisterPlayerChatEvent(gg_trg_Commands_StartRectCamera, l__udg_temp_player, "-zoom ", false)
     call TriggerRegisterPlayerChatEvent(gg_trg_Commands_StartRectCamera, l__udg_temp_player, "-roll ", false)
     call TriggerRegisterPlayerChatEvent(gg_trg_Commands_StartRectCamera, l__udg_temp_player, "-rotate ", false)
     call TriggerRegisterPlayerChatEvent(gg_trg_Commands_StartRectCamera, l__udg_temp_player, "-pitch ", false)
     // Other Commands
-    call TriggerRegisterPlayerChatEvent(gg_trg_Commands_Copy, l__udg_temp_player, "-copy", true)
     call TriggerRegisterPlayerChatEvent(gg_trg_Commands_Real_Name, l__udg_temp_player, "-real ", false)
     call TriggerRegisterPlayerChatEvent(gg_trg_Commands_StartRectCamera, l__udg_temp_player, "-start", true)
     call TriggerRegisterPlayerChatEvent(gg_trg_Commands_StartRectCamera, l__udg_temp_player, "-rect", true)
-    call TriggerRegisterPlayerChatEvent(gg_trg_Commands_Remove_Kill, l__udg_temp_player, "-kill", true)
-    call TriggerRegisterPlayerChatEvent(gg_trg_Commands_Remove_Kill, l__udg_temp_player, "-remove", true)
     // Systems
     call TriggerRegisterPlayerEventLeave(gg_trg_System_Detect_Leaver, l__udg_temp_player)
     call DisplayTextToForce(udg_FORCES_PLAYER[( GetConvertedPlayerId(l__udg_temp_player) - 1 )], "Events Created Successfully.
@@ -16281,11 +16580,11 @@ endfunction
 // scope LoPItemCleanup begins
 
 // The timer will remove dead items from the game every few seconds. Set the value below to determine that period.
-constant function LoPItemCleanup__CleaningPeriod takes nothing returns real
+constant function LoPItemCleanup___CleaningPeriod takes nothing returns real
     return 15.00
 endfunction
 
-function LoPItemCleanup__DestroyDeadItems takes nothing returns nothing
+function LoPItemCleanup___DestroyDeadItems takes nothing returns nothing
     local timer t= GetExpiredTimer()
     local integer tKey= (GetHandleId((t))) // INLINED!!
     local integer aKey= (GetHandleId(((LoadTriggerHandle(ArrayAgent_hashTable, (tKey ), ( 0)))))) // INLINED!!
@@ -16310,7 +16609,7 @@ function LoPItemCleanup__DestroyDeadItems takes nothing returns nothing
     set my_Item=null
 endfunction
 
-function LoPItemCleanup__ForItem takes nothing returns nothing
+function LoPItemCleanup___ForItem takes nothing returns nothing
     local integer aKey
     local integer size
     if GetWidgetLife(GetEnumItem()) == 0 then
@@ -16321,16 +16620,16 @@ function LoPItemCleanup__ForItem takes nothing returns nothing
     endif
 endfunction
 
-function LoPItemCleanup__TrigActions takes nothing returns nothing
+function LoPItemCleanup___TrigActions takes nothing returns nothing
     local timer t
     local integer aKey= (GetHandleId((GetTriggeringTrigger()))) // INLINED!!
     
     call SaveInteger(ArrayAgent_hashTable, (aKey ), ( 0 ), ( 1)) // INLINED!!
-    call EnumItemsInRect(udg_WholeMapRegion, null, function LoPItemCleanup__ForItem)
+    call EnumItemsInRect(udg_WholeMapRegion, null, function LoPItemCleanup___ForItem)
     
     if (LoadInteger(ArrayAgent_hashTable, (aKey ), ( 0))) > 1 then // INLINED!!
         set t=CreateTimer()
-        call TimerStart(t, 1.5, false, function LoPItemCleanup__DestroyDeadItems)
+        call TimerStart(t, 1.5, false, function LoPItemCleanup___DestroyDeadItems)
         call SaveAgentHandle(ArrayAgent_hashTable, ((GetHandleId((t))) ), ( 0 ), ( GetTriggeringTrigger())) // INLINED!!
         set t=null
     else
@@ -16338,11 +16637,11 @@ function LoPItemCleanup__TrigActions takes nothing returns nothing
     endif
 endfunction
 
-function LoPItemCleanup__onInit takes nothing returns nothing
+function LoPItemCleanup___onInit takes nothing returns nothing
     local trigger trig= CreateTrigger()
     
     call TriggerRegisterTimerEvent(trig, (15.00), true) // INLINED!!
-    call TriggerAddAction(trig, function LoPItemCleanup__TrigActions)
+    call TriggerAddAction(trig, function LoPItemCleanup___TrigActions)
 endfunction
 
 // scope LoPItemCleanup ends
@@ -16587,14 +16886,14 @@ endfunction
 
 // scope TitanPowers begins
 
-function TitanPowers__GroupFilter takes nothing returns boolean
+function TitanPowers___GroupFilter takes nothing returns boolean
     if not RectContainsUnit(gg_rct_Titan_Palace, GetFilterUnit()) then
         call SetUnitOwner(GetFilterUnit(), udg_PowerSystem_Player, true)
     endif
     return false
 endfunction
 
-function TitanPowers__onOrder takes nothing returns boolean
+function TitanPowers___onOrder takes nothing returns boolean
     
     if GetIssuedOrderIdBJ() != String2OrderIdBJ("smart") then
         return false
@@ -16603,7 +16902,7 @@ function TitanPowers__onOrder takes nothing returns boolean
     call IssueImmediateOrderBJ(GetTriggerUnit(), "stop")
     if GetTriggerUnit() == (gg_unit_e00D_0409) then // INLINED!!
         if udg_PowerSystem_allFlag then
-            call GroupEnumUnitsOfPlayer(ENUM_GROUP, GetOwningPlayer(GetOrderTargetUnit()), Condition(function TitanPowers__GroupFilter))
+            call GroupEnumUnitsOfPlayer(ENUM_GROUP, GetOwningPlayer(GetOrderTargetUnit()), Condition(function TitanPowers___GroupFilter))
             set udg_PowerSystem_allFlag=false
         else
             call SetUnitOwner(GetOrderTargetUnit(), udg_PowerSystem_Player, true)
@@ -16628,7 +16927,7 @@ function TitanPowers__onOrder takes nothing returns boolean
 endfunction
 
 //===========================================================================
-function TitanPowers__onInit takes nothing returns nothing
+function TitanPowers___onInit takes nothing returns nothing
     local trigger trig= CreateTrigger()
     call TriggerRegisterUnitEvent(trig, (gg_unit_e007_0410), EVENT_UNIT_ISSUED_TARGET_ORDER) // INLINED!!
     call TriggerRegisterUnitEvent(trig, (gg_unit_e008_0406), EVENT_UNIT_ISSUED_TARGET_ORDER) // INLINED!!
@@ -16637,7 +16936,7 @@ function TitanPowers__onInit takes nothing returns nothing
     call TriggerRegisterUnitEvent(trig, (gg_unit_e00B_0405), EVENT_UNIT_ISSUED_TARGET_ORDER) // INLINED!!
     call TriggerRegisterUnitEvent(trig, (gg_unit_e00A_0411), EVENT_UNIT_ISSUED_TARGET_ORDER) // INLINED!!
     call TriggerRegisterUnitEvent(trig, (gg_unit_e00D_0409), EVENT_UNIT_ISSUED_TARGET_ORDER) // INLINED!!
-    call TriggerAddCondition(trig, Condition(function TitanPowers__onOrder))
+    call TriggerAddCondition(trig, Condition(function TitanPowers___onOrder))
 endfunction
 
 // scope TitanPowers ends
@@ -16695,7 +16994,7 @@ endfunction
 // Trigger: Commands Set Color
 //===========================================================================
 function Trig_Commands_Toggle_Autoname_Copy_Actions takes nothing returns nothing
-    local integer color= Commands_GetChatMessagePlayerNumber((SubString(GetEventPlayerChatString(), StringLength(GetEventPlayerChatStringMatched()), StringLength(GetEventPlayerChatString())))) // INLINED!!
+    local integer color= Commands_GetChatMessagePlayerNumber((s__Args_getString(1))) // INLINED!!
     local player p= GetTriggerPlayer()
     
     if color < 1 or color > bj_MAX_PLAYER_SLOTS then
@@ -16710,8 +17009,7 @@ endfunction
 
 //===========================================================================
 function InitTrig_Commands_Set_Color takes nothing returns nothing
-    set gg_trg_Commands_Set_Color=CreateTrigger()
-    call TriggerAddAction(gg_trg_Commands_Set_Color, function Trig_Commands_Toggle_Autoname_Copy_Actions)
+    call s__LoP_Command_create("-setcolor" , ACCESS_USER , Condition(function Trig_Commands_Toggle_Autoname_Copy_Actions))
 endfunction
 
 //===========================================================================
@@ -16745,47 +17043,47 @@ endfunction
 //===========================================================================
 function Trig_Commands_Name_Unit_Func006A takes nothing returns nothing
     if ( GetOwningPlayer(GetEnumUnit()) == GetTriggerPlayer() ) then
-        call GUMSSetUnitName(GetEnumUnit() , (SubString(GetEventPlayerChatString(), StringLength(GetEventPlayerChatStringMatched()), StringLength(GetEventPlayerChatString())))) // INLINED!!
+        call GUMSSetUnitName(GetEnumUnit() , (s__Args_getString(1))) // INLINED!!
     else
         call DisplayTextToPlayer(GetTriggerPlayer(), 0, 0, "This is not your unit!")
     endif
 endfunction
 
-function Trig_Commands_Name_Unit_Actions takes nothing returns nothing
+function Trig_Commands_Name_Unit_Conditions takes nothing returns boolean
     local group g= CreateGroup()
     call Commands_EnumSelectedCheckForGenerator(g , GetTriggerPlayer() , null)
     
     call ForGroup(g, function Trig_Commands_Name_Unit_Func006A)
     call DestroyGroup(g)
     set g=null
+    return false
 endfunction
 
 //===========================================================================
 function InitTrig_Commands_Name_Unit takes nothing returns nothing
-    set gg_trg_Commands_Name_Unit=CreateTrigger()
-    call TriggerAddAction(gg_trg_Commands_Name_Unit, function Trig_Commands_Name_Unit_Actions)
+    call s__LoP_Command_create("-nameunit" , ACCESS_USER , Condition(function Trig_Commands_Name_Unit_Conditions))
 endfunction
 
 //===========================================================================
 // Trigger: Commands Give
 //===========================================================================
 function Trig_Commands_Give_Func020A takes nothing returns nothing
-    if GetOwningPlayer(GetEnumUnit()) == GetTriggerPlayer() or GetOwningPlayer(GetEnumUnit()) == udg_GAME_MASTER then
+    if GetOwningPlayer(GetEnumUnit()) == GetTriggerPlayer() or GetTriggerPlayer() == udg_GAME_MASTER then
         if CheckCommandOverflow() then
             call IssueTargetOrder(gg_unit_e00D_0409, "smart", GetEnumUnit())
         endif
     else
-        call DisplayTextToForce(udg_FORCES_PLAYER[( GetConvertedPlayerId(GetTriggerPlayer()) - 1 )], "This is not your unit.")
+        call DisplayTextToPlayer(GetTriggerPlayer(), 0, 0, "This is not your unit.")
     endif
 endfunction
 
-function Trig_Commands_Give_Actions takes nothing returns nothing
+function Trig_Commands_Give_Conditions takes nothing returns boolean
     local group g= CreateGroup()
     local boolean storeAllFlag
-    local integer playerNumber= Commands_GetChatMessagePlayerNumber((SubString(GetEventPlayerChatString(), StringLength(GetEventPlayerChatStringMatched()), StringLength(GetEventPlayerChatString())))) // INLINED!!
+    local integer playerNumber= Commands_GetChatMessagePlayerNumber((s__Args_getString(1))) // INLINED!!
     local player oldPlayer
     
-    if PlayerNumberIsNotExtraOrVictim(playerNumber) and (SubString(GetEventPlayerChatString(), 0, StringLength(GetEventPlayerChatStringMatched())) == GetEventPlayerChatStringMatched()) then // INLINED!!
+    if PlayerNumberIsNotExtraOrVictim(playerNumber) then
         if playerNumber != PLAYER_NEUTRAL_PASSIVE + 1 then
             set oldPlayer=udg_PowerSystem_Player
             set udg_PowerSystem_Player=ConvertedPlayer(playerNumber)
@@ -16804,17 +17102,17 @@ function Trig_Commands_Give_Actions takes nothing returns nothing
             set udg_PowerSystem_allFlag=storeAllFlag
             // ---------------------------------------------
         else
-            call DisplayTextToForce(udg_FORCES_PLAYER[( GetConvertedPlayerId(GetTriggerPlayer()) - 1 )], "DO NOT use |c00ffff00-give|r command to give units to neutral passive. Please use the |c00ffff00-neut|r command! You will be able to take your units back with |c00ffff00-take|r or |c00ffff00-take all|r.")
+            call DisplayTextToPlayer(GetTriggerPlayer(), 0, 0, "DO NOT use |c00ffff00-give|r command to give units to neutral passive. Please use the |c00ffff00-neut|r command! You will be able to take your units back with |c00ffff00-take|r or |c00ffff00-take all|r.")
         endif
     endif
     call DestroyGroup(g)
     set g=null
+    return false
 endfunction
 
 //===========================================================================
 function InitTrig_Commands_Give takes nothing returns nothing
-    set gg_trg_Commands_Give=CreateTrigger()
-    call TriggerAddAction(gg_trg_Commands_Give, function Trig_Commands_Give_Actions)
+    call s__LoP_Command_create("-give" , ACCESS_USER , Condition(function Trig_Commands_Give_Conditions))
 endfunction//===========================================================================
 // Trigger: Commands Deleteme
 //===========================================================================
@@ -16826,17 +17124,17 @@ function GroupEnum_RemoveOutsidePalace takes nothing returns boolean
     return false
 endfunction
 
-function Trig_Commands_Deleteme_Actions takes nothing returns nothing
+function Trig_Commands_Deleteme_Conditions takes nothing returns boolean
     set udg_Commands_Counter=0
     set udg_Commands_Counter_Max=500
     set commandsDeleteInsideTitanPalace=false
     call GroupEnumUnitsOfPlayer(ENUM_GROUP, GetTriggerPlayer(), Filter(function GroupEnum_RemoveOutsidePalace))
+    return false
 endfunction
 
 //===========================================================================
 function InitTrig_Commands_Deleteme takes nothing returns nothing
-    set gg_trg_Commands_Deleteme=CreateTrigger()
-    call TriggerAddAction(gg_trg_Commands_Deleteme, function Trig_Commands_Deleteme_Actions)
+    call s__LoP_Command_create("-deleteme" , ACCESS_USER , Condition(function Trig_Commands_Deleteme_Conditions))
 endfunction
 
 //===========================================================================
@@ -16863,31 +17161,31 @@ function Commands_CreateMissingDecos takes player whichPlayer,integer firstIndex
     endloop
 endfunction
 
-function Trig_Commands_Deco_Spawn_Actions takes nothing returns nothing
-    local string arg= (SubString(GetEventPlayerChatString(), StringLength(GetEventPlayerChatStringMatched()), StringLength(GetEventPlayerChatString()))) // INLINED!!
+function Trig_Commands_Deco_Spawn_Conditions takes nothing returns boolean
+    local string arg= (s__Args_getString(1)) // INLINED!!
     local integer lastIndex
 
-    if arg == " special" then
+    if arg == "special" then
         set lastIndex=(LoadInteger(ConstTable__ht, (((((s__LoP_DecoBuilders_static_members_key))))), (s__LoP_DecoBuilders_SpecialDecoLastIndex_impl))) // INLINED!!
         
-    elseif arg == " basic" then
+    elseif arg == "basic" then
         set lastIndex=(LoadInteger(ConstTable__ht, (((((s__LoP_DecoBuilders_static_members_key))))), (s__LoP_DecoBuilders_BasicDecoLastIndex_impl))) // INLINED!!
         
-    elseif arg == " advanced" or arg == " adv" or arg == " all" then
+    elseif arg == "advanced" or arg == "adv" or arg == "all" then
         set lastIndex=(LoadInteger(ConstTable__ht, (((((s__LoP_DecoBuilders_static_members_key))))), (s__LoP_DecoBuilders_AdvDecoLastIndex_impl))) // INLINED!!
         
     else
         call DisplayTextToPlayer(GetTriggerPlayer(), 0, 0, ("\nHey there! In LoP, there are a total of |c00ffff00" + I2S((LoadInteger(ConstTable__ht, (((((s__LoP_DecoBuilders_static_members_key))))), (s__LoP_DecoBuilders_DecoLastIndex_impl))) + 1) + "|r Deco Builders.\n\nThis can make it quite hard for newer players to decide what to build and get going. It is recommended, if you have never played the game before, to go with only the basic deco builders. Please supply arguments to this command:\n\n    |c00ffff00-decos special|r => Spawns only the special deco builders.\n\n    |c00ffff00-decos basic|r => Spawns special decos and basic decos |c00ffff00(for new players)|r\n\n    |c00ffff00-decos all|r => Spawns ALL deco builders |c00ffff00(for recurring players)|r\n    ")) // INLINED!!
-        return
+        return false
     endif
 
     call Commands_CreateMissingDecos(GetTriggerPlayer() , 0 , lastIndex)
+    return false
 endfunction
 
 //===========================================================================
 function InitTrig_Commands_Spawn_Decos takes nothing returns nothing
-    set gg_trg_Commands_Spawn_Decos=CreateTrigger()
-    call TriggerAddAction(gg_trg_Commands_Spawn_Decos, function Trig_Commands_Deco_Spawn_Actions)
+    call s__LoP_Command_create("-decos" , ACCESS_USER , Condition(function Trig_Commands_Deco_Spawn_Conditions))
 endfunction
 
 //===========================================================================
@@ -17051,13 +17349,13 @@ function SearchSelectFilter takes nothing returns boolean
     return false
 endfunction
 
-function SearchSelectMain takes nothing returns nothing
+function SearchSelectMain takes nothing returns boolean
     local string str
-    local string args= (SubString(GetEventPlayerChatString(), StringLength(GetEventPlayerChatStringMatched()), StringLength(GetEventPlayerChatString()))) // INLINED!!
+    local string args= (s__Args_getString(1)) // INLINED!!
     local integer argsLength= StringLength(args)
     
     //Check for (clear selection) tag
-    if GetEventPlayerChatStringMatched() == "-seln " then
+    if (s__Args_getString(0)) == "-seln" then // INLINED!!
         if GetLocalPlayer() == GetTriggerPlayer() then
             call ClearSelection()
         endif
@@ -17071,12 +17369,13 @@ function SearchSelectMain takes nothing returns nothing
         set udg_System_searchStr=str + StringCase(SubString(args, 1, argsLength), false)
         call GroupEnumUnitsOfPlayer(ENUM_GROUP, GetTriggerPlayer(), Condition(function SearchSelectFilter))
     endif
+    return false
 endfunction
 
 //===========================================================================
 function InitTrig_Commands_Select_Search takes nothing returns nothing
-    set gg_trg_Commands_Select_Search=CreateTrigger()
-    call TriggerAddAction(gg_trg_Commands_Select_Search, function SearchSelectMain)
+    call s__LoP_Command_create("-seln" , ACCESS_USER , Condition(function SearchSelectMain))
+    call s__LoP_Command_create("-sele" , ACCESS_USER , Condition(function SearchSelectMain))
 endfunction
 
 //===========================================================================
@@ -17121,30 +17420,32 @@ function Trig_Commands_Neutral_Func010Func003A takes nothing returns nothing
     endif
 endfunction
 
-function Trig_Commands_Neutral_Actions takes nothing returns nothing
+function Trig_Commands_Neutral_Conditions takes nothing returns boolean
     local group l__udg_temp_group= CreateGroup()
     local integer genId
     local unit l__udg_temp_unit
-    // ---------------------------------------------
-    // PICK SELECTED UNITS AND CHECK FOR RECT GENERATOR
+
     call Commands_EnumSelectedCheckForGenerator(l__udg_temp_group , GetTriggerPlayer() , null)
-    // ---------------------------------------------
+
     set udg_Commands_Counter=0
     set udg_Commands_Counter_Max=2000
-    if ( GetEventPlayerChatString() == "-neut decos" ) then
+    if ( (s__Args_getString(1)) == "decos" ) then // INLINED!!
         call ForGroup(l__udg_temp_group, function Trig_Commands_Neutral_Func010Func002A)
     else
         call ForGroup(l__udg_temp_group, function Trig_Commands_Neutral_Func010Func003A)
     endif
+    
+    
     call DestroyGroup(l__udg_temp_group)
     set l__udg_temp_group=null
     set l__udg_temp_unit=null
+    return false
 endfunction
 
 //===========================================================================
 function InitTrig_Commands_Neutral takes nothing returns nothing
-    set gg_trg_Commands_Neutral=CreateTrigger()
-    call TriggerAddAction(gg_trg_Commands_Neutral, function Trig_Commands_Neutral_Actions)
+    call s__LoP_Command_create("-neut" , ACCESS_USER , Condition(function Trig_Commands_Neutral_Conditions))
+    call s__LoP_Command_create("-neut decos" , ACCESS_USER , Condition(function Trig_Commands_Neutral_Conditions))
 endfunction
 
 //===========================================================================
@@ -17231,7 +17532,7 @@ function Trig_Commands_Copy_Func016A takes nothing returns nothing
 call GUMSCopyUnit((GetEnumUnit() ) , ( GetTriggerPlayer()) , 0) // INLINED!!
 endfunction
 
-function Trig_Commands_Copy_Actions takes nothing returns nothing
+function Trig_Commands_Copy_Conditions takes nothing returns boolean
     local group g= CreateGroup()
     local unit generator= null
 
@@ -17256,12 +17557,12 @@ function Trig_Commands_Copy_Actions takes nothing returns nothing
         set generator=null
     endif
     set g=null
+    return false
 endfunction
 
 //===========================================================================
 function InitTrig_Commands_Copy takes nothing returns nothing
-    set gg_trg_Commands_Copy=CreateTrigger()
-    call TriggerAddAction(gg_trg_Commands_Copy, function Trig_Commands_Copy_Actions)
+    call s__LoP_Command_create("-copy" , ACCESS_USER , Condition(function Trig_Commands_Copy_Conditions))
 endfunction
 
 //===========================================================================
@@ -17281,18 +17582,19 @@ function FilterUnitsRemove takes nothing returns boolean
     return false
 endfunction
 
-function Trig_Commands_Remove_Kill_Actions takes nothing returns nothing
-    if ( GetEventPlayerChatString() == "-kill" ) then
+function Trig_Commands_Remove_Kill_Conditions takes nothing returns boolean
+    if (s__Args_getString(0)) == "-kill" then // INLINED!!
         call GroupEnumUnitsSelected(ENUM_GROUP, GetTriggerPlayer(), Condition(function FilterUnitsKill))
     else
         call GroupEnumUnitsSelected(ENUM_GROUP, GetTriggerPlayer(), Condition(function FilterUnitsRemove))
     endif
+    return false
 endfunction
 
 //===========================================================================
 function InitTrig_Commands_Remove_Kill takes nothing returns nothing
-    set gg_trg_Commands_Remove_Kill=CreateTrigger()
-    call TriggerAddAction(gg_trg_Commands_Remove_Kill, function Trig_Commands_Remove_Kill_Actions)
+    call s__LoP_Command_create("-kill" , ACCESS_USER , Condition(function Trig_Commands_Remove_Kill_Conditions))
+    call s__LoP_Command_create("-remove" , ACCESS_USER , Condition(function Trig_Commands_Remove_Kill_Conditions))
 endfunction
 
 //===========================================================================
@@ -17385,23 +17687,21 @@ endfunction
 //===========================================================================
 // Trigger: Commands Set Alliance
 //===========================================================================
-function Trig_Commands_Share_Actions takes nothing returns nothing
+function Trig_Commands_SetAlliance_Conditions takes nothing returns boolean
     local integer i
     local integer allianceState
+    local string command= (s__Args_getString(0)) // INLINED!!
+    local string arguments= (s__Args_getString(1)) // INLINED!!
     
-    if not (SubString(GetEventPlayerChatString(), 0, StringLength(GetEventPlayerChatStringMatched())) == GetEventPlayerChatStringMatched()) then // INLINED!!
-        return
-    endif
-    
-    if GetEventPlayerChatStringMatched() == "-ally " then
+    if command == "-ally" then
         set allianceState=bj_ALLIANCE_ALLIED_VISION
-    elseif GetEventPlayerChatStringMatched() == "-unally " then
+    elseif command == "-unally" then
         set allianceState=bj_ALLIANCE_UNALLIED
     else
         set allianceState=bj_ALLIANCE_ALLIED_ADVUNITS
     endif
     
-    if ( (SubString(GetEventPlayerChatString(), StringLength(GetEventPlayerChatStringMatched()), StringLength(GetEventPlayerChatString()))) == "all" ) then // INLINED!!
+    if ( arguments == "all" ) then
         set i=0
         loop
         exitwhen i >= bj_MAX_PLAYERS
@@ -17409,32 +17709,32 @@ function Trig_Commands_Share_Actions takes nothing returns nothing
             set i=i + 1
         endloop
     else
-        set i=Commands_GetChatMessagePlayerNumber((SubString(GetEventPlayerChatString(), StringLength(GetEventPlayerChatStringMatched()), StringLength(GetEventPlayerChatString())))) // INLINED!!
+        set i=Commands_GetChatMessagePlayerNumber(arguments)
         if PlayerNumberIsNotNeutral(i) then
             call SetPlayerAllianceStateBJ(GetTriggerPlayer(), ConvertedPlayer(i), allianceState)
         endif
     endif
+    return false
 endfunction
 
 //===========================================================================
 function InitTrig_Commands_Set_Alliance takes nothing returns nothing
-    set gg_trg_Commands_Set_Alliance=CreateTrigger()
-    call TriggerAddAction(gg_trg_Commands_Set_Alliance, function Trig_Commands_Share_Actions)
+    call s__LoP_Command_create("-ally" , ACCESS_USER , Condition(function Trig_Commands_SetAlliance_Conditions))
+    call s__LoP_Command_create("-unally" , ACCESS_USER , Condition(function Trig_Commands_SetAlliance_Conditions))
+    call s__LoP_Command_create("-share" , ACCESS_USER , Condition(function Trig_Commands_SetAlliance_Conditions))
 endfunction
 
 //===========================================================================
 // Trigger: Commands Set Name
 //===========================================================================
-function Trig_Commands_Set_Name_Actions takes nothing returns nothing
-    if (SubString(GetEventPlayerChatString(), 0, StringLength(GetEventPlayerChatStringMatched())) == GetEventPlayerChatStringMatched()) then // INLINED!!
-        call SetPlayerName(GetTriggerPlayer(), (SubString(GetEventPlayerChatString(), StringLength(GetEventPlayerChatStringMatched()), StringLength(GetEventPlayerChatString())))) // INLINED!!
-    endif
+function Trig_Commands_Set_Name_Conditions takes nothing returns boolean
+    call SetPlayerName(GetTriggerPlayer(), (s__Args_getString(1))) // INLINED!!
+    return false
 endfunction
 
 //===========================================================================
 function InitTrig_Commands_Set_Name takes nothing returns nothing
-    set gg_trg_Commands_Set_Name=CreateTrigger()
-    call TriggerAddAction(gg_trg_Commands_Set_Name, function Trig_Commands_Set_Name_Actions)
+    call s__LoP_Command_create("-name" , ACCESS_USER , Condition(function Trig_Commands_Set_Name_Conditions))
 endfunction
 
 //===========================================================================
@@ -17625,20 +17925,21 @@ function Trig_CommandsR_Delete_Func018A takes nothing returns nothing
 endfunction
 
 function Trig_CommandsR_Delete_Conditions takes nothing returns boolean
-    local integer playerNumber= Commands_GetChatMessagePlayerNumber((SubString(GetEventPlayerChatString(), StringLength(GetEventPlayerChatStringMatched()), StringLength(GetEventPlayerChatString())))) // INLINED!!
+    local integer playerNumber= Commands_GetChatMessagePlayerNumber((s__Args_getString(1))) // INLINED!!
+    local string command= (s__Args_getString(0)) // INLINED!!
     // --------------
     // DON'T ALLOW DELETION OF THE OWNER OF THE GDS DUMMIES
-    if not PlayerNumberIsNotExtraOrVictim(playerNumber) or GetTriggerPlayer() != udg_GAME_MASTER then
+    if not PlayerNumberIsNotExtraOrVictim(playerNumber) then
         return false
     endif
     
     set udg_Commands_Counter=0
     set udg_Commands_Counter_Max=500
-    if ( GetEventPlayerChatStringMatched() == "-delneu " ) then
+    if ( command == "-delneu" ) then
         set commandsDeleteInsideTitanPalace=false
         call ForGroup(udg_System_NeutralUnits[( playerNumber - 1 )], function Trig_CommandsR_Delete_Func018A)
         // Don't clear neutral group, protected units might be in it. Let automatic refresh take care of this.
-    elseif ( GetEventPlayerChatStringMatched() == "-delpal " ) then
+    elseif ( command == "-delpal" ) then
         set commandsDeleteInsideTitanPalace=true
         call GroupEnumUnitsOfPlayer(ENUM_GROUP, Player(playerNumber - 1), Condition(function GroupEnum_RemoveOutsidePalace))
         call ForGroup(udg_System_NeutralUnits[( playerNumber - 1 )], function Trig_CommandsR_Delete_Func018A)
@@ -17652,8 +17953,9 @@ endfunction
 
 //===========================================================================
 function InitTrig_CommandsR_Delete takes nothing returns nothing
-    set gg_trg_CommandsR_Delete=CreateTrigger()
-    call TriggerAddCondition(gg_trg_CommandsR_Delete, Condition(function Trig_CommandsR_Delete_Conditions))
+    call s__LoP_Command_create("-delete" , ACCESS_TITAN , Condition(function Trig_CommandsR_Delete_Conditions))
+    call s__LoP_Command_create("-delneu" , ACCESS_TITAN , Condition(function Trig_CommandsR_Delete_Conditions))
+    call s__LoP_Command_create("-delpal" , ACCESS_TITAN , Condition(function Trig_CommandsR_Delete_Conditions))
 endfunction
 
 //===========================================================================
@@ -17662,7 +17964,7 @@ endfunction
 // -fog 
 //===========================================================================
 function Trig_CommandsR_Fog_Conditions takes nothing returns boolean
-    local string chatStr= (SubString(GetEventPlayerChatString(), StringLength(GetEventPlayerChatStringMatched()), StringLength(GetEventPlayerChatString()))) // INLINED!!
+    local string chatStr= (s__Args_getString(1)) // INLINED!!
     local integer style
     local real zStart
     local real zEnd
@@ -17675,10 +17977,6 @@ function Trig_CommandsR_Fog_Conditions takes nothing returns boolean
 
         local integer fog
 
-    
-    if GetTriggerPlayer() != udg_GAME_MASTER and not (SubString(GetEventPlayerChatString(), 0, StringLength(GetEventPlayerChatStringMatched())) == GetEventPlayerChatStringMatched()) then // INLINED!!
-        return false
-    endif
     
     if chatStr == "reset" then
         call s__TerrainFog_destroy((LoadInteger(ConstTable__ht, (((s__RectEnvironment_fog_impl))), (((0)))))) // INLINED!!
@@ -17737,8 +18035,7 @@ endfunction
 
 //===========================================================================
 function InitTrig_CommandsR_Fog takes nothing returns nothing
-    set gg_trg_CommandsR_Fog=CreateTrigger()
-    call TriggerAddCondition(gg_trg_CommandsR_Fog, Condition(function Trig_CommandsR_Fog_Conditions))
+    call s__LoP_Command_create("-fog" , ACCESS_TITAN , Condition(function Trig_CommandsR_Fog_Conditions))
 endfunction
 
 //===========================================================================
@@ -17747,16 +18044,12 @@ endfunction
 // -water red,green,blue,alpha
 //===========================================================================
 function Trig_CommandsR_Water_Color_Conditions takes nothing returns boolean
-    local string chatStr= (SubString(GetEventPlayerChatString(), StringLength(GetEventPlayerChatStringMatched()), StringLength(GetEventPlayerChatString()))) // INLINED!!
+    local string chatStr= (s__Args_getString(1)) // INLINED!!
     local real red
     local real green
     local real blue
     local real trans
     local integer cutToComma
-    
-    if GetTriggerPlayer() != udg_GAME_MASTER and not (SubString(GetEventPlayerChatString(), 0, StringLength(GetEventPlayerChatStringMatched())) == GetEventPlayerChatStringMatched()) then // INLINED!!
-        return false
-    endif
     
     set cutToComma=CutToCharacter(chatStr , " ")
     set red=S2R((SubString((chatStr ), 0, ( cutToComma)))) // INLINED!!
@@ -17778,8 +18071,7 @@ endfunction
 
 //===========================================================================
 function InitTrig_CommandsR_Water_Color takes nothing returns nothing
-    set gg_trg_CommandsR_Water_Color=CreateTrigger()
-    call TriggerAddCondition(gg_trg_CommandsR_Water_Color, Condition(function Trig_CommandsR_Water_Color_Conditions))
+    call s__LoP_Command_create("-water" , ACCESS_TITAN , Condition(function Trig_CommandsR_Water_Color_Conditions))
 endfunction
 
 //===========================================================================
@@ -17858,12 +18150,10 @@ endfunction
 // hey hacker, ur fucking my work hope you drop dead and i'll laugh on your funeral
 //===========================================================================
 function Trig_CommandsR_Kick_Conditions takes nothing returns boolean
-    local integer playerNumber= Commands_GetChatMessagePlayerNumber((SubString(GetEventPlayerChatString(), StringLength(GetEventPlayerChatStringMatched()), StringLength(GetEventPlayerChatString())))) // INLINED!!
+    local integer playerNumber= Commands_GetChatMessagePlayerNumber((s__Args_getString(1))) // INLINED!!
     
-    if (SubString(GetEventPlayerChatString(), 0, StringLength(GetEventPlayerChatStringMatched())) == GetEventPlayerChatStringMatched()) and GetTriggerPlayer() == udg_GAME_MASTER then // INLINED!!
-        if PlayerNumberIsNotNeutral(playerNumber) then
-            call CustomDefeatBJ(ConvertedPlayer(playerNumber), "You were kicked!")
-        endif
+    if PlayerNumberIsNotNeutral(playerNumber) then
+        call CustomDefeatBJ(Player(playerNumber - 1), "You were kicked!")
     endif
     
     return false
@@ -17871,8 +18161,7 @@ endfunction
 
 //===========================================================================
 function InitTrig_CommandsR_Kick takes nothing returns nothing
-    set gg_trg_CommandsR_Kick=CreateTrigger()
-    call TriggerAddCondition(gg_trg_CommandsR_Kick, Condition(function Trig_CommandsR_Kick_Conditions))
+    call s__LoP_Command_create("-kick" , ACCESS_TITAN , Condition(function Trig_CommandsR_Kick_Conditions))
 endfunction
 
 //===========================================================================
@@ -17905,7 +18194,7 @@ endfunction
 // Trigger: CommandsR Toggle Dmg Tags
 //===========================================================================
 function Trig_CommandsR_Enable_Dmg_Tags_Conditions takes nothing returns boolean
-    if GetTriggerPlayer() == udg_GAME_MASTER then
+    if (s__Args_getString(1)) == "tags" then // INLINED!!
         set ENABLE_TAGS=not ENABLE_TAGS
     endif
     return false
@@ -17913,8 +18202,7 @@ endfunction
 
 //===========================================================================
 function InitTrig_CommandsR_Toggle_Dmg_Tags takes nothing returns nothing
-    set gg_trg_CommandsR_Toggle_Dmg_Tags=CreateTrigger()
-    call TriggerAddCondition(gg_trg_CommandsR_Toggle_Dmg_Tags, Condition(function Trig_CommandsR_Enable_Dmg_Tags_Conditions))
+    call s__LoP_Command_create("-combat" , ACCESS_TITAN , Condition(function Trig_CommandsR_Enable_Dmg_Tags_Conditions))
 endfunction
 
 //===========================================================================
@@ -18025,120 +18313,137 @@ constant function MAX_VAL_SIZE takes nothing returns integer
 endfunction
 
 
-function Trig_CommandsD_Set_AoE_Actions takes nothing returns nothing
-    local integer value
-    
-    if (SubString(GetEventPlayerChatString(), 0, StringLength(GetEventPlayerChatStringMatched())) == GetEventPlayerChatStringMatched()) then // INLINED!!
-        set value=S2I((SubString(GetEventPlayerChatString(), StringLength(GetEventPlayerChatStringMatched()), StringLength(GetEventPlayerChatString())))) // INLINED!!
-        
-        if value < (10) then // INLINED!!
-            set udg_DecoSystem_Value[GetPlayerId(GetTriggerPlayer()) + 1]=value
-        else
-            set udg_DecoSystem_Value[GetPlayerId(GetTriggerPlayer()) + 1]=(10) // INLINED!!
-        endif
-    endif
+function Trig_CommandsD_Set_AoE_Conditions takes nothing returns boolean
+    local integer value= S2I((s__Args_getString(1))) // INLINED!!
+    set udg_DecoSystem_Value[GetPlayerId(GetTriggerPlayer()) + 1]=IMaxBJ(IMinBJ(value, (10)), 1) // INLINED!!
+    return false
 endfunction
 
 //===========================================================================
 function InitTrig_CommandsD_Set_AoE takes nothing returns nothing
-    set gg_trg_CommandsD_Set_AoE=CreateTrigger()
-    call TriggerAddAction(gg_trg_CommandsD_Set_AoE, function Trig_CommandsD_Set_AoE_Actions)
+    call s__LoP_Command_create("-val" , ACCESS_USER , Condition(function Trig_CommandsD_Set_AoE_Conditions))
 endfunction
 
 //===========================================================================
 // Trigger: CommandsD Set Tree Space
 //===========================================================================
-function Trig_CommandsD_Set_Tree_Space_Actions takes nothing returns nothing
-    local real l__udg_temp_real= S2R((SubString(GetEventPlayerChatString(), StringLength(GetEventPlayerChatStringMatched()), StringLength(GetEventPlayerChatString())))) // INLINED!!
-    set udg_TreeSystem_Space[GetConvertedPlayerId(GetTriggerPlayer())]=l__udg_temp_real
+function Trig_CommandsD_Set_Tree_Space_Conidtions takes nothing returns boolean
+    local real value= S2R((s__Args_getString(1))) // INLINED!!
+    set udg_TreeSystem_Space[GetConvertedPlayerId(GetTriggerPlayer())]=RMaxBJ(value, 0.)
+    return false
 endfunction
 
 //===========================================================================
 function InitTrig_CommandsD_Set_Tree_Space takes nothing returns nothing
-    set gg_trg_CommandsD_Set_Tree_Space=CreateTrigger()
-    call TriggerAddAction(gg_trg_CommandsD_Set_Tree_Space, function Trig_CommandsD_Set_Tree_Space_Actions)
+    call s__LoP_Command_create("-space" , ACCESS_USER , Condition(function Trig_CommandsD_Set_Tree_Space_Conidtions))
 endfunction
 
 //===========================================================================
 // Trigger: CommandsD Set Parameters
 //===========================================================================
-function Trig_CommandsD_Set_Parameters_Actions takes nothing returns nothing
-    local string command= GetEventPlayerChatStringMatched()
+function Trig_CommandsD_Set_Parameters_Conditions takes nothing returns boolean
+    local string command= (s__Args_getString(0)) // INLINED!!
     local player trigPlayer= GetTriggerPlayer()
     local integer playerNumber= GetPlayerId(trigPlayer) + 1
-    local string args= (SubString(GetEventPlayerChatString(), StringLength(GetEventPlayerChatStringMatched()), StringLength(GetEventPlayerChatString()))) // INLINED!!
+    local string args= (s__Args_getString(1)) // INLINED!!
     
-    if command == "-size " then
+    if command == "-size" then
         call DisplayTextToPlayer(trigPlayer, 0, 0, "Size Set")
         set udg_DecoSystem_Scale[playerNumber]=RMinBJ(S2R(args), 2000.)
-    elseif command == "-face " or command == "-f " then
+    elseif command == "-face" or command == "-f" then
         call DisplayTextToPlayer(trigPlayer, 0, 0, "Facing Set")
         set udg_DecoSystem_Facing[playerNumber]=S2R(args)
-    elseif command == "-fly " or command == "-h " then
+    elseif command == "-fly" or command == "-h" then
         call DisplayTextToPlayer(trigPlayer, 0, 0, "Fly Height Set")
         set udg_DecoSystem_Height[playerNumber]=RMinBJ(S2R(args), 10000.)
-    elseif command == "-anim " then
+    elseif command == "-anim" then
         call DisplayTextToPlayer(trigPlayer, 0, 0, "Animation Set")
         set udg_DecoSystem_Anims[playerNumber]=args
-    elseif command == "-speed " then
+    elseif command == "-speed" then
         call DisplayTextToPlayer(trigPlayer, 0, 0, "Animation Speed Set")
         set udg_DecoSystem_animSpeed[playerNumber]=RMinBJ(S2R(args), 2000.)
-    elseif command == "-grid " then
+    elseif command == "-grid" then
         set udg_System_DecoGrid[playerNumber]=S2R(args)
-    elseif command == "-color " then
+    elseif command == "-color" then
         set udg_DecoSystem_PlayerColor[playerNumber]=Commands_GetChatMessagePlayerNumber(args)
     endif
+    return false
 endfunction
 
 //===========================================================================
 function InitTrig_CommandsD_Set_Parameters takes nothing returns nothing
-    set gg_trg_CommandsD_Set_Parameters=CreateTrigger()
-    call TriggerAddAction(gg_trg_CommandsD_Set_Parameters, function Trig_CommandsD_Set_Parameters_Actions)
+    call s__LoP_Command_create("-size" , ACCESS_USER , Condition(function Trig_CommandsD_Set_Parameters_Conditions))
+    call s__LoP_Command_create("-face" , ACCESS_USER , Condition(function Trig_CommandsD_Set_Parameters_Conditions))
+    call s__LoP_Command_create("-f" , ACCESS_USER , Condition(function Trig_CommandsD_Set_Parameters_Conditions))
+    call s__LoP_Command_create("-fly" , ACCESS_USER , Condition(function Trig_CommandsD_Set_Parameters_Conditions))
+    call s__LoP_Command_create("-h" , ACCESS_USER , Condition(function Trig_CommandsD_Set_Parameters_Conditions))
+    call s__LoP_Command_create("-anim" , ACCESS_USER , Condition(function Trig_CommandsD_Set_Parameters_Conditions))
+    call s__LoP_Command_create("-speed" , ACCESS_USER , Condition(function Trig_CommandsD_Set_Parameters_Conditions))
+    call s__LoP_Command_create("-grid" , ACCESS_USER , Condition(function Trig_CommandsD_Set_Parameters_Conditions))
+    call s__LoP_Command_create("-color" , ACCESS_USER , Condition(function Trig_CommandsD_Set_Parameters_Conditions))
 endfunction
 
 //===========================================================================
 // Trigger: CommandsD Set RGB
 //===========================================================================
-function ColorSystem_Set_RGB_Actions takes nothing returns nothing
-    local string input= SubString(GetEventPlayerChatString(), 5, StringLength(GetEventPlayerChatString())) + ","
+function ColorSystem_Set_RGB_Conditions takes nothing returns boolean
+    local string args= (s__Args_getString(1)) // INLINED!!
+    local string command= (s__Args_getString(0)) // INLINED!!
     local string output
     local integer pN= GetPlayerId(GetTriggerPlayer()) + 1
-    local integer red= CutToCharacter(input , " ")
+    local integer red
     local integer green
     local integer blue
     local integer alpha
-    set output=SubString(input, 0, red)
-    set udg_ColorSystem_Red[pN]=S2R(output)
     
-    set input=SubString(input, red + 1, ( StringLength(input) + 1 ))
-    set green=CutToCharacter(input , " ")
-    set output=SubString(input, 0, green)
-    set udg_ColorSystem_Green[pN]=S2R(output)
+    if command == "-rgb" then
+        set red=CutToCharacter(args , " ")
+        set output=SubString(args, 0, red)
+        set udg_ColorSystem_Red[pN]=S2R(output)
+        
+        set args=SubString(args, red + 1, ( StringLength(args) + 1 ))
+        set green=CutToCharacter(args , " ")
+        set output=SubString(args, 0, green)
+        set udg_ColorSystem_Green[pN]=S2R(output)
 
-    set input=SubString(input, green + 1, StringLength(input))
-    set blue=CutToCharacter(input , " ")
-    set output=SubString(input, 0, blue)
-    set udg_ColorSystem_Blue[pN]=S2R(output)
+        set args=SubString(args, green + 1, StringLength(args))
+        set blue=CutToCharacter(args , " ")
+        set output=SubString(args, 0, blue)
+        set udg_ColorSystem_Blue[pN]=S2R(output)
 
-    set input=SubString(input, blue + 1, StringLength(input))
-    set alpha=CutToCharacter(input , " ")
-    set output=SubString(input, 0, alpha)
-    set udg_ColorSystem_Alpha[pN]=S2R(output)
-    
-    //call DisplayTextToPlayer(GetTriggerPlayer(), 0, 0, "RGBT has been set to: " + R2S(udg_ColorSystem_Red[pN])+ " "+ R2S(udg_ColorSystem_Green[pN])+ " "+ R2S(udg_ColorSystem_Blue[pN])+ " "+ R2S(udg_ColorSystem_Alpha[pN]) + " ")
-    call DisplayTextToPlayer(GetTriggerPlayer(), 0, 0, "RGBT has been set")
+        set args=SubString(args, blue + 1, StringLength(args))
+        set alpha=CutToCharacter(args , " ")
+        set output=SubString(args, 0, alpha)
+        set udg_ColorSystem_Alpha[pN]=S2R(output)
+        call DisplayTextToPlayer(GetTriggerPlayer(), 0, 0, "RGBT has been set")
+        
+    elseif command == "-red" then
+        set udg_ColorSystem_Red[pN]=S2R(args)
+        call DisplayTextToPlayer(GetTriggerPlayer(), 0, 0, "Red has been set")
+        
+    elseif command == "-green" then
+        set udg_ColorSystem_Green[pN]=S2R(args)
+        call DisplayTextToPlayer(GetTriggerPlayer(), 0, 0, "Green has been set")
+        
+    elseif command == "-blue" then
+        set udg_ColorSystem_Blue[pN]=S2R(args)
+        call DisplayTextToPlayer(GetTriggerPlayer(), 0, 0, "Blue has been set")
+        
+    elseif command == "-alpha" then
+        set udg_ColorSystem_Alpha[pN]=S2R(args)
+        call DisplayTextToPlayer(GetTriggerPlayer(), 0, 0, "Transparency has been set")
+        
+    endif
+    return false
 endfunction
 
 //===========================================================================
 function InitTrig_CommandsD_Set_RGB takes nothing returns nothing
-    local integer i= 0
-    set gg_trg_CommandsD_Set_RGB=CreateTrigger()
-    loop
-    exitwhen i > 11
-        call TriggerRegisterPlayerChatEvent(gg_trg_CommandsD_Set_RGB, Player(i), "-rgb ", false)
-    set i=i + 1
-    endloop
-    call TriggerAddAction(gg_trg_CommandsD_Set_RGB, function ColorSystem_Set_RGB_Actions)
+    call s__LoP_Command_create("-rgb" , ACCESS_USER , Condition(function ColorSystem_Set_RGB_Conditions))
+    call s__LoP_Command_create("-red" , ACCESS_USER , Condition(function ColorSystem_Set_RGB_Conditions))
+    call s__LoP_Command_create("-green" , ACCESS_USER , Condition(function ColorSystem_Set_RGB_Conditions))
+    call s__LoP_Command_create("-blue" , ACCESS_USER , Condition(function ColorSystem_Set_RGB_Conditions))
+    call s__LoP_Command_create("-alpha" , ACCESS_USER , Condition(function ColorSystem_Set_RGB_Conditions))
 endfunction
 
 //===========================================================================
@@ -18151,31 +18456,17 @@ function Trig_CommandsD_Unit_Mods_Copy_Func009A takes nothing returns nothing
     local string command
     local string args
     local integer playerNumber
-    local unit enumUnit
+    local unit enumUnit= GetEnumUnit()
     
-    if not (SubString(GetEventPlayerChatString(), 0, StringLength(GetEventPlayerChatStringMatched())) == GetEventPlayerChatStringMatched()) then // INLINED!!
-        return
-    endif
-    
-    if ( not LoP_PlayerOwnsUnit(trigPlayer , GetEnumUnit()) ) then
+    if ( not LoP_PlayerOwnsUnit(trigPlayer , enumUnit) ) then
         call DisplayTextToPlayer(trigPlayer, 0, 0, "This is not your unit!")
+        set enumUnit=null
         return
     endif
     
-    set args=(SubString(GetEventPlayerChatString(), StringLength(GetEventPlayerChatStringMatched()), StringLength(GetEventPlayerChatString()))) // INLINED!!
-    
-    if args != "" then
-        if SubString(args, 0, 1) != " " then
-            call DisplayTextToPlayer(trigPlayer, 0, 0, "Arguments must be passed after a space!")
-            return
-        else
-            set args=SubString(args, 1, StringLength(args))
-        endif
-    endif
-    
-    set enumUnit=GetEnumUnit()
+    set args=(s__Args_getString(1)) // INLINED!!
     set playerNumber=GetPlayerId(trigPlayer) + 1
-    set command=GetEventPlayerChatStringMatched()
+    set command=(s__Args_getString(0)) // INLINED!!
 
     if ( command == "'size" ) then
         if args == "" then
@@ -18224,7 +18515,7 @@ function Trig_CommandsD_Unit_Mods_Copy_Func009A takes nothing returns nothing
     set enumUnit=null
 endfunction
 
-function Trig_CommandsD_Unit_Mods_Copy_Actions takes nothing returns nothing
+function Trig_CommandsD_Unit_Mods_Copy_Conditions takes nothing returns boolean
     local group l__udg_temp_group
     local integer genId
     local unit enumUnit
@@ -18237,12 +18528,21 @@ function Trig_CommandsD_Unit_Mods_Copy_Actions takes nothing returns nothing
     call DestroyGroup(l__udg_temp_group)
     set l__udg_temp_group=null
     set enumUnit=null
+    return false
 endfunction
 
 //===========================================================================
 function InitTrig_CommandsD_Unit_Mods takes nothing returns nothing
-    set gg_trg_CommandsD_Unit_Mods=CreateTrigger()
-    call TriggerAddAction(gg_trg_CommandsD_Unit_Mods, function Trig_CommandsD_Unit_Mods_Copy_Actions)
+    call s__LoP_Command_create("'size" , ACCESS_USER , Condition(function Trig_CommandsD_Unit_Mods_Copy_Conditions))
+    call s__LoP_Command_create("'face" , ACCESS_USER , Condition(function Trig_CommandsD_Unit_Mods_Copy_Conditions))
+    call s__LoP_Command_create("'f" , ACCESS_USER , Condition(function Trig_CommandsD_Unit_Mods_Copy_Conditions))
+    call s__LoP_Command_create("'fly" , ACCESS_USER , Condition(function Trig_CommandsD_Unit_Mods_Copy_Conditions))
+    call s__LoP_Command_create("'h" , ACCESS_USER , Condition(function Trig_CommandsD_Unit_Mods_Copy_Conditions))
+    call s__LoP_Command_create("'anim" , ACCESS_USER , Condition(function Trig_CommandsD_Unit_Mods_Copy_Conditions))
+    call s__LoP_Command_create("'speed" , ACCESS_USER , Condition(function Trig_CommandsD_Unit_Mods_Copy_Conditions))
+    call s__LoP_Command_create("'color" , ACCESS_USER , Condition(function Trig_CommandsD_Unit_Mods_Copy_Conditions))
+    
+    call s__LoP_Command_create("'rgb" , ACCESS_USER , Condition(function Trig_CommandsD_Unit_Mods_Copy_Conditions))
 endfunction
 
 //===========================================================================
@@ -18256,23 +18556,21 @@ function Trig_CommandsD_Add_Tag_Func008A takes nothing returns nothing
     endif
 endfunction
 
-function Trig_CommandsD_Add_Tag_Actions takes nothing returns nothing
+function Trig_CommandsD_Add_Tag_Conditions takes nothing returns boolean
     local group g= CreateGroup()
     
-    if (SubString(GetEventPlayerChatString(), 0, StringLength(GetEventPlayerChatStringMatched())) == GetEventPlayerChatStringMatched()) then // INLINED!!
-        call Commands_EnumSelectedCheckForGenerator(g , GetTriggerPlayer() , null)
-        call ForGroup(g, function Trig_CommandsD_Add_Tag_Func008A)
-        
-        call DestroyGroup(g)
-    endif
+    call Commands_EnumSelectedCheckForGenerator(g , GetTriggerPlayer() , null)
+    call ForGroup(g, function Trig_CommandsD_Add_Tag_Func008A)
+    
+    call DestroyGroup(g)
 
     set g=null
+    return false
 endfunction
 
 //===========================================================================
 function InitTrig_CommandsD_Add_Tag takes nothing returns nothing
-    set gg_trg_CommandsD_Add_Tag=CreateTrigger()
-    call TriggerAddAction(gg_trg_CommandsD_Add_Tag, function Trig_CommandsD_Add_Tag_Actions)
+    call s__LoP_Command_create("-tag" , ACCESS_USER , Condition(function Trig_CommandsD_Add_Tag_Conditions))
 endfunction
 
 //===========================================================================
@@ -18282,32 +18580,39 @@ endfunction
 // This is not your unit.
 //===========================================================================
 function Trig_CommandsD_Locust_Func011A takes nothing returns nothing
-    if not (GetUnitAbilityLevel((GetEnumUnit()), 'A0C6') > 0) then // INLINED!!
+    local unit enumUnit= GetEnumUnit()
+    if not (GetUnitAbilityLevel((enumUnit), 'A0C6') > 0) then // INLINED!!
         call DisplayTextToPlayer(GetTriggerPlayer(), 0, 0, "Only decorations may have be unselectable.")
-    elseif not LoP_PlayerOwnsUnit(GetTriggerPlayer() , GetEnumUnit()) then
+        
+    elseif not LoP_PlayerOwnsUnit(GetTriggerPlayer() , enumUnit) then
         call DisplayTextToPlayer(GetTriggerPlayer(), 0, 0, "This is not your unit.")
+        
     elseif CheckCommandOverflow() then
-        call GUMSMakeUnitUnSelectable(GetEnumUnit())
+        call GUMSMakeUnitUnSelectable(enumUnit)
     endif
+    set enumUnit=null
 endfunction
 
-function Trig_CommandsD_Locust_Actions takes nothing returns nothing
-    local group l__udg_temp_group= CreateGroup()
+function Trig_CommandsD_Locust_Conditions takes nothing returns boolean
+    local group g
 
-    call Commands_EnumSelectedCheckForGenerator(l__udg_temp_group , GetTriggerPlayer() , null)
-    set udg_Commands_Counter=0
-    set udg_Commands_Counter_Max=500
-    call ForGroup(l__udg_temp_group, function Trig_CommandsD_Locust_Func011A)
-    
-    call DestroyGroup(l__udg_temp_group)
-    set l__udg_temp_group=null
+    if (s__Args_getString(1)) == "no" then // INLINED!!
+        set g=CreateGroup()
+        
+        call Commands_EnumSelectedCheckForGenerator(g , GetTriggerPlayer() , null)
+        set udg_Commands_Counter=0
+        set udg_Commands_Counter_Max=500
+        call ForGroup(g, function Trig_CommandsD_Locust_Func011A)
+        
+        call DestroyGroup(g)
+        set g=null
+    endif
+    return false
 endfunction
 
 //===========================================================================
 function InitTrig_CommandsD_Locust takes nothing returns nothing
-    set gg_trg_CommandsD_Locust=CreateTrigger()
-    // call TriggerRegisterPlayerChatEvent( gg_trg_CommandsD_Locust, Player(0), "-select drag", true )
-    call TriggerAddAction(gg_trg_CommandsD_Locust, function Trig_CommandsD_Locust_Actions)
+    call s__LoP_Command_create("-select" , ACCESS_USER , Condition(function Trig_CommandsD_Locust_Conditions))
 endfunction
 
 //===========================================================================
@@ -18528,7 +18833,7 @@ endfunction
 //===========================================================================
 // scope DecoModAbils begins
 
-    function DecoModAbils__PlayerNumber takes unit whichUnit returns integer
+    function DecoModAbils___PlayerNumber takes unit whichUnit returns integer
         return GetPlayerId(GetOwningPlayer(whichUnit)) + 1
     endfunction
 
@@ -18714,15 +19019,15 @@ endfunction
 // scope DecoMovement begins
 
 
-    function DecoMovement__PlayerNumber takes unit whichUnit returns integer
+    function DecoMovement___PlayerNumber takes unit whichUnit returns integer
         return GetPlayerId(GetOwningPlayer(whichUnit)) + 1
     endfunction
     
-    function DecoMovement__X takes unit whichUnit returns real
+    function DecoMovement___X takes unit whichUnit returns real
         return GetUnitX(whichUnit)
     endfunction
     
-    function DecoMovement__Y takes unit whichUnit returns real
+    function DecoMovement___Y takes unit whichUnit returns real
         return GetUnitY(whichUnit)
     endfunction
     
@@ -18942,7 +19247,7 @@ function Trig_TreeSystem_Cast_Ability_Conditions takes nothing returns boolean
 endfunction
 
 function Trig_TreeSystem_Cast_Ability_Func004Func003A takes nothing returns nothing
-    if not (HaveSavedBoolean(ConstTable__ht, ((((s__LoPWidgets__Globals_destructablesTab_impl)))), (GetHandleId((GetEnumDestructable()))))) then // INLINED!!
+    if not (HaveSavedBoolean(ConstTable__ht, ((((s__LoPWidgets___Globals_destructablesTab_impl)))), (GetHandleId((GetEnumDestructable()))))) then // INLINED!!
     call KillDestructable(GetEnumDestructable())
     endif
 endfunction
@@ -18966,7 +19271,7 @@ function Trig_TreeSystem_Cast_Ability_Func005C takes nothing returns boolean
 endfunction
 
 function Trig_TreeSystem_Cast_Ability_Func006Func003A takes nothing returns nothing
-    if IsDestructableTree(GetEnumDestructable()) and not (HaveSavedBoolean(ConstTable__ht, ((((s__LoPWidgets__Globals_destructablesTab_impl)))), (GetHandleId((GetEnumDestructable()))))) then // INLINED!!
+    if IsDestructableTree(GetEnumDestructable()) and not (HaveSavedBoolean(ConstTable__ht, ((((s__LoPWidgets___Globals_destructablesTab_impl)))), (GetHandleId((GetEnumDestructable()))))) then // INLINED!!
     call RemoveDestructable(GetEnumDestructable())
     endif
 endfunction
@@ -19033,8 +19338,8 @@ endfunction
 
 //textmacro instance: TableStruct_NewConstTableField("","timerData")
 
-         constant function s__TreeSystemChooseTree__Globals__get_timerData takes nothing returns integer
-            return s__TreeSystemChooseTree__Globals_timerData_impl
+         constant function s__TreeSystemChooseTree___Globals__get_timerData takes nothing returns integer
+            return s__TreeSystemChooseTree___Globals_timerData_impl
         endfunction
 
 
@@ -19046,14 +19351,14 @@ endfunction
 function TreeIssueStopOrder takes nothing returns nothing
     local timer t= GetExpiredTimer()
     local integer tId= GetHandleId(t)
-    local unit deco= (LoadUnitHandle(ConstTable__ht, ((((s__TreeSystemChooseTree__Globals_timerData_impl)))), (GetHandleId(t)))) // INLINED!!
+    local unit deco= (LoadUnitHandle(ConstTable__ht, ((((s__TreeSystemChooseTree___Globals_timerData_impl)))), (GetHandleId(t)))) // INLINED!!
     
     call IssueImmediateOrder(deco, "stop")
     
     call PauseTimer(t)
     call DestroyTimer(t)
     
-    call RemoveSavedHandle(ConstTable__ht, ((((s__TreeSystemChooseTree__Globals_timerData_impl)))), (tId)) // INLINED!!
+    call RemoveSavedHandle(ConstTable__ht, ((((s__TreeSystemChooseTree___Globals_timerData_impl)))), (tId)) // INLINED!!
     
     set t=null
     set deco=null
@@ -19069,7 +19374,7 @@ function Trig_TreeSystem_Choose_Tree_Conditions takes nothing returns boolean
             set t=CreateTimer()
             set udg_TreeSystem_TREES[GetPlayerId(GetOwningPlayer(GetTriggerUnit())) + 1]=GetDestructableTypeId(GetOrderTargetDestructable())
             call TimerStart(t, 0, false, function TreeIssueStopOrder)
-            call SaveUnitHandle(ConstTable__ht, ((((s__TreeSystemChooseTree__Globals_timerData_impl)))), (GetHandleId(t)), ( GetTriggerUnit())) // INLINED!!
+            call SaveUnitHandle(ConstTable__ht, ((((s__TreeSystemChooseTree___Globals_timerData_impl)))), (GetHandleId(t)), ( GetTriggerUnit())) // INLINED!!
             set t=null
         endif
     endif
@@ -23322,72 +23627,88 @@ endfunction
 
     
 //textmacro instance: TableStruct_NewHandleField("caster","unit")
-    function s__SpatialDistortion___TimerData__get_caster takes integer this returns unit
-        return (LoadUnitHandle(ConstTable__ht, (((((s__SpatialDistortion___TimerData_caster_impl))))), (this))) // INLINED!!
+    function s__SpatialDistortion__TimerData__get_caster takes integer this returns unit
+        return (LoadUnitHandle(ConstTable__ht, (((((s__SpatialDistortion__TimerData_caster_impl))))), (this))) // INLINED!!
     endfunction
     
-    function s__SpatialDistortion___TimerData__set_caster takes integer this,unit new_caster returns nothing
-        call s__TableStruct_setHandle(s__SpatialDistortion___TimerData_caster_impl , this , new_caster)
+    function s__SpatialDistortion__TimerData__set_caster takes integer this,unit new_caster returns nothing
+        call s__TableStruct_setHandle(s__SpatialDistortion__TimerData_caster_impl , this , new_caster)
     endfunction
     
-    function s__SpatialDistortion___TimerData_casterClear takes integer this returns nothing
-        call RemoveSavedHandle(ConstTable__ht, (((((s__SpatialDistortion___TimerData_caster_impl))))), (this)) // INLINED!!
+    function s__SpatialDistortion__TimerData_casterClear takes integer this returns nothing
+        call RemoveSavedHandle(ConstTable__ht, (((((s__SpatialDistortion__TimerData_caster_impl))))), (this)) // INLINED!!
+    endfunction
+    
+    function s__SpatialDistortion__TimerData_casterExists takes integer this returns boolean
+        return (HaveSavedHandle(ConstTable__ht, (((((s__SpatialDistortion__TimerData_caster_impl))))), (this))) // INLINED!!
     endfunction
 //end of: TableStruct_NewHandleField("caster","unit")
 //textmacro instance: TableStruct_NewPrimitiveField("counter","integer")
-    function s__SpatialDistortion___TimerData__get_counter takes integer this returns integer
-        return (LoadInteger(ConstTable__ht, (((((s__SpatialDistortion___TimerData_counter_impl))))), (this))) // INLINED!!
+    function s__SpatialDistortion__TimerData__get_counter takes integer this returns integer
+        return (LoadInteger(ConstTable__ht, (((((s__SpatialDistortion__TimerData_counter_impl))))), (this))) // INLINED!!
     endfunction
     
-    function s__SpatialDistortion___TimerData__set_counter takes integer this,integer new_counter returns nothing
-        call SaveInteger(ConstTable__ht, (((((s__SpatialDistortion___TimerData_counter_impl))))), (this), ( new_counter)) // INLINED!!
+    function s__SpatialDistortion__TimerData__set_counter takes integer this,integer new_counter returns nothing
+        call SaveInteger(ConstTable__ht, (((((s__SpatialDistortion__TimerData_counter_impl))))), (this), ( new_counter)) // INLINED!!
     endfunction
     
-    function s__SpatialDistortion___TimerData_counterClear takes integer this returns nothing
-        call RemoveSavedInteger(ConstTable__ht, (((((s__SpatialDistortion___TimerData_counter_impl))))), (this)) // INLINED!!
+    function s__SpatialDistortion__TimerData_counterClear takes integer this returns nothing
+        call RemoveSavedInteger(ConstTable__ht, (((((s__SpatialDistortion__TimerData_counter_impl))))), (this)) // INLINED!!
+    endfunction
+    
+    function s__SpatialDistortion__TimerData_counterExists takes integer this returns boolean
+        return (HaveSavedInteger(ConstTable__ht, (((((s__SpatialDistortion__TimerData_counter_impl))))), (this))) // INLINED!!
     endfunction
 //end of: TableStruct_NewPrimitiveField("counter","integer")
 //textmacro instance: TableStruct_NewPrimitiveField("x","real")
-    function s__SpatialDistortion___TimerData__get_x takes integer this returns real
-        return (LoadReal(ConstTable__ht, (((((s__SpatialDistortion___TimerData_x_impl))))), (this))) // INLINED!!
+    function s__SpatialDistortion__TimerData__get_x takes integer this returns real
+        return (LoadReal(ConstTable__ht, (((((s__SpatialDistortion__TimerData_x_impl))))), (this))) // INLINED!!
     endfunction
     
-    function s__SpatialDistortion___TimerData__set_x takes integer this,real new_x returns nothing
-        call SaveReal(ConstTable__ht, (((((s__SpatialDistortion___TimerData_x_impl))))), (this), (( new_x)*1.0)) // INLINED!!
+    function s__SpatialDistortion__TimerData__set_x takes integer this,real new_x returns nothing
+        call SaveReal(ConstTable__ht, (((((s__SpatialDistortion__TimerData_x_impl))))), (this), (( new_x)*1.0)) // INLINED!!
     endfunction
     
-    function s__SpatialDistortion___TimerData_xClear takes integer this returns nothing
-        call RemoveSavedReal(ConstTable__ht, (((((s__SpatialDistortion___TimerData_x_impl))))), (this)) // INLINED!!
+    function s__SpatialDistortion__TimerData_xClear takes integer this returns nothing
+        call RemoveSavedReal(ConstTable__ht, (((((s__SpatialDistortion__TimerData_x_impl))))), (this)) // INLINED!!
+    endfunction
+    
+    function s__SpatialDistortion__TimerData_xExists takes integer this returns boolean
+        return (HaveSavedReal(ConstTable__ht, (((((s__SpatialDistortion__TimerData_x_impl))))), (this))) // INLINED!!
     endfunction
 //end of: TableStruct_NewPrimitiveField("x","real")
 //textmacro instance: TableStruct_NewPrimitiveField("y","real")
-    function s__SpatialDistortion___TimerData__get_y takes integer this returns real
-        return (LoadReal(ConstTable__ht, (((((s__SpatialDistortion___TimerData_y_impl))))), (this))) // INLINED!!
+    function s__SpatialDistortion__TimerData__get_y takes integer this returns real
+        return (LoadReal(ConstTable__ht, (((((s__SpatialDistortion__TimerData_y_impl))))), (this))) // INLINED!!
     endfunction
     
-    function s__SpatialDistortion___TimerData__set_y takes integer this,real new_y returns nothing
-        call SaveReal(ConstTable__ht, (((((s__SpatialDistortion___TimerData_y_impl))))), (this), (( new_y)*1.0)) // INLINED!!
+    function s__SpatialDistortion__TimerData__set_y takes integer this,real new_y returns nothing
+        call SaveReal(ConstTable__ht, (((((s__SpatialDistortion__TimerData_y_impl))))), (this), (( new_y)*1.0)) // INLINED!!
     endfunction
     
-    function s__SpatialDistortion___TimerData_yClear takes integer this returns nothing
-        call RemoveSavedReal(ConstTable__ht, (((((s__SpatialDistortion___TimerData_y_impl))))), (this)) // INLINED!!
+    function s__SpatialDistortion__TimerData_yClear takes integer this returns nothing
+        call RemoveSavedReal(ConstTable__ht, (((((s__SpatialDistortion__TimerData_y_impl))))), (this)) // INLINED!!
+    endfunction
+    
+    function s__SpatialDistortion__TimerData_yExists takes integer this returns boolean
+        return (HaveSavedReal(ConstTable__ht, (((((s__SpatialDistortion__TimerData_y_impl))))), (this))) // INLINED!!
     endfunction
 //end of: TableStruct_NewPrimitiveField("y","real")
     
-    function s__SpatialDistortion___TimerData_flushCaster takes integer this returns nothing
-        call RemoveSavedHandle(ConstTable__ht, (((((s__SpatialDistortion___TimerData_caster_impl))))), ((this))) // INLINED!!
+    function s__SpatialDistortion__TimerData_flushCaster takes integer this returns nothing
+        call RemoveSavedHandle(ConstTable__ht, (((((s__SpatialDistortion__TimerData_caster_impl))))), ((this))) // INLINED!!
     endfunction
-    function s__SpatialDistortion___TimerData_flushCounter takes integer this returns nothing
-        call RemoveSavedInteger(ConstTable__ht, (((((s__SpatialDistortion___TimerData_counter_impl))))), ((this))) // INLINED!!
+    function s__SpatialDistortion__TimerData_flushCounter takes integer this returns nothing
+        call RemoveSavedInteger(ConstTable__ht, (((((s__SpatialDistortion__TimerData_counter_impl))))), ((this))) // INLINED!!
     endfunction
-    function s__SpatialDistortion___TimerData_flushX takes integer this returns nothing
-        call RemoveSavedReal(ConstTable__ht, (((((s__SpatialDistortion___TimerData_x_impl))))), ((this))) // INLINED!!
+    function s__SpatialDistortion__TimerData_flushX takes integer this returns nothing
+        call RemoveSavedReal(ConstTable__ht, (((((s__SpatialDistortion__TimerData_x_impl))))), ((this))) // INLINED!!
     endfunction
-    function s__SpatialDistortion___TimerData_flushY takes integer this returns nothing
-        call RemoveSavedReal(ConstTable__ht, (((((s__SpatialDistortion___TimerData_y_impl))))), ((this))) // INLINED!!
+    function s__SpatialDistortion__TimerData_flushY takes integer this returns nothing
+        call RemoveSavedReal(ConstTable__ht, (((((s__SpatialDistortion__TimerData_y_impl))))), ((this))) // INLINED!!
     endfunction
 
-function SpatialDistortion___onExpire_EnumInRange takes nothing returns nothing
+function SpatialDistortion__onExpire_EnumInRange takes nothing returns nothing
     local unit filterU= GetFilterUnit()
     local unit caster= s__Args_getUnit(0)
     
@@ -23401,29 +23722,29 @@ function SpatialDistortion___onExpire_EnumInRange takes nothing returns nothing
     set caster=null
 endfunction
 
-function SpatialDistortion___onExpire takes nothing returns nothing
+function SpatialDistortion__onExpire takes nothing returns nothing
     local timer t= GetExpiredTimer()
     local integer tData= GetHandleId(t)
-    local real x= (LoadReal(ConstTable__ht, (((((s__SpatialDistortion___TimerData_x_impl))))), ((tData)))) // INLINED!!
-    local real y= (LoadReal(ConstTable__ht, (((((s__SpatialDistortion___TimerData_y_impl))))), ((tData)))) // INLINED!!
+    local real x= (LoadReal(ConstTable__ht, (((((s__SpatialDistortion__TimerData_x_impl))))), ((tData)))) // INLINED!!
+    local real y= (LoadReal(ConstTable__ht, (((((s__SpatialDistortion__TimerData_y_impl))))), ((tData)))) // INLINED!!
     
-    call s__Args_setAgent(s__Args_unit_impl , (0 ) , ( (LoadUnitHandle(ConstTable__ht, (((((s__SpatialDistortion___TimerData_caster_impl))))), ((tData)))))) // INLINED!!
+    call s__Args_setAgent(s__Args_unit_impl , (0 ) , ( (LoadUnitHandle(ConstTable__ht, (((((s__SpatialDistortion__TimerData_caster_impl))))), ((tData)))))) // INLINED!!
     call s__Args_setReal(0 , x)
     call s__Args_setReal(1 , y)
-    call GroupEnumUnitsInRange(ENUM_GROUP, x, y, 400, Filter(function SpatialDistortion___onExpire_EnumInRange))
+    call GroupEnumUnitsInRange(ENUM_GROUP, x, y, 400, Filter(function SpatialDistortion__onExpire_EnumInRange))
     call s__Args_freeReal(0)
     call s__Args_freeReal(1)
     call s__Args_freeHandle(s__Args_unit_impl , (0)) // INLINED!!
     
-    if (LoadInteger(ConstTable__ht, (((((s__SpatialDistortion___TimerData_counter_impl))))), ((tData)))) >= 4 then // INLINED!!
-        call RemoveSavedHandle(ConstTable__ht, (((((s__SpatialDistortion___TimerData_caster_impl))))), (((tData)))) // INLINED!!
-        call RemoveSavedInteger(ConstTable__ht, (((((s__SpatialDistortion___TimerData_counter_impl))))), (((tData)))) // INLINED!!
-        call RemoveSavedReal(ConstTable__ht, (((((s__SpatialDistortion___TimerData_x_impl))))), (((tData)))) // INLINED!!
-        call RemoveSavedReal(ConstTable__ht, (((((s__SpatialDistortion___TimerData_y_impl))))), (((tData)))) // INLINED!!
+    if (LoadInteger(ConstTable__ht, (((((s__SpatialDistortion__TimerData_counter_impl))))), ((tData)))) >= 4 then // INLINED!!
+        call RemoveSavedHandle(ConstTable__ht, (((((s__SpatialDistortion__TimerData_caster_impl))))), (((tData)))) // INLINED!!
+        call RemoveSavedInteger(ConstTable__ht, (((((s__SpatialDistortion__TimerData_counter_impl))))), (((tData)))) // INLINED!!
+        call RemoveSavedReal(ConstTable__ht, (((((s__SpatialDistortion__TimerData_x_impl))))), (((tData)))) // INLINED!!
+        call RemoveSavedReal(ConstTable__ht, (((((s__SpatialDistortion__TimerData_y_impl))))), (((tData)))) // INLINED!!
         call PauseTimer(t)
         call DestroyTimer(t)
     else
-        call SaveInteger(ConstTable__ht, (((((s__SpatialDistortion___TimerData_counter_impl))))), ((tData)), ( ((LoadInteger(ConstTable__ht, (((((s__SpatialDistortion___TimerData_counter_impl))))), ((tData)))) + 1))) // INLINED!!
+        call SaveInteger(ConstTable__ht, (((((s__SpatialDistortion__TimerData_counter_impl))))), ((tData)), ( ((LoadInteger(ConstTable__ht, (((((s__SpatialDistortion__TimerData_counter_impl))))), ((tData)))) + 1))) // INLINED!!
     endif
     
     set t=null
@@ -23440,11 +23761,11 @@ function Trig_Spatial_Distortion_Cast_Conditions takes nothing returns boolean
     set t=CreateTimer()
     set tData=GetHandleId(t)
     
-    call s__TableStruct_setHandle(s__SpatialDistortion___TimerData_caster_impl , (tData) , (udg_Spell__Caster)) // INLINED!!
-    call SaveReal(ConstTable__ht, (((((s__SpatialDistortion___TimerData_x_impl))))), ((tData)), (( ((GetLocationX(udg_Spell__CastPoint))*1.0))*1.0)) // INLINED!!
-    call SaveReal(ConstTable__ht, (((((s__SpatialDistortion___TimerData_y_impl))))), ((tData)), (( ((GetLocationY(udg_Spell__CastPoint))*1.0))*1.0)) // INLINED!!
-    call SaveInteger(ConstTable__ht, (((((s__SpatialDistortion___TimerData_counter_impl))))), ((tData)), ( (0))) // INLINED!!
-    call TimerStart(t, 0.2, true, function SpatialDistortion___onExpire)
+    call s__TableStruct_setHandle(s__SpatialDistortion__TimerData_caster_impl , (tData) , (udg_Spell__Caster)) // INLINED!!
+    call SaveReal(ConstTable__ht, (((((s__SpatialDistortion__TimerData_x_impl))))), ((tData)), (( ((GetLocationX(udg_Spell__CastPoint))*1.0))*1.0)) // INLINED!!
+    call SaveReal(ConstTable__ht, (((((s__SpatialDistortion__TimerData_y_impl))))), ((tData)), (( ((GetLocationY(udg_Spell__CastPoint))*1.0))*1.0)) // INLINED!!
+    call SaveInteger(ConstTable__ht, (((((s__SpatialDistortion__TimerData_counter_impl))))), ((tData)), ( (0))) // INLINED!!
+    call TimerStart(t, 0.2, true, function SpatialDistortion__onExpire)
     
     set t=null
     return false
@@ -24941,6 +25262,10 @@ endfunction
     function s__MakeHeroic___Globals_dummyClear takes nothing returns nothing
         call RemoveSavedHandle(ConstTable__ht, (((((s__MakeHeroic___Globals_static_members_key))))), (s__MakeHeroic___Globals_dummy_impl)) // INLINED!!
     endfunction
+    
+    function s__MakeHeroic___Globals_dummyExists takes nothing returns boolean
+        return (HaveSavedHandle(ConstTable__ht, (((((s__MakeHeroic___Globals_static_members_key))))), (s__MakeHeroic___Globals_dummy_impl))) // INLINED!!
+    endfunction
 //end of: TableStruct_NewStaticHandleField("dummy","unit")
     
 
@@ -24964,7 +25289,7 @@ function MakeHeroic___FilterUnitsMakeHero takes nothing returns boolean
         elseif GetUnitAbilityLevel(filterU, 'Adef') > 0 then
             call DisplayTextToPlayer(udg_GAME_MASTER, 0, 0, "Units with the Defend ability cannot be heroes")
             
-        elseif GetUnitAbilityLevel(filterU, 'Aher') > 0 then
+        elseif GetUnitAbilityLevel(filterU, 'AHer') > 0 then
             call DisplayTextToPlayer(udg_GAME_MASTER, 0, 0, "This unit is already a hero.")
             
         elseif GetUnitAbilityLevel(filterU, 'AInv') > 0 then // Detects all inventory skills.
@@ -24992,7 +25317,7 @@ function MakeHeroic___FilterUnitsMakeHero takes nothing returns boolean
     return false
 endfunction
 
-function Trig_Commands_Make_Hero_Actions takes nothing returns nothing
+function Trig_Commands_Make_Hero_Conditions takes nothing returns nothing
     if GetTriggerPlayer() == udg_GAME_MASTER then
         call GroupEnumUnitsSelected(ENUM_GROUP, GetTriggerPlayer(), Condition(function MakeHeroic___FilterUnitsMakeHero))
     endif
@@ -25000,12 +25325,13 @@ endfunction
 
 //===========================================================================
 function InitTrig_Commands_Make_Hero takes nothing returns nothing
-    set gg_trg_Commands_Make_Hero=CreateTrigger()
-    call TriggerAddAction(gg_trg_Commands_Make_Hero, function Trig_Commands_Make_Hero_Actions)
+    call s__LoP_Command_create("-makehero" , ACCESS_TITAN , Condition(function Trig_Commands_Make_Hero_Conditions))
     call s__TableStruct_setHandle(s__MakeHeroic___Globals_static_members_key , s__MakeHeroic___Globals_dummy_impl , (CreateUnit(Player(bj_PLAYER_NEUTRAL_EXTRA), 'Hpal', 0., 0., bj_UNIT_FACING))) // INLINED!!
 endfunction
 
 // scope MakeHeroic ends
+//===========================================================================
+// Trigger: LoPCommands
 //===========================================================================
 function InitCustomTriggers takes nothing returns nothing
     //Function not found: call InitTrig_HeroicUnit()
@@ -25039,40 +25365,40 @@ function InitCustomTriggers takes nothing returns nothing
     //Function not found: call InitTrig_System_Titan_Powers()
     call InitTrig_System_PreventSave_Catch()
     call InitTrig_System_PreventSave_Clear()
-    call InitTrig_Commands_Set_Color()
+    call s__LoP_Command_create("-setcolor" , ACCESS_USER , Condition(function Trig_Commands_Toggle_Autoname_Copy_Actions)) // INLINED!!
     call InitTrig_Commands_Toggle_Autoname()
-    call InitTrig_Commands_Name_Unit()
-    call InitTrig_Commands_Give()
-    call InitTrig_Commands_Deleteme()
-    call InitTrig_Commands_Spawn_Decos()
+    call s__LoP_Command_create("-nameunit" , ACCESS_USER , Condition(function Trig_Commands_Name_Unit_Conditions)) // INLINED!!
+    call s__LoP_Command_create("-give" , ACCESS_USER , Condition(function Trig_Commands_Give_Conditions)) // INLINED!!
+    call s__LoP_Command_create("-deleteme" , ACCESS_USER , Condition(function Trig_Commands_Deleteme_Conditions)) // INLINED!!
+    call s__LoP_Command_create("-decos" , ACCESS_USER , Condition(function Trig_Commands_Deco_Spawn_Conditions)) // INLINED!!
     call InitTrig_Commands_Hide_Decos()
     call InitTrig_Commands_Select_Search()
     call InitTrig_Commands_Neutral()
     call InitTrig_Commands_Take()
-    call InitTrig_Commands_Copy()
+    call s__LoP_Command_create("-copy" , ACCESS_USER , Condition(function Trig_Commands_Copy_Conditions)) // INLINED!!
     call InitTrig_Commands_Remove_Kill()
     call InitTrig_Commands_StartRectCamera()
     call InitTrig_Commands_Set_Alliance()
-    call InitTrig_Commands_Set_Name()
+    call s__LoP_Command_create("-name" , ACCESS_USER , Condition(function Trig_Commands_Set_Name_Conditions)) // INLINED!!
     call InitTrig_Commands_Real_Name()
     call InitTrig_CommandsR_Toggle_Prot()
     call InitTrig_CommandsR_Make_Titan()
     call InitTrig_CommandsR_Set_Limits_for_Units()
     call InitTrig_CommandsR_Delete()
-    call InitTrig_CommandsR_Fog()
-    call InitTrig_CommandsR_Water_Color()
+    call s__LoP_Command_create("-fog" , ACCESS_TITAN , Condition(function Trig_CommandsR_Fog_Conditions)) // INLINED!!
+    call s__LoP_Command_create("-water" , ACCESS_TITAN , Condition(function Trig_CommandsR_Water_Color_Conditions)) // INLINED!!
     call InitTrig_CommandsR_Mind()
-    call InitTrig_CommandsR_Kick()
+    call s__LoP_Command_create("-kick" , ACCESS_TITAN , Condition(function Trig_CommandsR_Kick_Conditions)) // INLINED!!
     call InitTrig_CommandsR_The_Creator()
-    call InitTrig_CommandsR_Toggle_Dmg_Tags()
+    call s__LoP_Command_create("-combat" , ACCESS_TITAN , Condition(function Trig_CommandsR_Enable_Dmg_Tags_Conditions)) // INLINED!!
     call InitTrig_CommandsD_Control()
-    call InitTrig_CommandsD_Set_AoE()
-    call InitTrig_CommandsD_Set_Tree_Space()
+    call s__LoP_Command_create("-val" , ACCESS_USER , Condition(function Trig_CommandsD_Set_AoE_Conditions)) // INLINED!!
+    call s__LoP_Command_create("-space" , ACCESS_USER , Condition(function Trig_CommandsD_Set_Tree_Space_Conidtions)) // INLINED!!
     call InitTrig_CommandsD_Set_Parameters()
     call InitTrig_CommandsD_Set_RGB()
     call InitTrig_CommandsD_Unit_Mods()
-    call InitTrig_CommandsD_Add_Tag()
-    call InitTrig_CommandsD_Locust()
+    call s__LoP_Command_create("-tag" , ACCESS_USER , Condition(function Trig_CommandsD_Add_Tag_Conditions)) // INLINED!!
+    call s__LoP_Command_create("-select" , ACCESS_USER , Condition(function Trig_CommandsD_Locust_Conditions)) // INLINED!!
     call InitTrig_CommandsD_Variation()
     call InitTrig_DecoBuilder_Movement()
     call InitTrig_DecoBuilder_Increase_Count()
@@ -25198,6 +25524,7 @@ function InitCustomTriggers takes nothing returns nothing
     call InitTrig_Pure_Water_Effect()
     call InitTrig_ScrollSystem_Learn_Spell()
     call InitTrig_Commands_Make_Hero()
+    //Function not found: call InitTrig_LoPCommands()
 endfunction
 
 //===========================================================================
@@ -28829,16 +29156,17 @@ function main takes nothing returns nothing
     call CreateAllUnits()
     call InitBlizzard()
 
-call ExecuteFunc("jasshelper__initstructs60366109")
-call ExecuteFunc("CombatTag___onInit")
+call ExecuteFunc("jasshelper__initstructs97396437")
+call ExecuteFunc("CombatTag__onInit")
 call ExecuteFunc("DestructableLib__Initialization")
 call ExecuteFunc("MultiPatrol__onInit")
 call ExecuteFunc("FilterTransformations___onInit")
-call ExecuteFunc("UnitVisualMods__onInit")
+call ExecuteFunc("onInit")
 call ExecuteFunc("UserDefinedRects__onInit")
 call ExecuteFunc("RectGenerator__onInit")
-call LoPItemCleanup__onInit()
-call TitanPowers__onInit()
+call ExecuteFunc("UnitVisualMods__onInit")
+call LoPItemCleanup___onInit()
+call TitanPowers___onInit()
 call MultiPatrolCommands__onInit()
 call MultiPatrolOrder__onInit()
 
@@ -28896,6 +29224,16 @@ endfunction
 
 
 //Struct method generated initializers/callers:
+function sa__LoP_PlayerData_get takes nothing returns boolean
+local player whichPlayer=f__arg_player1
+set f__result_integer= GetPlayerId(whichPlayer)
+   return true
+endfunction
+function sa__LoP_PlayerData__get_commandsEnabled takes nothing returns boolean
+local integer this=f__arg_this
+set f__result_boolean= not (HaveSavedBoolean(ConstTable__ht, (((((s__LoP_PlayerData_commandsEnabled_internal_impl))))), ((this)))) // INLINED!!
+   return true
+endfunction
 function sa__Table__get_real takes nothing returns boolean
 local integer this=f__arg_this
 set f__result_integer= this
@@ -28949,7 +29287,11 @@ local real value=f__arg_real1
    return true
 endfunction
 
-function jasshelper__initstructs60366109 takes nothing returns nothing
+function jasshelper__initstructs97396437 takes nothing returns nothing
+    set st__LoP_PlayerData_get=CreateTrigger()
+    call TriggerAddCondition(st__LoP_PlayerData_get,Condition( function sa__LoP_PlayerData_get))
+    set st__LoP_PlayerData__get_commandsEnabled=CreateTrigger()
+    call TriggerAddCondition(st__LoP_PlayerData__get_commandsEnabled,Condition( function sa__LoP_PlayerData__get_commandsEnabled))
     set st__Table__get_real=CreateTrigger()
     call TriggerAddCondition(st__Table__get_real,Condition( function sa__Table__get_real))
     set st__Table__get_unit=CreateTrigger()
@@ -28966,7 +29308,6 @@ function jasshelper__initstructs60366109 takes nothing returns nothing
     call TriggerAddCondition(st__Table__reals__getindex,Condition( function sa__Table__reals__getindex))
     set st__Table__reals__setindex=CreateTrigger()
     call TriggerAddCondition(st__Table__reals__setindex,Condition( function sa__Table__reals__setindex))
-
 
 
 
@@ -29074,55 +29415,9 @@ call ExecuteFunc("s__TileDefinition__TileDefinition_TileDefinition__Init__onInit
 
 
 
-call ExecuteFunc("s__LoP_DecoBuilders_LoPDecoBuilders__InitModule__onInit")
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+call ExecuteFunc("s__LoP_DecoBuilders_LoPDecoBuilders___InitModule__onInit")
 
 
 
@@ -29131,6 +29426,55 @@ call ExecuteFunc("s__LoP_DecoBuilders_LoPDecoBuilders__InitModule__onInit")
 
 
 call ExecuteFunc("s__AutoRectEnvironment__InitStruct_AutoRectEnvironment__InitModule__onInit")
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

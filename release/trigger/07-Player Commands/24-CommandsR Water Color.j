@@ -1,14 +1,10 @@
 function Trig_CommandsR_Water_Color_Conditions takes nothing returns boolean
-    local string chatStr = Commands_GetArguments()
+    local string chatStr = LoP_Command.getArguments()
     local real red
     local real green
     local real blue
     local real trans
     local integer cutToComma
-    
-    if GetTriggerPlayer() != udg_GAME_MASTER and not Commands_StartsWithCommand() then
-        return false
-    endif
     
     set cutToComma = CutToCharacter(chatStr, " ")
     set red = S2R(CutToCommaResult(chatStr, cutToComma))
@@ -30,7 +26,6 @@ endfunction
 
 //===========================================================================
 function InitTrig_CommandsR_Water_Color takes nothing returns nothing
-    set gg_trg_CommandsR_Water_Color = CreateTrigger(  )
-    call TriggerAddCondition( gg_trg_CommandsR_Water_Color, Condition( function Trig_CommandsR_Water_Color_Conditions ) )
+    call LoP_Command.create("-water", ACCESS_TITAN, Condition(function Trig_CommandsR_Water_Color_Conditions))
 endfunction
 

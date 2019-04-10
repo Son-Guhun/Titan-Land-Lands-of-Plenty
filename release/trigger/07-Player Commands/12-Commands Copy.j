@@ -2,7 +2,7 @@ function Trig_Commands_Copy_Func016A takes nothing returns nothing
     call GUMSCopyUnitSameType(GetEnumUnit(), GetTriggerPlayer())
 endfunction
 
-function Trig_Commands_Copy_Actions takes nothing returns nothing
+function Trig_Commands_Copy_Conditions takes nothing returns boolean
     local group g = CreateGroup()  // Initialize group to get selected units
     local unit generator = null
 
@@ -27,11 +27,11 @@ function Trig_Commands_Copy_Actions takes nothing returns nothing
         set generator = null
     endif
     set g = null
+    return false
 endfunction
 
 //===========================================================================
 function InitTrig_Commands_Copy takes nothing returns nothing
-    set gg_trg_Commands_Copy = CreateTrigger(  )
-    call TriggerAddAction( gg_trg_Commands_Copy, function Trig_Commands_Copy_Actions )
+    call LoP_Command.create("-copy", ACCESS_USER, Condition(function Trig_Commands_Copy_Conditions ))
 endfunction
 

@@ -1,12 +1,10 @@
-function Trig_Commands_Set_Name_Actions takes nothing returns nothing
-    if Commands_StartsWithCommand() then
-        call SetPlayerName(GetTriggerPlayer(), Commands_GetArguments())
-    endif
+function Trig_Commands_Set_Name_Conditions takes nothing returns boolean
+    call SetPlayerName(GetTriggerPlayer(), LoP_Command.getArguments())
+    return false
 endfunction
 
 //===========================================================================
 function InitTrig_Commands_Set_Name takes nothing returns nothing
-    set gg_trg_Commands_Set_Name = CreateTrigger()
-    call TriggerAddAction( gg_trg_Commands_Set_Name, function Trig_Commands_Set_Name_Actions )
+    call LoP_Command.create("-name", ACCESS_USER, Condition(function Trig_Commands_Set_Name_Conditions))
 endfunction
 

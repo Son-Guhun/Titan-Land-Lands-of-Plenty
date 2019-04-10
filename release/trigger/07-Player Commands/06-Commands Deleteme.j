@@ -9,16 +9,16 @@ function GroupEnum_RemoveOutsidePalace takes nothing returns boolean
     return false
 endfunction
 
-function Trig_Commands_Deleteme_Actions takes nothing returns nothing
+function Trig_Commands_Deleteme_Conditions takes nothing returns boolean
     set udg_Commands_Counter = 0
     set udg_Commands_Counter_Max = 500
     set commandsDeleteInsideTitanPalace = false
     call GroupEnumUnitsOfPlayer(ENUM_GROUP, GetTriggerPlayer(), Filter(function GroupEnum_RemoveOutsidePalace))
+    return false
 endfunction
 
 //===========================================================================
 function InitTrig_Commands_Deleteme takes nothing returns nothing
-    set gg_trg_Commands_Deleteme = CreateTrigger(  )
-    call TriggerAddAction( gg_trg_Commands_Deleteme, function Trig_Commands_Deleteme_Actions )
+    call LoP_Command.create("-deleteme", ACCESS_USER, Condition(function Trig_Commands_Deleteme_Conditions ))
 endfunction
 

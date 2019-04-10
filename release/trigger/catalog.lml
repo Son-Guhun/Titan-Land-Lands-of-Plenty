@@ -46,6 +46,7 @@
     2-LoPDecoBuilders: LoPDecoBuilders
     3-LoPWidgets: LoPWidgets
     4-LoPPlayers: LoPPlayers
+    5-LoPCommands: LoPCommands
 '05-Map Init': 'Map Init'
     1-Functions: Functions
         Comment
