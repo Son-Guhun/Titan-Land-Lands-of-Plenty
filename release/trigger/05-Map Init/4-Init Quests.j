@@ -40,6 +40,28 @@ passive, neutral = 28
 "
     call CreateQuestBJ(questType, "Player Numbers & Colors", quest_text, "ReplaceableTextures\\CommandButtons\\BTNScrollOfRegenerationGreen.blp")
     // ----------
+        
+    // Titan Commands
+    set quest_text = "
+|cffffff00-mind|r <number>
+Will set the target player for Power: Mind. If you write just \"-mind\", it will flag changing ownership of all units on/off.
+|cffffff00'mind|r
+Use this command to change ownership of units you have selected without having to select the Power: Mind unit.
+|cffffff00-kick|r (color or #)
+The Titan Player can kick people that make the game suck.
+|cffffff00-delete|r/|cffffff00-delneu|r (color or #)
+Deletes all non-neutral/neutral (see |cffffff00-neut|r) units of a player. Outside titan palace only.
+|cffffff00-delpal|r  (color or #)
+Deletes all units (neutral included) inside the titan palace of a player.
+
+|cffffff00-load limit|r (number)
+Sets the limit of how many terrain areas, units or doodads can be loaded at a time.
+|cff0000ffMaximum: 9999|r\n\n|cffffff00-limit|r (p|a|g) (number)
+Limits how many units players can have. <p> is for passive units (no attack), <a> is for air and <g> for ground.
+|cff0000ffDefaults: 150p | 24a | 150g|r
+"
+    call CreateQuestBJ(questType, "Titan Commands", quest_text, "ReplaceableTextures\\CommandButtons\\BTNScrollOfRegenerationGreen.blp")
+    // ----------
     
     // Unit Commands
     set quest_text = "
@@ -158,25 +180,6 @@ Commands:
     call CreateQuestBJ(questType, "Guhun's Patrol System", quest_text, "ReplaceableTextures\\CommandButtons\\BTNBoots.blp")
     // ----------
     
-    // Titan Commands
-    set quest_text = "
-|cffffff00-mind|r <number>
-Will set the target player for Power: Mind. If you write just \"-mind\", it will flag changing ownership of all units on/off.
-|cffffff00'mind|r
-Use this command to change ownership of units you have selected without having to select the Power: Mind unit.
-|cffffff00-kick|r (color)
-The Titan Player can kick people that make the game suck.
-|cff0000ffThe color must contain no capitals|r
-
-|cffffff00-load limit|r (number)
-Sets the limit of how many terrain areas, units or doodads can be loaded at a time.
-|cff0000ffMaximum: 9999|r\n\n|cffffff00-limit|r (p|a|g) (number)
-Limits how many units players can have. <p> is for passive units (no attack), <a> is for air and <g> for ground.
-|cff0000ffDefaults: 150p | 24a | 150g|r
-"
-    call CreateQuestBJ(questType, "Titan Commands", quest_text, "ReplaceableTextures\\CommandButtons\\BTNScrollOfRegenerationGreen.blp")
-    // ----------
-    
     // ====================
     // Credits & Information
     // ====================
@@ -199,7 +202,7 @@ Limits how many units players can have. <p> is for passive units (no attack), <a
     // Model Credits
     set quest_text = "
 |cff00b300The Hive Workshop:|r
-Kwaliti, Lord_T, Deolrin, Chilla_killa, Sellenisko, Hellish Hybrid, A Void, Uncle Fester, MassiveMaster, HerrDave, Olofmoleman, Sliph-M, darkdeathknight, evigeorge1617, Hayate, Tranquil, -Grendel, Stefan.K, HappyTauren, donut3.5, Cavman, HateCrew, Expresso, General Frank, YrpoTRIa , KO3bMA , Dixnos, Fingolfin, Mike, ChevronSeven, MatiS, killst4r, Tarrasque, Red XIII, FvckTP, Em!, Misha, Arak1da, Chen, Wandering Soul, kagyun, Hexus, -=Emergenzy=-, Sin'dorei300, PROXY, WebSter, darklord_avalon, eubz, Kitabatake, kellym0, Sunchips, Remixer, Su7VdeR, koondad, Mister_Haudrauf, Daenar7, SinisterX, TiJiL, icewolf055, RightField, UgoUgo, DarkHunter1357, Necromancer_187, alfredx_sotn, Black_Stan, BlinkBoy, NaserKingArthas, bisnar13, InfernalTater, Hueter, ~Nightmare, 67chrome, dickxunder, Elenai, Redsteel1, Mr Goblin, Ujimasa Hojo, Happy Tauren
+Kwaliti, Lord_T, Deolrin, Chilla_killa, Sellenisko, Hellish Hybrid, A Void, Uncle Fester, MassiveMaster, HerrDave, Olofmoleman, Sliph-M, darkdeathknight, evigeorge1617, Hayate, Tranquil, -Grendel, Stefan.K, HappyTauren, donut3.5, Cavman, HateCrew, Expresso, General Frank, YrpoTRIa , KO3bMA , Dixnos, Fingolfin, Mike, ChevronSeven, MatiS, killst4r, Tarrasque, Red XIII, FvckTP, Em!, Misha, Arak1da, Chen, Wandering Soul, kagyun, Hexus, -=Emergenzy=-, Sin'dorei300, PROXY, WebSter, darklord_avalon, eubz, Kitabatake, kellym0, Sunchips, Remixer, Su7VdeR, koondad, Mister_Haudrauf, Daenar7, SinisterX, TiJiL, icewolf055, RightField, UgoUgo, DarkHunter1357, Necromancer_187, alfredx_sotn, Black_Stan, BlinkBoy, NaserKingArthas, bisnar13, InfernalTater, Hueter, ~Nightmare, 67chrome, dickxunder, Elenai, Redsteel1, Mr Goblin, Ujimasa Hojo, Happy Tauren, Himperion, Kuhneghetz, Wildfire, Horn, Wisdom
 
 
 |cffff0000XGM:|r

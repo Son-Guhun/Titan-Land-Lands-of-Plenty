@@ -1,8 +1,5 @@
 function Trig_Spell_System_Filter_Decorations_Conditions takes nothing returns boolean
-    if GetUnitAbilityLevel(udg_Spell__InRangeUnit , 'A0C6') != 0  then
-        return false
-    endif
-    return true
+    return not LoP_IsUnitDecoration(udg_Spell__InRangeUnit)
 endfunction
 
 //===========================================================================
