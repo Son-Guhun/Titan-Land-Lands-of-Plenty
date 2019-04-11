@@ -924,6 +924,46 @@ Action
     CommentString
         Const : ' '
     CommentString
+        Const : ---------------------------
+    CommentString
+        Const : 'Defend Turn On'
+    CommentString
+        Const : ---------------------------
+    SetVariable
+        Var   : Spell__Ability
+        Const : A02S
+    CommentString
+        Const : ' '
+    SetVariable
+        Var   : Spell__Trigger_OnEffect
+        Var   : gg_trg_Defend_Turn_On
+    CommentString
+        Const : ' '
+    TriggerExecute
+        Var   : gg_trg_Spell_System
+    CommentString
+        Const : ' '
+    CommentString
+        Const : ---------------------------
+    CommentString
+        Const : 'Defend Turn Off'
+    CommentString
+        Const : ---------------------------
+    SetVariable
+        Var   : Spell__Ability
+        Const : A02X
+    CommentString
+        Const : ' '
+    SetVariable
+        Var   : Spell__Trigger_OnEffect
+        Var   : gg_trg_Defend_Turn_Off
+    CommentString
+        Const : ' '
+    TriggerExecute
+        Var   : gg_trg_Spell_System
+    CommentString
+        Const : ' '
+    CommentString
         Const : ' '
     CommentString
         Const : ' '
