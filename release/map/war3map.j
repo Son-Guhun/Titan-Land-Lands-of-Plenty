@@ -24,7 +24,7 @@ integer CombatTag_PHYS_DAMAGE
 integer CombatTag_SPELL_DAMAGE
 integer CombatTag_HEALING
     
-integer CombatTag___timerData
+integer CombatTag__timerData
 //endglobals from CombatTag
 //globals from CustomStatSystem:
 constant boolean LIBRARY_CustomStatSystem=true
@@ -121,20 +121,20 @@ integer Table__more= 8190
     //Configure it if you use more than 8190 "key" variables in your map (this will never happen though).
    
 hashtable Table__ht= InitHashtable()
-constant integer Table__sizeK=8
-constant integer Table__listK=9
+constant integer Table__sizeK=10
+constant integer Table__listK=12
 //endglobals from Table
 //globals from ThirdPersonCamera:
 constant boolean LIBRARY_ThirdPersonCamera=true
-hashtable ThirdPersonCamera___data= InitHashtable()
+hashtable ThirdPersonCamera__data= InitHashtable()
     
-trigger ThirdPersonCamera___triggerMouse= CreateTrigger()
-trigger ThirdPersonCamera___triggerLeft= CreateTrigger()
-trigger ThirdPersonCamera___triggerRight= CreateTrigger()
-trigger ThirdPersonCamera___triggerEsc= CreateTrigger()
-trigger ThirdPersonCamera___triggerCleanup= CreateTrigger()
+trigger ThirdPersonCamera__triggerMouse= CreateTrigger()
+trigger ThirdPersonCamera__triggerLeft= CreateTrigger()
+trigger ThirdPersonCamera__triggerRight= CreateTrigger()
+trigger ThirdPersonCamera__triggerEsc= CreateTrigger()
+trigger ThirdPersonCamera__triggerCleanup= CreateTrigger()
     
-unit array ThirdPersonCamera___focusUnits
+unit array ThirdPersonCamera__focusUnits
 //endglobals from ThirdPersonCamera
 //globals from TreeSystemCreateTrees:
 constant boolean LIBRARY_TreeSystemCreateTrees=true
@@ -204,7 +204,7 @@ constant real DummyRecycler__FACING_OFFSET= 180.0 / DummyRecycler__ANGLES_COUNT
 //endglobals from DummyRecycler
 //globals from Lists:
 constant boolean LIBRARY_Lists=true
-constant integer Lists_RECYCLE_KEY=10
+constant integer Lists_RECYCLE_KEY=14
 constant boolean Lists_ENABLE_GUI= false
 hashtable Lists__hashTable= InitHashtable()
 //endglobals from Lists
@@ -224,8 +224,8 @@ constant boolean MoveSpeedBonus_INIT_HASHTABLE= false
     // Automatically clean up unit data by removing any data when a unit is created that has an ID that was previously used
     // If you disable this, then you must call GMSS_ClearData whenever a unit enters the game or is removed from it
 constant boolean MoveSpeedBonus_AUTO_CLEANUP= false
-integer MoveSpeedBonus___data
-hashtable MoveSpeedBonus___hashTable= null
+integer MoveSpeedBonus__data
+hashtable MoveSpeedBonus__hashTable= null
 //endglobals from MoveSpeedBonus
 //globals from StructureTileDefinition:
 constant boolean LIBRARY_StructureTileDefinition=true
@@ -331,7 +331,7 @@ constant boolean UnitVisualModsDefaults_COLOR= true
 constant boolean LIBRARY_UserDefinedRects=true
 hashtable UserDefinedRects__hashTable= InitHashtable()
 weathereffect array UserDefinedRects__weatherEffects
-constant integer UserDefinedRects__RECYCLE_KEY=11
+constant integer UserDefinedRects__RECYCLE_KEY=16
 integer array UserDefinedRects__instances
 //endglobals from UserDefinedRects
 //globals from LoPHeader:
@@ -884,11 +884,11 @@ sound gg_snd_RiflemanAttack1= null
 trigger gg_trg_Generate_Missing_Doodad_Globals= null
 trigger gg_trg_External_Set_Tiles= null
 trigger gg_trg_External_Import_All_Files= null
-trigger gg_trg_HeroicUnit= null
 trigger gg_trg_LoPHeader= null
 trigger gg_trg_LoPDecoBuilders= null
 trigger gg_trg_LoPWidgets= null
 trigger gg_trg_LoPPlayers= null
+trigger gg_trg_LoPCommands= null
 trigger gg_trg_Init_Player_Circles= null
 trigger gg_trg_Init_Deco_Tents= null
 trigger gg_trg_Init_Quests= null
@@ -915,6 +915,7 @@ trigger gg_trg_System_Titan_GiveUnit= null
 trigger gg_trg_System_Titan_Powers= null
 trigger gg_trg_System_PreventSave_Catch= null
 trigger gg_trg_System_PreventSave_Clear= null
+trigger gg_trg_Commands_Make_Hero= null
 trigger gg_trg_Commands_Set_Color= null
 trigger gg_trg_Commands_Toggle_Autoname= null
 trigger gg_trg_Commands_Name_Unit= null
@@ -984,6 +985,7 @@ trigger gg_trg_DestructableLib= null
 trigger gg_trg_GroupTools= null
 trigger gg_trg_DummyRecycler= null
 trigger gg_trg_Id2String= null
+trigger gg_trg_HeroicUnit= null
 trigger gg_trg_CutToComma= null
 trigger gg_trg_UnitVisualMods= null
 trigger gg_trg_Camera_System= null
@@ -1118,8 +1120,6 @@ destructable gg_dest_ATg3_0004= null
 destructable gg_dest_LTe3_0005= null
 destructable gg_dest_DTg5_0007= null
 destructable gg_dest_DTg5_0008= null
-trigger gg_trg_Commands_Make_Hero= null
-trigger gg_trg_LoPCommands= null
 boolean g_unitHasBeenRemoved= false
 boolean commandsDeleteInsideTitanPalace= false
 constant integer DecoMovement_CONTROLLER= 'h0KD'
@@ -1251,119 +1251,119 @@ constant integer si__ConstHashTable=96
 constant integer si__DummyRecycler__S=97
 integer s__DummyRecycler__S_tb
 constant integer si__TileDefinition__TileDefinition=98
-constant integer si__ArgumentStack___table=99
+constant integer si__ArgumentStack__table=99
 constant integer si__Args=100
-constant integer s__Args_real_impl=12
-constant integer s__Args_integer_impl=13
-constant integer s__Args_boolean_impl=14
-constant integer s__Args_string_impl=15
-constant integer s__Args_player_impl=16
-constant integer s__Args_widget_impl=17
-constant integer s__Args_destructable_impl=18
-constant integer s__Args_item_impl=19
-constant integer s__Args_unit_impl=20
-constant integer s__Args_ability_impl=21
-constant integer s__Args_timer_impl=22
-constant integer s__Args_trigger_impl=23
-constant integer s__Args_triggercondition_impl=24
-constant integer s__Args_event_impl=25
-constant integer s__Args_force_impl=26
-constant integer s__Args_group_impl=27
-constant integer s__Args_location_impl=28
-constant integer s__Args_rect_impl=29
-constant integer s__Args_boolexpr_impl=30
-constant integer s__Args_sound_impl=31
-constant integer s__Args_effect_impl=32
-constant integer s__Args_quest_impl=33
-constant integer s__Args_questitem_impl=34
-constant integer s__Args_defeatcondition_impl=35
-constant integer s__Args_timerdialog_impl=36
-constant integer s__Args_leaderboard_impl=37
-constant integer s__Args_multiboard_impl=38
-constant integer s__Args_multiboarditem_impl=39
-constant integer s__Args_trackable_impl=40
-constant integer s__Args_dialog_impl=41
-constant integer s__Args_button_impl=42
-constant integer s__Args_region_impl=43
-constant integer s__Args_fogmodifier_impl=44
-constant integer s__Args_hashtable_impl=45
-constant integer s__Args_triggeraction_impl=46
-constant integer s__Args_unitpool_impl=47
-constant integer s__Args_itempool_impl=48
-constant integer s__Args_texttag_impl=49
-constant integer s__Args_lightning_impl=50
-constant integer s__Args_image_impl=51
-constant integer s__Args_ubersplat_impl=52
-constant integer s__Args_fogstate_impl=53
+constant integer s__Args_real_impl=18
+constant integer s__Args_integer_impl=20
+constant integer s__Args_boolean_impl=22
+constant integer s__Args_string_impl=24
+constant integer s__Args_player_impl=26
+constant integer s__Args_widget_impl=28
+constant integer s__Args_destructable_impl=30
+constant integer s__Args_item_impl=32
+constant integer s__Args_unit_impl=34
+constant integer s__Args_ability_impl=36
+constant integer s__Args_timer_impl=38
+constant integer s__Args_trigger_impl=40
+constant integer s__Args_triggercondition_impl=42
+constant integer s__Args_event_impl=44
+constant integer s__Args_force_impl=46
+constant integer s__Args_group_impl=48
+constant integer s__Args_location_impl=50
+constant integer s__Args_rect_impl=52
+constant integer s__Args_boolexpr_impl=54
+constant integer s__Args_sound_impl=56
+constant integer s__Args_effect_impl=58
+constant integer s__Args_quest_impl=60
+constant integer s__Args_questitem_impl=62
+constant integer s__Args_defeatcondition_impl=64
+constant integer s__Args_timerdialog_impl=66
+constant integer s__Args_leaderboard_impl=68
+constant integer s__Args_multiboard_impl=70
+constant integer s__Args_multiboarditem_impl=72
+constant integer s__Args_trackable_impl=74
+constant integer s__Args_dialog_impl=76
+constant integer s__Args_button_impl=78
+constant integer s__Args_region_impl=80
+constant integer s__Args_fogmodifier_impl=82
+constant integer s__Args_hashtable_impl=84
+constant integer s__Args_triggeraction_impl=86
+constant integer s__Args_unitpool_impl=88
+constant integer s__Args_itempool_impl=90
+constant integer s__Args_texttag_impl=92
+constant integer s__Args_lightning_impl=94
+constant integer s__Args_image_impl=96
+constant integer s__Args_ubersplat_impl=98
+constant integer s__Args_fogstate_impl=100
 constant integer si__LinkedHashSet=101
 integer s__LinkedHashSet_enumElement= 0
 integer s__LinkedHashSet_enumSet= 0
 constant integer si__TableStruct=102
 constant integer si__FilterTransformations_Globals=103
-constant integer s__FilterTransformations_Globals_data_impl=54
+constant integer s__FilterTransformations_Globals_data_impl=102
 constant integer si__LoP_Command=104
-constant integer s__LoP_Command_boolexpr_impl=55
-constant integer s__LoP_Command_string_impl=56
-constant integer s__LoP_Command_accessLevel_impl=57
+constant integer s__LoP_Command_boolexpr_impl=104
+constant integer s__LoP_Command_string_impl=106
+constant integer s__LoP_Command_accessLevel_impl=108
 constant integer si__LoPCommands_Globals=105
-constant integer s__LoPCommands_Globals_static_members_key=58
-constant integer s__LoPCommands_Globals_trigger_impl=59
-constant integer s__LoPCommands_Globals_evaluator_impl=60
+constant integer s__LoPCommands_Globals_static_members_key=110
+constant integer s__LoPCommands_Globals_trigger_impl=112
+constant integer s__LoPCommands_Globals_evaluator_impl=114
 constant integer si__LoP_DecoBuilders=106
 integer array s__LoP_DecoBuilders_rawcodes
-constant integer s__LoP_DecoBuilders_static_members_key=61
-constant integer s__LoP_DecoBuilders_SpecialDecoLastIndex_impl=62
-constant integer s__LoP_DecoBuilders_BasicDecoFirstIndex_impl=63
-constant integer s__LoP_DecoBuilders_BasicDecoLastIndex_impl=64
-constant integer s__LoP_DecoBuilders_AdvDecoFirstIndex_impl=65
-constant integer s__LoP_DecoBuilders_AdvDecoLastIndex_impl=66
-constant integer s__LoP_DecoBuilders_DecoLastIndex_impl=67
+constant integer s__LoP_DecoBuilders_static_members_key=116
+constant integer s__LoP_DecoBuilders_SpecialDecoLastIndex_impl=118
+constant integer s__LoP_DecoBuilders_BasicDecoFirstIndex_impl=120
+constant integer s__LoP_DecoBuilders_BasicDecoLastIndex_impl=122
+constant integer s__LoP_DecoBuilders_AdvDecoFirstIndex_impl=124
+constant integer s__LoP_DecoBuilders_AdvDecoLastIndex_impl=126
+constant integer s__LoP_DecoBuilders_DecoLastIndex_impl=128
 constant integer si__LoPInitPlayerCircles_Globals=107
-constant integer s__LoPInitPlayerCircles_Globals_regionTable_impl=68
+constant integer s__LoPInitPlayerCircles_Globals_regionTable_impl=130
 constant integer si__LoP_PlayerData=108
 playercolor array s__LoP_PlayerData_playerColors
-constant integer s__LoP_PlayerData_commandsEnabled_internal_impl=69
+constant integer s__LoP_PlayerData_commandsEnabled_internal_impl=132
 constant integer si__MultiBoard=109
-constant integer s__MultiBoard_items_impl=70
-constant integer s__MultiBoard_cols_impl=71
-constant integer s__MultiBoard_rows_impl=72
-constant integer s__MultiBoard_multiboard_impl=73
+constant integer s__MultiBoard_items_impl=134
+constant integer s__MultiBoard_cols_impl=136
+constant integer s__MultiBoard_rows_impl=138
+constant integer s__MultiBoard_multiboard_impl=140
 constant integer si__TerrainFog=110
 constant integer s__TerrainFog_LINEAR= 0
 constant integer s__TerrainFog_EXPONENTIAL= 1
 constant integer s__TerrainFog_EXPONENTIAL2= 2
-constant integer s__TerrainFog_style_impl=74
-constant integer s__TerrainFog_zStart_impl=75
-constant integer s__TerrainFog_zEnd_impl=76
-constant integer s__TerrainFog_density_impl=77
-constant integer s__TerrainFog_red_impl=78
-constant integer s__TerrainFog_green_impl=79
-constant integer s__TerrainFog_blue_impl=80
+constant integer s__TerrainFog_style_impl=142
+constant integer s__TerrainFog_zStart_impl=144
+constant integer s__TerrainFog_zEnd_impl=146
+constant integer s__TerrainFog_density_impl=148
+constant integer s__TerrainFog_red_impl=150
+constant integer s__TerrainFog_green_impl=152
+constant integer s__TerrainFog_blue_impl=154
 constant integer si__RectEnvironment=111
-constant integer s__RectEnvironment_fog_impl=81
+constant integer s__RectEnvironment_fog_impl=156
 constant integer si__AutoRectEnvironment__Globals=112
-constant integer s__AutoRectEnvironment__Globals_static_members_key=82
-constant integer s__AutoRectEnvironment__Globals_lastCameraX_impl=83
-constant integer s__AutoRectEnvironment__Globals_lastCameraY_impl=84
-constant integer s__AutoRectEnvironment__Globals_rectWasMoved_impl=85
-constant integer s__AutoRectEnvironment__Globals_lastCameraRect_impl=86
-constant integer s__AutoRectEnvironment__Globals_allRects_impl=87
-constant integer s__AutoRectEnvironment__Globals_rects_impl=88
-constant integer s__AutoRectEnvironment__Globals_id2_impl=89
+constant integer s__AutoRectEnvironment__Globals_static_members_key=158
+constant integer s__AutoRectEnvironment__Globals_lastCameraX_impl=160
+constant integer s__AutoRectEnvironment__Globals_lastCameraY_impl=162
+constant integer s__AutoRectEnvironment__Globals_rectWasMoved_impl=164
+constant integer s__AutoRectEnvironment__Globals_lastCameraRect_impl=166
+constant integer s__AutoRectEnvironment__Globals_allRects_impl=168
+constant integer s__AutoRectEnvironment__Globals_rects_impl=170
+constant integer s__AutoRectEnvironment__Globals_id2_impl=172
 constant integer si__AutoRectEnvironment__InitStruct=113
 constant integer si__GameTime=114
 integer s__GameTime_a
-constant integer s__GameTime_static_members_key=90
-constant integer s__GameTime_hours_impl=91
-constant integer s__GameTime_minutes_impl=92
-constant integer s__GameTime_seconds_impl=93
-constant integer s__GameTime_timer_impl=94
-constant integer s__GameTime_multiboard_impl=95
+constant integer s__GameTime_static_members_key=174
+constant integer s__GameTime_hours_impl=176
+constant integer s__GameTime_minutes_impl=178
+constant integer s__GameTime_seconds_impl=180
+constant integer s__GameTime_timer_impl=182
+constant integer s__GameTime_multiboard_impl=184
 constant integer si__UserDefinedRects__Indices=115
 constant integer si__RectGenerator__FogStyle=116
-constant integer s__RectGenerator__FogStyle_strings_impl=96
-constant integer s__RectGenerator__FogStyle_linkedListNext_impl=97
-constant integer s__RectGenerator__FogStyle_linkedListPrev_impl=98
+constant integer s__RectGenerator__FogStyle_strings_impl=186
+constant integer s__RectGenerator__FogStyle_linkedListNext_impl=188
+constant integer s__RectGenerator__FogStyle_linkedListPrev_impl=190
 constant integer si__UnitVisualMods__data_reals=117
 constant integer si__UnitVisualMods__data_booleans=118
 constant integer si__UnitVisualMods__data_strings=119
@@ -1415,19 +1415,19 @@ constant integer s__TerrainType2Id_KEY= - 2
 constant integer si__UnitVisualMods__UnitVisualsRaw=164
 constant integer si__UnitVisuals=165
 constant integer si__LoPWidgets__Globals=166
-constant integer s__LoPWidgets__Globals_destructablesTab_impl=99
+constant integer s__LoPWidgets__Globals_destructablesTab_impl=192
 constant integer si__LoP_UnitData=167
-constant integer s__LoP_UnitData_isHeroic_impl=100
-constant integer si__TreeSystemChooseTree__Globals=168
-constant integer s__TreeSystemChooseTree__Globals_timerData_impl=101
-constant integer si__SpatialDistortion___TimerData=169
-constant integer s__SpatialDistortion___TimerData_caster_impl=102
-constant integer s__SpatialDistortion___TimerData_counter_impl=103
-constant integer s__SpatialDistortion___TimerData_x_impl=104
-constant integer s__SpatialDistortion___TimerData_y_impl=105
-constant integer si__MakeHeroic___Globals=170
-constant integer s__MakeHeroic___Globals_static_members_key=106
-constant integer s__MakeHeroic___Globals_dummy_impl=107
+constant integer s__LoP_UnitData_isHeroic_impl=194
+constant integer si__MakeHeroic__Globals=168
+constant integer s__MakeHeroic__Globals_static_members_key=196
+constant integer s__MakeHeroic__Globals_dummy_impl=198
+constant integer si__TreeSystemChooseTree__Globals=169
+constant integer s__TreeSystemChooseTree__Globals_timerData_impl=200
+constant integer si__SpatialDistortion___TimerData=170
+constant integer s__SpatialDistortion___TimerData_caster_impl=202
+constant integer s__SpatialDistortion___TimerData_counter_impl=204
+constant integer s__SpatialDistortion___TimerData_x_impl=206
+constant integer s__SpatialDistortion___TimerData_y_impl=208
 trigger st__Table__reals__getindex
 trigger st__Table__reals__setindex
 trigger st__Table__units__getindex
@@ -1842,10 +1842,10 @@ endfunction
 // scope CombatTag_HEAL ends
 
 
-function CombatTag___ShowText takes nothing returns nothing
+function CombatTag__ShowText takes nothing returns nothing
     local timer t= GetExpiredTimer()
     local integer tId= GetHandleId(t)
-    local unit u= (LoadUnitHandle(Table__ht, (((CombatTag___timerData))), (tId))) // INLINED!!
+    local unit u= (LoadUnitHandle(Table__ht, (((CombatTag__timerData))), (tId))) // INLINED!!
     local integer uId= GetUnitUserData(u)
     
     local real z_offset= 50
@@ -1871,7 +1871,7 @@ function CombatTag___ShowText takes nothing returns nothing
     
     call PauseTimer(t)
     call DestroyTimer(t)
-    call RemoveSavedHandle(Table__ht, (((CombatTag___timerData))), (tId)) // INLINED!!
+    call RemoveSavedHandle(Table__ht, (((CombatTag__timerData))), (tId)) // INLINED!!
     set t=null
     set u=null
 endfunction
@@ -1887,20 +1887,20 @@ function CombatTag_Register takes unit whichUnit,real value,integer whichType re
     
     if amount <= 0. then
         set t=CreateTimer()
-        call TimerStart(t, 0, false, function CombatTag___ShowText)
-        call SaveUnitHandle(Table__ht, (((CombatTag___timerData))), (GetHandleId(t)), ( whichUnit)) // INLINED!!
+        call TimerStart(t, 0, false, function CombatTag__ShowText)
+        call SaveUnitHandle(Table__ht, (((CombatTag__timerData))), (GetHandleId(t)), ( whichUnit)) // INLINED!!
         set t=null
     endif
         
     call SaveReal(Table__ht, (((whichType))), (uId), (( amount + value)*1.0)) // INLINED!!
 endfunction
 
-function CombatTag___onInit takes nothing returns nothing
+function CombatTag__onInit takes nothing returns nothing
     set CombatTag_PHYS_DAMAGE=sc__Table_create()
     set CombatTag_SPELL_DAMAGE=sc__Table_create()
     set CombatTag_HEALING=sc__Table_create()
     
-    set CombatTag___timerData=sc__Table_create()
+    set CombatTag__timerData=sc__Table_create()
 endfunction
 
 
@@ -2474,9 +2474,14 @@ function InitQuests takes nothing returns nothing
     call CreateQuestBJ(questType, "|cffff0000TL Creators|r", quest_text, "ReplaceableTextures\\CommandButtons\\BTNReincarnation.blp")
     // ----------
     
-    // Model Credits
-    set quest_text="\n|cff00b300The Hive Workshop:|r\nKwaliti, Lord_T, Deolrin, Chilla_killa, Sellenisko, Hellish Hybrid, A Void, Uncle Fester, MassiveMaster, HerrDave, Olofmoleman, Sliph-M, darkdeathknight, evigeorge1617, Hayate, Tranquil, -Grendel, Stefan.K, HappyTauren, donut3.5, Cavman, HateCrew, Expresso, General Frank, YrpoTRIa , KO3bMA , Dixnos, Fingolfin, Mike, ChevronSeven, MatiS, killst4r, Tarrasque, Red XIII, FvckTP, Em!, Misha, Arak1da, Chen, Wandering Soul, kagyun, Hexus, -=Emergenzy=-, Sin'dorei300, PROXY, WebSter, darklord_avalon, eubz, Kitabatake, kellym0, Sunchips, Remixer, Su7VdeR, koondad, Mister_Haudrauf, Daenar7, SinisterX, TiJiL, icewolf055, RightField, UgoUgo, DarkHunter1357, Necromancer_187, alfredx_sotn, Black_Stan, BlinkBoy, NaserKingArthas, bisnar13, InfernalTater, Hueter, ~Nightmare, 67chrome, dickxunder, Elenai, Redsteel1, Mr Goblin, Ujimasa Hojo, Happy Tauren, Himperion, Kuhneghetz, Wildfire, Horn, Wisdom\n\n\n|cffff0000XGM:|r\nP4ela, Kolbosa, Wulfrein, DampirTBs, Feleer, Jack Sparrow, DiKey51, Ket"
-    call CreateQuestBJ(questType, "|cff00ff00Model/Skins|r", quest_text, "ReplaceableTextures\\CommandButtons\\BTNTemp.blp")
+    // Model Credits 1
+    set quest_text="\n|cff00b300The Hive Workshop:|r\nKwaliti, Lord_T, Deolrin, Chilla_killa, Sellenisko, Hellish Hybrid, A Void, Uncle Fester, MassiveMaster, HerrDave, Olofmoleman, Sliph-M, darkdeathknight, evigeorge1617, Hayate, Tranquil, -Grendel, Stefan.K, HappyTauren, donut3.5, Cavman, HateCrew, Expresso, General Frank, YrpoTRIa , KO3bMA , Dixnos, Fingolfin, Mike, ChevronSeven, MatiS, killst4r, Tarrasque, Red XIII, FvckTP, Em!, Misha, Arak1da, Chen, Wandering Soul, kagyun, Hexus, -=Emergenzy=-, Sin'dorei300, PROXY, WebSter, darklord_avalon, eubz, Kitabatake, kellym0, Sunchips, Remixer, Su7VdeR, koondad, Mister_Haudrauf, Daenar7, SinisterX, TiJiL, icewolf055, RightField, UgoUgo, DarkHunter1357, Necromancer_187, alfredx_sotn, Black_Stan, BlinkBoy, NaserKingArthas, bisnar13, InfernalTater, Hueter, ~Nightmare, 67chrome, dickxunder, Elenai, Redstee1, Mr Goblin, Ujimasa Hojo, Happy Tauren, Himperion, Kuhneghetz, Wildfire, Horn, Wisdom\n\n\n|cffff0000XGM:|r\nP4ela, Kolbosa, Wulfrein, DampirTBs, Feleer, Jack Sparrow, DiKey51, Ket"
+    call CreateQuestBJ(questType, "|cff00ff00Art 1|r", quest_text, "ReplaceableTextures\\CommandButtons\\BTNTemp.blp")
+    // ----------
+    
+    // Model Credits 2
+    set quest_text="\n|cff00b300The Hive Workshop:|r\nPrinceYaser, shiik, Dr.Death, Sant, Eagle XI, Afroknight_76\n"
+    call CreateQuestBJ(questType, "|cff00ff00Art 2|r", quest_text, "ReplaceableTextures\\CommandButtons\\BTNTemp.blp")
     // ----------
     
     // Coding and Tools
@@ -4213,49 +4218,49 @@ endfunction
 //===============
 // Setters
 function Camera_SetDefaultRotator takes integer playerId,unit whichUnit returns nothing
-    set ThirdPersonCamera___focusUnits[playerId + 2 * bj_MAX_PLAYERS]=whichUnit
+    set ThirdPersonCamera__focusUnits[playerId + 2 * bj_MAX_PLAYERS]=whichUnit
 endfunction
 
 function Camera_SetRotator takes integer playerId,unit whichUnit returns nothing
-    set ThirdPersonCamera___focusUnits[playerId + bj_MAX_PLAYERS]=whichUnit
+    set ThirdPersonCamera__focusUnits[playerId + bj_MAX_PLAYERS]=whichUnit
 endfunction
 
 function Camera_SetTarget takes integer playerId,unit whichUnit returns nothing
-    set ThirdPersonCamera___focusUnits[playerId]=whichUnit
+    set ThirdPersonCamera__focusUnits[playerId]=whichUnit
 endfunction
 
 //===============
 // Getters
 function Camera_GetDefaultRotator takes integer playerId returns unit
-    return ThirdPersonCamera___focusUnits[playerId + 2 * bj_MAX_PLAYERS]
+    return ThirdPersonCamera__focusUnits[playerId + 2 * bj_MAX_PLAYERS]
 endfunction
 
 function Camera_GetRotator takes integer playerId returns unit
-    return ThirdPersonCamera___focusUnits[playerId + bj_MAX_PLAYERS]
+    return ThirdPersonCamera__focusUnits[playerId + bj_MAX_PLAYERS]
 endfunction
 
 function Camera_GetTarget takes integer playerId returns unit
-    return ThirdPersonCamera___focusUnits[playerId]
+    return ThirdPersonCamera__focusUnits[playerId]
 endfunction
 //===========================================================================
 // API
 //===============
 function Camera_WasHelpSeen takes integer playerId returns boolean
-    return not HaveSavedBoolean(ThirdPersonCamera___data, playerId, - 1)
+    return not HaveSavedBoolean(ThirdPersonCamera__data, playerId, - 1)
 endfunction
 
 function Camera_SetHelpSeen takes integer playerId,boolean flag returns nothing
     if flag then
-        call RemoveSavedBoolean(ThirdPersonCamera___data, playerId, - 1)
+        call RemoveSavedBoolean(ThirdPersonCamera__data, playerId, - 1)
     else
-        call SaveBoolean(ThirdPersonCamera___data, playerId, - 1, true)
+        call SaveBoolean(ThirdPersonCamera__data, playerId, - 1, true)
     endif
 endfunction
 
 function Camera_SetFirstPerson takes player whichPlayer,unit whichUnit returns nothing
     local real sleepTime
     
-    if not (not HaveSavedBoolean(ThirdPersonCamera___data, (GetPlayerId(whichPlayer)), - 1)) then // INLINED!!
+    if not (not HaveSavedBoolean(ThirdPersonCamera__data, (GetPlayerId(whichPlayer)), - 1)) then // INLINED!!
         call DisplayTextToPlayer(whichPlayer, 0, 0, ("First Person Camera Enabled!\n\nTo leave this perspective, double-click the |c00ffff00Esc|r key.\nTo fix the camera to the unit's facing, click the |c00ffff00Esc|r key.\nTo allow the camera to move independently, click the |c00ffff00Esc|r key.\n\nYou can use the |c00ffff00left|r and |c00ffff00right|r arrow keys to move the camera.\nYou can find the commands for the camera by pressing |c00ffff00F9|r.")) // INLINED!!
         call Camera_SetHelpSeen(GetPlayerId(whichPlayer) , true)
     endif
@@ -4277,12 +4282,12 @@ function Camera_SetFirstPerson takes player whichPlayer,unit whichUnit returns n
         endif
     endif
     
-    set ThirdPersonCamera___focusUnits[(GetPlayerId(whichPlayer) )]=( whichUnit) // INLINED!!
-    set ThirdPersonCamera___focusUnits[(GetPlayerId(whichPlayer) ) + bj_MAX_PLAYERS]=( (ThirdPersonCamera___focusUnits[(GetPlayerId(whichPlayer)) + 2 * bj_MAX_PLAYERS])) // INLINED!!
+    set ThirdPersonCamera__focusUnits[(GetPlayerId(whichPlayer) )]=( whichUnit) // INLINED!!
+    set ThirdPersonCamera__focusUnits[(GetPlayerId(whichPlayer) ) + bj_MAX_PLAYERS]=( (ThirdPersonCamera__focusUnits[(GetPlayerId(whichPlayer)) + 2 * bj_MAX_PLAYERS])) // INLINED!!
 endfunction
 
 function Camera_SetThirdPerson takes player whichPlayer returns nothing
-    set ThirdPersonCamera___focusUnits[(GetPlayerId(whichPlayer) )]=( null) // INLINED!!
+    set ThirdPersonCamera__focusUnits[(GetPlayerId(whichPlayer) )]=( null) // INLINED!!
     if GetLocalPlayer() == whichPlayer then
         call StopCamera()
         call ResetToGameCamera((1.0)) // INLINED!!
@@ -4307,27 +4312,27 @@ function Camera_ClearPlayerData takes player whichPlayer returns nothing
     local integer playerId= GetPlayerId(whichPlayer)
 
     // Flushing this will also destroy timers for arrow keys
-    call FlushChildHashtable(ThirdPersonCamera___data, playerId)
+    call FlushChildHashtable(ThirdPersonCamera__data, playerId)
     
     // Remove useless unit and null everything to avoid handle reference leaks
-    call RemoveUnit((ThirdPersonCamera___focusUnits[(playerId) + 2 * bj_MAX_PLAYERS])) // INLINED!!
-    set ThirdPersonCamera___focusUnits[(playerId ) + 2 * bj_MAX_PLAYERS]=( null) // INLINED!!
-    set ThirdPersonCamera___focusUnits[(playerId ) + bj_MAX_PLAYERS]=( null) // INLINED!!
-    set ThirdPersonCamera___focusUnits[(playerId )]=( null) // INLINED!!
+    call RemoveUnit((ThirdPersonCamera__focusUnits[(playerId) + 2 * bj_MAX_PLAYERS])) // INLINED!!
+    set ThirdPersonCamera__focusUnits[(playerId ) + 2 * bj_MAX_PLAYERS]=( null) // INLINED!!
+    set ThirdPersonCamera__focusUnits[(playerId ) + bj_MAX_PLAYERS]=( null) // INLINED!!
+    set ThirdPersonCamera__focusUnits[(playerId )]=( null) // INLINED!!
 endfunction
 //===========================================================================
 // Key Event Handling: Left and Right arrows
 //===============
 // Utility
 function Camera_IsKeyPressed takes integer playerId,integer whichKey returns boolean
-    return HaveSavedBoolean(ThirdPersonCamera___data, playerId, whichKey)
+    return HaveSavedBoolean(ThirdPersonCamera__data, playerId, whichKey)
 endfunction
 
 function Camera_SetKeyPressed takes integer playerId,integer whichKey,boolean flag returns nothing
     if flag then
-        call SaveBoolean(ThirdPersonCamera___data, playerId, whichKey, true)
+        call SaveBoolean(ThirdPersonCamera__data, playerId, whichKey, true)
     else
-        call RemoveSavedBoolean(ThirdPersonCamera___data, playerId, whichKey)
+        call RemoveSavedBoolean(ThirdPersonCamera__data, playerId, whichKey)
     endif
 endfunction
 
@@ -4336,10 +4341,10 @@ endfunction
 function Camera_TimerFunc2 takes nothing returns nothing
     local unit u
     local timer t= GetExpiredTimer()
-    local integer playerId= LoadInteger(ThirdPersonCamera___data, GetHandleId(t), 0)
+    local integer playerId= LoadInteger(ThirdPersonCamera__data, GetHandleId(t), 0)
     
-    if ( (HaveSavedBoolean(ThirdPersonCamera___data, (playerId ), ( (1)))) ) then // INLINED!!
-        set u=(ThirdPersonCamera___focusUnits[(playerId) + bj_MAX_PLAYERS]) // INLINED!!
+    if ( (HaveSavedBoolean(ThirdPersonCamera__data, (playerId ), ( (1)))) ) then // INLINED!!
+        set u=(ThirdPersonCamera__focusUnits[(playerId) + bj_MAX_PLAYERS]) // INLINED!!
         call SetUnitFacing(u, GetUnitFacing(u) + 10.)
         set u=null
     else
@@ -4352,14 +4357,14 @@ endfunction
 function Camera_TimerFunc_RightArrow takes nothing returns nothing
     local unit u
     local timer t= GetExpiredTimer()
-    local integer playerId= LoadInteger(ThirdPersonCamera___data, GetHandleId(t), 0)
+    local integer playerId= LoadInteger(ThirdPersonCamera__data, GetHandleId(t), 0)
     
-    if ( (HaveSavedBoolean(ThirdPersonCamera___data, (playerId ), ( (2)))) ) then // INLINED!!
-        set u=(ThirdPersonCamera___focusUnits[(playerId) + bj_MAX_PLAYERS]) // INLINED!!
+    if ( (HaveSavedBoolean(ThirdPersonCamera__data, (playerId ), ( (2)))) ) then // INLINED!!
+        set u=(ThirdPersonCamera__focusUnits[(playerId) + bj_MAX_PLAYERS]) // INLINED!!
         call SetUnitFacing(u, GetUnitFacing(u) - 10.)
         set u=null
     else
-        call FlushChildHashtable(ThirdPersonCamera___data, GetHandleId(t))
+        call FlushChildHashtable(ThirdPersonCamera__data, GetHandleId(t))
         call PauseTimer(t)
         call DestroyTimer(t)
     endif
@@ -4371,18 +4376,18 @@ endfunction
 function SideArrowPress takes integer playerId,integer whichKey,code handlerFunc returns nothing
     local timer t
     
-    if (ThirdPersonCamera___focusUnits[(playerId)]) == null then // INLINED!!
+    if (ThirdPersonCamera__focusUnits[(playerId)]) == null then // INLINED!!
         return
     endif
     
-    if (HaveSavedBoolean(ThirdPersonCamera___data, (playerId ), ( whichKey))) then // INLINED!!
+    if (HaveSavedBoolean(ThirdPersonCamera__data, (playerId ), ( whichKey))) then // INLINED!!
         call Camera_SetKeyPressed(playerId , whichKey , false)
     else
         call Camera_SetKeyPressed(playerId , whichKey , true)
         
         set t=CreateTimer()
         call TimerStart(t, 0.03, true, handlerFunc)
-        call SaveInteger(ThirdPersonCamera___data, GetHandleId(t), 0, playerId)
+        call SaveInteger(ThirdPersonCamera__data, GetHandleId(t), 0, playerId)
         set t=null
     endif
 endfunction
@@ -4399,35 +4404,35 @@ endfunction
 // Key Event Handling: Esc
 //===============
 function Camera_GetEscClicks takes integer playerId returns integer
-    return LoadInteger(ThirdPersonCamera___data, playerId, (0)) // INLINED!!
+    return LoadInteger(ThirdPersonCamera__data, playerId, (0)) // INLINED!!
 endfunction
 
 function Camera_SetEscClicks takes integer playerId,integer value returns nothing
-    call SaveInteger(ThirdPersonCamera___data, playerId, (0), value) // INLINED!!
+    call SaveInteger(ThirdPersonCamera__data, playerId, (0), value) // INLINED!!
 endfunction
 
 function Camera_ResetEscClicks takes integer playerId returns nothing
-    call RemoveSavedInteger(ThirdPersonCamera___data, playerId, (0)) // INLINED!!
+    call RemoveSavedInteger(ThirdPersonCamera__data, playerId, (0)) // INLINED!!
 endfunction
 
 function Camera_Trig_Esc_Actions takes nothing returns nothing
     local player p= GetTriggerPlayer()
     local integer pId= GetPlayerId(p)
-    local integer count= (LoadInteger(ThirdPersonCamera___data, (pId), (0))) // INLINED!!
+    local integer count= (LoadInteger(ThirdPersonCamera__data, (pId), (0))) // INLINED!!
     
     if count == 0 then
-        if (ThirdPersonCamera___focusUnits[(pId) + bj_MAX_PLAYERS]) == (ThirdPersonCamera___focusUnits[(pId)]) then // INLINED!!
-            set ThirdPersonCamera___focusUnits[(pId ) + bj_MAX_PLAYERS]=( (ThirdPersonCamera___focusUnits[(pId) + 2 * bj_MAX_PLAYERS])) // INLINED!!
+        if (ThirdPersonCamera__focusUnits[(pId) + bj_MAX_PLAYERS]) == (ThirdPersonCamera__focusUnits[(pId)]) then // INLINED!!
+            set ThirdPersonCamera__focusUnits[(pId ) + bj_MAX_PLAYERS]=( (ThirdPersonCamera__focusUnits[(pId) + 2 * bj_MAX_PLAYERS])) // INLINED!!
         else
-            set ThirdPersonCamera___focusUnits[(pId ) + bj_MAX_PLAYERS]=( (ThirdPersonCamera___focusUnits[(pId)])) // INLINED!!
+            set ThirdPersonCamera__focusUnits[(pId ) + bj_MAX_PLAYERS]=( (ThirdPersonCamera__focusUnits[(pId)])) // INLINED!!
         endif
         
-        call SaveInteger(ThirdPersonCamera___data, (pId ), (0), ( count + 1)) // INLINED!!
+        call SaveInteger(ThirdPersonCamera__data, (pId ), (0), ( count + 1)) // INLINED!!
         call TriggerSleepAction(.4)
-        call RemoveSavedInteger(ThirdPersonCamera___data, (pId), (0)) // INLINED!!
+        call RemoveSavedInteger(ThirdPersonCamera__data, (pId), (0)) // INLINED!!
     elseif count == 1 then
-        call SaveInteger(ThirdPersonCamera___data, (pId ), (0), ( count + 1)) // INLINED!!
-        if (ThirdPersonCamera___focusUnits[(pId)]) != null then // INLINED!!
+        call SaveInteger(ThirdPersonCamera__data, (pId ), (0), ( count + 1)) // INLINED!!
+        if (ThirdPersonCamera__focusUnits[(pId)]) != null then // INLINED!!
             call Camera_SetThirdPerson(p)
         else
             call Camera_SetFirstPersonSelected(p) // There is a wait in this function
@@ -4442,13 +4447,13 @@ endfunction
 // Returns the minimum angle between mouse and unit for camera to turn.
 // This is a per-player setting, since it may vary with screen resolution.
 function Camera_GetMinAngle takes integer playerId returns real
-    return LoadReal(ThirdPersonCamera___data, playerId, (3)) // INLINED!!
+    return LoadReal(ThirdPersonCamera__data, playerId, (3)) // INLINED!!
 endfunction
 
 // Sets the minimum angle between mouse and unit for camera to turn.
 // This is a per-player setting, since it may vary with screen resolution.
 function Camera_SetMinAngle takes integer playerId,real angle returns nothing
-    call SaveReal(ThirdPersonCamera___data, playerId, (3), angle) // INLINED!!
+    call SaveReal(ThirdPersonCamera__data, playerId, (3), angle) // INLINED!!
 endfunction
 
 function Camera_AngleToMouse takes unit u,integer playerId,real x,real y returns real
@@ -4456,18 +4461,18 @@ function Camera_AngleToMouse takes unit u,integer playerId,real x,real y returns
     local real mouseY= BlzGetTriggerPlayerMouseY()
     local real newAngle= bj_RADTODEG * Atan2(mouseY - y, mouseX - x)
     local real difference
-    local real minAngle= (LoadReal(ThirdPersonCamera___data, (playerId), (3))) // INLINED!!
+    local real minAngle= (LoadReal(ThirdPersonCamera__data, (playerId), (3))) // INLINED!!
     
     if newAngle < 0 then
         set newAngle=360 + newAngle // Convert negative angles to positive, since GetUnitFacing always returns positives
     endif
-    set difference=newAngle - GetUnitFacing((ThirdPersonCamera___focusUnits[(playerId) + bj_MAX_PLAYERS])) // INLINED!!
+    set difference=newAngle - GetUnitFacing((ThirdPersonCamera__focusUnits[(playerId) + bj_MAX_PLAYERS])) // INLINED!!
     
     // If both mouseX and Y are 0, then the mouse is (probably) on the UI
     if ( difference > minAngle or difference < - minAngle ) and ( mouseX != 0 and mouseY != 0 ) then
         return newAngle
     else
-        return GetUnitFacing((ThirdPersonCamera___focusUnits[(playerId) + bj_MAX_PLAYERS])) // INLINED!!
+        return GetUnitFacing((ThirdPersonCamera__focusUnits[(playerId) + bj_MAX_PLAYERS])) // INLINED!!
     endif
 endfunction
 
@@ -4475,10 +4480,10 @@ endfunction
 function Trig_CameraMouse_Actions takes nothing returns nothing
     local player trigPlayer= GetTriggerPlayer()
     local integer playerId= GetPlayerId(trigPlayer)
-    local unit u= (ThirdPersonCamera___focusUnits[(playerId)]) // INLINED!!
+    local unit u= (ThirdPersonCamera__focusUnits[(playerId)]) // INLINED!!
     
     if u != null then
-        call SetUnitFacing((ThirdPersonCamera___focusUnits[(playerId) + bj_MAX_PLAYERS]), Camera_AngleToMouse(u , playerId , GetUnitX(u) , GetUnitY(u))) // INLINED!!
+        call SetUnitFacing((ThirdPersonCamera__focusUnits[(playerId) + bj_MAX_PLAYERS]), Camera_AngleToMouse(u , playerId , GetUnitX(u) , GetUnitY(u))) // INLINED!!
         set u=null
     endif
 endfunction
@@ -4495,13 +4500,13 @@ function Trig_Commands_First_Person_Actions takes nothing returns nothing
     elseif chatStr == ("-third person") then // INLINED!!
         call Camera_SetThirdPerson(p)
     elseif chatStr == ("-fixed camera") then // INLINED!!
-        set ThirdPersonCamera___focusUnits[(GetPlayerId(p) ) + bj_MAX_PLAYERS]=( (ThirdPersonCamera___focusUnits[(GetPlayerId(p))])) // INLINED!!
+        set ThirdPersonCamera__focusUnits[(GetPlayerId(p) ) + bj_MAX_PLAYERS]=( (ThirdPersonCamera__focusUnits[(GetPlayerId(p))])) // INLINED!!
     elseif chatStr == ("-free camera") then // INLINED!!
-        set ThirdPersonCamera___focusUnits[(GetPlayerId(p) ) + bj_MAX_PLAYERS]=( (ThirdPersonCamera___focusUnits[(GetPlayerId(p)) + 2 * bj_MAX_PLAYERS])) // INLINED!!
+        set ThirdPersonCamera__focusUnits[(GetPlayerId(p) ) + bj_MAX_PLAYERS]=( (ThirdPersonCamera__focusUnits[(GetPlayerId(p)) + 2 * bj_MAX_PLAYERS])) // INLINED!!
     elseif chatStr == ("-help camera") then // INLINED!!
         call DisplayTextToPlayer(p, 0, 0, ("First Person Camera Enabled!\n\nTo leave this perspective, double-click the |c00ffff00Esc|r key.\nTo fix the camera to the unit's facing, click the |c00ffff00Esc|r key.\nTo allow the camera to move independently, click the |c00ffff00Esc|r key.\n\nYou can use the |c00ffff00left|r and |c00ffff00right|r arrow keys to move the camera.\nYou can find the commands for the camera by pressing |c00ffff00F9|r.")) // INLINED!!
     else
-        call SaveReal(ThirdPersonCamera___data, (GetPlayerId(p) ), (3), (( S2R(SubString(chatStr, StringLength(GetEventPlayerChatStringMatched()), StringLength(chatStr))))*1.0)) // INLINED!!
+        call SaveReal(ThirdPersonCamera__data, (GetPlayerId(p) ), (3), (( S2R(SubString(chatStr, StringLength(GetEventPlayerChatStringMatched()), StringLength(chatStr))))*1.0)) // INLINED!!
     endif
 endfunction
 
@@ -4514,11 +4519,11 @@ function Camera_TimerFunc takes nothing returns nothing
     local player localPlayer= GetLocalPlayer()
     local integer playerId= GetPlayerId(localPlayer)
     
-    if ThirdPersonCamera___focusUnits[playerId] != null then
-        call SetCameraField(CAMERA_FIELD_ROTATION, GetUnitFacing(ThirdPersonCamera___focusUnits[playerId + bj_MAX_PLAYERS]), 0)
+    if ThirdPersonCamera__focusUnits[playerId] != null then
+        call SetCameraField(CAMERA_FIELD_ROTATION, GetUnitFacing(ThirdPersonCamera__focusUnits[playerId + bj_MAX_PLAYERS]), 0)
         call SetCameraField(CAMERA_FIELD_ANGLE_OF_ATTACK, 350.00, 0)
         call SetCameraField(CAMERA_FIELD_TARGET_DISTANCE, 140.00, 0)
-        call SetCameraField(CAMERA_FIELD_ZOFFSET, ( GetUnitFlyHeight(ThirdPersonCamera___focusUnits[playerId]) + 125.00 ), 0.01)
+        call SetCameraField(CAMERA_FIELD_ZOFFSET, ( GetUnitFlyHeight(ThirdPersonCamera__focusUnits[playerId]) + 125.00 ), 0.01)
     endif
 endfunction
 
@@ -4538,26 +4543,26 @@ function Camera_ForForce_Init takes nothing returns nothing
             call TriggerRegisterPlayerChatEvent(gg_trg_Camera_System, enumPlayer, ("-help camera"), true) // INLINED!!
             call TriggerRegisterPlayerChatEvent(gg_trg_Camera_System, enumPlayer, ("-sensitivity "), false) // INLINED!!
         endif
-        call TriggerRegisterPlayerMouseEventBJ(ThirdPersonCamera___triggerMouse, enumPlayer, bj_MOUSEEVENTTYPE_MOVE)
+        call TriggerRegisterPlayerMouseEventBJ(ThirdPersonCamera__triggerMouse, enumPlayer, bj_MOUSEEVENTTYPE_MOVE)
         
-        call TriggerRegisterPlayerEvent(ThirdPersonCamera___triggerLeft, enumPlayer, EVENT_PLAYER_ARROW_LEFT_DOWN)
-        call TriggerRegisterPlayerEvent(ThirdPersonCamera___triggerLeft, enumPlayer, EVENT_PLAYER_ARROW_LEFT_UP)
+        call TriggerRegisterPlayerEvent(ThirdPersonCamera__triggerLeft, enumPlayer, EVENT_PLAYER_ARROW_LEFT_DOWN)
+        call TriggerRegisterPlayerEvent(ThirdPersonCamera__triggerLeft, enumPlayer, EVENT_PLAYER_ARROW_LEFT_UP)
     
-        call TriggerRegisterPlayerEvent(ThirdPersonCamera___triggerRight, enumPlayer, EVENT_PLAYER_ARROW_RIGHT_DOWN)
-        call TriggerRegisterPlayerEvent(ThirdPersonCamera___triggerRight, enumPlayer, EVENT_PLAYER_ARROW_RIGHT_UP)
+        call TriggerRegisterPlayerEvent(ThirdPersonCamera__triggerRight, enumPlayer, EVENT_PLAYER_ARROW_RIGHT_DOWN)
+        call TriggerRegisterPlayerEvent(ThirdPersonCamera__triggerRight, enumPlayer, EVENT_PLAYER_ARROW_RIGHT_UP)
         
-        call TriggerRegisterPlayerEvent(ThirdPersonCamera___triggerEsc, enumPlayer, EVENT_PLAYER_END_CINEMATIC)
+        call TriggerRegisterPlayerEvent(ThirdPersonCamera__triggerEsc, enumPlayer, EVENT_PLAYER_END_CINEMATIC)
         
-        call TriggerRegisterPlayerEvent(ThirdPersonCamera___triggerCleanup, enumPlayer, EVENT_PLAYER_LEAVE)
+        call TriggerRegisterPlayerEvent(ThirdPersonCamera__triggerCleanup, enumPlayer, EVENT_PLAYER_LEAVE)
         
         set u=CreateUnit((Player(bj_PLAYER_NEUTRAL_EXTRA)), ('nvil'), (0.0), (0.0), bj_UNIT_FACING) // INLINED!!
         call UnitAddAbility(u, 'Aloc')
         call SetUnitInvulnerable(u, true)
         call ShowUnit(u, false)
         call SetUnitTurnSpeed(u, 3.)
-        set ThirdPersonCamera___focusUnits[(GetPlayerId(enumPlayer) ) + 2 * bj_MAX_PLAYERS]=( u) // INLINED!!
-        set ThirdPersonCamera___focusUnits[(GetPlayerId(enumPlayer) ) + bj_MAX_PLAYERS]=( u) // INLINED!!
-        call SaveReal(ThirdPersonCamera___data, (GetPlayerId(enumPlayer) ), (3), (( 39.0)*1.0)) // INLINED!!
+        set ThirdPersonCamera__focusUnits[(GetPlayerId(enumPlayer) ) + 2 * bj_MAX_PLAYERS]=( u) // INLINED!!
+        set ThirdPersonCamera__focusUnits[(GetPlayerId(enumPlayer) ) + bj_MAX_PLAYERS]=( u) // INLINED!!
+        call SaveReal(ThirdPersonCamera__data, (GetPlayerId(enumPlayer) ), (3), (( 39.0)*1.0)) // INLINED!!
         
         call Camera_SetHelpSeen(GetPlayerId(enumPlayer) , false)
         
@@ -4574,26 +4579,26 @@ function InitTrig_Camera_System takes nothing returns nothing
     local timer t= CreateTimer()
     call TimerStart(t, 0.03, true, function Camera_TimerFunc)
     
-    set ThirdPersonCamera___data=InitHashtable()
+    set ThirdPersonCamera__data=InitHashtable()
     
     if ("-first person") != "" then // INLINED!!
         set gg_trg_Camera_System=CreateTrigger()
         call TriggerAddAction(gg_trg_Camera_System, function Trig_Commands_First_Person_Actions)
     endif
 
-    set ThirdPersonCamera___triggerLeft=CreateTrigger()
-    set ThirdPersonCamera___triggerRight=CreateTrigger()
-    call TriggerAddAction(ThirdPersonCamera___triggerLeft, function Camera_Trig_LeftArrow_Actions)
-    call TriggerAddAction(ThirdPersonCamera___triggerRight, function Camera_Trig_RightArrow_Actions)
+    set ThirdPersonCamera__triggerLeft=CreateTrigger()
+    set ThirdPersonCamera__triggerRight=CreateTrigger()
+    call TriggerAddAction(ThirdPersonCamera__triggerLeft, function Camera_Trig_LeftArrow_Actions)
+    call TriggerAddAction(ThirdPersonCamera__triggerRight, function Camera_Trig_RightArrow_Actions)
     
-    set ThirdPersonCamera___triggerEsc=CreateTrigger()
-    call TriggerAddAction(ThirdPersonCamera___triggerEsc, function Camera_Trig_Esc_Actions)
+    set ThirdPersonCamera__triggerEsc=CreateTrigger()
+    call TriggerAddAction(ThirdPersonCamera__triggerEsc, function Camera_Trig_Esc_Actions)
     
-    set ThirdPersonCamera___triggerMouse=CreateTrigger()
-    call TriggerAddAction(ThirdPersonCamera___triggerMouse, function Trig_CameraMouse_Actions)
+    set ThirdPersonCamera__triggerMouse=CreateTrigger()
+    call TriggerAddAction(ThirdPersonCamera__triggerMouse, function Trig_CameraMouse_Actions)
     
-    set ThirdPersonCamera___triggerCleanup=CreateTrigger()
-    call TriggerAddAction(ThirdPersonCamera___triggerCleanup, function Camera_Trig_PlayerLeaves)
+    set ThirdPersonCamera__triggerCleanup=CreateTrigger()
+    call TriggerAddAction(ThirdPersonCamera__triggerCleanup, function Camera_Trig_PlayerLeaves)
     
     call ForForce(GetPlayersAll(), function Camera_ForForce_Init)
     
@@ -5900,7 +5905,7 @@ endfunction
 //Positive Unit Handle ID > Move Bonus
 //Negative Unit Handle ID > Move Multiplier
 
-function MoveSpeedBonus___KEY takes nothing returns integer
+function MoveSpeedBonus__KEY takes nothing returns integer
 
 
 
@@ -5910,11 +5915,11 @@ function MoveSpeedBonus___KEY takes nothing returns integer
 
 endfunction
 
-function MoveSpeedBonus___GetUnitId takes unit whichUnit returns integer
+function MoveSpeedBonus__GetUnitId takes unit whichUnit returns integer
     return GetHandleId(whichUnit)
 endfunction
 
-function MoveSpeedBonus___LoadMultiplier takes integer uId returns real
+function MoveSpeedBonus__LoadMultiplier takes integer uId returns real
 
 
 
@@ -5923,7 +5928,7 @@ function MoveSpeedBonus___LoadMultiplier takes integer uId returns real
 
 endfunction
 
-function MoveSpeedBonus___LoadBonus takes integer uId returns real
+function MoveSpeedBonus__LoadBonus takes integer uId returns real
 
 
 
@@ -5931,7 +5936,7 @@ function MoveSpeedBonus___LoadBonus takes integer uId returns real
 
 endfunction
 
-function MoveSpeedBonus___RemoveMultiplier takes integer uId returns nothing
+function MoveSpeedBonus__RemoveMultiplier takes integer uId returns nothing
 
 
 
@@ -5939,7 +5944,7 @@ function MoveSpeedBonus___RemoveMultiplier takes integer uId returns nothing
 
 endfunction
 
-function MoveSpeedBonus___RemoveBonus takes integer uId returns nothing
+function MoveSpeedBonus__RemoveBonus takes integer uId returns nothing
 
 
 
@@ -5947,7 +5952,7 @@ function MoveSpeedBonus___RemoveBonus takes integer uId returns nothing
 
 endfunction
 
-function MoveSpeedBonus___SaveMultiplier takes integer uId,real value returns nothing
+function MoveSpeedBonus__SaveMultiplier takes integer uId,real value returns nothing
 
 
 
@@ -5955,7 +5960,7 @@ function MoveSpeedBonus___SaveMultiplier takes integer uId,real value returns no
 
 endfunction
 
-function MoveSpeedBonus___SaveBonus takes integer uId,real value returns nothing
+function MoveSpeedBonus__SaveBonus takes integer uId,real value returns nothing
 
 
 
@@ -6244,8 +6249,8 @@ endfunction
 
 
 
-//Implemented from module ArgumentStack___Const:
-        function s__ArgumentStack___table_type takes integer i returns integer
+//Implemented from module ArgumentStack__Const:
+        function s__ArgumentStack__table_type takes integer i returns integer
             return i
         endfunction
 
@@ -8559,7 +8564,7 @@ endfunction
 
 
 
-function LoPCommands___onChatMessage takes nothing returns boolean
+function LoPCommands__onChatMessage takes nothing returns boolean
     local string chatMsg
     local integer cutToComma
     local string beforeSpace
@@ -8628,7 +8633,7 @@ function onInit takes nothing returns nothing
         endif
         set playerId=playerId + 1
     endloop
-    call TriggerAddCondition(trig, Condition(function LoPCommands___onChatMessage))
+    call TriggerAddCondition(trig, Condition(function LoPCommands__onChatMessage))
 
     set trig=null
 endfunction
@@ -8752,8 +8757,8 @@ endfunction
 
 
     
-//Implemented from module LoPDecoBuilders__InitModule:
-        function s__LoP_DecoBuilders_LoPDecoBuilders__InitModule__onInit takes nothing returns nothing
+//Implemented from module LoPDecoBuilders___InitModule:
+        function s__LoP_DecoBuilders_LoPDecoBuilders___InitModule__onInit takes nothing returns nothing
             local integer i= 0
             // ---------
             // Special Decos
@@ -13856,7 +13861,7 @@ endfunction
 // 
 //   Warcraft III map script
 //   Generated by the Warcraft III World Editor
-//   Date: Wed Apr 10 17:29:27 2019
+//   Date: Wed Apr 10 18:27:48 2019
 //   Map Author: Guhun
 // 
 //===========================================================================
@@ -15837,8 +15842,6 @@ endfunction
 //***************************************************************************
 
 //===========================================================================
-// Trigger: HeroicUnit
-//===========================================================================
 // Trigger: LoPHeader
 //===========================================================================
 //===========================================================================
@@ -15849,6 +15852,8 @@ endfunction
 
 
 // Trigger: LoPPlayers
+//===========================================================================
+// Trigger: LoPCommands
 //===========================================================================
 // Trigger: Init Player Circles
 //===========================================================================
@@ -16988,6 +16993,91 @@ function InitTrig_System_PreventSave_Clear takes nothing returns nothing
     call TriggerAddAction(gg_trg_System_PreventSave_Clear, function Trig_System_PreventSave_Clear_Actions)
 endfunction
 
+//===========================================================================
+// Trigger: Commands Make Hero
+//===========================================================================
+// scope MakeHeroic begins
+
+//textmacro instance: TableStruct_NewStaticHandleField("dummy","unit")
+    function s__MakeHeroic__Globals__get_dummy takes nothing returns unit
+        return (LoadUnitHandle(ConstTable__ht, (((((s__MakeHeroic__Globals_static_members_key))))), (s__MakeHeroic__Globals_dummy_impl))) // INLINED!!
+    endfunction
+    
+    function s__MakeHeroic__Globals__set_dummy takes unit new_dummy returns nothing
+        call s__TableStruct_setHandle(s__MakeHeroic__Globals_static_members_key , s__MakeHeroic__Globals_dummy_impl , new_dummy)
+    endfunction
+    
+    function s__MakeHeroic__Globals_dummyClear takes nothing returns nothing
+        call RemoveSavedHandle(ConstTable__ht, (((((s__MakeHeroic__Globals_static_members_key))))), (s__MakeHeroic__Globals_dummy_impl)) // INLINED!!
+    endfunction
+    
+    function s__MakeHeroic__Globals_dummyExists takes nothing returns boolean
+        return (HaveSavedHandle(ConstTable__ht, (((((s__MakeHeroic__Globals_static_members_key))))), (s__MakeHeroic__Globals_dummy_impl))) // INLINED!!
+    endfunction
+//end of: TableStruct_NewStaticHandleField("dummy","unit")
+    
+
+function MakeHeroic__FilterUnitsMakeHero takes nothing returns boolean
+    local unit filterU= GetFilterUnit()
+    
+    if GetTriggerPlayer() == udg_GAME_MASTER or GetOwningPlayer(filterU) == GetTriggerPlayer() then
+    
+        if (GetUnitAbilityLevel((filterU), 'A0C6') > 0) then // INLINED!!
+            call DisplayTextToPlayer(udg_GAME_MASTER, 0, 0, "Decorations cannot be heroes")
+            
+        elseif (GetUnitAbilityLevel((filterU), 'A00J') > 0) then // INLINED!!
+            call DisplayTextToPlayer(udg_GAME_MASTER, 0, 0, "Deco builders cannot be heroes")
+            
+        elseif IsUnitType(filterU, UNIT_TYPE_PEON) then
+            call DisplayTextToPlayer(udg_GAME_MASTER, 0, 0, "Builders cannot be heroes")
+        
+        elseif IsUnitType(filterU, UNIT_TYPE_STRUCTURE) then
+            call DisplayTextToPlayer(udg_GAME_MASTER, 0, 0, "Buildings cannot be heroes")
+            
+        elseif GetUnitAbilityLevel(filterU, 'Adef') > 0 then
+            call DisplayTextToPlayer(udg_GAME_MASTER, 0, 0, "Units with the Defend ability cannot be heroes")
+            
+        elseif GetUnitAbilityLevel(filterU, 'AHer') > 0 then
+            call DisplayTextToPlayer(udg_GAME_MASTER, 0, 0, "This unit is already a hero.")
+            
+        elseif GetUnitAbilityLevel(filterU, 'AInv') > 0 then // Detects all inventory skills.
+            call DisplayTextToPlayer(udg_GAME_MASTER, 0, 0, "This unit has an inventory, it can't be a hero.")
+        
+        else
+            call DisplayTextToPlayer(udg_GAME_MASTER, 0, 0, "-makehero is an experimental command which needs more testing. Use it wisely. Do not give to units that can morph!")
+            if UnitMakeHeroic(filterU) then
+                call UnitAddAbility(filterU, 'A09Y')
+                call UnitMakeAbilityPermanent(filterU, true, 'A09Y')
+                call SaveBoolean(ConstTable__ht, (((((s__LoP_UnitData_isHeroic_impl))))), (((GetHandleId((filterU))))), ( (true))) // INLINED!!
+            else
+                call DisplayTextToPlayer(GetLocalPlayer(), 0, 0, "Unable to make unit " + GetUnitName(filterU) + " a hero. Report this problem please.")
+            endif
+            
+            // Refresh hero icons on the left side of the screen
+            call DisableTrigger(gg_trg_System_Cleanup_Owner_Change)
+            call SetUnitOwner((LoadUnitHandle(ConstTable__ht, (((((s__MakeHeroic__Globals_static_members_key))))), (s__MakeHeroic__Globals_dummy_impl))), GetOwningPlayer(filterU), false) // INLINED!!
+            call SetUnitOwner((LoadUnitHandle(ConstTable__ht, (((((s__MakeHeroic__Globals_static_members_key))))), (s__MakeHeroic__Globals_dummy_impl))), Player(bj_PLAYER_NEUTRAL_EXTRA), false) // INLINED!!
+            call EnableTrigger(gg_trg_System_Cleanup_Owner_Change)
+        endif
+    endif
+    
+    set filterU=null
+    return false
+endfunction
+
+function Trig_Commands_Make_Hero_Conditions takes nothing returns nothing
+    if GetTriggerPlayer() == udg_GAME_MASTER then
+        call GroupEnumUnitsSelected(ENUM_GROUP, GetTriggerPlayer(), Condition(function MakeHeroic__FilterUnitsMakeHero))
+    endif
+endfunction
+
+//===========================================================================
+function InitTrig_Commands_Make_Hero takes nothing returns nothing
+    call s__LoP_Command_create("-makehero" , ACCESS_TITAN , Condition(function Trig_Commands_Make_Hero_Conditions))
+    call s__TableStruct_setHandle(s__MakeHeroic__Globals_static_members_key , s__MakeHeroic__Globals_dummy_impl , (CreateUnit(Player(bj_PLAYER_NEUTRAL_EXTRA), 'Hpal', 0., 0., bj_UNIT_FACING))) // INLINED!!
+endfunction
+
+// scope MakeHeroic ends
 //===========================================================================
 // Trigger: Commands Set Color
 //===========================================================================
@@ -19618,6 +19708,8 @@ endfunction
 //===========================================================================
 // Trigger: Id2String
 //===========================================================================
+//===========================================================================
+// Trigger: HeroicUnit
 //===========================================================================
 // Trigger: CutToComma
 //===========================================================================
@@ -25244,99 +25336,12 @@ function InitTrig_ScrollSystem_Learn_Spell takes nothing returns nothing
 endfunction
 
 //===========================================================================
-// Trigger: Commands Make Hero
-//===========================================================================
-// scope MakeHeroic begins
-
-//textmacro instance: TableStruct_NewStaticHandleField("dummy","unit")
-    function s__MakeHeroic___Globals__get_dummy takes nothing returns unit
-        return (LoadUnitHandle(ConstTable__ht, (((((s__MakeHeroic___Globals_static_members_key))))), (s__MakeHeroic___Globals_dummy_impl))) // INLINED!!
-    endfunction
-    
-    function s__MakeHeroic___Globals__set_dummy takes unit new_dummy returns nothing
-        call s__TableStruct_setHandle(s__MakeHeroic___Globals_static_members_key , s__MakeHeroic___Globals_dummy_impl , new_dummy)
-    endfunction
-    
-    function s__MakeHeroic___Globals_dummyClear takes nothing returns nothing
-        call RemoveSavedHandle(ConstTable__ht, (((((s__MakeHeroic___Globals_static_members_key))))), (s__MakeHeroic___Globals_dummy_impl)) // INLINED!!
-    endfunction
-    
-    function s__MakeHeroic___Globals_dummyExists takes nothing returns boolean
-        return (HaveSavedHandle(ConstTable__ht, (((((s__MakeHeroic___Globals_static_members_key))))), (s__MakeHeroic___Globals_dummy_impl))) // INLINED!!
-    endfunction
-//end of: TableStruct_NewStaticHandleField("dummy","unit")
-    
-
-function MakeHeroic___FilterUnitsMakeHero takes nothing returns boolean
-    local unit filterU= GetFilterUnit()
-    
-    if GetTriggerPlayer() == udg_GAME_MASTER or GetOwningPlayer(filterU) == GetTriggerPlayer() then
-    
-        if (GetUnitAbilityLevel((filterU), 'A0C6') > 0) then // INLINED!!
-            call DisplayTextToPlayer(udg_GAME_MASTER, 0, 0, "Decorations cannot be heroes")
-            
-        elseif (GetUnitAbilityLevel((filterU), 'A00J') > 0) then // INLINED!!
-            call DisplayTextToPlayer(udg_GAME_MASTER, 0, 0, "Deco builders cannot be heroes")
-            
-        elseif IsUnitType(filterU, UNIT_TYPE_PEON) then
-            call DisplayTextToPlayer(udg_GAME_MASTER, 0, 0, "Builders cannot be heroes")
-        
-        elseif IsUnitType(filterU, UNIT_TYPE_STRUCTURE) then
-            call DisplayTextToPlayer(udg_GAME_MASTER, 0, 0, "Buildings cannot be heroes")
-            
-        elseif GetUnitAbilityLevel(filterU, 'Adef') > 0 then
-            call DisplayTextToPlayer(udg_GAME_MASTER, 0, 0, "Units with the Defend ability cannot be heroes")
-            
-        elseif GetUnitAbilityLevel(filterU, 'AHer') > 0 then
-            call DisplayTextToPlayer(udg_GAME_MASTER, 0, 0, "This unit is already a hero.")
-            
-        elseif GetUnitAbilityLevel(filterU, 'AInv') > 0 then // Detects all inventory skills.
-            call DisplayTextToPlayer(udg_GAME_MASTER, 0, 0, "This unit has an inventory, it can't be a hero.")
-        
-        else
-            call DisplayTextToPlayer(udg_GAME_MASTER, 0, 0, "-makehero is an experimental command which needs more testing. Use it wisely. Do not give to units that can morph!")
-            if UnitMakeHeroic(filterU) then
-                call UnitAddAbility(filterU, 'A09Y')
-                call UnitMakeAbilityPermanent(filterU, true, 'A09Y')
-                call SaveBoolean(ConstTable__ht, (((((s__LoP_UnitData_isHeroic_impl))))), (((GetHandleId((filterU))))), ( (true))) // INLINED!!
-            else
-                call DisplayTextToPlayer(GetLocalPlayer(), 0, 0, "Unable to make unit " + GetUnitName(filterU) + " a hero. Report this problem please.")
-            endif
-            
-            // Refresh hero icons on the left side of the screen
-            call DisableTrigger(gg_trg_System_Cleanup_Owner_Change)
-            call SetUnitOwner((LoadUnitHandle(ConstTable__ht, (((((s__MakeHeroic___Globals_static_members_key))))), (s__MakeHeroic___Globals_dummy_impl))), GetOwningPlayer(filterU), false) // INLINED!!
-            call SetUnitOwner((LoadUnitHandle(ConstTable__ht, (((((s__MakeHeroic___Globals_static_members_key))))), (s__MakeHeroic___Globals_dummy_impl))), Player(bj_PLAYER_NEUTRAL_EXTRA), false) // INLINED!!
-            call EnableTrigger(gg_trg_System_Cleanup_Owner_Change)
-        endif
-    endif
-    
-    set filterU=null
-    return false
-endfunction
-
-function Trig_Commands_Make_Hero_Conditions takes nothing returns nothing
-    if GetTriggerPlayer() == udg_GAME_MASTER then
-        call GroupEnumUnitsSelected(ENUM_GROUP, GetTriggerPlayer(), Condition(function MakeHeroic___FilterUnitsMakeHero))
-    endif
-endfunction
-
-//===========================================================================
-function InitTrig_Commands_Make_Hero takes nothing returns nothing
-    call s__LoP_Command_create("-makehero" , ACCESS_TITAN , Condition(function Trig_Commands_Make_Hero_Conditions))
-    call s__TableStruct_setHandle(s__MakeHeroic___Globals_static_members_key , s__MakeHeroic___Globals_dummy_impl , (CreateUnit(Player(bj_PLAYER_NEUTRAL_EXTRA), 'Hpal', 0., 0., bj_UNIT_FACING))) // INLINED!!
-endfunction
-
-// scope MakeHeroic ends
-//===========================================================================
-// Trigger: LoPCommands
-//===========================================================================
 function InitCustomTriggers takes nothing returns nothing
-    //Function not found: call InitTrig_HeroicUnit()
     //Function not found: call InitTrig_LoPHeader()
     //Function not found: call InitTrig_LoPDecoBuilders()
     //Function not found: call InitTrig_LoPWidgets()
     //Function not found: call InitTrig_LoPPlayers()
+    //Function not found: call InitTrig_LoPCommands()
     //Function not found: call InitTrig_Init_Player_Circles()
     //Function not found: call InitTrig_Init_Deco_Tents()
     //Function not found: call InitTrig_Init_Quests()
@@ -25363,6 +25368,7 @@ function InitCustomTriggers takes nothing returns nothing
     //Function not found: call InitTrig_System_Titan_Powers()
     call InitTrig_System_PreventSave_Catch()
     call InitTrig_System_PreventSave_Clear()
+    call InitTrig_Commands_Make_Hero()
     call s__LoP_Command_create("-setcolor" , ACCESS_USER , Condition(function Trig_Commands_Toggle_Autoname_Copy_Actions)) // INLINED!!
     call InitTrig_Commands_Toggle_Autoname()
     call s__LoP_Command_create("-nameunit" , ACCESS_USER , Condition(function Trig_Commands_Name_Unit_Conditions)) // INLINED!!
@@ -25432,6 +25438,7 @@ function InitCustomTriggers takes nothing returns nothing
     //Function not found: call InitTrig_GroupTools()
     //Function not found: call InitTrig_DummyRecycler()
     //Function not found: call InitTrig_Id2String()
+    //Function not found: call InitTrig_HeroicUnit()
     //Function not found: call InitTrig_CutToComma()
     //Function not found: call InitTrig_UnitVisualMods()
     call InitTrig_Camera_System()
@@ -25521,8 +25528,6 @@ function InitCustomTriggers takes nothing returns nothing
     call InitTrig_Silver_Key_Trigger()
     call InitTrig_Pure_Water_Effect()
     call InitTrig_ScrollSystem_Learn_Spell()
-    call InitTrig_Commands_Make_Hero()
-    //Function not found: call InitTrig_LoPCommands()
 endfunction
 
 //===========================================================================
@@ -29154,8 +29159,8 @@ function main takes nothing returns nothing
     call CreateAllUnits()
     call InitBlizzard()
 
-call ExecuteFunc("jasshelper__initstructs109920703")
-call ExecuteFunc("CombatTag___onInit")
+call ExecuteFunc("jasshelper__initstructs113420843")
+call ExecuteFunc("CombatTag__onInit")
 call ExecuteFunc("DestructableLib__Initialization")
 call ExecuteFunc("MultiPatrol__onInit")
 call ExecuteFunc("FilterTransformations___onInit")
@@ -29285,7 +29290,7 @@ local real value=f__arg_real1
    return true
 endfunction
 
-function jasshelper__initstructs109920703 takes nothing returns nothing
+function jasshelper__initstructs113420843 takes nothing returns nothing
     set st__LoP_PlayerData_get=CreateTrigger()
     call TriggerAddCondition(st__LoP_PlayerData_get,Condition( function sa__LoP_PlayerData_get))
     set st__LoP_PlayerData__get_commandsEnabled=CreateTrigger()
@@ -29415,7 +29420,7 @@ call ExecuteFunc("s__TileDefinition__TileDefinition_TileDefinition__Init__onInit
 
 
 
-call ExecuteFunc("s__LoP_DecoBuilders_LoPDecoBuilders__InitModule__onInit")
+call ExecuteFunc("s__LoP_DecoBuilders_LoPDecoBuilders___InitModule__onInit")
 
 
 
