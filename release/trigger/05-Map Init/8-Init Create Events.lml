@@ -37,38 +37,6 @@ Action
             CommentString
                 Const : a
             CommentString
-                Const : 'Player Commands'
-            AddTriggerEvent
-                Var   : gg_trg_Commands_Toggle_Autoname
-                Event: TriggerRegisterPlayerChatEvent
-                    Var   : temp_player
-                    Const : -autoname
-                    Preset: ChatMatchTypeExact
-            AddTriggerEvent
-                Var   : gg_trg_Commands_Hide_Decos
-                Event: TriggerRegisterPlayerChatEvent
-                    Var   : temp_player
-                    Const : '-hide all'
-                    Preset: ChatMatchTypeExact
-            AddTriggerEvent
-                Var   : gg_trg_Commands_Hide_Decos
-                Event: TriggerRegisterPlayerChatEvent
-                    Var   : temp_player
-                    Const : -hide
-                    Preset: ChatMatchTypeExact
-            AddTriggerEvent
-                Var   : gg_trg_Commands_Take
-                Event: TriggerRegisterPlayerChatEvent
-                    Var   : temp_player
-                    Const : -take
-                    Preset: ChatMatchTypeExact
-            AddTriggerEvent
-                Var   : gg_trg_Commands_Take
-                Event: TriggerRegisterPlayerChatEvent
-                    Var   : temp_player
-                    Const : '-take all'
-                    Preset: ChatMatchTypeExact
-            CommentString
                 Const : 'Titan Commands'
             AddTriggerEvent
                 Var   : gg_trg_CommandsR_Make_Titan
@@ -76,12 +44,6 @@ Action
                     Var   : temp_player
                     Const : '-titan '
                     Preset: ChatMatchTypeSubstring
-            AddTriggerEvent
-                Var   : gg_trg_CommandsR_Toggle_Prot
-                Event: TriggerRegisterPlayerChatEvent
-                    Var   : temp_player
-                    Const : '-palace protection'
-                    Preset: ChatMatchTypeExact
             AddTriggerEvent
                 Var   : gg_trg_CommandsR_Mind
                 Event: TriggerRegisterPlayerChatEvent
@@ -100,12 +62,6 @@ Action
                     Var   : temp_player
                     Const : '-Summon the Creator'
                     Preset: ChatMatchTypeExact
-            AddTriggerEvent
-                Var   : gg_trg_CommandsR_Set_Limits_for_Units
-                Event: TriggerRegisterPlayerChatEvent
-                    Var   : temp_player
-                    Const : '-limit '
-                    Preset: ChatMatchTypeSubstring
             CommentString
                 Const : 'Deco Commands'
             AddTriggerEvent
@@ -131,32 +87,6 @@ Action
                     Var   : temp_integer
                 Const : -1
             CommentString
-                Const : 'Camera Commands'
-            AddTriggerEvent
-                Var   : gg_trg_Commands_StartRectCamera
-                Event: TriggerRegisterPlayerChatEvent
-                    Var   : temp_player
-                    Const : '-zoom '
-                    Preset: ChatMatchTypeSubstring
-            AddTriggerEvent
-                Var   : gg_trg_Commands_StartRectCamera
-                Event: TriggerRegisterPlayerChatEvent
-                    Var   : temp_player
-                    Const : '-roll '
-                    Preset: ChatMatchTypeSubstring
-            AddTriggerEvent
-                Var   : gg_trg_Commands_StartRectCamera
-                Event: TriggerRegisterPlayerChatEvent
-                    Var   : temp_player
-                    Const : '-rotate '
-                    Preset: ChatMatchTypeSubstring
-            AddTriggerEvent
-                Var   : gg_trg_Commands_StartRectCamera
-                Event: TriggerRegisterPlayerChatEvent
-                    Var   : temp_player
-                    Const : '-pitch '
-                    Preset: ChatMatchTypeSubstring
-            CommentString
                 Const : 'Other Commands'
             AddTriggerEvent
                 Var   : gg_trg_Commands_Real_Name
@@ -164,18 +94,6 @@ Action
                     Var   : temp_player
                     Const : '-real '
                     Preset: ChatMatchTypeSubstring
-            AddTriggerEvent
-                Var   : gg_trg_Commands_StartRectCamera
-                Event: TriggerRegisterPlayerChatEvent
-                    Var   : temp_player
-                    Const : -start
-                    Preset: ChatMatchTypeExact
-            AddTriggerEvent
-                Var   : gg_trg_Commands_StartRectCamera
-                Event: TriggerRegisterPlayerChatEvent
-                    Var   : temp_player
-                    Const : -rect
-                    Preset: ChatMatchTypeExact
             CommentString
                 Const : Systems
             AddTriggerEvent

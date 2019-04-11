@@ -12,6 +12,13 @@ library PlayerUnitLimit
 // In Titan Land LoP, the registering and deregistering of units is controlled by the Cleanup and 
 // Unit Limit System triggers inside the Map System Category.
 //////////////////////////////////////////////////////
+globals
+    public constant integer GROUND = 1
+    public constant integer AIR = 2
+    public constant integer PASSIVE = 3
+endglobals
+
+
 function Limit_GetPlayerCategoryCount takes integer playerId, integer unitCategory returns integer
     return udg_System_PlayerArmy[playerId + bj_MAX_PLAYER_SLOTS*(unitCategory - 1)]
 endfunction
@@ -29,9 +36,9 @@ function Limit_LoadUnitCategory takes integer unitUserData returns integer
 endfunction
 
 constant function Limit_GetCategoryName takes integer category returns string
-    if category == 1 then
+    if category == GROUND then
         return "Ground Units"
-    elseif category == 2 then
+    elseif category == AIR then
         return "Air Units"
     else
         return "Passive Units"
@@ -41,12 +48,12 @@ endfunction
 function Limit_UnitCategory takes unit u returns integer
     if IsUnitType(u, UNIT_TYPE_MELEE_ATTACKER) or IsUnitType(u, UNIT_TYPE_RANGED_ATTACKER) then
         if IsUnitType(u, UNIT_TYPE_FLYING) then
-            return 2  //Register Flying Unit
+            return AIR  //Register Flying Unit
         else
-            return 1  //Register Army Unit
+            return GROUND  //Register Army Unit
         endif
     else
-        return 3  //Register Passive Unit
+        return PASSIVE  //Register Passive Unit
     endif
 endfunction
 
