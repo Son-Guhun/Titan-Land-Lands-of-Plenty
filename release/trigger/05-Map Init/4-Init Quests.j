@@ -38,7 +38,7 @@ function InitQuests takes nothing returns nothing
 hostile = 25
 passive, neutral = 28
 "
-    call CreateQuestBJ(questType, "Player Numbers & Colors", quest_text, "ReplaceableTextures\\CommandButtons\\BTNScrollOfRegenerationGreen.blp")
+    call CreateQuestBJ(questType, "Player Numbers & Colors", quest_text, "ReplaceableTextures\\CommandButtons\\BTNScatterRockets.blp")
     // ----------
         
     // Titan Commands 1
@@ -60,7 +60,7 @@ Sets the limit of how many terrain areas, units or doodads can be loaded at a ti
 Limits how many units players can have. <p> is for passive units (no attack), <a> is for air and <g> for ground.
 |cff0000ffDefaults: 150p | 24a | 150g|r
 "
-    call CreateQuestBJ(questType, "Titan Commands 1", quest_text, "ReplaceableTextures\\CommandButtons\\BTNScrollOfRegenerationGreen.blp")
+    call CreateQuestBJ(questType, "Titan Commands 1", quest_text, "ReplaceableTextures\\CommandButtons\\BTNBloodMage2.blp")
     // ----------
     
     // Titan Commands 2
@@ -78,7 +78,7 @@ Toggles combat tags on/off. Default: off.
 |cffffff00-makehero|r
 Makes the selected units heroes. This is an experimental command. Many restrictions apply.
 "
-    call CreateQuestBJ(questType, "Titan Commands 2", quest_text, "ReplaceableTextures\\CommandButtons\\BTNScrollOfRegenerationGreen.blp")
+    call CreateQuestBJ(questType, "Titan Commands 2", quest_text, "ReplaceableTextures\\CommandButtons\\BTNBloodMage2.blp")
     // ----------
     
     // Unit Commands
@@ -95,7 +95,7 @@ Adds deco builders whose name starts with the entered characters to your selecti
 |cffffff00-remove|r\n|cffffff00-kill|r
 |cffffff00-hide|r <all>\nHides selected/all deco builders. Use |cffffff00-sele|r to get them back.
 "
-    call CreateQuestBJ(questType, "Unit Commands", quest_text, "ReplaceableTextures\\CommandButtons\\BTNScrollOfRegenerationGreen.blp")
+    call CreateQuestBJ(questType, "Unit Commands", quest_text, "ReplaceableTextures\\CommandButtons\\BTNFootman.blp")
     // ----------
     
     // Unit Modification Commands
@@ -117,10 +117,10 @@ Set the flying height for the 'fly command.
 |cffffff00'fly|r | |cffffff00'rgb|r | |cffffff00'face|r | |cffffff00'size|r | |cffffff00'color|r | |cffffff00'anim|r
 Use the commands above to apply unit modifications. Alternatively, you can use Deco Modifier Special's (use the command |cffffcc00-seln sp|r to select it) abilities.
 "
-    call CreateQuestBJ(questType, "Unit Modification Commands", quest_text, "ReplaceableTextures\\CommandButtons\\BTNScrollOfRegenerationGreen.blp")
+    call CreateQuestBJ(questType, "Unit Modification Commands", quest_text, "ReplaceableTextures\\CommandButtons\\BTNFootman.blp")
     // ----------
     
-    // Alliance Commands
+    // Player Commands
     set quest_text = "
 |cffff0000Alliance Commands:|r (Color names are case-insensitive for all commands. You can use a player number instead.)
 |cffffff00-ally|r 'color'
@@ -135,6 +135,24 @@ Gives you a Wandering Soul to make a Race Selector.
 Spawns any decos you may be missing (hidden decos are not considered missing).
 "
     call CreateQuestBJ(questType, "Player Commands", quest_text, "ReplaceableTextures\\CommandButtons\\BTNScrollOfRegenerationGreen.blp")
+    // ----------
+    
+    // Camera Commands
+    set quest_text = "
+|cffffff00-zoom|r (value)
+Sets the camera distance to target.
+
+|cffffff00-camera|r/|cffffff00-cam|r/|cffffff00-c|r
+This command accepts many different kinds of arguments
+    |cffffff00(field)|r |cffffff00(value)|r
+    Sets the value of the specified field. Fields are: zoom, roll, rotate, pitch. 
+    |cff0000ffExample: -c rotate 270|r
+    |cffffff00lock|r/|cffffff00unlock|r
+    Locks or unlocks the camera to the current view. Disables the mouse scroll-wheel adjustment.
+    |cffffff00(preset)|r
+    Sets the camera to a certain preset. Available presets: far
+"
+    call CreateQuestBJ(questType, "Camera Commands", quest_text, "ReplaceableTextures\\WorldEditUI\\Doodad-Cinematic.blp")
     // ----------
     
     // Deco Special Commands
