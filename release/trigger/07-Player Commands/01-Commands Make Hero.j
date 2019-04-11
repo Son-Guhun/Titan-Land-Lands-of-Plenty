@@ -36,7 +36,8 @@ private function FilterUnitsMakeHero takes nothing returns boolean
             call DisplayTextToPlayer(udg_GAME_MASTER, 0, 0, "-makehero is an experimental command which needs more testing. Use it wisely. Do not give to units that can morph!")
             if UnitMakeHeroic(filterU) then
                 call UnitAddAbility(filterU, 'A09Y' )
-                call UnitMakeAbilityPermanent(filterU, true, 'A09Y' )
+                //call UnitMakeAbilityPermanent(filterU, true, 'A09Y' )
+                // call BlzSetUnitMaxHP()
                 set LoP_UnitData.get(filterU).isHeroic = true
             else
                 call DisplayTextToPlayer(GetLocalPlayer(), 0, 0, "Unable to make unit " + GetUnitName(filterU) + " a hero. Report this problem please.")
@@ -64,6 +65,7 @@ endfunction
 function InitTrig_Commands_Make_Hero takes nothing returns nothing
     call LoP_Command.create("-makehero", ACCESS_TITAN, Condition(function Trig_Commands_Make_Hero_Conditions ))
     set Globals.dummy = CreateUnit(Player(bj_PLAYER_NEUTRAL_EXTRA), 'Hpal', 0., 0., bj_UNIT_FACING )
+    call ShowUnit(Globals.dummy, false)
 endfunction
 
 endscope
