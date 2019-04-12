@@ -2,8 +2,12 @@
 development/
 development.w3x
 release/resource
+release/sound
 config.ini
 development_slk.w3x
 *.pyc
 release.w3x
 release_slk.w3x
+release/map/resource/_unoptmized/MdxPather.exe
+release/map/resource/_unoptmized/_unused/Death Knights and Derivatives/readme.html
+release/map/resource/_unoptmized/__textures__.txt
