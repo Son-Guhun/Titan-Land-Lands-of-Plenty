@@ -395,6 +395,7 @@
     '6-Pure Water': 'Pure Water'
         Comment
     '7-Pure Water Effect': 'Pure Water Effect'
+        Disab
     8-Sword: Sword
         Comment
     9-Sword: Sword
@@ -403,6 +404,7 @@
     '1-Legendary Scroll Spell': 'Legendary Scroll Spell'
         Comment
     '2-ScrollSystem Learn Spell': 'ScrollSystem Learn Spell'
+        Disab
 44----------------------------------------: ---------------------------------------
     Comment
 45-TESTING: TESTING

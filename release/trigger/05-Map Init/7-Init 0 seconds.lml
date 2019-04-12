@@ -57,30 +57,10 @@ And discord: SonGuhun#4510'
         Const : ---------------
     CommentString
         Const : 'SCROLL SYSTEM SET ARRAYS'
-    Disab: SetVariable
-        Array : ScrollSystem_learnAbilities
-            Const : 0
-        Disab: 
-    Disab: SetVariable
-        Array : ScrollSystem_learnAbilities
-            Const : 1
-        Disab: 
     SetVariable
         Array : ScrollSystem_learnAbilities
             Const : 2
         Const : A04K
-    Disab: SetVariable
-        Array : ScrollSystem_learnAbilities
-            Const : 3
-        Disab: 
-    Disab: SetVariable
-        Array : ScrollSystem_learnAbilities
-            Const : 4
-        Disab: 
-    Disab: SetVariable
-        Array : ScrollSystem_learnAbilities
-            Const : 5
-        Disab: 
     SetVariable
         Array : ScrollSystem_learnAbilities
             Const : 6
