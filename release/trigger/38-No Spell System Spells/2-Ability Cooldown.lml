@@ -8,7 +8,9 @@ Action
     CustomScriptCode
         Const : 'local real udg_temp_real = 1.'
     CustomScriptCode
-        Const : 'if IsOrderMorph(GetUnitCurrentOrder(GetTriggerUnit())) then'
+        Const : 'local Order order = GetUnitCurrentOrder(GetTriggerUnit())'
+    CustomScriptCode
+        Const : 'if order.isMorph() or order.isNecrotic() or order.isGeneral() then'
     CustomScriptCode
         Const : return
     CustomScriptCode
