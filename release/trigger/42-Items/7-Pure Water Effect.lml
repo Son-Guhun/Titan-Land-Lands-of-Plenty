@@ -2,10 +2,10 @@ Event
     TriggerRegisterAnyUnitEventBJ
         Preset: PlayerUnitEventSpellEffect
 Condition
-    OperatorCompareAbilityId
+    Disab: OperatorCompareAbilityId
         Call  : GetSpellAbilityId
         Preset: OperatorEqualENE
-        Const : A04W
+        Disab: 
 Action
     CustomScriptCode
         Const : 'local location udg_temp_point'
