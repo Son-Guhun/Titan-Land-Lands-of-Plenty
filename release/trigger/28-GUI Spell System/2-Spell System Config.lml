@@ -7,7 +7,7 @@ Action
         Const : ' '
     SetVariable
         Var   : Spell__DummyType
-        Const : n000
+        Const : h07Q
     SetVariable
         Var   : Spell__DummyOwner
         Preset: PlayerNE
