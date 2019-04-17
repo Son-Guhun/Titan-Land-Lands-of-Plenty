@@ -12,15 +12,15 @@ endstruct
 //===========================================================================
 // CONFIG (some of it is in the Object Editor ability)
 //===========================================================================
-constant function ATTACK_SPEED_REDUCTION takes nothing returns integer
+private constant function ATTACK_SPEED_REDUCTION takes nothing returns integer
     return -20
 endfunction
 
-constant function MOVE_SPEED_REDUCTION takes nothing returns real
+private constant function MOVE_SPEED_REDUCTION takes nothing returns real
     return 0.5
 endfunction
 
-constant function BASE_ORDER_ID takes nothing returns string
+private constant function BASE_ORDER_ID takes nothing returns string
     return "entangle"
 endfunction
 
