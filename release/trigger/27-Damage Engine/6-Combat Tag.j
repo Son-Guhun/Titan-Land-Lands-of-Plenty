@@ -1,4 +1,4 @@
-library CombatTag initializer onInit
+library CombatTag requires TableStruct
 
 private scope PHYSICAL
     globals
@@ -23,72 +23,83 @@ private scope HEAL
 endscope
 
 globals
-    public Table PHYS_DAMAGE
-    public Table SPELL_DAMAGE
-    public Table HEALING
-    
-    private Table timerData
+    public constant key PHYS_DAMAGE
+    public constant key SPELL_DAMAGE
+    public constant key HEALING
 endglobals
 
-private function ShowText takes nothing returns nothing
-    local timer t = GetExpiredTimer()
-    local integer tId = GetHandleId(t)
-    local unit u = timerData.unit[tId]
-    local integer uId = GetUnitUserData(u)
-    
-    local real z_offset = 50
-    
-    if PHYS_DAMAGE.real[uId] > 0. then
-        call CreateTextTagUnitBJ( I2S(R2I(PHYS_DAMAGE.real[uId])), u, z_offset, 13.00, PHYSICAL_RED, PHYSICAL_GREEN, PHYSICAL_BLUE, 0 )
-        call SetTextTagVelocityBJ( bj_lastCreatedTextTag, 75.00, 90.00 )
-        call SetTextTagPermanent( bj_lastCreatedTextTag, false )
-        call SetTextTagLifespan( bj_lastCreatedTextTag, 3.50 )
-        call SetTextTagFadepoint( bj_lastCreatedTextTag, 1.40 )
-        set z_offset = z_offset + 50.0
-        set PHYS_DAMAGE.real[uId] = 0.
-    endif
-    if SPELL_DAMAGE.real[uId] > 0. then
-        call CreateTextTagUnitBJ( I2S(R2I(SPELL_DAMAGE.real[uId])), u, z_offset, 13.00, SPELL_RED, SPELL_GREEN, SPELL_BLUE, 0 )
-        call SetTextTagVelocityBJ( bj_lastCreatedTextTag, 75.00, 90.00 )
-        call SetTextTagPermanent( bj_lastCreatedTextTag, false )
-        call SetTextTagLifespan( bj_lastCreatedTextTag, 3.50 )
-        call SetTextTagFadepoint( bj_lastCreatedTextTag, 1.40 )
-        set z_offset = z_offset + 50.0
-        set SPELL_DAMAGE.real[uId] = 0.
-    endif
-    
-    call PauseTimer(t)
-    call DestroyTimer(t)
-    call timerData.unit.remove(tId)
-    set t = null
-    set u = null
-endfunction
+private struct CombatTag extends array
 
-public function Register takes unit whichUnit, real value, Table whichType returns nothing
+    private static method operator physDmgTable takes nothing returns ConstTable
+        return PHYS_DAMAGE
+    endmethod
+    
+    private static method operator spellDmgTable takes nothing returns ConstTable
+        return SPELL_DAMAGE
+    endmethod
+    
+    private static method operator healingTable takes nothing returns ConstTable
+        return HEALING
+    endmethod
+    
+    //! runtextmacro TableStruct_NewConstTableField("","timerData")
+
+
+    static method showText takes nothing returns nothing
+        local timer t = GetExpiredTimer()
+        local integer tId = GetHandleId(t)
+        local unit u = timerData.unit[tId]
+        local integer uId = GetUnitUserData(u)
+        
+        local real z_offset = 50
+        
+        if physDmgTable.real.has(uId) then
+            call CreateTextTagUnitBJ( I2S(R2I(physDmgTable.real[uId])), u, z_offset, 13.00, PHYSICAL_RED, PHYSICAL_GREEN, PHYSICAL_BLUE, 0 )
+            call SetTextTagVelocityBJ( bj_lastCreatedTextTag, 75.00, 90.00 )
+            call SetTextTagPermanent( bj_lastCreatedTextTag, false )
+            call SetTextTagLifespan( bj_lastCreatedTextTag, 3.50 )
+            call SetTextTagFadepoint( bj_lastCreatedTextTag, 1.40 )
+            set z_offset = z_offset + 50.0
+            call physDmgTable.real.remove(uId)
+        endif
+        if spellDmgTable.real.has(uId) then
+            call CreateTextTagUnitBJ( I2S(R2I(spellDmgTable.real[uId])), u, z_offset, 13.00, SPELL_RED, SPELL_GREEN, SPELL_BLUE, 0 )
+            call SetTextTagVelocityBJ( bj_lastCreatedTextTag, 75.00, 90.00 )
+            call SetTextTagPermanent( bj_lastCreatedTextTag, false )
+            call SetTextTagLifespan( bj_lastCreatedTextTag, 3.50 )
+            call SetTextTagFadepoint( bj_lastCreatedTextTag, 1.40 )
+            set z_offset = z_offset + 50.0
+            call spellDmgTable.real.remove(uId)
+        endif
+        
+        call PauseTimer(t)
+        call DestroyTimer(t)
+        call timerData.unit.remove(tId)
+        set t = null
+        set u = null
+    endmethod
+endstruct
+
+public function Register takes unit whichUnit, real value, ConstTable whichType returns nothing
     local integer uId = GetUnitUserData(whichUnit)
-    local real amount = whichType.real[uId]
+    local real amount
     local timer t
     
     if value <= 0. then
         return
     endif
-    
-    if amount <= 0. then
+
+    if whichType.real.has(uId) then
+        set amount = whichType.real[uId]
+    else
         set t = CreateTimer()
-        call TimerStart(t, 0, false, function ShowText)
-        set timerData.unit[GetHandleId(t)] = whichUnit
+        call TimerStart(t, 0, false, function CombatTag.showText)
+        set CombatTag.timerData.unit[GetHandleId(t)] = whichUnit
         set t = null
+        set amount = 0
     endif
         
     set whichType.real[uId] = amount + value
-endfunction
-
-private function onInit takes nothing returns nothing
-    set PHYS_DAMAGE = Table.create()
-    set SPELL_DAMAGE = Table.create()
-    set HEALING = Table.create()
-    
-    set timerData = Table.create()
 endfunction
 
 endlibrary
