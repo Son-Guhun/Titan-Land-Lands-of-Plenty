@@ -47,6 +47,7 @@
     3-LoPWidgets: LoPWidgets
     4-LoPPlayers: LoPPlayers
     5-LoPCommands: LoPCommands
+    6-LoPUtils: LoPUtils
 '05-Map Init': 'Map Init'
     1-Functions: Functions
         Comment
@@ -129,6 +130,7 @@
     '36-CommandsD Add Tag': 'CommandsD Add Tag'
     '37-CommandsD Locust': 'CommandsD Locust'
     '38-CommandsD Variation': 'CommandsD Variation'
+    '39-CommandsR Time': 'CommandsR Time'
 '08-Decoration Systems': 'Decoration Systems'
     Comment
 '09-Deco Builders': 'Deco Builders'

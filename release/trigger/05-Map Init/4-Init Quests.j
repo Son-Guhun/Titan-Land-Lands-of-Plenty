@@ -77,6 +77,8 @@ A traditional Titan Land command.
 Toggles combat tags on/off. Default: off.
 |cffffff00-makehero|r
 Makes the selected units heroes. This is an experimental command. Many restrictions apply.
+|cffffff00-time|r (value)
+Sets the time of day (ingame) to the specified time (24 hour time).
 "
     call CreateQuestBJ(questType, "Titan Commands 2", quest_text, "ReplaceableTextures\\CommandButtons\\BTNBloodMage2.blp")
     // ----------
