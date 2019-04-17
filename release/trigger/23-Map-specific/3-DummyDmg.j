@@ -26,6 +26,11 @@ function DummyDmg_ApplyTimedLife takes unit whichUnit, real timeout returns noth
     call DummyAddRecycleTimer(whichUnit, timeout)
 endfunction
 
+function DummyDmg_RemoveDummy takes unit whichUnit returns nothing
+    // call RemoveUnit(whichUnit)
+    call RecycleDummy(whichUnit)
+endfunction
+
 function DummyDmg_GetCaster takes integer dummyKey returns unit
     return LoadUnitHandle(DummyDmg_HASHTABLE(), dummyKey, 0)
 endfunction
@@ -58,7 +63,7 @@ endfunction
 
 function DummyDmg_CreateDummyEx takes unit spellCaster, integer unitId, integer abilityId, real x, real y, real expiration returns unit
     local integer dummyKey
-    local unit realSpellCaster = spellCaster
+    local unit realSpellCaster = spellCaster  // spellCaster is actually the Dummy
     
     //set spellCaster = CreateUnit(GetOwningPlayer(spellCaster), unitId, x, y, bj_UNIT_FACING)
     set spellCaster = GetRecycledDummyAnyAngle(x, y, 0)
