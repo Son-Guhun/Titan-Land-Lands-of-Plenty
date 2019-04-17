@@ -1,4 +1,4 @@
-library LoPCommands initializer onInit requires CutToComma, TableStruct, ArgumentStack
+library LoPCommands initializer onInit requires CutToComma, TableStruct, ArgumentStack, LoPPlayers
 
 globals
     constant integer ACCESS_TITAN = 1
