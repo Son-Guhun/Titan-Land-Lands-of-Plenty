@@ -64,12 +64,6 @@ Action
                     Var   : temp_player
                     Const : -uncontrol
                     Preset: ChatMatchTypeSubstring
-            AddTriggerEvent
-                Var   : gg_trg_CommandsD_Variation
-                Event: TriggerRegisterPlayerChatEvent
-                    Var   : temp_player
-                    Const : '-var '
-                    Preset: ChatMatchTypeSubstring
             SetVariable
                 Array : TileSystem_Var
                     Var   : temp_integer
