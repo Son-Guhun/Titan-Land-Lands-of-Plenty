@@ -1,54 +1,54 @@
+scope WillOfTheTribunal
+
+private struct CasterData extends array
+
+    //! runtextmacro TableStruct_NewHandleField("timer","timer")
+
+    method destroy takes nothing returns nothing
+        call timerClear()
+    endmethod
+endstruct
+
 //===========================================================================
 // CONFIG (some of it is in the Object Editor ability)
 //===========================================================================
-function WotT_ATTACK_SPEED_REDUCTION takes nothing returns integer
+private constant function ATTACK_SPEED_REDUCTION takes nothing returns integer
     return -20
 endfunction
 
-function WotT_MOVE_SPEED_REDUCTION takes nothing returns real
+private constant function MOVE_SPEED_REDUCTION takes nothing returns real
     return 0.5
 endfunction
 
-function WotT_BASE_ORDER_ID takes nothing returns string
-    return "corporealform"
+private constant function BASE_ORDER_ID takes nothing returns string
+    return "entangle"
 endfunction
 
 //===========================================================================
 // CODE
 //===========================================================================
 // Spell end and cleanup
-function WotTSlowGroupRemoveDebuff takes nothing returns nothing
+private function GroupRemoveDebuff takes nothing returns nothing
     local unit u = GetEnumUnit()
-    call CSS_AddBonus(u, -WotT_ATTACK_SPEED_REDUCTION(), 1)
-    call UnitMultiplyMoveSpeed(u, 1./WotT_MOVE_SPEED_REDUCTION())
+    call CSS_AddBonus(u, -ATTACK_SPEED_REDUCTION(), 1)
+    call UnitMultiplyMoveSpeed(u, 1./MOVE_SPEED_REDUCTION())
     set u = null
-endfunction
-
-function WotTFinish takes timer t, integer tKey, unit dummy, integer circleId returns nothing
-    local group slowGroup = AgentLoadGroup(GetAgentKey(dummy), 0)
-    call ForGroup(slowGroup, function WotTSlowGroupRemoveDebuff)
-    
-    call DestroyGroup(slowGroup)
-    call DestroyGCOS(circleId)
-    call RemoveUnit(dummy)
-    call AgentFlush(tKey)
-    call AgentFlush(GetAgentKey(dummy))
-    call PauseTimer(t)
-    call DestroyTimer(t)
-
-    set slowGroup = null
 endfunction
 
 //===========================================================================
 // Spell Main Loop
-function WotTTimerAction takes nothing returns nothing
+private function WotTTimerAction takes nothing returns nothing
     local timer t = GetExpiredTimer()
     local integer tKey = GetAgentKey(GetExpiredTimer())
     local integer circleId = AgentLoadInteger(tKey, 0)
     local unit dummy = AgentLoadUnit(tKey, 1)
+    local CasterData casterData = AgentLoadInteger(tKey, 3)
+    local group slowGroup
+    
     local integer i = 0
+    
 
-    if OrderId2String(GetUnitCurrentOrder(AgentLoadUnit(tKey, 2))) == WotT_BASE_ORDER_ID() then
+    if OrderId2String(GetUnitCurrentOrder(AgentLoadUnit(tKey, 2))) == BASE_ORDER_ID() and t == casterData.timer then
         call UpdateGCOS(circleId)
         loop
         exitwhen i > 8
@@ -56,29 +56,50 @@ function WotTTimerAction takes nothing returns nothing
             set i = i + 1
         endloop
     else
-        call WotTFinish(GetExpiredTimer(), tKey, dummy, circleId)
+        if t == casterData.timer then
+            debug call BJDebugMsg("Deleting WotT timer.")
+            call casterData.destroy()
+        debug else
+            debug call BJDebugMsg("Deleting WotT replaced timer.")
+        endif
+        
+        set slowGroup = AgentLoadGroup(tKey, 4)
+        call ForGroup(slowGroup, function GroupRemoveDebuff)
+    
+        call DestroyGroup(slowGroup)
+        call DestroyGCOS(circleId)
+        call DummyDmg_RemoveDummy(dummy)
+        call AgentFlush(tKey)
+        call AgentFlush(GetAgentKey(dummy))
+        call PauseTimer(t)
+        call DestroyTimer(t)
     endif
     
     set dummy = null
     set t = null
+    set slowGroup = null
 endfunction
 
 //===========================================================================
 // Spell Cast Event Response
-function WotTCastAction takes nothing returns nothing
+private function onCast takes nothing returns nothing
     local integer circleId = CreateGCOS(0, GetLocationX(udg_Spell__TargetPoint), GetLocationY(udg_Spell__TargetPoint), 200, 200, 16, 0, bj_PI/4)
     local timer t = CreateTimer()
     local integer tKey = CreateAgentKey(t)
     local group slowGroup = CreateGroup()
-    local unit dummy = CreateUnit(udg_Spell__CasterOwner, 'h07Q', GetLocationX(udg_Spell__TargetPoint), GetLocationY(udg_Spell__TargetPoint), 270)//GetRecycledDummy(GetLocationX(udg_Spell__TargetPoint), GetLocationY(udg_Spell__TargetPoint), 0, 270)
+    local unit dummy = DummyDmg_CreateDummyAt(udg_Spell__Caster, 'A04B', GetLocationX(udg_Spell__TargetPoint), GetLocationY(udg_Spell__TargetPoint), -1.)
 
     call UnitAddAbility(dummy,'A045')
     call AgentSaveInteger(tKey, 0, circleId)
     call AgentSaveAgent(tKey,   1, dummy)
     call AgentSaveAgent(tKey,   2, udg_Spell__Caster)
+    call AgentSaveInteger(tKey, 3, GetHandleId(udg_Spell__Caster))  // Save HandleId so CasterData can be cleared even if caster is deleted.
+    call AgentSaveAgent(tKey,   4, slowGroup)  // Save group in timer so it can be destroyed even if the dummy is deleted.
     call AgentSaveAgent(CreateAgentKey(dummy),   0, slowGroup)
-    call DummyDmg_SetAbility(DummyDmg_GetKey(dummy),  'A04B')
-    call DummyDmg_SetCaster(DummyDmg_GetKey(dummy),  udg_Spell__Caster)
+    
+    set CasterData(GetHandleId(udg_Spell__Caster)).timer = t
+    
+    debug call BJDebugMsg("Sucessfully Cast Will of the Tribunal")
     
     call TimerStart(t,1,true, function WotTTimerAction)
     set t = null
@@ -88,11 +109,11 @@ endfunction
 
 //===========================================================================
 // Dummy on damage trigger
-function HoJSlowAction takes nothing returns boolean
+private function onDamage takes nothing returns boolean
     local group slowGroup = AgentLoadGroup(GetAgentKey(udg_DamageEventSource), 0)
     if not IsUnitInGroup(udg_DamageEventTarget, slowGroup) then
-        call CSS_AddBonus(udg_DamageEventTarget, WotT_ATTACK_SPEED_REDUCTION(), 1)
-        call UnitMultiplyMoveSpeed(udg_DamageEventTarget, WotT_MOVE_SPEED_REDUCTION())
+        call CSS_AddBonus(udg_DamageEventTarget, ATTACK_SPEED_REDUCTION(), 1)
+        call UnitMultiplyMoveSpeed(udg_DamageEventTarget, MOVE_SPEED_REDUCTION())
         call GroupAddUnit(slowGroup, udg_DamageEventTarget)
         
         debug call BJDebugMsg("Debug Message: "+GetUnitName(udg_DamageEventTarget)+" added to WotT group!")
@@ -102,13 +123,15 @@ function HoJSlowAction takes nothing returns boolean
     return false
 endfunction
 
+
 //===========================================================================
 function InitTrig_Tyrael_WotT_Cast takes nothing returns nothing
     set gg_trg_Tyrael_WotT_Cast = CreateTrigger()
-    call TriggerAddAction(gg_trg_Tyrael_WotT_Cast, function WotTCastAction)
+    call TriggerAddAction(gg_trg_Tyrael_WotT_Cast, function onCast)
     
     //Tyrael - Will of the Tribunal: Slow damaged Units 
-    call InitializeOnDamageTrigger(CreateTrigger(), 'A04B', function HoJSlowAction)
+    call InitializeOnDamageTrigger(CreateTrigger(), 'A04B', function onDamage)
     //-------------------------------------------------
 endfunction
 
+endscope
