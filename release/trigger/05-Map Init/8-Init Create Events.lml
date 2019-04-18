@@ -45,18 +45,6 @@ Action
                     Const : '-titan '
                     Preset: ChatMatchTypeSubstring
             AddTriggerEvent
-                Var   : gg_trg_CommandsR_Mind
-                Event: TriggerRegisterPlayerChatEvent
-                    Var   : temp_player
-                    Const : -mind
-                    Preset: ChatMatchTypeSubstring
-            AddTriggerEvent
-                Var   : gg_trg_CommandsR_Mind
-                Event: TriggerRegisterPlayerChatEvent
-                    Var   : temp_player
-                    Const : '''mind'
-                    Preset: ChatMatchTypeSubstring
-            AddTriggerEvent
                 Var   : gg_trg_CommandsR_The_Creator
                 Event: TriggerRegisterPlayerChatEvent
                     Var   : temp_player
