@@ -9,6 +9,33 @@ Patch versions indicate bugfixes. Some command aliases or arguments may be added
 
 ## [Unreleased]
 
+
+## [1.0.2] - 2019-04-12
+
+### Fixed
+- Improved icons for: 
+	- Ruined Inn
+	- Ruined Tower
+	- Ruined Town Hall
+	
+- Fixed tooltip/name text for:
+	- Mansion Walls
+	- Ice Rock Gate
+	- Armchairs
+	
+- Fixed animation tag for Magical Butterflies decoration
+
+- Fixed Nihonjin Ninja model and re-enabled it
+
+- Fixed stock replenishment times for Air Barge and Zeppelin
+
+- Fixed Tyrael's Will of the Tribunal CD not being reduceable
+
+- Fixed crashes:
+	- When Treant Bird was selected with 1 or more other units
+	- When Cosmis summoned a Titan Tower before any structure was built (removed the ability)
+
+
 ## [1.0.2] - 2019-04-12
 
 ### Added
