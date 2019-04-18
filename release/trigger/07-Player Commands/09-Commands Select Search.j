@@ -92,6 +92,12 @@ function SearchSelectMain takes nothing returns boolean
         
         //Make rest of the word uncapitalized and save to global variable
         set udg_System_searchStr = str + StringCase(SubString(args, 1, argsLength),false)
+        
+        // Handle special cases
+        if udg_System_searchStr == "Rect" then
+            set udg_System_searchStr = "Generator"  // -sele rect will select rect generator
+        endif
+        
         call GroupEnumUnitsOfPlayer(ENUM_GROUP, GetTriggerPlayer(), Condition(function SearchSelectFilter))
     endif
     return false
