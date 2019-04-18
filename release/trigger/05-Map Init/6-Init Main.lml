@@ -90,8 +90,6 @@ Action
                         Const : 1
                 Call  : GetForceOfPlayer
                     Var   : temp_player
-            CustomScriptCode
-                Const : 'set LoP_PlayerData.playerColors[udg_temp_integer - 1] = ConvertPlayerColor(udg_temp_integer-1)'
             ForceAddPlayerSimple
                 Var   : temp_player
                 Var   : ALL_PLAYERS_FORCE
@@ -115,16 +113,6 @@ Action
             Var   : Commands_Integer
             Preset: OperatorAdd
             Const : 1
-    ForLoopVarMultiple
-        Var   : temp_integer
-        Var   : Commands_Integer
-        Call  : OperatorInt
-            Var   : Commands_Integer
-            Preset: OperatorAdd
-            Const : 3
-        Action
-            CustomScriptCode
-                Const : 'set LoP_PlayerData.playerColors[udg_temp_integer - 1] = ConvertPlayerColor(udg_Commands_Integer-1)'
     ForForceMultiple
         Call  : GetPlayersAll
         Action

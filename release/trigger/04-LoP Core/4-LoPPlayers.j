@@ -17,8 +17,7 @@ struct LoP_PlayerData extends array
     endmethod
     
     //==================================
-    
-    // Initialized in Init Main (probably should make an initializer module here, but... ^_^)
+
     static playercolor array playerColors
 
     // Why use an array and not ConvertPlayerColor? Because ConvertPlayerColor can crash.
@@ -30,6 +29,8 @@ struct LoP_PlayerData extends array
     method setUnitColor takes playercolor color returns nothing
         set playerColors[this] = color
     endmethod
+    
+    //! runtextmacro TableStruct_NewPrimitiveField("rotationStep","integer")
     
     //==================================
     // Enable/Disable function (to be called by the Save System when loading)
@@ -49,7 +50,28 @@ struct LoP_PlayerData extends array
         return not commandsEnabled_internalExists()
     endmethod
     
-
+    private static method onInit takes nothing returns nothing
+        local LoP_PlayerData playerData = 0
+        
+        
+        loop
+        exitwhen playerData == bj_MAX_PLAYERS
+            call playerData.setUnitColor(ConvertPlayerColor(playerData))
+            
+            if GetPlayerSlotState(Player(playerData)) == PLAYER_SLOT_STATE_PLAYING then
+                set playerData.rotationStep = 90
+            endif
+        
+            set playerData = playerData + 1
+        endloop
+        loop
+        exitwhen playerData == bj_MAX_PLAYER_SLOTS
+            call playerData.setUnitColor(ConvertPlayerColor(playerData))
+            
+            set playerData = playerData + 1
+        endloop
+        
+    endmethod
 endstruct
 
 
