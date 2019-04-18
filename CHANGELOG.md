@@ -10,7 +10,7 @@ Patch versions indicate bugfixes. Some command aliases or arguments may be added
 ## [Unreleased]
 
 
-## [1.0.2] - 2019-04-12
+## [1.0.3] - 2019-04-18
 
 ### Fixed
 - Improved icons for: 
