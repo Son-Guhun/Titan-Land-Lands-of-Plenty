@@ -92,20 +92,6 @@ function Trig_Commands_Camera takes nothing returns boolean
     return false
 endfunction
 
-
-function Trig_Commands_RectStart takes nothing returns boolean
-    local string args = LoP_Command.getArguments()
-    local string command  = LoP_Command.getCommand()
-
-    if ( command == "-rect" ) then
-        call CreateUnitAtLoc(GetTriggerPlayer(), RectGenerator_GENERATOR_ID, udg_PLAYER_LOCATIONS[GetConvertedPlayerId(GetTriggerPlayer())], bj_UNIT_FACING )
-    elseif ( command == "-start" ) then
-        call CreateUnitAtLoc(GetTriggerPlayer(), 'e000', udg_PLAYER_LOCATIONS[GetConvertedPlayerId(GetTriggerPlayer())], bj_UNIT_FACING )
-    endif
-    
-    return false
-endfunction
-
 //===========================================================================
 function InitTrig_Commands_StartRectCamera takes nothing returns nothing
     call LoP_Command.create("-c", ACCESS_USER, Condition(function Trig_Commands_Camera))
@@ -113,8 +99,5 @@ function InitTrig_Commands_StartRectCamera takes nothing returns nothing
     call LoP_Command.create("-camera", ACCESS_USER, Condition(function Trig_Commands_Camera))
     call LoP_Command.create("-zoom", ACCESS_USER, Condition(function Trig_Commands_Camera))
     set CameraValues.timer = CreateTimer()
-    
-    call LoP_Command.create("-start", ACCESS_USER, Condition(function Trig_Commands_RectStart))
-    call LoP_Command.create("-rect", ACCESS_USER, Condition(function Trig_Commands_RectStart))
 endfunction
 
