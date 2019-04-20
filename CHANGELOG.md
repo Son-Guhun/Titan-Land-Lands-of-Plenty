@@ -9,6 +9,19 @@ Patch versions indicate bugfixes. Some command aliases or arguments may be added
 
 ## [Unreleased]
 
+### Added:
+- New commands:
+	- -time => Allows the Titan to change the in-game time of day.
+	- -rotate => Allows you to set the angle of rotation for the Rotate ability of decorations.
+	- -controller => Allows you to spawn a Controller deco (was removed from -decos command in version 1.0.0).
+- New command arguments:
+	- -seln/sele rect => Will now select your Rect Generators.
+	- 'mind (number/color) => Will now work as if you had ordered the Power: Mind unit to right-click your selected units.
+
+### Fixed
+	- A hostile 'Give Unit To' circle is no longer created at coordinates (0, 0).
+	- -control/uncontrol commands are now easier to use again, since you can more easily spawn a Controller deco.
+
 
 ## [1.0.3] - 2019-04-18
 
