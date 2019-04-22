@@ -32,17 +32,17 @@ function Trig_Deco_DisableMovement_Conditions takes nothing returns boolean
             // PLAY OPEN ANIMATION FOR OPENED GATES
             // OTHERWISE, PLAY STAND ANIMATION
             if ( GetUnitAbilityLevel(trigU, 'A0B5') != 0 ) then
-                if GUMS_HaveSavedAnimationTag(trigU) then
-                    call SetUnitAnimation(trigU, "death alternate " +GUMSConvertTags( GUMSGetUnitAnimationTag(trigU)))
-                else
+                // if GUMS_HaveSavedAnimationTag(trigU) then
+                    // call SetUnitAnimation(trigU, "death alternate " +GUMSConvertTags( GUMSGetUnitAnimationTag(trigU)))
+                // else
                     call SetUnitAnimation(trigU, "death alternate")
-                endif
+                // endif
             else
-                if GUMS_HaveSavedAnimationTag(trigU) then
-                    call SetUnitAnimation(trigU, "stand " +GUMSConvertTags( GUMSGetUnitAnimationTag(trigU)))
-                else
+                // if GUMS_HaveSavedAnimationTag(trigU) then
+                    // call SetUnitAnimation(trigU, "stand " +GUMSConvertTags( GUMSGetUnitAnimationTag(trigU)))
+                // else
                     call SetUnitAnimation(trigU, "stand")
-                endif
+                // endif
             endif
         endif
     endif

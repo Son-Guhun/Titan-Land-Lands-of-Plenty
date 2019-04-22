@@ -21,13 +21,25 @@ function LoadH2D takes string char returns integer
 endfunction
 endlibrary
 
-library SaveNLoad requires UnitVisualMods, Rawcode2String, Base36, optional UserDefinedRects
+library SaveNLoadConfig requires LoPHeader
+    
+public function StructureShouldAutoLand takes unit structure returns boolean
+    return not LoP_IsUnitDecoration(structure)
+endfunction    
+
+endlibrary
+
+library SaveNLoad requires UnitVisualMods, Rawcode2String, Base36, optional UserDefinedRects, optional SaveNLoadConfig
 ////////////////////////////////////////////////////////////////////////////////////////////////////
-//SaveNLoad and required libraries v2.0
+//SaveNLoad v2.0
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 constant function SaveLoadVersion takes nothing returns integer
     return 2
 endfunction
+
+globals
+    public boolean AUTO_LAND = false  // Can be overwritten by SaveNLoadConfig StructureShouldAutoLand
+endglobals
 
 //////////////////////////////////////////////////////
 //SaveNLoad by Guhun
@@ -246,23 +258,15 @@ function LoadUnit takes string chat_str, player un_owner returns nothing
     //Create the unit and modify it according to the chat input data
     set resultUnit = CreateUnit (un_owner, un_type, un_posx, un_posy, un_fangle )
     
-    //Set flying height
-    if UnitAddAbility(resultUnit, 'Amrf') then
-        call UnitRemoveAbility(resultUnit, 'Amrf')
-    endif
     
-    call SetUnitFlyHeight(resultUnit, un_flyH, 0)
-    
-    // Fix flying height for structures
-    if GetUnitAbilityLevel(resultUnit, 'Amov') == 0 then
-        if un_flyH > 0.5 then
-            if IsUnitType(resultUnit, UNIT_TYPE_STRUCTURE) then
-                call GUMS_AddStructureFlightAbility(resultUnit)
-                call IssueImmediateOrder(resultUnit, "unroot")
-            else
-                call GUMS_RegisterImmovableUnit(resultUnit)
-            endif 
+    if IsUnitType(resultUnit, UNIT_TYPE_STRUCTURE) then
+        static if LIBRARY_SaveNLoadConfig then
+            call GUMSSetStructureFlyHeight(resultUnit, un_flyH, SaveNLoadConfig_StructureShouldAutoLand(resultUnit))
+        else
+            call GUMSSetStructureFlyHeight(resultUnit, un_flyH, AUTO_LAND)
         endif
+    else
+        call GUMSSetUnitFlyHeight(resultUnit, un_flyH)
     endif
 
     
@@ -280,7 +284,7 @@ function LoadUnit takes string chat_str, player un_owner returns nothing
         call GUMSSetUnitAnimSpeed(resultUnit, S2R(aSpeed))
     endif
     if animTag != "D" then
-        call GUMSAddUnitAnimationTag(resultUnit,GUMSConvertTags(animTag))
+        call GUMSAddUnitAnimationTag(resultUnit,GUMSConvertTags(UnitVisualMods_TAGS_DECOMPRESS, animTag))
     endif
     if select == "1" then
         call GUMSMakeUnitDragSelectable(resultUnit)

@@ -10,7 +10,7 @@ library UnitVisualModsDefaults requires LoPPlayers
 
 endlibrary
 
-library UnitVisualMods initializer onInit requires CutToComma, optional UnitVisualModsDefaults/*
+library UnitVisualMods requires CutToComma, optional UnitVisualModsDefaults/*
 
     */ /*optional*/ HashtableWrapper,  /* Required to initialize a hashtable.
     
@@ -22,8 +22,6 @@ library UnitVisualMods initializer onInit requires CutToComma, optional UnitVisu
 
 
 //Hashtable values:
-// -2  -> Intended angle for the unit to reach in the GroupFunction
-// -1  -> temporary integer to count how many times a  unit has been looped through in the GroupFunction
 
 //////////////////////////////////////////////////////
 // CONFIGURATION
@@ -49,6 +47,8 @@ globals
     private group loopGroup = CreateGroup()
     
     private constant boolean INIT_HASHTABLE = true // DOES NOT WORK YET! NEED TO CHANGE FUNCTIONS THAT USE HASGTABLE API
+    
+    private string allTags = "gold lumber work flesh ready one two throw slam large medium small victory alternate morph defend swim spin fast upgrade first second third fourth fifth"
 endglobals
 
 //==================================================================================================
@@ -89,21 +89,6 @@ endstruct
 //                                        Source Code
 //==================================================================================================
 
-function GUMS_AddStructureFlightAbility takes unit structure returns nothing
-    local real facing
-
-    if not HaveSavedReal(hashTable, GetHandleId(structure) , -2)  then
-        set facing = GetUnitFacing(structure)
-        call SaveReal(hashTable, GetHandleId(structure), -2, facing)
-        call UnitAddAbility(structure, 'DEDF' )
-        call SetUnitFacingTimed(structure, facing, 0 )
-        call GroupAddUnit(loopGroup, structure)
-    else
-        call UnitAddAbility(structure, 'DEDF' )
-        call SetUnitFacingTimed(structure , LoadReal(hashTable, GetHandleId(structure) , -2), 0)
-    endif
-endfunction
-
 function GUMS_RegisterImmovableUnit takes unit whichUnit returns nothing
     call GroupAddUnit(loopGroup, whichUnit)
 endfunction
@@ -122,8 +107,16 @@ function GUMSConvertFromCustomName takes string name returns string
 endfunction
 
 //==========================================
-//CONSTANT FUNCTIONS FOR HASHTABLE ADDRESSES
+//CONSTANTS FOR HASHTABLE ADDRESSES (Unit Handle Ids)
 globals
+    private constant integer COUNTER = -1  // Used to count if the unit has had their position set by the timer loop
+    private constant integer TARGET_ANGLE = -2  // Used to store the final facing angle of an immovable unit that's turning
+    private constant integer AUTO_LAND = -3
+    private constant integer STRUCTURE_HEIGHT = -4
+    
+    private constant integer tempX = -5
+    private constant integer tempY = -6
+
     private constant integer SCALE  = 0
     private constant integer RED    = 1
     private constant integer GREEN  = 2
@@ -134,8 +127,16 @@ globals
     private constant integer ATAG   = 7
     private constant integer SELECT = 8
     private constant integer NAME   = 9
-
+    // private constant integer HEIGHT = 10  // This is only saved for structures, which lose their flying heights when moving
 endglobals
+
+//CONSTANTS FOR STATIC TABLES (Must be negative to avoid null-point exceptions of handles and conflics with handles)
+globals
+    public constant integer TAGS_DECOMPRESS = -1
+    public constant integer TAGS_COMPRESS   = -2
+endglobals
+
+
 
 function GUMS_GetUnitSelectionType takes unit whichUnit returns integer
     return LoadInteger(hashTable, GetHandleId(whichUnit), SELECT)
@@ -161,101 +162,26 @@ endfunction
 
 //==========================================
 // GUMS Animation Tag Utilities
-function GUMSTagDict takes string whichStr returns string
-    set whichStr = StringCase(whichStr, false)
-    
-    if whichStr == "gold" then
-        return "g"
-    endif
-    if whichStr == "g" then
-        return "gold"
-    endif
-    
-    if whichStr == "lumber" then
-        return "l"
-    endif
-    if whichStr == "l" then
-        return "lumber"
-    endif
-    
-    if whichStr == "alternate" then
-        return "a"
-    endif
-    if whichStr == "a" then
-        return "alternate"
-    endif
-    
-    if whichStr == "swim" then
-        return "s"
-    endif
-    if whichStr == "s" then
-        return "swim"
-    endif
-    
-    if whichStr == "upgrade" then
-        return "u"
-    endif
-    if whichStr == "u" then
-        return "upgrade"
-    endif
-    
-    if whichStr == "defend" then
-        return "d"
-    endif
-    if whichStr == "d" then
-        return "defend"
-    endif
-    
-    if whichStr == "work" then
-        return "w"
-    endif
-    if whichStr == "w" then
-        return "work"
-    endif
-    
-    if whichStr == "first" then
-        return "n1"
-    endif
-    if whichStr == "second" then
-        return "n2"
-    endif
-    if whichStr == "third" then
-        return "n3"
-    endif
-    if whichStr == "fourth" then
-        return "n4"
-    endif
-    if whichStr == "fifth" then
-        return "n5"
-    endif
-    
-    if whichStr == "n1" then
-        return "first"
-    endif
-    if whichStr == "n2" then
-        return "second"
-    endif
-    if whichStr == "n3" then
-        return "third"
-    endif
-    if whichStr == "n4" then
-        return "fourth"
-    endif
-    if whichStr == "n5" then
-        return "fifth"
-    endif
-    
-    return whichStr
-endfunction
+//! textmacro GUMS_RegisterTag takes FULL, COMPRESSED
+    set data_Child(TAGS_COMPRESS).string[StringHash("$FULL$")] = "$COMPRESSED$"
+    set data_Child(TAGS_DECOMPRESS).string[StringHash("$COMPRESSED$")] = "$FULL$"
+//! endtextmacro
 
-function GUMSConvertTags takes string whichStr returns string
+function GUMSConvertTags takes data_Child convertType, string whichStr returns string
     local string result = ""
     local integer cutToComma = -1
+    local integer stringHash
+    
     loop
     exitwhen cutToComma == 0
-        //call BJDebugMsg("Here:" + whichStr + "hello")
         set cutToComma = CutToCharacter(whichStr, " ")
-        set result = result + GUMSTagDict(SubString(whichStr, 0, cutToComma)) + " "
+        set stringHash = StringHash((SubString(whichStr, 0, cutToComma)))
+        if convertType.string.has(stringHash) then
+            set result = result + convertType.string[stringHash] + " "
+        else
+            set result = result + whichStr + " "
+            // call DisplayTextToPlayer(WHO?,0,0, whichStr + " is not a known tag. If you think this is wrong, please report it")
+        endif
         set whichStr = SubString(whichStr, cutToComma + 1, StringLength(whichStr) + 1)
     endloop
     return SubString(result,0,StringLength(result) - 1)
@@ -263,120 +189,22 @@ endfunction
 //==========================================
 
 //==========================================
-// GUMS Flying Height and Facing Timer
-
-//THIS FUNCTION IS USED TO SET FLYING HEIGHT AND FACING OF IMMOBILE UNITS (NO 'Amov')
-function GUMSGroupFunction takes nothing returns nothing
-    local unit enumUnit = GetEnumUnit()
-    local integer unitId = GetHandleId(enumUnit)
-    local real face
-    local boolean removeReal
-    
-    debug call BJDebugMsg(GetUnitName(enumUnit))
-    
-    //Check if unit is having it's facing changed and apply values accordingly
-    if not HaveSavedReal(hashTable, unitId, -2) then
-        set face = GetUnitFacing(enumUnit)
-        set removeReal = false
-    else
-        set face = LoadReal(hashTable, unitId, -2)
-        set removeReal = true
-    endif
-    
-    //Move unit to it's own position to fix flying height and facing
-    if not HaveSavedInteger(hashTable, unitId, -1) then
-        call SaveInteger(hashTable, unitId, -1, 0)
-        call SetUnitPosition(enumUnit, GetUnitX(enumUnit), GetUnitY(enumUnit))
-    elseif GetUnitFacing(enumUnit) < face - 0.001 or GetUnitFacing(enumUnit) > face + 0.001 then
-        call SetUnitPosition(enumUnit, GetUnitX(enumUnit), GetUnitY(enumUnit))
-    else
-        call RemoveSavedInteger(hashTable, unitId, -1)
-        if removeReal then //Not sure if removing unexisting stuff can cause crashes, but might as well avoid it
-            call RemoveSavedReal(hashTable, unitId, -2)
-        endif
-        call GroupRemoveUnit(loopGroup, enumUnit)
-        call SetUnitPosition(enumUnit, GetUnitX(enumUnit), GetUnitY(enumUnit))
-    endif
-
-    set enumUnit = null
-endfunction
-
-//THIS FUNCTION IS RUN ON A TIMER THAT CALLS THE FUNCTION ABOVE
-function GUMSTimerFunction takes nothing returns nothing
-    call ForGroup(loopGroup, function GUMSGroupFunction)
-endfunction
 //==========================================
 
 //==========================================
 // GUMS API
 //==========================================
 
+// Call this when a unit is removed from the game, or when a unit enters the entire map rect.
 function GUMSClearUnitData takes unit whichUnit returns nothing
     call GroupRemoveUnit(loopGroup, whichUnit)
     call FlushChildHashtable(hashTable, GetHandleId(whichUnit))
 endfunction
 
 //==========================================
-// GUMS Setters
-
-//Set Scale
-function GUMSSetUnitScale takes unit whichUnit, real scale returns nothing
-    call SetUnitScale(whichUnit, scale, scale, scale)
-    call SaveReal(hashTable, GetHandleId(whichUnit), SCALE, scale)
-endfunction
-
-//Set Vertex Color
-function GUMSSetUnitVertexColor takes unit whichUnit, real red, real green, real blue, real trans  returns nothing
-    local integer intRed = R2I(2.55 * red)
-    local integer intGreen = R2I(2.55 * green)
-    local integer intBlue = R2I(2.55 * blue)
-    local integer intAlpha = R2I(2.55 * (100. - trans))
-    
-    call SetUnitVertexColor(whichUnit, intRed, intGreen, intBlue, intAlpha)
-    call SaveInteger(hashTable, GetHandleId(whichUnit), RED, intRed)
-    call SaveInteger(hashTable, GetHandleId(whichUnit), GREEN, intGreen)
-    call SaveInteger(hashTable, GetHandleId(whichUnit), BLUE, intBlue)
-    call SaveInteger(hashTable, GetHandleId(whichUnit), ALPHA, intAlpha)
-endfunction
-
-//Set Player Color (why in hell can't this be retrieved with natives?!)
-function GUMSSetUnitColor takes unit whichUnit, integer color returns nothing
-    if color <= bj_MAX_PLAYER_SLOTS and color >= 1 then
-        call SaveInteger(hashTable, GetHandleId(whichUnit), COLOR, color)
-        call SetUnitColor(whichUnit, ConvertPlayerColor(color-1))
-    else
-        call RemoveSavedInteger(hashTable, GetHandleId(whichUnit), COLOR)
-        //! novjass
-        call GUMS_Config_ResetColorFunc(whichUnit)
-        //! endnovjass
-        //! runtextmacro GUMS_Config_ResetColorFunc()
-    endif
-endfunction
-
-//Set Animation Speed
-function GUMSSetUnitAnimSpeed takes unit whichUnit, real speedMultiplier returns nothing
-    call SetUnitTimeScale(whichUnit, speedMultiplier)
-    call SaveReal(hashTable, GetHandleId(whichUnit), ASPEED, speedMultiplier)
-endfunction
-
-//Set Animation Tag
-function GUMSAddUnitAnimationTag takes unit whichUnit, string whichTag returns nothing
-    local integer unitId = GetHandleId(whichUnit)
-    local string oldTag = GUMSConvertTags(LoadStr(hashTable, unitId, ATAG))
-    call RemoveSavedString(hashTable, unitId, ATAG)
-    call AddUnitAnimationProperties(whichUnit, oldTag, false)
-    if whichTag != "" then
-        
-        call AddUnitAnimationProperties(whichUnit, whichTag, true)
-        set whichTag = GUMSConvertTags(whichTag)
-        //call BJDebugMsg(whichTag)
-        call SaveStr(hashTable, unitId, ATAG, whichTag)
-    endif
-endfunction
-
-//==========================================
 // GUMS Getters
 
+// Contains the Raw values of each UnitVisuals struct. Returned by the .raw method operator.
 private struct UnitVisualsRaw extends array
     static if LIBRARY_ConstTable and INIT_HASHTABLE then
         private method operator values takes nothing returns data_Child
@@ -425,6 +253,7 @@ private struct UnitVisualsRaw extends array
     endmethod
 endstruct
 
+// Contains getters for all UnitVisualMods-related data. These getters return strings, not raw values.
 struct UnitVisuals extends array
     
     static if LIBRARY_ConstTable and INIT_HASHTABLE then
@@ -465,6 +294,7 @@ struct UnitVisuals extends array
         return .values.string.has(ATAG)
     endmethod
     
+    //THESE FUNCTIONS RETRIEVE THE SAVED VALUES IN THE HASHTABLE OR RETURN "D" IF THERE IS NO SAVED VALUE
     method getScale takes nothing returns string
         if .hasScale() then
             return R2S(.values.real[SCALE])
@@ -477,7 +307,7 @@ struct UnitVisuals extends array
         if .hasVertexColor(r1g2b3a4) then
             return I2S(.values[r1g2b3a4])
         else
-            return "D"
+            return "D" //D stands for default
         endif
     endmethod
     
@@ -501,7 +331,7 @@ struct UnitVisuals extends array
         if .hasColor() then
             return I2S(.values[COLOR])
         else
-            return "D"
+            return "D" //D stands for default
         endif
     endmethod
     
@@ -509,7 +339,7 @@ struct UnitVisuals extends array
         if .hasAnimSpeed() then
             return R2S(values.real[ASPEED])
         else
-            return "D"
+            return "D" //D stands for default
         endif
     endmethod
     
@@ -517,55 +347,127 @@ struct UnitVisuals extends array
         if .hasAnimTag() then
             return .values.string[ATAG]
         else
-            return "D"
+            return "D" //D stands for default
         endif
     endmethod
 endstruct
 
-function GUMS_HaveSavedScale takes unit whichUnit returns boolean
-    return HaveSavedReal(hashTable, GetHandleId(whichUnit), SCALE)
+//==========================================
+// GUMS Setters
+
+// The setters cannot be a part of the struct, since they require setting values in the unit, and the
+// unit is not saved within the struct.
+
+function GUMSSetUnitFacing takes unit whichUnit, real newAngle returns nothing
+    call SetUnitFacing(whichUnit, newAngle)
+    if GetUnitAbilityLevel(whichUnit, 'Amov') == 0 then
+        call GroupAddUnit(loopGroup, whichUnit)
+        call SaveReal(hashTable, GetHandleId(whichUnit), TARGET_ANGLE, ModuloReal(newAngle, 360))
+    endif
 endfunction
 
-function GUMS_HaveSavedVertexColor takes unit whichUnit, integer r1b2g3a4 returns boolean
-    return HaveSavedInteger(hashTable, GetHandleId(whichUnit), r1b2g3a4)
+function GUMSSetUnitFlyHeight takes unit whichUnit, real newHeight returns nothing
+    if UnitAddAbility(whichUnit, 'Amrf' ) then
+        call UnitRemoveAbility(whichUnit, 'Amrf')
+    endif
+    call SetUnitFlyHeight( whichUnit, newHeight, 0)
+    if GetUnitAbilityLevel(whichUnit, 'Amov') == 0 then
+        call GroupAddUnit(loopGroup, whichUnit)
+    endif
 endfunction
 
-function GUMS_HaveSavedColor takes unit whichUnit returns boolean
-    return HaveSavedInteger(hashTable, GetHandleId(whichUnit), COLOR)
+function GUMS_AddStructureFlightAbility takes unit structure returns nothing
+    local real facing
+
+    if not HaveSavedReal(hashTable, GetHandleId(structure) , TARGET_ANGLE)  then
+        set facing = GetUnitFacing(structure)
+        call UnitAddAbility(structure, 'DEDF' )
+        call GUMSSetUnitFacing(structure, facing)
+    else
+        call UnitAddAbility(structure, 'DEDF' )
+        call SetUnitFacingTimed(structure , LoadReal(hashTable, GetHandleId(structure) , TARGET_ANGLE), 0)
+        call SetUnitAnimation(structure, "stand")
+    endif
 endfunction
 
-function GUMS_HaveSavedAnimSpeed takes unit whichUnit returns boolean
-    return HaveSavedReal(hashTable, GetHandleId(whichUnit), ASPEED)
+function GUMSSetStructureFlyHeight takes unit structure, real newHeight, boolean autoLand returns nothing
+    if GetUnitFlyHeight(structure) < 0.02 and newHeight < 0.02 then  // 0.01 seems to be the minimum flying height
+        return
+    endif
+ 
+    if UnitAddAbility(structure, 'Amrf' ) then
+        call UnitRemoveAbility(structure, 'Amrf')
+    endif
+    call SetUnitFlyHeight( structure, newHeight, 0)
+    if GetUnitAbilityLevel(structure,'Amov') > 0 then
+        // this is an Ancient and probably already has root. Do nothing
+    else
+        call GUMS_AddStructureFlightAbility(structure)  // already adds unit to loopGroup
+        call IssueImmediateOrder(structure, "unroot")
+        set data[GetHandleId(structure)].boolean[STRUCTURE_HEIGHT] = true
+        if autoLand then
+            set data[GetHandleId(structure)].boolean[AUTO_LAND] = true
+        endif
+    endif
 endfunction
 
-function GUMS_HaveSavedAnimationTag takes unit whichUnit returns boolean
-    return HaveSavedString(hashTable, GetHandleId(whichUnit), ATAG)
-endfunction 
-
-//THESE FUNCTIONS RETRIEVE THE SAVED VALUES IN THE HASHTABLE OR RETURN "D" IF THERE IS NO SAVED VALUE
-//GET Scale
-function GUMSGetUnitScale takes unit whichUnit returns string
-    return UnitVisuals.get(whichUnit).getScale()
+//Set Scale
+function GUMSSetUnitScale takes unit whichUnit, real scale returns nothing
+    call SetUnitScale(whichUnit, scale, scale, scale)
+    call SaveReal(hashTable, GetHandleId(whichUnit), SCALE, scale)
 endfunction
 
-//GET Vertex Color
-function GUMSGetUnitVertexColor takes unit whichUnit, integer r1g2b3a4  returns string
-    return UnitVisuals.get(whichUnit).getVertexColor(r1g2b3a4)
+//Set Vertex Color
+function GUMSSetUnitVertexColor takes unit whichUnit, real red, real green, real blue, real trans  returns nothing
+    local integer intRed = R2I(2.55 * red)
+    local integer intGreen = R2I(2.55 * green)
+    local integer intBlue = R2I(2.55 * blue)
+    local integer intAlpha = R2I(2.55 * (100. - trans))
+    
+    call SetUnitVertexColor(whichUnit, intRed, intGreen, intBlue, intAlpha)
+    call SaveInteger(hashTable, GetHandleId(whichUnit), RED, intRed)
+    call SaveInteger(hashTable, GetHandleId(whichUnit), GREEN, intGreen)
+    call SaveInteger(hashTable, GetHandleId(whichUnit), BLUE, intBlue)
+    call SaveInteger(hashTable, GetHandleId(whichUnit), ALPHA, intAlpha)
 endfunction
 
-//GET Player Color (why in hell can't this be retrieved with natives?!)
-function GUMSGetUnitColor takes unit whichUnit returns string
-    return UnitVisuals.get(whichUnit).getColor()
+//Set Player Color (why in hell can't this be retrieved with natives?!)
+function GUMSSetUnitColor takes unit whichUnit, integer color returns nothing
+    if color <= bj_MAX_PLAYER_SLOTS and color >= 1 then
+        call SaveInteger(hashTable, GetHandleId(whichUnit), COLOR, color)
+        call SetUnitColor(whichUnit, ConvertPlayerColor(color-1))
+    else
+        call RemoveSavedInteger(hashTable, GetHandleId(whichUnit), COLOR)
+
+        //! runtextmacro GUMS_Config_ResetColorFunc()
+    endif
 endfunction
 
-//GET Animation Speed
-function GUMSGetUnitAnimSpeed takes unit whichUnit returns string
-    return UnitVisuals.get(whichUnit).getAnimSpeed()
+//Set Animation Speed
+function GUMSSetUnitAnimSpeed takes unit whichUnit, real speedMultiplier returns nothing
+    call SetUnitTimeScale(whichUnit, speedMultiplier)
+    call SaveReal(hashTable, GetHandleId(whichUnit), ASPEED, speedMultiplier)
 endfunction
 
-//GET Animation Tag
-function GUMSGetUnitAnimationTag takes unit whichUnit returns string
-    return UnitVisuals.get(whichUnit).getAnimTag()
+//Set Animation Tag
+function GUMSAddUnitAnimationTag takes unit whichUnit, string whichTag returns nothing
+    local UnitVisuals unitId = GetHandleId(whichUnit)
+    
+    if unitId.hasAnimTag() then
+        call AddUnitAnimationProperties(whichUnit, GUMSConvertTags(TAGS_DECOMPRESS, unitId.raw.getAnimTag()), false)
+    else
+        call AddUnitAnimationProperties(whichUnit, allTags, false)
+    endif
+    
+    if whichTag != "" then
+        call SaveStr(hashTable, unitId, ATAG, whichTag)
+        call AddUnitAnimationProperties(whichUnit, whichTag, true)
+        set whichTag = GUMSConvertTags(TAGS_COMPRESS, whichTag)
+        debug call BJDebugMsg("Setting tag: " + whichTag)
+        
+    else
+        call RemoveSavedString(hashTable, unitId, ATAG)
+    endif
 endfunction
 
 ///////////////////////////
@@ -620,7 +522,6 @@ function GUMSGetUnitName takes unit whichUnit returns string
     endif
 endfunction
 
-
 //==========================================
 // GUMS Copying Utilities
 
@@ -628,92 +529,17 @@ endfunction
 //    -Unit selectability
 //    -Unit custom name
 
-// Creates a new unit and copies all the GUMS values from the old unit to the newly created one.
-// bj_lastCreatedUnit is set to the newly created unit.
-// If the specified newType is nonpositive, then the created unit will have the same type as the copied one
-function GUMSCopyUnit takes unit whichUnit, player owner, integer newType returns unit
-    local real fangle = GetUnitFacing(whichUnit)
-    local unit newUnit
-    
-    if newType < 1 then
-        set newType = GetUnitTypeId(whichUnit)
-    endif
-    set newUnit = CreateUnit( owner, newType, GetUnitX(whichUnit), GetUnitY(whichUnit), fangle)
-    if UnitAddAbility(newUnit, 'Amrf') then
-        call UnitRemoveAbility(newUnit, 'Amrf')
-    endif
-    call SetUnitFlyHeight(newUnit, GetUnitFlyHeight(whichUnit), 0)
-    //Fix Flying (TLLOP SPECIFIC)
-    if GetUnitAbilityLevel(newUnit, 'Amov') == 0 then
-        if IsUnitType(newUnit, UNIT_TYPE_STRUCTURE) then
-            if GetUnitFlyHeight(whichUnit) > 0.5 then
-                call SaveReal(hashTable, GetHandleId(newUnit), -2, fangle)
-                call UnitAddAbility(newUnit,'DEDF')
-                call IssueImmediateOrder(newUnit, "unroot")
-                call SetUnitFacingTimed(newUnit, fangle, 0)
-            endif
-        endif   
-        call GroupAddUnit(loopGroup, newUnit)
-    endif
-    //EndofFix
-    //FIX Flying (ANY MAP)
-//    if GetUnitAbilityLevel(newUnit, 'Amov') == 0 then
-//        call GroupAddUnit(loopGroup, newUnit)
-//    endif
-    //EndofFix
-        if GUMSGetUnitScale(whichUnit) != "D" then
-        call GUMSSetUnitScale(newUnit, S2R(GUMSGetUnitScale(whichUnit)))
-    endif
-    if GUMSGetUnitVertexColor(whichUnit,1) != "D" then
-        call GUMSSetUnitVertexColor(newUnit, S2I(GUMSGetUnitVertexColor(whichUnit,1))/2.55,S2I(GUMSGetUnitVertexColor(whichUnit,2))/2.55, S2I(GUMSGetUnitVertexColor(whichUnit,3))/2.55, (255 - S2I(GUMSGetUnitVertexColor(whichUnit,4)))/2.55)
-    endif
-    if GUMSGetUnitColor(whichUnit) != "D" then
-        call GUMSSetUnitColor(newUnit, S2I(GUMSGetUnitColor(whichUnit)))
-    endif
-    if GUMSGetUnitAnimSpeed(whichUnit) != "D" then
-        call GUMSSetUnitAnimSpeed(newUnit, S2R(GUMSGetUnitAnimSpeed(whichUnit)))
-    endif
-    if GUMSGetUnitAnimationTag(whichUnit) != "D" then
-        call GUMSAddUnitAnimationTag(newUnit, GUMSConvertTags(GUMSGetUnitAnimationTag(whichUnit)))
-    endif
-    
-    set bj_lastCreatedUnit = newUnit
-    set newUnit = null
-    return bj_lastCreatedUnit
-endfunction
-
-function GUMSCopyUnitSameType takes unit whichUnit, player owner returns unit
-    return GUMSCopyUnit(whichUnit, owner, 0)
-endfunction
-
 // Copies all GUMS values from one source unit to a target unit.
 function GUMSCopyValues takes unit source, unit target returns nothing
     local real fangle = GetUnitFacing(source)
     local UnitVisuals sourceId = GetHandleId(source)
     
-    if UnitAddAbility(target, 'Amrf') then
-        call UnitRemoveAbility(target, 'Amrf')
+    if IsUnitType(target, UNIT_TYPE_STRUCTURE) then
+        call GUMSSetStructureFlyHeight(target, GetUnitFlyHeight(source), GetUnitAbilityLevel(source, 'DEDF') == 0)
+    else
+        call GUMSSetUnitFlyHeight(target, GetUnitFlyHeight(source))
     endif
-    //Fix Flying (TLLOP SPECIFIC)
-    if GetUnitAbilityLevel(target, 'Amov') == 0 then
-        if IsUnitType(target, UNIT_TYPE_STRUCTURE) then
-            if GetUnitFlyHeight(source) > 0.5 then
-            call SaveReal(hashTable, GetHandleId(target), -2, fangle)
-                if UnitAddAbility(target,'DEDF') then
-                    
-                endif
-                call IssueImmediateOrder(target, "unroot")
-                call SetUnitFacingTimed(target, fangle, 0)
-            endif
-        endif   
-        call GroupAddUnit(loopGroup, target)
-    endif
-    //EndofFix
-    //FIX Flying (ANY MAP)
-//    if GetUnitAbilityLevel(bj_lastCreatedUnit, 'Amov') == 0 then
-//        call GroupAddUnit(loopGroup, bj_lastCreatedUnit)
-//    endif
-    //EndofFix
+    
     if sourceId.hasScale() then
         call GUMSSetUnitScale(target, data[sourceId].real[SCALE])
     endif
@@ -733,6 +559,29 @@ function GUMSCopyValues takes unit source, unit target returns nothing
     if sourceId.hasAnimTag() then
         call GUMSAddUnitAnimationTag(target, data[sourceId].string[ATAG])
     endif
+endfunction
+
+// Creates a new unit and copies all the GUMS values from the old unit to the newly created one.
+// bj_lastCreatedUnit is set to the newly created unit.
+// If the specified newType is nonpositive, then the created unit will have the same type as the copied one
+function GUMSCopyUnit takes unit whichUnit, player owner, integer newType returns unit
+    local real fangle = GetUnitFacing(whichUnit)
+    local unit newUnit
+    
+    if newType < 1 then
+        set newType = GetUnitTypeId(whichUnit)
+    endif
+    set newUnit = CreateUnit( owner, newType, GetUnitX(whichUnit), GetUnitY(whichUnit), fangle)
+    
+    call GUMSCopyValues(whichUnit, newUnit)
+    
+    set bj_lastCreatedUnit = newUnit
+    set newUnit = null
+    return bj_lastCreatedUnit
+endfunction
+
+function GUMSCopyUnitSameType takes unit whichUnit, player owner returns unit
+    return GUMSCopyUnit(whichUnit, owner, 0)
 endfunction
 
 //==========================================
@@ -794,26 +643,6 @@ endfunction
 //End of GUMS
 //////////////////////////////////////////////////////
 
-function GUMSSetUnitFacing takes unit whichUnit, real newAngle returns nothing
-    call SetUnitFacing(whichUnit, newAngle)
-    if GetUnitAbilityLevel(whichUnit, 'Amov') == 0 then
-        // call SetUnitPosition(whichUnit, GetUnitX(whichUnit), GetUnitY(whichUnit))
-        call GroupAddUnit(loopGroup, whichUnit)
-        call SaveReal(hashTable, GetHandleId(whichUnit), -2, ModuloReal(newAngle, 360))
-    endif
-endfunction
-
-function GUMSSetUnitFlyHeight takes unit whichUnit, real newHeight returns nothing
-    if UnitAddAbility(whichUnit, 'Amrf' ) then
-        call UnitRemoveAbility(whichUnit, 'Amrf')
-    endif
-    call SetUnitFlyHeight( whichUnit, newHeight, 0)
-    if GetUnitAbilityLevel(whichUnit, 'Amov') == 0 then
-        // call SetUnitPosition( whichUnit, GetUnitX(whichUnit), GetUnitY(whichUnit) )
-        call GroupAddUnit(loopGroup, whichUnit)
-    endif
-endfunction
-
 function GUMSSetUnitVertexColorString takes unit whichUnit, string args, string separator returns nothing
     local integer cutToComma
     local real cRed
@@ -837,42 +666,249 @@ function GUMSSetUnitVertexColorString takes unit whichUnit, string args, string 
     call GUMSSetUnitVertexColor(whichUnit, cRed, cGreen, cBlue, cAlpha)
 endfunction
 
-
-
 //==================================================================================================
 //                                        Initialization
 //==================================================================================================
+// GUMS Flying Height and Facing Timer
 
-// When a unit cancels of finishes an upgrade, reapply its Visual modifications.
-function GUMS_FixUpgrades takes nothing returns nothing
-    call GUMSCopyValues(GetTriggerUnit(), GetTriggerUnit())
+private struct TimerData extends array
+    //! runtextmacro TableStruct_NewHandleField("unit","unit")
+    
+    static method get takes timer t returns thistype
+        return GetHandleId(t)
+    endmethod
+    
+    method destroy takes nothing returns nothing
+        call .unitClear()
+    endmethod
+endstruct
+
+globals
+    private group hiddenGrp = CreateGroup()
+endglobals
+
+private function ForGroupUnhide takes nothing returns nothing
+    // call ShowUnit(GetEnumUnit(), true)
+    call BlzUnitDisableAbility(GetEnumUnit(), 'Amov', false, false)
+endfunction
+
+private function onTimer3 takes nothing returns nothing
+    local timer t = GetExpiredTimer()
+    local TimerData tData = TimerData.get(t)
+    local unit u = tData.unit
+    
+    call UnitRemoveAbility(u, 'DEDF')
+    
+    call ForGroup(hiddenGrp, function ForGroupUnhide)
+    call GroupClear(hiddenGrp)
+    
+    call PauseTimer(t)
+    call DestroyTimer(t)
+    call tData.destroy()
+    
+    set t = null
+    set u = null
+endfunction
+
+private function FilterHide takes nothing returns boolean
+    local unit filterU = GetFilterUnit()
+    if GetUnitAbilityLevel(filterU, 'Amov') > 0 then
+        //call ShowUnit(filterU, false)
+        call BlzUnitDisableAbility(filterU, 'Amov', true, false)
+        call GroupAddUnit(hiddenGrp, filterU)
+    endif
+    set filterU = null
+    return false
+endfunction
+
+private function onTimer2 takes nothing returns nothing
+    local timer t = GetExpiredTimer()
+    local unit u = TimerData.get(t).unit
+    
+    // Here, we make sure that units below the building don't stop it from instantly rooting (they have to move away first)
+    call GroupEnumUnitsInRange(ENUM_GROUP, GetUnitX(u), GetUnitY(u), 1000., Filter(function FilterHide))
+    
+    // More efficient then the method used above, but units below still move out of the way: 
+    // call SetUnitOwner(u, Player(bj_PLAYER_NEUTRAL_VICTIM), false)
+    
+    call IssuePointOrder(u, "root", GetUnitX(u), GetUnitY(u))
+    call TimerStart(t, 0, false, function onTimer3)
+    
+    set t = null
+    set u = null
+endfunction
+
+//THIS FUNCTION IS USED TO SET FLYING HEIGHT AND FACING OF IMMOBILE UNITS (NO 'Amov')
+function GUMSGroupFunction takes nothing returns nothing
+    local unit enumUnit = GetEnumUnit()
+    local integer unitId = GetHandleId(enumUnit)
+    local real face
+    local boolean removeReal
+    
+    local timer t
+    
+    debug call BJDebugMsg(GetUnitName(enumUnit))
+    
+    //Check if unit is having it's facing changed and apply values accordingly
+    if not HaveSavedReal(hashTable, unitId, TARGET_ANGLE) then
+        set face = GetUnitFacing(enumUnit)
+        set removeReal = false
+    else
+        set face = LoadReal(hashTable, unitId, TARGET_ANGLE)
+        set removeReal = true
+    endif
+    
+    //Move unit to it's own position to fix flying height and facing
+    if not HaveSavedInteger(hashTable, unitId, COUNTER) then
+        call SaveInteger(hashTable, unitId, COUNTER, 0)
+        call SetUnitPosition(enumUnit, GetUnitX(enumUnit), GetUnitY(enumUnit))
+    elseif GetUnitFacing(enumUnit) < face - 0.001 or GetUnitFacing(enumUnit) > face + 0.001 then
+        call SetUnitPosition(enumUnit, GetUnitX(enumUnit), GetUnitY(enumUnit))
+    else
+        call RemoveSavedInteger(hashTable, unitId, COUNTER)
+        if removeReal then //Not sure if removing unexisting stuff can cause crashes, but might as well avoid it
+            call RemoveSavedReal(hashTable, unitId, TARGET_ANGLE)
+        endif
+        call SetUnitPosition(enumUnit, GetUnitX(enumUnit), GetUnitY(enumUnit))
+        
+        if data[unitId].boolean.has(STRUCTURE_HEIGHT) then
+            call data[unitId].boolean.remove(STRUCTURE_HEIGHT)
+            if data[unitId].boolean.has(AUTO_LAND) then
+                set t = CreateTimer()
+                set TimerData.get(t).unit = enumUnit
+                call TimerStart(t, 0, false, function onTimer2)
+                call SetUnitAnimation(enumUnit, "stand")
+            endif
+            call GroupRemoveUnit(loopGroup, enumUnit)
+        else
+            if IsUnitType(enumUnit, UNIT_TYPE_STRUCTURE) and GetUnitFlyHeight(enumUnit) > 0.02 then
+                call BJDebugMsg(R2S(GetUnitFlyHeight(enumUnit)*1000))
+                call GUMSSetStructureFlyHeight(enumUnit,GetUnitFlyHeight(enumUnit), data[unitId].boolean.has(AUTO_LAND))
+            else 
+                call GroupRemoveUnit(loopGroup, enumUnit)
+            endif
+        endif
+    endif
+
+    set enumUnit = null
 endfunction
 
 
-private function onInit takes nothing returns nothing
-    local trigger fixUpgrades = CreateTrigger()
-    local integer i
-    local timer t = CreateTimer()
+//THIS FUNCTION IS RUN ON A TIMER THAT CALLS THE FUNCTION ABOVE
+function GUMSTimerFunction takes nothing returns nothing
+    call ForGroup(loopGroup, function GUMSGroupFunction)
+endfunction
+
+// When a unit cancels of finishes an upgrade, reapply its Visual modifications.
+private module InitModule
+    private static method onUpgradeHandler takes nothing returns nothing
+        call GUMSCopyValues(GetTriggerUnit(), GetTriggerUnit())
+    endmethod
+
+
+    private static method onInit takes nothing returns nothing
+        local trigger fixUpgrades = CreateTrigger()
+        local integer i
+        local timer t = CreateTimer()
+        
+        call TriggerRegisterAnyUnitEventBJ( fixUpgrades, EVENT_PLAYER_UNIT_UPGRADE_CANCEL )
+        call TriggerRegisterAnyUnitEventBJ( fixUpgrades, EVENT_PLAYER_UNIT_UPGRADE_FINISH )
+        call TriggerAddAction( fixUpgrades, function thistype.onUpgradeHandler )
+        
+        static if INIT_HASHTABLE /*and LIBRARY_HashtableWrapper */ then
+            set hashTable = InitHashtable()
+        endif
+        
+        call TimerStart( t, 0.1, true, function GUMSTimerFunction)
+        
+        set i = 0
+        loop
+            exitwhen i > 15
+            set TerrainType2Id[udg_TileSystem_TILES[i]] = i
+            set i = i + 1
+        endloop
+        
+    //! runtextmacro GUMS_RegisterTag("gold", "g")
+    //! runtextmacro GUMS_RegisterTag("lumber", "l")
+    //! runtextmacro GUMS_RegisterTag("work", "w")
+    //! runtextmacro GUMS_RegisterTag("flesh", "f")
+    //! runtextmacro GUMS_RegisterTag("ready", "r")
+    //! runtextmacro GUMS_RegisterTag("one", "1")
+    //! runtextmacro GUMS_RegisterTag("two", "2")
+    //! runtextmacro GUMS_RegisterTag("throw", "t")
+    //! runtextmacro GUMS_RegisterTag("slam", "sl")
     
-    call TriggerRegisterAnyUnitEventBJ( fixUpgrades, EVENT_PLAYER_UNIT_UPGRADE_CANCEL )
-    call TriggerRegisterAnyUnitEventBJ( fixUpgrades, EVENT_PLAYER_UNIT_UPGRADE_FINISH )
-    call TriggerAddAction( fixUpgrades, function GUMS_FixUpgrades )
+    //! runtextmacro GUMS_RegisterTag("large", "sl")
+    //! runtextmacro GUMS_RegisterTag("medium", "sm")
+    //! runtextmacro GUMS_RegisterTag("small", "ss")
+
+    //! runtextmacro GUMS_RegisterTag("victory", "v")
+    //! runtextmacro GUMS_RegisterTag("alternate", "a")
+    //! runtextmacro GUMS_RegisterTag("morph", "m")
+    //! runtextmacro GUMS_RegisterTag("defend", "d")
+    //! runtextmacro GUMS_RegisterTag("swim", "s")
     
-    static if INIT_HASHTABLE /*and LIBRARY_HashtableWrapper */ then
-        set hashTable = InitHashtable()
-    endif
+    //! runtextmacro GUMS_RegisterTag("spin", "sp")
+    //! runtextmacro GUMS_RegisterTag("fast", "fa")
     
-    call TimerStart( t, 0.1, true, function GUMSTimerFunction)
-    
-    set i = 0
-    loop
-        exitwhen i > 15
-        set TerrainType2Id[udg_TileSystem_TILES[i]] = i
-        set i = i + 1
-    endloop
+    //! runtextmacro GUMS_RegisterTag("upgrade","u")
+    //! runtextmacro GUMS_RegisterTag("first","n1")
+    //! runtextmacro GUMS_RegisterTag("second","n2")
+    //! runtextmacro GUMS_RegisterTag("third","n3")
+    //! runtextmacro GUMS_RegisterTag("fourth","n4")
+    //! runtextmacro GUMS_RegisterTag("fifth","n5")
+    endmethod
+endmodule
+private struct InitStruct extends array
+    implement InitModule
+endstruct
+
+//==================================================================================================
+//                                       Wrappers
+//==================================================================================================
+
+function GUMS_HaveSavedScale takes unit whichUnit returns boolean
+    return HaveSavedReal(hashTable, GetHandleId(whichUnit), SCALE)
+endfunction
+
+function GUMS_HaveSavedVertexColor takes unit whichUnit, integer r1b2g3a4 returns boolean
+    return HaveSavedInteger(hashTable, GetHandleId(whichUnit), r1b2g3a4)
+endfunction
+
+function GUMS_HaveSavedColor takes unit whichUnit returns boolean
+    return HaveSavedInteger(hashTable, GetHandleId(whichUnit), COLOR)
+endfunction
+
+function GUMS_HaveSavedAnimSpeed takes unit whichUnit returns boolean
+    return HaveSavedReal(hashTable, GetHandleId(whichUnit), ASPEED)
+endfunction
+
+function GUMS_HaveSavedAnimationTag takes unit whichUnit returns boolean
+    return HaveSavedString(hashTable, GetHandleId(whichUnit), ATAG)
+endfunction 
+
+function GUMSGetUnitScale takes unit whichUnit returns string
+    return UnitVisuals.get(whichUnit).getScale()
+endfunction
+
+function GUMSGetUnitVertexColor takes unit whichUnit, integer r1g2b3a4  returns string
+    return UnitVisuals.get(whichUnit).getVertexColor(r1g2b3a4)
+endfunction
+
+function GUMSGetUnitColor takes unit whichUnit returns string
+    return UnitVisuals.get(whichUnit).getColor()
+endfunction
+
+function GUMSGetUnitAnimSpeed takes unit whichUnit returns string
+    return UnitVisuals.get(whichUnit).getAnimSpeed()
+endfunction
+
+function GUMSGetUnitAnimationTag takes unit whichUnit returns string
+    return UnitVisuals.get(whichUnit).getAnimTag()
 endfunction
 
 //==================================================================================================
+// Include this so it is declared even if HashtableWrapper library is not present
 //! textmacro_once DeclareHashTableWrapperModule takes NAME
 
     module $NAME$_HashTableWrapper
