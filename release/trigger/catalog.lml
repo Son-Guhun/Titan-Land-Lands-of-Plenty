@@ -429,3 +429,8 @@
         Disab
     '2-Create Destructable': 'Create Destructable'
         Disab
+'47-Special Effect System': 'Special Effect System'
+    1-HashStruct: HashStruct
+    2-SpecialEffect: SpecialEffect
+    3-PlayerSpecialEffect: PlayerSpecialEffect
+    4-UnitSpecialEffect: UnitSpecialEffect
