@@ -179,6 +179,24 @@ And discord: SonGuhun#4510'
     CustomScriptCode
         Const : 'call SaveInteger(udg_Hashtable_1, ''h0NU'', 0, ''h0NT'')'
     CommentString
+        Const : 'Massive Ruins Gates'
+    CustomScriptCode
+        Const : 'call SaveInteger(udg_Hashtable_1, ''h0R6'', 0, ''h0R7'')'
+    CustomScriptCode
+        Const : 'call SaveInteger(udg_Hashtable_1, ''h0R7'', 0, ''h0R6'')'
+    CommentString
+        Const : 'Ruins Gate'
+    CustomScriptCode
+        Const : 'call SaveInteger(udg_Hashtable_1, ''h0R8'', 0, ''h0R9'')'
+    CustomScriptCode
+        Const : 'call SaveInteger(udg_Hashtable_1, ''h0R9'', 0, ''h0R8'')'
+    CommentString
+        Const : -
+    CustomScriptCode
+        Const : 'call SaveInteger(udg_Hashtable_1,  ''h0RA'', 0, ''h0RB'')'
+    CustomScriptCode
+        Const : 'call SaveInteger(udg_Hashtable_1, ''h0RB'', 0,  ''h0RA'')'
+    CommentString
         Const : ---------------------
     CommentString
         Const : ---------------------
