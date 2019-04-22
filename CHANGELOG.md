@@ -19,13 +19,13 @@ Patch versions indicate bugfixes. Some command aliases or arguments may be added
 	- 'mind (number/color) => Will now work as if you had ordered the Power: Mind unit to right-click your selected units.
 
 ### Fixed
-	- A hostile 'Give Unit To' circle is no longer created at coordinates (0, 0).
-	- -control/uncontrol commands are now easier to use again, since you can more easily spawn a Controller deco.
-	- Non-decoration structures loaded with a flying height will no longer keep the Enable/Disable Flight ability.
-	- Adding animation tags to units that have animation tags by default (like Castles or Guard Towers) with the -tag command now works correctly. These units are now also correctly loaded with the Save System.
+- A hostile 'Give Unit To' circle is no longer created at coordinates (0, 0).
+- -control/uncontrol commands are now easier to use again, since you can more easily spawn a Controller deco.
+- Non-decoration structures loaded with a flying height will no longer keep the Enable/Disable Flight ability.
+- Adding animation tags to units that have animation tags by default (like Castles or Guard Towers) with the -tag command now works correctly. These units are now also correctly loaded with the Save System.
 
 ### Changed
-	- Structures can now have their flying height set with commands. Decorations will automatically cast Enable Flight when their flying height is changed.
+- Structures can now have their flying height set with commands. Decorations will automatically cast Enable Flight when their flying height is changed.
 
 
 ## [1.0.3] - 2019-04-18
