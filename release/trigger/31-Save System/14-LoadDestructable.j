@@ -10,8 +10,8 @@ function Trig_LoadDest_Actions takes nothing returns nothing
 endfunction
 
 //===========================================================================
-function InitTrig_LoadDest takes nothing returns nothing
-    set gg_trg_LoadDest = CreateTrigger(  )
-    call TriggerAddAction( gg_trg_LoadDest, function Trig_LoadDest_Actions )
+function InitTrig_LoadDestructable takes nothing returns nothing
+    set gg_trg_LoadDestructable = CreateTrigger(  )
+    call TriggerAddAction( gg_trg_LoadDestructable, function Trig_LoadDest_Actions )
 endfunction
 

@@ -59,14 +59,14 @@ function SaveTerrain takes nothing returns nothing
         //call BJDebugMsg("Saving Terrain")
     endif
     set udg_save_password[playerNumber+1] = SubString(GetEventPlayerChatString(), 6, 129)
-    set cond = TriggerAddCondition(gg_trg_SaveLoop_Terrain, Condition(function SaveTiles))
+    set cond = TriggerAddCondition(gg_trg_SaveTerrain, Condition(function SaveTiles))
     loop
     exitwhen udg_save_XYminmaxcur[playerNumber+5*bj_MAX_PLAYERS] > udg_save_XYminmaxcur[playerNumber+4*bj_MAX_PLAYERS]
         
-        call TriggerEvaluate(gg_trg_SaveLoop_Terrain)
+        call TriggerEvaluate(gg_trg_SaveTerrain)
         
     endloop
-    call TriggerRemoveCondition(gg_trg_SaveLoop_Terrain, cond)
+    call TriggerRemoveCondition(gg_trg_SaveTerrain, cond)
     
     if GetLocalPlayer() == GetTriggerPlayer() then
         call PreloadGenEnd("DataManager\\" + udg_save_password[playerNumber+1] + "\\0.txt")
@@ -81,8 +81,8 @@ endfunction
 
 
 //===========================================================================
-function InitTrig_SaveLoop_Terrain takes nothing returns nothing
-    set gg_trg_SaveLoop_Terrain = CreateTrigger(  )
-    call TriggerAddAction( gg_trg_SaveLoop_Terrain, function SaveTerrain )
+function InitTrig_SaveTerrain takes nothing returns nothing
+    set gg_trg_SaveTerrain = CreateTrigger(  )
+    call TriggerAddAction( gg_trg_SaveTerrain, function SaveTerrain )
 endfunction
 

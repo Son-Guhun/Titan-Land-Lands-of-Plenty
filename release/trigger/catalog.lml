@@ -272,10 +272,10 @@
     '04-SaveLoad Set Center Numbers': 'SaveLoad Set Center Numbers'
     05-Save: Save
         Comment
-    06-SaveCall: SaveCall
-    07-SaveLoop: SaveLoop
-    '08-SaveLoop Dest': 'SaveLoop Dest'
-    '09-SaveLoop Terrain': 'SaveLoop Terrain'
+    06-SaveRequest: SaveRequest
+    07-SaveUnit: SaveUnit
+    08-SaveDestructable: SaveDestructable
+    09-SaveTerrain: SaveTerrain
     10-Load: Load
         Comment
     11-LoadRequest: LoadRequest
@@ -283,7 +283,7 @@
         Closed
     '13-LoadUnit Extra': 'LoadUnit Extra'
         Closed
-    14-LoadDest: LoadDest
+    14-LoadDestructable: LoadDestructable
     15-LoadTerrain: LoadTerrain
     16-vJass: vJass
         Comment

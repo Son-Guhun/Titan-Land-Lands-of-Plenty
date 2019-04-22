@@ -61,21 +61,21 @@ Action
                     Const : '-nosave units'
                     Preset: ChatMatchTypeExact
             AddTriggerEvent
-                Var   : gg_trg_SaveCall
+                Var   : gg_trg_SaveRequest
                 Event: TriggerRegisterPlayerChatEvent
                     Call  : ConvertedPlayer
                         Var   : temp_integer
                     Const : '-save '
                     Preset: ChatMatchTypeSubstring
             AddTriggerEvent
-                Var   : gg_trg_SaveLoop_Dest
+                Var   : gg_trg_SaveDestructable
                 Event: TriggerRegisterPlayerChatEvent
                     Call  : ConvertedPlayer
                         Var   : temp_integer
                     Const : '-dsav '
                     Preset: ChatMatchTypeSubstring
             AddTriggerEvent
-                Var   : gg_trg_SaveLoop_Terrain
+                Var   : gg_trg_SaveTerrain
                 Event: TriggerRegisterPlayerChatEvent
                     Call  : ConvertedPlayer
                         Var   : temp_integer
@@ -98,7 +98,7 @@ Action
                     Const : =
                     Preset: ChatMatchTypeSubstring
             AddTriggerEvent
-                Var   : gg_trg_LoadDest
+                Var   : gg_trg_LoadDestructable
                 Event: TriggerRegisterPlayerChatEvent
                     Call  : ConvertedPlayer
                         Var   : temp_integer

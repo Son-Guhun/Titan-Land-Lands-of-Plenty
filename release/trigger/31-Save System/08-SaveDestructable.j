@@ -49,8 +49,8 @@ function SaveLoopActions2 takes nothing returns nothing
 endfunction
 
 //===========================================================================
-function InitTrig_SaveLoop_Dest takes nothing returns nothing
-    set gg_trg_SaveLoop_Dest = CreateTrigger(  )
-    call TriggerAddAction( gg_trg_SaveLoop_Dest, function SaveLoopActions2 )
+function InitTrig_SaveDestructable takes nothing returns nothing
+    set gg_trg_SaveDestructable = CreateTrigger(  )
+    call TriggerAddAction( gg_trg_SaveDestructable, function SaveLoopActions2 )
 endfunction
 
