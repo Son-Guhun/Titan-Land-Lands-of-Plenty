@@ -39,6 +39,12 @@
         Disab
     '3-External Import All Files': 'External Import All Files'
         Disab
+    4-Tests: Tests
+        Comment
+    '5-Allowed Abilities': 'Allowed Abilities'
+        Disab
+    '6-Enabling Inventory': 'Enabling Inventory'
+        Disab
 '03-Main Systems': 'Main Systems'
     Comment
 '04-LoP Core': 'LoP Core'
