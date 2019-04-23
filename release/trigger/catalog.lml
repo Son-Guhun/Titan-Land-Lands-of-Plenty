@@ -221,22 +221,23 @@
     Comment
 '25-CSS System': 'CSS System'
     01-CustomStatSystem: CustomStatSystem
-    '02-BonusMod standalone': 'BonusMod standalone'
+    02-CustomStatSystemConstants: CustomStatSystemConstants
+    '03-BonusMod standalone': 'BonusMod standalone'
         Comment
-    '03-CSS Standalone Bonus': 'CSS Standalone Bonus'
-    '04-Color codes for info panel': 'Color codes for info panel'
+    '04-CSS Standalone Bonus': 'CSS Standalone Bonus'
+    '05-Color codes for info panel': 'Color codes for info panel'
         Comment
-    '05-Color Code Setting': 'Color Code Setting'
+    '06-Color Code Setting': 'Color Code Setting'
         Disab
-    06-Instruction: Instruction
+    07-Instruction: Instruction
         Comment
-    '07-CSS Item Functions': 'CSS Item Functions'
+    '08-CSS Item Functions': 'CSS Item Functions'
         Disab
-    '08-Item Declaration': 'Item Declaration'
+    '09-Item Declaration': 'Item Declaration'
         Comment
-    '09-Examplary Item Declaration': 'Examplary Item Declaration'
+    '10-Examplary Item Declaration': 'Examplary Item Declaration'
         Comment
-    '10-Item Declaration': 'Item Declaration'
+    '11-Item Declaration': 'Item Declaration'
         Disab
 '26-Unit Event': 'Unit Event'
     '1-Unit Event Config': 'Unit Event Config'
