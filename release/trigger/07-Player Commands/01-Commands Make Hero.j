@@ -6,8 +6,88 @@ private struct Globals extends array
     
 endstruct
 
+// Attempts at giving units Hero armor  (Currently, the unrooted unit cannot use items in its inventory.
+/*
+struct ABCDE extends array
+
+    //! runtextmacro TableStruct_NewHandleField("unit","unit")
+    
+    method destroy takes nothing returns nothing
+        call unitClear()
+    endmethod
+
+endstruct
+
+function onExpireHeroic takes nothing returns nothing
+    local timer t = GetExpiredTimer()
+    local ABCDE tData = GetHandleId(t)
+    local unit whichUnit = tData.unit
+    
+    call UnitRemoveAbility(whichUnit, 'A008')
+    call tData.destroy()
+    
+    call BlzUnitDisableAbility(whichUnit, 'AHer', false, false)
+    call UnitRemoveAbility(whichUnit, 'AInv')
+    call UnitAddAbility(whichUnit, 'AInv')
+    call BlzUnitDisableAbility(whichUnit, 'AInv', false, false)
+    
+    call UnitApplyTimedLife(whichUnit, 'BHwe', 1)
+    call UnitPauseTimedLife(whichUnit, true)
+    call UnitAddItemById(whichUnit, 'I013')
+    call BlzSetUnitMaxHP(whichUnit, 100)
+    call BlzSetUnitMaxMana(whichUnit, 0)
+    call BlzSetUnitDiceNumber(whichUnit, 2, 1)
+    call BlzSetUnitDiceSides(whichUnit, 6, 1)
+    call BlzSetUnitBaseDamage(whichUnit, 0, 1)
+    call BlzSetUnitArmor(whichUnit, 0)
+    call UnitAddItemById(whichUnit, 'I00S')
+    
+    call PauseTimer(t)
+    call DestroyTimer(t)
+    set t  = null
+    set whichUnit = null
+endfunction
+
+
+function onExpireHeroic2 takes nothing returns nothing
+    local timer t = GetExpiredTimer()
+    local ABCDE tData = GetHandleId(t)
+
+    call IssueImmediateOrder(tData.unit, "unroot")
+    call TimerStart(t, 1, false, function onExpireHeroic)
+
+    set t  = null
+    
+endfunction
+*/
+
+function GiveHeroStats takes unit whichUnit returns nothing
+    // Attempts at giving units Hero armor  (Currently, the unrooted unit cannot use items in its inventory.
+    /*
+    local timer t = CreateTimer()
+    call UnitAddAbility(whichUnit, 'A008')
+    
+    call TimerStart(t, 1, false, function onExpireHeroic2)
+    set ABCDE(GetHandleId(t)).unit = whichUnit
+    set t = null
+    */
+    
+    call UnitApplyTimedLife(whichUnit, 'BHwe', 1)
+    call UnitPauseTimedLife(whichUnit, true)
+    call UnitAddItemById(whichUnit, 'I013')
+    call BlzSetUnitMaxHP(whichUnit, 100)
+    call BlzSetUnitMaxMana(whichUnit, 0)
+    call BlzSetUnitDiceNumber(whichUnit, 2, 1)
+    call BlzSetUnitDiceSides(whichUnit, 6, 1)
+    call BlzSetUnitBaseDamage(whichUnit, 0, 1)
+    call BlzSetUnitArmor(whichUnit, 0)
+    call BlzSetUnitAttackCooldown(whichUnit, 1.8, 1)
+    call UnitAddItemById(whichUnit, 'I00S')
+endfunction
+
 private function FilterUnitsMakeHero takes nothing returns boolean
     local unit filterU = GetFilterUnit()
+    local boolean hasMana
     
     if GetTriggerPlayer() == udg_GAME_MASTER or GetOwningPlayer(filterU) == GetTriggerPlayer() then
     
@@ -34,11 +114,15 @@ private function FilterUnitsMakeHero takes nothing returns boolean
         
         else 
             call DisplayTextToPlayer(udg_GAME_MASTER, 0, 0, "-makehero is an experimental command which needs more testing. Use it wisely. Do not give to units that can morph!")
+            
+            set hasMana = GetUnitState(filterU, UNIT_STATE_MAX_MANA) > 1
             if UnitMakeHeroic(filterU) then
                 call UnitAddAbility(filterU, 'A09Y' )
                 //call UnitMakeAbilityPermanent(filterU, true, 'A09Y' )
                 // call BlzSetUnitMaxHP()
                 set LoP_UnitData.get(filterU).isHeroic = true
+                
+                call GiveHeroStats(filterU)
             else
                 call DisplayTextToPlayer(GetLocalPlayer(), 0, 0, "Unable to make unit " + GetUnitName(filterU) + " a hero. Report this problem please.")
             endif

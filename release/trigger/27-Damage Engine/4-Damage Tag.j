@@ -81,6 +81,10 @@ function DamageDetectionFunctions_Spell takes nothing returns nothing
         set udg_Damage_Mod_Multiplier = udg_Damage_Mod_Multiplier * 0.75
     endif
 //--------------
+
+    if LoP_UnitData.get(udg_DamageEventTarget).isHeroic then
+        set udg_Damage_Mod_Multiplier = udg_Damage_Mod_Multiplier * 1.5
+    endif
 endfunction
 
 function DamageDetectionFunctions_Last takes nothing returns nothing
@@ -139,7 +143,7 @@ function Trig_Damage_Tag_Actions takes nothing returns nothing
             //No way to fix the damage source, change Source variable to Spellcaster
             set udg_DamageEventSource = DummyDmg_GetCaster(DummyDmg_GetKey(udg_DamageEventSource))
         else
-            //Make damage detal 0 and make Spellcaster deal damage equal to damage dealt
+            //Make damage dealt 0 and make Spellcaster deal damage equal to damage dealt
             //Deal Chaos damage (no reduction or increase by armor) of type Universal
             set storeDamage = 0
             set udg_DamageTypeSpell = true
