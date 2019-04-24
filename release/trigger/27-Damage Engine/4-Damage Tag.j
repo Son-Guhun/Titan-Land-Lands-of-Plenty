@@ -85,6 +85,12 @@ function DamageDetectionFunctions_Spell takes nothing returns nothing
     if LoP_UnitData.get(udg_DamageEventTarget).isHeroic then
         set udg_Damage_Mod_Multiplier = udg_Damage_Mod_Multiplier * 1.5
     endif
+    
+    if GetUnitAbilityLevel(udg_DamageEventTarget, 'AHer') > 0 then
+        if GetUnitAbilityLevel(udg_DamageEventTarget, 'A018') >0 then
+            set udg_Damage_Mod_Multiplier = udg_Damage_Mod_Multiplier * 0.67
+        endif
+    endif
 endfunction
 
 function DamageDetectionFunctions_Last takes nothing returns nothing
