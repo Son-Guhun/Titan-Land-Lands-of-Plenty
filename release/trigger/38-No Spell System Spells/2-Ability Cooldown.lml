@@ -2,6 +2,24 @@ Event
     TriggerRegisterAnyUnitEventBJ
         Preset: PlayerUnitEventSpellEffect
 Condition
+    OperatorCompareInteger
+        Call  : GetUnitAbilityLevelSwapped
+            Const : A0C6
+            Call  : GetTriggerUnit
+        Preset: OperatorEqual
+        Const : 0
+    OperatorCompareAbilityId
+        Call  : GetSpellAbilityId
+        Preset: OperatorNotEqualENE
+        Const : AEme
+    OperatorCompareAbilityId
+        Call  : GetSpellAbilityId
+        Preset: OperatorNotEqualENE
+        Const : AEvi
+    OperatorCompareAbilityId
+        Call  : GetSpellAbilityId
+        Preset: OperatorNotEqualENE
+        Const : AEIl
 Action
     CustomScriptCode
         Const : 'local integer udg_temp_integer'
@@ -15,42 +33,33 @@ Action
         Const : return
     CustomScriptCode
         Const : endif
+    SetVariable
+        Var   : temp_integer
+        Call  : GetUnitAbilityLevelSwapped
+            Call  : GetSpellAbilityId
+            Call  : GetTriggerUnit
     IfThenElseMultiple
         Condition
-            OperatorCompareInteger
-                Call  : GetUnitAbilityLevelSwapped
-                    Const : A0C6
+            OperatorCompareBoolean
+                Call  : UnitHasBuffBJ
                     Call  : GetTriggerUnit
-                Preset: OperatorEqual
-                Const : 0
+                    Const : B033
+                Preset: OperatorEqualENE
+                Const : true
         Action
             SetVariable
-                Var   : temp_integer
-                Call  : GetUnitAbilityLevelSwapped
-                    Call  : GetSpellAbilityId
-                    Call  : GetTriggerUnit
-            IfThenElseMultiple
-                Condition
-                    OperatorCompareBoolean
-                        Call  : UnitHasBuffBJ
-                            Call  : GetTriggerUnit
-                            Const : B033
-                        Preset: OperatorEqualENE
-                        Const : true
-                Action
-                    SetVariable
-                        Var   : temp_real
-                        Call  : OperatorReal
-                            Var   : temp_real
-                            Preset: OperatorMultiply
-                            Const : 0.25
-            BlzSetUnitAbilityCooldown
-                Call  : GetTriggerUnit
-                Call  : GetSpellAbilityId
-                Var   : temp_integer
+                Var   : temp_real
                 Call  : OperatorReal
                     Var   : temp_real
                     Preset: OperatorMultiply
-                    Call  : BlzGetAbilityCooldown
-                        Call  : GetSpellAbilityId
-                        Var   : temp_integer
+                    Const : 0.25
+    BlzSetUnitAbilityCooldown
+        Call  : GetTriggerUnit
+        Call  : GetSpellAbilityId
+        Var   : temp_integer
+        Call  : OperatorReal
+            Var   : temp_real
+            Preset: OperatorMultiply
+            Call  : BlzGetAbilityCooldown
+                Call  : GetSpellAbilityId
+                Var   : temp_integer
