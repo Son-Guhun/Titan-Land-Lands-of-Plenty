@@ -251,7 +251,7 @@ P4ela, Kolbosa, Wulfrein, DampirTBs, Feleer, Jack Sparrow, DiKey51, Ket"
     // Model Credits 2
     set quest_text = "
 |cff00b300The Hive Workshop:|r
-PrinceYaser, shiik, Dr.Death, Sant, Eagle XI, Afroknight_76, Deleted member 238226 (unknown), GhostThruster, Whitewolf8, WhiteDeath, A.R., Xezko, Deep Sea Kraken
+PrinceYaser, shiik, Dr.Death, Sant, Eagle XI, Afroknight_76, Deleted member 238226 (unknown), GhostThruster, Whitewolf8, WhiteDeath, A.R., Xezko, Deep Sea Kraken, Hellx-Magnus, -Berz-, CRAZYRUSSIAN, HappyCockroach
 "
     call CreateQuestBJ(questType, "|cff00ff00Art 2|r", quest_text, "ReplaceableTextures\\CommandButtons\\BTNTemp.blp")
     // ----------
