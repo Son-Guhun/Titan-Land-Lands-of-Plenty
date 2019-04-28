@@ -32,9 +32,15 @@ Patch versions indicate bugfixes. Some command aliases or arguments may be added
 	- New unique hero abilities for casters: Arcane Ward, Extraplanar Body, Nature's Wrath. *Developer comment: Intelligence heroes felt a lot weaker then strength and agility heroes. These new abilities should bring them up to the correct power level. Some intelligence heroes that were already pretty strong have not been given these abilities.*
 	- Comet: A comet falls down from the sky, dealing damage and stunning enemy units. Ability has a 1-second cast time and a small delay happens before the comet falls. This ability can even stun magic-immune units. Additionally, a successful hit resets the cooldown for other specific hero abilities. 
 	- Searing Hatred (Sargeras only): a SFX-intensive ability (as the hero deserves) that makes Sargeras more effective at regaining mana and destroying armies. Inspired by his ability to burn things for miles in the WoW RPG.
+- New heroes:
+	- Vampire Ranger (Request by 11tommita)
+	- Drow Dark Princess (Request by LichKing76)
+	- Drow Queen (Request by LichKing76)
+	- Master of the Talon
 - New units:
 	- Stormwind units for default humans. Can be built in the Stormwind barracks.
 	- Lordaeron units for default humans. Can be built in the Lordaeron barracks.
+	- Haradrim units: Armored Archer, Elite Archer, Guard, Magician, Infantry
 - New decorations:
 	- Deco Builder Gates:
 		- Ruins Gates (including diagonal and massive), Diagonal Gates (Normal, Dungeon and Demon gates)
@@ -57,7 +63,8 @@ Patch versions indicate bugfixes. Some command aliases or arguments may be added
 - Heroes no longer have to learn default wc3 hero abilities. All heroes spawn with their hero abilities automatically learned.
 - Overhauled hotkeys for hero abilties. Ability hotkeys are not separated by their targeting type (target, point, circle), functionality (instant, buff, debuff) and casting form (instant, channeled, delayed). Hero abilities now consistenly show their hotkey between brackets after the ability name. Hopefully this will make it so creating heroes is more streamlined and allow for more fun to use heroes.
 - Added many custom icons for abilities. *Developer comments: while I personally am against adding icons, I can understant that they add value to many users, and can help immersion. To this crowd, I consider that the most valuable icons to add would be ability and hero icons. For now, only ability icons will be added, and only to avoid icon conflicts for generic abilities. For unique hero abilities (such as Tyral's WotT), the icons shall either be already imported for other custom abilities or default wc3 icons.*
-- Improved icons for many decorations and units. Imported custom icons for hero attributes (mainly for the -makehero command). 
+- Improved icons for many decorations and units. Imported custom icons for hero attributes (mainly for the -makehero command).
+- Changed Sargera's animation names to make more animations available. Check out his tooltip!
 
 ### Removed
 - Removed vertical versions of gates that had a horizontal and vertical version. They have been replaced by the diagonal version of the gate.
