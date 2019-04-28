@@ -79,7 +79,7 @@ function DamageDetectionFunctions_Spell takes nothing returns nothing
         endif
         
         // Nature's Wrath
-        if GetUnitAbilityLevel(udg_DamageEventTarget, 'A018') >0 then
+        if GetUnitAbilityLevel(udg_DamageEventTarget, 'A01C') >0 then
             set udg_Damage_Mod_Multiplier = udg_Damage_Mod_Multiplier * 0.80
         endif
         
@@ -118,10 +118,10 @@ function DamageDetectionFunctions_Last takes nothing returns nothing
     //Aura of Retribution
     if GetUnitAbilityLevel(udg_DamageEventTarget, 'B000') > 0 then
         set udg_Damage_Mod_Reset = false
-        set udg_Damage_Mod_Multiplier = 1
-        set udg_Damage_Mod_Add = 0
-        set udg_Damage_Mod_Minimum = 10
-        set udg_Damage_Mod_Maximum = -1
+        set udg_Damage_Mod_Multiplier = 1.
+        set udg_Damage_Mod_Add = 0.
+        set udg_Damage_Mod_Minimum = 10.
+        set udg_Damage_Mod_Maximum = -1.
         set udg_Damage_Mod_AllowReflect = false
         call UnitDamageTarget(udg_DamageEventTarget, udg_DamageEventSource, udg_DamageEventAmount * 10/90, true, false, ATTACK_TYPE_NORMAL, DAMAGE_TYPE_MAGIC, WEAPON_TYPE_WHOKNOWS)
         set udg_DamageEventAmount = storeDamage
@@ -133,10 +133,10 @@ function Trig_Damage_Tag_Actions takes nothing returns nothing
     local integer damageType
 
     if udg_Damage_Mod_Reset then
-        set udg_Damage_Mod_Multiplier = 1
-        set udg_Damage_Mod_Add = 0
-        set udg_Damage_Mod_Minimum = 0
-        set udg_Damage_Mod_Maximum = -1
+        set udg_Damage_Mod_Multiplier = 1.
+        set udg_Damage_Mod_Add = 0.
+        set udg_Damage_Mod_Minimum = 0.
+        set udg_Damage_Mod_Maximum = -1.
     else
         set udg_Damage_Mod_Reset = true
     endif
@@ -151,11 +151,11 @@ function Trig_Damage_Tag_Actions takes nothing returns nothing
         if DummyDmg_HasTrigger(DummyDmg_GetKey(udg_DamageEventSource)) then
             call TriggerEvaluate(LoadTriggerHandle(udg_Hashtable_2, DummyDmg_GetAbility(DummyDmg_GetKey(udg_DamageEventSource)) , 0))
         endif
-        if IsUnitType(udg_DamageEventTarget, UNIT_TYPE_ETHEREAL) then
+        //if IsUnitType(udg_DamageEventTarget, UNIT_TYPE_ETHEREAL) then
             //Unit is ETHEREAL, thus can't deal universal physical damage
             //No way to fix the damage source, change Source variable to Spellcaster
             set udg_DamageEventSource = DummyDmg_GetCaster(DummyDmg_GetKey(udg_DamageEventSource))
-        else
+        /*else
             //Make damage dealt 0 and make Spellcaster deal damage equal to damage dealt
             //Deal Chaos damage (no reduction or increase by armor) of type Universal
             set udg_DamageTypeSpell = true
@@ -163,6 +163,7 @@ function Trig_Damage_Tag_Actions takes nothing returns nothing
             set udg_DamageEventAmount = 0
             return
         endif
+        */
     endif
     if ( udg_DamageEventType == udg_DamageTypeHeal ) then
         call CreateTextTagUnitBJ( ( "+" + I2S(R2I(RAbsBJ(udg_DamageEventAmount))) ), udg_DamageEventTarget, 50.00, 13.00, 5.00, 100.00, 10.00, 0 )
@@ -185,7 +186,7 @@ function Trig_Damage_Tag_Actions takes nothing returns nothing
         set udg_DamageEventAmount = (udg_DamageEventAmount + udg_Damage_Mod_Add)*udg_Damage_Mod_Multiplier
         if udg_Damage_Mod_Minimum > udg_DamageEventAmount then
             set udg_DamageEventAmount = udg_Damage_Mod_Minimum
-        elseif udg_Damage_Mod_Maximum >= 0 and udg_Damage_Mod_Maximum < udg_DamageEventAmount then
+        elseif udg_Damage_Mod_Maximum >= 0. and udg_Damage_Mod_Maximum < udg_DamageEventAmount then
             set udg_DamageEventAmount = udg_Damage_Mod_Maximum
         endif
             
