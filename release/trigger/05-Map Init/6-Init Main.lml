@@ -143,6 +143,18 @@ Action
                 Preset: EnableDisableDisable
                 Const : ACps
                 Var   : temp_player
+            SetPlayerAbilityAvailableBJ
+                Preset: EnableDisableDisable
+                Const : Ashm
+                Var   : temp_player
+            SetPlayerAbilityAvailableBJ
+                Preset: EnableDisableDisable
+                Const : Ahid
+                Var   : temp_player
+            SetPlayerAbilityAvailableBJ
+                Preset: EnableDisableDisable
+                Const : Sshm
+                Var   : temp_player
             SetPlayerHandicapXPBJ
                 Var   : temp_player
                 Const : 0.00
