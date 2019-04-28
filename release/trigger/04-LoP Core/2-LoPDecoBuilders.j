@@ -124,6 +124,9 @@ are listed first, though.
             // Draenei
             set i = ( i + 1 )
             set rawcodes[i] = 'u02O'
+            // Drow
+            set i = ( i + 1 )
+            set rawcodes[i] = 'u03Z'
             // Elves
             set i = ( i + 1 )
             set rawcodes[i] = 'u02A'
