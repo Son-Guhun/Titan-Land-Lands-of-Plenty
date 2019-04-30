@@ -33,11 +33,13 @@ function UnitEventCheckAfter takes nothing returns nothing
     endloop
 endfunction
 function UnitEventCheckAfterProxy takes integer i returns nothing
-    if udg_CheckDeathList[0] == 0 then
-        call TimerStart(udg_CheckDeathTimer, 0.00, false, function UnitEventCheckAfter)
+    if udg_CheckDeathList[0] != i then
+        if udg_CheckDeathList[0] == 0 then
+            call TimerStart(udg_CheckDeathTimer, 0.00, false, function UnitEventCheckAfter)
+        endif
+        set udg_CheckDeathList[i] = udg_CheckDeathList[0]
+        set udg_CheckDeathList[0] = i
     endif
-    set udg_CheckDeathList[i] = udg_CheckDeathList[0]
-    set udg_CheckDeathList[0] = i
 endfunction
 
 function UnitEventOnUnload takes nothing returns nothing
