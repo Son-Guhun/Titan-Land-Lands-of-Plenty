@@ -1,11 +1,8 @@
 Event
-    TriggerRegisterAnyUnitEventBJ
-        Preset: PlayerUnitEventDeath
-Condition
-    OperatorCompareUnit
-        Call  : GetDyingUnit
-        Preset: OperatorEqualENE
+    TriggerRegisterUnitEvent
         Var   : gg_unit_H00S_0141
+        Preset: UnitEventDeath
+Condition
 Action
     CustomScriptCode
         Const : 'local location temp_point'
@@ -16,7 +13,7 @@ Action
         Call  : GetUnitLoc
             Var   : gg_unit_H00S_0141
     ReviveHeroLoc
-        Call  : GetDyingUnit
+        Var   : gg_unit_H00S_0141
         Var   : temp_point
         Preset: ShowHideHide
     CustomScriptCode
