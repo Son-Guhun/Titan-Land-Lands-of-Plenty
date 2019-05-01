@@ -20,9 +20,13 @@ function IsUnitDecoBuilder takes unit whichUnit returns boolean
 endfunction
 endlibrary
 
-library LoPtwo requires LoPone
+library LoPtwo requires LoPone, UnitEvents
+
 function LoP_onRemoval takes unit whichUnit returns nothing
     debug call BJDebugMsg("OnRemove")
+    
+    call UnitEvents.evalOnRemove(whichUnit)
+    
     if DummyDmg_IsDummy(DummyDmg_GetKey(whichUnit)) then
     
         debug call BJDebugMsg("Dummy Removed from the game!")
@@ -46,6 +50,7 @@ function LoP_onRemoval takes unit whichUnit returns nothing
         if Limit_IsPlayerLimited(GetOwningPlayer(whichUnit)) and Limit_IsUnitLimited(whichUnit) then
             call Limit_UnregisterUnit(whichUnit)
         endif
+        
         
         if LoP_UnitData.get(whichUnit).isHeroic then
             call DisableTrigger(gg_trg_System_Cleanup_Owner_Change)
