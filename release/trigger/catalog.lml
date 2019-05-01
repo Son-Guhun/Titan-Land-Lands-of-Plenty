@@ -139,6 +139,7 @@
     '39-CommandsD Variation': 'CommandsD Variation'
     '40-CommandsD Rotate': 'CommandsD Rotate'
     '41-Commands Spawn Stuff': 'Commands Spawn Stuff'
+    '42-Commands Roll': 'Commands Roll'
 '08-Decoration Systems': 'Decoration Systems'
     Comment
 '09-Deco Builders': 'Deco Builders'
@@ -214,7 +215,8 @@
     16-ArgumentStack: ArgumentStack
     '17-Under Construction': 'Under Construction'
         Comment
-    '18-Create Water': 'Create Water'
+    18-BoolExprEvaluator: BoolExprEvaluator
+    '19-Create Water': 'Create Water'
         Disab
 23-Map-specific: Map-specific
     1-Debug: Debug
@@ -347,6 +349,7 @@
     '33-Defend Turn On': 'Defend Turn On'
     '34-Defend Turn Off': 'Defend Turn Off'
     35-Comet: Comet
+    36-UnitEvents: UnitEvents
 '38-No Spell System Spells': 'No Spell System Spells'
     1-FilterTransformations: FilterTransformations
     '2-Ability Cooldown': 'Ability Cooldown'
