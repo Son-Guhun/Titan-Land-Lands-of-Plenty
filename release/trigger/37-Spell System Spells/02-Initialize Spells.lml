@@ -966,7 +966,7 @@ Action
     CommentString
         Const : ---------------------------
     CommentString
-        Const : 'Defend Turn On'
+        Const : Comet
     CommentString
         Const : ---------------------------
     SetVariable
@@ -977,6 +977,26 @@ Action
     SetVariable
         Var   : Spell__Trigger_OnFinish
         Var   : gg_trg_Comet
+    CommentString
+        Const : ' '
+    TriggerExecute
+        Var   : gg_trg_Spell_System
+    CommentString
+        Const : ' '
+    CommentString
+        Const : ---------------------------
+    CommentString
+        Const : 'Staff of Mimic'
+    CommentString
+        Const : ---------------------------
+    SetVariable
+        Var   : Spell__Ability
+        Const : A01N
+    CommentString
+        Const : ' '
+    SetVariable
+        Var   : Spell__Trigger_OnFinish
+        Var   : gg_trg_Staff_of_Mimic
     CommentString
         Const : ' '
     TriggerExecute

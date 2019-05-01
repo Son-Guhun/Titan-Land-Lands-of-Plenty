@@ -32,7 +32,6 @@ library UnitEvents requires ArgumentStack, BoolExprEvaluator
         
         static method evalOnRemove takes unit whichUnit returns nothing
             if UnitEvents.get(whichUnit).onRemove_impl != 0 then
-                call BJDebugMsg("onRemove")
                 call Args.unitSet(0, whichUnit)
                 call UnitEvents.get(whichUnit).onRemove.evaluate()
                 call Args.unitFree(0)

@@ -350,6 +350,8 @@
     '34-Defend Turn Off': 'Defend Turn Off'
     35-Comet: Comet
     36-UnitEvents: UnitEvents
+    37-Mimic: Mimic
+    '38-Staff of Mimic': 'Staff of Mimic'
 '38-No Spell System Spells': 'No Spell System Spells'
     1-FilterTransformations: FilterTransformations
     '2-Ability Cooldown': 'Ability Cooldown'
