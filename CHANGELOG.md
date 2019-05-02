@@ -21,6 +21,7 @@ Patch versions indicate bugfixes. Some command aliases or arguments may be added
 	- -time => Allows the Titan to change the in-game time of day.
 	- -rotate => Allows you to set the angle of rotation for the Rotate ability of decorations.
 	- -controller => Allows you to spawn a Controller deco (was removed from -decos command in version 1.0.0). This deco allows you to control units and move them using the QoL decoration abilities. All controllers of the same player control the same group of units. To add or remove units from your controller group, use the -control and -uncontrol commands.
+	- -roll => Allows players to generate random numbers in certain ranges. You can use a tabletop (2d6) notation or a range notation ((number) (min) (max) => 2 1 6).
 - New command arguments:
 	- -seln/sele rect => Will now select your Rect Generators.
 	- 'mind (number/color) => Will now work as if you had ordered the Power: Mind unit to right-click your selected units.
@@ -47,6 +48,9 @@ Patch versions indicate bugfixes. Some command aliases or arguments may be added
 - New deco builders:
 	- Deco Builder Drow (Adv Deco): 
 		- Altar, Dungeon, Houses (Large and Small), Smith, Temple, Wormhole and Ziggurat (4 variations).
+- New items:
+	- **Staff of Mimic**: Allows a hero to copy a unit's appearance and abilities.
+	- **Diamond of Mass Teleportation**: Allows a hero to use the Archmage's ultimate ability: Mass Teleportation.
 
 ### Fixed
 - A hostile 'Give Unit To' circle is no longer created at coordinates (0, 0).
