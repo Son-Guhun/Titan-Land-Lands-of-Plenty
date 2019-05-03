@@ -316,7 +316,7 @@
     '02-Initialize Spells': 'Initialize Spells'
     '03-Spell System Sample Config': 'Spell System Sample Config'
         Disab
-    '04-Event_ OnStart': 'Event: OnStart'
+    '04-Hero Abilities': 'Hero Abilities'
         Comment
     '05-Spatial Distortion Cast': 'Spatial Distortion Cast'
     '06-AoE Snare': 'AoE Snare'
@@ -352,6 +352,8 @@
     36-UnitEvents: UnitEvents
     37-Mimic: Mimic
     '38-Staff of Mimic': 'Staff of Mimic'
+    39-Silence: Silence
+    '40-Thunder Clap': 'Thunder Clap'
 '38-No Spell System Spells': 'No Spell System Spells'
     1-FilterTransformations: FilterTransformations
     '2-Ability Cooldown': 'Ability Cooldown'
