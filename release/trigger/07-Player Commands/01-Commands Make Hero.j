@@ -22,19 +22,19 @@ library LoPHeroicUnit requires LoPHeader, LoPWidgets
     
     function IsValidHeroicUnit takes unit whichUnit, player errorMsgPlayer returns boolean
         if LoP_IsUnitDecoration(whichUnit) then
-            call DisplayTextToPlayer(errorMsgPlayer, 0, 0, "Decorations cannot be heroes")
+            call DisplayTextToPlayer(errorMsgPlayer, 0, 0, "Decorations cannot be heroes.")
             
         elseif LoP_IsUnitDecoBuilder(whichUnit) then
-            call DisplayTextToPlayer(errorMsgPlayer, 0, 0, "Deco builders cannot be heroes")
+            call DisplayTextToPlayer(errorMsgPlayer, 0, 0, "Deco builders cannot be heroes.")
             
         elseif IsUnitType(whichUnit, UNIT_TYPE_PEON) then
-            call DisplayTextToPlayer(errorMsgPlayer, 0, 0, "Builders cannot be heroes")
+            call DisplayTextToPlayer(errorMsgPlayer, 0, 0, "Builders cannot be heroes.")
         
         elseif IsUnitType(whichUnit, UNIT_TYPE_STRUCTURE) then
-            call DisplayTextToPlayer(errorMsgPlayer, 0, 0, "Buildings cannot be heroes")
+            call DisplayTextToPlayer(errorMsgPlayer, 0, 0, "Buildings cannot be heroes.")
             
         elseif GetUnitAbilityLevel(whichUnit, 'Adef') > 0 then
-            call DisplayTextToPlayer(errorMsgPlayer, 0, 0, "Units with the Defend ability cannot be heroes")
+            call DisplayTextToPlayer(errorMsgPlayer, 0, 0, "Units with the Defend ability cannot be heroes.")  // Crashes the game.
             
         elseif GetUnitAbilityLevel(whichUnit, 'AHer') > 0 then
             call DisplayTextToPlayer(errorMsgPlayer, 0, 0, "This unit is already a hero.")
@@ -42,6 +42,8 @@ library LoPHeroicUnit requires LoPHeader, LoPWidgets
         elseif GetUnitAbilityLevel(whichUnit, 'AInv') > 0 then  // Detects all inventory skills.
             // call DisplayTextToPlayer(errorMsgPlayer, 0, 0, "This unit has an inventory, it can't be a hero.")
             call DisplayTextToPlayer(errorMsgPlayer, 0, 0, "This type of unit cannot become a hero.")
+        elseif IsUnitType(whichUnit, UNIT_TYPE_ATTACKS_GROUND) then
+            call DisplayTextToPlayer(errorMsgPlayer, 0, 0, "Artillery units cannot be heroes.")  // Orb effects crash the game when attacking ground.
         else
             return true
         endif
