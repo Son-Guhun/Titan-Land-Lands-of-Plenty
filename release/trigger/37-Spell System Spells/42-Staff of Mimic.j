@@ -4,7 +4,9 @@ scope StaffOfMimic
 
 
 private function onStartEffect takes nothing returns nothing
-    call CreateUnitMimic(udg_Spell__Caster, udg_Spell__Target)
+    if IsValidHeroicUnit(udg_Spell__Target, GetOwningPlayer(udg_Spell__Caster)) then
+        call CreateUnitMimic(udg_Spell__Caster, udg_Spell__Target)
+    endif
 endfunction
 
 //===========================================================================
