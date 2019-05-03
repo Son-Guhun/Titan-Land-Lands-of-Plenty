@@ -216,7 +216,8 @@
     '17-Under Construction': 'Under Construction'
         Comment
     18-BoolExprEvaluator: BoolExprEvaluator
-    '19-Create Water': 'Create Water'
+    19-UnitEvents: UnitEvents
+    '20-Create Water': 'Create Water'
         Disab
 23-Map-specific: Map-specific
     1-Debug: Debug
@@ -316,13 +317,14 @@
     '02-Initialize Spells': 'Initialize Spells'
     '03-Spell System Sample Config': 'Spell System Sample Config'
         Disab
-    '04-Hero Abilities': 'Hero Abilities'
+    04-Libraries: Libraries
         Comment
-    '05-Spatial Distortion Cast': 'Spatial Distortion Cast'
-    '06-AoE Snare': 'AoE Snare'
-    '07-Mass Banish': 'Mass Banish'
-    '08-Make Unit Selectable': 'Make Unit Selectable'
-    '09-Angel Judgement': 'Angel Judgement'
+    05-Mimic: Mimic
+    '06-Hero Abilities': 'Hero Abilities'
+        Comment
+    '07-Spatial Distortion Cast': 'Spatial Distortion Cast'
+    '08-AoE Snare': 'AoE Snare'
+    '09-Mass Banish': 'Mass Banish'
     '10-Tyrael Judgement': 'Tyrael Judgement'
     '11-Tyrael WotT Cast': 'Tyrael WotT Cast'
     '12-Chain Slow': 'Chain Slow'
@@ -346,14 +348,18 @@
     '30-Battle Jump End': 'Battle Jump End'
     '31-Ethereal Jaunt': 'Ethereal Jaunt'
     '32-Power Surge': 'Power Surge'
-    '33-Defend Turn On': 'Defend Turn On'
-    '34-Defend Turn Off': 'Defend Turn Off'
-    35-Comet: Comet
-    36-UnitEvents: UnitEvents
-    37-Mimic: Mimic
-    '38-Staff of Mimic': 'Staff of Mimic'
-    39-Silence: Silence
-    '40-Thunder Clap': 'Thunder Clap'
+    33-Comet: Comet
+    34-Silence: Silence
+    '35-Thunder Clap': 'Thunder Clap'
+    '36-Unit Abilities': 'Unit Abilities'
+        Comment
+    '37-Make Unit Selectable': 'Make Unit Selectable'
+    '38-Angel Judgement': 'Angel Judgement'
+    '39-Defend Turn On': 'Defend Turn On'
+    '40-Defend Turn Off': 'Defend Turn Off'
+    '41-Item Abilities': 'Item Abilities'
+        Comment
+    '42-Staff of Mimic': 'Staff of Mimic'
 '38-No Spell System Spells': 'No Spell System Spells'
     1-FilterTransformations: FilterTransformations
     '2-Ability Cooldown': 'Ability Cooldown'
