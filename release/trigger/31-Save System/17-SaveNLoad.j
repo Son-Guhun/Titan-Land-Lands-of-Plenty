@@ -29,7 +29,7 @@ endfunction
 
 endlibrary
 
-library SaveNLoad requires UnitVisualMods, Rawcode2String, Base36, optional UserDefinedRects, optional SaveNLoadConfig
+library SaveNLoad requires UnitVisualMods, Rawcode2String, Base36, TerrainTools, optional UserDefinedRects, optional SaveNLoadConfig
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 //SaveNLoad v2.0
 ////////////////////////////////////////////////////////////////////////////////////////////////////

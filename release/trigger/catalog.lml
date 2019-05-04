@@ -63,7 +63,6 @@
     5-Triggers: Triggers
         Comment
     '6-Init Main': 'Init Main'
-        Run
     '7-Init 0 seconds': 'Init 0 seconds'
     '8-Init Create Events': 'Init Create Events'
 '06-Map System': 'Map System'
@@ -219,6 +218,7 @@
     19-UnitEvents: UnitEvents
     '20-Create Water': 'Create Water'
         Disab
+    21-TerrainTools: TerrainTools
 23-Map-specific: Map-specific
     1-Debug: Debug
     2-ArrayAgent: ArrayAgent

@@ -72,19 +72,6 @@ private struct data extends array
     endif
 endstruct
 
-struct TerrainType2Id extends array
-    private static constant integer KEY = -2
-    
-    static method operator[] takes integer key returns integer
-        return data[KEY][key]
-    endmethod
-    
-    static method operator[]= takes integer key, integer value returns nothing
-        set data[KEY][key] = value
-    endmethod
-
-endstruct
-
 //==================================================================================================
 //                                        Source Code
 //==================================================================================================
@@ -140,10 +127,6 @@ endglobals
 
 function GUMS_GetUnitSelectionType takes unit whichUnit returns integer
     return LoadInteger(hashTable, GetHandleId(whichUnit), SELECT)
-endfunction
-
-function GUMS_GetTerrainTileIndex takes integer terrainType returns integer
-    return TerrainType2Id[terrainType]
 endfunction
 //==========================================
 //GUMS SELECTION TYPE CONSTANTS
@@ -820,43 +803,36 @@ private module InitModule
         endif
         
         call TimerStart( t, 0.1, true, function GUMSTimerFunction)
-        
-        set i = 0
-        loop
-            exitwhen i > 15
-            set TerrainType2Id[udg_TileSystem_TILES[i]] = i
-            set i = i + 1
-        endloop
-        
-    //! runtextmacro GUMS_RegisterTag("gold", "g")
-    //! runtextmacro GUMS_RegisterTag("lumber", "l")
-    //! runtextmacro GUMS_RegisterTag("work", "w")
-    //! runtextmacro GUMS_RegisterTag("flesh", "f")
-    //! runtextmacro GUMS_RegisterTag("ready", "r")
-    //! runtextmacro GUMS_RegisterTag("one", "1")
-    //! runtextmacro GUMS_RegisterTag("two", "2")
-    //! runtextmacro GUMS_RegisterTag("throw", "t")
-    //! runtextmacro GUMS_RegisterTag("slam", "sl")
     
-    //! runtextmacro GUMS_RegisterTag("large", "sl")
-    //! runtextmacro GUMS_RegisterTag("medium", "sm")
-    //! runtextmacro GUMS_RegisterTag("small", "ss")
+        //! runtextmacro GUMS_RegisterTag("gold", "g")
+        //! runtextmacro GUMS_RegisterTag("lumber", "l")
+        //! runtextmacro GUMS_RegisterTag("work", "w")
+        //! runtextmacro GUMS_RegisterTag("flesh", "f")
+        //! runtextmacro GUMS_RegisterTag("ready", "r")
+        //! runtextmacro GUMS_RegisterTag("one", "1")
+        //! runtextmacro GUMS_RegisterTag("two", "2")
+        //! runtextmacro GUMS_RegisterTag("throw", "t")
+        //! runtextmacro GUMS_RegisterTag("slam", "sl")
+        
+        //! runtextmacro GUMS_RegisterTag("large", "sl")
+        //! runtextmacro GUMS_RegisterTag("medium", "sm")
+        //! runtextmacro GUMS_RegisterTag("small", "ss")
 
-    //! runtextmacro GUMS_RegisterTag("victory", "v")
-    //! runtextmacro GUMS_RegisterTag("alternate", "a")
-    //! runtextmacro GUMS_RegisterTag("morph", "m")
-    //! runtextmacro GUMS_RegisterTag("defend", "d")
-    //! runtextmacro GUMS_RegisterTag("swim", "s")
-    
-    //! runtextmacro GUMS_RegisterTag("spin", "sp")
-    //! runtextmacro GUMS_RegisterTag("fast", "fa")
-    
-    //! runtextmacro GUMS_RegisterTag("upgrade","u")
-    //! runtextmacro GUMS_RegisterTag("first","n1")
-    //! runtextmacro GUMS_RegisterTag("second","n2")
-    //! runtextmacro GUMS_RegisterTag("third","n3")
-    //! runtextmacro GUMS_RegisterTag("fourth","n4")
-    //! runtextmacro GUMS_RegisterTag("fifth","n5")
+        //! runtextmacro GUMS_RegisterTag("victory", "v")
+        //! runtextmacro GUMS_RegisterTag("alternate", "a")
+        //! runtextmacro GUMS_RegisterTag("morph", "m")
+        //! runtextmacro GUMS_RegisterTag("defend", "d")
+        //! runtextmacro GUMS_RegisterTag("swim", "s")
+        
+        //! runtextmacro GUMS_RegisterTag("spin", "sp")
+        //! runtextmacro GUMS_RegisterTag("fast", "fa")
+        
+        //! runtextmacro GUMS_RegisterTag("upgrade","u")
+        //! runtextmacro GUMS_RegisterTag("first","n1")
+        //! runtextmacro GUMS_RegisterTag("second","n2")
+        //! runtextmacro GUMS_RegisterTag("third","n3")
+        //! runtextmacro GUMS_RegisterTag("fourth","n4")
+        //! runtextmacro GUMS_RegisterTag("fifth","n5")
     endmethod
 endmodule
 private struct InitStruct extends array
