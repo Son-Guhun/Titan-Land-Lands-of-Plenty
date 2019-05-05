@@ -12,11 +12,12 @@ function SaveTiles takes nothing returns boolean
         exitwhen i >= 60 // exit loop to avoid op_limit
             if udg_save_XYminmaxcur[playerNumber+5*bj_MAX_PLAYERS] > udg_save_XYminmaxcur[playerNumber+4*bj_MAX_PLAYERS] then
                 set i = 121  // exit loop, since we already traversed all of the rows
-                
-                set saveStr = saveStr + LoadD2H(GUMS_GetTerrainTileIndex(GetTerrainType(udg_save_XYminmaxcur[playerNumber+2*bj_MAX_PLAYERS],/*
-                                                                                      */udg_save_XYminmaxcur[playerNumber+5*bj_MAX_PLAYERS])))/*
-                                    */+ LoadD2H(GetTerrainVariance(udg_save_XYminmaxcur[playerNumber+2*bj_MAX_PLAYERS],udg_save_XYminmaxcur[playerNumber+5*bj_MAX_PLAYERS]))
             endif
+            
+            set saveStr = saveStr + LoadD2H(GUMS_GetTerrainTileIndex(GetTerrainType(udg_save_XYminmaxcur[playerNumber+2*bj_MAX_PLAYERS],/*
+                                                                                  */udg_save_XYminmaxcur[playerNumber+5*bj_MAX_PLAYERS])))/*
+                                */+ LoadD2H(GetTerrainVariance(udg_save_XYminmaxcur[playerNumber+2*bj_MAX_PLAYERS],udg_save_XYminmaxcur[playerNumber+5*bj_MAX_PLAYERS]))
+            
             set i = i+1
             if udg_save_XYminmaxcur[playerNumber+2*bj_MAX_PLAYERS] > udg_save_XYminmaxcur[playerNumber+bj_MAX_PLAYERS] then // x cur > x min
                 set udg_save_XYminmaxcur[playerNumber+5*bj_MAX_PLAYERS] = udg_save_XYminmaxcur[playerNumber+5*bj_MAX_PLAYERS] + 128 // y cur = next y cur
