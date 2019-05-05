@@ -130,6 +130,9 @@ are listed first, though.
             // Elves
             set i = ( i + 1 )
             set rawcodes[i] = 'u02A'
+            // Elves Forest
+            set i = ( i + 1 )
+            set rawcodes[i] = 'u040'
             // Fence
             set i = ( i + 1 )
             set rawcodes[i] = 'u03I'

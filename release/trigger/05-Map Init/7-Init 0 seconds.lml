@@ -193,9 +193,33 @@ And discord: SonGuhun#4510'
     CommentString
         Const : -
     CustomScriptCode
-        Const : 'call SaveInteger(udg_Hashtable_1,  ''h0RA'', 0, ''h0RB'')'
+        Const : 'call SaveInteger(udg_Hashtable_1, ''h0RA'', 0, ''h0RB'')'
     CustomScriptCode
         Const : 'call SaveInteger(udg_Hashtable_1, ''h0RB'', 0,  ''h0RA'')'
+    CommentString
+        Const : 'Castle Iron Gate'
+    CustomScriptCode
+        Const : 'call SaveInteger(udg_Hashtable_1, ''h0S8'', 0, ''h0S9'')'
+    CustomScriptCode
+        Const : 'call SaveInteger(udg_Hashtable_1, ''h0S9'', 0, ''h0S8'')'
+    CommentString
+        Const : 'Iron Gates'
+    CustomScriptCode
+        Const : 'call SaveInteger(udg_Hashtable_1, ''h0SA'', 0, ''h0SB'')'
+    CustomScriptCode
+        Const : 'call SaveInteger(udg_Hashtable_1, ''h0SB'', 0, ''h0SA'')'
+    CommentString
+        Const : -
+    CustomScriptCode
+        Const : 'call SaveInteger(udg_Hashtable_1, ''h0SC'', 0, ''h0SD'')'
+    CustomScriptCode
+        Const : 'call SaveInteger(udg_Hashtable_1, ''h0SD'', 0,  ''h0SC'')'
+    CommentString
+        Const : 'Wooden Gate'
+    CustomScriptCode
+        Const : 'call SaveInteger(udg_Hashtable_1, ''h0SE'', 0, ''h0SF'')'
+    CustomScriptCode
+        Const : 'call SaveInteger(udg_Hashtable_1, ''h0SF'', 0, ''h0SE'')'
     CommentString
         Const : ---------------------
     CommentString
