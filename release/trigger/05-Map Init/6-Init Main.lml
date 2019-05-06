@@ -48,18 +48,15 @@ Action
     SetDestructableInvulnerableBJ
         Var   : gg_dest_ATg1_0003
         Preset: InvulnerabilityInvulnerable
+    ModifyGateBJ
+        Preset: GateOperationOpen
+        Var   : gg_dest_ATg1_0003
     SetDestructableInvulnerableBJ
         Var   : gg_dest_ATg3_0004
         Preset: InvulnerabilityInvulnerable
-    SetDestructableInvulnerableBJ
-        Var   : gg_dest_DTg5_0008
-        Preset: InvulnerabilityInvulnerable
-    SetDestructableInvulnerableBJ
-        Var   : gg_dest_DTg5_0007
-        Preset: InvulnerabilityInvulnerable
-    SetDestructableInvulnerableBJ
-        Var   : gg_dest_LTe3_0005
-        Preset: InvulnerabilityInvulnerable
+    ModifyGateBJ
+        Preset: GateOperationOpen
+        Var   : gg_dest_ATg3_0004
     CommentString
         Const : ---------------
     CommentString

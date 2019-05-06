@@ -4,7 +4,7 @@ Action
     CommentString
         Const : LOCALS
     CustomScriptCode
-        Const : 'local group udg_temp_group = CreateGroup()'
+        Const : 'local group udg_temp_group'
     CustomScriptCode
         Const : 'local unit udg_temp_unit'
     CustomScriptCode
@@ -24,6 +24,8 @@ Action
         Action
             CommentString
                 Const : 'CENTER COMMAND'
+            CustomScriptCode
+                Const : 'set udg_temp_group = CreateGroup()'
             SetVariable
                 Var   : temp_integer
                 Call  : GetConvertedPlayerId

@@ -49,6 +49,7 @@ function Trig_Aura_Of_Restitution_ForGroup_HealNearbyAllies takes nothing return
     
     //Null locals
     set nearbyAlliesGroup = null
+    set enumUnit = null
 endfunction
 
 function Trig_Aura_Of_Restitution_Actions takes nothing returns nothing

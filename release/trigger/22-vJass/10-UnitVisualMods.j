@@ -761,6 +761,7 @@ function GUMSGroupFunction takes nothing returns nothing
                 set TimerData.get(t).unit = enumUnit
                 call TimerStart(t, 0, false, function onTimer2)
                 call SetUnitAnimation(enumUnit, "stand")
+                set t = null
             endif
             call GroupRemoveUnit(loopGroup, enumUnit)
         else

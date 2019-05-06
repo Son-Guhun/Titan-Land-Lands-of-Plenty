@@ -216,6 +216,7 @@ function Camera_SetFirstPersonSelected takes player p returns nothing
     
     call DestroyGroup(g)
     set g = null
+    set u = null
 endfunction
 
 // Clears ALL of a player's data related to this system, including the default rotation unit and timers.

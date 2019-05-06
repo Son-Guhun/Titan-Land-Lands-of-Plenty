@@ -73,6 +73,8 @@ function InitDecoTents takes nothing returns nothing
     //! runtextmacro DecoBuilders_MakeTents("Special")
     //! runtextmacro DecoBuilders_MakeTents("Basic")
     //! runtextmacro DecoBuilders_MakeTents("Adv")
+    
+    set decoTent = null
 endfunction
 
 

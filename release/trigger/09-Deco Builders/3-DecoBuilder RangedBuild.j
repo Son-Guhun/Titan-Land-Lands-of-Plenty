@@ -13,12 +13,15 @@ endfunction
 
 function Trig_Deco_RangedBuild_Actions takes nothing returns nothing
     local unit u = GetTriggerUnit()
-    local timer t = CreateTimer()
+    local timer t
     local integer builtUnitType = GetIssuedOrderId()  // Only works for undead build ability!!!
     
-    if not IsUnitIdType(builtUnitType, UNIT_TYPE_MECHANICAL) or (GetUnitAbilityLevel(u,'A0C7') != 0) or (GetUnitAbilityLevel(u,'A0C8') !=0 ) or (GetUnitAbilityLevel(u,'A0CA') ==0 ) then
+    if not IsUnitIdType(builtUnitType, UNIT_TYPE_MECHANICAL) or not LoP_IsUnitDecoBuilder(u) then
+        set u = null
         return
     endif
+    
+    set t = CreateTimer()
     
     call CreateUnit(GetOwningPlayer(u), builtUnitType, GetOrderPointX(), GetOrderPointY(), bj_UNIT_FACING)
     
