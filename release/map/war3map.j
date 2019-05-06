@@ -31,11 +31,11 @@ constant boolean LIBRARY_DecoBuilderCount=true
 //endglobals from DecoBuilderCount
 //globals from DestructableLib:
 constant boolean LIBRARY_DestructableLib=true
-constant integer DestructableLib__DUMMY_UNIT_ID= 'hfoo'
-constant integer DestructableLib__HARVEST_ID= 'Ahrl'
-constant player DestructableLib__OWNING_PLAYER= Player(PLAYER_NEUTRAL_PASSIVE)
+constant integer DestructableLib___DUMMY_UNIT_ID= 'hfoo'
+constant integer DestructableLib___HARVEST_ID= 'Ahrl'
+constant player DestructableLib___OWNING_PLAYER= Player(PLAYER_NEUTRAL_PASSIVE)
     
-unit DestructableLib__dummy= null
+unit DestructableLib___dummy= null
 //endglobals from DestructableLib
 //globals from GMUI:
 constant boolean LIBRARY_GMUI=true
@@ -49,12 +49,12 @@ integer GMUI_Init_Funcs_Size= 0
 //globals from GroupTools:
 constant boolean LIBRARY_GroupTools=true
         // The highest collision size you're using in your map.
-constant real GroupTools__MAX_COLLISION_SIZE= 197.
+constant real GroupTools___MAX_COLLISION_SIZE= 197.
         // Data Variables
-group array GroupTools__groups
-group GroupTools__gT= null
-integer GroupTools__gN= 0
-boolean GroupTools__f= false
+group array GroupTools___groups
+group GroupTools___gT= null
+integer GroupTools___gN= 0
+boolean GroupTools___f= false
         // Global Group (Change it to CreateGroup() if you want)
 group ENUM_GROUP= bj_lastCreatedGroup
 //endglobals from GroupTools
@@ -63,12 +63,12 @@ constant boolean LIBRARY_HERO=true
 //endglobals from HERO
 //globals from HeroicUnit:
 constant boolean LIBRARY_HeroicUnit=true
-constant integer HeroicUnit__HERO_ID='H0QU'
-constant integer HeroicUnit__SPELL_ID='A02B'
-constant integer HeroicUnit__ITEM_ID='I00R'
-constant integer HeroicUnit__BONUS_ID='AIs1'
-constant integer HeroicUnit__DETECTOR='Adef'
-constant integer HeroicUnit__ORDER=852056
+constant integer HeroicUnit___HERO_ID='H0QU'
+constant integer HeroicUnit___SPELL_ID='A02B'
+constant integer HeroicUnit___ITEM_ID='I00R'
+constant integer HeroicUnit___BONUS_ID='AIs1'
+constant integer HeroicUnit___DETECTOR='Adef'
+constant integer HeroicUnit___ORDER=852056
 //endglobals from HeroicUnit
 //globals from Iterator:
 constant boolean LIBRARY_Iterator=true
@@ -85,22 +85,22 @@ constant boolean LIBRARY_LoPUtils=true
 //globals from MultiPatrol:
 constant boolean LIBRARY_MultiPatrol=true
     // Maximum number of patrol points a single unit can have.
-constant integer MultiPatrol__MAX_POINTS= 128
+constant integer MultiPatrol___MAX_POINTS= 128
     
     // Determines how close a unit must get to a patrol point before moving onto the next.
-constant real MultiPatrol__RANGE= 32.
+constant real MultiPatrol___RANGE= 32.
     
     // Determines the minimum distance between two consecutive patrol points.
-constant real MultiPatrol__MINIMUM_DISTANCE= 100.
+constant real MultiPatrol___MINIMUM_DISTANCE= 100.
 constant integer MultiPatrol_ERROR_OVERFLOW= 2
 constant integer MultiPatrol_ERROR_NULL_POINTER= 3
 constant integer MultiPatrol_ERROR_TOO_CLOSE= 1
 constant integer MultiPatrol_ERROR_NONE= 0
-hashtable MultiPatrol__data= InitHashtable()
-boolean MultiPatrol__orderBool= false
-rect MultiPatrol__ptrlRect
+hashtable MultiPatrol___data= InitHashtable()
+boolean MultiPatrol___orderBool= false
+rect MultiPatrol___ptrlRect
     
-constant integer MultiPatrol__INDEX_DISPLAY= 9999
+constant integer MultiPatrol___INDEX_DISPLAY= 9999
 //endglobals from MultiPatrol
 //globals from POWER:
 constant boolean LIBRARY_POWER=true
@@ -122,19 +122,19 @@ integer Table__more= 8190
    
 hashtable Table__ht= InitHashtable()
 constant integer Table__sizeK=4
-constant integer Table__listK=5
+constant integer Table__listK=6
 //endglobals from Table
 //globals from ThirdPersonCamera:
 constant boolean LIBRARY_ThirdPersonCamera=true
-hashtable ThirdPersonCamera__data= InitHashtable()
+hashtable ThirdPersonCamera___data= InitHashtable()
     
-trigger ThirdPersonCamera__triggerMouse= CreateTrigger()
-trigger ThirdPersonCamera__triggerLeft= CreateTrigger()
-trigger ThirdPersonCamera__triggerRight= CreateTrigger()
-trigger ThirdPersonCamera__triggerEsc= CreateTrigger()
-trigger ThirdPersonCamera__triggerCleanup= CreateTrigger()
+trigger ThirdPersonCamera___triggerMouse= CreateTrigger()
+trigger ThirdPersonCamera___triggerLeft= CreateTrigger()
+trigger ThirdPersonCamera___triggerRight= CreateTrigger()
+trigger ThirdPersonCamera___triggerEsc= CreateTrigger()
+trigger ThirdPersonCamera___triggerCleanup= CreateTrigger()
     
-unit array ThirdPersonCamera__focusUnits
+unit array ThirdPersonCamera___focusUnits
 //endglobals from ThirdPersonCamera
 //globals from TreeSystemCreateTrees:
 constant boolean LIBRARY_TreeSystemCreateTrees=true
@@ -149,62 +149,62 @@ hashtable ConstTable__ht= InitHashtable()
 //globals from DummyRecycler:
 constant boolean LIBRARY_DummyRecycler=true
         //The rawcode of the Dummy Unit
-constant integer DummyRecycler__DUMMY_ID= 'h07Q'
+constant integer DummyRecycler___DUMMY_ID= 'h07Q'
      
         //The owner of the Dummy Unit
-constant player DummyRecycler__OWNER= Player(bj_PLAYER_NEUTRAL_VICTIM)
+constant player DummyRecycler___OWNER= Player(bj_PLAYER_NEUTRAL_VICTIM)
      
         //The number of indexed angle. The higher the value the:
         // - Lesser the turning time for the Dummy Units.
         // - Higher the total number of Dummy Units created at Map Initialization.
         //          Recommended Value: 10 (Max difference of 18 degrees)
-constant integer DummyRecycler__ANGLES_COUNT= 10
+constant integer DummyRecycler___ANGLES_COUNT= 10
      
         //The number of Dummy units per ANGLES_COUNT. The higher the value the:
         // - Higher the number of units that can be recycled per angle, when
         //   no more units are in queue, the system will resort to use CreateUnit.
         // - Higher the total number of Dummy Units created at Map Initialization.
         //    Recommended Value: 3 to 5 (for less overhead in Map Loading Screen)
-constant integer DummyRecycler__STORED_UNIT_COUNT= 3
+constant integer DummyRecycler___STORED_UNIT_COUNT= 3
      
         //The maximum number of Dummy units that can exist. When the system resort
         //to using CreateUnit, the unit will be permanently added to the Dummy
         //List. To avoid spamming Dummy Units and having too much free Dummy
         //Units to allocate, the maximum number of Dummy Units is capped.
         //               Recommended Value: 80 to 120
-constant integer DummyRecycler__MAX_DUMMY_COUNT= 100
+constant integer DummyRecycler___MAX_DUMMY_COUNT= 100
      
         //When a certain angle have less than BORROW_REQUEST units in its list,
         //it will start to borrow Dummy Units from the list with the highest
         //Dummy Unit count.
         //      Recommended Value: Half of maximum STORED_UNIT_COUNT
-constant integer DummyRecycler__BORROW_REQUEST= 5
+constant integer DummyRecycler___BORROW_REQUEST= 5
      
         //It will only return a Dummy if the current dummy is close
         //to it's appropriate facing angle. This is to avoid returning
         //a Dummy which is still turning to face it's list angle.
-constant real DummyRecycler__ANGLE_TOLERANCE= 10.0
+constant real DummyRecycler___ANGLE_TOLERANCE= 10.0
      
         //An additional option to automatically hide recycled dummy units in the
         //corner of the map camera bounds
-constant boolean DummyRecycler__HIDE_ON_MAP_CORNER= true
-integer DummyRecycler__dummyCount= DummyRecycler__ANGLES_COUNT * DummyRecycler__STORED_UNIT_COUNT
-real array DummyRecycler__angle
-integer array DummyRecycler__count
-integer array DummyRecycler__countHead
-integer array DummyRecycler__countNext
-integer array DummyRecycler__countPrev
-integer array DummyRecycler__next
-integer array DummyRecycler__prev
-unit array DummyRecycler__dummy
-integer DummyRecycler__upper
-integer DummyRecycler__lower
-integer DummyRecycler__lastInstance
-constant real DummyRecycler__FACING_OFFSET= 180.0 / DummyRecycler__ANGLES_COUNT
+constant boolean DummyRecycler___HIDE_ON_MAP_CORNER= true
+integer DummyRecycler___dummyCount= DummyRecycler___ANGLES_COUNT * DummyRecycler___STORED_UNIT_COUNT
+real array DummyRecycler___angle
+integer array DummyRecycler___count
+integer array DummyRecycler___countHead
+integer array DummyRecycler___countNext
+integer array DummyRecycler___countPrev
+integer array DummyRecycler___next
+integer array DummyRecycler___prev
+unit array DummyRecycler___dummy
+integer DummyRecycler___upper
+integer DummyRecycler___lower
+integer DummyRecycler___lastInstance
+constant real DummyRecycler___FACING_OFFSET= 180.0 / DummyRecycler___ANGLES_COUNT
 //endglobals from DummyRecycler
 //globals from Lists:
 constant boolean LIBRARY_Lists=true
-constant integer Lists_RECYCLE_KEY=6
+constant integer Lists_RECYCLE_KEY=8
 constant boolean Lists_ENABLE_GUI= false
 hashtable Lists__hashTable= InitHashtable()
 //endglobals from Lists
@@ -224,8 +224,8 @@ constant boolean MoveSpeedBonus_INIT_HASHTABLE= false
     // Automatically clean up unit data by removing any data when a unit is created that has an ID that was previously used
     // If you disable this, then you must call GMSS_ClearData whenever a unit enters the game or is removed from it
 constant boolean MoveSpeedBonus_AUTO_CLEANUP= false
-integer MoveSpeedBonus__data
-hashtable MoveSpeedBonus__hashTable= null
+integer MoveSpeedBonus___data
+hashtable MoveSpeedBonus___hashTable= null
 //endglobals from MoveSpeedBonus
 //globals from StructureTileDefinition:
 constant boolean LIBRARY_StructureTileDefinition=true
@@ -235,7 +235,7 @@ constant boolean LIBRARY_TileDefinition=true
     
     // If you do not use these functions, setting this to false will spare you 2 global variables and an init function
     // Requires WorldBounds.
-constant boolean TileDefinition__ENABLE_ID_FUNCTIONS= true
+constant boolean TileDefinition___ENABLE_ID_FUNCTIONS= true
 
 integer WorldTilesX
 integer WorldTilesY
@@ -288,9 +288,9 @@ constant real CombatTag_SPELL_BLUE= 100.00
 constant real CombatTag_HEAL_RED= 0.
 constant real CombatTag_HEAL_GREEN= 0.
 constant real CombatTag_HEAL_BLUE= 0.
-constant integer CombatTag_PHYS_DAMAGE=7
-constant integer CombatTag_SPELL_DAMAGE=8
-constant integer CombatTag_HEALING=9
+constant integer CombatTag_PHYS_DAMAGE=10
+constant integer CombatTag_SPELL_DAMAGE=12
+constant integer CombatTag_HEALING=14
 //endglobals from CombatTag
 //globals from FilterTransformations:
 constant boolean LIBRARY_FilterTransformations=true
@@ -318,10 +318,10 @@ constant boolean LIBRARY_TerrainTools=true
 //endglobals from TerrainTools
 //globals from AutoRectEnvironment:
 constant boolean LIBRARY_AutoRectEnvironment=true
-constant boolean AutoRectEnvironment__ENABLE_SET_HOOK= false
-constant boolean AutoRectEnvironment__ENABLE_MOVE_HOOK= false
-constant boolean AutoRectEnvironment__ENABLE_REMOVE_HOOK= false
-constant real AutoRectEnvironment__PERIOD= 0.03
+constant boolean AutoRectEnvironment___ENABLE_SET_HOOK= false
+constant boolean AutoRectEnvironment___ENABLE_MOVE_HOOK= false
+constant boolean AutoRectEnvironment___ENABLE_REMOVE_HOOK= false
+constant real AutoRectEnvironment___PERIOD= 0.03
 //endglobals from AutoRectEnvironment
 //globals from GameTime:
 constant boolean LIBRARY_GameTime=true
@@ -363,10 +363,10 @@ constant boolean UnitVisualModsDefaults_COLOR= true
 //endglobals from UnitVisualModsDefaults
 //globals from UserDefinedRects:
 constant boolean LIBRARY_UserDefinedRects=true
-hashtable UserDefinedRects__hashTable= InitHashtable()
-weathereffect array UserDefinedRects__weatherEffects
-constant integer UserDefinedRects__RECYCLE_KEY=10
-integer array UserDefinedRects__instances
+hashtable UserDefinedRects___hashTable= InitHashtable()
+weathereffect array UserDefinedRects___weatherEffects
+constant integer UserDefinedRects___RECYCLE_KEY=16
+integer array UserDefinedRects___instances
 //endglobals from UserDefinedRects
 //globals from LoPHeader:
 constant boolean LIBRARY_LoPHeader=true
@@ -431,45 +431,45 @@ constant integer RectGenerator_FOG_GREEN_DOWN= 'UDRH'
 constant integer RectGenerator_FOG_BLUE_UP= 'UDRE'
 constant integer RectGenerator_FOG_BLUE_DOWN= 'UDRF'
     // This is the maximum number of units that can be moved at a time with a GUDR (high limits may cause crashes)
-constant integer RectGenerator__MAXIMUM_MOVE_LIMIT= 300
+constant integer RectGenerator___MAXIMUM_MOVE_LIMIT= 300
     
     // If this is set to false, you will need to manually remove 'Amov' and 'Aatk' when a generator enters the map
     // You will also need to automatically set it's abilities by calling //! runtextmacro GUDR_FirstPage("ADD"," unitVar" )
-constant boolean RectGenerator__AUTOMATIC_ON_SPAWN= false
+constant boolean RectGenerator___AUTOMATIC_ON_SPAWN= false
 //endglobals from RectGenerator
 //globals from UnitSpecialEffect:
 constant boolean LIBRARY_UnitSpecialEffect=true
 //endglobals from UnitSpecialEffect
 //globals from UnitVisualMods:
 constant boolean LIBRARY_UnitVisualMods=true
-hashtable UnitVisualMods__hashTable= null
-group UnitVisualMods__loopGroup= CreateGroup()
+hashtable UnitVisualMods___hashTable= null
+group UnitVisualMods___loopGroup= CreateGroup()
     
-constant boolean UnitVisualMods__INIT_HASHTABLE= true
+constant boolean UnitVisualMods___INIT_HASHTABLE= true
     
-string UnitVisualMods__allTags= "gold lumber work flesh ready one two throw slam large medium small victory alternate morph defend swim spin fast upgrade first second third fourth fifth"
-constant integer UnitVisualMods__COUNTER= - 1
-constant integer UnitVisualMods__TARGET_ANGLE= - 2
-constant integer UnitVisualMods__AUTO_LAND= - 3
-constant integer UnitVisualMods__STRUCTURE_HEIGHT= - 4
+string UnitVisualMods___allTags= "gold lumber work flesh ready one two throw slam large medium small victory alternate morph defend swim spin fast upgrade first second third fourth fifth"
+constant integer UnitVisualMods___COUNTER= - 1
+constant integer UnitVisualMods___TARGET_ANGLE= - 2
+constant integer UnitVisualMods___AUTO_LAND= - 3
+constant integer UnitVisualMods___STRUCTURE_HEIGHT= - 4
     
-constant integer UnitVisualMods__tempX= - 5
-constant integer UnitVisualMods__tempY= - 6
+constant integer UnitVisualMods___tempX= - 5
+constant integer UnitVisualMods___tempY= - 6
 
-constant integer UnitVisualMods__SCALE= 0
-constant integer UnitVisualMods__RED= 1
-constant integer UnitVisualMods__GREEN= 2
-constant integer UnitVisualMods__BLUE= 3
-constant integer UnitVisualMods__ALPHA= 4
-constant integer UnitVisualMods__COLOR= 5
-constant integer UnitVisualMods__ASPEED= 6
-constant integer UnitVisualMods__ATAG= 7
-constant integer UnitVisualMods__SELECT= 8
-constant integer UnitVisualMods__NAME= 9
+constant integer UnitVisualMods___SCALE= 0
+constant integer UnitVisualMods___RED= 1
+constant integer UnitVisualMods___GREEN= 2
+constant integer UnitVisualMods___BLUE= 3
+constant integer UnitVisualMods___ALPHA= 4
+constant integer UnitVisualMods___COLOR= 5
+constant integer UnitVisualMods___ASPEED= 6
+constant integer UnitVisualMods___ATAG= 7
+constant integer UnitVisualMods___SELECT= 8
+constant integer UnitVisualMods___NAME= 9
     // private constant integer HEIGHT = 10  // This is only saved for structures, which lose their flying heights when moving
 constant integer UnitVisualMods_TAGS_DECOMPRESS= - 1
 constant integer UnitVisualMods_TAGS_COMPRESS= - 2
-group UnitVisualMods__hiddenGrp= CreateGroup()
+group UnitVisualMods___hiddenGrp= CreateGroup()
 //endglobals from UnitVisualMods
 //globals from LoPWidgets:
 constant boolean LIBRARY_LoPWidgets=true
@@ -1197,9 +1197,6 @@ unit gg_unit_e007_0410= null
 unit gg_unit_e00B_0405= null
 destructable gg_dest_ATg1_0003= null
 destructable gg_dest_ATg3_0004= null
-destructable gg_dest_LTe3_0005= null
-destructable gg_dest_DTg5_0007= null
-destructable gg_dest_DTg5_0008= null
 boolean g_unitHasBeenRemoved= false
 boolean commandsDeleteInsideTitanPalace= false
 constant integer DecoMovement_CONTROLLER= 'h0KD'
@@ -1331,128 +1328,128 @@ constant integer si__ConstTable__fogmodifiers=93
 constant integer si__ConstTable__hashtables=94
 constant integer si__ConstTable=95
 constant integer si__ConstHashTable=96
-constant integer si__DummyRecycler__S=97
-integer s__DummyRecycler__S_tb
-constant integer si__TileDefinition__TileDefinition=98
-constant integer si__ArgumentStack__table=99
+constant integer si__DummyRecycler___S=97
+integer s__DummyRecycler___S_tb
+constant integer si__TileDefinition___TileDefinition=98
+constant integer si__ArgumentStack___table=99
 constant integer si__Args=100
-constant integer s__Args_real_impl=11
-constant integer s__Args_integer_impl=12
-constant integer s__Args_boolean_impl=13
-constant integer s__Args_string_impl=14
-constant integer s__Args_player_impl=15
-constant integer s__Args_widget_impl=16
-constant integer s__Args_destructable_impl=17
-constant integer s__Args_item_impl=18
-constant integer s__Args_unit_impl=19
-constant integer s__Args_ability_impl=20
-constant integer s__Args_timer_impl=21
-constant integer s__Args_trigger_impl=22
-constant integer s__Args_triggercondition_impl=23
-constant integer s__Args_event_impl=24
-constant integer s__Args_force_impl=25
-constant integer s__Args_group_impl=26
-constant integer s__Args_location_impl=27
-constant integer s__Args_rect_impl=28
-constant integer s__Args_boolexpr_impl=29
-constant integer s__Args_sound_impl=30
-constant integer s__Args_effect_impl=31
-constant integer s__Args_quest_impl=32
-constant integer s__Args_questitem_impl=33
-constant integer s__Args_defeatcondition_impl=34
-constant integer s__Args_timerdialog_impl=35
-constant integer s__Args_leaderboard_impl=36
-constant integer s__Args_multiboard_impl=37
-constant integer s__Args_multiboarditem_impl=38
-constant integer s__Args_trackable_impl=39
-constant integer s__Args_dialog_impl=40
-constant integer s__Args_button_impl=41
-constant integer s__Args_region_impl=42
-constant integer s__Args_fogmodifier_impl=43
-constant integer s__Args_hashtable_impl=44
-constant integer s__Args_triggeraction_impl=45
-constant integer s__Args_unitpool_impl=46
-constant integer s__Args_itempool_impl=47
-constant integer s__Args_texttag_impl=48
-constant integer s__Args_lightning_impl=49
-constant integer s__Args_image_impl=50
-constant integer s__Args_ubersplat_impl=51
-constant integer s__Args_fogstate_impl=52
+constant integer s__Args_real_impl=18
+constant integer s__Args_integer_impl=20
+constant integer s__Args_boolean_impl=22
+constant integer s__Args_string_impl=24
+constant integer s__Args_player_impl=26
+constant integer s__Args_widget_impl=28
+constant integer s__Args_destructable_impl=30
+constant integer s__Args_item_impl=32
+constant integer s__Args_unit_impl=34
+constant integer s__Args_ability_impl=36
+constant integer s__Args_timer_impl=38
+constant integer s__Args_trigger_impl=40
+constant integer s__Args_triggercondition_impl=42
+constant integer s__Args_event_impl=44
+constant integer s__Args_force_impl=46
+constant integer s__Args_group_impl=48
+constant integer s__Args_location_impl=50
+constant integer s__Args_rect_impl=52
+constant integer s__Args_boolexpr_impl=54
+constant integer s__Args_sound_impl=56
+constant integer s__Args_effect_impl=58
+constant integer s__Args_quest_impl=60
+constant integer s__Args_questitem_impl=62
+constant integer s__Args_defeatcondition_impl=64
+constant integer s__Args_timerdialog_impl=66
+constant integer s__Args_leaderboard_impl=68
+constant integer s__Args_multiboard_impl=70
+constant integer s__Args_multiboarditem_impl=72
+constant integer s__Args_trackable_impl=74
+constant integer s__Args_dialog_impl=76
+constant integer s__Args_button_impl=78
+constant integer s__Args_region_impl=80
+constant integer s__Args_fogmodifier_impl=82
+constant integer s__Args_hashtable_impl=84
+constant integer s__Args_triggeraction_impl=86
+constant integer s__Args_unitpool_impl=88
+constant integer s__Args_itempool_impl=90
+constant integer s__Args_texttag_impl=92
+constant integer s__Args_lightning_impl=94
+constant integer s__Args_image_impl=96
+constant integer s__Args_ubersplat_impl=98
+constant integer s__Args_fogstate_impl=100
 constant integer si__LinkedHashSet=101
 integer s__LinkedHashSet_enumElement= 0
 integer s__LinkedHashSet_enumSet= 0
 constant integer si__TableStruct=102
 constant integer si__BoolExprEvaluator=103
-constant integer s__BoolExprEvaluator_tab_impl=53
-constant integer s__BoolExprEvaluator_trigger_impl=54
-constant integer si__CombatTag__CombatTag=104
-constant integer s__CombatTag__CombatTag_timerData_impl=55
+constant integer s__BoolExprEvaluator_tab_impl=102
+constant integer s__BoolExprEvaluator_trigger_impl=104
+constant integer si__CombatTag___CombatTag=104
+constant integer s__CombatTag___CombatTag_timerData_impl=106
 constant integer si__Order=105
-constant integer s__Order_morphOrders_impl=56
-constant integer s__Order_generalOrders_impl=57
-constant integer s__Order_necroticOrders_impl=58
+constant integer s__Order_morphOrders_impl=108
+constant integer s__Order_generalOrders_impl=110
+constant integer s__Order_necroticOrders_impl=112
 constant integer si__LoP_DecoBuilders=106
 integer array s__LoP_DecoBuilders_rawcodes
-constant integer s__LoP_DecoBuilders_static_members_key=59
-constant integer s__LoP_DecoBuilders_SpecialDecoLastIndex_impl=60
-constant integer s__LoP_DecoBuilders_BasicDecoFirstIndex_impl=61
-constant integer s__LoP_DecoBuilders_BasicDecoLastIndex_impl=62
-constant integer s__LoP_DecoBuilders_AdvDecoFirstIndex_impl=63
-constant integer s__LoP_DecoBuilders_AdvDecoLastIndex_impl=64
-constant integer s__LoP_DecoBuilders_DecoLastIndex_impl=65
+constant integer s__LoP_DecoBuilders_static_members_key=114
+constant integer s__LoP_DecoBuilders_SpecialDecoLastIndex_impl=116
+constant integer s__LoP_DecoBuilders_BasicDecoFirstIndex_impl=118
+constant integer s__LoP_DecoBuilders_BasicDecoLastIndex_impl=120
+constant integer s__LoP_DecoBuilders_AdvDecoFirstIndex_impl=122
+constant integer s__LoP_DecoBuilders_AdvDecoLastIndex_impl=124
+constant integer s__LoP_DecoBuilders_DecoLastIndex_impl=126
 constant integer si__LoPInitPlayerCircles_Globals=107
-constant integer s__LoPInitPlayerCircles_Globals_regionTable_impl=66
+constant integer s__LoPInitPlayerCircles_Globals_regionTable_impl=128
 constant integer si__LoP_PlayerData=108
 playercolor array s__LoP_PlayerData_playerColors
-constant integer s__LoP_PlayerData_rotationStep_impl=67
-constant integer s__LoP_PlayerData_commandsEnabled_internal_impl=68
+constant integer s__LoP_PlayerData_rotationStep_impl=130
+constant integer s__LoP_PlayerData_commandsEnabled_internal_impl=132
 constant integer si__MultiBoard=109
-constant integer s__MultiBoard_items_impl=69
-constant integer s__MultiBoard_cols_impl=70
-constant integer s__MultiBoard_rows_impl=71
-constant integer s__MultiBoard_multiboard_impl=72
+constant integer s__MultiBoard_items_impl=134
+constant integer s__MultiBoard_cols_impl=136
+constant integer s__MultiBoard_rows_impl=138
+constant integer s__MultiBoard_multiboard_impl=140
 constant integer si__TerrainFog=110
 constant integer s__TerrainFog_LINEAR= 0
 constant integer s__TerrainFog_EXPONENTIAL= 1
 constant integer s__TerrainFog_EXPONENTIAL2= 2
-constant integer s__TerrainFog_style_impl=73
-constant integer s__TerrainFog_zStart_impl=74
-constant integer s__TerrainFog_zEnd_impl=75
-constant integer s__TerrainFog_density_impl=76
-constant integer s__TerrainFog_red_impl=77
-constant integer s__TerrainFog_green_impl=78
-constant integer s__TerrainFog_blue_impl=79
+constant integer s__TerrainFog_style_impl=142
+constant integer s__TerrainFog_zStart_impl=144
+constant integer s__TerrainFog_zEnd_impl=146
+constant integer s__TerrainFog_density_impl=148
+constant integer s__TerrainFog_red_impl=150
+constant integer s__TerrainFog_green_impl=152
+constant integer s__TerrainFog_blue_impl=154
 constant integer si__RectEnvironment=111
-constant integer s__RectEnvironment_fog_impl=80
+constant integer s__RectEnvironment_fog_impl=156
 constant integer si__TerrainType2Id=112
-constant integer s__TerrainType2Id_data_impl=81
-constant integer si__TerrainTools__InitStruct=113
-constant integer si__AutoRectEnvironment__Globals=114
-constant integer s__AutoRectEnvironment__Globals_static_members_key=82
-constant integer s__AutoRectEnvironment__Globals_lastCameraX_impl=83
-constant integer s__AutoRectEnvironment__Globals_lastCameraY_impl=84
-constant integer s__AutoRectEnvironment__Globals_rectWasMoved_impl=85
-constant integer s__AutoRectEnvironment__Globals_lastCameraRect_impl=86
-constant integer s__AutoRectEnvironment__Globals_allRects_impl=87
-constant integer s__AutoRectEnvironment__Globals_rects_impl=88
-constant integer s__AutoRectEnvironment__Globals_id2_impl=89
-constant integer si__AutoRectEnvironment__InitStruct=115
+constant integer s__TerrainType2Id_data_impl=158
+constant integer si__TerrainTools___InitStruct=113
+constant integer si__AutoRectEnvironment___Globals=114
+constant integer s__AutoRectEnvironment___Globals_static_members_key=160
+constant integer s__AutoRectEnvironment___Globals_lastCameraX_impl=162
+constant integer s__AutoRectEnvironment___Globals_lastCameraY_impl=164
+constant integer s__AutoRectEnvironment___Globals_rectWasMoved_impl=166
+constant integer s__AutoRectEnvironment___Globals_lastCameraRect_impl=168
+constant integer s__AutoRectEnvironment___Globals_allRects_impl=170
+constant integer s__AutoRectEnvironment___Globals_rects_impl=172
+constant integer s__AutoRectEnvironment___Globals_id2_impl=174
+constant integer si__AutoRectEnvironment___InitStruct=115
 constant integer si__GameTime=116
 integer s__GameTime_a
-constant integer s__GameTime_static_members_key=90
-constant integer s__GameTime_hours_impl=91
-constant integer s__GameTime_minutes_impl=92
-constant integer s__GameTime_seconds_impl=93
-constant integer s__GameTime_timer_impl=94
-constant integer s__GameTime_multiboard_impl=95
+constant integer s__GameTime_static_members_key=176
+constant integer s__GameTime_hours_impl=178
+constant integer s__GameTime_minutes_impl=180
+constant integer s__GameTime_seconds_impl=182
+constant integer s__GameTime_timer_impl=184
+constant integer s__GameTime_multiboard_impl=186
 constant integer si__LoP_Command=117
-constant integer s__LoP_Command_boolexpr_impl=96
-constant integer s__LoP_Command_string_impl=97
-constant integer s__LoP_Command_accessLevel_impl=98
+constant integer s__LoP_Command_boolexpr_impl=188
+constant integer s__LoP_Command_string_impl=190
+constant integer s__LoP_Command_accessLevel_impl=192
 constant integer si__LoPCommands_Globals=118
-constant integer s__LoPCommands_Globals_static_members_key=99
-constant integer s__LoPCommands_Globals_trigger_impl=100
-constant integer s__LoPCommands_Globals_evaluator_impl=101
+constant integer s__LoPCommands_Globals_static_members_key=194
+constant integer s__LoPCommands_Globals_trigger_impl=196
+constant integer s__LoPCommands_Globals_evaluator_impl=198
 constant integer si__SpecialEffect_hT_reals=119
 constant integer si__SpecialEffect_hT_booleans=120
 constant integer si__SpecialEffect_hT_strings=121
@@ -1500,149 +1497,149 @@ constant integer si__SpecialEffect_hT_hashtables=162
 constant integer si__SpecialEffect_hT_Child=163
 constant integer si__SpecialEffect_hT=164
 constant integer si__SpecialEffect=165
-constant integer s__SpecialEffect_x_INDEX=102
-constant integer s__SpecialEffect_y_INDEX=103
-constant integer s__SpecialEffect_height_INDEX=104
-constant integer s__SpecialEffect_scale_INDEX=105
+constant integer s__SpecialEffect_x_INDEX=200
+constant integer s__SpecialEffect_y_INDEX=202
+constant integer s__SpecialEffect_height_INDEX=204
+constant integer s__SpecialEffect_scale_INDEX=206
 constant real s__SpecialEffect_scale_DEFAULT= 1.
-constant integer s__SpecialEffect_roll_INDEX=106
-constant integer s__SpecialEffect_yaw_INDEX=107
-constant integer s__SpecialEffect_pitch_INDEX=108
-constant integer s__SpecialEffect_red_INDEX=109
+constant integer s__SpecialEffect_roll_INDEX=208
+constant integer s__SpecialEffect_yaw_INDEX=210
+constant integer s__SpecialEffect_pitch_INDEX=212
+constant integer s__SpecialEffect_red_INDEX=214
 constant integer s__SpecialEffect_red_DEFAULT= 255
-constant integer s__SpecialEffect_green_INDEX=110
+constant integer s__SpecialEffect_green_INDEX=216
 constant integer s__SpecialEffect_green_DEFAULT= 255
-constant integer s__SpecialEffect_blue_INDEX=111
+constant integer s__SpecialEffect_blue_INDEX=218
 constant integer s__SpecialEffect_blue_DEFAULT= 255
-constant integer s__SpecialEffect_alpha_INDEX=112
+constant integer s__SpecialEffect_alpha_INDEX=220
 constant integer s__SpecialEffect_alpha_DEFAULT= 255
 constant integer si__UnitEvents=166
-constant integer s__UnitEvents_onDeath_impl_impl=113
-constant integer s__UnitEvents_onRemove_impl_impl=114
-constant integer s__UnitEvents_removeOnDeath_impl=115
-constant integer si__UserDefinedRects__Indices=167
+constant integer s__UnitEvents_onDeath_impl_impl=222
+constant integer s__UnitEvents_onRemove_impl_impl=224
+constant integer s__UnitEvents_removeOnDeath_impl=226
+constant integer si__UserDefinedRects___Indices=167
 constant integer si__PlayerSpecialEffect=168
-constant integer s__PlayerSpecialEffect_x_INDEX=116
-constant integer s__PlayerSpecialEffect_y_INDEX=117
-constant integer s__PlayerSpecialEffect_height_INDEX=118
-constant integer s__PlayerSpecialEffect_scale_INDEX=119
+constant integer s__PlayerSpecialEffect_x_INDEX=228
+constant integer s__PlayerSpecialEffect_y_INDEX=230
+constant integer s__PlayerSpecialEffect_height_INDEX=232
+constant integer s__PlayerSpecialEffect_scale_INDEX=234
 constant real s__PlayerSpecialEffect_scale_DEFAULT= 1.
-constant integer s__PlayerSpecialEffect_roll_INDEX=120
-constant integer s__PlayerSpecialEffect_yaw_INDEX=121
-constant integer s__PlayerSpecialEffect_pitch_INDEX=122
-constant integer s__PlayerSpecialEffect_red_INDEX=123
+constant integer s__PlayerSpecialEffect_roll_INDEX=236
+constant integer s__PlayerSpecialEffect_yaw_INDEX=238
+constant integer s__PlayerSpecialEffect_pitch_INDEX=240
+constant integer s__PlayerSpecialEffect_red_INDEX=242
 constant integer s__PlayerSpecialEffect_red_DEFAULT= 255
-constant integer s__PlayerSpecialEffect_green_INDEX=124
+constant integer s__PlayerSpecialEffect_green_INDEX=244
 constant integer s__PlayerSpecialEffect_green_DEFAULT= 255
-constant integer s__PlayerSpecialEffect_blue_INDEX=125
+constant integer s__PlayerSpecialEffect_blue_INDEX=246
 constant integer s__PlayerSpecialEffect_blue_DEFAULT= 255
-constant integer s__PlayerSpecialEffect_alpha_INDEX=126
+constant integer s__PlayerSpecialEffect_alpha_INDEX=248
 constant integer s__PlayerSpecialEffect_alpha_DEFAULT= 255
-constant integer s__PlayerSpecialEffect_Owner_INDEX=127
-constant integer si__RectGenerator__FogStyle=169
-constant integer s__RectGenerator__FogStyle_strings_impl=128
-constant integer s__RectGenerator__FogStyle_linkedListNext_impl=129
-constant integer s__RectGenerator__FogStyle_linkedListPrev_impl=130
+constant integer s__PlayerSpecialEffect_Owner_INDEX=250
+constant integer si__RectGenerator___FogStyle=169
+constant integer s__RectGenerator___FogStyle_strings_impl=252
+constant integer s__RectGenerator___FogStyle_linkedListNext_impl=254
+constant integer s__RectGenerator___FogStyle_linkedListPrev_impl=256
 constant integer si__UnitSpecialEffect=170
-constant integer s__UnitSpecialEffect_x_INDEX=131
-constant integer s__UnitSpecialEffect_y_INDEX=132
-constant integer s__UnitSpecialEffect_height_INDEX=133
-constant integer s__UnitSpecialEffect_scale_INDEX=134
+constant integer s__UnitSpecialEffect_x_INDEX=258
+constant integer s__UnitSpecialEffect_y_INDEX=260
+constant integer s__UnitSpecialEffect_height_INDEX=262
+constant integer s__UnitSpecialEffect_scale_INDEX=264
 constant real s__UnitSpecialEffect_scale_DEFAULT= 1.
-constant integer s__UnitSpecialEffect_roll_INDEX=135
-constant integer s__UnitSpecialEffect_yaw_INDEX=136
-constant integer s__UnitSpecialEffect_pitch_INDEX=137
-constant integer s__UnitSpecialEffect_red_INDEX=138
+constant integer s__UnitSpecialEffect_roll_INDEX=266
+constant integer s__UnitSpecialEffect_yaw_INDEX=268
+constant integer s__UnitSpecialEffect_pitch_INDEX=270
+constant integer s__UnitSpecialEffect_red_INDEX=272
 constant integer s__UnitSpecialEffect_red_DEFAULT= 255
-constant integer s__UnitSpecialEffect_green_INDEX=139
+constant integer s__UnitSpecialEffect_green_INDEX=274
 constant integer s__UnitSpecialEffect_green_DEFAULT= 255
-constant integer s__UnitSpecialEffect_blue_INDEX=140
+constant integer s__UnitSpecialEffect_blue_INDEX=276
 constant integer s__UnitSpecialEffect_blue_DEFAULT= 255
-constant integer s__UnitSpecialEffect_alpha_INDEX=141
+constant integer s__UnitSpecialEffect_alpha_INDEX=278
 constant integer s__UnitSpecialEffect_alpha_DEFAULT= 255
-constant integer s__UnitSpecialEffect_unitType_INDEX=142
-constant integer si__UnitVisualMods__data_reals=171
-constant integer si__UnitVisualMods__data_booleans=172
-constant integer si__UnitVisualMods__data_strings=173
-constant integer si__UnitVisualMods__data_integers=174
-constant integer si__UnitVisualMods__data_handles=175
-constant integer si__UnitVisualMods__data_agents=176
-constant integer si__UnitVisualMods__data_players=177
-constant integer si__UnitVisualMods__data_widgets=178
-constant integer si__UnitVisualMods__data_destructables=179
-constant integer si__UnitVisualMods__data_items=180
-constant integer si__UnitVisualMods__data_units=181
-constant integer si__UnitVisualMods__data_abilitys=182
-constant integer si__UnitVisualMods__data_timers=183
-constant integer si__UnitVisualMods__data_triggers=184
-constant integer si__UnitVisualMods__data_triggerconditions=185
-constant integer si__UnitVisualMods__data_triggeractions=186
-constant integer si__UnitVisualMods__data_events=187
-constant integer si__UnitVisualMods__data_forces=188
-constant integer si__UnitVisualMods__data_groups=189
-constant integer si__UnitVisualMods__data_locations=190
-constant integer si__UnitVisualMods__data_rects=191
-constant integer si__UnitVisualMods__data_boolexprs=192
-constant integer si__UnitVisualMods__data_sounds=193
-constant integer si__UnitVisualMods__data_effects=194
-constant integer si__UnitVisualMods__data_unitpools=195
-constant integer si__UnitVisualMods__data_itempools=196
-constant integer si__UnitVisualMods__data_quests=197
-constant integer si__UnitVisualMods__data_questitems=198
-constant integer si__UnitVisualMods__data_defeatconditions=199
-constant integer si__UnitVisualMods__data_timerdialogs=200
-constant integer si__UnitVisualMods__data_leaderboards=201
-constant integer si__UnitVisualMods__data_multiboards=202
-constant integer si__UnitVisualMods__data_multiboarditems=203
-constant integer si__UnitVisualMods__data_trackables=204
-constant integer si__UnitVisualMods__data_dialogs=205
-constant integer si__UnitVisualMods__data_buttons=206
-constant integer si__UnitVisualMods__data_texttags=207
-constant integer si__UnitVisualMods__data_lightnings=208
-constant integer si__UnitVisualMods__data_images=209
-constant integer si__UnitVisualMods__data_ubersplats=210
-constant integer si__UnitVisualMods__data_regions=211
-constant integer si__UnitVisualMods__data_fogstates=212
-constant integer si__UnitVisualMods__data_fogmodifiers=213
-constant integer si__UnitVisualMods__data_hashtables=214
-constant integer si__UnitVisualMods__data_Child=215
-constant integer si__UnitVisualMods__data=216
-constant integer si__UnitVisualMods__UnitVisualsRaw=217
+constant integer s__UnitSpecialEffect_unitType_INDEX=280
+constant integer si__UnitVisualMods___data_reals=171
+constant integer si__UnitVisualMods___data_booleans=172
+constant integer si__UnitVisualMods___data_strings=173
+constant integer si__UnitVisualMods___data_integers=174
+constant integer si__UnitVisualMods___data_handles=175
+constant integer si__UnitVisualMods___data_agents=176
+constant integer si__UnitVisualMods___data_players=177
+constant integer si__UnitVisualMods___data_widgets=178
+constant integer si__UnitVisualMods___data_destructables=179
+constant integer si__UnitVisualMods___data_items=180
+constant integer si__UnitVisualMods___data_units=181
+constant integer si__UnitVisualMods___data_abilitys=182
+constant integer si__UnitVisualMods___data_timers=183
+constant integer si__UnitVisualMods___data_triggers=184
+constant integer si__UnitVisualMods___data_triggerconditions=185
+constant integer si__UnitVisualMods___data_triggeractions=186
+constant integer si__UnitVisualMods___data_events=187
+constant integer si__UnitVisualMods___data_forces=188
+constant integer si__UnitVisualMods___data_groups=189
+constant integer si__UnitVisualMods___data_locations=190
+constant integer si__UnitVisualMods___data_rects=191
+constant integer si__UnitVisualMods___data_boolexprs=192
+constant integer si__UnitVisualMods___data_sounds=193
+constant integer si__UnitVisualMods___data_effects=194
+constant integer si__UnitVisualMods___data_unitpools=195
+constant integer si__UnitVisualMods___data_itempools=196
+constant integer si__UnitVisualMods___data_quests=197
+constant integer si__UnitVisualMods___data_questitems=198
+constant integer si__UnitVisualMods___data_defeatconditions=199
+constant integer si__UnitVisualMods___data_timerdialogs=200
+constant integer si__UnitVisualMods___data_leaderboards=201
+constant integer si__UnitVisualMods___data_multiboards=202
+constant integer si__UnitVisualMods___data_multiboarditems=203
+constant integer si__UnitVisualMods___data_trackables=204
+constant integer si__UnitVisualMods___data_dialogs=205
+constant integer si__UnitVisualMods___data_buttons=206
+constant integer si__UnitVisualMods___data_texttags=207
+constant integer si__UnitVisualMods___data_lightnings=208
+constant integer si__UnitVisualMods___data_images=209
+constant integer si__UnitVisualMods___data_ubersplats=210
+constant integer si__UnitVisualMods___data_regions=211
+constant integer si__UnitVisualMods___data_fogstates=212
+constant integer si__UnitVisualMods___data_fogmodifiers=213
+constant integer si__UnitVisualMods___data_hashtables=214
+constant integer si__UnitVisualMods___data_Child=215
+constant integer si__UnitVisualMods___data=216
+constant integer si__UnitVisualMods___UnitVisualsRaw=217
 constant integer si__UnitVisuals=218
-constant integer si__UnitVisualMods__TimerData=219
-constant integer s__UnitVisualMods__TimerData_unit_impl=144
-constant integer si__UnitVisualMods__InitStruct=220
+constant integer si__UnitVisualMods___TimerData=219
+constant integer s__UnitVisualMods___TimerData_unit_impl=282
+constant integer si__UnitVisualMods___InitStruct=220
 constant integer si__LoPWidgets__Globals=221
-constant integer s__LoPWidgets__Globals_destructablesTab_impl=146
+constant integer s__LoPWidgets__Globals_destructablesTab_impl=284
 constant integer si__LoP_UnitData=222
-constant integer s__LoP_UnitData_isHeroic_impl=148
+constant integer s__LoP_UnitData_isHeroic_impl=286
 constant integer si__LoPHeroicUnit_Globals=223
-constant integer s__LoPHeroicUnit_Globals_static_members_key=150
-constant integer s__LoPHeroicUnit_Globals_dummy_impl=152
+constant integer s__LoPHeroicUnit_Globals_static_members_key=288
+constant integer s__LoPHeroicUnit_Globals_dummy_impl=290
 constant integer si__Mimic___UnitData=224
-constant integer s__Mimic___UnitData_original_impl=154
+constant integer s__Mimic___UnitData_original_impl=292
 constant integer si__CameraValues=225
-constant integer s__CameraValues_static_members_key=156
-constant integer s__CameraValues_zoom_impl=158
-constant integer s__CameraValues_rotate_impl=160
-constant integer s__CameraValues_roll_impl=162
-constant integer s__CameraValues_pitch_impl=164
-constant integer s__CameraValues_timer_impl=166
+constant integer s__CameraValues_static_members_key=294
+constant integer s__CameraValues_zoom_impl=296
+constant integer s__CameraValues_rotate_impl=298
+constant integer s__CameraValues_roll_impl=300
+constant integer s__CameraValues_pitch_impl=302
+constant integer s__CameraValues_timer_impl=304
 constant integer si__CommandsSetLimits__StringConvert=226
-constant integer s__CommandsSetLimits__StringConvert_data_impl=168
+constant integer s__CommandsSetLimits__StringConvert_data_impl=306
 constant integer si__TreeSystemChooseTree__Globals=227
-constant integer s__TreeSystemChooseTree__Globals_timerData_impl=170
+constant integer s__TreeSystemChooseTree__Globals_timerData_impl=308
 constant integer si__SpatialDistortion___TimerData=228
-constant integer s__SpatialDistortion___TimerData_caster_impl=172
-constant integer s__SpatialDistortion___TimerData_counter_impl=174
-constant integer s__SpatialDistortion___TimerData_x_impl=176
-constant integer s__SpatialDistortion___TimerData_y_impl=178
+constant integer s__SpatialDistortion___TimerData_caster_impl=310
+constant integer s__SpatialDistortion___TimerData_counter_impl=312
+constant integer s__SpatialDistortion___TimerData_x_impl=314
+constant integer s__SpatialDistortion___TimerData_y_impl=316
 constant integer si__WillOfTheTribunal___CasterData=229
-constant integer s__WillOfTheTribunal___CasterData_timer_impl=180
+constant integer s__WillOfTheTribunal___CasterData_timer_impl=318
 constant integer si__CometSpell___TimerData=230
-constant integer s__CometSpell___TimerData_caster_impl=182
-constant integer s__CometSpell___TimerData_x_impl=184
-constant integer s__CometSpell___TimerData_y_impl=186
+constant integer s__CometSpell___TimerData_caster_impl=320
+constant integer s__CometSpell___TimerData_x_impl=322
+constant integer s__CometSpell___TimerData_y_impl=324
 trigger st__UnitEvents__get_onDeath
 trigger st__UnitEvents__get_onRemove
 integer f__arg_this
@@ -2272,19 +2269,19 @@ endfunction
 function IsDestructableTree takes destructable dest returns boolean
     local boolean result= false
     if ( dest != null ) then
-        call PauseUnit(DestructableLib__dummy, false)
-        set result=IssueTargetOrder(DestructableLib__dummy, "harvest", dest)
-        call PauseUnit(DestructableLib__dummy, true) // stops order
+        call PauseUnit(DestructableLib___dummy, false)
+        set result=IssueTargetOrder(DestructableLib___dummy, "harvest", dest)
+        call PauseUnit(DestructableLib___dummy, true) // stops order
     endif
     return result
 endfunction
 
-function DestructableLib__Initialization takes nothing returns nothing
-    set DestructableLib__dummy=CreateUnit(DestructableLib__OWNING_PLAYER, DestructableLib__DUMMY_UNIT_ID, 0.0, 0.0, 0.0)
-    call ShowUnit(DestructableLib__dummy, false) // cannot enumerate
-    call UnitAddAbility(DestructableLib__dummy, DestructableLib__HARVEST_ID)
-    call UnitAddAbility(DestructableLib__dummy, 'Aloc') // unselectable, invulnerable
-    call PauseUnit(DestructableLib__dummy, true)
+function DestructableLib___Initialization takes nothing returns nothing
+    set DestructableLib___dummy=CreateUnit(DestructableLib___OWNING_PLAYER, DestructableLib___DUMMY_UNIT_ID, 0.0, 0.0, 0.0)
+    call ShowUnit(DestructableLib___dummy, false) // cannot enumerate
+    call UnitAddAbility(DestructableLib___dummy, DestructableLib___HARVEST_ID)
+    call UnitAddAbility(DestructableLib___dummy, 'Aloc') // unselectable, invulnerable
+    call PauseUnit(DestructableLib___dummy, true)
 endfunction
 
 //library DestructableLib ends
@@ -2383,40 +2380,40 @@ endfunction
 
 
    
-    function GroupTools__AE takes nothing returns nothing
-        if ( GroupTools__f ) then
-            call GroupClear(GroupTools__gT)
-            set GroupTools__f=false
+    function GroupTools___AE takes nothing returns nothing
+        if ( GroupTools___f ) then
+            call GroupClear(GroupTools___gT)
+            set GroupTools___f=false
         endif
-        call GroupAddUnit(GroupTools__gT, GetEnumUnit())
+        call GroupAddUnit(GroupTools___gT, GetEnumUnit())
     endfunction
    
     function GroupRefresh takes group g returns nothing
-        set GroupTools__f=true
-        set GroupTools__gT=g
-        call ForGroup(GroupTools__gT, function GroupTools__AE)
-        if ( GroupTools__f ) then
+        set GroupTools___f=true
+        set GroupTools___gT=g
+        call ForGroup(GroupTools___gT, function GroupTools___AE)
+        if ( GroupTools___f ) then
             call GroupClear(g)
         endif
     endfunction
    
     function NewGroup takes nothing returns group
-        if 0 == GroupTools__gN then
+        if 0 == GroupTools___gN then
             return CreateGroup()
         endif
-        set GroupTools__gN=GroupTools__gN - 1
-        return GroupTools__groups[GroupTools__gN]
+        set GroupTools___gN=GroupTools___gN - 1
+        return GroupTools___groups[GroupTools___gN]
     endfunction
    
     function ReleaseGroup takes group g returns nothing
         call GroupClear(g)
-        set GroupTools__groups[GroupTools__gN]=g
-        set GroupTools__gN=GroupTools__gN + 1
+        set GroupTools___groups[GroupTools___gN]=g
+        set GroupTools___gN=GroupTools___gN + 1
     endfunction
    
     function GroupUnitsInArea takes group whichGroup,real x,real y,real radius returns nothing
         local unit u
-        call GroupEnumUnitsInRange(ENUM_GROUP, x, y, radius + GroupTools__MAX_COLLISION_SIZE, null)
+        call GroupEnumUnitsInRange(ENUM_GROUP, x, y, radius + GroupTools___MAX_COLLISION_SIZE, null)
         loop
             set u=FirstOfGroup(ENUM_GROUP)
             exitwhen null == u
@@ -2442,20 +2439,20 @@ endfunction
 
 //library HERO ends
 //library HeroicUnit:
-    function HeroicUnit__OnMorph takes nothing returns boolean
+    function HeroicUnit___OnMorph takes nothing returns boolean
         local unit u=GetTriggerUnit()
         local trigger t=GetTriggeringTrigger()
         if ( GetTriggerEventId() == EVENT_UNIT_STATE_LIMIT ) then
             call DisableTrigger(t)
-            call UnitRemoveAbility(u, HeroicUnit__SPELL_ID)
-        elseif ( GetUnitTypeId(u) != HeroicUnit__HERO_ID ) then
-            call UnitAddAbility(u, HeroicUnit__SPELL_ID)
-            call UnitAddAbility(u, HeroicUnit__BONUS_ID)
-            call UnitMakeAbilityPermanent(u, true, HeroicUnit__BONUS_ID)
+            call UnitRemoveAbility(u, HeroicUnit___SPELL_ID)
+        elseif ( GetUnitTypeId(u) != HeroicUnit___HERO_ID ) then
+            call UnitAddAbility(u, HeroicUnit___SPELL_ID)
+            call UnitAddAbility(u, HeroicUnit___BONUS_ID)
+            call UnitMakeAbilityPermanent(u, true, HeroicUnit___BONUS_ID)
             call TriggerRegisterUnitStateEvent(t, u, UNIT_STATE_LIFE, GREATER_THAN, GetWidgetLife(u) + 1.)
-            call RemoveItem(UnitAddItemById(u, HeroicUnit__ITEM_ID))
+            call RemoveItem(UnitAddItemById(u, HeroicUnit___ITEM_ID))
         else
-            call UnitAddAbility(u, HeroicUnit__DETECTOR)
+            call UnitAddAbility(u, HeroicUnit___DETECTOR)
         endif
         set t=null
         set u=null
@@ -2467,12 +2464,12 @@ endfunction
         local real mp=GetUnitState(u, UNIT_STATE_MANA)
         call SetWidgetLife(u, GetUnitState(u, UNIT_STATE_MAX_LIFE))
         call TriggerRegisterUnitEvent(t, u, EVENT_UNIT_ISSUED_ORDER)
-        call TriggerAddCondition(t, Condition(function HeroicUnit__OnMorph))
+        call TriggerAddCondition(t, Condition(function HeroicUnit___OnMorph))
         call UnitAddAbility(u, 'AInv')
-        call UnitAddAbility(u, HeroicUnit__DETECTOR)
-        call UnitAddAbility(u, HeroicUnit__BONUS_ID)
-        call RemoveItem(UnitAddItemById(u, HeroicUnit__ITEM_ID))
-        call UnitRemoveAbility(u, HeroicUnit__BONUS_ID)
+        call UnitAddAbility(u, HeroicUnit___DETECTOR)
+        call UnitAddAbility(u, HeroicUnit___BONUS_ID)
+        call RemoveItem(UnitAddItemById(u, HeroicUnit___ITEM_ID))
+        call UnitRemoveAbility(u, HeroicUnit___BONUS_ID)
         call SetWidgetLife(u, hp)
         call SetUnitState(u, UNIT_STATE_MANA, mp)
         call SetUnitAnimation(u, "stand")
@@ -2636,23 +2633,23 @@ endfunction
 //==================================================================================================
 
 // Constants
-constant function MultiPatrol__Patrol_MinDistance takes nothing returns real
+constant function MultiPatrol___Patrol_MinDistance takes nothing returns real
     return 100.
 endfunction
 
-constant function MultiPatrol__Patrol_POINT_CURRENT takes nothing returns integer
+constant function MultiPatrol___Patrol_POINT_CURRENT takes nothing returns integer
     return 9996
 endfunction
 
-constant function MultiPatrol__Patrol_POINT_TOTAL takes nothing returns integer
+constant function MultiPatrol___Patrol_POINT_TOTAL takes nothing returns integer
     return 9997
 endfunction
 
-constant function MultiPatrol__Patrol_REGION takes nothing returns integer
+constant function MultiPatrol___Patrol_REGION takes nothing returns integer
     return 9998
 endfunction
 
-constant function MultiPatrol__Patrol_TRIGGER takes nothing returns integer
+constant function MultiPatrol___Patrol_TRIGGER takes nothing returns integer
     return 9999
 endfunction
 //==================================================================================================
@@ -2662,108 +2659,108 @@ endfunction
 //=====================
 // Points
 function Patrol_GetPointX takes integer unitHandleId,integer pointNumber returns real
-    return LoadReal(MultiPatrol__data, unitHandleId, pointNumber)
+    return LoadReal(MultiPatrol___data, unitHandleId, pointNumber)
 endfunction
 
 function Patrol_GetPointY takes integer unitHandleId,integer pointNumber returns real
-    return LoadReal(MultiPatrol__data, unitHandleId, - pointNumber)
+    return LoadReal(MultiPatrol___data, unitHandleId, - pointNumber)
 endfunction
 
 function Patrol_SetPointX takes integer unitHandleId,integer pointNumber,real newX returns nothing
-    call SaveReal(MultiPatrol__data, unitHandleId, pointNumber, newX)
+    call SaveReal(MultiPatrol___data, unitHandleId, pointNumber, newX)
 endfunction
 
 function Patrol_SetPointY takes integer unitHandleId,integer pointNumber,real newY returns nothing
-    call SaveReal(MultiPatrol__data, unitHandleId, - pointNumber, newY)
+    call SaveReal(MultiPatrol___data, unitHandleId, - pointNumber, newY)
 endfunction
 //=====================
 // Current Point and Total Points
 function Patrol_GetCurrentPatrolPoint takes integer unitHandleId returns integer
-    return LoadInteger(MultiPatrol__data, - unitHandleId, (9996)) // INLINED!!
+    return LoadInteger(MultiPatrol___data, - unitHandleId, (9996)) // INLINED!!
 endfunction
 
 function Patrol_GetTotalPatrolPoints takes integer unitHandleId returns integer
-    return LoadInteger(MultiPatrol__data, - unitHandleId, (9997)) // INLINED!!
+    return LoadInteger(MultiPatrol___data, - unitHandleId, (9997)) // INLINED!!
 endfunction
 
 function Patrol_SetCurrentPatrolPoint takes integer unitHandleId,integer pointNumber returns nothing
-    call SaveInteger(MultiPatrol__data, - unitHandleId, (9996), pointNumber) // INLINED!!
+    call SaveInteger(MultiPatrol___data, - unitHandleId, (9996), pointNumber) // INLINED!!
 endfunction
 
 function Patrol_SetTotalPatrolPoints takes integer unitHandleId,integer newTotal returns nothing
-    call SaveInteger(MultiPatrol__data, - unitHandleId, (9997), newTotal) // INLINED!!
+    call SaveInteger(MultiPatrol___data, - unitHandleId, (9997), newTotal) // INLINED!!
 endfunction
 //=====================
 // Region and Trigger
-function MultiPatrol__Patrol_GetRegion takes integer unitHandleId returns region
-    return LoadRegionHandle(MultiPatrol__data, - unitHandleId, (9998)) // INLINED!!
+function MultiPatrol___Patrol_GetRegion takes integer unitHandleId returns region
+    return LoadRegionHandle(MultiPatrol___data, - unitHandleId, (9998)) // INLINED!!
 endfunction
 
-function MultiPatrol__Patrol_GetTrigger takes integer unitHandleId returns trigger
-    return LoadTriggerHandle(MultiPatrol__data, - unitHandleId, (9999)) // INLINED!!
+function MultiPatrol___Patrol_GetTrigger takes integer unitHandleId returns trigger
+    return LoadTriggerHandle(MultiPatrol___data, - unitHandleId, (9999)) // INLINED!!
 endfunction
 
-function MultiPatrol__Patrol_SetRegion takes integer unitHandleId,region newRegion returns nothing
-    call SaveRegionHandle(MultiPatrol__data, - unitHandleId, (9998), newRegion) // INLINED!!
+function MultiPatrol___Patrol_SetRegion takes integer unitHandleId,region newRegion returns nothing
+    call SaveRegionHandle(MultiPatrol___data, - unitHandleId, (9998), newRegion) // INLINED!!
 endfunction
 
-function MultiPatrol__Patrol_SetTrigger takes integer unitHandleId,trigger newTrigger returns nothing
-    call SaveTriggerHandle(MultiPatrol__data, - unitHandleId, (9999), newTrigger) // INLINED!!
+function MultiPatrol___Patrol_SetTrigger takes integer unitHandleId,trigger newTrigger returns nothing
+    call SaveTriggerHandle(MultiPatrol___data, - unitHandleId, (9999), newTrigger) // INLINED!!
 endfunction
 
 //=====================
 // Text Tags and Special Effects for displaying patrol points
-function MultiPatrol__Patrol_SetPointEffect takes integer uId,integer point,effect spEffect returns nothing
-    call SaveEffectHandle(MultiPatrol__data, uId, MultiPatrol__INDEX_DISPLAY + point, spEffect)
+function MultiPatrol___Patrol_SetPointEffect takes integer uId,integer point,effect spEffect returns nothing
+    call SaveEffectHandle(MultiPatrol___data, uId, MultiPatrol___INDEX_DISPLAY + point, spEffect)
 endfunction
 
-function MultiPatrol__Patrol_SetPointTag takes integer uId,integer point,texttag tag returns nothing
-    call SaveTextTagHandle(MultiPatrol__data, uId, - MultiPatrol__INDEX_DISPLAY - point, tag)
+function MultiPatrol___Patrol_SetPointTag takes integer uId,integer point,texttag tag returns nothing
+    call SaveTextTagHandle(MultiPatrol___data, uId, - MultiPatrol___INDEX_DISPLAY - point, tag)
 endfunction
 
-function MultiPatrol__Patrol_GetPointEffect takes integer uId,integer point returns effect
-    return LoadEffectHandle(MultiPatrol__data, uId, MultiPatrol__INDEX_DISPLAY + point)
+function MultiPatrol___Patrol_GetPointEffect takes integer uId,integer point returns effect
+    return LoadEffectHandle(MultiPatrol___data, uId, MultiPatrol___INDEX_DISPLAY + point)
 endfunction
 
-function MultiPatrol__Patrol_GetPointTag takes integer uId,integer point returns texttag
-    return LoadTextTagHandle(MultiPatrol__data, uId, - MultiPatrol__INDEX_DISPLAY - point)
+function MultiPatrol___Patrol_GetPointTag takes integer uId,integer point returns texttag
+    return LoadTextTagHandle(MultiPatrol___data, uId, - MultiPatrol___INDEX_DISPLAY - point)
 endfunction
 
-function MultiPatrol__Patrol_RemovePointEffect takes integer uId,integer point returns nothing
-    call RemoveSavedHandle(MultiPatrol__data, uId, MultiPatrol__INDEX_DISPLAY + point)
+function MultiPatrol___Patrol_RemovePointEffect takes integer uId,integer point returns nothing
+    call RemoveSavedHandle(MultiPatrol___data, uId, MultiPatrol___INDEX_DISPLAY + point)
 endfunction
 
-function MultiPatrol__Patrol_RemovePointTag takes integer uId,integer point returns nothing
-    call RemoveSavedHandle(MultiPatrol__data, uId, - MultiPatrol__INDEX_DISPLAY - point)
+function MultiPatrol___Patrol_RemovePointTag takes integer uId,integer point returns nothing
+    call RemoveSavedHandle(MultiPatrol___data, uId, - MultiPatrol___INDEX_DISPLAY - point)
 endfunction
 //==================================================================================================
 
 // Uitilities
-function MultiPatrol__Patrol_Distance takes real x,real y returns real
+function MultiPatrol___Patrol_Distance takes real x,real y returns real
     return SquareRoot(Pow(x, 2) + Pow(y, 2))
 endfunction
 
 //==================================================================================================
 
-function MultiPatrol__Patrol_PointReached takes nothing returns boolean
+function MultiPatrol___Patrol_PointReached takes nothing returns boolean
     local unit trigU= GetTriggerUnit()
     local integer u_handle= GetHandleId(trigU)
-    local integer currentPtrl= (LoadInteger(MultiPatrol__data, - (u_handle), (9996))) // INLINED!!
+    local integer currentPtrl= (LoadInteger(MultiPatrol___data, - (u_handle), (9996))) // INLINED!!
     local region ptrlReg= GetTriggeringRegion()
     local real oldX
     local real oldY
     local real newX
     local real newY
-    if trigU != LoadUnitHandle(MultiPatrol__data, GetHandleId(GetTriggeringTrigger()), 0) then
+    if trigU != LoadUnitHandle(MultiPatrol___data, GetHandleId(GetTriggeringTrigger()), 0) then
         set trigU=null
         set ptrlReg=null
         return false
     endif
 //
-    call MoveRectTo(MultiPatrol__ptrlRect, (LoadReal(MultiPatrol__data, (u_handle ), ( currentPtrl))), (LoadReal(MultiPatrol__data, (u_handle ), - ( currentPtrl)))) // INLINED!!
-    call RegionClearRect(ptrlReg, MultiPatrol__ptrlRect)
+    call MoveRectTo(MultiPatrol___ptrlRect, (LoadReal(MultiPatrol___data, (u_handle ), ( currentPtrl))), (LoadReal(MultiPatrol___data, (u_handle ), - ( currentPtrl)))) // INLINED!!
+    call RegionClearRect(ptrlReg, MultiPatrol___ptrlRect)
 //
-    if currentPtrl == (LoadInteger(MultiPatrol__data, - (u_handle), (9997))) then // INLINED!!
+    if currentPtrl == (LoadInteger(MultiPatrol___data, - (u_handle), (9997))) then // INLINED!!
         set currentPtrl=1
     else
         set currentPtrl=currentPtrl + 1
@@ -2771,23 +2768,23 @@ function MultiPatrol__Patrol_PointReached takes nothing returns boolean
     
     set oldX=GetUnitX(trigU)
     set oldY=GetUnitY(trigU)
-    set newX=(LoadReal(MultiPatrol__data, (u_handle ), ( currentPtrl))) // INLINED!!
-    set newY=(LoadReal(MultiPatrol__data, (u_handle ), - ( currentPtrl))) // INLINED!!
+    set newX=(LoadReal(MultiPatrol___data, (u_handle ), ( currentPtrl))) // INLINED!!
+    set newY=(LoadReal(MultiPatrol___data, (u_handle ), - ( currentPtrl))) // INLINED!!
             
     //TODO:System can still bug even if it's not the first point, if a unit is blocking the path
-    if (SquareRoot(Pow(((newX - oldX )*1.0), 2) + Pow((( newY - oldY)*1.0), 2))) <= MultiPatrol__MINIMUM_DISTANCE then // INLINED!!
+    if (SquareRoot(Pow(((newX - oldX )*1.0), 2) + Pow((( newY - oldY)*1.0), 2))) <= MultiPatrol___MINIMUM_DISTANCE then // INLINED!!
         set currentPtrl=currentPtrl + 1
     endif
     
-    call SaveInteger(MultiPatrol__data, - (u_handle ), (9996), ( currentPtrl)) // INLINED!!
+    call SaveInteger(MultiPatrol___data, - (u_handle ), (9996), ( currentPtrl)) // INLINED!!
 //
-    call MoveRectTo(MultiPatrol__ptrlRect, (LoadReal(MultiPatrol__data, (u_handle ), ( currentPtrl))), (LoadReal(MultiPatrol__data, (u_handle ), - ( currentPtrl)))) // INLINED!!
-    call RegionAddRect(ptrlReg, MultiPatrol__ptrlRect)
+    call MoveRectTo(MultiPatrol___ptrlRect, (LoadReal(MultiPatrol___data, (u_handle ), ( currentPtrl))), (LoadReal(MultiPatrol___data, (u_handle ), - ( currentPtrl)))) // INLINED!!
+    call RegionAddRect(ptrlReg, MultiPatrol___ptrlRect)
 //
-    set MultiPatrol__orderBool=true
-    if IssuePointOrder(trigU, "patrol", (LoadReal(MultiPatrol__data, (u_handle ), ( currentPtrl))), (LoadReal(MultiPatrol__data, (u_handle ), - ( currentPtrl)))) then // INLINED!!
+    set MultiPatrol___orderBool=true
+    if IssuePointOrder(trigU, "patrol", (LoadReal(MultiPatrol___data, (u_handle ), ( currentPtrl))), (LoadReal(MultiPatrol___data, (u_handle ), - ( currentPtrl)))) then // INLINED!!
     else
-        set MultiPatrol__orderBool=false
+        set MultiPatrol___orderBool=false
     endif
     
     set trigU=null
@@ -2802,37 +2799,37 @@ endfunction
 //===================
 
 function Patrol_UnitIdHasPatrolPoints takes integer unitHandleId returns boolean
-    return (LoadInteger(MultiPatrol__data, - (unitHandleId), (9996))) != 0 // INLINED!!
+    return (LoadInteger(MultiPatrol___data, - (unitHandleId), (9996))) != 0 // INLINED!!
 endfunction
 
 function Patrol_UnitHasPatrolPoints takes unit whichUnit returns boolean
-    return ((LoadInteger(MultiPatrol__data, - ((GetHandleId(whichUnit))), (9996))) != 0) // INLINED!!
+    return ((LoadInteger(MultiPatrol___data, - ((GetHandleId(whichUnit))), (9996))) != 0) // INLINED!!
 endfunction
 
 function Patrol_DestroyIdPoints takes integer u_handle returns nothing
-    local integer pnts_number= (LoadInteger(MultiPatrol__data, - (u_handle), (9997))) // INLINED!!
+    local integer pnts_number= (LoadInteger(MultiPatrol___data, - (u_handle), (9997))) // INLINED!!
     local integer i= 1
     
     loop
-    exitwhen i > pnts_number or (LoadEffectHandle(MultiPatrol__data, (u_handle ), MultiPatrol__INDEX_DISPLAY + ( i))) == null // INLINED!!
-        call BlzSetSpecialEffectAlpha((LoadEffectHandle(MultiPatrol__data, (u_handle ), MultiPatrol__INDEX_DISPLAY + ( i))), 0) // INLINED!!
-        call DestroyEffect((LoadEffectHandle(MultiPatrol__data, (u_handle ), MultiPatrol__INDEX_DISPLAY + ( i)))) // INLINED!!
-        call DestroyTextTag((LoadTextTagHandle(MultiPatrol__data, (u_handle ), - MultiPatrol__INDEX_DISPLAY - ( i)))) // INLINED!!
-        call RemoveSavedHandle(MultiPatrol__data, (u_handle ), MultiPatrol__INDEX_DISPLAY + ( i)) // INLINED!!
-        call RemoveSavedHandle(MultiPatrol__data, (u_handle ), - MultiPatrol__INDEX_DISPLAY - ( i)) // INLINED!!
+    exitwhen i > pnts_number or (LoadEffectHandle(MultiPatrol___data, (u_handle ), MultiPatrol___INDEX_DISPLAY + ( i))) == null // INLINED!!
+        call BlzSetSpecialEffectAlpha((LoadEffectHandle(MultiPatrol___data, (u_handle ), MultiPatrol___INDEX_DISPLAY + ( i))), 0) // INLINED!!
+        call DestroyEffect((LoadEffectHandle(MultiPatrol___data, (u_handle ), MultiPatrol___INDEX_DISPLAY + ( i)))) // INLINED!!
+        call DestroyTextTag((LoadTextTagHandle(MultiPatrol___data, (u_handle ), - MultiPatrol___INDEX_DISPLAY - ( i)))) // INLINED!!
+        call RemoveSavedHandle(MultiPatrol___data, (u_handle ), MultiPatrol___INDEX_DISPLAY + ( i)) // INLINED!!
+        call RemoveSavedHandle(MultiPatrol___data, (u_handle ), - MultiPatrol___INDEX_DISPLAY - ( i)) // INLINED!!
         
         set i=i + 1
     endloop
 endfunction
 
 function Patrol_ClearUnitIdData takes integer unitHandleId returns nothing
-    local trigger patrolTrig= (LoadTriggerHandle(MultiPatrol__data, - (unitHandleId), (9999))) // INLINED!!
+    local trigger patrolTrig= (LoadTriggerHandle(MultiPatrol___data, - (unitHandleId), (9999))) // INLINED!!
     
     call Patrol_DestroyIdPoints(unitHandleId)
-    call FlushChildHashtable(MultiPatrol__data, GetHandleId(patrolTrig))
-    call FlushChildHashtable(MultiPatrol__data, unitHandleId) // Clear patrol points
-    call FlushChildHashtable(MultiPatrol__data, - unitHandleId) // Clear other stuff
-    call RemoveRegion((LoadRegionHandle(MultiPatrol__data, - (unitHandleId), (9998)))) // INLINED!!
+    call FlushChildHashtable(MultiPatrol___data, GetHandleId(patrolTrig))
+    call FlushChildHashtable(MultiPatrol___data, unitHandleId) // Clear patrol points
+    call FlushChildHashtable(MultiPatrol___data, - unitHandleId) // Clear other stuff
+    call RemoveRegion((LoadRegionHandle(MultiPatrol___data, - (unitHandleId), (9998)))) // INLINED!!
     call DestroyTrigger(patrolTrig)
     
     set patrolTrig=null
@@ -2848,8 +2845,8 @@ function Patrol_IsValidPatrolOrder takes integer orderId returns boolean
     endif
     
     // Handle recursion
-    if MultiPatrol__orderBool then
-        set MultiPatrol__orderBool=false
+    if MultiPatrol___orderBool then
+        set MultiPatrol___orderBool=false
         return false
     endif
     
@@ -2858,7 +2855,7 @@ endfunction
 
 function Patrol_DisplayPoints takes unit whichUnit returns nothing
     local integer u_handle= GetHandleId(whichUnit)
-    local integer pnts_number= (LoadInteger(MultiPatrol__data, - (u_handle), (9997))) // INLINED!!
+    local integer pnts_number= (LoadInteger(MultiPatrol___data, - (u_handle), (9997))) // INLINED!!
     local integer i= 1
     local real x
     local real y
@@ -2867,16 +2864,16 @@ function Patrol_DisplayPoints takes unit whichUnit returns nothing
     
     loop
     exitwhen i > pnts_number
-        if (LoadEffectHandle(MultiPatrol__data, (u_handle ), MultiPatrol__INDEX_DISPLAY + ( i))) == null then // INLINED!!
-            set x=(LoadReal(MultiPatrol__data, (u_handle ), ( i))) // INLINED!!
-            set y=(LoadReal(MultiPatrol__data, (u_handle ), - ( i))) // INLINED!!
+        if (LoadEffectHandle(MultiPatrol___data, (u_handle ), MultiPatrol___INDEX_DISPLAY + ( i))) == null then // INLINED!!
+            set x=(LoadReal(MultiPatrol___data, (u_handle ), ( i))) // INLINED!!
+            set y=(LoadReal(MultiPatrol___data, (u_handle ), - ( i))) // INLINED!!
         
             set tag=CreateTextTag()
             set spEffect=AddSpecialEffect("UI\\Feedback\\RallyPoint\\RallyPoint.mdl", x, y)
             call SetTextTagText(tag, I2S(i), 0.023)
             call SetTextTagPos(tag, x - 32, y, 0)
-            call SaveEffectHandle(MultiPatrol__data, (u_handle ), MultiPatrol__INDEX_DISPLAY + ( i ), ( spEffect)) // INLINED!!
-            call SaveTextTagHandle(MultiPatrol__data, (u_handle ), - MultiPatrol__INDEX_DISPLAY - ( i ), ( tag)) // INLINED!!
+            call SaveEffectHandle(MultiPatrol___data, (u_handle ), MultiPatrol___INDEX_DISPLAY + ( i ), ( spEffect)) // INLINED!!
+            call SaveTextTagHandle(MultiPatrol___data, (u_handle ), - MultiPatrol___INDEX_DISPLAY - ( i ), ( tag)) // INLINED!!
             if GetLocalPlayer() != GetOwningPlayer(whichUnit) then
                 call SetTextTagVisibility(tag, false)
                 call BlzSetSpecialEffectAlpha(spEffect, 0)
@@ -2895,22 +2892,22 @@ endfunction
 
 function Patrol_ResumePatrol takes unit whichUnit returns nothing
     local integer u_handle= GetHandleId(whichUnit)
-    local integer currentPtrl= (LoadInteger(MultiPatrol__data, - (u_handle), (9996))) // INLINED!!
-    local real patrolX= (LoadReal(MultiPatrol__data, (u_handle ), ( currentPtrl))) // INLINED!!
-    local real patrolY= (LoadReal(MultiPatrol__data, (u_handle ), - ( currentPtrl))) // INLINED!!
+    local integer currentPtrl= (LoadInteger(MultiPatrol___data, - (u_handle), (9996))) // INLINED!!
+    local real patrolX= (LoadReal(MultiPatrol___data, (u_handle ), ( currentPtrl))) // INLINED!!
+    local real patrolY= (LoadReal(MultiPatrol___data, (u_handle ), - ( currentPtrl))) // INLINED!!
     
-    if not ((LoadInteger(MultiPatrol__data, - ((u_handle)), (9996))) != 0) then //currentPtrl == 0 then // INLINED!!
+    if not ((LoadInteger(MultiPatrol___data, - ((u_handle)), (9996))) != 0) then //currentPtrl == 0 then // INLINED!!
         return
     endif
     
-    set MultiPatrol__orderBool=true
-    if (SquareRoot(Pow(((patrolX - GetUnitX(whichUnit) )*1.0), 2) + Pow((( patrolY - GetUnitY(whichUnit))*1.0), 2))) > MultiPatrol__MINIMUM_DISTANCE then // INLINED!!
+    set MultiPatrol___orderBool=true
+    if (SquareRoot(Pow(((patrolX - GetUnitX(whichUnit) )*1.0), 2) + Pow((( patrolY - GetUnitY(whichUnit))*1.0), 2))) > MultiPatrol___MINIMUM_DISTANCE then // INLINED!!
         if not IssuePointOrder(whichUnit, "patrol", patrolX, patrolY) then
-            set MultiPatrol__orderBool=false
+            set MultiPatrol___orderBool=false
         endif
     else
         if not IssuePointOrder(whichUnit, "move", patrolX, patrolY) then
-            set MultiPatrol__orderBool=false
+            set MultiPatrol___orderBool=false
         endif
     endif
 endfunction
@@ -2920,25 +2917,25 @@ function Patrol_Create takes unit whichUnit,real x0,real y0,real x,real y return
     local trigger dynTrig
     local region ptrlReg
     
-    if (SquareRoot(Pow(((x - x0 )*1.0), 2) + Pow((( y - y0)*1.0), 2))) > MultiPatrol__MINIMUM_DISTANCE then // INLINED!!
+    if (SquareRoot(Pow(((x - x0 )*1.0), 2) + Pow((( y - y0)*1.0), 2))) > MultiPatrol___MINIMUM_DISTANCE then // INLINED!!
         set dynTrig=CreateTrigger()
         set ptrlReg=CreateRegion()
         
-        call SaveInteger(MultiPatrol__data, - (u_handle ), (9997), ( 2)) // INLINED!!
-        call SaveInteger(MultiPatrol__data, - (u_handle ), (9996), ( 2)) // INLINED!!
-        call SaveReal(MultiPatrol__data, (u_handle ), ( 1 ), (( x0)*1.0)) // INLINED!!
-        call SaveReal(MultiPatrol__data, (u_handle ), - ( 1 ), (( y0)*1.0)) // INLINED!!
-        call SaveReal(MultiPatrol__data, (u_handle ), ( 2 ), (( x)*1.0)) // INLINED!!
-        call SaveReal(MultiPatrol__data, (u_handle ), - ( 2 ), (( y)*1.0)) // INLINED!!
-        call SaveTriggerHandle(MultiPatrol__data, - (u_handle ), (9999), ( dynTrig)) // INLINED!!
-        call SaveRegionHandle(MultiPatrol__data, - (u_handle ), (9998), ( ptrlReg)) // INLINED!!
+        call SaveInteger(MultiPatrol___data, - (u_handle ), (9997), ( 2)) // INLINED!!
+        call SaveInteger(MultiPatrol___data, - (u_handle ), (9996), ( 2)) // INLINED!!
+        call SaveReal(MultiPatrol___data, (u_handle ), ( 1 ), (( x0)*1.0)) // INLINED!!
+        call SaveReal(MultiPatrol___data, (u_handle ), - ( 1 ), (( y0)*1.0)) // INLINED!!
+        call SaveReal(MultiPatrol___data, (u_handle ), ( 2 ), (( x)*1.0)) // INLINED!!
+        call SaveReal(MultiPatrol___data, (u_handle ), - ( 2 ), (( y)*1.0)) // INLINED!!
+        call SaveTriggerHandle(MultiPatrol___data, - (u_handle ), (9999), ( dynTrig)) // INLINED!!
+        call SaveRegionHandle(MultiPatrol___data, - (u_handle ), (9998), ( ptrlReg)) // INLINED!!
         
-        call MoveRectTo(MultiPatrol__ptrlRect, x, y)
-        call RegionAddRect(ptrlReg, MultiPatrol__ptrlRect)
+        call MoveRectTo(MultiPatrol___ptrlRect, x, y)
+        call RegionAddRect(ptrlReg, MultiPatrol___ptrlRect)
         
         call TriggerRegisterEnterRegion(dynTrig, ptrlReg, null)
-        call TriggerAddCondition(dynTrig, Condition(function MultiPatrol__Patrol_PointReached))
-        call SaveUnitHandle(MultiPatrol__data, GetHandleId(dynTrig), 0, whichUnit)
+        call TriggerAddCondition(dynTrig, Condition(function MultiPatrol___Patrol_PointReached))
+        call SaveUnitHandle(MultiPatrol___data, GetHandleId(dynTrig), 0, whichUnit)
 
         set dynTrig=null
         set ptrlReg=null
@@ -2950,22 +2947,22 @@ endfunction
 
 function Patrol_AddPoint takes unit whichUnit,real newX,real newY returns integer
     local integer u_handle= GetHandleId(whichUnit)
-    local integer pnts_number= (LoadInteger(MultiPatrol__data, - (u_handle), (9997))) // INLINED!!
+    local integer pnts_number= (LoadInteger(MultiPatrol___data, - (u_handle), (9997))) // INLINED!!
     local real oldX
     local real oldY
     
-    if pnts_number > MultiPatrol__MAX_POINTS then
+    if pnts_number > MultiPatrol___MAX_POINTS then
         return MultiPatrol_ERROR_OVERFLOW
     
     elseif pnts_number > 0 then
-        set oldX=(LoadReal(MultiPatrol__data, (u_handle ), ( pnts_number))) // INLINED!!
-        set oldY=(LoadReal(MultiPatrol__data, (u_handle ), - ( pnts_number))) // INLINED!!
+        set oldX=(LoadReal(MultiPatrol___data, (u_handle ), ( pnts_number))) // INLINED!!
+        set oldY=(LoadReal(MultiPatrol___data, (u_handle ), - ( pnts_number))) // INLINED!!
         
-        if (SquareRoot(Pow(((newX - oldX )*1.0), 2) + Pow((( newY - oldY)*1.0), 2))) > MultiPatrol__MINIMUM_DISTANCE then // INLINED!!
+        if (SquareRoot(Pow(((newX - oldX )*1.0), 2) + Pow((( newY - oldY)*1.0), 2))) > MultiPatrol___MINIMUM_DISTANCE then // INLINED!!
             set pnts_number=pnts_number + 1
-            call SaveInteger(MultiPatrol__data, - (u_handle ), (9997), ( pnts_number)) // INLINED!!
-            call SaveReal(MultiPatrol__data, (u_handle ), ( pnts_number ), (( newX)*1.0)) // INLINED!!
-            call SaveReal(MultiPatrol__data, (u_handle ), - ( pnts_number ), (( newY)*1.0)) // INLINED!!
+            call SaveInteger(MultiPatrol___data, - (u_handle ), (9997), ( pnts_number)) // INLINED!!
+            call SaveReal(MultiPatrol___data, (u_handle ), ( pnts_number ), (( newX)*1.0)) // INLINED!!
+            call SaveReal(MultiPatrol___data, (u_handle ), - ( pnts_number ), (( newY)*1.0)) // INLINED!!
         else
             return MultiPatrol_ERROR_TOO_CLOSE
         endif
@@ -2994,8 +2991,8 @@ endfunction
 //  ------------------------
 // ||END OF PATROL SYSTEM ||
 //  
-function MultiPatrol__onInit takes nothing returns nothing
-    set MultiPatrol__ptrlRect=Rect(0, 0, MultiPatrol__RANGE, MultiPatrol__RANGE)
+function MultiPatrol___onInit takes nothing returns nothing
+    set MultiPatrol___ptrlRect=Rect(0, 0, MultiPatrol___RANGE, MultiPatrol___RANGE)
 endfunction
 
 
@@ -4333,49 +4330,49 @@ endfunction
 //===============
 // Setters
 function Camera_SetDefaultRotator takes integer playerId,unit whichUnit returns nothing
-    set ThirdPersonCamera__focusUnits[playerId + 2 * bj_MAX_PLAYERS]=whichUnit
+    set ThirdPersonCamera___focusUnits[playerId + 2 * bj_MAX_PLAYERS]=whichUnit
 endfunction
 
 function Camera_SetRotator takes integer playerId,unit whichUnit returns nothing
-    set ThirdPersonCamera__focusUnits[playerId + bj_MAX_PLAYERS]=whichUnit
+    set ThirdPersonCamera___focusUnits[playerId + bj_MAX_PLAYERS]=whichUnit
 endfunction
 
 function Camera_SetTarget takes integer playerId,unit whichUnit returns nothing
-    set ThirdPersonCamera__focusUnits[playerId]=whichUnit
+    set ThirdPersonCamera___focusUnits[playerId]=whichUnit
 endfunction
 
 //===============
 // Getters
 function Camera_GetDefaultRotator takes integer playerId returns unit
-    return ThirdPersonCamera__focusUnits[playerId + 2 * bj_MAX_PLAYERS]
+    return ThirdPersonCamera___focusUnits[playerId + 2 * bj_MAX_PLAYERS]
 endfunction
 
 function Camera_GetRotator takes integer playerId returns unit
-    return ThirdPersonCamera__focusUnits[playerId + bj_MAX_PLAYERS]
+    return ThirdPersonCamera___focusUnits[playerId + bj_MAX_PLAYERS]
 endfunction
 
 function Camera_GetTarget takes integer playerId returns unit
-    return ThirdPersonCamera__focusUnits[playerId]
+    return ThirdPersonCamera___focusUnits[playerId]
 endfunction
 //===========================================================================
 // API
 //===============
 function Camera_WasHelpSeen takes integer playerId returns boolean
-    return not HaveSavedBoolean(ThirdPersonCamera__data, playerId, - 1)
+    return not HaveSavedBoolean(ThirdPersonCamera___data, playerId, - 1)
 endfunction
 
 function Camera_SetHelpSeen takes integer playerId,boolean flag returns nothing
     if flag then
-        call RemoveSavedBoolean(ThirdPersonCamera__data, playerId, - 1)
+        call RemoveSavedBoolean(ThirdPersonCamera___data, playerId, - 1)
     else
-        call SaveBoolean(ThirdPersonCamera__data, playerId, - 1, true)
+        call SaveBoolean(ThirdPersonCamera___data, playerId, - 1, true)
     endif
 endfunction
 
 function Camera_SetFirstPerson takes player whichPlayer,unit whichUnit returns nothing
     local real sleepTime
     
-    if not (not HaveSavedBoolean(ThirdPersonCamera__data, (GetPlayerId(whichPlayer)), - 1)) then // INLINED!!
+    if not (not HaveSavedBoolean(ThirdPersonCamera___data, (GetPlayerId(whichPlayer)), - 1)) then // INLINED!!
         call DisplayTextToPlayer(whichPlayer, 0, 0, ("First Person Camera Enabled!\n\nTo leave this perspective, double-click the |c00ffff00Esc|r key.\nTo fix the camera to the unit's facing, click the |c00ffff00Esc|r key.\nTo allow the camera to move independently, click the |c00ffff00Esc|r key.\n\nYou can use the |c00ffff00left|r and |c00ffff00right|r arrow keys to move the camera.\nYou can find the commands for the camera by pressing |c00ffff00F9|r.")) // INLINED!!
         call Camera_SetHelpSeen(GetPlayerId(whichPlayer) , true)
     endif
@@ -4397,12 +4394,12 @@ function Camera_SetFirstPerson takes player whichPlayer,unit whichUnit returns n
         endif
     endif
     
-    set ThirdPersonCamera__focusUnits[(GetPlayerId(whichPlayer) )]=( whichUnit) // INLINED!!
-    set ThirdPersonCamera__focusUnits[(GetPlayerId(whichPlayer) ) + bj_MAX_PLAYERS]=( (ThirdPersonCamera__focusUnits[(GetPlayerId(whichPlayer)) + 2 * bj_MAX_PLAYERS])) // INLINED!!
+    set ThirdPersonCamera___focusUnits[(GetPlayerId(whichPlayer) )]=( whichUnit) // INLINED!!
+    set ThirdPersonCamera___focusUnits[(GetPlayerId(whichPlayer) ) + bj_MAX_PLAYERS]=( (ThirdPersonCamera___focusUnits[(GetPlayerId(whichPlayer)) + 2 * bj_MAX_PLAYERS])) // INLINED!!
 endfunction
 
 function Camera_SetThirdPerson takes player whichPlayer returns nothing
-    set ThirdPersonCamera__focusUnits[(GetPlayerId(whichPlayer) )]=( null) // INLINED!!
+    set ThirdPersonCamera___focusUnits[(GetPlayerId(whichPlayer) )]=( null) // INLINED!!
     if GetLocalPlayer() == whichPlayer then
         call StopCamera()
         call ResetToGameCamera((1.0)) // INLINED!!
@@ -4420,6 +4417,7 @@ function Camera_SetFirstPersonSelected takes player p returns nothing
     
     call DestroyGroup(g)
     set g=null
+    set u=null
 endfunction
 
 // Clears ALL of a player's data related to this system, including the default rotation unit and timers.
@@ -4427,27 +4425,27 @@ function Camera_ClearPlayerData takes player whichPlayer returns nothing
     local integer playerId= GetPlayerId(whichPlayer)
 
     // Flushing this will also destroy timers for arrow keys
-    call FlushChildHashtable(ThirdPersonCamera__data, playerId)
+    call FlushChildHashtable(ThirdPersonCamera___data, playerId)
     
     // Remove useless unit and null everything to avoid handle reference leaks
-    call RemoveUnit((ThirdPersonCamera__focusUnits[(playerId) + 2 * bj_MAX_PLAYERS])) // INLINED!!
-    set ThirdPersonCamera__focusUnits[(playerId ) + 2 * bj_MAX_PLAYERS]=( null) // INLINED!!
-    set ThirdPersonCamera__focusUnits[(playerId ) + bj_MAX_PLAYERS]=( null) // INLINED!!
-    set ThirdPersonCamera__focusUnits[(playerId )]=( null) // INLINED!!
+    call RemoveUnit((ThirdPersonCamera___focusUnits[(playerId) + 2 * bj_MAX_PLAYERS])) // INLINED!!
+    set ThirdPersonCamera___focusUnits[(playerId ) + 2 * bj_MAX_PLAYERS]=( null) // INLINED!!
+    set ThirdPersonCamera___focusUnits[(playerId ) + bj_MAX_PLAYERS]=( null) // INLINED!!
+    set ThirdPersonCamera___focusUnits[(playerId )]=( null) // INLINED!!
 endfunction
 //===========================================================================
 // Key Event Handling: Left and Right arrows
 //===============
 // Utility
 function Camera_IsKeyPressed takes integer playerId,integer whichKey returns boolean
-    return HaveSavedBoolean(ThirdPersonCamera__data, playerId, whichKey)
+    return HaveSavedBoolean(ThirdPersonCamera___data, playerId, whichKey)
 endfunction
 
 function Camera_SetKeyPressed takes integer playerId,integer whichKey,boolean flag returns nothing
     if flag then
-        call SaveBoolean(ThirdPersonCamera__data, playerId, whichKey, true)
+        call SaveBoolean(ThirdPersonCamera___data, playerId, whichKey, true)
     else
-        call RemoveSavedBoolean(ThirdPersonCamera__data, playerId, whichKey)
+        call RemoveSavedBoolean(ThirdPersonCamera___data, playerId, whichKey)
     endif
 endfunction
 
@@ -4456,10 +4454,10 @@ endfunction
 function Camera_TimerFunc2 takes nothing returns nothing
     local unit u
     local timer t= GetExpiredTimer()
-    local integer playerId= LoadInteger(ThirdPersonCamera__data, GetHandleId(t), 0)
+    local integer playerId= LoadInteger(ThirdPersonCamera___data, GetHandleId(t), 0)
     
-    if ( (HaveSavedBoolean(ThirdPersonCamera__data, (playerId ), ( (1)))) ) then // INLINED!!
-        set u=(ThirdPersonCamera__focusUnits[(playerId) + bj_MAX_PLAYERS]) // INLINED!!
+    if ( (HaveSavedBoolean(ThirdPersonCamera___data, (playerId ), ( (1)))) ) then // INLINED!!
+        set u=(ThirdPersonCamera___focusUnits[(playerId) + bj_MAX_PLAYERS]) // INLINED!!
         call SetUnitFacing(u, GetUnitFacing(u) + 10.)
         set u=null
     else
@@ -4472,14 +4470,14 @@ endfunction
 function Camera_TimerFunc_RightArrow takes nothing returns nothing
     local unit u
     local timer t= GetExpiredTimer()
-    local integer playerId= LoadInteger(ThirdPersonCamera__data, GetHandleId(t), 0)
+    local integer playerId= LoadInteger(ThirdPersonCamera___data, GetHandleId(t), 0)
     
-    if ( (HaveSavedBoolean(ThirdPersonCamera__data, (playerId ), ( (2)))) ) then // INLINED!!
-        set u=(ThirdPersonCamera__focusUnits[(playerId) + bj_MAX_PLAYERS]) // INLINED!!
+    if ( (HaveSavedBoolean(ThirdPersonCamera___data, (playerId ), ( (2)))) ) then // INLINED!!
+        set u=(ThirdPersonCamera___focusUnits[(playerId) + bj_MAX_PLAYERS]) // INLINED!!
         call SetUnitFacing(u, GetUnitFacing(u) - 10.)
         set u=null
     else
-        call FlushChildHashtable(ThirdPersonCamera__data, GetHandleId(t))
+        call FlushChildHashtable(ThirdPersonCamera___data, GetHandleId(t))
         call PauseTimer(t)
         call DestroyTimer(t)
     endif
@@ -4491,18 +4489,18 @@ endfunction
 function SideArrowPress takes integer playerId,integer whichKey,code handlerFunc returns nothing
     local timer t
     
-    if (ThirdPersonCamera__focusUnits[(playerId)]) == null then // INLINED!!
+    if (ThirdPersonCamera___focusUnits[(playerId)]) == null then // INLINED!!
         return
     endif
     
-    if (HaveSavedBoolean(ThirdPersonCamera__data, (playerId ), ( whichKey))) then // INLINED!!
+    if (HaveSavedBoolean(ThirdPersonCamera___data, (playerId ), ( whichKey))) then // INLINED!!
         call Camera_SetKeyPressed(playerId , whichKey , false)
     else
         call Camera_SetKeyPressed(playerId , whichKey , true)
         
         set t=CreateTimer()
         call TimerStart(t, 0.03, true, handlerFunc)
-        call SaveInteger(ThirdPersonCamera__data, GetHandleId(t), 0, playerId)
+        call SaveInteger(ThirdPersonCamera___data, GetHandleId(t), 0, playerId)
         set t=null
     endif
 endfunction
@@ -4519,35 +4517,35 @@ endfunction
 // Key Event Handling: Esc
 //===============
 function Camera_GetEscClicks takes integer playerId returns integer
-    return LoadInteger(ThirdPersonCamera__data, playerId, (0)) // INLINED!!
+    return LoadInteger(ThirdPersonCamera___data, playerId, (0)) // INLINED!!
 endfunction
 
 function Camera_SetEscClicks takes integer playerId,integer value returns nothing
-    call SaveInteger(ThirdPersonCamera__data, playerId, (0), value) // INLINED!!
+    call SaveInteger(ThirdPersonCamera___data, playerId, (0), value) // INLINED!!
 endfunction
 
 function Camera_ResetEscClicks takes integer playerId returns nothing
-    call RemoveSavedInteger(ThirdPersonCamera__data, playerId, (0)) // INLINED!!
+    call RemoveSavedInteger(ThirdPersonCamera___data, playerId, (0)) // INLINED!!
 endfunction
 
 function Camera_Trig_Esc_Actions takes nothing returns nothing
     local player p= GetTriggerPlayer()
     local integer pId= GetPlayerId(p)
-    local integer count= (LoadInteger(ThirdPersonCamera__data, (pId), (0))) // INLINED!!
+    local integer count= (LoadInteger(ThirdPersonCamera___data, (pId), (0))) // INLINED!!
     
     if count == 0 then
-        if (ThirdPersonCamera__focusUnits[(pId) + bj_MAX_PLAYERS]) == (ThirdPersonCamera__focusUnits[(pId)]) then // INLINED!!
-            set ThirdPersonCamera__focusUnits[(pId ) + bj_MAX_PLAYERS]=( (ThirdPersonCamera__focusUnits[(pId) + 2 * bj_MAX_PLAYERS])) // INLINED!!
+        if (ThirdPersonCamera___focusUnits[(pId) + bj_MAX_PLAYERS]) == (ThirdPersonCamera___focusUnits[(pId)]) then // INLINED!!
+            set ThirdPersonCamera___focusUnits[(pId ) + bj_MAX_PLAYERS]=( (ThirdPersonCamera___focusUnits[(pId) + 2 * bj_MAX_PLAYERS])) // INLINED!!
         else
-            set ThirdPersonCamera__focusUnits[(pId ) + bj_MAX_PLAYERS]=( (ThirdPersonCamera__focusUnits[(pId)])) // INLINED!!
+            set ThirdPersonCamera___focusUnits[(pId ) + bj_MAX_PLAYERS]=( (ThirdPersonCamera___focusUnits[(pId)])) // INLINED!!
         endif
         
-        call SaveInteger(ThirdPersonCamera__data, (pId ), (0), ( count + 1)) // INLINED!!
+        call SaveInteger(ThirdPersonCamera___data, (pId ), (0), ( count + 1)) // INLINED!!
         call TriggerSleepAction(.4)
-        call RemoveSavedInteger(ThirdPersonCamera__data, (pId), (0)) // INLINED!!
+        call RemoveSavedInteger(ThirdPersonCamera___data, (pId), (0)) // INLINED!!
     elseif count == 1 then
-        call SaveInteger(ThirdPersonCamera__data, (pId ), (0), ( count + 1)) // INLINED!!
-        if (ThirdPersonCamera__focusUnits[(pId)]) != null then // INLINED!!
+        call SaveInteger(ThirdPersonCamera___data, (pId ), (0), ( count + 1)) // INLINED!!
+        if (ThirdPersonCamera___focusUnits[(pId)]) != null then // INLINED!!
             call Camera_SetThirdPerson(p)
         else
             call Camera_SetFirstPersonSelected(p) // There is a wait in this function
@@ -4562,13 +4560,13 @@ endfunction
 // Returns the minimum angle between mouse and unit for camera to turn.
 // This is a per-player setting, since it may vary with screen resolution.
 function Camera_GetMinAngle takes integer playerId returns real
-    return LoadReal(ThirdPersonCamera__data, playerId, (3)) // INLINED!!
+    return LoadReal(ThirdPersonCamera___data, playerId, (3)) // INLINED!!
 endfunction
 
 // Sets the minimum angle between mouse and unit for camera to turn.
 // This is a per-player setting, since it may vary with screen resolution.
 function Camera_SetMinAngle takes integer playerId,real angle returns nothing
-    call SaveReal(ThirdPersonCamera__data, playerId, (3), angle) // INLINED!!
+    call SaveReal(ThirdPersonCamera___data, playerId, (3), angle) // INLINED!!
 endfunction
 
 function Camera_AngleToMouse takes unit u,integer playerId,real x,real y returns real
@@ -4576,18 +4574,18 @@ function Camera_AngleToMouse takes unit u,integer playerId,real x,real y returns
     local real mouseY= BlzGetTriggerPlayerMouseY()
     local real newAngle= bj_RADTODEG * Atan2(mouseY - y, mouseX - x)
     local real difference
-    local real minAngle= (LoadReal(ThirdPersonCamera__data, (playerId), (3))) // INLINED!!
+    local real minAngle= (LoadReal(ThirdPersonCamera___data, (playerId), (3))) // INLINED!!
     
     if newAngle < 0 then
         set newAngle=360 + newAngle // Convert negative angles to positive, since GetUnitFacing always returns positives
     endif
-    set difference=newAngle - GetUnitFacing((ThirdPersonCamera__focusUnits[(playerId) + bj_MAX_PLAYERS])) // INLINED!!
+    set difference=newAngle - GetUnitFacing((ThirdPersonCamera___focusUnits[(playerId) + bj_MAX_PLAYERS])) // INLINED!!
     
     // If both mouseX and Y are 0, then the mouse is (probably) on the UI
     if ( difference > minAngle or difference < - minAngle ) and ( mouseX != 0 and mouseY != 0 ) then
         return newAngle
     else
-        return GetUnitFacing((ThirdPersonCamera__focusUnits[(playerId) + bj_MAX_PLAYERS])) // INLINED!!
+        return GetUnitFacing((ThirdPersonCamera___focusUnits[(playerId) + bj_MAX_PLAYERS])) // INLINED!!
     endif
 endfunction
 
@@ -4595,10 +4593,10 @@ endfunction
 function Trig_CameraMouse_Actions takes nothing returns nothing
     local player trigPlayer= GetTriggerPlayer()
     local integer playerId= GetPlayerId(trigPlayer)
-    local unit u= (ThirdPersonCamera__focusUnits[(playerId)]) // INLINED!!
+    local unit u= (ThirdPersonCamera___focusUnits[(playerId)]) // INLINED!!
     
     if u != null then
-        call SetUnitFacing((ThirdPersonCamera__focusUnits[(playerId) + bj_MAX_PLAYERS]), Camera_AngleToMouse(u , playerId , GetUnitX(u) , GetUnitY(u))) // INLINED!!
+        call SetUnitFacing((ThirdPersonCamera___focusUnits[(playerId) + bj_MAX_PLAYERS]), Camera_AngleToMouse(u , playerId , GetUnitX(u) , GetUnitY(u))) // INLINED!!
         set u=null
     endif
 endfunction
@@ -4615,13 +4613,13 @@ function Trig_Commands_First_Person_Actions takes nothing returns nothing
     elseif chatStr == ("-third person") then // INLINED!!
         call Camera_SetThirdPerson(p)
     elseif chatStr == ("-fixed camera") then // INLINED!!
-        set ThirdPersonCamera__focusUnits[(GetPlayerId(p) ) + bj_MAX_PLAYERS]=( (ThirdPersonCamera__focusUnits[(GetPlayerId(p))])) // INLINED!!
+        set ThirdPersonCamera___focusUnits[(GetPlayerId(p) ) + bj_MAX_PLAYERS]=( (ThirdPersonCamera___focusUnits[(GetPlayerId(p))])) // INLINED!!
     elseif chatStr == ("-free camera") then // INLINED!!
-        set ThirdPersonCamera__focusUnits[(GetPlayerId(p) ) + bj_MAX_PLAYERS]=( (ThirdPersonCamera__focusUnits[(GetPlayerId(p)) + 2 * bj_MAX_PLAYERS])) // INLINED!!
+        set ThirdPersonCamera___focusUnits[(GetPlayerId(p) ) + bj_MAX_PLAYERS]=( (ThirdPersonCamera___focusUnits[(GetPlayerId(p)) + 2 * bj_MAX_PLAYERS])) // INLINED!!
     elseif chatStr == ("-help camera") then // INLINED!!
         call DisplayTextToPlayer(p, 0, 0, ("First Person Camera Enabled!\n\nTo leave this perspective, double-click the |c00ffff00Esc|r key.\nTo fix the camera to the unit's facing, click the |c00ffff00Esc|r key.\nTo allow the camera to move independently, click the |c00ffff00Esc|r key.\n\nYou can use the |c00ffff00left|r and |c00ffff00right|r arrow keys to move the camera.\nYou can find the commands for the camera by pressing |c00ffff00F9|r.")) // INLINED!!
     else
-        call SaveReal(ThirdPersonCamera__data, (GetPlayerId(p) ), (3), (( S2R(SubString(chatStr, StringLength(GetEventPlayerChatStringMatched()), StringLength(chatStr))))*1.0)) // INLINED!!
+        call SaveReal(ThirdPersonCamera___data, (GetPlayerId(p) ), (3), (( S2R(SubString(chatStr, StringLength(GetEventPlayerChatStringMatched()), StringLength(chatStr))))*1.0)) // INLINED!!
     endif
 endfunction
 
@@ -4634,11 +4632,11 @@ function Camera_TimerFunc takes nothing returns nothing
     local player localPlayer= GetLocalPlayer()
     local integer playerId= GetPlayerId(localPlayer)
     
-    if ThirdPersonCamera__focusUnits[playerId] != null then
-        call SetCameraField(CAMERA_FIELD_ROTATION, GetUnitFacing(ThirdPersonCamera__focusUnits[playerId + bj_MAX_PLAYERS]), 0)
+    if ThirdPersonCamera___focusUnits[playerId] != null then
+        call SetCameraField(CAMERA_FIELD_ROTATION, GetUnitFacing(ThirdPersonCamera___focusUnits[playerId + bj_MAX_PLAYERS]), 0)
         call SetCameraField(CAMERA_FIELD_ANGLE_OF_ATTACK, 350.00, 0)
         call SetCameraField(CAMERA_FIELD_TARGET_DISTANCE, 140.00, 0)
-        call SetCameraField(CAMERA_FIELD_ZOFFSET, ( GetUnitFlyHeight(ThirdPersonCamera__focusUnits[playerId]) + 125.00 ), 0.01)
+        call SetCameraField(CAMERA_FIELD_ZOFFSET, ( GetUnitFlyHeight(ThirdPersonCamera___focusUnits[playerId]) + 125.00 ), 0.01)
     endif
 endfunction
 
@@ -4658,26 +4656,26 @@ function Camera_ForForce_Init takes nothing returns nothing
             call TriggerRegisterPlayerChatEvent(gg_trg_Camera_System, enumPlayer, ("-help camera"), true) // INLINED!!
             call TriggerRegisterPlayerChatEvent(gg_trg_Camera_System, enumPlayer, ("-sensitivity "), false) // INLINED!!
         endif
-        call TriggerRegisterPlayerMouseEventBJ(ThirdPersonCamera__triggerMouse, enumPlayer, bj_MOUSEEVENTTYPE_MOVE)
+        call TriggerRegisterPlayerMouseEventBJ(ThirdPersonCamera___triggerMouse, enumPlayer, bj_MOUSEEVENTTYPE_MOVE)
         
-        call TriggerRegisterPlayerEvent(ThirdPersonCamera__triggerLeft, enumPlayer, EVENT_PLAYER_ARROW_LEFT_DOWN)
-        call TriggerRegisterPlayerEvent(ThirdPersonCamera__triggerLeft, enumPlayer, EVENT_PLAYER_ARROW_LEFT_UP)
+        call TriggerRegisterPlayerEvent(ThirdPersonCamera___triggerLeft, enumPlayer, EVENT_PLAYER_ARROW_LEFT_DOWN)
+        call TriggerRegisterPlayerEvent(ThirdPersonCamera___triggerLeft, enumPlayer, EVENT_PLAYER_ARROW_LEFT_UP)
     
-        call TriggerRegisterPlayerEvent(ThirdPersonCamera__triggerRight, enumPlayer, EVENT_PLAYER_ARROW_RIGHT_DOWN)
-        call TriggerRegisterPlayerEvent(ThirdPersonCamera__triggerRight, enumPlayer, EVENT_PLAYER_ARROW_RIGHT_UP)
+        call TriggerRegisterPlayerEvent(ThirdPersonCamera___triggerRight, enumPlayer, EVENT_PLAYER_ARROW_RIGHT_DOWN)
+        call TriggerRegisterPlayerEvent(ThirdPersonCamera___triggerRight, enumPlayer, EVENT_PLAYER_ARROW_RIGHT_UP)
         
-        call TriggerRegisterPlayerEvent(ThirdPersonCamera__triggerEsc, enumPlayer, EVENT_PLAYER_END_CINEMATIC)
+        call TriggerRegisterPlayerEvent(ThirdPersonCamera___triggerEsc, enumPlayer, EVENT_PLAYER_END_CINEMATIC)
         
-        call TriggerRegisterPlayerEvent(ThirdPersonCamera__triggerCleanup, enumPlayer, EVENT_PLAYER_LEAVE)
+        call TriggerRegisterPlayerEvent(ThirdPersonCamera___triggerCleanup, enumPlayer, EVENT_PLAYER_LEAVE)
         
         set u=CreateUnit((Player(bj_PLAYER_NEUTRAL_EXTRA)), ('nvil'), (0.0), (0.0), bj_UNIT_FACING) // INLINED!!
         call UnitAddAbility(u, 'Aloc')
         call SetUnitInvulnerable(u, true)
         call ShowUnit(u, false)
         call SetUnitTurnSpeed(u, 3.)
-        set ThirdPersonCamera__focusUnits[(GetPlayerId(enumPlayer) ) + 2 * bj_MAX_PLAYERS]=( u) // INLINED!!
-        set ThirdPersonCamera__focusUnits[(GetPlayerId(enumPlayer) ) + bj_MAX_PLAYERS]=( u) // INLINED!!
-        call SaveReal(ThirdPersonCamera__data, (GetPlayerId(enumPlayer) ), (3), (( 39.0)*1.0)) // INLINED!!
+        set ThirdPersonCamera___focusUnits[(GetPlayerId(enumPlayer) ) + 2 * bj_MAX_PLAYERS]=( u) // INLINED!!
+        set ThirdPersonCamera___focusUnits[(GetPlayerId(enumPlayer) ) + bj_MAX_PLAYERS]=( u) // INLINED!!
+        call SaveReal(ThirdPersonCamera___data, (GetPlayerId(enumPlayer) ), (3), (( 39.0)*1.0)) // INLINED!!
         
         call Camera_SetHelpSeen(GetPlayerId(enumPlayer) , false)
         
@@ -4694,26 +4692,26 @@ function InitTrig_Camera_System takes nothing returns nothing
     local timer t= CreateTimer()
     call TimerStart(t, 0.03, true, function Camera_TimerFunc)
     
-    set ThirdPersonCamera__data=InitHashtable()
+    set ThirdPersonCamera___data=InitHashtable()
     
     if ("-first person") != "" then // INLINED!!
         set gg_trg_Camera_System=CreateTrigger()
         call TriggerAddAction(gg_trg_Camera_System, function Trig_Commands_First_Person_Actions)
     endif
 
-    set ThirdPersonCamera__triggerLeft=CreateTrigger()
-    set ThirdPersonCamera__triggerRight=CreateTrigger()
-    call TriggerAddAction(ThirdPersonCamera__triggerLeft, function Camera_Trig_LeftArrow_Actions)
-    call TriggerAddAction(ThirdPersonCamera__triggerRight, function Camera_Trig_RightArrow_Actions)
+    set ThirdPersonCamera___triggerLeft=CreateTrigger()
+    set ThirdPersonCamera___triggerRight=CreateTrigger()
+    call TriggerAddAction(ThirdPersonCamera___triggerLeft, function Camera_Trig_LeftArrow_Actions)
+    call TriggerAddAction(ThirdPersonCamera___triggerRight, function Camera_Trig_RightArrow_Actions)
     
-    set ThirdPersonCamera__triggerEsc=CreateTrigger()
-    call TriggerAddAction(ThirdPersonCamera__triggerEsc, function Camera_Trig_Esc_Actions)
+    set ThirdPersonCamera___triggerEsc=CreateTrigger()
+    call TriggerAddAction(ThirdPersonCamera___triggerEsc, function Camera_Trig_Esc_Actions)
     
-    set ThirdPersonCamera__triggerMouse=CreateTrigger()
-    call TriggerAddAction(ThirdPersonCamera__triggerMouse, function Trig_CameraMouse_Actions)
+    set ThirdPersonCamera___triggerMouse=CreateTrigger()
+    call TriggerAddAction(ThirdPersonCamera___triggerMouse, function Trig_CameraMouse_Actions)
     
-    set ThirdPersonCamera__triggerCleanup=CreateTrigger()
-    call TriggerAddAction(ThirdPersonCamera__triggerCleanup, function Camera_Trig_PlayerLeaves)
+    set ThirdPersonCamera___triggerCleanup=CreateTrigger()
+    call TriggerAddAction(ThirdPersonCamera___triggerCleanup, function Camera_Trig_PlayerLeaves)
     
     call ForForce(GetPlayersAll(), function Camera_ForForce_Init)
     
@@ -4754,8 +4752,8 @@ endfunction
 		
 		
 		
-//Implemented from module WorldBounds__WorldBoundInit:
-  function s__WorldBounds_WorldBounds__WorldBoundInit___onInit takes nothing returns nothing
+//Implemented from module WorldBounds___WorldBoundInit:
+  function s__WorldBounds_WorldBounds___WorldBoundInit___onInit takes nothing returns nothing
 			set s__WorldBounds_world=GetWorldBounds()
 			
 			set s__WorldBounds_maxX=R2I(GetRectMaxX(s__WorldBounds_world))
@@ -5645,68 +5643,68 @@ endfunction
 
  
  
-//Implemented from module DummyRecycler__M:
+//Implemented from module DummyRecycler___M:
      
 
 
 
 
      
-        function s__DummyRecycler__S_DummyRecycler__M___onInit takes nothing returns nothing
-            local real add= 360.0 / DummyRecycler__ANGLES_COUNT
+        function s__DummyRecycler___S_DummyRecycler___M___onInit takes nothing returns nothing
+            local real add= 360.0 / DummyRecycler___ANGLES_COUNT
             local real a= 0
-            local integer this= DummyRecycler__ANGLES_COUNT
+            local integer this= DummyRecycler___ANGLES_COUNT
             local integer head= 0
             local integer cHead= JASS_MAX_ARRAY_SIZE - 1
-            local integer i= R2I(DummyRecycler__MAX_DUMMY_COUNT / DummyRecycler__ANGLES_COUNT + 0.5)
-            set DummyRecycler__upper=DummyRecycler__STORED_UNIT_COUNT
-            set DummyRecycler__lower=DummyRecycler__STORED_UNIT_COUNT
+            local integer i= R2I(DummyRecycler___MAX_DUMMY_COUNT / DummyRecycler___ANGLES_COUNT + 0.5)
+            set DummyRecycler___upper=DummyRecycler___STORED_UNIT_COUNT
+            set DummyRecycler___lower=DummyRecycler___STORED_UNIT_COUNT
 
-                set s__DummyRecycler__S_tb=s__Table_create()
+                set s__DummyRecycler___S_tb=s__Table_create()
 
             //Initialize countHeads
             loop
                 exitwhen i < 0
-                set DummyRecycler__countNext[cHead]=cHead
-                set DummyRecycler__countPrev[cHead]=cHead
-                set DummyRecycler__countHead[i]=cHead
+                set DummyRecycler___countNext[cHead]=cHead
+                set DummyRecycler___countPrev[cHead]=cHead
+                set DummyRecycler___countHead[i]=cHead
                 set cHead=cHead - 1
                 set i=i - 1
             endloop
-            set cHead=DummyRecycler__countHead[DummyRecycler__STORED_UNIT_COUNT] //All heads will be inserted here initially
+            set cHead=DummyRecycler___countHead[DummyRecycler___STORED_UNIT_COUNT] //All heads will be inserted here initially
             //Create the Dummy units
             loop
                 exitwhen a >= 360
                 //Initialize head
-                set DummyRecycler__next[head]=head
-                set DummyRecycler__prev[head]=head
-                set DummyRecycler__count[head]=DummyRecycler__STORED_UNIT_COUNT
-                set DummyRecycler__angle[head]=a
+                set DummyRecycler___next[head]=head
+                set DummyRecycler___prev[head]=head
+                set DummyRecycler___count[head]=DummyRecycler___STORED_UNIT_COUNT
+                set DummyRecycler___angle[head]=a
                 //Insert head in the Count List
-                set DummyRecycler__countNext[head]=cHead
-                set DummyRecycler__countPrev[head]=DummyRecycler__countPrev[cHead]
-                set DummyRecycler__countNext[DummyRecycler__countPrev[head]]=head
-                set DummyRecycler__countPrev[DummyRecycler__countNext[head]]=head
+                set DummyRecycler___countNext[head]=cHead
+                set DummyRecycler___countPrev[head]=DummyRecycler___countPrev[cHead]
+                set DummyRecycler___countNext[DummyRecycler___countPrev[head]]=head
+                set DummyRecycler___countPrev[DummyRecycler___countNext[head]]=head
                 set i=0
                 loop
-                    exitwhen i >= DummyRecycler__STORED_UNIT_COUNT
+                    exitwhen i >= DummyRecycler___STORED_UNIT_COUNT
                     //Queued Linked List
-                    set DummyRecycler__next[this]=head
-                    set DummyRecycler__prev[this]=DummyRecycler__prev[head]
-                    set DummyRecycler__next[DummyRecycler__prev[this]]=this
-                    set DummyRecycler__prev[DummyRecycler__next[this]]=this
+                    set DummyRecycler___next[this]=head
+                    set DummyRecycler___prev[this]=DummyRecycler___prev[head]
+                    set DummyRecycler___next[DummyRecycler___prev[this]]=this
+                    set DummyRecycler___prev[DummyRecycler___next[this]]=this
 
 
-                            set DummyRecycler__dummy[this]=CreateUnit(DummyRecycler__OWNER, DummyRecycler__DUMMY_ID, s__WorldBounds_maxX, s__WorldBounds_maxY, a)
-
-
-
+                            set DummyRecycler___dummy[this]=CreateUnit(DummyRecycler___OWNER, DummyRecycler___DUMMY_ID, s__WorldBounds_maxX, s__WorldBounds_maxY, a)
 
 
 
-                    call PauseUnit(DummyRecycler__dummy[this], true)
 
-                        call SaveInteger(Table__ht, (s__DummyRecycler__S_tb), (GetHandleId(DummyRecycler__dummy[this])), ( this)) // INLINED!!
+
+
+                    call PauseUnit(DummyRecycler___dummy[this], true)
+
+                        call SaveInteger(Table__ht, (s__DummyRecycler___S_tb), (GetHandleId(DummyRecycler___dummy[this])), ( this)) // INLINED!!
 
 
 
@@ -5716,24 +5714,24 @@ endfunction
                 set head=head + 1
                 set a=a + add
             endloop
-            set DummyRecycler__lastInstance=this
+            set DummyRecycler___lastInstance=this
         endfunction
      
  
-    function DummyRecycler__GetHead takes integer facing returns integer
+    function DummyRecycler___GetHead takes integer facing returns integer
         if facing < 0 or facing >= 360 then
             set facing=facing - ( facing / 360 ) * 360
             if facing < 0 then
                 set facing=facing + 360
             endif
         endif
-        return R2I(( facing * DummyRecycler__ANGLES_COUNT / 360.0 ))
+        return R2I(( facing * DummyRecycler___ANGLES_COUNT / 360.0 ))
     endfunction
  
     function ShowDummy takes unit u,boolean flag returns nothing
         if IsUnitHidden(u) == flag then
             call ShowUnit(u, flag)
-            if flag and GetUnitTypeId(u) == DummyRecycler__DUMMY_ID then
+            if flag and GetUnitTypeId(u) == DummyRecycler___DUMMY_ID then
                 call UnitRemoveAbility(u, 'Aloc')
                 call UnitAddAbility(u, 'Aloc')
             endif
@@ -5741,19 +5739,19 @@ endfunction
     endfunction
  
     function GetRecycledDummy takes real x,real y,real z,real facing returns unit
-        local integer head= DummyRecycler__GetHead(R2I(facing + DummyRecycler__FACING_OFFSET))
-        local integer this= DummyRecycler__next[head]
+        local integer head= DummyRecycler___GetHead(R2I(facing + DummyRecycler___FACING_OFFSET))
+        local integer this= DummyRecycler___next[head]
         local integer cHead
      
         //If there are Dummy Units in the Queue List already facing close to the appropriate angle
-        if this != head and RAbsBJ(GetUnitFacing(DummyRecycler__dummy[this]) - DummyRecycler__angle[head]) <= DummyRecycler__ANGLE_TOLERANCE then
+        if this != head and RAbsBJ(GetUnitFacing(DummyRecycler___dummy[this]) - DummyRecycler___angle[head]) <= DummyRecycler___ANGLE_TOLERANCE then
             //Remove from the Queue List
-            set DummyRecycler__next[DummyRecycler__prev[this]]=DummyRecycler__next[this]
-            set DummyRecycler__prev[DummyRecycler__next[this]]=DummyRecycler__prev[this]
+            set DummyRecycler___next[DummyRecycler___prev[this]]=DummyRecycler___next[this]
+            set DummyRecycler___prev[DummyRecycler___next[this]]=DummyRecycler___prev[this]
             //For double free protection
-            set DummyRecycler__next[this]=- 1
+            set DummyRecycler___next[this]=- 1
             //Unit Properties
-            set bj_lastCreatedUnit=DummyRecycler__dummy[this]
+            set bj_lastCreatedUnit=DummyRecycler___dummy[this]
             call SetUnitX(bj_lastCreatedUnit, x)
             call SetUnitY(bj_lastCreatedUnit, y)
             call SetUnitFacing(bj_lastCreatedUnit, facing)
@@ -5765,67 +5763,67 @@ endfunction
         call ShowDummy(bj_lastCreatedUnit , true)
 //end of: DUMMY_UNIT_RESET()
             //Update Count and Bounds
-            set DummyRecycler__count[head]=DummyRecycler__count[head] - 1
+            set DummyRecycler___count[head]=DummyRecycler___count[head] - 1
          
             //------------------------------------------------
             //                 Unit Sharing
             //------------------------------------------------
-            if DummyRecycler__count[head] < DummyRecycler__BORROW_REQUEST and DummyRecycler__count[DummyRecycler__countNext[DummyRecycler__countHead[DummyRecycler__upper]]] > DummyRecycler__count[head] then
-                set DummyRecycler__count[head]=DummyRecycler__count[head] + 1
-                set this=DummyRecycler__next[DummyRecycler__countNext[DummyRecycler__countHead[DummyRecycler__upper]]]
-                call SetUnitFacing(DummyRecycler__dummy[this], DummyRecycler__angle[head])
+            if DummyRecycler___count[head] < DummyRecycler___BORROW_REQUEST and DummyRecycler___count[DummyRecycler___countNext[DummyRecycler___countHead[DummyRecycler___upper]]] > DummyRecycler___count[head] then
+                set DummyRecycler___count[head]=DummyRecycler___count[head] + 1
+                set this=DummyRecycler___next[DummyRecycler___countNext[DummyRecycler___countHead[DummyRecycler___upper]]]
+                call SetUnitFacing(DummyRecycler___dummy[this], DummyRecycler___angle[head])
                 //Remove
-                set DummyRecycler__next[DummyRecycler__prev[this]]=DummyRecycler__next[this]
-                set DummyRecycler__prev[DummyRecycler__next[this]]=DummyRecycler__prev[this]
+                set DummyRecycler___next[DummyRecycler___prev[this]]=DummyRecycler___next[this]
+                set DummyRecycler___prev[DummyRecycler___next[this]]=DummyRecycler___prev[this]
                 //Add to the Current List
-                set DummyRecycler__next[this]=head
-                set DummyRecycler__prev[this]=DummyRecycler__prev[head]
-                set DummyRecycler__next[DummyRecycler__prev[this]]=this
-                set DummyRecycler__prev[DummyRecycler__next[this]]=this
-                set head=DummyRecycler__countNext[DummyRecycler__countHead[DummyRecycler__upper]]
-                set DummyRecycler__count[head]=DummyRecycler__count[head] - 1
+                set DummyRecycler___next[this]=head
+                set DummyRecycler___prev[this]=DummyRecycler___prev[head]
+                set DummyRecycler___next[DummyRecycler___prev[this]]=this
+                set DummyRecycler___prev[DummyRecycler___next[this]]=this
+                set head=DummyRecycler___countNext[DummyRecycler___countHead[DummyRecycler___upper]]
+                set DummyRecycler___count[head]=DummyRecycler___count[head] - 1
             endif
          
             //---------------------------
             //Update Count Lists
             //---------------------------
             //Remove from the current Count List
-            set DummyRecycler__countNext[DummyRecycler__countPrev[head]]=DummyRecycler__countNext[head]
-            set DummyRecycler__countPrev[DummyRecycler__countNext[head]]=DummyRecycler__countPrev[head]
+            set DummyRecycler___countNext[DummyRecycler___countPrev[head]]=DummyRecycler___countNext[head]
+            set DummyRecycler___countPrev[DummyRecycler___countNext[head]]=DummyRecycler___countPrev[head]
             //Add to the new Count List
-            set cHead=DummyRecycler__countHead[DummyRecycler__count[head]]
-            set DummyRecycler__countNext[head]=cHead
-            set DummyRecycler__countPrev[head]=DummyRecycler__countPrev[cHead]
-            set DummyRecycler__countNext[DummyRecycler__countPrev[head]]=head
-            set DummyRecycler__countPrev[DummyRecycler__countNext[head]]=head
+            set cHead=DummyRecycler___countHead[DummyRecycler___count[head]]
+            set DummyRecycler___countNext[head]=cHead
+            set DummyRecycler___countPrev[head]=DummyRecycler___countPrev[cHead]
+            set DummyRecycler___countNext[DummyRecycler___countPrev[head]]=head
+            set DummyRecycler___countPrev[DummyRecycler___countNext[head]]=head
          
             //---------------------------
             //  Update Bounds
             //---------------------------
-            set cHead=DummyRecycler__countHead[DummyRecycler__upper]
-            if DummyRecycler__countNext[cHead] == cHead then
-                set DummyRecycler__upper=DummyRecycler__upper - 1
+            set cHead=DummyRecycler___countHead[DummyRecycler___upper]
+            if DummyRecycler___countNext[cHead] == cHead then
+                set DummyRecycler___upper=DummyRecycler___upper - 1
             endif
-            if DummyRecycler__count[head] < DummyRecycler__lower then
-                set DummyRecycler__lower=DummyRecycler__count[head]
+            if DummyRecycler___count[head] < DummyRecycler___lower then
+                set DummyRecycler___lower=DummyRecycler___count[head]
             endif
         else
-            set bj_lastCreatedUnit=CreateUnit(DummyRecycler__OWNER, DummyRecycler__DUMMY_ID, x, y, facing)
+            set bj_lastCreatedUnit=CreateUnit(DummyRecycler___OWNER, DummyRecycler___DUMMY_ID, x, y, facing)
             call PauseUnit(bj_lastCreatedUnit, true)
             call SetUnitFlyHeight(bj_lastCreatedUnit, z, 0)
-            if DummyRecycler__dummyCount < DummyRecycler__MAX_DUMMY_COUNT then
-                set this=DummyRecycler__lastInstance
+            if DummyRecycler___dummyCount < DummyRecycler___MAX_DUMMY_COUNT then
+                set this=DummyRecycler___lastInstance
                 //For double free protection
-                set DummyRecycler__next[this]=- 1
-                set DummyRecycler__dummy[this]=bj_lastCreatedUnit
+                set DummyRecycler___next[this]=- 1
+                set DummyRecycler___dummy[this]=bj_lastCreatedUnit
 
-                    call SaveInteger(Table__ht, (s__DummyRecycler__S_tb), (GetHandleId(bj_lastCreatedUnit)), ( this)) // INLINED!!
+                    call SaveInteger(Table__ht, (s__DummyRecycler___S_tb), (GetHandleId(bj_lastCreatedUnit)), ( this)) // INLINED!!
 
 
 
-                set DummyRecycler__lastInstance=DummyRecycler__lastInstance + 1
+                set DummyRecycler___lastInstance=DummyRecycler___lastInstance + 1
             endif
-            set DummyRecycler__dummyCount=DummyRecycler__dummyCount + 1
+            set DummyRecycler___dummyCount=DummyRecycler___dummyCount + 1
         endif
 
         return bj_lastCreatedUnit
@@ -5833,7 +5831,7 @@ endfunction
  
     function RecycleDummy takes unit u returns nothing
 
-            local integer this= (LoadInteger(Table__ht, (s__DummyRecycler__S_tb), (GetHandleId(u)))) // INLINED!!
+            local integer this= (LoadInteger(Table__ht, (s__DummyRecycler___S_tb), (GetHandleId(u)))) // INLINED!!
 
 
 
@@ -5841,17 +5839,17 @@ endfunction
         local integer cHead
      
         //If the unit is a legit Dummy Unit
-        if this > 0 and DummyRecycler__next[this] == - 1 then
+        if this > 0 and DummyRecycler___next[this] == - 1 then
             //Find where to insert based on the list having the least number of units
-            set head=DummyRecycler__countNext[DummyRecycler__countHead[DummyRecycler__lower]]
-            set DummyRecycler__next[this]=head
-            set DummyRecycler__prev[this]=DummyRecycler__prev[head]
-            set DummyRecycler__next[DummyRecycler__prev[this]]=this
-            set DummyRecycler__prev[DummyRecycler__next[this]]=this
+            set head=DummyRecycler___countNext[DummyRecycler___countHead[DummyRecycler___lower]]
+            set DummyRecycler___next[this]=head
+            set DummyRecycler___prev[this]=DummyRecycler___prev[head]
+            set DummyRecycler___next[DummyRecycler___prev[this]]=this
+            set DummyRecycler___prev[DummyRecycler___next[this]]=this
             //Update Status
-            call SetUnitFacing(u, DummyRecycler__angle[head])
+            call SetUnitFacing(u, DummyRecycler___angle[head])
             call PauseUnit(u, true)
-            call SetUnitOwner(u, DummyRecycler__OWNER, false)
+            call SetUnitOwner(u, DummyRecycler___OWNER, false)
 
 
                     call SetUnitX(u, s__WorldBounds_maxX)
@@ -5864,30 +5862,30 @@ endfunction
 
 
 
-            set DummyRecycler__count[head]=DummyRecycler__count[head] + 1
+            set DummyRecycler___count[head]=DummyRecycler___count[head] + 1
          
             //---------------------------
             //    Update Count Lists
             //---------------------------
             //Remove
-            set DummyRecycler__countNext[DummyRecycler__countPrev[head]]=DummyRecycler__countNext[head]
-            set DummyRecycler__countPrev[DummyRecycler__countNext[head]]=DummyRecycler__countPrev[head]
+            set DummyRecycler___countNext[DummyRecycler___countPrev[head]]=DummyRecycler___countNext[head]
+            set DummyRecycler___countPrev[DummyRecycler___countNext[head]]=DummyRecycler___countPrev[head]
             //Add to the new Count List
-            set cHead=DummyRecycler__countHead[DummyRecycler__count[head]]
-            set DummyRecycler__countNext[head]=cHead
-            set DummyRecycler__countPrev[head]=DummyRecycler__countPrev[cHead]
-            set DummyRecycler__countNext[DummyRecycler__countPrev[head]]=head
-            set DummyRecycler__countPrev[DummyRecycler__countNext[head]]=head
+            set cHead=DummyRecycler___countHead[DummyRecycler___count[head]]
+            set DummyRecycler___countNext[head]=cHead
+            set DummyRecycler___countPrev[head]=DummyRecycler___countPrev[cHead]
+            set DummyRecycler___countNext[DummyRecycler___countPrev[head]]=head
+            set DummyRecycler___countPrev[DummyRecycler___countNext[head]]=head
          
             //---------------------------
             //  Update Bounds
             //---------------------------
-            set cHead=DummyRecycler__countHead[DummyRecycler__lower]
-            if DummyRecycler__countNext[cHead] == cHead then
-                set DummyRecycler__lower=DummyRecycler__lower + 1
+            set cHead=DummyRecycler___countHead[DummyRecycler___lower]
+            if DummyRecycler___countNext[cHead] == cHead then
+                set DummyRecycler___lower=DummyRecycler___lower + 1
             endif
-            if DummyRecycler__count[head] > DummyRecycler__upper then
-                set DummyRecycler__upper=DummyRecycler__count[head]
+            if DummyRecycler___count[head] > DummyRecycler___upper then
+                set DummyRecycler___upper=DummyRecycler___count[head]
             endif
         elseif this == 0 then
             call RemoveUnit(u)
@@ -5895,12 +5893,12 @@ endfunction
      
     endfunction
  
-    function DummyRecycler__Expires takes nothing returns nothing
+    function DummyRecycler___Expires takes nothing returns nothing
         local timer t= GetExpiredTimer()
         local integer id= GetHandleId(t)
 
-            call RecycleDummy((LoadUnitHandle(Table__ht, (((s__DummyRecycler__S_tb))), (id)))) // INLINED!!
-            call RemoveSavedHandle(Table__ht, (((s__DummyRecycler__S_tb))), (id)) // INLINED!!
+            call RecycleDummy((LoadUnitHandle(Table__ht, (((s__DummyRecycler___S_tb))), (id)))) // INLINED!!
+            call RemoveSavedHandle(Table__ht, (((s__DummyRecycler___S_tb))), (id)) // INLINED!!
 
 
 
@@ -5912,16 +5910,16 @@ endfunction
     function DummyAddRecycleTimer takes unit u,real time returns nothing
         local timer t= CreateTimer()
 
-            call SaveUnitHandle(Table__ht, (((s__DummyRecycler__S_tb))), (GetHandleId(t)), ( u)) // INLINED!!
+            call SaveUnitHandle(Table__ht, (((s__DummyRecycler___S_tb))), (GetHandleId(t)), ( u)) // INLINED!!
 
 
 
-        call TimerStart(t, time, false, function DummyRecycler__Expires)
+        call TimerStart(t, time, false, function DummyRecycler___Expires)
         set t=null
     endfunction
  
     function GetRecycledDummyAnyAngle takes real x,real y,real z returns unit
-        return GetRecycledDummy(x , y , z , DummyRecycler__angle[DummyRecycler__countNext[DummyRecycler__countHead[DummyRecycler__upper]]])
+        return GetRecycledDummy(x , y , z , DummyRecycler___angle[DummyRecycler___countNext[DummyRecycler___countHead[DummyRecycler___upper]]])
     endfunction
  
     // runtextmacro DUMMY_DEBUG_TOOLS()
@@ -6020,7 +6018,7 @@ endfunction
 //Positive Unit Handle ID > Move Bonus
 //Negative Unit Handle ID > Move Multiplier
 
-function MoveSpeedBonus__KEY takes nothing returns integer
+function MoveSpeedBonus___KEY takes nothing returns integer
 
 
 
@@ -6030,11 +6028,11 @@ function MoveSpeedBonus__KEY takes nothing returns integer
 
 endfunction
 
-function MoveSpeedBonus__GetUnitId takes unit whichUnit returns integer
+function MoveSpeedBonus___GetUnitId takes unit whichUnit returns integer
     return GetHandleId(whichUnit)
 endfunction
 
-function MoveSpeedBonus__LoadMultiplier takes integer uId returns real
+function MoveSpeedBonus___LoadMultiplier takes integer uId returns real
 
 
 
@@ -6043,7 +6041,7 @@ function MoveSpeedBonus__LoadMultiplier takes integer uId returns real
 
 endfunction
 
-function MoveSpeedBonus__LoadBonus takes integer uId returns real
+function MoveSpeedBonus___LoadBonus takes integer uId returns real
 
 
 
@@ -6051,7 +6049,7 @@ function MoveSpeedBonus__LoadBonus takes integer uId returns real
 
 endfunction
 
-function MoveSpeedBonus__RemoveMultiplier takes integer uId returns nothing
+function MoveSpeedBonus___RemoveMultiplier takes integer uId returns nothing
 
 
 
@@ -6059,7 +6057,7 @@ function MoveSpeedBonus__RemoveMultiplier takes integer uId returns nothing
 
 endfunction
 
-function MoveSpeedBonus__RemoveBonus takes integer uId returns nothing
+function MoveSpeedBonus___RemoveBonus takes integer uId returns nothing
 
 
 
@@ -6067,7 +6065,7 @@ function MoveSpeedBonus__RemoveBonus takes integer uId returns nothing
 
 endfunction
 
-function MoveSpeedBonus__SaveMultiplier takes integer uId,real value returns nothing
+function MoveSpeedBonus___SaveMultiplier takes integer uId,real value returns nothing
 
 
 
@@ -6075,7 +6073,7 @@ function MoveSpeedBonus__SaveMultiplier takes integer uId,real value returns not
 
 endfunction
 
-function MoveSpeedBonus__SaveBonus takes integer uId,real value returns nothing
+function MoveSpeedBonus___SaveBonus takes integer uId,real value returns nothing
 
 
 
@@ -6344,8 +6342,8 @@ endfunction
         endfunction
        
        
-//Implemented from module TileDefinition__Init:
-            function s__TileDefinition__TileDefinition_TileDefinition__Init___onInit takes nothing returns nothing
+//Implemented from module TileDefinition___Init:
+            function s__TileDefinition___TileDefinition_TileDefinition___Init___onInit takes nothing returns nothing
                 set WorldTilesX=R2I(s__WorldBounds_maxX - s__WorldBounds_minX) / 128 + 1
                 set WorldTilesY=R2I(s__WorldBounds_maxY - s__WorldBounds_minY) / 128 + 1
             endfunction
@@ -6364,8 +6362,8 @@ endfunction
 
 
 
-//Implemented from module ArgumentStack__Const:
-        function s__ArgumentStack__table_type takes integer i returns integer
+//Implemented from module ArgumentStack___Const:
+        function s__ArgumentStack___table_type takes integer i returns integer
             return i
         endfunction
 
@@ -8031,7 +8029,7 @@ function DummyDmg_CreateDummyEx takes unit spellCaster,integer unitId,integer ab
     local unit realSpellCaster= spellCaster
     
     //set spellCaster = CreateUnit(GetOwningPlayer(spellCaster), unitId, x, y, bj_UNIT_FACING)
-    set spellCaster=(GetRecycledDummy(((x )*1.0) , (( y )*1.0) , (( 0)*1.0) , DummyRecycler__angle[DummyRecycler__countNext[DummyRecycler__countHead[DummyRecycler__upper]]])) // INLINED!!
+    set spellCaster=(GetRecycledDummy(((x )*1.0) , (( y )*1.0) , (( 0)*1.0) , DummyRecycler___angle[DummyRecycler___countNext[DummyRecycler___countHead[DummyRecycler___upper]]])) // INLINED!!
     call FlushChildHashtable((ArrayAgent_hashTable), ((- GetHandleId((spellCaster))))) // INLINED!!
     call PauseUnit(spellCaster, false)
     call SetUnitOwner(spellCaster, GetOwningPlayer(realSpellCaster), false)
@@ -8411,7 +8409,7 @@ endfunction
 
 
 
-//Implemented from module TableStruct__Const:
+//Implemented from module TableStruct___Const:
         function s__TableStruct_type takes integer i returns integer
             return i
         endfunction
@@ -8625,22 +8623,22 @@ endfunction
 
 
 
-    function s__CombatTag__CombatTag__get_physDmgTable takes nothing returns integer
+    function s__CombatTag___CombatTag__get_physDmgTable takes nothing returns integer
         return CombatTag_PHYS_DAMAGE
     endfunction
     
-    function s__CombatTag__CombatTag__get_spellDmgTable takes nothing returns integer
+    function s__CombatTag___CombatTag__get_spellDmgTable takes nothing returns integer
         return CombatTag_SPELL_DAMAGE
     endfunction
     
-    function s__CombatTag__CombatTag__get_healingTable takes nothing returns integer
+    function s__CombatTag___CombatTag__get_healingTable takes nothing returns integer
         return CombatTag_HEALING
     endfunction
     
 //textmacro instance: TableStruct_NewConstTableField("","timerData")
 
-         constant function s__CombatTag__CombatTag__get_timerData takes nothing returns integer
-            return s__CombatTag__CombatTag_timerData_impl
+         constant function s__CombatTag___CombatTag__get_timerData takes nothing returns integer
+            return s__CombatTag___CombatTag_timerData_impl
         endfunction
 
 
@@ -8650,10 +8648,10 @@ endfunction
 //end of: TableStruct_NewConstTableField("","timerData")
 
 
-    function s__CombatTag__CombatTag_showText takes nothing returns nothing
+    function s__CombatTag___CombatTag_showText takes nothing returns nothing
         local timer t= GetExpiredTimer()
         local integer tId= GetHandleId(t)
-        local unit u= (LoadUnitHandle(ConstTable__ht, ((((s__CombatTag__CombatTag_timerData_impl)))), (tId))) // INLINED!!
+        local unit u= (LoadUnitHandle(ConstTable__ht, ((((s__CombatTag___CombatTag_timerData_impl)))), (tId))) // INLINED!!
         local integer uId= GetUnitUserData(u)
         
         local real z_offset= 50
@@ -8679,7 +8677,7 @@ endfunction
         
         call PauseTimer(t)
         call DestroyTimer(t)
-        call RemoveSavedHandle(ConstTable__ht, ((((s__CombatTag__CombatTag_timerData_impl)))), (tId)) // INLINED!!
+        call RemoveSavedHandle(ConstTable__ht, ((((s__CombatTag___CombatTag_timerData_impl)))), (tId)) // INLINED!!
         set t=null
         set u=null
     endfunction
@@ -8697,8 +8695,8 @@ function CombatTag_Register takes unit whichUnit,real value,integer whichType re
         set amount=(LoadReal(ConstTable__ht, (((whichType))), (uId))) // INLINED!!
     else
         set t=CreateTimer()
-        call TimerStart(t, 0, false, function s__CombatTag__CombatTag_showText)
-        call SaveUnitHandle(ConstTable__ht, ((((s__CombatTag__CombatTag_timerData_impl)))), (GetHandleId(t)), ( whichUnit)) // INLINED!!
+        call TimerStart(t, 0, false, function s__CombatTag___CombatTag_showText)
+        call SaveUnitHandle(ConstTable__ht, ((((s__CombatTag___CombatTag_timerData_impl)))), (GetHandleId(t)), ( whichUnit)) // INLINED!!
         set t=null
         set amount=0
     endif
@@ -9812,8 +9810,8 @@ endfunction
         return (LoadInteger(ConstTable__ht, ((s__TerrainType2Id_data_impl)), ((terrainType)))) // INLINED!!
     endfunction
 
-//Implemented from module TerrainTools__InitModule:
-        function s__TerrainTools__InitStruct_TerrainTools__InitModule___onInit takes nothing returns nothing
+//Implemented from module TerrainTools___InitModule:
+        function s__TerrainTools___InitStruct_TerrainTools___InitModule___onInit takes nothing returns nothing
             local integer i= 0
             
             // Terrain Settings
@@ -9866,114 +9864,114 @@ endfunction
 
 
 //textmacro instance: TableStruct_NewStaticPrimitiveField("lastCameraX", "real")
-    function s__AutoRectEnvironment__Globals__get_lastCameraX takes nothing returns real
-        return (LoadReal(ConstTable__ht, (((((s__AutoRectEnvironment__Globals_static_members_key))))), (s__AutoRectEnvironment__Globals_lastCameraX_impl))) // INLINED!!
+    function s__AutoRectEnvironment___Globals__get_lastCameraX takes nothing returns real
+        return (LoadReal(ConstTable__ht, (((((s__AutoRectEnvironment___Globals_static_members_key))))), (s__AutoRectEnvironment___Globals_lastCameraX_impl))) // INLINED!!
     endfunction
     
-    function s__AutoRectEnvironment__Globals__set_lastCameraX takes real new_lastCameraX returns nothing
-        call SaveReal(ConstTable__ht, (((((s__AutoRectEnvironment__Globals_static_members_key))))), (s__AutoRectEnvironment__Globals_lastCameraX_impl), (( new_lastCameraX)*1.0)) // INLINED!!
+    function s__AutoRectEnvironment___Globals__set_lastCameraX takes real new_lastCameraX returns nothing
+        call SaveReal(ConstTable__ht, (((((s__AutoRectEnvironment___Globals_static_members_key))))), (s__AutoRectEnvironment___Globals_lastCameraX_impl), (( new_lastCameraX)*1.0)) // INLINED!!
     endfunction
     
-    function s__AutoRectEnvironment__Globals_lastCameraXClear takes nothing returns nothing
-        call RemoveSavedReal(ConstTable__ht, (((((s__AutoRectEnvironment__Globals_static_members_key))))), (s__AutoRectEnvironment__Globals_lastCameraX_impl)) // INLINED!!
+    function s__AutoRectEnvironment___Globals_lastCameraXClear takes nothing returns nothing
+        call RemoveSavedReal(ConstTable__ht, (((((s__AutoRectEnvironment___Globals_static_members_key))))), (s__AutoRectEnvironment___Globals_lastCameraX_impl)) // INLINED!!
     endfunction
     
-    function s__AutoRectEnvironment__Globals_lastCameraXExists takes nothing returns boolean
-        return (HaveSavedReal(ConstTable__ht, (((((s__AutoRectEnvironment__Globals_static_members_key))))), (s__AutoRectEnvironment__Globals_lastCameraX_impl))) // INLINED!!
+    function s__AutoRectEnvironment___Globals_lastCameraXExists takes nothing returns boolean
+        return (HaveSavedReal(ConstTable__ht, (((((s__AutoRectEnvironment___Globals_static_members_key))))), (s__AutoRectEnvironment___Globals_lastCameraX_impl))) // INLINED!!
     endfunction
 //end of: TableStruct_NewStaticPrimitiveField("lastCameraX", "real")
 //textmacro instance: TableStruct_NewStaticPrimitiveField("lastCameraY", "real")
-    function s__AutoRectEnvironment__Globals__get_lastCameraY takes nothing returns real
-        return (LoadReal(ConstTable__ht, (((((s__AutoRectEnvironment__Globals_static_members_key))))), (s__AutoRectEnvironment__Globals_lastCameraY_impl))) // INLINED!!
+    function s__AutoRectEnvironment___Globals__get_lastCameraY takes nothing returns real
+        return (LoadReal(ConstTable__ht, (((((s__AutoRectEnvironment___Globals_static_members_key))))), (s__AutoRectEnvironment___Globals_lastCameraY_impl))) // INLINED!!
     endfunction
     
-    function s__AutoRectEnvironment__Globals__set_lastCameraY takes real new_lastCameraY returns nothing
-        call SaveReal(ConstTable__ht, (((((s__AutoRectEnvironment__Globals_static_members_key))))), (s__AutoRectEnvironment__Globals_lastCameraY_impl), (( new_lastCameraY)*1.0)) // INLINED!!
+    function s__AutoRectEnvironment___Globals__set_lastCameraY takes real new_lastCameraY returns nothing
+        call SaveReal(ConstTable__ht, (((((s__AutoRectEnvironment___Globals_static_members_key))))), (s__AutoRectEnvironment___Globals_lastCameraY_impl), (( new_lastCameraY)*1.0)) // INLINED!!
     endfunction
     
-    function s__AutoRectEnvironment__Globals_lastCameraYClear takes nothing returns nothing
-        call RemoveSavedReal(ConstTable__ht, (((((s__AutoRectEnvironment__Globals_static_members_key))))), (s__AutoRectEnvironment__Globals_lastCameraY_impl)) // INLINED!!
+    function s__AutoRectEnvironment___Globals_lastCameraYClear takes nothing returns nothing
+        call RemoveSavedReal(ConstTable__ht, (((((s__AutoRectEnvironment___Globals_static_members_key))))), (s__AutoRectEnvironment___Globals_lastCameraY_impl)) // INLINED!!
     endfunction
     
-    function s__AutoRectEnvironment__Globals_lastCameraYExists takes nothing returns boolean
-        return (HaveSavedReal(ConstTable__ht, (((((s__AutoRectEnvironment__Globals_static_members_key))))), (s__AutoRectEnvironment__Globals_lastCameraY_impl))) // INLINED!!
+    function s__AutoRectEnvironment___Globals_lastCameraYExists takes nothing returns boolean
+        return (HaveSavedReal(ConstTable__ht, (((((s__AutoRectEnvironment___Globals_static_members_key))))), (s__AutoRectEnvironment___Globals_lastCameraY_impl))) // INLINED!!
     endfunction
 //end of: TableStruct_NewStaticPrimitiveField("lastCameraY", "real")
 //textmacro instance: TableStruct_NewStaticPrimitiveField("rectWasMoved", "boolean")
-    function s__AutoRectEnvironment__Globals__get_rectWasMoved takes nothing returns boolean
-        return (LoadBoolean(ConstTable__ht, (((((s__AutoRectEnvironment__Globals_static_members_key))))), (s__AutoRectEnvironment__Globals_rectWasMoved_impl))) // INLINED!!
+    function s__AutoRectEnvironment___Globals__get_rectWasMoved takes nothing returns boolean
+        return (LoadBoolean(ConstTable__ht, (((((s__AutoRectEnvironment___Globals_static_members_key))))), (s__AutoRectEnvironment___Globals_rectWasMoved_impl))) // INLINED!!
     endfunction
     
-    function s__AutoRectEnvironment__Globals__set_rectWasMoved takes boolean new_rectWasMoved returns nothing
-        call SaveBoolean(ConstTable__ht, (((((s__AutoRectEnvironment__Globals_static_members_key))))), (s__AutoRectEnvironment__Globals_rectWasMoved_impl), ( new_rectWasMoved)) // INLINED!!
+    function s__AutoRectEnvironment___Globals__set_rectWasMoved takes boolean new_rectWasMoved returns nothing
+        call SaveBoolean(ConstTable__ht, (((((s__AutoRectEnvironment___Globals_static_members_key))))), (s__AutoRectEnvironment___Globals_rectWasMoved_impl), ( new_rectWasMoved)) // INLINED!!
     endfunction
     
-    function s__AutoRectEnvironment__Globals_rectWasMovedClear takes nothing returns nothing
-        call RemoveSavedBoolean(ConstTable__ht, (((((s__AutoRectEnvironment__Globals_static_members_key))))), (s__AutoRectEnvironment__Globals_rectWasMoved_impl)) // INLINED!!
+    function s__AutoRectEnvironment___Globals_rectWasMovedClear takes nothing returns nothing
+        call RemoveSavedBoolean(ConstTable__ht, (((((s__AutoRectEnvironment___Globals_static_members_key))))), (s__AutoRectEnvironment___Globals_rectWasMoved_impl)) // INLINED!!
     endfunction
     
-    function s__AutoRectEnvironment__Globals_rectWasMovedExists takes nothing returns boolean
-        return (HaveSavedBoolean(ConstTable__ht, (((((s__AutoRectEnvironment__Globals_static_members_key))))), (s__AutoRectEnvironment__Globals_rectWasMoved_impl))) // INLINED!!
+    function s__AutoRectEnvironment___Globals_rectWasMovedExists takes nothing returns boolean
+        return (HaveSavedBoolean(ConstTable__ht, (((((s__AutoRectEnvironment___Globals_static_members_key))))), (s__AutoRectEnvironment___Globals_rectWasMoved_impl))) // INLINED!!
     endfunction
 //end of: TableStruct_NewStaticPrimitiveField("rectWasMoved", "boolean")
     
 //textmacro instance: TableStruct_NewStaticHandleField("lastCameraRect", "rect")
-    function s__AutoRectEnvironment__Globals__get_lastCameraRect takes nothing returns rect
-        return (LoadRectHandle(ConstTable__ht, (((((s__AutoRectEnvironment__Globals_static_members_key))))), (s__AutoRectEnvironment__Globals_lastCameraRect_impl))) // INLINED!!
+    function s__AutoRectEnvironment___Globals__get_lastCameraRect takes nothing returns rect
+        return (LoadRectHandle(ConstTable__ht, (((((s__AutoRectEnvironment___Globals_static_members_key))))), (s__AutoRectEnvironment___Globals_lastCameraRect_impl))) // INLINED!!
     endfunction
     
-    function s__AutoRectEnvironment__Globals__set_lastCameraRect takes rect new_lastCameraRect returns nothing
-        call s__TableStruct_setHandle(s__AutoRectEnvironment__Globals_static_members_key , s__AutoRectEnvironment__Globals_lastCameraRect_impl , new_lastCameraRect)
+    function s__AutoRectEnvironment___Globals__set_lastCameraRect takes rect new_lastCameraRect returns nothing
+        call s__TableStruct_setHandle(s__AutoRectEnvironment___Globals_static_members_key , s__AutoRectEnvironment___Globals_lastCameraRect_impl , new_lastCameraRect)
     endfunction
     
-    function s__AutoRectEnvironment__Globals_lastCameraRectClear takes nothing returns nothing
-        call RemoveSavedHandle(ConstTable__ht, (((((s__AutoRectEnvironment__Globals_static_members_key))))), (s__AutoRectEnvironment__Globals_lastCameraRect_impl)) // INLINED!!
+    function s__AutoRectEnvironment___Globals_lastCameraRectClear takes nothing returns nothing
+        call RemoveSavedHandle(ConstTable__ht, (((((s__AutoRectEnvironment___Globals_static_members_key))))), (s__AutoRectEnvironment___Globals_lastCameraRect_impl)) // INLINED!!
     endfunction
     
-    function s__AutoRectEnvironment__Globals_lastCameraRectExists takes nothing returns boolean
-        return (HaveSavedHandle(ConstTable__ht, (((((s__AutoRectEnvironment__Globals_static_members_key))))), (s__AutoRectEnvironment__Globals_lastCameraRect_impl))) // INLINED!!
+    function s__AutoRectEnvironment___Globals_lastCameraRectExists takes nothing returns boolean
+        return (HaveSavedHandle(ConstTable__ht, (((((s__AutoRectEnvironment___Globals_static_members_key))))), (s__AutoRectEnvironment___Globals_lastCameraRect_impl))) // INLINED!!
     endfunction
 //end of: TableStruct_NewStaticHandleField("lastCameraRect", "rect")
 //textmacro instance: TableStruct_NewStaticHandleField("allRects", "region")
-    function s__AutoRectEnvironment__Globals__get_allRects takes nothing returns region
-        return (LoadRegionHandle(ConstTable__ht, (((((s__AutoRectEnvironment__Globals_static_members_key))))), (s__AutoRectEnvironment__Globals_allRects_impl))) // INLINED!!
+    function s__AutoRectEnvironment___Globals__get_allRects takes nothing returns region
+        return (LoadRegionHandle(ConstTable__ht, (((((s__AutoRectEnvironment___Globals_static_members_key))))), (s__AutoRectEnvironment___Globals_allRects_impl))) // INLINED!!
     endfunction
     
-    function s__AutoRectEnvironment__Globals__set_allRects takes region new_allRects returns nothing
-        call s__TableStruct_setHandle(s__AutoRectEnvironment__Globals_static_members_key , s__AutoRectEnvironment__Globals_allRects_impl , new_allRects)
+    function s__AutoRectEnvironment___Globals__set_allRects takes region new_allRects returns nothing
+        call s__TableStruct_setHandle(s__AutoRectEnvironment___Globals_static_members_key , s__AutoRectEnvironment___Globals_allRects_impl , new_allRects)
     endfunction
     
-    function s__AutoRectEnvironment__Globals_allRectsClear takes nothing returns nothing
-        call RemoveSavedHandle(ConstTable__ht, (((((s__AutoRectEnvironment__Globals_static_members_key))))), (s__AutoRectEnvironment__Globals_allRects_impl)) // INLINED!!
+    function s__AutoRectEnvironment___Globals_allRectsClear takes nothing returns nothing
+        call RemoveSavedHandle(ConstTable__ht, (((((s__AutoRectEnvironment___Globals_static_members_key))))), (s__AutoRectEnvironment___Globals_allRects_impl)) // INLINED!!
     endfunction
     
-    function s__AutoRectEnvironment__Globals_allRectsExists takes nothing returns boolean
-        return (HaveSavedHandle(ConstTable__ht, (((((s__AutoRectEnvironment__Globals_static_members_key))))), (s__AutoRectEnvironment__Globals_allRects_impl))) // INLINED!!
+    function s__AutoRectEnvironment___Globals_allRectsExists takes nothing returns boolean
+        return (HaveSavedHandle(ConstTable__ht, (((((s__AutoRectEnvironment___Globals_static_members_key))))), (s__AutoRectEnvironment___Globals_allRects_impl))) // INLINED!!
     endfunction
 //end of: TableStruct_NewStaticHandleField("allRects", "region")
     
 //textmacro instance: TableStruct_NewStaticStructField("rects", "LinkedHashSet")
-    function s__AutoRectEnvironment__Globals__get_rects takes nothing returns integer
-        return (LoadInteger(ConstTable__ht, (((s__AutoRectEnvironment__Globals_static_members_key))), (s__AutoRectEnvironment__Globals_rects_impl))) // INLINED!!
+    function s__AutoRectEnvironment___Globals__get_rects takes nothing returns integer
+        return (LoadInteger(ConstTable__ht, (((s__AutoRectEnvironment___Globals_static_members_key))), (s__AutoRectEnvironment___Globals_rects_impl))) // INLINED!!
     endfunction
     
-    function s__AutoRectEnvironment__Globals__set_rects takes integer new_rects returns nothing
-        call SaveInteger(ConstTable__ht, (((s__AutoRectEnvironment__Globals_static_members_key))), (s__AutoRectEnvironment__Globals_rects_impl), ( new_rects)) // INLINED!!
+    function s__AutoRectEnvironment___Globals__set_rects takes integer new_rects returns nothing
+        call SaveInteger(ConstTable__ht, (((s__AutoRectEnvironment___Globals_static_members_key))), (s__AutoRectEnvironment___Globals_rects_impl), ( new_rects)) // INLINED!!
     endfunction
     
-    function s__AutoRectEnvironment__Globals_rectsClear takes nothing returns nothing
-        call RemoveSavedInteger(ConstTable__ht, (((s__AutoRectEnvironment__Globals_static_members_key))), (s__AutoRectEnvironment__Globals_rects_impl)) // INLINED!!
+    function s__AutoRectEnvironment___Globals_rectsClear takes nothing returns nothing
+        call RemoveSavedInteger(ConstTable__ht, (((s__AutoRectEnvironment___Globals_static_members_key))), (s__AutoRectEnvironment___Globals_rects_impl)) // INLINED!!
     endfunction
     
-    function s__AutoRectEnvironment__Globals_rectsExists takes nothing returns boolean
-        return (HaveSavedInteger(ConstTable__ht, (((s__AutoRectEnvironment__Globals_static_members_key))), (s__AutoRectEnvironment__Globals_rects_impl))) // INLINED!!
+    function s__AutoRectEnvironment___Globals_rectsExists takes nothing returns boolean
+        return (HaveSavedInteger(ConstTable__ht, (((s__AutoRectEnvironment___Globals_static_members_key))), (s__AutoRectEnvironment___Globals_rects_impl))) // INLINED!!
     endfunction
 //end of: TableStruct_NewStaticStructField("rects", "LinkedHashSet")
     
 //textmacro instance: TableStruct_NewConstTableField("public","id2")
 
-        constant function s__AutoRectEnvironment__Globals__get_id2 takes nothing returns integer
-            return s__AutoRectEnvironment__Globals_id2_impl
+        constant function s__AutoRectEnvironment___Globals__get_id2 takes nothing returns integer
+            return s__AutoRectEnvironment___Globals_id2_impl
         endfunction
 
 
@@ -9985,10 +9983,10 @@ endfunction
 function AutoRectEnvironment_RegisterRect takes rect r returns nothing
     local integer rId= GetHandleId(r)
     
-    if not (HaveSavedHandle(ConstTable__ht, ((((s__AutoRectEnvironment__Globals_id2_impl)))), (rId))) then // INLINED!!
-        call SaveRectHandle(ConstTable__ht, ((((s__AutoRectEnvironment__Globals_id2_impl)))), (rId), ( r)) // INLINED!!
-        call RegionAddRect((LoadRegionHandle(ConstTable__ht, (((((s__AutoRectEnvironment__Globals_static_members_key))))), (s__AutoRectEnvironment__Globals_allRects_impl))), r) // INLINED!!
-        call GLHS__AddBefore((((LoadInteger(ConstTable__ht, (((s__AutoRectEnvironment__Globals_static_members_key))), (s__AutoRectEnvironment__Globals_rects_impl))))) , (0 ) , ( (rId))) // INLINED!!
+    if not (HaveSavedHandle(ConstTable__ht, ((((s__AutoRectEnvironment___Globals_id2_impl)))), (rId))) then // INLINED!!
+        call SaveRectHandle(ConstTable__ht, ((((s__AutoRectEnvironment___Globals_id2_impl)))), (rId), ( r)) // INLINED!!
+        call RegionAddRect((LoadRegionHandle(ConstTable__ht, (((((s__AutoRectEnvironment___Globals_static_members_key))))), (s__AutoRectEnvironment___Globals_allRects_impl))), r) // INLINED!!
+        call GLHS__AddBefore((((LoadInteger(ConstTable__ht, (((s__AutoRectEnvironment___Globals_static_members_key))), (s__AutoRectEnvironment___Globals_rects_impl))))) , (0 ) , ( (rId))) // INLINED!!
     endif
 endfunction
 
@@ -9996,35 +9994,35 @@ function AutoRectEnvironment_DeRegisterRect takes rect r returns nothing
     local integer rId= GetHandleId(r)
     
     // This rect can be different for each player. Null the handle to reduce reference counter.
-    if r == (LoadRectHandle(ConstTable__ht, (((((s__AutoRectEnvironment__Globals_static_members_key))))), (s__AutoRectEnvironment__Globals_lastCameraRect_impl))) then // INLINED!!
-        call s__TableStruct_setHandle(s__AutoRectEnvironment__Globals_static_members_key , s__AutoRectEnvironment__Globals_lastCameraRect_impl , (null)) // This possibly avoids desyncs. // INLINED!!
+    if r == (LoadRectHandle(ConstTable__ht, (((((s__AutoRectEnvironment___Globals_static_members_key))))), (s__AutoRectEnvironment___Globals_lastCameraRect_impl))) then // INLINED!!
+        call s__TableStruct_setHandle(s__AutoRectEnvironment___Globals_static_members_key , s__AutoRectEnvironment___Globals_lastCameraRect_impl , (null)) // This possibly avoids desyncs. // INLINED!!
     endif
     
-    if (HaveSavedHandle(ConstTable__ht, ((((s__AutoRectEnvironment__Globals_id2_impl)))), (rId))) then // INLINED!!
-        call SaveBoolean(ConstTable__ht, (((((s__AutoRectEnvironment__Globals_static_members_key))))), (s__AutoRectEnvironment__Globals_rectWasMoved_impl), ( (true))) // INLINED!!
-        call RemoveSavedHandle(ConstTable__ht, ((((s__AutoRectEnvironment__Globals_id2_impl)))), (rId)) // INLINED!!
-        call RegionClearRect((LoadRegionHandle(ConstTable__ht, (((((s__AutoRectEnvironment__Globals_static_members_key))))), (s__AutoRectEnvironment__Globals_allRects_impl))), r) // INLINED!!
-        call s__LinkedHashSet_delete(((LoadInteger(ConstTable__ht, (((s__AutoRectEnvironment__Globals_static_members_key))), (s__AutoRectEnvironment__Globals_rects_impl)))),(rId)) // INLINED!!
+    if (HaveSavedHandle(ConstTable__ht, ((((s__AutoRectEnvironment___Globals_id2_impl)))), (rId))) then // INLINED!!
+        call SaveBoolean(ConstTable__ht, (((((s__AutoRectEnvironment___Globals_static_members_key))))), (s__AutoRectEnvironment___Globals_rectWasMoved_impl), ( (true))) // INLINED!!
+        call RemoveSavedHandle(ConstTable__ht, ((((s__AutoRectEnvironment___Globals_id2_impl)))), (rId)) // INLINED!!
+        call RegionClearRect((LoadRegionHandle(ConstTable__ht, (((((s__AutoRectEnvironment___Globals_static_members_key))))), (s__AutoRectEnvironment___Globals_allRects_impl))), r) // INLINED!!
+        call s__LinkedHashSet_delete(((LoadInteger(ConstTable__ht, (((s__AutoRectEnvironment___Globals_static_members_key))), (s__AutoRectEnvironment___Globals_rects_impl)))),(rId)) // INLINED!!
     endif
 endfunction
 
 function AutoRectEnvironment_MoveRect takes rect r,real newCenterX,real newCenterY returns nothing
 
-    if (HaveSavedHandle(ConstTable__ht, ((((s__AutoRectEnvironment__Globals_id2_impl)))), (GetHandleId(r)))) then // INLINED!!
-        call SaveBoolean(ConstTable__ht, (((((s__AutoRectEnvironment__Globals_static_members_key))))), (s__AutoRectEnvironment__Globals_rectWasMoved_impl), ( (true))) // INLINED!!
-        call RegionClearRect((LoadRegionHandle(ConstTable__ht, (((((s__AutoRectEnvironment__Globals_static_members_key))))), (s__AutoRectEnvironment__Globals_allRects_impl))), r) // INLINED!!
+    if (HaveSavedHandle(ConstTable__ht, ((((s__AutoRectEnvironment___Globals_id2_impl)))), (GetHandleId(r)))) then // INLINED!!
+        call SaveBoolean(ConstTable__ht, (((((s__AutoRectEnvironment___Globals_static_members_key))))), (s__AutoRectEnvironment___Globals_rectWasMoved_impl), ( (true))) // INLINED!!
+        call RegionClearRect((LoadRegionHandle(ConstTable__ht, (((((s__AutoRectEnvironment___Globals_static_members_key))))), (s__AutoRectEnvironment___Globals_allRects_impl))), r) // INLINED!!
         call MoveRectTo(r, newCenterX, newCenterY)
-        call RegionAddRect((LoadRegionHandle(ConstTable__ht, (((((s__AutoRectEnvironment__Globals_static_members_key))))), (s__AutoRectEnvironment__Globals_allRects_impl))), r) // INLINED!!
+        call RegionAddRect((LoadRegionHandle(ConstTable__ht, (((((s__AutoRectEnvironment___Globals_static_members_key))))), (s__AutoRectEnvironment___Globals_allRects_impl))), r) // INLINED!!
     endif
     
 endfunction
 
 function AutoRectEnvironment_SetRect takes rect r,real minx,real miny,real maxx,real maxy returns nothing
-    if (HaveSavedHandle(ConstTable__ht, ((((s__AutoRectEnvironment__Globals_id2_impl)))), (GetHandleId(r)))) then // INLINED!!
-        call SaveBoolean(ConstTable__ht, (((((s__AutoRectEnvironment__Globals_static_members_key))))), (s__AutoRectEnvironment__Globals_rectWasMoved_impl), ( (true))) // INLINED!!
-        call RegionClearRect((LoadRegionHandle(ConstTable__ht, (((((s__AutoRectEnvironment__Globals_static_members_key))))), (s__AutoRectEnvironment__Globals_allRects_impl))), r) // INLINED!!
+    if (HaveSavedHandle(ConstTable__ht, ((((s__AutoRectEnvironment___Globals_id2_impl)))), (GetHandleId(r)))) then // INLINED!!
+        call SaveBoolean(ConstTable__ht, (((((s__AutoRectEnvironment___Globals_static_members_key))))), (s__AutoRectEnvironment___Globals_rectWasMoved_impl), ( (true))) // INLINED!!
+        call RegionClearRect((LoadRegionHandle(ConstTable__ht, (((((s__AutoRectEnvironment___Globals_static_members_key))))), (s__AutoRectEnvironment___Globals_allRects_impl))), r) // INLINED!!
         call SetRect(r, minx, miny, maxx, maxy)
-        call RegionAddRect((LoadRegionHandle(ConstTable__ht, (((((s__AutoRectEnvironment__Globals_static_members_key))))), (s__AutoRectEnvironment__Globals_allRects_impl))), r) // INLINED!!
+        call RegionAddRect((LoadRegionHandle(ConstTable__ht, (((((s__AutoRectEnvironment___Globals_static_members_key))))), (s__AutoRectEnvironment___Globals_allRects_impl))), r) // INLINED!!
     endif
 endfunction
 
@@ -10045,39 +10043,39 @@ function onTimer takes nothing returns nothing
     local rect r
     local integer i
     
-    if (LoadRectHandle(ConstTable__ht, (((((s__AutoRectEnvironment__Globals_static_members_key))))), (s__AutoRectEnvironment__Globals_lastCameraRect_impl))) != null then // INLINED!!
-        if GetRectMinX((LoadRectHandle(ConstTable__ht, (((((s__AutoRectEnvironment__Globals_static_members_key))))), (s__AutoRectEnvironment__Globals_lastCameraRect_impl)))) <= x and x <= GetRectMaxX((LoadRectHandle(ConstTable__ht, (((((s__AutoRectEnvironment__Globals_static_members_key))))), (s__AutoRectEnvironment__Globals_lastCameraRect_impl)))) and GetRectMinY((LoadRectHandle(ConstTable__ht, (((((s__AutoRectEnvironment__Globals_static_members_key))))), (s__AutoRectEnvironment__Globals_lastCameraRect_impl)))) <= y and y <= GetRectMaxY((LoadRectHandle(ConstTable__ht, (((((s__AutoRectEnvironment__Globals_static_members_key))))), (s__AutoRectEnvironment__Globals_lastCameraRect_impl)))) then // INLINED!!
+    if (LoadRectHandle(ConstTable__ht, (((((s__AutoRectEnvironment___Globals_static_members_key))))), (s__AutoRectEnvironment___Globals_lastCameraRect_impl))) != null then // INLINED!!
+        if GetRectMinX((LoadRectHandle(ConstTable__ht, (((((s__AutoRectEnvironment___Globals_static_members_key))))), (s__AutoRectEnvironment___Globals_lastCameraRect_impl)))) <= x and x <= GetRectMaxX((LoadRectHandle(ConstTable__ht, (((((s__AutoRectEnvironment___Globals_static_members_key))))), (s__AutoRectEnvironment___Globals_lastCameraRect_impl)))) and GetRectMinY((LoadRectHandle(ConstTable__ht, (((((s__AutoRectEnvironment___Globals_static_members_key))))), (s__AutoRectEnvironment___Globals_lastCameraRect_impl)))) <= y and y <= GetRectMaxY((LoadRectHandle(ConstTable__ht, (((((s__AutoRectEnvironment___Globals_static_members_key))))), (s__AutoRectEnvironment___Globals_lastCameraRect_impl)))) then // INLINED!!
             //call BJDebugMsg("In last rect.")
-            call s__RectEnvironment_apply((GetHandleId(((LoadRectHandle(ConstTable__ht, (((((s__AutoRectEnvironment__Globals_static_members_key))))), (s__AutoRectEnvironment__Globals_lastCameraRect_impl))))))) // INLINED!!
+            call s__RectEnvironment_apply((GetHandleId(((LoadRectHandle(ConstTable__ht, (((((s__AutoRectEnvironment___Globals_static_members_key))))), (s__AutoRectEnvironment___Globals_lastCameraRect_impl))))))) // INLINED!!
             return
         else
             // Do not set Globals.lastCameraRect to null, it's likely the camera will soon return to the last rect.
         endif
     endif
     
-    if (LoadBoolean(ConstTable__ht, (((((s__AutoRectEnvironment__Globals_static_members_key))))), (s__AutoRectEnvironment__Globals_rectWasMoved_impl))) then // INLINED!!
-        call SaveBoolean(ConstTable__ht, (((((s__AutoRectEnvironment__Globals_static_members_key))))), (s__AutoRectEnvironment__Globals_rectWasMoved_impl), ( (false))) // INLINED!!
+    if (LoadBoolean(ConstTable__ht, (((((s__AutoRectEnvironment___Globals_static_members_key))))), (s__AutoRectEnvironment___Globals_rectWasMoved_impl))) then // INLINED!!
+        call SaveBoolean(ConstTable__ht, (((((s__AutoRectEnvironment___Globals_static_members_key))))), (s__AutoRectEnvironment___Globals_rectWasMoved_impl), ( (false))) // INLINED!!
     else
-        if (LoadReal(ConstTable__ht, (((((s__AutoRectEnvironment__Globals_static_members_key))))), (s__AutoRectEnvironment__Globals_lastCameraX_impl))) == x and (LoadReal(ConstTable__ht, (((((s__AutoRectEnvironment__Globals_static_members_key))))), (s__AutoRectEnvironment__Globals_lastCameraY_impl))) == y then // INLINED!!
+        if (LoadReal(ConstTable__ht, (((((s__AutoRectEnvironment___Globals_static_members_key))))), (s__AutoRectEnvironment___Globals_lastCameraX_impl))) == x and (LoadReal(ConstTable__ht, (((((s__AutoRectEnvironment___Globals_static_members_key))))), (s__AutoRectEnvironment___Globals_lastCameraY_impl))) == y then // INLINED!!
             //call BJDebugMsg("Camera did not move, no Globals.rects moved: do nothing.")
             return
         endif
     endif
     
-    if IsPointInRegion((LoadRegionHandle(ConstTable__ht, (((((s__AutoRectEnvironment__Globals_static_members_key))))), (s__AutoRectEnvironment__Globals_allRects_impl))), x, y) then // INLINED!!
-        set i=(LoadInteger((Lists__hashTable), (((LoadInteger(ConstTable__ht, (((s__AutoRectEnvironment__Globals_static_members_key))), (s__AutoRectEnvironment__Globals_rects_impl)))) ), ( 0))) // INLINED!!
+    if IsPointInRegion((LoadRegionHandle(ConstTable__ht, (((((s__AutoRectEnvironment___Globals_static_members_key))))), (s__AutoRectEnvironment___Globals_allRects_impl))), x, y) then // INLINED!!
+        set i=(LoadInteger((Lists__hashTable), (((LoadInteger(ConstTable__ht, (((s__AutoRectEnvironment___Globals_static_members_key))), (s__AutoRectEnvironment___Globals_rects_impl)))) ), ( 0))) // INLINED!!
             loop
                 exitwhen i == (0) // INLINED!!
-                set r=(LoadRectHandle(ConstTable__ht, ((((s__AutoRectEnvironment__Globals_id2_impl)))), (i))) // INLINED!!
+                set r=(LoadRectHandle(ConstTable__ht, ((((s__AutoRectEnvironment___Globals_id2_impl)))), (i))) // INLINED!!
                 
                 if GetRectMinX(r) <= x and x <= GetRectMaxX(r) and GetRectMinY(r) <= y and y <= GetRectMaxY(r) then
                     //call BJDebugMsg("Found rect!")
-                    call s__TableStruct_setHandle(s__AutoRectEnvironment__Globals_static_members_key , s__AutoRectEnvironment__Globals_lastCameraRect_impl , (r)) // INLINED!!
+                    call s__TableStruct_setHandle(s__AutoRectEnvironment___Globals_static_members_key , s__AutoRectEnvironment___Globals_lastCameraRect_impl , (r)) // INLINED!!
                     call s__RectEnvironment_apply((GetHandleId((r)))) // INLINED!!
                     exitwhen true
                 endif
             
-                set i=(LoadInteger((Lists__hashTable), (((LoadInteger(ConstTable__ht, (((s__AutoRectEnvironment__Globals_static_members_key))), (s__AutoRectEnvironment__Globals_rects_impl)))) ), ( (i)))) // INLINED!!
+                set i=(LoadInteger((Lists__hashTable), (((LoadInteger(ConstTable__ht, (((s__AutoRectEnvironment___Globals_static_members_key))), (s__AutoRectEnvironment___Globals_rects_impl)))) ), ( (i)))) // INLINED!!
             endloop
         set r=null
     else
@@ -10085,19 +10083,19 @@ function onTimer takes nothing returns nothing
         call s__RectEnvironment_apply((0))
     endif
     
-    call SaveReal(ConstTable__ht, (((((s__AutoRectEnvironment__Globals_static_members_key))))), (s__AutoRectEnvironment__Globals_lastCameraX_impl), (( ((x)*1.0))*1.0)) // INLINED!!
-    call SaveReal(ConstTable__ht, (((((s__AutoRectEnvironment__Globals_static_members_key))))), (s__AutoRectEnvironment__Globals_lastCameraY_impl), (( ((y)*1.0))*1.0)) // INLINED!!
+    call SaveReal(ConstTable__ht, (((((s__AutoRectEnvironment___Globals_static_members_key))))), (s__AutoRectEnvironment___Globals_lastCameraX_impl), (( ((x)*1.0))*1.0)) // INLINED!!
+    call SaveReal(ConstTable__ht, (((((s__AutoRectEnvironment___Globals_static_members_key))))), (s__AutoRectEnvironment___Globals_lastCameraY_impl), (( ((y)*1.0))*1.0)) // INLINED!!
 endfunction
 
 
-//Implemented from module AutoRectEnvironment__InitModule:
-    function s__AutoRectEnvironment__InitStruct_AutoRectEnvironment__InitModule___onInit takes nothing returns nothing
+//Implemented from module AutoRectEnvironment___InitModule:
+    function s__AutoRectEnvironment___InitStruct_AutoRectEnvironment___InitModule___onInit takes nothing returns nothing
         local timer t= CreateTimer()
-        call SaveInteger(ConstTable__ht, (((s__AutoRectEnvironment__Globals_static_members_key))), (s__AutoRectEnvironment__Globals_rects_impl), ( ((GMUI_GetIndex((Lists_RECYCLE_KEY)))))) // INLINED!!
+        call SaveInteger(ConstTable__ht, (((s__AutoRectEnvironment___Globals_static_members_key))), (s__AutoRectEnvironment___Globals_rects_impl), ( ((GMUI_GetIndex((Lists_RECYCLE_KEY)))))) // INLINED!!
         
-        call s__TableStruct_setHandle(s__AutoRectEnvironment__Globals_static_members_key , s__AutoRectEnvironment__Globals_allRects_impl , (CreateRegion())) // INLINED!!
+        call s__TableStruct_setHandle(s__AutoRectEnvironment___Globals_static_members_key , s__AutoRectEnvironment___Globals_allRects_impl , (CreateRegion())) // INLINED!!
         
-        call TimerStart(t, AutoRectEnvironment__PERIOD, true, function onTimer)
+        call TimerStart(t, AutoRectEnvironment___PERIOD, true, function onTimer)
     endfunction
 
 //library AutoRectEnvironment ends
@@ -10235,8 +10233,8 @@ endfunction
             set sec=0
         endif
     
-        if sec == 60 then
-            if (LoadInteger(ConstTable__ht, (((((s__GameTime_static_members_key))))), (s__GameTime_minutes_impl))) == 60 then // INLINED!!
+        if sec == 59 then
+            if (LoadInteger(ConstTable__ht, (((((s__GameTime_static_members_key))))), (s__GameTime_minutes_impl))) == 59 then // INLINED!!
                 call SaveInteger(ConstTable__ht, (((((s__GameTime_static_members_key))))), (s__GameTime_hours_impl), ( ((LoadInteger(ConstTable__ht, (((((s__GameTime_static_members_key))))), (s__GameTime_hours_impl))) + 1))) // INLINED!!
                 call SaveInteger(ConstTable__ht, (((((s__GameTime_static_members_key))))), (s__GameTime_minutes_impl), ( (0))) // INLINED!!
             else
@@ -10588,6 +10586,8 @@ function InitDecoTents takes nothing returns nothing
 
     endloop
 //end of: DecoBuilders_MakeTents("Adv")
+    
+    set decoTent=null
 endfunction
 
 
@@ -11899,127 +11899,127 @@ endfunction
 //CONSTANTS THAT RETURN THE INTEGER ADDRESS OF A GUDR MEMBER IN THE HASHTABLE
 
 //textmacro instance: GUDR_INDEX("RECT", "0")
-    constant function s__UserDefinedRects__Indices__get_RECT takes nothing returns integer
+    constant function s__UserDefinedRects___Indices__get_RECT takes nothing returns integer
         return 0
     endfunction
 //end of: GUDR_INDEX("RECT", "0")
 //textmacro instance: GUDR_INDEX("LIGHT_T", "1")
-    constant function s__UserDefinedRects__Indices__get_LIGHT_T takes nothing returns integer
+    constant function s__UserDefinedRects___Indices__get_LIGHT_T takes nothing returns integer
         return 1
     endfunction
 //end of: GUDR_INDEX("LIGHT_T", "1")
 //textmacro instance: GUDR_INDEX("LIGHT_B", "2")
-    constant function s__UserDefinedRects__Indices__get_LIGHT_B takes nothing returns integer
+    constant function s__UserDefinedRects___Indices__get_LIGHT_B takes nothing returns integer
         return 2
     endfunction
 //end of: GUDR_INDEX("LIGHT_B", "2")
 //textmacro instance: GUDR_INDEX("LIGHT_L", "3")
-    constant function s__UserDefinedRects__Indices__get_LIGHT_L takes nothing returns integer
+    constant function s__UserDefinedRects___Indices__get_LIGHT_L takes nothing returns integer
         return 3
     endfunction
 //end of: GUDR_INDEX("LIGHT_L", "3")
 //textmacro instance: GUDR_INDEX("LIGHT_R", "4")
-    constant function s__UserDefinedRects__Indices__get_LIGHT_R takes nothing returns integer
+    constant function s__UserDefinedRects___Indices__get_LIGHT_R takes nothing returns integer
         return 4
     endfunction
 //end of: GUDR_INDEX("LIGHT_R", "4")
 //textmacro instance: GUDR_INDEX("WEATHER", "5")
-    constant function s__UserDefinedRects__Indices__get_WEATHER takes nothing returns integer
+    constant function s__UserDefinedRects___Indices__get_WEATHER takes nothing returns integer
         return 5
     endfunction
 //end of: GUDR_INDEX("WEATHER", "5")
 //textmacro instance: GUDR_INDEX("GROUP", "6")
-    constant function s__UserDefinedRects__Indices__get_GROUP takes nothing returns integer
+    constant function s__UserDefinedRects___Indices__get_GROUP takes nothing returns integer
         return 6
     endfunction
 //end of: GUDR_INDEX("GROUP", "6")
 //textmacro instance: GUDR_INDEX("HIDDEN", "7")
-    constant function s__UserDefinedRects__Indices__get_HIDDEN takes nothing returns integer
+    constant function s__UserDefinedRects___Indices__get_HIDDEN takes nothing returns integer
         return 7
     endfunction
 //end of: GUDR_INDEX("HIDDEN", "7")
 //textmacro instance: GUDR_INDEX("WEATHER_TYPE", "8")
-    constant function s__UserDefinedRects__Indices__get_WEATHER_TYPE takes nothing returns integer
+    constant function s__UserDefinedRects___Indices__get_WEATHER_TYPE takes nothing returns integer
         return 8
     endfunction
 //end of: GUDR_INDEX("WEATHER_TYPE", "8")
 //=============================
 //FUNCTIONS THAT RETURN BOOLEANS
 function GUDR_IsUnitIdGenerator takes integer unitHandle returns boolean
-    return HaveSavedHandle(UserDefinedRects__hashTable, unitHandle, (0)) // INLINED!!
+    return HaveSavedHandle(UserDefinedRects___hashTable, unitHandle, (0)) // INLINED!!
 endfunction
 
 function GUDR_IsUnitGenerator takes unit whichUnit returns boolean
-    return (HaveSavedHandle(UserDefinedRects__hashTable, (GetHandleId(whichUnit)), (0))) // INLINED!!
+    return (HaveSavedHandle(UserDefinedRects___hashTable, (GetHandleId(whichUnit)), (0))) // INLINED!!
 endfunction
 
 function GUDR_IsGeneratorIdHidden takes integer generatorId returns boolean
-    return LoadBoolean(UserDefinedRects__hashTable, generatorId, (7)) // INLINED!!
+    return LoadBoolean(UserDefinedRects___hashTable, generatorId, (7)) // INLINED!!
 endfunction
 
 function GUDR_IsGeneratorHidden takes unit generator returns boolean
-    return (LoadBoolean(UserDefinedRects__hashTable, (GetHandleId(generator)), (7))) // INLINED!!
+    return (LoadBoolean(UserDefinedRects___hashTable, (GetHandleId(generator)), (7))) // INLINED!!
 endfunction
 
 function GUDR_GeneratorIdHasGroup takes integer generatorId returns boolean
-    return HaveSavedHandle(UserDefinedRects__hashTable, generatorId, (6)) // INLINED!!
+    return HaveSavedHandle(UserDefinedRects___hashTable, generatorId, (6)) // INLINED!!
 endfunction
 
 function GUDR_GeneratorHasGroup takes unit generator returns boolean
-    return (HaveSavedHandle(UserDefinedRects__hashTable, (GetHandleId(generator)), (6))) // INLINED!!
+    return (HaveSavedHandle(UserDefinedRects___hashTable, (GetHandleId(generator)), (6))) // INLINED!!
 endfunction
 
 function GUDR_GeneratorIdHasWeather takes integer generatorId returns boolean
-    return HaveSavedInteger(UserDefinedRects__hashTable, generatorId, (5)) // INLINED!!
+    return HaveSavedInteger(UserDefinedRects___hashTable, generatorId, (5)) // INLINED!!
 endfunction
 
 function GUDR_GeneratorHasWeather takes unit generator returns boolean
-    return (HaveSavedInteger(UserDefinedRects__hashTable, (GetHandleId(generator)), (5))) // INLINED!!
+    return (HaveSavedInteger(UserDefinedRects___hashTable, (GetHandleId(generator)), (5))) // INLINED!!
 endfunction
 //=============================
 //FUNCTIONS TO GET GUDR MEMBERS
 
 //Handle Id as parameter
 function GUDR_GetGeneratorIdRect takes integer generatorId returns rect
-    return LoadRectHandle(UserDefinedRects__hashTable, generatorId, (0)) // INLINED!!
+    return LoadRectHandle(UserDefinedRects___hashTable, generatorId, (0)) // INLINED!!
 endfunction
 
 function GUDR_GetGeneratorIdWeatherEffect takes integer generatorId returns weathereffect
-    return UserDefinedRects__weatherEffects[LoadInteger(UserDefinedRects__hashTable, generatorId, (5))] // INLINED!!
+    return UserDefinedRects___weatherEffects[LoadInteger(UserDefinedRects___hashTable, generatorId, (5))] // INLINED!!
 endfunction
 
 function GUDR_GetGeneratorIdGroup takes integer generatorId returns group
-    return LoadGroupHandle(UserDefinedRects__hashTable, generatorId, (6)) // INLINED!!
+    return LoadGroupHandle(UserDefinedRects___hashTable, generatorId, (6)) // INLINED!!
 endfunction
 
 function GUDR_GetGeneratorIdWeatherType takes integer generatorId returns integer
-    return LoadInteger(UserDefinedRects__hashTable, generatorId, (8)) // INLINED!!
+    return LoadInteger(UserDefinedRects___hashTable, generatorId, (8)) // INLINED!!
 endfunction
 
 //Unit as parameter
 
 function GUDR_GetGeneratorRect takes unit generator returns rect
-    return (LoadRectHandle(UserDefinedRects__hashTable, (GetHandleId(generator)), (0))) // INLINED!!
+    return (LoadRectHandle(UserDefinedRects___hashTable, (GetHandleId(generator)), (0))) // INLINED!!
 endfunction
 
 function GUDR_GetGeneratorWeatherEffect takes unit generator returns weathereffect
-    return (UserDefinedRects__weatherEffects[LoadInteger(UserDefinedRects__hashTable, (GetHandleId(generator)), (5))]) // INLINED!!
+    return (UserDefinedRects___weatherEffects[LoadInteger(UserDefinedRects___hashTable, (GetHandleId(generator)), (5))]) // INLINED!!
 endfunction
 
 function GUDR_GetGeneratorGroup takes unit generator returns group
-    return (LoadGroupHandle(UserDefinedRects__hashTable, (GetHandleId(generator)), (6))) // INLINED!!
+    return (LoadGroupHandle(UserDefinedRects___hashTable, (GetHandleId(generator)), (6))) // INLINED!!
 endfunction
 
 function GUDR_GetGeneratorWeatherType takes unit generator returns integer
-    return (LoadInteger(UserDefinedRects__hashTable, (GetHandleId(generator)), (8))) // INLINED!!
+    return (LoadInteger(UserDefinedRects___hashTable, (GetHandleId(generator)), (8))) // INLINED!!
 endfunction
 
 function GUDR_ConvertWeatherType takes integer weatherType returns integer
-    return LoadInteger(UserDefinedRects__hashTable, 0, weatherType)
+    return LoadInteger(UserDefinedRects___hashTable, 0, weatherType)
 endfunction
 
-function UserDefinedRects__GetGeneratorIdLightning takes integer genId,integer i returns lightning
-    return LoadLightningHandle(UserDefinedRects__hashTable, genId, i)
+function UserDefinedRects___GetGeneratorIdLightning takes integer genId,integer i returns lightning
+    return LoadLightningHandle(UserDefinedRects___hashTable, genId, i)
 endfunction
 
 //=============================
@@ -12031,11 +12031,11 @@ function GUDR_SwapGroup_UnitsInsideUDR takes group whichGroup,boolean includeGen
     set firstOfGroup=FirstOfGroup(whichGroup)
     set genId=GetHandleId(firstOfGroup)
     
-    if (HaveSavedHandle(UserDefinedRects__hashTable, (genId), (0))) then // INLINED!!
+    if (HaveSavedHandle(UserDefinedRects___hashTable, (genId), (0))) then // INLINED!!
         set bj_groupRandomCurrentPick=firstOfGroup
         
         call GroupClear(whichGroup)
-        call GroupEnumUnitsInRect(whichGroup, (LoadRectHandle(UserDefinedRects__hashTable, (genId), (0))), filter) // INLINED!!
+        call GroupEnumUnitsInRect(whichGroup, (LoadRectHandle(UserDefinedRects___hashTable, (genId), (0))), filter) // INLINED!!
         
         if not includeGenerator then
             call GroupRemoveUnit(whichGroup, firstOfGroup)
@@ -12062,11 +12062,13 @@ function GUDR_PlayerGetSelectedGeneratorId takes player whichPlayer returns inte
     call DestroyGroup(slctGrp)
     set slctGrp=null
     
-    if (HaveSavedHandle(UserDefinedRects__hashTable, (unitId), (0))) then // INLINED!!
+    if (HaveSavedHandle(UserDefinedRects___hashTable, (unitId), (0))) then // INLINED!!
         set bj_groupRandomCurrentPick=firstOfGroup
+        set firstOfGroup=null
         return unitId
     endif
     
+    set firstOfGroup=null
     return 0
 endfunction
 
@@ -12076,12 +12078,12 @@ function ChangeGUDRWeatherNew takes unit whichUnit,integer changeWeather,integer
     local integer unitId= GetHandleId(whichUnit)
     local integer weatherId
     
-    if not (HaveSavedHandle(UserDefinedRects__hashTable, (unitId), (0))) then // INLINED!!
+    if not (HaveSavedHandle(UserDefinedRects___hashTable, (unitId), (0))) then // INLINED!!
         return 0
     endif
 
     if finalWeather < 1 or finalWeather > 21 then
-        set curWeather=(LoadInteger(UserDefinedRects__hashTable, (unitId), (8))) // INLINED!!
+        set curWeather=(LoadInteger(UserDefinedRects___hashTable, (unitId), (8))) // INLINED!!
         set finalWeather=curWeather + changeWeather
     endif
         
@@ -12098,15 +12100,15 @@ function ChangeGUDRWeatherNew takes unit whichUnit,integer changeWeather,integer
         endloop
     endif
     
-    call SaveInteger(UserDefinedRects__hashTable, unitId, (8), finalWeather) // INLINED!!
+    call SaveInteger(UserDefinedRects___hashTable, unitId, (8), finalWeather) // INLINED!!
     
     // Update Weather, if it exists.
-    set weatherId=LoadInteger(UserDefinedRects__hashTable, unitId, 5)
+    set weatherId=LoadInteger(UserDefinedRects___hashTable, unitId, 5)
     if weatherId > 0 then
-        call EnableWeatherEffect(UserDefinedRects__weatherEffects[weatherId], false) //BUG: If weather effect is not disabled before destruction, it's sound effect will remain
-        call RemoveWeatherEffect(UserDefinedRects__weatherEffects[weatherId])
-        set UserDefinedRects__weatherEffects[weatherId]=AddWeatherEffect((LoadRectHandle(UserDefinedRects__hashTable, (unitId), (0))), (LoadInteger(UserDefinedRects__hashTable, 0, (finalWeather)))) // INLINED!!
-        call EnableWeatherEffect(UserDefinedRects__weatherEffects[weatherId], true)
+        call EnableWeatherEffect(UserDefinedRects___weatherEffects[weatherId], false) //BUG: If weather effect is not disabled before destruction, it's sound effect will remain
+        call RemoveWeatherEffect(UserDefinedRects___weatherEffects[weatherId])
+        set UserDefinedRects___weatherEffects[weatherId]=AddWeatherEffect((LoadRectHandle(UserDefinedRects___hashTable, (unitId), (0))), (LoadInteger(UserDefinedRects___hashTable, 0, (finalWeather)))) // INLINED!!
+        call EnableWeatherEffect(UserDefinedRects___weatherEffects[weatherId], true)
     endif
     
     return finalWeather
@@ -12115,7 +12117,7 @@ endfunction
 function GroupGUDRFilter takes nothing returns boolean
     local unit filterUnit= GetFilterUnit()
     
-    if (HaveSavedHandle(UserDefinedRects__hashTable, (GetHandleId((filterUnit))), (0))) or GetOwningPlayer(filterUnit) != bj_forceRandomCurrentPick then // INLINED!!
+    if (HaveSavedHandle(UserDefinedRects___hashTable, (GetHandleId((filterUnit))), (0))) or GetOwningPlayer(filterUnit) != bj_forceRandomCurrentPick then // INLINED!!
         set filterUnit=null
         return false
     endif
@@ -12131,11 +12133,11 @@ function GroupGUDR takes unit whichUnit,boolean unlock returns boolean
     local unit firstUnit
     local player storeGlobal= bj_forceRandomCurrentPick
     
-    if not (HaveSavedHandle(UserDefinedRects__hashTable, (unitId), (0))) then // INLINED!!
+    if not (HaveSavedHandle(UserDefinedRects___hashTable, (unitId), (0))) then // INLINED!!
         return false
     endif
     
-    set g=(LoadGroupHandle(UserDefinedRects__hashTable, (unitId), (6))) // INLINED!!
+    set g=(LoadGroupHandle(UserDefinedRects___hashTable, (unitId), (6))) // INLINED!!
     
     //Save the GURD's owner in the Hashtable for use in the EnumFilter function
     set firstUnit=FirstOfGroup(g)
@@ -12155,7 +12157,7 @@ function GroupGUDR takes unit whichUnit,boolean unlock returns boolean
     //We only want to add new units to the group if the user doesn't want to unlock it
     if not unlock then
         set bj_forceRandomCurrentPick=GetOwningPlayer(whichUnit)
-        call GroupEnumUnitsInRect(g, (LoadRectHandle(UserDefinedRects__hashTable, (unitId), (0))), Condition(function GroupGUDRFilter)) // INLINED!!
+        call GroupEnumUnitsInRect(g, (LoadRectHandle(UserDefinedRects___hashTable, (unitId), (0))), Condition(function GroupGUDRFilter)) // INLINED!!
         set bj_forceRandomCurrentPick=storeGlobal
     endif
     
@@ -12169,7 +12171,7 @@ function CreateWeather takes unit whichUnit returns boolean
     local integer instance
     local integer genId= GetHandleId(whichUnit)
     
-    if not (HaveSavedHandle(UserDefinedRects__hashTable, (genId), (0))) then // INLINED!!
+    if not (HaveSavedHandle(UserDefinedRects___hashTable, (genId), (0))) then // INLINED!!
         return false
     endif
     
@@ -12182,34 +12184,34 @@ function CreateWeather takes unit whichUnit returns boolean
 
 
 
-        set instance=GMUI_GetIndex(UserDefinedRects__RECYCLE_KEY)
+        set instance=GMUI_GetIndex(UserDefinedRects___RECYCLE_KEY)
 
     
-    call SaveInteger(UserDefinedRects__hashTable, GetHandleId(whichUnit), (5), instance) // INLINED!!
-    set UserDefinedRects__weatherEffects[instance]=AddWeatherEffect((LoadRectHandle(UserDefinedRects__hashTable, (genId), (0))), (LoadInteger(UserDefinedRects__hashTable, 0, ((LoadInteger(UserDefinedRects__hashTable, (genId), (8))))))) // INLINED!!
-    call EnableWeatherEffect(UserDefinedRects__weatherEffects[instance], true)
+    call SaveInteger(UserDefinedRects___hashTable, GetHandleId(whichUnit), (5), instance) // INLINED!!
+    set UserDefinedRects___weatherEffects[instance]=AddWeatherEffect((LoadRectHandle(UserDefinedRects___hashTable, (genId), (0))), (LoadInteger(UserDefinedRects___hashTable, 0, ((LoadInteger(UserDefinedRects___hashTable, (genId), (8))))))) // INLINED!!
+    call EnableWeatherEffect(UserDefinedRects___weatherEffects[instance], true)
     
     return true
 endfunction
 
 function DestroyWeather takes unit whichUnit returns boolean
-    local integer instance= LoadInteger(UserDefinedRects__hashTable, GetHandleId(whichUnit), (5)) // INLINED!!
+    local integer instance= LoadInteger(UserDefinedRects___hashTable, GetHandleId(whichUnit), (5)) // INLINED!!
     
     if instance < 1 then
         return false // False for effect not destroyed, unit did not have weather attached.
     endif
     
-    call EnableWeatherEffect(UserDefinedRects__weatherEffects[instance], false) // BUG: If weather effect is not disabled before destruction, it's sound effect will remain
-    call RemoveWeatherEffect(UserDefinedRects__weatherEffects[instance])
-    set UserDefinedRects__weatherEffects[instance]=null // Null to free handles for other systems
-    call RemoveSavedInteger(UserDefinedRects__hashTable, GetHandleId(whichUnit), (5)) // INLINED!!
+    call EnableWeatherEffect(UserDefinedRects___weatherEffects[instance], false) // BUG: If weather effect is not disabled before destruction, it's sound effect will remain
+    call RemoveWeatherEffect(UserDefinedRects___weatherEffects[instance])
+    set UserDefinedRects___weatherEffects[instance]=null // Null to free handles for other systems
+    call RemoveSavedInteger(UserDefinedRects___hashTable, GetHandleId(whichUnit), (5)) // INLINED!!
     
     
 
 
 
 
-        call GMUI_RecycleIndex(UserDefinedRects__RECYCLE_KEY , instance)
+        call GMUI_RecycleIndex(UserDefinedRects___RECYCLE_KEY , instance)
 
     
     return true // True for effect destroyed.
@@ -12219,15 +12221,15 @@ function ToggleGUDRVisibility takes unit whichUnit,boolean toggle,boolean show r
     local real alpha
     local integer unitId= GetHandleId(whichUnit)
     
-    if not (HaveSavedHandle(UserDefinedRects__hashTable, (unitId), (0))) then // INLINED!!
+    if not (HaveSavedHandle(UserDefinedRects___hashTable, (unitId), (0))) then // INLINED!!
         return false
     endif
     
     if toggle then //If user wants to switch the current value, change the value of show to opposite of current value
-        set show=not LoadBoolean(UserDefinedRects__hashTable, unitId, (7)) // INLINED!!
+        set show=not LoadBoolean(UserDefinedRects___hashTable, unitId, (7)) // INLINED!!
     endif
     
-    call SaveBoolean(UserDefinedRects__hashTable, unitId, (7), show) //Save current show/hide boolean // INLINED!!
+    call SaveBoolean(UserDefinedRects___hashTable, unitId, (7), show) //Save current show/hide boolean // INLINED!!
     
     //Convert Boolean to Real T/F = 1/0
     if show then
@@ -12239,10 +12241,10 @@ function ToggleGUDRVisibility takes unit whichUnit,boolean toggle,boolean show r
 
     //After it has been decided if the GUDR should be shown or hidden, apply the choice
     call SetUnitVertexColor(whichUnit, 255, 255, 255, 255 * R2I(alpha))
-    call SetLightningColor(LoadLightningHandle(UserDefinedRects__hashTable, unitId, (1)), 1, 1, 1, alpha) // INLINED!!
-    call SetLightningColor(LoadLightningHandle(UserDefinedRects__hashTable, unitId, (2)), 1, 1, 1, alpha) // INLINED!!
-    call SetLightningColor(LoadLightningHandle(UserDefinedRects__hashTable, unitId, (3)), 1, 1, 1, alpha) // INLINED!!
-    call SetLightningColor(LoadLightningHandle(UserDefinedRects__hashTable, unitId, (4)), 1, 1, 1, alpha) // INLINED!!
+    call SetLightningColor(LoadLightningHandle(UserDefinedRects___hashTable, unitId, (1)), 1, 1, 1, alpha) // INLINED!!
+    call SetLightningColor(LoadLightningHandle(UserDefinedRects___hashTable, unitId, (2)), 1, 1, 1, alpha) // INLINED!!
+    call SetLightningColor(LoadLightningHandle(UserDefinedRects___hashTable, unitId, (3)), 1, 1, 1, alpha) // INLINED!!
+    call SetLightningColor(LoadLightningHandle(UserDefinedRects___hashTable, unitId, (4)), 1, 1, 1, alpha) // INLINED!!
     return true
 endfunction
 
@@ -12258,11 +12260,11 @@ function MoveGUDR takes unit centerUnit,real offsetX,real offsetY,boolean expand
     local real minY
     local real maxY
     
-    if not (HaveSavedHandle(UserDefinedRects__hashTable, (unitId), (0))) then // INLINED!!
+    if not (HaveSavedHandle(UserDefinedRects___hashTable, (unitId), (0))) then // INLINED!!
         return false
     endif
     
-    set userDefRect=(LoadRectHandle(UserDefinedRects__hashTable, (unitId), (0))) // INLINED!!
+    set userDefRect=(LoadRectHandle(UserDefinedRects___hashTable, (unitId), (0))) // INLINED!!
     
     //If user wants to expand or contract the current region, Load the current value of its borders
     if expand then
@@ -12277,10 +12279,10 @@ function MoveGUDR takes unit centerUnit,real offsetX,real offsetY,boolean expand
     set maxY=centerY + offsetY
     
     //Update Lightnings
-    call MoveLightning(LoadLightningHandle(UserDefinedRects__hashTable, unitId, (1)), true, minX, maxY, maxX, maxY) // INLINED!!
-    call MoveLightning(LoadLightningHandle(UserDefinedRects__hashTable, unitId, (2)), true, minX, minY, maxX, minY) // INLINED!!
-    call MoveLightning(LoadLightningHandle(UserDefinedRects__hashTable, unitId, (3)), true, minX, minY, minX, maxY) // INLINED!!
-    call MoveLightning(LoadLightningHandle(UserDefinedRects__hashTable, unitId, (4)), true, maxX, minY, maxX, maxY) // INLINED!!
+    call MoveLightning(LoadLightningHandle(UserDefinedRects___hashTable, unitId, (1)), true, minX, maxY, maxX, maxY) // INLINED!!
+    call MoveLightning(LoadLightningHandle(UserDefinedRects___hashTable, unitId, (2)), true, minX, minY, maxX, minY) // INLINED!!
+    call MoveLightning(LoadLightningHandle(UserDefinedRects___hashTable, unitId, (3)), true, minX, minY, minX, maxY) // INLINED!!
+    call MoveLightning(LoadLightningHandle(UserDefinedRects___hashTable, unitId, (4)), true, maxX, minY, maxX, maxY) // INLINED!!
     
     //Update Rect
 
@@ -12290,12 +12292,12 @@ function MoveGUDR takes unit centerUnit,real offsetX,real offsetY,boolean expand
 
     
     // Update Weather Effect
-    set weatherId=LoadInteger(UserDefinedRects__hashTable, unitId, 5)
+    set weatherId=LoadInteger(UserDefinedRects___hashTable, unitId, 5)
     if weatherId > 0 then
-        call EnableWeatherEffect(UserDefinedRects__weatherEffects[weatherId], false) //BUG: If weather effect is not disabled before destruction, it's sound effect will remain
-        call RemoveWeatherEffect(UserDefinedRects__weatherEffects[weatherId])
-        set UserDefinedRects__weatherEffects[weatherId]=AddWeatherEffect(userDefRect, (LoadInteger(UserDefinedRects__hashTable, 0, ((LoadInteger(UserDefinedRects__hashTable, (unitId), (8))))))) // INLINED!!
-        call EnableWeatherEffect(UserDefinedRects__weatherEffects[weatherId], true)
+        call EnableWeatherEffect(UserDefinedRects___weatherEffects[weatherId], false) //BUG: If weather effect is not disabled before destruction, it's sound effect will remain
+        call RemoveWeatherEffect(UserDefinedRects___weatherEffects[weatherId])
+        set UserDefinedRects___weatherEffects[weatherId]=AddWeatherEffect(userDefRect, (LoadInteger(UserDefinedRects___hashTable, 0, ((LoadInteger(UserDefinedRects___hashTable, (unitId), (8))))))) // INLINED!!
+        call EnableWeatherEffect(UserDefinedRects___weatherEffects[weatherId], true)
     endif
     
     set userDefRect=null
@@ -12313,7 +12315,7 @@ function CreateGUDR takes unit centerUnit returns boolean
         local integer fog
 
     
-    if (HaveSavedHandle(UserDefinedRects__hashTable, (unitId), (0))) then // INLINED!!
+    if (HaveSavedHandle(UserDefinedRects___hashTable, (unitId), (0))) then // INLINED!!
         return false
     endif
     
@@ -12326,14 +12328,14 @@ function CreateGUDR takes unit centerUnit returns boolean
         call AutoRectEnvironment_RegisterRect(userDefRect)
 
     
-    call SaveRectHandle(UserDefinedRects__hashTable, unitId, (0), userDefRect) // INLINED!!
-    call SaveLightningHandle(UserDefinedRects__hashTable, unitId, (1), AddLightning("DRAM", true, centerX - 32, centerY + 32, centerX + 32, centerY + 32)) // INLINED!!
-    call SaveLightningHandle(UserDefinedRects__hashTable, unitId, (2), AddLightning("DRAM", true, centerX - 32, centerY - 32, centerX + 32, centerY - 32)) // INLINED!!
-    call SaveLightningHandle(UserDefinedRects__hashTable, unitId, (3), AddLightning("DRAM", true, centerX - 32, centerY - 32, centerX - 32, centerY + 32)) // INLINED!!
-    call SaveLightningHandle(UserDefinedRects__hashTable, unitId, (4), AddLightning("DRAM", true, centerX + 32, centerY - 32, centerX + 32, centerY + 32)) // INLINED!!
-    call SaveGroupHandle(UserDefinedRects__hashTable, unitId, (6), CreateGroup()) // INLINED!!
-    call SaveBoolean(UserDefinedRects__hashTable, unitId, (7), true) //Save show/hide boolean as true, because nothing is being hidden // INLINED!!
-    call SaveInteger(UserDefinedRects__hashTable, unitId, (8), 1) //Save 1 as it is the value of 'RAhr' // INLINED!!
+    call SaveRectHandle(UserDefinedRects___hashTable, unitId, (0), userDefRect) // INLINED!!
+    call SaveLightningHandle(UserDefinedRects___hashTable, unitId, (1), AddLightning("DRAM", true, centerX - 32, centerY + 32, centerX + 32, centerY + 32)) // INLINED!!
+    call SaveLightningHandle(UserDefinedRects___hashTable, unitId, (2), AddLightning("DRAM", true, centerX - 32, centerY - 32, centerX + 32, centerY - 32)) // INLINED!!
+    call SaveLightningHandle(UserDefinedRects___hashTable, unitId, (3), AddLightning("DRAM", true, centerX - 32, centerY - 32, centerX - 32, centerY + 32)) // INLINED!!
+    call SaveLightningHandle(UserDefinedRects___hashTable, unitId, (4), AddLightning("DRAM", true, centerX + 32, centerY - 32, centerX + 32, centerY + 32)) // INLINED!!
+    call SaveGroupHandle(UserDefinedRects___hashTable, unitId, (6), CreateGroup()) // INLINED!!
+    call SaveBoolean(UserDefinedRects___hashTable, unitId, (7), true) //Save show/hide boolean as true, because nothing is being hidden // INLINED!!
+    call SaveInteger(UserDefinedRects___hashTable, unitId, (8), 1) //Save 1 as it is the value of 'RAhr' // INLINED!!
     
     set userDefRect=null
     return true
@@ -12341,7 +12343,7 @@ endfunction
 
 function DestroyGUDR takes unit centerUnit returns nothing
     local integer unitId= GetHandleId(centerUnit)
-    local rect udr= (LoadRectHandle(UserDefinedRects__hashTable, (unitId), (0))) // INLINED!!
+    local rect udr= (LoadRectHandle(UserDefinedRects___hashTable, (unitId), (0))) // INLINED!!
     
 
         local integer fog= (LoadInteger(ConstTable__ht, (((s__RectEnvironment_fog_impl))), (((GetHandleId((udr))))))) // INLINED!!
@@ -12361,44 +12363,44 @@ function DestroyGUDR takes unit centerUnit returns nothing
 
     call DestroyWeather(centerUnit)
     call GroupGUDR(centerUnit , true)
-    call DestroyLightning((LoadLightningHandle(UserDefinedRects__hashTable, (unitId ), ( (1))))) // INLINED!!
-    call DestroyLightning((LoadLightningHandle(UserDefinedRects__hashTable, (unitId ), ( (2))))) // INLINED!!
-    call DestroyLightning((LoadLightningHandle(UserDefinedRects__hashTable, (unitId ), ( (3))))) // INLINED!!
-    call DestroyLightning((LoadLightningHandle(UserDefinedRects__hashTable, (unitId ), ( (4))))) // INLINED!!
+    call DestroyLightning((LoadLightningHandle(UserDefinedRects___hashTable, (unitId ), ( (1))))) // INLINED!!
+    call DestroyLightning((LoadLightningHandle(UserDefinedRects___hashTable, (unitId ), ( (2))))) // INLINED!!
+    call DestroyLightning((LoadLightningHandle(UserDefinedRects___hashTable, (unitId ), ( (3))))) // INLINED!!
+    call DestroyLightning((LoadLightningHandle(UserDefinedRects___hashTable, (unitId ), ( (4))))) // INLINED!!
     call RemoveRect(udr)
-    call DestroyGroup((LoadGroupHandle(UserDefinedRects__hashTable, (unitId), (6)))) // INLINED!!
+    call DestroyGroup((LoadGroupHandle(UserDefinedRects___hashTable, (unitId), (6)))) // INLINED!!
     
-    call FlushChildHashtable(UserDefinedRects__hashTable, unitId)
+    call FlushChildHashtable(UserDefinedRects___hashTable, unitId)
 
     set udr=null
 endfunction
 
-function UserDefinedRects__onInit takes nothing returns nothing
+function UserDefinedRects___onInit takes nothing returns nothing
 
 
 
     
-    call SaveInteger(UserDefinedRects__hashTable, 0, 1, 'RAhr')
-    call SaveInteger(UserDefinedRects__hashTable, 0, 2, 'RAlr')
-    call SaveInteger(UserDefinedRects__hashTable, 0, 3, 'MEds')
-    call SaveInteger(UserDefinedRects__hashTable, 0, 4, 'FDbh')
-    call SaveInteger(UserDefinedRects__hashTable, 0, 5, 'FDbl')
-    call SaveInteger(UserDefinedRects__hashTable, 0, 6, 'FDgh')
-    call SaveInteger(UserDefinedRects__hashTable, 0, 7, 'FDgl')
-    call SaveInteger(UserDefinedRects__hashTable, 0, 8, 'FDrh')
-    call SaveInteger(UserDefinedRects__hashTable, 0, 9, 'FDrl')
-    call SaveInteger(UserDefinedRects__hashTable, 0, 10, 'FDwh')
-    call SaveInteger(UserDefinedRects__hashTable, 0, 11, 'FDwl')
-    call SaveInteger(UserDefinedRects__hashTable, 0, 12, 'RLhr')
-    call SaveInteger(UserDefinedRects__hashTable, 0, 13, 'RLlr')
-    call SaveInteger(UserDefinedRects__hashTable, 0, 14, 'SNbs')
-    call SaveInteger(UserDefinedRects__hashTable, 0, 15, 'SNhs')
-    call SaveInteger(UserDefinedRects__hashTable, 0, 16, 'SNls')
-    call SaveInteger(UserDefinedRects__hashTable, 0, 17, 'WOcw')
-    call SaveInteger(UserDefinedRects__hashTable, 0, 18, 'WOlw')
-    call SaveInteger(UserDefinedRects__hashTable, 0, 19, 'LRaa')
-    call SaveInteger(UserDefinedRects__hashTable, 0, 20, 'LRma')
-    call SaveInteger(UserDefinedRects__hashTable, 0, 21, 'WNcw')
+    call SaveInteger(UserDefinedRects___hashTable, 0, 1, 'RAhr')
+    call SaveInteger(UserDefinedRects___hashTable, 0, 2, 'RAlr')
+    call SaveInteger(UserDefinedRects___hashTable, 0, 3, 'MEds')
+    call SaveInteger(UserDefinedRects___hashTable, 0, 4, 'FDbh')
+    call SaveInteger(UserDefinedRects___hashTable, 0, 5, 'FDbl')
+    call SaveInteger(UserDefinedRects___hashTable, 0, 6, 'FDgh')
+    call SaveInteger(UserDefinedRects___hashTable, 0, 7, 'FDgl')
+    call SaveInteger(UserDefinedRects___hashTable, 0, 8, 'FDrh')
+    call SaveInteger(UserDefinedRects___hashTable, 0, 9, 'FDrl')
+    call SaveInteger(UserDefinedRects___hashTable, 0, 10, 'FDwh')
+    call SaveInteger(UserDefinedRects___hashTable, 0, 11, 'FDwl')
+    call SaveInteger(UserDefinedRects___hashTable, 0, 12, 'RLhr')
+    call SaveInteger(UserDefinedRects___hashTable, 0, 13, 'RLlr')
+    call SaveInteger(UserDefinedRects___hashTable, 0, 14, 'SNbs')
+    call SaveInteger(UserDefinedRects___hashTable, 0, 15, 'SNhs')
+    call SaveInteger(UserDefinedRects___hashTable, 0, 16, 'SNls')
+    call SaveInteger(UserDefinedRects___hashTable, 0, 17, 'WOcw')
+    call SaveInteger(UserDefinedRects___hashTable, 0, 18, 'WOlw')
+    call SaveInteger(UserDefinedRects___hashTable, 0, 19, 'LRaa')
+    call SaveInteger(UserDefinedRects___hashTable, 0, 20, 'LRma')
+    call SaveInteger(UserDefinedRects___hashTable, 0, 21, 'WNcw')
 endfunction
 
 //////////////////////////////////////////////////////
@@ -12757,15 +12759,15 @@ endfunction
 
 
 
-function RectGenerator__InFirstPage takes unit u returns boolean
+function RectGenerator___InFirstPage takes unit u returns boolean
 	return GetUnitAbilityLevel(u, RectGenerator_CREATE_OR_DESTROY) > 0
 endfunction
 
-function RectGenerator__InSecondPage takes unit u returns boolean
+function RectGenerator___InSecondPage takes unit u returns boolean
 	return GetUnitAbilityLevel(u, RectGenerator_TOGGLE_WEATHER) > 0
 endfunction
 
-function RectGenerator__InThirdPage takes unit u returns boolean
+function RectGenerator___InThirdPage takes unit u returns boolean
 	return GetUnitAbilityLevel(u, RectGenerator_FOG_DENSITY_UP) > 0
 endfunction
 //===================================================
@@ -12776,8 +12778,8 @@ endfunction
 
 //textmacro instance: TableStruct_NewConstTableField("public","strings")
 
-        constant function s__RectGenerator__FogStyle__get_strings takes nothing returns integer
-            return s__RectGenerator__FogStyle_strings_impl
+        constant function s__RectGenerator___FogStyle__get_strings takes nothing returns integer
+            return s__RectGenerator___FogStyle_strings_impl
         endfunction
 
 
@@ -12787,8 +12789,8 @@ endfunction
 //end of: TableStruct_NewConstTableField("public","strings")
 //textmacro instance: TableStruct_NewConstTableField("private","linkedListNext")
 
-        constant function s__RectGenerator__FogStyle__get_linkedListNext takes nothing returns integer
-            return s__RectGenerator__FogStyle_linkedListNext_impl
+        constant function s__RectGenerator___FogStyle__get_linkedListNext takes nothing returns integer
+            return s__RectGenerator___FogStyle_linkedListNext_impl
         endfunction
 
 
@@ -12798,8 +12800,8 @@ endfunction
 //end of: TableStruct_NewConstTableField("private","linkedListNext")
 //textmacro instance: TableStruct_NewConstTableField("private","linkedListPrev")
 
-        constant function s__RectGenerator__FogStyle__get_linkedListPrev takes nothing returns integer
-            return s__RectGenerator__FogStyle_linkedListPrev_impl
+        constant function s__RectGenerator___FogStyle__get_linkedListPrev takes nothing returns integer
+            return s__RectGenerator___FogStyle_linkedListPrev_impl
         endfunction
 
 
@@ -12808,28 +12810,28 @@ endfunction
 
 //end of: TableStruct_NewConstTableField("private","linkedListPrev")
         
-        function s__RectGenerator__FogStyle_next takes integer this returns integer
-            return (LoadInteger(ConstTable__ht, ((s__RectGenerator__FogStyle_linkedListNext_impl)), (this))) // INLINED!!
+        function s__RectGenerator___FogStyle_next takes integer this returns integer
+            return (LoadInteger(ConstTable__ht, ((s__RectGenerator___FogStyle_linkedListNext_impl)), (this))) // INLINED!!
         endfunction
         
-        function s__RectGenerator__FogStyle_prev takes integer this returns integer
-            return (LoadInteger(ConstTable__ht, ((s__RectGenerator__FogStyle_linkedListPrev_impl)), (this))) // INLINED!!
+        function s__RectGenerator___FogStyle_prev takes integer this returns integer
+            return (LoadInteger(ConstTable__ht, ((s__RectGenerator___FogStyle_linkedListPrev_impl)), (this))) // INLINED!!
         endfunction
         
-        function s__RectGenerator__FogStyle_setNext takes integer this,integer nextStyle returns nothing
-            call SaveInteger(ConstTable__ht, ((s__RectGenerator__FogStyle_linkedListNext_impl)), (this), ( nextStyle)) // INLINED!!
+        function s__RectGenerator___FogStyle_setNext takes integer this,integer nextStyle returns nothing
+            call SaveInteger(ConstTable__ht, ((s__RectGenerator___FogStyle_linkedListNext_impl)), (this), ( nextStyle)) // INLINED!!
         endfunction
         
-        function s__RectGenerator__FogStyle_setPrev takes integer this,integer prevStyle returns nothing
-            call SaveInteger(ConstTable__ht, ((s__RectGenerator__FogStyle_linkedListPrev_impl)), (this), ( prevStyle)) // INLINED!!
+        function s__RectGenerator___FogStyle_setPrev takes integer this,integer prevStyle returns nothing
+            call SaveInteger(ConstTable__ht, ((s__RectGenerator___FogStyle_linkedListPrev_impl)), (this), ( prevStyle)) // INLINED!!
         endfunction
         
-        function s__RectGenerator__FogStyle_getString takes integer this returns string
-            return (LoadStr(ConstTable__ht, ((((s__RectGenerator__FogStyle_strings_impl)))), (this))) // INLINED!!
+        function s__RectGenerator___FogStyle_getString takes integer this returns string
+            return (LoadStr(ConstTable__ht, ((((s__RectGenerator___FogStyle_strings_impl)))), (this))) // INLINED!!
         endfunction
         
-        function s__RectGenerator__FogStyle_setString takes integer this,string str returns nothing
-            call SaveStr(ConstTable__ht, ((((s__RectGenerator__FogStyle_strings_impl)))), (this), ( str)) // INLINED!!
+        function s__RectGenerator___FogStyle_setString takes integer this,string str returns nothing
+            call SaveStr(ConstTable__ht, ((((s__RectGenerator___FogStyle_strings_impl)))), (this), ( str)) // INLINED!!
         endfunction
         
         
@@ -12838,12 +12840,12 @@ endfunction
 
 
 
-function RectGenerator__GroupLoop takes nothing returns nothing
+function RectGenerator___GroupLoop takes nothing returns nothing
     local unit udr= GetTriggerUnit()
     local unit enumUnit= GetEnumUnit()
     
-    if (HaveSavedHandle(UserDefinedRects__hashTable, (GetHandleId((enumUnit))), (0))) or GetOwningPlayer(enumUnit) != GetOwningPlayer(udr) then // INLINED!!
-        call GroupRemoveUnit((LoadGroupHandle(UserDefinedRects__hashTable, (GetHandleId((udr))), (6))), enumUnit) // INLINED!!
+    if (HaveSavedHandle(UserDefinedRects___hashTable, (GetHandleId((enumUnit))), (0))) or GetOwningPlayer(enumUnit) != GetOwningPlayer(udr) then // INLINED!!
+        call GroupRemoveUnit((LoadGroupHandle(UserDefinedRects___hashTable, (GetHandleId((udr))), (6))), enumUnit) // INLINED!!
     else
         call SetUnitPosition(enumUnit, GetUnitX(enumUnit) + GetSpellTargetX() - GetUnitX(udr), GetUnitY(enumUnit) + GetSpellTargetY() - GetUnitY(udr))
     endif
@@ -12853,12 +12855,12 @@ function RectGenerator__GroupLoop takes nothing returns nothing
 endfunction
 
 
-    function RectGenerator__GroupLoopTerrain takes nothing returns nothing
+    function RectGenerator___GroupLoopTerrain takes nothing returns nothing
         local unit udr= GetTriggerUnit()
         local unit enumUnit= GetEnumUnit()
         
-        if (HaveSavedHandle(UserDefinedRects__hashTable, (GetHandleId((enumUnit))), (0))) or GetOwningPlayer(enumUnit) != GetOwningPlayer(udr) then // INLINED!!
-            call GroupRemoveUnit((LoadGroupHandle(UserDefinedRects__hashTable, (GetHandleId((udr))), (6))), enumUnit) // INLINED!!
+        if (HaveSavedHandle(UserDefinedRects___hashTable, (GetHandleId((enumUnit))), (0))) or GetOwningPlayer(enumUnit) != GetOwningPlayer(udr) then // INLINED!!
+            call GroupRemoveUnit((LoadGroupHandle(UserDefinedRects___hashTable, (GetHandleId((udr))), (6))), enumUnit) // INLINED!!
         else
             call SetUnitPosition(enumUnit, GetUnitX(enumUnit) + GetTileCenterCoordinate(GetSpellTargetX()) - GetUnitX(udr), GetUnitY(enumUnit) + GetTileCenterCoordinate(GetSpellTargetY()) - GetUnitY(udr))
         endif
@@ -12868,12 +12870,12 @@ endfunction
     endfunction
 
 
-function RectGenerator__ColorMessage takes string color,real value returns string
+function RectGenerator___ColorMessage takes string color,real value returns string
     return "Fog " + color + " set to: " + I2S(R2I(value * 100. + .5)) + "%"
 endfunction
 
 
-function RectGenerator__onCast takes nothing returns boolean
+function RectGenerator___onCast takes nothing returns boolean
     local integer abilityId= GetSpellAbilityId()
     
     if not (GetUnitTypeId((GetTriggerUnit())) == RectGenerator_GENERATOR_ID) then // INLINED!!
@@ -13256,12 +13258,12 @@ function RectGenerator__onCast takes nothing returns boolean
             endif
 
             
-        if CountUnitsInGroup((LoadGroupHandle(UserDefinedRects__hashTable, (GetHandleId((GetTriggerUnit()))), (6)))) <= RectGenerator__MAXIMUM_MOVE_LIMIT then // INLINED!!
-            call ForGroup((LoadGroupHandle(UserDefinedRects__hashTable, (GetHandleId((GetTriggerUnit()))), (6))), function RectGenerator__GroupLoop) // INLINED!!
+        if CountUnitsInGroup((LoadGroupHandle(UserDefinedRects___hashTable, (GetHandleId((GetTriggerUnit()))), (6)))) <= RectGenerator___MAXIMUM_MOVE_LIMIT then // INLINED!!
+            call ForGroup((LoadGroupHandle(UserDefinedRects___hashTable, (GetHandleId((GetTriggerUnit()))), (6))), function RectGenerator___GroupLoop) // INLINED!!
             call SetUnitPosition(GetTriggerUnit(), GetSpellTargetX(), GetSpellTargetY())
             call MoveGUDR(GetTriggerUnit() , 0 , 0 , true)
         else
-            call DisplayTextToPlayer(GetOwningPlayer(GetTriggerUnit()), 0, 0, "Failed to move Rect Generator:\n Attached unit limit exceeded! (" + I2S(RectGenerator__MAXIMUM_MOVE_LIMIT) + ")")
+            call DisplayTextToPlayer(GetOwningPlayer(GetTriggerUnit()), 0, 0, "Failed to move Rect Generator:\n Attached unit limit exceeded! (" + I2S(RectGenerator___MAXIMUM_MOVE_LIMIT) + ")")
             call SetUnitPosition(GetTriggerUnit(), GetUnitX(GetTriggerUnit()), GetUnitY(GetTriggerUnit()))
             call MoveGUDR(GetTriggerUnit() , 0 , 0 , true)
         endif
@@ -13279,14 +13281,14 @@ function RectGenerator__onCast takes nothing returns boolean
         call ChangeGUDRWeatherNew(GetTriggerUnit() , - 1 , 0)
     
     elseif abilityId == RectGenerator_TOGGLE_WEATHER then
-        if (HaveSavedInteger(UserDefinedRects__hashTable, (GetHandleId((GetTriggerUnit()))), (5))) then // INLINED!!
+        if (HaveSavedInteger(UserDefinedRects___hashTable, (GetHandleId((GetTriggerUnit()))), (5))) then // INLINED!!
             call DestroyWeather(GetTriggerUnit())
         else
             call CreateWeather(GetTriggerUnit())
         endif
     
     elseif abilityId == RectGenerator_CREATE_OR_DESTROY then
-        if (HaveSavedHandle(UserDefinedRects__hashTable, (GetHandleId((GetTriggerUnit()))), (0))) then // INLINED!!
+        if (HaveSavedHandle(UserDefinedRects___hashTable, (GetHandleId((GetTriggerUnit()))), (0))) then // INLINED!!
             call DestroyGUDR(GetTriggerUnit())
         else
             call CreateGUDR(GetTriggerUnit())
@@ -13296,99 +13298,99 @@ function RectGenerator__onCast takes nothing returns boolean
         call GroupGUDR(GetTriggerUnit() , true)
     else
 
-            if (LoadInteger(ConstTable__ht, (((s__RectEnvironment_fog_impl))), (((GetHandleId(((LoadRectHandle(UserDefinedRects__hashTable, (GetHandleId((GetTriggerUnit()))), (0)))))))))) == 0 then // INLINED!!
+            if (LoadInteger(ConstTable__ht, (((s__RectEnvironment_fog_impl))), (((GetHandleId(((LoadRectHandle(UserDefinedRects___hashTable, (GetHandleId((GetTriggerUnit()))), (0)))))))))) == 0 then // INLINED!!
         
             elseif abilityId == RectGenerator_FOG_RED_UP then
-                if (LoadReal(ConstTable__ht, (((((s__TerrainFog_red_impl))))), (((LoadInteger(ConstTable__ht, (((s__RectEnvironment_fog_impl))), (((GetHandleId(((LoadRectHandle(UserDefinedRects__hashTable, (GetHandleId((GetTriggerUnit()))), (0)))))))))))))) <= .96 then // INLINED!!
-                    call SaveReal(ConstTable__ht, (((((s__TerrainFog_red_impl))))), (((LoadInteger(ConstTable__ht, (((s__RectEnvironment_fog_impl))), (((GetHandleId(((LoadRectHandle(UserDefinedRects__hashTable, (GetHandleId((GetTriggerUnit()))), (0)))))))))))), (( (((LoadReal(ConstTable__ht, (((((s__TerrainFog_red_impl))))), (((LoadInteger(ConstTable__ht, (((s__RectEnvironment_fog_impl))), (((GetHandleId(((LoadRectHandle(UserDefinedRects__hashTable, (GetHandleId((GetTriggerUnit()))), (0)))))))))))))) + .05)*1.0))*1.0)) // INLINED!!
+                if (LoadReal(ConstTable__ht, (((((s__TerrainFog_red_impl))))), (((LoadInteger(ConstTable__ht, (((s__RectEnvironment_fog_impl))), (((GetHandleId(((LoadRectHandle(UserDefinedRects___hashTable, (GetHandleId((GetTriggerUnit()))), (0)))))))))))))) <= .96 then // INLINED!!
+                    call SaveReal(ConstTable__ht, (((((s__TerrainFog_red_impl))))), (((LoadInteger(ConstTable__ht, (((s__RectEnvironment_fog_impl))), (((GetHandleId(((LoadRectHandle(UserDefinedRects___hashTable, (GetHandleId((GetTriggerUnit()))), (0)))))))))))), (( (((LoadReal(ConstTable__ht, (((((s__TerrainFog_red_impl))))), (((LoadInteger(ConstTable__ht, (((s__RectEnvironment_fog_impl))), (((GetHandleId(((LoadRectHandle(UserDefinedRects___hashTable, (GetHandleId((GetTriggerUnit()))), (0)))))))))))))) + .05)*1.0))*1.0)) // INLINED!!
                 else
-                    call SaveReal(ConstTable__ht, (((((s__TerrainFog_red_impl))))), (((LoadInteger(ConstTable__ht, (((s__RectEnvironment_fog_impl))), (((GetHandleId(((LoadRectHandle(UserDefinedRects__hashTable, (GetHandleId((GetTriggerUnit()))), (0)))))))))))), (( ((0.)*1.0))*1.0)) // INLINED!!
+                    call SaveReal(ConstTable__ht, (((((s__TerrainFog_red_impl))))), (((LoadInteger(ConstTable__ht, (((s__RectEnvironment_fog_impl))), (((GetHandleId(((LoadRectHandle(UserDefinedRects___hashTable, (GetHandleId((GetTriggerUnit()))), (0)))))))))))), (( ((0.)*1.0))*1.0)) // INLINED!!
                 endif
-                call DisplayTextToPlayer(GetOwningPlayer(GetTriggerUnit()), 0, 0, ("Fog " + ("|c00ff0000Red|r" ) + " set to: " + I2S(R2I((( (LoadReal(ConstTable__ht, (((((s__TerrainFog_red_impl))))), (((LoadInteger(ConstTable__ht, (((s__RectEnvironment_fog_impl))), (((GetHandleId(((LoadRectHandle(UserDefinedRects__hashTable, (GetHandleId((GetTriggerUnit()))), (0)))))))))))))))*1.0) * 100. + .5)) + "%")) // INLINED!!
+                call DisplayTextToPlayer(GetOwningPlayer(GetTriggerUnit()), 0, 0, ("Fog " + ("|c00ff0000Red|r" ) + " set to: " + I2S(R2I((( (LoadReal(ConstTable__ht, (((((s__TerrainFog_red_impl))))), (((LoadInteger(ConstTable__ht, (((s__RectEnvironment_fog_impl))), (((GetHandleId(((LoadRectHandle(UserDefinedRects___hashTable, (GetHandleId((GetTriggerUnit()))), (0)))))))))))))))*1.0) * 100. + .5)) + "%")) // INLINED!!
             
             elseif abilityId == RectGenerator_FOG_RED_DOWN then
-                if (LoadReal(ConstTable__ht, (((((s__TerrainFog_red_impl))))), (((LoadInteger(ConstTable__ht, (((s__RectEnvironment_fog_impl))), (((GetHandleId(((LoadRectHandle(UserDefinedRects__hashTable, (GetHandleId((GetTriggerUnit()))), (0)))))))))))))) >= 0.01 then // INLINED!!
-                    call SaveReal(ConstTable__ht, (((((s__TerrainFog_red_impl))))), (((LoadInteger(ConstTable__ht, (((s__RectEnvironment_fog_impl))), (((GetHandleId(((LoadRectHandle(UserDefinedRects__hashTable, (GetHandleId((GetTriggerUnit()))), (0)))))))))))), (( (((LoadReal(ConstTable__ht, (((((s__TerrainFog_red_impl))))), (((LoadInteger(ConstTable__ht, (((s__RectEnvironment_fog_impl))), (((GetHandleId(((LoadRectHandle(UserDefinedRects__hashTable, (GetHandleId((GetTriggerUnit()))), (0)))))))))))))) - .05)*1.0))*1.0)) // INLINED!!
+                if (LoadReal(ConstTable__ht, (((((s__TerrainFog_red_impl))))), (((LoadInteger(ConstTable__ht, (((s__RectEnvironment_fog_impl))), (((GetHandleId(((LoadRectHandle(UserDefinedRects___hashTable, (GetHandleId((GetTriggerUnit()))), (0)))))))))))))) >= 0.01 then // INLINED!!
+                    call SaveReal(ConstTable__ht, (((((s__TerrainFog_red_impl))))), (((LoadInteger(ConstTable__ht, (((s__RectEnvironment_fog_impl))), (((GetHandleId(((LoadRectHandle(UserDefinedRects___hashTable, (GetHandleId((GetTriggerUnit()))), (0)))))))))))), (( (((LoadReal(ConstTable__ht, (((((s__TerrainFog_red_impl))))), (((LoadInteger(ConstTable__ht, (((s__RectEnvironment_fog_impl))), (((GetHandleId(((LoadRectHandle(UserDefinedRects___hashTable, (GetHandleId((GetTriggerUnit()))), (0)))))))))))))) - .05)*1.0))*1.0)) // INLINED!!
                 else
-                    call SaveReal(ConstTable__ht, (((((s__TerrainFog_red_impl))))), (((LoadInteger(ConstTable__ht, (((s__RectEnvironment_fog_impl))), (((GetHandleId(((LoadRectHandle(UserDefinedRects__hashTable, (GetHandleId((GetTriggerUnit()))), (0)))))))))))), (( ((1.)*1.0))*1.0)) // INLINED!!
+                    call SaveReal(ConstTable__ht, (((((s__TerrainFog_red_impl))))), (((LoadInteger(ConstTable__ht, (((s__RectEnvironment_fog_impl))), (((GetHandleId(((LoadRectHandle(UserDefinedRects___hashTable, (GetHandleId((GetTriggerUnit()))), (0)))))))))))), (( ((1.)*1.0))*1.0)) // INLINED!!
                 endif
-                call DisplayTextToPlayer(GetOwningPlayer(GetTriggerUnit()), 0, 0, ("Fog " + ("|c00ff0000Red|r" ) + " set to: " + I2S(R2I((( (LoadReal(ConstTable__ht, (((((s__TerrainFog_red_impl))))), (((LoadInteger(ConstTable__ht, (((s__RectEnvironment_fog_impl))), (((GetHandleId(((LoadRectHandle(UserDefinedRects__hashTable, (GetHandleId((GetTriggerUnit()))), (0)))))))))))))))*1.0) * 100. + .5)) + "%")) // INLINED!!
+                call DisplayTextToPlayer(GetOwningPlayer(GetTriggerUnit()), 0, 0, ("Fog " + ("|c00ff0000Red|r" ) + " set to: " + I2S(R2I((( (LoadReal(ConstTable__ht, (((((s__TerrainFog_red_impl))))), (((LoadInteger(ConstTable__ht, (((s__RectEnvironment_fog_impl))), (((GetHandleId(((LoadRectHandle(UserDefinedRects___hashTable, (GetHandleId((GetTriggerUnit()))), (0)))))))))))))))*1.0) * 100. + .5)) + "%")) // INLINED!!
                 
             elseif abilityId == RectGenerator_FOG_BLUE_UP then
-                if (LoadReal(ConstTable__ht, (((((s__TerrainFog_blue_impl))))), (((LoadInteger(ConstTable__ht, (((s__RectEnvironment_fog_impl))), (((GetHandleId(((LoadRectHandle(UserDefinedRects__hashTable, (GetHandleId((GetTriggerUnit()))), (0)))))))))))))) <= .96 then // INLINED!!
-                    call SaveReal(ConstTable__ht, (((((s__TerrainFog_blue_impl))))), (((LoadInteger(ConstTable__ht, (((s__RectEnvironment_fog_impl))), (((GetHandleId(((LoadRectHandle(UserDefinedRects__hashTable, (GetHandleId((GetTriggerUnit()))), (0)))))))))))), (( (((LoadReal(ConstTable__ht, (((((s__TerrainFog_blue_impl))))), (((LoadInteger(ConstTable__ht, (((s__RectEnvironment_fog_impl))), (((GetHandleId(((LoadRectHandle(UserDefinedRects__hashTable, (GetHandleId((GetTriggerUnit()))), (0)))))))))))))) + .05)*1.0))*1.0)) // INLINED!!
+                if (LoadReal(ConstTable__ht, (((((s__TerrainFog_blue_impl))))), (((LoadInteger(ConstTable__ht, (((s__RectEnvironment_fog_impl))), (((GetHandleId(((LoadRectHandle(UserDefinedRects___hashTable, (GetHandleId((GetTriggerUnit()))), (0)))))))))))))) <= .96 then // INLINED!!
+                    call SaveReal(ConstTable__ht, (((((s__TerrainFog_blue_impl))))), (((LoadInteger(ConstTable__ht, (((s__RectEnvironment_fog_impl))), (((GetHandleId(((LoadRectHandle(UserDefinedRects___hashTable, (GetHandleId((GetTriggerUnit()))), (0)))))))))))), (( (((LoadReal(ConstTable__ht, (((((s__TerrainFog_blue_impl))))), (((LoadInteger(ConstTable__ht, (((s__RectEnvironment_fog_impl))), (((GetHandleId(((LoadRectHandle(UserDefinedRects___hashTable, (GetHandleId((GetTriggerUnit()))), (0)))))))))))))) + .05)*1.0))*1.0)) // INLINED!!
                 else
-                    call SaveReal(ConstTable__ht, (((((s__TerrainFog_blue_impl))))), (((LoadInteger(ConstTable__ht, (((s__RectEnvironment_fog_impl))), (((GetHandleId(((LoadRectHandle(UserDefinedRects__hashTable, (GetHandleId((GetTriggerUnit()))), (0)))))))))))), (( ((0.)*1.0))*1.0)) // INLINED!!
+                    call SaveReal(ConstTable__ht, (((((s__TerrainFog_blue_impl))))), (((LoadInteger(ConstTable__ht, (((s__RectEnvironment_fog_impl))), (((GetHandleId(((LoadRectHandle(UserDefinedRects___hashTable, (GetHandleId((GetTriggerUnit()))), (0)))))))))))), (( ((0.)*1.0))*1.0)) // INLINED!!
                 endif
-                call DisplayTextToPlayer(GetOwningPlayer(GetTriggerUnit()), 0, 0, ("Fog " + ("|c000000ffBlue|r" ) + " set to: " + I2S(R2I((( (LoadReal(ConstTable__ht, (((((s__TerrainFog_blue_impl))))), (((LoadInteger(ConstTable__ht, (((s__RectEnvironment_fog_impl))), (((GetHandleId(((LoadRectHandle(UserDefinedRects__hashTable, (GetHandleId((GetTriggerUnit()))), (0)))))))))))))))*1.0) * 100. + .5)) + "%")) // INLINED!!
+                call DisplayTextToPlayer(GetOwningPlayer(GetTriggerUnit()), 0, 0, ("Fog " + ("|c000000ffBlue|r" ) + " set to: " + I2S(R2I((( (LoadReal(ConstTable__ht, (((((s__TerrainFog_blue_impl))))), (((LoadInteger(ConstTable__ht, (((s__RectEnvironment_fog_impl))), (((GetHandleId(((LoadRectHandle(UserDefinedRects___hashTable, (GetHandleId((GetTriggerUnit()))), (0)))))))))))))))*1.0) * 100. + .5)) + "%")) // INLINED!!
             
             elseif abilityId == RectGenerator_FOG_BLUE_DOWN then
-                if (LoadReal(ConstTable__ht, (((((s__TerrainFog_blue_impl))))), (((LoadInteger(ConstTable__ht, (((s__RectEnvironment_fog_impl))), (((GetHandleId(((LoadRectHandle(UserDefinedRects__hashTable, (GetHandleId((GetTriggerUnit()))), (0)))))))))))))) >= 0.01 then // INLINED!!
-                    call SaveReal(ConstTable__ht, (((((s__TerrainFog_blue_impl))))), (((LoadInteger(ConstTable__ht, (((s__RectEnvironment_fog_impl))), (((GetHandleId(((LoadRectHandle(UserDefinedRects__hashTable, (GetHandleId((GetTriggerUnit()))), (0)))))))))))), (( (((LoadReal(ConstTable__ht, (((((s__TerrainFog_blue_impl))))), (((LoadInteger(ConstTable__ht, (((s__RectEnvironment_fog_impl))), (((GetHandleId(((LoadRectHandle(UserDefinedRects__hashTable, (GetHandleId((GetTriggerUnit()))), (0)))))))))))))) - .05)*1.0))*1.0)) // INLINED!!
+                if (LoadReal(ConstTable__ht, (((((s__TerrainFog_blue_impl))))), (((LoadInteger(ConstTable__ht, (((s__RectEnvironment_fog_impl))), (((GetHandleId(((LoadRectHandle(UserDefinedRects___hashTable, (GetHandleId((GetTriggerUnit()))), (0)))))))))))))) >= 0.01 then // INLINED!!
+                    call SaveReal(ConstTable__ht, (((((s__TerrainFog_blue_impl))))), (((LoadInteger(ConstTable__ht, (((s__RectEnvironment_fog_impl))), (((GetHandleId(((LoadRectHandle(UserDefinedRects___hashTable, (GetHandleId((GetTriggerUnit()))), (0)))))))))))), (( (((LoadReal(ConstTable__ht, (((((s__TerrainFog_blue_impl))))), (((LoadInteger(ConstTable__ht, (((s__RectEnvironment_fog_impl))), (((GetHandleId(((LoadRectHandle(UserDefinedRects___hashTable, (GetHandleId((GetTriggerUnit()))), (0)))))))))))))) - .05)*1.0))*1.0)) // INLINED!!
                 else
-                    call SaveReal(ConstTable__ht, (((((s__TerrainFog_blue_impl))))), (((LoadInteger(ConstTable__ht, (((s__RectEnvironment_fog_impl))), (((GetHandleId(((LoadRectHandle(UserDefinedRects__hashTable, (GetHandleId((GetTriggerUnit()))), (0)))))))))))), (( ((1.)*1.0))*1.0)) // INLINED!!
+                    call SaveReal(ConstTable__ht, (((((s__TerrainFog_blue_impl))))), (((LoadInteger(ConstTable__ht, (((s__RectEnvironment_fog_impl))), (((GetHandleId(((LoadRectHandle(UserDefinedRects___hashTable, (GetHandleId((GetTriggerUnit()))), (0)))))))))))), (( ((1.)*1.0))*1.0)) // INLINED!!
                 endif
-                call DisplayTextToPlayer(GetOwningPlayer(GetTriggerUnit()), 0, 0, ("Fog " + ("|c000000ffBlue|r" ) + " set to: " + I2S(R2I((( (LoadReal(ConstTable__ht, (((((s__TerrainFog_blue_impl))))), (((LoadInteger(ConstTable__ht, (((s__RectEnvironment_fog_impl))), (((GetHandleId(((LoadRectHandle(UserDefinedRects__hashTable, (GetHandleId((GetTriggerUnit()))), (0)))))))))))))))*1.0) * 100. + .5)) + "%")) // INLINED!!
+                call DisplayTextToPlayer(GetOwningPlayer(GetTriggerUnit()), 0, 0, ("Fog " + ("|c000000ffBlue|r" ) + " set to: " + I2S(R2I((( (LoadReal(ConstTable__ht, (((((s__TerrainFog_blue_impl))))), (((LoadInteger(ConstTable__ht, (((s__RectEnvironment_fog_impl))), (((GetHandleId(((LoadRectHandle(UserDefinedRects___hashTable, (GetHandleId((GetTriggerUnit()))), (0)))))))))))))))*1.0) * 100. + .5)) + "%")) // INLINED!!
             
             elseif abilityId == RectGenerator_FOG_GREEN_UP then
-                if (LoadReal(ConstTable__ht, (((((s__TerrainFog_green_impl))))), (((LoadInteger(ConstTable__ht, (((s__RectEnvironment_fog_impl))), (((GetHandleId(((LoadRectHandle(UserDefinedRects__hashTable, (GetHandleId((GetTriggerUnit()))), (0)))))))))))))) <= .96 then // INLINED!!
-                    call SaveReal(ConstTable__ht, (((((s__TerrainFog_green_impl))))), (((LoadInteger(ConstTable__ht, (((s__RectEnvironment_fog_impl))), (((GetHandleId(((LoadRectHandle(UserDefinedRects__hashTable, (GetHandleId((GetTriggerUnit()))), (0)))))))))))), (( (((LoadReal(ConstTable__ht, (((((s__TerrainFog_green_impl))))), (((LoadInteger(ConstTable__ht, (((s__RectEnvironment_fog_impl))), (((GetHandleId(((LoadRectHandle(UserDefinedRects__hashTable, (GetHandleId((GetTriggerUnit()))), (0)))))))))))))) + .05)*1.0))*1.0)) // INLINED!!
+                if (LoadReal(ConstTable__ht, (((((s__TerrainFog_green_impl))))), (((LoadInteger(ConstTable__ht, (((s__RectEnvironment_fog_impl))), (((GetHandleId(((LoadRectHandle(UserDefinedRects___hashTable, (GetHandleId((GetTriggerUnit()))), (0)))))))))))))) <= .96 then // INLINED!!
+                    call SaveReal(ConstTable__ht, (((((s__TerrainFog_green_impl))))), (((LoadInteger(ConstTable__ht, (((s__RectEnvironment_fog_impl))), (((GetHandleId(((LoadRectHandle(UserDefinedRects___hashTable, (GetHandleId((GetTriggerUnit()))), (0)))))))))))), (( (((LoadReal(ConstTable__ht, (((((s__TerrainFog_green_impl))))), (((LoadInteger(ConstTable__ht, (((s__RectEnvironment_fog_impl))), (((GetHandleId(((LoadRectHandle(UserDefinedRects___hashTable, (GetHandleId((GetTriggerUnit()))), (0)))))))))))))) + .05)*1.0))*1.0)) // INLINED!!
                 else
-                    call SaveReal(ConstTable__ht, (((((s__TerrainFog_green_impl))))), (((LoadInteger(ConstTable__ht, (((s__RectEnvironment_fog_impl))), (((GetHandleId(((LoadRectHandle(UserDefinedRects__hashTable, (GetHandleId((GetTriggerUnit()))), (0)))))))))))), (( ((0.)*1.0))*1.0)) // INLINED!!
+                    call SaveReal(ConstTable__ht, (((((s__TerrainFog_green_impl))))), (((LoadInteger(ConstTable__ht, (((s__RectEnvironment_fog_impl))), (((GetHandleId(((LoadRectHandle(UserDefinedRects___hashTable, (GetHandleId((GetTriggerUnit()))), (0)))))))))))), (( ((0.)*1.0))*1.0)) // INLINED!!
                 endif
-                call DisplayTextToPlayer(GetOwningPlayer(GetTriggerUnit()), 0, 0, ("Fog " + ("|c0000ff00Green|r" ) + " set to: " + I2S(R2I((( (LoadReal(ConstTable__ht, (((((s__TerrainFog_green_impl))))), (((LoadInteger(ConstTable__ht, (((s__RectEnvironment_fog_impl))), (((GetHandleId(((LoadRectHandle(UserDefinedRects__hashTable, (GetHandleId((GetTriggerUnit()))), (0)))))))))))))))*1.0) * 100. + .5)) + "%")) // INLINED!!
+                call DisplayTextToPlayer(GetOwningPlayer(GetTriggerUnit()), 0, 0, ("Fog " + ("|c0000ff00Green|r" ) + " set to: " + I2S(R2I((( (LoadReal(ConstTable__ht, (((((s__TerrainFog_green_impl))))), (((LoadInteger(ConstTable__ht, (((s__RectEnvironment_fog_impl))), (((GetHandleId(((LoadRectHandle(UserDefinedRects___hashTable, (GetHandleId((GetTriggerUnit()))), (0)))))))))))))))*1.0) * 100. + .5)) + "%")) // INLINED!!
             
             elseif abilityId == RectGenerator_FOG_GREEN_DOWN then
-                if (LoadReal(ConstTable__ht, (((((s__TerrainFog_green_impl))))), (((LoadInteger(ConstTable__ht, (((s__RectEnvironment_fog_impl))), (((GetHandleId(((LoadRectHandle(UserDefinedRects__hashTable, (GetHandleId((GetTriggerUnit()))), (0)))))))))))))) >= 0.01 then // INLINED!!
-                    call SaveReal(ConstTable__ht, (((((s__TerrainFog_green_impl))))), (((LoadInteger(ConstTable__ht, (((s__RectEnvironment_fog_impl))), (((GetHandleId(((LoadRectHandle(UserDefinedRects__hashTable, (GetHandleId((GetTriggerUnit()))), (0)))))))))))), (( (((LoadReal(ConstTable__ht, (((((s__TerrainFog_green_impl))))), (((LoadInteger(ConstTable__ht, (((s__RectEnvironment_fog_impl))), (((GetHandleId(((LoadRectHandle(UserDefinedRects__hashTable, (GetHandleId((GetTriggerUnit()))), (0)))))))))))))) - .05)*1.0))*1.0)) // INLINED!!
+                if (LoadReal(ConstTable__ht, (((((s__TerrainFog_green_impl))))), (((LoadInteger(ConstTable__ht, (((s__RectEnvironment_fog_impl))), (((GetHandleId(((LoadRectHandle(UserDefinedRects___hashTable, (GetHandleId((GetTriggerUnit()))), (0)))))))))))))) >= 0.01 then // INLINED!!
+                    call SaveReal(ConstTable__ht, (((((s__TerrainFog_green_impl))))), (((LoadInteger(ConstTable__ht, (((s__RectEnvironment_fog_impl))), (((GetHandleId(((LoadRectHandle(UserDefinedRects___hashTable, (GetHandleId((GetTriggerUnit()))), (0)))))))))))), (( (((LoadReal(ConstTable__ht, (((((s__TerrainFog_green_impl))))), (((LoadInteger(ConstTable__ht, (((s__RectEnvironment_fog_impl))), (((GetHandleId(((LoadRectHandle(UserDefinedRects___hashTable, (GetHandleId((GetTriggerUnit()))), (0)))))))))))))) - .05)*1.0))*1.0)) // INLINED!!
                 else
-                    call SaveReal(ConstTable__ht, (((((s__TerrainFog_green_impl))))), (((LoadInteger(ConstTable__ht, (((s__RectEnvironment_fog_impl))), (((GetHandleId(((LoadRectHandle(UserDefinedRects__hashTable, (GetHandleId((GetTriggerUnit()))), (0)))))))))))), (( ((1.)*1.0))*1.0)) // INLINED!!
+                    call SaveReal(ConstTable__ht, (((((s__TerrainFog_green_impl))))), (((LoadInteger(ConstTable__ht, (((s__RectEnvironment_fog_impl))), (((GetHandleId(((LoadRectHandle(UserDefinedRects___hashTable, (GetHandleId((GetTriggerUnit()))), (0)))))))))))), (( ((1.)*1.0))*1.0)) // INLINED!!
                 endif
-                call DisplayTextToPlayer(GetOwningPlayer(GetTriggerUnit()), 0, 0, ("Fog " + ("|c0000ff00Green|r" ) + " set to: " + I2S(R2I((( (LoadReal(ConstTable__ht, (((((s__TerrainFog_green_impl))))), (((LoadInteger(ConstTable__ht, (((s__RectEnvironment_fog_impl))), (((GetHandleId(((LoadRectHandle(UserDefinedRects__hashTable, (GetHandleId((GetTriggerUnit()))), (0)))))))))))))))*1.0) * 100. + .5)) + "%")) // INLINED!!
+                call DisplayTextToPlayer(GetOwningPlayer(GetTriggerUnit()), 0, 0, ("Fog " + ("|c0000ff00Green|r" ) + " set to: " + I2S(R2I((( (LoadReal(ConstTable__ht, (((((s__TerrainFog_green_impl))))), (((LoadInteger(ConstTable__ht, (((s__RectEnvironment_fog_impl))), (((GetHandleId(((LoadRectHandle(UserDefinedRects___hashTable, (GetHandleId((GetTriggerUnit()))), (0)))))))))))))))*1.0) * 100. + .5)) + "%")) // INLINED!!
             
             elseif abilityId == RectGenerator_FOG_DENSITY_UP then
-                call SaveReal(ConstTable__ht, (((((s__TerrainFog_density_impl))))), (((LoadInteger(ConstTable__ht, (((s__RectEnvironment_fog_impl))), (((GetHandleId(((LoadRectHandle(UserDefinedRects__hashTable, (GetHandleId((GetTriggerUnit()))), (0)))))))))))), (( (((LoadReal(ConstTable__ht, (((((s__TerrainFog_density_impl))))), (((LoadInteger(ConstTable__ht, (((s__RectEnvironment_fog_impl))), (((GetHandleId(((LoadRectHandle(UserDefinedRects__hashTable, (GetHandleId((GetTriggerUnit()))), (0)))))))))))))) + .00005)*1.0))*1.0)) // INLINED!!
-                call DisplayTextToPlayer(GetOwningPlayer(GetTriggerUnit()), 0, 0, "Fog Density set to: " + R2S((LoadReal(ConstTable__ht, (((((s__TerrainFog_density_impl))))), (((LoadInteger(ConstTable__ht, (((s__RectEnvironment_fog_impl))), (((GetHandleId(((LoadRectHandle(UserDefinedRects__hashTable, (GetHandleId((GetTriggerUnit()))), (0)))))))))))))) * 100) + "%") // INLINED!!
+                call SaveReal(ConstTable__ht, (((((s__TerrainFog_density_impl))))), (((LoadInteger(ConstTable__ht, (((s__RectEnvironment_fog_impl))), (((GetHandleId(((LoadRectHandle(UserDefinedRects___hashTable, (GetHandleId((GetTriggerUnit()))), (0)))))))))))), (( (((LoadReal(ConstTable__ht, (((((s__TerrainFog_density_impl))))), (((LoadInteger(ConstTable__ht, (((s__RectEnvironment_fog_impl))), (((GetHandleId(((LoadRectHandle(UserDefinedRects___hashTable, (GetHandleId((GetTriggerUnit()))), (0)))))))))))))) + .00005)*1.0))*1.0)) // INLINED!!
+                call DisplayTextToPlayer(GetOwningPlayer(GetTriggerUnit()), 0, 0, "Fog Density set to: " + R2S((LoadReal(ConstTable__ht, (((((s__TerrainFog_density_impl))))), (((LoadInteger(ConstTable__ht, (((s__RectEnvironment_fog_impl))), (((GetHandleId(((LoadRectHandle(UserDefinedRects___hashTable, (GetHandleId((GetTriggerUnit()))), (0)))))))))))))) * 100) + "%") // INLINED!!
             
             elseif abilityId == RectGenerator_FOG_DENSITY_DOWN then
-                if (LoadReal(ConstTable__ht, (((((s__TerrainFog_density_impl))))), (((LoadInteger(ConstTable__ht, (((s__RectEnvironment_fog_impl))), (((GetHandleId(((LoadRectHandle(UserDefinedRects__hashTable, (GetHandleId((GetTriggerUnit()))), (0)))))))))))))) >= 0.00006 then // INLINED!!
-                    call SaveReal(ConstTable__ht, (((((s__TerrainFog_density_impl))))), (((LoadInteger(ConstTable__ht, (((s__RectEnvironment_fog_impl))), (((GetHandleId(((LoadRectHandle(UserDefinedRects__hashTable, (GetHandleId((GetTriggerUnit()))), (0)))))))))))), (( (((LoadReal(ConstTable__ht, (((((s__TerrainFog_density_impl))))), (((LoadInteger(ConstTable__ht, (((s__RectEnvironment_fog_impl))), (((GetHandleId(((LoadRectHandle(UserDefinedRects__hashTable, (GetHandleId((GetTriggerUnit()))), (0)))))))))))))) - .00005)*1.0))*1.0)) // INLINED!!
+                if (LoadReal(ConstTable__ht, (((((s__TerrainFog_density_impl))))), (((LoadInteger(ConstTable__ht, (((s__RectEnvironment_fog_impl))), (((GetHandleId(((LoadRectHandle(UserDefinedRects___hashTable, (GetHandleId((GetTriggerUnit()))), (0)))))))))))))) >= 0.00006 then // INLINED!!
+                    call SaveReal(ConstTable__ht, (((((s__TerrainFog_density_impl))))), (((LoadInteger(ConstTable__ht, (((s__RectEnvironment_fog_impl))), (((GetHandleId(((LoadRectHandle(UserDefinedRects___hashTable, (GetHandleId((GetTriggerUnit()))), (0)))))))))))), (( (((LoadReal(ConstTable__ht, (((((s__TerrainFog_density_impl))))), (((LoadInteger(ConstTable__ht, (((s__RectEnvironment_fog_impl))), (((GetHandleId(((LoadRectHandle(UserDefinedRects___hashTable, (GetHandleId((GetTriggerUnit()))), (0)))))))))))))) - .00005)*1.0))*1.0)) // INLINED!!
                 else
-                    call SaveReal(ConstTable__ht, (((((s__TerrainFog_density_impl))))), (((LoadInteger(ConstTable__ht, (((s__RectEnvironment_fog_impl))), (((GetHandleId(((LoadRectHandle(UserDefinedRects__hashTable, (GetHandleId((GetTriggerUnit()))), (0)))))))))))), (( ((0.)*1.0))*1.0)) // INLINED!!
+                    call SaveReal(ConstTable__ht, (((((s__TerrainFog_density_impl))))), (((LoadInteger(ConstTable__ht, (((s__RectEnvironment_fog_impl))), (((GetHandleId(((LoadRectHandle(UserDefinedRects___hashTable, (GetHandleId((GetTriggerUnit()))), (0)))))))))))), (( ((0.)*1.0))*1.0)) // INLINED!!
                 endif
-                call DisplayTextToPlayer(GetOwningPlayer(GetTriggerUnit()), 0, 0, "Fog Density set to: " + R2S((LoadReal(ConstTable__ht, (((((s__TerrainFog_density_impl))))), (((LoadInteger(ConstTable__ht, (((s__RectEnvironment_fog_impl))), (((GetHandleId(((LoadRectHandle(UserDefinedRects__hashTable, (GetHandleId((GetTriggerUnit()))), (0)))))))))))))) * 100) + "%") // INLINED!!
+                call DisplayTextToPlayer(GetOwningPlayer(GetTriggerUnit()), 0, 0, "Fog Density set to: " + R2S((LoadReal(ConstTable__ht, (((((s__TerrainFog_density_impl))))), (((LoadInteger(ConstTable__ht, (((s__RectEnvironment_fog_impl))), (((GetHandleId(((LoadRectHandle(UserDefinedRects___hashTable, (GetHandleId((GetTriggerUnit()))), (0)))))))))))))) * 100) + "%") // INLINED!!
             
             elseif abilityId == RectGenerator_FOG_ZSTART_UP then
-                call SaveReal(ConstTable__ht, (((((s__TerrainFog_zStart_impl))))), (((LoadInteger(ConstTable__ht, (((s__RectEnvironment_fog_impl))), (((GetHandleId(((LoadRectHandle(UserDefinedRects__hashTable, (GetHandleId((GetTriggerUnit()))), (0)))))))))))), (( (((LoadReal(ConstTable__ht, (((((s__TerrainFog_zStart_impl))))), (((LoadInteger(ConstTable__ht, (((s__RectEnvironment_fog_impl))), (((GetHandleId(((LoadRectHandle(UserDefinedRects__hashTable, (GetHandleId((GetTriggerUnit()))), (0)))))))))))))) + 1000.)*1.0))*1.0)) // INLINED!!
-                call DisplayTextToPlayer(GetOwningPlayer(GetTriggerUnit()), 0, 0, ( "Fog zStart set to: " + R2S((LoadReal(ConstTable__ht, (((((s__TerrainFog_zStart_impl))))), (((LoadInteger(ConstTable__ht, (((s__RectEnvironment_fog_impl))), (((GetHandleId(((LoadRectHandle(UserDefinedRects__hashTable, (GetHandleId((GetTriggerUnit()))), (0))))))))))))))) )) // INLINED!!
+                call SaveReal(ConstTable__ht, (((((s__TerrainFog_zStart_impl))))), (((LoadInteger(ConstTable__ht, (((s__RectEnvironment_fog_impl))), (((GetHandleId(((LoadRectHandle(UserDefinedRects___hashTable, (GetHandleId((GetTriggerUnit()))), (0)))))))))))), (( (((LoadReal(ConstTable__ht, (((((s__TerrainFog_zStart_impl))))), (((LoadInteger(ConstTable__ht, (((s__RectEnvironment_fog_impl))), (((GetHandleId(((LoadRectHandle(UserDefinedRects___hashTable, (GetHandleId((GetTriggerUnit()))), (0)))))))))))))) + 1000.)*1.0))*1.0)) // INLINED!!
+                call DisplayTextToPlayer(GetOwningPlayer(GetTriggerUnit()), 0, 0, ( "Fog zStart set to: " + R2S((LoadReal(ConstTable__ht, (((((s__TerrainFog_zStart_impl))))), (((LoadInteger(ConstTable__ht, (((s__RectEnvironment_fog_impl))), (((GetHandleId(((LoadRectHandle(UserDefinedRects___hashTable, (GetHandleId((GetTriggerUnit()))), (0))))))))))))))) )) // INLINED!!
             
             elseif abilityId == RectGenerator_FOG_ZSTART_DOWN then
-                if (LoadReal(ConstTable__ht, (((((s__TerrainFog_zStart_impl))))), (((LoadInteger(ConstTable__ht, (((s__RectEnvironment_fog_impl))), (((GetHandleId(((LoadRectHandle(UserDefinedRects__hashTable, (GetHandleId((GetTriggerUnit()))), (0)))))))))))))) >= 1200. then // INLINED!!
-                    call SaveReal(ConstTable__ht, (((((s__TerrainFog_zStart_impl))))), (((LoadInteger(ConstTable__ht, (((s__RectEnvironment_fog_impl))), (((GetHandleId(((LoadRectHandle(UserDefinedRects__hashTable, (GetHandleId((GetTriggerUnit()))), (0)))))))))))), (( (((LoadReal(ConstTable__ht, (((((s__TerrainFog_zStart_impl))))), (((LoadInteger(ConstTable__ht, (((s__RectEnvironment_fog_impl))), (((GetHandleId(((LoadRectHandle(UserDefinedRects__hashTable, (GetHandleId((GetTriggerUnit()))), (0)))))))))))))) - 1000.)*1.0))*1.0)) // INLINED!!
+                if (LoadReal(ConstTable__ht, (((((s__TerrainFog_zStart_impl))))), (((LoadInteger(ConstTable__ht, (((s__RectEnvironment_fog_impl))), (((GetHandleId(((LoadRectHandle(UserDefinedRects___hashTable, (GetHandleId((GetTriggerUnit()))), (0)))))))))))))) >= 1200. then // INLINED!!
+                    call SaveReal(ConstTable__ht, (((((s__TerrainFog_zStart_impl))))), (((LoadInteger(ConstTable__ht, (((s__RectEnvironment_fog_impl))), (((GetHandleId(((LoadRectHandle(UserDefinedRects___hashTable, (GetHandleId((GetTriggerUnit()))), (0)))))))))))), (( (((LoadReal(ConstTable__ht, (((((s__TerrainFog_zStart_impl))))), (((LoadInteger(ConstTable__ht, (((s__RectEnvironment_fog_impl))), (((GetHandleId(((LoadRectHandle(UserDefinedRects___hashTable, (GetHandleId((GetTriggerUnit()))), (0)))))))))))))) - 1000.)*1.0))*1.0)) // INLINED!!
                 else
-                    call SaveReal(ConstTable__ht, (((((s__TerrainFog_zStart_impl))))), (((LoadInteger(ConstTable__ht, (((s__RectEnvironment_fog_impl))), (((GetHandleId(((LoadRectHandle(UserDefinedRects__hashTable, (GetHandleId((GetTriggerUnit()))), (0)))))))))))), (( ((0.)*1.0))*1.0)) // INLINED!!
+                    call SaveReal(ConstTable__ht, (((((s__TerrainFog_zStart_impl))))), (((LoadInteger(ConstTable__ht, (((s__RectEnvironment_fog_impl))), (((GetHandleId(((LoadRectHandle(UserDefinedRects___hashTable, (GetHandleId((GetTriggerUnit()))), (0)))))))))))), (( ((0.)*1.0))*1.0)) // INLINED!!
                 endif
-                call DisplayTextToPlayer(GetOwningPlayer(GetTriggerUnit()), 0, 0, ( "Fog zStart set to: " + R2S((LoadReal(ConstTable__ht, (((((s__TerrainFog_zStart_impl))))), (((LoadInteger(ConstTable__ht, (((s__RectEnvironment_fog_impl))), (((GetHandleId(((LoadRectHandle(UserDefinedRects__hashTable, (GetHandleId((GetTriggerUnit()))), (0))))))))))))))) )) // INLINED!!
+                call DisplayTextToPlayer(GetOwningPlayer(GetTriggerUnit()), 0, 0, ( "Fog zStart set to: " + R2S((LoadReal(ConstTable__ht, (((((s__TerrainFog_zStart_impl))))), (((LoadInteger(ConstTable__ht, (((s__RectEnvironment_fog_impl))), (((GetHandleId(((LoadRectHandle(UserDefinedRects___hashTable, (GetHandleId((GetTriggerUnit()))), (0))))))))))))))) )) // INLINED!!
             
             elseif abilityId == RectGenerator_FOG_ZEND_UP then
-                call SaveReal(ConstTable__ht, (((((s__TerrainFog_zEnd_impl))))), (((LoadInteger(ConstTable__ht, (((s__RectEnvironment_fog_impl))), (((GetHandleId(((LoadRectHandle(UserDefinedRects__hashTable, (GetHandleId((GetTriggerUnit()))), (0)))))))))))), (( (((LoadReal(ConstTable__ht, (((((s__TerrainFog_zEnd_impl))))), (((LoadInteger(ConstTable__ht, (((s__RectEnvironment_fog_impl))), (((GetHandleId(((LoadRectHandle(UserDefinedRects__hashTable, (GetHandleId((GetTriggerUnit()))), (0)))))))))))))) + 500.)*1.0))*1.0)) // INLINED!!
-                call DisplayTextToPlayer(GetOwningPlayer(GetTriggerUnit()), 0, 0, ( "Fog zEnd set to: " + R2S((LoadReal(ConstTable__ht, (((((s__TerrainFog_zEnd_impl))))), (((LoadInteger(ConstTable__ht, (((s__RectEnvironment_fog_impl))), (((GetHandleId(((LoadRectHandle(UserDefinedRects__hashTable, (GetHandleId((GetTriggerUnit()))), (0))))))))))))))) )) // INLINED!!
+                call SaveReal(ConstTable__ht, (((((s__TerrainFog_zEnd_impl))))), (((LoadInteger(ConstTable__ht, (((s__RectEnvironment_fog_impl))), (((GetHandleId(((LoadRectHandle(UserDefinedRects___hashTable, (GetHandleId((GetTriggerUnit()))), (0)))))))))))), (( (((LoadReal(ConstTable__ht, (((((s__TerrainFog_zEnd_impl))))), (((LoadInteger(ConstTable__ht, (((s__RectEnvironment_fog_impl))), (((GetHandleId(((LoadRectHandle(UserDefinedRects___hashTable, (GetHandleId((GetTriggerUnit()))), (0)))))))))))))) + 500.)*1.0))*1.0)) // INLINED!!
+                call DisplayTextToPlayer(GetOwningPlayer(GetTriggerUnit()), 0, 0, ( "Fog zEnd set to: " + R2S((LoadReal(ConstTable__ht, (((((s__TerrainFog_zEnd_impl))))), (((LoadInteger(ConstTable__ht, (((s__RectEnvironment_fog_impl))), (((GetHandleId(((LoadRectHandle(UserDefinedRects___hashTable, (GetHandleId((GetTriggerUnit()))), (0))))))))))))))) )) // INLINED!!
             
             elseif abilityId == RectGenerator_FOG_ZEND_DOWN then
-                if (LoadReal(ConstTable__ht, (((((s__TerrainFog_zEnd_impl))))), (((LoadInteger(ConstTable__ht, (((s__RectEnvironment_fog_impl))), (((GetHandleId(((LoadRectHandle(UserDefinedRects__hashTable, (GetHandleId((GetTriggerUnit()))), (0)))))))))))))) >= 1200. then // INLINED!!
-                    call SaveReal(ConstTable__ht, (((((s__TerrainFog_zEnd_impl))))), (((LoadInteger(ConstTable__ht, (((s__RectEnvironment_fog_impl))), (((GetHandleId(((LoadRectHandle(UserDefinedRects__hashTable, (GetHandleId((GetTriggerUnit()))), (0)))))))))))), (( (((LoadReal(ConstTable__ht, (((((s__TerrainFog_zEnd_impl))))), (((LoadInteger(ConstTable__ht, (((s__RectEnvironment_fog_impl))), (((GetHandleId(((LoadRectHandle(UserDefinedRects__hashTable, (GetHandleId((GetTriggerUnit()))), (0)))))))))))))) - 500.)*1.0))*1.0)) // INLINED!!
+                if (LoadReal(ConstTable__ht, (((((s__TerrainFog_zEnd_impl))))), (((LoadInteger(ConstTable__ht, (((s__RectEnvironment_fog_impl))), (((GetHandleId(((LoadRectHandle(UserDefinedRects___hashTable, (GetHandleId((GetTriggerUnit()))), (0)))))))))))))) >= 1200. then // INLINED!!
+                    call SaveReal(ConstTable__ht, (((((s__TerrainFog_zEnd_impl))))), (((LoadInteger(ConstTable__ht, (((s__RectEnvironment_fog_impl))), (((GetHandleId(((LoadRectHandle(UserDefinedRects___hashTable, (GetHandleId((GetTriggerUnit()))), (0)))))))))))), (( (((LoadReal(ConstTable__ht, (((((s__TerrainFog_zEnd_impl))))), (((LoadInteger(ConstTable__ht, (((s__RectEnvironment_fog_impl))), (((GetHandleId(((LoadRectHandle(UserDefinedRects___hashTable, (GetHandleId((GetTriggerUnit()))), (0)))))))))))))) - 500.)*1.0))*1.0)) // INLINED!!
                 else
-                    call SaveReal(ConstTable__ht, (((((s__TerrainFog_zEnd_impl))))), (((LoadInteger(ConstTable__ht, (((s__RectEnvironment_fog_impl))), (((GetHandleId(((LoadRectHandle(UserDefinedRects__hashTable, (GetHandleId((GetTriggerUnit()))), (0)))))))))))), (( ((0.)*1.0))*1.0)) // INLINED!!
+                    call SaveReal(ConstTable__ht, (((((s__TerrainFog_zEnd_impl))))), (((LoadInteger(ConstTable__ht, (((s__RectEnvironment_fog_impl))), (((GetHandleId(((LoadRectHandle(UserDefinedRects___hashTable, (GetHandleId((GetTriggerUnit()))), (0)))))))))))), (( ((0.)*1.0))*1.0)) // INLINED!!
                 endif
-                call DisplayTextToPlayer(GetOwningPlayer(GetTriggerUnit()), 0, 0, ( "Fog zEnd set to: " + R2S((LoadReal(ConstTable__ht, (((((s__TerrainFog_zEnd_impl))))), (((LoadInteger(ConstTable__ht, (((s__RectEnvironment_fog_impl))), (((GetHandleId(((LoadRectHandle(UserDefinedRects__hashTable, (GetHandleId((GetTriggerUnit()))), (0))))))))))))))) )) // INLINED!!
+                call DisplayTextToPlayer(GetOwningPlayer(GetTriggerUnit()), 0, 0, ( "Fog zEnd set to: " + R2S((LoadReal(ConstTable__ht, (((((s__TerrainFog_zEnd_impl))))), (((LoadInteger(ConstTable__ht, (((s__RectEnvironment_fog_impl))), (((GetHandleId(((LoadRectHandle(UserDefinedRects___hashTable, (GetHandleId((GetTriggerUnit()))), (0))))))))))))))) )) // INLINED!!
             
             elseif abilityId == RectGenerator_FOG_STYLE_UP then
-                call SaveInteger(ConstTable__ht, (((((s__TerrainFog_style_impl))))), (((LoadInteger(ConstTable__ht, (((s__RectEnvironment_fog_impl))), (((GetHandleId(((LoadRectHandle(UserDefinedRects__hashTable, (GetHandleId((GetTriggerUnit()))), (0)))))))))))), ( ((LoadInteger(ConstTable__ht, ((s__RectGenerator__FogStyle_linkedListNext_impl)), ((((LoadInteger(ConstTable__ht, (((((s__TerrainFog_style_impl))))), (((LoadInteger(ConstTable__ht, (((s__RectEnvironment_fog_impl))), (((GetHandleId(((LoadRectHandle(UserDefinedRects__hashTable, (GetHandleId((GetTriggerUnit()))), (0)))))))))))))))))))))) // INLINED!!
-                call DisplayTextToPlayer(GetOwningPlayer(GetTriggerUnit()), 0, 0, "Fog Style set to: " + (LoadStr(ConstTable__ht, ((((s__RectGenerator__FogStyle_strings_impl)))), ((((LoadInteger(ConstTable__ht, (((((s__TerrainFog_style_impl))))), (((LoadInteger(ConstTable__ht, (((s__RectEnvironment_fog_impl))), (((GetHandleId(((LoadRectHandle(UserDefinedRects__hashTable, (GetHandleId((GetTriggerUnit()))), (0)))))))))))))))))))) // INLINED!!
+                call SaveInteger(ConstTable__ht, (((((s__TerrainFog_style_impl))))), (((LoadInteger(ConstTable__ht, (((s__RectEnvironment_fog_impl))), (((GetHandleId(((LoadRectHandle(UserDefinedRects___hashTable, (GetHandleId((GetTriggerUnit()))), (0)))))))))))), ( ((LoadInteger(ConstTable__ht, ((s__RectGenerator___FogStyle_linkedListNext_impl)), ((((LoadInteger(ConstTable__ht, (((((s__TerrainFog_style_impl))))), (((LoadInteger(ConstTable__ht, (((s__RectEnvironment_fog_impl))), (((GetHandleId(((LoadRectHandle(UserDefinedRects___hashTable, (GetHandleId((GetTriggerUnit()))), (0)))))))))))))))))))))) // INLINED!!
+                call DisplayTextToPlayer(GetOwningPlayer(GetTriggerUnit()), 0, 0, "Fog Style set to: " + (LoadStr(ConstTable__ht, ((((s__RectGenerator___FogStyle_strings_impl)))), ((((LoadInteger(ConstTable__ht, (((((s__TerrainFog_style_impl))))), (((LoadInteger(ConstTable__ht, (((s__RectEnvironment_fog_impl))), (((GetHandleId(((LoadRectHandle(UserDefinedRects___hashTable, (GetHandleId((GetTriggerUnit()))), (0)))))))))))))))))))) // INLINED!!
             
             elseif abilityId == RectGenerator_FOG_STYLE_DOWN then
-                call SaveInteger(ConstTable__ht, (((((s__TerrainFog_style_impl))))), (((LoadInteger(ConstTable__ht, (((s__RectEnvironment_fog_impl))), (((GetHandleId(((LoadRectHandle(UserDefinedRects__hashTable, (GetHandleId((GetTriggerUnit()))), (0)))))))))))), ( ((LoadInteger(ConstTable__ht, ((s__RectGenerator__FogStyle_linkedListPrev_impl)), ((((LoadInteger(ConstTable__ht, (((((s__TerrainFog_style_impl))))), (((LoadInteger(ConstTable__ht, (((s__RectEnvironment_fog_impl))), (((GetHandleId(((LoadRectHandle(UserDefinedRects__hashTable, (GetHandleId((GetTriggerUnit()))), (0)))))))))))))))))))))) // INLINED!!
-                call DisplayTextToPlayer(GetOwningPlayer(GetTriggerUnit()), 0, 0, "Fog Style set to: " + (LoadStr(ConstTable__ht, ((((s__RectGenerator__FogStyle_strings_impl)))), ((((LoadInteger(ConstTable__ht, (((((s__TerrainFog_style_impl))))), (((LoadInteger(ConstTable__ht, (((s__RectEnvironment_fog_impl))), (((GetHandleId(((LoadRectHandle(UserDefinedRects__hashTable, (GetHandleId((GetTriggerUnit()))), (0)))))))))))))))))))) // INLINED!!
+                call SaveInteger(ConstTable__ht, (((((s__TerrainFog_style_impl))))), (((LoadInteger(ConstTable__ht, (((s__RectEnvironment_fog_impl))), (((GetHandleId(((LoadRectHandle(UserDefinedRects___hashTable, (GetHandleId((GetTriggerUnit()))), (0)))))))))))), ( ((LoadInteger(ConstTable__ht, ((s__RectGenerator___FogStyle_linkedListPrev_impl)), ((((LoadInteger(ConstTable__ht, (((((s__TerrainFog_style_impl))))), (((LoadInteger(ConstTable__ht, (((s__RectEnvironment_fog_impl))), (((GetHandleId(((LoadRectHandle(UserDefinedRects___hashTable, (GetHandleId((GetTriggerUnit()))), (0)))))))))))))))))))))) // INLINED!!
+                call DisplayTextToPlayer(GetOwningPlayer(GetTriggerUnit()), 0, 0, "Fog Style set to: " + (LoadStr(ConstTable__ht, ((((s__RectGenerator___FogStyle_strings_impl)))), ((((LoadInteger(ConstTable__ht, (((((s__TerrainFog_style_impl))))), (((LoadInteger(ConstTable__ht, (((s__RectEnvironment_fog_impl))), (((GetHandleId(((LoadRectHandle(UserDefinedRects___hashTable, (GetHandleId((GetTriggerUnit()))), (0)))))))))))))))))))) // INLINED!!
             endif
 
 
@@ -13400,12 +13402,12 @@ function RectGenerator__onCast takes nothing returns boolean
                     call SetUnitY(GetTriggerUnit(), GetUnitY(GetTriggerUnit()) - 32)
                 endif
             
-                if CountUnitsInGroup((LoadGroupHandle(UserDefinedRects__hashTable, (GetHandleId((GetTriggerUnit()))), (6)))) <= RectGenerator__MAXIMUM_MOVE_LIMIT then // INLINED!!
-                    call ForGroup((LoadGroupHandle(UserDefinedRects__hashTable, (GetHandleId((GetTriggerUnit()))), (6))), function RectGenerator__GroupLoopTerrain) // INLINED!!
+                if CountUnitsInGroup((LoadGroupHandle(UserDefinedRects___hashTable, (GetHandleId((GetTriggerUnit()))), (6)))) <= RectGenerator___MAXIMUM_MOVE_LIMIT then // INLINED!!
+                    call ForGroup((LoadGroupHandle(UserDefinedRects___hashTable, (GetHandleId((GetTriggerUnit()))), (6))), function RectGenerator___GroupLoopTerrain) // INLINED!!
                     call SetUnitPosition(GetTriggerUnit(), GetTileCenterCoordinate(GetSpellTargetX()), GetTileCenterCoordinate(GetSpellTargetY()))
                     call MoveGUDR(GetTriggerUnit() , 0 , 0 , true)
                 else
-                    call DisplayTextToPlayer(GetOwningPlayer(GetTriggerUnit()), 0, 0, "Failed to move Rect Generator:\n Attached unit limit exceeded! (" + I2S(RectGenerator__MAXIMUM_MOVE_LIMIT) + ")")
+                    call DisplayTextToPlayer(GetOwningPlayer(GetTriggerUnit()), 0, 0, "Failed to move Rect Generator:\n Attached unit limit exceeded! (" + I2S(RectGenerator___MAXIMUM_MOVE_LIMIT) + ")")
                     call SetUnitPosition(GetTriggerUnit(), GetUnitX(GetTriggerUnit()), GetUnitY(GetTriggerUnit()))
                     call MoveGUDR(GetTriggerUnit() , 0 , 0 , true)
                 endif
@@ -13416,7 +13418,7 @@ function RectGenerator__onCast takes nothing returns boolean
     return false
 endfunction
 
-function RectGenerator__onSpawn takes nothing returns boolean
+function RectGenerator___onSpawn takes nothing returns boolean
     local unit u= GetTriggerUnit()
     
     if u == null then
@@ -13452,13 +13454,13 @@ function RectGenerator__onSpawn takes nothing returns boolean
 endfunction
 
 //===========================================================================
-function RectGenerator__onInit takes nothing returns nothing
+function RectGenerator___onInit takes nothing returns nothing
     local trigger trig= CreateTrigger()
-    local boolexpr onSpawnFilter= Condition(function RectGenerator__onSpawn)
+    local boolexpr onSpawnFilter= Condition(function RectGenerator___onSpawn)
     local integer i= 0
     
     call TriggerRegisterAnyUnitEventBJ(trig, EVENT_PLAYER_UNIT_SPELL_CAST)
-    call TriggerAddCondition(trig, Condition(function RectGenerator__onCast))
+    call TriggerAddCondition(trig, Condition(function RectGenerator___onCast))
     
 
 
@@ -13479,21 +13481,21 @@ function RectGenerator__onInit takes nothing returns nothing
 
     
 
-        call SaveStr(ConstTable__ht, ((((s__RectGenerator__FogStyle_strings_impl)))), (((s__TerrainFog_LINEAR))), ( ("Linear"))) // INLINED!!
-        call SaveStr(ConstTable__ht, ((((s__RectGenerator__FogStyle_strings_impl)))), (((s__TerrainFog_EXPONENTIAL))), ( ("Exponential 1"))) // INLINED!!
-        call SaveStr(ConstTable__ht, ((((s__RectGenerator__FogStyle_strings_impl)))), (((s__TerrainFog_EXPONENTIAL2))), ( ("Exponential 2"))) // INLINED!!
+        call SaveStr(ConstTable__ht, ((((s__RectGenerator___FogStyle_strings_impl)))), (((s__TerrainFog_LINEAR))), ( ("Linear"))) // INLINED!!
+        call SaveStr(ConstTable__ht, ((((s__RectGenerator___FogStyle_strings_impl)))), (((s__TerrainFog_EXPONENTIAL))), ( ("Exponential 1"))) // INLINED!!
+        call SaveStr(ConstTable__ht, ((((s__RectGenerator___FogStyle_strings_impl)))), (((s__TerrainFog_EXPONENTIAL2))), ( ("Exponential 2"))) // INLINED!!
         
 //textmacro instance: udrAddon_LinkStyles("TerrainFog.LINEAR", "TerrainFog.EXPONENTIAL")
-        call SaveInteger(ConstTable__ht, ((s__RectGenerator__FogStyle_linkedListNext_impl)), (((s__TerrainFog_LINEAR))), ( (s__TerrainFog_EXPONENTIAL))) // INLINED!!
-        call SaveInteger(ConstTable__ht, ((s__RectGenerator__FogStyle_linkedListPrev_impl)), (((s__TerrainFog_EXPONENTIAL))), ( (s__TerrainFog_LINEAR))) // INLINED!!
+        call SaveInteger(ConstTable__ht, ((s__RectGenerator___FogStyle_linkedListNext_impl)), (((s__TerrainFog_LINEAR))), ( (s__TerrainFog_EXPONENTIAL))) // INLINED!!
+        call SaveInteger(ConstTable__ht, ((s__RectGenerator___FogStyle_linkedListPrev_impl)), (((s__TerrainFog_EXPONENTIAL))), ( (s__TerrainFog_LINEAR))) // INLINED!!
 //end of: udrAddon_LinkStyles("TerrainFog.LINEAR", "TerrainFog.EXPONENTIAL")
 //textmacro instance: udrAddon_LinkStyles("TerrainFog.EXPONENTIAL", "TerrainFog.EXPONENTIAL2")
-        call SaveInteger(ConstTable__ht, ((s__RectGenerator__FogStyle_linkedListNext_impl)), (((s__TerrainFog_EXPONENTIAL))), ( (s__TerrainFog_EXPONENTIAL2))) // INLINED!!
-        call SaveInteger(ConstTable__ht, ((s__RectGenerator__FogStyle_linkedListPrev_impl)), (((s__TerrainFog_EXPONENTIAL2))), ( (s__TerrainFog_EXPONENTIAL))) // INLINED!!
+        call SaveInteger(ConstTable__ht, ((s__RectGenerator___FogStyle_linkedListNext_impl)), (((s__TerrainFog_EXPONENTIAL))), ( (s__TerrainFog_EXPONENTIAL2))) // INLINED!!
+        call SaveInteger(ConstTable__ht, ((s__RectGenerator___FogStyle_linkedListPrev_impl)), (((s__TerrainFog_EXPONENTIAL2))), ( (s__TerrainFog_EXPONENTIAL))) // INLINED!!
 //end of: udrAddon_LinkStyles("TerrainFog.EXPONENTIAL", "TerrainFog.EXPONENTIAL2")
 //textmacro instance: udrAddon_LinkStyles("TerrainFog.EXPONENTIAL2", "TerrainFog.LINEAR")
-        call SaveInteger(ConstTable__ht, ((s__RectGenerator__FogStyle_linkedListNext_impl)), (((s__TerrainFog_EXPONENTIAL2))), ( (s__TerrainFog_LINEAR))) // INLINED!!
-        call SaveInteger(ConstTable__ht, ((s__RectGenerator__FogStyle_linkedListPrev_impl)), (((s__TerrainFog_LINEAR))), ( (s__TerrainFog_EXPONENTIAL2))) // INLINED!!
+        call SaveInteger(ConstTable__ht, ((s__RectGenerator___FogStyle_linkedListNext_impl)), (((s__TerrainFog_EXPONENTIAL2))), ( (s__TerrainFog_LINEAR))) // INLINED!!
+        call SaveInteger(ConstTable__ht, ((s__RectGenerator___FogStyle_linkedListPrev_impl)), (((s__TerrainFog_LINEAR))), ( (s__TerrainFog_EXPONENTIAL2))) // INLINED!!
 //end of: udrAddon_LinkStyles("TerrainFog.EXPONENTIAL2", "TerrainFog.LINEAR")
 
     
@@ -13778,775 +13780,775 @@ endfunction
 
 
 //textmacro instance: DeclareParentHashtableWrapperModule("hashTable","true", "data","private")
-function UnitVisualMods__data_GetWrappedHashtable takes nothing returns hashtable
-    return UnitVisualMods__hashTable
+function UnitVisualMods___data_GetWrappedHashtable takes nothing returns hashtable
+    return UnitVisualMods___hashTable
 endfunction
 
 
-    function s__UnitVisualMods__data_reals__getindex takes integer this,integer key returns real
-        return LoadReal((UnitVisualMods__hashTable), this, key) // INLINED!!
+    function s__UnitVisualMods___data_reals__getindex takes integer this,integer key returns real
+        return LoadReal((UnitVisualMods___hashTable), this, key) // INLINED!!
     endfunction
-    function s__UnitVisualMods__data_reals__setindex takes integer this,integer key,real value returns nothing
-        call SaveReal((UnitVisualMods__hashTable), this, key, value) // INLINED!!
+    function s__UnitVisualMods___data_reals__setindex takes integer this,integer key,real value returns nothing
+        call SaveReal((UnitVisualMods___hashTable), this, key, value) // INLINED!!
     endfunction
-    function s__UnitVisualMods__data_reals_has takes integer this,integer key returns boolean
-        return HaveSavedReal((UnitVisualMods__hashTable), this, key) // INLINED!!
+    function s__UnitVisualMods___data_reals_has takes integer this,integer key returns boolean
+        return HaveSavedReal((UnitVisualMods___hashTable), this, key) // INLINED!!
     endfunction
-    function s__UnitVisualMods__data_reals_remove takes integer this,integer key returns nothing
-        call RemoveSavedReal((UnitVisualMods__hashTable), this, key) // INLINED!!
-    endfunction
-
-    function s__UnitVisualMods__data_booleans__getindex takes integer this,integer key returns boolean
-        return LoadBoolean((UnitVisualMods__hashTable), this, key) // INLINED!!
-    endfunction
-    function s__UnitVisualMods__data_booleans__setindex takes integer this,integer key,boolean value returns nothing
-        call SaveBoolean((UnitVisualMods__hashTable), this, key, value) // INLINED!!
-    endfunction
-    function s__UnitVisualMods__data_booleans_has takes integer this,integer key returns boolean
-        return HaveSavedBoolean((UnitVisualMods__hashTable), this, key) // INLINED!!
-    endfunction
-    function s__UnitVisualMods__data_booleans_remove takes integer this,integer key returns nothing
-        call RemoveSavedBoolean((UnitVisualMods__hashTable), this, key) // INLINED!!
+    function s__UnitVisualMods___data_reals_remove takes integer this,integer key returns nothing
+        call RemoveSavedReal((UnitVisualMods___hashTable), this, key) // INLINED!!
     endfunction
 
-    function s__UnitVisualMods__data_strings__getindex takes integer this,integer key returns string
-        return LoadStr((UnitVisualMods__hashTable), this, key) // INLINED!!
+    function s__UnitVisualMods___data_booleans__getindex takes integer this,integer key returns boolean
+        return LoadBoolean((UnitVisualMods___hashTable), this, key) // INLINED!!
     endfunction
-    function s__UnitVisualMods__data_strings__setindex takes integer this,integer key,string value returns nothing
-        call SaveStr((UnitVisualMods__hashTable), this, key, value) // INLINED!!
+    function s__UnitVisualMods___data_booleans__setindex takes integer this,integer key,boolean value returns nothing
+        call SaveBoolean((UnitVisualMods___hashTable), this, key, value) // INLINED!!
     endfunction
-    function s__UnitVisualMods__data_strings_has takes integer this,integer key returns boolean
-        return HaveSavedString((UnitVisualMods__hashTable), this, key) // INLINED!!
+    function s__UnitVisualMods___data_booleans_has takes integer this,integer key returns boolean
+        return HaveSavedBoolean((UnitVisualMods___hashTable), this, key) // INLINED!!
     endfunction
-    function s__UnitVisualMods__data_strings_remove takes integer this,integer key returns nothing
-        call RemoveSavedString((UnitVisualMods__hashTable), this, key) // INLINED!!
-    endfunction
-
-    function s__UnitVisualMods__data_integers__getindex takes integer this,integer key returns integer
-        return LoadInteger((UnitVisualMods__hashTable), this, key) // INLINED!!
-    endfunction
-    function s__UnitVisualMods__data_integers__setindex takes integer this,integer key,integer value returns nothing
-        call SaveInteger((UnitVisualMods__hashTable), this, key, value) // INLINED!!
-    endfunction
-    function s__UnitVisualMods__data_integers_has takes integer this,integer key returns boolean
-        return HaveSavedInteger((UnitVisualMods__hashTable), this, key) // INLINED!!
-    endfunction
-    function s__UnitVisualMods__data_integers_remove takes integer this,integer key returns nothing
-        call RemoveSavedInteger((UnitVisualMods__hashTable), this, key) // INLINED!!
+    function s__UnitVisualMods___data_booleans_remove takes integer this,integer key returns nothing
+        call RemoveSavedBoolean((UnitVisualMods___hashTable), this, key) // INLINED!!
     endfunction
 
-    function s__UnitVisualMods__data_handles_has takes integer this,integer key returns boolean
-        return HaveSavedHandle((UnitVisualMods__hashTable), this, key) // INLINED!!
+    function s__UnitVisualMods___data_strings__getindex takes integer this,integer key returns string
+        return LoadStr((UnitVisualMods___hashTable), this, key) // INLINED!!
     endfunction
-    function s__UnitVisualMods__data_handles_remove takes integer this,integer key returns nothing
-        call RemoveSavedHandle((UnitVisualMods__hashTable), this, key) // INLINED!!
+    function s__UnitVisualMods___data_strings__setindex takes integer this,integer key,string value returns nothing
+        call SaveStr((UnitVisualMods___hashTable), this, key, value) // INLINED!!
+    endfunction
+    function s__UnitVisualMods___data_strings_has takes integer this,integer key returns boolean
+        return HaveSavedString((UnitVisualMods___hashTable), this, key) // INLINED!!
+    endfunction
+    function s__UnitVisualMods___data_strings_remove takes integer this,integer key returns nothing
+        call RemoveSavedString((UnitVisualMods___hashTable), this, key) // INLINED!!
+    endfunction
+
+    function s__UnitVisualMods___data_integers__getindex takes integer this,integer key returns integer
+        return LoadInteger((UnitVisualMods___hashTable), this, key) // INLINED!!
+    endfunction
+    function s__UnitVisualMods___data_integers__setindex takes integer this,integer key,integer value returns nothing
+        call SaveInteger((UnitVisualMods___hashTable), this, key, value) // INLINED!!
+    endfunction
+    function s__UnitVisualMods___data_integers_has takes integer this,integer key returns boolean
+        return HaveSavedInteger((UnitVisualMods___hashTable), this, key) // INLINED!!
+    endfunction
+    function s__UnitVisualMods___data_integers_remove takes integer this,integer key returns nothing
+        call RemoveSavedInteger((UnitVisualMods___hashTable), this, key) // INLINED!!
+    endfunction
+
+    function s__UnitVisualMods___data_handles_has takes integer this,integer key returns boolean
+        return HaveSavedHandle((UnitVisualMods___hashTable), this, key) // INLINED!!
+    endfunction
+    function s__UnitVisualMods___data_handles_remove takes integer this,integer key returns nothing
+        call RemoveSavedHandle((UnitVisualMods___hashTable), this, key) // INLINED!!
     endfunction
 
 
-        function s__UnitVisualMods__data_agents__setindex takes integer this,integer key,agent value returns nothing
-            call SaveAgentHandle((UnitVisualMods__hashTable), this, key, value) // INLINED!!
+        function s__UnitVisualMods___data_agents__setindex takes integer this,integer key,agent value returns nothing
+            call SaveAgentHandle((UnitVisualMods___hashTable), this, key, value) // INLINED!!
         endfunction
 
-        function s__UnitVisualMods__data_players__getindex takes integer this,integer key returns player
-            return LoadPlayerHandle((UnitVisualMods__hashTable), this, key) // INLINED!!
+        function s__UnitVisualMods___data_players__getindex takes integer this,integer key returns player
+            return LoadPlayerHandle((UnitVisualMods___hashTable), this, key) // INLINED!!
         endfunction
-        function s__UnitVisualMods__data_players__setindex takes integer this,integer key,player value returns nothing
-            call SavePlayerHandle((UnitVisualMods__hashTable), this, key, value) // INLINED!!
+        function s__UnitVisualMods___data_players__setindex takes integer this,integer key,player value returns nothing
+            call SavePlayerHandle((UnitVisualMods___hashTable), this, key, value) // INLINED!!
         endfunction
-        function s__UnitVisualMods__data_players_has takes integer this,integer key returns boolean
-            return HaveSavedHandle((UnitVisualMods__hashTable), this, key) // INLINED!!
+        function s__UnitVisualMods___data_players_has takes integer this,integer key returns boolean
+            return HaveSavedHandle((UnitVisualMods___hashTable), this, key) // INLINED!!
         endfunction
-        function s__UnitVisualMods__data_players_remove takes integer this,integer key returns nothing
-            call RemoveSavedHandle((UnitVisualMods__hashTable), this, key) // INLINED!!
-        endfunction
-
-        function s__UnitVisualMods__data_widgets__getindex takes integer this,integer key returns widget
-            return LoadWidgetHandle((UnitVisualMods__hashTable), this, key) // INLINED!!
-        endfunction
-        function s__UnitVisualMods__data_widgets__setindex takes integer this,integer key,widget value returns nothing
-            call SaveWidgetHandle((UnitVisualMods__hashTable), this, key, value) // INLINED!!
-        endfunction
-        function s__UnitVisualMods__data_widgets_has takes integer this,integer key returns boolean
-            return HaveSavedHandle((UnitVisualMods__hashTable), this, key) // INLINED!!
-        endfunction
-        function s__UnitVisualMods__data_widgets_remove takes integer this,integer key returns nothing
-            call RemoveSavedHandle((UnitVisualMods__hashTable), this, key) // INLINED!!
+        function s__UnitVisualMods___data_players_remove takes integer this,integer key returns nothing
+            call RemoveSavedHandle((UnitVisualMods___hashTable), this, key) // INLINED!!
         endfunction
 
-        function s__UnitVisualMods__data_destructables__getindex takes integer this,integer key returns destructable
-            return LoadDestructableHandle((UnitVisualMods__hashTable), this, key) // INLINED!!
+        function s__UnitVisualMods___data_widgets__getindex takes integer this,integer key returns widget
+            return LoadWidgetHandle((UnitVisualMods___hashTable), this, key) // INLINED!!
         endfunction
-        function s__UnitVisualMods__data_destructables__setindex takes integer this,integer key,destructable value returns nothing
-            call SaveDestructableHandle((UnitVisualMods__hashTable), this, key, value) // INLINED!!
+        function s__UnitVisualMods___data_widgets__setindex takes integer this,integer key,widget value returns nothing
+            call SaveWidgetHandle((UnitVisualMods___hashTable), this, key, value) // INLINED!!
         endfunction
-        function s__UnitVisualMods__data_destructables_has takes integer this,integer key returns boolean
-            return HaveSavedHandle((UnitVisualMods__hashTable), this, key) // INLINED!!
+        function s__UnitVisualMods___data_widgets_has takes integer this,integer key returns boolean
+            return HaveSavedHandle((UnitVisualMods___hashTable), this, key) // INLINED!!
         endfunction
-        function s__UnitVisualMods__data_destructables_remove takes integer this,integer key returns nothing
-            call RemoveSavedHandle((UnitVisualMods__hashTable), this, key) // INLINED!!
-        endfunction
-
-        function s__UnitVisualMods__data_items__getindex takes integer this,integer key returns item
-            return LoadItemHandle((UnitVisualMods__hashTable), this, key) // INLINED!!
-        endfunction
-        function s__UnitVisualMods__data_items__setindex takes integer this,integer key,item value returns nothing
-            call SaveItemHandle((UnitVisualMods__hashTable), this, key, value) // INLINED!!
-        endfunction
-        function s__UnitVisualMods__data_items_has takes integer this,integer key returns boolean
-            return HaveSavedHandle((UnitVisualMods__hashTable), this, key) // INLINED!!
-        endfunction
-        function s__UnitVisualMods__data_items_remove takes integer this,integer key returns nothing
-            call RemoveSavedHandle((UnitVisualMods__hashTable), this, key) // INLINED!!
+        function s__UnitVisualMods___data_widgets_remove takes integer this,integer key returns nothing
+            call RemoveSavedHandle((UnitVisualMods___hashTable), this, key) // INLINED!!
         endfunction
 
-        function s__UnitVisualMods__data_units__getindex takes integer this,integer key returns unit
-            return LoadUnitHandle((UnitVisualMods__hashTable), this, key) // INLINED!!
+        function s__UnitVisualMods___data_destructables__getindex takes integer this,integer key returns destructable
+            return LoadDestructableHandle((UnitVisualMods___hashTable), this, key) // INLINED!!
         endfunction
-        function s__UnitVisualMods__data_units__setindex takes integer this,integer key,unit value returns nothing
-            call SaveUnitHandle((UnitVisualMods__hashTable), this, key, value) // INLINED!!
+        function s__UnitVisualMods___data_destructables__setindex takes integer this,integer key,destructable value returns nothing
+            call SaveDestructableHandle((UnitVisualMods___hashTable), this, key, value) // INLINED!!
         endfunction
-        function s__UnitVisualMods__data_units_has takes integer this,integer key returns boolean
-            return HaveSavedHandle((UnitVisualMods__hashTable), this, key) // INLINED!!
+        function s__UnitVisualMods___data_destructables_has takes integer this,integer key returns boolean
+            return HaveSavedHandle((UnitVisualMods___hashTable), this, key) // INLINED!!
         endfunction
-        function s__UnitVisualMods__data_units_remove takes integer this,integer key returns nothing
-            call RemoveSavedHandle((UnitVisualMods__hashTable), this, key) // INLINED!!
-        endfunction
-
-        function s__UnitVisualMods__data_abilitys__getindex takes integer this,integer key returns ability
-            return LoadAbilityHandle((UnitVisualMods__hashTable), this, key) // INLINED!!
-        endfunction
-        function s__UnitVisualMods__data_abilitys__setindex takes integer this,integer key,ability value returns nothing
-            call SaveAbilityHandle((UnitVisualMods__hashTable), this, key, value) // INLINED!!
-        endfunction
-        function s__UnitVisualMods__data_abilitys_has takes integer this,integer key returns boolean
-            return HaveSavedHandle((UnitVisualMods__hashTable), this, key) // INLINED!!
-        endfunction
-        function s__UnitVisualMods__data_abilitys_remove takes integer this,integer key returns nothing
-            call RemoveSavedHandle((UnitVisualMods__hashTable), this, key) // INLINED!!
+        function s__UnitVisualMods___data_destructables_remove takes integer this,integer key returns nothing
+            call RemoveSavedHandle((UnitVisualMods___hashTable), this, key) // INLINED!!
         endfunction
 
-        function s__UnitVisualMods__data_timers__getindex takes integer this,integer key returns timer
-            return LoadTimerHandle((UnitVisualMods__hashTable), this, key) // INLINED!!
+        function s__UnitVisualMods___data_items__getindex takes integer this,integer key returns item
+            return LoadItemHandle((UnitVisualMods___hashTable), this, key) // INLINED!!
         endfunction
-        function s__UnitVisualMods__data_timers__setindex takes integer this,integer key,timer value returns nothing
-            call SaveTimerHandle((UnitVisualMods__hashTable), this, key, value) // INLINED!!
+        function s__UnitVisualMods___data_items__setindex takes integer this,integer key,item value returns nothing
+            call SaveItemHandle((UnitVisualMods___hashTable), this, key, value) // INLINED!!
         endfunction
-        function s__UnitVisualMods__data_timers_has takes integer this,integer key returns boolean
-            return HaveSavedHandle((UnitVisualMods__hashTable), this, key) // INLINED!!
+        function s__UnitVisualMods___data_items_has takes integer this,integer key returns boolean
+            return HaveSavedHandle((UnitVisualMods___hashTable), this, key) // INLINED!!
         endfunction
-        function s__UnitVisualMods__data_timers_remove takes integer this,integer key returns nothing
-            call RemoveSavedHandle((UnitVisualMods__hashTable), this, key) // INLINED!!
-        endfunction
-
-        function s__UnitVisualMods__data_triggers__getindex takes integer this,integer key returns trigger
-            return LoadTriggerHandle((UnitVisualMods__hashTable), this, key) // INLINED!!
-        endfunction
-        function s__UnitVisualMods__data_triggers__setindex takes integer this,integer key,trigger value returns nothing
-            call SaveTriggerHandle((UnitVisualMods__hashTable), this, key, value) // INLINED!!
-        endfunction
-        function s__UnitVisualMods__data_triggers_has takes integer this,integer key returns boolean
-            return HaveSavedHandle((UnitVisualMods__hashTable), this, key) // INLINED!!
-        endfunction
-        function s__UnitVisualMods__data_triggers_remove takes integer this,integer key returns nothing
-            call RemoveSavedHandle((UnitVisualMods__hashTable), this, key) // INLINED!!
+        function s__UnitVisualMods___data_items_remove takes integer this,integer key returns nothing
+            call RemoveSavedHandle((UnitVisualMods___hashTable), this, key) // INLINED!!
         endfunction
 
-        function s__UnitVisualMods__data_triggerconditions__getindex takes integer this,integer key returns triggercondition
-            return LoadTriggerConditionHandle((UnitVisualMods__hashTable), this, key) // INLINED!!
+        function s__UnitVisualMods___data_units__getindex takes integer this,integer key returns unit
+            return LoadUnitHandle((UnitVisualMods___hashTable), this, key) // INLINED!!
         endfunction
-        function s__UnitVisualMods__data_triggerconditions__setindex takes integer this,integer key,triggercondition value returns nothing
-            call SaveTriggerConditionHandle((UnitVisualMods__hashTable), this, key, value) // INLINED!!
+        function s__UnitVisualMods___data_units__setindex takes integer this,integer key,unit value returns nothing
+            call SaveUnitHandle((UnitVisualMods___hashTable), this, key, value) // INLINED!!
         endfunction
-        function s__UnitVisualMods__data_triggerconditions_has takes integer this,integer key returns boolean
-            return HaveSavedHandle((UnitVisualMods__hashTable), this, key) // INLINED!!
+        function s__UnitVisualMods___data_units_has takes integer this,integer key returns boolean
+            return HaveSavedHandle((UnitVisualMods___hashTable), this, key) // INLINED!!
         endfunction
-        function s__UnitVisualMods__data_triggerconditions_remove takes integer this,integer key returns nothing
-            call RemoveSavedHandle((UnitVisualMods__hashTable), this, key) // INLINED!!
-        endfunction
-
-        function s__UnitVisualMods__data_triggeractions__getindex takes integer this,integer key returns triggeraction
-            return LoadTriggerActionHandle((UnitVisualMods__hashTable), this, key) // INLINED!!
-        endfunction
-        function s__UnitVisualMods__data_triggeractions__setindex takes integer this,integer key,triggeraction value returns nothing
-            call SaveTriggerActionHandle((UnitVisualMods__hashTable), this, key, value) // INLINED!!
-        endfunction
-        function s__UnitVisualMods__data_triggeractions_has takes integer this,integer key returns boolean
-            return HaveSavedHandle((UnitVisualMods__hashTable), this, key) // INLINED!!
-        endfunction
-        function s__UnitVisualMods__data_triggeractions_remove takes integer this,integer key returns nothing
-            call RemoveSavedHandle((UnitVisualMods__hashTable), this, key) // INLINED!!
+        function s__UnitVisualMods___data_units_remove takes integer this,integer key returns nothing
+            call RemoveSavedHandle((UnitVisualMods___hashTable), this, key) // INLINED!!
         endfunction
 
-        function s__UnitVisualMods__data_events__getindex takes integer this,integer key returns event
-            return LoadTriggerEventHandle((UnitVisualMods__hashTable), this, key) // INLINED!!
+        function s__UnitVisualMods___data_abilitys__getindex takes integer this,integer key returns ability
+            return LoadAbilityHandle((UnitVisualMods___hashTable), this, key) // INLINED!!
         endfunction
-        function s__UnitVisualMods__data_events__setindex takes integer this,integer key,event value returns nothing
-            call SaveTriggerEventHandle((UnitVisualMods__hashTable), this, key, value) // INLINED!!
+        function s__UnitVisualMods___data_abilitys__setindex takes integer this,integer key,ability value returns nothing
+            call SaveAbilityHandle((UnitVisualMods___hashTable), this, key, value) // INLINED!!
         endfunction
-        function s__UnitVisualMods__data_events_has takes integer this,integer key returns boolean
-            return HaveSavedHandle((UnitVisualMods__hashTable), this, key) // INLINED!!
+        function s__UnitVisualMods___data_abilitys_has takes integer this,integer key returns boolean
+            return HaveSavedHandle((UnitVisualMods___hashTable), this, key) // INLINED!!
         endfunction
-        function s__UnitVisualMods__data_events_remove takes integer this,integer key returns nothing
-            call RemoveSavedHandle((UnitVisualMods__hashTable), this, key) // INLINED!!
-        endfunction
-
-        function s__UnitVisualMods__data_forces__getindex takes integer this,integer key returns force
-            return LoadForceHandle((UnitVisualMods__hashTable), this, key) // INLINED!!
-        endfunction
-        function s__UnitVisualMods__data_forces__setindex takes integer this,integer key,force value returns nothing
-            call SaveForceHandle((UnitVisualMods__hashTable), this, key, value) // INLINED!!
-        endfunction
-        function s__UnitVisualMods__data_forces_has takes integer this,integer key returns boolean
-            return HaveSavedHandle((UnitVisualMods__hashTable), this, key) // INLINED!!
-        endfunction
-        function s__UnitVisualMods__data_forces_remove takes integer this,integer key returns nothing
-            call RemoveSavedHandle((UnitVisualMods__hashTable), this, key) // INLINED!!
+        function s__UnitVisualMods___data_abilitys_remove takes integer this,integer key returns nothing
+            call RemoveSavedHandle((UnitVisualMods___hashTable), this, key) // INLINED!!
         endfunction
 
-        function s__UnitVisualMods__data_groups__getindex takes integer this,integer key returns group
-            return LoadGroupHandle((UnitVisualMods__hashTable), this, key) // INLINED!!
+        function s__UnitVisualMods___data_timers__getindex takes integer this,integer key returns timer
+            return LoadTimerHandle((UnitVisualMods___hashTable), this, key) // INLINED!!
         endfunction
-        function s__UnitVisualMods__data_groups__setindex takes integer this,integer key,group value returns nothing
-            call SaveGroupHandle((UnitVisualMods__hashTable), this, key, value) // INLINED!!
+        function s__UnitVisualMods___data_timers__setindex takes integer this,integer key,timer value returns nothing
+            call SaveTimerHandle((UnitVisualMods___hashTable), this, key, value) // INLINED!!
         endfunction
-        function s__UnitVisualMods__data_groups_has takes integer this,integer key returns boolean
-            return HaveSavedHandle((UnitVisualMods__hashTable), this, key) // INLINED!!
+        function s__UnitVisualMods___data_timers_has takes integer this,integer key returns boolean
+            return HaveSavedHandle((UnitVisualMods___hashTable), this, key) // INLINED!!
         endfunction
-        function s__UnitVisualMods__data_groups_remove takes integer this,integer key returns nothing
-            call RemoveSavedHandle((UnitVisualMods__hashTable), this, key) // INLINED!!
-        endfunction
-
-        function s__UnitVisualMods__data_locations__getindex takes integer this,integer key returns location
-            return LoadLocationHandle((UnitVisualMods__hashTable), this, key) // INLINED!!
-        endfunction
-        function s__UnitVisualMods__data_locations__setindex takes integer this,integer key,location value returns nothing
-            call SaveLocationHandle((UnitVisualMods__hashTable), this, key, value) // INLINED!!
-        endfunction
-        function s__UnitVisualMods__data_locations_has takes integer this,integer key returns boolean
-            return HaveSavedHandle((UnitVisualMods__hashTable), this, key) // INLINED!!
-        endfunction
-        function s__UnitVisualMods__data_locations_remove takes integer this,integer key returns nothing
-            call RemoveSavedHandle((UnitVisualMods__hashTable), this, key) // INLINED!!
+        function s__UnitVisualMods___data_timers_remove takes integer this,integer key returns nothing
+            call RemoveSavedHandle((UnitVisualMods___hashTable), this, key) // INLINED!!
         endfunction
 
-        function s__UnitVisualMods__data_rects__getindex takes integer this,integer key returns rect
-            return LoadRectHandle((UnitVisualMods__hashTable), this, key) // INLINED!!
+        function s__UnitVisualMods___data_triggers__getindex takes integer this,integer key returns trigger
+            return LoadTriggerHandle((UnitVisualMods___hashTable), this, key) // INLINED!!
         endfunction
-        function s__UnitVisualMods__data_rects__setindex takes integer this,integer key,rect value returns nothing
-            call SaveRectHandle((UnitVisualMods__hashTable), this, key, value) // INLINED!!
+        function s__UnitVisualMods___data_triggers__setindex takes integer this,integer key,trigger value returns nothing
+            call SaveTriggerHandle((UnitVisualMods___hashTable), this, key, value) // INLINED!!
         endfunction
-        function s__UnitVisualMods__data_rects_has takes integer this,integer key returns boolean
-            return HaveSavedHandle((UnitVisualMods__hashTable), this, key) // INLINED!!
+        function s__UnitVisualMods___data_triggers_has takes integer this,integer key returns boolean
+            return HaveSavedHandle((UnitVisualMods___hashTable), this, key) // INLINED!!
         endfunction
-        function s__UnitVisualMods__data_rects_remove takes integer this,integer key returns nothing
-            call RemoveSavedHandle((UnitVisualMods__hashTable), this, key) // INLINED!!
-        endfunction
-
-        function s__UnitVisualMods__data_boolexprs__getindex takes integer this,integer key returns boolexpr
-            return LoadBooleanExprHandle((UnitVisualMods__hashTable), this, key) // INLINED!!
-        endfunction
-        function s__UnitVisualMods__data_boolexprs__setindex takes integer this,integer key,boolexpr value returns nothing
-            call SaveBooleanExprHandle((UnitVisualMods__hashTable), this, key, value) // INLINED!!
-        endfunction
-        function s__UnitVisualMods__data_boolexprs_has takes integer this,integer key returns boolean
-            return HaveSavedHandle((UnitVisualMods__hashTable), this, key) // INLINED!!
-        endfunction
-        function s__UnitVisualMods__data_boolexprs_remove takes integer this,integer key returns nothing
-            call RemoveSavedHandle((UnitVisualMods__hashTable), this, key) // INLINED!!
+        function s__UnitVisualMods___data_triggers_remove takes integer this,integer key returns nothing
+            call RemoveSavedHandle((UnitVisualMods___hashTable), this, key) // INLINED!!
         endfunction
 
-        function s__UnitVisualMods__data_sounds__getindex takes integer this,integer key returns sound
-            return LoadSoundHandle((UnitVisualMods__hashTable), this, key) // INLINED!!
+        function s__UnitVisualMods___data_triggerconditions__getindex takes integer this,integer key returns triggercondition
+            return LoadTriggerConditionHandle((UnitVisualMods___hashTable), this, key) // INLINED!!
         endfunction
-        function s__UnitVisualMods__data_sounds__setindex takes integer this,integer key,sound value returns nothing
-            call SaveSoundHandle((UnitVisualMods__hashTable), this, key, value) // INLINED!!
+        function s__UnitVisualMods___data_triggerconditions__setindex takes integer this,integer key,triggercondition value returns nothing
+            call SaveTriggerConditionHandle((UnitVisualMods___hashTable), this, key, value) // INLINED!!
         endfunction
-        function s__UnitVisualMods__data_sounds_has takes integer this,integer key returns boolean
-            return HaveSavedHandle((UnitVisualMods__hashTable), this, key) // INLINED!!
+        function s__UnitVisualMods___data_triggerconditions_has takes integer this,integer key returns boolean
+            return HaveSavedHandle((UnitVisualMods___hashTable), this, key) // INLINED!!
         endfunction
-        function s__UnitVisualMods__data_sounds_remove takes integer this,integer key returns nothing
-            call RemoveSavedHandle((UnitVisualMods__hashTable), this, key) // INLINED!!
-        endfunction
-
-        function s__UnitVisualMods__data_effects__getindex takes integer this,integer key returns effect
-            return LoadEffectHandle((UnitVisualMods__hashTable), this, key) // INLINED!!
-        endfunction
-        function s__UnitVisualMods__data_effects__setindex takes integer this,integer key,effect value returns nothing
-            call SaveEffectHandle((UnitVisualMods__hashTable), this, key, value) // INLINED!!
-        endfunction
-        function s__UnitVisualMods__data_effects_has takes integer this,integer key returns boolean
-            return HaveSavedHandle((UnitVisualMods__hashTable), this, key) // INLINED!!
-        endfunction
-        function s__UnitVisualMods__data_effects_remove takes integer this,integer key returns nothing
-            call RemoveSavedHandle((UnitVisualMods__hashTable), this, key) // INLINED!!
+        function s__UnitVisualMods___data_triggerconditions_remove takes integer this,integer key returns nothing
+            call RemoveSavedHandle((UnitVisualMods___hashTable), this, key) // INLINED!!
         endfunction
 
-        function s__UnitVisualMods__data_unitpools__getindex takes integer this,integer key returns unitpool
-            return LoadUnitPoolHandle((UnitVisualMods__hashTable), this, key) // INLINED!!
+        function s__UnitVisualMods___data_triggeractions__getindex takes integer this,integer key returns triggeraction
+            return LoadTriggerActionHandle((UnitVisualMods___hashTable), this, key) // INLINED!!
         endfunction
-        function s__UnitVisualMods__data_unitpools__setindex takes integer this,integer key,unitpool value returns nothing
-            call SaveUnitPoolHandle((UnitVisualMods__hashTable), this, key, value) // INLINED!!
+        function s__UnitVisualMods___data_triggeractions__setindex takes integer this,integer key,triggeraction value returns nothing
+            call SaveTriggerActionHandle((UnitVisualMods___hashTable), this, key, value) // INLINED!!
         endfunction
-        function s__UnitVisualMods__data_unitpools_has takes integer this,integer key returns boolean
-            return HaveSavedHandle((UnitVisualMods__hashTable), this, key) // INLINED!!
+        function s__UnitVisualMods___data_triggeractions_has takes integer this,integer key returns boolean
+            return HaveSavedHandle((UnitVisualMods___hashTable), this, key) // INLINED!!
         endfunction
-        function s__UnitVisualMods__data_unitpools_remove takes integer this,integer key returns nothing
-            call RemoveSavedHandle((UnitVisualMods__hashTable), this, key) // INLINED!!
-        endfunction
-
-        function s__UnitVisualMods__data_itempools__getindex takes integer this,integer key returns itempool
-            return LoadItemPoolHandle((UnitVisualMods__hashTable), this, key) // INLINED!!
-        endfunction
-        function s__UnitVisualMods__data_itempools__setindex takes integer this,integer key,itempool value returns nothing
-            call SaveItemPoolHandle((UnitVisualMods__hashTable), this, key, value) // INLINED!!
-        endfunction
-        function s__UnitVisualMods__data_itempools_has takes integer this,integer key returns boolean
-            return HaveSavedHandle((UnitVisualMods__hashTable), this, key) // INLINED!!
-        endfunction
-        function s__UnitVisualMods__data_itempools_remove takes integer this,integer key returns nothing
-            call RemoveSavedHandle((UnitVisualMods__hashTable), this, key) // INLINED!!
+        function s__UnitVisualMods___data_triggeractions_remove takes integer this,integer key returns nothing
+            call RemoveSavedHandle((UnitVisualMods___hashTable), this, key) // INLINED!!
         endfunction
 
-        function s__UnitVisualMods__data_quests__getindex takes integer this,integer key returns quest
-            return LoadQuestHandle((UnitVisualMods__hashTable), this, key) // INLINED!!
+        function s__UnitVisualMods___data_events__getindex takes integer this,integer key returns event
+            return LoadTriggerEventHandle((UnitVisualMods___hashTable), this, key) // INLINED!!
         endfunction
-        function s__UnitVisualMods__data_quests__setindex takes integer this,integer key,quest value returns nothing
-            call SaveQuestHandle((UnitVisualMods__hashTable), this, key, value) // INLINED!!
+        function s__UnitVisualMods___data_events__setindex takes integer this,integer key,event value returns nothing
+            call SaveTriggerEventHandle((UnitVisualMods___hashTable), this, key, value) // INLINED!!
         endfunction
-        function s__UnitVisualMods__data_quests_has takes integer this,integer key returns boolean
-            return HaveSavedHandle((UnitVisualMods__hashTable), this, key) // INLINED!!
+        function s__UnitVisualMods___data_events_has takes integer this,integer key returns boolean
+            return HaveSavedHandle((UnitVisualMods___hashTable), this, key) // INLINED!!
         endfunction
-        function s__UnitVisualMods__data_quests_remove takes integer this,integer key returns nothing
-            call RemoveSavedHandle((UnitVisualMods__hashTable), this, key) // INLINED!!
-        endfunction
-
-        function s__UnitVisualMods__data_questitems__getindex takes integer this,integer key returns questitem
-            return LoadQuestItemHandle((UnitVisualMods__hashTable), this, key) // INLINED!!
-        endfunction
-        function s__UnitVisualMods__data_questitems__setindex takes integer this,integer key,questitem value returns nothing
-            call SaveQuestItemHandle((UnitVisualMods__hashTable), this, key, value) // INLINED!!
-        endfunction
-        function s__UnitVisualMods__data_questitems_has takes integer this,integer key returns boolean
-            return HaveSavedHandle((UnitVisualMods__hashTable), this, key) // INLINED!!
-        endfunction
-        function s__UnitVisualMods__data_questitems_remove takes integer this,integer key returns nothing
-            call RemoveSavedHandle((UnitVisualMods__hashTable), this, key) // INLINED!!
+        function s__UnitVisualMods___data_events_remove takes integer this,integer key returns nothing
+            call RemoveSavedHandle((UnitVisualMods___hashTable), this, key) // INLINED!!
         endfunction
 
-        function s__UnitVisualMods__data_defeatconditions__getindex takes integer this,integer key returns defeatcondition
-            return LoadDefeatConditionHandle((UnitVisualMods__hashTable), this, key) // INLINED!!
+        function s__UnitVisualMods___data_forces__getindex takes integer this,integer key returns force
+            return LoadForceHandle((UnitVisualMods___hashTable), this, key) // INLINED!!
         endfunction
-        function s__UnitVisualMods__data_defeatconditions__setindex takes integer this,integer key,defeatcondition value returns nothing
-            call SaveDefeatConditionHandle((UnitVisualMods__hashTable), this, key, value) // INLINED!!
+        function s__UnitVisualMods___data_forces__setindex takes integer this,integer key,force value returns nothing
+            call SaveForceHandle((UnitVisualMods___hashTable), this, key, value) // INLINED!!
         endfunction
-        function s__UnitVisualMods__data_defeatconditions_has takes integer this,integer key returns boolean
-            return HaveSavedHandle((UnitVisualMods__hashTable), this, key) // INLINED!!
+        function s__UnitVisualMods___data_forces_has takes integer this,integer key returns boolean
+            return HaveSavedHandle((UnitVisualMods___hashTable), this, key) // INLINED!!
         endfunction
-        function s__UnitVisualMods__data_defeatconditions_remove takes integer this,integer key returns nothing
-            call RemoveSavedHandle((UnitVisualMods__hashTable), this, key) // INLINED!!
-        endfunction
-
-        function s__UnitVisualMods__data_timerdialogs__getindex takes integer this,integer key returns timerdialog
-            return LoadTimerDialogHandle((UnitVisualMods__hashTable), this, key) // INLINED!!
-        endfunction
-        function s__UnitVisualMods__data_timerdialogs__setindex takes integer this,integer key,timerdialog value returns nothing
-            call SaveTimerDialogHandle((UnitVisualMods__hashTable), this, key, value) // INLINED!!
-        endfunction
-        function s__UnitVisualMods__data_timerdialogs_has takes integer this,integer key returns boolean
-            return HaveSavedHandle((UnitVisualMods__hashTable), this, key) // INLINED!!
-        endfunction
-        function s__UnitVisualMods__data_timerdialogs_remove takes integer this,integer key returns nothing
-            call RemoveSavedHandle((UnitVisualMods__hashTable), this, key) // INLINED!!
+        function s__UnitVisualMods___data_forces_remove takes integer this,integer key returns nothing
+            call RemoveSavedHandle((UnitVisualMods___hashTable), this, key) // INLINED!!
         endfunction
 
-        function s__UnitVisualMods__data_leaderboards__getindex takes integer this,integer key returns leaderboard
-            return LoadLeaderboardHandle((UnitVisualMods__hashTable), this, key) // INLINED!!
+        function s__UnitVisualMods___data_groups__getindex takes integer this,integer key returns group
+            return LoadGroupHandle((UnitVisualMods___hashTable), this, key) // INLINED!!
         endfunction
-        function s__UnitVisualMods__data_leaderboards__setindex takes integer this,integer key,leaderboard value returns nothing
-            call SaveLeaderboardHandle((UnitVisualMods__hashTable), this, key, value) // INLINED!!
+        function s__UnitVisualMods___data_groups__setindex takes integer this,integer key,group value returns nothing
+            call SaveGroupHandle((UnitVisualMods___hashTable), this, key, value) // INLINED!!
         endfunction
-        function s__UnitVisualMods__data_leaderboards_has takes integer this,integer key returns boolean
-            return HaveSavedHandle((UnitVisualMods__hashTable), this, key) // INLINED!!
+        function s__UnitVisualMods___data_groups_has takes integer this,integer key returns boolean
+            return HaveSavedHandle((UnitVisualMods___hashTable), this, key) // INLINED!!
         endfunction
-        function s__UnitVisualMods__data_leaderboards_remove takes integer this,integer key returns nothing
-            call RemoveSavedHandle((UnitVisualMods__hashTable), this, key) // INLINED!!
-        endfunction
-
-        function s__UnitVisualMods__data_multiboards__getindex takes integer this,integer key returns multiboard
-            return LoadMultiboardHandle((UnitVisualMods__hashTable), this, key) // INLINED!!
-        endfunction
-        function s__UnitVisualMods__data_multiboards__setindex takes integer this,integer key,multiboard value returns nothing
-            call SaveMultiboardHandle((UnitVisualMods__hashTable), this, key, value) // INLINED!!
-        endfunction
-        function s__UnitVisualMods__data_multiboards_has takes integer this,integer key returns boolean
-            return HaveSavedHandle((UnitVisualMods__hashTable), this, key) // INLINED!!
-        endfunction
-        function s__UnitVisualMods__data_multiboards_remove takes integer this,integer key returns nothing
-            call RemoveSavedHandle((UnitVisualMods__hashTable), this, key) // INLINED!!
+        function s__UnitVisualMods___data_groups_remove takes integer this,integer key returns nothing
+            call RemoveSavedHandle((UnitVisualMods___hashTable), this, key) // INLINED!!
         endfunction
 
-        function s__UnitVisualMods__data_multiboarditems__getindex takes integer this,integer key returns multiboarditem
-            return LoadMultiboardItemHandle((UnitVisualMods__hashTable), this, key) // INLINED!!
+        function s__UnitVisualMods___data_locations__getindex takes integer this,integer key returns location
+            return LoadLocationHandle((UnitVisualMods___hashTable), this, key) // INLINED!!
         endfunction
-        function s__UnitVisualMods__data_multiboarditems__setindex takes integer this,integer key,multiboarditem value returns nothing
-            call SaveMultiboardItemHandle((UnitVisualMods__hashTable), this, key, value) // INLINED!!
+        function s__UnitVisualMods___data_locations__setindex takes integer this,integer key,location value returns nothing
+            call SaveLocationHandle((UnitVisualMods___hashTable), this, key, value) // INLINED!!
         endfunction
-        function s__UnitVisualMods__data_multiboarditems_has takes integer this,integer key returns boolean
-            return HaveSavedHandle((UnitVisualMods__hashTable), this, key) // INLINED!!
+        function s__UnitVisualMods___data_locations_has takes integer this,integer key returns boolean
+            return HaveSavedHandle((UnitVisualMods___hashTable), this, key) // INLINED!!
         endfunction
-        function s__UnitVisualMods__data_multiboarditems_remove takes integer this,integer key returns nothing
-            call RemoveSavedHandle((UnitVisualMods__hashTable), this, key) // INLINED!!
-        endfunction
-
-        function s__UnitVisualMods__data_trackables__getindex takes integer this,integer key returns trackable
-            return LoadTrackableHandle((UnitVisualMods__hashTable), this, key) // INLINED!!
-        endfunction
-        function s__UnitVisualMods__data_trackables__setindex takes integer this,integer key,trackable value returns nothing
-            call SaveTrackableHandle((UnitVisualMods__hashTable), this, key, value) // INLINED!!
-        endfunction
-        function s__UnitVisualMods__data_trackables_has takes integer this,integer key returns boolean
-            return HaveSavedHandle((UnitVisualMods__hashTable), this, key) // INLINED!!
-        endfunction
-        function s__UnitVisualMods__data_trackables_remove takes integer this,integer key returns nothing
-            call RemoveSavedHandle((UnitVisualMods__hashTable), this, key) // INLINED!!
+        function s__UnitVisualMods___data_locations_remove takes integer this,integer key returns nothing
+            call RemoveSavedHandle((UnitVisualMods___hashTable), this, key) // INLINED!!
         endfunction
 
-        function s__UnitVisualMods__data_dialogs__getindex takes integer this,integer key returns dialog
-            return LoadDialogHandle((UnitVisualMods__hashTable), this, key) // INLINED!!
+        function s__UnitVisualMods___data_rects__getindex takes integer this,integer key returns rect
+            return LoadRectHandle((UnitVisualMods___hashTable), this, key) // INLINED!!
         endfunction
-        function s__UnitVisualMods__data_dialogs__setindex takes integer this,integer key,dialog value returns nothing
-            call SaveDialogHandle((UnitVisualMods__hashTable), this, key, value) // INLINED!!
+        function s__UnitVisualMods___data_rects__setindex takes integer this,integer key,rect value returns nothing
+            call SaveRectHandle((UnitVisualMods___hashTable), this, key, value) // INLINED!!
         endfunction
-        function s__UnitVisualMods__data_dialogs_has takes integer this,integer key returns boolean
-            return HaveSavedHandle((UnitVisualMods__hashTable), this, key) // INLINED!!
+        function s__UnitVisualMods___data_rects_has takes integer this,integer key returns boolean
+            return HaveSavedHandle((UnitVisualMods___hashTable), this, key) // INLINED!!
         endfunction
-        function s__UnitVisualMods__data_dialogs_remove takes integer this,integer key returns nothing
-            call RemoveSavedHandle((UnitVisualMods__hashTable), this, key) // INLINED!!
-        endfunction
-
-        function s__UnitVisualMods__data_buttons__getindex takes integer this,integer key returns button
-            return LoadButtonHandle((UnitVisualMods__hashTable), this, key) // INLINED!!
-        endfunction
-        function s__UnitVisualMods__data_buttons__setindex takes integer this,integer key,button value returns nothing
-            call SaveButtonHandle((UnitVisualMods__hashTable), this, key, value) // INLINED!!
-        endfunction
-        function s__UnitVisualMods__data_buttons_has takes integer this,integer key returns boolean
-            return HaveSavedHandle((UnitVisualMods__hashTable), this, key) // INLINED!!
-        endfunction
-        function s__UnitVisualMods__data_buttons_remove takes integer this,integer key returns nothing
-            call RemoveSavedHandle((UnitVisualMods__hashTable), this, key) // INLINED!!
+        function s__UnitVisualMods___data_rects_remove takes integer this,integer key returns nothing
+            call RemoveSavedHandle((UnitVisualMods___hashTable), this, key) // INLINED!!
         endfunction
 
-        function s__UnitVisualMods__data_texttags__getindex takes integer this,integer key returns texttag
-            return LoadTextTagHandle((UnitVisualMods__hashTable), this, key) // INLINED!!
+        function s__UnitVisualMods___data_boolexprs__getindex takes integer this,integer key returns boolexpr
+            return LoadBooleanExprHandle((UnitVisualMods___hashTable), this, key) // INLINED!!
         endfunction
-        function s__UnitVisualMods__data_texttags__setindex takes integer this,integer key,texttag value returns nothing
-            call SaveTextTagHandle((UnitVisualMods__hashTable), this, key, value) // INLINED!!
+        function s__UnitVisualMods___data_boolexprs__setindex takes integer this,integer key,boolexpr value returns nothing
+            call SaveBooleanExprHandle((UnitVisualMods___hashTable), this, key, value) // INLINED!!
         endfunction
-        function s__UnitVisualMods__data_texttags_has takes integer this,integer key returns boolean
-            return HaveSavedHandle((UnitVisualMods__hashTable), this, key) // INLINED!!
+        function s__UnitVisualMods___data_boolexprs_has takes integer this,integer key returns boolean
+            return HaveSavedHandle((UnitVisualMods___hashTable), this, key) // INLINED!!
         endfunction
-        function s__UnitVisualMods__data_texttags_remove takes integer this,integer key returns nothing
-            call RemoveSavedHandle((UnitVisualMods__hashTable), this, key) // INLINED!!
-        endfunction
-
-        function s__UnitVisualMods__data_lightnings__getindex takes integer this,integer key returns lightning
-            return LoadLightningHandle((UnitVisualMods__hashTable), this, key) // INLINED!!
-        endfunction
-        function s__UnitVisualMods__data_lightnings__setindex takes integer this,integer key,lightning value returns nothing
-            call SaveLightningHandle((UnitVisualMods__hashTable), this, key, value) // INLINED!!
-        endfunction
-        function s__UnitVisualMods__data_lightnings_has takes integer this,integer key returns boolean
-            return HaveSavedHandle((UnitVisualMods__hashTable), this, key) // INLINED!!
-        endfunction
-        function s__UnitVisualMods__data_lightnings_remove takes integer this,integer key returns nothing
-            call RemoveSavedHandle((UnitVisualMods__hashTable), this, key) // INLINED!!
+        function s__UnitVisualMods___data_boolexprs_remove takes integer this,integer key returns nothing
+            call RemoveSavedHandle((UnitVisualMods___hashTable), this, key) // INLINED!!
         endfunction
 
-        function s__UnitVisualMods__data_images__getindex takes integer this,integer key returns image
-            return LoadImageHandle((UnitVisualMods__hashTable), this, key) // INLINED!!
+        function s__UnitVisualMods___data_sounds__getindex takes integer this,integer key returns sound
+            return LoadSoundHandle((UnitVisualMods___hashTable), this, key) // INLINED!!
         endfunction
-        function s__UnitVisualMods__data_images__setindex takes integer this,integer key,image value returns nothing
-            call SaveImageHandle((UnitVisualMods__hashTable), this, key, value) // INLINED!!
+        function s__UnitVisualMods___data_sounds__setindex takes integer this,integer key,sound value returns nothing
+            call SaveSoundHandle((UnitVisualMods___hashTable), this, key, value) // INLINED!!
         endfunction
-        function s__UnitVisualMods__data_images_has takes integer this,integer key returns boolean
-            return HaveSavedHandle((UnitVisualMods__hashTable), this, key) // INLINED!!
+        function s__UnitVisualMods___data_sounds_has takes integer this,integer key returns boolean
+            return HaveSavedHandle((UnitVisualMods___hashTable), this, key) // INLINED!!
         endfunction
-        function s__UnitVisualMods__data_images_remove takes integer this,integer key returns nothing
-            call RemoveSavedHandle((UnitVisualMods__hashTable), this, key) // INLINED!!
-        endfunction
-
-        function s__UnitVisualMods__data_ubersplats__getindex takes integer this,integer key returns ubersplat
-            return LoadUbersplatHandle((UnitVisualMods__hashTable), this, key) // INLINED!!
-        endfunction
-        function s__UnitVisualMods__data_ubersplats__setindex takes integer this,integer key,ubersplat value returns nothing
-            call SaveUbersplatHandle((UnitVisualMods__hashTable), this, key, value) // INLINED!!
-        endfunction
-        function s__UnitVisualMods__data_ubersplats_has takes integer this,integer key returns boolean
-            return HaveSavedHandle((UnitVisualMods__hashTable), this, key) // INLINED!!
-        endfunction
-        function s__UnitVisualMods__data_ubersplats_remove takes integer this,integer key returns nothing
-            call RemoveSavedHandle((UnitVisualMods__hashTable), this, key) // INLINED!!
+        function s__UnitVisualMods___data_sounds_remove takes integer this,integer key returns nothing
+            call RemoveSavedHandle((UnitVisualMods___hashTable), this, key) // INLINED!!
         endfunction
 
-        function s__UnitVisualMods__data_regions__getindex takes integer this,integer key returns region
-            return LoadRegionHandle((UnitVisualMods__hashTable), this, key) // INLINED!!
+        function s__UnitVisualMods___data_effects__getindex takes integer this,integer key returns effect
+            return LoadEffectHandle((UnitVisualMods___hashTable), this, key) // INLINED!!
         endfunction
-        function s__UnitVisualMods__data_regions__setindex takes integer this,integer key,region value returns nothing
-            call SaveRegionHandle((UnitVisualMods__hashTable), this, key, value) // INLINED!!
+        function s__UnitVisualMods___data_effects__setindex takes integer this,integer key,effect value returns nothing
+            call SaveEffectHandle((UnitVisualMods___hashTable), this, key, value) // INLINED!!
         endfunction
-        function s__UnitVisualMods__data_regions_has takes integer this,integer key returns boolean
-            return HaveSavedHandle((UnitVisualMods__hashTable), this, key) // INLINED!!
+        function s__UnitVisualMods___data_effects_has takes integer this,integer key returns boolean
+            return HaveSavedHandle((UnitVisualMods___hashTable), this, key) // INLINED!!
         endfunction
-        function s__UnitVisualMods__data_regions_remove takes integer this,integer key returns nothing
-            call RemoveSavedHandle((UnitVisualMods__hashTable), this, key) // INLINED!!
-        endfunction
-
-        function s__UnitVisualMods__data_fogstates__getindex takes integer this,integer key returns fogstate
-            return LoadFogStateHandle((UnitVisualMods__hashTable), this, key) // INLINED!!
-        endfunction
-        function s__UnitVisualMods__data_fogstates__setindex takes integer this,integer key,fogstate value returns nothing
-            call SaveFogStateHandle((UnitVisualMods__hashTable), this, key, value) // INLINED!!
-        endfunction
-        function s__UnitVisualMods__data_fogstates_has takes integer this,integer key returns boolean
-            return HaveSavedHandle((UnitVisualMods__hashTable), this, key) // INLINED!!
-        endfunction
-        function s__UnitVisualMods__data_fogstates_remove takes integer this,integer key returns nothing
-            call RemoveSavedHandle((UnitVisualMods__hashTable), this, key) // INLINED!!
+        function s__UnitVisualMods___data_effects_remove takes integer this,integer key returns nothing
+            call RemoveSavedHandle((UnitVisualMods___hashTable), this, key) // INLINED!!
         endfunction
 
-        function s__UnitVisualMods__data_fogmodifiers__getindex takes integer this,integer key returns fogmodifier
-            return LoadFogModifierHandle((UnitVisualMods__hashTable), this, key) // INLINED!!
+        function s__UnitVisualMods___data_unitpools__getindex takes integer this,integer key returns unitpool
+            return LoadUnitPoolHandle((UnitVisualMods___hashTable), this, key) // INLINED!!
         endfunction
-        function s__UnitVisualMods__data_fogmodifiers__setindex takes integer this,integer key,fogmodifier value returns nothing
-            call SaveFogModifierHandle((UnitVisualMods__hashTable), this, key, value) // INLINED!!
+        function s__UnitVisualMods___data_unitpools__setindex takes integer this,integer key,unitpool value returns nothing
+            call SaveUnitPoolHandle((UnitVisualMods___hashTable), this, key, value) // INLINED!!
         endfunction
-        function s__UnitVisualMods__data_fogmodifiers_has takes integer this,integer key returns boolean
-            return HaveSavedHandle((UnitVisualMods__hashTable), this, key) // INLINED!!
+        function s__UnitVisualMods___data_unitpools_has takes integer this,integer key returns boolean
+            return HaveSavedHandle((UnitVisualMods___hashTable), this, key) // INLINED!!
         endfunction
-        function s__UnitVisualMods__data_fogmodifiers_remove takes integer this,integer key returns nothing
-            call RemoveSavedHandle((UnitVisualMods__hashTable), this, key) // INLINED!!
+        function s__UnitVisualMods___data_unitpools_remove takes integer this,integer key returns nothing
+            call RemoveSavedHandle((UnitVisualMods___hashTable), this, key) // INLINED!!
         endfunction
 
-        function s__UnitVisualMods__data_hashtables__getindex takes integer this,integer key returns hashtable
-            return LoadHashtableHandle((UnitVisualMods__hashTable), this, key) // INLINED!!
+        function s__UnitVisualMods___data_itempools__getindex takes integer this,integer key returns itempool
+            return LoadItemPoolHandle((UnitVisualMods___hashTable), this, key) // INLINED!!
         endfunction
-        function s__UnitVisualMods__data_hashtables__setindex takes integer this,integer key,hashtable value returns nothing
-            call SaveHashtableHandle((UnitVisualMods__hashTable), this, key, value) // INLINED!!
+        function s__UnitVisualMods___data_itempools__setindex takes integer this,integer key,itempool value returns nothing
+            call SaveItemPoolHandle((UnitVisualMods___hashTable), this, key, value) // INLINED!!
         endfunction
-        function s__UnitVisualMods__data_hashtables_has takes integer this,integer key returns boolean
-            return HaveSavedHandle((UnitVisualMods__hashTable), this, key) // INLINED!!
+        function s__UnitVisualMods___data_itempools_has takes integer this,integer key returns boolean
+            return HaveSavedHandle((UnitVisualMods___hashTable), this, key) // INLINED!!
         endfunction
-        function s__UnitVisualMods__data_hashtables_remove takes integer this,integer key returns nothing
-            call RemoveSavedHandle((UnitVisualMods__hashTable), this, key) // INLINED!!
+        function s__UnitVisualMods___data_itempools_remove takes integer this,integer key returns nothing
+            call RemoveSavedHandle((UnitVisualMods___hashTable), this, key) // INLINED!!
+        endfunction
+
+        function s__UnitVisualMods___data_quests__getindex takes integer this,integer key returns quest
+            return LoadQuestHandle((UnitVisualMods___hashTable), this, key) // INLINED!!
+        endfunction
+        function s__UnitVisualMods___data_quests__setindex takes integer this,integer key,quest value returns nothing
+            call SaveQuestHandle((UnitVisualMods___hashTable), this, key, value) // INLINED!!
+        endfunction
+        function s__UnitVisualMods___data_quests_has takes integer this,integer key returns boolean
+            return HaveSavedHandle((UnitVisualMods___hashTable), this, key) // INLINED!!
+        endfunction
+        function s__UnitVisualMods___data_quests_remove takes integer this,integer key returns nothing
+            call RemoveSavedHandle((UnitVisualMods___hashTable), this, key) // INLINED!!
+        endfunction
+
+        function s__UnitVisualMods___data_questitems__getindex takes integer this,integer key returns questitem
+            return LoadQuestItemHandle((UnitVisualMods___hashTable), this, key) // INLINED!!
+        endfunction
+        function s__UnitVisualMods___data_questitems__setindex takes integer this,integer key,questitem value returns nothing
+            call SaveQuestItemHandle((UnitVisualMods___hashTable), this, key, value) // INLINED!!
+        endfunction
+        function s__UnitVisualMods___data_questitems_has takes integer this,integer key returns boolean
+            return HaveSavedHandle((UnitVisualMods___hashTable), this, key) // INLINED!!
+        endfunction
+        function s__UnitVisualMods___data_questitems_remove takes integer this,integer key returns nothing
+            call RemoveSavedHandle((UnitVisualMods___hashTable), this, key) // INLINED!!
+        endfunction
+
+        function s__UnitVisualMods___data_defeatconditions__getindex takes integer this,integer key returns defeatcondition
+            return LoadDefeatConditionHandle((UnitVisualMods___hashTable), this, key) // INLINED!!
+        endfunction
+        function s__UnitVisualMods___data_defeatconditions__setindex takes integer this,integer key,defeatcondition value returns nothing
+            call SaveDefeatConditionHandle((UnitVisualMods___hashTable), this, key, value) // INLINED!!
+        endfunction
+        function s__UnitVisualMods___data_defeatconditions_has takes integer this,integer key returns boolean
+            return HaveSavedHandle((UnitVisualMods___hashTable), this, key) // INLINED!!
+        endfunction
+        function s__UnitVisualMods___data_defeatconditions_remove takes integer this,integer key returns nothing
+            call RemoveSavedHandle((UnitVisualMods___hashTable), this, key) // INLINED!!
+        endfunction
+
+        function s__UnitVisualMods___data_timerdialogs__getindex takes integer this,integer key returns timerdialog
+            return LoadTimerDialogHandle((UnitVisualMods___hashTable), this, key) // INLINED!!
+        endfunction
+        function s__UnitVisualMods___data_timerdialogs__setindex takes integer this,integer key,timerdialog value returns nothing
+            call SaveTimerDialogHandle((UnitVisualMods___hashTable), this, key, value) // INLINED!!
+        endfunction
+        function s__UnitVisualMods___data_timerdialogs_has takes integer this,integer key returns boolean
+            return HaveSavedHandle((UnitVisualMods___hashTable), this, key) // INLINED!!
+        endfunction
+        function s__UnitVisualMods___data_timerdialogs_remove takes integer this,integer key returns nothing
+            call RemoveSavedHandle((UnitVisualMods___hashTable), this, key) // INLINED!!
+        endfunction
+
+        function s__UnitVisualMods___data_leaderboards__getindex takes integer this,integer key returns leaderboard
+            return LoadLeaderboardHandle((UnitVisualMods___hashTable), this, key) // INLINED!!
+        endfunction
+        function s__UnitVisualMods___data_leaderboards__setindex takes integer this,integer key,leaderboard value returns nothing
+            call SaveLeaderboardHandle((UnitVisualMods___hashTable), this, key, value) // INLINED!!
+        endfunction
+        function s__UnitVisualMods___data_leaderboards_has takes integer this,integer key returns boolean
+            return HaveSavedHandle((UnitVisualMods___hashTable), this, key) // INLINED!!
+        endfunction
+        function s__UnitVisualMods___data_leaderboards_remove takes integer this,integer key returns nothing
+            call RemoveSavedHandle((UnitVisualMods___hashTable), this, key) // INLINED!!
+        endfunction
+
+        function s__UnitVisualMods___data_multiboards__getindex takes integer this,integer key returns multiboard
+            return LoadMultiboardHandle((UnitVisualMods___hashTable), this, key) // INLINED!!
+        endfunction
+        function s__UnitVisualMods___data_multiboards__setindex takes integer this,integer key,multiboard value returns nothing
+            call SaveMultiboardHandle((UnitVisualMods___hashTable), this, key, value) // INLINED!!
+        endfunction
+        function s__UnitVisualMods___data_multiboards_has takes integer this,integer key returns boolean
+            return HaveSavedHandle((UnitVisualMods___hashTable), this, key) // INLINED!!
+        endfunction
+        function s__UnitVisualMods___data_multiboards_remove takes integer this,integer key returns nothing
+            call RemoveSavedHandle((UnitVisualMods___hashTable), this, key) // INLINED!!
+        endfunction
+
+        function s__UnitVisualMods___data_multiboarditems__getindex takes integer this,integer key returns multiboarditem
+            return LoadMultiboardItemHandle((UnitVisualMods___hashTable), this, key) // INLINED!!
+        endfunction
+        function s__UnitVisualMods___data_multiboarditems__setindex takes integer this,integer key,multiboarditem value returns nothing
+            call SaveMultiboardItemHandle((UnitVisualMods___hashTable), this, key, value) // INLINED!!
+        endfunction
+        function s__UnitVisualMods___data_multiboarditems_has takes integer this,integer key returns boolean
+            return HaveSavedHandle((UnitVisualMods___hashTable), this, key) // INLINED!!
+        endfunction
+        function s__UnitVisualMods___data_multiboarditems_remove takes integer this,integer key returns nothing
+            call RemoveSavedHandle((UnitVisualMods___hashTable), this, key) // INLINED!!
+        endfunction
+
+        function s__UnitVisualMods___data_trackables__getindex takes integer this,integer key returns trackable
+            return LoadTrackableHandle((UnitVisualMods___hashTable), this, key) // INLINED!!
+        endfunction
+        function s__UnitVisualMods___data_trackables__setindex takes integer this,integer key,trackable value returns nothing
+            call SaveTrackableHandle((UnitVisualMods___hashTable), this, key, value) // INLINED!!
+        endfunction
+        function s__UnitVisualMods___data_trackables_has takes integer this,integer key returns boolean
+            return HaveSavedHandle((UnitVisualMods___hashTable), this, key) // INLINED!!
+        endfunction
+        function s__UnitVisualMods___data_trackables_remove takes integer this,integer key returns nothing
+            call RemoveSavedHandle((UnitVisualMods___hashTable), this, key) // INLINED!!
+        endfunction
+
+        function s__UnitVisualMods___data_dialogs__getindex takes integer this,integer key returns dialog
+            return LoadDialogHandle((UnitVisualMods___hashTable), this, key) // INLINED!!
+        endfunction
+        function s__UnitVisualMods___data_dialogs__setindex takes integer this,integer key,dialog value returns nothing
+            call SaveDialogHandle((UnitVisualMods___hashTable), this, key, value) // INLINED!!
+        endfunction
+        function s__UnitVisualMods___data_dialogs_has takes integer this,integer key returns boolean
+            return HaveSavedHandle((UnitVisualMods___hashTable), this, key) // INLINED!!
+        endfunction
+        function s__UnitVisualMods___data_dialogs_remove takes integer this,integer key returns nothing
+            call RemoveSavedHandle((UnitVisualMods___hashTable), this, key) // INLINED!!
+        endfunction
+
+        function s__UnitVisualMods___data_buttons__getindex takes integer this,integer key returns button
+            return LoadButtonHandle((UnitVisualMods___hashTable), this, key) // INLINED!!
+        endfunction
+        function s__UnitVisualMods___data_buttons__setindex takes integer this,integer key,button value returns nothing
+            call SaveButtonHandle((UnitVisualMods___hashTable), this, key, value) // INLINED!!
+        endfunction
+        function s__UnitVisualMods___data_buttons_has takes integer this,integer key returns boolean
+            return HaveSavedHandle((UnitVisualMods___hashTable), this, key) // INLINED!!
+        endfunction
+        function s__UnitVisualMods___data_buttons_remove takes integer this,integer key returns nothing
+            call RemoveSavedHandle((UnitVisualMods___hashTable), this, key) // INLINED!!
+        endfunction
+
+        function s__UnitVisualMods___data_texttags__getindex takes integer this,integer key returns texttag
+            return LoadTextTagHandle((UnitVisualMods___hashTable), this, key) // INLINED!!
+        endfunction
+        function s__UnitVisualMods___data_texttags__setindex takes integer this,integer key,texttag value returns nothing
+            call SaveTextTagHandle((UnitVisualMods___hashTable), this, key, value) // INLINED!!
+        endfunction
+        function s__UnitVisualMods___data_texttags_has takes integer this,integer key returns boolean
+            return HaveSavedHandle((UnitVisualMods___hashTable), this, key) // INLINED!!
+        endfunction
+        function s__UnitVisualMods___data_texttags_remove takes integer this,integer key returns nothing
+            call RemoveSavedHandle((UnitVisualMods___hashTable), this, key) // INLINED!!
+        endfunction
+
+        function s__UnitVisualMods___data_lightnings__getindex takes integer this,integer key returns lightning
+            return LoadLightningHandle((UnitVisualMods___hashTable), this, key) // INLINED!!
+        endfunction
+        function s__UnitVisualMods___data_lightnings__setindex takes integer this,integer key,lightning value returns nothing
+            call SaveLightningHandle((UnitVisualMods___hashTable), this, key, value) // INLINED!!
+        endfunction
+        function s__UnitVisualMods___data_lightnings_has takes integer this,integer key returns boolean
+            return HaveSavedHandle((UnitVisualMods___hashTable), this, key) // INLINED!!
+        endfunction
+        function s__UnitVisualMods___data_lightnings_remove takes integer this,integer key returns nothing
+            call RemoveSavedHandle((UnitVisualMods___hashTable), this, key) // INLINED!!
+        endfunction
+
+        function s__UnitVisualMods___data_images__getindex takes integer this,integer key returns image
+            return LoadImageHandle((UnitVisualMods___hashTable), this, key) // INLINED!!
+        endfunction
+        function s__UnitVisualMods___data_images__setindex takes integer this,integer key,image value returns nothing
+            call SaveImageHandle((UnitVisualMods___hashTable), this, key, value) // INLINED!!
+        endfunction
+        function s__UnitVisualMods___data_images_has takes integer this,integer key returns boolean
+            return HaveSavedHandle((UnitVisualMods___hashTable), this, key) // INLINED!!
+        endfunction
+        function s__UnitVisualMods___data_images_remove takes integer this,integer key returns nothing
+            call RemoveSavedHandle((UnitVisualMods___hashTable), this, key) // INLINED!!
+        endfunction
+
+        function s__UnitVisualMods___data_ubersplats__getindex takes integer this,integer key returns ubersplat
+            return LoadUbersplatHandle((UnitVisualMods___hashTable), this, key) // INLINED!!
+        endfunction
+        function s__UnitVisualMods___data_ubersplats__setindex takes integer this,integer key,ubersplat value returns nothing
+            call SaveUbersplatHandle((UnitVisualMods___hashTable), this, key, value) // INLINED!!
+        endfunction
+        function s__UnitVisualMods___data_ubersplats_has takes integer this,integer key returns boolean
+            return HaveSavedHandle((UnitVisualMods___hashTable), this, key) // INLINED!!
+        endfunction
+        function s__UnitVisualMods___data_ubersplats_remove takes integer this,integer key returns nothing
+            call RemoveSavedHandle((UnitVisualMods___hashTable), this, key) // INLINED!!
+        endfunction
+
+        function s__UnitVisualMods___data_regions__getindex takes integer this,integer key returns region
+            return LoadRegionHandle((UnitVisualMods___hashTable), this, key) // INLINED!!
+        endfunction
+        function s__UnitVisualMods___data_regions__setindex takes integer this,integer key,region value returns nothing
+            call SaveRegionHandle((UnitVisualMods___hashTable), this, key, value) // INLINED!!
+        endfunction
+        function s__UnitVisualMods___data_regions_has takes integer this,integer key returns boolean
+            return HaveSavedHandle((UnitVisualMods___hashTable), this, key) // INLINED!!
+        endfunction
+        function s__UnitVisualMods___data_regions_remove takes integer this,integer key returns nothing
+            call RemoveSavedHandle((UnitVisualMods___hashTable), this, key) // INLINED!!
+        endfunction
+
+        function s__UnitVisualMods___data_fogstates__getindex takes integer this,integer key returns fogstate
+            return LoadFogStateHandle((UnitVisualMods___hashTable), this, key) // INLINED!!
+        endfunction
+        function s__UnitVisualMods___data_fogstates__setindex takes integer this,integer key,fogstate value returns nothing
+            call SaveFogStateHandle((UnitVisualMods___hashTable), this, key, value) // INLINED!!
+        endfunction
+        function s__UnitVisualMods___data_fogstates_has takes integer this,integer key returns boolean
+            return HaveSavedHandle((UnitVisualMods___hashTable), this, key) // INLINED!!
+        endfunction
+        function s__UnitVisualMods___data_fogstates_remove takes integer this,integer key returns nothing
+            call RemoveSavedHandle((UnitVisualMods___hashTable), this, key) // INLINED!!
+        endfunction
+
+        function s__UnitVisualMods___data_fogmodifiers__getindex takes integer this,integer key returns fogmodifier
+            return LoadFogModifierHandle((UnitVisualMods___hashTable), this, key) // INLINED!!
+        endfunction
+        function s__UnitVisualMods___data_fogmodifiers__setindex takes integer this,integer key,fogmodifier value returns nothing
+            call SaveFogModifierHandle((UnitVisualMods___hashTable), this, key, value) // INLINED!!
+        endfunction
+        function s__UnitVisualMods___data_fogmodifiers_has takes integer this,integer key returns boolean
+            return HaveSavedHandle((UnitVisualMods___hashTable), this, key) // INLINED!!
+        endfunction
+        function s__UnitVisualMods___data_fogmodifiers_remove takes integer this,integer key returns nothing
+            call RemoveSavedHandle((UnitVisualMods___hashTable), this, key) // INLINED!!
+        endfunction
+
+        function s__UnitVisualMods___data_hashtables__getindex takes integer this,integer key returns hashtable
+            return LoadHashtableHandle((UnitVisualMods___hashTable), this, key) // INLINED!!
+        endfunction
+        function s__UnitVisualMods___data_hashtables__setindex takes integer this,integer key,hashtable value returns nothing
+            call SaveHashtableHandle((UnitVisualMods___hashTable), this, key, value) // INLINED!!
+        endfunction
+        function s__UnitVisualMods___data_hashtables_has takes integer this,integer key returns boolean
+            return HaveSavedHandle((UnitVisualMods___hashTable), this, key) // INLINED!!
+        endfunction
+        function s__UnitVisualMods___data_hashtables_remove takes integer this,integer key returns nothing
+            call RemoveSavedHandle((UnitVisualMods___hashTable), this, key) // INLINED!!
         endfunction
 
 
     
-//Implemented from module UnitVisualMods__data_realm:
-    function s__UnitVisualMods__data_Child__get_real takes integer this returns integer
+//Implemented from module UnitVisualMods___data_realm:
+    function s__UnitVisualMods___data_Child__get_real takes integer this returns integer
         return this
     endfunction
-//Implemented from module UnitVisualMods__data_integerm:
-    function s__UnitVisualMods__data_Child__get_integer takes integer this returns integer
+//Implemented from module UnitVisualMods___data_integerm:
+    function s__UnitVisualMods___data_Child__get_integer takes integer this returns integer
         return this
     endfunction
-//Implemented from module UnitVisualMods__data_booleanm:
-    function s__UnitVisualMods__data_Child__get_boolean takes integer this returns integer
+//Implemented from module UnitVisualMods___data_booleanm:
+    function s__UnitVisualMods___data_Child__get_boolean takes integer this returns integer
         return this
     endfunction
-//Implemented from module UnitVisualMods__data_stringm:
-    function s__UnitVisualMods__data_Child__get_string takes integer this returns integer
+//Implemented from module UnitVisualMods___data_stringm:
+    function s__UnitVisualMods___data_Child__get_string takes integer this returns integer
         return this
     endfunction
     
 
-        function s__UnitVisualMods__data_Child__get_handle takes integer this returns integer
+        function s__UnitVisualMods___data_Child__get_handle takes integer this returns integer
             return this
         endfunction
     
-        function s__UnitVisualMods__data_Child__get_agent takes integer this returns integer
+        function s__UnitVisualMods___data_Child__get_agent takes integer this returns integer
             return this
         endfunction
 
-//Implemented from module UnitVisualMods__data_playerm:
-        function s__UnitVisualMods__data_Child__get_player takes integer this returns integer
+//Implemented from module UnitVisualMods___data_playerm:
+        function s__UnitVisualMods___data_Child__get_player takes integer this returns integer
             return this
         endfunction
-//Implemented from module UnitVisualMods__data_widgetm:
-        function s__UnitVisualMods__data_Child__get_widget takes integer this returns integer
+//Implemented from module UnitVisualMods___data_widgetm:
+        function s__UnitVisualMods___data_Child__get_widget takes integer this returns integer
             return this
         endfunction
-//Implemented from module UnitVisualMods__data_destructablem:
-        function s__UnitVisualMods__data_Child__get_destructable takes integer this returns integer
+//Implemented from module UnitVisualMods___data_destructablem:
+        function s__UnitVisualMods___data_Child__get_destructable takes integer this returns integer
             return this
         endfunction
-//Implemented from module UnitVisualMods__data_itemm:
-        function s__UnitVisualMods__data_Child__get_item takes integer this returns integer
+//Implemented from module UnitVisualMods___data_itemm:
+        function s__UnitVisualMods___data_Child__get_item takes integer this returns integer
             return this
         endfunction
-//Implemented from module UnitVisualMods__data_unitm:
-        function s__UnitVisualMods__data_Child__get_unit takes integer this returns integer
+//Implemented from module UnitVisualMods___data_unitm:
+        function s__UnitVisualMods___data_Child__get_unit takes integer this returns integer
             return this
         endfunction
-//Implemented from module UnitVisualMods__data_abilitym:
-        function s__UnitVisualMods__data_Child__get_ability takes integer this returns integer
+//Implemented from module UnitVisualMods___data_abilitym:
+        function s__UnitVisualMods___data_Child__get_ability takes integer this returns integer
             return this
         endfunction
-//Implemented from module UnitVisualMods__data_timerm:
-        function s__UnitVisualMods__data_Child__get_timer takes integer this returns integer
+//Implemented from module UnitVisualMods___data_timerm:
+        function s__UnitVisualMods___data_Child__get_timer takes integer this returns integer
             return this
         endfunction
-//Implemented from module UnitVisualMods__data_triggerm:
-        function s__UnitVisualMods__data_Child__get_trigger takes integer this returns integer
+//Implemented from module UnitVisualMods___data_triggerm:
+        function s__UnitVisualMods___data_Child__get_trigger takes integer this returns integer
             return this
         endfunction
-//Implemented from module UnitVisualMods__data_triggerconditionm:
-        function s__UnitVisualMods__data_Child__get_triggercondition takes integer this returns integer
+//Implemented from module UnitVisualMods___data_triggerconditionm:
+        function s__UnitVisualMods___data_Child__get_triggercondition takes integer this returns integer
             return this
         endfunction
-//Implemented from module UnitVisualMods__data_triggeractionm:
-        function s__UnitVisualMods__data_Child__get_triggeraction takes integer this returns integer
+//Implemented from module UnitVisualMods___data_triggeractionm:
+        function s__UnitVisualMods___data_Child__get_triggeraction takes integer this returns integer
             return this
         endfunction
-//Implemented from module UnitVisualMods__data_eventm:
-        function s__UnitVisualMods__data_Child__get_event takes integer this returns integer
+//Implemented from module UnitVisualMods___data_eventm:
+        function s__UnitVisualMods___data_Child__get_event takes integer this returns integer
             return this
         endfunction
-//Implemented from module UnitVisualMods__data_forcem:
-        function s__UnitVisualMods__data_Child__get_force takes integer this returns integer
+//Implemented from module UnitVisualMods___data_forcem:
+        function s__UnitVisualMods___data_Child__get_force takes integer this returns integer
             return this
         endfunction
-//Implemented from module UnitVisualMods__data_groupm:
-        function s__UnitVisualMods__data_Child__get_group takes integer this returns integer
+//Implemented from module UnitVisualMods___data_groupm:
+        function s__UnitVisualMods___data_Child__get_group takes integer this returns integer
             return this
         endfunction
-//Implemented from module UnitVisualMods__data_locationm:
-        function s__UnitVisualMods__data_Child__get_location takes integer this returns integer
+//Implemented from module UnitVisualMods___data_locationm:
+        function s__UnitVisualMods___data_Child__get_location takes integer this returns integer
             return this
         endfunction
-//Implemented from module UnitVisualMods__data_rectm:
-        function s__UnitVisualMods__data_Child__get_rect takes integer this returns integer
+//Implemented from module UnitVisualMods___data_rectm:
+        function s__UnitVisualMods___data_Child__get_rect takes integer this returns integer
             return this
         endfunction
-//Implemented from module UnitVisualMods__data_boolexprm:
-        function s__UnitVisualMods__data_Child__get_boolexpr takes integer this returns integer
+//Implemented from module UnitVisualMods___data_boolexprm:
+        function s__UnitVisualMods___data_Child__get_boolexpr takes integer this returns integer
             return this
         endfunction
-//Implemented from module UnitVisualMods__data_soundm:
-        function s__UnitVisualMods__data_Child__get_sound takes integer this returns integer
+//Implemented from module UnitVisualMods___data_soundm:
+        function s__UnitVisualMods___data_Child__get_sound takes integer this returns integer
             return this
         endfunction
-//Implemented from module UnitVisualMods__data_effectm:
-        function s__UnitVisualMods__data_Child__get_effect takes integer this returns integer
+//Implemented from module UnitVisualMods___data_effectm:
+        function s__UnitVisualMods___data_Child__get_effect takes integer this returns integer
             return this
         endfunction
-//Implemented from module UnitVisualMods__data_unitpoolm:
-        function s__UnitVisualMods__data_Child__get_unitpool takes integer this returns integer
+//Implemented from module UnitVisualMods___data_unitpoolm:
+        function s__UnitVisualMods___data_Child__get_unitpool takes integer this returns integer
             return this
         endfunction
-//Implemented from module UnitVisualMods__data_itempoolm:
-        function s__UnitVisualMods__data_Child__get_itempool takes integer this returns integer
+//Implemented from module UnitVisualMods___data_itempoolm:
+        function s__UnitVisualMods___data_Child__get_itempool takes integer this returns integer
             return this
         endfunction
-//Implemented from module UnitVisualMods__data_questm:
-        function s__UnitVisualMods__data_Child__get_quest takes integer this returns integer
+//Implemented from module UnitVisualMods___data_questm:
+        function s__UnitVisualMods___data_Child__get_quest takes integer this returns integer
             return this
         endfunction
-//Implemented from module UnitVisualMods__data_questitemm:
-        function s__UnitVisualMods__data_Child__get_questitem takes integer this returns integer
+//Implemented from module UnitVisualMods___data_questitemm:
+        function s__UnitVisualMods___data_Child__get_questitem takes integer this returns integer
             return this
         endfunction
-//Implemented from module UnitVisualMods__data_defeatconditionm:
-        function s__UnitVisualMods__data_Child__get_defeatcondition takes integer this returns integer
+//Implemented from module UnitVisualMods___data_defeatconditionm:
+        function s__UnitVisualMods___data_Child__get_defeatcondition takes integer this returns integer
             return this
         endfunction
-//Implemented from module UnitVisualMods__data_timerdialogm:
-        function s__UnitVisualMods__data_Child__get_timerdialog takes integer this returns integer
+//Implemented from module UnitVisualMods___data_timerdialogm:
+        function s__UnitVisualMods___data_Child__get_timerdialog takes integer this returns integer
             return this
         endfunction
-//Implemented from module UnitVisualMods__data_leaderboardm:
-        function s__UnitVisualMods__data_Child__get_leaderboard takes integer this returns integer
+//Implemented from module UnitVisualMods___data_leaderboardm:
+        function s__UnitVisualMods___data_Child__get_leaderboard takes integer this returns integer
             return this
         endfunction
-//Implemented from module UnitVisualMods__data_multiboardm:
-        function s__UnitVisualMods__data_Child__get_multiboard takes integer this returns integer
+//Implemented from module UnitVisualMods___data_multiboardm:
+        function s__UnitVisualMods___data_Child__get_multiboard takes integer this returns integer
             return this
         endfunction
-//Implemented from module UnitVisualMods__data_multiboarditemm:
-        function s__UnitVisualMods__data_Child__get_multiboarditem takes integer this returns integer
+//Implemented from module UnitVisualMods___data_multiboarditemm:
+        function s__UnitVisualMods___data_Child__get_multiboarditem takes integer this returns integer
             return this
         endfunction
-//Implemented from module UnitVisualMods__data_trackablem:
-        function s__UnitVisualMods__data_Child__get_trackable takes integer this returns integer
+//Implemented from module UnitVisualMods___data_trackablem:
+        function s__UnitVisualMods___data_Child__get_trackable takes integer this returns integer
             return this
         endfunction
-//Implemented from module UnitVisualMods__data_dialogm:
-        function s__UnitVisualMods__data_Child__get_dialog takes integer this returns integer
+//Implemented from module UnitVisualMods___data_dialogm:
+        function s__UnitVisualMods___data_Child__get_dialog takes integer this returns integer
             return this
         endfunction
-//Implemented from module UnitVisualMods__data_buttonm:
-        function s__UnitVisualMods__data_Child__get_button takes integer this returns integer
+//Implemented from module UnitVisualMods___data_buttonm:
+        function s__UnitVisualMods___data_Child__get_button takes integer this returns integer
             return this
         endfunction
-//Implemented from module UnitVisualMods__data_texttagm:
-        function s__UnitVisualMods__data_Child__get_texttag takes integer this returns integer
+//Implemented from module UnitVisualMods___data_texttagm:
+        function s__UnitVisualMods___data_Child__get_texttag takes integer this returns integer
             return this
         endfunction
-//Implemented from module UnitVisualMods__data_lightningm:
-        function s__UnitVisualMods__data_Child__get_lightning takes integer this returns integer
+//Implemented from module UnitVisualMods___data_lightningm:
+        function s__UnitVisualMods___data_Child__get_lightning takes integer this returns integer
             return this
         endfunction
-//Implemented from module UnitVisualMods__data_imagem:
-        function s__UnitVisualMods__data_Child__get_image takes integer this returns integer
+//Implemented from module UnitVisualMods___data_imagem:
+        function s__UnitVisualMods___data_Child__get_image takes integer this returns integer
             return this
         endfunction
-//Implemented from module UnitVisualMods__data_ubersplatm:
-        function s__UnitVisualMods__data_Child__get_ubersplat takes integer this returns integer
+//Implemented from module UnitVisualMods___data_ubersplatm:
+        function s__UnitVisualMods___data_Child__get_ubersplat takes integer this returns integer
             return this
         endfunction
-//Implemented from module UnitVisualMods__data_regionm:
-        function s__UnitVisualMods__data_Child__get_region takes integer this returns integer
+//Implemented from module UnitVisualMods___data_regionm:
+        function s__UnitVisualMods___data_Child__get_region takes integer this returns integer
             return this
         endfunction
-//Implemented from module UnitVisualMods__data_fogstatem:
-        function s__UnitVisualMods__data_Child__get_fogstate takes integer this returns integer
+//Implemented from module UnitVisualMods___data_fogstatem:
+        function s__UnitVisualMods___data_Child__get_fogstate takes integer this returns integer
             return this
         endfunction
-//Implemented from module UnitVisualMods__data_fogmodifierm:
-        function s__UnitVisualMods__data_Child__get_fogmodifier takes integer this returns integer
+//Implemented from module UnitVisualMods___data_fogmodifierm:
+        function s__UnitVisualMods___data_Child__get_fogmodifier takes integer this returns integer
             return this
         endfunction
-//Implemented from module UnitVisualMods__data_hashtablem:
-        function s__UnitVisualMods__data_Child__get_hashtable takes integer this returns integer
+//Implemented from module UnitVisualMods___data_hashtablem:
+        function s__UnitVisualMods___data_Child__get_hashtable takes integer this returns integer
             return this
         endfunction
-
-   
-
-        function s__UnitVisualMods__data_Child__getindex takes integer this,integer key returns integer
-            return LoadInteger((UnitVisualMods__hashTable), this, key) // INLINED!!
-        endfunction
-
-
-
-
 
    
-    function s__UnitVisualMods__data_Child__setindex takes integer this,integer key,integer tb returns nothing
-        call SaveInteger((UnitVisualMods__hashTable), this, key, tb) // INLINED!!
+
+        function s__UnitVisualMods___data_Child__getindex takes integer this,integer key returns integer
+            return LoadInteger((UnitVisualMods___hashTable), this, key) // INLINED!!
+        endfunction
+
+
+
+
+
+   
+    function s__UnitVisualMods___data_Child__setindex takes integer this,integer key,integer tb returns nothing
+        call SaveInteger((UnitVisualMods___hashTable), this, key, tb) // INLINED!!
     endfunction
    
-    function s__UnitVisualMods__data_Child_has takes integer this,integer key returns boolean
-        return HaveSavedInteger((UnitVisualMods__hashTable), this, key) // INLINED!!
+    function s__UnitVisualMods___data_Child_has takes integer this,integer key returns boolean
+        return HaveSavedInteger((UnitVisualMods___hashTable), this, key) // INLINED!!
     endfunction
    
-    function s__UnitVisualMods__data_Child_remove takes integer this,integer key returns nothing
-        call RemoveSavedInteger((UnitVisualMods__hashTable), this, key) // INLINED!!
+    function s__UnitVisualMods___data_Child_remove takes integer this,integer key returns nothing
+        call RemoveSavedInteger((UnitVisualMods___hashTable), this, key) // INLINED!!
     endfunction
    
-    function s__UnitVisualMods__data_Child_flush takes integer this returns nothing
-        call FlushChildHashtable((UnitVisualMods__hashTable), this) // INLINED!!
+    function s__UnitVisualMods___data_Child_flush takes integer this returns nothing
+        call FlushChildHashtable((UnitVisualMods___hashTable), this) // INLINED!!
     endfunction
 
 //end of: DeclareParentHashtableWrapperModule("hashTable","true", "data","private")
@@ -14557,21 +14559,21 @@ endfunction
 
 
 
-//Implemented from module UnitVisualMods__data_ParentHashtableWrapper:
-    function s__UnitVisualMods__data__staticgetindex takes integer key returns integer
+//Implemented from module UnitVisualMods___data_ParentHashtableWrapper:
+    function s__UnitVisualMods___data__staticgetindex takes integer key returns integer
         return key
     endfunction
     
-    function s__UnitVisualMods__data_flushChild takes integer key returns nothing
-        call FlushChildHashtable((UnitVisualMods__hashTable), key) // INLINED!!
+    function s__UnitVisualMods___data_flushChild takes integer key returns nothing
+        call FlushChildHashtable((UnitVisualMods___hashTable), key) // INLINED!!
     endfunction
     
-    function s__UnitVisualMods__data_flush takes nothing returns nothing
-        call FlushParentHashtable((UnitVisualMods__hashTable)) // INLINED!!
+    function s__UnitVisualMods___data_flush takes nothing returns nothing
+        call FlushParentHashtable((UnitVisualMods___hashTable)) // INLINED!!
     endfunction
     
-    function s__UnitVisualMods__data_hashtable takes nothing returns hashtable
-        return (UnitVisualMods__hashTable) // INLINED!!
+    function s__UnitVisualMods___data_hashtable takes nothing returns hashtable
+        return (UnitVisualMods___hashTable) // INLINED!!
     endfunction
 
 
@@ -14609,7 +14611,7 @@ endfunction
 //==================================================================================================
 
 function GUMS_RegisterImmovableUnit takes unit whichUnit returns nothing
-    call GroupAddUnit(UnitVisualMods__loopGroup, whichUnit)
+    call GroupAddUnit(UnitVisualMods___loopGroup, whichUnit)
 endfunction
 
 //////////////////////////////////////////////////////
@@ -14633,7 +14635,7 @@ endfunction
 
 
 function GUMS_GetUnitSelectionType takes unit whichUnit returns integer
-    return LoadInteger(UnitVisualMods__hashTable, GetHandleId(whichUnit), UnitVisualMods__SELECT)
+    return LoadInteger(UnitVisualMods___hashTable, GetHandleId(whichUnit), UnitVisualMods___SELECT)
 endfunction
 //==========================================
 //GUMS SELECTION TYPE CONSTANTS
@@ -14662,8 +14664,8 @@ function GUMSConvertTags takes integer convertType,string whichStr returns strin
     exitwhen cutToComma == 0
         set cutToComma=CutToCharacter(whichStr , " ")
         set stringHash=StringHash(( SubString(whichStr, 0, cutToComma) ))
-        if (HaveSavedString((UnitVisualMods__hashTable), (((convertType))), (stringHash))) then // INLINED!!
-            set result=result + (LoadStr((UnitVisualMods__hashTable), (((convertType))), (stringHash))) + " " // INLINED!!
+        if (HaveSavedString((UnitVisualMods___hashTable), (((convertType))), (stringHash))) then // INLINED!!
+            set result=result + (LoadStr((UnitVisualMods___hashTable), (((convertType))), (stringHash))) + " " // INLINED!!
         else
             set result=result + whichStr + " "
             // call DisplayTextToPlayer(WHO?,0,0, whichStr + " is not a known tag. If you think this is wrong, please report it")
@@ -14683,8 +14685,8 @@ endfunction
 
 // Call this when a unit is removed from the game, or when a unit enters the entire map rect.
 function GUMSClearUnitData takes unit whichUnit returns nothing
-    call GroupRemoveUnit(UnitVisualMods__loopGroup, whichUnit)
-    call FlushChildHashtable(UnitVisualMods__hashTable, GetHandleId(whichUnit))
+    call GroupRemoveUnit(UnitVisualMods___loopGroup, whichUnit)
+    call FlushChildHashtable(UnitVisualMods___hashTable, GetHandleId(whichUnit))
 endfunction
 
 //==========================================
@@ -14692,7 +14694,7 @@ endfunction
 
 // Contains the Raw values of each UnitVisuals struct. Returned by the .raw method operator.
 
-        function s__UnitVisualMods__UnitVisualsRaw__get_values takes integer this returns integer
+        function s__UnitVisualMods___UnitVisualsRaw__get_values takes integer this returns integer
             return ((this)) // INLINED!!
         endfunction
 
@@ -14701,40 +14703,40 @@ endfunction
 
 
     
-    function s__UnitVisualMods__UnitVisualsRaw_getScale takes integer this returns real
-        return ( (LoadReal((UnitVisualMods__hashTable), (((((this))))), (UnitVisualMods__SCALE))) ) // INLINED!!
+    function s__UnitVisualMods___UnitVisualsRaw_getScale takes integer this returns real
+        return ( (LoadReal((UnitVisualMods___hashTable), (((((this))))), (UnitVisualMods___SCALE))) ) // INLINED!!
     endfunction
     
-    function s__UnitVisualMods__UnitVisualsRaw_getVertexColor takes integer this,integer r1g2b3a4 returns integer
-        return ( (LoadInteger((UnitVisualMods__hashTable), (((this))), (r1g2b3a4))) ) // INLINED!!
+    function s__UnitVisualMods___UnitVisualsRaw_getVertexColor takes integer this,integer r1g2b3a4 returns integer
+        return ( (LoadInteger((UnitVisualMods___hashTable), (((this))), (r1g2b3a4))) ) // INLINED!!
     endfunction
     
-    function s__UnitVisualMods__UnitVisualsRaw_getVertexRed takes integer this returns integer
-        return (LoadInteger((UnitVisualMods__hashTable), ((((this)))), ((UnitVisualMods__RED)))) // INLINED!!
+    function s__UnitVisualMods___UnitVisualsRaw_getVertexRed takes integer this returns integer
+        return (LoadInteger((UnitVisualMods___hashTable), ((((this)))), ((UnitVisualMods___RED)))) // INLINED!!
     endfunction
     
-    function s__UnitVisualMods__UnitVisualsRaw_getVertexGreen takes integer this returns integer
-        return (LoadInteger((UnitVisualMods__hashTable), ((((this)))), ((UnitVisualMods__GREEN)))) // INLINED!!
+    function s__UnitVisualMods___UnitVisualsRaw_getVertexGreen takes integer this returns integer
+        return (LoadInteger((UnitVisualMods___hashTable), ((((this)))), ((UnitVisualMods___GREEN)))) // INLINED!!
     endfunction
     
-    function s__UnitVisualMods__UnitVisualsRaw_getVertexBlue takes integer this returns integer
-        return (LoadInteger((UnitVisualMods__hashTable), ((((this)))), ((UnitVisualMods__BLUE)))) // INLINED!!
+    function s__UnitVisualMods___UnitVisualsRaw_getVertexBlue takes integer this returns integer
+        return (LoadInteger((UnitVisualMods___hashTable), ((((this)))), ((UnitVisualMods___BLUE)))) // INLINED!!
     endfunction
     
-    function s__UnitVisualMods__UnitVisualsRaw_getVertexAlpha takes integer this returns integer
-        return (LoadInteger((UnitVisualMods__hashTable), ((((this)))), ((UnitVisualMods__ALPHA)))) // INLINED!!
+    function s__UnitVisualMods___UnitVisualsRaw_getVertexAlpha takes integer this returns integer
+        return (LoadInteger((UnitVisualMods___hashTable), ((((this)))), ((UnitVisualMods___ALPHA)))) // INLINED!!
     endfunction
     
-    function s__UnitVisualMods__UnitVisualsRaw_getColor takes integer this returns integer
-        return ( (LoadInteger((UnitVisualMods__hashTable), (((this))), (UnitVisualMods__COLOR))) ) // INLINED!!
+    function s__UnitVisualMods___UnitVisualsRaw_getColor takes integer this returns integer
+        return ( (LoadInteger((UnitVisualMods___hashTable), (((this))), (UnitVisualMods___COLOR))) ) // INLINED!!
     endfunction
     
-    function s__UnitVisualMods__UnitVisualsRaw_getAnimSpeed takes integer this returns real
-        return ( (LoadReal((UnitVisualMods__hashTable), (((((this))))), (UnitVisualMods__ASPEED))) ) // INLINED!!
+    function s__UnitVisualMods___UnitVisualsRaw_getAnimSpeed takes integer this returns real
+        return ( (LoadReal((UnitVisualMods___hashTable), (((((this))))), (UnitVisualMods___ASPEED))) ) // INLINED!!
     endfunction
     
-    function s__UnitVisualMods__UnitVisualsRaw_getAnimTag takes integer this returns string
-        return (LoadStr((UnitVisualMods__hashTable), (((((this))))), (UnitVisualMods__ATAG))) // INLINED!!
+    function s__UnitVisualMods___UnitVisualsRaw_getAnimTag takes integer this returns string
+        return (LoadStr((UnitVisualMods___hashTable), (((((this))))), (UnitVisualMods___ATAG))) // INLINED!!
     endfunction
 
 // Contains getters for all UnitVisualMods-related data. These getters return strings, not raw values.
@@ -14758,77 +14760,77 @@ endfunction
     endfunction
     
     function s__UnitVisuals_hasScale takes integer this returns boolean
-        return (HaveSavedReal((UnitVisualMods__hashTable), (((((this))))), (UnitVisualMods__SCALE))) // INLINED!!
+        return (HaveSavedReal((UnitVisualMods___hashTable), (((((this))))), (UnitVisualMods___SCALE))) // INLINED!!
     endfunction
     
     function s__UnitVisuals_hasVertexColor takes integer this,integer whichChannel returns boolean
-        return (HaveSavedInteger((UnitVisualMods__hashTable), (((this))), (whichChannel))) // INLINED!!
+        return (HaveSavedInteger((UnitVisualMods___hashTable), (((this))), (whichChannel))) // INLINED!!
     endfunction
     
     function s__UnitVisuals_hasColor takes integer this returns boolean
-        return (HaveSavedInteger((UnitVisualMods__hashTable), (((this))), (UnitVisualMods__COLOR))) // INLINED!!
+        return (HaveSavedInteger((UnitVisualMods___hashTable), (((this))), (UnitVisualMods___COLOR))) // INLINED!!
     endfunction
     
     function s__UnitVisuals_hasAnimSpeed takes integer this returns boolean
-        return (HaveSavedReal((UnitVisualMods__hashTable), (((((this))))), (UnitVisualMods__ASPEED))) // INLINED!!
+        return (HaveSavedReal((UnitVisualMods___hashTable), (((((this))))), (UnitVisualMods___ASPEED))) // INLINED!!
     endfunction
     
     function s__UnitVisuals_hasAnimTag takes integer this returns boolean
-        return (HaveSavedString((UnitVisualMods__hashTable), (((((this))))), (UnitVisualMods__ATAG))) // INLINED!!
+        return (HaveSavedString((UnitVisualMods___hashTable), (((((this))))), (UnitVisualMods___ATAG))) // INLINED!!
     endfunction
     
     //THESE FUNCTIONS RETRIEVE THE SAVED VALUES IN THE HASHTABLE OR RETURN "D" IF THERE IS NO SAVED VALUE
     function s__UnitVisuals_getScale takes integer this returns string
-        if (HaveSavedReal((UnitVisualMods__hashTable), ((((((this)))))), (UnitVisualMods__SCALE))) then // INLINED!!
-            return R2S((LoadReal((UnitVisualMods__hashTable), (((((this))))), (UnitVisualMods__SCALE)))) // INLINED!!
+        if (HaveSavedReal((UnitVisualMods___hashTable), ((((((this)))))), (UnitVisualMods___SCALE))) then // INLINED!!
+            return R2S((LoadReal((UnitVisualMods___hashTable), (((((this))))), (UnitVisualMods___SCALE)))) // INLINED!!
         else
             return "D" //D stands for default
         endif
     endfunction
     
     function s__UnitVisuals_getVertexColor takes integer this,integer r1g2b3a4 returns string
-        if (HaveSavedInteger((UnitVisualMods__hashTable), ((((this)))), ((r1g2b3a4)))) then // INLINED!!
-            return I2S((LoadInteger((UnitVisualMods__hashTable), (((this))), (r1g2b3a4)))) // INLINED!!
+        if (HaveSavedInteger((UnitVisualMods___hashTable), ((((this)))), ((r1g2b3a4)))) then // INLINED!!
+            return I2S((LoadInteger((UnitVisualMods___hashTable), (((this))), (r1g2b3a4)))) // INLINED!!
         else
             return "D" //D stands for default
         endif
     endfunction
     
     function s__UnitVisuals_getVertexRed takes integer this returns string
-        return s__UnitVisuals_getVertexColor(this,UnitVisualMods__RED)
+        return s__UnitVisuals_getVertexColor(this,UnitVisualMods___RED)
     endfunction
     
     function s__UnitVisuals_getVertexGreen takes integer this returns string
-        return s__UnitVisuals_getVertexColor(this,UnitVisualMods__GREEN)
+        return s__UnitVisuals_getVertexColor(this,UnitVisualMods___GREEN)
     endfunction
     
     function s__UnitVisuals_getVertexBlue takes integer this returns string
-        return s__UnitVisuals_getVertexColor(this,UnitVisualMods__BLUE)
+        return s__UnitVisuals_getVertexColor(this,UnitVisualMods___BLUE)
     endfunction
     
     function s__UnitVisuals_getVertexAlpha takes integer this returns string
-        return s__UnitVisuals_getVertexColor(this,UnitVisualMods__ALPHA)
+        return s__UnitVisuals_getVertexColor(this,UnitVisualMods___ALPHA)
     endfunction
     
     function s__UnitVisuals_getColor takes integer this returns string
-        if (HaveSavedInteger((UnitVisualMods__hashTable), ((((this)))), (UnitVisualMods__COLOR))) then // INLINED!!
-            return I2S((LoadInteger((UnitVisualMods__hashTable), (((this))), (UnitVisualMods__COLOR)))) // INLINED!!
+        if (HaveSavedInteger((UnitVisualMods___hashTable), ((((this)))), (UnitVisualMods___COLOR))) then // INLINED!!
+            return I2S((LoadInteger((UnitVisualMods___hashTable), (((this))), (UnitVisualMods___COLOR)))) // INLINED!!
         else
             return "D" //D stands for default
         endif
     endfunction
     
     function s__UnitVisuals_getAnimSpeed takes integer this returns string
-        if (HaveSavedReal((UnitVisualMods__hashTable), ((((((this)))))), (UnitVisualMods__ASPEED))) then // INLINED!!
-            return R2S((LoadReal((UnitVisualMods__hashTable), (((((this))))), (UnitVisualMods__ASPEED)))) // INLINED!!
+        if (HaveSavedReal((UnitVisualMods___hashTable), ((((((this)))))), (UnitVisualMods___ASPEED))) then // INLINED!!
+            return R2S((LoadReal((UnitVisualMods___hashTable), (((((this))))), (UnitVisualMods___ASPEED)))) // INLINED!!
         else
             return "D" //D stands for default
         endif
     endfunction
     
     function s__UnitVisuals_getAnimTag takes integer this returns string
-        if (HaveSavedString((UnitVisualMods__hashTable), ((((((this)))))), (UnitVisualMods__ATAG))) then // INLINED!!
-            return (LoadStr((UnitVisualMods__hashTable), (((((this))))), (UnitVisualMods__ATAG))) // INLINED!!
+        if (HaveSavedString((UnitVisualMods___hashTable), ((((((this)))))), (UnitVisualMods___ATAG))) then // INLINED!!
+            return (LoadStr((UnitVisualMods___hashTable), (((((this))))), (UnitVisualMods___ATAG))) // INLINED!!
         else
             return "D" //D stands for default
         endif
@@ -14843,8 +14845,8 @@ endfunction
 function GUMSSetUnitFacing takes unit whichUnit,real newAngle returns nothing
     call SetUnitFacing(whichUnit, newAngle)
     if GetUnitAbilityLevel(whichUnit, 'Amov') == 0 then
-        call GroupAddUnit(UnitVisualMods__loopGroup, whichUnit)
-        call SaveReal(UnitVisualMods__hashTable, GetHandleId(whichUnit), UnitVisualMods__TARGET_ANGLE, ModuloReal(newAngle, 360))
+        call GroupAddUnit(UnitVisualMods___loopGroup, whichUnit)
+        call SaveReal(UnitVisualMods___hashTable, GetHandleId(whichUnit), UnitVisualMods___TARGET_ANGLE, ModuloReal(newAngle, 360))
     endif
 endfunction
 
@@ -14854,20 +14856,20 @@ function GUMSSetUnitFlyHeight takes unit whichUnit,real newHeight returns nothin
     endif
     call SetUnitFlyHeight(whichUnit, newHeight, 0)
     if GetUnitAbilityLevel(whichUnit, 'Amov') == 0 then
-        call GroupAddUnit(UnitVisualMods__loopGroup, whichUnit)
+        call GroupAddUnit(UnitVisualMods___loopGroup, whichUnit)
     endif
 endfunction
 
 function GUMS_AddStructureFlightAbility takes unit structure returns nothing
     local real facing
 
-    if not HaveSavedReal(UnitVisualMods__hashTable, GetHandleId(structure), UnitVisualMods__TARGET_ANGLE) then
+    if not HaveSavedReal(UnitVisualMods___hashTable, GetHandleId(structure), UnitVisualMods___TARGET_ANGLE) then
         set facing=GetUnitFacing(structure)
         call UnitAddAbility(structure, 'DEDF')
         call GUMSSetUnitFacing(structure , facing)
     else
         call UnitAddAbility(structure, 'DEDF')
-        call SetUnitFacingTimed(structure, LoadReal(UnitVisualMods__hashTable, GetHandleId(structure), UnitVisualMods__TARGET_ANGLE), 0)
+        call SetUnitFacingTimed(structure, LoadReal(UnitVisualMods___hashTable, GetHandleId(structure), UnitVisualMods___TARGET_ANGLE), 0)
         call SetUnitAnimation(structure, "stand")
     endif
 endfunction
@@ -14886,9 +14888,9 @@ function GUMSSetStructureFlyHeight takes unit structure,real newHeight,boolean a
     else
         call GUMS_AddStructureFlightAbility(structure) // already adds unit to loopGroup
         call IssueImmediateOrder(structure, "unroot")
-        call SaveBoolean((UnitVisualMods__hashTable), (((((GetHandleId(structure)))))), (UnitVisualMods__STRUCTURE_HEIGHT), ( true)) // INLINED!!
+        call SaveBoolean((UnitVisualMods___hashTable), (((((GetHandleId(structure)))))), (UnitVisualMods___STRUCTURE_HEIGHT), ( true)) // INLINED!!
         if autoLand then
-            call SaveBoolean((UnitVisualMods__hashTable), (((((GetHandleId(structure)))))), (UnitVisualMods__AUTO_LAND), ( true)) // INLINED!!
+            call SaveBoolean((UnitVisualMods___hashTable), (((((GetHandleId(structure)))))), (UnitVisualMods___AUTO_LAND), ( true)) // INLINED!!
         endif
     endif
 endfunction
@@ -14896,7 +14898,7 @@ endfunction
 //Set Scale
 function GUMSSetUnitScale takes unit whichUnit,real scale returns nothing
     call SetUnitScale(whichUnit, scale, scale, scale)
-    call SaveReal(UnitVisualMods__hashTable, GetHandleId(whichUnit), UnitVisualMods__SCALE, scale)
+    call SaveReal(UnitVisualMods___hashTable, GetHandleId(whichUnit), UnitVisualMods___SCALE, scale)
 endfunction
 
 //Set Vertex Color
@@ -14907,19 +14909,19 @@ function GUMSSetUnitVertexColor takes unit whichUnit,real red,real green,real bl
     local integer intAlpha= R2I(2.55 * ( 100. - trans ))
     
     call SetUnitVertexColor(whichUnit, intRed, intGreen, intBlue, intAlpha)
-    call SaveInteger(UnitVisualMods__hashTable, GetHandleId(whichUnit), UnitVisualMods__RED, intRed)
-    call SaveInteger(UnitVisualMods__hashTable, GetHandleId(whichUnit), UnitVisualMods__GREEN, intGreen)
-    call SaveInteger(UnitVisualMods__hashTable, GetHandleId(whichUnit), UnitVisualMods__BLUE, intBlue)
-    call SaveInteger(UnitVisualMods__hashTable, GetHandleId(whichUnit), UnitVisualMods__ALPHA, intAlpha)
+    call SaveInteger(UnitVisualMods___hashTable, GetHandleId(whichUnit), UnitVisualMods___RED, intRed)
+    call SaveInteger(UnitVisualMods___hashTable, GetHandleId(whichUnit), UnitVisualMods___GREEN, intGreen)
+    call SaveInteger(UnitVisualMods___hashTable, GetHandleId(whichUnit), UnitVisualMods___BLUE, intBlue)
+    call SaveInteger(UnitVisualMods___hashTable, GetHandleId(whichUnit), UnitVisualMods___ALPHA, intAlpha)
 endfunction
 
 //Set Player Color (why in hell can't this be retrieved with natives?!)
 function GUMSSetUnitColor takes unit whichUnit,integer color returns nothing
     if color <= bj_MAX_PLAYER_SLOTS and color >= 1 then
-        call SaveInteger(UnitVisualMods__hashTable, GetHandleId(whichUnit), UnitVisualMods__COLOR, color)
+        call SaveInteger(UnitVisualMods___hashTable, GetHandleId(whichUnit), UnitVisualMods___COLOR, color)
         call SetUnitColor(whichUnit, ConvertPlayerColor(color - 1))
     else
-        call RemoveSavedInteger(UnitVisualMods__hashTable, GetHandleId(whichUnit), UnitVisualMods__COLOR)
+        call RemoveSavedInteger(UnitVisualMods___hashTable, GetHandleId(whichUnit), UnitVisualMods___COLOR)
 
 //textmacro instance: GUMS_Config_ResetColorFunc()
 
@@ -14935,26 +14937,26 @@ endfunction
 //Set Animation Speed
 function GUMSSetUnitAnimSpeed takes unit whichUnit,real speedMultiplier returns nothing
     call SetUnitTimeScale(whichUnit, speedMultiplier)
-    call SaveReal(UnitVisualMods__hashTable, GetHandleId(whichUnit), UnitVisualMods__ASPEED, speedMultiplier)
+    call SaveReal(UnitVisualMods___hashTable, GetHandleId(whichUnit), UnitVisualMods___ASPEED, speedMultiplier)
 endfunction
 
 //Set Animation Tag
 function GUMSAddUnitAnimationTag takes unit whichUnit,string whichTag returns nothing
     local integer unitId= GetHandleId(whichUnit)
     
-    if (HaveSavedString((UnitVisualMods__hashTable), ((((((unitId)))))), (UnitVisualMods__ATAG))) then // INLINED!!
-        call AddUnitAnimationProperties(whichUnit, GUMSConvertTags(UnitVisualMods_TAGS_DECOMPRESS , (LoadStr((UnitVisualMods__hashTable), ((((((((unitId)))))))), (UnitVisualMods__ATAG)))), false) // INLINED!!
+    if (HaveSavedString((UnitVisualMods___hashTable), ((((((unitId)))))), (UnitVisualMods___ATAG))) then // INLINED!!
+        call AddUnitAnimationProperties(whichUnit, GUMSConvertTags(UnitVisualMods_TAGS_DECOMPRESS , (LoadStr((UnitVisualMods___hashTable), ((((((((unitId)))))))), (UnitVisualMods___ATAG)))), false) // INLINED!!
     else
-        call AddUnitAnimationProperties(whichUnit, UnitVisualMods__allTags, false)
+        call AddUnitAnimationProperties(whichUnit, UnitVisualMods___allTags, false)
     endif
     
     if whichTag != "" then
-        call SaveStr(UnitVisualMods__hashTable, unitId, UnitVisualMods__ATAG, whichTag)
+        call SaveStr(UnitVisualMods___hashTable, unitId, UnitVisualMods___ATAG, whichTag)
         call AddUnitAnimationProperties(whichUnit, whichTag, true)
         set whichTag=GUMSConvertTags(UnitVisualMods_TAGS_COMPRESS , whichTag)
         
     else
-        call RemoveSavedString(UnitVisualMods__hashTable, unitId, UnitVisualMods__ATAG)
+        call RemoveSavedString(UnitVisualMods___hashTable, unitId, UnitVisualMods___ATAG)
     endif
 endfunction
 
@@ -14965,35 +14967,35 @@ endfunction
 ///////////////////////////
 
 function GUMSUnitHasCustomName takes integer unitHandle returns boolean
-    return HaveSavedString(UnitVisualMods__hashTable, unitHandle, UnitVisualMods__NAME)
+    return HaveSavedString(UnitVisualMods___hashTable, unitHandle, UnitVisualMods___NAME)
 endfunction
 
 function GUMSGetDefaultName takes integer unitHandle returns string
-    return LoadStr(UnitVisualMods__hashTable, unitHandle, UnitVisualMods__NAME)
+    return LoadStr(UnitVisualMods___hashTable, unitHandle, UnitVisualMods___NAME)
 endfunction
 
 function GUMSResetUnitName takes unit whichUnit returns nothing
     local integer unitHandle= GetHandleId(whichUnit)
     
     if IsUnitType(whichUnit, UNIT_TYPE_HERO) then
-        call BlzSetHeroProperName(whichUnit, (LoadStr(UnitVisualMods__hashTable, (unitHandle), UnitVisualMods__NAME))) // INLINED!!
+        call BlzSetHeroProperName(whichUnit, (LoadStr(UnitVisualMods___hashTable, (unitHandle), UnitVisualMods___NAME))) // INLINED!!
     else
-        call BlzSetUnitName(whichUnit, (LoadStr(UnitVisualMods__hashTable, (unitHandle), UnitVisualMods__NAME))) // INLINED!!
+        call BlzSetUnitName(whichUnit, (LoadStr(UnitVisualMods___hashTable, (unitHandle), UnitVisualMods___NAME))) // INLINED!!
     endif
     
-    call RemoveSavedString(UnitVisualMods__hashTable, unitHandle, UnitVisualMods__NAME)
+    call RemoveSavedString(UnitVisualMods___hashTable, unitHandle, UnitVisualMods___NAME)
 endfunction
 
 function GUMSSetUnitName takes unit whichUnit,string name returns nothing
     if name != "" then
         if IsUnitType(whichUnit, UNIT_TYPE_HERO) then
-            if not (HaveSavedString(UnitVisualMods__hashTable, (GetHandleId(whichUnit)), UnitVisualMods__NAME)) then // INLINED!!
-                call SaveStr(UnitVisualMods__hashTable, GetHandleId(whichUnit), UnitVisualMods__NAME, GetHeroProperName(whichUnit))
+            if not (HaveSavedString(UnitVisualMods___hashTable, (GetHandleId(whichUnit)), UnitVisualMods___NAME)) then // INLINED!!
+                call SaveStr(UnitVisualMods___hashTable, GetHandleId(whichUnit), UnitVisualMods___NAME, GetHeroProperName(whichUnit))
             endif
             call BlzSetHeroProperName(whichUnit, (("|cffffcc00") + (name) + "|r")) // INLINED!!
         else
-            if not (HaveSavedString(UnitVisualMods__hashTable, (GetHandleId(whichUnit)), UnitVisualMods__NAME)) then // INLINED!!
-                call SaveStr(UnitVisualMods__hashTable, GetHandleId(whichUnit), UnitVisualMods__NAME, GetUnitName(whichUnit))
+            if not (HaveSavedString(UnitVisualMods___hashTable, (GetHandleId(whichUnit)), UnitVisualMods___NAME)) then // INLINED!!
+                call SaveStr(UnitVisualMods___hashTable, GetHandleId(whichUnit), UnitVisualMods___NAME, GetUnitName(whichUnit))
             endif
             call BlzSetUnitName(whichUnit, (("|cffffcc00") + (name) + "|r")) // INLINED!!
         endif
@@ -15028,20 +15030,20 @@ function GUMSCopyValues takes unit source,unit target returns nothing
         call GUMSSetUnitFlyHeight(target , GetUnitFlyHeight(source))
     endif
     
-    if (HaveSavedReal((UnitVisualMods__hashTable), ((((((sourceId)))))), (UnitVisualMods__SCALE))) then // INLINED!!
-        call GUMSSetUnitScale(target , (LoadReal((UnitVisualMods__hashTable), (((((sourceId))))), (UnitVisualMods__SCALE)))) // INLINED!!
+    if (HaveSavedReal((UnitVisualMods___hashTable), ((((((sourceId)))))), (UnitVisualMods___SCALE))) then // INLINED!!
+        call GUMSSetUnitScale(target , (LoadReal((UnitVisualMods___hashTable), (((((sourceId))))), (UnitVisualMods___SCALE)))) // INLINED!!
     endif
-    if (HaveSavedInteger((UnitVisualMods__hashTable), ((((sourceId)))), ((UnitVisualMods__RED)))) then // INLINED!!
-        call GUMSSetUnitVertexColor(target , (LoadInteger((UnitVisualMods__hashTable), (((sourceId))), (UnitVisualMods__RED))) / 2.55 , (LoadInteger((UnitVisualMods__hashTable), (((sourceId))), (UnitVisualMods__GREEN))) / 2.55 , (LoadInteger((UnitVisualMods__hashTable), (((sourceId))), (UnitVisualMods__BLUE))) / 2.55 , ( 255 - (LoadInteger((UnitVisualMods__hashTable), (((sourceId))), (UnitVisualMods__ALPHA))) ) / 2.55) // INLINED!!
+    if (HaveSavedInteger((UnitVisualMods___hashTable), ((((sourceId)))), ((UnitVisualMods___RED)))) then // INLINED!!
+        call GUMSSetUnitVertexColor(target , (LoadInteger((UnitVisualMods___hashTable), (((sourceId))), (UnitVisualMods___RED))) / 2.55 , (LoadInteger((UnitVisualMods___hashTable), (((sourceId))), (UnitVisualMods___GREEN))) / 2.55 , (LoadInteger((UnitVisualMods___hashTable), (((sourceId))), (UnitVisualMods___BLUE))) / 2.55 , ( 255 - (LoadInteger((UnitVisualMods___hashTable), (((sourceId))), (UnitVisualMods___ALPHA))) ) / 2.55) // INLINED!!
     endif
-    if (HaveSavedInteger((UnitVisualMods__hashTable), ((((sourceId)))), (UnitVisualMods__COLOR))) then // INLINED!!
-        call GUMSSetUnitColor(target , (LoadInteger((UnitVisualMods__hashTable), (((sourceId))), (UnitVisualMods__COLOR)))) // INLINED!!
+    if (HaveSavedInteger((UnitVisualMods___hashTable), ((((sourceId)))), (UnitVisualMods___COLOR))) then // INLINED!!
+        call GUMSSetUnitColor(target , (LoadInteger((UnitVisualMods___hashTable), (((sourceId))), (UnitVisualMods___COLOR)))) // INLINED!!
     endif
-    if (HaveSavedReal((UnitVisualMods__hashTable), ((((((sourceId)))))), (UnitVisualMods__ASPEED))) then // INLINED!!
-        call GUMSSetUnitAnimSpeed(target , (LoadReal((UnitVisualMods__hashTable), (((((sourceId))))), (UnitVisualMods__ASPEED)))) // INLINED!!
+    if (HaveSavedReal((UnitVisualMods___hashTable), ((((((sourceId)))))), (UnitVisualMods___ASPEED))) then // INLINED!!
+        call GUMSSetUnitAnimSpeed(target , (LoadReal((UnitVisualMods___hashTable), (((((sourceId))))), (UnitVisualMods___ASPEED)))) // INLINED!!
     endif
-    if (HaveSavedString((UnitVisualMods__hashTable), ((((((sourceId)))))), (UnitVisualMods__ATAG))) then // INLINED!!
-        call GUMSAddUnitAnimationTag(target , (LoadStr((UnitVisualMods__hashTable), (((((sourceId))))), (UnitVisualMods__ATAG)))) // INLINED!!
+    if (HaveSavedString((UnitVisualMods___hashTable), ((((((sourceId)))))), (UnitVisualMods___ATAG))) then // INLINED!!
+        call GUMSAddUnitAnimationTag(target , (LoadStr((UnitVisualMods___hashTable), (((((sourceId))))), (UnitVisualMods___ATAG)))) // INLINED!!
     endif
 endfunction
 
@@ -15073,7 +15075,7 @@ endfunction
 
 function GUMSMakeUnitUnSelectable takes unit whichUnit returns nothing
     local integer unitId= GetHandleId(whichUnit)
-    local integer selectionType= LoadInteger(UnitVisualMods__hashTable, unitId, UnitVisualMods__SELECT)
+    local integer selectionType= LoadInteger(UnitVisualMods___hashTable, unitId, UnitVisualMods___SELECT)
 
     if selectionType == (2) then // INLINED!!
         return //Unit is already unselectable, do nothing.
@@ -15081,14 +15083,14 @@ function GUMSMakeUnitUnSelectable takes unit whichUnit returns nothing
 
     if UnitAddAbility(whichUnit, 'Aloc') then //Do nothing is unit has locust by default.
         call UnitRemoveAbility(whichUnit, 'Aloc')
-        call SaveInteger(UnitVisualMods__hashTable, unitId, UnitVisualMods__SELECT, (2)) // INLINED!!
+        call SaveInteger(UnitVisualMods___hashTable, unitId, UnitVisualMods___SELECT, (2)) // INLINED!!
         call SetUnitInvulnerable(whichUnit, true)
     endif
 endfunction
 
 function GUMSMakeUnitDragSelectable takes unit whichUnit returns nothing
     local integer unitId= GetHandleId(whichUnit)
-    local integer selectionType= LoadInteger(UnitVisualMods__hashTable, unitId, UnitVisualMods__SELECT)
+    local integer selectionType= LoadInteger(UnitVisualMods___hashTable, unitId, UnitVisualMods___SELECT)
 
     if selectionType == (1) then // INLINED!!
         return //Unit is already drag-selectable, do nothing.
@@ -15097,7 +15099,7 @@ function GUMSMakeUnitDragSelectable takes unit whichUnit returns nothing
     if selectionType != (2) then //Check if unit is already unselectable. // INLINED!!
         if UnitAddAbility(whichUnit, 'Aloc') then //Do nothing is unit has locust by default.
             call UnitRemoveAbility(whichUnit, 'Aloc')
-            call SaveInteger(UnitVisualMods__hashTable, unitId, UnitVisualMods__SELECT, (1)) // INLINED!!
+            call SaveInteger(UnitVisualMods___hashTable, unitId, UnitVisualMods___SELECT, (1)) // INLINED!!
         else
             return
         endif
@@ -15112,7 +15114,7 @@ endfunction
 
 function GUMSMakeUnitSelectable takes unit whichUnit returns nothing
     local integer unitId= GetHandleId(whichUnit)
-    local integer selectionType= LoadInteger(UnitVisualMods__hashTable, unitId, UnitVisualMods__SELECT)
+    local integer selectionType= LoadInteger(UnitVisualMods___hashTable, unitId, UnitVisualMods___SELECT)
     
     if selectionType == (0) then // INLINED!!
         return //Unit has not been give a special selection type, do nothing.
@@ -15156,78 +15158,78 @@ endfunction
 // GUMS Flying Height and Facing Timer
 
 //textmacro instance: TableStruct_NewHandleField("unit","unit")
-    function s__UnitVisualMods__TimerData__get_unit takes integer this returns unit
-        return (LoadUnitHandle(ConstTable__ht, (((((s__UnitVisualMods__TimerData_unit_impl))))), (this))) // INLINED!!
+    function s__UnitVisualMods___TimerData__get_unit takes integer this returns unit
+        return (LoadUnitHandle(ConstTable__ht, (((((s__UnitVisualMods___TimerData_unit_impl))))), (this))) // INLINED!!
     endfunction
     
-    function s__UnitVisualMods__TimerData__set_unit takes integer this,unit new_unit returns nothing
-        call s__TableStruct_setHandle(s__UnitVisualMods__TimerData_unit_impl , this , new_unit)
+    function s__UnitVisualMods___TimerData__set_unit takes integer this,unit new_unit returns nothing
+        call s__TableStruct_setHandle(s__UnitVisualMods___TimerData_unit_impl , this , new_unit)
     endfunction
     
-    function s__UnitVisualMods__TimerData_unitClear takes integer this returns nothing
-        call RemoveSavedHandle(ConstTable__ht, (((((s__UnitVisualMods__TimerData_unit_impl))))), (this)) // INLINED!!
+    function s__UnitVisualMods___TimerData_unitClear takes integer this returns nothing
+        call RemoveSavedHandle(ConstTable__ht, (((((s__UnitVisualMods___TimerData_unit_impl))))), (this)) // INLINED!!
     endfunction
     
-    function s__UnitVisualMods__TimerData_unitExists takes integer this returns boolean
-        return (HaveSavedHandle(ConstTable__ht, (((((s__UnitVisualMods__TimerData_unit_impl))))), (this))) // INLINED!!
+    function s__UnitVisualMods___TimerData_unitExists takes integer this returns boolean
+        return (HaveSavedHandle(ConstTable__ht, (((((s__UnitVisualMods___TimerData_unit_impl))))), (this))) // INLINED!!
     endfunction
 //end of: TableStruct_NewHandleField("unit","unit")
     
-    function s__UnitVisualMods__TimerData_get takes timer t returns integer
+    function s__UnitVisualMods___TimerData_get takes timer t returns integer
         return GetHandleId(t)
     endfunction
     
-    function s__UnitVisualMods__TimerData_destroy takes integer this returns nothing
-        call RemoveSavedHandle(ConstTable__ht, (((((s__UnitVisualMods__TimerData_unit_impl))))), ((this))) // INLINED!!
+    function s__UnitVisualMods___TimerData_destroy takes integer this returns nothing
+        call RemoveSavedHandle(ConstTable__ht, (((((s__UnitVisualMods___TimerData_unit_impl))))), ((this))) // INLINED!!
     endfunction
 
 
-function UnitVisualMods__ForGroupUnhide takes nothing returns nothing
+function UnitVisualMods___ForGroupUnhide takes nothing returns nothing
     // call ShowUnit(GetEnumUnit(), true)
     call BlzUnitDisableAbility(GetEnumUnit(), 'Amov', false, false)
 endfunction
 
-function UnitVisualMods__onTimer3 takes nothing returns nothing
+function UnitVisualMods___onTimer3 takes nothing returns nothing
     local timer t= GetExpiredTimer()
     local integer tData= (GetHandleId((t))) // INLINED!!
-    local unit u= (LoadUnitHandle(ConstTable__ht, (((((s__UnitVisualMods__TimerData_unit_impl))))), ((tData)))) // INLINED!!
+    local unit u= (LoadUnitHandle(ConstTable__ht, (((((s__UnitVisualMods___TimerData_unit_impl))))), ((tData)))) // INLINED!!
     
     call UnitRemoveAbility(u, 'DEDF')
     
-    call ForGroup(UnitVisualMods__hiddenGrp, function UnitVisualMods__ForGroupUnhide)
-    call GroupClear(UnitVisualMods__hiddenGrp)
+    call ForGroup(UnitVisualMods___hiddenGrp, function UnitVisualMods___ForGroupUnhide)
+    call GroupClear(UnitVisualMods___hiddenGrp)
     
     call PauseTimer(t)
     call DestroyTimer(t)
-    call RemoveSavedHandle(ConstTable__ht, (((((s__UnitVisualMods__TimerData_unit_impl))))), (((tData)))) // INLINED!!
+    call RemoveSavedHandle(ConstTable__ht, (((((s__UnitVisualMods___TimerData_unit_impl))))), (((tData)))) // INLINED!!
     
     set t=null
     set u=null
 endfunction
 
-function UnitVisualMods__FilterHide takes nothing returns boolean
+function UnitVisualMods___FilterHide takes nothing returns boolean
     local unit filterU= GetFilterUnit()
     if GetUnitAbilityLevel(filterU, 'Amov') > 0 then
         //call ShowUnit(filterU, false)
         call BlzUnitDisableAbility(filterU, 'Amov', true, false)
-        call GroupAddUnit(UnitVisualMods__hiddenGrp, filterU)
+        call GroupAddUnit(UnitVisualMods___hiddenGrp, filterU)
     endif
     set filterU=null
     return false
 endfunction
 
-function UnitVisualMods__onTimer2 takes nothing returns nothing
+function UnitVisualMods___onTimer2 takes nothing returns nothing
     local timer t= GetExpiredTimer()
-    local unit u= (LoadUnitHandle(ConstTable__ht, (((((s__UnitVisualMods__TimerData_unit_impl))))), (((GetHandleId((t))))))) // INLINED!!
+    local unit u= (LoadUnitHandle(ConstTable__ht, (((((s__UnitVisualMods___TimerData_unit_impl))))), (((GetHandleId((t))))))) // INLINED!!
     
     // Here, we make sure that units below the building don't stop it from instantly rooting (they have to move away first)
-    call GroupEnumUnitsInRange(ENUM_GROUP, GetUnitX(u), GetUnitY(u), 1000., Filter(function UnitVisualMods__FilterHide))
+    call GroupEnumUnitsInRange(ENUM_GROUP, GetUnitX(u), GetUnitY(u), 1000., Filter(function UnitVisualMods___FilterHide))
     
     // More efficient then the method used above, but units below still move out of the way: 
     // call SetUnitOwner(u, Player(bj_PLAYER_NEUTRAL_VICTIM), false)
     
     call IssuePointOrder(u, "root", GetUnitX(u), GetUnitY(u))
-    call TimerStart(t, 0, false, function UnitVisualMods__onTimer3)
+    call TimerStart(t, 0, false, function UnitVisualMods___onTimer3)
     
     set t=null
     set u=null
@@ -15244,42 +15246,43 @@ function GUMSGroupFunction takes nothing returns nothing
     
     
     //Check if unit is having it's facing changed and apply values accordingly
-    if not HaveSavedReal(UnitVisualMods__hashTable, unitId, UnitVisualMods__TARGET_ANGLE) then
+    if not HaveSavedReal(UnitVisualMods___hashTable, unitId, UnitVisualMods___TARGET_ANGLE) then
         set face=GetUnitFacing(enumUnit)
         set removeReal=false
     else
-        set face=LoadReal(UnitVisualMods__hashTable, unitId, UnitVisualMods__TARGET_ANGLE)
+        set face=LoadReal(UnitVisualMods___hashTable, unitId, UnitVisualMods___TARGET_ANGLE)
         set removeReal=true
     endif
     
     //Move unit to it's own position to fix flying height and facing
-    if not HaveSavedInteger(UnitVisualMods__hashTable, unitId, UnitVisualMods__COUNTER) then
-        call SaveInteger(UnitVisualMods__hashTable, unitId, UnitVisualMods__COUNTER, 0)
+    if not HaveSavedInteger(UnitVisualMods___hashTable, unitId, UnitVisualMods___COUNTER) then
+        call SaveInteger(UnitVisualMods___hashTable, unitId, UnitVisualMods___COUNTER, 0)
         call SetUnitPosition(enumUnit, GetUnitX(enumUnit), GetUnitY(enumUnit))
     elseif GetUnitFacing(enumUnit) < face - 0.001 or GetUnitFacing(enumUnit) > face + 0.001 then
         call SetUnitPosition(enumUnit, GetUnitX(enumUnit), GetUnitY(enumUnit))
     else
-        call RemoveSavedInteger(UnitVisualMods__hashTable, unitId, UnitVisualMods__COUNTER)
+        call RemoveSavedInteger(UnitVisualMods___hashTable, unitId, UnitVisualMods___COUNTER)
         if removeReal then //Not sure if removing unexisting stuff can cause crashes, but might as well avoid it
-            call RemoveSavedReal(UnitVisualMods__hashTable, unitId, UnitVisualMods__TARGET_ANGLE)
+            call RemoveSavedReal(UnitVisualMods___hashTable, unitId, UnitVisualMods___TARGET_ANGLE)
         endif
         call SetUnitPosition(enumUnit, GetUnitX(enumUnit), GetUnitY(enumUnit))
         
-        if (HaveSavedBoolean((UnitVisualMods__hashTable), (((((unitId))))), (UnitVisualMods__STRUCTURE_HEIGHT))) then // INLINED!!
-            call RemoveSavedBoolean((UnitVisualMods__hashTable), (((((unitId))))), (UnitVisualMods__STRUCTURE_HEIGHT)) // INLINED!!
-            if (HaveSavedBoolean((UnitVisualMods__hashTable), (((((unitId))))), (UnitVisualMods__AUTO_LAND))) then // INLINED!!
+        if (HaveSavedBoolean((UnitVisualMods___hashTable), (((((unitId))))), (UnitVisualMods___STRUCTURE_HEIGHT))) then // INLINED!!
+            call RemoveSavedBoolean((UnitVisualMods___hashTable), (((((unitId))))), (UnitVisualMods___STRUCTURE_HEIGHT)) // INLINED!!
+            if (HaveSavedBoolean((UnitVisualMods___hashTable), (((((unitId))))), (UnitVisualMods___AUTO_LAND))) then // INLINED!!
                 set t=CreateTimer()
-                call s__TableStruct_setHandle(s__UnitVisualMods__TimerData_unit_impl , ((GetHandleId((t)))) , (enumUnit)) // INLINED!!
-                call TimerStart(t, 0, false, function UnitVisualMods__onTimer2)
+                call s__TableStruct_setHandle(s__UnitVisualMods___TimerData_unit_impl , ((GetHandleId((t)))) , (enumUnit)) // INLINED!!
+                call TimerStart(t, 0, false, function UnitVisualMods___onTimer2)
                 call SetUnitAnimation(enumUnit, "stand")
+                set t=null
             endif
-            call GroupRemoveUnit(UnitVisualMods__loopGroup, enumUnit)
+            call GroupRemoveUnit(UnitVisualMods___loopGroup, enumUnit)
         else
             if IsUnitType(enumUnit, UNIT_TYPE_STRUCTURE) and GetUnitFlyHeight(enumUnit) > 0.02 then
                 call BJDebugMsg(R2S(GetUnitFlyHeight(enumUnit) * 1000))
-                call GUMSSetStructureFlyHeight(enumUnit , GetUnitFlyHeight(enumUnit) , (HaveSavedBoolean((UnitVisualMods__hashTable), (((((unitId))))), (UnitVisualMods__AUTO_LAND)))) // INLINED!!
+                call GUMSSetStructureFlyHeight(enumUnit , GetUnitFlyHeight(enumUnit) , (HaveSavedBoolean((UnitVisualMods___hashTable), (((((unitId))))), (UnitVisualMods___AUTO_LAND)))) // INLINED!!
             else
-                call GroupRemoveUnit(UnitVisualMods__loopGroup, enumUnit)
+                call GroupRemoveUnit(UnitVisualMods___loopGroup, enumUnit)
             endif
         endif
     endif
@@ -15290,134 +15293,134 @@ endfunction
 
 //THIS FUNCTION IS RUN ON A TIMER THAT CALLS THE FUNCTION ABOVE
 function GUMSTimerFunction takes nothing returns nothing
-    call ForGroup(UnitVisualMods__loopGroup, function GUMSGroupFunction)
+    call ForGroup(UnitVisualMods___loopGroup, function GUMSGroupFunction)
 endfunction
 
 // When a unit cancels of finishes an upgrade, reapply its Visual modifications.
-//Implemented from module UnitVisualMods__InitModule:
-    function s__UnitVisualMods__InitStruct_UnitVisualMods__InitModule___onUpgradeHandler takes nothing returns nothing
+//Implemented from module UnitVisualMods___InitModule:
+    function s__UnitVisualMods___InitStruct_UnitVisualMods___InitModule___onUpgradeHandler takes nothing returns nothing
         call GUMSCopyValues(GetTriggerUnit() , GetTriggerUnit())
     endfunction
 
 
-    function s__UnitVisualMods__InitStruct_UnitVisualMods__InitModule___onInit takes nothing returns nothing
+    function s__UnitVisualMods___InitStruct_UnitVisualMods___InitModule___onInit takes nothing returns nothing
         local trigger fixUpgrades= CreateTrigger()
         local integer i
         local timer t= CreateTimer()
         
         call TriggerRegisterAnyUnitEventBJ(fixUpgrades, EVENT_PLAYER_UNIT_UPGRADE_CANCEL)
         call TriggerRegisterAnyUnitEventBJ(fixUpgrades, EVENT_PLAYER_UNIT_UPGRADE_FINISH)
-        call TriggerAddAction(fixUpgrades, function s__UnitVisualMods__InitStruct_UnitVisualMods__InitModule___onUpgradeHandler)
+        call TriggerAddAction(fixUpgrades, function s__UnitVisualMods___InitStruct_UnitVisualMods___InitModule___onUpgradeHandler)
         
 
-            set UnitVisualMods__hashTable=InitHashtable()
+            set UnitVisualMods___hashTable=InitHashtable()
 
         
         call TimerStart(t, 0.1, true, function GUMSTimerFunction)
     
 //textmacro instance: GUMS_RegisterTag("gold", "g")
-    call SaveStr((UnitVisualMods__hashTable), ((((UnitVisualMods_TAGS_COMPRESS)))), (StringHash("gold")), ( "g")) // INLINED!!
-    call SaveStr((UnitVisualMods__hashTable), ((((UnitVisualMods_TAGS_DECOMPRESS)))), (StringHash("g")), ( "gold")) // INLINED!!
+    call SaveStr((UnitVisualMods___hashTable), ((((UnitVisualMods_TAGS_COMPRESS)))), (StringHash("gold")), ( "g")) // INLINED!!
+    call SaveStr((UnitVisualMods___hashTable), ((((UnitVisualMods_TAGS_DECOMPRESS)))), (StringHash("g")), ( "gold")) // INLINED!!
 //end of: GUMS_RegisterTag("gold", "g")
 //textmacro instance: GUMS_RegisterTag("lumber", "l")
-    call SaveStr((UnitVisualMods__hashTable), ((((UnitVisualMods_TAGS_COMPRESS)))), (StringHash("lumber")), ( "l")) // INLINED!!
-    call SaveStr((UnitVisualMods__hashTable), ((((UnitVisualMods_TAGS_DECOMPRESS)))), (StringHash("l")), ( "lumber")) // INLINED!!
+    call SaveStr((UnitVisualMods___hashTable), ((((UnitVisualMods_TAGS_COMPRESS)))), (StringHash("lumber")), ( "l")) // INLINED!!
+    call SaveStr((UnitVisualMods___hashTable), ((((UnitVisualMods_TAGS_DECOMPRESS)))), (StringHash("l")), ( "lumber")) // INLINED!!
 //end of: GUMS_RegisterTag("lumber", "l")
 //textmacro instance: GUMS_RegisterTag("work", "w")
-    call SaveStr((UnitVisualMods__hashTable), ((((UnitVisualMods_TAGS_COMPRESS)))), (StringHash("work")), ( "w")) // INLINED!!
-    call SaveStr((UnitVisualMods__hashTable), ((((UnitVisualMods_TAGS_DECOMPRESS)))), (StringHash("w")), ( "work")) // INLINED!!
+    call SaveStr((UnitVisualMods___hashTable), ((((UnitVisualMods_TAGS_COMPRESS)))), (StringHash("work")), ( "w")) // INLINED!!
+    call SaveStr((UnitVisualMods___hashTable), ((((UnitVisualMods_TAGS_DECOMPRESS)))), (StringHash("w")), ( "work")) // INLINED!!
 //end of: GUMS_RegisterTag("work", "w")
 //textmacro instance: GUMS_RegisterTag("flesh", "f")
-    call SaveStr((UnitVisualMods__hashTable), ((((UnitVisualMods_TAGS_COMPRESS)))), (StringHash("flesh")), ( "f")) // INLINED!!
-    call SaveStr((UnitVisualMods__hashTable), ((((UnitVisualMods_TAGS_DECOMPRESS)))), (StringHash("f")), ( "flesh")) // INLINED!!
+    call SaveStr((UnitVisualMods___hashTable), ((((UnitVisualMods_TAGS_COMPRESS)))), (StringHash("flesh")), ( "f")) // INLINED!!
+    call SaveStr((UnitVisualMods___hashTable), ((((UnitVisualMods_TAGS_DECOMPRESS)))), (StringHash("f")), ( "flesh")) // INLINED!!
 //end of: GUMS_RegisterTag("flesh", "f")
 //textmacro instance: GUMS_RegisterTag("ready", "r")
-    call SaveStr((UnitVisualMods__hashTable), ((((UnitVisualMods_TAGS_COMPRESS)))), (StringHash("ready")), ( "r")) // INLINED!!
-    call SaveStr((UnitVisualMods__hashTable), ((((UnitVisualMods_TAGS_DECOMPRESS)))), (StringHash("r")), ( "ready")) // INLINED!!
+    call SaveStr((UnitVisualMods___hashTable), ((((UnitVisualMods_TAGS_COMPRESS)))), (StringHash("ready")), ( "r")) // INLINED!!
+    call SaveStr((UnitVisualMods___hashTable), ((((UnitVisualMods_TAGS_DECOMPRESS)))), (StringHash("r")), ( "ready")) // INLINED!!
 //end of: GUMS_RegisterTag("ready", "r")
 //textmacro instance: GUMS_RegisterTag("one", "1")
-    call SaveStr((UnitVisualMods__hashTable), ((((UnitVisualMods_TAGS_COMPRESS)))), (StringHash("one")), ( "1")) // INLINED!!
-    call SaveStr((UnitVisualMods__hashTable), ((((UnitVisualMods_TAGS_DECOMPRESS)))), (StringHash("1")), ( "one")) // INLINED!!
+    call SaveStr((UnitVisualMods___hashTable), ((((UnitVisualMods_TAGS_COMPRESS)))), (StringHash("one")), ( "1")) // INLINED!!
+    call SaveStr((UnitVisualMods___hashTable), ((((UnitVisualMods_TAGS_DECOMPRESS)))), (StringHash("1")), ( "one")) // INLINED!!
 //end of: GUMS_RegisterTag("one", "1")
 //textmacro instance: GUMS_RegisterTag("two", "2")
-    call SaveStr((UnitVisualMods__hashTable), ((((UnitVisualMods_TAGS_COMPRESS)))), (StringHash("two")), ( "2")) // INLINED!!
-    call SaveStr((UnitVisualMods__hashTable), ((((UnitVisualMods_TAGS_DECOMPRESS)))), (StringHash("2")), ( "two")) // INLINED!!
+    call SaveStr((UnitVisualMods___hashTable), ((((UnitVisualMods_TAGS_COMPRESS)))), (StringHash("two")), ( "2")) // INLINED!!
+    call SaveStr((UnitVisualMods___hashTable), ((((UnitVisualMods_TAGS_DECOMPRESS)))), (StringHash("2")), ( "two")) // INLINED!!
 //end of: GUMS_RegisterTag("two", "2")
 //textmacro instance: GUMS_RegisterTag("throw", "t")
-    call SaveStr((UnitVisualMods__hashTable), ((((UnitVisualMods_TAGS_COMPRESS)))), (StringHash("throw")), ( "t")) // INLINED!!
-    call SaveStr((UnitVisualMods__hashTable), ((((UnitVisualMods_TAGS_DECOMPRESS)))), (StringHash("t")), ( "throw")) // INLINED!!
+    call SaveStr((UnitVisualMods___hashTable), ((((UnitVisualMods_TAGS_COMPRESS)))), (StringHash("throw")), ( "t")) // INLINED!!
+    call SaveStr((UnitVisualMods___hashTable), ((((UnitVisualMods_TAGS_DECOMPRESS)))), (StringHash("t")), ( "throw")) // INLINED!!
 //end of: GUMS_RegisterTag("throw", "t")
 //textmacro instance: GUMS_RegisterTag("slam", "sl")
-    call SaveStr((UnitVisualMods__hashTable), ((((UnitVisualMods_TAGS_COMPRESS)))), (StringHash("slam")), ( "sl")) // INLINED!!
-    call SaveStr((UnitVisualMods__hashTable), ((((UnitVisualMods_TAGS_DECOMPRESS)))), (StringHash("sl")), ( "slam")) // INLINED!!
+    call SaveStr((UnitVisualMods___hashTable), ((((UnitVisualMods_TAGS_COMPRESS)))), (StringHash("slam")), ( "sl")) // INLINED!!
+    call SaveStr((UnitVisualMods___hashTable), ((((UnitVisualMods_TAGS_DECOMPRESS)))), (StringHash("sl")), ( "slam")) // INLINED!!
 //end of: GUMS_RegisterTag("slam", "sl")
         
 //textmacro instance: GUMS_RegisterTag("large", "sl")
-    call SaveStr((UnitVisualMods__hashTable), ((((UnitVisualMods_TAGS_COMPRESS)))), (StringHash("large")), ( "sl")) // INLINED!!
-    call SaveStr((UnitVisualMods__hashTable), ((((UnitVisualMods_TAGS_DECOMPRESS)))), (StringHash("sl")), ( "large")) // INLINED!!
+    call SaveStr((UnitVisualMods___hashTable), ((((UnitVisualMods_TAGS_COMPRESS)))), (StringHash("large")), ( "sl")) // INLINED!!
+    call SaveStr((UnitVisualMods___hashTable), ((((UnitVisualMods_TAGS_DECOMPRESS)))), (StringHash("sl")), ( "large")) // INLINED!!
 //end of: GUMS_RegisterTag("large", "sl")
 //textmacro instance: GUMS_RegisterTag("medium", "sm")
-    call SaveStr((UnitVisualMods__hashTable), ((((UnitVisualMods_TAGS_COMPRESS)))), (StringHash("medium")), ( "sm")) // INLINED!!
-    call SaveStr((UnitVisualMods__hashTable), ((((UnitVisualMods_TAGS_DECOMPRESS)))), (StringHash("sm")), ( "medium")) // INLINED!!
+    call SaveStr((UnitVisualMods___hashTable), ((((UnitVisualMods_TAGS_COMPRESS)))), (StringHash("medium")), ( "sm")) // INLINED!!
+    call SaveStr((UnitVisualMods___hashTable), ((((UnitVisualMods_TAGS_DECOMPRESS)))), (StringHash("sm")), ( "medium")) // INLINED!!
 //end of: GUMS_RegisterTag("medium", "sm")
 //textmacro instance: GUMS_RegisterTag("small", "ss")
-    call SaveStr((UnitVisualMods__hashTable), ((((UnitVisualMods_TAGS_COMPRESS)))), (StringHash("small")), ( "ss")) // INLINED!!
-    call SaveStr((UnitVisualMods__hashTable), ((((UnitVisualMods_TAGS_DECOMPRESS)))), (StringHash("ss")), ( "small")) // INLINED!!
+    call SaveStr((UnitVisualMods___hashTable), ((((UnitVisualMods_TAGS_COMPRESS)))), (StringHash("small")), ( "ss")) // INLINED!!
+    call SaveStr((UnitVisualMods___hashTable), ((((UnitVisualMods_TAGS_DECOMPRESS)))), (StringHash("ss")), ( "small")) // INLINED!!
 //end of: GUMS_RegisterTag("small", "ss")
 
 //textmacro instance: GUMS_RegisterTag("victory", "v")
-    call SaveStr((UnitVisualMods__hashTable), ((((UnitVisualMods_TAGS_COMPRESS)))), (StringHash("victory")), ( "v")) // INLINED!!
-    call SaveStr((UnitVisualMods__hashTable), ((((UnitVisualMods_TAGS_DECOMPRESS)))), (StringHash("v")), ( "victory")) // INLINED!!
+    call SaveStr((UnitVisualMods___hashTable), ((((UnitVisualMods_TAGS_COMPRESS)))), (StringHash("victory")), ( "v")) // INLINED!!
+    call SaveStr((UnitVisualMods___hashTable), ((((UnitVisualMods_TAGS_DECOMPRESS)))), (StringHash("v")), ( "victory")) // INLINED!!
 //end of: GUMS_RegisterTag("victory", "v")
 //textmacro instance: GUMS_RegisterTag("alternate", "a")
-    call SaveStr((UnitVisualMods__hashTable), ((((UnitVisualMods_TAGS_COMPRESS)))), (StringHash("alternate")), ( "a")) // INLINED!!
-    call SaveStr((UnitVisualMods__hashTable), ((((UnitVisualMods_TAGS_DECOMPRESS)))), (StringHash("a")), ( "alternate")) // INLINED!!
+    call SaveStr((UnitVisualMods___hashTable), ((((UnitVisualMods_TAGS_COMPRESS)))), (StringHash("alternate")), ( "a")) // INLINED!!
+    call SaveStr((UnitVisualMods___hashTable), ((((UnitVisualMods_TAGS_DECOMPRESS)))), (StringHash("a")), ( "alternate")) // INLINED!!
 //end of: GUMS_RegisterTag("alternate", "a")
 //textmacro instance: GUMS_RegisterTag("morph", "m")
-    call SaveStr((UnitVisualMods__hashTable), ((((UnitVisualMods_TAGS_COMPRESS)))), (StringHash("morph")), ( "m")) // INLINED!!
-    call SaveStr((UnitVisualMods__hashTable), ((((UnitVisualMods_TAGS_DECOMPRESS)))), (StringHash("m")), ( "morph")) // INLINED!!
+    call SaveStr((UnitVisualMods___hashTable), ((((UnitVisualMods_TAGS_COMPRESS)))), (StringHash("morph")), ( "m")) // INLINED!!
+    call SaveStr((UnitVisualMods___hashTable), ((((UnitVisualMods_TAGS_DECOMPRESS)))), (StringHash("m")), ( "morph")) // INLINED!!
 //end of: GUMS_RegisterTag("morph", "m")
 //textmacro instance: GUMS_RegisterTag("defend", "d")
-    call SaveStr((UnitVisualMods__hashTable), ((((UnitVisualMods_TAGS_COMPRESS)))), (StringHash("defend")), ( "d")) // INLINED!!
-    call SaveStr((UnitVisualMods__hashTable), ((((UnitVisualMods_TAGS_DECOMPRESS)))), (StringHash("d")), ( "defend")) // INLINED!!
+    call SaveStr((UnitVisualMods___hashTable), ((((UnitVisualMods_TAGS_COMPRESS)))), (StringHash("defend")), ( "d")) // INLINED!!
+    call SaveStr((UnitVisualMods___hashTable), ((((UnitVisualMods_TAGS_DECOMPRESS)))), (StringHash("d")), ( "defend")) // INLINED!!
 //end of: GUMS_RegisterTag("defend", "d")
 //textmacro instance: GUMS_RegisterTag("swim", "s")
-    call SaveStr((UnitVisualMods__hashTable), ((((UnitVisualMods_TAGS_COMPRESS)))), (StringHash("swim")), ( "s")) // INLINED!!
-    call SaveStr((UnitVisualMods__hashTable), ((((UnitVisualMods_TAGS_DECOMPRESS)))), (StringHash("s")), ( "swim")) // INLINED!!
+    call SaveStr((UnitVisualMods___hashTable), ((((UnitVisualMods_TAGS_COMPRESS)))), (StringHash("swim")), ( "s")) // INLINED!!
+    call SaveStr((UnitVisualMods___hashTable), ((((UnitVisualMods_TAGS_DECOMPRESS)))), (StringHash("s")), ( "swim")) // INLINED!!
 //end of: GUMS_RegisterTag("swim", "s")
         
 //textmacro instance: GUMS_RegisterTag("spin", "sp")
-    call SaveStr((UnitVisualMods__hashTable), ((((UnitVisualMods_TAGS_COMPRESS)))), (StringHash("spin")), ( "sp")) // INLINED!!
-    call SaveStr((UnitVisualMods__hashTable), ((((UnitVisualMods_TAGS_DECOMPRESS)))), (StringHash("sp")), ( "spin")) // INLINED!!
+    call SaveStr((UnitVisualMods___hashTable), ((((UnitVisualMods_TAGS_COMPRESS)))), (StringHash("spin")), ( "sp")) // INLINED!!
+    call SaveStr((UnitVisualMods___hashTable), ((((UnitVisualMods_TAGS_DECOMPRESS)))), (StringHash("sp")), ( "spin")) // INLINED!!
 //end of: GUMS_RegisterTag("spin", "sp")
 //textmacro instance: GUMS_RegisterTag("fast", "fa")
-    call SaveStr((UnitVisualMods__hashTable), ((((UnitVisualMods_TAGS_COMPRESS)))), (StringHash("fast")), ( "fa")) // INLINED!!
-    call SaveStr((UnitVisualMods__hashTable), ((((UnitVisualMods_TAGS_DECOMPRESS)))), (StringHash("fa")), ( "fast")) // INLINED!!
+    call SaveStr((UnitVisualMods___hashTable), ((((UnitVisualMods_TAGS_COMPRESS)))), (StringHash("fast")), ( "fa")) // INLINED!!
+    call SaveStr((UnitVisualMods___hashTable), ((((UnitVisualMods_TAGS_DECOMPRESS)))), (StringHash("fa")), ( "fast")) // INLINED!!
 //end of: GUMS_RegisterTag("fast", "fa")
         
 //textmacro instance: GUMS_RegisterTag("upgrade","u")
-    call SaveStr((UnitVisualMods__hashTable), ((((UnitVisualMods_TAGS_COMPRESS)))), (StringHash("upgrade")), ( "u")) // INLINED!!
-    call SaveStr((UnitVisualMods__hashTable), ((((UnitVisualMods_TAGS_DECOMPRESS)))), (StringHash("u")), ( "upgrade")) // INLINED!!
+    call SaveStr((UnitVisualMods___hashTable), ((((UnitVisualMods_TAGS_COMPRESS)))), (StringHash("upgrade")), ( "u")) // INLINED!!
+    call SaveStr((UnitVisualMods___hashTable), ((((UnitVisualMods_TAGS_DECOMPRESS)))), (StringHash("u")), ( "upgrade")) // INLINED!!
 //end of: GUMS_RegisterTag("upgrade","u")
 //textmacro instance: GUMS_RegisterTag("first","n1")
-    call SaveStr((UnitVisualMods__hashTable), ((((UnitVisualMods_TAGS_COMPRESS)))), (StringHash("first")), ( "n1")) // INLINED!!
-    call SaveStr((UnitVisualMods__hashTable), ((((UnitVisualMods_TAGS_DECOMPRESS)))), (StringHash("n1")), ( "first")) // INLINED!!
+    call SaveStr((UnitVisualMods___hashTable), ((((UnitVisualMods_TAGS_COMPRESS)))), (StringHash("first")), ( "n1")) // INLINED!!
+    call SaveStr((UnitVisualMods___hashTable), ((((UnitVisualMods_TAGS_DECOMPRESS)))), (StringHash("n1")), ( "first")) // INLINED!!
 //end of: GUMS_RegisterTag("first","n1")
 //textmacro instance: GUMS_RegisterTag("second","n2")
-    call SaveStr((UnitVisualMods__hashTable), ((((UnitVisualMods_TAGS_COMPRESS)))), (StringHash("second")), ( "n2")) // INLINED!!
-    call SaveStr((UnitVisualMods__hashTable), ((((UnitVisualMods_TAGS_DECOMPRESS)))), (StringHash("n2")), ( "second")) // INLINED!!
+    call SaveStr((UnitVisualMods___hashTable), ((((UnitVisualMods_TAGS_COMPRESS)))), (StringHash("second")), ( "n2")) // INLINED!!
+    call SaveStr((UnitVisualMods___hashTable), ((((UnitVisualMods_TAGS_DECOMPRESS)))), (StringHash("n2")), ( "second")) // INLINED!!
 //end of: GUMS_RegisterTag("second","n2")
 //textmacro instance: GUMS_RegisterTag("third","n3")
-    call SaveStr((UnitVisualMods__hashTable), ((((UnitVisualMods_TAGS_COMPRESS)))), (StringHash("third")), ( "n3")) // INLINED!!
-    call SaveStr((UnitVisualMods__hashTable), ((((UnitVisualMods_TAGS_DECOMPRESS)))), (StringHash("n3")), ( "third")) // INLINED!!
+    call SaveStr((UnitVisualMods___hashTable), ((((UnitVisualMods_TAGS_COMPRESS)))), (StringHash("third")), ( "n3")) // INLINED!!
+    call SaveStr((UnitVisualMods___hashTable), ((((UnitVisualMods_TAGS_DECOMPRESS)))), (StringHash("n3")), ( "third")) // INLINED!!
 //end of: GUMS_RegisterTag("third","n3")
 //textmacro instance: GUMS_RegisterTag("fourth","n4")
-    call SaveStr((UnitVisualMods__hashTable), ((((UnitVisualMods_TAGS_COMPRESS)))), (StringHash("fourth")), ( "n4")) // INLINED!!
-    call SaveStr((UnitVisualMods__hashTable), ((((UnitVisualMods_TAGS_DECOMPRESS)))), (StringHash("n4")), ( "fourth")) // INLINED!!
+    call SaveStr((UnitVisualMods___hashTable), ((((UnitVisualMods_TAGS_COMPRESS)))), (StringHash("fourth")), ( "n4")) // INLINED!!
+    call SaveStr((UnitVisualMods___hashTable), ((((UnitVisualMods_TAGS_DECOMPRESS)))), (StringHash("n4")), ( "fourth")) // INLINED!!
 //end of: GUMS_RegisterTag("fourth","n4")
 //textmacro instance: GUMS_RegisterTag("fifth","n5")
-    call SaveStr((UnitVisualMods__hashTable), ((((UnitVisualMods_TAGS_COMPRESS)))), (StringHash("fifth")), ( "n5")) // INLINED!!
-    call SaveStr((UnitVisualMods__hashTable), ((((UnitVisualMods_TAGS_DECOMPRESS)))), (StringHash("n5")), ( "fifth")) // INLINED!!
+    call SaveStr((UnitVisualMods___hashTable), ((((UnitVisualMods_TAGS_COMPRESS)))), (StringHash("fifth")), ( "n5")) // INLINED!!
+    call SaveStr((UnitVisualMods___hashTable), ((((UnitVisualMods_TAGS_DECOMPRESS)))), (StringHash("n5")), ( "fifth")) // INLINED!!
 //end of: GUMS_RegisterTag("fifth","n5")
     endfunction
 
@@ -15426,23 +15429,23 @@ endfunction
 //==================================================================================================
 
 function GUMS_HaveSavedScale takes unit whichUnit returns boolean
-    return HaveSavedReal(UnitVisualMods__hashTable, GetHandleId(whichUnit), UnitVisualMods__SCALE)
+    return HaveSavedReal(UnitVisualMods___hashTable, GetHandleId(whichUnit), UnitVisualMods___SCALE)
 endfunction
 
 function GUMS_HaveSavedVertexColor takes unit whichUnit,integer r1b2g3a4 returns boolean
-    return HaveSavedInteger(UnitVisualMods__hashTable, GetHandleId(whichUnit), r1b2g3a4)
+    return HaveSavedInteger(UnitVisualMods___hashTable, GetHandleId(whichUnit), r1b2g3a4)
 endfunction
 
 function GUMS_HaveSavedColor takes unit whichUnit returns boolean
-    return HaveSavedInteger(UnitVisualMods__hashTable, GetHandleId(whichUnit), UnitVisualMods__COLOR)
+    return HaveSavedInteger(UnitVisualMods___hashTable, GetHandleId(whichUnit), UnitVisualMods___COLOR)
 endfunction
 
 function GUMS_HaveSavedAnimSpeed takes unit whichUnit returns boolean
-    return HaveSavedReal(UnitVisualMods__hashTable, GetHandleId(whichUnit), UnitVisualMods__ASPEED)
+    return HaveSavedReal(UnitVisualMods___hashTable, GetHandleId(whichUnit), UnitVisualMods___ASPEED)
 endfunction
 
 function GUMS_HaveSavedAnimationTag takes unit whichUnit returns boolean
-    return HaveSavedString(UnitVisualMods__hashTable, GetHandleId(whichUnit), UnitVisualMods__ATAG)
+    return HaveSavedString(UnitVisualMods___hashTable, GetHandleId(whichUnit), UnitVisualMods___ATAG)
 endfunction 
 
 function GUMSGetUnitScale takes unit whichUnit returns string
@@ -15713,8 +15716,8 @@ function LoP_onChangeOwner takes unit whichUnit,player ownerOld returns nothing
     
     // If ownership was changed with -neut command, no need to change colors.
     if not IsUnitInGroup(whichUnit, udg_System_NeutralUnits[GetPlayerId(ownerOld) + 1]) then
-        if (HaveSavedInteger((UnitVisualMods__hashTable), ((((unitId)))), (UnitVisualMods__COLOR))) then // INLINED!!
-            call GUMSSetUnitColor(whichUnit , (LoadInteger((UnitVisualMods__hashTable), ((((((unitId)))))), (UnitVisualMods__COLOR)))) // INLINED!!
+        if (HaveSavedInteger((UnitVisualMods___hashTable), ((((unitId)))), (UnitVisualMods___COLOR))) then // INLINED!!
+            call GUMSSetUnitColor(whichUnit , (LoadInteger((UnitVisualMods___hashTable), ((((((unitId)))))), (UnitVisualMods___COLOR)))) // INLINED!!
         else
             call SetUnitColor(whichUnit, (s__LoP_PlayerData_playerColors[((GetPlayerId((GetOwningPlayer(whichUnit)))))])) // INLINED!!
         endif
@@ -15827,11 +15830,11 @@ endfunction
         
 
     function Save_GetGUDRSaveString takes integer generatorId returns string
-        local rect userRect= (LoadRectHandle(UserDefinedRects__hashTable, (generatorId), (0))) // INLINED!!
+        local rect userRect= (LoadRectHandle(UserDefinedRects___hashTable, (generatorId), (0))) // INLINED!!
         
         local real length= GetRectMaxX(userRect) - GetRectCenterX(userRect)
         local real height= GetRectMaxY(userRect) - GetRectCenterY(userRect)
-        local integer weatherType= (LoadInteger(UserDefinedRects__hashTable, (generatorId), (8))) // INLINED!!
+        local integer weatherType= (LoadInteger(UserDefinedRects___hashTable, (generatorId), (8))) // INLINED!!
         local boolean hidden
         
         return R2S(length) + "=" + R2S(height) + "=" + I2S(weatherType) + "="
@@ -16334,11 +16337,11 @@ endfunction
 
 function Save_SaveUnitPatrolPoints takes integer unitHandleId returns nothing
     local integer i= 1
-    local integer totalPoints= (LoadInteger(MultiPatrol__data, - (unitHandleId), (9997))) // INLINED!!
+    local integer totalPoints= (LoadInteger(MultiPatrol___data, - (unitHandleId), (9997))) // INLINED!!
     
     loop
     exitwhen i > totalPoints
-        call Preload("=p " + R2S((((LoadReal(MultiPatrol__data, (unitHandleId ), ( i))) )*1.0)) + "=" + R2S((( (LoadReal(MultiPatrol__data, (unitHandleId ), - ( i))))*1.0))) // INLINED!!
+        call Preload("=p " + R2S((((LoadReal(MultiPatrol___data, (unitHandleId ), ( i))) )*1.0)) + "=" + R2S((( (LoadReal(MultiPatrol___data, (unitHandleId ), - ( i))))*1.0))) // INLINED!!
         set i=i + 1
     endloop
 endfunction
@@ -16368,14 +16371,14 @@ function SaveForceLoop takes nothing returns boolean
             //Check if Unit has been removed
             if GetUnitTypeId(saveUnit) != 0 then
                 if isLocalPlayer then
-                    call Preload(ID2S(( GetUnitTypeId(saveUnit) )) + "," + R2S(GetUnitX(saveUnit) - (udg_load_center[(playerId) + 1])) + "," + R2S(GetUnitY(saveUnit) - (udg_load_center[(playerId) + 1 + bj_MAX_PLAYERS])) + "," + R2S(GetUnitFlyHeight(saveUnit)) + "," + R2S(GetUnitFacing(saveUnit)) + "," + s__UnitVisuals_getScale(unitHandleId) + "," + (s__UnitVisuals_getVertexColor((unitHandleId),UnitVisualMods__RED)) + "," + (s__UnitVisuals_getVertexColor((unitHandleId),UnitVisualMods__GREEN)) + "," + (s__UnitVisuals_getVertexColor((unitHandleId),UnitVisualMods__BLUE)) + "," + (s__UnitVisuals_getVertexColor((unitHandleId),UnitVisualMods__ALPHA)) + "," + s__UnitVisuals_getColor(unitHandleId) + "," + s__UnitVisuals_getAnimSpeed(unitHandleId) + "," + s__UnitVisuals_getAnimTag(unitHandleId) + "," + I2S((LoadInteger(UnitVisualMods__hashTable, GetHandleId((saveUnit)), UnitVisualMods__SELECT)))) // INLINED!!
+                    call Preload(ID2S(( GetUnitTypeId(saveUnit) )) + "," + R2S(GetUnitX(saveUnit) - (udg_load_center[(playerId) + 1])) + "," + R2S(GetUnitY(saveUnit) - (udg_load_center[(playerId) + 1 + bj_MAX_PLAYERS])) + "," + R2S(GetUnitFlyHeight(saveUnit)) + "," + R2S(GetUnitFacing(saveUnit)) + "," + s__UnitVisuals_getScale(unitHandleId) + "," + (s__UnitVisuals_getVertexColor((unitHandleId),UnitVisualMods___RED)) + "," + (s__UnitVisuals_getVertexColor((unitHandleId),UnitVisualMods___GREEN)) + "," + (s__UnitVisuals_getVertexColor((unitHandleId),UnitVisualMods___BLUE)) + "," + (s__UnitVisuals_getVertexColor((unitHandleId),UnitVisualMods___ALPHA)) + "," + s__UnitVisuals_getColor(unitHandleId) + "," + s__UnitVisuals_getAnimSpeed(unitHandleId) + "," + s__UnitVisuals_getAnimTag(unitHandleId) + "," + I2S((LoadInteger(UnitVisualMods___hashTable, GetHandleId((saveUnit)), UnitVisualMods___SELECT)))) // INLINED!!
                     
                     
                     
-                    if (HaveSavedString(UnitVisualMods__hashTable, (unitHandleId), UnitVisualMods__NAME)) then // INLINED!!
+                    if (HaveSavedString(UnitVisualMods___hashTable, (unitHandleId), UnitVisualMods___NAME)) then // INLINED!!
                         call Preload("=n " + GUMSGetUnitName(saveUnit))
                     endif
-                    if (HaveSavedHandle(UserDefinedRects__hashTable, (unitHandleId), (0))) then // INLINED!!
+                    if (HaveSavedHandle(UserDefinedRects___hashTable, (unitHandleId), (0))) then // INLINED!!
                         call Preload(Save_GetGUDRSaveString(unitHandleId))
                     endif
                     if (GetUnitAbilityLevel((saveUnit), 'Awrp') > 0) then // INLINED!!
@@ -16385,7 +16388,7 @@ function SaveForceLoop takes nothing returns boolean
                             call Preload("=w " + R2S(WaygateGetDestinationX(saveUnit)) + "=" + R2S(WaygateGetDestinationY(saveUnit)) + "=F=")
                         endif
                     endif
-                    if ((LoadInteger(MultiPatrol__data, - ((unitHandleId)), (9996))) != 0) then // INLINED!!
+                    if ((LoadInteger(MultiPatrol___data, - ((unitHandleId)), (9996))) != 0) then // INLINED!!
                         call Save_SaveUnitPatrolPoints(unitHandleId)
                     endif
                 endif
@@ -16458,7 +16461,7 @@ endfunction
 // 
 //   Warcraft III map script
 //   Generated by the Warcraft III World Editor
-//   Date: Sun May  5 10:24:03 2019
+//   Date: Mon May  6 15:33:15 2019
 //   Map Author: Guhun
 // 
 //===========================================================================
@@ -17495,9 +17498,6 @@ function CreateAllDestructables takes nothing returns nothing
     local real life
     set gg_dest_ATg1_0003=CreateDestructable('ATg1', - 26752.0, 26240.0, 270.000, 0.900, 0)
     set gg_dest_ATg3_0004=CreateDestructable('ATg3', - 26112.0, 26880.0, 0.000, 0.900, 0)
-    set gg_dest_DTg5_0007=CreateDestructable('DTg5', - 25472.0, 27136.0, 270.000, 0.900, 0)
-    set gg_dest_DTg5_0008=CreateDestructable('DTg5', - 25472.0, 26624.0, 270.000, 0.900, 0)
-    set gg_dest_LTe3_0005=CreateDestructable('LTe3', - 24064.0, 26880.0, 0.000, 0.900, 0)
 endfunction
 
 //***************************************************************************
@@ -17514,28 +17514,27 @@ function CreateBuildingsForPlayer0 takes nothing returns nothing
     local trigger t
     local real life
 
-    set u=CreateUnit(p, 'nct2', - 27424.0, 24544.0, 270.000)
-    set u=CreateUnit(p, 'nfr2', - 25472.0, 24576.0, 270.000)
+    set u=CreateUnit(p, 'nct2', - 27872.0, 25440.0, 270.000)
+    set u=CreateUnit(p, 'nfr2', - 27072.0, 24960.0, 270.000)
     set u=CreateUnit(p, 'nwgt', - 22784.0, 22912.0, 270.000)
     call WaygateSetDestination(u, GetRectCenterX(gg_rct_WaygateRed), GetRectCenterY(gg_rct_WaygateRed))
     call WaygateActivate(u, true)
     call SetUnitColor(u, ConvertPlayerColor(0))
-    set u=CreateUnit(p, 'nct1', - 27616.0, 24608.0, 270.000)
-    set u=CreateUnit(p, 'nth1', - 24544.0, 27360.0, 270.000)
-    set u=CreateUnit(p, 'nfr1', - 24448.0, 25920.0, 270.000)
-    set u=CreateUnit(p, 'nth0', - 28160.0, 24576.0, 270.000)
-    set u=CreateUnit(p, 'ngt2', - 27232.0, 24608.0, 270.000)
-    set u=CreateUnit(p, 'nfh1', - 24480.0, 27680.0, 270.000)
-    set u=CreateUnit(p, 'ndh0', - 24448.0, 25664.0, 270.000)
-    set u=CreateUnit(p, 'nmh0', - 24672.0, 24608.0, 270.000)
-    set u=CreateUnit(p, 'nmh1', - 27808.0, 24544.0, 270.000)
-    set u=CreateUnit(p, 'nnzg', - 24544.0, 26144.0, 270.000)
-    set u=CreateUnit(p, 'ndch', - 26048.0, 24576.0, 270.000)
-    set u=CreateUnit(p, 'nhns', - 24448.0, 27968.0, 270.000)
-    set u=CreateUnit(p, 'ndh1', - 24960.0, 24576.0, 270.000)
-    set u=CreateUnit(p, 'ngnh', - 24480.0, 26592.0, 270.000)
-    set u=CreateUnit(p, 'ncnt', - 24480.0, 26336.0, 270.000)
-    set u=CreateUnit(p, 'nfh0', - 25216.0, 24576.0, 270.000)
+    set u=CreateUnit(p, 'nct1', - 27872.0, 25696.0, 270.000)
+    set u=CreateUnit(p, 'nth1', - 26144.0, 25888.0, 270.000)
+    set u=CreateUnit(p, 'nth0', - 26432.0, 25984.0, 270.000)
+    set u=CreateUnit(p, 'ngt2', - 27872.0, 25184.0, 270.000)
+    set u=CreateUnit(p, 'nfh1', - 26400.0, 25760.0, 270.000)
+    set u=CreateUnit(p, 'ndh0', - 27392.0, 25984.0, 270.000)
+    set u=CreateUnit(p, 'nmh0', - 27808.0, 24992.0, 270.000)
+    set u=CreateUnit(p, 'nmh1', - 27616.0, 25952.0, 270.000)
+    set u=CreateUnit(p, 'nnzg', - 27104.0, 25952.0, 270.000)
+    set u=CreateUnit(p, 'ndch', - 27904.0, 25984.0, 270.000)
+    set u=CreateUnit(p, 'nhns', - 27584.0, 25344.0, 270.000)
+    set u=CreateUnit(p, 'ndh1', - 27008.0, 25536.0, 270.000)
+    set u=CreateUnit(p, 'ngnh', - 27296.0, 25056.0, 270.000)
+    set u=CreateUnit(p, 'ncnt', - 27552.0, 25056.0, 270.000)
+    set u=CreateUnit(p, 'nfh0', - 27008.0, 25216.0, 270.000)
     set u=CreateUnit(p, 'nwgt', - 23552.0, 22912.0, 270.000)
     call WaygateSetDestination(u, GetRectCenterX(gg_rct_WaygateBlue), GetRectCenterY(gg_rct_WaygateBlue))
     call WaygateActivate(u, true)
@@ -17550,14 +17549,14 @@ function CreateUnitsForPlayer0 takes nothing returns nothing
     local trigger t
     local real life
 
-    set u=CreateUnit(p, 'ngnw', - 23106.7, 26998.5, 265.330)
-    set u=CreateUnit(p, 'h04K', - 22679.9, 26620.4, 276.611)
-    set u=CreateUnit(p, 'h04I', - 22832.2, 26608.1, 184.345)
-    set u=CreateUnit(p, 'ngns', - 23376.6, 26887.8, 279.039)
-    set u=CreateUnit(p, 'ngna', - 23269.8, 26930.3, 295.131)
-    set u=CreateUnit(p, 'ngnb', - 23215.6, 26720.9, 263.813)
-    set u=CreateUnit(p, 'ngnv', - 23082.5, 26753.6, 270.943)
-    set u=CreateUnit(p, 'ngno', - 23293.7, 26724.7, 268.734)
+    set u=CreateUnit(p, 'ngnw', - 25483.2, 27995.1, 265.330)
+    set u=CreateUnit(p, 'h04K', - 25056.4, 27617.0, 276.611)
+    set u=CreateUnit(p, 'h04I', - 25208.7, 27604.7, 184.345)
+    set u=CreateUnit(p, 'ngns', - 25753.2, 27884.4, 279.039)
+    set u=CreateUnit(p, 'ngna', - 25646.3, 27926.9, 295.131)
+    set u=CreateUnit(p, 'ngnb', - 25592.2, 27717.5, 263.813)
+    set u=CreateUnit(p, 'ngnv', - 25459.0, 27750.2, 270.943)
+    set u=CreateUnit(p, 'ngno', - 25670.2, 27721.3, 268.734)
     set gg_unit_H00V_0359=CreateUnit(p, 'H00V', - 26815.8, 26960.7, 301.444)
     call SetUnitColor(gg_unit_H00V_0359, ConvertPlayerColor(3))
     set gg_unit_e00B_0405=CreateUnit(p, 'e00B', - 27924.4, 28020.3, 182.390)
@@ -17626,6 +17625,7 @@ function CreateBuildingsForPlayer5 takes nothing returns nothing
     local trigger t
     local real life
 
+    set u=CreateUnit(p, 'nfr1', - 27648.0, 25728.0, 270.000)
     set u=CreateUnit(p, 'n000', - 25536.0, 24064.0, 270.000)
 endfunction
 
@@ -17835,60 +17835,62 @@ function CreateNeutralPassiveBuildings takes nothing returns nothing
     local trigger t
     local real life
 
-    set u=CreateUnit(p, 'n02W', - 27968.0, 25536.0, 270.000)
-    set u=CreateUnit(p, 'n02Z', - 23360.0, 25024.0, 270.000)
-    set u=CreateUnit(p, 'n02V', - 27968.0, 25216.0, 270.000)
-    set u=CreateUnit(p, 'n02X', - 27968.0, 24896.0, 270.000)
-    set u=CreateUnit(p, 'n02J', - 22848.0, 25344.0, 270.000)
+    set u=CreateUnit(p, 'n02W', - 25664.0, 26240.0, 270.000)
+    set u=CreateUnit(p, 'n02Z', - 22784.0, 25408.0, 270.000)
+    set u=CreateUnit(p, 'n02V', - 25856.0, 25984.0, 270.000)
+    set u=CreateUnit(p, 'n02X', - 25920.0, 25664.0, 270.000)
+    set u=CreateUnit(p, 'n02J', - 22784.0, 26496.0, 270.000)
     set u=CreateUnit(p, 'u00K', - 768.0, - 13888.0, 270.000)
     set u=CreateUnit(p, 'nshp', 8576.0, 6528.0, 270.000)
     set u=CreateUnit(p, 'nshp', - 3328.0, 5376.0, 270.000)
     set u=CreateUnit(p, 'nshp', - 3712.0, - 1664.0, 270.000)
     set u=CreateUnit(p, 'nshp', 1920.0, - 192.0, 270.000)
-    set u=CreateUnit(p, 'n00Z', - 22976.0, 26048.0, 270.000)
-    set u=CreateUnit(p, 'n03T', - 23232.0, 25152.0, 270.000)
-    set u=CreateUnit(p, 'n03U', - 24000.0, 25792.0, 270.000)
-    set u=CreateUnit(p, 'n03A', - 22848.0, 24832.0, 270.000)
-    set u=CreateUnit(p, 'n02R', - 23424.0, 24704.0, 270.000)
-    set u=CreateUnit(p, 'n015', - 23360.0, 25280.0, 270.000)
-    set u=CreateUnit(p, 'n00R', - 23360.0, 25152.0, 270.000)
-    set u=CreateUnit(p, 'n02P', - 23488.0, 26048.0, 270.000)
-    set u=CreateUnit(p, 'n00S', - 22720.0, 25472.0, 270.000)
-    set u=CreateUnit(p, 'n00X', - 23616.0, 26048.0, 270.000)
-    set u=CreateUnit(p, 'n00O', - 24000.0, 25600.0, 270.000)
-    set u=CreateUnit(p, 'n014', - 23104.0, 26048.0, 270.000)
-    set u=CreateUnit(p, 'ndrk', - 23808.0, 27520.0, 270.000)
-    set u=CreateUnit(p, 'n03D', - 23296.0, 24768.0, 270.000)
-    set u=CreateUnit(p, 'ngme', - 24320.0, 24384.0, 270.000)
-    set u=CreateUnit(p, 'n02I', - 22848.0, 26048.0, 270.000)
-    set u=CreateUnit(p, 'n02U', - 23232.0, 25280.0, 270.000)
-    set u=CreateUnit(p, 'n00P', - 23808.0, 25344.0, 270.000)
-    set u=CreateUnit(p, 'n02C', - 23936.0, 25984.0, 270.000)
-    set u=CreateUnit(p, 'n02L', - 23488.0, 25280.0, 270.000)
-    set u=CreateUnit(p, 'n00D', - 23680.0, 25344.0, 270.000)
-    set u=CreateUnit(p, 'n00W', - 23232.0, 26048.0, 270.000)
-    set u=CreateUnit(p, 'n02K', - 22720.0, 25088.0, 270.000)
-    set u=CreateUnit(p, 'n006', - 22720.0, 25344.0, 270.000)
-    set u=CreateUnit(p, 'n010', - 22720.0, 25984.0, 270.000)
-    set u=CreateUnit(p, 'n005', - 23744.0, 26048.0, 270.000)
-    set u=CreateUnit(p, 'n00H', - 23360.0, 26048.0, 270.000)
-    set u=CreateUnit(p, 'ndrg', - 22784.0, 28032.0, 270.000)
-    set u=CreateUnit(p, 'n00C', - 22848.0, 25216.0, 270.000)
-    set u=CreateUnit(p, 'n00E', - 22720.0, 25856.0, 270.000)
-    set u=CreateUnit(p, 'ndru', - 23296.0, 27520.0, 270.000)
-    set u=CreateUnit(p, 'ndrz', - 22784.0, 27520.0, 270.000)
+    set u=CreateUnit(p, 'n00Z', - 23744.0, 26880.0, 270.000)
+    set u=CreateUnit(p, 'n03T', - 23424.0, 27200.0, 270.000)
+    set u=CreateUnit(p, 'n03U', - 23936.0, 25792.0, 270.000)
+    set u=CreateUnit(p, 'n02R', - 23360.0, 26176.0, 270.000)
+    set u=CreateUnit(p, 'n02R', - 23360.0, 24768.0, 270.000)
+    set u=CreateUnit(p, 'n02R', - 23360.0, 26816.0, 270.000)
+    set u=CreateUnit(p, 'n03A', - 22976.0, 26880.0, 270.000)
+    set u=CreateUnit(p, 'n015', - 23296.0, 25280.0, 270.000)
+    set u=CreateUnit(p, 'n00R', - 23168.0, 25280.0, 270.000)
+    set u=CreateUnit(p, 'n02P', - 23936.0, 26496.0, 270.000)
+    set u=CreateUnit(p, 'n00S', - 22784.0, 26240.0, 270.000)
+    set u=CreateUnit(p, 'n00X', - 23936.0, 26368.0, 270.000)
+    set u=CreateUnit(p, 'n00O', - 23936.0, 25600.0, 270.000)
+    set u=CreateUnit(p, 'n014', - 23872.0, 26880.0, 270.000)
+    set u=CreateUnit(p, 'ndrk', - 23808.0, 27264.0, 270.000)
+    set u=CreateUnit(p, 'n03D', - 22912.0, 25280.0, 270.000)
+    set u=CreateUnit(p, 'ngme', - 23296.0, 25024.0, 270.000)
+    set u=CreateUnit(p, 'n02I', - 23680.0, 27008.0, 270.000)
+    set u=CreateUnit(p, 'n02U', - 23040.0, 27008.0, 270.000)
+    set u=CreateUnit(p, 'n00P', - 23744.0, 25344.0, 270.000)
+    set u=CreateUnit(p, 'n02C', - 23936.0, 26048.0, 270.000)
+    set u=CreateUnit(p, 'n02L', - 23424.0, 25280.0, 270.000)
+    set u=CreateUnit(p, 'n00D', - 23616.0, 25344.0, 270.000)
+    set u=CreateUnit(p, 'n00W', - 23936.0, 26752.0, 270.000)
+    set u=CreateUnit(p, 'n02K', - 22784.0, 25792.0, 270.000)
+    set u=CreateUnit(p, 'n006', - 22784.0, 26048.0, 270.000)
+    set u=CreateUnit(p, 'n010', - 23552.0, 27136.0, 270.000)
+    set u=CreateUnit(p, 'n005', - 23936.0, 26240.0, 270.000)
+    set u=CreateUnit(p, 'n00H', - 23936.0, 26624.0, 270.000)
+    set u=CreateUnit(p, 'ndrg', - 22912.0, 28032.0, 270.000)
+    set u=CreateUnit(p, 'n00C', - 22784.0, 26624.0, 270.000)
+    set u=CreateUnit(p, 'n00E', - 23168.0, 27136.0, 270.000)
+    set u=CreateUnit(p, 'ndru', - 23808.0, 27648.0, 270.000)
+    set u=CreateUnit(p, 'ndrz', - 22912.0, 27264.0, 270.000)
     set u=CreateUnit(p, 'ndro', - 23808.0, 28032.0, 270.000)
-    set u=CreateUnit(p, 'ndrr', - 23296.0, 28032.0, 270.000)
-    set u=CreateUnit(p, 'n00N', - 22720.0, 24960.0, 270.000)
-    set u=CreateUnit(p, 'n00Q', - 24000.0, 25408.0, 270.000)
-    set u=CreateUnit(p, 'n00G', - 22848.0, 25088.0, 270.000)
-    set u=CreateUnit(p, 'n030', - 22720.0, 25216.0, 270.000)
-    set u=CreateUnit(p, 'n033', - 23360.0, 24896.0, 270.000)
-    set u=CreateUnit(p, 'n034', - 22720.0, 24832.0, 270.000)
-    set u=CreateUnit(p, 'n038', - 22848.0, 24960.0, 270.000)
-    set u=CreateUnit(p, 'n02Q', - 22720.0, 25728.0, 270.000)
-    set u=CreateUnit(p, 'n03K', - 22720.0, 25600.0, 270.000)
-    set u=CreateUnit(p, 'nmgv', - 27968.0, 25856.0, 270.000)
+    set u=CreateUnit(p, 'ndrr', - 22912.0, 27648.0, 270.000)
+    set u=CreateUnit(p, 'n00N', - 22784.0, 25664.0, 270.000)
+    set u=CreateUnit(p, 'n00Q', - 23936.0, 25408.0, 270.000)
+    set u=CreateUnit(p, 'n00G', - 22784.0, 26752.0, 270.000)
+    set u=CreateUnit(p, 'n030', - 22784.0, 25920.0, 270.000)
+    set u=CreateUnit(p, 'n033', - 22784.0, 25280.0, 270.000)
+    set u=CreateUnit(p, 'n034', - 22784.0, 25536.0, 270.000)
+    set u=CreateUnit(p, 'n038', - 22848.0, 26880.0, 270.000)
+    set u=CreateUnit(p, 'n02Q', - 23296.0, 27200.0, 270.000)
+    set u=CreateUnit(p, 'n03K', - 22784.0, 26368.0, 270.000)
+    set u=CreateUnit(p, 'nmgv', - 25792.0, 26560.0, 270.000)
     set u=CreateUnit(p, 'ntav', - 23296.0, 23808.0, 270.000)
     call SetUnitColor(u, ConvertPlayerColor(0))
     set u=CreateUnit(p, 'u00K', - 768.0, - 13568.0, 270.000)
@@ -17912,7 +17914,7 @@ function CreateNeutralPassive takes nothing returns nothing
     set u=CreateUnit(p, 'Ekgg', - 25163.5, 27943.6, 294.712)
     set u=CreateUnit(p, 'Hgam', - 25306.9, 27929.4, 273.447)
     set u=CreateUnit(p, 'H060', - 25446.9, 27952.7, 272.054)
-    set u=CreateUnit(p, 'H00T', - 24936.2, 26472.6, 274.040)
+    set u=CreateUnit(p, 'H00T', - 25771.6, 27564.9, 274.040)
     set u=CreateUnit(p, 'h0K8', - 19290.2, 27008.7, 320.382)
     set u=CreateUnit(p, 'h0K6', - 20239.0, 26842.0, 355.627)
     set u=CreateUnit(p, 'h0K6', - 20831.5, 26509.4, 98.902)
@@ -18457,7 +18459,7 @@ endfunction
 //===========================================================================
 // Trigger: Init Main
 //===========================================================================
-function Trig_Init_Main_Func031A takes nothing returns nothing
+function Trig_Init_Main_Func030A takes nothing returns nothing
     local integer l__udg_temp_integer= GetPlayerId(GetEnumPlayer()) + 1
     local player l__udg_temp_player
     set l__udg_temp_player=ConvertedPlayer(l__udg_temp_integer)
@@ -18489,19 +18491,19 @@ function Trig_Init_Main_Func031A takes nothing returns nothing
     // --
 endfunction
 
-function Trig_Init_Main_Func036001002001 takes nothing returns boolean
+function Trig_Init_Main_Func035001002001 takes nothing returns boolean
     return ( IsUnitType(GetFilterUnit(), UNIT_TYPE_STRUCTURE) == true )
 endfunction
 
-function Trig_Init_Main_Func036001002002 takes nothing returns boolean
+function Trig_Init_Main_Func035001002002 takes nothing returns boolean
     return ( RectContainsUnit(gg_rct_Titan_Palace, GetFilterUnit()) == false )
 endfunction
 
-function Trig_Init_Main_Func036001002 takes nothing returns boolean
+function Trig_Init_Main_Func035001002 takes nothing returns boolean
     return GetBooleanAnd((IsUnitType(GetFilterUnit(), UNIT_TYPE_STRUCTURE) == true), (RectContainsUnit(gg_rct_Titan_Palace, GetFilterUnit()) == false)) // INLINED!!
 endfunction
 
-function Trig_Init_Main_Func036A takes nothing returns nothing
+function Trig_Init_Main_Func035A takes nothing returns nothing
     call SetUnitOwner(GetEnumUnit(), Player(PLAYER_NEUTRAL_PASSIVE), true)
 endfunction
 
@@ -18523,10 +18525,9 @@ function Trig_Init_Main_Actions takes nothing returns nothing
     endif
     // Make destructibles invulnerable
     call SetDestructableInvulnerableBJ(gg_dest_ATg1_0003, true)
+    call ModifyGateBJ(bj_GATEOPERATION_OPEN, gg_dest_ATg1_0003)
     call SetDestructableInvulnerableBJ(gg_dest_ATg3_0004, true)
-    call SetDestructableInvulnerableBJ(gg_dest_DTg5_0008, true)
-    call SetDestructableInvulnerableBJ(gg_dest_DTg5_0007, true)
-    call SetDestructableInvulnerableBJ(gg_dest_LTe3_0005, true)
+    call ModifyGateBJ(bj_GATEOPERATION_OPEN, gg_dest_ATg3_0004)
     // ---------------
     // Ally Players and Create Spawns
     // ---------------
@@ -18549,12 +18550,12 @@ function Trig_Init_Main_Actions takes nothing returns nothing
         set l__udg_temp_integer=l__udg_temp_integer + 1
     endloop
     set l__udg_Commands_Integer=( l__udg_Commands_Integer + 1 )
-    call ForForce(GetPlayersAll(), function Trig_Init_Main_Func031A)
+    call ForForce(GetPlayersAll(), function Trig_Init_Main_Func030A)
     // Setup Starting Units
     call SetHeroLevelBJ(gg_unit_H00V_0359, 100, false)
     call UnitAddItemByIdSwapped('I00D', gg_unit_H00V_0359)
     set bj_wantDestroyGroup=true
-    call ForGroupBJ(GetUnitsOfPlayerMatching(Player(0), Condition(function Trig_Init_Main_Func036001002)), function Trig_Init_Main_Func036A)
+    call ForGroupBJ(GetUnitsOfPlayerMatching(Player(0), Condition(function Trig_Init_Main_Func035001002)), function Trig_Init_Main_Func035A)
     call DisplayTextToForce(GetPlayersAll(), "Map Initialization was Successful! Welcome to the Land of Plenty!
 Check out F9 for new commands or if you never played Titan Land before.")
 endfunction
@@ -18799,7 +18800,7 @@ endfunction
 function Filter_UnitSetPlayerColor takes nothing returns boolean
     local unit filterU= GetFilterUnit()
 
-    if not (HaveSavedInteger((UnitVisualMods__hashTable), (((((GetHandleId((filterU))))))), (UnitVisualMods__COLOR))) then // INLINED!!
+    if not (HaveSavedInteger((UnitVisualMods___hashTable), (((((GetHandleId((filterU))))))), (UnitVisualMods___COLOR))) then // INLINED!!
         call SetUnitColor(filterU, (s__LoP_PlayerData_playerColors[((GetPlayerId((GetOwningPlayer(filterU)))))])) // INLINED!!
     endif
 
@@ -18850,7 +18851,7 @@ function Trig_System_Autoname_Actions takes nothing returns boolean
     local player trigPlayer= GetTriggerPlayer()
     local unit trigUnit= GetTriggerUnit()
 
-    if (HaveSavedString(UnitVisualMods__hashTable, (GetHandleId(trigUnit)), UnitVisualMods__NAME)) and GetOwningPlayer(trigUnit) == trigPlayer and udg_System_AutonameBoolean[GetPlayerId(trigPlayer) + 1] then // INLINED!!
+    if (HaveSavedString(UnitVisualMods___hashTable, (GetHandleId(trigUnit)), UnitVisualMods___NAME)) and GetOwningPlayer(trigUnit) == trigPlayer and udg_System_AutonameBoolean[GetPlayerId(trigPlayer) + 1] then // INLINED!!
         call SetPlayerName(trigPlayer, GUMSGetUnitName(trigUnit))
     endif
 
@@ -18862,62 +18863,6 @@ endfunction
 function InitTrig_System_Autoname takes nothing returns nothing
     set gg_trg_System_Autoname=CreateTrigger()
     call TriggerAddCondition(gg_trg_System_Autoname, Condition(function Trig_System_Autoname_Actions))
-endfunction
-
-//===========================================================================
-// Trigger: System TPalace Doors
-//===========================================================================
-function Trig_System_TPalace_Doors_Actions takes nothing returns nothing
-    local group rectGroup= CreateGroup()
-    
-    call GroupEnumUnitsInRect(rectGroup, gg_rct_DoorIceTitan, null)
-    if IsGroupEmpty(rectGroup) then
-        call ModifyGateBJ(bj_GATEOPERATION_CLOSE, gg_dest_LTe3_0005)
-    else
-        call ModifyGateBJ(bj_GATEOPERATION_OPEN, gg_dest_LTe3_0005)
-    endif
-    call GroupClear(rectGroup)
-    
-    call GroupEnumUnitsInRect(rectGroup, gg_rct_DoorTitanA, null)
-    if IsGroupEmpty(rectGroup) then
-        call ModifyGateBJ(bj_GATEOPERATION_CLOSE, gg_dest_ATg3_0004)
-    else
-        call ModifyGateBJ(bj_GATEOPERATION_OPEN, gg_dest_ATg3_0004)
-    endif
-    call GroupClear(rectGroup)
-    
-    call GroupEnumUnitsInRect(rectGroup, gg_rct_DoorTitanB, null)
-    if IsGroupEmpty(rectGroup) then
-        call ModifyGateBJ(bj_GATEOPERATION_CLOSE, gg_dest_ATg1_0003)
-    else
-        call ModifyGateBJ(bj_GATEOPERATION_OPEN, gg_dest_ATg1_0003)
-    endif
-    call GroupClear(rectGroup)
-    
-    call GroupEnumUnitsInRect(rectGroup, gg_rct_DoorTreasureA, null)
-    if IsGroupEmpty(rectGroup) then
-        call ModifyGateBJ(bj_GATEOPERATION_CLOSE, gg_dest_DTg5_0007)
-    else
-        call ModifyGateBJ(bj_GATEOPERATION_OPEN, gg_dest_DTg5_0007)
-    endif
-    call GroupClear(rectGroup)
-    
-    call GroupEnumUnitsInRect(rectGroup, gg_rct_DoorTreasureB, null)
-    if IsGroupEmpty(rectGroup) then
-        call ModifyGateBJ(bj_GATEOPERATION_CLOSE, gg_dest_DTg5_0008)
-    else
-        call ModifyGateBJ(bj_GATEOPERATION_OPEN, gg_dest_DTg5_0008)
-    endif
-    
-    call DestroyGroup(rectGroup)
-    set rectGroup=null
-endfunction
-
-//===========================================================================
-function InitTrig_System_TPalace_Doors takes nothing returns nothing
-    set gg_trg_System_TPalace_Doors=CreateTrigger()
-    call TriggerRegisterTimerEvent(gg_trg_System_TPalace_Doors, 0.50, true)
-    call TriggerAddAction(gg_trg_System_TPalace_Doors, function Trig_System_TPalace_Doors_Actions)
 endfunction
 
 //===========================================================================
@@ -20087,10 +20032,10 @@ function Trig_Commands_Copy_Conditions takes nothing returns boolean
 
     call GroupEnumUnitsSelected(g, GetTriggerPlayer(), null)
 
-    if (HaveSavedHandle(UserDefinedRects__hashTable, (GetHandleId((FirstOfGroup(g)))), (6))) then // INLINED!!
+    if (HaveSavedHandle(UserDefinedRects___hashTable, (GetHandleId((FirstOfGroup(g)))), (6))) then // INLINED!!
         set generator=FirstOfGroup(g)
         call DestroyGroup(g)
-        set g=(LoadGroupHandle(UserDefinedRects__hashTable, (GetHandleId((generator))), (6))) // INLINED!!
+        set g=(LoadGroupHandle(UserDefinedRects___hashTable, (GetHandleId((generator))), (6))) // INLINED!!
     endif
 
     call GroupRemoveGroup(udg_System_ProtectedGroup, g)
@@ -21539,12 +21484,15 @@ endfunction
 
 function Trig_Deco_RangedBuild_Actions takes nothing returns nothing
     local unit u= GetTriggerUnit()
-    local timer t= CreateTimer()
+    local timer t
     local integer builtUnitType= GetIssuedOrderId()
     
-    if not IsUnitIdType(builtUnitType, UNIT_TYPE_MECHANICAL) or ( GetUnitAbilityLevel(u, 'A0C7') != 0 ) or ( GetUnitAbilityLevel(u, 'A0C8') != 0 ) or ( GetUnitAbilityLevel(u, 'A0CA') == 0 ) then
+    if not IsUnitIdType(builtUnitType, UNIT_TYPE_MECHANICAL) or not (GetUnitAbilityLevel((u), 'A00J') > 0) then // INLINED!!
+        set u=null
         return
     endif
+    
+    set t=CreateTimer()
     
     call CreateUnit(GetOwningPlayer(u), builtUnitType, GetOrderPointX(), GetOrderPointY(), bj_UNIT_FACING)
     
@@ -22241,7 +22189,7 @@ endfunction
 //===========================================================================
 // scope MultiPatrolCommands begins
 
-function MultiPatrolCommands__CommandActions takes nothing returns nothing
+function MultiPatrolCommands___CommandActions takes nothing returns nothing
     local group selectedGrp= CreateGroup()
     local unit u
 
@@ -22270,10 +22218,10 @@ function MultiPatrolCommands__CommandActions takes nothing returns nothing
     set u=null
 endfunction
 
-function MultiPatrolCommands__onInit takes nothing returns nothing
+function MultiPatrolCommands___onInit takes nothing returns nothing
     local trigger trig= CreateTrigger()
     local integer i= 0
-    call TriggerAddAction(trig, function MultiPatrolCommands__CommandActions)
+    call TriggerAddAction(trig, function MultiPatrolCommands___CommandActions)
     
     loop
     exitwhen i >= bj_MAX_PLAYERS
@@ -22288,7 +22236,7 @@ endfunction
 
 // scope MultiPatrolOrder begins
 
-function MultiPatrolOrder__IsUnitOnlySelected takes unit trigU returns boolean
+function MultiPatrolOrder___IsUnitOnlySelected takes unit trigU returns boolean
     local group selectedGrp= CreateGroup()
     local unit firstOfGrp
     local integer groupCounter= 0
@@ -22314,10 +22262,10 @@ function MultiPatrolOrder__IsUnitOnlySelected takes unit trigU returns boolean
     return groupCounter == 1 and trigUnitInSelection
 endfunction
 
-function MultiPatrolOrder__OnPatrolOrderCondition takes nothing returns boolean
+function MultiPatrolOrder___OnPatrolOrderCondition takes nothing returns boolean
     local unit trigU= GetTriggerUnit()
     
-    if Patrol_IsValidPatrolOrder(GetIssuedOrderId()) and MultiPatrolOrder__IsUnitOnlySelected(trigU) then
+    if Patrol_IsValidPatrolOrder(GetIssuedOrderId()) and MultiPatrolOrder___IsUnitOnlySelected(trigU) then
         call Patrol_RegisterPoint(trigU , GetOrderPointX() , GetOrderPointY())
     endif
     
@@ -22326,11 +22274,11 @@ function MultiPatrolOrder__OnPatrolOrderCondition takes nothing returns boolean
     return false
 endfunction
 
-function MultiPatrolOrder__onInit takes nothing returns nothing
+function MultiPatrolOrder___onInit takes nothing returns nothing
     local trigger trig= CreateTrigger()
     
     call TriggerRegisterAnyUnitEventBJ(trig, EVENT_PLAYER_UNIT_ISSUED_POINT_ORDER)
-    call TriggerAddCondition(trig, Condition(function MultiPatrolOrder__OnPatrolOrderCondition))
+    call TriggerAddCondition(trig, Condition(function MultiPatrolOrder___OnPatrolOrderCondition))
 endfunction
 
 // scope MultiPatrolOrder ends
@@ -24991,14 +24939,14 @@ endfunction
 //
 // Putting everything in one trigger is less readable but  more efficient for player chat event performance
 //===========================================================================
-function Trig_SaveLoad_Commands_Func008Func023Func006C takes nothing returns boolean
+function Trig_SaveLoad_Commands_Func008Func024Func006C takes nothing returns boolean
     if ( not ( GetTriggerPlayer() == udg_GAME_MASTER ) ) then
         return false
     endif
     return true
 endfunction
 
-function Trig_SaveLoad_Commands_Func008Func023C takes nothing returns boolean
+function Trig_SaveLoad_Commands_Func008Func024C takes nothing returns boolean
     if ( not ( GetEventPlayerChatString() == "-nosave units" ) ) then
         return false
     endif
@@ -25014,7 +24962,7 @@ endfunction
 
 function Trig_SaveLoad_Commands_Actions takes nothing returns nothing
     // LOCALS
-    local group l__udg_temp_group= CreateGroup()
+    local group l__udg_temp_group
     local unit l__udg_temp_unit
     local location l__udg_temp_point
     local integer l__udg_temp_integer
@@ -25022,6 +24970,7 @@ function Trig_SaveLoad_Commands_Actions takes nothing returns nothing
     // LOCALS
     if ( Trig_SaveLoad_Commands_Func008C() ) then
         // CENTER COMMAND
+        set l__udg_temp_group=CreateGroup()
         set l__udg_temp_integer=GetConvertedPlayerId(GetTriggerPlayer())
         call GroupEnumUnitsSelected(l__udg_temp_group, GetTriggerPlayer(), null)
         set l__udg_temp_unit=GroupPickRandomUnit(l__udg_temp_group)
@@ -25043,10 +24992,10 @@ function Trig_SaveLoad_Commands_Actions takes nothing returns nothing
         set l__udg_temp_point=null
         // CENTER COMMAND
     else
-        if ( Trig_SaveLoad_Commands_Func008Func023C() ) then
+        if ( Trig_SaveLoad_Commands_Func008Func024C() ) then
         else
             // SET LOAD LIMIT COMMAND
-            if ( Trig_SaveLoad_Commands_Func008Func023Func006C() ) then
+            if ( Trig_SaveLoad_Commands_Func008Func024Func006C() ) then
                 set udg_load_limit=S2I(SubStringBJ(GetEventPlayerChatString(), 13, 16))
                 call DisplayTextToForce(GetPlayersAll(), ( "Unit Load Limit has been set to " + I2S(udg_load_limit) ))
                 // Double conversion ensures that, if for some reason the first conversion did not work out, the players won't receive the correct message
@@ -25182,7 +25131,7 @@ function SaveLoopActions2 takes nothing returns nothing
 
     
     
-    set rectangle=(LoadRectHandle(UserDefinedRects__hashTable, (genId), (0))) // INLINED!!
+    set rectangle=(LoadRectHandle(UserDefinedRects___hashTable, (genId), (0))) // INLINED!!
     if GetLocalPlayer() == saver then
         call PreloadGenClear()
         call PreloadGenStart()
@@ -25262,7 +25211,7 @@ function SaveTerrain takes nothing returns nothing
         return
     endif
     
-    set saveRect=(LoadRectHandle(UserDefinedRects__hashTable, (genId), (0))) // INLINED!!
+    set saveRect=(LoadRectHandle(UserDefinedRects___hashTable, (genId), (0))) // INLINED!!
     set udg_save_XYminmaxcur[playerNumber]=GetRectMinX(saveRect)
     set udg_save_XYminmaxcur[playerNumber + bj_MAX_PLAYERS]=GetRectMaxX(saveRect)
     set udg_save_XYminmaxcur[playerNumber + 3 * bj_MAX_PLAYERS]=GetRectMinY(saveRect)
@@ -25388,9 +25337,9 @@ endfunction
         
         
         // TODO: Create function to set first patrol in the GPS library
-        if not ((LoadInteger(MultiPatrol__data, - ((GetHandleId((whichUnit)))), (9996))) != 0) then // INLINED!!
+        if not ((LoadInteger(MultiPatrol___data, - ((GetHandleId((whichUnit)))), (9996))) != 0) then // INLINED!!
             call SetUnitPosition(whichUnit, x, y)
-            call SaveInteger(MultiPatrol__data, - (GetHandleId(whichUnit) ), (9996), ( 1)) // INLINED!!
+            call SaveInteger(MultiPatrol___data, - (GetHandleId(whichUnit) ), (9996), ( 1)) // INLINED!!
         else
             call Patrol_RegisterPoint(whichUnit , x , y)
         endif
@@ -27891,7 +27840,7 @@ function Trig_Make_Unit_Selectable_Func003A takes nothing returns nothing
     local real locX= GetLocationX(udg_Spell__TargetPoint)
     local real locY= GetLocationY(udg_Spell__TargetPoint)
     if SquareRoot(( unitX - locX ) * ( unitX - locX ) + ( unitY - locY ) * ( unitY - locY )) <= 300 then
-        if (LoadInteger(UnitVisualMods__hashTable, GetHandleId((enumUnit)), UnitVisualMods__SELECT)) != 0 then // INLINED!!
+        if (LoadInteger(UnitVisualMods___hashTable, GetHandleId((enumUnit)), UnitVisualMods___SELECT)) != 0 then // INLINED!!
             call GUMSMakeUnitSelectable(enumUnit)
             call KillUnit(enumUnit)
         endif
@@ -28018,7 +27967,11 @@ endfunction
 
 
 function StaffOfMimic___onStartEffect takes nothing returns nothing
-    if IsValidHeroicUnit(udg_Spell__Target , GetOwningPlayer(udg_Spell__Caster)) then
+    if (IsUnitInGroup((udg_Spell__Target), udg_System_ProtectedGroup)) then // INLINED!!
+        call DisplayTextToPlayer(GetOwningPlayer(udg_Spell__Caster), 0, 0, "This unit's powers far exceed mortal imagination. No type of forgery can mimic their unfathomable form.")
+    elseif IsUnitType(udg_Spell__Target, UNIT_TYPE_HERO) then
+        call CreateUnitMimic(udg_Spell__Caster , udg_Spell__Target)
+    elseif IsValidHeroicUnit(udg_Spell__Target , GetOwningPlayer(udg_Spell__Caster)) then
         call CreateUnitMimic(udg_Spell__Caster , udg_Spell__Target)
     endif
 endfunction
@@ -28195,6 +28148,7 @@ function Trig_Aura_Of_Restitution_ForGroup_HealNearbyAllies takes nothing return
     
     //Null locals
     set nearbyAlliesGroup=null
+    set enumUnit=null
 endfunction
 
 function Trig_Aura_Of_Restitution_Actions takes nothing returns nothing
@@ -28396,7 +28350,6 @@ function InitCustomTriggers takes nothing returns nothing
     call InitTrig_System_Set_Unit_Color()
     call InitTrig_System_Level_Up_Heroes()
     call InitTrig_System_Autoname()
-    call InitTrig_System_TPalace_Doors()
     call InitTrig_System_Detect_Leaver()
     call InitTrig_System_Player_Locations()
     call InitTrig_System_Give_Potion_to_Hero()
@@ -32217,17 +32170,17 @@ function main takes nothing returns nothing
     call CreateAllUnits()
     call InitBlizzard()
 
-call ExecuteFunc("jasshelper__initstructs639909718")
-call ExecuteFunc("DestructableLib__Initialization")
-call ExecuteFunc("MultiPatrol__onInit")
+call ExecuteFunc("jasshelper__initstructs15823578")
+call ExecuteFunc("DestructableLib___Initialization")
+call ExecuteFunc("MultiPatrol___onInit")
 call ExecuteFunc("FilterTransformations___onInit")
 call ExecuteFunc("onInit")
-call ExecuteFunc("UserDefinedRects__onInit")
-call ExecuteFunc("RectGenerator__onInit")
+call ExecuteFunc("UserDefinedRects___onInit")
+call ExecuteFunc("RectGenerator___onInit")
 call LoPItemCleanup__onInit()
 call TitanPowers__onInit()
-call MultiPatrolCommands__onInit()
-call MultiPatrolOrder__onInit()
+call MultiPatrolCommands___onInit()
+call MultiPatrolOrder___onInit()
 
     call InitGlobals()
     call InitCustomTriggers()
@@ -32300,7 +32253,7 @@ set f__result_integer= (LoadInteger(ConstTable__ht, (((s__UnitEvents_onRemove_im
    return true
 endfunction
 
-function jasshelper__initstructs639909718 takes nothing returns nothing
+function jasshelper__initstructs15823578 takes nothing returns nothing
     set st__UnitEvents__get_onDeath=CreateTrigger()
     call TriggerAddCondition(st__UnitEvents__get_onDeath,Condition( function sa__UnitEvents__get_onDeath))
     set st__UnitEvents__get_onRemove=CreateTrigger()
@@ -32355,7 +32308,7 @@ function jasshelper__initstructs639909718 takes nothing returns nothing
 
 
 
-call ExecuteFunc("s__WorldBounds_WorldBounds__WorldBoundInit___onInit")
+call ExecuteFunc("s__WorldBounds_WorldBounds___WorldBoundInit___onInit")
 
 
 
@@ -32403,9 +32356,9 @@ call ExecuteFunc("s__WorldBounds_WorldBounds__WorldBoundInit___onInit")
 
 
 
-call ExecuteFunc("s__DummyRecycler__S_DummyRecycler__M___onInit")
+call ExecuteFunc("s__DummyRecycler___S_DummyRecycler___M___onInit")
 
-call ExecuteFunc("s__TileDefinition__TileDefinition_TileDefinition__Init___onInit")
+call ExecuteFunc("s__TileDefinition___TileDefinition_TileDefinition___Init___onInit")
 
 
 
@@ -32422,10 +32375,10 @@ call ExecuteFunc("s__LoP_DecoBuilders_LoPDecoBuilders__InitModule___onInit")
 
 
 
-call ExecuteFunc("s__TerrainTools__InitStruct_TerrainTools__InitModule___onInit")
+call ExecuteFunc("s__TerrainTools___InitStruct_TerrainTools___InitModule___onInit")
 
 
-call ExecuteFunc("s__AutoRectEnvironment__InitStruct_AutoRectEnvironment__InitModule___onInit")
+call ExecuteFunc("s__AutoRectEnvironment___InitStruct_AutoRectEnvironment___InitModule___onInit")
 
 
 
@@ -32531,7 +32484,7 @@ call ExecuteFunc("s__AutoRectEnvironment__InitStruct_AutoRectEnvironment__InitMo
 
 
 
-call ExecuteFunc("s__UnitVisualMods__InitStruct_UnitVisualMods__InitModule___onInit")
+call ExecuteFunc("s__UnitVisualMods___InitStruct_UnitVisualMods___InitModule___onInit")
 
 
 
