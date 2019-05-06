@@ -4,7 +4,11 @@ scope StaffOfMimic
 
 
 private function onStartEffect takes nothing returns nothing
-    if IsValidHeroicUnit(udg_Spell__Target, GetOwningPlayer(udg_Spell__Caster)) then
+    if LoP_IsUnitProtected(udg_Spell__Target) then
+        call DisplayTextToPlayer(GetOwningPlayer(udg_Spell__Caster), 0, 0, "This unit's powers far exceed mortal imagination. No type of forgery can mimic their unfathomable form.")
+    elseif IsUnitType(udg_Spell__Target, UNIT_TYPE_HERO) then
+        call CreateUnitMimic(udg_Spell__Caster, udg_Spell__Target)
+    elseif IsValidHeroicUnit(udg_Spell__Target, GetOwningPlayer(udg_Spell__Caster)) then
         call CreateUnitMimic(udg_Spell__Caster, udg_Spell__Target)
     endif
 endfunction
