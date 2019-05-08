@@ -158,6 +158,11 @@ function AgentFlush takes integer agentKey returns nothing
     call FlushChildHashtable(hashTable, agentKey)
 endfunction
 
+
+function AgentHaveSavedReal takes integer agentKey, integer whichKey returns boolean
+    return HaveSavedReal(hashTable, agentKey, whichKey)
+endfunction
+
 //===========================================================================
 // End of Agent Key system
 //===========================================================================
