@@ -457,3 +457,10 @@
     2-SpecialEffect: SpecialEffect
     3-PlayerSpecialEffect: PlayerSpecialEffect
     4-UnitSpecialEffect: UnitSpecialEffect
+48-Memory: Memory
+    1-TimerMemory: TimerMemory
+        Disab
+    2-TriggerMemory: TriggerMemory
+        Disab
+    3-RegionMemory: RegionMemory
+        Disab
