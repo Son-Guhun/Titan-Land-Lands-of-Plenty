@@ -88,7 +88,7 @@ private function Conditions takes nothing returns boolean
     call BlzSetSpecialEffectPitch(e, bj_PI/12.)
     call BlzSetSpecialEffectScale(e, 2.)
     call DestroyEffect(e)
-    call TimerStart(t, .75, true, function onExpire)
+    call TimerStart(t, .75, false, function onExpire)
     
     set t = null
     set e = null

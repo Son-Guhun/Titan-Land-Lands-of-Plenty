@@ -57,6 +57,7 @@ function RemoveUnitMimic takes unit mimic returns nothing
         call SetUnitY(original, GetUnitY(mimic))
         call DestroyEffect(AddSpecialEffect("Abilities\\Spells\\Orc\\FeralSpirit\\feralspirittarget.mdl", GetUnitX(mimic), GetUnitY(mimic)))
         // remove heroic unit
+        set original = null
     endif
 endfunction
 
@@ -64,6 +65,7 @@ function onRemove takes nothing returns boolean
     local unit original = UnitData(GetHandleId(UnitEvents.getEventUnit())).original
     call RemoveUnitMimic(UnitEvents.getEventUnit())
     call RemoveUnit(original)
+    set original = null
     return false
 endfunction
 
@@ -129,6 +131,7 @@ function CreateUnitMimic takes unit whichUnit, unit target returns nothing
     endif
     
     set original = null
+    set mimic = null
 endfunction
 
 endlibrary
