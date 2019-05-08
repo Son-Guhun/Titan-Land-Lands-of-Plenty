@@ -42,8 +42,8 @@ library LoPHeroicUnit requires LoPHeader, LoPWidgets
         elseif GetUnitAbilityLevel(whichUnit, 'AInv') > 0 then  // Detects all inventory skills.
             // call DisplayTextToPlayer(errorMsgPlayer, 0, 0, "This unit has an inventory, it can't be a hero.")
             call DisplayTextToPlayer(errorMsgPlayer, 0, 0, "This type of unit cannot become a hero.")
-        elseif IsUnitType(whichUnit, UNIT_TYPE_ATTACKS_GROUND) then
-            call DisplayTextToPlayer(errorMsgPlayer, 0, 0, "Artillery units cannot be heroes.")  // Orb effects crash the game when attacking ground.
+        //elseif IsUnitType(whichUnit, UNIT_TYPE_ATTACKS_GROUND) == true then
+        //    call DisplayTextToPlayer(errorMsgPlayer, 0, 0, "Artillery units cannot be heroes.")  // Orb effects crash the game when attacking ground.
         else
             return true
         endif
