@@ -470,13 +470,15 @@ endfunction
 function GUMSResetUnitName takes unit whichUnit returns nothing
     local integer unitHandle = GetHandleId(whichUnit)
     
-    if IsUnitType(whichUnit, UNIT_TYPE_HERO) then
-        call BlzSetHeroProperName(whichUnit, GUMSGetDefaultName(unitHandle))
-    else
-        call BlzSetUnitName(whichUnit, GUMSGetDefaultName(unitHandle))
-    endif
+    if GUMSUnitHasCustomName(unitHandle) then
+        if IsUnitType(whichUnit, UNIT_TYPE_HERO) then
+            call BlzSetHeroProperName(whichUnit, GUMSGetDefaultName(unitHandle))
+        else
+            call BlzSetUnitName(whichUnit, GUMSGetDefaultName(unitHandle))
+        endif
     
-    call RemoveSavedString(hashTable, unitHandle, NAME)
+        call RemoveSavedString(hashTable, unitHandle, NAME)
+    endif
 endfunction
 
 function GUMSSetUnitName takes unit whichUnit, string name returns nothing
