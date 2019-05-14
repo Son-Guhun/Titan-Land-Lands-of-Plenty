@@ -14,9 +14,8 @@ Action
         Const : 'local integer udg_temp_integer'
     CustomScriptCode
         Const : 'local integer my_ability = GetSpellAbilityId()'
-    SetVariable
-        Var   : temp_point
-        Call  : GetSpellTargetLoc
+    CustomScriptCode
+        Const : 'set udg_temp_point = Location(GetTileCenterCoordinate(GetSpellTargetX()),GetTileCenterCoordinate(GetSpellTargetY()))'
     ForLoopVarMultiple
         Var   : temp_integer
         Const : 0
@@ -65,13 +64,16 @@ Action
                     Call  : GetTriggerUnit
                 Var   : temp_point
                 Call  : OperatorReal
-                    Const : 64.00
+                    Const : 128.00
                     Preset: OperatorMultiply
-                    Call  : I2R
-                        Array : DecoSystem_Value
-                            Call  : GetConvertedPlayerId
-                                Call  : GetOwningPlayer
-                                    Call  : GetTriggerUnit
+                    Call  : OperatorReal
+                        Call  : I2R
+                            Array : DecoSystem_Value
+                                Call  : GetConvertedPlayerId
+                                    Call  : GetOwningPlayer
+                                        Call  : GetTriggerUnit
+                        Preset: OperatorSubtract
+                        Const : 1
     IfThenElseMultiple
         Condition
             OperatorCompareAbilityId
@@ -85,13 +87,16 @@ Action
                     Call  : GetTriggerUnit
                 Var   : temp_point
                 Call  : OperatorReal
-                    Const : 64.00
+                    Const : 128.00
                     Preset: OperatorMultiply
-                    Call  : I2R
-                        Array : DecoSystem_Value
-                            Call  : GetConvertedPlayerId
-                                Call  : GetOwningPlayer
-                                    Call  : GetTriggerUnit
+                    Call  : OperatorReal
+                        Call  : I2R
+                            Array : DecoSystem_Value
+                                Call  : GetConvertedPlayerId
+                                    Call  : GetOwningPlayer
+                                        Call  : GetTriggerUnit
+                        Preset: OperatorSubtract
+                        Const : 1
     CustomScriptCode
         Const : 'call RemoveLocation(udg_temp_point)'
     CustomScriptCode
