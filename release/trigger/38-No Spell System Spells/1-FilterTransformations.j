@@ -57,7 +57,9 @@ private function onInit takes nothing returns nothing
     set Order.morphOrders.boolean[OrderId("stoneform")]       = true
     set Order.morphOrders.boolean[OrderId("unstoneform")]     = true
     set Order.morphOrders.boolean[OrderId("chemicalrage")]    = true
-    set Order.morphOrders.boolean[OrderId("elementalfury")]    = true
+    set Order.morphOrders.boolean[OrderId("elementalfury")]   = true
+    set Order.morphOrders.boolean[OrderId("polymorph")]   = true
+    set Order.morphOrders.boolean[OrderId("hex")]   = true
 
     // Necrotic Orders
     set Order.necroticOrders.boolean[OrderId("raisedead")]             = true
