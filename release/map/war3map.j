@@ -121,8 +121,8 @@ integer Table___more= 8190
     //Configure it if you use more than 8190 "key" variables in your map (this will never happen though).
    
 hashtable Table___ht= InitHashtable()
-constant integer Table___sizeK=6
-constant integer Table___listK=7
+constant integer Table___sizeK=8
+constant integer Table___listK=9
 //endglobals from Table
 //globals from ThirdPersonCamera:
 constant boolean LIBRARY_ThirdPersonCamera=true
@@ -204,7 +204,7 @@ constant real DummyRecycler___FACING_OFFSET= 180.0 / DummyRecycler___ANGLES_COUN
 //endglobals from DummyRecycler
 //globals from Lists:
 constant boolean LIBRARY_Lists=true
-constant integer Lists_RECYCLE_KEY=8
+constant integer Lists_RECYCLE_KEY=10
 constant boolean Lists_ENABLE_GUI= false
 hashtable Lists___hashTable= InitHashtable()
 //endglobals from Lists
@@ -288,9 +288,9 @@ constant real CombatTag_SPELL_BLUE= 100.00
 constant real CombatTag_HEAL_RED= 0.
 constant real CombatTag_HEAL_GREEN= 0.
 constant real CombatTag_HEAL_BLUE= 0.
-constant integer CombatTag_PHYS_DAMAGE=9
-constant integer CombatTag_SPELL_DAMAGE=10
-constant integer CombatTag_HEALING=11
+constant integer CombatTag_PHYS_DAMAGE=11
+constant integer CombatTag_SPELL_DAMAGE=12
+constant integer CombatTag_HEALING=13
 //endglobals from CombatTag
 //globals from FilterTransformations:
 constant boolean LIBRARY_FilterTransformations=true
@@ -365,7 +365,7 @@ constant boolean UnitVisualModsDefaults_COLOR= true
 constant boolean LIBRARY_UserDefinedRects=true
 hashtable UserDefinedRects___hashTable= InitHashtable()
 weathereffect array UserDefinedRects___weatherEffects
-constant integer UserDefinedRects___RECYCLE_KEY=12
+constant integer UserDefinedRects___RECYCLE_KEY=14
 integer array UserDefinedRects___instances
 //endglobals from UserDefinedRects
 //globals from LoPHeader:
@@ -1337,123 +1337,123 @@ integer s__DummyRecycler___S_tb
 constant integer si__TileDefinition___TileDefinition=98
 constant integer si__ArgumentStack___table=99
 constant integer si__Args=100
-constant integer s__Args_real_impl=13
-constant integer s__Args_integer_impl=14
-constant integer s__Args_boolean_impl=15
-constant integer s__Args_string_impl=16
-constant integer s__Args_player_impl=17
-constant integer s__Args_widget_impl=18
-constant integer s__Args_destructable_impl=19
-constant integer s__Args_item_impl=20
-constant integer s__Args_unit_impl=21
-constant integer s__Args_ability_impl=22
-constant integer s__Args_timer_impl=23
-constant integer s__Args_trigger_impl=24
-constant integer s__Args_triggercondition_impl=25
-constant integer s__Args_event_impl=26
-constant integer s__Args_force_impl=27
-constant integer s__Args_group_impl=28
-constant integer s__Args_location_impl=29
-constant integer s__Args_rect_impl=30
-constant integer s__Args_boolexpr_impl=31
-constant integer s__Args_sound_impl=32
-constant integer s__Args_effect_impl=33
-constant integer s__Args_quest_impl=34
-constant integer s__Args_questitem_impl=35
-constant integer s__Args_defeatcondition_impl=36
-constant integer s__Args_timerdialog_impl=37
-constant integer s__Args_leaderboard_impl=38
-constant integer s__Args_multiboard_impl=39
-constant integer s__Args_multiboarditem_impl=40
-constant integer s__Args_trackable_impl=41
-constant integer s__Args_dialog_impl=42
-constant integer s__Args_button_impl=43
-constant integer s__Args_region_impl=44
-constant integer s__Args_fogmodifier_impl=45
-constant integer s__Args_hashtable_impl=46
-constant integer s__Args_triggeraction_impl=47
-constant integer s__Args_unitpool_impl=48
-constant integer s__Args_itempool_impl=49
-constant integer s__Args_texttag_impl=50
-constant integer s__Args_lightning_impl=51
-constant integer s__Args_image_impl=52
-constant integer s__Args_ubersplat_impl=53
-constant integer s__Args_fogstate_impl=54
+constant integer s__Args_real_impl=15
+constant integer s__Args_integer_impl=16
+constant integer s__Args_boolean_impl=17
+constant integer s__Args_string_impl=18
+constant integer s__Args_player_impl=19
+constant integer s__Args_widget_impl=20
+constant integer s__Args_destructable_impl=21
+constant integer s__Args_item_impl=22
+constant integer s__Args_unit_impl=23
+constant integer s__Args_ability_impl=24
+constant integer s__Args_timer_impl=25
+constant integer s__Args_trigger_impl=26
+constant integer s__Args_triggercondition_impl=27
+constant integer s__Args_event_impl=28
+constant integer s__Args_force_impl=29
+constant integer s__Args_group_impl=30
+constant integer s__Args_location_impl=31
+constant integer s__Args_rect_impl=32
+constant integer s__Args_boolexpr_impl=33
+constant integer s__Args_sound_impl=34
+constant integer s__Args_effect_impl=35
+constant integer s__Args_quest_impl=36
+constant integer s__Args_questitem_impl=37
+constant integer s__Args_defeatcondition_impl=38
+constant integer s__Args_timerdialog_impl=39
+constant integer s__Args_leaderboard_impl=40
+constant integer s__Args_multiboard_impl=41
+constant integer s__Args_multiboarditem_impl=42
+constant integer s__Args_trackable_impl=43
+constant integer s__Args_dialog_impl=44
+constant integer s__Args_button_impl=45
+constant integer s__Args_region_impl=46
+constant integer s__Args_fogmodifier_impl=47
+constant integer s__Args_hashtable_impl=48
+constant integer s__Args_triggeraction_impl=49
+constant integer s__Args_unitpool_impl=50
+constant integer s__Args_itempool_impl=51
+constant integer s__Args_texttag_impl=52
+constant integer s__Args_lightning_impl=53
+constant integer s__Args_image_impl=54
+constant integer s__Args_ubersplat_impl=55
+constant integer s__Args_fogstate_impl=56
 constant integer si__LinkedHashSet=101
 integer s__LinkedHashSet_enumElement= 0
 integer s__LinkedHashSet_enumSet= 0
 constant integer si__TableStruct=102
 constant integer si__BoolExprEvaluator=103
-constant integer s__BoolExprEvaluator_tab_impl=55
-constant integer s__BoolExprEvaluator_trigger_impl=56
+constant integer s__BoolExprEvaluator_tab_impl=57
+constant integer s__BoolExprEvaluator_trigger_impl=58
 constant integer si__CombatTag___CombatTag=104
-constant integer s__CombatTag___CombatTag_timerData_impl=57
+constant integer s__CombatTag___CombatTag_timerData_impl=59
 constant integer si__Order=105
-constant integer s__Order_morphOrders_impl=58
-constant integer s__Order_generalOrders_impl=59
-constant integer s__Order_necroticOrders_impl=60
+constant integer s__Order_morphOrders_impl=60
+constant integer s__Order_generalOrders_impl=61
+constant integer s__Order_necroticOrders_impl=62
 constant integer si__LoP_DecoBuilders=106
 integer array s__LoP_DecoBuilders_rawcodes
-constant integer s__LoP_DecoBuilders_static_members_key=61
-constant integer s__LoP_DecoBuilders_SpecialDecoLastIndex_impl=62
-constant integer s__LoP_DecoBuilders_BasicDecoFirstIndex_impl=63
-constant integer s__LoP_DecoBuilders_BasicDecoLastIndex_impl=64
-constant integer s__LoP_DecoBuilders_AdvDecoFirstIndex_impl=65
-constant integer s__LoP_DecoBuilders_AdvDecoLastIndex_impl=66
-constant integer s__LoP_DecoBuilders_DecoLastIndex_impl=67
+constant integer s__LoP_DecoBuilders_static_members_key=63
+constant integer s__LoP_DecoBuilders_SpecialDecoLastIndex_impl=64
+constant integer s__LoP_DecoBuilders_BasicDecoFirstIndex_impl=65
+constant integer s__LoP_DecoBuilders_BasicDecoLastIndex_impl=66
+constant integer s__LoP_DecoBuilders_AdvDecoFirstIndex_impl=67
+constant integer s__LoP_DecoBuilders_AdvDecoLastIndex_impl=68
+constant integer s__LoP_DecoBuilders_DecoLastIndex_impl=69
 constant integer si__LoPInitPlayerCircles_Globals=107
-constant integer s__LoPInitPlayerCircles_Globals_regionTable_impl=68
+constant integer s__LoPInitPlayerCircles_Globals_regionTable_impl=70
 constant integer si__LoP_PlayerData=108
 playercolor array s__LoP_PlayerData_playerColors
-constant integer s__LoP_PlayerData_rotationStep_impl=69
-constant integer s__LoP_PlayerData_commandsEnabled_internal_impl=70
+constant integer s__LoP_PlayerData_rotationStep_impl=71
+constant integer s__LoP_PlayerData_commandsEnabled_internal_impl=72
 constant integer si__MultiBoard=109
-constant integer s__MultiBoard_items_impl=71
-constant integer s__MultiBoard_cols_impl=72
-constant integer s__MultiBoard_rows_impl=73
-constant integer s__MultiBoard_multiboard_impl=74
+constant integer s__MultiBoard_items_impl=73
+constant integer s__MultiBoard_cols_impl=74
+constant integer s__MultiBoard_rows_impl=75
+constant integer s__MultiBoard_multiboard_impl=76
 constant integer si__TerrainFog=110
 constant integer s__TerrainFog_LINEAR= 0
 constant integer s__TerrainFog_EXPONENTIAL= 1
 constant integer s__TerrainFog_EXPONENTIAL2= 2
-constant integer s__TerrainFog_style_impl=75
-constant integer s__TerrainFog_zStart_impl=76
-constant integer s__TerrainFog_zEnd_impl=77
-constant integer s__TerrainFog_density_impl=78
-constant integer s__TerrainFog_red_impl=79
-constant integer s__TerrainFog_green_impl=80
-constant integer s__TerrainFog_blue_impl=81
+constant integer s__TerrainFog_style_impl=77
+constant integer s__TerrainFog_zStart_impl=78
+constant integer s__TerrainFog_zEnd_impl=79
+constant integer s__TerrainFog_density_impl=80
+constant integer s__TerrainFog_red_impl=81
+constant integer s__TerrainFog_green_impl=82
+constant integer s__TerrainFog_blue_impl=83
 constant integer si__RectEnvironment=111
-constant integer s__RectEnvironment_fog_impl=82
+constant integer s__RectEnvironment_fog_impl=84
 constant integer si__TerrainType2Id=112
-constant integer s__TerrainType2Id_data_impl=83
+constant integer s__TerrainType2Id_data_impl=85
 constant integer si__TerrainTools___InitStruct=113
 constant integer si__AutoRectEnvironment___Globals=114
-constant integer s__AutoRectEnvironment___Globals_static_members_key=84
-constant integer s__AutoRectEnvironment___Globals_lastCameraX_impl=85
-constant integer s__AutoRectEnvironment___Globals_lastCameraY_impl=86
-constant integer s__AutoRectEnvironment___Globals_rectWasMoved_impl=87
-constant integer s__AutoRectEnvironment___Globals_lastCameraRect_impl=88
-constant integer s__AutoRectEnvironment___Globals_allRects_impl=89
-constant integer s__AutoRectEnvironment___Globals_rects_impl=90
-constant integer s__AutoRectEnvironment___Globals_id2_impl=91
+constant integer s__AutoRectEnvironment___Globals_static_members_key=86
+constant integer s__AutoRectEnvironment___Globals_lastCameraX_impl=87
+constant integer s__AutoRectEnvironment___Globals_lastCameraY_impl=88
+constant integer s__AutoRectEnvironment___Globals_rectWasMoved_impl=89
+constant integer s__AutoRectEnvironment___Globals_lastCameraRect_impl=90
+constant integer s__AutoRectEnvironment___Globals_allRects_impl=91
+constant integer s__AutoRectEnvironment___Globals_rects_impl=92
+constant integer s__AutoRectEnvironment___Globals_id2_impl=93
 constant integer si__AutoRectEnvironment___InitStruct=115
 constant integer si__GameTime=116
 integer s__GameTime_a
-constant integer s__GameTime_static_members_key=92
-constant integer s__GameTime_hours_impl=93
-constant integer s__GameTime_minutes_impl=94
-constant integer s__GameTime_seconds_impl=95
-constant integer s__GameTime_timer_impl=96
-constant integer s__GameTime_multiboard_impl=97
+constant integer s__GameTime_static_members_key=94
+constant integer s__GameTime_hours_impl=95
+constant integer s__GameTime_minutes_impl=96
+constant integer s__GameTime_seconds_impl=97
+constant integer s__GameTime_timer_impl=98
+constant integer s__GameTime_multiboard_impl=99
 constant integer si__LoP_Command=117
-constant integer s__LoP_Command_boolexpr_impl=98
-constant integer s__LoP_Command_string_impl=99
-constant integer s__LoP_Command_accessLevel_impl=100
+constant integer s__LoP_Command_boolexpr_impl=100
+constant integer s__LoP_Command_string_impl=101
+constant integer s__LoP_Command_accessLevel_impl=102
 constant integer si__LoPCommands_Globals=118
-constant integer s__LoPCommands_Globals_static_members_key=101
-constant integer s__LoPCommands_Globals_trigger_impl=102
-constant integer s__LoPCommands_Globals_evaluator_impl=103
+constant integer s__LoPCommands_Globals_static_members_key=103
+constant integer s__LoPCommands_Globals_trigger_impl=104
+constant integer s__LoPCommands_Globals_evaluator_impl=105
 constant integer si__SpecialEffect_hT_reals=119
 constant integer si__SpecialEffect_hT_booleans=120
 constant integer si__SpecialEffect_hT_strings=121
@@ -1501,67 +1501,67 @@ constant integer si__SpecialEffect_hT_hashtables=162
 constant integer si__SpecialEffect_hT_Child=163
 constant integer si__SpecialEffect_hT=164
 constant integer si__SpecialEffect=165
-constant integer s__SpecialEffect_x_INDEX=105
+constant integer s__SpecialEffect_x_INDEX=106
 constant integer s__SpecialEffect_y_INDEX=107
-constant integer s__SpecialEffect_height_INDEX=109
-constant integer s__SpecialEffect_scale_INDEX=111
+constant integer s__SpecialEffect_height_INDEX=108
+constant integer s__SpecialEffect_scale_INDEX=109
 constant real s__SpecialEffect_scale_DEFAULT= 1.
-constant integer s__SpecialEffect_roll_INDEX=113
-constant integer s__SpecialEffect_yaw_INDEX=115
-constant integer s__SpecialEffect_pitch_INDEX=117
-constant integer s__SpecialEffect_red_INDEX=119
+constant integer s__SpecialEffect_roll_INDEX=110
+constant integer s__SpecialEffect_yaw_INDEX=111
+constant integer s__SpecialEffect_pitch_INDEX=112
+constant integer s__SpecialEffect_red_INDEX=113
 constant integer s__SpecialEffect_red_DEFAULT= 255
-constant integer s__SpecialEffect_green_INDEX=121
+constant integer s__SpecialEffect_green_INDEX=114
 constant integer s__SpecialEffect_green_DEFAULT= 255
-constant integer s__SpecialEffect_blue_INDEX=123
+constant integer s__SpecialEffect_blue_INDEX=115
 constant integer s__SpecialEffect_blue_DEFAULT= 255
-constant integer s__SpecialEffect_alpha_INDEX=125
+constant integer s__SpecialEffect_alpha_INDEX=116
 constant integer s__SpecialEffect_alpha_DEFAULT= 255
 constant integer si__UnitEvents=166
-constant integer s__UnitEvents_onDeath_impl_impl=127
-constant integer s__UnitEvents_onRemove_impl_impl=129
-constant integer s__UnitEvents_removeOnDeath_impl=131
+constant integer s__UnitEvents_onDeath_impl_impl=117
+constant integer s__UnitEvents_onRemove_impl_impl=118
+constant integer s__UnitEvents_removeOnDeath_impl=119
 constant integer si__UserDefinedRects___Indices=167
 constant integer si__PlayerSpecialEffect=168
-constant integer s__PlayerSpecialEffect_x_INDEX=133
-constant integer s__PlayerSpecialEffect_y_INDEX=135
-constant integer s__PlayerSpecialEffect_height_INDEX=137
-constant integer s__PlayerSpecialEffect_scale_INDEX=139
+constant integer s__PlayerSpecialEffect_x_INDEX=120
+constant integer s__PlayerSpecialEffect_y_INDEX=121
+constant integer s__PlayerSpecialEffect_height_INDEX=122
+constant integer s__PlayerSpecialEffect_scale_INDEX=123
 constant real s__PlayerSpecialEffect_scale_DEFAULT= 1.
-constant integer s__PlayerSpecialEffect_roll_INDEX=141
-constant integer s__PlayerSpecialEffect_yaw_INDEX=143
-constant integer s__PlayerSpecialEffect_pitch_INDEX=145
-constant integer s__PlayerSpecialEffect_red_INDEX=147
+constant integer s__PlayerSpecialEffect_roll_INDEX=124
+constant integer s__PlayerSpecialEffect_yaw_INDEX=125
+constant integer s__PlayerSpecialEffect_pitch_INDEX=126
+constant integer s__PlayerSpecialEffect_red_INDEX=127
 constant integer s__PlayerSpecialEffect_red_DEFAULT= 255
-constant integer s__PlayerSpecialEffect_green_INDEX=149
+constant integer s__PlayerSpecialEffect_green_INDEX=128
 constant integer s__PlayerSpecialEffect_green_DEFAULT= 255
-constant integer s__PlayerSpecialEffect_blue_INDEX=151
+constant integer s__PlayerSpecialEffect_blue_INDEX=129
 constant integer s__PlayerSpecialEffect_blue_DEFAULT= 255
-constant integer s__PlayerSpecialEffect_alpha_INDEX=153
+constant integer s__PlayerSpecialEffect_alpha_INDEX=130
 constant integer s__PlayerSpecialEffect_alpha_DEFAULT= 255
-constant integer s__PlayerSpecialEffect_Owner_INDEX=155
+constant integer s__PlayerSpecialEffect_Owner_INDEX=131
 constant integer si__RectGenerator___FogStyle=169
-constant integer s__RectGenerator___FogStyle_strings_impl=157
-constant integer s__RectGenerator___FogStyle_linkedListNext_impl=159
-constant integer s__RectGenerator___FogStyle_linkedListPrev_impl=161
+constant integer s__RectGenerator___FogStyle_strings_impl=132
+constant integer s__RectGenerator___FogStyle_linkedListNext_impl=133
+constant integer s__RectGenerator___FogStyle_linkedListPrev_impl=134
 constant integer si__UnitSpecialEffect=170
-constant integer s__UnitSpecialEffect_x_INDEX=163
-constant integer s__UnitSpecialEffect_y_INDEX=165
-constant integer s__UnitSpecialEffect_height_INDEX=167
-constant integer s__UnitSpecialEffect_scale_INDEX=169
+constant integer s__UnitSpecialEffect_x_INDEX=135
+constant integer s__UnitSpecialEffect_y_INDEX=136
+constant integer s__UnitSpecialEffect_height_INDEX=137
+constant integer s__UnitSpecialEffect_scale_INDEX=138
 constant real s__UnitSpecialEffect_scale_DEFAULT= 1.
-constant integer s__UnitSpecialEffect_roll_INDEX=171
-constant integer s__UnitSpecialEffect_yaw_INDEX=173
-constant integer s__UnitSpecialEffect_pitch_INDEX=175
-constant integer s__UnitSpecialEffect_red_INDEX=177
+constant integer s__UnitSpecialEffect_roll_INDEX=139
+constant integer s__UnitSpecialEffect_yaw_INDEX=140
+constant integer s__UnitSpecialEffect_pitch_INDEX=141
+constant integer s__UnitSpecialEffect_red_INDEX=142
 constant integer s__UnitSpecialEffect_red_DEFAULT= 255
-constant integer s__UnitSpecialEffect_green_INDEX=179
+constant integer s__UnitSpecialEffect_green_INDEX=143
 constant integer s__UnitSpecialEffect_green_DEFAULT= 255
-constant integer s__UnitSpecialEffect_blue_INDEX=181
+constant integer s__UnitSpecialEffect_blue_INDEX=144
 constant integer s__UnitSpecialEffect_blue_DEFAULT= 255
-constant integer s__UnitSpecialEffect_alpha_INDEX=183
+constant integer s__UnitSpecialEffect_alpha_INDEX=145
 constant integer s__UnitSpecialEffect_alpha_DEFAULT= 255
-constant integer s__UnitSpecialEffect_unitType_INDEX=185
+constant integer s__UnitSpecialEffect_unitType_INDEX=146
 constant integer si__UnitVisualMods___data_reals=171
 constant integer si__UnitVisualMods___data_booleans=172
 constant integer si__UnitVisualMods___data_strings=173
@@ -1611,39 +1611,39 @@ constant integer si__UnitVisualMods___data=216
 constant integer si__UnitVisualMods___UnitVisualsRaw=217
 constant integer si__UnitVisuals=218
 constant integer si__UnitVisualMods___TimerData=219
-constant integer s__UnitVisualMods___TimerData_unit_impl=187
+constant integer s__UnitVisualMods___TimerData_unit_impl=147
 constant integer si__UnitVisualMods___InitStruct=220
 constant integer si__LoPWidgets__Globals=221
-constant integer s__LoPWidgets__Globals_destructablesTab_impl=189
+constant integer s__LoPWidgets__Globals_destructablesTab_impl=148
 constant integer si__LoP_UnitData=222
-constant integer s__LoP_UnitData_isHeroic_impl=191
+constant integer s__LoP_UnitData_isHeroic_impl=149
 constant integer si__LoPHeroicUnit_Globals=223
-constant integer s__LoPHeroicUnit_Globals_static_members_key=193
-constant integer s__LoPHeroicUnit_Globals_dummy_impl=195
+constant integer s__LoPHeroicUnit_Globals_static_members_key=150
+constant integer s__LoPHeroicUnit_Globals_dummy_impl=151
 constant integer si__Mimic__UnitData=224
-constant integer s__Mimic__UnitData_original_impl=197
+constant integer s__Mimic__UnitData_original_impl=152
 constant integer si__CameraValues=225
-constant integer s__CameraValues_static_members_key=199
-constant integer s__CameraValues_zoom_impl=201
-constant integer s__CameraValues_rotate_impl=203
-constant integer s__CameraValues_roll_impl=205
-constant integer s__CameraValues_pitch_impl=207
-constant integer s__CameraValues_timer_impl=209
+constant integer s__CameraValues_static_members_key=153
+constant integer s__CameraValues_zoom_impl=154
+constant integer s__CameraValues_rotate_impl=155
+constant integer s__CameraValues_roll_impl=156
+constant integer s__CameraValues_pitch_impl=157
+constant integer s__CameraValues_timer_impl=158
 constant integer si__CommandsSetLimits__StringConvert=226
-constant integer s__CommandsSetLimits__StringConvert_data_impl=211
+constant integer s__CommandsSetLimits__StringConvert_data_impl=159
 constant integer si__TreeSystemChooseTree___Globals=227
-constant integer s__TreeSystemChooseTree___Globals_timerData_impl=213
+constant integer s__TreeSystemChooseTree___Globals_timerData_impl=160
 constant integer si__SpatialDistortion__TimerData=228
-constant integer s__SpatialDistortion__TimerData_caster_impl=215
-constant integer s__SpatialDistortion__TimerData_counter_impl=217
-constant integer s__SpatialDistortion__TimerData_x_impl=219
-constant integer s__SpatialDistortion__TimerData_y_impl=221
+constant integer s__SpatialDistortion__TimerData_caster_impl=161
+constant integer s__SpatialDistortion__TimerData_counter_impl=162
+constant integer s__SpatialDistortion__TimerData_x_impl=163
+constant integer s__SpatialDistortion__TimerData_y_impl=164
 constant integer si__WillOfTheTribunal__CasterData=229
-constant integer s__WillOfTheTribunal__CasterData_timer_impl=223
+constant integer s__WillOfTheTribunal__CasterData_timer_impl=165
 constant integer si__CometSpell__TimerData=230
-constant integer s__CometSpell__TimerData_caster_impl=225
-constant integer s__CometSpell__TimerData_x_impl=227
-constant integer s__CometSpell__TimerData_y_impl=229
+constant integer s__CometSpell__TimerData_caster_impl=166
+constant integer s__CometSpell__TimerData_x_impl=167
+constant integer s__CometSpell__TimerData_y_impl=168
 trigger st__UnitEvents__get_onDeath
 trigger st__UnitEvents__get_onRemove
 integer f__arg_this
@@ -16501,7 +16501,7 @@ endfunction
 // 
 //   Warcraft III map script
 //   Generated by the Warcraft III World Editor
-//   Date: Tue May 14 18:47:07 2019
+//   Date: Wed May 15 08:38:45 2019
 //   Map Author: Guhun
 // 
 //===========================================================================
@@ -21315,7 +21315,7 @@ endfunction
 //===========================================================================
 // scope CommandsRoll begins
 
-function CommandsRoll___onCommand takes nothing returns boolean
+function CommandsRoll__onCommand takes nothing returns boolean
     local string args= (s__Args_getString(1)) // INLINED!!
     local integer cutToComma
     local integer diceMin
@@ -21378,7 +21378,7 @@ endfunction
 
 //===========================================================================
 function InitTrig_Commands_Roll takes nothing returns nothing
-    call s__LoP_Command_create("-roll" , ACCESS_USER , Condition(function CommandsRoll___onCommand))
+    call s__LoP_Command_create("-roll" , ACCESS_USER , Condition(function CommandsRoll__onCommand))
 endfunction
 
 // scope CommandsRoll ends
@@ -21564,7 +21564,7 @@ endfunction
 //===========================================================================
 // scope DecoModAbils begins
 
-    function DecoModAbils___PlayerNumber takes unit whichUnit returns integer
+    function DecoModAbils__PlayerNumber takes unit whichUnit returns integer
         return GetPlayerId(GetOwningPlayer(whichUnit)) + 1
     endfunction
 
@@ -21750,15 +21750,15 @@ endfunction
 // scope DecoMovement begins
 
 
-    function DecoMovement___PlayerNumber takes unit whichUnit returns integer
+    function DecoMovement__PlayerNumber takes unit whichUnit returns integer
         return GetPlayerId(GetOwningPlayer(whichUnit)) + 1
     endfunction
     
-    function DecoMovement___X takes unit whichUnit returns real
+    function DecoMovement__X takes unit whichUnit returns real
         return GetUnitX(whichUnit)
     endfunction
     
-    function DecoMovement___Y takes unit whichUnit returns real
+    function DecoMovement__Y takes unit whichUnit returns real
         return GetUnitY(whichUnit)
     endfunction
     
@@ -28445,7 +28445,7 @@ function InitCustomTriggers takes nothing returns nothing
     call s__LoP_Command_create("-var" , ACCESS_USER , Condition(function Trig_CommandsD_Variation_Conditions)) // INLINED!!
     call s__LoP_Command_create("-rotate" , ACCESS_USER , Condition(function Trig_CommandsD_Rotate_Conditions)) // INLINED!!
     call InitTrig_Commands_Spawn_Stuff()
-    call s__LoP_Command_create("-roll" , ACCESS_USER , Condition(function CommandsRoll___onCommand)) // INLINED!!
+    call s__LoP_Command_create("-roll" , ACCESS_USER , Condition(function CommandsRoll__onCommand)) // INLINED!!
     call InitTrig_DecoBuilder_Movement()
     call InitTrig_DecoBuilder_Increase_Count()
     call InitTrig_DecoBuilder_RangedBuild()
@@ -32213,7 +32213,7 @@ function main takes nothing returns nothing
     call CreateAllUnits()
     call InitBlizzard()
 
-call ExecuteFunc("jasshelper__initstructs609906640")
+call ExecuteFunc("jasshelper__initstructs659806296")
 call ExecuteFunc("DestructableLib___Initialization")
 call ExecuteFunc("MultiPatrol___onInit")
 call ExecuteFunc("FilterTransformations__onInit")
@@ -32296,7 +32296,7 @@ set f__result_integer= (LoadInteger(ConstTable___ht, (((s__UnitEvents_onRemove_i
    return true
 endfunction
 
-function jasshelper__initstructs609906640 takes nothing returns nothing
+function jasshelper__initstructs659806296 takes nothing returns nothing
     set st__UnitEvents__get_onDeath=CreateTrigger()
     call TriggerAddCondition(st__UnitEvents__get_onDeath,Condition( function sa__UnitEvents__get_onDeath))
     set st__UnitEvents__get_onRemove=CreateTrigger()
