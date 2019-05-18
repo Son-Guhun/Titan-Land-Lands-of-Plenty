@@ -1,4 +1,10 @@
 library FilterTransformations initializer onInit requires TableStruct
+/*
+This library is a workaround to the fact that many abilities crash the game when their cooldowns or
+mana cost are modified.
+
+It can also be used to detect whether a certain order is in a certain type of category or not.
+*/
 
 struct Order extends array
 
@@ -18,6 +24,9 @@ struct Order extends array
         return .generalOrders.boolean.has(this)
     endmethod
 endstruct
+
+//========================
+// API
 
 function IsOrderMorph takes integer orderId returns boolean
     return Order(orderId).isMorph()

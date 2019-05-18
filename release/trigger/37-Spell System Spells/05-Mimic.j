@@ -1,6 +1,21 @@
 native UnitAlive takes unit whichUnit returns boolean
 
 library Mimic requires LoPHeroicUnit, UnitVisualMods, UnitEvents
+/*
+Allows heroes to "mimic" other units, while mantaining some of their original stats. The hero that is
+mimicing ("original") is hidden, and a copy of the mimicked unit is created. If the target unit was
+not a hero, then the copy is made into a hero using the HeroicUnit library. If the unit cannot be
+made heroic, the mimic fails.
+
+Whenever a hero that was alreading mimicking another unit attempts a new mimic, the original unit still
+remains hidden, the previous mimic copy is destroyed, and a new mimic copy is created, mimicking the
+new target unit.
+
+All items are transfered from the original hero to the mimic, or from an old mimic to a new mimic.
+
+When a mimic dies, the original unit reappears at the dying position, and the mimic is removed from
+the game. When a mimic is directly removed from the game, the original unit is also removed.
+*/
 
 private function MAX_INVENTORY takes nothing returns integer
     return bj_MAX_INVENTORY
@@ -61,7 +76,7 @@ function RemoveUnitMimic takes unit mimic returns nothing
     endif
 endfunction
 
-function onRemove takes nothing returns boolean
+private function OnRemove takes nothing returns boolean
     local unit original = UnitData(GetHandleId(UnitEvents.getEventUnit())).original
     call RemoveUnitMimic(UnitEvents.getEventUnit())
     call RemoveUnit(original)
@@ -69,10 +84,10 @@ function onRemove takes nothing returns boolean
     return false
 endfunction
 
-function onDeath takes nothing returns boolean
+private function OnDeath takes nothing returns boolean
     call RemoveUnitMimic(UnitEvents.getEventUnit())
-    call UnitEvents.get(UnitEvents.getEventUnit()).onRemove.deregister(Condition(function onDeath))
-    call UnitEvents.get(UnitEvents.getEventUnit()).onRemove.deregister(Condition(function onRemove))
+    call UnitEvents.get(UnitEvents.getEventUnit()).onRemove.deregister(Condition(function OnDeath))
+    call UnitEvents.get(UnitEvents.getEventUnit()).onRemove.deregister(Condition(function OnRemove))
     return false
 endfunction
 
@@ -93,7 +108,7 @@ function CreateUnitMimic takes unit whichUnit, unit target returns nothing
             
             call HeroTransferInventory(whichUnit, mimic)
             
-            call UnitEvents.get(whichUnit).onRemove.deregister(Condition(function onRemove))
+            call UnitEvents.get(whichUnit).onRemove.deregister(Condition(function OnRemove))
             call UnitData(GetHandleId(whichUnit)).destroy()
             call KillUnit(whichUnit)
         else
@@ -118,8 +133,8 @@ function CreateUnitMimic takes unit whichUnit, unit target returns nothing
         call GUMSCopyValues(target, mimic)
         call DestroyEffect(AddSpecialEffect("Abilities\\Spells\\Orc\\FeralSpirit\\feralspirittarget.mdl", GetUnitX(mimic), GetUnitY(mimic)))
         
-        call UnitEvents(mimicId).onDeath.register(Condition(function onDeath))
-        call UnitEvents(mimicId).onRemove.register(Condition(function onRemove))
+        call UnitEvents(mimicId).onDeath.register(Condition(function OnDeath))
+        call UnitEvents(mimicId).onRemove.register(Condition(function OnRemove))
         call UnitEvents(mimicId).setRemoveOnDeath()
         if not IsUnitType(mimic, UNIT_TYPE_HERO) then
             call RefreshHeroIcons(GetOwningPlayer(mimic))
