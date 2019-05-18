@@ -1,8 +1,6 @@
 function Trig_LoadUnit_Conditions takes nothing returns boolean
-    if ( not ( udg_save_LoadUnitType != 'H00V' ) ) then
-        return false
-    endif
-    return true
+    // Can't load Cosmosis or Angel of Creation
+    return udg_save_LoadUnitType != 'H00V' and udg_save_LoadUnitType != 'H00S'
 endfunction
 
 function Trig_LoadUnit_Actions takes nothing returns nothing

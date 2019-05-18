@@ -98,10 +98,11 @@ private function onChatMessage takes nothing returns boolean
         call Args.freeString(0)
         call Args.freeString(1)
         call TriggerRemoveCondition(evaluator, condition)
+        
+        set condition = null
+        set evaluator = null
     endif
 
-    set condition = null
-    set evaluator = null
     return false
 endfunction
 

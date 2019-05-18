@@ -245,14 +245,19 @@ endfunction
 function Patrol_ClearUnitIdData takes integer unitHandleId returns nothing
     local trigger patrolTrig = Patrol_GetTrigger(unitHandleId)
     
-    call Patrol_DestroyIdPoints(unitHandleId)
-    call FlushChildHashtable(data, GetHandleId(patrolTrig))
-    call FlushChildHashtable(data, unitHandleId)  // Clear patrol points
-    call FlushChildHashtable(data,-unitHandleId)  // Clear other stuff
-    call RemoveRegion(Patrol_GetRegion(unitHandleId))
-    call DestroyTrigger(patrolTrig)
     
-    set patrolTrig = null
+    if patrolTrig != null then
+        call Patrol_DestroyIdPoints(unitHandleId)
+        call RemoveRegion(Patrol_GetRegion(unitHandleId))
+        
+        call FlushChildHashtable(data, GetHandleId(patrolTrig))
+        call DestroyTrigger(patrolTrig)
+        
+        call FlushChildHashtable(data, unitHandleId)  // Clear patrol points
+        call FlushChildHashtable(data,-unitHandleId)  // Clear other stuff
+        
+        set patrolTrig = null
+    endif
 endfunction
 
 function Patrol_ClearUnitData takes unit whichUnit returns nothing
@@ -302,6 +307,8 @@ function Patrol_DisplayPoints takes unit whichUnit returns nothing
         
         set i = i+1
     endloop
+    
+    set spEffect = null
 endfunction
 
 

@@ -1,6 +1,9 @@
-library LoPone requires PlayerUnitLimit, LoPHeader, MoveSpeedBonus, UserDefinedRects, DummyDmg, MultiPatrol
+library LoPone requires PlayerUnitLimit, LoPHeader, MoveSpeedBonus, UserDefinedRects, DummyDmg, MultiPatrol, UnitEvents
 function LoP_onDeath takes unit whichUnit returns nothing
     debug call BJDebugMsg("OnDeath")
+    
+    call UnitEvents.evalOnDeath(whichUnit)
+    
     if ( GetUnitPointValue(whichUnit) == 37 ) then
     
         call DummyDmg_FlushKey(DummyDmg_GetKey(whichUnit))
@@ -9,14 +12,17 @@ function LoP_onDeath takes unit whichUnit returns nothing
     else
         if not LoP_IsUnitDecoration(whichUnit) then
         // DECO BUILDER DECREASE COUNT
-            if LoP_UnitData.get(whichUnit).isHeroic then
-                call RemoveUnit(whichUnit)
-                
-            elseif IsUnitDecoBuilder(whichUnit)  then
+            if IsUnitDecoBuilder(whichUnit)  then
                 call RemoveUnit(whichUnit)
             else
                 if ( Limit_IsPlayerLimited(GetOwningPlayer(whichUnit)) and Limit_IsUnitLimited(whichUnit) ) then
                     call Limit_UnregisterUnit(whichUnit)
+                endif
+                if LoP_UnitData.get(whichUnit).isHeroic then
+                    call DisableTrigger(gg_trg_System_Cleanup_Owner_Change)
+                    call SetUnitOwner(whichUnit, Player(bj_PLAYER_NEUTRAL_EXTRA), false)
+                    call EnableTrigger(gg_trg_System_Cleanup_Owner_Change)
+                    call RemoveUnit(whichUnit)
                 endif
             endif
         else

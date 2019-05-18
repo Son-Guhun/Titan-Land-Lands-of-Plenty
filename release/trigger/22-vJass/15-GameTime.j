@@ -55,8 +55,8 @@ struct GameTime extends array
             set sec = 0
         endif
     
-        if sec == 60 then
-            if .minutes == 60 then
+        if sec == 59 then
+            if .minutes == 59 then
                 set .hours = .hours + 1
                 set .minutes = 0
             else

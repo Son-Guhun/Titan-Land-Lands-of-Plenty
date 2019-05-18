@@ -95,11 +95,11 @@ endfunction
 globals
     private hashtable data = InitHashtable()
     
-    private trigger triggerMouse = CreateTrigger()
-    private trigger triggerLeft = CreateTrigger()
-    private trigger triggerRight = CreateTrigger()
-    private trigger triggerEsc = CreateTrigger()
-    private trigger triggerCleanup = CreateTrigger()
+    private trigger triggerMouse
+    private trigger triggerLeft
+    private trigger triggerRight
+    private trigger triggerEsc
+    private trigger triggerCleanup
     
     private unit array focusUnits
 endglobals
@@ -216,6 +216,7 @@ function Camera_SetFirstPersonSelected takes player p returns nothing
     
     call DestroyGroup(g)
     set g = null
+    set u = null
 endfunction
 
 // Clears ALL of a player's data related to this system, including the default rotation unit and timers.
@@ -259,6 +260,7 @@ function Camera_TimerFunc2 takes nothing returns nothing
         call SetUnitFacing(u, GetUnitFacing(u) + 10.)
         set u = null
     else
+        call FlushChildHashtable(data, GetHandleId(t))
         call PauseTimer(t)
         call DestroyTimer(t)
     endif
@@ -488,6 +490,13 @@ endfunction
 
 function InitTrig_Camera_System takes nothing returns nothing
     local timer t = CreateTimer()
+    
+    set triggerMouse = CreateTrigger()
+    set triggerLeft = CreateTrigger()
+    set triggerRight = CreateTrigger()
+    set triggerEsc = CreateTrigger()
+    set triggerCleanup = CreateTrigger()
+    
     call TimerStart(t, 0.03, true, function Camera_TimerFunc)
     
     set data = InitHashtable()

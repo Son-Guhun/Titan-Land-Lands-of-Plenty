@@ -124,9 +124,15 @@ are listed first, though.
             // Draenei
             set i = ( i + 1 )
             set rawcodes[i] = 'u02O'
+            // Drow
+            set i = ( i + 1 )
+            set rawcodes[i] = 'u03Z'
             // Elves
             set i = ( i + 1 )
             set rawcodes[i] = 'u02A'
+            // Elves Forest
+            set i = ( i + 1 )
+            set rawcodes[i] = 'u040'
             // Fence
             set i = ( i + 1 )
             set rawcodes[i] = 'u03I'
@@ -184,6 +190,9 @@ are listed first, though.
             // Ruined
             set i = ( i + 1 )
             set rawcodes[i] = 'u02T'
+            // Ruined
+            set i = ( i + 1 )
+            set rawcodes[i] = 'u044'
             // Ruins
             set i = ( i + 1 )
             set rawcodes[i] = 'u00X'

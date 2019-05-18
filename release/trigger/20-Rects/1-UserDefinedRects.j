@@ -218,9 +218,11 @@ function GUDR_PlayerGetSelectedGeneratorId takes player whichPlayer returns inte
     
     if GUDR_IsUnitIdGenerator(unitId) then
         set bj_groupRandomCurrentPick = firstOfGroup
+        set firstOfGroup = null
         return unitId
     endif
     
+    set firstOfGroup = null
     return 0
 endfunction
 

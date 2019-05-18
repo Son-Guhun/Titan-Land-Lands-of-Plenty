@@ -28,21 +28,30 @@ function Trig_Deco_DisableMovement_Conditions takes nothing returns boolean
         if GetUnitAbilityLevel(trigU, 'A037') != 0 then
         else
             call GUMS_AddStructureFlightAbility(trigU)
+            
+            call BlzUnitDisableAbility(trigU, 'A011', false, false)
+            call BlzUnitDisableAbility(trigU, 'A012', false, false)
+            call BlzUnitDisableAbility(trigU, 'UDR4', false, false)
+            call BlzUnitDisableAbility(trigU, 'A02Y', false, false)
+            call BlzUnitDisableAbility(trigU, 'A02Z', false, false)
+            call BlzUnitDisableAbility(trigU, 'A031', false, false)
+            call BlzUnitDisableAbility(trigU, 'A032', false, false)
+            call BlzUnitDisableAbility(trigU, 'A0B7', false, false)
             // -
             // PLAY OPEN ANIMATION FOR OPENED GATES
             // OTHERWISE, PLAY STAND ANIMATION
             if ( GetUnitAbilityLevel(trigU, 'A0B5') != 0 ) then
-                if GUMS_HaveSavedAnimationTag(trigU) then
-                    call SetUnitAnimation(trigU, "death alternate " +GUMSConvertTags( GUMSGetUnitAnimationTag(trigU)))
-                else
+                // if GUMS_HaveSavedAnimationTag(trigU) then
+                    // call SetUnitAnimation(trigU, "death alternate " +GUMSConvertTags( GUMSGetUnitAnimationTag(trigU)))
+                // else
                     call SetUnitAnimation(trigU, "death alternate")
-                endif
+                // endif
             else
-                if GUMS_HaveSavedAnimationTag(trigU) then
-                    call SetUnitAnimation(trigU, "stand " +GUMSConvertTags( GUMSGetUnitAnimationTag(trigU)))
-                else
+                // if GUMS_HaveSavedAnimationTag(trigU) then
+                    // call SetUnitAnimation(trigU, "stand " +GUMSConvertTags( GUMSGetUnitAnimationTag(trigU)))
+                // else
                     call SetUnitAnimation(trigU, "stand")
-                endif
+                // endif
             endif
         endif
     endif

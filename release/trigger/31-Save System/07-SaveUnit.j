@@ -142,7 +142,7 @@ endfunction
 
 
 //===========================================================================
-function InitTrig_SaveLoop takes nothing returns nothing
+function InitTrig_SaveUnit takes nothing returns nothing
     set loopTimer = CreateTimer()
     
     call TimerStart(loopTimer, 0.5, true, function SaveLoopActions)

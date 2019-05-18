@@ -1,0 +1,44 @@
+Event
+Condition
+Action
+    SetVariable
+        Var   : Spell__InRangePoint
+        Var   : Spell__TargetPoint
+    SetVariable
+        Var   : Spell__InRange
+        Const : 350.00
+    ForGroupMultiple
+        Var   : Spell__InRangeGroup
+        Action
+            IfThenElseMultiple
+                Condition
+                    OrMultiple
+                        Condition
+                            OperatorCompareBoolean
+                                Call  : IsUnitType
+                                    Call  : GetEnumUnit
+                                    Preset: UnitTypeHero
+                                Preset: OperatorEqualENE
+                                Const : true
+                            OperatorCompareBoolean
+                                Call  : IsUnitType
+                                    Call  : GetEnumUnit
+                                    Preset: UnitTypeResistant
+                                Preset: OperatorEqualENE
+                                Const : true
+                Action
+                    SetVariable
+                        Var   : GDS_Duration
+                        Const : 12.00
+                Action
+                    SetVariable
+                        Var   : GDS_Duration
+                        Const : 24.00
+            SetVariable
+                Var   : GDS_Type
+                Var   : GDS_cSILENCE
+            SetVariable
+                Var   : GDS_Target
+                Call  : GetEnumUnit
+            TriggerExecute
+                Var   : gg_trg_GDS_Main_Modifier

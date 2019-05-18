@@ -39,6 +39,14 @@
         Disab
     '3-External Import All Files': 'External Import All Files'
         Disab
+    4-Tests: Tests
+        Comment
+    '5-Allowed Abilities': 'Allowed Abilities'
+        Disab
+    '6-Enabling Inventory': 'Enabling Inventory'
+        Disab
+    7-Items: Items
+        Disab
 '03-Main Systems': 'Main Systems'
     Comment
 '04-LoP Core': 'LoP Core'
@@ -57,7 +65,6 @@
     5-Triggers: Triggers
         Comment
     '6-Init Main': 'Init Main'
-        Run
     '7-Init 0 seconds': 'Init 0 seconds'
     '8-Init Create Events': 'Init Create Events'
 '06-Map System': 'Map System'
@@ -65,6 +72,7 @@
     '02-System Level Up Heroes': 'System Level Up Heroes'
     '03-System Autoname': 'System Autoname'
     '04-System TPalace Doors': 'System TPalace Doors'
+        Disab
     '05-System Detect Leaver': 'System Detect Leaver'
     '06-System Player Locations': 'System Player Locations'
     '07-System Give Potion to Hero': 'System Give Potion to Hero'
@@ -133,6 +141,7 @@
     '39-CommandsD Variation': 'CommandsD Variation'
     '40-CommandsD Rotate': 'CommandsD Rotate'
     '41-Commands Spawn Stuff': 'Commands Spawn Stuff'
+    '42-Commands Roll': 'Commands Roll'
 '08-Decoration Systems': 'Decoration Systems'
     Comment
 '09-Deco Builders': 'Deco Builders'
@@ -208,7 +217,11 @@
     16-ArgumentStack: ArgumentStack
     '17-Under Construction': 'Under Construction'
         Comment
-    '18-Create Water': 'Create Water'
+    18-BoolExprEvaluator: BoolExprEvaluator
+    19-UnitEvents: UnitEvents
+    '20-Create Water': 'Create Water'
+        Disab
+    21-TerrainTools: TerrainTools
 23-Map-specific: Map-specific
     1-Debug: Debug
     2-ArrayAgent: ArrayAgent
@@ -221,22 +234,23 @@
     Comment
 '25-CSS System': 'CSS System'
     01-CustomStatSystem: CustomStatSystem
-    '02-BonusMod standalone': 'BonusMod standalone'
+    02-CustomStatSystemConstants: CustomStatSystemConstants
+    '03-BonusMod standalone': 'BonusMod standalone'
         Comment
-    '03-CSS Standalone Bonus': 'CSS Standalone Bonus'
-    '04-Color codes for info panel': 'Color codes for info panel'
+    '04-CSS Standalone Bonus': 'CSS Standalone Bonus'
+    '05-Color codes for info panel': 'Color codes for info panel'
         Comment
-    '05-Color Code Setting': 'Color Code Setting'
+    '06-Color Code Setting': 'Color Code Setting'
         Disab
-    06-Instruction: Instruction
+    07-Instruction: Instruction
         Comment
-    '07-CSS Item Functions': 'CSS Item Functions'
+    '08-CSS Item Functions': 'CSS Item Functions'
         Disab
-    '08-Item Declaration': 'Item Declaration'
+    '09-Item Declaration': 'Item Declaration'
         Comment
-    '09-Examplary Item Declaration': 'Examplary Item Declaration'
+    '10-Examplary Item Declaration': 'Examplary Item Declaration'
         Comment
-    '10-Item Declaration': 'Item Declaration'
+    '11-Item Declaration': 'Item Declaration'
         Disab
 '26-Unit Event': 'Unit Event'
     '1-Unit Event Config': 'Unit Event Config'
@@ -272,10 +286,10 @@
     '04-SaveLoad Set Center Numbers': 'SaveLoad Set Center Numbers'
     05-Save: Save
         Comment
-    06-SaveCall: SaveCall
-    07-SaveLoop: SaveLoop
-    '08-SaveLoop Dest': 'SaveLoop Dest'
-    '09-SaveLoop Terrain': 'SaveLoop Terrain'
+    06-SaveRequest: SaveRequest
+    07-SaveUnit: SaveUnit
+    08-SaveDestructable: SaveDestructable
+    09-SaveTerrain: SaveTerrain
     10-Load: Load
         Comment
     11-LoadRequest: LoadRequest
@@ -283,7 +297,7 @@
         Closed
     '13-LoadUnit Extra': 'LoadUnit Extra'
         Closed
-    14-LoadDest: LoadDest
+    14-LoadDestructable: LoadDestructable
     15-LoadTerrain: LoadTerrain
     16-vJass: vJass
         Comment
@@ -306,13 +320,14 @@
     '02-Initialize Spells': 'Initialize Spells'
     '03-Spell System Sample Config': 'Spell System Sample Config'
         Disab
-    '04-Event_ OnStart': 'Event: OnStart'
+    04-Libraries: Libraries
         Comment
-    '05-Spatial Distortion Cast': 'Spatial Distortion Cast'
-    '06-AoE Snare': 'AoE Snare'
-    '07-Mass Banish': 'Mass Banish'
-    '08-Make Unit Selectable': 'Make Unit Selectable'
-    '09-Angel Judgement': 'Angel Judgement'
+    05-Mimic: Mimic
+    '06-Hero Abilities': 'Hero Abilities'
+        Comment
+    '07-Spatial Distortion Cast': 'Spatial Distortion Cast'
+    '08-AoE Snare': 'AoE Snare'
+    '09-Mass Banish': 'Mass Banish'
     '10-Tyrael Judgement': 'Tyrael Judgement'
     '11-Tyrael WotT Cast': 'Tyrael WotT Cast'
     '12-Chain Slow': 'Chain Slow'
@@ -336,8 +351,18 @@
     '30-Battle Jump End': 'Battle Jump End'
     '31-Ethereal Jaunt': 'Ethereal Jaunt'
     '32-Power Surge': 'Power Surge'
-    '33-Defend Turn On': 'Defend Turn On'
-    '34-Defend Turn Off': 'Defend Turn Off'
+    33-Comet: Comet
+    34-Silence: Silence
+    '35-Thunder Clap': 'Thunder Clap'
+    '36-Unit Abilities': 'Unit Abilities'
+        Comment
+    '37-Make Unit Selectable': 'Make Unit Selectable'
+    '38-Angel Judgement': 'Angel Judgement'
+    '39-Defend Turn On': 'Defend Turn On'
+    '40-Defend Turn Off': 'Defend Turn Off'
+    '41-Item Abilities': 'Item Abilities'
+        Comment
+    '42-Staff of Mimic': 'Staff of Mimic'
 '38-No Spell System Spells': 'No Spell System Spells'
     1-FilterTransformations: FilterTransformations
     '2-Ability Cooldown': 'Ability Cooldown'
@@ -428,4 +453,16 @@
     '1-Untitled Trigger 002': 'Untitled Trigger 002'
         Disab
     '2-Create Destructable': 'Create Destructable'
+        Disab
+'47-Special Effect System': 'Special Effect System'
+    1-HashStruct: HashStruct
+    2-SpecialEffect: SpecialEffect
+    3-PlayerSpecialEffect: PlayerSpecialEffect
+    4-UnitSpecialEffect: UnitSpecialEffect
+48-Memory: Memory
+    1-TimerMemory: TimerMemory
+        Disab
+    2-TriggerMemory: TriggerMemory
+        Disab
+    3-RegionMemory: RegionMemory
         Disab

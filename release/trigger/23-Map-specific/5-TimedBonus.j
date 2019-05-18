@@ -21,15 +21,23 @@ function TimedBonusTimerFunc takes nothing returns nothing
     local integer tId = GetAgentKey(t)
     local unit timerUnit = AgentLoadUnit(tId, -1)
     local integer bonusType = 0
+    
+    call BJDebugMsg("0")
 
     loop
     exitwhen bonusType>10
-        call CSS_AddBonus(timerUnit, -AgentLoadInteger(tId, bonusType) , bonusType)
+        if -AgentLoadInteger(tId, bonusType) != 0. then
+            call CSS_AddBonus(timerUnit, -AgentLoadInteger(tId, bonusType) , bonusType)
+        endif
         set bonusType = bonusType + 1
     endloop
     
-    call GMSS_UnitAddMoveSpeed(timerUnit, -AgentLoadReal(tId, bonusType))
-    call GMSS_UnitMultiplyMoveSpeed(timerUnit, 1./AgentLoadReal(tId, bonusType + 1))
+    if AgentHaveSavedReal(tId, bonusType) then
+        call GMSS_UnitAddMoveSpeed(timerUnit, -AgentLoadReal(tId, bonusType))
+    endif
+    if AgentHaveSavedReal(tId, bonusType+1) then
+        call GMSS_UnitMultiplyMoveSpeed(timerUnit, 1./AgentLoadReal(tId, bonusType + 1))
+    endif
     
     call PauseTimer(t)
     call DestroyTimer(t)

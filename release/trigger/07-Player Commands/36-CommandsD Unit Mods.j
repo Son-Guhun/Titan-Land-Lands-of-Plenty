@@ -22,10 +22,18 @@ function Trig_CommandsD_Unit_Mods_Copy_Func009A takes nothing returns nothing
             call GUMSSetUnitScale(enumUnit, S2R(args)/100)
         endif
     elseif ( command == "'fly" or command == "'h") then
-        if args == "" then
-            call GUMSSetUnitFlyHeight(enumUnit, udg_DecoSystem_Height[playerNumber])
+        if IsUnitType(enumUnit, UNIT_TYPE_STRUCTURE) then
+            if args == "" then
+                call GUMSSetStructureFlyHeight(enumUnit, udg_DecoSystem_Height[playerNumber], not LoP_IsUnitDecoration(enumUnit))
+            else
+                call GUMSSetStructureFlyHeight(enumUnit, S2R(args), not LoP_IsUnitDecoration(enumUnit))
+            endif
         else
-            call GUMSSetUnitFlyHeight(enumUnit, S2R(args))
+            if args == "" then
+                call GUMSSetUnitFlyHeight(enumUnit, udg_DecoSystem_Height[playerNumber])
+            else
+                call GUMSSetUnitFlyHeight(enumUnit, S2R(args))
+            endif
         endif
     elseif ( command == "'face" or command == "'f") then
         if args == "" then

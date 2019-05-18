@@ -1,0 +1,40 @@
+Event
+Condition
+Action
+    SetVariable
+        Var   : Spell__InRangePoint
+        Var   : Spell__CastPoint
+    SetVariable
+        Var   : Spell__InRange
+        Const : 250.00
+    ForGroupMultiple
+        Var   : Spell__InRangeGroup
+        Action
+            IfThenElseMultiple
+                Condition
+                    OrMultiple
+                        Condition
+                            OperatorCompareBoolean
+                                Call  : IsUnitType
+                                    Call  : GetEnumUnit
+                                    Preset: UnitTypeHero
+                                Preset: OperatorEqualENE
+                                Const : true
+                            OperatorCompareBoolean
+                                Call  : IsUnitType
+                                    Call  : GetEnumUnit
+                                    Preset: UnitTypeResistant
+                                Preset: OperatorEqualENE
+                                Const : true
+                Action
+                    CustomScriptCode
+                        Const : 'call AddTimedBonus(GetEnumUnit(), 0.5, 0.5, 3)'
+                Action
+                    CustomScriptCode
+                        Const : 'call AddTimedBonus(GetEnumUnit(), 0.5, 0.5, 5)'
+            UnitDamageTargetBJ
+                Var   : Spell__Caster
+                Call  : GetEnumUnit
+                Const : 140.00
+                Preset: AttackTypeNormal
+                Preset: DamageTypeMagic
