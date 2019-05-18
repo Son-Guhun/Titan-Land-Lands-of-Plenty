@@ -121,8 +121,8 @@ integer Table___more= 8190
     //Configure it if you use more than 8190 "key" variables in your map (this will never happen though).
    
 hashtable Table___ht= InitHashtable()
-constant integer Table___sizeK=8
-constant integer Table___listK=9
+constant integer Table___sizeK=5
+constant integer Table___listK=6
 //endglobals from Table
 //globals from ThirdPersonCamera:
 constant boolean LIBRARY_ThirdPersonCamera=true
@@ -204,7 +204,7 @@ constant real DummyRecycler___FACING_OFFSET= 180.0 / DummyRecycler___ANGLES_COUN
 //endglobals from DummyRecycler
 //globals from Lists:
 constant boolean LIBRARY_Lists=true
-constant integer Lists_RECYCLE_KEY=10
+constant integer Lists_RECYCLE_KEY=7
 constant boolean Lists_ENABLE_GUI= false
 hashtable Lists___hashTable= InitHashtable()
 //endglobals from Lists
@@ -288,9 +288,9 @@ constant real CombatTag_SPELL_BLUE= 100.00
 constant real CombatTag_HEAL_RED= 0.
 constant real CombatTag_HEAL_GREEN= 0.
 constant real CombatTag_HEAL_BLUE= 0.
-constant integer CombatTag_PHYS_DAMAGE=11
-constant integer CombatTag_SPELL_DAMAGE=12
-constant integer CombatTag_HEALING=13
+constant integer CombatTag_PHYS_DAMAGE=8
+constant integer CombatTag_SPELL_DAMAGE=9
+constant integer CombatTag_HEALING=10
 //endglobals from CombatTag
 //globals from FilterTransformations:
 constant boolean LIBRARY_FilterTransformations=true
@@ -316,6 +316,9 @@ constant boolean LIBRARY_RectEnvironment=true
 //globals from TerrainTools:
 constant boolean LIBRARY_TerrainTools=true
 //endglobals from TerrainTools
+//globals from ToggleAura:
+constant boolean LIBRARY_ToggleAura=true
+//endglobals from ToggleAura
 //globals from AutoRectEnvironment:
 constant boolean LIBRARY_AutoRectEnvironment=true
 constant boolean AutoRectEnvironment___ENABLE_SET_HOOK= false
@@ -365,7 +368,7 @@ constant boolean UnitVisualModsDefaults_COLOR= true
 constant boolean LIBRARY_UserDefinedRects=true
 hashtable UserDefinedRects___hashTable= InitHashtable()
 weathereffect array UserDefinedRects___weatherEffects
-constant integer UserDefinedRects___RECYCLE_KEY=14
+constant integer UserDefinedRects___RECYCLE_KEY=11
 integer array UserDefinedRects___instances
 //endglobals from UserDefinedRects
 //globals from LoPHeader:
@@ -1147,6 +1150,7 @@ trigger gg_trg_Angel_Judgement= null
 trigger gg_trg_Defend_Turn_On= null
 trigger gg_trg_Defend_Turn_Off= null
 trigger gg_trg_Staff_of_Mimic= null
+trigger gg_trg_ToggleAura= null
 trigger gg_trg_FilterTransformations= null
 trigger gg_trg_Ability_Cooldown= null
 trigger gg_trg_Summon= null
@@ -1337,313 +1341,316 @@ integer s__DummyRecycler___S_tb
 constant integer si__TileDefinition___TileDefinition=98
 constant integer si__ArgumentStack___table=99
 constant integer si__Args=100
-constant integer s__Args_real_impl=15
-constant integer s__Args_integer_impl=16
-constant integer s__Args_boolean_impl=17
-constant integer s__Args_string_impl=18
-constant integer s__Args_player_impl=19
-constant integer s__Args_widget_impl=20
-constant integer s__Args_destructable_impl=21
-constant integer s__Args_item_impl=22
-constant integer s__Args_unit_impl=23
-constant integer s__Args_ability_impl=24
-constant integer s__Args_timer_impl=25
-constant integer s__Args_trigger_impl=26
-constant integer s__Args_triggercondition_impl=27
-constant integer s__Args_event_impl=28
-constant integer s__Args_force_impl=29
-constant integer s__Args_group_impl=30
-constant integer s__Args_location_impl=31
-constant integer s__Args_rect_impl=32
-constant integer s__Args_boolexpr_impl=33
-constant integer s__Args_sound_impl=34
-constant integer s__Args_effect_impl=35
-constant integer s__Args_quest_impl=36
-constant integer s__Args_questitem_impl=37
-constant integer s__Args_defeatcondition_impl=38
-constant integer s__Args_timerdialog_impl=39
-constant integer s__Args_leaderboard_impl=40
-constant integer s__Args_multiboard_impl=41
-constant integer s__Args_multiboarditem_impl=42
-constant integer s__Args_trackable_impl=43
-constant integer s__Args_dialog_impl=44
-constant integer s__Args_button_impl=45
-constant integer s__Args_region_impl=46
-constant integer s__Args_fogmodifier_impl=47
-constant integer s__Args_hashtable_impl=48
-constant integer s__Args_triggeraction_impl=49
-constant integer s__Args_unitpool_impl=50
-constant integer s__Args_itempool_impl=51
-constant integer s__Args_texttag_impl=52
-constant integer s__Args_lightning_impl=53
-constant integer s__Args_image_impl=54
-constant integer s__Args_ubersplat_impl=55
-constant integer s__Args_fogstate_impl=56
+constant integer s__Args_real_impl=12
+constant integer s__Args_integer_impl=13
+constant integer s__Args_boolean_impl=14
+constant integer s__Args_string_impl=15
+constant integer s__Args_player_impl=16
+constant integer s__Args_widget_impl=17
+constant integer s__Args_destructable_impl=18
+constant integer s__Args_item_impl=19
+constant integer s__Args_unit_impl=20
+constant integer s__Args_ability_impl=21
+constant integer s__Args_timer_impl=22
+constant integer s__Args_trigger_impl=23
+constant integer s__Args_triggercondition_impl=24
+constant integer s__Args_event_impl=25
+constant integer s__Args_force_impl=26
+constant integer s__Args_group_impl=27
+constant integer s__Args_location_impl=28
+constant integer s__Args_rect_impl=29
+constant integer s__Args_boolexpr_impl=30
+constant integer s__Args_sound_impl=31
+constant integer s__Args_effect_impl=32
+constant integer s__Args_quest_impl=33
+constant integer s__Args_questitem_impl=34
+constant integer s__Args_defeatcondition_impl=35
+constant integer s__Args_timerdialog_impl=36
+constant integer s__Args_leaderboard_impl=37
+constant integer s__Args_multiboard_impl=38
+constant integer s__Args_multiboarditem_impl=39
+constant integer s__Args_trackable_impl=40
+constant integer s__Args_dialog_impl=41
+constant integer s__Args_button_impl=42
+constant integer s__Args_region_impl=43
+constant integer s__Args_fogmodifier_impl=44
+constant integer s__Args_hashtable_impl=45
+constant integer s__Args_triggeraction_impl=46
+constant integer s__Args_unitpool_impl=47
+constant integer s__Args_itempool_impl=48
+constant integer s__Args_texttag_impl=49
+constant integer s__Args_lightning_impl=50
+constant integer s__Args_image_impl=51
+constant integer s__Args_ubersplat_impl=52
+constant integer s__Args_fogstate_impl=53
 constant integer si__LinkedHashSet=101
 integer s__LinkedHashSet_enumElement= 0
 integer s__LinkedHashSet_enumSet= 0
 constant integer si__TableStruct=102
 constant integer si__BoolExprEvaluator=103
-constant integer s__BoolExprEvaluator_tab_impl=57
-constant integer s__BoolExprEvaluator_trigger_impl=58
+constant integer s__BoolExprEvaluator_tab_impl=54
+constant integer s__BoolExprEvaluator_trigger_impl=55
 constant integer si__CombatTag___CombatTag=104
-constant integer s__CombatTag___CombatTag_timerData_impl=59
+constant integer s__CombatTag___CombatTag_timerData_impl=56
 constant integer si__Order=105
-constant integer s__Order_morphOrders_impl=60
-constant integer s__Order_generalOrders_impl=61
-constant integer s__Order_necroticOrders_impl=62
+constant integer s__Order_morphOrders_impl=57
+constant integer s__Order_generalOrders_impl=58
+constant integer s__Order_necroticOrders_impl=59
 constant integer si__LoP_DecoBuilders=106
 integer array s__LoP_DecoBuilders_rawcodes
-constant integer s__LoP_DecoBuilders_static_members_key=63
-constant integer s__LoP_DecoBuilders_SpecialDecoLastIndex_impl=64
-constant integer s__LoP_DecoBuilders_BasicDecoFirstIndex_impl=65
-constant integer s__LoP_DecoBuilders_BasicDecoLastIndex_impl=66
-constant integer s__LoP_DecoBuilders_AdvDecoFirstIndex_impl=67
-constant integer s__LoP_DecoBuilders_AdvDecoLastIndex_impl=68
-constant integer s__LoP_DecoBuilders_DecoLastIndex_impl=69
+constant integer s__LoP_DecoBuilders_static_members_key=60
+constant integer s__LoP_DecoBuilders_SpecialDecoLastIndex_impl=61
+constant integer s__LoP_DecoBuilders_BasicDecoFirstIndex_impl=62
+constant integer s__LoP_DecoBuilders_BasicDecoLastIndex_impl=63
+constant integer s__LoP_DecoBuilders_AdvDecoFirstIndex_impl=64
+constant integer s__LoP_DecoBuilders_AdvDecoLastIndex_impl=65
+constant integer s__LoP_DecoBuilders_DecoLastIndex_impl=66
 constant integer si__LoPInitPlayerCircles_Globals=107
-constant integer s__LoPInitPlayerCircles_Globals_regionTable_impl=70
+constant integer s__LoPInitPlayerCircles_Globals_regionTable_impl=67
 constant integer si__LoP_PlayerData=108
 playercolor array s__LoP_PlayerData_playerColors
-constant integer s__LoP_PlayerData_rotationStep_impl=71
-constant integer s__LoP_PlayerData_commandsEnabled_internal_impl=72
+constant integer s__LoP_PlayerData_rotationStep_impl=68
+constant integer s__LoP_PlayerData_commandsEnabled_internal_impl=69
 constant integer si__MultiBoard=109
-constant integer s__MultiBoard_items_impl=73
-constant integer s__MultiBoard_cols_impl=74
-constant integer s__MultiBoard_rows_impl=75
-constant integer s__MultiBoard_multiboard_impl=76
+constant integer s__MultiBoard_items_impl=70
+constant integer s__MultiBoard_cols_impl=71
+constant integer s__MultiBoard_rows_impl=72
+constant integer s__MultiBoard_multiboard_impl=73
 constant integer si__TerrainFog=110
 constant integer s__TerrainFog_LINEAR= 0
 constant integer s__TerrainFog_EXPONENTIAL= 1
 constant integer s__TerrainFog_EXPONENTIAL2= 2
-constant integer s__TerrainFog_style_impl=77
-constant integer s__TerrainFog_zStart_impl=78
-constant integer s__TerrainFog_zEnd_impl=79
-constant integer s__TerrainFog_density_impl=80
-constant integer s__TerrainFog_red_impl=81
-constant integer s__TerrainFog_green_impl=82
-constant integer s__TerrainFog_blue_impl=83
+constant integer s__TerrainFog_style_impl=74
+constant integer s__TerrainFog_zStart_impl=75
+constant integer s__TerrainFog_zEnd_impl=76
+constant integer s__TerrainFog_density_impl=77
+constant integer s__TerrainFog_red_impl=78
+constant integer s__TerrainFog_green_impl=79
+constant integer s__TerrainFog_blue_impl=80
 constant integer si__RectEnvironment=111
-constant integer s__RectEnvironment_fog_impl=84
+constant integer s__RectEnvironment_fog_impl=81
 constant integer si__TerrainType2Id=112
-constant integer s__TerrainType2Id_data_impl=85
+constant integer s__TerrainType2Id_data_impl=82
 constant integer si__TerrainTools___InitStruct=113
-constant integer si__AutoRectEnvironment___Globals=114
-constant integer s__AutoRectEnvironment___Globals_static_members_key=86
-constant integer s__AutoRectEnvironment___Globals_lastCameraX_impl=87
-constant integer s__AutoRectEnvironment___Globals_lastCameraY_impl=88
-constant integer s__AutoRectEnvironment___Globals_rectWasMoved_impl=89
-constant integer s__AutoRectEnvironment___Globals_lastCameraRect_impl=90
-constant integer s__AutoRectEnvironment___Globals_allRects_impl=91
-constant integer s__AutoRectEnvironment___Globals_rects_impl=92
-constant integer s__AutoRectEnvironment___Globals_id2_impl=93
-constant integer si__AutoRectEnvironment___InitStruct=115
-constant integer si__GameTime=116
+constant integer si__ToggleAura__Globals=114
+constant integer s__ToggleAura__Globals_tab_impl=83
+constant integer si__ToggleAura__InitStruct=115
+constant integer si__AutoRectEnvironment___Globals=116
+constant integer s__AutoRectEnvironment___Globals_static_members_key=84
+constant integer s__AutoRectEnvironment___Globals_lastCameraX_impl=85
+constant integer s__AutoRectEnvironment___Globals_lastCameraY_impl=86
+constant integer s__AutoRectEnvironment___Globals_rectWasMoved_impl=87
+constant integer s__AutoRectEnvironment___Globals_lastCameraRect_impl=88
+constant integer s__AutoRectEnvironment___Globals_allRects_impl=89
+constant integer s__AutoRectEnvironment___Globals_rects_impl=90
+constant integer s__AutoRectEnvironment___Globals_id2_impl=91
+constant integer si__AutoRectEnvironment___InitStruct=117
+constant integer si__GameTime=118
 integer s__GameTime_a
-constant integer s__GameTime_static_members_key=94
-constant integer s__GameTime_hours_impl=95
-constant integer s__GameTime_minutes_impl=96
-constant integer s__GameTime_seconds_impl=97
-constant integer s__GameTime_timer_impl=98
-constant integer s__GameTime_multiboard_impl=99
-constant integer si__LoP_Command=117
-constant integer s__LoP_Command_boolexpr_impl=100
-constant integer s__LoP_Command_string_impl=101
-constant integer s__LoP_Command_accessLevel_impl=102
-constant integer si__LoPCommands_Globals=118
-constant integer s__LoPCommands_Globals_static_members_key=103
-constant integer s__LoPCommands_Globals_trigger_impl=104
-constant integer s__LoPCommands_Globals_evaluator_impl=105
-constant integer si__SpecialEffect_hT_reals=119
-constant integer si__SpecialEffect_hT_booleans=120
-constant integer si__SpecialEffect_hT_strings=121
-constant integer si__SpecialEffect_hT_integers=122
-constant integer si__SpecialEffect__hT_handles=123
-constant integer si__SpecialEffect__hT_agents=124
-constant integer si__SpecialEffect_hT_players=125
-constant integer si__SpecialEffect_hT_widgets=126
-constant integer si__SpecialEffect_hT_destructables=127
-constant integer si__SpecialEffect_hT_items=128
-constant integer si__SpecialEffect_hT_units=129
-constant integer si__SpecialEffect_hT_abilitys=130
-constant integer si__SpecialEffect_hT_timers=131
-constant integer si__SpecialEffect_hT_triggers=132
-constant integer si__SpecialEffect_hT_triggerconditions=133
-constant integer si__SpecialEffect_hT_triggeractions=134
-constant integer si__SpecialEffect_hT_events=135
-constant integer si__SpecialEffect_hT_forces=136
-constant integer si__SpecialEffect_hT_groups=137
-constant integer si__SpecialEffect_hT_locations=138
-constant integer si__SpecialEffect_hT_rects=139
-constant integer si__SpecialEffect_hT_boolexprs=140
-constant integer si__SpecialEffect_hT_sounds=141
-constant integer si__SpecialEffect_hT_effects=142
-constant integer si__SpecialEffect_hT_unitpools=143
-constant integer si__SpecialEffect_hT_itempools=144
-constant integer si__SpecialEffect_hT_quests=145
-constant integer si__SpecialEffect_hT_questitems=146
-constant integer si__SpecialEffect_hT_defeatconditions=147
-constant integer si__SpecialEffect_hT_timerdialogs=148
-constant integer si__SpecialEffect_hT_leaderboards=149
-constant integer si__SpecialEffect_hT_multiboards=150
-constant integer si__SpecialEffect_hT_multiboarditems=151
-constant integer si__SpecialEffect_hT_trackables=152
-constant integer si__SpecialEffect_hT_dialogs=153
-constant integer si__SpecialEffect_hT_buttons=154
-constant integer si__SpecialEffect_hT_texttags=155
-constant integer si__SpecialEffect_hT_lightnings=156
-constant integer si__SpecialEffect_hT_images=157
-constant integer si__SpecialEffect_hT_ubersplats=158
-constant integer si__SpecialEffect_hT_regions=159
-constant integer si__SpecialEffect_hT_fogstates=160
-constant integer si__SpecialEffect_hT_fogmodifiers=161
-constant integer si__SpecialEffect_hT_hashtables=162
-constant integer si__SpecialEffect_hT_Child=163
-constant integer si__SpecialEffect_hT=164
-constant integer si__SpecialEffect=165
-constant integer s__SpecialEffect_x_INDEX=106
-constant integer s__SpecialEffect_y_INDEX=107
-constant integer s__SpecialEffect_height_INDEX=108
-constant integer s__SpecialEffect_scale_INDEX=109
+constant integer s__GameTime_static_members_key=92
+constant integer s__GameTime_hours_impl=93
+constant integer s__GameTime_minutes_impl=94
+constant integer s__GameTime_seconds_impl=95
+constant integer s__GameTime_timer_impl=96
+constant integer s__GameTime_multiboard_impl=97
+constant integer si__LoP_Command=119
+constant integer s__LoP_Command_boolexpr_impl=98
+constant integer s__LoP_Command_string_impl=99
+constant integer s__LoP_Command_accessLevel_impl=100
+constant integer si__LoPCommands_Globals=120
+constant integer s__LoPCommands_Globals_static_members_key=101
+constant integer s__LoPCommands_Globals_trigger_impl=102
+constant integer s__LoPCommands_Globals_evaluator_impl=103
+constant integer si__SpecialEffect_hT_reals=121
+constant integer si__SpecialEffect_hT_booleans=122
+constant integer si__SpecialEffect_hT_strings=123
+constant integer si__SpecialEffect_hT_integers=124
+constant integer si__SpecialEffect__hT_handles=125
+constant integer si__SpecialEffect__hT_agents=126
+constant integer si__SpecialEffect_hT_players=127
+constant integer si__SpecialEffect_hT_widgets=128
+constant integer si__SpecialEffect_hT_destructables=129
+constant integer si__SpecialEffect_hT_items=130
+constant integer si__SpecialEffect_hT_units=131
+constant integer si__SpecialEffect_hT_abilitys=132
+constant integer si__SpecialEffect_hT_timers=133
+constant integer si__SpecialEffect_hT_triggers=134
+constant integer si__SpecialEffect_hT_triggerconditions=135
+constant integer si__SpecialEffect_hT_triggeractions=136
+constant integer si__SpecialEffect_hT_events=137
+constant integer si__SpecialEffect_hT_forces=138
+constant integer si__SpecialEffect_hT_groups=139
+constant integer si__SpecialEffect_hT_locations=140
+constant integer si__SpecialEffect_hT_rects=141
+constant integer si__SpecialEffect_hT_boolexprs=142
+constant integer si__SpecialEffect_hT_sounds=143
+constant integer si__SpecialEffect_hT_effects=144
+constant integer si__SpecialEffect_hT_unitpools=145
+constant integer si__SpecialEffect_hT_itempools=146
+constant integer si__SpecialEffect_hT_quests=147
+constant integer si__SpecialEffect_hT_questitems=148
+constant integer si__SpecialEffect_hT_defeatconditions=149
+constant integer si__SpecialEffect_hT_timerdialogs=150
+constant integer si__SpecialEffect_hT_leaderboards=151
+constant integer si__SpecialEffect_hT_multiboards=152
+constant integer si__SpecialEffect_hT_multiboarditems=153
+constant integer si__SpecialEffect_hT_trackables=154
+constant integer si__SpecialEffect_hT_dialogs=155
+constant integer si__SpecialEffect_hT_buttons=156
+constant integer si__SpecialEffect_hT_texttags=157
+constant integer si__SpecialEffect_hT_lightnings=158
+constant integer si__SpecialEffect_hT_images=159
+constant integer si__SpecialEffect_hT_ubersplats=160
+constant integer si__SpecialEffect_hT_regions=161
+constant integer si__SpecialEffect_hT_fogstates=162
+constant integer si__SpecialEffect_hT_fogmodifiers=163
+constant integer si__SpecialEffect_hT_hashtables=164
+constant integer si__SpecialEffect_hT_Child=165
+constant integer si__SpecialEffect_hT=166
+constant integer si__SpecialEffect=167
+constant integer s__SpecialEffect_x_INDEX=104
+constant integer s__SpecialEffect_y_INDEX=105
+constant integer s__SpecialEffect_height_INDEX=106
+constant integer s__SpecialEffect_scale_INDEX=107
 constant real s__SpecialEffect_scale_DEFAULT= 1.
-constant integer s__SpecialEffect_roll_INDEX=110
-constant integer s__SpecialEffect_yaw_INDEX=111
-constant integer s__SpecialEffect_pitch_INDEX=112
-constant integer s__SpecialEffect_red_INDEX=113
+constant integer s__SpecialEffect_roll_INDEX=108
+constant integer s__SpecialEffect_yaw_INDEX=109
+constant integer s__SpecialEffect_pitch_INDEX=110
+constant integer s__SpecialEffect_red_INDEX=111
 constant integer s__SpecialEffect_red_DEFAULT= 255
-constant integer s__SpecialEffect_green_INDEX=114
+constant integer s__SpecialEffect_green_INDEX=112
 constant integer s__SpecialEffect_green_DEFAULT= 255
-constant integer s__SpecialEffect_blue_INDEX=115
+constant integer s__SpecialEffect_blue_INDEX=113
 constant integer s__SpecialEffect_blue_DEFAULT= 255
-constant integer s__SpecialEffect_alpha_INDEX=116
+constant integer s__SpecialEffect_alpha_INDEX=114
 constant integer s__SpecialEffect_alpha_DEFAULT= 255
-constant integer si__UnitEvents=166
-constant integer s__UnitEvents_onDeath_impl_impl=117
-constant integer s__UnitEvents_onRemove_impl_impl=118
-constant integer s__UnitEvents_removeOnDeath_impl=119
-constant integer si__UserDefinedRects___Indices=167
-constant integer si__PlayerSpecialEffect=168
-constant integer s__PlayerSpecialEffect_x_INDEX=120
-constant integer s__PlayerSpecialEffect_y_INDEX=121
-constant integer s__PlayerSpecialEffect_height_INDEX=122
-constant integer s__PlayerSpecialEffect_scale_INDEX=123
+constant integer si__UnitEvents=168
+constant integer s__UnitEvents_onDeath_impl_impl=115
+constant integer s__UnitEvents_onRemove_impl_impl=116
+constant integer s__UnitEvents_removeOnDeath_impl=117
+constant integer si__UserDefinedRects___Indices=169
+constant integer si__PlayerSpecialEffect=170
+constant integer s__PlayerSpecialEffect_x_INDEX=118
+constant integer s__PlayerSpecialEffect_y_INDEX=119
+constant integer s__PlayerSpecialEffect_height_INDEX=120
+constant integer s__PlayerSpecialEffect_scale_INDEX=121
 constant real s__PlayerSpecialEffect_scale_DEFAULT= 1.
-constant integer s__PlayerSpecialEffect_roll_INDEX=124
-constant integer s__PlayerSpecialEffect_yaw_INDEX=125
-constant integer s__PlayerSpecialEffect_pitch_INDEX=126
-constant integer s__PlayerSpecialEffect_red_INDEX=127
+constant integer s__PlayerSpecialEffect_roll_INDEX=122
+constant integer s__PlayerSpecialEffect_yaw_INDEX=123
+constant integer s__PlayerSpecialEffect_pitch_INDEX=124
+constant integer s__PlayerSpecialEffect_red_INDEX=125
 constant integer s__PlayerSpecialEffect_red_DEFAULT= 255
-constant integer s__PlayerSpecialEffect_green_INDEX=128
+constant integer s__PlayerSpecialEffect_green_INDEX=126
 constant integer s__PlayerSpecialEffect_green_DEFAULT= 255
-constant integer s__PlayerSpecialEffect_blue_INDEX=129
+constant integer s__PlayerSpecialEffect_blue_INDEX=127
 constant integer s__PlayerSpecialEffect_blue_DEFAULT= 255
-constant integer s__PlayerSpecialEffect_alpha_INDEX=130
+constant integer s__PlayerSpecialEffect_alpha_INDEX=128
 constant integer s__PlayerSpecialEffect_alpha_DEFAULT= 255
-constant integer s__PlayerSpecialEffect_Owner_INDEX=131
-constant integer si__RectGenerator___FogStyle=169
-constant integer s__RectGenerator___FogStyle_strings_impl=132
-constant integer s__RectGenerator___FogStyle_linkedListNext_impl=133
-constant integer s__RectGenerator___FogStyle_linkedListPrev_impl=134
-constant integer si__UnitSpecialEffect=170
-constant integer s__UnitSpecialEffect_x_INDEX=135
-constant integer s__UnitSpecialEffect_y_INDEX=136
-constant integer s__UnitSpecialEffect_height_INDEX=137
-constant integer s__UnitSpecialEffect_scale_INDEX=138
+constant integer s__PlayerSpecialEffect_Owner_INDEX=129
+constant integer si__RectGenerator___FogStyle=171
+constant integer s__RectGenerator___FogStyle_strings_impl=130
+constant integer s__RectGenerator___FogStyle_linkedListNext_impl=131
+constant integer s__RectGenerator___FogStyle_linkedListPrev_impl=132
+constant integer si__UnitSpecialEffect=172
+constant integer s__UnitSpecialEffect_x_INDEX=133
+constant integer s__UnitSpecialEffect_y_INDEX=134
+constant integer s__UnitSpecialEffect_height_INDEX=135
+constant integer s__UnitSpecialEffect_scale_INDEX=136
 constant real s__UnitSpecialEffect_scale_DEFAULT= 1.
-constant integer s__UnitSpecialEffect_roll_INDEX=139
-constant integer s__UnitSpecialEffect_yaw_INDEX=140
-constant integer s__UnitSpecialEffect_pitch_INDEX=141
-constant integer s__UnitSpecialEffect_red_INDEX=142
+constant integer s__UnitSpecialEffect_roll_INDEX=137
+constant integer s__UnitSpecialEffect_yaw_INDEX=138
+constant integer s__UnitSpecialEffect_pitch_INDEX=139
+constant integer s__UnitSpecialEffect_red_INDEX=140
 constant integer s__UnitSpecialEffect_red_DEFAULT= 255
-constant integer s__UnitSpecialEffect_green_INDEX=143
+constant integer s__UnitSpecialEffect_green_INDEX=141
 constant integer s__UnitSpecialEffect_green_DEFAULT= 255
-constant integer s__UnitSpecialEffect_blue_INDEX=144
+constant integer s__UnitSpecialEffect_blue_INDEX=142
 constant integer s__UnitSpecialEffect_blue_DEFAULT= 255
-constant integer s__UnitSpecialEffect_alpha_INDEX=145
+constant integer s__UnitSpecialEffect_alpha_INDEX=143
 constant integer s__UnitSpecialEffect_alpha_DEFAULT= 255
-constant integer s__UnitSpecialEffect_unitType_INDEX=146
-constant integer si__UnitVisualMods___data_reals=171
-constant integer si__UnitVisualMods___data_booleans=172
-constant integer si__UnitVisualMods___data_strings=173
-constant integer si__UnitVisualMods___data_integers=174
-constant integer si__UnitVisualMods___data_handles=175
-constant integer si__UnitVisualMods___data_agents=176
-constant integer si__UnitVisualMods___data_players=177
-constant integer si__UnitVisualMods___data_widgets=178
-constant integer si__UnitVisualMods___data_destructables=179
-constant integer si__UnitVisualMods___data_items=180
-constant integer si__UnitVisualMods___data_units=181
-constant integer si__UnitVisualMods___data_abilitys=182
-constant integer si__UnitVisualMods___data_timers=183
-constant integer si__UnitVisualMods___data_triggers=184
-constant integer si__UnitVisualMods___data_triggerconditions=185
-constant integer si__UnitVisualMods___data_triggeractions=186
-constant integer si__UnitVisualMods___data_events=187
-constant integer si__UnitVisualMods___data_forces=188
-constant integer si__UnitVisualMods___data_groups=189
-constant integer si__UnitVisualMods___data_locations=190
-constant integer si__UnitVisualMods___data_rects=191
-constant integer si__UnitVisualMods___data_boolexprs=192
-constant integer si__UnitVisualMods___data_sounds=193
-constant integer si__UnitVisualMods___data_effects=194
-constant integer si__UnitVisualMods___data_unitpools=195
-constant integer si__UnitVisualMods___data_itempools=196
-constant integer si__UnitVisualMods___data_quests=197
-constant integer si__UnitVisualMods___data_questitems=198
-constant integer si__UnitVisualMods___data_defeatconditions=199
-constant integer si__UnitVisualMods___data_timerdialogs=200
-constant integer si__UnitVisualMods___data_leaderboards=201
-constant integer si__UnitVisualMods___data_multiboards=202
-constant integer si__UnitVisualMods___data_multiboarditems=203
-constant integer si__UnitVisualMods___data_trackables=204
-constant integer si__UnitVisualMods___data_dialogs=205
-constant integer si__UnitVisualMods___data_buttons=206
-constant integer si__UnitVisualMods___data_texttags=207
-constant integer si__UnitVisualMods___data_lightnings=208
-constant integer si__UnitVisualMods___data_images=209
-constant integer si__UnitVisualMods___data_ubersplats=210
-constant integer si__UnitVisualMods___data_regions=211
-constant integer si__UnitVisualMods___data_fogstates=212
-constant integer si__UnitVisualMods___data_fogmodifiers=213
-constant integer si__UnitVisualMods___data_hashtables=214
-constant integer si__UnitVisualMods___data_Child=215
-constant integer si__UnitVisualMods___data=216
-constant integer si__UnitVisualMods___UnitVisualsRaw=217
-constant integer si__UnitVisuals=218
-constant integer si__UnitVisualMods___TimerData=219
-constant integer s__UnitVisualMods___TimerData_unit_impl=147
-constant integer si__UnitVisualMods___InitStruct=220
-constant integer si__LoPWidgets__Globals=221
-constant integer s__LoPWidgets__Globals_destructablesTab_impl=148
-constant integer si__LoP_UnitData=222
-constant integer s__LoP_UnitData_isHeroic_impl=149
-constant integer si__LoPHeroicUnit_Globals=223
-constant integer s__LoPHeroicUnit_Globals_static_members_key=150
-constant integer s__LoPHeroicUnit_Globals_dummy_impl=151
-constant integer si__Mimic__UnitData=224
-constant integer s__Mimic__UnitData_original_impl=152
-constant integer si__CameraValues=225
-constant integer s__CameraValues_static_members_key=153
-constant integer s__CameraValues_zoom_impl=154
-constant integer s__CameraValues_rotate_impl=155
-constant integer s__CameraValues_roll_impl=156
-constant integer s__CameraValues_pitch_impl=157
-constant integer s__CameraValues_timer_impl=158
-constant integer si__CommandsSetLimits__StringConvert=226
-constant integer s__CommandsSetLimits__StringConvert_data_impl=159
-constant integer si__TreeSystemChooseTree___Globals=227
-constant integer s__TreeSystemChooseTree___Globals_timerData_impl=160
-constant integer si__SpatialDistortion__TimerData=228
-constant integer s__SpatialDistortion__TimerData_caster_impl=161
-constant integer s__SpatialDistortion__TimerData_counter_impl=162
-constant integer s__SpatialDistortion__TimerData_x_impl=163
-constant integer s__SpatialDistortion__TimerData_y_impl=164
-constant integer si__WillOfTheTribunal__CasterData=229
-constant integer s__WillOfTheTribunal__CasterData_timer_impl=165
-constant integer si__CometSpell__TimerData=230
-constant integer s__CometSpell__TimerData_caster_impl=166
-constant integer s__CometSpell__TimerData_x_impl=167
-constant integer s__CometSpell__TimerData_y_impl=168
+constant integer s__UnitSpecialEffect_unitType_INDEX=144
+constant integer si__UnitVisualMods___data_reals=173
+constant integer si__UnitVisualMods___data_booleans=174
+constant integer si__UnitVisualMods___data_strings=175
+constant integer si__UnitVisualMods___data_integers=176
+constant integer si__UnitVisualMods___data_handles=177
+constant integer si__UnitVisualMods___data_agents=178
+constant integer si__UnitVisualMods___data_players=179
+constant integer si__UnitVisualMods___data_widgets=180
+constant integer si__UnitVisualMods___data_destructables=181
+constant integer si__UnitVisualMods___data_items=182
+constant integer si__UnitVisualMods___data_units=183
+constant integer si__UnitVisualMods___data_abilitys=184
+constant integer si__UnitVisualMods___data_timers=185
+constant integer si__UnitVisualMods___data_triggers=186
+constant integer si__UnitVisualMods___data_triggerconditions=187
+constant integer si__UnitVisualMods___data_triggeractions=188
+constant integer si__UnitVisualMods___data_events=189
+constant integer si__UnitVisualMods___data_forces=190
+constant integer si__UnitVisualMods___data_groups=191
+constant integer si__UnitVisualMods___data_locations=192
+constant integer si__UnitVisualMods___data_rects=193
+constant integer si__UnitVisualMods___data_boolexprs=194
+constant integer si__UnitVisualMods___data_sounds=195
+constant integer si__UnitVisualMods___data_effects=196
+constant integer si__UnitVisualMods___data_unitpools=197
+constant integer si__UnitVisualMods___data_itempools=198
+constant integer si__UnitVisualMods___data_quests=199
+constant integer si__UnitVisualMods___data_questitems=200
+constant integer si__UnitVisualMods___data_defeatconditions=201
+constant integer si__UnitVisualMods___data_timerdialogs=202
+constant integer si__UnitVisualMods___data_leaderboards=203
+constant integer si__UnitVisualMods___data_multiboards=204
+constant integer si__UnitVisualMods___data_multiboarditems=205
+constant integer si__UnitVisualMods___data_trackables=206
+constant integer si__UnitVisualMods___data_dialogs=207
+constant integer si__UnitVisualMods___data_buttons=208
+constant integer si__UnitVisualMods___data_texttags=209
+constant integer si__UnitVisualMods___data_lightnings=210
+constant integer si__UnitVisualMods___data_images=211
+constant integer si__UnitVisualMods___data_ubersplats=212
+constant integer si__UnitVisualMods___data_regions=213
+constant integer si__UnitVisualMods___data_fogstates=214
+constant integer si__UnitVisualMods___data_fogmodifiers=215
+constant integer si__UnitVisualMods___data_hashtables=216
+constant integer si__UnitVisualMods___data_Child=217
+constant integer si__UnitVisualMods___data=218
+constant integer si__UnitVisualMods___UnitVisualsRaw=219
+constant integer si__UnitVisuals=220
+constant integer si__UnitVisualMods___TimerData=221
+constant integer s__UnitVisualMods___TimerData_unit_impl=145
+constant integer si__UnitVisualMods___InitStruct=222
+constant integer si__LoPWidgets__Globals=223
+constant integer s__LoPWidgets__Globals_destructablesTab_impl=146
+constant integer si__LoP_UnitData=224
+constant integer s__LoP_UnitData_isHeroic_impl=147
+constant integer si__LoPHeroicUnit_Globals=225
+constant integer s__LoPHeroicUnit_Globals_static_members_key=148
+constant integer s__LoPHeroicUnit_Globals_dummy_impl=149
+constant integer si__Mimic___UnitData=226
+constant integer s__Mimic___UnitData_original_impl=150
+constant integer si__CameraValues=227
+constant integer s__CameraValues_static_members_key=151
+constant integer s__CameraValues_zoom_impl=152
+constant integer s__CameraValues_rotate_impl=153
+constant integer s__CameraValues_roll_impl=154
+constant integer s__CameraValues_pitch_impl=155
+constant integer s__CameraValues_timer_impl=156
+constant integer si__CommandsSetLimits__StringConvert=228
+constant integer s__CommandsSetLimits__StringConvert_data_impl=157
+constant integer si__TreeSystemChooseTree__Globals=229
+constant integer s__TreeSystemChooseTree__Globals_timerData_impl=158
+constant integer si__SpatialDistortion__TimerData=230
+constant integer s__SpatialDistortion__TimerData_caster_impl=159
+constant integer s__SpatialDistortion__TimerData_counter_impl=160
+constant integer s__SpatialDistortion__TimerData_x_impl=161
+constant integer s__SpatialDistortion__TimerData_y_impl=162
+constant integer si__WillOfTheTribunal__CasterData=231
+constant integer s__WillOfTheTribunal__CasterData_timer_impl=163
+constant integer si__CometSpell__TimerData=232
+constant integer s__CometSpell__TimerData_caster_impl=164
+constant integer s__CometSpell__TimerData_x_impl=165
+constant integer s__CometSpell__TimerData_y_impl=166
 trigger st__UnitEvents__get_onDeath
 trigger st__UnitEvents__get_onRemove
 integer f__arg_this
@@ -2581,12 +2588,12 @@ function InitQuests takes nothing returns nothing
     // ----------
     
     // Model Credits 1
-    set quest_text="\n|cff00b300The Hive Workshop:|r\nKwaliti, Lord_T, Deolrin, Chilla_killa, Sellenisko, Hellish Hybrid, A Void, Uncle Fester, MassiveMaster, HerrDave, Olofmoleman, Sliph-M, darkdeathknight, evigeorge1617, Hayate, Tranquil, -Grendel, Stefan.K, HappyTauren, donut3.5, Cavman, HateCrew, Expresso, General Frank, YrpoTRIa , KO3bMA , Dixnos, Fingolfin, Mike, ChevronSeven, MatiS, killst4r, Tarrasque, Red XIII, FvckTP, Em!, Misha, Arak1da, Chen, Wandering Soul, kagyun, Hexus, -=Emergenzy=-, Sin'dorei300, PROXY, WebSter, darklord_avalon, eubz, Kitabatake, kellym0, Sunchips, Remixer, Su7VdeR, koondad, Mister_Haudrauf, Daenar7, SinisterX, TiJiL, icewolf055, RightField, UgoUgo, DarkHunter1357, Necromancer_187, alfredx_sotn, Black_Stan, BlinkBoy, NaserKingArthas, bisnar13, InfernalTater, Hueter, ~Nightmare, 67chrome, dickxunder, Elenai, Redstee1, Mr Goblin, Ujimasa Hojo, Happy Tauren, Himperion, Kuhneghetz, Wildfire, Horn, Wisdom\n\n\n|cffff0000XGM:|r\nP4ela, Kolbosa, Wulfrein, DampirTBs, Feleer, Jack Sparrow, DiKey51, Ket"
+    set quest_text="\n|cff00b300The Hive Workshop:|r\nKwaliti, Lord_T, Deolrin, Chilla_killa, Sellenisko, Hellish Hybrid, A Void, Uncle Fester, MassiveMaster, HerrDave, Olofmoleman, Sliph-M, darkdeathknight, evigeorge1617, Hayate, Tranquil, -Grendel, Stefan.K, HappyTauren, donut3.5, Cavman, HateCrew, Expresso, General Frank, YrpoTRIa , KO3bMA , Dixnos, Fingolfin, Mike, ChevronSeven, MatiS, killst4r, Tarrasque, Red XIII, FvckTP, Em!, Misha, Arak1da, Chen, Wandering Soul, kagyun, Hexus, -=Emergenzy=-, Sin'dorei300, PROXY, WebSter, darklord_avalon, eubz, Kitabatake, kellym0, Sunchips, Remixer, Su7VdeR, koondad, Mister_Haudrauf, Daenar7, SinisterX, TiJiL, icewolf055, RightField, UgoUgo, DarkHunter1357, Necromancer_187, alfredx_sotn, Black_Stan, BlinkBoy, NaserKingArthas, bisnar13, InfernalTater, Hueter, ~Nightmare, 67chrome, dickxunder, Elenai, Redstee1, Mr Goblin, Ujimasa Hojo, Happy Tauren, Himperion, Kuhneghetz, Wildfire, Horn, Wisdom\n\n|cffff0000Unity:|r\nXiaolianhuaStudio\n"
     call CreateQuestBJ(questType, "|cff00ff00Art 1|r", quest_text, "ReplaceableTextures\\CommandButtons\\BTNTemp.blp")
     // ----------
     
     // Model Credits 2
-    set quest_text="\n|cff00b300The Hive Workshop:|r\nPrinceYaser, shiik, Dr.Death, Sant, Eagle XI, Afroknight_76, Deleted member 238226 (unknown), GhostThruster, Whitewolf8, WhiteDeath, A.R., Xezko, Deep Sea Kraken, Hellx-Magnus, -Berz-, CRAZYRUSSIAN, HappyCockroach\n"
+    set quest_text="\n|cff00b300The Hive Workshop:|r\nPrinceYaser, shiik, Dr.Death, Sant, Eagle XI, Afroknight_76, Deleted member 238226 (unknown), GhostThruster, Whitewolf8, WhiteDeath, A.R., Xezko, Deep Sea Kraken, Hellx-Magnus, -Berz-, CRAZYRUSSIAN, HappyCockroach, Tamplier777, Kehel, Radagast, Lordaeron Creator, The D3ath\n\n|cffff0000XGM:|r\nP4ela, Kolbosa, Wulfrein, DampirTBs, Feleer, Jack Sparrow, DiKey51, Ket, LongbowMan\n"
     call CreateQuestBJ(questType, "|cff00ff00Art 2|r", quest_text, "ReplaceableTextures\\CommandButtons\\BTNTemp.blp")
     // ----------
     
@@ -4777,7 +4784,7 @@ endfunction
 		
 		
 //Implemented from module WorldBounds___WorldBoundInit:
-  function s__WorldBounds_WorldBounds___WorldBoundInit___onInit takes nothing returns nothing
+  function s__WorldBounds_WorldBounds___WorldBoundInit__onInit takes nothing returns nothing
 			set s__WorldBounds_world=GetWorldBounds()
 			
 			set s__WorldBounds_maxX=R2I(GetRectMaxX(s__WorldBounds_world))
@@ -5674,7 +5681,7 @@ endfunction
 
 
      
-        function s__DummyRecycler___S_DummyRecycler___M___onInit takes nothing returns nothing
+        function s__DummyRecycler___S_DummyRecycler___M__onInit takes nothing returns nothing
             local real add= 360.0 / DummyRecycler___ANGLES_COUNT
             local real a= 0
             local integer this= DummyRecycler___ANGLES_COUNT
@@ -6367,7 +6374,7 @@ endfunction
        
        
 //Implemented from module TileDefinition___Init:
-            function s__TileDefinition___TileDefinition_TileDefinition___Init___onInit takes nothing returns nothing
+            function s__TileDefinition___TileDefinition_TileDefinition___Init__onInit takes nothing returns nothing
                 set WorldTilesX=R2I(s__WorldBounds_maxX - s__WorldBounds_minX) / 128 + 1
                 set WorldTilesY=R2I(s__WorldBounds_maxY - s__WorldBounds_minY) / 128 + 1
             endfunction
@@ -8741,6 +8748,7 @@ endfunction
 //library FilterTransformations:
 
 
+
 //textmacro instance: TableStruct_NewConstTableField("", "morphOrders")
 
          constant function s__Order__get_morphOrders takes nothing returns integer
@@ -8787,10 +8795,14 @@ endfunction
         return (HaveSavedBoolean(ConstTable___ht, ((((s__Order_generalOrders_impl)))), (this))) // INLINED!!
     endfunction
 
+//========================
+// API
+
 function IsOrderMorph takes integer orderId returns boolean
     return (HaveSavedBoolean(ConstTable___ht, ((((s__Order_morphOrders_impl)))), (((orderId))))) // INLINED!!
 endfunction
 
+// includes pocket factory because it crahses on CDR reduce
 function IsOrderNecrotic takes integer orderId returns boolean
     return (HaveSavedBoolean(ConstTable___ht, ((((s__Order_necroticOrders_impl)))), (((orderId))))) // INLINED!!
 endfunction
@@ -8798,6 +8810,8 @@ endfunction
 function IsOrderGeneral takes integer orderId returns boolean
     return (HaveSavedBoolean(ConstTable___ht, ((((s__Order_generalOrders_impl)))), (((orderId))))) // INLINED!!
 endfunction
+
+//========================
 
 
 function FilterTransformations__onInit takes nothing returns nothing
@@ -8836,6 +8850,7 @@ function FilterTransformations__onInit takes nothing returns nothing
     call SaveBoolean(ConstTable___ht, ((((s__Order_necroticOrders_impl)))), (OrderId("vengeanceinstant")), ( true)) // INLINED!!
     call SaveBoolean(ConstTable___ht, ((((s__Order_necroticOrders_impl)))), (OrderId("carrionscarabs")), ( true)) // INLINED!!
     call SaveBoolean(ConstTable___ht, ((((s__Order_necroticOrders_impl)))), (OrderId("carrionscarabsinstant")), ( true)) // INLINED!!
+    call SaveBoolean(ConstTable___ht, ((((s__Order_necroticOrders_impl)))), (OrderId("summonfactory")), ( true)) // INLINED!!
 
     // General Orders
     call SaveBoolean(ConstTable___ht, ((((s__Order_generalOrders_impl)))), (OrderId("smart")), ( true)) // INLINED!!
@@ -8972,7 +8987,7 @@ endfunction
 
     
 //Implemented from module LoPDecoBuilders__InitModule:
-        function s__LoP_DecoBuilders_LoPDecoBuilders__InitModule___onInit takes nothing returns nothing
+        function s__LoP_DecoBuilders_LoPDecoBuilders__InitModule__onInit takes nothing returns nothing
             local integer i= 0
             // ---------
             // Special Decos
@@ -9157,6 +9172,9 @@ endfunction
             // Ruined
             set i=( i + 1 )
             set s__LoP_DecoBuilders_rawcodes[i]='u02T'
+            // Ruined
+            set i=( i + 1 )
+            set s__LoP_DecoBuilders_rawcodes[i]='u044'
             // Ruins
             set i=( i + 1 )
             set s__LoP_DecoBuilders_rawcodes[i]='u00X'
@@ -9845,7 +9863,7 @@ endfunction
     endfunction
 
 //Implemented from module TerrainTools___InitModule:
-        function s__TerrainTools___InitStruct_TerrainTools___InitModule___onInit takes nothing returns nothing
+        function s__TerrainTools___InitStruct_TerrainTools___InitModule__onInit takes nothing returns nothing
             local integer i= 0
             
             // Terrain Settings
@@ -9894,6 +9912,54 @@ endfunction
 
 
 //library TerrainTools ends
+//library ToggleAura:
+
+//textmacro instance: TableStruct_NewConstTableField("","tab")
+
+         constant function s__ToggleAura__Globals__get_tab takes nothing returns integer
+            return s__ToggleAura__Globals_tab_impl
+        endfunction
+
+
+
+
+
+//end of: TableStruct_NewConstTableField("","tab")
+
+function ToggleAura_RegisterAura takes integer auraAbility,integer activeAbility returns nothing
+    call SaveInteger(ConstTable___ht, ((s__ToggleAura__Globals_tab_impl)), (activeAbility), ( auraAbility)) // INLINED!!
+endfunction
+
+function ToggleAura__onCast takes nothing returns nothing
+    local integer activeAbility= GetSpellAbilityId()
+    local integer auraAbility= (LoadInteger(ConstTable___ht, ((s__ToggleAura__Globals_tab_impl)), (activeAbility))) // INLINED!!
+    local unit trigU= GetTriggerUnit()
+    
+    if auraAbility != 0 then
+        if GetUnitAbilityLevel(trigU, auraAbility) == 0 then
+            call UnitAddAbility(trigU, auraAbility)
+            call BlzUnitHideAbility(trigU, auraAbility, true)
+            call UnitMakeAbilityPermanent(trigU, true, auraAbility)
+        else
+            call UnitRemoveAbility(trigU, auraAbility)
+        endif
+    endif
+endfunction
+
+function ToggleAura_InitializeAuras takes nothing returns nothing
+    set udg_Spell__Ability='A02U'
+    set udg_Spell__Trigger_OnEffect=null
+    call TriggerExecute(gg_trg_Spell_System)
+endfunction
+
+//Implemented from module ToggleAura__InitModule:
+    function s__ToggleAura__InitStruct_ToggleAura__InitModule__onInit takes nothing returns nothing
+        
+    endfunction
+
+
+
+//library ToggleAura ends
 //library AutoRectEnvironment:
 
 
@@ -10123,7 +10189,7 @@ endfunction
 
 
 //Implemented from module AutoRectEnvironment___InitModule:
-    function s__AutoRectEnvironment___InitStruct_AutoRectEnvironment___InitModule___onInit takes nothing returns nothing
+    function s__AutoRectEnvironment___InitStruct_AutoRectEnvironment___InitModule__onInit takes nothing returns nothing
         local timer t= CreateTimer()
         call SaveInteger(ConstTable___ht, (((s__AutoRectEnvironment___Globals_static_members_key))), (s__AutoRectEnvironment___Globals_rects_impl), ( ((GMUI_GetIndex((Lists_RECYCLE_KEY)))))) // INLINED!!
         
@@ -11448,11 +11514,11 @@ endfunction
         call SaveReal((SpecialEffect__hashTableHandle), (((((s__SpecialEffect_x_INDEX))))), (this), (( new_x)*1.0)) // INLINED!!
     endfunction
     
-    function s__SpecialEffect_SpecialEffectModule___x_clear takes integer this returns nothing
+    function s__SpecialEffect_SpecialEffectModule__x_clear takes integer this returns nothing
         call RemoveSavedReal((SpecialEffect__hashTableHandle), (((((s__SpecialEffect_x_INDEX))))), (this)) // INLINED!!
     endfunction
     
-    function s__SpecialEffect_SpecialEffectModule___x_exists takes integer this returns boolean
+    function s__SpecialEffect_SpecialEffectModule__x_exists takes integer this returns boolean
         return (HaveSavedReal((SpecialEffect__hashTableHandle), (((((s__SpecialEffect_x_INDEX))))), (this))) // INLINED!!
     endfunction
 //end of: HashStruct_NewPrimitiveField("x","real")
@@ -11466,11 +11532,11 @@ endfunction
         call SaveReal((SpecialEffect__hashTableHandle), (((((s__SpecialEffect_y_INDEX))))), (this), (( new_y)*1.0)) // INLINED!!
     endfunction
     
-    function s__SpecialEffect_SpecialEffectModule___y_clear takes integer this returns nothing
+    function s__SpecialEffect_SpecialEffectModule__y_clear takes integer this returns nothing
         call RemoveSavedReal((SpecialEffect__hashTableHandle), (((((s__SpecialEffect_y_INDEX))))), (this)) // INLINED!!
     endfunction
     
-    function s__SpecialEffect_SpecialEffectModule___y_exists takes integer this returns boolean
+    function s__SpecialEffect_SpecialEffectModule__y_exists takes integer this returns boolean
         return (HaveSavedReal((SpecialEffect__hashTableHandle), (((((s__SpecialEffect_y_INDEX))))), (this))) // INLINED!!
     endfunction
 //end of: HashStruct_NewPrimitiveField("y","real")
@@ -11484,11 +11550,11 @@ endfunction
         call SaveReal((SpecialEffect__hashTableHandle), (((((s__SpecialEffect_height_INDEX))))), (this), (( new_height)*1.0)) // INLINED!!
     endfunction
     
-    function s__SpecialEffect_SpecialEffectModule___height_clear takes integer this returns nothing
+    function s__SpecialEffect_SpecialEffectModule__height_clear takes integer this returns nothing
         call RemoveSavedReal((SpecialEffect__hashTableHandle), (((((s__SpecialEffect_height_INDEX))))), (this)) // INLINED!!
     endfunction
     
-    function s__SpecialEffect_SpecialEffectModule___height_exists takes integer this returns boolean
+    function s__SpecialEffect_SpecialEffectModule__height_exists takes integer this returns boolean
         return (HaveSavedReal((SpecialEffect__hashTableHandle), (((((s__SpecialEffect_height_INDEX))))), (this))) // INLINED!!
     endfunction
 //end of: HashStruct_NewPrimitiveField("height","real")
@@ -11503,11 +11569,11 @@ endfunction
         call SaveReal((SpecialEffect__hashTableHandle), (((((s__SpecialEffect_scale_INDEX))))), (this), (( new_scale - 1.)*1.0)) // INLINED!!
     endfunction
     
-    function s__SpecialEffect_SpecialEffectModule___scale_clear takes integer this returns nothing
+    function s__SpecialEffect_SpecialEffectModule__scale_clear takes integer this returns nothing
         call RemoveSavedReal((SpecialEffect__hashTableHandle), (((((s__SpecialEffect_scale_INDEX))))), (this)) // INLINED!!
     endfunction
     
-    function s__SpecialEffect_SpecialEffectModule___scale_exists takes integer this returns boolean
+    function s__SpecialEffect_SpecialEffectModule__scale_exists takes integer this returns boolean
         return (HaveSavedReal((SpecialEffect__hashTableHandle), (((((s__SpecialEffect_scale_INDEX))))), (this))) // INLINED!!
     endfunction
 //end of: HashStruct_NewNumberFieldWithDefault("scale","real","1.")
@@ -11522,11 +11588,11 @@ endfunction
         call SaveReal((SpecialEffect__hashTableHandle), (((((s__SpecialEffect_roll_INDEX))))), (this), (( new_roll)*1.0)) // INLINED!!
     endfunction
     
-    function s__SpecialEffect_SpecialEffectModule___roll_clear takes integer this returns nothing
+    function s__SpecialEffect_SpecialEffectModule__roll_clear takes integer this returns nothing
         call RemoveSavedReal((SpecialEffect__hashTableHandle), (((((s__SpecialEffect_roll_INDEX))))), (this)) // INLINED!!
     endfunction
     
-    function s__SpecialEffect_SpecialEffectModule___roll_exists takes integer this returns boolean
+    function s__SpecialEffect_SpecialEffectModule__roll_exists takes integer this returns boolean
         return (HaveSavedReal((SpecialEffect__hashTableHandle), (((((s__SpecialEffect_roll_INDEX))))), (this))) // INLINED!!
     endfunction
 //end of: HashStruct_NewPrimitiveField("roll","real")
@@ -11540,11 +11606,11 @@ endfunction
         call SaveReal((SpecialEffect__hashTableHandle), (((((s__SpecialEffect_yaw_INDEX))))), (this), (( new_yaw)*1.0)) // INLINED!!
     endfunction
     
-    function s__SpecialEffect_SpecialEffectModule___yaw_clear takes integer this returns nothing
+    function s__SpecialEffect_SpecialEffectModule__yaw_clear takes integer this returns nothing
         call RemoveSavedReal((SpecialEffect__hashTableHandle), (((((s__SpecialEffect_yaw_INDEX))))), (this)) // INLINED!!
     endfunction
     
-    function s__SpecialEffect_SpecialEffectModule___yaw_exists takes integer this returns boolean
+    function s__SpecialEffect_SpecialEffectModule__yaw_exists takes integer this returns boolean
         return (HaveSavedReal((SpecialEffect__hashTableHandle), (((((s__SpecialEffect_yaw_INDEX))))), (this))) // INLINED!!
     endfunction
 //end of: HashStruct_NewPrimitiveField("yaw","real")
@@ -11558,11 +11624,11 @@ endfunction
         call SaveReal((SpecialEffect__hashTableHandle), (((((s__SpecialEffect_pitch_INDEX))))), (this), (( new_pitch)*1.0)) // INLINED!!
     endfunction
     
-    function s__SpecialEffect_SpecialEffectModule___pitch_clear takes integer this returns nothing
+    function s__SpecialEffect_SpecialEffectModule__pitch_clear takes integer this returns nothing
         call RemoveSavedReal((SpecialEffect__hashTableHandle), (((((s__SpecialEffect_pitch_INDEX))))), (this)) // INLINED!!
     endfunction
     
-    function s__SpecialEffect_SpecialEffectModule___pitch_exists takes integer this returns boolean
+    function s__SpecialEffect_SpecialEffectModule__pitch_exists takes integer this returns boolean
         return (HaveSavedReal((SpecialEffect__hashTableHandle), (((((s__SpecialEffect_pitch_INDEX))))), (this))) // INLINED!!
     endfunction
 //end of: HashStruct_NewPrimitiveField("pitch","real")
@@ -11577,11 +11643,11 @@ endfunction
         call SaveInteger((SpecialEffect__hashTableHandle), (((((s__SpecialEffect_red_INDEX))))), (this), ( new_red - 255)) // INLINED!!
     endfunction
     
-    function s__SpecialEffect_SpecialEffectModule___red_clear takes integer this returns nothing
+    function s__SpecialEffect_SpecialEffectModule__red_clear takes integer this returns nothing
         call RemoveSavedInteger((SpecialEffect__hashTableHandle), (((((s__SpecialEffect_red_INDEX))))), (this)) // INLINED!!
     endfunction
     
-    function s__SpecialEffect_SpecialEffectModule___red_exists takes integer this returns boolean
+    function s__SpecialEffect_SpecialEffectModule__red_exists takes integer this returns boolean
         return (HaveSavedInteger((SpecialEffect__hashTableHandle), (((((s__SpecialEffect_red_INDEX))))), (this))) // INLINED!!
     endfunction
 //end of: HashStruct_NewNumberFieldWithDefault("red","integer","255")
@@ -11595,11 +11661,11 @@ endfunction
         call SaveInteger((SpecialEffect__hashTableHandle), (((((s__SpecialEffect_green_INDEX))))), (this), ( new_green - 255)) // INLINED!!
     endfunction
     
-    function s__SpecialEffect_SpecialEffectModule___green_clear takes integer this returns nothing
+    function s__SpecialEffect_SpecialEffectModule__green_clear takes integer this returns nothing
         call RemoveSavedInteger((SpecialEffect__hashTableHandle), (((((s__SpecialEffect_green_INDEX))))), (this)) // INLINED!!
     endfunction
     
-    function s__SpecialEffect_SpecialEffectModule___green_exists takes integer this returns boolean
+    function s__SpecialEffect_SpecialEffectModule__green_exists takes integer this returns boolean
         return (HaveSavedInteger((SpecialEffect__hashTableHandle), (((((s__SpecialEffect_green_INDEX))))), (this))) // INLINED!!
     endfunction
 //end of: HashStruct_NewNumberFieldWithDefault("green","integer","255")
@@ -11613,11 +11679,11 @@ endfunction
         call SaveInteger((SpecialEffect__hashTableHandle), (((((s__SpecialEffect_blue_INDEX))))), (this), ( new_blue - 255)) // INLINED!!
     endfunction
     
-    function s__SpecialEffect_SpecialEffectModule___blue_clear takes integer this returns nothing
+    function s__SpecialEffect_SpecialEffectModule__blue_clear takes integer this returns nothing
         call RemoveSavedInteger((SpecialEffect__hashTableHandle), (((((s__SpecialEffect_blue_INDEX))))), (this)) // INLINED!!
     endfunction
     
-    function s__SpecialEffect_SpecialEffectModule___blue_exists takes integer this returns boolean
+    function s__SpecialEffect_SpecialEffectModule__blue_exists takes integer this returns boolean
         return (HaveSavedInteger((SpecialEffect__hashTableHandle), (((((s__SpecialEffect_blue_INDEX))))), (this))) // INLINED!!
     endfunction
 //end of: HashStruct_NewNumberFieldWithDefault("blue","integer","255")
@@ -11631,11 +11697,11 @@ endfunction
         call SaveInteger((SpecialEffect__hashTableHandle), (((((s__SpecialEffect_alpha_INDEX))))), (this), ( new_alpha - 255)) // INLINED!!
     endfunction
     
-    function s__SpecialEffect_SpecialEffectModule___alpha_clear takes integer this returns nothing
+    function s__SpecialEffect_SpecialEffectModule__alpha_clear takes integer this returns nothing
         call RemoveSavedInteger((SpecialEffect__hashTableHandle), (((((s__SpecialEffect_alpha_INDEX))))), (this)) // INLINED!!
     endfunction
     
-    function s__SpecialEffect_SpecialEffectModule___alpha_exists takes integer this returns boolean
+    function s__SpecialEffect_SpecialEffectModule__alpha_exists takes integer this returns boolean
         return (HaveSavedInteger((SpecialEffect__hashTableHandle), (((((s__SpecialEffect_alpha_INDEX))))), (this))) // INLINED!!
     endfunction
 //end of: HashStruct_NewNumberFieldWithDefault("alpha","integer","255")
@@ -12552,11 +12618,11 @@ endfunction
         call SaveReal((SpecialEffect__hashTableHandle), (((((s__PlayerSpecialEffect_x_INDEX))))), (this), (( new_x)*1.0)) // INLINED!!
     endfunction
     
-    function s__PlayerSpecialEffect_SpecialEffectModule___x_clear takes integer this returns nothing
+    function s__PlayerSpecialEffect_SpecialEffectModule__x_clear takes integer this returns nothing
         call RemoveSavedReal((SpecialEffect__hashTableHandle), (((((s__PlayerSpecialEffect_x_INDEX))))), (this)) // INLINED!!
     endfunction
     
-    function s__PlayerSpecialEffect_SpecialEffectModule___x_exists takes integer this returns boolean
+    function s__PlayerSpecialEffect_SpecialEffectModule__x_exists takes integer this returns boolean
         return (HaveSavedReal((SpecialEffect__hashTableHandle), (((((s__PlayerSpecialEffect_x_INDEX))))), (this))) // INLINED!!
     endfunction
 //end of: HashStruct_NewPrimitiveField("x","real")
@@ -12570,11 +12636,11 @@ endfunction
         call SaveReal((SpecialEffect__hashTableHandle), (((((s__PlayerSpecialEffect_y_INDEX))))), (this), (( new_y)*1.0)) // INLINED!!
     endfunction
     
-    function s__PlayerSpecialEffect_SpecialEffectModule___y_clear takes integer this returns nothing
+    function s__PlayerSpecialEffect_SpecialEffectModule__y_clear takes integer this returns nothing
         call RemoveSavedReal((SpecialEffect__hashTableHandle), (((((s__PlayerSpecialEffect_y_INDEX))))), (this)) // INLINED!!
     endfunction
     
-    function s__PlayerSpecialEffect_SpecialEffectModule___y_exists takes integer this returns boolean
+    function s__PlayerSpecialEffect_SpecialEffectModule__y_exists takes integer this returns boolean
         return (HaveSavedReal((SpecialEffect__hashTableHandle), (((((s__PlayerSpecialEffect_y_INDEX))))), (this))) // INLINED!!
     endfunction
 //end of: HashStruct_NewPrimitiveField("y","real")
@@ -12588,11 +12654,11 @@ endfunction
         call SaveReal((SpecialEffect__hashTableHandle), (((((s__PlayerSpecialEffect_height_INDEX))))), (this), (( new_height)*1.0)) // INLINED!!
     endfunction
     
-    function s__PlayerSpecialEffect_SpecialEffectModule___height_clear takes integer this returns nothing
+    function s__PlayerSpecialEffect_SpecialEffectModule__height_clear takes integer this returns nothing
         call RemoveSavedReal((SpecialEffect__hashTableHandle), (((((s__PlayerSpecialEffect_height_INDEX))))), (this)) // INLINED!!
     endfunction
     
-    function s__PlayerSpecialEffect_SpecialEffectModule___height_exists takes integer this returns boolean
+    function s__PlayerSpecialEffect_SpecialEffectModule__height_exists takes integer this returns boolean
         return (HaveSavedReal((SpecialEffect__hashTableHandle), (((((s__PlayerSpecialEffect_height_INDEX))))), (this))) // INLINED!!
     endfunction
 //end of: HashStruct_NewPrimitiveField("height","real")
@@ -12607,11 +12673,11 @@ endfunction
         call SaveReal((SpecialEffect__hashTableHandle), (((((s__PlayerSpecialEffect_scale_INDEX))))), (this), (( new_scale - 1.)*1.0)) // INLINED!!
     endfunction
     
-    function s__PlayerSpecialEffect_SpecialEffectModule___scale_clear takes integer this returns nothing
+    function s__PlayerSpecialEffect_SpecialEffectModule__scale_clear takes integer this returns nothing
         call RemoveSavedReal((SpecialEffect__hashTableHandle), (((((s__PlayerSpecialEffect_scale_INDEX))))), (this)) // INLINED!!
     endfunction
     
-    function s__PlayerSpecialEffect_SpecialEffectModule___scale_exists takes integer this returns boolean
+    function s__PlayerSpecialEffect_SpecialEffectModule__scale_exists takes integer this returns boolean
         return (HaveSavedReal((SpecialEffect__hashTableHandle), (((((s__PlayerSpecialEffect_scale_INDEX))))), (this))) // INLINED!!
     endfunction
 //end of: HashStruct_NewNumberFieldWithDefault("scale","real","1.")
@@ -12626,11 +12692,11 @@ endfunction
         call SaveReal((SpecialEffect__hashTableHandle), (((((s__PlayerSpecialEffect_roll_INDEX))))), (this), (( new_roll)*1.0)) // INLINED!!
     endfunction
     
-    function s__PlayerSpecialEffect_SpecialEffectModule___roll_clear takes integer this returns nothing
+    function s__PlayerSpecialEffect_SpecialEffectModule__roll_clear takes integer this returns nothing
         call RemoveSavedReal((SpecialEffect__hashTableHandle), (((((s__PlayerSpecialEffect_roll_INDEX))))), (this)) // INLINED!!
     endfunction
     
-    function s__PlayerSpecialEffect_SpecialEffectModule___roll_exists takes integer this returns boolean
+    function s__PlayerSpecialEffect_SpecialEffectModule__roll_exists takes integer this returns boolean
         return (HaveSavedReal((SpecialEffect__hashTableHandle), (((((s__PlayerSpecialEffect_roll_INDEX))))), (this))) // INLINED!!
     endfunction
 //end of: HashStruct_NewPrimitiveField("roll","real")
@@ -12644,11 +12710,11 @@ endfunction
         call SaveReal((SpecialEffect__hashTableHandle), (((((s__PlayerSpecialEffect_yaw_INDEX))))), (this), (( new_yaw)*1.0)) // INLINED!!
     endfunction
     
-    function s__PlayerSpecialEffect_SpecialEffectModule___yaw_clear takes integer this returns nothing
+    function s__PlayerSpecialEffect_SpecialEffectModule__yaw_clear takes integer this returns nothing
         call RemoveSavedReal((SpecialEffect__hashTableHandle), (((((s__PlayerSpecialEffect_yaw_INDEX))))), (this)) // INLINED!!
     endfunction
     
-    function s__PlayerSpecialEffect_SpecialEffectModule___yaw_exists takes integer this returns boolean
+    function s__PlayerSpecialEffect_SpecialEffectModule__yaw_exists takes integer this returns boolean
         return (HaveSavedReal((SpecialEffect__hashTableHandle), (((((s__PlayerSpecialEffect_yaw_INDEX))))), (this))) // INLINED!!
     endfunction
 //end of: HashStruct_NewPrimitiveField("yaw","real")
@@ -12662,11 +12728,11 @@ endfunction
         call SaveReal((SpecialEffect__hashTableHandle), (((((s__PlayerSpecialEffect_pitch_INDEX))))), (this), (( new_pitch)*1.0)) // INLINED!!
     endfunction
     
-    function s__PlayerSpecialEffect_SpecialEffectModule___pitch_clear takes integer this returns nothing
+    function s__PlayerSpecialEffect_SpecialEffectModule__pitch_clear takes integer this returns nothing
         call RemoveSavedReal((SpecialEffect__hashTableHandle), (((((s__PlayerSpecialEffect_pitch_INDEX))))), (this)) // INLINED!!
     endfunction
     
-    function s__PlayerSpecialEffect_SpecialEffectModule___pitch_exists takes integer this returns boolean
+    function s__PlayerSpecialEffect_SpecialEffectModule__pitch_exists takes integer this returns boolean
         return (HaveSavedReal((SpecialEffect__hashTableHandle), (((((s__PlayerSpecialEffect_pitch_INDEX))))), (this))) // INLINED!!
     endfunction
 //end of: HashStruct_NewPrimitiveField("pitch","real")
@@ -12681,11 +12747,11 @@ endfunction
         call SaveInteger((SpecialEffect__hashTableHandle), (((((s__PlayerSpecialEffect_red_INDEX))))), (this), ( new_red - 255)) // INLINED!!
     endfunction
     
-    function s__PlayerSpecialEffect_SpecialEffectModule___red_clear takes integer this returns nothing
+    function s__PlayerSpecialEffect_SpecialEffectModule__red_clear takes integer this returns nothing
         call RemoveSavedInteger((SpecialEffect__hashTableHandle), (((((s__PlayerSpecialEffect_red_INDEX))))), (this)) // INLINED!!
     endfunction
     
-    function s__PlayerSpecialEffect_SpecialEffectModule___red_exists takes integer this returns boolean
+    function s__PlayerSpecialEffect_SpecialEffectModule__red_exists takes integer this returns boolean
         return (HaveSavedInteger((SpecialEffect__hashTableHandle), (((((s__PlayerSpecialEffect_red_INDEX))))), (this))) // INLINED!!
     endfunction
 //end of: HashStruct_NewNumberFieldWithDefault("red","integer","255")
@@ -12699,11 +12765,11 @@ endfunction
         call SaveInteger((SpecialEffect__hashTableHandle), (((((s__PlayerSpecialEffect_green_INDEX))))), (this), ( new_green - 255)) // INLINED!!
     endfunction
     
-    function s__PlayerSpecialEffect_SpecialEffectModule___green_clear takes integer this returns nothing
+    function s__PlayerSpecialEffect_SpecialEffectModule__green_clear takes integer this returns nothing
         call RemoveSavedInteger((SpecialEffect__hashTableHandle), (((((s__PlayerSpecialEffect_green_INDEX))))), (this)) // INLINED!!
     endfunction
     
-    function s__PlayerSpecialEffect_SpecialEffectModule___green_exists takes integer this returns boolean
+    function s__PlayerSpecialEffect_SpecialEffectModule__green_exists takes integer this returns boolean
         return (HaveSavedInteger((SpecialEffect__hashTableHandle), (((((s__PlayerSpecialEffect_green_INDEX))))), (this))) // INLINED!!
     endfunction
 //end of: HashStruct_NewNumberFieldWithDefault("green","integer","255")
@@ -12717,11 +12783,11 @@ endfunction
         call SaveInteger((SpecialEffect__hashTableHandle), (((((s__PlayerSpecialEffect_blue_INDEX))))), (this), ( new_blue - 255)) // INLINED!!
     endfunction
     
-    function s__PlayerSpecialEffect_SpecialEffectModule___blue_clear takes integer this returns nothing
+    function s__PlayerSpecialEffect_SpecialEffectModule__blue_clear takes integer this returns nothing
         call RemoveSavedInteger((SpecialEffect__hashTableHandle), (((((s__PlayerSpecialEffect_blue_INDEX))))), (this)) // INLINED!!
     endfunction
     
-    function s__PlayerSpecialEffect_SpecialEffectModule___blue_exists takes integer this returns boolean
+    function s__PlayerSpecialEffect_SpecialEffectModule__blue_exists takes integer this returns boolean
         return (HaveSavedInteger((SpecialEffect__hashTableHandle), (((((s__PlayerSpecialEffect_blue_INDEX))))), (this))) // INLINED!!
     endfunction
 //end of: HashStruct_NewNumberFieldWithDefault("blue","integer","255")
@@ -12735,11 +12801,11 @@ endfunction
         call SaveInteger((SpecialEffect__hashTableHandle), (((((s__PlayerSpecialEffect_alpha_INDEX))))), (this), ( new_alpha - 255)) // INLINED!!
     endfunction
     
-    function s__PlayerSpecialEffect_SpecialEffectModule___alpha_clear takes integer this returns nothing
+    function s__PlayerSpecialEffect_SpecialEffectModule__alpha_clear takes integer this returns nothing
         call RemoveSavedInteger((SpecialEffect__hashTableHandle), (((((s__PlayerSpecialEffect_alpha_INDEX))))), (this)) // INLINED!!
     endfunction
     
-    function s__PlayerSpecialEffect_SpecialEffectModule___alpha_exists takes integer this returns boolean
+    function s__PlayerSpecialEffect_SpecialEffectModule__alpha_exists takes integer this returns boolean
         return (HaveSavedInteger((SpecialEffect__hashTableHandle), (((((s__PlayerSpecialEffect_alpha_INDEX))))), (this))) // INLINED!!
     endfunction
 //end of: HashStruct_NewNumberFieldWithDefault("alpha","integer","255")
@@ -12755,11 +12821,11 @@ endfunction
         call SavePlayerHandle((SpecialEffect__hashTableHandle), (((((s__PlayerSpecialEffect_Owner_INDEX))))), (this), ( new_Owner)) // INLINED!!
     endfunction
     
-    function s__PlayerSpecialEffect_PlayerSpecialEffectModule___clearOwner takes integer this returns nothing
+    function s__PlayerSpecialEffect_PlayerSpecialEffectModule__clearOwner takes integer this returns nothing
         call RemoveSavedHandle((SpecialEffect__hashTableHandle), (((((s__PlayerSpecialEffect_Owner_INDEX))))), (this)) // INLINED!!
     endfunction
     
-    function s__PlayerSpecialEffect_PlayerSpecialEffectModule___hasOwner takes integer this returns boolean
+    function s__PlayerSpecialEffect_PlayerSpecialEffectModule__hasOwner takes integer this returns boolean
         return (HaveSavedHandle((SpecialEffect__hashTableHandle), (((((s__PlayerSpecialEffect_Owner_INDEX))))), (this))) // INLINED!!
     endfunction
 //end of: HashStruct_NewPrimitiveGetterSetter("Owner","player")
@@ -13562,11 +13628,11 @@ endfunction
         call SaveReal((SpecialEffect__hashTableHandle), (((((s__UnitSpecialEffect_x_INDEX))))), (this), (( new_x)*1.0)) // INLINED!!
     endfunction
     
-    function s__UnitSpecialEffect_SpecialEffectModule___x_clear takes integer this returns nothing
+    function s__UnitSpecialEffect_SpecialEffectModule__x_clear takes integer this returns nothing
         call RemoveSavedReal((SpecialEffect__hashTableHandle), (((((s__UnitSpecialEffect_x_INDEX))))), (this)) // INLINED!!
     endfunction
     
-    function s__UnitSpecialEffect_SpecialEffectModule___x_exists takes integer this returns boolean
+    function s__UnitSpecialEffect_SpecialEffectModule__x_exists takes integer this returns boolean
         return (HaveSavedReal((SpecialEffect__hashTableHandle), (((((s__UnitSpecialEffect_x_INDEX))))), (this))) // INLINED!!
     endfunction
 //end of: HashStruct_NewPrimitiveField("x","real")
@@ -13580,11 +13646,11 @@ endfunction
         call SaveReal((SpecialEffect__hashTableHandle), (((((s__UnitSpecialEffect_y_INDEX))))), (this), (( new_y)*1.0)) // INLINED!!
     endfunction
     
-    function s__UnitSpecialEffect_SpecialEffectModule___y_clear takes integer this returns nothing
+    function s__UnitSpecialEffect_SpecialEffectModule__y_clear takes integer this returns nothing
         call RemoveSavedReal((SpecialEffect__hashTableHandle), (((((s__UnitSpecialEffect_y_INDEX))))), (this)) // INLINED!!
     endfunction
     
-    function s__UnitSpecialEffect_SpecialEffectModule___y_exists takes integer this returns boolean
+    function s__UnitSpecialEffect_SpecialEffectModule__y_exists takes integer this returns boolean
         return (HaveSavedReal((SpecialEffect__hashTableHandle), (((((s__UnitSpecialEffect_y_INDEX))))), (this))) // INLINED!!
     endfunction
 //end of: HashStruct_NewPrimitiveField("y","real")
@@ -13598,11 +13664,11 @@ endfunction
         call SaveReal((SpecialEffect__hashTableHandle), (((((s__UnitSpecialEffect_height_INDEX))))), (this), (( new_height)*1.0)) // INLINED!!
     endfunction
     
-    function s__UnitSpecialEffect_SpecialEffectModule___height_clear takes integer this returns nothing
+    function s__UnitSpecialEffect_SpecialEffectModule__height_clear takes integer this returns nothing
         call RemoveSavedReal((SpecialEffect__hashTableHandle), (((((s__UnitSpecialEffect_height_INDEX))))), (this)) // INLINED!!
     endfunction
     
-    function s__UnitSpecialEffect_SpecialEffectModule___height_exists takes integer this returns boolean
+    function s__UnitSpecialEffect_SpecialEffectModule__height_exists takes integer this returns boolean
         return (HaveSavedReal((SpecialEffect__hashTableHandle), (((((s__UnitSpecialEffect_height_INDEX))))), (this))) // INLINED!!
     endfunction
 //end of: HashStruct_NewPrimitiveField("height","real")
@@ -13617,11 +13683,11 @@ endfunction
         call SaveReal((SpecialEffect__hashTableHandle), (((((s__UnitSpecialEffect_scale_INDEX))))), (this), (( new_scale - 1.)*1.0)) // INLINED!!
     endfunction
     
-    function s__UnitSpecialEffect_SpecialEffectModule___scale_clear takes integer this returns nothing
+    function s__UnitSpecialEffect_SpecialEffectModule__scale_clear takes integer this returns nothing
         call RemoveSavedReal((SpecialEffect__hashTableHandle), (((((s__UnitSpecialEffect_scale_INDEX))))), (this)) // INLINED!!
     endfunction
     
-    function s__UnitSpecialEffect_SpecialEffectModule___scale_exists takes integer this returns boolean
+    function s__UnitSpecialEffect_SpecialEffectModule__scale_exists takes integer this returns boolean
         return (HaveSavedReal((SpecialEffect__hashTableHandle), (((((s__UnitSpecialEffect_scale_INDEX))))), (this))) // INLINED!!
     endfunction
 //end of: HashStruct_NewNumberFieldWithDefault("scale","real","1.")
@@ -13636,11 +13702,11 @@ endfunction
         call SaveReal((SpecialEffect__hashTableHandle), (((((s__UnitSpecialEffect_roll_INDEX))))), (this), (( new_roll)*1.0)) // INLINED!!
     endfunction
     
-    function s__UnitSpecialEffect_SpecialEffectModule___roll_clear takes integer this returns nothing
+    function s__UnitSpecialEffect_SpecialEffectModule__roll_clear takes integer this returns nothing
         call RemoveSavedReal((SpecialEffect__hashTableHandle), (((((s__UnitSpecialEffect_roll_INDEX))))), (this)) // INLINED!!
     endfunction
     
-    function s__UnitSpecialEffect_SpecialEffectModule___roll_exists takes integer this returns boolean
+    function s__UnitSpecialEffect_SpecialEffectModule__roll_exists takes integer this returns boolean
         return (HaveSavedReal((SpecialEffect__hashTableHandle), (((((s__UnitSpecialEffect_roll_INDEX))))), (this))) // INLINED!!
     endfunction
 //end of: HashStruct_NewPrimitiveField("roll","real")
@@ -13654,11 +13720,11 @@ endfunction
         call SaveReal((SpecialEffect__hashTableHandle), (((((s__UnitSpecialEffect_yaw_INDEX))))), (this), (( new_yaw)*1.0)) // INLINED!!
     endfunction
     
-    function s__UnitSpecialEffect_SpecialEffectModule___yaw_clear takes integer this returns nothing
+    function s__UnitSpecialEffect_SpecialEffectModule__yaw_clear takes integer this returns nothing
         call RemoveSavedReal((SpecialEffect__hashTableHandle), (((((s__UnitSpecialEffect_yaw_INDEX))))), (this)) // INLINED!!
     endfunction
     
-    function s__UnitSpecialEffect_SpecialEffectModule___yaw_exists takes integer this returns boolean
+    function s__UnitSpecialEffect_SpecialEffectModule__yaw_exists takes integer this returns boolean
         return (HaveSavedReal((SpecialEffect__hashTableHandle), (((((s__UnitSpecialEffect_yaw_INDEX))))), (this))) // INLINED!!
     endfunction
 //end of: HashStruct_NewPrimitiveField("yaw","real")
@@ -13672,11 +13738,11 @@ endfunction
         call SaveReal((SpecialEffect__hashTableHandle), (((((s__UnitSpecialEffect_pitch_INDEX))))), (this), (( new_pitch)*1.0)) // INLINED!!
     endfunction
     
-    function s__UnitSpecialEffect_SpecialEffectModule___pitch_clear takes integer this returns nothing
+    function s__UnitSpecialEffect_SpecialEffectModule__pitch_clear takes integer this returns nothing
         call RemoveSavedReal((SpecialEffect__hashTableHandle), (((((s__UnitSpecialEffect_pitch_INDEX))))), (this)) // INLINED!!
     endfunction
     
-    function s__UnitSpecialEffect_SpecialEffectModule___pitch_exists takes integer this returns boolean
+    function s__UnitSpecialEffect_SpecialEffectModule__pitch_exists takes integer this returns boolean
         return (HaveSavedReal((SpecialEffect__hashTableHandle), (((((s__UnitSpecialEffect_pitch_INDEX))))), (this))) // INLINED!!
     endfunction
 //end of: HashStruct_NewPrimitiveField("pitch","real")
@@ -13691,11 +13757,11 @@ endfunction
         call SaveInteger((SpecialEffect__hashTableHandle), (((((s__UnitSpecialEffect_red_INDEX))))), (this), ( new_red - 255)) // INLINED!!
     endfunction
     
-    function s__UnitSpecialEffect_SpecialEffectModule___red_clear takes integer this returns nothing
+    function s__UnitSpecialEffect_SpecialEffectModule__red_clear takes integer this returns nothing
         call RemoveSavedInteger((SpecialEffect__hashTableHandle), (((((s__UnitSpecialEffect_red_INDEX))))), (this)) // INLINED!!
     endfunction
     
-    function s__UnitSpecialEffect_SpecialEffectModule___red_exists takes integer this returns boolean
+    function s__UnitSpecialEffect_SpecialEffectModule__red_exists takes integer this returns boolean
         return (HaveSavedInteger((SpecialEffect__hashTableHandle), (((((s__UnitSpecialEffect_red_INDEX))))), (this))) // INLINED!!
     endfunction
 //end of: HashStruct_NewNumberFieldWithDefault("red","integer","255")
@@ -13709,11 +13775,11 @@ endfunction
         call SaveInteger((SpecialEffect__hashTableHandle), (((((s__UnitSpecialEffect_green_INDEX))))), (this), ( new_green - 255)) // INLINED!!
     endfunction
     
-    function s__UnitSpecialEffect_SpecialEffectModule___green_clear takes integer this returns nothing
+    function s__UnitSpecialEffect_SpecialEffectModule__green_clear takes integer this returns nothing
         call RemoveSavedInteger((SpecialEffect__hashTableHandle), (((((s__UnitSpecialEffect_green_INDEX))))), (this)) // INLINED!!
     endfunction
     
-    function s__UnitSpecialEffect_SpecialEffectModule___green_exists takes integer this returns boolean
+    function s__UnitSpecialEffect_SpecialEffectModule__green_exists takes integer this returns boolean
         return (HaveSavedInteger((SpecialEffect__hashTableHandle), (((((s__UnitSpecialEffect_green_INDEX))))), (this))) // INLINED!!
     endfunction
 //end of: HashStruct_NewNumberFieldWithDefault("green","integer","255")
@@ -13727,11 +13793,11 @@ endfunction
         call SaveInteger((SpecialEffect__hashTableHandle), (((((s__UnitSpecialEffect_blue_INDEX))))), (this), ( new_blue - 255)) // INLINED!!
     endfunction
     
-    function s__UnitSpecialEffect_SpecialEffectModule___blue_clear takes integer this returns nothing
+    function s__UnitSpecialEffect_SpecialEffectModule__blue_clear takes integer this returns nothing
         call RemoveSavedInteger((SpecialEffect__hashTableHandle), (((((s__UnitSpecialEffect_blue_INDEX))))), (this)) // INLINED!!
     endfunction
     
-    function s__UnitSpecialEffect_SpecialEffectModule___blue_exists takes integer this returns boolean
+    function s__UnitSpecialEffect_SpecialEffectModule__blue_exists takes integer this returns boolean
         return (HaveSavedInteger((SpecialEffect__hashTableHandle), (((((s__UnitSpecialEffect_blue_INDEX))))), (this))) // INLINED!!
     endfunction
 //end of: HashStruct_NewNumberFieldWithDefault("blue","integer","255")
@@ -13745,11 +13811,11 @@ endfunction
         call SaveInteger((SpecialEffect__hashTableHandle), (((((s__UnitSpecialEffect_alpha_INDEX))))), (this), ( new_alpha - 255)) // INLINED!!
     endfunction
     
-    function s__UnitSpecialEffect_SpecialEffectModule___alpha_clear takes integer this returns nothing
+    function s__UnitSpecialEffect_SpecialEffectModule__alpha_clear takes integer this returns nothing
         call RemoveSavedInteger((SpecialEffect__hashTableHandle), (((((s__UnitSpecialEffect_alpha_INDEX))))), (this)) // INLINED!!
     endfunction
     
-    function s__UnitSpecialEffect_SpecialEffectModule___alpha_exists takes integer this returns boolean
+    function s__UnitSpecialEffect_SpecialEffectModule__alpha_exists takes integer this returns boolean
         return (HaveSavedInteger((SpecialEffect__hashTableHandle), (((((s__UnitSpecialEffect_alpha_INDEX))))), (this))) // INLINED!!
     endfunction
 //end of: HashStruct_NewNumberFieldWithDefault("alpha","integer","255")
@@ -13764,11 +13830,11 @@ endfunction
         call SaveInteger((SpecialEffect__hashTableHandle), (((((s__UnitSpecialEffect_unitType_INDEX))))), (this), ( new_unitType)) // INLINED!!
     endfunction
     
-    function s__UnitSpecialEffect_UnitSpecialEffectModule___unitType_clear takes integer this returns nothing
+    function s__UnitSpecialEffect_UnitSpecialEffectModule__unitType_clear takes integer this returns nothing
         call RemoveSavedInteger((SpecialEffect__hashTableHandle), (((((s__UnitSpecialEffect_unitType_INDEX))))), (this)) // INLINED!!
     endfunction
     
-    function s__UnitSpecialEffect_UnitSpecialEffectModule___unitType_exists takes integer this returns boolean
+    function s__UnitSpecialEffect_UnitSpecialEffectModule__unitType_exists takes integer this returns boolean
         return (HaveSavedInteger((SpecialEffect__hashTableHandle), (((((s__UnitSpecialEffect_unitType_INDEX))))), (this))) // INLINED!!
     endfunction
 //end of: HashStruct_NewPrimitiveField("unitType","integer")
@@ -15335,19 +15401,19 @@ endfunction
 
 // When a unit cancels of finishes an upgrade, reapply its Visual modifications.
 //Implemented from module UnitVisualMods___InitModule:
-    function s__UnitVisualMods___InitStruct_UnitVisualMods___InitModule___onUpgradeHandler takes nothing returns nothing
+    function s__UnitVisualMods___InitStruct_UnitVisualMods___InitModule__onUpgradeHandler takes nothing returns nothing
         call GUMSCopyValues(GetTriggerUnit() , GetTriggerUnit())
     endfunction
 
 
-    function s__UnitVisualMods___InitStruct_UnitVisualMods___InitModule___onInit takes nothing returns nothing
+    function s__UnitVisualMods___InitStruct_UnitVisualMods___InitModule__onInit takes nothing returns nothing
         local trigger fixUpgrades= CreateTrigger()
         local integer i
         local timer t= CreateTimer()
         
         call TriggerRegisterAnyUnitEventBJ(fixUpgrades, EVENT_PLAYER_UNIT_UPGRADE_CANCEL)
         call TriggerRegisterAnyUnitEventBJ(fixUpgrades, EVENT_PLAYER_UNIT_UPGRADE_FINISH)
-        call TriggerAddAction(fixUpgrades, function s__UnitVisualMods___InitStruct_UnitVisualMods___InitModule___onUpgradeHandler)
+        call TriggerAddAction(fixUpgrades, function s__UnitVisualMods___InitStruct_UnitVisualMods___InitModule__onUpgradeHandler)
         
 
             set UnitVisualMods___hashTable=InitHashtable()
@@ -16216,31 +16282,32 @@ endfunction
 //library LoPthree ends
 //library Mimic:
 
-function Mimic__MAX_INVENTORY takes nothing returns integer
+
+function Mimic___MAX_INVENTORY takes nothing returns integer
     return bj_MAX_INVENTORY
 endfunction
 
     
 //textmacro instance: TableStruct_NewHandleField("original","unit")
-    function s__Mimic__UnitData__get_original takes integer this returns unit
-        return (LoadUnitHandle(ConstTable___ht, (((((s__Mimic__UnitData_original_impl))))), (this))) // INLINED!!
+    function s__Mimic___UnitData__get_original takes integer this returns unit
+        return (LoadUnitHandle(ConstTable___ht, (((((s__Mimic___UnitData_original_impl))))), (this))) // INLINED!!
     endfunction
     
-    function s__Mimic__UnitData__set_original takes integer this,unit new_original returns nothing
-        call s__TableStruct_setHandle(s__Mimic__UnitData_original_impl , this , new_original)
+    function s__Mimic___UnitData__set_original takes integer this,unit new_original returns nothing
+        call s__TableStruct_setHandle(s__Mimic___UnitData_original_impl , this , new_original)
     endfunction
     
-    function s__Mimic__UnitData_originalClear takes integer this returns nothing
-        call RemoveSavedHandle(ConstTable___ht, (((((s__Mimic__UnitData_original_impl))))), (this)) // INLINED!!
+    function s__Mimic___UnitData_originalClear takes integer this returns nothing
+        call RemoveSavedHandle(ConstTable___ht, (((((s__Mimic___UnitData_original_impl))))), (this)) // INLINED!!
     endfunction
     
-    function s__Mimic__UnitData_originalExists takes integer this returns boolean
-        return (HaveSavedHandle(ConstTable___ht, (((((s__Mimic__UnitData_original_impl))))), (this))) // INLINED!!
+    function s__Mimic___UnitData_originalExists takes integer this returns boolean
+        return (HaveSavedHandle(ConstTable___ht, (((((s__Mimic___UnitData_original_impl))))), (this))) // INLINED!!
     endfunction
 //end of: TableStruct_NewHandleField("original","unit")
 
-    function s__Mimic__UnitData_destroy takes integer this returns nothing
-        call RemoveSavedHandle(ConstTable___ht, (((((s__Mimic__UnitData_original_impl))))), ((this))) // INLINED!!
+    function s__Mimic___UnitData_destroy takes integer this returns nothing
+        call RemoveSavedHandle(ConstTable___ht, (((((s__Mimic___UnitData_original_impl))))), ((this))) // INLINED!!
     endfunction
 
 function HeroTransferInventory takes unit source,unit target returns nothing
@@ -16260,10 +16327,10 @@ function HeroTransferInventory takes unit source,unit target returns nothing
 endfunction
 
 function RemoveUnitMimic takes unit mimic returns nothing
-    local unit original= (LoadUnitHandle(ConstTable___ht, (((((s__Mimic__UnitData_original_impl))))), (((GetHandleId(mimic)))))) // INLINED!!
+    local unit original= (LoadUnitHandle(ConstTable___ht, (((((s__Mimic___UnitData_original_impl))))), (((GetHandleId(mimic)))))) // INLINED!!
     
     if original != null then
-        call RemoveSavedHandle(ConstTable___ht, (((((s__Mimic__UnitData_original_impl))))), ((((GetHandleId(mimic)))))) // INLINED!!
+        call RemoveSavedHandle(ConstTable___ht, (((((s__Mimic___UnitData_original_impl))))), ((((GetHandleId(mimic)))))) // INLINED!!
         if UnitAlive(mimic) then
             call KillUnit(mimic)
         endif
@@ -16289,18 +16356,18 @@ function RemoveUnitMimic takes unit mimic returns nothing
     endif
 endfunction
 
-function onRemove takes nothing returns boolean
-    local unit original= (LoadUnitHandle(ConstTable___ht, (((((s__Mimic__UnitData_original_impl))))), (((GetHandleId((s__Args_getUnit((0))))))))) // INLINED!!
+function Mimic___OnRemove takes nothing returns boolean
+    local unit original= (LoadUnitHandle(ConstTable___ht, (((((s__Mimic___UnitData_original_impl))))), (((GetHandleId((s__Args_getUnit((0))))))))) // INLINED!!
     call RemoveUnitMimic((s__Args_getUnit((0)))) // INLINED!!
     call RemoveUnit(original)
     set original=null
     return false
 endfunction
 
-function onDeath takes nothing returns boolean
+function Mimic___OnDeath takes nothing returns boolean
     call RemoveUnitMimic((s__Args_getUnit((0)))) // INLINED!!
-    call s__BoolExprEvaluator_deregister(s__UnitEvents__get_onRemove((GetHandleId(((s__Args_getUnit((0))))))),Condition(function onDeath)) // INLINED!!
-    call s__BoolExprEvaluator_deregister(s__UnitEvents__get_onRemove((GetHandleId(((s__Args_getUnit((0))))))),Condition(function onRemove)) // INLINED!!
+    call s__BoolExprEvaluator_deregister(s__UnitEvents__get_onRemove((GetHandleId(((s__Args_getUnit((0))))))),Condition(function Mimic___OnDeath)) // INLINED!!
+    call s__BoolExprEvaluator_deregister(s__UnitEvents__get_onRemove((GetHandleId(((s__Args_getUnit((0))))))),Condition(function Mimic___OnRemove)) // INLINED!!
     return false
 endfunction
 
@@ -16316,13 +16383,13 @@ function CreateUnitMimic takes unit whichUnit,unit target returns nothing
     set mimicId=GetHandleId(mimic)
     
     if IsUnitType(mimic, UNIT_TYPE_HERO) or UnitMakeHeroic(mimic) then
-        if (LoadUnitHandle(ConstTable___ht, (((((s__Mimic__UnitData_original_impl))))), (((GetHandleId(whichUnit)))))) != null then // INLINED!!
-            set original=(LoadUnitHandle(ConstTable___ht, (((((s__Mimic__UnitData_original_impl))))), (((GetHandleId(whichUnit)))))) // INLINED!!
+        if (LoadUnitHandle(ConstTable___ht, (((((s__Mimic___UnitData_original_impl))))), (((GetHandleId(whichUnit)))))) != null then // INLINED!!
+            set original=(LoadUnitHandle(ConstTable___ht, (((((s__Mimic___UnitData_original_impl))))), (((GetHandleId(whichUnit)))))) // INLINED!!
             
             call HeroTransferInventory(whichUnit , mimic)
             
-            call s__BoolExprEvaluator_deregister(s__UnitEvents__get_onRemove((GetHandleId((whichUnit)))),Condition(function onRemove)) // INLINED!!
-            call RemoveSavedHandle(ConstTable___ht, (((((s__Mimic__UnitData_original_impl))))), ((((GetHandleId(whichUnit)))))) // INLINED!!
+            call s__BoolExprEvaluator_deregister(s__UnitEvents__get_onRemove((GetHandleId((whichUnit)))),Condition(function Mimic___OnRemove)) // INLINED!!
+            call RemoveSavedHandle(ConstTable___ht, (((((s__Mimic___UnitData_original_impl))))), ((((GetHandleId(whichUnit)))))) // INLINED!!
             call KillUnit(whichUnit)
         else
             set original=whichUnit
@@ -16331,7 +16398,7 @@ function CreateUnitMimic takes unit whichUnit,unit target returns nothing
             call SetUnitOwner(original, Player(bj_PLAYER_NEUTRAL_EXTRA), false)
         endif
             
-        call s__TableStruct_setHandle(s__Mimic__UnitData_original_impl , ((mimicId)) , (original)) // INLINED!!
+        call s__TableStruct_setHandle(s__Mimic___UnitData_original_impl , ((mimicId)) , (original)) // INLINED!!
         
         call BlzSetUnitBaseDamage(mimic, BlzGetUnitBaseDamage(original, 1), 1)
         call BlzSetUnitBaseDamage(mimic, BlzGetUnitBaseDamage(original, 2), 2)
@@ -16346,8 +16413,8 @@ function CreateUnitMimic takes unit whichUnit,unit target returns nothing
         call GUMSCopyValues(target , mimic)
         call DestroyEffect(AddSpecialEffect("Abilities\\Spells\\Orc\\FeralSpirit\\feralspirittarget.mdl", GetUnitX(mimic), GetUnitY(mimic)))
         
-        call s__BoolExprEvaluator_register(s__UnitEvents__get_onDeath((mimicId)),Condition(function onDeath))
-        call s__BoolExprEvaluator_register(s__UnitEvents__get_onRemove((mimicId)),Condition(function onRemove))
+        call s__BoolExprEvaluator_register(s__UnitEvents__get_onDeath((mimicId)),Condition(function Mimic___OnDeath))
+        call s__BoolExprEvaluator_register(s__UnitEvents__get_onRemove((mimicId)),Condition(function Mimic___OnRemove))
         call SaveBoolean(ConstTable___ht, (((((s__UnitEvents_removeOnDeath_impl))))), ((((mimicId)))), ( (true))) // INLINED!!
         if not IsUnitType(mimic, UNIT_TYPE_HERO) then
             call RefreshHeroIcons(GetOwningPlayer(mimic))
@@ -16501,7 +16568,7 @@ endfunction
 // 
 //   Warcraft III map script
 //   Generated by the Warcraft III World Editor
-//   Date: Wed May 15 08:38:45 2019
+//   Date: Sat May 18 08:34:58 2019
 //   Map Author: Guhun
 // 
 //===========================================================================
@@ -22069,8 +22136,8 @@ endfunction
 
 //textmacro instance: TableStruct_NewConstTableField("","timerData")
 
-         constant function s__TreeSystemChooseTree___Globals__get_timerData takes nothing returns integer
-            return s__TreeSystemChooseTree___Globals_timerData_impl
+         constant function s__TreeSystemChooseTree__Globals__get_timerData takes nothing returns integer
+            return s__TreeSystemChooseTree__Globals_timerData_impl
         endfunction
 
 
@@ -22082,14 +22149,14 @@ endfunction
 function TreeIssueStopOrder takes nothing returns nothing
     local timer t= GetExpiredTimer()
     local integer tId= GetHandleId(t)
-    local unit deco= (LoadUnitHandle(ConstTable___ht, ((((s__TreeSystemChooseTree___Globals_timerData_impl)))), (GetHandleId(t)))) // INLINED!!
+    local unit deco= (LoadUnitHandle(ConstTable___ht, ((((s__TreeSystemChooseTree__Globals_timerData_impl)))), (GetHandleId(t)))) // INLINED!!
     
     call IssueImmediateOrder(deco, "stop")
     
     call PauseTimer(t)
     call DestroyTimer(t)
     
-    call RemoveSavedHandle(ConstTable___ht, ((((s__TreeSystemChooseTree___Globals_timerData_impl)))), (tId)) // INLINED!!
+    call RemoveSavedHandle(ConstTable___ht, ((((s__TreeSystemChooseTree__Globals_timerData_impl)))), (tId)) // INLINED!!
     
     set t=null
     set deco=null
@@ -22105,7 +22172,7 @@ function Trig_TreeSystem_Choose_Tree_Conditions takes nothing returns boolean
             set t=CreateTimer()
             set udg_TreeSystem_TREES[GetPlayerId(GetOwningPlayer(GetTriggerUnit())) + 1]=GetDestructableTypeId(GetOrderTargetDestructable())
             call TimerStart(t, 0, false, function TreeIssueStopOrder)
-            call SaveUnitHandle(ConstTable___ht, ((((s__TreeSystemChooseTree___Globals_timerData_impl)))), (GetHandleId(t)), ( GetTriggerUnit())) // INLINED!!
+            call SaveUnitHandle(ConstTable___ht, ((((s__TreeSystemChooseTree__Globals_timerData_impl)))), (GetHandleId(t)), ( GetTriggerUnit())) // INLINED!!
             set t=null
         endif
     endif
@@ -25930,9 +25997,9 @@ endfunction
 
 //===========================================================================
 // Trigger: Spell System Filter Decorations
-//
-// This trigger is used by spells that pick a group of units in range. It simply filters decoration units, preventing them from being added to the unit goup.
 //===========================================================================
+
+
 function Trig_Spell_System_Filter_Decorations_Conditions takes nothing returns boolean
     return not (GetUnitAbilityLevel((udg_Spell__InRangeUnit), 'A0C6') > 0) // INLINED!!
 endfunction
@@ -28026,6 +28093,8 @@ endfunction
 // scope StaffOfMimic ends
 
 //===========================================================================
+// Trigger: ToggleAura
+//===========================================================================
 // Trigger: FilterTransformations
 //===========================================================================
 // Trigger: Ability Cooldown
@@ -28569,6 +28638,7 @@ function InitCustomTriggers takes nothing returns nothing
     call InitTrig_Defend_Turn_On()
     call InitTrig_Defend_Turn_Off()
     call InitTrig_Staff_of_Mimic()
+    //Function not found: call InitTrig_ToggleAura()
     //Function not found: call InitTrig_FilterTransformations()
     call InitTrig_Ability_Cooldown()
     call InitTrig_Summon()
@@ -32213,7 +32283,7 @@ function main takes nothing returns nothing
     call CreateAllUnits()
     call InitBlizzard()
 
-call ExecuteFunc("jasshelper__initstructs659806296")
+call ExecuteFunc("jasshelper__initstructs217801343")
 call ExecuteFunc("DestructableLib___Initialization")
 call ExecuteFunc("MultiPatrol___onInit")
 call ExecuteFunc("FilterTransformations__onInit")
@@ -32296,7 +32366,7 @@ set f__result_integer= (LoadInteger(ConstTable___ht, (((s__UnitEvents_onRemove_i
    return true
 endfunction
 
-function jasshelper__initstructs659806296 takes nothing returns nothing
+function jasshelper__initstructs217801343 takes nothing returns nothing
     set st__UnitEvents__get_onDeath=CreateTrigger()
     call TriggerAddCondition(st__UnitEvents__get_onDeath,Condition( function sa__UnitEvents__get_onDeath))
     set st__UnitEvents__get_onRemove=CreateTrigger()
@@ -32351,7 +32421,7 @@ function jasshelper__initstructs659806296 takes nothing returns nothing
 
 
 
-call ExecuteFunc("s__WorldBounds_WorldBounds___WorldBoundInit___onInit")
+call ExecuteFunc("s__WorldBounds_WorldBounds___WorldBoundInit__onInit")
 
 
 
@@ -32399,9 +32469,9 @@ call ExecuteFunc("s__WorldBounds_WorldBounds___WorldBoundInit___onInit")
 
 
 
-call ExecuteFunc("s__DummyRecycler___S_DummyRecycler___M___onInit")
+call ExecuteFunc("s__DummyRecycler___S_DummyRecycler___M__onInit")
 
-call ExecuteFunc("s__TileDefinition___TileDefinition_TileDefinition___Init___onInit")
+call ExecuteFunc("s__TileDefinition___TileDefinition_TileDefinition___Init__onInit")
 
 
 
@@ -32410,7 +32480,7 @@ call ExecuteFunc("s__TileDefinition___TileDefinition_TileDefinition___Init___onI
 
 
 
-call ExecuteFunc("s__LoP_DecoBuilders_LoPDecoBuilders__InitModule___onInit")
+call ExecuteFunc("s__LoP_DecoBuilders_LoPDecoBuilders__InitModule__onInit")
 
 
 
@@ -32418,12 +32488,13 @@ call ExecuteFunc("s__LoP_DecoBuilders_LoPDecoBuilders__InitModule___onInit")
 
 
 
-call ExecuteFunc("s__TerrainTools___InitStruct_TerrainTools___InitModule___onInit")
+call ExecuteFunc("s__TerrainTools___InitStruct_TerrainTools___InitModule__onInit")
 
 
-call ExecuteFunc("s__AutoRectEnvironment___InitStruct_AutoRectEnvironment___InitModule___onInit")
+call ExecuteFunc("s__ToggleAura__InitStruct_ToggleAura__InitModule__onInit")
 
 
+call ExecuteFunc("s__AutoRectEnvironment___InitStruct_AutoRectEnvironment___InitModule__onInit")
 
 
 
@@ -32527,7 +32598,9 @@ call ExecuteFunc("s__AutoRectEnvironment___InitStruct_AutoRectEnvironment___Init
 
 
 
-call ExecuteFunc("s__UnitVisualMods___InitStruct_UnitVisualMods___InitModule___onInit")
+
+
+call ExecuteFunc("s__UnitVisualMods___InitStruct_UnitVisualMods___InitModule__onInit")
 
 
 
