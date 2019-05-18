@@ -32,6 +32,7 @@ function IsOrderMorph takes integer orderId returns boolean
     return Order(orderId).isMorph()
 endfunction
 
+// includes pocket factory because it crahses on CDR reduce
 function IsOrderNecrotic takes integer orderId returns boolean
     return Order(orderId).isNecrotic()
 endfunction
@@ -39,6 +40,8 @@ endfunction
 function IsOrderGeneral takes integer orderId returns boolean
     return Order(orderId).isGeneral()
 endfunction
+
+//========================
 
 
 private function onInit takes nothing returns nothing
@@ -77,6 +80,7 @@ private function onInit takes nothing returns nothing
     set Order.necroticOrders.boolean[OrderId("vengeanceinstant")]      = true
     set Order.necroticOrders.boolean[OrderId("carrionscarabs")]        = true
     set Order.necroticOrders.boolean[OrderId("carrionscarabsinstant")] = true
+    set Order.necroticOrders.boolean[OrderId("summonfactory")] = true
 
     // General Orders
     set Order.generalOrders.boolean[OrderId("smart")]        = true
