@@ -190,6 +190,9 @@ are listed first, though.
             // Ruined
             set i = ( i + 1 )
             set rawcodes[i] = 'u02T'
+            // Ruined
+            set i = ( i + 1 )
+            set rawcodes[i] = 'u044'
             // Ruins
             set i = ( i + 1 )
             set rawcodes[i] = 'u00X'
