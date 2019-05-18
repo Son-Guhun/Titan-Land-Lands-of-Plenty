@@ -28,6 +28,15 @@ function Trig_Deco_DisableMovement_Conditions takes nothing returns boolean
         if GetUnitAbilityLevel(trigU, 'A037') != 0 then
         else
             call GUMS_AddStructureFlightAbility(trigU)
+            
+            call BlzUnitDisableAbility(trigU, 'A011', false, false)
+            call BlzUnitDisableAbility(trigU, 'A012', false, false)
+            call BlzUnitDisableAbility(trigU, 'UDR4', false, false)
+            call BlzUnitDisableAbility(trigU, 'A02Y', false, false)
+            call BlzUnitDisableAbility(trigU, 'A02Z', false, false)
+            call BlzUnitDisableAbility(trigU, 'A031', false, false)
+            call BlzUnitDisableAbility(trigU, 'A032', false, false)
+            call BlzUnitDisableAbility(trigU, 'A0B7', false, false)
             // -
             // PLAY OPEN ANIMATION FOR OPENED GATES
             // OTHERWISE, PLAY STAND ANIMATION
