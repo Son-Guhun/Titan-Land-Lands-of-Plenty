@@ -363,6 +363,7 @@
     '41-Item Abilities': 'Item Abilities'
         Comment
     '42-Staff of Mimic': 'Staff of Mimic'
+    43-ToggleAura: ToggleAura
 '38-No Spell System Spells': 'No Spell System Spells'
     1-FilterTransformations: FilterTransformations
     '2-Ability Cooldown': 'Ability Cooldown'

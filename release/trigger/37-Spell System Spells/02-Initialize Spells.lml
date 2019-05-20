@@ -3,6 +3,8 @@ Event
         Const : 0.00
 Condition
 Action
+    CustomScriptCode
+        Const : 'call ToggleAura_Initialize()'
     CommentString
         Const : ' '
     CommentString
