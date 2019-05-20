@@ -323,47 +323,47 @@
     04-Libraries: Libraries
         Comment
     05-Mimic: Mimic
-    '06-Hero Abilities': 'Hero Abilities'
+    06-ToggleAura: ToggleAura
+    '07-Hero Abilities': 'Hero Abilities'
         Comment
-    '07-Spatial Distortion Cast': 'Spatial Distortion Cast'
-    '08-AoE Snare': 'AoE Snare'
-    '09-Mass Banish': 'Mass Banish'
-    '10-Tyrael Judgement': 'Tyrael Judgement'
-    '11-Tyrael WotT Cast': 'Tyrael WotT Cast'
-    '12-Chain Slow': 'Chain Slow'
-    13-Stormstrike: Stormstrike
-    14-Replenish: Replenish
-    '15-Disarming Blow': 'Disarming Blow'
-    '16-Scatter Shot': 'Scatter Shot'
-    '17-Imperius Light of Valor': 'Imperius Light of Valor'
-    '18-War Stomp': 'War Stomp'
-    '19-Carrion Burst': 'Carrion Burst'
-    '20-Burst of Despair': 'Burst of Despair'
-    '21-Greater Shockwave': 'Greater Shockwave'
-    22-Bladespin: Bladespin
-    '23-Charge Cast': 'Charge Cast'
-    '24-Charge Collision': 'Charge Collision'
-    '25-Charge End': 'Charge End'
-    '26-Thunderstrike Cast': 'Thunderstrike Cast'
-    '27-Thunderstrike Impact': 'Thunderstrike Impact'
-    28-Waterspout: Waterspout
-    '29-Battle Jump Cast': 'Battle Jump Cast'
-    '30-Battle Jump End': 'Battle Jump End'
-    '31-Ethereal Jaunt': 'Ethereal Jaunt'
-    '32-Power Surge': 'Power Surge'
-    33-Comet: Comet
-    34-Silence: Silence
-    '35-Thunder Clap': 'Thunder Clap'
-    '36-Unit Abilities': 'Unit Abilities'
+    '08-Spatial Distortion Cast': 'Spatial Distortion Cast'
+    '09-AoE Snare': 'AoE Snare'
+    '10-Mass Banish': 'Mass Banish'
+    '11-Tyrael Judgement': 'Tyrael Judgement'
+    '12-Tyrael WotT Cast': 'Tyrael WotT Cast'
+    '13-Chain Slow': 'Chain Slow'
+    14-Stormstrike: Stormstrike
+    15-Replenish: Replenish
+    '16-Disarming Blow': 'Disarming Blow'
+    '17-Scatter Shot': 'Scatter Shot'
+    '18-Imperius Light of Valor': 'Imperius Light of Valor'
+    '19-War Stomp': 'War Stomp'
+    '20-Carrion Burst': 'Carrion Burst'
+    '21-Burst of Despair': 'Burst of Despair'
+    '22-Greater Shockwave': 'Greater Shockwave'
+    23-Bladespin: Bladespin
+    '24-Charge Cast': 'Charge Cast'
+    '25-Charge Collision': 'Charge Collision'
+    '26-Charge End': 'Charge End'
+    '27-Thunderstrike Cast': 'Thunderstrike Cast'
+    '28-Thunderstrike Impact': 'Thunderstrike Impact'
+    29-Waterspout: Waterspout
+    '30-Battle Jump Cast': 'Battle Jump Cast'
+    '31-Battle Jump End': 'Battle Jump End'
+    '32-Ethereal Jaunt': 'Ethereal Jaunt'
+    '33-Power Surge': 'Power Surge'
+    34-Comet: Comet
+    35-Silence: Silence
+    '36-Thunder Clap': 'Thunder Clap'
+    '37-Unit Abilities': 'Unit Abilities'
         Comment
-    '37-Make Unit Selectable': 'Make Unit Selectable'
-    '38-Angel Judgement': 'Angel Judgement'
-    '39-Defend Turn On': 'Defend Turn On'
-    '40-Defend Turn Off': 'Defend Turn Off'
-    '41-Item Abilities': 'Item Abilities'
+    '38-Make Unit Selectable': 'Make Unit Selectable'
+    '39-Angel Judgement': 'Angel Judgement'
+    '40-Defend Turn On': 'Defend Turn On'
+    '41-Defend Turn Off': 'Defend Turn Off'
+    '42-Item Abilities': 'Item Abilities'
         Comment
-    '42-Staff of Mimic': 'Staff of Mimic'
-    43-ToggleAura: ToggleAura
+    '43-Staff of Mimic': 'Staff of Mimic'
 '38-No Spell System Spells': 'No Spell System Spells'
     1-FilterTransformations: FilterTransformations
     '2-Ability Cooldown': 'Ability Cooldown'
