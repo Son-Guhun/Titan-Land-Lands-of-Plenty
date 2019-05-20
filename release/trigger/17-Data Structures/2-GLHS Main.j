@@ -285,7 +285,7 @@ struct LinkedHashSet extends array
     Returns whether a set is empty. A set is empty when its first element is zero.
     */
     method isEmpty takes nothing returns boolean
-        return this.begin() != this.end()
+        return this.begin() == this.end()
     endmethod
     
     /* DOC: contains(integer)
