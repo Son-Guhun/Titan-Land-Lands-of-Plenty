@@ -56,6 +56,7 @@
     4-LoPPlayers: LoPPlayers
     5-LoPCommands: LoPCommands
     6-LoPUtils: LoPUtils
+    7-LoPTip: LoPTip
 '05-Map Init': 'Map Init'
     1-Functions: Functions
         Comment
@@ -142,6 +143,7 @@
     '40-CommandsD Rotate': 'CommandsD Rotate'
     '41-Commands Spawn Stuff': 'Commands Spawn Stuff'
     '42-Commands Roll': 'Commands Roll'
+    '43-Commands Tips': 'Commands Tips'
 '08-Decoration Systems': 'Decoration Systems'
     Comment
 '09-Deco Builders': 'Deco Builders'
@@ -176,6 +178,7 @@
     1-Lists: Lists
     '2-GLHS Main': 'GLHS Main'
     '3-GMUI Main': 'GMUI Main'
+    '4-GAL Main': 'GAL Main'
 18-Tables: Tables
     1-External: External
         Comment
