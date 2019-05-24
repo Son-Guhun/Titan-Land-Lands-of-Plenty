@@ -128,6 +128,12 @@ Use the commands above to apply unit modifications. Alternatively, you can use D
 |cffffff00-ally|r 'color'
 |cffffff00-unally|r 'color'
 
+|cffff0000Tips/Hints Commands:|r
+|cffffff00-tips|r (on/off)
+If no arguments are given, then tips are toggled on/off, according to their current value.
+|cffffff00-hints|r (on/off)
+An alias for the |cffffff00-tips|r command.
+
 |cffff0000Player Commands:|r
 |cffffff00-deleteme|r
 Removes all your units that are not in the Titan Palace from the game, except your neutral units.
@@ -251,7 +257,7 @@ XiaolianhuaStudio
     // Model Credits 2
     set quest_text = "
 |cff00b300The Hive Workshop:|r
-PrinceYaser, shiik, Dr.Death, Sant, Eagle XI, Afroknight_76, Deleted member 238226 (unknown), GhostThruster, Whitewolf8, WhiteDeath, A.R., Xezko, Deep Sea Kraken, Hellx-Magnus, -Berz-, CRAZYRUSSIAN, HappyCockroach, Tamplier777, Kehel, Radagast, Lordaeron Creator, The D3ath
+PrinceYaser, shiik, Dr.Death, Sant, Eagle XI, Afroknight_76, Deleted member 238226 (unknown), GhostThruster, Whitewolf8, WhiteDeath, A.R., Xezko, Deep Sea Kraken, Hellx-Magnus, -Berz-, CRAZYRUSSIAN, HappyCockroach, Tamplier777, Kehel, Radagast, Lordaeron Creator, The D3ath, Gottfrei
 
 |cffff0000XGM:|r
 P4ela, Kolbosa, Wulfrein, DampirTBs, Feleer, Jack Sparrow, DiKey51, Ket, LongbowMan
