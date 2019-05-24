@@ -12,8 +12,66 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 	- New units for an existing race can be added in a patch version. 
 	- New decorations for an existing deco builder can be added in a patch version.
 
-## [Unreleased]
+## [v1.1.5]
 
+### Added
+- New tips system to give new players useful information regarding Lands of Plenty (intended for players who already played Titan Land).
+- New commands:
+	- tips
+		- off: Disables periodic tips.
+		- on: Enables periodic tips.
+		- (empty): toggles tips on/off, depending on current setting.
+	- hints: An alias for -tips.
+- New Deco Builder:
+	- Deco Builder Elves High:
+		- High Elf decorations
+		- Highborne decorations
+- New Decorations:
+	- Deco Builder Furniture:
+		- Windows
+		- Curtains
+- New heroes:
+	- Goblin Trade Prince
+- New units:
+	- Goblin:
+		- Goblin Siege Walker
+	- New Elven units:
+		- Blood Elf: Archer, Battle-cleric, Battle-priestess, Cleric, Elite Strider, Footman, Guard, Hawk Knight, Hawkstrider Rider, Huntress, Lieutenant Female, Magister, Novice Mage, Phoenix Archer, Phoenix Crusader, Royal Mage, Spellbane, Strider, Thaumaturge
+		- Gray Elf: Battle-priestess, Caladrius Crusader, Elite Strider, Guard, Magister, Priest, Royal Mage, Spellbane, Strider
+		- High Elf: Anarchist, Assassin, Battle-cleric, Footman, Hawk Knight, Militia, Priest, Sacntum Archer, Sanctum Warrior, Sorceress, Warmage
+		- Wood Elf: Spearthrower
+
+
+### Fixed
+- Fixed an issue where the game would crash if a very big rect generator was being expanded.
+- The following units now have weapons:
+	- Gray Elf Solider (renamed from Gray Elf Guardian)
+	- Gray Elf Pikeman
+- Fixed an issue where a debug message would occur when using certain abilities.
+- Icons adjusted for many decorations, units and heroes. Most towers and buildings no longer have units with duplicate icons.
+- Astrologer no longer doubles his attack when transforming back from his alternate form.
+
+### Changed
+- Heroes can now turn some auras (Brilliance, Command, Devotion, Endurance, Thorns, Trueshot, Unholy and Vampiric) off, by clicking on them in the Command Card. By default the auras are disabled, so people can notice the feature. In the future, they may be enabled by default.
+- Adjusted size for FantEnv Rocks and Statues. If you were using them before, you might have to resize them.
+- Structure decorations (such as walls and gates) will no longer lose their abilities when their flight is enabled.
+- The High Elf race has been overhauled. Their units now belong to the Noldor race. Their buildings now produce Warcraft High Elf units.
+- The Elves races has been converted to Blood Elves. The high elven units in that race have been moved to the new High Elf race.
+- Polished the goblin race, diversifying many of their units and improving their stats:
+	- Goblin Flamethrowers now deal AoE damage.
+	- Goblin Flameshooters now have a bouncing attack.
+	- Goblin Sniper now has the correct range of 1000, up from 600.
+- Polished the Wood Elf units, diversifying many of their units and improving their stats.
+- Terrain Updates:
+	- Added more trees to the small blighted area between the dirt mountain passage and the southwest forest.
+	- Added more trees in the transitionary region between the west forest and the northwest cold lands.
+	- Fixed many tiles that had been incorrectly placed.
+- Deco Builder Elves renamed to Deco Builder Elves blood.
+- Added, fixed or changed tooltip descriptions for many deco builders.
+
+
+### Removed
+- Noldor (old High Elf) units can no longer be produced. A new production building will be added for them in a future version. For now, you can create them by loading old saves and copying the units to get as many as you need.
 
 ## [v1.1.4]
 
