@@ -21,8 +21,6 @@ function TimedBonusTimerFunc takes nothing returns nothing
     local integer tId = GetAgentKey(t)
     local unit timerUnit = AgentLoadUnit(tId, -1)
     local integer bonusType = 0
-    
-    call BJDebugMsg("0")
 
     loop
     exitwhen bonusType>10

@@ -66,11 +66,11 @@ private function onTimer takes nothing returns nothing
 endfunction
 
 private constant function DELAY_MINUTES takes nothing returns real
-    return 0.//10.
+    return 10.
 endfunction
 
 private constant function DELAY_SECONDS takes nothing returns real
-    return 1.
+    return 0.
 endfunction
 
 private module InitModule

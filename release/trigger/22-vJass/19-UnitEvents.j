@@ -1,5 +1,11 @@
 library UnitEvents requires ArgumentStack, BoolExprEvaluator
-    /* Simple unit events library by Guhun*/
+    /* Simple unit events library by Guhun
+    
+    These are supposed to be called by the user in their own global unit event triggers.
+    
+    
+    (See System Cleanup Death and System Cleanup Removal triggers in the Map System category).
+    */
 
     struct UnitEvents extends array
         
@@ -57,6 +63,7 @@ library UnitEvents requires ArgumentStack, BoolExprEvaluator
             set .removeOnDeath = true
         endmethod
         
+        
         method operator onDeath takes nothing returns BoolExprEvaluator
             if .onDeath_impl == 0 then
                 set .onDeath_impl = BoolExprEvaluator.create()
@@ -66,6 +73,8 @@ library UnitEvents requires ArgumentStack, BoolExprEvaluator
         method operator onDeath= takes BoolExprEvaluator eval returns nothing
             set .onDeath_impl = eval
         endmethod
+        
+
         method operator onRemove takes nothing returns BoolExprEvaluator
             if .onRemove_impl == 0 then
                 set .onRemove_impl = BoolExprEvaluator.create()
