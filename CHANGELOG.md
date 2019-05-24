@@ -3,9 +3,14 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
-Major versions are created arbitrarily.
-Minor versions indicate addition of a very important new feature or a new race or a new deco builder.
-Patch versions indicate bugfixes. Some command aliases or arguments may be added in a patch version. New units for an existing race can be adde in a patch version.
+- Major versions are created arbitrarily.
+- Minor versions indicate addition of a very important new feature, a new race or a new deco builder.
+	- *Exception:* Racial deco builders can be added in a patch version for existing races.
+	- *Exception:* Extended deco builders (numbered from 2 onwards) can be added in a patch version for existing deco builders.
+- Patch versions indicate bugfixes. 
+	- Some commands, command aliases or command arguments may be added in a patch version. 
+	- New units for an existing race can be added in a patch version. 
+	- New decorations for an existing deco builder can be added in a patch version.
 
 ## [Unreleased]
 
