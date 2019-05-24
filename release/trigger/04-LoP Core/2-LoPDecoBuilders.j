@@ -127,9 +127,12 @@ are listed first, though.
             // Drow
             set i = ( i + 1 )
             set rawcodes[i] = 'u03Z'
-            // Elves
+            // Elves Blood
             set i = ( i + 1 )
             set rawcodes[i] = 'u02A'
+            // Elves High
+            set i = ( i + 1 )
+            set rawcodes[i] = 'u045'
             // Elves Forest
             set i = ( i + 1 )
             set rawcodes[i] = 'u040'
