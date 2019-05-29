@@ -148,11 +148,15 @@
 '08-Decoration Systems': 'Decoration Systems'
     Comment
 '09-Deco Builders': 'Deco Builders'
-    '1-DecoBuilder Movement': 'DecoBuilder Movement'
-    '2-DecoBuilder Increase Count': 'DecoBuilder Increase Count'
-    '3-DecoBuilder RangedBuild': 'DecoBuilder RangedBuild'
-    '4-DecoBuilder Cast Ability': 'DecoBuilder Cast Ability'
-    5-DecoBuilderCount: DecoBuilderCount
+    1-Libraries: Libraries
+        Comment
+    2-DecoBuilderCount: DecoBuilderCount
+    3-Triggers: Triggers
+        Comment
+    '4-DecoBuilder Movement': 'DecoBuilder Movement'
+    '5-DecoBuilder Increase Count': 'DecoBuilder Increase Count'
+    '6-DecoBuilder RangedBuild': 'DecoBuilder RangedBuild'
+    '7-DecoBuilder Cast Ability': 'DecoBuilder Cast Ability'
 10-Decorations: Decorations
     '1-Deco DisableMovement': 'Deco DisableMovement'
     '2-Deco Instant Upgrade': 'Deco Instant Upgrade'
