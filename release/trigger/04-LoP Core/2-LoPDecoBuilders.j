@@ -172,6 +172,9 @@ are listed first, though.
             // Medieval 2
             set i = ( i + 1 )
             set rawcodes[i] = 'u02L'
+            // Mushrooms
+            set i = ( i + 1 )
+            set rawcodes[i] = 'u046'
             // Naga
             set i = ( i + 1 )
             set rawcodes[i] = 'u03R'
