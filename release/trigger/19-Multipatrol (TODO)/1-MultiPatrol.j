@@ -1,6 +1,6 @@
 library MultiPatrol initializer onInit
 
-// TODO: Still interfaces badly with the save system,  which is using a private function.
+// TODO: Still interfaces badly with the save system,  which is using a private function. When loading a unit, it relies on internal behaviour of the Patrol_RegisterPoint function.
 
 //==================================================================================================
 //  ------------------------
@@ -86,11 +86,11 @@ function Patrol_GetPointY takes integer unitHandleId, integer pointNumber return
     return LoadReal(data, unitHandleId, -pointNumber)
 endfunction
 
-function Patrol_SetPointX takes integer unitHandleId, integer pointNumber, real newX returns nothing
+private function Patrol_SetPointX takes integer unitHandleId, integer pointNumber, real newX returns nothing
     call SaveReal(data, unitHandleId, pointNumber, newX)
 endfunction
 
-function Patrol_SetPointY takes integer unitHandleId, integer pointNumber, real newY returns nothing
+private function Patrol_SetPointY takes integer unitHandleId, integer pointNumber, real newY returns nothing
     call SaveReal(data, unitHandleId, -pointNumber, newY)
 endfunction
 //=====================

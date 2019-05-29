@@ -27,9 +27,9 @@ struct LoP_Command extends array
             set .string = str
             set .accessLevel = access
         elseif .string == str then
-            // Updating command.
+            // Handle: Updating command.
         else
-            // Hash collision
+            // Handle: Hash collision.
         endif
         return this
     endmethod

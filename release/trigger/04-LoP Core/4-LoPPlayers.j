@@ -2,8 +2,6 @@ library LoPPlayers requires TableStruct
 
 struct LoP_PlayerData extends array
     
-    
-    
     static method get takes player whichPlayer returns LoP_PlayerData
         return GetPlayerId(whichPlayer)
     endmethod
@@ -12,6 +10,7 @@ struct LoP_PlayerData extends array
         return this
     endmethod
     
+    // Player number is the value used by GUI and also by user commands in the map. It is also used as an index in some systems.
     method toPlayerNumber takes nothing returns integer
         return this+1
     endmethod
