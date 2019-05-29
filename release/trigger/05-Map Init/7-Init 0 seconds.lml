@@ -221,6 +221,12 @@ And discord: SonGuhun#4510'
     CustomScriptCode
         Const : 'call SaveInteger(udg_Hashtable_1, ''h0SF'', 0, ''h0SE'')'
     CommentString
+        Const : 'Magical Pen'
+    CustomScriptCode
+        Const : 'call SaveInteger(udg_Hashtable_1, ''h0WY'', 0, ''h00E'')'
+    CustomScriptCode
+        Const : 'call SaveInteger(udg_Hashtable_1, ''h00E'', 0, ''h0WY'')'
+    CommentString
         Const : ---------------------
     CommentString
         Const : ---------------------
