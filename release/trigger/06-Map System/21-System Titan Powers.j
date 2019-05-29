@@ -1,4 +1,4 @@
-library LoPthree requires LoPone, LoPtwo
+library LoPthree requires LoPCleanUpDeath, LoPCleanUpRemoval
 
 function LoP_RemoveUnit takes unit whichUnit returns nothing
     if not IsUnitInGroup(whichUnit, udg_System_ProtectedGroup) then

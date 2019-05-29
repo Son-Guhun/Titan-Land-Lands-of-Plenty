@@ -1,4 +1,5 @@
-library LoPone requires PlayerUnitLimit, LoPHeader, MoveSpeedBonus, UserDefinedRects, DummyDmg, MultiPatrol, UnitEvents
+library LoPCleanUpDeath requires PlayerUnitLimit, LoPWidgets, MoveSpeedBonus, UserDefinedRects, DummyDmg, MultiPatrol, UnitEvents
+
 function LoP_onDeath takes unit whichUnit returns nothing
     debug call BJDebugMsg("OnDeath")
     
@@ -12,7 +13,7 @@ function LoP_onDeath takes unit whichUnit returns nothing
     else
         if not LoP_IsUnitDecoration(whichUnit) then
         // DECO BUILDER DECREASE COUNT
-            if IsUnitDecoBuilder(whichUnit)  then
+            if LoP_IsUnitDecoBuilder(whichUnit)  then
                 call RemoveUnit(whichUnit)
             else
                 if ( Limit_IsPlayerLimited(GetOwningPlayer(whichUnit)) and Limit_IsUnitLimited(whichUnit) ) then

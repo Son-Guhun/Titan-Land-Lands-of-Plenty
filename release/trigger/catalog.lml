@@ -152,6 +152,7 @@
     '2-DecoBuilder Increase Count': 'DecoBuilder Increase Count'
     '3-DecoBuilder RangedBuild': 'DecoBuilder RangedBuild'
     '4-DecoBuilder Cast Ability': 'DecoBuilder Cast Ability'
+    5-DecoBuilderCount: DecoBuilderCount
 10-Decorations: Decorations
     '1-Deco DisableMovement': 'Deco DisableMovement'
     '2-Deco Instant Upgrade': 'Deco Instant Upgrade'

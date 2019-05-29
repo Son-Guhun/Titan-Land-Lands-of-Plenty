@@ -1,26 +1,4 @@
-library DecoBuilderCount
-function DecoBuilderReduceCountEx takes integer playerNumber, integer unitType returns nothing
-    local integer decoCount = LoadInteger(udg_Hashtable_2, playerNumber, unitType )
-    if decoCount > 0 then
-        debug call BJDebugMsg("Deco count reduced!")
-        call SaveInteger(udg_Hashtable_2, playerNumber, unitType, decoCount - 1)
-    endif
-endfunction
-
-function DecoBuilderReduceCount takes unit whichUnit returns nothing
-    call DecoBuilderReduceCountEx(GetPlayerId( GetOwningPlayer( whichUnit ) ) + 1, GetUnitTypeId(whichUnit))
-endfunction
-
-function IsUnitDecoBuilderEx takes integer ownerNumber, integer unitType returns boolean
-    return LoadInteger(udg_Hashtable_2, ownerNumber, unitType ) > 0
-endfunction
-
-function IsUnitDecoBuilder takes unit whichUnit returns boolean
-    return  IsUnitDecoBuilderEx(GetPlayerId(GetOwningPlayer(whichUnit)) + 1, GetUnitTypeId(whichUnit))
-endfunction
-endlibrary
-
-library LoPtwo requires LoPone, UnitEvents
+library LoPCleanUpRemoval requires LoPCleanUpDeath, UnitEvents
 
 function LoP_onRemoval takes unit whichUnit returns nothing
     debug call BJDebugMsg("OnRemove")
@@ -40,7 +18,7 @@ function LoP_onRemoval takes unit whichUnit returns nothing
         // CLEAR CUSTOM STAT HASHTABLE
         call FlushChildHashtable(udg_CSS_Hashtable, GetHandleId(whichUnit))
         // DECO BUILDER DECREASE COUNT
-        call DecoBuilderReduceCount(whichUnit)
+        call DecoBuilderCount_ReduceCount(whichUnit)
 
         
         call GUMSClearUnitData(whichUnit)
