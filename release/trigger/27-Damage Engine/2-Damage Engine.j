@@ -57,7 +57,7 @@ function CheckDamagedLifeEvent takes boolean clear returns nothing
                 endif
                 //Kill the unit
                 call DisableTrigger(udg_DamageEventTrigger)
-                call UnitDamageTarget(udg_DamageEventSource, udg_DamageEventTarget, -999, false, false, null, DAMAGE_TYPE_UNIVERSAL, null)
+                call UnitDamageTarget(udg_DamageEventSource, udg_DamageEventTarget, -999, false, false, ATTACK_TYPE_CHAOS, DAMAGE_TYPE_UNIVERSAL, null)
                 call EnableTrigger(udg_DamageEventTrigger)
             endif
         elseif GetUnitAbilityLevel(udg_DamageEventTarget, udg_DamageBlockingAbility) > 0 then
