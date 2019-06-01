@@ -12,11 +12,12 @@ library LoPHeroicUnit requires LoPHeader, LoPWidgets
         call UnitAddItemById(whichUnit, 'I013')
         call BlzSetUnitMaxHP(whichUnit, 100)
         call BlzSetUnitMaxMana(whichUnit, 0)
-        call BlzSetUnitDiceNumber(whichUnit, 2, 1)
-        call BlzSetUnitDiceSides(whichUnit, 6, 1)
-        call BlzSetUnitBaseDamage(whichUnit, 0, 1)
+        call BlzSetUnitDiceNumber(whichUnit, 2, 0)
+        call BlzSetUnitDiceSides(whichUnit, 6, 0)
+        call BlzSetUnitBaseDamage(whichUnit, 0, 0)
         call BlzSetUnitArmor(whichUnit, 0)
-        call BlzSetUnitAttackCooldown(whichUnit, 1.8, 1)
+        call BlzSetUnitAttackCooldown(whichUnit, 1.8, 0)
+        call BlzSetUnitIntegerField(whichUnit, UNIT_IF_DEFENSE_TYPE, GetHandleId(DEFENSE_TYPE_HERO))
         call UnitAddItemById(whichUnit, 'I00S')
     endfunction
     
@@ -39,11 +40,9 @@ library LoPHeroicUnit requires LoPHeader, LoPWidgets
         elseif GetUnitAbilityLevel(whichUnit, 'AHer') > 0 then
             call DisplayTextToPlayer(errorMsgPlayer, 0, 0, "This unit is already a hero.")
             
-        elseif GetUnitAbilityLevel(whichUnit, 'AInv') > 0 then  // Detects all inventory skills.
+        elseif GetUnitAbilityLevel(whichUnit, 'AInv') > 0 then  // Detects all inventory skills. Add inventory to units with morph so they don't crash.
             // call DisplayTextToPlayer(errorMsgPlayer, 0, 0, "This unit has an inventory, it can't be a hero.")
             call DisplayTextToPlayer(errorMsgPlayer, 0, 0, "This type of unit cannot become a hero.")
-        //elseif IsUnitType(whichUnit, UNIT_TYPE_ATTACKS_GROUND) == true then
-        //    call DisplayTextToPlayer(errorMsgPlayer, 0, 0, "Artillery units cannot be heroes.")  // Orb effects crash the game when attacking ground.
         else
             return true
         endif

@@ -83,11 +83,6 @@ function DamageDetectionFunctions_Spell takes nothing returns nothing
             set udg_Damage_Mod_Multiplier = udg_Damage_Mod_Multiplier * 0.80
         endif
         
-        // Increase spell damage for heroic units to compensate for their magic damage reduction (50%)
-        if LoP_UnitData.get(udg_DamageEventTarget).isHeroic then
-            set udg_Damage_Mod_Multiplier = udg_Damage_Mod_Multiplier * 1.5
-        endif
-        
         //  Lion's Strike passive (Anduin Lothar)
         if ( GetUnitAbilityLevel(udg_DamageEventSource,'A023') != 0 and  GetRandomInt(1, 10) <= 5) then
             set udg_Damage_Mod_Multiplier = ( udg_Damage_Mod_Multiplier * 1.50 )
