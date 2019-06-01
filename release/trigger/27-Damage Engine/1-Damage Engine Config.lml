@@ -1,16 +1,5 @@
 Event
 Condition
-    Disab: OperatorCompareBoolean
-        Call  : IsUnitType
-            Array : UDexUnits
-                Var   : UDex
-            Preset: UnitTypeStructure
-        Preset: OperatorEqualENE
-        Const : false
-    OperatorCompareInteger
-        Var   : UDex
-        Preset: OperatorNotEqual
-        Const : 0
 Action
     CommentString
         Const : -
@@ -71,21 +60,6 @@ Action
         Const : -
     CommentString
         Const : -
-    CommentString
-        Const : 'Set the damage multiplication factor (1.00 being unmodified, increasing in damage over 1.00 and at 0 damage with 0.00)'
-    CommentString
-        Const : 'NOTE. With the default values, Runed Bracers is reduces 33%, Elune''s Grace reduces 20% and Ethereal increases 67%'
-    CommentString
-        Const : -
-    SetVariable
-        Var   : DAMAGE_FACTOR_BRACERS
-        Const : 0.67
-    SetVariable
-        Var   : DAMAGE_FACTOR_ELUNES
-        Const : 0.80
-    SetVariable
-        Var   : DAMAGE_FACTOR_ETHEREAL
-        Const : 1.67
     CommentString
         Const : -
     CommentString

@@ -160,13 +160,13 @@ function Trig_Damage_Tag_Actions takes nothing returns nothing
         endif
         */
     endif
-    if ( udg_DamageEventType == udg_DamageTypeHeal ) then
+    /*if ( udg_DamageEventType == udg_DamageTypeHeal ) then
         call CreateTextTagUnitBJ( ( "+" + I2S(R2I(RAbsBJ(udg_DamageEventAmount))) ), udg_DamageEventTarget, 50.00, 13.00, 5.00, 100.00, 10.00, 0 )
         call SetTextTagVelocityBJ( GetLastCreatedTextTag(), 75.00, 90.00 )
         call SetTextTagPermanent( GetLastCreatedTextTag(), false )
         call SetTextTagLifespan( GetLastCreatedTextTag(), 3.50 )
         call SetTextTagFadepoint( GetLastCreatedTextTag(), 1.40 )
-    else
+    else*/
     
         call DamageDetectionFunctions_Both()
         
@@ -194,13 +194,13 @@ function Trig_Damage_Tag_Actions takes nothing returns nothing
         else
             set udg_Damage_Mod_AllowReflect = true
         endif
-    endif
+    //endif
 endfunction
 
 //===========================================================================
 function InitTrig_Damage_Tag takes nothing returns nothing
     set gg_trg_Damage_Tag = CreateTrigger(  )
-    call TriggerRegisterVariableEvent( gg_trg_Damage_Tag, "udg_DamageEvent", EQUAL, 1.00 )
+    call TriggerRegisterVariableEvent( gg_trg_Damage_Tag, "udg_DamageModifierEvent", EQUAL, 3.00 )
     call TriggerAddAction( gg_trg_Damage_Tag, function Trig_Damage_Tag_Actions )
 endfunction
 

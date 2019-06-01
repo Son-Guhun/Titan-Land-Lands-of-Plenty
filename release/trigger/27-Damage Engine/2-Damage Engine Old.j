@@ -310,7 +310,7 @@ function SetupDmgEv takes nothing returns boolean
 endfunction
    
 //===========================================================================
-function InitTrig_Damage_Engine takes nothing returns nothing
+function InitTrig_Damage_Engine_Old takes nothing returns nothing
     local unit u = CreateUnit(Player(bj_PLAYER_NEUTRAL_EXTRA), 'uloc', 0, 0, 0)
     local integer i = bj_MAX_PLAYERS //Fixed in 3.8
    
