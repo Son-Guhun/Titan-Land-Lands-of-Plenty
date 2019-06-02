@@ -145,6 +145,7 @@
     '42-CommandsD Locust': 'CommandsD Locust'
     '43-CommandsD Variation': 'CommandsD Variation'
     '44-CommandsD Rotate': 'CommandsD Rotate'
+    '45-Commands Editor': 'Commands Editor'
 '08-Decoration Systems': 'Decoration Systems'
     Comment
 '09-Deco Builders': 'Deco Builders'
@@ -479,3 +480,14 @@
         Disab
 '49-Terrain Libraries': 'Terrain Libraries'
     1-TerrainTools: TerrainTools
+    2-Deformations: Deformations
+    3-DeformationTools: DeformationTools
+50-ControlState: ControlState
+    1-SelectionStates: SelectionStates
+    2-PlayerEventTools: PlayerEventTools
+    3-PlayerEvent: PlayerEvent
+    4-PlayerMouseEvent: PlayerMouseEvent
+    5-ControlState: ControlState
+51-TerrainEditor: TerrainEditor
+    1-TerrainEditor: TerrainEditor
+    2-TerrainEditorUI: TerrainEditorUI
