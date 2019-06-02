@@ -118,7 +118,7 @@ function DamageDetectionFunctions_Last takes nothing returns nothing
         set udg_Damage_Mod_Minimum = 10.
         set udg_Damage_Mod_Maximum = -1.
         set udg_Damage_Mod_AllowReflect = false
-        call UnitDamageTarget(udg_DamageEventTarget, udg_DamageEventSource, udg_DamageEventAmount * 10/90, true, false, ATTACK_TYPE_NORMAL, DAMAGE_TYPE_MAGIC, WEAPON_TYPE_WHOKNOWS)
+        call UnitDamageTarget(udg_DamageEventTarget, udg_DamageEventSource, udg_DamageEventAmount * 10/90, true, false, ATTACK_TYPE_NORMAL, DAMAGE_TYPE_DEFENSIVE, WEAPON_TYPE_WHOKNOWS)
         set udg_DamageEventAmount = storeDamage
     endif
     

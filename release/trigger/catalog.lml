@@ -231,7 +231,6 @@
     19-UnitEvents: UnitEvents
     '20-Create Water': 'Create Water'
         Disab
-    21-TerrainTools: TerrainTools
 23-Map-specific: Map-specific
     1-Debug: Debug
     2-ArrayAgent: ArrayAgent
@@ -478,3 +477,5 @@
         Disab
     3-RegionMemory: RegionMemory
         Disab
+'49-Terrain Libraries': 'Terrain Libraries'
+    1-TerrainTools: TerrainTools

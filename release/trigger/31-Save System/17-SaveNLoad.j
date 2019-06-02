@@ -374,7 +374,7 @@ function LoadTerrain takes string chatStr returns nothing
     set strSize = StringLength(chatStr)
     loop
     exitwhen i >= strSize
-        call SetTerrainType(udg_save_XYminmaxcur[playerNumber+2*bj_MAX_PLAYERS], udg_save_XYminmaxcur[playerNumber+5*bj_MAX_PLAYERS], udg_TileSystem_TILES[LoadH2D(SubString(chatStr,i,i+1))],LoadH2D(SubString(chatStr,i+1,i+2)), 1, 0)
+        call SetTerrainType(udg_save_XYminmaxcur[playerNumber+2*bj_MAX_PLAYERS], udg_save_XYminmaxcur[playerNumber+5*bj_MAX_PLAYERS], TerrainTools_GetTexture(LoadH2D(SubString(chatStr,i,i+1))), LoadH2D(SubString(chatStr,i+1,i+2)), 1, 0)
         set i = i + 2
         if udg_save_XYminmaxcur[playerNumber+2*bj_MAX_PLAYERS] > udg_save_XYminmaxcur[playerNumber+bj_MAX_PLAYERS] then
             set udg_save_XYminmaxcur[playerNumber+5*bj_MAX_PLAYERS] = udg_save_XYminmaxcur[playerNumber+5*bj_MAX_PLAYERS] + 128

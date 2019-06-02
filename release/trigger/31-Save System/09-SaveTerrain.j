@@ -14,7 +14,7 @@ function SaveTiles takes nothing returns boolean
                 set i = 121  // exit loop, since we already traversed all of the rows
             endif
             
-            set saveStr = saveStr + LoadD2H(GUMS_GetTerrainTileIndex(GetTerrainType(udg_save_XYminmaxcur[playerNumber+2*bj_MAX_PLAYERS],/*
+            set saveStr = saveStr + LoadD2H(TerrainTools_GetTextureId(GetTerrainType(udg_save_XYminmaxcur[playerNumber+2*bj_MAX_PLAYERS],/*
                                                                                   */udg_save_XYminmaxcur[playerNumber+5*bj_MAX_PLAYERS])))/*
                                 */+ LoadD2H(GetTerrainVariance(udg_save_XYminmaxcur[playerNumber+2*bj_MAX_PLAYERS],udg_save_XYminmaxcur[playerNumber+5*bj_MAX_PLAYERS]))
             

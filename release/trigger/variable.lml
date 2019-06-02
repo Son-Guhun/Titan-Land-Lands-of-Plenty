@@ -35,8 +35,6 @@ PLAYER_LOCATIONS: location
     Array : 1
 FORCES_PLAYER: force
     Array : 12
-TileSystem_TILES: terraintype
-    Array : 1
 TileSystem_ABILITIES: abilcode
     Array : 1
 DecoSystem_Value: integer
