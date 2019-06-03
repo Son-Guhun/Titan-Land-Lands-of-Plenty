@@ -1,0 +1,22 @@
+{
+  "name": "titan-land-lands-of-plenty",
+  "version": "1.0.0",
+  "description": "Node package for building titan land LoP",
+  "main": "doodadConverter.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Son-Guhun/Titan-Land-Lands-of-Plenty.git"
+  },
+  "author": "SonGuhun",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Son-Guhun/Titan-Land-Lands-of-Plenty/issues"
+  },
+  "homepage": "https://github.com/Son-Guhun/Titan-Land-Lands-of-Plenty#readme",
+  "dependencies": {
+    "wc3maptranslator": "^1.1.0"
+  }
+}
