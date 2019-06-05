@@ -20,13 +20,29 @@ class Translator:
     def generateJass(self):
         doodads = self.parse()
         types = set()
+        i = 0
+        j = 1
 
         output = []
+        output.append('library DoodadEffects{} initializer Init\n'.format(j))
+        output.append('private function Init takes nothing returns nothing\n')
         for doodad in doodads:
-            output.append('call CreateDoodadEffect(\'{type}\',{xyz},{angle},{scaleXYZ})'.format(type=doodad['type'],
-                                                                                            xyz=','.join([str(x) for x in doodad['position']]),
-                                                                                            angle=doodad['angle'],
-                                                                                            scaleXYZ=','.join([str(x) for x in doodad['scale']]),
-                                                                                     ))
+            output.append('    call CreateDoodadEffect(\'{type}\',{var},{xyz},{angle},{scaleXYZ})\n'.format(type=doodad['type'],
+                                                                                                            var = doodad['variation'],
+                                                                                                            xyz=','.join([str(x) for x in doodad['position']]),
+                                                                                                            angle=doodad['angle'],
+                                                                                                            scaleXYZ=','.join([str(x) for x in doodad['scale']]),
+                                                                                                     ))
+            i += 1
+            if i > j*5000:
+                j += 1
+                output.append('endfunction\n')
+                output.append('endlibrary\n')
+                output.append('library DoodadEffects{} initializer Init requires DoodadEffects{}\n'.format(j, j-1))
+                output.append('private function Init takes nothing returns nothing\n')
+
+        if output[-1] != 'endlibrary\n':
+            output.append('endfunction\n')
+            output.append('endlibrary\n')
         return output
     
