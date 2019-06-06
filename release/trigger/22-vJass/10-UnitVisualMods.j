@@ -1,16 +1,4 @@
-library UnitVisualModsDefaults requires LoPPlayers
-    
-    globals
-        public constant boolean COLOR = true
-    endglobals
-
-    public function SetColor takes unit whichUnit, player owner returns nothing
-        call SetUnitColor(whichUnit, LoP_PlayerData.get(owner).getUnitColor())
-    endfunction
-
-endlibrary
-
-library UnitVisualMods requires CutToComma, optional UnitVisualModsDefaults/*
+library UnitVisualMods requires CutToComma, GroupTools, optional UnitVisualModsDefaults/*
 
     */ /*optional*/ HashtableWrapper,  /* Required to initialize a hashtable.
     
@@ -105,10 +93,10 @@ globals
     private constant integer tempY = -6
 
     private constant integer SCALE  = 0
-    private constant integer RED    = 1
-    private constant integer GREEN  = 2
-    private constant integer BLUE   = 3
-    private constant integer ALPHA  = 4
+    public constant integer RED    = 1
+    public constant integer GREEN  = 2
+    public constant integer BLUE   = 3
+    public constant integer ALPHA  = 4
     private constant integer COLOR  = 5
     private constant integer ASPEED = 6
     private constant integer ATAG   = 7
@@ -189,12 +177,12 @@ endfunction
 
 // Contains the Raw values of each UnitVisuals struct. Returned by the .raw method operator.
 private struct UnitVisualsRaw extends array
-    static if LIBRARY_ConstTable and INIT_HASHTABLE then
-        private method operator values takes nothing returns data_Child
+    static if not INIT_HASHTABLE  and LIBRARY_HashtableWrapper then
+        private method operator values takes nothing returns Table
             return data[this]
         endmethod
     else
-        private method operator values takes nothing returns Table
+        private method operator values takes nothing returns data_Child
             return data[this]
         endmethod
     endif
@@ -239,12 +227,12 @@ endstruct
 // Contains getters for all UnitVisualMods-related data. These getters return strings, not raw values.
 struct UnitVisuals extends array
     
-    static if LIBRARY_ConstTable and INIT_HASHTABLE then
-        private method operator values takes nothing returns data_Child
+    static if not INIT_HASHTABLE  and LIBRARY_HashtableWrapper then
+        private method operator values takes nothing returns Table
             return data[this]
         endmethod
     else
-        private method operator values takes nothing returns Table
+        private method operator values takes nothing returns data_Child
             return data[this]
         endmethod
     endif
@@ -768,7 +756,7 @@ function GUMSGroupFunction takes nothing returns nothing
             call GroupRemoveUnit(loopGroup, enumUnit)
         else
             if IsUnitType(enumUnit, UNIT_TYPE_STRUCTURE) and GetUnitFlyHeight(enumUnit) > 0.02 then
-                call BJDebugMsg(R2S(GetUnitFlyHeight(enumUnit)*1000))
+                debug call BJDebugMsg(R2S(GetUnitFlyHeight(enumUnit)*1000))
                 call GUMSSetStructureFlyHeight(enumUnit,GetUnitFlyHeight(enumUnit), data[unitId].boolean.has(AUTO_LAND))
             else 
                 call GroupRemoveUnit(loopGroup, enumUnit)
