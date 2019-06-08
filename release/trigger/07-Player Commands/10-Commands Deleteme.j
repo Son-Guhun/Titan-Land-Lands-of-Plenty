@@ -10,10 +10,23 @@ function GroupEnum_RemoveOutsidePalace takes nothing returns boolean
 endfunction
 
 function Trig_Commands_Deleteme_Conditions takes nothing returns boolean
+    local LinkedHashSet_DecorationEffect test = EnumDecorationsOfPlayer(Player(0))
+    local DecorationEffect i = test.begin()
+
     set udg_Commands_Counter = 0
     set udg_Commands_Counter_Max = 500
     set commandsDeleteInsideTitanPalace = false
     call GroupEnumUnitsOfPlayer(ENUM_GROUP, GetTriggerPlayer(), Filter(function GroupEnum_RemoveOutsidePalace))
+    
+    
+
+    loop
+    exitwhen i == test.end()
+        call i.destroy()
+        set i = test.next(i)
+    endloop
+    
+    call test.destroy()
     return false
 endfunction
 

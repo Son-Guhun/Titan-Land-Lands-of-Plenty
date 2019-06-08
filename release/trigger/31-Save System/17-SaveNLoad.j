@@ -29,7 +29,7 @@ endfunction
 
 endlibrary
 
-library SaveNLoad requires UnitVisualMods, Rawcode2String, Base36, TerrainTools, optional UserDefinedRects, optional SaveNLoadConfig
+library SaveNLoad requires UnitVisualMods, Rawcode2String, Base36, TerrainTools, DecorationSFX, optional UserDefinedRects, optional SaveNLoadConfig
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 //SaveNLoad v2.0
 ////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -131,6 +131,30 @@ static if LIBRARY_UserDefinedRects then
         call ChangeGUDRWeatherNew(generator, 0, weatherType)
     endfunction
 endif
+
+function LoadSpecialEffect takes player owner, integer unitType, real x, real y, real height, real facing, string scale, string red, string green, string blue, string alpha, string color, string aSpeed, string aTags returns nothing
+    local DecorationEffect result = DecorationEffect.create(owner, unitType, x, y)
+    local real value
+    
+    set result.height = height
+    set result.yaw = Deg2Rad(facing)
+    
+    if scale != "D" then
+        set value = S2R(scale)
+        call result.setScale(value, value, value)
+    endif
+    
+    if red != "D" then
+        call result.setVertexColor(S2I(red), S2I(green), S2I(blue))
+        set result.alpha = S2I(alpha)
+    endif
+    
+    if color != "D" then
+        set result.color = S2I(color) - 1
+    else
+        set result.color = GetPlayerId(owner)
+    endif
+endfunction
 
 function LoadUnit takes string chat_str, player un_owner returns nothing
     local integer str_index
@@ -254,46 +278,49 @@ function LoadUnit takes string chat_str, player un_owner returns nothing
         return
     endif
 
-    
-    //Create the unit and modify it according to the chat input data
-    set resultUnit = CreateUnit (un_owner, un_type, un_posx, un_posy, un_fangle )
-    
-    
-    if IsUnitType(resultUnit, UNIT_TYPE_STRUCTURE) then
-        static if LIBRARY_SaveNLoadConfig then
-            call GUMSSetStructureFlyHeight(resultUnit, un_flyH, SaveNLoadConfig_StructureShouldAutoLand(resultUnit))
-        else
-            call GUMSSetStructureFlyHeight(resultUnit, un_flyH, AUTO_LAND)
-        endif
+    if select == "2" then
+        call LoadSpecialEffect(un_owner, un_type, un_posx, un_posy, un_flyH, un_fangle, size, red, green, blue, alpha, color, aSpeed, animTag)
     else
-        call GUMSSetUnitFlyHeight(resultUnit, un_flyH)
-    endif
+        //Create the unit and modify it according to the chat input data
+        set resultUnit = CreateUnit (un_owner, un_type, un_posx, un_posy, un_fangle )
+        
+        
+        if IsUnitType(resultUnit, UNIT_TYPE_STRUCTURE) then
+            static if LIBRARY_SaveNLoadConfig then
+                call GUMSSetStructureFlyHeight(resultUnit, un_flyH, SaveNLoadConfig_StructureShouldAutoLand(resultUnit))
+            else
+                call GUMSSetStructureFlyHeight(resultUnit, un_flyH, AUTO_LAND)
+            endif
+        else
+            call GUMSSetUnitFlyHeight(resultUnit, un_flyH)
+        endif
 
-    
-    //GUMS modifications
-    if size != "D" then
-        call GUMSSetUnitScale(resultUnit, S2R(size))
+        
+        //GUMS modifications
+        if size != "D" then
+            call GUMSSetUnitScale(resultUnit, S2R(size))
+        endif
+        if red != "D" then
+            call GUMSSetUnitVertexColor(resultUnit, S2I(red)/2.55, S2I(green)/2.55, S2I(blue)/2.55, (255 - S2I(alpha))/2.55)
+        endif
+        if color != "D" then
+            call GUMSSetUnitColor(resultUnit, S2I(color))
+        endif
+        if aSpeed != "D" then
+            call GUMSSetUnitAnimSpeed(resultUnit, S2R(aSpeed))
+        endif
+        if animTag != "D" then
+            call GUMSAddUnitAnimationTag(resultUnit,GUMSConvertTags(UnitVisualMods_TAGS_DECOMPRESS, animTag))
+        endif
+        if select == "1" then
+            call GUMSMakeUnitDragSelectable(resultUnit)
+        elseif select == "2" then
+            call GUMSMakeUnitUnSelectable(resultUnit)
+        endif
+        
+        set udg_save_LastLoadedUnit[playerId] = resultUnit
+        set resultUnit = null
     endif
-    if red != "D" then
-        call GUMSSetUnitVertexColor(resultUnit, S2I(red)/2.55, S2I(green)/2.55, S2I(blue)/2.55, (255 - S2I(alpha))/2.55)
-    endif
-    if color != "D" then
-        call GUMSSetUnitColor(resultUnit, S2I(color))
-    endif
-    if aSpeed != "D" then
-        call GUMSSetUnitAnimSpeed(resultUnit, S2R(aSpeed))
-    endif
-    if animTag != "D" then
-        call GUMSAddUnitAnimationTag(resultUnit,GUMSConvertTags(UnitVisualMods_TAGS_DECOMPRESS, animTag))
-    endif
-    if select == "1" then
-        call GUMSMakeUnitDragSelectable(resultUnit)
-    elseif select == "2" then
-        call GUMSMakeUnitUnSelectable(resultUnit)
-    endif
-    
-    set udg_save_LastLoadedUnit[playerId] = resultUnit
-    set resultUnit = null
 endfunction
 
 function LoadDestructable takes string chatStr returns nothing

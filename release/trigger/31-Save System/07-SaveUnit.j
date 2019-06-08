@@ -25,6 +25,54 @@ function Save_SaveUnitPatrolPoints takes integer unitHandleId returns nothing
     endloop
 endfunction
 
+function GenerateSpecialEffectSaveString takes SpecialEffect whichEffect returns string
+    local string result = ID2S(whichEffect.unitType) + ","
+    
+    set result = result + R2S(whichEffect.x) + ","
+    set result = result + R2S(whichEffect.y) + ","
+    set result = result + R2S(whichEffect.height) + ","
+    set result = result + R2S(Rad2Deg(whichEffect.yaw)) + ","
+    set result = result + R2S(whichEffect.scaleX) + ","
+    set result = result + I2S(whichEffect.red) + ","
+    set result = result + I2S(whichEffect.green) + ","
+    set result = result + I2S(whichEffect.blue) + ","
+    set result = result + I2S(whichEffect.alpha) + ","
+    set result = result + I2S(whichEffect.color) + ","
+    set result = result + R2S(whichEffect.animationSpeed) + ","
+    set result = result + "D,"//R2S(whichEffect.animationTags)
+    set result = result + I2S(GUMS_SELECTION_UNSELECTABLE())
+    
+    return result
+endfunction
+
+function SaveEffectDecos takes integer playerNumber, boolean isLocalPlayer returns integer
+    local LinkedHashSet_DecorationEffect decorations = save_decoration_effects[playerNumber]
+    local DecorationEffect decoration = decorations.begin()
+
+    local integer counter = 0
+    loop
+        exitwhen counter == 25 or decorations == 0 or decoration == decorations.end()
+        
+        if isLocalPlayer then
+            call Preload(GenerateSpecialEffectSaveString(decoration))
+        endif
+        
+        call BJDebugMsg(I2S(decoration))
+        
+        set decoration = decorations.next(decoration)
+        call decorations.remove(decorations.prev(decoration))
+        if decoration == decorations.end() then
+            call decorations.destroy()
+            set decorations = 0
+            set save_decoration_effects[playerNumber] = 0
+        endif
+
+        set counter = counter + 1
+    endloop
+    
+    return counter
+endfunction
+
 function SaveForceLoop takes nothing returns boolean
     local integer playerId = GetPlayerId(GetFilterPlayer())
     local integer playerNumber = playerId + 1
@@ -41,6 +89,8 @@ function SaveForceLoop takes nothing returns boolean
             call PreloadGenStart()
             call PreloadGenClear()
         endif
+        
+        set saveUnitCount = SaveEffectDecos(playerNumber, isLocalPlayer)
         loop
         exitwhen saveUnitCount >= 25
             set saveUnit = FirstOfGroup(udg_save_grp[playerNumber])
