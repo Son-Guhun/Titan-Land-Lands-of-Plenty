@@ -186,6 +186,7 @@
     '2-GLHS Main': 'GLHS Main'
     '3-GMUI Main': 'GMUI Main'
     '4-GAL Main': 'GAL Main'
+    '5-GLHS Generics': 'GLHS Generics'
 18-Tables: Tables
     1-External: External
         Comment
@@ -469,8 +470,9 @@
 '47-Special Effect System': 'Special Effect System'
     1-HashStruct: HashStruct
     2-SpecialEffect: SpecialEffect
-    3-PlayerSpecialEffect: PlayerSpecialEffect
-    4-UnitSpecialEffect: UnitSpecialEffect
+    3-DecorationSFX: DecorationSFX
+    4-Unit2Effect: Unit2Effect
+    '5-Untitled Trigger 001': 'Untitled Trigger 001'
 48-Memory: Memory
     1-TimerMemory: TimerMemory
         Disab

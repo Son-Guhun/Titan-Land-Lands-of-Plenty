@@ -17,6 +17,9 @@ when setting.
     endmethod
 //! endtextmacro
 
+
+
+
 //! textmacro HashStruct_NewPrimitiveGetterSetter takes NAME, TYPE
     public static key $NAME$_INDEX
     
@@ -37,6 +40,10 @@ when setting.
     endmethod
 //! endtextmacro
 
+
+// ==================================
+// Primitive Fields
+
 //! textmacro HashStruct_NewPrimitiveField takes NAME, TYPE
     public static key $NAME$_INDEX
     
@@ -56,6 +63,49 @@ when setting.
         return thistype.getChildTable($NAME$_INDEX).$TYPE$.has(this)
     endmethod
 //! endtextmacro
+
+//! textmacro HashStruct_NewReadonlyPrimitiveField takes NAME, TYPE
+    public static key $NAME$_INDEX
+    
+    method operator $NAME$ takes nothing returns $TYPE$
+        return thistype.getChildTable($NAME$_INDEX).$TYPE$[this]
+    endmethod
+    
+    method operator $NAME$= takes $TYPE$ new_$NAME$ returns nothing
+        set thistype.getChildTable($NAME$_INDEX).$TYPE$[this] = new_$NAME$
+    endmethod
+    
+    private method $NAME$_clear takes nothing returns nothing
+        call thistype.getChildTable($NAME$_INDEX).$TYPE$.remove(this)
+    endmethod
+    
+    private method $NAME$_exists takes nothing returns boolean
+        return thistype.getChildTable($NAME$_INDEX).$TYPE$.has(this)
+    endmethod
+//! endtextmacro
+
+// Used if you want to have control over the indices, instead of using a constant key variable
+//! textmacro HashStruct_NewPrimitiveFieldEx takes HASHTABLE, NAME, TYPE, INDEX
+    method operator $NAME$ takes nothing returns $TYPE$
+        return $HASHTABLE$[$INDEX$].$TYPE$[this]
+    endmethod
+    
+    method operator $NAME$= takes $TYPE$ new_$NAME$ returns nothing
+        set $HASHTABLE$[$INDEX$].$TYPE$[this] = new_$NAME$
+    endmethod
+    
+    private method $NAME$_clear takes nothing returns nothing
+        call $HASHTABLE$[$INDEX$].$TYPE$.remove(this)
+    endmethod
+    
+    private method $NAME$_exists takes nothing returns boolean
+        return $HASHTABLE$[$INDEX$].$TYPE$.has(this)
+    endmethod
+//! endtextmacro
+
+
+// ==================================
+// Number Fields
 
 //! textmacro HashStruct_NewNumberFieldWithDefault takes NAME, TYPE, DEFAULT
     public static key $NAME$_INDEX
@@ -78,23 +128,24 @@ when setting.
     endmethod
 //! endtextmacro
 
-//! textmacro HashStruct_NewPrimitiveFieldEx takes HASHTABLE, NAME, TYPE, INDEX
+//! textmacro HashStruct_NewReadonlyNumberFieldWithDefault takes NAME, TYPE, DEFAULT
+    public static key $NAME$_INDEX
+    public static constant $TYPE$ $NAME$_DEFAULT = $DEFAULT$
+    
     method operator $NAME$ takes nothing returns $TYPE$
-        return $HASHTABLE$[$INDEX$].$TYPE$[this]
+        return thistype.getChildTable($NAME$_INDEX).$TYPE$[this] + $DEFAULT$
     endmethod
     
-    method operator $NAME$= takes $TYPE$ new_$NAME$ returns nothing
-        set $HASHTABLE$[$INDEX$].$TYPE$[this] = new_$NAME$
+    private method operator $NAME$= takes $TYPE$ new_$NAME$ returns nothing
+        set thistype.getChildTable($NAME$_INDEX).$TYPE$[this] = new_$NAME$ - $DEFAULT$
     endmethod
     
     private method $NAME$_clear takes nothing returns nothing
-        call $HASHTABLE$[$INDEX$].$TYPE$.remove(this)
+        call thistype.getChildTable($NAME$_INDEX).$TYPE$.remove(this)
     endmethod
     
     private method $NAME$_exists takes nothing returns boolean
-        return $HASHTABLE$[$INDEX$].$TYPE$.has(this)
+        return thistype.getChildTable($NAME$_INDEX).$TYPE$.has(this)
     endmethod
 //! endtextmacro
-
-
 endlibrary

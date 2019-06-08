@@ -1,12 +1,4 @@
-library SpecialEffect requires HashStruct
-/* 
-  Defines the basic properties of a Special effect and functions that allow you to get those properties.
-*/
-
-globals
-    // If you use hooks, you might as well enable this.
-    private boolean LAST_CREATED_SAFETY = false
-endglobals
+library SpecialEffect requires TableStruct, AnyTileDefinition, GLHS, HashStruct
 
 globals
         private hashtable hashTableHandle = InitHashtable()
@@ -15,177 +7,156 @@ endglobals
 //! runtextmacro DeclareParentHashtableWrapperModule("hashTableHandle", "true", "hT", "public")
 //! runtextmacro DeclareParentHashtableWrapperStruct("hT","public")
 
-module SpecialEffectModule
+function GetUnitTypeIdModel takes integer unitTypeId returns string 
+    return GetAbilityEffectById(unitTypeId, EFFECT_TYPE_SPECIAL, 1)
+endfunction
+
+struct SpecialEffect extends array
     //! runtextmacro HashStruct_SetHashtableWrapper("SpecialEffect_hT")
 
-    //! runtextmacro HashStruct_NewPrimitiveField("x","real")
-    //! runtextmacro HashStruct_NewPrimitiveField("y","real")
-    //! runtextmacro HashStruct_NewPrimitiveField("height","real")
+    //! runtextmacro HashStruct_NewReadonlyPrimitiveField("unitType","integer")
+    //! runtextmacro HashStruct_NewReadonlyPrimitiveField("effect","effect")
     
-    //! runtextmacro HashStruct_NewNumberFieldWithDefault("scale","real","1.")
+    //! runtextmacro HashStruct_NewReadonlyPrimitiveField("height_impl","real")
     
-    //! runtextmacro HashStruct_NewPrimitiveField("roll","real")
-    //! runtextmacro HashStruct_NewPrimitiveField("yaw","real")
-    //! runtextmacro HashStruct_NewPrimitiveField("pitch","real")
+    //! runtextmacro HashStruct_NewReadonlyPrimitiveField("yaw_impl","real")
+    //! runtextmacro HashStruct_NewReadonlyPrimitiveField("pitch_impl","real")
+    //! runtextmacro HashStruct_NewReadonlyPrimitiveField("roll_impl","real")
     
-    //! runtextmacro HashStruct_NewNumberFieldWithDefault("red","integer","255")
-    //! runtextmacro HashStruct_NewNumberFieldWithDefault("green","integer","255")
-    //! runtextmacro HashStruct_NewNumberFieldWithDefault("blue","integer","255")
-    //! runtextmacro HashStruct_NewNumberFieldWithDefault("alpha","integer","255")
-endmodule
+    //! runtextmacro HashStruct_NewReadonlyPrimitiveField("color_impl","integer")
 
-module SpecialEffectGetDestroyMethods
-    static method get takes effect e returns thistype
-        return GetHandleId(e)
+    //! runtextmacro HashStruct_NewReadonlyNumberFieldWithDefault("scaleX","real","1.")
+    //! runtextmacro HashStruct_NewReadonlyNumberFieldWithDefault("scaleY","real","1.")
+    //! runtextmacro HashStruct_NewReadonlyNumberFieldWithDefault("scaleZ","real","1.")
+
+    //! runtextmacro HashStruct_NewReadonlyNumberFieldWithDefault("red","integer","255")
+    //! runtextmacro HashStruct_NewReadonlyNumberFieldWithDefault("green","integer","255")
+    //! runtextmacro HashStruct_NewReadonlyNumberFieldWithDefault("blue","integer","255")
+    //! runtextmacro HashStruct_NewReadonlyNumberFieldWithDefault("alpha_impl","integer", "255")
+    
+    //! runtextmacro HashStruct_NewReadonlyNumberFieldWithDefault("animationSpeed_impl","real","1.")
+    //! runtextmacro HashStruct_NewReadonlyPrimitiveField("animation_impl","integer")
+    //! runtextmacro HashStruct_NewReadonlyPrimitiveField("subanimation_impl","integer")
+    
+    method operator x takes nothing returns real
+        return BlzGetLocalSpecialEffectX(.effect)
+    endmethod
+    
+    method operator x= takes real value returns nothing
+        // change block
+        call BlzSetSpecialEffectX(.effect, value)
+    endmethod
+    
+    method operator y takes nothing returns real
+        return BlzGetLocalSpecialEffectY(.effect)
+    endmethod
+    
+    method operator y= takes real value returns nothing
+        // change block
+        call BlzSetSpecialEffectY(.effect, value)
+    endmethod
+    
+    method operator height takes nothing returns real
+        return .height_impl
+    endmethod
+    
+    method operator height= takes real value returns nothing
+        set .height_impl = value
+        call BlzSetSpecialEffectHeight(.effect, value)
+    endmethod
+    
+    method operator yaw takes nothing returns real
+        return .yaw_impl
+    endmethod
+    
+    method operator yaw= takes real value returns nothing
+        set .yaw_impl = value
+        call BlzSetSpecialEffectYaw(.effect, value)
+    endmethod
+    
+    method operator pitch takes nothing returns real
+        return .pitch_impl
+    endmethod
+    
+    method operator pitch= takes real value returns nothing
+        set .pitch_impl = value
+        call BlzSetSpecialEffectPitch(.effect, value)
+    endmethod
+    
+    method operator roll takes nothing returns real
+        return .roll_impl
+    endmethod
+    
+    method operator roll= takes real value returns nothing
+        set .roll_impl = value
+        call BlzSetSpecialEffectRoll(.effect, value)
+    endmethod
+    
+    method setOrientation takes real yaw, real pitch, real roll returns nothing
+        set .yaw = yaw
+        set .pitch = pitch
+        set .roll = roll
+        call BlzSetSpecialEffectOrientation(.effect, yaw, pitch, roll)
+    endmethod
+    
+    method operator color takes nothing returns integer
+        return .color_impl
+    endmethod
+    
+    method operator color= takes integer value returns nothing
+        set .color_impl = value
+        call BlzSetSpecialEffectColorByPlayer(.effect, Player(value))
+    endmethod
+    
+    method setScale takes real scaleX, real scaleY, real scaleZ returns nothing
+        set .scaleX = scaleX
+        set .scaleY = scaleY
+        set .scaleZ = scaleZ
+        call BlzSetSpecialEffectMatrixScale(.effect, scaleX, scaleY, scaleZ)
+    endmethod
+    
+    method setVertexColor takes integer red, integer green, integer blue returns nothing
+        set .red = red
+        set .green = green
+        set .blue = blue
+        call BlzSetSpecialEffectColor(.effect, red, green, blue)
+    endmethod
+    
+    method operator alpha takes nothing returns integer
+        return .alpha_impl
+    endmethod
+    
+    method operator alpha= takes integer alpha returns nothing
+        set .alpha_impl = alpha
+        call BlzSetSpecialEffectAlpha(.effect, alpha)
+    endmethod
+    
+    method operator animationSpeed takes nothing returns real
+        return .animationSpeed_impl
+    endmethod
+    
+    method operator animationSpeed= takes real value returns nothing
+        set .animationSpeed_impl = value
+        call BlzSetSpecialEffectTimeScale(.effect, value)
+    endmethod
+    
+    static method create takes integer unitType, real x, real y returns SpecialEffect
+        local effect e = AddSpecialEffect(GetUnitTypeIdModel(unitType), x, y)
+        local SpecialEffect this = GetHandleId(e)
+        
+        set this.unitType= unitType
+        set this.effect = e
+        //call DecorationEffectBlock.get(x, y).effects.append(this)
+        
+        return this
     endmethod
     
     method destroy takes nothing returns nothing
-        call hT.flushChild(this)
+        call DestroyEffect(.effect)
+        call SpecialEffect_hT.flushChild(this)
     endmethod
-endmodule
 
-struct SpecialEffect extends array
-    implement SpecialEffectModule
-    implement SpecialEffectGetDestroyMethods
 endstruct
 
-// ==========================================
-// X and Y setters
-function SetSpecialEffectX takes effect e, real x returns nothing
-    call BlzSetSpecialEffectX(e, x)
-    set SpecialEffect.get(e).x = x
-endfunction
-
-function SetSpecialEffectY takes effect e, real y returns nothing
-    call BlzSetSpecialEffectY(e, y)
-    set SpecialEffect.get(e).y = y
-endfunction
-
-function SetSpecialEffectPosition takes effect e, real x, real y returns nothing
-    call BlzSetSpecialEffectX(e, x)
-    set SpecialEffect.get(e).x = x
-    call BlzSetSpecialEffectY(e, y)
-    set SpecialEffect.get(e).y = y
-endfunction
-
-// ==========================================
-
-function SetSpecialEffectHeight takes effect e, real height returns nothing
-    call BlzSetSpecialEffectHeight(e, height)
-    set SpecialEffect.get(e).height = height
-endfunction
-
-function SetSpecialEffectScale takes effect e, real scale returns nothing
-    call BlzSetSpecialEffectScale(e, scale)
-    set SpecialEffect.get(e).scale = scale
-endfunction
-
-// ==========================================
-// Orientation setters
-function SetSpecialEffectRoll takes effect e, real value returns nothing
-    call BlzSetSpecialEffectRoll(e, value)
-    set SpecialEffect.get(e).roll = value
-endfunction
-
-function SetSpecialEffectYaw takes effect e, real value returns nothing
-    call BlzSetSpecialEffectYaw(e, value)
-    set SpecialEffect.get(e).yaw = value
-endfunction
-
-function SetSpecialEffectPitch takes effect e, real value returns nothing
-    call BlzSetSpecialEffectPitch(e, value)
-    set SpecialEffect.get(e).pitch = value
-endfunction
-
-function SetSpecialEffectOrientation takes effect e, real yaw, real pitch, real roll returns nothing
-    call BlzSetSpecialEffectOrientation(e, yaw, pitch, roll)
-    set SpecialEffect.get(e).roll = roll
-    set SpecialEffect.get(e).yaw = yaw
-    set SpecialEffect.get(e).pitch = pitch
-endfunction
-
-// ==========================================
-// RGBA setters
-function SetSpecialEffectColor takes effect e, integer red, integer green, integer blue returns nothing
-    call BlzSetSpecialEffectColor(e, red, green, blue)
-    set SpecialEffect.get(e).red = red
-    set SpecialEffect.get(e).green = green
-    set SpecialEffect.get(e).blue = blue
-endfunction
-
-function SetSpecialEffectAlpha takes effect e, integer alpha returns nothing
-    call BlzSetSpecialEffectAlpha(e, alpha)
-    set SpecialEffect.get(e).alpha = alpha
-endfunction
-
-// ==========================================
-
-// Creates an effect, setting bj_lastCreatedEffect to it and returning it.
-private function CreateEffect takes string model, real x, real y returns effect
-    static if LAST_CREATED_SAFETY then
-        local effect e = AddSpecialEffect(model, x, y)
-        local SpecialEffect eData = GetHandleId(e)
-        
-        set eData.x = x
-        set eData.y = y
-        
-        set bj_lastCreatedEffect = e
-        set e = null
-    else
-        local SpecialEffect eData 
-        
-        set bj_lastCreatedEffect = AddSpecialEffect(model, x, y) 
-        set eData = GetHandleId(bj_lastCreatedEffect)
-        
-        set eData.x = x
-        set eData.y = y
-    endif
-    
-    return bj_lastCreatedEffect
-endfunction
-
-/*
-private function CreateEffectEx takes string model, real x, real y, real height, real roll, real yaw, real pitch, integer red, integer green, integer blue, integer alpha returns effect
-    
-    call BlzSetSpecialEffectColor(e, red, green, blue)
-    set SpecialEffect.get(e).red = red
-    set SpecialEffect.get(e).green = green
-    set SpecialEffect.get(e).blue = blue
-    call BlzSetSpecialEffectAlpha(e, alpha)
-    set SpecialEffect.get(e).alpha = alpha
-endfunction
-*/
-
-private function SelectionFilter takes nothing returns boolean
-    local string model = GetAbilityEffectById(GetUnitTypeId(GetFilterUnit()), EFFECT_TYPE_SPECIAL, 0)
-    local effect placeHolder = AddSpecialEffect(model, GetUnitX(GetFilterUnit()), GetUnitY(GetFilterUnit()))
-    local SpecialEffect eData = GetHandleId(placeHolder)
-    
-    call BlzSetSpecialEffectYaw(placeHolder, Deg2Rad(270. - 45))  // => Roll along x axis
-    call BlzSetSpecialEffectPitch(placeHolder, Deg2Rad(270. - 45)) // => Roll along y axiz
-    call BlzSetSpecialEffectRoll(placeHolder, Deg2Rad(270.))  // => Roll along z axis (facing)
-    // call BlzSetSpecialEffectScale()
-    call BlzSetSpecialEffectHeight(placeHolder, -200/*GetUnitFlyHeight(GetFilterUnit())*/)
-    
-    call BJDebugMsg(I2S(eData.green))
-    call BJDebugMsg(R2S(eData.scale))
-    call SetSpecialEffectScale(placeHolder, 2.)
-    call BJDebugMsg(R2S(eData.scale))
-    
-    
-    call BJDebugMsg(model)
-    return false
-endfunction
-
-
-private function onCommand takes nothing returns boolean
-    call GroupEnumUnitsSelected(ENUM_GROUP, GetTriggerPlayer(), Filter(function SelectionFilter))
-    return false
-endfunction
-
-//===========================================================================
-function InitTrig_SpecialEffect takes nothing returns nothing
-    call LoP_Command.create("-testing", ACCESS_TITAN, Condition(function onCommand ))
-endfunction
 
 endlibrary

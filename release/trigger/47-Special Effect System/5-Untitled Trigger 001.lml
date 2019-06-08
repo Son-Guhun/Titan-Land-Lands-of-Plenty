@@ -1,0 +1,9 @@
+Event
+    TriggerRegisterPlayerChatEvent
+        Preset: Player00
+        Const : show
+        Preset: ChatMatchTypeExact
+Condition
+Action
+    CustomScriptCode
+        Const : 'call Test()'
