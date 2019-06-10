@@ -34,7 +34,7 @@ function Trig_CommandsD_Locust_Conditions takes nothing returns boolean
 endfunction
 
 //===========================================================================
-function InitTrig_CommandsD_Locust takes nothing returns nothing
+function InitTrig_CommandsD_Select_No takes nothing returns nothing
     call LoP_Command.create("-select", ACCESS_USER, Condition(function Trig_CommandsD_Locust_Conditions))
 endfunction
 

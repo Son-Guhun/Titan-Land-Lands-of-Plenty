@@ -7,6 +7,9 @@ endfunction
 function Trig_CommandsR_Delete_Conditions takes nothing returns boolean
     local integer playerNumber = Commands_GetChatMessagePlayerNumber(LoP_Command.getArguments())
     local string command = LoP_Command.getCommand()
+    local LinkedHashSet_DecorationEffect test 
+    local DecorationEffect i
+    
     // --------------
     // DON'T ALLOW DELETION OF THE OWNER OF THE GDS DUMMIES
     if not PlayerNumberIsNotExtraOrVictim(playerNumber) then
@@ -24,8 +27,19 @@ function Trig_CommandsR_Delete_Conditions takes nothing returns boolean
         call GroupEnumUnitsOfPlayer(ENUM_GROUP, Player(playerNumber - 1), Condition(function GroupEnum_RemoveOutsidePalace))
         call ForGroup( udg_System_NeutralUnits[( playerNumber - 1 )], function Trig_CommandsR_Delete_Func018A )
     else
+        set test = EnumDecorationsOfPlayer(Player(0))
+        set i = test.begin()
+    
         set commandsDeleteInsideTitanPalace = false
         call GroupEnumUnitsOfPlayer(ENUM_GROUP, Player(playerNumber - 1), Condition(function GroupEnum_RemoveOutsidePalace))
+        
+        loop
+        exitwhen i == test.end()
+            call i.destroy()
+            set i = test.next(i)
+        endloop
+        
+        call test.destroy()
     endif
     
     return false
