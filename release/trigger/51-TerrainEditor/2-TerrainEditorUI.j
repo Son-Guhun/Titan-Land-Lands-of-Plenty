@@ -67,7 +67,7 @@ library TerrainEditorUI requires TerrainEditor
         local player owner = GetOwningPlayer(trigU)
         local integer spellId = GetSpellAbilityId()
         local integer i
-        call BJDebugMsg(I2S(TerrainTools_GetTextureId(TerrainEditor_currentTexture[GetPlayerId(owner)])))
+
         call BlzUnitDisableAbility(trigU, ABILITY_TEXTURES[TerrainTools_GetTextureId(TerrainEditor_currentTexture[GetPlayerId(owner)])], false, false)
         if Globals.ability2id.has(spellId) then
             set TerrainEditor_currentTexture[GetPlayerId(owner)] = TerrainTools_GetTexture(Globals.ability2id[spellId])

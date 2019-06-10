@@ -39,6 +39,7 @@ globals
     private integer array brushSize
     private boolean array isRightButtonPressed
     private boolean array isLeftButtonPressed
+    private boolean array enableCursor
     
     // Controls whether a terrain texture will be applied when clicking or moving the mouse.
     private boolean array applyTexture
@@ -107,6 +108,10 @@ private function onMouseRelease takes nothing returns boolean
     return false
 endfunction
 
+private function PlayerEnableCursorInEditor takes integer playerId returns boolean
+    return enableCursor[playerId]
+endfunction
+
 function onMoveMouse takes nothing returns boolean
     local real x = GetTileCenterCoordinate(PlayerMouseEvent_GetTriggerPlayerMouseX())
     local real y = GetTileCenterCoordinate(PlayerMouseEvent_GetTriggerPlayerMouseY())
@@ -114,7 +119,14 @@ function onMoveMouse takes nothing returns boolean
     local integer playerId = GetPlayerId(PlayerEvent_GetTriggerPlayer())
     
     if x == 0. and y == 0. then
+        if GetLocalPlayer() == Player(playerId) then
+            call BlzEnableCursor(true)
+        endif
         return false
+    else
+        if GetLocalPlayer() == Player(playerId) then
+            call BlzEnableCursor(PlayerEnableCursorInEditor(playerId))
+        endif
     endif
     
     if isLeftButtonPressed[playerId] then
@@ -142,6 +154,11 @@ private function onStateEnter takes nothing returns boolean
     local integer playerId = GetPlayerId(ControlState.getChangingPlayer())
     call SetImageRenderAlways(myImage[playerId], true)
     
+    
+    if GetLocalPlayer() == Player(playerId) then
+        call BlzEnableCursor(PlayerEnableCursorInEditor(playerId))
+    endif
+    
     return false
 endfunction
 
@@ -149,6 +166,11 @@ endfunction
 private function onStateExit takes nothing returns boolean
     local integer playerId = GetPlayerId(ControlState.getChangingPlayer())
     call SetImageRenderAlways(myImage[playerId], false)
+    
+    if GetLocalPlayer() == Player(playerId) then
+        call BlzEnableCursor(true)
+    endif
+    
     
     return false
 endfunction
@@ -167,6 +189,7 @@ private function onInit takes nothing returns nothing
             set applyTexture[i] = DEFAULT_APPLY_TEXTURE
             set currentHeightTool[i] = DEFAULT_HEIGHT_TOOL
             set currentTexture[i] = DEFAULT_TEXTURE
+            set enableCursor[i] = true
         endif
         
         set i = i + 1
