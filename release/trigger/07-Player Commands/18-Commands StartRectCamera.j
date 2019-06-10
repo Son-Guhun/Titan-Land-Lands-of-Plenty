@@ -1,3 +1,10 @@
+/*
+This trigger contains commands for:
+
+-Spawning a Wandering Soul
+-Spawning a Rect Generator
+-Camera adjustments
+*/
 struct CameraValues extends array
     
     private static key static_members_key

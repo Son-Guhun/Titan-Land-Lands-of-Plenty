@@ -1,3 +1,4 @@
+// -water red,green,blue,alpha
 function Trig_CommandsR_Water_Color_Conditions takes nothing returns boolean
     local string chatStr = LoP_Command.getArguments()
     local real red

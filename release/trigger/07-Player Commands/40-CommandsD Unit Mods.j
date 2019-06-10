@@ -1,3 +1,4 @@
+// Check if unit is Deco Special so this trigger is not run for every unit that casts a ability
 function Trig_CommandsD_Unit_Mods_Copy_Func009A takes nothing returns nothing
     local player trigPlayer = GetTriggerPlayer()
     local string command
