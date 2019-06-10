@@ -93,9 +93,9 @@ struct SpecialEffect extends array
     endmethod
     
     method setOrientation takes real yaw, real pitch, real roll returns nothing
-        set .yaw = yaw
-        set .pitch = pitch
-        set .roll = roll
+        set .yaw_impl = yaw
+        set .pitch_impl = pitch
+        set .roll_impl = roll
         call BlzSetSpecialEffectOrientation(.effect, yaw, pitch, roll)
     endmethod
     
@@ -148,12 +148,19 @@ struct SpecialEffect extends array
         set this.effect = e
         //call DecorationEffectBlock.get(x, y).effects.append(this)
         
+        set e = null
         return this
     endmethod
     
     method destroy takes nothing returns nothing
-        call DestroyEffect(.effect)
+        local effect e = .effect
+        
+        call DestroyEffect(e)
+        call BlzPlaySpecialEffect(e, ANIM_TYPE_STAND)
+        call BlzSetSpecialEffectZ(e, 9999.)
         call SpecialEffect_hT.flushChild(this)
+        
+        set e = null
     endmethod
 
 endstruct

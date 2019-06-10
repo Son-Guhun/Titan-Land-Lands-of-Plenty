@@ -15,7 +15,7 @@ endfunction
 
 // This function should inline
 private function Distance takes real x, real x0, real y, real y0 returns real
-    return SquareRoot(Distance(x,x0,y,y0))
+    return SquareRoot(DistanceSquared(x,x0,y,y0))
 endfunction
 
 public function Hill takes real x0, real y0, real intensity, integer radius returns nothing

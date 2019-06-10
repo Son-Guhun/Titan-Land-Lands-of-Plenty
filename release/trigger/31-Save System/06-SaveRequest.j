@@ -24,6 +24,7 @@ function Trig_SaveRequest_Actions takes nothing returns nothing
     call DestroyGroup(udg_save_grp[playerNumber])
     set udg_save_grp[playerNumber] = CreateGroup()
     call GroupEnumUnitsOfPlayer(udg_save_grp[playerNumber], GetTriggerPlayer(), Filter(function EnumFilter))
+    call GroupRemoveUnit(udg_save_grp[playerNumber], TerrainEditorUI_GetEditorUnit(GetTriggerPlayer()))
     
     set save_decoration_effects[playerNumber] = EnumDecorationsOfPlayer(GetTriggerPlayer())
 

@@ -8,8 +8,6 @@ library Unit2Effect requires SpecialEffect, UnitVisualMods
         set result.height = GetUnitFlyHeight(whichUnit)
         set result.yaw = Deg2Rad(GetUnitFacing(whichUnit))
         
-        call BJDebugMsg(GUMSGetUnitScale(whichUnit))
-        
         if unitData.hasScale() then
             set value = unitData.raw.getScale()
             call result.setScale(value, value, value)
@@ -27,13 +25,7 @@ library Unit2Effect requires SpecialEffect, UnitVisualMods
         // Anim speed
         // Anim tag
         
-        call BJDebugMsg(I2S(result.red))
-        call BJDebugMsg(I2S(result.green))
-        call BJDebugMsg(I2S(result.blue))
-        call BJDebugMsg(I2S(result.alpha))
-        
-        
-    
+        call RemoveUnit(whichUnit)
         return result
     endfunction
     
@@ -42,13 +34,14 @@ library Unit2Effect requires SpecialEffect, UnitVisualMods
         
         
         call GUMSSetUnitScale(u, whichEffect.scaleX)
-        call GUMSSetUnitVertexColor(u, whichEffect.red, whichEffect.green, whichEffect.blue, whichEffect.alpha)
+        call GUMSSetUnitVertexColor(u, whichEffect.red/2.55, whichEffect.green/2.55, whichEffect.blue/2.55, 100. - whichEffect.alpha/2.55)
         call GUMSSetUnitFlyHeight(u, whichEffect.height)
         call GUMSSetUnitColor(u, whichEffect.color + 1)
     
+        call whichEffect.destroy()
         set bj_lastCreatedUnit = u
         set u = null
-        return u
+        return bj_lastCreatedUnit
     endfunction
 
 endlibrary

@@ -130,6 +130,9 @@ constant function GUMS_SELECTION_UNSELECTABLE takes nothing returns integer
     return 2
 endfunction
 //==========================================
+constant function GUMS_MINIMUM_FLY_HEIGHT takes nothing returns real
+    return 0.02
+endfunction
 
 //==========================================
 // GUMS Animation Tag Utilities
@@ -362,7 +365,7 @@ function GUMS_AddStructureFlightAbility takes unit structure returns nothing
 endfunction
 
 function GUMSSetStructureFlyHeight takes unit structure, real newHeight, boolean autoLand returns nothing
-    if GetUnitFlyHeight(structure) < 0.02 and newHeight < 0.02 then  // 0.01 seems to be the minimum flying height
+    if GetUnitFlyHeight(structure) < GUMS_MINIMUM_FLY_HEIGHT() and newHeight < GUMS_MINIMUM_FLY_HEIGHT() then  // 0.01 seems to be the minimum flying height
         return
     endif
  
@@ -755,7 +758,7 @@ function GUMSGroupFunction takes nothing returns nothing
             endif
             call GroupRemoveUnit(loopGroup, enumUnit)
         else
-            if IsUnitType(enumUnit, UNIT_TYPE_STRUCTURE) and GetUnitFlyHeight(enumUnit) > 0.02 then
+            if IsUnitType(enumUnit, UNIT_TYPE_STRUCTURE) and GetUnitFlyHeight(enumUnit) > GUMS_MINIMUM_FLY_HEIGHT() then
                 debug call BJDebugMsg(R2S(GetUnitFlyHeight(enumUnit)*1000))
                 call GUMSSetStructureFlyHeight(enumUnit,GetUnitFlyHeight(enumUnit), data[unitId].boolean.has(AUTO_LAND))
             else 

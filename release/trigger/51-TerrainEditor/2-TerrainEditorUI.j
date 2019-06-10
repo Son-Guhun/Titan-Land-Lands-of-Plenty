@@ -92,6 +92,10 @@ library TerrainEditorUI requires TerrainEditor
         private unit array terrainEditors
     endglobals
     
+    public function GetEditorUnit takes player whichPlayer returns unit
+        return terrainEditors[GetPlayerId(whichPlayer)]
+    endfunction
+    
     public function Activate takes player whichPlayer returns nothing
         local unit editor = terrainEditors[GetPlayerId(whichPlayer)]
         
