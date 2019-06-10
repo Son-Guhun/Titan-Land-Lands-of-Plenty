@@ -277,10 +277,8 @@ function LoadUnit takes string chat_str, player un_owner returns nothing
     if un_posy < GetRectMinY(udg_save_WholeMapRect) then
         return
     endif
-
-    if select == "2" then
-        call LoadSpecialEffect(un_owner, un_type, un_posx, un_posy, un_flyH, un_fangle, size, red, green, blue, alpha, color, aSpeed, animTag)
-    else
+    
+    if select != "2" or (IsUnitIdType(un_type, UNIT_TYPE_STRUCTURE) and un_flyH < GUMS_MINIMUM_FLY_HEIGHT())  then
         //Create the unit and modify it according to the chat input data
         set resultUnit = CreateUnit (un_owner, un_type, un_posx, un_posy, un_fangle )
         
@@ -320,6 +318,8 @@ function LoadUnit takes string chat_str, player un_owner returns nothing
         
         set udg_save_LastLoadedUnit[playerId] = resultUnit
         set resultUnit = null
+    else
+        call LoadSpecialEffect(un_owner, un_type, un_posx, un_posy, un_flyH, un_fangle, size, red, green, blue, alpha, color, aSpeed, animTag)
     endif
 endfunction
 

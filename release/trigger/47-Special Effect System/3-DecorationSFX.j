@@ -201,8 +201,6 @@ function AreCoordsInRectangle takes real x, real y, real minX, real minY, real m
     return x >= minX and x <= maxX and y >= minY and y <= maxY
 endfunction
 
-// The Sets returned by this fucntion are not meant to persists, they are meant solely for iteration.
-// The structs are not reference-counted, and they may be replaced by other effects after removed.
 function EnumDecorationsInRect takes real minX, real minY, real maxX, real maxY returns LinkedHashSet_DecorationEffect
     local real x = minX
     
@@ -240,8 +238,6 @@ function EnumDecorationsInRect takes real minX, real minY, real maxX, real maxY 
     return result
 endfunction
 
-// The Sets returned by this fucntion are not meant to persists, they are meant solely for iteration.
-// The structs are not reference-counted, and they may be replaced by other effects after removed.
 function EnumDecorationsOfPlayerInRect takes player whichPlayer, real minX, real minY, real maxX, real maxY returns LinkedHashSet_DecorationEffect
     local real x = minX
     
@@ -267,6 +263,100 @@ function EnumDecorationsOfPlayerInRect takes player whichPlayer, real minX, real
                 exitwhen decoration == decorations.end()
                 set e = decoration.effect
                 if AreCoordsInRectangle(BlzGetLocalSpecialEffectX(e), BlzGetLocalSpecialEffectY(e), minX, minY, maxX, maxY) and decoration.getOwner() == whichPlayer then
+                    call result.append(decoration)
+                endif
+                set decoration = decorations.next(decoration)
+            endloop
+            set i = i + 1
+        endloop
+        set x = x + DecorationEffectBlock.BLOCK_SIZE
+    endloop
+    
+    return result
+endfunction
+
+// This function should inline
+private function DistanceSquared takes real x, real x0, real y, real y0 returns real
+    return Pow(x - x0, 2.) + Pow(y - y0, 2.)
+endfunction
+
+// This function should inline
+private function Distance takes real x, real x0, real y, real y0 returns real
+    return SquareRoot(DistanceSquared(x,x0,y,y0))
+endfunction
+
+function EnumDecorationsInRange takes real centerX, real centerY, real radius returns LinkedHashSet_DecorationEffect
+    local real minX = centerX - radius
+    local real minY = centerY - radius
+    local real maxX = centerX + radius
+    local real maxY = centerY + radius
+    
+    local real x = minX
+    
+    local integer i
+    local LinkedHashSet decorations
+    local DecorationEffect decoration
+    
+    local integer maxI = DecorationEffectBlock.get(maxX,maxY)
+    local integer maxJ
+    
+    local LinkedHashSet result = LinkedHashSet.create()
+    local effect e
+    
+    loop
+        set maxJ = DecorationEffectBlock.get(x,maxY)
+        set i = DecorationEffectBlock.get(x,minY)
+        exitwhen i > maxI
+        loop
+            exitwhen i > maxJ
+            set decorations = DecorationEffectBlock(i).effects
+            set decoration = decorations.begin()
+            loop
+                exitwhen decoration == decorations.end()
+                set e = decoration.effect
+                if Distance(BlzGetLocalSpecialEffectX(e), centerX, BlzGetLocalSpecialEffectY(e), centerY) <= radius then
+                    call result.append(decoration)
+                endif
+                set decoration = decorations.next(decoration)
+            endloop
+            set i = i + 1
+        endloop
+        set x = x + DecorationEffectBlock.BLOCK_SIZE
+    endloop
+    
+    return result
+endfunction
+
+function EnumDecorationsOfPlayerInRange takes player whichPlayer, real centerX, real centerY, real radius returns LinkedHashSet_DecorationEffect
+    local real minX = centerX - radius
+    local real minY = centerY - radius
+    local real maxX = centerX + radius
+    local real maxY = centerY + radius
+    
+    local real x = minX
+    
+    local integer i
+    local LinkedHashSet decorations
+    local DecorationEffect decoration
+    
+    local integer maxI = DecorationEffectBlock.get(maxX,maxY)
+    local integer maxJ
+    
+    local LinkedHashSet result = LinkedHashSet.create()
+    local effect e
+    
+    loop
+        set maxJ = DecorationEffectBlock.get(x,maxY)
+        set i = DecorationEffectBlock.get(x,minY)
+        exitwhen i > maxI
+        loop
+            exitwhen i > maxJ
+            set decorations = DecorationEffectBlock(i).effects
+            set decoration = decorations.begin()
+            loop
+                exitwhen decoration == decorations.end()
+                set e = decoration.effect
+                if Distance(BlzGetLocalSpecialEffectX(e), centerX, BlzGetLocalSpecialEffectY(e), centerY) <= radius and decoration.getOwner() == whichPlayer then
                     call result.append(decoration)
                 endif
                 set decoration = decorations.next(decoration)
