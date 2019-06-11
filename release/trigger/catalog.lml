@@ -473,6 +473,7 @@
     3-DecorationSFX: DecorationSFX
     4-Unit2Effect: Unit2Effect
     '5-Untitled Trigger 001': 'Untitled Trigger 001'
+    6-UnitTypeDefaultValues: UnitTypeDefaultValues
 48-Memory: Memory
     1-TimerMemory: TimerMemory
         Disab

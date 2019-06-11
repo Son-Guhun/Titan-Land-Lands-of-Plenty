@@ -29,7 +29,7 @@ endfunction
 
 endlibrary
 
-library SaveNLoad requires UnitVisualMods, Rawcode2String, Base36, TerrainTools, DecorationSFX, optional UserDefinedRects, optional SaveNLoadConfig
+library SaveNLoad requires UnitVisualMods, Rawcode2String, Base36, TerrainTools, DecorationSFX, UnitTypeDefaultValues, optional UserDefinedRects, optional SaveNLoadConfig
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 //SaveNLoad v2.0
 ////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -132,9 +132,11 @@ static if LIBRARY_UserDefinedRects then
     endfunction
 endif
 
-function LoadSpecialEffect takes player owner, integer unitType, real x, real y, real height, real facing, string scale, string red, string green, string blue, string alpha, string color, string aSpeed, string aTags returns nothing
+function LoadSpecialEffect takes player owner, UnitTypeDefaultValues unitType, real x, real y, real height, real facing, string scale, string red, string green, string blue, string alpha, string color, string aSpeed, string aTags returns nothing
     local DecorationEffect result = DecorationEffect.create(owner, unitType, x, y)
     local real value
+    local integer redRaw
+    local integer greenRaw
     
     set result.height = height
     set result.yaw = Deg2Rad(facing)
@@ -142,11 +144,32 @@ function LoadSpecialEffect takes player owner, integer unitType, real x, real y,
     if scale != "D" then
         set value = S2R(scale)
         call result.setScale(value, value, value)
+    elseif unitType.hasModelScale() then
+        set value = unitType.modelScale
+        call result.setScale(value, value, value)
     endif
     
     if red != "D" then
         call result.setVertexColor(S2I(red), S2I(green), S2I(blue))
         set result.alpha = S2I(alpha)
+    else
+        if unitType.hasRed() then
+            set redRaw = unitType.red
+        else
+            set redRaw = 255
+        endif
+        if unitType.hasGreen() then
+            set greenRaw = unitType.green
+        else
+            set greenRaw = 255
+        endif
+        if unitType.hasBlue() then
+            call result.setVertexColor(redRaw, greenRaw, unitType.blue)
+        else
+            if greenRaw != 255 and redRaw != 255 then
+                call result.setVertexColor(redRaw, greenRaw, 255)
+            endif
+        endif
     endif
     
     if color != "D" then
