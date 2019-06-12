@@ -178,6 +178,26 @@ struct DecorationEffect extends array
         set SpecialEffect(this).animationSpeed = value
     endmethod
     
+    method operator subanimations takes nothing returns LinkedHashSet
+        return SpecialEffect(this).subanimations
+    endmethod
+    
+    method hasSubAnimations takes nothing returns boolean
+        return SpecialEffect(this).hasSubAnimations()
+    endmethod
+    
+    method addSubAnimation takes subanimtype anim returns nothing
+        call SpecialEffect(this).addSubAnimation(anim)
+    endmethod    
+    
+    method removeSubAnimation takes subanimtype anim returns nothing
+        call SpecialEffect(this).removeSubAnimation(anim)
+    endmethod
+    
+    method clearSubAnimations takes nothing returns nothing
+        call SpecialEffect(this).clearSubAnimations()
+    endmethod
+    
     static method create takes player playerid, integer unitType, real x, real y returns DecorationEffect
         local integer this = SpecialEffect.create(unitType, x, y)
         call .setOwner(playerid)

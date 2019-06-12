@@ -2,7 +2,7 @@ function Trig_CommandsD_Add_Tag_Func008A takes nothing returns nothing
     if not LoP_PlayerOwnsUnit(GetTriggerPlayer(), GetEnumUnit()) then
         call DisplayTextToPlayer(GetTriggerPlayer(), 0, 0, "This is not your unit." )
     else
-        call GUMSAddUnitAnimationTag( GetEnumUnit() , Commands_GetArguments() )
+        call GUMSAddUnitAnimationTag( GetEnumUnit() , LoP_Command.getArguments() )
     endif
 endfunction
 

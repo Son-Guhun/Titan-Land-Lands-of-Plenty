@@ -143,12 +143,10 @@ endfunction
 
 function GUMSConvertTags takes data_Child convertType, string whichStr returns string
     local string result = ""
-    local integer cutToComma = -1
+    local integer cutToComma = CutToCharacter(whichStr, " ")
     local integer stringHash
     
     loop
-    exitwhen cutToComma == 0
-        set cutToComma = CutToCharacter(whichStr, " ")
         set stringHash = StringHash((SubString(whichStr, 0, cutToComma)))
         if convertType.string.has(stringHash) then
             set result = result + convertType.string[stringHash] + " "
@@ -156,7 +154,10 @@ function GUMSConvertTags takes data_Child convertType, string whichStr returns s
             set result = result + whichStr + " "
             // call DisplayTextToPlayer(WHO?,0,0, whichStr + " is not a known tag. If you think this is wrong, please report it")
         endif
+        
+        exitwhen cutToComma >= StringLength(whichStr)
         set whichStr = SubString(whichStr, cutToComma + 1, StringLength(whichStr) + 1)
+        set cutToComma = CutToCharacter(whichStr, " ")
     endloop
     return SubString(result,0,StringLength(result) - 1)
 endfunction
@@ -434,9 +435,9 @@ function GUMSAddUnitAnimationTag takes unit whichUnit, string whichTag returns n
     endif
     
     if whichTag != "" then
-        call SaveStr(hashTable, unitId, ATAG, whichTag)
         call AddUnitAnimationProperties(whichUnit, whichTag, true)
         set whichTag = GUMSConvertTags(TAGS_COMPRESS, whichTag)
+        call SaveStr(hashTable, unitId, ATAG, whichTag)
         debug call BJDebugMsg("Setting tag: " + whichTag)
         
     else
@@ -820,6 +821,7 @@ private module InitModule
         
         //! runtextmacro GUMS_RegisterTag("spin", "sp")
         //! runtextmacro GUMS_RegisterTag("fast", "fa")
+        //! runtextmacro GUMS_RegisterTag("talk", "ta")
         
         //! runtextmacro GUMS_RegisterTag("upgrade","u")
         //! runtextmacro GUMS_RegisterTag("first","n1")

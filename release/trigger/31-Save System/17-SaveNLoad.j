@@ -177,6 +177,12 @@ function LoadSpecialEffect takes player owner, UnitTypeDefaultValues unitType, r
     else
         set result.color = GetPlayerId(owner)
     endif
+    
+    if aTags != "D" then
+        call AddTagsStringAsSubAnimations(result, GUMSConvertTags(UnitVisualMods_TAGS_DECOMPRESS, aTags))
+    endif
+    
+    call BlzPlaySpecialEffect(result.effect, ANIM_TYPE_STAND)
 endfunction
 
 function LoadUnit takes string chat_str, player un_owner returns nothing

@@ -36,7 +36,9 @@ struct SpecialEffect extends array
     
     //! runtextmacro HashStruct_NewReadonlyNumberFieldWithDefault("animationSpeed_impl","real","1.")
     //! runtextmacro HashStruct_NewReadonlyPrimitiveField("animation_impl","integer")
-    //! runtextmacro HashStruct_NewReadonlyPrimitiveField("subanimation_impl","integer")
+    
+    // Ideally this should return a list that, when modified, modfies the SFX as well. For now, don't remove elements from this list.
+    //! runtextmacro HashStruct_NewReadonlyStructField("subanimations","LinkedHashSet")
     
     method operator x takes nothing returns real
         return BlzGetLocalSpecialEffectX(.effect)
@@ -140,6 +142,49 @@ struct SpecialEffect extends array
         call BlzSetSpecialEffectTimeScale(.effect, value)
     endmethod
     
+    method hasSubAnimations takes nothing returns boolean
+        return .subanimations_exists()
+    endmethod
+    
+    method addSubAnimation takes subanimtype anim returns nothing
+        local integer animId = GetHandleId(anim)
+        
+        if not .subanimations_exists() then
+            set .subanimations = LinkedHashSet.create()
+        endif
+        
+        if not .subanimations.contains(animId) then
+            call BJDebugMsg("Adding subanimation: " + I2S(animId))
+            call .subanimations.append(animId)
+            call BlzSpecialEffectAddSubAnimation(.effect, anim)
+        endif
+    endmethod    
+    
+    method removeSubAnimation takes subanimtype anim returns nothing
+        local integer animId = GetHandleId(anim)
+        
+        if .subanimations_exists() then
+            if .subanimations.contains(animId) then
+                call .subanimations.remove(animId)
+                call BlzSpecialEffectRemoveSubAnimation(.effect, anim)
+                
+                if .subanimations.begin() == .subanimations.end() then
+                    call .subanimations.destroy()
+                    call .subanimations_clear()
+                endif
+            endif
+        endif
+    endmethod
+    
+    method clearSubAnimations takes nothing returns nothing
+        if .subanimations_exists() then
+            call BlzSpecialEffectClearSubAnimations(.effect)
+            call .subanimations.destroy()
+            call .subanimations_clear()
+        endif
+    endmethod
+    
+    
     static method create takes integer unitType, real x, real y returns SpecialEffect
         local effect e = AddSpecialEffect(GetUnitTypeIdModel(unitType), x, y)
         local SpecialEffect this = GetHandleId(e)
@@ -164,6 +209,5 @@ struct SpecialEffect extends array
     endmethod
 
 endstruct
-
 
 endlibrary

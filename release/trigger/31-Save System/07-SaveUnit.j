@@ -39,7 +39,7 @@ function GenerateSpecialEffectSaveString takes SpecialEffect whichEffect returns
     set result = result + I2S(whichEffect.alpha) + ","
     set result = result + I2S(whichEffect.color) + ","
     set result = result + R2S(whichEffect.animationSpeed) + ","
-    set result = result + "D,"//R2S(whichEffect.animationTags)
+    set result = result + GUMSConvertTags(UnitVisualMods_TAGS_COMPRESS, SubAnimations2Tags(whichEffect.subanimations)) + ","
     set result = result + I2S(GUMS_SELECTION_UNSELECTABLE())
     
     return result
