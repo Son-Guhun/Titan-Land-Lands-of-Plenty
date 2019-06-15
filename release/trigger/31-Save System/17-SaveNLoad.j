@@ -442,30 +442,46 @@ function LoadTerrain takes string chatStr returns nothing
 
 endfunction
 
-function SaveCenter takes string password, real centerX, real centerY returns nothing
-    call PreloadGenStart()
-    call PreloadGenClear()
-    call Preload(R2S(centerX) + "," + R2S(centerY))
-    call PreloadGenEnd("DataManager\\" + password + "\\" + "center.txt")
-endfunction
-
-function SaveSize takes string password,integer size returns nothing
-    call PreloadGenStart()
-    call PreloadGenClear()
-    call Preload(I2S(size))
-    call PreloadGenEnd("DataManager\\" + password + "\\" + "size.txt")
+function SaveCenter takes player savePlayer, string password, real centerX, real centerY returns nothing
+    local string data = R2S(centerX) + "," + R2S(centerY)
+    local string filePath = "DataManager\\" + password + "\\" + "center.txt"
     
-    //Output the major version with which the save has been made (compatibility)
-    call PreloadGenStart()
-    call PreloadGenClear()
-    call Preload(I2S(SaveLoadVersion()))
-    call PreloadGenEnd("DataManager\\" + password + "\\" + "version.txt")
+    if GetLocalPlayer() == savePlayer then
+        call PreloadGenStart()
+        call PreloadGenClear()
+        call Preload(data)
+        call PreloadGenEnd(filePath)
+    endif
 endfunction
 
-function LoadRequest takes string password returns nothing
-    call PreloadGenStart()
-    call PreloadGenClear()
-    call Preload(password)
-    call PreloadGenEnd("DataManager\\load.txt")
+function SaveSize takes player savePlayer, string password,integer size returns nothing
+    local string filePathSize = "DataManager\\" + password + "\\" + "size.txt"
+    local string filePathVersion = "DataManager\\" + password + "\\" + "version.txt"
+    local string ver = I2S(SaveLoadVersion())
+    local string sz = I2S(size)
+    
+    if GetLocalPlayer() == savePlayer then
+        call PreloadGenStart()
+        call PreloadGenClear()
+        call Preload(sz)
+        call PreloadGenEnd(filePathSize)
+    
+        //Output the major version with which the save has been made (compatibility)
+        call PreloadGenStart()
+        call PreloadGenClear()
+        call Preload(ver)
+        call PreloadGenEnd(filePathVersion)
+    endif
+endfunction
+
+function LoadRequest takes player savePlayer, string password returns nothing
+    local string filePath = "DataManager\\load.txt"
+
+    if GetLocalPlayer() == savePlayer then
+        call PreloadGenStart()
+        call PreloadGenClear()
+        call Preload(password)
+        call PreloadGenEnd(filePath)
+    endif
 endfunction
 endlibrary

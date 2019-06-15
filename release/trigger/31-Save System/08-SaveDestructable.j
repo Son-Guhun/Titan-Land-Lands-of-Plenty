@@ -14,6 +14,8 @@ function SaveLoopActions2 takes nothing returns nothing
     local integer playerNumber = GetPlayerId(saver)
     local integer tempInteger
     
+    local string saveStr = "-load dest" // Create string outside of local block.
+    
     if SubString(GetEventPlayerChatString(), 0, 6) != "-dsav " then
         return
     endif
@@ -31,18 +33,21 @@ function SaveLoopActions2 takes nothing returns nothing
     if GetLocalPlayer() == saver then
         call PreloadGenClear()
         call PreloadGenStart()
-        call Preload("-load dest")
+        call Preload(saveStr)
         set udg_save_localPlayerBool = true
-        set tempInteger = udg_temp_integer
+        set tempInteger = udg_temp_integer  // store global value in local
         set udg_temp_integer = playerNumber
     endif
     call EnumDestructablesInRect(rectangle, Condition(function SaveFilter), null)
+    
+    set saveStr = "DataManager\\" + udg_save_password[playerNumber+1] + "\\0.txt"
     if GetLocalPlayer() == saver then
-        call PreloadGenEnd("DataManager\\" + udg_save_password[playerNumber+1] + "\\0.txt")
-        call SaveSize(udg_save_password[playerNumber+1], 1)
+        call PreloadGenEnd(saveStr)
         set udg_save_localPlayerBool = false
-        set udg_temp_integer = tempInteger
+        set udg_temp_integer = tempInteger  // restore global variable value
     endif
+    call SaveSize(saver, udg_save_password[playerNumber+1], 1)
+    
     call DisplayTextToPlayer( saver,0,0, "Finished Saving" )
     
     set rectangle = null

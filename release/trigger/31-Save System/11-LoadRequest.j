@@ -21,9 +21,8 @@ function Trig_LoadRequest_Actions takes nothing returns nothing
         endif
         
     else
-        if GetLocalPlayer() == GetTriggerPlayer() then
-            call LoadRequest(SubString(GetEventPlayerChatString(),9,129))
-        endif
+        set chatStr = SubString(chatStr,9,129)
+        call LoadRequest(GetTriggerPlayer(), chatStr)
     endif
 endfunction
 
