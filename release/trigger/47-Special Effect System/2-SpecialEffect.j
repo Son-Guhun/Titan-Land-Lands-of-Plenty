@@ -106,8 +106,10 @@ struct SpecialEffect extends array
     endmethod
     
     method operator color= takes integer value returns nothing
-        set .color_impl = value
-        call BlzSetSpecialEffectColorByPlayer(.effect, Player(value))
+        if 0 <= value and bj_MAX_PLAYER_SLOTS > value then
+            set .color_impl = value
+            call BlzSetSpecialEffectColorByPlayer(.effect, Player(value))
+        endif
     endmethod
     
     method setScale takes real scaleX, real scaleY, real scaleZ returns nothing

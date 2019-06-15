@@ -31,23 +31,20 @@ function Save_SaveUnitPatrolPoints takes player savePlayer, integer unitHandleId
 endfunction
 
 function GenerateSpecialEffectSaveString takes SpecialEffect whichEffect returns string
-    local string result = ID2S(whichEffect.unitType) + ","
-    
-    set result = result + R2S(whichEffect.x) + ","
-    set result = result + R2S(whichEffect.y) + ","
-    set result = result + R2S(whichEffect.height) + ","
-    set result = result + R2S(Rad2Deg(whichEffect.yaw)) + ","
-    set result = result + R2S(whichEffect.scaleX) + ","
-    set result = result + I2S(whichEffect.red) + ","
-    set result = result + I2S(whichEffect.green) + ","
-    set result = result + I2S(whichEffect.blue) + ","
-    set result = result + I2S(whichEffect.alpha) + ","
-    set result = result + I2S(whichEffect.color) + ","
-    set result = result + R2S(whichEffect.animationSpeed) + ","
-    set result = result + GUMSConvertTags(UnitVisualMods_TAGS_COMPRESS, SubAnimations2Tags(whichEffect.subanimations)) + ","
-    set result = result + I2S(GUMS_SELECTION_UNSELECTABLE())
-    
-    return result
+    return ID2S(whichEffect.unitType) + "," +/*
+        */ R2S(whichEffect.x) + "," +/*
+        */ R2S(whichEffect.y) + "," +/*
+        */ R2S(whichEffect.height) + "," +/*
+        */ R2S(Rad2Deg(whichEffect.yaw)) + "," +/*
+        */ R2S(whichEffect.scaleX) + "," +/*
+        */ I2S(whichEffect.red) + "," +/*
+        */ I2S(whichEffect.green) + "," +/*
+        */ I2S(whichEffect.blue) + "," +/*
+        */ I2S(whichEffect.alpha) + "," +/*
+        */ I2S(whichEffect.color + 1) + "," +/*
+        */ R2S(whichEffect.animationSpeed) + "," +/*
+        */ GUMSConvertTags(UnitVisualMods_TAGS_COMPRESS, SubAnimations2Tags(whichEffect.subanimations)) + "," +/*
+        */ I2S(GUMS_SELECTION_UNSELECTABLE())
 endfunction
 
 function SaveEffectDecos takes integer playerNumber, boolean isLocalPlayer returns integer

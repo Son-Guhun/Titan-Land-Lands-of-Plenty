@@ -45,6 +45,11 @@ private struct DecorationEffectBlock extends array
 endstruct
 
 struct DecorationEffect extends array
+ 
+    
+    //! runtextmacro HashStruct_SetHashtableWrapper("SpecialEffect_hT")
+    //! runtextmacro HashStruct_NewPrimitiveGetterSetter("Owner","player")
+    
     method operator effect takes nothing returns effect
         return SpecialEffect(this).effect
     endmethod
@@ -52,9 +57,6 @@ struct DecorationEffect extends array
     method operator unitType takes nothing returns integer
         return SpecialEffect(this).unitType
     endmethod
-    
-    //! runtextmacro HashStruct_SetHashtableWrapper("SpecialEffect_hT")
-    //! runtextmacro HashStruct_NewPrimitiveGetterSetter("Owner","player")
 
     method operator x takes nothing returns real
         return BlzGetLocalSpecialEffectX(.effect)
