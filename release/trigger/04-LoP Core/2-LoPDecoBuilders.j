@@ -211,6 +211,9 @@ are listed first, though.
             // Statue 2
             set i = ( i + 1 )
             set rawcodes[i] = 'u023'
+            // Tableware
+            set i = ( i + 1 )
+            set rawcodes[i] = 'u007'
             // Trees
             set i = ( i + 1 )
             set rawcodes[i] = 'u01B'
