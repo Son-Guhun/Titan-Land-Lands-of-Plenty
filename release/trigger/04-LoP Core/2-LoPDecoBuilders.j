@@ -208,6 +208,12 @@ are listed first, though.
             // Runic
             set i = ( i + 1 )
             set rawcodes[i] = 'u02M'
+            // S&S Manor 1
+            set i = ( i + 1 )
+            set rawcodes[i] = 'u008'
+            // S&S Manor 2
+            set i = ( i + 1 )
+            set rawcodes[i] = 'u009'
             // Statue 2
             set i = ( i + 1 )
             set rawcodes[i] = 'u023'
