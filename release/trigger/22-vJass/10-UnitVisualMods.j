@@ -87,10 +87,11 @@ globals
     private constant integer COUNTER = -1  // Used to count if the unit has had their position set by the timer loop
     private constant integer TARGET_ANGLE = -2  // Used to store the final facing angle of an immovable unit that's turning
     private constant integer AUTO_LAND = -3
-    private constant integer STRUCTURE_HEIGHT = -4
+    private constant integer STRUCTURE_HEIGHT = -4 // This is only saved for structures, which lose their flying heights when moving
     
     private constant integer tempX = -5
     private constant integer tempY = -6
+    private constant integer saveFlyHeight = -7
 
     private constant integer SCALE  = 0
     public constant integer RED    = 1
@@ -102,7 +103,6 @@ globals
     private constant integer ATAG   = 7
     private constant integer SELECT = 8
     private constant integer NAME   = 9
-    // private constant integer HEIGHT = 10  // This is only saved for structures, which lose their flying heights when moving
 endglobals
 
 //CONSTANTS FOR STATIC TABLES (Must be negative to avoid null-point exceptions of handles and conflics with handles)
@@ -327,6 +327,25 @@ struct UnitVisuals extends array
     endmethod
 endstruct
 
+private struct SaveFlyHeight extends array
+
+    method operator height takes nothing returns real
+        return data[this].real[saveFlyHeight]
+    endmethod
+    
+    method operator height= takes real value returns nothing
+        set data[this].real[saveFlyHeight] = value
+    endmethod
+    
+    method clearHeight takes nothing returns nothing
+        call data[this].real.remove(saveFlyHeight)
+    endmethod
+    
+    method hasHeight takes nothing returns boolean
+        return data[this].real.has(saveFlyHeight)
+    endmethod
+endstruct
+
 //==========================================
 // GUMS Setters
 
@@ -335,6 +354,7 @@ endstruct
 
 function GUMSSetUnitFacing takes unit whichUnit, real newAngle returns nothing
     call SetUnitFacing(whichUnit, newAngle)
+    
     if GetUnitAbilityLevel(whichUnit, 'Amov') == 0 then
         call GroupAddUnit(loopGroup, whichUnit)
         call SaveReal(hashTable, GetHandleId(whichUnit), TARGET_ANGLE, ModuloReal(newAngle, 360))
@@ -345,7 +365,10 @@ function GUMSSetUnitFlyHeight takes unit whichUnit, real newHeight returns nothi
     if UnitAddAbility(whichUnit, 'Amrf' ) then
         call UnitRemoveAbility(whichUnit, 'Amrf')
     endif
+    
     call SetUnitFlyHeight( whichUnit, newHeight, 0)
+    set SaveFlyHeight(GetHandleId(whichUnit)).height = newHeight
+    
     if GetUnitAbilityLevel(whichUnit, 'Amov') == 0 then
         call GroupAddUnit(loopGroup, whichUnit)
     endif
@@ -373,7 +396,10 @@ function GUMSSetStructureFlyHeight takes unit structure, real newHeight, boolean
     if UnitAddAbility(structure, 'Amrf' ) then
         call UnitRemoveAbility(structure, 'Amrf')
     endif
+    
     call SetUnitFlyHeight( structure, newHeight, 0)
+    set SaveFlyHeight(GetHandleId(structure)).height = newHeight
+    
     if GetUnitAbilityLevel(structure,'Amov') > 0 then
         // this is an Ancient and probably already has root. Do nothing
     else
@@ -777,10 +803,29 @@ function GUMSTimerFunction takes nothing returns nothing
     call ForGroup(loopGroup, function GUMSGroupFunction)
 endfunction
 
+
+
 // When a unit cancels of finishes an upgrade, reapply its Visual modifications.
 private module InitModule
+
+
     private static method onUpgradeHandler takes nothing returns nothing
-        call GUMSCopyValues(GetTriggerUnit(), GetTriggerUnit())
+        local unit trigU = GetTriggerUnit()
+        local SaveFlyHeight unitData = GetHandleId(trigU)
+        local real height
+        
+        
+        if unitData.hasHeight() and unitData.height > GUMS_MINIMUM_FLY_HEIGHT() then
+            set height = unitData.height
+        
+            call GUMSCopyValues(trigU, trigU)
+
+            call GUMSSetUnitFlyHeight(trigU, height)
+        else
+            call GUMSCopyValues(trigU, trigU)
+        endif
+        
+        set trigU = null
     endmethod
 
 
