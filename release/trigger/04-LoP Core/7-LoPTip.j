@@ -59,9 +59,10 @@ endstruct
 
 private function onTimer takes nothing returns nothing
     local LoP_Tip tip = LoP_TipCategory(PERIODIC_TIPS).getNextTip()
+    local string displayString = tip.messageAsHint()// do not create string in local player block
     
     if enabled then
-        call DisplayTextToPlayer(GetLocalPlayer(),0,0, tip.messageAsHint())
+        call DisplayTextToPlayer(GetLocalPlayer(),0,0, displayString)
     endif
 endfunction
 

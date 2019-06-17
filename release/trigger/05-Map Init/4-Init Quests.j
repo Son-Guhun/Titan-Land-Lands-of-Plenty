@@ -250,6 +250,9 @@ Kwaliti, Lord_T, Deolrin, Chilla_killa, Sellenisko, Hellish Hybrid, A Void, Uncl
 
 |cffff0000Unity:|r
 XiaolianhuaStudio
+
+|cffff0000wc3campaigns:|r
+TiJil, unwirklich
 "
     call CreateQuestBJ(questType, "|cff00ff00Art 1|r", quest_text, "ReplaceableTextures\\CommandButtons\\BTNTemp.blp")
     // ----------
@@ -257,7 +260,7 @@ XiaolianhuaStudio
     // Model Credits 2
     set quest_text = "
 |cff00b300The Hive Workshop:|r
-PrinceYaser, shiik, Dr.Death, Sant, Eagle XI, Afroknight_76, Deleted member 238226 (unknown), GhostThruster, Whitewolf8, WhiteDeath, A.R., Xezko, Deep Sea Kraken, Hellx-Magnus, -Berz-, CRAZYRUSSIAN, HappyCockroach, Tamplier777, Kehel, Radagast, Lordaeron Creator, The D3ath, Gottfrei
+PrinceYaser, shiik, Dr.Death, Sant, Eagle XI, Afroknight_76, Deleted member 238226 (unknown), GhostThruster, Whitewolf8, WhiteDeath, A.R., Xezko, Deep Sea Kraken, Hellx-Magnus, -Berz-, CRAZYRUSSIAN, HappyCockroach, Tamplier777, Kehel, Radagast, Lordaeron Creator, The D3ath, Gottfrei, bu3ny, CloudWolf, Gyrosphinx, Marenko, Talavaj, !!GORO!!, THE_SILENT
 
 |cffff0000XGM:|r
 P4ela, Kolbosa, Wulfrein, DampirTBs, Feleer, Jack Sparrow, DiKey51, Ket, LongbowMan
