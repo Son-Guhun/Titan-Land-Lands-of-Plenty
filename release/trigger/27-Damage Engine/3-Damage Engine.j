@@ -1,3 +1,8 @@
+globals
+    string array udg_AttackTypeDebugStr
+    string array udg_DamageTypeDebugStr
+    string array udg_WeaponTypeDebugStr
+endglobals
 //===========================================================================
 // Damage Engine lets you detect, amplify, block or nullify damage. It even
 // lets you detect if the damage was physical or from a spell. Just reference
@@ -7,12 +12,11 @@
 // - Detect damage (after it's been dealt to the unit): use the event "DamageEvent Equal to 1.00"
 // - To change damage before it's dealt: use the event "DamageModifierEvent Equal to 1.00"
 // - Detect spell damage: use the condition "IsDamageSpell Equal to True"
-// - Detect zero-damage: use the event "DamageEvent Equal to 2.00" (an AfterDamageEvent will not fire for this)
+// - Detect zero-damage: use the event "DamageEvent Equal to 2.00"
 //
-// You can specify the DamageEventType before dealing triggered damage, then run the trigger "ClearDamageEvent (Checking Conditions)" after dealing triggered damage from within a damage event:
+// You can specify the DamageEventType before dealing triggered damage:
 // - Set NextDamageType = DamageTypeWhatever
 // - Unit - Cause...
-// - Trigger - Run ClearDamageEvent (Checking Conditions)
 //
 // You can modify the DamageEventAmount and the DamageEventType from a "DamageModifierEvent Equal to 1.00" trigger.
 // - If the amount is modified to negative, it will count as a heal.
@@ -21,57 +25,41 @@
 // If you need to reference the original in-game damage, use the variable "DamageEventPrevAmt".
 //
 //===========================================================================
-globals
-    integer udg_DamageEventAttackT = 0
-    integer udg_DamageEventDamageT = 0
-    integer udg_DamageEventWeaponT = 0
-    boolean udg_IsDamageMelee = false
-    boolean udg_IsDamageRanged = false
-    real udg_DamageEventPureAmt = 0
-    
-    integer udg_DAMAGE_TYPE_NORMAL = GetHandleId(DAMAGE_TYPE_NORMAL)
-    unit udg_AOEDamageSource = null
-    
-    real udg_LethalDamageHP = 0
-    real udg_LethalDamageEvent = 0
-    string array udg_AttackTypeDebugStr
-    string array udg_DamageTypeDebugStr
-    string array udg_WeaponTypeDebugStr
-endglobals
-
-
 library DamageEngine initializer Init
 
 globals
     private boolean started = false
-    private boolean queued = false
-    private integer recursion = 0
+    private integer recursion = -1
+    private boolean recursive = false
+    private boolean purge = false
     private timer ticker = CreateTimer()
+    private trigger trig = CreateTrigger()
     
-    private integer array lastPrevATyp    
-    private integer array lastPrevDTyp    
-    private integer array lastPrevWTyp    
-    private boolean array lastOverride    
-    private boolean array lastMelee
-    private boolean array lastRanged
-    private boolean array lastSpell    
-    private integer array lastType    
-    private real array lastAmount    
-    private real array lastPrevAmount    
-    private real array lastPureAmount    
+    private real previousAmount = 0.00      //Added to track the original modified damage pre-spirit Link
+    private real previousValue = 0.00       //Added to track the original pure damage amount of Spirit Link
+    private integer previousType = 0        //Track the type
+    private boolean previousCode = false    //Was it caused by a trigger/script?
+    private boolean preDamage = false
+    private boolean holdClear = false
+    
     private unit array lastSource    
     private unit array lastTarget    
-    
-    private real lifeTrack = 0.00
+    private real array lastAmount    
+    private attacktype array lastAttackT    
+    private damagetype array lastDamageT    
+    private weapontype array lastWeaponT    
+    private trigger array lastTrig    
+    private integer array lastType    
 endglobals
 
 //GUI Vars:
 /*
-    boolean udg_NextDamageOverride
+    trigger udg_DamageEventTrigger      //Different functionality from before in 5.1
+    
     boolean udg_DamageEventOverride
     boolean udg_NextDamageType
     boolean udg_DamageEventType
-    trigger udg_ClearDamageEvent
+    boolean udg_IsDamageCode            //New in 5.1 as per request from chopinski
     boolean udg_IsDamageSpell
     boolean udg_IsDamageMelee           //New in 5.0
     boolean udg_IsDamageRanged          //New in 5.0
@@ -92,7 +80,6 @@ endglobals
     
     real udg_DamageEventAmount
     real udg_DamageEventPrevAmt
-    real udg_DamageEventPureAmt         //New in 5.0
     real udg_LethalDamageHP             //New in 5.0
     
     integer udg_DamageEventAttackT      //New in 5.0
@@ -101,52 +88,14 @@ endglobals
 */
 
 private function Error takes nothing returns nothing
-    local string s = "WARNING: Recursion error when dealing damage! Make sure when you deal damage from within a DamageEvent trigger, do it like this:\n"
-    set s = s + "Trigger - Turn off (This Trigger)\n"
-    set s = s + "Unit - Cause...\n"
-    set s = s + "Trigger - Run ClearDamageEvent (Checking Conditions)\n"
-    set s = s + "Trigger - Turn on (This Trigger)"
-   
-    //Delete the next couple of lines to disable the in-game recursion crash warnings
+    local string s = "WARNING: Recursion error when dealing damage! Prior to dealing damage from within a DamageEvent response trigger, do this:\n"
+    set s = s + "Set DamageEventTrigger = (This Trigger)\n"
+    set s = s + "Unit - Cause <Source> to damage <Target>...\n\n"
+    set s = s + "Alternatively, just use the UNKNOWN damage type. It will skip recursive damage on its own without needing the \"Set\" line:\n"
+    set s = s + "Unit - Cause <Source> to damage <Target>, dealing <Amount> damage of attack type <Attack Type> and damage type Unknown"
+    
     call ClearTextMessages()
     call DisplayTimedTextToPlayer(GetLocalPlayer(), 0.00, 0.00, 999.00, s)
-endfunction
-
-function ClearDamageEvent takes boolean clear returns nothing
-    local integer i = recursion - 1
-    if clear then
-        set udg_NextDamageOverride = false
-        set udg_NextDamageType = 0
-    endif
-    if queued then
-        //The 0-second timer has expired, or there had been multiple sequential damage events running in parallel.        
-        set queued = false
-        
-        if udg_DamageEventAmount < 0.00 then
-            call SetWidgetLife(udg_DamageEventTarget, GetWidgetLife(udg_DamageEventTarget) - udg_DamageEventAmount)
-        endif
-        
-        //call BJDebugMsg(R2S(GetWidgetLife(udg_DamageEventTarget)))
-        
-        set udg_DamageEvent = 0.00
-        set udg_DamageEvent = 1.00  //AfterDamageEvent is no longer used. I've moved the original event to this point to replace it.
-        
-        //call BJDebugMsg("Decreasing recursion to " + (I2S(i)))
-        set recursion = i
-        set udg_DamageEventAmount   = lastAmount[i]
-        set udg_DamageEventAttackT  = lastPrevATyp[i]
-        set udg_DamageEventDamageT  = lastPrevDTyp[i]
-        set udg_DamageEventWeaponT  = lastPrevWTyp[i]
-        set udg_IsDamageMelee       = lastMelee[i]
-        set udg_IsDamageRanged      = lastRanged[i]
-        set udg_IsDamageSpell       = lastSpell[i]
-        set udg_DamageEventType     = lastType[i]
-        set udg_DamageEventOverride = lastOverride[i]
-        set udg_DamageEventPrevAmt  = lastPrevAmount[i]
-        set udg_DamageEventPureAmt  = lastPureAmount[i]
-        set udg_DamageEventSource   = lastSource[i]
-        set udg_DamageEventTarget   = lastTarget[i]
-    endif
 endfunction
 
 private function OnAOEEnd takes nothing returns nothing
@@ -157,208 +106,267 @@ private function OnAOEEnd takes nothing returns nothing
     endif
     set udg_DamageEventLevel        = 1
     set udg_EnhancedDamageTarget    = null
+    set udg_AOEDamageSource         = null
     call GroupClear(udg_DamageEventAOEGroup)
 endfunction
     
 private function OnExpire takes nothing returns nothing
     set started = false //The timer has expired. Flag off to allow it to be restarted when needed.
-    call ClearDamageEvent(true) //Check for any lingering damage
     
-    //Reset things so they don't perpetuate for AoE/Level target detection
-    call OnAOEEnd()
+    call OnAOEEnd() //Reset things so they don't perpetuate for AoE/Level target detection
 endfunction
 
-function StoreDamageEventVars takes nothing returns boolean
-    local integer i = recursion
-    
-    call ClearDamageEvent(false) //in case the 0.00 second timer hasn't yet expired
-    
-    if i > 16 then
-        call Error()
-        return false
-    endif
-    
-    set lastAmount[i]       = udg_DamageEventAmount
-    set lastPrevATyp[i]     = udg_DamageEventAttackT
-    set lastPrevDTyp[i]     = udg_DamageEventDamageT
-    set lastPrevWTyp[i]     = udg_DamageEventWeaponT
-    set lastMelee[i]        = udg_IsDamageMelee
-    set lastRanged[i]       = udg_IsDamageRanged
-    set lastSpell[i]        = udg_IsDamageSpell
-    set lastType[i]         = udg_DamageEventType
-    set lastOverride[i]     = udg_DamageEventOverride
-    set lastPrevAmount[i]   = udg_DamageEventPrevAmt
-    set lastPureAmount[i]   = udg_DamageEventPureAmt
-    set lastSource[i]       = udg_DamageEventSource
-    set lastTarget[i]       = udg_DamageEventTarget
-    set recursion           = i + 1
-    //call BJDebugMsg("Increasing recursion to " + (I2S(i + 1)))
-    
-    return true
-endfunction
-
-private function OnPreDamage takes nothing returns boolean
-    if not StoreDamageEventVars() then
-        return false
-    endif
-
-    
-    //Get event responses
-    set udg_DamageEventAmount   = GetEventDamage() //Is initially the DamageEventOriDmg, then is stored into DamageEventPrevAmt, then set to the processed damage
-    set udg_DamageEventAttackT  = GetHandleId(BlzGetEventAttackType())
-    set udg_DamageEventDamageT  = GetHandleId(BlzGetEventDamageType())
-    set udg_DamageEventWeaponT  = GetHandleId(BlzGetEventWeaponType())
-    set udg_DamageEventSource   = GetEventDamageSource()
-    set udg_DamageEventTarget   = BlzGetEventDamageTarget()
-    
-    //Set custom Damage Engine data
+private function CalibrateMR takes nothing returns nothing
     set udg_IsDamageMelee           = false
     set udg_IsDamageRanged          = false
-    if udg_DamageEventAttackT == 0 then //In 1.31, one can just use this simple comparison to assess if the damage type is a spell.
-        set udg_IsDamageSpell       = true 
-    elseif udg_DamageEventDamageT == udg_DAMAGE_TYPE_NORMAL then //This damage type is the only one that can get reduced by armor.
+    set udg_IsDamageSpell           = udg_DamageEventAttackT == 0 //In Patch 1.31, one can just check the attack type to find out if it's a spell.
+    
+    if udg_DamageEventDamageT == udg_DAMAGE_TYPE_NORMAL and not udg_IsDamageSpell then //This damage type is the only one that can get reduced by armor.
         set udg_IsDamageMelee       = IsUnitType(udg_DamageEventSource, UNIT_TYPE_MELEE_ATTACKER)
         set udg_IsDamageRanged      = IsUnitType(udg_DamageEventSource, UNIT_TYPE_RANGED_ATTACKER)
         if udg_IsDamageMelee and udg_IsDamageRanged then
-            set udg_IsDamageMelee   = udg_DamageEventWeaponT > 0//Melee units play a sound when damaging
-            set udg_IsDamageRanged  = not udg_IsDamageMelee     //In the case where a unit is both ranged and melee, the ranged attack plays no sound.
-        endif                                                   //The Huntress has a melee sound for her ranged projectile, however it is only an issue
+            set udg_IsDamageMelee   = udg_DamageEventWeaponT > 0// Melee units play a sound when damaging
+            set udg_IsDamageRanged  = not udg_IsDamageMelee     // In the case where a unit is both ranged and melee, the ranged attack plays no sound.
+        endif                                                   // The Huntress has a melee sound for her ranged projectile, however it is only an issue
     endif                                                       //if she also had a melee attack, because by default she is only UNIT_TYPE_RANGED_ATTACKER.
+endfunction
+
+//Load the event responses into the Pre-Damage Modification trigger.
+private function OnPreDamage takes nothing returns boolean
+    local unit src      = GetEventDamageSource()
+    local unit tgt      = BlzGetEventDamageTarget()
+    local real amt      = GetEventDamage()
+    local attacktype at = BlzGetEventAttackType()
+    local damagetype dt = BlzGetEventDamageType()
+    local weapontype wt = BlzGetEventWeaponType()
     
-    set udg_DamageEventPureAmt  = udg_DamageEventAmount
-    set udg_DamageEventPrevAmt  = udg_DamageEventAmount
-    set udg_DamageEventType     = udg_NextDamageType
-    set udg_NextDamageType      = 0
-    set udg_DamageEventOverride = udg_NextDamageOverride
-    set udg_NextDamageOverride  = false
-    
-    //call BJDebugMsg(GetUnitName(udg_DamageEventSource) + " dealt " + I2S(R2I(udg_DamageEventAmount)) + " to " + GetUnitName(udg_DamageEventTarget))
-    
-    //Added 25 July 2017 to detect AOE damage or multiple single-target damage
-    if recursion == 1 and udg_DamageEventType == 0 then
-        if started then
-            if udg_DamageEventSource == udg_AOEDamageSource then //Source has damaged more than once
+    if udg_NextDamageType == 0 and (udg_DamageEventTrigger != null or recursive) then
+        set udg_NextDamageType      = udg_DamageTypeCode
+    endif
+    if recursive then
+        if amt != 0.00 then
+            if recursion < 16 then  //when 16 events are run recursively from one damage instance, it's a safe bet that something has gone wrong.
+                set recursion = recursion + 1
                 
-                if IsUnitInGroup(udg_DamageEventTarget, udg_DamageEventAOEGroup) then
-                    //Added 5 August 2017 to improve tracking of enhanced damage against, say, Pulverize
-                    set udg_DamageEventLevel = udg_DamageEventLevel + 1
-                    set udg_EnhancedDamageTarget = udg_DamageEventTarget
-                else
-                    //Multiple targets hit by this source - flag as AOE
-                    set udg_DamageEventAOE = udg_DamageEventAOE + 1
-                endif
+                //Store recursive damage into a queue from index "recursion" (0-15)
+                //This damage will be fired after the current damage instance has wrapped up its events.
+                //This damage can only be caused by triggers.
+                set lastAmount[recursion]   = amt
+                set lastSource[recursion]   = src
+                set lastTarget[recursion]   = tgt
+                set lastAttackT[recursion]  = at
+                set lastDamageT[recursion]  = dt
+                set lastWeaponT[recursion]  = wt                
+                set lastTrig[recursion]     = udg_DamageEventTrigger
+                set lastType[recursion]     = udg_NextDamageType
             else
-                //New damage source - unflag everything
-                call OnAOEEnd()
+                //Delete or comment-out the next line to disable the in-game recursion crash warning
+                call Error()
             endif
         endif
-        set udg_AOEDamageSource = udg_DamageEventSource
-        call GroupAddUnit(udg_DamageEventAOEGroup, udg_DamageEventTarget)
-    endif
-    
-    //Debug only - show source unit's different attack data
-    //call BJDebugMsg(BlzGetUnitWeaponStringField(udg_DamageEventSource, UNIT_WEAPON_SF_ATTACK_PROJECTILE_ART, 1))
-    //call BJDebugMsg(BlzGetUnitWeaponStringField(udg_DamageEventSource, UNIT_WEAPON_SF_ATTACK_PROJECTILE_ART, 2))
-    //call BJDebugMsg(R2S(BlzGetUnitWeaponRealField(udg_DamageEventSource, UNIT_WEAPON_RF_ATTACK_RANGE, 1))) //always returns 0.00
-    //call BJDebugMsg(R2S(BlzGetUnitWeaponRealField(udg_DamageEventSource, UNIT_WEAPON_RF_ATTACK_RANGE, 2))) //always returns 0.00
-    
-    if udg_DamageEventAmount == 0.00 then
-        set udg_DamageEvent = 0.00
-        set udg_DamageEvent = 2.00              //This is the zero-damage event and should only run on Enhanced effects or Faerie Fire.
+        set udg_NextDamageType          = 0
+        set udg_DamageEventTrigger      = null
+        call BlzSetEventDamage(0.00) //queue the damage instance instead of letting it run recursively
     else
-        set udg_DamageModifierEvent = 0.00
-        set udg_DamageModifierEvent = 1.00      //I recommend using this for changing damage types or using percentage-based scaling for damage modification
-        if not udg_DamageEventOverride then
-            set udg_DamageModifierEvent = 2.00  //Extra event in case you need to make final adjustments before in-game modifications are calculated.
+        if not purge then
+            //Added 25 July 2017 to detect AOE damage or multiple single-target damage
+            if started then
+                if src != udg_AOEDamageSource then //Source has damaged more than once
+                    
+                    call OnAOEEnd() //New damage source - unflag everything
+                    set udg_AOEDamageSource = src
+                elseif tgt == udg_EnhancedDamageTarget then
+                    set udg_DamageEventLevel= udg_DamageEventLevel + 1  //The number of times the same unit was hit.
+                elseif not IsUnitInGroup(tgt, udg_DamageEventAOEGroup) then
+                    set udg_DamageEventAOE  = udg_DamageEventAOE + 1    //Multiple targets hit by this source - flag as AOE
+                endif
+                if preDamage then
+                    set preDamage           = false
+                    set previousAmount      = udg_DamageEventAmount
+                    set previousValue       = udg_DamageEventPrevAmt    //Store the actual pre-armor value.
+                    set previousType        = udg_DamageEventType       //also store the damage type.
+                    set previousCode        = udg_IsDamageCode          //store this as well.
+                    set holdClear           = true
+                endif
+            else
+                call TimerStart(ticker, 0.00, false, function OnExpire)
+                set started                 = true
+                set udg_AOEDamageSource     = src
+                set udg_EnhancedDamageTarget= tgt
+            endif
+            call GroupAddUnit(udg_DamageEventAOEGroup, tgt)
         endif
         
-        //All events have run and the damage amount is finalized.
+        set udg_DamageEventType             = udg_NextDamageType
+        if udg_NextDamageType != 0 then 
+            set udg_DamageEventType         = udg_NextDamageType
+            set udg_NextDamageType          = 0
+            set udg_IsDamageCode            = true //New in 5.1 - requested by chopinski to allow user to detect Code damage
+                
+            set udg_DamageEventTrigger      = null
+        endif   
+        set udg_DamageEventOverride         = dt == null or amt == 0.00 or udg_DamageEventType*udg_DamageEventType == 4 //Got rid of NextDamageOverride in 5.1 for simplicity
+        set udg_DamageEventPrevAmt          = amt
+        
+        set udg_DamageEventSource           = src    
+        set udg_DamageEventTarget           = tgt        
+        set udg_DamageEventAmount           = amt
+        set udg_DamageEventAttackT          = GetHandleId(at)
+        set udg_DamageEventDamageT          = GetHandleId(dt)
+        set udg_DamageEventWeaponT          = GetHandleId(wt)
+        
+        call CalibrateMR() //Set Melee and Ranged settings.
+        
+        //Ignores event on various debuffs like Faerie Fire - alternatively,
+        //the user can exploit UNKNOWN damage type to avoid damage detection.
+        if not udg_DamageEventOverride then
+            set recursive = true
+            
+            set udg_DamageModifierEvent = 0.00
+            set udg_DamageModifierEvent = 1.00  //I recommend using this for changing damage types or for when you need to do things that should override subsequent damage modification.
+            
+            set udg_DamageEventOverride = udg_DamageEventOverride or udg_DamageEventType*udg_DamageEventType == 4
+            if not udg_DamageEventOverride then
+                set udg_DamageModifierEvent = 2.00  //This should involve damage calculation based on multiplication/percentages.
+                set udg_DamageModifierEvent = 3.00  //This should just be addition or subtraction at this point.
+            endif
+            
+            set recursive = false
+        endif
+        
+        //All events have run and the pre-damage amount is finalized.
         call BlzSetEventAttackType(ConvertAttackType(udg_DamageEventAttackT))
         call BlzSetEventDamageType(ConvertDamageType(udg_DamageEventDamageT))
         call BlzSetEventWeaponType(ConvertWeaponType(udg_DamageEventWeaponT))
-        call BlzSetEventDamage(RMaxBJ(udg_DamageEventAmount, 0.00)) //Healing causes issues here as the negative damage is not always counted as a heal. 
-    endif                                               //I therefore run a separate heal process from the "After Damage" moment which works for all units. 
-    
-    //call BJDebugMsg(R2S(GetWidgetLife(udg_DamageEventTarget)))
-    call BJDebugMsg("dAMAGE")
-    if not started then
-        set started = true
-        call TimerStart(ticker, 0.00, false, function OnExpire)
+        call BlzSetEventDamage(udg_DamageEventAmount)
+        set preDamage = true
+        //call BJDebugMsg("Ready to deal " + R2S(udg_DamageEventAmount))
     endif
-    
-    set queued = true //I set this variable to True just in case the classic damage event doesn't fire.
-
+    set src = null
+    set tgt = null
     return false
 endfunction
 
-private function RunLethal takes nothing returns real
-    local real r = udg_LethalDamageHP   //exists only for recurion
-    set udg_LethalDamageHP = 0.00
-    
-    set udg_LethalDamageEvent = 0.00    //New - added 10 May 2019 to detect and potentially prevent lethal damage. Instead of
-    set udg_LethalDamageEvent = 1.00    //modifying the damage, you need to modify LethalDamageHP instead (the final HP of the unit).
-    
-    if udg_LethalDamageHP > 0.405 then
-        //Instead of modifying the DamageEventAmount variable, just ensure the unit survives.
-        return GetWidgetLife(udg_DamageEventTarget) - udg_LethalDamageHP
-    elseif udg_DamageEventType < 0 then
-        call SetUnitExploded(udg_DamageEventTarget, true)   //Explosive damage types should blow up the target.
-    endif
-    
-    set udg_LethalDamageHP = r //exists only for recurion
-    return udg_DamageEventAmount
-endfunction
-
+//The traditional on-damage response, where armor reduction has already been factored in.
 private function OnDamage takes nothing returns boolean
-    set queued = false
-    
-    //call BJDebugMsg(R2S(GetWidgetLife(udg_DamageEventTarget)))
-    //call BJDebugMsg("Regular damage event running")
-    
-    set udg_DamageEventPrevAmt  = udg_DamageEventAmount
-    set udg_DamageEventAmount   = GetEventDamage()  //Damage may have been further adjusted (ie. unit armor or armor type reduction)
-    
-    //call BJDebugMsg(GetUnitName(udg_DamageEventSource) + " dealt " + I2S(R2I(udg_DamageEventAmount)) + " to " + GetUnitName(udg_DamageEventTarget))
-    
-    if not udg_DamageEventOverride then
-        set udg_DamageModifierEvent = 3.00      //One final modifier to run before shields but after armor & attacks were calculated.
+    local real r = GetEventDamage()
+    local integer i
+    if recursive then
+        return false
     endif
-    if udg_DamageEventAmount > 0.00 then
-        set udg_DamageModifierEvent = 4.00      //This event is used for custom shields which have a limited hit point value
-    endif
-    
-    if GetWidgetLife(udg_DamageEventTarget) - udg_DamageEventAmount <= 0.405 then
-        call BlzSetEventDamage(RunLethal())
+    //call BJDebugMsg("Second event running")
+    if preDamage then
+        set preDamage = false   //This should be the case in almost all circumstances
     else
-        call BlzSetEventDamage(udg_DamageEventAmount)    //Apply the final damage amount.
+        set holdClear                   = false
+        
+        //Unfortunately, Spirit Link and Thorns Aura/Spiked Carapace fire the DAMAGED event out of sequence with the DAMAGING event,
+        //so I have to re-generate a buncha stuff here.
+        set udg_DamageEventAmount       = previousAmount
+        set udg_DamageEventPrevAmt      = previousValue
+        set udg_DamageEventType         = previousType
+        set udg_IsDamageCode            = previousCode
+        set udg_DamageEventSource       = GetEventDamageSource()
+        set udg_DamageEventTarget       = BlzGetEventDamageTarget()
+        set udg_DamageEventAttackT      = GetHandleId(BlzGetEventAttackType())
+        set udg_DamageEventDamageT      = GetHandleId(BlzGetEventDamageType())
+        set udg_DamageEventWeaponT      = GetHandleId(BlzGetEventWeaponType())
+        
+        call CalibrateMR() //Apply melee/ranged settings once again.
     endif
     
-    set queued = true
+    set recursive = true
+    if udg_DamageEventPrevAmt == 0.00 then
+        set udg_DamageEvent = 0.00
+        set udg_DamageEvent = 2.00
+    else    
+        if udg_DamageEventAmount != 0.00 then
+            set udg_DamageScalingWC3 = r / udg_DamageEventAmount
+        else
+            set udg_DamageScalingWC3 = 0.00
+        endif
+        
+        //DamageEventAmount remains unmodified by in-game damage processing for DamageTypePure.
+        //Damage may have been further adjusted (ie. unit armor or armor type reduction)
+        //Do not adjust in case damage was below zero because WC3 will have converted it to zero. 
+        if udg_DamageScalingWC3 > 0.00 and not udg_DamageEventOverride then
+            set udg_DamageEventAmount = r
+        endif
+        
+        if udg_DamageEventAmount > 0.00 then
+            //This event is used for custom shields which have a limited hit point value
+            //The shield here kicks in after armor, so it acts like extra hit points.
+            set udg_DamageModifierEvent = 0.00
+            set udg_DamageModifierEvent = 4.00
+            
+            set udg_LethalDamageHP = GetWidgetLife(udg_DamageEventTarget) - udg_DamageEventAmount
+            if udg_LethalDamageHP <= 0.405 then
+                
+                set udg_LethalDamageEvent = 0.00    //New - added 10 May 2019 to detect and potentially prevent lethal damage. Instead of
+                set udg_LethalDamageEvent = 1.00    //modifying the damage, you need to modify LethalDamageHP instead (the final HP of the unit).
+                
+                set udg_DamageEventAmount = GetWidgetLife(udg_DamageEventTarget) - udg_LethalDamageHP
+                if udg_DamageEventType < 0 and udg_LethalDamageHP <= 0.405 then
+                    call SetUnitExploded(udg_DamageEventTarget, true)   //Explosive damage types should blow up the target.
+                endif
+            endif
+        endif
+        call BlzSetEventDamage(udg_DamageEventAmount)   //Apply the final damage amount.
+        //if recursion > -1 then
+            //call BJDebugMsg("Dealing " + R2S(udg_DamageEventAmount))
+        //endif
+        if udg_DamageEventDamageT != udg_DAMAGE_TYPE_UNKNOWN then
+            set udg_DamageEvent = 0.00
+            set udg_DamageEvent = 1.00
+        endif
+    endif
+    set recursive = false
+    if recursion > -1 then
+        if not holdClear and not purge then
+            set purge = true
+            set i = -1
+            //call BJDebugMsg("Clearing Recursion: " + I2S(recursion))
+            loop
+                exitwhen i >= recursion
+                set i = i + 1 //Need to loop bottom to top to make sure damage order is preserved.
+                
+                set udg_NextDamageType = lastType[i]
+                if lastTrig[i] != null then
+                    call DisableTrigger(lastTrig[i])//Since the damage is run sequentially now, rather than recursively, the system needs to disable the user's trigger for them.
+                endif
+                //call BJDebugMsg("Stacking on " + R2S(lastAmount[i]))
+                call UnitDamageTarget(lastSource[i], lastTarget[i], lastAmount[i], true, false, lastAttackT[i], lastDamageT[i], lastWeaponT[i])
+            endloop
+            loop
+                exitwhen i <= -1
+                if lastTrig[i] != null then
+                    call EnableTrigger(lastTrig[i]) //Only re-enable recursive triggers AFTER all damage is dealt.
+                endif
+                set i = i - 1
+            endloop
+            //call BJDebugMsg("Cleared Recursion: " + I2S(recursion))
+            set recursion = -1 //Can only be set after all the damage has successfully ended.
+            set purge = false
+        endif
+    //else
+        //call BJDebugMsg("Not Clearing Recursion: " + I2S(recursion) + ", HoldClear: " + I2S(IntegerTertiaryOp(holdClear, 1, 0)) + ", Purge: " + I2S(IntegerTertiaryOp(purge, 1, 0)))
+    endif
     return false
 endfunction
 
 //===========================================================================
-private function PreClear takes nothing returns boolean
-    call ClearDamageEvent(true)
-    return false
-endfunction
-
 private function Init takes nothing returns nothing
-    local trigger t = CreateTrigger()
-    call TriggerRegisterAnyUnitEventBJ(t, EVENT_PLAYER_UNIT_DAMAGING)
-    call TriggerAddCondition(t, Filter(function OnPreDamage))
-    set t = CreateTrigger()
-    call TriggerRegisterAnyUnitEventBJ(t, EVENT_PLAYER_UNIT_DAMAGED)
-    call TriggerAddCondition(t, Filter(function OnDamage))
-
-    //Create GUI-friendly trigger for cleaning up after UnitDamageTarget.
-    set udg_ClearDamageEvent = CreateTrigger()
-    call TriggerAddCondition(udg_ClearDamageEvent, Filter(function PreClear))
+    call TriggerRegisterAnyUnitEventBJ(trig, EVENT_PLAYER_UNIT_DAMAGING) //The new 1.31 event which fires before damage.
+    call TriggerAddCondition(trig, Filter(function OnPreDamage))
+    
+    set trig = CreateTrigger()
+    call TriggerRegisterAnyUnitEventBJ(trig, EVENT_PLAYER_UNIT_DAMAGED) //Thanks to this I no longer have to have 1 event for all units in the map.
+    call TriggerAddCondition(trig, Filter(function OnDamage))
 endfunction
 
 public function DebugStr takes nothing returns nothing
-    set udg_AttackTypeDebugStr[0] = "SPELLS"
-    set udg_AttackTypeDebugStr[1] = "NORMAL" 
+    set udg_AttackTypeDebugStr[0] = "SPELLS"    //ATTACK_TYPE_NORMAL in JASS
+    set udg_AttackTypeDebugStr[1] = "NORMAL"    //ATTACK_TYPE_MELEE in JASS
     set udg_AttackTypeDebugStr[2] = "PIERCE"
     set udg_AttackTypeDebugStr[3] = "SIEGE" 
     set udg_AttackTypeDebugStr[4] = "MAGIC" 
@@ -388,7 +396,7 @@ public function DebugStr takes nothing returns nothing
     set udg_DamageTypeDebugStr[25] = "SHADOW_STRIKE"
     set udg_DamageTypeDebugStr[26] = "UNIVERSAL"
     
-    set udg_WeaponTypeDebugStr[0]  = "NONE"
+    set udg_WeaponTypeDebugStr[0]  = "NONE"     //WEAPON_TYPE_WHOKNOWS in JASS
     set udg_WeaponTypeDebugStr[1]  = "METAL_LIGHT_CHOP"
     set udg_WeaponTypeDebugStr[2]  = "METAL_MEDIUM_CHOP"
     set udg_WeaponTypeDebugStr[3]  = "METAL_HEAVY_CHOP"
@@ -412,6 +420,18 @@ public function DebugStr takes nothing returns nothing
     set udg_WeaponTypeDebugStr[21] = "CLAW_HEAVY_SLICE"
     set udg_WeaponTypeDebugStr[22] = "AXE_MEDIUM_CHOP"
     set udg_WeaponTypeDebugStr[23] = "ROCK_HEAVY_BASH"
+endfunction
+
+//This function exists mainly to make it easier to switch from another DDS, like PDD.
+function UnitDamageTargetEx takes unit src, unit tgt, real amt, boolean a, boolean r, attacktype at, damagetype dt, weapontype wt returns boolean
+    if udg_DamageEventTrigger == null then
+        set udg_DamageEventTrigger = GetTriggeringTrigger() //Directly access the user's calling trigger
+    endif
+    if udg_NextDamageType == 0 then
+       set udg_NextDamageType = udg_DamageTypeCode 
+    endif
+    call UnitDamageTarget(src, tgt, amt, a, r, at, dt, wt)
+    return recursive
 endfunction
 
 endlibrary 

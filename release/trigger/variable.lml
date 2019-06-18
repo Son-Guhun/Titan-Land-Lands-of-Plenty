@@ -278,9 +278,6 @@ DamageTypeHeal: integer
 DamageTypeReduced: integer
 DamageTypeBlocked: integer
 DmgEvBracers: itemcode
-DAMAGE_FACTOR_BRACERS: real
-DAMAGE_FACTOR_ELUNES: real
-DAMAGE_FACTOR_ETHEREAL: real
 AfterDamageEvent: real
 DamageEvent: real
 DamageModifierEvent: real
@@ -297,7 +294,6 @@ DamageEventType: integer
 LastDmgPrevType: integer
     Array : 1
 NextDamageType: integer
-DamageEventsWasted: integer
 DmgEvRecursionN: integer
 DmgEvRunning: boolean
 DmgEvStarted: boolean
@@ -555,3 +551,17 @@ Spell_i_BuffAbil: abilcode
     Array : 1
 System_FP_Units: unit
     Array : 1
+AOEDamageSource: unit
+IsDamageMelee: boolean
+IsDamageRanged: boolean
+DamageEventAttackT: integer
+DamageEventDamageT: integer
+DamageEventWeaponT: integer
+DamageTypeCode: integer
+DamageTypePure: integer
+LethalDamageEvent: real
+DAMAGE_TYPE_UNKNOWN: integer
+DAMAGE_TYPE_NORMAL: integer
+IsDamageCode: boolean
+LethalDamageHP: real
+DamageScalingWC3: real

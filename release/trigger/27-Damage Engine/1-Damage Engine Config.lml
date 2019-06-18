@@ -42,14 +42,20 @@ Action
         Var   : DamageTypeCriticalStrike
         Const : 1
     SetVariable
-        Var   : DamageTypeHeal
+        Var   : DamageTypeCode
+        Const : 1
+    SetVariable
+        Var   : DamageTypePure
         Const : 2
     SetVariable
-        Var   : DamageTypeReduced
+        Var   : DamageTypeHeal
         Const : 3
     SetVariable
         Var   : DamageTypeBlocked
         Const : 4
+    SetVariable
+        Var   : DamageTypeReduced
+        Const : 5
     CommentString
         Const : -
     CommentString
@@ -78,3 +84,13 @@ Action
         Const : 'Do not enable any of the following lines as they are simply variable declarations to make copying easier'
     CommentString
         Const : -
+    SetVariable
+        Var   : DAMAGE_TYPE_UNKNOWN
+        Const : 0
+    SetVariable
+        Var   : DAMAGE_TYPE_NORMAL
+        Const : 4
+    CommentString
+        Const : -
+    CustomScriptCode
+        Const : 'call DamageEngine_DebugStr()'

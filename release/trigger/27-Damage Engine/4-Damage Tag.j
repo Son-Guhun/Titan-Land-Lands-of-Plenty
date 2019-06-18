@@ -200,7 +200,7 @@ endfunction
 //===========================================================================
 function InitTrig_Damage_Tag takes nothing returns nothing
     set gg_trg_Damage_Tag = CreateTrigger(  )
-    call TriggerRegisterVariableEvent( gg_trg_Damage_Tag, "udg_DamageModifierEvent", EQUAL, 3.00 )
+    call TriggerRegisterVariableEvent( gg_trg_Damage_Tag, "udg_DamageModifierEvent", EQUAL, 4.00 )
     call TriggerAddAction( gg_trg_Damage_Tag, function Trig_Damage_Tag_Actions )
 endfunction
 
