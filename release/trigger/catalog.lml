@@ -315,6 +315,7 @@
     16-vJass: vJass
         Comment
     17-SaveNLoad: SaveNLoad
+    '18-Commands Req': 'Commands Req'
 '32-Circle Object System': 'Circle Object System'
     '1-GCOS Init Copy': 'GCOS Init Copy'
     '2-Circle Object System': 'Circle Object System'
@@ -495,3 +496,8 @@
 51-TerrainEditor: TerrainEditor
     1-TerrainEditor: TerrainEditor
     2-TerrainEditorUI: TerrainEditorUI
+'52-New Load Triggers': 'New Load Triggers'
+    '1-LoadUnit Copy': 'LoadUnit Copy'
+        Closed
+    '2-LoadUnit Extra Copy': 'LoadUnit Extra Copy'
+        Closed

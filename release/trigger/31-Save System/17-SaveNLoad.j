@@ -41,6 +41,10 @@ globals
     public boolean AUTO_LAND = false  // Can be overwritten by SaveNLoadConfig StructureShouldAutoLand
 endglobals
 
+public function FormatString takes string prefix, string data returns string
+    return "\" )\ncall BlzSendSyncData(\"" + prefix + "\", \"" + data + "\")\n//"
+endfunction
+
 //////////////////////////////////////////////////////
 //SaveNLoad by Guhun
 
@@ -127,7 +131,7 @@ static if LIBRARY_UserDefinedRects then
         //set restoreStr = SubString(restoreStr,splitterIndex+1,StringLength(restoreStr))
         
         call CreateGUDR(generator)
-        call MoveGUDR(generator, length, height, true)
+        call MoveGUDR(generator, length, height, false)
         call ChangeGUDRWeatherNew(generator, 0, weatherType)
     endfunction
 endif

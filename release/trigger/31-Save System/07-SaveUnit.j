@@ -11,7 +11,7 @@ function IsUnitWaygate takes unit whichUnit returns boolean
 endfunction
 
 function Save_PatrolPointStr takes real x, real y returns string
-    return "=p " + R2S(x) + "=" +  R2S(y)
+    return SaveNLoad_FormatString("SnL_unit_extra", "=p " + R2S(x) + "=" +  R2S(y))
 endfunction
 
 function Save_SaveUnitPatrolPoints takes player savePlayer, integer unitHandleId returns nothing
@@ -57,7 +57,7 @@ function SaveEffectDecos takes integer playerNumber, boolean isLocalPlayer retur
     loop
         exitwhen counter == 25 or decorations == 0 or decoration == decorations.end()
         
-        set saveStr = GenerateSpecialEffectSaveString(decoration)
+        set saveStr = SaveNLoad_FormatString("SnL_unit", GenerateSpecialEffectSaveString(decoration))
         if isLocalPlayer then
             call Preload(saveStr)
         endif
@@ -76,6 +76,10 @@ function SaveEffectDecos takes integer playerNumber, boolean isLocalPlayer retur
     return counter
 endfunction
 
+globals
+    boolean is_saving = false
+endglobals
+
 function SaveForceLoop takes nothing returns boolean
     local integer playerId = GetPlayerId(GetFilterPlayer())
     local integer playerNumber = playerId + 1
@@ -89,8 +93,12 @@ function SaveForceLoop takes nothing returns boolean
         set stillSaving = true
         if ( GetLocalPlayer() == Player(playerNumber - 1) ) then
             set isLocalPlayer = true
-            call PreloadGenStart()
-            call PreloadGenClear()
+            
+            if not is_saving then
+                call PreloadGenStart()
+                call PreloadGenClear()
+                set is_saving = true
+            endif
         endif
         
         set saveUnitCount = SaveEffectDecos(playerNumber, isLocalPlayer)
@@ -117,19 +125,21 @@ function SaveForceLoop takes nothing returns boolean
                             */   unitHandleId.getAnimSpeed() + "," + /*
                             */   unitHandleId.getAnimTag() + "," + /*
                             */   I2S(GUMS_GetUnitSelectionType(saveUnit))
+                
+                set saveStr = SaveNLoad_FormatString("SnL_unit", saveStr)
                 if isLocalPlayer then
                     call Preload(saveStr)
                 endif
                 
                 if GUMSUnitHasCustomName(unitHandleId) then
-                    set saveStr = "=n " + GUMSGetUnitName(saveUnit)
+                    set saveStr = SaveNLoad_FormatString("SnL_unit_extra", "=n " + GUMSGetUnitName(saveUnit))
                     if isLocalPlayer then
                         call Preload(saveStr)
                     endif
                 endif
                 
                 if GUDR_IsUnitIdGenerator(unitHandleId) then
-                    set saveStr = Save_GetGUDRSaveString(unitHandleId)
+                    set saveStr = SaveNLoad_FormatString("SnL_unit_extra", Save_GetGUDRSaveString(unitHandleId))
                     if isLocalPlayer then
                         call Preload(saveStr)
                     endif
@@ -137,9 +147,9 @@ function SaveForceLoop takes nothing returns boolean
                 
                 if IsUnitWaygate(saveUnit) then
                     if WaygateIsActive(saveUnit) then
-                        set saveStr = "=w " + R2S(WaygateGetDestinationX(saveUnit)) + "=" + R2S(WaygateGetDestinationY(saveUnit)) + "=T="
+                        set saveStr = SaveNLoad_FormatString("SnL_unit_extra", "=w " + R2S(WaygateGetDestinationX(saveUnit)) + "=" + R2S(WaygateGetDestinationY(saveUnit)) + "=T=")
                     else
-                        set saveStr = "=w " + R2S(WaygateGetDestinationX(saveUnit)) + "=" + R2S(WaygateGetDestinationY(saveUnit)) + "=F="
+                        set saveStr = SaveNLoad_FormatString("SnL_unit_extra", "=w " + R2S(WaygateGetDestinationX(saveUnit)) + "=" + R2S(WaygateGetDestinationY(saveUnit)) + "=F=")
                     endif
                     if isLocalPlayer then
                         call Preload(saveStr)
@@ -150,10 +160,12 @@ function SaveForceLoop takes nothing returns boolean
                     call Save_SaveUnitPatrolPoints(Player(playerNumber - 1), unitHandleId)
                 endif
             else
+                /*
                 set saveStr = "Removed Unit"
                 if isLocalPlayer then
                     call Preload(saveStr)
                 endif
+                */
                 call GroupRefresh(udg_save_grp[playerNumber])
             endif
             //End of Check
@@ -170,13 +182,20 @@ function SaveForceLoop takes nothing returns boolean
         endloop //saveUnitCount should be set to zero at the start of this loop
         
         //This if statement must remain inside (if udg_save_load_boolean[playerNumber] == true) statement to avoid output for people who aren't saving
+        /*
         set saveStr = "DataManager\\" + udg_save_password[playerNumber] + "\\" + I2S(udg_save_unit_nmbr[playerNumber]) + ".txt"
         if isLocalPlayer then
             call PreloadGenEnd(saveStr)
         endif
+        */
         call DisplayTextToPlayer(Player(playerNumber - 1), 0, 0, (I2S(udg_save_unit_nmbr[playerNumber])))
         set udg_save_unit_nmbr[playerNumber] = ( udg_save_unit_nmbr[playerNumber] + 1 )
         if udg_save_load_boolean[playerNumber] == false then
+            set saveStr = "DataManager\\" + udg_save_password[playerNumber] + "\\0.txt"
+            if isLocalPlayer then
+                call PreloadGenEnd(saveStr)
+            endif
+            set is_saving = false
             call SaveSize(Player(playerNumber - 1), udg_save_password[playerNumber], udg_save_unit_nmbr[playerNumber])
         endif
         

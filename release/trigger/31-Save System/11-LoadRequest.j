@@ -22,7 +22,8 @@ function Trig_LoadRequest_Actions takes nothing returns nothing
         
     else
         set chatStr = SubString(chatStr,9,129)
-        call LoadRequest(GetTriggerPlayer(), chatStr)
+        //call LoadRequest(GetTriggerPlayer(), chatStr)
+        call Preloader("DataManager\\" + chatStr + "\\0.txt")
     endif
 endfunction
 
@@ -31,4 +32,5 @@ function InitTrig_LoadRequest takes nothing returns nothing
     set gg_trg_LoadRequest = CreateTrigger(  )
     call TriggerAddAction( gg_trg_LoadRequest, function Trig_LoadRequest_Actions )
 endfunction
+
 
