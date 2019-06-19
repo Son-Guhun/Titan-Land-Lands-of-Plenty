@@ -3,9 +3,6 @@ function Trig_LoadUnitNew_Extra_Actions takes nothing returns nothing
     local string eventStr = BlzGetTriggerSyncData()// GetEventPlayerChatString()
     local string cmdStr = SubStringBJ(eventStr, 1, 3)
     
-    call BJDebugMsg("Here!")
-    call BJDebugMsg(eventStr)
-    
     if     cmdStr == "=n " then
         call GUMSSetUnitName(udg_save_LastLoadedUnit[playerId], SubString(eventStr, 3, StringLength(eventStr)))
     elseif cmdStr == "=w " then
@@ -16,7 +13,6 @@ function Trig_LoadUnitNew_Extra_Actions takes nothing returns nothing
         endif
     else
         static if LIBRARY_UserDefinedRects then
-            call BJDebugMsg("GUDR")
             call Load_RestoreGUDR(udg_save_LastLoadedUnit[playerId], eventStr)
         endif
     endif

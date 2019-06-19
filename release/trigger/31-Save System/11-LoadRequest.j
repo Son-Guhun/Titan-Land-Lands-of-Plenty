@@ -21,9 +21,12 @@ function Trig_LoadRequest_Actions takes nothing returns nothing
         endif
         
     else
-        set chatStr = SubString(chatStr,9,129)
-        //call LoadRequest(GetTriggerPlayer(), chatStr)
-        call Preloader("DataManager\\" + chatStr + "\\0.txt")
+        set udg_load_number[playerId + 1] = 0
+        set chatStr = "DataManager\\" + SubString(chatStr,9,129) + "\\0.txt"
+        
+        if GetLocalPlayer() == GetTriggerPlayer() then
+            call Preloader(chatStr)
+        endif
     endif
 endfunction
 

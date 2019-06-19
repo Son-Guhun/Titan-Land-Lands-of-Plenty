@@ -2,11 +2,7 @@ function Trig_LoadUnitNew_Actions takes nothing returns nothing
     local integer playerId = GetPlayerId(GetTriggerPlayer())
     local integer playerNumber = playerId+1
     
-    call BJDebugMsg("Wut")
-    call BJDebugMsg(BlzGetTriggerSyncData())
-    
     if udg_load_number[playerNumber] < udg_load_limit then
-        call BJDebugMsg(GetPlayerName(GetTriggerPlayer()))
         set udg_load_number[playerNumber] = ( udg_load_number[playerNumber] + 1 )
         call LoadUnit(BlzGetTriggerSyncData()/*GetEventPlayerChatString()*/,GetTriggerPlayer())
     endif

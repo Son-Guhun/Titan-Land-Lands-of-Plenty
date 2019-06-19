@@ -27,6 +27,7 @@ function SaveTiles takes nothing returns boolean
             endif
         endloop
 
+        set saveStr = SaveNLoad_FormatString("SnL_ter", saveStr)
         if GetLocalPlayer() == GetTriggerPlayer() then
             call Preload(saveStr)
         endif
@@ -40,8 +41,7 @@ function SaveTerrain takes nothing returns nothing
     local rect saveRect
     local integer genId
     
-    local string saveStr = "-load ter"
-    local string centerStr
+    local string saveStr
     
     if SubString(GetEventPlayerChatString(), 0, 6) != "-tsav " then
         return
@@ -60,12 +60,11 @@ function SaveTerrain takes nothing returns nothing
     set udg_save_XYminmaxcur[playerId+2*bj_MAX_PLAYERS] = udg_save_XYminmaxcur[playerId]
     set udg_save_XYminmaxcur[playerId+5*bj_MAX_PLAYERS] = udg_save_XYminmaxcur[playerId+3*bj_MAX_PLAYERS]
     
-    set centerStr = R2S(udg_save_XYminmaxcur[playerId]) + "@" + R2S(udg_save_XYminmaxcur[playerId+bj_MAX_PLAYERS]) + "@" + R2S(udg_save_XYminmaxcur[playerId+3*bj_MAX_PLAYERS]) + "@" + R2S(udg_save_XYminmaxcur[playerId+4*bj_MAX_PLAYERS]) + "@"
+    set saveStr = SaveNLoad_FormatString("SnL_ter", R2S(udg_save_XYminmaxcur[playerId]) + "@" + R2S(udg_save_XYminmaxcur[playerId+bj_MAX_PLAYERS]) + "@" + R2S(udg_save_XYminmaxcur[playerId+3*bj_MAX_PLAYERS]) + "@" + R2S(udg_save_XYminmaxcur[playerId+4*bj_MAX_PLAYERS]) + "@")
     if GetLocalPlayer()== GetTriggerPlayer() then
         call PreloadGenClear()
         call PreloadGenStart()
         call Preload(saveStr)
-        call Preload(centerStr)
     endif
     set udg_save_password[playerId+1] = SubString(GetEventPlayerChatString(), 6, 129)
     set cond = TriggerAddCondition(gg_trg_SaveTerrain, Condition(function SaveTiles))

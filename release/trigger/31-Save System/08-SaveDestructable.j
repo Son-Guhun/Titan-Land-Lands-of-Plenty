@@ -1,7 +1,12 @@
 function SaveFilter takes nothing returns boolean
     local destructable dest = GetFilterDestructable()
-    if  IsDestructableTree(dest) and udg_save_localPlayerBool then
-        call Preload(I2S(GetDestructableTypeId(dest))+"|"+R2S(GetDestructableX(dest)- Save_GetCenterX(udg_temp_integer))+"|"+R2S(GetDestructableY(dest)- Save_GetCenterY(udg_temp_integer))+"|")
+    local string saveStr
+    
+    if  IsDestructableTree(dest) then
+        set saveStr = SaveNLoad_FormatString("SnL_dest",  I2S(GetDestructableTypeId(dest))+"|"+R2S(GetDestructableX(dest)- Save_GetCenterX(udg_temp_integer))+"|"+R2S(GetDestructableY(dest)- Save_GetCenterY(udg_temp_integer))+"|")
+        if udg_save_localPlayerBool then
+            call Preload(saveStr)
+        endif
     endif
     set dest = null
     return false
@@ -13,8 +18,7 @@ function SaveLoopActions2 takes nothing returns nothing
     local rect rectangle
     local integer playerNumber = GetPlayerId(saver)
     local integer tempInteger
-    
-    local string saveStr = "-load dest" // Create string outside of local block.
+    local string saveStr
     
     if SubString(GetEventPlayerChatString(), 0, 6) != "-dsav " then
         return
@@ -33,7 +37,6 @@ function SaveLoopActions2 takes nothing returns nothing
     if GetLocalPlayer() == saver then
         call PreloadGenClear()
         call PreloadGenStart()
-        call Preload(saveStr)
         set udg_save_localPlayerBool = true
         set tempInteger = udg_temp_integer  // store global value in local
         set udg_temp_integer = playerNumber

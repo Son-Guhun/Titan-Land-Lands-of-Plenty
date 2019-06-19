@@ -501,3 +501,5 @@
         Closed
     '2-LoadUnit Extra Copy': 'LoadUnit Extra Copy'
         Closed
+    '3-LoadDestructable Copy': 'LoadDestructable Copy'
+    '4-LoadTerrain Copy': 'LoadTerrain Copy'
