@@ -27,7 +27,7 @@ function Trig_CommandsR_Delete_Conditions takes nothing returns boolean
         call GroupEnumUnitsOfPlayer(ENUM_GROUP, Player(playerNumber - 1), Condition(function GroupEnum_RemoveOutsidePalace))
         call ForGroup( udg_System_NeutralUnits[( playerNumber - 1 )], function Trig_CommandsR_Delete_Func018A )
     else
-        set test = EnumDecorationsOfPlayer(Player(0))
+        set test = EnumDecorationsOfPlayer(Player(playerNumber - 1))
         set i = test.begin()
     
         set commandsDeleteInsideTitanPalace = false

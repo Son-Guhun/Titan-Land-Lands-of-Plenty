@@ -10,7 +10,7 @@ function GroupEnum_RemoveOutsidePalace takes nothing returns boolean
 endfunction
 
 function Trig_Commands_Deleteme_Conditions takes nothing returns boolean
-    local LinkedHashSet_DecorationEffect test = EnumDecorationsOfPlayer(Player(0))
+    local LinkedHashSet_DecorationEffect test = EnumDecorationsOfPlayer(GetTriggerPlayer())
     local DecorationEffect i = test.begin()
 
     set udg_Commands_Counter = 0

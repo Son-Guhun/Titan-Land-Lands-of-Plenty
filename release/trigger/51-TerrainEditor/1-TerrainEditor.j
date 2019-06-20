@@ -31,6 +31,11 @@ globals
     public constant integer DEFAULT_TEXTURE = 'Ywmb'
 endglobals
 
+// This is the path to the image used for the square brush.
+private function SQUARE_PATH takes nothing returns string
+    return "Images\\SelectionSquare.tga"
+endfunction
+
 globals
     // This is the control state to be set as the active state when a user is editing terrain.
     public ControlState controlState
@@ -56,7 +61,7 @@ public function SetBrushSize takes player whichPlayer, integer size returns noth
     local integer playerId = GetPlayerId(whichPlayer)
     set size = (size/2)*2 + 1  // Makes sure value is odd (convert to nearest low even, add 1)
     call DestroyImage(myImage[playerId])
-    call SetImageRenderAlways(CreateImage("war3mapImported\\SelectionSquare.tga", 128*size, 128*size, 0, 0, 0, 0, 128*size/2,128*size/2,0, 1), true)
+    call SetImageRenderAlways(CreateImage(SQUARE_PATH(), 128*size, 128*size, 0, 0, 0, 0, 128*size/2,128*size/2,0, 1), true)
     call SetImagePosition(myImage[playerId], GetTileCenterCoordinate(GetPlayerLastMouseX(Player(0))), GetTileCenterCoordinate(GetPlayerLastMouseY(Player(0))), 0)
     set brushSize[playerId] = size
 endfunction
@@ -183,7 +188,7 @@ private function onInit takes nothing returns nothing
     loop
     exitwhen i > bj_MAX_PLAYERS
         if GetPlayerSlotState(Player(i)) == PLAYER_SLOT_STATE_PLAYING then
-            set myImage[i] = CreateImage("war3mapImported\\SelectionSquare.tga", 128*5, 128*5, 0, 0, 0, 0, 128*5/2,128*5/2,0, 1)
+            set myImage[i] = CreateImage(SQUARE_PATH(), 128*5, 128*5, 0, 0, 0, 0, 128*5/2,128*5/2,0, 1)
             set brushSize[i] = 5
             
             set applyTexture[i] = DEFAULT_APPLY_TEXTURE
