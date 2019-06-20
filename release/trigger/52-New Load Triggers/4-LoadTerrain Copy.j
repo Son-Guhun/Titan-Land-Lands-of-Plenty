@@ -13,6 +13,6 @@ endfunction
 function InitTrig_LoadTerrain_Copy takes nothing returns nothing
     set gg_trg_LoadTerrain_Copy = CreateTrigger(  )
     call TriggerAddAction( gg_trg_LoadTerrain_Copy, function Trig_LoadTerrainNew_Actions )
-    call BlzTriggerRegisterPlayerSyncEvent( gg_trg_LoadTerrain_Copy, Player(0), "SnL_ter", false)
+    call TriggerRegisterAnyPlayerSyncEvent( gg_trg_LoadTerrain_Copy, "SnL_ter", false)
 endfunction
 

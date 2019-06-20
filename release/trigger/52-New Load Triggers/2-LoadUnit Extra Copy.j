@@ -22,6 +22,6 @@ endfunction
 function InitTrig_LoadUnit_Extra_Copy takes nothing returns nothing
     set gg_trg_LoadUnit_Extra_Copy = CreateTrigger(  )
     call TriggerAddAction( gg_trg_LoadUnit_Extra_Copy, function Trig_LoadUnitNew_Extra_Actions )
-    call BlzTriggerRegisterPlayerSyncEvent( gg_trg_LoadUnit_Extra_Copy, Player(0), "SnL_unit_extra", false)
+    call TriggerRegisterAnyPlayerSyncEvent( gg_trg_LoadUnit_Extra_Copy, "SnL_unit_extra", false)
 endfunction
 

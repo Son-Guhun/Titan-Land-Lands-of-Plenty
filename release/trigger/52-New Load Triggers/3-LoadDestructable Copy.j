@@ -12,6 +12,6 @@ endfunction
 function InitTrig_LoadDestructable_Copy takes nothing returns nothing
     set gg_trg_LoadDestructable_Copy = CreateTrigger(  )
     call TriggerAddAction( gg_trg_LoadDestructable_Copy, function Trig_LoadDestNew_Actions )
-    call BlzTriggerRegisterPlayerSyncEvent( gg_trg_LoadDestructable_Copy, Player(0), "SnL_dest", false)
+    call TriggerRegisterAnyPlayerSyncEvent( gg_trg_LoadDestructable_Copy, "SnL_dest", false)
 endfunction
 

@@ -22,11 +22,7 @@ function Trig_LoadRequest_Actions takes nothing returns nothing
         
     else
         set udg_load_number[playerId + 1] = 0
-        set chatStr = "DataManager\\" + SubString(chatStr,9,129) + "\\0.txt"
-        
-        if GetLocalPlayer() == GetTriggerPlayer() then
-            call Preloader(chatStr)
-        endif
+        call SaveIO_LoadSave(Player(playerId), SaveNLoad_FOLDER() + SubString(chatStr,9,129))
     endif
 endfunction
 

@@ -13,6 +13,6 @@ function InitTrig_LoadUnit_Copy takes nothing returns nothing
     set gg_trg_LoadUnit_Copy = CreateTrigger(  )
     //call DisableTrigger( gg_trg_LoadUnit_Copy )
     call TriggerAddAction( gg_trg_LoadUnit_Copy, function Trig_LoadUnitNew_Actions )
-    call BlzTriggerRegisterPlayerSyncEvent( gg_trg_LoadUnit_Copy, Player(0), "SnL_unit", false)
+    call TriggerRegisterAnyPlayerSyncEvent( gg_trg_LoadUnit_Copy, "SnL_unit", false)
 endfunction
 

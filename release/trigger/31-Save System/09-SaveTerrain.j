@@ -1,13 +1,17 @@
+scope SaveTrigger
 
+globals
+    private SaveData saveData
+endglobals
 
 function SaveTiles takes nothing returns boolean
-        local integer i
-        local string saveStr
         local integer playerId = GetPlayerId(GetTriggerPlayer())
         local string temp1
         local string temp2
-        set i = 0
-        set saveStr = "@"
+        
+        local integer i = 0
+        local string saveStr = "@"
+
         loop
         exitwhen i >= 60 // exit loop to avoid op_limit
             if udg_save_XYminmaxcur[playerId+5*bj_MAX_PLAYERS] > udg_save_XYminmaxcur[playerId+4*bj_MAX_PLAYERS] then
@@ -27,10 +31,7 @@ function SaveTiles takes nothing returns boolean
             endif
         endloop
 
-        set saveStr = SaveNLoad_FormatString("SnL_ter", saveStr)
-        if GetLocalPlayer() == GetTriggerPlayer() then
-            call Preload(saveStr)
-        endif
+        call saveData.write(SaveNLoad_FormatString("SnL_ter", saveStr))
     return false
 endfunction
 
@@ -41,8 +42,6 @@ function SaveTerrain takes nothing returns nothing
     local rect saveRect
     local integer genId
     
-    local string saveStr
-    
     if SubString(GetEventPlayerChatString(), 0, 6) != "-tsav " then
         return
     endif
@@ -52,6 +51,9 @@ function SaveTerrain takes nothing returns nothing
         return
     endif
     
+    set udg_save_password[playerId+1] = SubString(GetEventPlayerChatString(), 6, 129)
+    set saveData = SaveData.create(GetTriggerPlayer(), SaveNLoad_FOLDER() + udg_save_password[playerId+1])
+    
     set saveRect = GUDR_GetGeneratorIdRect(genId)
     set udg_save_XYminmaxcur[playerId] = GetRectMinX(saveRect)
     set udg_save_XYminmaxcur[playerId+bj_MAX_PLAYERS] = GetRectMaxX(saveRect)
@@ -60,13 +62,12 @@ function SaveTerrain takes nothing returns nothing
     set udg_save_XYminmaxcur[playerId+2*bj_MAX_PLAYERS] = udg_save_XYminmaxcur[playerId]
     set udg_save_XYminmaxcur[playerId+5*bj_MAX_PLAYERS] = udg_save_XYminmaxcur[playerId+3*bj_MAX_PLAYERS]
     
-    set saveStr = SaveNLoad_FormatString("SnL_ter", R2S(udg_save_XYminmaxcur[playerId]) + "@" + R2S(udg_save_XYminmaxcur[playerId+bj_MAX_PLAYERS]) + "@" + R2S(udg_save_XYminmaxcur[playerId+3*bj_MAX_PLAYERS]) + "@" + R2S(udg_save_XYminmaxcur[playerId+4*bj_MAX_PLAYERS]) + "@")
-    if GetLocalPlayer()== GetTriggerPlayer() then
-        call PreloadGenClear()
-        call PreloadGenStart()
-        call Preload(saveStr)
-    endif
-    set udg_save_password[playerId+1] = SubString(GetEventPlayerChatString(), 6, 129)
+    call saveData.write(SaveNLoad_FormatString("SnL_ter", R2S(udg_save_XYminmaxcur[playerId]) + "@" +/*
+                                                        */R2S(udg_save_XYminmaxcur[playerId+bj_MAX_PLAYERS]) + "@" +/*
+                                                        */R2S(udg_save_XYminmaxcur[playerId+3*bj_MAX_PLAYERS]) + "@" +/* 
+                                                        */R2S(udg_save_XYminmaxcur[playerId+4*bj_MAX_PLAYERS]) + "@"))
+    
+    
     set cond = TriggerAddCondition(gg_trg_SaveTerrain, Condition(function SaveTiles))
     loop
     exitwhen udg_save_XYminmaxcur[playerId+5*bj_MAX_PLAYERS] > udg_save_XYminmaxcur[playerId+4*bj_MAX_PLAYERS]
@@ -76,12 +77,7 @@ function SaveTerrain takes nothing returns nothing
     endloop
     call TriggerRemoveCondition(gg_trg_SaveTerrain, cond)
     
-    set saveStr = "DataManager\\" + udg_save_password[playerId+1] + "\\0.txt"
-    if GetLocalPlayer() == GetTriggerPlayer() then
-        call PreloadGenEnd(saveStr)
-    endif
-    call SaveSize(GetTriggerPlayer(), udg_save_password[playerId+1], 1)
-    
+    call saveData.destroy()
     call DisplayTextToPlayer( Player(playerId),0,0, "Finished Saving" )
     
     set cond = null
@@ -95,3 +91,4 @@ function InitTrig_SaveTerrain takes nothing returns nothing
     call TriggerAddAction( gg_trg_SaveTerrain, function SaveTerrain )
 endfunction
 
+endscope

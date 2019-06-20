@@ -1,4 +1,4 @@
-library SaveUnit requires SaveNLoad
+library SaveUnit requires SaveNLoad, SaveIO
 
 globals
     force ENUM_FORCE = CreateForce()
@@ -14,18 +14,14 @@ function Save_PatrolPointStr takes real x, real y returns string
     return SaveNLoad_FormatString("SnL_unit_extra", "=p " + R2S(x) + "=" +  R2S(y))
 endfunction
 
-function Save_SaveUnitPatrolPoints takes player savePlayer, integer unitHandleId returns nothing
+function Save_SaveUnitPatrolPoints takes SaveData saveData, integer unitHandleId returns nothing
     local integer i = 1
     local integer totalPoints = Patrol_GetTotalPatrolPoints(unitHandleId)
-    local boolean isLocalPlayer = GetLocalPlayer() == savePlayer
     local string saveStr
     
     loop
     exitwhen i > totalPoints
-        set saveStr = Save_PatrolPointStr(Patrol_GetPointX(unitHandleId, i),Patrol_GetPointY(unitHandleId, i))
-        if isLocalPlayer then
-            call Preload(saveStr)
-        endif
+        call saveData.write(Save_PatrolPointStr(Patrol_GetPointX(unitHandleId, i),Patrol_GetPointY(unitHandleId, i)))
         set i = i+1
     endloop
 endfunction
@@ -47,7 +43,7 @@ function GenerateSpecialEffectSaveString takes SpecialEffect whichEffect returns
         */ I2S(GUMS_SELECTION_UNSELECTABLE())
 endfunction
 
-function SaveEffectDecos takes integer playerNumber, boolean isLocalPlayer returns integer
+function SaveEffectDecos takes integer playerNumber, SaveData saveData returns integer
     local LinkedHashSet_DecorationEffect decorations = save_decoration_effects[playerNumber]
     local DecorationEffect decoration = decorations.begin()
 
@@ -57,10 +53,7 @@ function SaveEffectDecos takes integer playerNumber, boolean isLocalPlayer retur
     loop
         exitwhen counter == 25 or decorations == 0 or decoration == decorations.end()
         
-        set saveStr = SaveNLoad_FormatString("SnL_unit", GenerateSpecialEffectSaveString(decoration))
-        if isLocalPlayer then
-            call Preload(saveStr)
-        endif
+        call saveData.write(SaveNLoad_FormatString("SnL_unit", GenerateSpecialEffectSaveString(decoration)))
         
         set decoration = decorations.next(decoration)
         call decorations.remove(decorations.prev(decoration))
@@ -77,7 +70,7 @@ function SaveEffectDecos takes integer playerNumber, boolean isLocalPlayer retur
 endfunction
 
 globals
-    boolean is_saving = false
+    SaveData array saveFile
 endglobals
 
 function SaveForceLoop takes nothing returns boolean
@@ -85,23 +78,18 @@ function SaveForceLoop takes nothing returns boolean
     local integer playerNumber = playerId + 1
     local unit saveUnit
     local integer saveUnitCount = 0
-    local boolean isLocalPlayer = false
     local string saveStr
     local UnitVisuals unitHandleId
+    local SaveData saveData
     
     if udg_save_load_boolean[playerNumber] == true then
         set stillSaving = true
-        if ( GetLocalPlayer() == Player(playerNumber - 1) ) then
-            set isLocalPlayer = true
-            
-            if not is_saving then
-                call PreloadGenStart()
-                call PreloadGenClear()
-                set is_saving = true
-            endif
+        if saveFile[playerId] == 0 then
+            set saveFile[playerId] = SaveData.create(Player(playerId), SaveNLoad_FOLDER() + udg_save_password[playerNumber])
         endif
+        set saveData = saveFile[playerId]
         
-        set saveUnitCount = SaveEffectDecos(playerNumber, isLocalPlayer)
+        set saveUnitCount = SaveEffectDecos(playerNumber, saveData)
         loop
         exitwhen saveUnitCount >= 25
             set saveUnit = FirstOfGroup(udg_save_grp[playerNumber])
@@ -126,38 +114,26 @@ function SaveForceLoop takes nothing returns boolean
                             */   unitHandleId.getAnimTag() + "," + /*
                             */   I2S(GUMS_GetUnitSelectionType(saveUnit))
                 
-                set saveStr = SaveNLoad_FormatString("SnL_unit", saveStr)
-                if isLocalPlayer then
-                    call Preload(saveStr)
-                endif
+                call saveData.write(SaveNLoad_FormatString("SnL_unit", saveStr))
                 
                 if GUMSUnitHasCustomName(unitHandleId) then
-                    set saveStr = SaveNLoad_FormatString("SnL_unit_extra", "=n " + GUMSGetUnitName(saveUnit))
-                    if isLocalPlayer then
-                        call Preload(saveStr)
-                    endif
+                    call saveData.write(SaveNLoad_FormatString("SnL_unit_extra", "=n " + GUMSGetUnitName(saveUnit)))
                 endif
                 
                 if GUDR_IsUnitIdGenerator(unitHandleId) then
-                    set saveStr = SaveNLoad_FormatString("SnL_unit_extra", Save_GetGUDRSaveString(unitHandleId))
-                    if isLocalPlayer then
-                        call Preload(saveStr)
-                    endif
+                    call saveData.write(SaveNLoad_FormatString("SnL_unit_extra", Save_GetGUDRSaveString(unitHandleId)))
                 endif
                 
                 if IsUnitWaygate(saveUnit) then
                     if WaygateIsActive(saveUnit) then
-                        set saveStr = SaveNLoad_FormatString("SnL_unit_extra", "=w " + R2S(WaygateGetDestinationX(saveUnit)) + "=" + R2S(WaygateGetDestinationY(saveUnit)) + "=T=")
+                        call saveData.write(SaveNLoad_FormatString("SnL_unit_extra", "=w " + R2S(WaygateGetDestinationX(saveUnit)) + "=" + R2S(WaygateGetDestinationY(saveUnit)) + "=T="))
                     else
-                        set saveStr = SaveNLoad_FormatString("SnL_unit_extra", "=w " + R2S(WaygateGetDestinationX(saveUnit)) + "=" + R2S(WaygateGetDestinationY(saveUnit)) + "=F=")
-                    endif
-                    if isLocalPlayer then
-                        call Preload(saveStr)
+                        call saveData.write(SaveNLoad_FormatString("SnL_unit_extra", "=w " + R2S(WaygateGetDestinationX(saveUnit)) + "=" + R2S(WaygateGetDestinationY(saveUnit)) + "=F="))
                     endif
                 endif
                 
                 if Patrol_UnitIdHasPatrolPoints(unitHandleId) then
-                    call Save_SaveUnitPatrolPoints(Player(playerNumber - 1), unitHandleId)
+                    call Save_SaveUnitPatrolPoints(saveData, unitHandleId)
                 endif
             else
                 /*
@@ -174,34 +150,21 @@ function SaveForceLoop takes nothing returns boolean
             if IsGroupEmpty(udg_save_grp[playerNumber]) then
                 set udg_save_load_boolean[playerNumber] = false
                 call DisplayTextToPlayer( Player(playerNumber - 1),0,0, "Finished Saving" )
-                set saveUnitCount =  99//No need to check for more units, get off the loop
+                exitwhen true
             endif
-            //End of block that should be below
                 
             set saveUnitCount = saveUnitCount +1
         endloop //saveUnitCount should be set to zero at the start of this loop
         
         //This if statement must remain inside (if udg_save_load_boolean[playerNumber] == true) statement to avoid output for people who aren't saving
-        /*
-        set saveStr = "DataManager\\" + udg_save_password[playerNumber] + "\\" + I2S(udg_save_unit_nmbr[playerNumber]) + ".txt"
-        if isLocalPlayer then
-            call PreloadGenEnd(saveStr)
-        endif
-        */
         call DisplayTextToPlayer(Player(playerNumber - 1), 0, 0, (I2S(udg_save_unit_nmbr[playerNumber])))
         set udg_save_unit_nmbr[playerNumber] = ( udg_save_unit_nmbr[playerNumber] + 1 )
         if udg_save_load_boolean[playerNumber] == false then
-            set saveStr = "DataManager\\" + udg_save_password[playerNumber] + "\\0.txt"
-            if isLocalPlayer then
-                call PreloadGenEnd(saveStr)
-            endif
-            set is_saving = false
-            call SaveSize(Player(playerNumber - 1), udg_save_password[playerNumber], udg_save_unit_nmbr[playerNumber])
+            call saveData.destroy()
+            set saveFile[playerId] = 0
+            // call SaveSize(Player(playerNumber - 1), udg_save_password[playerNumber], udg_save_unit_nmbr[playerNumber])
         endif
-        
-        
     endif
-    //End of if statement
     
     set saveUnit = null
     return false

@@ -31,10 +31,14 @@ endlibrary
 
 library SaveNLoad requires UnitVisualMods, Rawcode2String, Base36, TerrainTools, DecorationSFX, UnitTypeDefaultValues, optional UserDefinedRects, optional SaveNLoadConfig
 ////////////////////////////////////////////////////////////////////////////////////////////////////
-//SaveNLoad v2.0
+//SaveNLoad v3.0
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 constant function SaveLoadVersion takes nothing returns integer
-    return 2
+    return 3
+endfunction
+
+public constant function FOLDER takes nothing returns string
+    return "TitanLandLoP\\"
 endfunction
 
 globals
@@ -68,19 +72,6 @@ endfunction
 
 function Save_SetPlayerLoading takes integer playerId, boolean flag returns nothing
     set udg_save_load_boolean[playerId + 1 + bj_MAX_PLAYERS] = flag
-endfunction
-
-
-function SaveToFile takes string password, integer numbr, string saveStr returns nothing    
-    local real cur_life = 0
-    local real posx
-    local real posy
-
-    call PreloadGenStart()
-    call PreloadGenClear()
-    call Preload(saveStr)
-    call PreloadGenEnd("DataManager\\" + password + "\\" + I2S(numbr) + ".txt")
-
 endfunction
 
 function B2S takes boolean bool returns string
@@ -444,38 +435,6 @@ function LoadTerrain takes string chatStr returns nothing
         endif
     endloop
 
-endfunction
-
-function SaveCenter takes player savePlayer, string password, real centerX, real centerY returns nothing
-    local string data = R2S(centerX) + "," + R2S(centerY)
-    local string filePath = "DataManager\\" + password + "\\" + "center.txt"
-    
-    if GetLocalPlayer() == savePlayer then
-        call PreloadGenStart()
-        call PreloadGenClear()
-        call Preload(data)
-        call PreloadGenEnd(filePath)
-    endif
-endfunction
-
-function SaveSize takes player savePlayer, string password,integer size returns nothing
-    local string filePathSize = "DataManager\\" + password + "\\" + "size.txt"
-    local string filePathVersion = "DataManager\\" + password + "\\" + "version.txt"
-    local string ver = I2S(SaveLoadVersion())
-    local string sz = I2S(size)
-    
-    if GetLocalPlayer() == savePlayer then
-        call PreloadGenStart()
-        call PreloadGenClear()
-        call Preload(sz)
-        call PreloadGenEnd(filePathSize)
-    
-        //Output the major version with which the save has been made (compatibility)
-        call PreloadGenStart()
-        call PreloadGenClear()
-        call Preload(ver)
-        call PreloadGenEnd(filePathVersion)
-    endif
 endfunction
 
 function LoadRequest takes player savePlayer, string password returns nothing
