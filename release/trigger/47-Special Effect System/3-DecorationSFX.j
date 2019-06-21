@@ -415,19 +415,6 @@ function EnumDecorationsOfPlayer takes player whichPlayer returns LinkedHashSet_
     return result
 endfunction
 
-function Test takes nothing returns nothing
-    local LinkedHashSet test = EnumDecorationsOfPlayer(Player(0))
-    local integer  i = test.begin()
-
-    loop
-    exitwhen i == test.end()
-        call BJDebugMsg(I2S(i))
-        set i = test.next(i)
-    endloop
-    
-    call test.destroy()
-endfunction
-
 private module InitModule
     private static method onInit takes nothing returns nothing
         local integer lastId
@@ -440,8 +427,6 @@ private module InitModule
             set DecorationEffectBlock(i).effects = LinkedHashSet.create()
             set i = i + 1
         endloop
-        
-        call Test()
     endmethod
 endmodule
 private struct InitStruct extends array

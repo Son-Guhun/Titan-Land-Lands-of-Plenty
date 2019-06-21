@@ -156,7 +156,7 @@ struct SpecialEffect extends array
         endif
         
         if not .subanimations.contains(animId) then
-            call BJDebugMsg("Adding subanimation: " + I2S(animId))
+            debug call BJDebugMsg("Adding subanimation: " + I2S(animId))
             call .subanimations.append(animId)
             call BlzSpecialEffectAddSubAnimation(.effect, anim)
         endif

@@ -89,9 +89,7 @@ globals
     private constant integer AUTO_LAND = -3
     private constant integer STRUCTURE_HEIGHT = -4 // This is only saved for structures, which lose their flying heights when moving
     
-    private constant integer tempX = -5
-    private constant integer tempY = -6
-    private constant integer saveFlyHeight = -7
+    private constant integer saveFlyHeight = -5  // Used to save flying height for immovable units (to keep height after upgrading)
 
     private constant integer SCALE  = 0
     public constant integer RED    = 1
@@ -170,7 +168,7 @@ endfunction
 // GUMS API
 //==========================================
 
-// Call this when a unit is removed from the game, or when a unit enters the entire map rect.
+// Call this when a unit is removed from the game.
 function GUMSClearUnitData takes unit whichUnit returns nothing
     call GroupRemoveUnit(loopGroup, whichUnit)
     call FlushChildHashtable(hashTable, GetHandleId(whichUnit))

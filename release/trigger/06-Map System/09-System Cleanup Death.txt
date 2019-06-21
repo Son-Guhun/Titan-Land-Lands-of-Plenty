@@ -2,5 +2,6 @@ Instant removal upon death + cleanup:
 -Decorations
 -Dummies
 -Deco Builders
+-Heroic Units
 
-System_UnitHasBeenRemovedBool -> this variable is used by the System Cleanup UnitGroups trigger
+g_unitHasBeenRemoved-> this variable is used by the System Cleanup UnitGroups trigger
