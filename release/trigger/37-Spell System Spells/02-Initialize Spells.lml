@@ -1140,6 +1140,26 @@ Action
     CommentString
         Const : ' '
     CommentString
+        Const : ---------------------------
+    CommentString
+        Const : 'Cosmosis Obliterate'
+    CommentString
+        Const : ---------------------------
+    SetVariable
+        Var   : Spell__Ability
+        Const : A055
+    CommentString
+        Const : ' '
+    SetVariable
+        Var   : Spell__Trigger_OnEffect
+        Var   : gg_trg_Cosmosis_Obliterate
+    CommentString
+        Const : ' '
+    TriggerExecute
+        Var   : gg_trg_Spell_System
+    CommentString
+        Const : ' '
+    CommentString
         Const : ' '
     CommentString
         Const : ' '
