@@ -88,13 +88,14 @@ Sets the time of day (ingame) to the specified time (24 hour time).
 |cffff0000Unit Commands:|r
 |cffffff00-copy|r
 Copies your selection of units or the group of a selected Rect Generator.
-|cffffff00-neut|r <decos> | |cffffff00-take|r <all>
-Gives your selected units to Neutral Passive, only working on decorations if decos is specified. Takes selected unit back from Neutral Passive. Typing all next to the command will take all your units.
 |cffffff00-select no|r\nMakes selected units unselectable.
+|cffffff00-remove|r\n|cffffff00-kill|r
+|cffffff00-collison|r (on/off)\nEnables/disables collision for a unit.
 |cffffff00-sele (deco name)|r | |cffffff00-seln (deco name)|r
 Adds deco builders whose name starts with the entered characters to your selection. |cffffff00-seln|r clears your old selection.
 |cff0000ffExamples: -sele wall, -sele sp, -sele pand, -sele gen|r
-|cffffff00-remove|r\n|cffffff00-kill|r
+|cffffff00-neut|r <decos> | |cffffff00-take|r <all>
+Gives your selected units to Neutral Passive, only working on decorations if decos is specified. Takes selected unit back from Neutral Passive. Typing all next to the command will take all your units.
 |cffffff00-hide|r <all>\nHides selected/all deco builders. Use |cffffff00-sele|r to get them back.
 "
     call CreateQuestBJ(questType, "Unit Commands", quest_text, "ReplaceableTextures\\CommandButtons\\BTNFootman.blp")
@@ -114,7 +115,9 @@ Set the animation for the 'anim command.
 |cffffff00-speed (number)|r
 Set the animation speed for the 'speed command.
 |cffffff00-fly (number)|r
-Set the flying height for the 'fly command.
+Set the flying height for the 'fly command. Has a -h alias.
+|cffffff00-face (number)|r
+Set the facing angle for the 'face command. Has a -f alias.
 
 |cffffff00'fly|r | |cffffff00'rgb|r | |cffffff00'face|r | |cffffff00'size|r | |cffffff00'color|r | |cffffff00'anim|r
 Use the commands above to apply unit modifications. Alternatively, you can use Deco Modifier Special's (use the command |cffffcc00-seln sp|r to select it) abilities.
@@ -139,7 +142,7 @@ An alias for the |cffffff00-tips|r command.
 Removes all your units that are not in the Titan Palace from the game, except your neutral units.
 |cffffff00-start|r
 Gives you a Wandering Soul to make a Race Selector.
-|cffffff00-decos|r
+|cffffff00-decos|r (special/basic/all)
 Spawns any decos you may be missing (hidden decos are not considered missing).
 "
     call CreateQuestBJ(questType, "Player Commands", quest_text, "ReplaceableTextures\\CommandButtons\\BTNScrollOfRegenerationGreen.blp")
@@ -169,6 +172,8 @@ This command accepts many different kinds of arguments
 These commands work with the modifications abilities of \"Deco Modifier Special\". You can select this unit with the command: (|cffffcc00-seln sp|r)
 |cffffff00-val (number)|r
 Set the size of the area of terrain and tree mods.
+|cffffff00-var (number)|r
+Set the variation of terrain tiles created with the Terrain Editor or Deco Builder Special.
 |cffffff00-space (number)|r
 Set the space between each created tree.
 "
@@ -188,24 +193,19 @@ Toggles autoname on or off.
     
     // SaveNLoad Commands
     set quest_text = "
-|cffff0000ATTENTION:|r You can save your bases easily with the commands. However, to load a base, an external program is required. More information below.
-
-To get the SaveNLoad program, search for 'SaveNLoad GitHub Son-Guhun'.
-Alternatively, you can search for: Titan Land Lands of Plenty on Google.
-If you have the patience, you can also type this link in your browser:
-https://www.hiveworkshop.com/threads/titan-land-lands-of-plenty.289356/
-
 Commands:
--load center
-Set the center for future save/loads
--save (SaveName)
+|cffffff00-load center <x,y>|r
+Set the center for future save/loads. If no x and y arguments are given, then the save center is set to the position of your currently selected unit or the rally point of your currently selected building.
+|cffffff00-save (SaveName)|r
 Save all your units (including unselectable and neutral units)
--dsav (SaveName)
+|cffffff00-dsav (SaveName)|r
 Save all trees inside the region of your currently selected Rect Generator. (|cffffcc00-rect|r to spawn and |cffffcc00-seln gen|r to select)
--tsav (SaveName)
+|cffffff00-tsav (SaveName)|r
 Save terrain inside the region of your currently selected Rect Generator. (|cffffcc00-rect|r to spawn and |cffffcc00-seln gen|r to select)
--request (SaveName)
-Send a request to the SaveNLoad program (it must be open) to load a save.
+|cffffff00-request (SaveName)|r
+Load a save from your local storage.
+|cffffff00-req (SaveName)|r
+Send a request to the SaveNLoad program (it must be open) to load a save. This command is used to load legacy saves (before version 1.2.0).
 "
     call CreateQuestBJ(questType, "SaveNLoad System", quest_text, "ReplaceableTextures\\CommandButtons\\BTNSpellBookBLS.blp")
     // ----------

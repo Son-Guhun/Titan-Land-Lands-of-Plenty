@@ -1,10 +1,12 @@
 function Trig_CommandsD_Locust_Func011A takes nothing returns nothing
+    local player trigP = GetTriggerPlayer()
     local unit enumUnit = GetEnumUnit()
+    
     if not LoP_IsUnitDecoration(enumUnit) then
-        call DisplayTextToPlayer(GetTriggerPlayer(), 0, 0, "Only decorations may have be unselectable." )
+        call DisplayTextToPlayer(trigP, 0, 0, "Only decorations may be made unselectable." )
         
-    elseif not LoP_PlayerOwnsUnit(GetTriggerPlayer(), enumUnit) then
-        call DisplayTextToPlayer(GetTriggerPlayer(), 0, 0, "This is not your unit." )
+    elseif not LoP_PlayerOwnsUnit(trigP, enumUnit) and udg_GAME_MASTER != trigP then
+        call DisplayTextToPlayer(trigP, 0, 0, "This is not your unit." )
         
     elseif CheckCommandOverflow() then
         if IsUnitType(enumUnit, UNIT_TYPE_STRUCTURE) and GetUnitFlyHeight(enumUnit) < GUMS_MINIMUM_FLY_HEIGHT() then
@@ -13,6 +15,7 @@ function Trig_CommandsD_Locust_Func011A takes nothing returns nothing
             call Unit2Effect(enumUnit)
         endif
     endif
+    
     set enumUnit = null
 endfunction
 
