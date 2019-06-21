@@ -63,13 +63,17 @@ function SubAnimations2Tags takes LinkedHashSet subanims returns string
         exitwhen current == subanims.end()
         
         if current.isValid() then
-            set result = result + current.getString() + " "
+            set result = result + " " + current.getString() 
         endif
         
         set current = subanims.next(current)
     endloop
     
-    return result
+    if StringLength(result) > 0 then
+        return SubString(result, 1, StringLength(result))
+    else
+        return ""
+    endif
 endfunction
 
 function Unit2Effect takes unit whichUnit returns DecorationEffect

@@ -27,6 +27,14 @@ function Save_SaveUnitPatrolPoints takes SaveData saveData, integer unitHandleId
 endfunction
 
 function GenerateSpecialEffectSaveString takes SpecialEffect whichEffect returns string
+    local string animTags
+    
+    if whichEffect.hasSubAnimations() then
+        set animTags = GUMSConvertTags(UnitVisualMods_TAGS_COMPRESS, SubAnimations2Tags(whichEffect.subanimations))
+    else
+        set animTags = "D"
+    endif
+
     return ID2S(whichEffect.unitType) + "," +/*
         */ R2S(whichEffect.x) + "," +/*
         */ R2S(whichEffect.y) + "," +/*
@@ -39,7 +47,7 @@ function GenerateSpecialEffectSaveString takes SpecialEffect whichEffect returns
         */ I2S(whichEffect.alpha) + "," +/*
         */ I2S(whichEffect.color + 1) + "," +/*
         */ R2S(whichEffect.animationSpeed) + "," +/*
-        */ GUMSConvertTags(UnitVisualMods_TAGS_COMPRESS, SubAnimations2Tags(whichEffect.subanimations)) + "," +/*
+        */ animTags + "," +/*
         */ I2S(GUMS_SELECTION_UNSELECTABLE())
 endfunction
 
@@ -89,7 +97,7 @@ function SaveForceLoop takes nothing returns boolean
         endif
         set saveData = saveFile[playerId]
         
-        set saveUnitCount = SaveEffectDecos(playerNumber, saveData)
+        set saveUnitCount = SaveEffectDecos(playerNumber, saveData)  // Only begin saving units once all decorations have been saved.
         loop
         exitwhen saveUnitCount >= 25
             set saveUnit = FirstOfGroup(udg_save_grp[playerNumber])
@@ -154,7 +162,7 @@ function SaveForceLoop takes nothing returns boolean
             endif
                 
             set saveUnitCount = saveUnitCount +1
-        endloop //saveUnitCount should be set to zero at the start of this loop
+        endloop
         
         //This if statement must remain inside (if udg_save_load_boolean[playerNumber] == true) statement to avoid output for people who aren't saving
         call DisplayTextToPlayer(Player(playerNumber - 1), 0, 0, (I2S(udg_save_unit_nmbr[playerNumber])))
@@ -162,7 +170,6 @@ function SaveForceLoop takes nothing returns boolean
         if udg_save_load_boolean[playerNumber] == false then
             call saveData.destroy()
             set saveFile[playerId] = 0
-            // call SaveSize(Player(playerNumber - 1), udg_save_password[playerNumber], udg_save_unit_nmbr[playerNumber])
         endif
     endif
     
