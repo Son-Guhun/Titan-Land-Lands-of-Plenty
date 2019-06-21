@@ -13,6 +13,7 @@ function Trig_CommandsD_Locust_Func011A takes nothing returns nothing
             call GUMSMakeUnitUnSelectable(enumUnit)
         else
             call Unit2Effect(enumUnit)
+            call KillUnit(enumUnit)
         endif
     endif
     

@@ -29,6 +29,7 @@ function Trig_Make_Unit_Selectable_Actions takes nothing returns nothing
     loop
     exitwhen deco == decorations.end()
         call Effect2Unit(deco)
+        call deco.destroy()
         set deco = decorations.next(deco)
     endloop
     

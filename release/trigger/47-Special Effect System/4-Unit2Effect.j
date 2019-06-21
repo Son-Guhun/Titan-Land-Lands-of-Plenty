@@ -127,7 +127,6 @@ function Unit2Effect takes unit whichUnit returns DecorationEffect
     // Anim speed
     
     call BlzPlaySpecialEffect(result.effect, ANIM_TYPE_STAND)
-    call RemoveUnit(whichUnit)
     return result
 endfunction
 
@@ -143,8 +142,7 @@ function Effect2Unit takes DecorationEffect whichEffect returns unit
     if whichEffect.hasSubAnimations() then
         call GUMSAddUnitAnimationTag(u, SubAnimations2Tags(whichEffect.subanimations))
     endif
-
-    call whichEffect.destroy()
+    
     set bj_lastCreatedUnit = u
     set u = null
     return bj_lastCreatedUnit
