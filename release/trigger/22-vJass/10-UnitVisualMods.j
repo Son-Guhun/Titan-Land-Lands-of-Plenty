@@ -418,10 +418,10 @@ endfunction
 
 //Set Vertex Color
 function GUMSSetUnitVertexColor takes unit whichUnit, real red, real green, real blue, real trans  returns nothing
-    local integer intRed = R2I(2.55 * red)
-    local integer intGreen = R2I(2.55 * green)
-    local integer intBlue = R2I(2.55 * blue)
-    local integer intAlpha = R2I(2.55 * (100. - trans))
+    local integer intRed = R2I(2.55 * red + 0.5)
+    local integer intGreen = R2I(2.55 * green + 0.5)
+    local integer intBlue = R2I(2.55 * blue + 0.5)
+    local integer intAlpha = R2I(2.55 * (100. - trans) + 0.5)
     
     call SetUnitVertexColor(whichUnit, intRed, intGreen, intBlue, intAlpha)
     call SaveInteger(hashTable, GetHandleId(whichUnit), RED, intRed)
