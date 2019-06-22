@@ -12,6 +12,51 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 	- New units for an existing race can be added in a patch version. 
 	- New decorations for an existing deco builder can be added in a patch version.
 
+
+## [v1.2.0]
+
+### Added
+- New version of the Save system. The external SaveNLoad program is no longer required, saving and loading is done entirely using Warcraft III's functionalities. To transfer old saves to the new system, they must be loaded using the new **-req** command. Using SaveNLoad.exe will be required for this. After loading the old save, it can be saved using the save commands and afterwards it can be loaded with the **-request** command.
+- New Commands:
+	- -collision (on/off): allows you to turn collison on/off for units.
+    - -editor (terrain/none): Allows you to enter/exit the new ingame Terrain Editor.
+- New Races:
+	- Worgen
+- New Deco Builders:
+	- Deco Builder S&S 1 and 2: These are two new deco builders with 89 new decorations in total. These decorations are modular, allowing you to build pretty much any medieval building your imagination can come up with!
+	- Deco Builder Mushrooms: Builds mushrooms that used to be built by Deco Builder Crops.
+	- Deco Builder Tableware:
+- New Decorations:
+	- Deco Builder Fire:
+		- Flame Grate (round and rectangular)
+	- Deco Builder Misc:
+		- Magical Pen (can be activated and deactivated)
+
+- Cosmosis now possesses the Obliterate spell to remove unselectable decorations.
+
+
+### Fixed
+- Certain models (such as City Buildings) should no longer become partly invisible when they receive an RGB value. They will still become partly invisible if they receive an alpha value.
+- Tooltips for High Elf and Highborne decorations are now correct.
+- Ressurection stone has been correctly added to Deco Builder Rock (it was missing before).
+
+### Changed
+- Unselectable decorations are now Special Effects instead of units with the Locust ability. This SHOULD increase performance, and in the future it will allow for more flexiblity with unit visuals (negative flying height and rotations along the x and y axes).
+- The Titan can now make any player's decorations unselectable, in order to avoid lag.
+- Custom heroes created with -makehero will now have the Hero armor type.
+- Fire Campfire (with Pig) has been removed from Deco Builder Fire's build menu. It is now an upgrade of Fire Campfire.
+
+### Removed
+- Removed glowing mushrooms from the Scorched Lands. This part of the terrain is going to see a massive overhaul, probably in 1.3.0. Removing these mushrooms should reduce FPS lag that some people experience in LoP.
+
+
+## [v1.1.6]
+
+### Fixed
+- Most of the models in the map have been sanitzed, using https://viewer.hiveworkshop.com/check/ and hard work.
+- Some models (like the Blood Elf Phoenix Crusader) will no longer crash the game in patch 1.31.0.
+- Spell damage will now kill units in patch 1.31.0.
+
 ## [v1.1.5]
 
 ### Added
@@ -73,6 +118,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 ### Removed
 - Noldor (old High Elf) units can no longer be produced. A new production building will be added for them in a future version. For now, you can create them by loading old saves and copying the units to get as many as you need.
 
+
 ## [v1.1.4]
 
 ### Added
@@ -107,11 +153,11 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 - Lord of Black scales will now correctly display his level above him when hovered over with the mouse.
 - The goblin Tinker now has an inventory to hold all his tools. He had previously lost his bag in an explosion.
 
-
 ### Changed
 - Sylvanas's Undead incarnation now uses a custom model.
 - The High Elf race has been renamed to Noldor.
 - Nightmare (Legends Tower) now has more fitting abilities.
+
 
 ## [v1.1.3]
 
