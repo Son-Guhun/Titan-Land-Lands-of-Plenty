@@ -9,8 +9,13 @@ function Trig_CommandsD_Locust_Func011A takes nothing returns nothing
         call DisplayTextToPlayer(trigP, 0, 0, "This is not your unit." )
         
     elseif CheckCommandOverflow() then
-        if IsUnitType(enumUnit, UNIT_TYPE_STRUCTURE) and GetUnitFlyHeight(enumUnit) < GUMS_MINIMUM_FLY_HEIGHT() then
-            call GUMSMakeUnitUnSelectable(enumUnit)
+        if IsUnitType(enumUnit, UNIT_TYPE_STRUCTURE) then
+            if GetUnitFlyHeight(enumUnit) < GUMS_MINIMUM_FLY_HEIGHT() or GetUnitAbilityLevel(enumUnit, 'Awrp') > 0 then
+                call GUMSMakeUnitUnSelectable(enumUnit)
+            else
+                call Unit2Effect(enumUnit)
+                call KillUnit(enumUnit)
+            endif
         else
             call Unit2Effect(enumUnit)
             call KillUnit(enumUnit)
