@@ -7,27 +7,34 @@ This trigger contains commands for:
 */
 struct CameraValues extends array
     
-    private static key static_members_key
-    //! runtextmacro TableStruct_NewStaticPrimitiveField("zoom","real")
-    //! runtextmacro TableStruct_NewStaticPrimitiveField("rotate","real")
-    //! runtextmacro TableStruct_NewStaticPrimitiveField("roll","real")
-    //! runtextmacro TableStruct_NewStaticPrimitiveField("pitch","real")
+    static real zoom = 0
+    static real rotate = 0
+    static real roll = 0
+    static real pitch = 0
+    static boolean locked = false
     
+    private static key static_members_key
     //! runtextmacro TableStruct_NewStaticHandleField("timer","timer")
     
     private static method onTimer takes nothing returns nothing
-        call SetCameraField(CAMERA_FIELD_TARGET_DISTANCE, .zoom, 0)
-        call SetCameraField(CAMERA_FIELD_ROTATION, .rotate, 0)
-        call SetCameraField(CAMERA_FIELD_ROLL, .roll, 0)
-        call SetCameraField(CAMERA_FIELD_ANGLE_OF_ATTACK, .pitch, 0)
+        if .locked then
+            call SetCameraField(CAMERA_FIELD_TARGET_DISTANCE, .zoom, 0)
+            call SetCameraField(CAMERA_FIELD_ROTATION, .rotate, 0)
+            call SetCameraField(CAMERA_FIELD_ROLL, .roll, 0)
+            call SetCameraField(CAMERA_FIELD_ANGLE_OF_ATTACK, .pitch, 0)
+        endif
+    endmethod
+    
+    static method startTimer takes nothing returns nothing
+        call TimerStart(.timer, 0.03, true, function thistype.onTimer)
     endmethod
     
     static method lock takes nothing returns nothing
-        call TimerStart(.timer, 0.03, true, function thistype.onTimer)  // Need initialized timer: can't create a local time handle
+        set .locked = true
     endmethod
     
     static method unlock takes nothing returns nothing
-        call PauseTimer(.timer)
+        set .locked = false
     endmethod
 endstruct
 
@@ -52,22 +59,22 @@ function Trig_Commands_Camera takes nothing returns boolean
             
             // Local player blocks inside because we don't want to create strings in local blocks!!!
             if ( field == "zoom" ) then
-                if GetTriggerPlayer() == GetLocalPlayer() then
+                if GetLocalPlayer() == GetTriggerPlayer()  then
                     set CameraValues.zoom = value
                     call SetCameraField(CAMERA_FIELD_TARGET_DISTANCE, value, 0 )
                 endif
             elseif ( field == "rotate" ) then
-                if GetTriggerPlayer() == GetLocalPlayer() then
+                if GetLocalPlayer() == GetTriggerPlayer() then
                     set CameraValues.rotate = value
                     call SetCameraField(CAMERA_FIELD_ROTATION, value, 0 )
                 endif
             elseif ( field == "roll" ) then
-                if GetTriggerPlayer() == GetLocalPlayer() then
+                if GetLocalPlayer() == GetTriggerPlayer() then
                     set CameraValues.roll = value
                     call SetCameraField(CAMERA_FIELD_ROLL, value, 0 )
                 endif
             elseif ( field == "pitch" ) then
-                if GetTriggerPlayer() == GetLocalPlayer() then
+                if GetLocalPlayer() == GetTriggerPlayer() then
                     set CameraValues.pitch = value
                     call SetCameraField(CAMERA_FIELD_ANGLE_OF_ATTACK, value, 0 )
                 endif
@@ -75,7 +82,7 @@ function Trig_Commands_Camera takes nothing returns boolean
         else
             // Lock/Unlock
             if ( field == "lock" ) then
-                if GetTriggerPlayer() == GetLocalPlayer() then
+                if GetLocalPlayer() == GetTriggerPlayer() then
                     set CameraValues.zoom = GetCameraField(CAMERA_FIELD_TARGET_DISTANCE)
                     set CameraValues.rotate = GetCameraField(CAMERA_FIELD_ROTATION)*bj_RADTODEG
                     set CameraValues.roll = GetCameraField(CAMERA_FIELD_ROLL)*bj_RADTODEG
@@ -83,12 +90,12 @@ function Trig_Commands_Camera takes nothing returns boolean
                     call CameraValues.lock()
                 endif
             elseif ( field == "unlock" ) then
-                if GetTriggerPlayer() == GetLocalPlayer() then
+                if GetLocalPlayer() == GetTriggerPlayer() then
                     call CameraValues.unlock()
                 endif
             // Presets
             elseif ( field == "far" ) then
-                if GetTriggerPlayer() == GetLocalPlayer() then
+                if GetLocalPlayer() == GetTriggerPlayer() then
                     set CameraValues.zoom = 3000
                     call SetCameraField(CAMERA_FIELD_TARGET_DISTANCE, 3000, 0 )
                 endif
@@ -106,5 +113,6 @@ function InitTrig_Commands_StartRectCamera takes nothing returns nothing
     call LoP_Command.create("-camera", ACCESS_USER, Condition(function Trig_Commands_Camera))
     call LoP_Command.create("-zoom", ACCESS_USER, Condition(function Trig_Commands_Camera))
     set CameraValues.timer = CreateTimer()
+    call CameraValues.startTimer()
 endfunction
 
