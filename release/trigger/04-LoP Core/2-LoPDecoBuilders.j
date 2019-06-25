@@ -214,6 +214,12 @@ are listed first, though.
             // S&S Manor 2
             set i = ( i + 1 )
             set rawcodes[i] = 'u009'
+            // S&S Manor 1
+            set i = ( i + 1 )
+            set rawcodes[i] = 'u00G'
+            // S&S Manor 2
+            set i = ( i + 1 )
+            set rawcodes[i] = 'u00L'
             // Statue 2
             set i = ( i + 1 )
             set rawcodes[i] = 'u023'
