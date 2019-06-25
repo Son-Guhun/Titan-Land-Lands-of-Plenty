@@ -58,6 +58,10 @@ struct RectEnvironment extends array
         endif
     endmethod
     
+    static method operator default takes nothing returns RectEnvironment
+        return 0
+    endmethod
+    
     static method get takes rect r returns thistype
         return GetHandleId(r)
     endmethod

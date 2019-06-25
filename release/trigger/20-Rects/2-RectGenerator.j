@@ -135,8 +135,36 @@ endfunction
         call Unit$FUNC$Ability($U$, RectGenerator_FOG_ZSTART_DOWN)
         call Unit$FUNC$Ability($U$, RectGenerator_FOG_ZEND_UP )
         call Unit$FUNC$Ability($U$, RectGenerator_FOG_ZEND_DOWN)
+        
+        if not AutoRectEnvironment_IsRectRegistered(GUDR_GetGeneratorRect($U$)) then
+            call BlzUnitDisableAbility($U$, RectGenerator_FOG_STYLE_UP, true, false)
+            call BlzUnitDisableAbility($U$, RectGenerator_FOG_STYLE_DOWN, true, false)
+            call BlzUnitDisableAbility($U$, RectGenerator_FOG_ZSTART_UP, true, false)
+            call BlzUnitDisableAbility($U$, RectGenerator_FOG_ZSTART_DOWN, true, false)
+            call BlzUnitDisableAbility($U$, RectGenerator_FOG_ZEND_UP, true, false)
+            call BlzUnitDisableAbility($U$, RectGenerator_FOG_ZEND_DOWN, true, false)
+        endif
     endif
 
+//! endtextmacro
+
+//! textmacro GUDR_DisableFogAbilities takes U, BOOL
+    call BlzUnitDisableAbility($U$, RectGenerator_FOG_STYLE_UP, $BOOL$, false)
+    call BlzUnitDisableAbility($U$, RectGenerator_FOG_STYLE_DOWN, $BOOL$, false)
+    call BlzUnitDisableAbility($U$, RectGenerator_FOG_ZSTART_UP, $BOOL$, false)
+    call BlzUnitDisableAbility($U$, RectGenerator_FOG_ZSTART_DOWN, $BOOL$, false)
+    call BlzUnitDisableAbility($U$, RectGenerator_FOG_ZEND_UP, $BOOL$, false)
+    call BlzUnitDisableAbility($U$, RectGenerator_FOG_ZEND_DOWN, $BOOL$, false)
+
+
+    call BlzUnitDisableAbility($U$, RectGenerator_FOG_DENSITY_UP, $BOOL$, false)
+    call BlzUnitDisableAbility($U$, RectGenerator_FOG_DENSITY_DOWN, $BOOL$, false)
+    call BlzUnitDisableAbility($U$, RectGenerator_FOG_RED_UP, $BOOL$, false)
+    call BlzUnitDisableAbility($U$, RectGenerator_FOG_RED_DOWN, $BOOL$, false)
+    call BlzUnitDisableAbility($U$, RectGenerator_FOG_GREEN_UP, $BOOL$, false)
+    call BlzUnitDisableAbility($U$, RectGenerator_FOG_GREEN_DOWN, $BOOL$, false)
+    call BlzUnitDisableAbility($U$, RectGenerator_FOG_BLUE_UP, $BOOL$, false)
+    call BlzUnitDisableAbility($U$, RectGenerator_FOG_BLUE_DOWN, $BOOL$, false)
 //! endtextmacro
 
 private function InThirdPage takes unit u returns boolean
@@ -153,6 +181,17 @@ endfunction
 	call Unit$FUNC$Ability($U$, RectGenerator_FOG_GREEN_DOWN)
 	call Unit$FUNC$Ability($U$, RectGenerator_FOG_BLUE_UP )
 	call Unit$FUNC$Ability($U$, RectGenerator_FOG_BLUE_DOWN)
+    
+    if not AutoRectEnvironment_IsRectRegistered(GUDR_GetGeneratorRect($U$)) then
+        call BlzUnitDisableAbility($U$, RectGenerator_FOG_DENSITY_UP, true, false)
+        call BlzUnitDisableAbility($U$, RectGenerator_FOG_DENSITY_DOWN, true, false)
+        call BlzUnitDisableAbility($U$, RectGenerator_FOG_RED_UP, true, false)
+        call BlzUnitDisableAbility($U$, RectGenerator_FOG_RED_DOWN, true, false)
+        call BlzUnitDisableAbility($U$, RectGenerator_FOG_GREEN_UP, true, false)
+        call BlzUnitDisableAbility($U$, RectGenerator_FOG_GREEN_DOWN, true, false)
+        call BlzUnitDisableAbility($U$, RectGenerator_FOG_BLUE_UP, true, false)
+        call BlzUnitDisableAbility($U$, RectGenerator_FOG_BLUE_DOWN, true, false)
+    endif
 
 //! endtextmacro
 //===================================================
@@ -454,6 +493,14 @@ private function onCast takes nothing returns boolean
             elseif abilityId == FOG_STYLE_DOWN then
                 set RectEnvironment.get(GUDR_GetGeneratorRect(GetTriggerUnit())).fog.style = FogStyle(RectEnvironment.get(GUDR_GetGeneratorRect(GetTriggerUnit())).fog.style).prev()
                 call DisplayTextToPlayer(GetOwningPlayer(GetTriggerUnit()),0,0, "Fog Style set to: " + FogStyle(RectEnvironment.get(GUDR_GetGeneratorRect(GetTriggerUnit())).fog.style).getString())
+            elseif abilityId == TOGGLE_FOG then
+                if AutoRectEnvironment_IsRectRegistered(GUDR_GetGeneratorRect(GetTriggerUnit())) then
+                    call AutoRectEnvironment_DeRegisterRect(GUDR_GetGeneratorRect(GetTriggerUnit()))
+                    //! runtextmacro GUDR_DisableFogAbilities("GetTriggerUnit()","true")
+                else
+                    call AutoRectEnvironment_RegisterRect(GUDR_GetGeneratorRect(GetTriggerUnit()))
+                    //! runtextmacro GUDR_DisableFogAbilities("GetTriggerUnit()","false")
+                endif
             endif
         endif
         static if LIBRARY_StructureTileDefinition and LIBRARY_TileDefinition then

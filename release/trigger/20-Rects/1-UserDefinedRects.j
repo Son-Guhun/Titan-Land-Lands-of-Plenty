@@ -481,7 +481,6 @@ function CreateGUDR takes unit centerUnit returns boolean
         set fog = TerrainFog.create()
         set RectEnvironment.get(userDefRect).fog = fog
         set fog.style = TerrainFog.EXPONENTIAL
-        call AutoRectEnvironment_RegisterRect(userDefRect)
     endif
     
     call SaveRectHandle(hashTable, unitId, Indices.RECT, userDefRect)

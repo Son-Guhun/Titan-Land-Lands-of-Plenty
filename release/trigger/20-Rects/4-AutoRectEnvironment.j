@@ -1,6 +1,5 @@
 library AutoRectEnvironment requires RectEnvironment, GLHS, WorldBounds
-// Version 1.1.0 => Now uses AnyTileDefiniton to split map into blocks of 2048x2048 instead of a
-// region.
+// Version 1.1.0 => Now uses AnyTileDefiniton to split map into blocks of 2048x2048 instead of a region. 
 
 globals
     private constant boolean ENABLE_SET_HOOK = false
@@ -9,12 +8,12 @@ globals
 endglobals
 
 private struct Globals extends array
-    private static key static_members_key
-    //! runtextmacro TableStruct_NewStaticPrimitiveField("lastCameraX", "real")
-    //! runtextmacro TableStruct_NewStaticPrimitiveField("lastCameraY", "real")
-    //! runtextmacro TableStruct_NewStaticPrimitiveField("rectWasMoved", "boolean")
+
+    static real lastCameraX = 0.  // this is a localplayer value
+    static real lastCameraY = 0. // this is a localplayer value
+    static boolean rectWasMoved = false // this is a localplayer value
     
-    //! runtextmacro TableStruct_NewStaticHandleField("lastCameraRect", "rect")
+    static rect lastCameraRect = null // this is a localplayer value
     
     //! runtextmacro TableStruct_NewConstTableField("public","id2")
 endstruct
@@ -32,7 +31,7 @@ private struct AutoRectBlock extends array
 endstruct
 
 // Adds a rect to the .rects set of all AutoRectBlocks that it encompasses.
-function RegisterRectImpl takes rect r returns nothing
+private function AppendRectToBlocks takes rect r returns nothing
     local real x0 = GetRectMinX(r)
     local real y0 = GetRectMinY(r)
     
@@ -57,7 +56,7 @@ function RegisterRectImpl takes rect r returns nothing
 endfunction
 
 // Removes a rect to the .rects set of all AutoRectBlocks that it encompasses.
-function DeregisterRectImpl takes rect r returns nothing
+private function RemoveRectFromBlocks takes rect r returns nothing
     local real x0 = GetRectMinX(r)
     local real y0 = GetRectMinY(r)
     
@@ -81,13 +80,22 @@ function DeregisterRectImpl takes rect r returns nothing
 
 endfunction
 
+private function IsRectIdRegistered takes integer rectId returns boolean
+    return Globals.id2.handle.has(rectId)
+endfunction
+
+public function IsRectRegistered takes rect r returns boolean
+    return IsRectIdRegistered(GetHandleId(r))
+endfunction
+
 public function RegisterRect takes rect r returns nothing
     local integer rId = GetHandleId(r)
     
-    if not Globals.id2.handle.has(rId) then
+    if r != null and not IsRectIdRegistered(rId) then
 
+        set Globals.rectWasMoved = true
         set Globals.id2.rect[rId] = r
-        call RegisterRectImpl(r)
+        call AppendRectToBlocks(r)
     endif
 endfunction
 
@@ -99,30 +107,35 @@ public function DeRegisterRect takes rect r returns nothing
         set Globals.lastCameraRect = null  // This possibly avoids desyncs.
     endif
     
-    if Globals.id2.handle.has(rId) then
+    if r != null and IsRectIdRegistered(rId) then
+    
         set Globals.rectWasMoved = true
         call Globals.id2.rect.remove(rId)
-        call DeregisterRectImpl(r)
+        call RemoveRectFromBlocks(r)
     endif
 endfunction
 
 public function MoveRect takes rect r, real newCenterX, real newCenterY returns nothing
 
-    if Globals.id2.handle.has(GetHandleId(r)) then
+    if IsRectRegistered(r) then
         set Globals.rectWasMoved = true
-        call RegisterRectImpl(r)
+        call AppendRectToBlocks(r)
         call MoveRectTo(r, newCenterX, newCenterY)
-        call DeregisterRectImpl(r)
+        call RemoveRectFromBlocks(r)
+    else
+        call MoveRectTo(r, newCenterX, newCenterY)
     endif
     
 endfunction
 
 function AutoRectEnvironment_SetRect takes rect r, real minx, real miny, real maxx, real maxy returns nothing
-    if Globals.id2.handle.has(GetHandleId(r)) then
+    if IsRectRegistered(r) then
         set Globals.rectWasMoved = true
-        call RegisterRectImpl(r)
+        call AppendRectToBlocks(r)
         call SetRect(r, minx, miny, maxx, maxy)
-        call DeregisterRectImpl(r)
+        call RemoveRectFromBlocks(r)
+    else
+        call SetRect(r, minx, miny, maxx, maxy)
     endif
 endfunction
 
@@ -136,7 +149,7 @@ static if ENABLE_SET_HOOK then
     hook SetRect AutoRectEnvironment_SetRect
 endif
 
-
+// This function executes code specific for localplayer.
 function onTimer takes nothing returns nothing
     local real x = GetCameraTargetPositionX()
     local real y = GetCameraTargetPositionY()
@@ -184,13 +197,13 @@ function onTimer takes nothing returns nothing
         
         // No rect was found
         if i == rectSet.end() then
-            call RectEnvironment(0).apply()
+            call RectEnvironment.default.apply()
         endif
             
         set r = null
     else
-        //call BJDebugMsg("Camera not in region.")
-        call RectEnvironment(0).apply()
+        //call BJDebugMsg("Camera in block with no rects.")
+        call RectEnvironment.default.apply()
     endif
     
     set Globals.lastCameraX = x

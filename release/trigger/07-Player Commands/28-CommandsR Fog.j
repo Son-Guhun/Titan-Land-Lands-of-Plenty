@@ -14,8 +14,8 @@ function Trig_CommandsR_Fog_Conditions takes nothing returns boolean
     endif
     
     if chatStr == "reset" then
-        call RectEnvironment(0).fog.destroy()
-        set RectEnvironment(0).fog = 0
+        call RectEnvironment.default.fog.destroy()
+        set RectEnvironment.default.fog = 0
         return false
     endif
     
@@ -48,11 +48,11 @@ function Trig_CommandsR_Fog_Conditions takes nothing returns boolean
     set chatStr = CutToCommaShorten(chatStr, cutToComma)
     
     static if LIBRARY_AutoRectEnvironment then
-        set fog = RectEnvironment(0).fog
+        set fog = RectEnvironment.default.fog
         
         if fog == 0 then
             set fog = TerrainFog.create()
-            set RectEnvironment(0).fog = fog
+            set RectEnvironment.default.fog = fog
         endif
         
         set fog.style = style
