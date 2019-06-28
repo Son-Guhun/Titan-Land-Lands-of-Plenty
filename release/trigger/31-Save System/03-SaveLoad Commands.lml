@@ -191,7 +191,8 @@ Action
                                     Call  : SubStringBJ
                                         Call  : GetEventPlayerChatString
                                         Const : 13
-                                        Const : 16
+                                        Call  : StringLength
+                                            Call  : GetEventPlayerChatString
                             DisplayTextToForce
                                 Call  : GetPlayersAll
                                 Call  : OperatorString
