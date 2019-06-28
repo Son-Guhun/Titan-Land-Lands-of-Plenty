@@ -30,7 +30,7 @@ function GenerateSpecialEffectSaveString takes SpecialEffect whichEffect returns
     local string animTags
     
     if whichEffect.hasSubAnimations() then
-        set animTags = GUMSConvertTags(UnitVisualMods_TAGS_COMPRESS, SubAnimations2Tags(whichEffect.subanimations))
+        set animTags = SaveIO_CleanUpString(GUMSConvertTags(UnitVisualMods_TAGS_COMPRESS, SubAnimations2Tags(whichEffect.subanimations)))
     else
         set animTags = "D"
     endif
@@ -119,13 +119,13 @@ function SaveForceLoop takes nothing returns boolean
                             */   unitHandleId.getVertexAlpha() + "," + /*
                             */   unitHandleId.getColor() + "," + /*
                             */   unitHandleId.getAnimSpeed() + "," + /*
-                            */   unitHandleId.getAnimTag() + "," + /*
+                            */   SaveIO_CleanUpString(unitHandleId.getAnimTag()) + "," + /*
                             */   I2S(GUMS_GetUnitSelectionType(saveUnit))
                 
                 call saveData.write(SaveNLoad_FormatString("SnL_unit", saveStr))
                 
                 if GUMSUnitHasCustomName(unitHandleId) then
-                    call saveData.write(SaveNLoad_FormatString("SnL_unit_extra", "=n " + GUMSGetUnitName(saveUnit)))
+                    call saveData.write(SaveNLoad_FormatString("SnL_unit_extra", "=n " + SaveIO_CleanUpString(GUMSGetUnitName(saveUnit))))
                 endif
                 
                 if GUDR_IsUnitIdGenerator(unitHandleId) then

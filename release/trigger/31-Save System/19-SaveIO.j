@@ -21,6 +21,30 @@ private module InitModule
     endmethod
 endmodule
 
+// This function makes all occurences of quotation marks compatible with Preload I/O by converting them to ''.
+public function CleanUpString takes string str returns string
+    local string result = ""
+    local string char
+    local integer i = 0
+    local integer length = StringLength(str)
+    
+    
+    loop
+    exitwhen i >= length
+        set char = SubString(str, i, i+1)
+        
+        if char == "\"" then
+            set char = "''"
+        endif
+        
+        set result = result + char
+    
+        set i = i + 1
+    endloop
+
+    return result
+endfunction
+
 struct SaveData extends array
     implement GMUIUseGenericKey
 
