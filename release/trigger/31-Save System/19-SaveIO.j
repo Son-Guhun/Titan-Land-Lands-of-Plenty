@@ -220,7 +220,7 @@ function TriggerRegisterAnyPlayerSyncEvent takes trigger whichTrigger, string pr
     loop
     exitwhen i == bj_MAX_PLAYERS
         set slot = Player(i)
-        if GetPlayerSlotState(slot) == PLAYER_SLOT_STATE_PLAYING then
+        if GetPlayerController(slot) == MAP_CONTROL_USER then
             call BlzTriggerRegisterPlayerSyncEvent(whichTrigger, slot, prefix, fromServer)
         endif
         

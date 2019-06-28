@@ -118,7 +118,7 @@ function onInit takes nothing returns nothing
     
     loop
     exitwhen playerId == bj_MAX_PLAYERS
-        if GetPlayerSlotState(Player(playerId)) == PLAYER_SLOT_STATE_PLAYING then
+        if GetPlayerController(Player(playerId)) == MAP_CONTROL_USER then
             call TriggerRegisterPlayerChatEvent(trig, Player(playerId), "'", false)
             call TriggerRegisterPlayerChatEvent(trig, Player(playerId), "-", false)
         endif

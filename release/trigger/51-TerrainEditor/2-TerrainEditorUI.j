@@ -122,7 +122,7 @@ library TerrainEditorUI requires TerrainEditor
             call TriggerAddAction( trig, function onCastAbility )
             loop
             exitwhen i == bj_MAX_PLAYERS
-                if GetPlayerSlotState(Player(i)) == PLAYER_SLOT_STATE_PLAYING then
+                if GetPlayerController(Player(i)) == MAP_CONTROL_USER then
                     set editor = CreateUnit(Player(i), 'uTED', 0., 0., 270.)
                     call BlzUnitDisableAbility(editor, ABILITY_TEXTURES[TerrainTools_GetTextureId(TerrainEditor_DEFAULT_TEXTURE)], true, false)
                     

@@ -187,7 +187,7 @@ private function onInit takes nothing returns nothing
     
     loop
     exitwhen i > bj_MAX_PLAYERS
-        if GetPlayerSlotState(Player(i)) == PLAYER_SLOT_STATE_PLAYING then
+        if GetPlayerController(Player(i)) == MAP_CONTROL_USER then
             set myImage[i] = CreateImage(SQUARE_PATH(), 128*5, 128*5, 0, 0, 0, 0, 128*5/2,128*5/2,0, 1)
             set brushSize[i] = 5
             

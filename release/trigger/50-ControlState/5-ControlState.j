@@ -162,7 +162,7 @@ private function onInit takes nothing returns nothing
     
     loop
     exitwhen i > bj_MAX_PLAYERS
-        if GetPlayerSlotState(Player(i)) == PLAYER_SLOT_STATE_PLAYING then
+        if GetPlayerController(Player(i)) == MAP_CONTROL_USER then
             call TriggerRegisterPlayerEvent(onMouseButton, Player(i), EVENT_PLAYER_MOUSE_DOWN )
             call TriggerRegisterPlayerEvent(onMouseButton, Player(i), EVENT_PLAYER_MOUSE_UP )
             

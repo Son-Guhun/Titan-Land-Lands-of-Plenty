@@ -57,7 +57,7 @@ struct LoP_PlayerData extends array
         exitwhen playerData == bj_MAX_PLAYERS
             call playerData.setUnitColor(ConvertPlayerColor(playerData))
             
-            if GetPlayerSlotState(Player(playerData)) == PLAYER_SLOT_STATE_PLAYING then
+            if GetPlayerController(Player(playerData)) == MAP_CONTROL_USER then
                 set playerData.rotationStep = 90
             endif
         
