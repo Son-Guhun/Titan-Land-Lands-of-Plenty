@@ -36,6 +36,7 @@ private function onCast takes nothing returns nothing
         call deco.destroy()
         set deco = decorations.next(deco)
     endloop
+    call decorations.destroy()
 endfunction
 
 //===========================================================================

@@ -32,6 +32,7 @@ function Trig_Make_Unit_Selectable_Actions takes nothing returns nothing
         call deco.destroy()
         set deco = decorations.next(deco)
     endloop
+    call decorations.destroy()
     
     set udg_temp_group = null
     return

@@ -169,6 +169,7 @@ function SaveForceLoop takes nothing returns boolean
         set udg_save_unit_nmbr[playerNumber] = ( udg_save_unit_nmbr[playerNumber] + 1 )
         if udg_save_load_boolean[playerNumber] == false then
             call saveData.destroy()
+            call save_decoration_effects[playerNumber].destroy()
             set saveFile[playerId] = 0
         endif
     endif
