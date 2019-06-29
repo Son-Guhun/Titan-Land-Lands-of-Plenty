@@ -30,54 +30,55 @@ private struct AutoRectBlock extends array
     
 endstruct
 
+    
 // Adds a rect to the .rects set of all AutoRectBlocks that it encompasses.
 private function AppendRectToBlocks takes rect r returns nothing
-    local real x0 = GetRectMinX(r)
-    local real y0 = GetRectMinY(r)
-    
-    local real x = x0
-    local real y
-    
     local real maxX = GetRectMaxX(r)
-    local real maxY = GetRectMinY(r)
+    local real maxY = GetRectMaxY(r)
+    local real minY = GetRectMinY(r)
+    
+    local real x = GetRectMinX(r)
+    
+    local integer i
+    local integer maxI = AutoRectBlock.get(maxX,maxY)
+    local integer maxJ
     
     loop
-    exitwhen x > maxX
-        set y = y0
+        set maxJ = AutoRectBlock.get(x,maxY)
+        set i = AutoRectBlock.get(x,minY)
+        exitwhen i > maxI
         loop
-        exitwhen y > maxY
-            call AutoRectBlock.get(x, y).rects.append(GetHandleId(r))
-        
-            set y = y + AutoRectBlock.BLOCK_SIZE
+            exitwhen i > maxJ
+            call AutoRectBlock(i).rects.append(GetHandleId(r))
+            set i = i + 1
         endloop
         set x = x + AutoRectBlock.BLOCK_SIZE
     endloop
-
 endfunction
 
 // Removes a rect to the .rects set of all AutoRectBlocks that it encompasses.
 private function RemoveRectFromBlocks takes rect r returns nothing
-    local real x0 = GetRectMinX(r)
-    local real y0 = GetRectMinY(r)
-    
-    local real x = x0
-    local real y
-    
     local real maxX = GetRectMaxX(r)
-    local real maxY = GetRectMinY(r)
+    local real maxY = GetRectMaxY(r)
+    local real minY = GetRectMinY(r)
+    
+    local real x = GetRectMinX(r)
+    
+    local integer i
+    local integer maxI = AutoRectBlock.get(maxX,maxY)
+    local integer maxJ
     
     loop
-    exitwhen x > maxX
-        set y = y0
+        set maxJ = AutoRectBlock.get(x,maxY)
+        set i = AutoRectBlock.get(x,minY)
+        exitwhen i > maxI
         loop
-        exitwhen y > maxY
-            call AutoRectBlock.get(x, y).rects.remove(GetHandleId(r))
-        
-            set y = y + AutoRectBlock.BLOCK_SIZE
+            exitwhen i > maxJ
+            call AutoRectBlock(i).rects.remove(GetHandleId(r))
+            set i = i + 1
         endloop
         set x = x + AutoRectBlock.BLOCK_SIZE
     endloop
-
 endfunction
 
 private function IsRectIdRegistered takes integer rectId returns boolean
@@ -119,9 +120,9 @@ public function MoveRect takes rect r, real newCenterX, real newCenterY returns 
 
     if IsRectRegistered(r) then
         set Globals.rectWasMoved = true
-        call AppendRectToBlocks(r)
-        call MoveRectTo(r, newCenterX, newCenterY)
         call RemoveRectFromBlocks(r)
+        call MoveRectTo(r, newCenterX, newCenterY)
+        call AppendRectToBlocks(r)
     else
         call MoveRectTo(r, newCenterX, newCenterY)
     endif
@@ -131,9 +132,9 @@ endfunction
 function AutoRectEnvironment_SetRect takes rect r, real minx, real miny, real maxx, real maxy returns nothing
     if IsRectRegistered(r) then
         set Globals.rectWasMoved = true
-        call AppendRectToBlocks(r)
-        call SetRect(r, minx, miny, maxx, maxy)
         call RemoveRectFromBlocks(r)
+        call SetRect(r, minx, miny, maxx, maxy)
+        call AppendRectToBlocks(r)
     else
         call SetRect(r, minx, miny, maxx, maxy)
     endif
