@@ -17,34 +17,58 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ### Added
 - New version of the Save system. The external SaveNLoad program is no longer required, saving and loading is done entirely using Warcraft III's functionalities. To transfer old saves to the new system, they must be loaded using the new **-req** command. Using SaveNLoad.exe will be required for this. After loading the old save, it can be saved using the save commands and afterwards it can be loaded with the **-request** command.
+- Created a new ingame Terrain Editor, that works similarly to the World Editor's Terrain Editor. Currently, it is a very simple tool, but it will be greatly expanded upon in the furute. It will be the most supported form of terrain editing going foward, so try and ditch the Deco Modifier Terrain, if you can.
 - New Commands:
-	- -collision (on/off): allows you to turn collison on/off for units.
+	- -collision (on/off): allows you to turn collison on/off for units. This allows naval units to go onto land and ground units to walk through cliffs.
     - -editor (terrain/none): Allows you to enter/exit the new ingame Terrain Editor.
 - New Races:
 	- Worgen
+	- Ratfolk
 - New Deco Builders:
-	- Deco Builder S&S 1 and 2: These are two new deco builders with 89 new decorations in total. These decorations are modular, allowing you to build pretty much any medieval building your imagination can come up with!
-	- Deco Builder Mushrooms: Builds mushrooms that used to be built by Deco Builder Crops.
-	- Deco Builder Tableware:
+	- [Stone & Sword](https://www.hiveworkshop.com/threads/hybrisfactory-terraining-and-mapping-resources.238310/) builders:
+		- **Deco Builder S&S Manor 1 and 2:** These are two new deco builders with 89 new decorations in total. These decorations are modular, allowing you to build pretty much any medieval building your imagination can come up with!
+		- **Deco Builder S&S Kingdom 1 and 2:** There are two new deco builders that add a total of 54 new decorations. These decorations are pretty useful for creating interiors, villages or markets.
+	- **Deco Builder Mushrooms:** Builds mushrooms that used to be built by Deco Builder Crops. Also added new mushrooms:
+		- Giant Mushrooms (and Red variations)
+		- White Spotted Mushrooms
+	- **Deco Builder Tableware:** Builds things that you can put on top of tables.
+		- Mug
+		- Bread
+		- Plate, Plate with Meat
+		- Candelabra, Candelabra (Off)
 - New Decorations:
 	- Deco Builder Fire:
 		- Flame Grate (round and rectangular)
 	- Deco Builder Misc:
 		- Magical Pen (can be activated and deactivated)
 
+#### Minor Additions:
 - Cosmosis now possesses the Obliterate spell to remove unselectable decorations.
+- Readded the Noldor elven units to a new Barracks that can be built by the High Elf Architect.
 
 
 ### Fixed
 - Certain models (such as City Buildings) should no longer become partly invisible when they receive an RGB value. They will still become partly invisible if they receive an alpha value.
 - Tooltips for High Elf and Highborne decorations are now correct.
-- Ressurection stone has been correctly added to Deco Builder Rock (it was missing before).
+- Ressurection stone has been correctly added to Deco Builder Rocks (it was missing before).
+- Dragonspawn Cavern can now be built normally.
+- **Possibly** fixed some desyncs that could **possibly** happen at the start of the game. *It's hard to mod Warcraft 3*.
+- **Possibly** fixed some desyncs that could **possibly** be caused by the camera system and RectGenerator system. *Really hard*.
+- Fixed an issue where sometimes Rect Generators with sides greater than 2048x2048 would not perform correctly.
 
 ### Changed
-- Unselectable decorations are now Special Effects instead of units with the Locust ability. This SHOULD increase performance, and in the future it will allow for more flexiblity with unit visuals (negative flying height and rotations along the x and y axes).
+- Rect Generators' Toggle Terrain Fog ability is now functional. By default, fogs are disabled.
 - The Titan can now make any player's decorations unselectable, in order to avoid lag.
+- Terrain:
+	- Added a secondary entrance to the Dirt Peaks (connected to the Blighted Lands).
+- Decorations will now maintain their flying height when upgraded.
+- Load limit increased from 9999 to 2147483647.
+
+#### Minor Changes:
+- Unselectable decorations are now Special Effects instead of units with the Locust ability. This SHOULD increase performance, and in the future it will allow for more flexiblity with unit visuals (negative flying height and rotations along the x and y axes). Even though this is a minor change for the end user, this is the part of the update which took the longest to properly finish.
 - Custom heroes created with -makehero will now have the Hero armor type.
 - Fire Campfire (with Pig) has been removed from Deco Builder Fire's build menu. It is now an upgrade of Fire Campfire.
+- Double quotes (") will be converted to two single quotes ('') when saving unit names.
 
 ### Removed
 - Removed glowing mushrooms from the Scorched Lands. This part of the terrain is going to see a massive overhaul, probably in 1.3.0. Removing these mushrooms should reduce FPS lag that some people experience in LoP.
