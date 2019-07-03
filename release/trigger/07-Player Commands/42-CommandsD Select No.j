@@ -1,4 +1,10 @@
-function Trig_CommandsD_Locust_Func011A takes nothing returns nothing
+scope CommandsSelectNo
+
+private function SELECTABLE_ONLY_ABILITY takes nothing returns integer
+    return 'A04U'
+endfunction
+
+private function EnumFunc takes nothing returns nothing
     local player trigP = GetTriggerPlayer()
     local unit enumUnit = GetEnumUnit()
     
@@ -7,6 +13,9 @@ function Trig_CommandsD_Locust_Func011A takes nothing returns nothing
         
     elseif not LoP_PlayerOwnsUnit(trigP, enumUnit) and udg_GAME_MASTER != trigP then
         call DisplayTextToPlayer(trigP, 0, 0, "This is not your unit." )
+    
+    elseif GetUnitAbilityLevel(enumUnit, SELECTABLE_ONLY_ABILITY()) > 0 then
+        call DisplayTextToPlayer(trigP, 0, 0, "This decoration cannot be made unselectable." )
         
     elseif CheckCommandOverflow() then
         if IsUnitType(enumUnit, UNIT_TYPE_STRUCTURE) then
@@ -25,7 +34,7 @@ function Trig_CommandsD_Locust_Func011A takes nothing returns nothing
     set enumUnit = null
 endfunction
 
-function Trig_CommandsD_Locust_Conditions takes nothing returns boolean
+private function onCommand takes nothing returns boolean
     local group g
 
     if LoP_Command.getArguments() == "no" then
@@ -34,7 +43,7 @@ function Trig_CommandsD_Locust_Conditions takes nothing returns boolean
         call Commands_EnumSelectedCheckForGenerator(g, GetTriggerPlayer(), null)
         set udg_Commands_Counter = 0
         set udg_Commands_Counter_Max = 500
-        call ForGroup( g, function Trig_CommandsD_Locust_Func011A )
+        call ForGroup( g, function EnumFunc )
         
         call DestroyGroup(g)
         set g = null
@@ -44,6 +53,8 @@ endfunction
 
 //===========================================================================
 function InitTrig_CommandsD_Select_No takes nothing returns nothing
-    call LoP_Command.create("-select", ACCESS_USER, Condition(function Trig_CommandsD_Locust_Conditions))
+    call LoP_Command.create("-select", ACCESS_USER, Condition(function onCommand))
 endfunction
+
+endscope
 

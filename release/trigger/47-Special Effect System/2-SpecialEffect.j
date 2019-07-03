@@ -7,8 +7,16 @@ endglobals
 //! runtextmacro DeclareParentHashtableWrapperModule("hashTableHandle", "true", "hT", "public")
 //! runtextmacro DeclareParentHashtableWrapperStruct("hT","public")
 
+globals
+    constant boolean IS_SLK = false
+endglobals
 function GetUnitTypeIdModel takes integer unitTypeId returns string 
-    return GetAbilityEffectById(unitTypeId, EFFECT_TYPE_SPECIAL, 1)
+    static if IS_SLK then
+        return GetAbilityEffectById(unitTypeId, EFFECT_TYPE_SPECIAL, 1)
+    else
+        local string str = GetAbilityEffectById(unitTypeId, EFFECT_TYPE_SPECIAL, 1)
+        return SubString(str, CutToComma(str)+1, StringLength(str))
+    endif
 endfunction
 
 struct SpecialEffect extends array
