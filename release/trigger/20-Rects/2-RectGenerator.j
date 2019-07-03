@@ -40,8 +40,8 @@ globals
     public constant integer EXPAND_X            = 'UDR6'
     public constant integer RETRACT_X           = 'UDR5'
     
-    public constant integer CHANGE_WEATHER_NEXT = 'UDR1'
-    public constant integer CHANGE_WEATHER_PREV = 'UDR0'
+    public constant integer CHANGE_WEATHER_NEXT = 'AUR0'
+    public constant integer CHANGE_WEATHER_PREV = 'AUR1'
     public constant integer TOGGLE_WEATHER      = 'UDR9'
     
     public constant integer LOCK_UNITS          = 'UDR3'
@@ -71,7 +71,7 @@ globals
     public constant integer FOG_GREEN_UP     = 'UDRG'
     public constant integer FOG_GREEN_DOWN   = 'UDRH'
     
-    public constant integer FOG_BLUE_UP      = 'UDRE'
+    public constant integer FOG_BLUE_UP      = 'AUR2'
     public constant integer FOG_BLUE_DOWN    = 'UDRF'
 endglobals
 

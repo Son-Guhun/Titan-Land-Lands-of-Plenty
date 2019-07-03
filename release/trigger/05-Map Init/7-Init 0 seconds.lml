@@ -71,20 +71,12 @@ And discord: SonGuhun#4510'
         Const : A062
     SetVariable
         Array : ScrollSystem_realAbilities
-            Const : 1
-        Const : A04U
-    SetVariable
-        Array : ScrollSystem_realAbilities
             Const : 2
         Const : A04J
     SetVariable
         Array : ScrollSystem_realAbilities
             Const : 3
         Const : A05Y
-    SetVariable
-        Array : ScrollSystem_realAbilities
-            Const : 5
-        Const : A06A
     SetVariable
         Array : ScrollSystem_realAbilities
             Const : 6
