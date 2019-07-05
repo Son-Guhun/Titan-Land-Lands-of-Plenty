@@ -109,6 +109,9 @@ are listed first, though.
             // Blocks
             set i = ( i + 1 )
             set rawcodes[i] = 'u03A'
+            // Castle
+            set i = ( i + 1 )
+            set rawcodes[i] = 'u00M'
             // Celtic
             set i = ( i + 1 )
             set rawcodes[i] = 'u029'
