@@ -4,10 +4,10 @@ from myconfigparser import MyConfigParser, load_unit_data, get_decorations
 
 import pyperclip
 
-keys = ['modelScale','red','green','blue']
+keys = ['modelScale','red','green','blue','animProps','maxRoll']
 
 def do(file_path):
-    with open(FILE_PATH) as f:
+    with open(file_path) as f:
         unit_data = load_unit_data(f)
 
     result = []
@@ -16,8 +16,13 @@ def do(file_path):
     for deco in decos:
         for key in keys:
             if key in unit_data[deco]:
-                result.append(" set UnitTypeDefaultValues('{}').{} = {}".format(deco,
-                                                                                key,
-                                                                                unit_data[deco][key]))
+                if key == 'animProps':
+                    result.append(" set UnitTypeDefaultValues('{}').{} = {}".format(deco,
+                                                                                    key,
+                                                                                    unit_data[deco][key].replace(',', ' ')))
+                elif key != 'maxRoll' or float(unit_data[deco]['maxRoll']) < 0:
+                    result.append(" set UnitTypeDefaultValues('{}').{} = {}".format(deco,
+                                                                                    key,
+                                                                                    unit_data[deco][key]))
 
     pyperclip.copy('\n'.join(result))

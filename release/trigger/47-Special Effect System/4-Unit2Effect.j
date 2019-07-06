@@ -131,9 +131,13 @@ function Unit2Effect takes unit whichUnit returns DecorationEffect
     if unitData.hasAnimTag() then
         debug call BJDebugMsg("Tags: " + unitData.raw.getAnimTag())
         call AddTagsStringAsSubAnimations(result, GUMSConvertTags(UnitVisualMods_TAGS_DECOMPRESS, unitData.raw.getAnimTag()))
+    elseif unitType.hasAnimProps() then
+        call AddTagsStringAsSubAnimations(result, unitType.animProps)
     endif
     
-    // Anim speed
+    if unitType.hasMaxRoll() then
+        set result.roll = Deg2Rad(unitType.maxRoll+180.)
+    endif
     
     call BlzPlaySpecialEffect(result.effect, ANIM_TYPE_STAND)
     return result
