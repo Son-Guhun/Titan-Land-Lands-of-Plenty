@@ -12,6 +12,10 @@ when setting.
         return 0  // Return type does not matter, since this is not used as a hashtable.
     endmethod
     
+    static method operator hashTableHandle takes nothing returns hashtable
+        return $WRAPPER$.hashtable
+    endmethod
+    
     static method getChildTable takes integer i returns $WRAPPER$_Child
         return i
     endmethod
@@ -24,19 +28,19 @@ when setting.
     public static key $NAME$_INDEX
     
     method get$NAME$ takes nothing returns $TYPE$
-        return thistype.getChildTable($NAME$_INDEX).$TYPE$[this]
+        return thistype.getChildTable(this).$TYPE$[$NAME$_INDEX]
     endmethod
     
     method set$NAME$ takes $TYPE$ new_$NAME$ returns nothing
-        set thistype.getChildTable($NAME$_INDEX).$TYPE$[this] = new_$NAME$
+        set thistype.getChildTable(this).$TYPE$[$NAME$_INDEX] = new_$NAME$
     endmethod
     
     private method clear$NAME$ takes nothing returns nothing
-        call thistype.getChildTable($NAME$_INDEX).$TYPE$.remove(this)
+        call thistype.getChildTable(this).$TYPE$.remove($NAME$_INDEX)
     endmethod
     
     private method has$NAME$ takes nothing returns boolean
-        return thistype.getChildTable($NAME$_INDEX).$TYPE$.has(this)
+        return thistype.getChildTable(this).$TYPE$.has($NAME$_INDEX)
     endmethod
 //! endtextmacro
 
@@ -48,19 +52,19 @@ when setting.
     public static key $NAME$_INDEX
     
     method operator $NAME$ takes nothing returns $TYPE$
-        return thistype.getChildTable($NAME$_INDEX).$TYPE$[this]
+        return thistype.getChildTable(this).$TYPE$[$NAME$_INDEX]
     endmethod
     
     method operator $NAME$= takes $TYPE$ new_$NAME$ returns nothing
-        set thistype.getChildTable($NAME$_INDEX).$TYPE$[this] = new_$NAME$
+        set thistype.getChildTable(this).$TYPE$[$NAME$_INDEX] = new_$NAME$
     endmethod
     
     private method $NAME$_clear takes nothing returns nothing
-        call thistype.getChildTable($NAME$_INDEX).$TYPE$.remove(this)
+        call thistype.getChildTable(this).$TYPE$.remove($NAME$_INDEX)
     endmethod
     
     private method $NAME$_exists takes nothing returns boolean
-        return thistype.getChildTable($NAME$_INDEX).$TYPE$.has(this)
+        return thistype.getChildTable(this).$TYPE$.has($NAME$_INDEX)
     endmethod
 //! endtextmacro
 
@@ -68,38 +72,38 @@ when setting.
     public static key $NAME$_INDEX
     
     method operator $NAME$ takes nothing returns $TYPE$
-        return thistype.getChildTable($NAME$_INDEX).$TYPE$[this]
+        return thistype.getChildTable(this).$TYPE$[$NAME$_INDEX]
     endmethod
     
     method operator $NAME$= takes $TYPE$ new_$NAME$ returns nothing
-        set thistype.getChildTable($NAME$_INDEX).$TYPE$[this] = new_$NAME$
+        set thistype.getChildTable(this).$TYPE$[$NAME$_INDEX] = new_$NAME$
     endmethod
     
     private method $NAME$_clear takes nothing returns nothing
-        call thistype.getChildTable($NAME$_INDEX).$TYPE$.remove(this)
+        call thistype.getChildTable(this).$TYPE$.remove($NAME$_INDEX)
     endmethod
     
     private method $NAME$_exists takes nothing returns boolean
-        return thistype.getChildTable($NAME$_INDEX).$TYPE$.has(this)
+        return thistype.getChildTable(this).$TYPE$.has($NAME$_INDEX)
     endmethod
 //! endtextmacro
 
 // Used if you want to have control over the indices, instead of using a constant key variable
 //! textmacro HashStruct_NewPrimitiveFieldEx takes HASHTABLE, NAME, TYPE, INDEX
     method operator $NAME$ takes nothing returns $TYPE$
-        return $HASHTABLE$[$INDEX$].$TYPE$[this]
+        return $HASHTABLE$[this].$TYPE$[$INDEX$]
     endmethod
     
     method operator $NAME$= takes $TYPE$ new_$NAME$ returns nothing
-        set $HASHTABLE$[$INDEX$].$TYPE$[this] = new_$NAME$
+        set $HASHTABLE$[this].$TYPE$[$INDEX$] = new_$NAME$
     endmethod
     
     private method $NAME$_clear takes nothing returns nothing
-        call $HASHTABLE$[$INDEX$].$TYPE$.remove(this)
+        call $HASHTABLE$[this].$TYPE$.remove($INDEX$)
     endmethod
     
     private method $NAME$_exists takes nothing returns boolean
-        return $HASHTABLE$[$INDEX$].$TYPE$.has(this)
+        return $HASHTABLE$[this].$TYPE$.has($INDEX$)
     endmethod
 //! endtextmacro
 
@@ -110,19 +114,19 @@ when setting.
     public static key $NAME$_INDEX
     
     method operator $NAME$ takes nothing returns $TYPE$
-        return thistype.getChildTable($NAME$_INDEX)[this]
+        return thistype.getChildTable(this)[$NAME$_INDEX]
     endmethod
     
     method operator $NAME$= takes $TYPE$ new_$NAME$ returns nothing
-        set thistype.getChildTable($NAME$_INDEX)[this] = new_$NAME$
+        set thistype.getChildTable(this)[$NAME$_INDEX] = new_$NAME$
     endmethod
     
     private method $NAME$_clear takes nothing returns nothing
-        call thistype.getChildTable($NAME$_INDEX).remove(this)
+        call thistype.getChildTable(this).remove($NAME$_INDEX)
     endmethod
     
     private method $NAME$_exists takes nothing returns boolean
-        return thistype.getChildTable($NAME$_INDEX).has(this)
+        return thistype.getChildTable(this).has($NAME$_INDEX)
     endmethod
 //! endtextmacro
 
@@ -130,38 +134,38 @@ when setting.
     public static key $NAME$_INDEX
     
     method operator $NAME$ takes nothing returns $TYPE$
-        return thistype.getChildTable($NAME$_INDEX)[this]
+        return thistype.getChildTable(this)[$NAME$_INDEX]
     endmethod
     
     method operator $NAME$= takes $TYPE$ new_$NAME$ returns nothing
-        set thistype.getChildTable($NAME$_INDEX)[this] = new_$NAME$
+        set thistype.getChildTable(this)[$NAME$_INDEX] = new_$NAME$
     endmethod
     
     private method $NAME$_clear takes nothing returns nothing
-        call thistype.getChildTable($NAME$_INDEX).remove(this)
+        call thistype.getChildTable(this).remove($NAME$_INDEX)
     endmethod
     
     private method $NAME$_exists takes nothing returns boolean
-        return thistype.getChildTable($NAME$_INDEX).has(this)
+        return thistype.getChildTable(this).has($NAME$_INDEX)
     endmethod
 //! endtextmacro
 
 // Used if you want to have control over the indices, instead of using a constant key variable
 //! textmacro HashStruct_NewStructFieldEx takes HASHTABLE, NAME, TYPE, INDEX
     method operator $NAME$ takes nothing returns $TYPE$
-        return $HASHTABLE$[$INDEX$][this]
+        return $HASHTABLE$[this][$INDEX$]
     endmethod
     
     method operator $NAME$= takes $TYPE$ new_$NAME$ returns nothing
-        set $HASHTABLE$[$INDEX$][this] = new_$NAME$
+        set $HASHTABLE$[this][$INDEX$] = new_$NAME$
     endmethod
     
     private method $NAME$_clear takes nothing returns nothing
-        call $HASHTABLE$[$INDEX$].remove(this)
+        call $HASHTABLE$[this].remove($INDEX$)
     endmethod
     
     private method $NAME$_exists takes nothing returns boolean
-        return $HASHTABLE$[$INDEX$].has(this)
+        return $HASHTABLE$[this].has($INDEX$)
     endmethod
 //! endtextmacro
 
@@ -174,19 +178,19 @@ when setting.
     public static constant $TYPE$ $NAME$_DEFAULT = $DEFAULT$
     
     method operator $NAME$ takes nothing returns $TYPE$
-        return thistype.getChildTable($NAME$_INDEX).$TYPE$[this] + $DEFAULT$
+        return thistype.getChildTable(this).$TYPE$[$NAME$_INDEX] + $DEFAULT$
     endmethod
     
     method operator $NAME$= takes $TYPE$ new_$NAME$ returns nothing
-        set thistype.getChildTable($NAME$_INDEX).$TYPE$[this] = new_$NAME$ - $DEFAULT$
+        set thistype.getChildTable(this).$TYPE$[$NAME$_INDEX] = new_$NAME$ - $DEFAULT$
     endmethod
     
     private method $NAME$_clear takes nothing returns nothing
-        call thistype.getChildTable($NAME$_INDEX).$TYPE$.remove(this)
+        call thistype.getChildTable(this).$TYPE$.remove($NAME$_INDEX)
     endmethod
     
     private method $NAME$_exists takes nothing returns boolean
-        return thistype.getChildTable($NAME$_INDEX).$TYPE$.has(this)
+        return thistype.getChildTable(this).$TYPE$.has($NAME$_INDEX)
     endmethod
 //! endtextmacro
 
@@ -195,19 +199,48 @@ when setting.
     public static constant $TYPE$ $NAME$_DEFAULT = $DEFAULT$
     
     method operator $NAME$ takes nothing returns $TYPE$
-        return thistype.getChildTable($NAME$_INDEX).$TYPE$[this] + $DEFAULT$
+        return thistype.getChildTable(this).$TYPE$[$NAME$_INDEX] + $DEFAULT$
     endmethod
     
     private method operator $NAME$= takes $TYPE$ new_$NAME$ returns nothing
-        set thistype.getChildTable($NAME$_INDEX).$TYPE$[this] = new_$NAME$ - $DEFAULT$
+        set thistype.getChildTable(this).$TYPE$[$NAME$_INDEX] = new_$NAME$ - $DEFAULT$
     endmethod
     
     private method $NAME$_clear takes nothing returns nothing
-        call thistype.getChildTable($NAME$_INDEX).$TYPE$.remove(this)
+        call thistype.getChildTable(this).$TYPE$.remove($NAME$_INDEX)
     endmethod
     
     private method $NAME$_exists takes nothing returns boolean
-        return thistype.getChildTable($NAME$_INDEX).$TYPE$.has(this)
+        return thistype.getChildTable(this).$TYPE$.has($NAME$_INDEX)
     endmethod
 //! endtextmacro
+
+// ==================================
+// Boolean Fields
+
+public function SetBooleanField takes boolean default, hashtable whichHashtable, integer parentKey, integer childKey, boolean value returns nothing
+    
+    if value == default then
+        call RemoveSavedBoolean(whichHashtable, parentKey, childKey)
+    else
+        call SaveBoolean(whichHashtable, parentKey, childKey, true)
+    endif
+
+endfunction
+
+//! textmacro HashStruct_NewBooleanFieldWithDefault takes NAME, DEFAULT
+    public static key $NAME$_INDEX
+    public static constant boolean $NAME$_DEFAULT = $DEFAULT$
+    
+    method operator $NAME$ takes nothing returns boolean
+        return thistype.getChildTable(this).boolean.has($NAME$_INDEX) != $DEFAULT$
+    endmethod
+    
+    method operator $NAME$= takes boolean value returns nothing
+        call HashStruct_SetBooleanField($DEFAULT$, thistype.hashTableHandle, this, $NAME$_INDEX, value)
+    endmethod
+//! endtextmacro
+
+
+
 endlibrary

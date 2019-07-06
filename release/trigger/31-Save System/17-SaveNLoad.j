@@ -169,8 +169,13 @@ function LoadSpecialEffect takes player owner, UnitTypeDefaultValues unitType, r
     
     if color != "D" then
         set result.color = S2I(color) - 1
+        set result.hasCustomColor = true
     else
         set result.color = GetPlayerId(owner)
+    endif
+    
+    if aSpeed != "D" then
+        set result.animationSpeed = S2R(aSpeed)
     endif
     
     if aTags != "D" then

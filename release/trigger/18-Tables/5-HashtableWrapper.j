@@ -1155,7 +1155,7 @@ private module $NAME$_ParentHashtableWrapper
         call FlushParentHashtable($NAME$_GetWrappedHashtable())
     endmethod
     
-    static method hashtable takes nothing returns hashtable
+    static method operator hashtable takes nothing returns hashtable
         return $NAME$_GetWrappedHashtable()
     endmethod
 endmodule

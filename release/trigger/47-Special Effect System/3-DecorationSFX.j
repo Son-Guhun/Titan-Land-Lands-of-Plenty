@@ -49,6 +49,7 @@ struct DecorationEffect extends array
     
     //! runtextmacro HashStruct_SetHashtableWrapper("SpecialEffect_hT")
     //! runtextmacro HashStruct_NewPrimitiveGetterSetter("Owner","player")
+    //! runtextmacro HashStruct_NewBooleanFieldWithDefault("hasCustomColor","false")
     
     method operator effect takes nothing returns effect
         return SpecialEffect(this).effect

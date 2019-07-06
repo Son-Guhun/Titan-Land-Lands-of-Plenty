@@ -121,6 +121,11 @@ function Unit2Effect takes unit whichUnit returns DecorationEffect
     
     if unitData.hasColor() then
         set result.color = unitData.raw.getColor() - 1
+        set result.hasCustomColor = true
+    endif
+    
+    if unitData.hasAnimSpeed() then
+        set result.animationSpeed = unitData.raw.getAnimSpeed()
     endif
     
     if unitData.hasAnimTag() then
@@ -141,7 +146,15 @@ function Effect2Unit takes DecorationEffect whichEffect returns unit
     call GUMSSetUnitScale(u, whichEffect.scaleX)
     call GUMSSetUnitVertexColor(u, whichEffect.red/2.55, whichEffect.green/2.55, whichEffect.blue/2.55, 100. - whichEffect.alpha/2.55)
     call GUMSSetUnitFlyHeight(u, whichEffect.height)
-    call GUMSSetUnitColor(u, whichEffect.color + 1)
+    
+    if whichEffect.hasCustomColor then
+        call GUMSSetUnitColor(u, whichEffect.color + 1)
+    endif
+    
+    if whichEffect.animationSpeed != 1. then
+        call GUMSSetUnitAnimSpeed(u, whichEffect.animationSpeed)
+    endif
+    
     
     if whichEffect.hasSubAnimations() then
         call GUMSAddUnitAnimationTag(u, SubAnimations2Tags(whichEffect.subanimations))

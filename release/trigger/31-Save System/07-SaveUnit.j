@@ -26,8 +26,15 @@ function Save_SaveUnitPatrolPoints takes SaveData saveData, integer unitHandleId
     endloop
 endfunction
 
-function GenerateSpecialEffectSaveString takes SpecialEffect whichEffect returns string
+function GenerateSpecialEffectSaveString takes DecorationEffect whichEffect returns string
     local string animTags
+    local string color
+    
+    if whichEffect.hasCustomColor then
+        set color = I2S(whichEffect.color + 1)
+    else
+        set color = "D"
+    endif
     
     if whichEffect.hasSubAnimations() then
         set animTags = SaveIO_CleanUpString(GUMSConvertTags(UnitVisualMods_TAGS_COMPRESS, SubAnimations2Tags(whichEffect.subanimations)))
@@ -45,7 +52,7 @@ function GenerateSpecialEffectSaveString takes SpecialEffect whichEffect returns
         */ I2S(whichEffect.green) + "," +/*
         */ I2S(whichEffect.blue) + "," +/*
         */ I2S(whichEffect.alpha) + "," +/*
-        */ I2S(whichEffect.color + 1) + "," +/*
+        */ color + "," +/*
         */ R2S(whichEffect.animationSpeed) + "," +/*
         */ animTags + "," +/*
         */ I2S(GUMS_SELECTION_UNSELECTABLE())
