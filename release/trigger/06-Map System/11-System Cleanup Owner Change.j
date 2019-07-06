@@ -22,7 +22,7 @@ function LoP_onChangeOwner takes unit whichUnit, player ownerOld returns nothing
     endif
     
     // If ownership was changed with -neut command, no need to change colors.
-    if not IsUnitInGroup(whichUnit, udg_System_NeutralUnits[ GetPlayerId(ownerOld) + 1]) then
+    if not IsUnitInGroup(whichUnit, LoP_GetPlayerNeutralUnits(ownerOld)) then
         if unitId.hasColor() then
             call GUMSSetUnitColor(whichUnit, unitId.raw.getColor())
         else

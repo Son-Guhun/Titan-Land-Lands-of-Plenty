@@ -1,4 +1,4 @@
-
+library LoPNeutralUnits
 function LoP_GetPlayerNeutralUnits takes player whichPlayer returns group
     return udg_System_NeutralUnits[GetPlayerId(whichPlayer)]
 endfunction
@@ -15,6 +15,7 @@ endfunction
 function LoP_TakeFromNeutral takes unit whichUnit returns nothing
 
 endfunction
+endlibrary
 
 function Trig_Commands_Neutral_Func010Func002A takes nothing returns nothing
     if GetOwningPlayer(GetEnumUnit()) == GetTriggerPlayer() then
