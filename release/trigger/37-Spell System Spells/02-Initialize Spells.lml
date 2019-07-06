@@ -1160,6 +1160,46 @@ Action
     CommentString
         Const : ' '
     CommentString
+        Const : ---------------------------
+    CommentString
+        Const : 'Wander On'
+    CommentString
+        Const : ---------------------------
+    SetVariable
+        Var   : Spell__Ability
+        Const : A056
+    CommentString
+        Const : ' '
+    SetVariable
+        Var   : Spell__Trigger_OnEffect
+        Var   : gg_trg_Critter_Wander
+    CommentString
+        Const : ' '
+    TriggerExecute
+        Var   : gg_trg_Spell_System
+    CommentString
+        Const : ' '
+    CommentString
+        Const : ---------------------------
+    CommentString
+        Const : 'Wander Off'
+    CommentString
+        Const : ---------------------------
+    SetVariable
+        Var   : Spell__Ability
+        Const : A05L
+    CommentString
+        Const : ' '
+    SetVariable
+        Var   : Spell__Trigger_OnEffect
+        Var   : gg_trg_Critter_Wander
+    CommentString
+        Const : ' '
+    TriggerExecute
+        Var   : gg_trg_Spell_System
+    CommentString
+        Const : ' '
+    CommentString
         Const : ' '
     CommentString
         Const : ' '
