@@ -36,17 +36,19 @@ Action
     CommentString
         Const : -
     SetVariable
+        Var   : DamageTypePureExplosive
+        Const : -2
+    SetVariable
         Var   : DamageTypeExplosive
         Const : -1
-    SetVariable
-        Var   : DamageTypeCriticalStrike
-        Const : 1
     SetVariable
         Var   : DamageTypeCode
         Const : 1
     SetVariable
         Var   : DamageTypePure
         Const : 2
+    CommentString
+        Const : -
     SetVariable
         Var   : DamageTypeHeal
         Const : 3
@@ -58,14 +60,9 @@ Action
         Const : 5
     CommentString
         Const : -
-    CommentString
-        Const : 'Leave the next Set statement disabled if you modified the Spell Damage Reduction item ability to 1.67 reduction'
-    CommentString
-        Const : 'Otherwise, if you removed that ability from Runed Bracers, you''ll need to enable this line:'
-    CommentString
-        Const : -
-    CommentString
-        Const : -
+    SetVariable
+        Var   : DamageTypeCriticalStrike
+        Const : 6
     CommentString
         Const : -
     CommentString

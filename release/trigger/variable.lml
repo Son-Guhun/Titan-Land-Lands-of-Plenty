@@ -565,3 +565,16 @@ DAMAGE_TYPE_NORMAL: integer
 IsDamageCode: boolean
 LethalDamageHP: real
 DamageScalingWC3: real
+DamageTypePureExplosive: integer
+DamageEventArmorPierced: real
+DamageEventArmorT: integer
+DamageEventDefenseT: integer
+DamageScalingUser: real
+CONVERTED_ATTACK_TYPE: attacktype
+    Array : 1
+CONVERTED_DAMAGE_TYPE: damagetype
+    Array : 1
+DefenseTypeDebugStr: string
+    Array : 1
+ArmorTypeDebugStr: string
+    Array : 1
