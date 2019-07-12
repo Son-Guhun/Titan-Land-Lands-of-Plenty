@@ -14,17 +14,22 @@ function Trig_Commands_Deleteme_Conditions takes nothing returns boolean
     local DecorationEffect i = test.begin()
 
     set udg_Commands_Counter = 0
-    set udg_Commands_Counter_Max = 500
-    set commandsDeleteInsideTitanPalace = false
-    call GroupEnumUnitsOfPlayer(ENUM_GROUP, GetTriggerPlayer(), Filter(function GroupEnum_RemoveOutsidePalace))
-    
-    
-
+    set udg_Commands_Counter_Max = 1500
     loop
-    exitwhen i == test.end()
+    exitwhen i == test.end() or not CheckCommandOverflow()
         call i.destroy()
         set i = test.next(i)
     endloop
+    
+    set udg_Commands_Counter = udg_Commands_Counter/3
+    set udg_Commands_Counter_Max = 500
+    if udg_Commands_Counter < 250 then  // not worth less than 250 executions
+        set commandsDeleteInsideTitanPalace = false
+        call GroupEnumUnitsOfPlayer(ENUM_GROUP, GetTriggerPlayer(), Filter(function GroupEnum_RemoveOutsidePalace))
+    elseif udg_Commands_Counter < udg_Commands_Counter_Max then
+        set udg_Commands_Counter = udg_Commands_Counter_Max
+        call CheckCommandOverflow()
+    endif
     
     call test.destroy()
     return false
