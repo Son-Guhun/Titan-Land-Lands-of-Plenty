@@ -40,6 +40,24 @@ passive, neutral = 28
 "
     call CreateQuestBJ(questType, "Player Numbers & Colors", quest_text, "ReplaceableTextures\\CommandButtons\\BTNScatterRockets.blp")
     // ----------
+    
+    // Abilities
+    set quest_text = "
+You can customize your heroes' abilities, including units that were made into heroes using the |cffffff00-makehero|r command. Abilities compatbile with these commands have a special code at the end of their name, written in gray.
+
+The |cffffff00-ability|r command also has an alias: |cffffff00-abil|r.
+
+|cffffff00-ability|r add/a (code)
+Adds an ability to all selected heroes. Only hero abilities can be added, unit abilities can only be removed. Heroes can have at most 4 compatible abilities.
+
+|cffffff00-ability|r remove/rem/r (code)
+Removes an ability from all selected heroes.
+
+|cffffff00-ability|r clear
+Removes all compatible abilities from all selected heroes.
+"
+    call CreateQuestBJ(questType, "Ability Commands", quest_text, "ReplaceableTextures\\CommandButtons\\BTNSpellBookBLS.blp")
+    // ----------
         
     // Titan Commands 1
     set quest_text = "

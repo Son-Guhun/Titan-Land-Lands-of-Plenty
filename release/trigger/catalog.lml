@@ -146,6 +146,7 @@
     '43-CommandsD Variation': 'CommandsD Variation'
     '44-CommandsD Rotate': 'CommandsD Rotate'
     '45-Commands Editor': 'Commands Editor'
+    '46-Commands Ability': 'Commands Ability'
 '08-Decoration Systems': 'Decoration Systems'
     Comment
 '09-Deco Builders': 'Deco Builders'
@@ -234,6 +235,7 @@
     19-UnitEvents: UnitEvents
     '20-Create Water': 'Create Water'
         Disab
+    21-CustomizableAbilityList: CustomizableAbilityList
 23-Map-specific: Map-specific
     1-Debug: Debug
     2-ArrayAgent: ArrayAgent

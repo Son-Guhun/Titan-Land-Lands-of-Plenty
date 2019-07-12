@@ -1,3 +1,4 @@
+//! runtextmacro GAL_Generate_List("true","ability","AbilityHandle","Handle","null")
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 //Guhun's Array Lists v.1.0.0
 library GAL requires Lists
@@ -153,7 +154,7 @@ library_once GAL$type$ requires GAL
     endmodule
 
     static if $declareScope$ then
-        struct ArrayList$type$ extends array
+        struct ArrayList_$type$ extends array
         
             private static thistype EnumList = 0
             private static integer EnumIndex = 0

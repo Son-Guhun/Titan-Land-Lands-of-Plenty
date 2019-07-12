@@ -82,6 +82,10 @@ struct LoP_UnitData extends array
     endmethod
 endstruct
 
+function LoP_IsUnitHero takes unit whichUnit returns boolean
+    return GetUnitAbilityLevel(whichUnit, 'AHer') > 0
+endfunction
+
 function LoP_IsUnitDecoBuilder takes unit whichUnit returns boolean
     return GetUnitAbilityLevel(whichUnit, 'A00J') > 0
 endfunction
