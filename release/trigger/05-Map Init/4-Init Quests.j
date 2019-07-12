@@ -112,8 +112,10 @@ Copies your selection of units or the group of a selected Rect Generator.
 |cffffff00-sele (deco name)|r | |cffffff00-seln (deco name)|r
 Adds deco builders whose name starts with the entered characters to your selection. |cffffff00-seln|r clears your old selection.
 |cff0000ffExamples: -sele wall, -sele sp, -sele pand, -sele gen|r
-|cffffff00-neut|r <decos> | |cffffff00-take|r <all>
-Gives your selected units to Neutral Passive, only working on decorations if decos is specified. Takes selected unit back from Neutral Passive. Typing all next to the command will take all your units.
+|cffffff00-neut|r <decos>
+Gives your selected units to Neutral Passive, only working on decorations if decos is specified. Your neutral units are saved along with your normal units. Neutral decorations that are made unselectable are automatically returned to you.
+|cffffff00-take|r <all>
+Takes selected unit back from Neutral Passive. Typing all next to the command will take all your units.
 |cffffff00-hide|r <all>\nHides selected/all deco builders. Use |cffffff00-sele|r to get them back.
 "
     call CreateQuestBJ(questType, "Unit Commands", quest_text, "ReplaceableTextures\\CommandButtons\\BTNFootman.blp")

@@ -76,10 +76,10 @@ function SubAnimations2Tags takes LinkedHashSet subanims returns string
     endif
 endfunction
 
-function Unit2Effect takes unit whichUnit returns DecorationEffect
+function Unit2EffectEx takes unit whichUnit, player owner returns DecorationEffect
     local UnitTypeDefaultValues unitType = GetUnitTypeId(whichUnit)
     local UnitVisuals unitData = GetHandleId(whichUnit)
-    local DecorationEffect result = DecorationEffect.create(GetOwningPlayer(whichUnit), unitType, GetUnitX(whichUnit), GetUnitY(whichUnit))
+    local DecorationEffect result = DecorationEffect.create(owner, unitType, GetUnitX(whichUnit), GetUnitY(whichUnit))
     local real value
     
     local integer red
@@ -140,6 +140,10 @@ function Unit2Effect takes unit whichUnit returns DecorationEffect
     
     call BlzPlaySpecialEffect(result.effect, ANIM_TYPE_STAND)
     return result
+endfunction
+
+function Unit2Effect takes unit whichUnit returns DecorationEffect
+    return Unit2EffectEx(whichUnit, GetOwningPlayer(whichUnit))
 endfunction
 
 function Effect2Unit takes DecorationEffect whichEffect returns unit

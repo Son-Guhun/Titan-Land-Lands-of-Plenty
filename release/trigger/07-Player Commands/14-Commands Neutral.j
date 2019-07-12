@@ -1,4 +1,22 @@
-library LoPNeutralUnits
+library LoPNeutralUnits requires TableStruct
+
+private struct UnitData extends array
+    //! runtextmacro TableStruct_NewPrimitiveField("owner", "player")
+    
+    method clearOwner takes nothing returns nothing
+        call .ownerClear()
+    endmethod
+    
+    method hasOwner takes nothing returns boolean
+        return .ownerExists()
+    endmethod
+    
+    static method get takes unit whichUnit returns UnitData
+        return GetHandleId(whichUnit)
+    endmethod
+endstruct
+
+
 function LoP_GetPlayerNeutralUnits takes player whichPlayer returns group
     return udg_System_NeutralUnits[GetPlayerId(whichPlayer)]
 endfunction
@@ -8,12 +26,31 @@ function LoP_IsUnitInPlayerNeutralUnits takes unit whichUnit, player whichPlayer
 endfunction
 
 function LoP_GiveToNeutral takes unit whichUnit returns nothing
+    set UnitData.get(whichUnit).owner = GetOwningPlayer(whichUnit)
     call GroupAddUnit(LoP_GetPlayerNeutralUnits(GetOwningPlayer(whichUnit)), whichUnit)
     call SetUnitOwner(whichUnit, Player(PLAYER_NEUTRAL_PASSIVE), false )
 endfunction
 
 function LoP_TakeFromNeutral takes unit whichUnit returns nothing
+    local UnitData data = GetHandleId(whichUnit)
+    if GetOwningPlayer(whichUnit) == Player(PLAYER_NEUTRAL_PASSIVE) and data.hasOwner() then
+        call SetUnitOwner(whichUnit, data.owner, false)
+        //call data.clearOwner()
+    endif
+endfunction
 
+// This function is called when a unit changes owner and is not inside of the old owner's neutral grp
+function LoP_ClearNeutralData takes unit whichUnit returns nothing
+    call UnitData.get(whichUnit).clearOwner()
+endfunction
+
+function LoP_GetOwningPlayer takes unit whichUnit returns player
+    local player owner = GetOwningPlayer(whichUnit) 
+    if Player(PLAYER_NEUTRAL_PASSIVE) != owner then
+        return owner
+    else
+        return UnitData.get(whichUnit).owner
+    endif
 endfunction
 endlibrary
 

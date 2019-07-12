@@ -24,6 +24,7 @@ function LoP_onRemoval takes unit whichUnit returns nothing
         call GUMSClearUnitData(whichUnit)
         call Patrol_ClearUnitData(whichUnit)
         call GMSS_ClearData(whichUnit)
+        call LoP_ClearNeutralData(whichUnit)
         
         if Limit_IsPlayerLimited(GetOwningPlayer(whichUnit)) and Limit_IsUnitLimited(whichUnit) then
             call Limit_UnregisterUnit(whichUnit)

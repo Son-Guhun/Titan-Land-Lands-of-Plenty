@@ -1,4 +1,4 @@
-library LoPCleanUpDeath requires PlayerUnitLimit, LoPWidgets, MoveSpeedBonus, UserDefinedRects, DummyDmg, MultiPatrol, UnitEvents
+library LoPCleanUpDeath requires PlayerUnitLimit, LoPWidgets, MoveSpeedBonus, UserDefinedRects, DummyDmg, MultiPatrol, UnitEvents, LoPNeutralUnits
 
 function LoP_onDeath takes unit whichUnit returns nothing
     debug call BJDebugMsg("OnDeath")
@@ -29,6 +29,7 @@ function LoP_onDeath takes unit whichUnit returns nothing
         else
             call DestroyGUDR(whichUnit)
             call GUMSClearUnitData(whichUnit)
+            call LoP_ClearNeutralData(whichUnit)
             
             // Performance: Instantly remove decorations from the game
             set g_unitHasBeenRemoved = true

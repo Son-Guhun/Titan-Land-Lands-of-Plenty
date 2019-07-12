@@ -1,4 +1,4 @@
-library LoPfour requires LoPCleanUpDeath
+library LoPfour requires LoPCleanUpDeath, LoPNeutralUnits
 
 function LoP_onChangeOwner takes unit whichUnit, player ownerOld returns nothing
     local player owner = GetOwningPlayer( whichUnit )
@@ -28,6 +28,7 @@ function LoP_onChangeOwner takes unit whichUnit, player ownerOld returns nothing
         else
             call SetUnitColor(whichUnit, LoP_PlayerData.get(GetOwningPlayer(whichUnit)).getUnitColor())
         endif
+        call LoP_ClearNeutralData(whichUnit)
     endif
 endfunction
 
