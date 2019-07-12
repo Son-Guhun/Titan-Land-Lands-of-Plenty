@@ -1,4 +1,4 @@
-library SpecialEffect requires TableStruct, AnyTileDefinition, GLHS, HashStruct
+library SpecialEffect requires AnyTileDefinition, GLHS, HashStruct
 
 globals
         private hashtable hashTableHandle = InitHashtable()

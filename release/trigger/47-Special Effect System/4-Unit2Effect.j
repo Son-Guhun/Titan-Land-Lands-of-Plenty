@@ -121,7 +121,6 @@ function Unit2Effect takes unit whichUnit returns DecorationEffect
     
     if unitData.hasColor() then
         set result.color = unitData.raw.getColor() - 1
-        set result.hasCustomColor = true
     endif
     
     if unitData.hasAnimSpeed() then

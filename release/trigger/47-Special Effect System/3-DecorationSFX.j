@@ -1,4 +1,9 @@
-library DecorationSFX requires SpecialEffect
+library DecorationSFX requires SpecialEffect, TableStruct
+
+globals
+    public constant boolean USE_CUSTOM_PLAYER_COLORS = true
+endglobals
+
 //! novjass
 /*Doc:
     A struct that extends SpecialEffect. These effects are tracked on the map and can be enumerated
@@ -31,6 +36,32 @@ function EnumDecorationsOfPlayerInRect takes player whichPlayer, real minX, real
 '                                         Source Code                                              '
 //! endnovjass
 
+private struct PlayerData extends array
+    
+    static if USE_CUSTOM_PLAYER_COLORS then
+        //! runtextmacro TableStruct_NewReadonlyPrimitiveField("color_impl", "integer")
+    endif
+    
+    method operator color takes nothing returns integer
+        static if USE_CUSTOM_PLAYER_COLORS then
+            return .color_impl
+        else
+            return GetHandleId(GetPlayerColor(Player(this)))
+        endif
+    endmethod
+    
+    method operator color= takes integer color returns nothing
+        static if USE_CUSTOM_PLAYER_COLORS then
+            set .color_impl = color
+        endif
+    endmethod
+    
+    static method get takes player whichPlayer returns thistype
+        return GetPlayerId(whichPlayer)
+    endmethod
+    
+endstruct
+
 
 private struct DecorationEffectBlock extends array
 
@@ -48,8 +79,8 @@ struct DecorationEffect extends array
  
     
     //! runtextmacro HashStruct_SetHashtableWrapper("SpecialEffect_hT")
-    //! runtextmacro HashStruct_NewPrimitiveGetterSetter("Owner","player")
-    //! runtextmacro HashStruct_NewBooleanFieldWithDefault("hasCustomColor","false")
+    //! runtextmacro HashStruct_NewReadonlyPrimitiveField("owner","integer")
+    //! runtextmacro HashStruct_NewReadonlyBooleanFieldWithDefault("hasCustomColor","false")
     
     method operator effect takes nothing returns effect
         return SpecialEffect(this).effect
@@ -130,7 +161,13 @@ struct DecorationEffect extends array
     endmethod
     
     method operator color= takes integer value returns nothing
+        set .hasCustomColor = true
         set SpecialEffect(this).color = value
+    endmethod
+    
+    method resetColor takes nothing returns nothing
+        set .hasCustomColor = false
+        set SpecialEffect(this).color = PlayerData(.owner).color
     endmethod
     
     method operator scaleX takes nothing returns real
@@ -201,6 +238,22 @@ struct DecorationEffect extends array
         call SpecialEffect(this).clearSubAnimations()
     endmethod
     
+    method getOwner takes nothing returns player
+        return Player(.owner)
+    endmethod
+    
+    method setOwner takes player newOwner returns nothing
+        local PlayerData owner
+        if newOwner != null then
+            set owner = GetPlayerId(newOwner)
+        
+            set .owner = owner
+            if not .hasCustomColor then
+                set SpecialEffect(this).color = owner.color
+            endif
+        endif
+    endmethod
+    
     static method create takes player playerid, integer unitType, real x, real y returns DecorationEffect
         local integer this = SpecialEffect.create(unitType, x, y)
         call .setOwner(playerid)
@@ -215,9 +268,64 @@ struct DecorationEffect extends array
         call SpecialEffect(this).destroy()
         set e = null
     endmethod
+    
+    static method enumDecorationsOfPlayer takes player whichPlayer returns LinkedHashSet
+        local integer lastId = DecorationEffectBlock.get(WorldBounds.maxX, WorldBounds.maxY)
+        local integer i = 0
+        local LinkedHashSet decorations
+        local DecorationEffect decoration
+        local LinkedHashSet result = LinkedHashSet.create()
+        
+        loop
+        exitwhen i > lastId
+            set decorations = DecorationEffectBlock(i).effects
+            
+            if not decorations.isEmpty() then
+                set decoration = decorations.begin()
+                loop
+                    exitwhen decoration == decorations.end()
+                    if decoration.getOwner() == whichPlayer then
+                        call result.append(decoration)
+                    endif
+                    set decoration = decorations.next(decoration)
+                endloop  
+            endif
+
+            set i = i + 1
+        endloop
+        
+        return result
+    endmethod
+    
+    static method updateColorsForPlayer takes player whichPlayer returns nothing
+        local integer color
+        local LinkedHashSet decorations
+        local DecorationEffect deco
+        
+        if whichPlayer != null then
+            set color = PlayerData.get(whichPlayer).color
+            
+            set decorations = .enumDecorationsOfPlayer(whichPlayer)
+            set deco = decorations.begin()
+            loop
+            exitwhen deco == decorations.end()
+                if not deco.hasCustomColor then
+                    set SpecialEffect(deco).color = color
+                endif
+                
+                set deco = decorations.next(deco)
+            endloop
+            call decorations.destroy()
+        endif
+    endmethod
 
 endstruct
 
+public function SetPlayerColor takes player whichPlayer, integer color returns nothing
+    set PlayerData(GetPlayerId(whichPlayer)).color = color
+endfunction
+
+// Create Linked Hash Set
 //! runtextmacro GenerateStructLHS("DecorationEffect")
 
 function AreCoordsInRectangle takes real x, real y, real minX, real minY, real maxX, real maxY returns boolean
@@ -393,27 +501,7 @@ function EnumDecorationsOfPlayerInRange takes player whichPlayer, real centerX, 
 endfunction
 
 function EnumDecorationsOfPlayer takes player whichPlayer returns LinkedHashSet_DecorationEffect
-    local integer lastId = DecorationEffectBlock.get(WorldBounds.maxX, WorldBounds.maxY)
-    local integer i = 0
-    local LinkedHashSet decorations
-    local DecorationEffect decoration
-    local LinkedHashSet result = LinkedHashSet.create()
-    
-    loop
-    exitwhen i > lastId
-        set decorations = DecorationEffectBlock(i).effects
-        set decoration = decorations.begin()
-        loop
-            exitwhen decoration == decorations.end()
-            if decoration.getOwner() == whichPlayer then
-                call result.append(decoration)
-            endif
-            set decoration = decorations.next(decoration)
-        endloop
-        set i = i + 1
-    endloop
-    
-    return result
+    return DecorationEffect.enumDecorationsOfPlayer(whichPlayer)
 endfunction
 
 private module InitModule
@@ -426,6 +514,13 @@ private module InitModule
         loop
         exitwhen i > lastId
             set DecorationEffectBlock(i).effects = LinkedHashSet.create()
+            set i = i + 1
+        endloop
+        
+        set i = 0
+        loop
+        exitwhen i == bj_MAX_PLAYER_SLOTS
+            set PlayerData(i).color = GetHandleId(GetPlayerColor(Player(i)))
             set i = i + 1
         endloop
     endmethod

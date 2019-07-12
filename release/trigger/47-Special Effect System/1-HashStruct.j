@@ -241,6 +241,20 @@ endfunction
     endmethod
 //! endtextmacro
 
+//! textmacro HashStruct_NewReadonlyBooleanFieldWithDefault takes NAME, DEFAULT
+    public static key $NAME$_INDEX
+    public static constant boolean $NAME$_DEFAULT = $DEFAULT$
+    
+    method operator $NAME$ takes nothing returns boolean
+        return thistype.getChildTable(this).boolean.has($NAME$_INDEX) != $DEFAULT$
+    endmethod
+    
+    private method operator $NAME$= takes boolean value returns nothing
+        call HashStruct_SetBooleanField($DEFAULT$, thistype.hashTableHandle, this, $NAME$_INDEX, value)
+    endmethod
+//! endtextmacro
+
+
 
 
 endlibrary
