@@ -56,10 +56,16 @@ Action
     BlzSetUnitAbilityCooldown
         Call  : GetTriggerUnit
         Call  : GetSpellAbilityId
-        Var   : temp_integer
+        Call  : OperatorInt
+            Var   : temp_integer
+            Preset: OperatorSubtract
+            Const : 1
         Call  : OperatorReal
             Var   : temp_real
             Preset: OperatorMultiply
             Call  : BlzGetAbilityCooldown
                 Call  : GetSpellAbilityId
-                Var   : temp_integer
+                Call  : OperatorInt
+                    Var   : temp_integer
+                    Preset: OperatorSubtract
+                    Const : 1

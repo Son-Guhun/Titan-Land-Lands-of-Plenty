@@ -6,7 +6,7 @@ library UnitVisualMods requires CutToComma, GroupTools, optional UnitVisualModsD
     
     */ optional ConstTable  // If present, then ConstHashTable is used instead of HashTable.
 //////////////////////////////////////////////////////
-//Guhun's Unit Modification System v1.31
+//Guhun's Unit Modification System v1.3.1
 
 
 //Hashtable values:

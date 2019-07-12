@@ -1,4 +1,5 @@
 Event
+    MapInitializationEvent
 Condition
 Action
     CommentString

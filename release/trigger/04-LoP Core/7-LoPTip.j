@@ -87,7 +87,7 @@ private module InitModule
         call LoP_Tip.create(PERIODIC_TIPS, /*
                          */ "The |cffffff00-select no|r command, which allows you to make your decorations unselectable, reduces the lag from having too many units in the map. Use it!")
         call LoP_Tip.create(PERIODIC_TIPS, /*
-                         */ "The Titan can turn almost any unit into a hero, using the |cffffff00-makehero|r command. Some units, like builders and decorations, can't become heroes.")
+                         */ "The Titan can turn almost any unit into a hero, using the |cffffff00-makehero|r command. You can add custom abilities to these heroes using the |cffffff00-ability|r command (see F9). Some units, like builders and decorations, can't become heroes.")
         call LoP_Tip.create(PERIODIC_TIPS, /*
                          */ "You can set the default color of all your units with the |cffffff00-setcolor|r command. This will not alter your player color in the chat or F11 screen.")                 
         call LoP_Tip.create(PERIODIC_TIPS, /*
@@ -98,6 +98,10 @@ private module InitModule
                          */ "This map employs a multipatrol system. Whenever a unit is issued a Patrol order, it retains all its past patrol points and patrols all of them. Patrol points are saved by the Save System. Check F9 for commands.") 
         call LoP_Tip.create(PERIODIC_TIPS, /*
                          */ "This map contains many camera commands, so you can take screenshots of your builds from any angle! There is also a third person camera. Check F9 for more info.") 
+        call LoP_Tip.create(PERIODIC_TIPS, /*
+                         */ "You can access the ingame Terrain Editor with the |cffffff00-editor terrain|r command. To return to play mode, use |cffffff00-editor none|r.")
+        call LoP_Tip.create(PERIODIC_TIPS, /*
+                         */ "You can add or remove many abilities from your heroes using the |cffffff00-ability|r  command (see F9). This includes units made into heroes using the |cffffff00-makehero|r command.")                
         
         call TimerStart(CreateTimer(), DELAY_MINUTES()*60. + DELAY_SECONDS(), true, function onTimer)
     endmethod
