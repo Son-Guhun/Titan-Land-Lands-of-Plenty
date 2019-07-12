@@ -1,4 +1,4 @@
-library LoPPlayers requires TableStruct
+library LoPPlayers requires TableStruct, DecorationSFX
 
 struct LoP_PlayerData extends array
     
@@ -27,6 +27,7 @@ struct LoP_PlayerData extends array
     
     method setUnitColor takes playercolor color returns nothing
         set playerColors[this] = color
+        call DecorationSFX_SetPlayerColor(Player(this), GetHandleId(color))
     endmethod
     
     //! runtextmacro TableStruct_NewPrimitiveField("rotationStep","integer")

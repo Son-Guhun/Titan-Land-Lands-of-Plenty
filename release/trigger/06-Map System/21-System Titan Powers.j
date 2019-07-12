@@ -35,6 +35,30 @@ private function GroupFilter takes nothing returns boolean
     return false
 endfunction
 
+private function MindPower takes unit target returns nothing
+    local player owner = GetOwningPlayer(target)
+    local LinkedHashSet_DecorationEffect decorations 
+    local DecorationEffect i
+    local integer color = GetHandleId(LoP_PlayerData.get(owner).getUnitColor())
+    
+    if udg_PowerSystem_allFlag then
+            set decorations = EnumDecorationsOfPlayer(owner)
+            set i = decorations.begin()
+            
+            loop
+            exitwhen i == decorations.end()
+                call i.setOwner(udg_PowerSystem_Player)
+                set i = decorations.next(i)
+            endloop
+            call decorations.destroy()
+    
+            call GroupEnumUnitsOfPlayer(ENUM_GROUP, owner, Condition(function GroupFilter))
+            set udg_PowerSystem_allFlag = false
+        else
+            call SetUnitOwner( target, udg_PowerSystem_Player, true )
+    endif
+endfunction
+
 private function onOrder takes nothing returns boolean
     
     if GetIssuedOrderIdBJ() != String2OrderIdBJ("smart") then
@@ -43,12 +67,7 @@ private function onOrder takes nothing returns boolean
     
     call IssueImmediateOrderBJ( GetTriggerUnit(), "stop" )
     if GetTriggerUnit() == POWER_MIND() then
-        if udg_PowerSystem_allFlag then
-            call GroupEnumUnitsOfPlayer(ENUM_GROUP, GetOwningPlayer(GetOrderTargetUnit()), Condition(function GroupFilter))
-            set udg_PowerSystem_allFlag = false
-        else
-            call SetUnitOwner( GetOrderTargetUnit(), udg_PowerSystem_Player, true )
-        endif
+        call MindPower(GetOrderTargetUnit())
     elseif GetTriggerUnit() == POWER_INVULNERABILITY() then
             call SetUnitInvulnerable( GetOrderTargetUnit(), true )
     elseif GetTriggerUnit() == POWER_VULNERABILITY() then
