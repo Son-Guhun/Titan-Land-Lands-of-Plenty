@@ -21,6 +21,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 - New Commands:
 	- -collision (on/off): allows you to turn collison on/off for units. This allows naval units to go onto land and ground units to walk through cliffs.
     - -editor (terrain/none): Allows you to enter/exit the new ingame Terrain Editor.
+	- ability (add/remove/clear): Use the new ability system to manipulate which abilities a hero has.
 - New Races:
 	- Worgen
 	- Ratfolk
@@ -41,6 +42,8 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 		- Flame Grate (round and rectangular)
 	- Deco Builder Misc:
 		- Magical Pen (can be activated and deactivated)
+	- Deco Builder Misc:
+		- Animal Spawner 3: Pig, Fox, Horses and Belf Wagon (not an animal, but who cares?)
 
 #### Minor Additions:
 - Cosmosis now possesses the Obliterate spell to remove unselectable decorations.
@@ -63,6 +66,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 	- Added a secondary entrance to the Dirt Peaks (connected to the Blighted Lands).
 - Decorations will now maintain their flying height when upgraded.
 - Load limit increased from 9999 to 2147483647.
+- Rect Generators and Animal/Villager Spawners cano no longer be made unselectable.
 
 #### Minor Changes:
 - Unselectable decorations are now Special Effects instead of units with the Locust ability. This SHOULD increase performance, and in the future it will allow for more flexiblity with unit visuals (negative flying height and rotations along the x and y axes). Even though this is a minor change for the end user, this is the part of the update which took the longest to properly finish.
