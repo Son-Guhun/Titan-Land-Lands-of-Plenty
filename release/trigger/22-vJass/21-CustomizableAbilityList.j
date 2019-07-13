@@ -74,6 +74,9 @@ private module Init
         call .registerAbility('AHfs', true)  // Flamestrike
         call .registerAbility('AHhb', true)  // Holy Light
         call .registerAbility('AHwe', true)  // Water Elemental
+        call .registerAbility('AHpx', true)  // Phoenix
+        call .registerAbility('AHre', true)  // Ressurection
+        call .registerAbility('AHdr', true)  // Siphon Mana
         
         call .registerAbility('AOww', true)  // Bladestorm
         call .registerAbility('AOcl', true)  // Chain Lightning
@@ -102,7 +105,7 @@ private module Init
         // Aura Abilities
         call .registerAbility('A04L', true)  // Brilliance
         call .registerAbility('A03P', true)  // Command
-        call .registerAbility('AO3I', true)  // Devotion
+        call .registerAbility('A03I', true)  // Devotion
         call .registerAbility('A03Q', true)  // Endurance
         call .registerAbility('A04D', true)  // Thorns
         call .registerAbility('A040', true)  // Trueshot
@@ -138,9 +141,42 @@ private module Init
         call .registerAbility('A03J', true)  // Mass Banish
         call .registerAbility('A03H', true)  // Mass Death Coil
         call .registerAbility('A042', true)  // Mass Rejuvenation
-        // call .registerAbility('A041', true)  // Abil
+        call .registerAbility('A036', true)  // Monsoon
+        call .registerAbility('A050', true)  // Power Surge
+        call .registerAbility('A03Y', true)  // Rain of Fire
+        call .registerAbility('A03X', true)  // Rejuvenation
+        call .registerAbility('A02G', true)  // Royal Hammer
+        call .registerAbility('A03Z', true)  // Royal Inspiartion
+        call .registerAbility('A02E', true)  // Scatter Shot
+        call .registerAbility('A054', true)  // Scatter Shot
+        call .registerAbility('A022', true)  // Shockwave
+        call .registerAbility('A025', true)  // Silence
+        call .registerAbility('A053', true)  // Slow Posion
+        call .registerAbility('A034', true)  // Solid Fog
+        call .registerAbility('A039', true)  // Spell Disjunction
+        call .registerAbility('A02N', true)  // Star Rain
+        call .registerAbility('A03E', true)  // Stormbolt
+        call .registerAbility('A04P', true)  // Stormstrike
+        call .registerAbility('A02D', true)  // Sword Throw
+        call .registerAbility('A020', true)  // Thunderclap
+        call .registerAbility('A05A', true)  // Thunderstrike
+        call .registerAbility('A058', true)  // War Stomp
+        call .registerAbility('A05B', true)  // Waterspout
         
-        // Unit abilities
+        // Custom Unit abilities
+        call .registerAbility('A05N', false)  // Animate Dead
+        call .registerAbility('A02Q', false)  // Arrow Defense
+        call .registerAbility('A05F', false)  // Avatar
+        call .registerAbility('A05T', false)  // Gift of the Naaru
+        call .registerAbility('A05R', false)  // Hardened Plating
+        call .registerAbility('A05E', false)  // Hardened Skin
+        call .registerAbility('A03R', false)  // Holy Light
+        call .registerAbility('A05D', false)  // Wind Walk
+        
+        // call .registerAbility('A02S', false)  // Defend (must figure out a good way to do it)
+        
+        
+        // Default Unit abilities
         call .registerAbility('ACac', false)  //"Command Aura"
         call .registerAbility('ACad', false)  //"Animate Dead"
         call .registerAbility('ACah', false)  //"Thorns Aura"
