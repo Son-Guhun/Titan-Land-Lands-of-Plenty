@@ -412,48 +412,10 @@
 40-Items: Items
     Comment
 '41-Fixed Spells': 'Fixed Spells'
-    '01-Flames of Azzinoth': 'Flames of Azzinoth'
-        Comment
-    02-FlamesOfAzzinoth: FlamesOfAzzinoth
-        Disab
-    '03-Flame Dies': 'Flame Dies'
-        Disab
-    04-Comet: Comet
-        Comment
-    '05-Comet Cast': 'Comet Cast'
-        Disab
-    '06-Comet Summon': 'Comet Summon'
-        Disab
-    '07-Comet Impact': 'Comet Impact'
-        Disab
-    08-Pyroblast: Pyroblast
-        Comment
-    '09-Pyroblast Cast': 'Pyroblast Cast'
-        Disab
-    '10-Pyroblast Impact': 'Pyroblast Impact'
-        Disab
-    '11-Pyroblast Effect 1': 'Pyroblast Effect 1'
-        Disab
-    '12-Pyroblast Effect 2': 'Pyroblast Effect 2'
-        Disab
 42-Items: Items
-    '1-Glacius'' Ice Skull': 'Glacius'' Ice Skull'
+    '1-Silver Key': 'Silver Key'
         Comment
-    '2-Frost Storm Casting': 'Frost Storm Casting'
-        Disab
-    '3-Frost Storm Effect': 'Frost Storm Effect'
-        Disab
-    '4-Silver Key': 'Silver Key'
-        Comment
-    '5-Silver Key Trigger': 'Silver Key Trigger'
-    '6-Pure Water': 'Pure Water'
-        Comment
-    '7-Pure Water Effect': 'Pure Water Effect'
-        Disab
-    8-Sword: Sword
-        Comment
-    9-Sword: Sword
-        Disab
+    '2-Silver Key Trigger': 'Silver Key Trigger'
 '43-Legendary Scroll Spell': 'Legendary Scroll Spell'
     '1-Legendary Scroll Spell': 'Legendary Scroll Spell'
         Comment
