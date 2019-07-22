@@ -277,7 +277,7 @@ function Patrol_IsValidPatrolOrder takes integer orderId returns boolean
     
     return true
 endfunction
-
+/*
 function Patrol_DisplayPoints takes unit whichUnit returns nothing
     local integer u_handle = GetHandleId(whichUnit)
     local integer pnts_number = Patrol_GetTotalPatrolPoints(u_handle)
@@ -316,7 +316,7 @@ endfunction
 function Patrol_DestroyPoints takes unit whichUnit returns nothing
     call Patrol_DestroyIdPoints(GetHandleId(whichUnit))
 endfunction
-
+*/
 function Patrol_ResumePatrol takes unit whichUnit returns nothing
     local integer u_handle = GetHandleId(whichUnit)
     local integer currentPtrl = Patrol_GetCurrentPatrolPoint(u_handle)

@@ -104,24 +104,28 @@ struct SaveData extends array
         local string size = SaveNLoad_FormatString("SnL_IOsize", I2S(.current + 1))
         local string ver = I2S(.VERSION)
     
-        call .flush()
-        if GetLocalPlayer() == .player then
-            call PreloadGenStart()
-            call PreloadGenClear()
-            call Preload(size)
-            call PreloadGenEnd(filePathSize)
+        if .folderExists() then
+            call .flush()
+            if GetLocalPlayer() == .player then
+                call PreloadGenStart()
+                call PreloadGenClear()
+                call Preload(size)
+                call PreloadGenEnd(filePathSize)
 
-            //Output the major version with which the save has been made (compatibility)
-            call PreloadGenStart()
-            call PreloadGenClear()
-            call Preload(ver)
-            call PreloadGenEnd(filePathVersion)
+                //Output the major version with which the save has been made (compatibility)
+                call PreloadGenStart()
+                call PreloadGenClear()
+                call Preload(ver)
+                call PreloadGenEnd(filePathVersion)
+            endif
+            
+            call .linesWrittenClear()
+            call .currentClear()
+            call .folderClear()
+            call .playerClear()
+            
+            implement GMUI_deallocate_this
         endif
-        
-        call .linesWrittenClear()
-        call .currentClear()
-        call .folderClear()
-        call .playerClear()
     endmethod
 
     

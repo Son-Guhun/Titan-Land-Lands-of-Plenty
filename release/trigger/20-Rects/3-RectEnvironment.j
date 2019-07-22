@@ -27,18 +27,22 @@ struct TerrainFog extends array
     endmethod
         
     static method create takes nothing returns TerrainFog
-        return TerrainFog.allocate()
+        local TerrainFog this = TerrainFog.allocate()
+        set this.style = 0
+        return this
     endmethod
     
     method destroy takes nothing returns nothing
-        call this.styleClear()
-        call this.zStartClear()
-        call this.zEndClear()
-        call this.densityClear()
-        call this.redClear()
-        call this.greenClear()
-        call this.blueClear()
-        call this.deallocate()
+        if this.styleExists() then
+            call this.styleClear()
+            call this.zStartClear()
+            call this.zEndClear()
+            call this.densityClear()
+            call this.redClear()
+            call this.greenClear()
+            call this.blueClear()
+            call this.deallocate()
+        endif
     endmethod
     
 endstruct

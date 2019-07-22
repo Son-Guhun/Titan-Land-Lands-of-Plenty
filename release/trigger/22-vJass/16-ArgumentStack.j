@@ -294,9 +294,9 @@ static method $type$Dig takes integer i, integer depth returns $type$
     return table.type($type$_impl)[i].$type$[table.type($type$_impl)[i][-1] - depth]
 endmethod
 
-static method $type$DestroyStack takes integer whichStack returns nothing
-    call table.type($type$_impl)[whichStack].destroy()
-endmethod
+//static method $type$DestroyStack takes integer whichStack returns nothing
+//    call table.type($type$_impl)[whichStack].destroy()
+//endmethod
 //! endtextmacro
 
 //! textmacro ArgumentStack_AgentField takes type, capitalized
@@ -331,9 +331,9 @@ static method $type$Dig takes integer i, integer depth returns $type$
     return table.type($type$_impl)[i].$type$[table.type($type$_impl)[i][-1] - depth]
 endmethod
 
-static method $type$DestroyStack takes integer whichStack returns nothing
-    call table.type($type$_impl)[whichStack].destroy()
-endmethod
+//static method $type$DestroyStack takes integer whichStack returns nothing
+//    call table.type($type$_impl)[whichStack].destroy()
+//endmethod
 //! endtextmacro
 
 //! textmacro ArgumentStack_HandleField takes type, capitalized
@@ -368,9 +368,9 @@ static method $type$Dig takes integer i, integer depth returns $type$
     return table.type($type$_impl)[i].$type$[table.type($type$_impl)[i][-1] - depth]
 endmethod
 
-static method $type$DestroyStack takes integer whichStack returns nothing
-    call table.type($type$_impl)[whichStack].destroy()
-endmethod
+//static method $type$DestroyStack takes integer whichStack returns nothing
+//    call table.type($type$_impl)[whichStack].destroy()
+//endmethod
 //! endtextmacro
 
 struct Args extends array

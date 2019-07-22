@@ -53,12 +53,11 @@ struct BoolExprEvaluator extends array
     endmethod
     
     method destroy takes nothing returns nothing
-        static if SAFETY then
-            if .isNullPointer() then
-                return
-            endif
+
+        if .isNullPointer() then
+            return
         endif
-        
+    
         //call TriggerClearConditions(.trigger)
         call DestroyTrigger(.trigger)
         call .tab.destroy()

@@ -55,6 +55,10 @@ endglobals
 // Utilities (Private functions)
 //==============================================
 
+private function IsValidSet takes integer setKey returns boolean
+    return HaveSavedInteger(Lists_GetHashtable(), setKey, 0)
+endfunction
+
 // If a negative setKey is specified, this will actually set the previous element of the positive setKey
 private function SetNext takes integer setKey, integer data, integer next returns nothing
     call SaveInteger(Lists_GetHashtable(), setKey, data, next)
@@ -426,16 +430,23 @@ struct LinkedHashSet extends array
     Creates a new set and returns it.
     */
     static method create takes nothing returns LinkedHashSet
-        return GMUI_GetIndex(RECYCLE_KEY())
+        local LinkedHashSet this
+        implement GMUI_allocate_this
+        
+        call this.setNext(0, 0)
+        
+        return this
     endmethod
     
     /* DOC: destroy()
     Destroys a set and clears all of its data.
     */
     method destroy takes nothing returns nothing
-        call FlushChildHashtable(Lists_GetHashtable(), this)
-        call FlushChildHashtable(Lists_GetHashtable(), -this)
-        implement GMUI_deallocate_this
+        if IsValidSet(this) then
+            call FlushChildHashtable(Lists_GetHashtable(), this)
+            call FlushChildHashtable(Lists_GetHashtable(), -this)
+            implement GMUI_deallocate_this
+        endif
     endmethod
     
 endstruct

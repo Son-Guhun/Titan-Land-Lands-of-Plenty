@@ -57,6 +57,10 @@ public function SetSize takes integer listKey, integer newSize returns nothing
     call SaveInteger(Lists_GetHashtable(), listKey, INDEX_SIZE(), newSize)
 endfunction
 
+public function IsValidList takes integer listKey returns boolean
+    return HaveSavedInteger(Lists_GetHashtable(), listKey, INDEX_SIZE())
+endfunction
+
 //==============
 // Structs
 
@@ -198,8 +202,10 @@ library_once GAL$type$ requires GAL
             endmethod
             
             method destroy takes nothing returns nothing
-                call FlushChildHashtable(Lists_GetHashtable(), this)
-                implement GMUI_deallocate_this
+                if GAL_IsValidList(this) then
+                    call FlushChildHashtable(Lists_GetHashtable(), this)
+                    implement GMUI_deallocate_this
+                endif   
             endmethod
         endstruct
     endif

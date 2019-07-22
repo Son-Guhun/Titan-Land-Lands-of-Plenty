@@ -29,8 +29,10 @@ endglobals
 
 // Recycles the value of variable "var_name" in the specified recycle key. Does not alter "var_name".
 //! textmacro GMUI_RecycleIndex takes var_name,recycle_key
-    call SaveInteger(hashTable, $recycle_key$, $var_name$, LoadInteger(hashTable, $recycle_key$, 0))
-    call SaveInteger(hashTable, $recycle_key$, 0, $var_name$)
+    if $var_name$ != 0 then  // Do not free a nil value
+        call SaveInteger(hashTable, $recycle_key$, $var_name$, LoadInteger(hashTable, $recycle_key$, 0))
+        call SaveInteger(hashTable, $recycle_key$, 0, $var_name$)
+    endif
 //! endtextmacro
 
 

@@ -17,7 +17,7 @@ actions are under the "Game" Action Type.
 
 struct SelectionState extends array
     private static key static_members_key
-    //! runtextmacro TableStruct_NewReadonlyStaticStructField("current","SelectionState")
+    private static thistype current = 0
 
     //! runtextmacro TableStruct_NewPrimitiveField("enabled_impl","boolean")
     //! runtextmacro TableStruct_NewPrimitiveField("circles_impl","boolean")
@@ -60,24 +60,20 @@ struct SelectionState extends array
         return .allocate()
     endmethod
     
-    method destroy takes nothing returns nothing
-        if this == thistype.current then
-            return
-        endif
-    
-        if thistype.current == this then
-            call thistype.default.apply()
-        endif
-        
-        call .enabled_implClear()
-        call .circles_implClear()
-        call .deallocate()
-    endmethod
+//    method destroy takes nothing returns nothing
+//        if thistype.current == this then
+//            call thistype.default.apply()
+//        endif
+//        
+//        call .enabled_implClear()
+//        call .circles_implClear()
+//        call .deallocate()
+//    endmethod
 endstruct
 
 struct DragSelectionState extends array
     private static key static_members_key
-    //! runtextmacro TableStruct_NewReadonlyStaticStructField("current","DragSelectionState")
+    private static thistype current = 0
 
     //! runtextmacro TableStruct_NewPrimitiveField("enabled_impl","boolean")
     //! runtextmacro TableStruct_NewPrimitiveField("box_impl","boolean")
@@ -120,24 +116,20 @@ struct DragSelectionState extends array
         return .allocate()
     endmethod
     
-    method destroy takes nothing returns nothing
-        if this == thistype.current then
-            return
-        endif
-        
-        if thistype.current == this then
-            call thistype.default.apply()
-        endif
-        
-        call .enabled_implClear()
-        call .box_implClear()
-        call .deallocate()
-    endmethod
+//    method destroy takes nothing returns nothing
+//        if thistype.current == this then
+//            call thistype.default.apply()
+//        endif
+//        
+//        call .enabled_implClear()
+//        call .box_implClear()
+//        call .deallocate()
+//    endmethod
 endstruct
 
 struct PreSelectionState extends array
-private static key static_members_key
-    //! runtextmacro TableStruct_NewReadonlyStaticStructField("current","PreSelectionState")
+    private static key static_members_key
+    private static thistype current = 0
 
     //! runtextmacro TableStruct_NewPrimitiveField("enabled_impl","boolean")
     //! runtextmacro TableStruct_NewPrimitiveField("info_impl","boolean")
@@ -180,19 +172,15 @@ private static key static_members_key
         return .allocate()
     endmethod
     
-    method destroy takes nothing returns nothing
-        if this == thistype.current then
-            return
-        endif
-    
-        if thistype.current == this then
-            call thistype.default.apply()
-        endif
-        
-        call .enabled_implClear()
-        call .info_implClear()
-        call .deallocate()
-    endmethod
+//    method destroy takes nothing returns nothing
+//        if thistype.current == this then
+//            call thistype.default.apply()
+//        endif
+//        
+//        call .enabled_implClear()
+//        call .info_implClear()
+//        call .deallocate()
+//    endmethod
 endstruct
 
 private module InitModule
