@@ -163,6 +163,9 @@ are listed first, though.
             // Gravestones
             set i = ( i + 1 )
             set rawcodes[i] = 'u02S'
+            // Huts
+            set i = ( i + 1 )
+            set rawcodes[i] = 'u002'
             // Mansion
             set i = ( i + 1 )
             set rawcodes[i] = 'u02I'
