@@ -29,6 +29,7 @@ endfunction
 function GenerateSpecialEffectSaveString takes DecorationEffect whichEffect returns string
     local string animTags
     local string color
+    local integer playerId = GetPlayerId(whichEffect.getOwner())
     
     if whichEffect.hasCustomColor then
         set color = I2S(whichEffect.color + 1)
@@ -43,8 +44,8 @@ function GenerateSpecialEffectSaveString takes DecorationEffect whichEffect retu
     endif
 
     return ID2S(whichEffect.unitType) + "," +/*
-        */ R2S(whichEffect.x) + "," +/*
-        */ R2S(whichEffect.y) + "," +/*
+        */ R2S(whichEffect.x - Save_GetCenterX(playerId)) + "," +/*
+        */ R2S(whichEffect.y - Save_GetCenterY(playerId)) + "," +/*
         */ R2S(whichEffect.height) + "," +/*
         */ R2S(Rad2Deg(whichEffect.yaw)) + "," +/*
         */ R2S(whichEffect.scaleX) + "," +/*
