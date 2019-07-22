@@ -43,7 +43,7 @@ library HERO
 
 endlibrary
 
-library LoPWidgets requires LoPHeader, TableStruct, POWER, HERO
+library LoPWidgets requires LoPHeader, TableStruct, POWER, HERO, TerrainEditorUI
 /* 
 This libary defines many utilities for widget objects in the map's script.
 */
@@ -126,7 +126,14 @@ function LoP_InitProtectedUnitsFilter takes nothing returns boolean
 endfunction
 
 function LoP_InitProtectedUnits takes nothing returns nothing
+    local integer i = 0
     call GroupEnumUnitsInRect(udg_System_ProtectedGroup, gg_rct_Titan_Palace, Filter(function LoP_InitProtectedUnitsFilter))
+    
+    loop
+    exitwhen i >= bj_MAX_PLAYERS
+        call GroupAddUnit(udg_System_ProtectedGroup, TerrainEditorUI_GetEditorUnit(Player(i)))
+        set i = i + 1
+    endloop
 endfunction
 
 // ========

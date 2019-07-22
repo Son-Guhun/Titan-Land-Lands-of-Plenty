@@ -1,7 +1,7 @@
 library LoPthree requires LoPCleanUpDeath, LoPCleanUpRemoval
 
-function LoP_RemoveUnit takes unit whichUnit returns nothing
-    if not IsUnitInGroup(whichUnit, udg_System_ProtectedGroup) then
+function LoP_RemoveUnit takes unit whichUnit returns nothing       // Dummy point value
+    if not IsUnitInGroup(whichUnit, udg_System_ProtectedGroup) and GetUnitPointValue(whichUnit) != 37 then
         if not LoP_IsUnitDecoration(whichUnit) then
             //call DisableTrigger(gg_trg_System_Cleanup_Removal)
             //call LoP_onRemoval(whichUnit)
