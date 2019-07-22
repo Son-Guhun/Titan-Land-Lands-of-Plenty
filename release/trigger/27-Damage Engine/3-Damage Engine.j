@@ -5,26 +5,26 @@ globals
 endglobals
 
 //===========================================================================
-//
+//  
 //  Damage Engine 5.4.2 - update requires copying of the JASS script and adding
 //  the following to variables to your map script:
-//
+//  
 //  attacktype array udg_CONVERTED_ATTACK_TYPE
 //  damagetype array udg_CONVERTED_DAMAGE_TYPE
-//
+//  
 //===========================================================================
 library DamageEngine initializer Init
- 
+   
 globals
     private timer   alarm       = CreateTimer()
     private boolean alarmSet    = false
- 
+   
     //Values to track the original pre-spirit Link/defensive damage values
     private boolean canKick         = true
     private boolean totem           = false
     private real lastAmount         = 0.00
     private real lastPrevAmt        = 0.00
-    private integer lastType        = 0
+    private integer lastType        = 0  
     private boolean lastCode        = false
     private real lastPierced        = 0.00
     private integer armorType       = 0
@@ -33,7 +33,7 @@ globals
     private integer defenseType     = 0
     private integer lastDefense     = 0
     private integer lastPrevDefense = 0
- 
+   
     //Stuff to track recursive UnitDamageTarget calls.
     private boolean eventsRun       = false
     private boolean kicking         = false
@@ -46,14 +46,14 @@ globals
     private weapontype array weaponTStack
     private integer array userTrigStack
     private integer array typeStack
- 
+   
     //Added in 5.4 to silently eliminate infinite recursion.
     private integer userTrigs = 9
     private integer eventTrig = 0
     private integer array nextTrig
     private trigger array userTrig
     private boolean array trigFrozen
-   
+       
     //Added/re-tooled in 5.4.1 to allow forced recursion (for advanced users only).
     private constant integer    LIMBO           = 16    //Recursion will never go deeper than LIMBO.
     private integer array       levelsDeep              //How deep the user recursion currently is.
@@ -64,7 +64,7 @@ globals
     private integer             sleepLevel      = 0
     private group               proclusGlobal   = CreateGroup() //track sources of recursion
     private group               fischerMorrow   = CreateGroup() //track targets of recursion
- 
+   
     //Improves readability in the code to have these as named constants.
     private constant integer    MOD_EVENT       = 1
     private constant integer    SHIELD_EVENT    = 4
@@ -73,8 +73,10 @@ globals
     private constant integer    AFTER_EVENT     = 7
     private constant integer    LETHAL_EVENT    = 8
     private constant integer    AOE_EVENT       = 9
+   
+    //private string crashStr = ""
 endglobals
- 
+   
 //GUI Vars:
 /*
     Retained from 3.8 and prior:
@@ -95,59 +97,84 @@ endglobals
     boolean         udg_NextDamageType
     boolean         udg_DamageEventType
     boolean         udg_IsDamageSpell
- 
+   
     //Added in 5.0:
-    boolean          udg_IsDamageMelee
-    boolean          udg_IsDamageRanged
-    unit             udg_AOEDamageSource
+    boolean          udg_IsDamageMelee    
+    boolean          udg_IsDamageRanged    
+    unit             udg_AOEDamageSource  
     real             udg_LethalDamageEvent
-    real             udg_LethalDamageHP
+    real             udg_LethalDamageHP    
     real             udg_DamageScalingWC3
     integer          udg_DamageEventAttackT
     integer          udg_DamageEventDamageT
     integer          udg_DamageEventWeaponT
- 
+   
     //Added in 5.1:
-    boolean          udg_IsDamageCode
- 
+    boolean          udg_IsDamageCode    
+   
     //Added in 5.2:
-    integer          udg_DamageEventArmorT
+    integer          udg_DamageEventArmorT  
     integer          udg_DamageEventDefenseT
- 
+   
     //Addded in 5.3:
     real             DamageEventArmorPierced
-    real             udg_DamageScalingUser
- 
+    real             udg_DamageScalingUser  
+   
     //Added in 5.4.2 to allow GUI users to re-issue the exact same attack and damage type at the attacker.
     attacktype array udg_CONVERTED_ATTACK_TYPE
     damagetype array udg_CONVERTED_DAMAGE_TYPE
 */
- 
+   
     private function RunTrigs takes integer i returns nothing
         local integer cat = i
+        //if dreaming then
+        //    call BJDebugMsg("Tried to run triggers while triggers were already running.")
+        //    return
+        //endif
         set dreaming = true
+        //call BJDebugMsg("Start of event running")
         loop
             set i = nextTrig[i]
             exitwhen i == 0
             exitwhen cat == MOD_EVENT and (udg_DamageEventOverride or udg_DamageEventType*udg_DamageEventType == 4)
             exitwhen cat == SHIELD_EVENT and udg_DamageEventAmount <= 0.00
             exitwhen cat == LETHAL_EVENT and udg_LethalDamageHP > 0.405
+            //set crashStr = "Bout to inspect " + I2S(i)
             if not trigFrozen[i] and IsTriggerEnabled(userTrig[i]) then
                 set eventTrig = i
+                //set crashStr = "Bout to evaluate " + I2S(i)
                 if TriggerEvaluate(userTrig[i]) then
+                    //set crashStr = "Bout to execute " + I2S(i)
                     call TriggerExecute(userTrig[i])
                 endif
+                //set crashStr = "Ran " + I2S(i)
                 //call BJDebugMsg("Ran " + I2S(i))
-                if cat == MOD_EVENT then
-                    set udg_DamageScalingUser = udg_DamageEventAmount/udg_DamageEventPrevAmt
-                elseif cat == SHIELD_EVENT then
-                    set udg_DamageScalingUser = udg_DamageEventAmount/udg_DamageEventPrevAmt/udg_DamageScalingWC3
-                endif
+                //if not (udg_DamageEventPrevAmt == 0.00 or udg_DamageScalingWC3 == 0.00 or udg_DamageEventAmount == 0.00) then
+                //    if cat == MOD_EVENT then
+                //        set udg_DamageScalingUser = udg_DamageEventAmount/udg_DamageEventPrevAmt
+                //    elseif cat == SHIELD_EVENT then
+                //        set udg_DamageScalingUser = udg_DamageEventAmount/udg_DamageEventPrevAmt/udg_DamageScalingWC3
+                //    endif
+                //elseif udg_DamageEventPrevAmt == 0.00 then
+                //    call BJDebugMsg("Prev amount 0.00 and User Amount " + R2S(udg_DamageEventAmount))
+                //elseif udg_DamageEventAmount == 0.00 then
+                //    call BJDebugMsg("User amount 0.00 and Prev Amount " + R2S(udg_DamageEventPrevAmt))
+                //elseif udg_DamageScalingWC3 == 0.00 then
+                //    call BJDebugMsg("WC3 amount somehow 0.00")
+                //endif
+                //set crashStr = "Filtered " + I2S(i)
+            //elseif i > 9 then
+            //    if trigFrozen[i] then
+            //        call BJDebugMsg("User Trigger is frozen")
+            //    else
+            //        call BJDebugMsg("User Trigger is off")
+            //    endif
             endif
         endloop
+        //call BJDebugMsg("End of event running")
         set dreaming = false
     endfunction
- 
+   
     private function OnAOEEnd takes nothing returns nothing
         if udg_DamageEventAOE > 1 then
             call RunTrigs(AOE_EVENT)
@@ -158,13 +185,13 @@ endglobals
         set udg_AOEDamageSource         = null
         call GroupClear(udg_DamageEventAOEGroup)
     endfunction
- 
+   
     private function AfterDamage takes nothing returns nothing
         if udg_DamageEventPrevAmt != 0.00 and udg_DamageEventDamageT != udg_DAMAGE_TYPE_UNKNOWN then
             call RunTrigs(AFTER_EVENT)
         endif
     endfunction
- 
+   
     private function Finish takes nothing returns nothing
         local integer i = 0
         local integer exit
@@ -206,9 +233,13 @@ endglobals
             endif
             call GroupClear(proclusGlobal)
             call GroupClear(fischerMorrow)
+        //elseif kicking then
+        //    call BJDebugMsg("Somehow still kicking")
+        //else
+        //    call BJDebugMsg("Cannot kick")
         endif
     endfunction
- 
+   
     private function ResetArmor takes nothing returns nothing
         if udg_DamageEventArmorPierced != 0.00 then
             call BlzSetUnitArmor(udg_DamageEventTarget, BlzGetUnitArmor(udg_DamageEventTarget) + udg_DamageEventArmorPierced)
@@ -220,7 +251,7 @@ endglobals
             call BlzSetUnitIntegerField(udg_DamageEventTarget, UNIT_IF_DEFENSE_TYPE, defenseType)
         endif
     endfunction
- 
+   
     private function FailsafeClear takes nothing returns nothing
         //call BJDebugMsg("Damage from " + GetUnitName(udg_DamageEventSource) + " to " + GetUnitName(udg_DamageEventTarget) + " has been messing up Damage Engine.")
         //call BJDebugMsg(R2S(udg_DamageEventAmount) + " " + " " + R2S(udg_DamageEventPrevAmt) + " " + udg_AttackTypeDebugStr[udg_DamageEventAttackT] + " " + udg_DamageTypeDebugStr[udg_DamageEventDamageT])
@@ -235,18 +266,28 @@ endglobals
         endif
         call Finish()
     endfunction
- 
+   
     private function WakeUp takes nothing returns nothing
         set alarmSet    = false //The timer has expired. Flag off to allow it to be restarted when needed.
+        //if dreaming then
+        //    set dreaming= false
+        //    call BJDebugMsg("Timer set dreaming to False")
+        //    call BJDebugMsg(crashStr)
+        //endif
         if totem then
             //Something went wrong somewhere; the WarCraft 3 engine didn't run the DAMAGED event despite running the DAMAGING event.
             call FailsafeClear()
         else
+            if not canKick and damageStack > 0 then
+                //call BJDebugMsg("Damage Engine recursion deployment was failing with application of: " + R2S(udg_DamageEventAmount))
+                set canKick = true
+            endif
             call Finish() //Wrap up any outstanding damage instance
         endif
         call OnAOEEnd() //Reset things so they don't perpetuate for AoE/Level target detection
+        set udg_DamageEventPrevAmt = 0.00 //Added in 5.4.2.1 to try to squash the Cold Arrows glitch (failed to do it)
     endfunction
- 
+   
     private function CalibrateMR takes nothing returns nothing
         set udg_IsDamageMelee           = false
         set udg_IsDamageRanged          = false
@@ -260,7 +301,7 @@ endglobals
             endif                                                   // The Huntress has a melee sound for her ranged projectile, however it is only an issue
         endif                                                       //if she also had a melee attack, because by default she is only UNIT_TYPE_RANGED_ATTACKER.
     endfunction
- 
+   
     private function OnPreDamage takes nothing returns boolean
         local unit src      = GetEventDamageSource()
         local unit tgt      = GetTriggerUnit()
@@ -268,10 +309,11 @@ endglobals
         local attacktype at = BlzGetEventAttackType()
         local damagetype dt = BlzGetEventDamageType()
         local weapontype wt = BlzGetEventWeaponType()
-   
+       
         //call BJDebugMsg("First damage event running")
-   
+       
         if dreaming then
+            //call BJDebugMsg("Dreaming")
             if amt != 0.00 then
                 //Store recursive damage into a queue from index "damageStack" (0-15)
                 //This damage will be fired after the current damage instance has wrapped up its events.
@@ -365,9 +407,9 @@ endglobals
             set udg_DamageEventAttackT          = GetHandleId(at)
             set udg_DamageEventDamageT          = GetHandleId(dt)
             set udg_DamageEventWeaponT          = GetHandleId(wt)
-       
+           
             call CalibrateMR() //Set Melee and Ranged settings.
-       
+           
             set udg_DamageEventArmorT           = BlzGetUnitIntegerField(udg_DamageEventTarget, UNIT_IF_ARMOR_TYPE) //Introduced in Damage Engine 5.2.0.0
             set udg_DamageEventDefenseT         = BlzGetUnitIntegerField(udg_DamageEventTarget, UNIT_IF_DEFENSE_TYPE)
             set armorType                       = udg_DamageEventArmorT
@@ -375,11 +417,11 @@ endglobals
             set udg_DamageEventArmorPierced     = 0.00
             set udg_DamageScalingUser           = 1.00
             set udg_DamageScalingWC3            = 1.00
-       
+           
             if amt != 0.00 then
                 if not udg_DamageEventOverride then
                     call RunTrigs(MOD_EVENT)
-           
+               
                     //All events have run and the pre-damage amount is finalized.
                     call BlzSetEventAttackType(ConvertAttackType(udg_DamageEventAttackT))
                     call BlzSetEventDamageType(ConvertDamageType(udg_DamageEventDamageT))
@@ -409,12 +451,17 @@ endglobals
         set udg_NextDamageType = 0
         return false
     endfunction
- 
+   
     //The traditional on-damage response, where armor reduction has already been factored in.
     private function OnDamage takes nothing returns boolean
         local real r = GetEventDamage()
         //call BJDebugMsg("Second damage event running")
         if dreaming or udg_DamageEventPrevAmt == 0.00 then
+            //if dreaming then
+            //    call BJDebugMsg("Dreaming")
+            //else
+            //    call BJDebugMsg("Prev amount is zero")
+            //endif
             return false
         endif
         if totem then
@@ -447,10 +494,10 @@ endglobals
             set udg_DamageScalingWC3 = 0.00
         else
             set udg_DamageScalingWC3 = 1.00
+            set udg_DamageScalingUser = udg_DamageEventAmount / udg_DamageEventPrevAmt
         endif
-        set r = udg_DamageEventAmount
-        set udg_DamageEventAmount = r*udg_DamageScalingWC3
-   
+        set udg_DamageEventAmount = udg_DamageEventAmount*udg_DamageScalingWC3
+       
         if udg_DamageEventAmount > 0.00 then
             //This event is used for custom shields which have a limited hit point value
             //The shield here kicks in after armor, so it acts like extra hit points.
@@ -459,13 +506,13 @@ endglobals
             if udg_LethalDamageHP <= 0.405 then
                 call RunTrigs(LETHAL_EVENT) //Added 10 May 2019 to detect and potentially prevent lethal damage. Instead of
                 //modifying the damage, you need to modify LethalDamageHP instead (the final HP of the unit).
-           
+               
                 set udg_DamageEventAmount = GetWidgetLife(udg_DamageEventTarget) - udg_LethalDamageHP
-                set udg_DamageScalingUser = udg_DamageEventAmount/udg_DamageEventPrevAmt/udg_DamageScalingWC3
                 if udg_DamageEventType < 0 and udg_LethalDamageHP <= 0.405 then
                     call SetUnitExploded(udg_DamageEventTarget, true)   //Explosive damage types should blow up the target.
                 endif
             endif
+            set udg_DamageScalingUser = udg_DamageEventAmount/udg_DamageEventPrevAmt/udg_DamageScalingWC3
         endif
         call BlzSetEventDamage(udg_DamageEventAmount)   //Apply the final damage amount.
         if udg_DamageEventDamageT != udg_DAMAGE_TYPE_UNKNOWN then
@@ -477,7 +524,7 @@ endglobals
         endif
         return false
     endfunction
- 
+   
     //===========================================================================
     private function Init takes nothing returns nothing
         local trigger trig = CreateTrigger()
@@ -488,7 +535,7 @@ endglobals
         call TriggerAddCondition(trig, Filter(function OnPreDamage))
         set trig = null
     endfunction
- 
+   
     public function DebugStr takes nothing returns nothing
         local integer i = 0
         loop
@@ -509,7 +556,7 @@ endglobals
         set udg_AttackTypeDebugStr[4] = "MAGIC"
         set udg_AttackTypeDebugStr[5] = "CHAOS"
         set udg_AttackTypeDebugStr[6] = "HERO"
-   
+       
         set udg_DamageTypeDebugStr[0]  = "UNKNOWN"
         set udg_DamageTypeDebugStr[4]  = "NORMAL"
         set udg_DamageTypeDebugStr[5]  = "ENHANCED"
@@ -564,7 +611,7 @@ endglobals
         set udg_DefenseTypeDebugStr[5] = "HERO"
         set udg_DefenseTypeDebugStr[6] = "DIVINE"
         set udg_DefenseTypeDebugStr[7] = "UNARMORED"
-   
+       
         set udg_ArmorTypeDebugStr[0] = "NONE"       //ARMOR_TYPE_WHOKNOWS in JASS, added in 1.31
         set udg_ArmorTypeDebugStr[1] = "FLESH"
         set udg_ArmorTypeDebugStr[2] = "METAL"
@@ -572,7 +619,7 @@ endglobals
         set udg_ArmorTypeDebugStr[4] = "ETHEREAL"
         set udg_ArmorTypeDebugStr[5] = "STONE"
     endfunction
- 
+   
     //This function exists mainly to make it easier to switch from another DDS, like PDD.
     function UnitDamageTargetEx takes unit src, unit tgt, real amt, boolean a, boolean r, attacktype at, damagetype dt, weapontype wt returns boolean
         if udg_NextDamageType == 0 then
@@ -581,7 +628,7 @@ endglobals
         call UnitDamageTarget(src, tgt, amt, a, r, at, dt, wt)
         return dreaming
     endfunction
- 
+   
     public function SetupEvent takes trigger whichTrig, string var, integer index returns nothing
         local integer max = 1
         local integer off = 0
@@ -623,11 +670,12 @@ endglobals
         set userTrig[userTrigs] = whichTrig
         //call BJDebugMsg("Registered " + I2S(userTrigs) + " to " + I2S(index))
     endfunction
- 
+   
     private function PreSetup takes trigger whichTrig, string var, limitop op, real value returns nothing
         call SetupEvent(whichTrig, var, R2I(value))
     endfunction
- 
+   
     hook TriggerRegisterVariableEvent PreSetup
- 
+   
 endlibrary
+ 
