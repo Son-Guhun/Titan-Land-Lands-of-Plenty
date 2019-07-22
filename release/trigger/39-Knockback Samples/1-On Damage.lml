@@ -199,16 +199,12 @@ Action
                 Condition
                     OrMultiple
                         Condition
-                            OperatorCompareBoolean
-                                Array : Tauren_Shockwave
-                                    Call  : GetUnitUserData
-                                        Var   : DamageEventSource
+                            Disab: OperatorCompareBoolean
+                                Disab: 
                                 Preset: OperatorEqualENE
                                 Const : true
-                            OperatorCompareBoolean
-                                Array : Tauren_WarStomp
-                                    Call  : GetUnitUserData
-                                        Var   : DamageEventSource
+                            Disab: OperatorCompareBoolean
+                                Disab: 
                                 Preset: OperatorEqualENE
                                 Const : true
                 Action
@@ -240,10 +236,8 @@ Action
                         Var   : DamageEventTarget
                     IfThenElseMultiple
                         Condition
-                            OperatorCompareBoolean
-                                Array : Tauren_WarStomp
-                                    Call  : GetUnitUserData
-                                        Var   : DamageEventSource
+                            Disab: OperatorCompareBoolean
+                                Disab: 
                                 Preset: OperatorEqualENE
                                 Const : true
                         Action

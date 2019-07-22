@@ -18,10 +18,8 @@ Action
         Action
             CommentString
                 Const : 'In case the unit had other damaging spells, we don''t want those spells to trigger an unwanted knockback'
-            SetVariable
-                Array : Tauren_Shockwave
-                    Call  : GetUnitUserData
-                        Call  : GetTriggerUnit
+            Disab: SetVariable
+                Disab: 
                 Const : false
         Action
             IfThenElseMultiple
@@ -33,8 +31,6 @@ Action
                 Action
                     CommentString
                         Const : 'Same goes for here'
-                    SetVariable
-                        Array : Tauren_WarStomp
-                            Call  : GetUnitUserData
-                                Call  : GetTriggerUnit
+                    Disab: SetVariable
+                        Disab: 
                         Const : false

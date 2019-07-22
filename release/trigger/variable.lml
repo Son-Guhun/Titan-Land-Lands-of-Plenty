@@ -8,7 +8,6 @@ LegendaryScrollSpellInteger: integer
 RealNames: string
     Array : 1
 PathWayForInteger: integer
-SoulPactDefenseEffect: effect
 temp_integer: integer
 save_password: string
     Array : 1
@@ -76,10 +75,6 @@ temp_player: player
 PowerSystem_Player: player
     Def   : Player00
 PowerSystem_allFlag: boolean
-ScrollSystem_learnAbilities: abilcode
-    Array : 1
-ScrollSystem_realAbilities: abilcode
-    Array : 1
 GDS_cSTUN: integer
 GDS_cSILENCE: integer
 GDS_cDISARM_R: integer
@@ -326,7 +321,6 @@ System_DecoGrid: real
     Array : 1
 DecoSystem_PlayerColor: integer
     Array : 1
-save_localPlayerBool: boolean
 System_searchStr: string
 save_XYminmaxcur: real
     Array : 1
@@ -509,10 +503,6 @@ K2DUnbiasedCollision: boolean
     Array : 1
 Knockback2DUnbiasedCollision: boolean
 LoopInt: integer
-Tauren_WarStomp: boolean
-    Array : 1
-Tauren_Shockwave: boolean
-    Array : 1
 LeaklessGroup: group
 save_LastLoadedUnit: unit
     Array : 1

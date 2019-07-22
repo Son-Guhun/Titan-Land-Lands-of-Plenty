@@ -11,10 +11,8 @@ Action
                 Preset: OperatorEqualENE
                 Const : AOsh
         Action
-            SetVariable
-                Array : Tauren_Shockwave
-                    Call  : GetUnitUserData
-                        Call  : GetTriggerUnit
+            Disab: SetVariable
+                Disab: 
                 Const : true
             CommentString
                 Const : ---------------------
@@ -79,8 +77,6 @@ Action
                         Preset: OperatorEqualENE
                         Const : AOws
                 Action
-                    SetVariable
-                        Array : Tauren_WarStomp
-                            Call  : GetUnitUserData
-                                Call  : GetTriggerUnit
+                    Disab: SetVariable
+                        Disab: 
                         Const : true
