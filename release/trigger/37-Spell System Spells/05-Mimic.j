@@ -48,6 +48,7 @@ endfunction
 
 function RemoveUnitMimic takes unit mimic returns nothing
     local unit original = UnitData(GetHandleId(mimic)).original
+    local player owner = GetOwningPlayer(mimic)
     
     if original != null then
         call UnitData(GetHandleId(mimic)).destroy()
@@ -60,7 +61,7 @@ function RemoveUnitMimic takes unit mimic returns nothing
         call EnableTrigger(gg_trg_System_Cleanup_Owner_Change)
         
         
-        call SetUnitOwner(original, /*GetOwningPlayer(mimic)*/Player(0), false)
+        call SetUnitOwner(original, owner, false)
         call ShowUnit(original, true)
         call HeroTransferInventory(mimic, original)
         
