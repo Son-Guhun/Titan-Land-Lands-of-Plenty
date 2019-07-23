@@ -14,9 +14,9 @@ endfunction
 function Trig_Deco_RangedBuild_Actions takes nothing returns nothing
     local unit u = GetTriggerUnit()
     local timer t
-    local integer builtUnitType = GetIssuedOrderId()  // Only works for undead build ability!!!
+    local integer builtUnitType = GetIssuedOrderId()
     
-    if not IsUnitIdType(builtUnitType, UNIT_TYPE_MECHANICAL) or not LoP_IsUnitDecoBuilder(u) then
+    if not IsUnitIdType(builtUnitType, UNIT_TYPE_MECHANICAL) or not LoP_IsUnitDecoBuilder(u) or GetUnitAbilityLevel(u, 'A0CA') == 0 then
         set u = null
         return
     endif

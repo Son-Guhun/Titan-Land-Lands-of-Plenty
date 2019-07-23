@@ -8,7 +8,7 @@ endglobals
 //! runtextmacro DeclareParentHashtableWrapperStruct("hT","public")
 
 globals
-    constant boolean IS_SLK = false
+    constant boolean IS_SLK = true
 endglobals
 function GetUnitTypeIdModel takes integer unitTypeId returns string 
     static if IS_SLK then
