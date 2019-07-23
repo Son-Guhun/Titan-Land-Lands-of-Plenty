@@ -12,6 +12,108 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 	- New units for an existing race can be added in a patch version. 
 	- New decorations for an existing deco builder can be added in a patch version.
 
+
+## [v1.2.1]
+
+### Added
+- New version of the Save system. The external SaveNLoad program is no longer required, saving and loading is done entirely using Warcraft III's functionalities. To transfer old saves to the new system, they must be loaded using the new **-req** command. Using SaveNLoad.exe will be required for this. After loading the old save, it can be saved using the save commands and afterwards it can be loaded with the **-request** command.
+- Created a new ingame Terrain Editor, that works similarly to the World Editor's Terrain Editor. Currently, it is a very simple tool, but it will be greatly expanded upon in the furute. It will be the most supported form of terrain editing going foward, so try and ditch the Deco Modifier Terrain, if you can.
+- New Commands:
+	- -collision (on/off): allows you to turn collison on/off for units. This allows naval units to go onto land and ground units to walk through cliffs.
+    - -editor (terrain/none): Allows you to enter/exit the new ingame Terrain Editor.
+	- -ability (add/remove/clear): Use the new ability system to manipulate which abilities a hero has. Read F9 menu in-game for more details.
+	- -fix (darkness/selection): New (probably temporary) command to fix issues some players have been experiecing.
+- New Races:
+	- Worgen
+	- Ratfolk
+	- Lizardmen
+- New Deco Builders:
+	- [Stone & Sword](https://www.hiveworkshop.com/threads/hybrisfactory-terraining-and-mapping-resources.238310/) builders:
+		- **Deco Builder S&S Manor 1 and 2:** These are two new deco builders with 89 new decorations in total. These decorations are modular, allowing you to build pretty much any medieval building your imagination can come up with!
+		- **Deco Builder S&S Kingdom 1 and 2:** There are two new deco builders that add a total of 54 new decorations. These decorations are pretty useful for creating interiors, villages or markets.
+	- **Deco Builder Mushrooms:** Builds mushrooms that used to be built by Deco Builder Crops. Also added new mushrooms:
+		- Giant Mushrooms (and Red variations)
+		- White Spotted Mushrooms
+	- **Deco Builder Tableware:** Builds things that you can put on top of tables.
+		- Mug
+		- Bread
+		- Plate, Plate with Meat
+		- Candelabra, Candelabra (Off)
+	- **Deco Builder Castle:** Creates interior decorations for castles, including walls (with arches/doors/windows), pillars and banners.
+	- **Deco Builder Naga 2:** Contains a few new naga structures.
+	- **Deco Builder Gurubashi:** Contains Gurubashi buildings with Sunken Ruins textures made by THW user Ujimasa Hojo.
+	- **Deco Builder Huts:** Builds creep huts that used to be located in the Titan's Palace.
+- New Decorations:
+	- Deco Builder Fire:
+		- Flame Grate (round and rectangular)
+	- Deco Builder Misc:
+		- Magical Pen (can be activated and deactivated)
+	- Deco Builder Misc:
+		- Animal Spawner 3: Pig, Red Fox, Horses and Belf Wagon (not an animal, but who cares?)
+	- Deco Builder Naga:
+		- A few new naga structures.
+	- Deco Builder Water:
+		- New Water Square decoration that uses an HD water model.
+- Critters will no longer wander around aimlessly by default. An ability has been added to them which allows the wandering behaviour to be enabled or disabled.
+- New Critter: Fox.
+
+#### Minor Additions:
+- Cosmosis now possesses the Obliterate spell to remove unselectable decorations.
+- Readded the Noldor elven units to a new Barracks that can be built by the High Elf Architect.
+- New tips have been added for the ability system and the Terrain Editor.
+
+
+### Fixed
+- Many changes have been made in order to make the map more stable. Desyncs and crashes seems to have been mitigated, though they are not yet completely gone.
+- Certain models (such as City Buildings) should no longer become partly invisible when they receive an RGB value. They will still become partly invisible if they receive an alpha value.
+- Tooltips for High Elf and Highborne decorations are now correct.
+- Ressurection stone has been correctly added to Deco Builder Rocks (it was missing before).
+- Dragonspawn Cavern can now be built normally.
+- **Possibly** fixed some desyncs that could **possibly** happen at the start of the game. *It's hard to mod Warcraft 3*.
+- **Possibly** fixed some desyncs that could **possibly** be caused by the camera system and RectGenerator system. *Really hard*.
+- Fixed an issue where sometimes Rect Generators with sides greater than 2048x2048 would not perform correctly.
+- Young King's Mount Up ability now has the L hotkey and will no longer conflict with his Charge ability.
+- Greater Bloodlust will now work in patch 1.31.
+- Giving a unit to neutral will no longer cause it to lose it's custom color (given with the -color command).
+- Fixed an issue where the original unit would be given to Red when its mimic died (Staff of Mimic).
+
+### Changed
+- The map now requires patch 1.31 or greater.
+- The maximum number of players in the map has been reduced to 12, in an attempt to mitigate desyncs. In the future, the limit may be increased to 24 again, if it is found that it was not a cause for desyncs.
+- Rect Generators' Toggle Terrain Fog ability is now functional. By default, fogs are disabled.
+- The Titan can now make any player's decorations unselectable, in order to avoid lag.
+- Terrain:
+	- Added a secondary entrance to the Dirt Peaks (connected to the Blighted Lands).
+- Decorations will now maintain their flying height when upgraded.
+- Load limit increased from 9999 to 2147483647.
+- Rect Generators and Animal/Villager Spawners cano no longer be made unselectable.
+- Blizzard and Rain of Fire will no longer damage the casting hero. Only applies for the heroic versions of these abilities.
+- Drow Dark Hall can now train Deco Builder Drow.
+
+#### Minor Changes:
+- Unselectable decorations are now Special Effects instead of units with the Locust ability. This SHOULD increase performance, and in the future it will allow for more flexiblity with unit visuals (negative flying height and rotations along the x and y axes). Even though this is a minor change for the end user, this is the part of the update which took the longest to properly finish.
+- Custom heroes created with -makehero will now have the Hero armor type.
+- Fire Campfire (with Pig) has been removed from Deco Builder Fire's build menu. It is now an upgrade of Fire Campfire.
+- Double quotes (") will be converted to two single quotes ('') when saving unit names.
+- Cenarius has had his stats rebalanced, he should now be one of the most tanky Intelligence heroes.
+- Made unit sizes more consistent for High Elves and Blood Elves.
+
+### Removed
+- Removed glowing mushrooms from the Scorched Lands. This part of the terrain is going to see a massive overhaul, probably in 1.3.0. Removing these mushrooms should reduce FPS lag that some people experience in LoP.
+- Removed creep huts from the Titan Palace, since they now have a deco builder.
+
+
+## [v1.2.0]
+
+Skipped in order to avoid confusion due to there being multiple beta versions of this release.
+
+## [v1.1.6]
+
+### Fixed
+- Most of the models in the map have been sanitzed, using https://viewer.hiveworkshop.com/check/ and hard work.
+- Some models (like the Blood Elf Phoenix Crusader) will no longer crash the game in patch 1.31.0.
+- Spell damage will now kill units in patch 1.31.0.
+
 ## [v1.1.5]
 
 ### Added
@@ -73,6 +175,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 ### Removed
 - Noldor (old High Elf) units can no longer be produced. A new production building will be added for them in a future version. For now, you can create them by loading old saves and copying the units to get as many as you need.
 
+
 ## [v1.1.4]
 
 ### Added
@@ -107,11 +210,11 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 - Lord of Black scales will now correctly display his level above him when hovered over with the mouse.
 - The goblin Tinker now has an inventory to hold all his tools. He had previously lost his bag in an explosion.
 
-
 ### Changed
 - Sylvanas's Undead incarnation now uses a custom model.
 - The High Elf race has been renamed to Noldor.
 - Nightmare (Legends Tower) now has more fitting abilities.
+
 
 ## [v1.1.3]
 
