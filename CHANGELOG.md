@@ -13,7 +13,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 	- New decorations for an existing deco builder can be added in a patch version.
 
 
-## [v1.2.0]
+## [v1.2.1]
 
 ### Added
 - New version of the Save system. The external SaveNLoad program is no longer required, saving and loading is done entirely using Warcraft III's functionalities. To transfer old saves to the new system, they must be loaded using the new **-req** command. Using SaveNLoad.exe will be required for this. After loading the old save, it can be saved using the save commands and afterwards it can be loaded with the **-request** command.
@@ -21,10 +21,12 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 - New Commands:
 	- -collision (on/off): allows you to turn collison on/off for units. This allows naval units to go onto land and ground units to walk through cliffs.
     - -editor (terrain/none): Allows you to enter/exit the new ingame Terrain Editor.
-	- ability (add/remove/clear): Use the new ability system to manipulate which abilities a hero has.
+	- -ability (add/remove/clear): Use the new ability system to manipulate which abilities a hero has. Read F9 menu in-game for more details.
+	- -fix (darkness/selection): New (probably temporary) command to fix issues some players have been experiecing.
 - New Races:
 	- Worgen
 	- Ratfolk
+	- Lizardmen
 - New Deco Builders:
 	- [Stone & Sword](https://www.hiveworkshop.com/threads/hybrisfactory-terraining-and-mapping-resources.238310/) builders:
 		- **Deco Builder S&S Manor 1 and 2:** These are two new deco builders with 89 new decorations in total. These decorations are modular, allowing you to build pretty much any medieval building your imagination can come up with!
@@ -38,6 +40,9 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 		- Plate, Plate with Meat
 		- Candelabra, Candelabra (Off)
 	- **Deco Builder Castle:** Creates interior decorations for castles, including walls (with arches/doors/windows), pillars and banners.
+	- **Deco Builder Naga 2:** Contains a few new naga structures.
+	- **Deco Builder Gurubashi:** Contains Gurubashi buildings with Sunken Ruins textures made by THW user Ujimasa Hojo.
+	- **Deco Builder Huts:** Builds creep huts that used to be located in the Titan's Palace.
 - New Decorations:
 	- Deco Builder Fire:
 		- Flame Grate (round and rectangular)
@@ -45,7 +50,12 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 		- Magical Pen (can be activated and deactivated)
 	- Deco Builder Misc:
 		- Animal Spawner 3: Pig, Red Fox, Horses and Belf Wagon (not an animal, but who cares?)
+	- Deco Builder Naga:
+		- A few new naga structures.
+	- Deco Builder Water:
+		- New Water Square decoration that uses an HD water model.
 - Critters will no longer wander around aimlessly by default. An ability has been added to them which allows the wandering behaviour to be enabled or disabled.
+- New Critter: Fox.
 
 #### Minor Additions:
 - Cosmosis now possesses the Obliterate spell to remove unselectable decorations.
@@ -54,7 +64,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 
 ### Fixed
-- Many changes have been made in order to make the map more stable. Desyncs and crashes seems to have been mitigated, though sometimes players will randomly crash in the Loading Screen.
+- Many changes have been made in order to make the map more stable. Desyncs and crashes seems to have been mitigated, though they are not yet completely gone.
 - Certain models (such as City Buildings) should no longer become partly invisible when they receive an RGB value. They will still become partly invisible if they receive an alpha value.
 - Tooltips for High Elf and Highborne decorations are now correct.
 - Ressurection stone has been correctly added to Deco Builder Rocks (it was missing before).
@@ -65,6 +75,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 - Young King's Mount Up ability now has the L hotkey and will no longer conflict with his Charge ability.
 - Greater Bloodlust will now work in patch 1.31.
 - Giving a unit to neutral will no longer cause it to lose it's custom color (given with the -color command).
+- Fixed an issue where the original unit would be given to Red when its mimic died (Staff of Mimic).
 
 ### Changed
 - The map now requires patch 1.31 or greater.
@@ -77,6 +88,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 - Load limit increased from 9999 to 2147483647.
 - Rect Generators and Animal/Villager Spawners cano no longer be made unselectable.
 - Blizzard and Rain of Fire will no longer damage the casting hero. Only applies for the heroic versions of these abilities.
+- Drow Dark Hall can now train Deco Builder Drow.
 
 #### Minor Changes:
 - Unselectable decorations are now Special Effects instead of units with the Locust ability. This SHOULD increase performance, and in the future it will allow for more flexiblity with unit visuals (negative flying height and rotations along the x and y axes). Even though this is a minor change for the end user, this is the part of the update which took the longest to properly finish.
@@ -84,10 +96,16 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 - Fire Campfire (with Pig) has been removed from Deco Builder Fire's build menu. It is now an upgrade of Fire Campfire.
 - Double quotes (") will be converted to two single quotes ('') when saving unit names.
 - Cenarius has had his stats rebalanced, he should now be one of the most tanky Intelligence heroes.
+- Made unit sizes more consistent for High Elves and Blood Elves.
 
 ### Removed
 - Removed glowing mushrooms from the Scorched Lands. This part of the terrain is going to see a massive overhaul, probably in 1.3.0. Removing these mushrooms should reduce FPS lag that some people experience in LoP.
+- Removed creep huts from the Titan Palace, since they now have a deco builder.
 
+
+## [v1.2.0]
+
+Skipped in order to avoid confusion due to there being multiple beta versions of this release.
 
 ## [v1.1.6]
 
