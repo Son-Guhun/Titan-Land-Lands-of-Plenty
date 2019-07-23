@@ -181,9 +181,12 @@ are listed first, though.
             // Mushrooms
             set i = ( i + 1 )
             set rawcodes[i] = 'u046'
-            // Naga
+            // Naga 1
             set i = ( i + 1 )
             set rawcodes[i] = 'u03R'
+            // Naga 2
+            set i = ( i + 1 )
+            set rawcodes[i] = 'u00E'
             // Nordic
             set i = ( i + 1 )
             set rawcodes[i] = 'u03S'
