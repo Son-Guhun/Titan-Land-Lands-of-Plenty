@@ -1,10 +1,26 @@
 library LoPHeroicUnit requires LoPHeader, LoPWidgets
 
+    globals
+        private integer array heroicUnitCount
+        private group countedUnits
+    endglobals
+
+    private module InitModule
+        private static method onInit takes nothing returns nothing
+            set countedUnits = CreateGroup()
+        endmethod
+    endmodule
     public struct Globals extends array
-    private static key static_members_key
-    //! runtextmacro TableStruct_NewStaticHandleField("dummy","unit")
-    
+        private static key static_members_key
+        //! runtextmacro TableStruct_NewStaticHandleField("dummy","unit")
+        
+        implement InitModule
     endstruct
+    
+    
+    function LoP_GetPlayerHeroicUnitCount takes player whichPlayer returns integer
+        return heroicUnitCount[GetPlayerId(whichPlayer)]
+    endfunction
 
     function GiveHeroStats takes unit whichUnit returns nothing
         call UnitApplyTimedLife(whichUnit, 'BHwe', 1)
@@ -56,6 +72,39 @@ library LoPHeroicUnit requires LoPHeader, LoPWidgets
         call SetUnitOwner(Globals.dummy, Player(bj_PLAYER_NEUTRAL_EXTRA), false)
         call EnableTrigger(gg_trg_System_Cleanup_Owner_Change)
     endfunction
+    
+    function LoP_UnitMakeHeroic  takes unit whichUnit returns boolean
+        local boolean result = UnitMakeHeroic(whichUnit)
+        if result then
+            call UnitAddAbility(whichUnit, 'A09Y' )
+            set LoP_UnitData.get(whichUnit).isHeroic = true
+            call GroupAddUnit(countedUnits, whichUnit)
+            set heroicUnitCount[GetPlayerId(GetOwningPlayer(whichUnit))] = heroicUnitCount[GetPlayerId(GetOwningPlayer(whichUnit))] + 1
+            
+            call GiveHeroStats(whichUnit)
+        else
+            call DisplayTextToPlayer(GetLocalPlayer(), 0, 0, "Unable to make unit " + GetUnitName(whichUnit) + " a hero. Report this problem please.")
+        endif
+        return result
+    endfunction
+
+    public function OnRemove takes unit whichUnit returns nothing
+        if IsUnitInGroup(whichUnit, countedUnits) then
+            set heroicUnitCount[GetPlayerId(GetOwningPlayer(whichUnit))] = heroicUnitCount[GetPlayerId(GetOwningPlayer(whichUnit))] - 1
+            call GroupRemoveUnit(countedUnits, whichUnit)
+        endif
+    endfunction
+    
+    public function OnChangeOwner takes unit whichUnit, player oldOwner returns nothing
+        if IsUnitInGroup(whichUnit, countedUnits) then
+            set heroicUnitCount[GetPlayerId(GetOwningPlayer(whichUnit))] = heroicUnitCount[GetPlayerId(GetOwningPlayer(whichUnit))] + 1
+            set heroicUnitCount[GetPlayerId(oldOwner)] = heroicUnitCount[GetPlayerId(oldOwner)] - 1
+            
+            if heroicUnitCount[GetPlayerId(GetOwningPlayer(whichUnit))] >= 12 then
+                call RemoveUnit(whichUnit)
+            endif
+        endif
+    endfunction
 
 endlibrary
 
@@ -73,18 +122,16 @@ private function FilterUnitsMakeHero takes nothing returns boolean
         
         
         if IsValidHeroicUnit(filterU, udg_GAME_MASTER) then 
-            call DisplayTextToPlayer(udg_GAME_MASTER, 0, 0, "-makehero is an experimental command which needs more testing. Use it wisely. Do not give to units that can morph!")
+            if GetTriggerPlayer() != udg_GAME_MASTER then
+                //call DisplayTextToPlayer(udg_GAME_MASTER, 0, 0, "Player " + GetPlayerName(GetTriggerPlayer()) + " created a custom hero.")
+            endif
             
             set hasMana = GetUnitState(filterU, UNIT_STATE_MAX_MANA) > 1
-            if UnitMakeHeroic(filterU) then
-                call UnitAddAbility(filterU, 'A09Y' )
-                //call UnitMakeAbilityPermanent(filterU, true, 'A09Y' )
-                // call BlzSetUnitMaxHP()
-                set LoP_UnitData.get(filterU).isHeroic = true
-                
-                call GiveHeroStats(filterU)
+            
+            if LoP_GetPlayerHeroicUnitCount(GetOwningPlayer(filterU)) < 12 or GetTriggerPlayer() == udg_GAME_MASTER then
+                call LoP_UnitMakeHeroic(filterU)
             else
-                call DisplayTextToPlayer(GetLocalPlayer(), 0, 0, "Unable to make unit " + GetUnitName(filterU) + " a hero. Report this problem please.")
+                call DisplayTextToPlayer(GetTriggerPlayer(), 0., 0., "Heroic unit limit reached for player. Only the Titan can make heroic units over this limit.")
             endif
             
             call RefreshHeroIcons(GetOwningPlayer(filterU))
@@ -103,7 +150,7 @@ endfunction
 
 //===========================================================================
 function InitTrig_Commands_Make_Hero takes nothing returns nothing
-    call LoP_Command.create("-makehero", ACCESS_TITAN, Condition(function Trig_Commands_Make_Hero_Conditions ))
+    call LoP_Command.create("-makehero", ACCESS_USER, Condition(function Trig_Commands_Make_Hero_Conditions ))
     
     set LoPHeroicUnit_Globals.dummy = CreateUnit(Player(bj_PLAYER_NEUTRAL_EXTRA), 'Hpal', 0., 0., bj_UNIT_FACING )
     call ShowUnit(LoPHeroicUnit_Globals.dummy, false)

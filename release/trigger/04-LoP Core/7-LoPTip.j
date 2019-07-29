@@ -87,7 +87,7 @@ private module InitModule
         call LoP_Tip.create(PERIODIC_TIPS, /*
                          */ "The |cffffff00-select no|r command, which allows you to make your decorations unselectable, reduces the lag from having too many units in the map. Use it!")
         call LoP_Tip.create(PERIODIC_TIPS, /*
-                         */ "The Titan can turn almost any unit into a hero, using the |cffffff00-makehero|r command. You can add custom abilities to these heroes using the |cffffff00-ability|r command (see F9). Some units, like builders and decorations, can't become heroes.")
+                         */ "You can turn almost any unit into a hero, using the |cffffff00-makehero|r command. You can add custom abilities to these heroes using the |cffffff00-ability|r command (see F9). Some units, like builders and decorations, can't become heroes.")
         call LoP_Tip.create(PERIODIC_TIPS, /*
                          */ "You can set the default color of all your units with the |cffffff00-setcolor|r command. This will not alter your player color in the chat or F11 screen.")                 
         call LoP_Tip.create(PERIODIC_TIPS, /*

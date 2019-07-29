@@ -93,8 +93,6 @@ Sets a new player as the titan. Player 1 (Red) can always use the -titan command
 A traditional Titan Land command.
 |cffffff00-combat tags|r
 Toggles combat tags on/off. Default: off.
-|cffffff00-makehero|r
-Makes the selected units heroes. This is an experimental command. Many restrictions apply.
 |cffffff00-time|r (value)
 Sets the time of day (ingame) to the specified time (24 hour time).
 "
@@ -104,21 +102,32 @@ Sets the time of day (ingame) to the specified time (24 hour time).
     // Unit Commands
     set quest_text = "
 |cffff0000Unit Commands:|r
+|cffffff00-makehero|r
+Makes your selected units heroes. Many restrictions apply. Up to 12 heroes per player.
 |cffffff00-copy|r
-Copies your selection of units or the group of a selected Rect Generator.
-|cffffff00-select no|r\nMakes selected units unselectable.
-|cffffff00-remove|r\n|cffffff00-kill|r
-|cffffff00-collison|r (on/off)\nEnables/disables collision for a unit.
-|cffffff00-sele (deco name)|r | |cffffff00-seln (deco name)|r
-Adds deco builders whose name starts with the entered characters to your selection. |cffffff00-seln|r clears your old selection.
-|cff0000ffExamples: -sele wall, -sele sp, -sele pand, -sele gen|r
+Copies your selection of units or the locked group of a selected Rect Generator.
+|cffffff00-select no|r
+Makes selected decorations unselectable. Unselectable decorations consume less computing resources, reducing lag.
 |cffffff00-neut|r <decos>
 Gives your selected units to Neutral Passive, only working on decorations if decos is specified. Your neutral units are saved along with your normal units. Neutral decorations that are made unselectable are automatically returned to you.
 |cffffff00-take|r <all>
 Takes selected unit back from Neutral Passive. Typing all next to the command will take all your units.
 |cffffff00-hide|r <all>\nHides selected/all deco builders. Use |cffffff00-sele|r to get them back.
 "
-    call CreateQuestBJ(questType, "Unit Commands", quest_text, "ReplaceableTextures\\CommandButtons\\BTNFootman.blp")
+    call CreateQuestBJ(questType, "Unit Commands 1", quest_text, "ReplaceableTextures\\CommandButtons\\BTNFootman.blp")
+    // ----------
+    
+    // Unit Commands 2
+    set quest_text = "
+|cffff0000Unit Commands:|r
+|cffffff00-sele (deco name)|r | |cffffff00-seln (deco name)|r
+Adds deco builders whose name starts with the entered characters to your selection. |cffffff00-seln|r clears your old selection before selecting the new units.
+|cff0000ffExamples: -sele wall, -sele sp, -sele pand, -sele gen|r
+|cffffff00-remove|r
+|cffffff00-kill|r
+|cffffff00-collision (on/off)|r
+"
+    call CreateQuestBJ(questType, "Unit Commands 2", quest_text, "ReplaceableTextures\\CommandButtons\\BTNFootman.blp")
     // ----------
     
     // Unit Modification Commands

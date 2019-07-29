@@ -32,6 +32,9 @@ function LoP_onRemoval takes unit whichUnit returns nothing
         
         
         if LoP_UnitData.get(whichUnit).isHeroic then
+            call LoPHeroicUnit_OnRemove(whichUnit)
+            
+            // Avoid crashes due to invalid hero icon in sidebar
             call DisableTrigger(gg_trg_System_Cleanup_Owner_Change)
             call SetUnitOwner(whichUnit, Player(bj_PLAYER_NEUTRAL_EXTRA), false)
             call EnableTrigger(gg_trg_System_Cleanup_Owner_Change)
