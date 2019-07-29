@@ -1,11 +1,15 @@
 scope CommandsAbility
 
+private function MAX_ABILITIES takes nothing returns integer
+    return 7
+endfunction
+
 private function AddAbility takes unit whichUnit, integer rawcode returns nothing
     local ArrayList_ability abilities = UnitEnumRemoveableAbilities(whichUnit)
     
-    if abilities.size() >= 4 then
+    if abilities.size() >= MAX_ABILITIES() then
     
-        call DisplayTextToPlayer(GetTriggerPlayer(), 0., 0., "This hero already has 4 abilities.")
+        call DisplayTextToPlayer(GetTriggerPlayer(), 0., 0., "This hero already has " + I2S(MAX_ABILITIES()) + " abilities.")
     elseif not RemoveableAbility(rawcode).isHero then
     
         call DisplayTextToPlayer(GetTriggerPlayer(), 0., 0., "Unit abilities can only be removed, not added.")
