@@ -96,8 +96,17 @@ static if LIBRARY_UserDefinedRects then
         local real height = GetRectMaxY(userRect) - GetRectCenterY(userRect)
         local integer weatherType = GUDR_GetGeneratorIdWeatherType(generatorId)
         local boolean hidden 
+        local TerrainFog fog
         
-        return R2S(length) + "=" + R2S(height) + "=" + I2S(weatherType) + "="
+        if RectEnvironment.get(userRect).hasFog() then
+            set fog = RectEnvironment.get(userRect).fog
+            
+            return R2S(length) + "=" + R2S(height) + "=" + I2S(weatherType) + "=" + "T" + "=" +/*
+                 */ I2S(fog.style) + "=" + R2S(fog.zStart) + "=" + R2S(fog.zEnd) + "=" +/*
+                 */ R2S(fog.density*10000) + "=" + R2S(fog.red) + "=" + R2S(fog.green) + "=" + R2S(fog.blue) + "="
+        else
+            return R2S(length) + "=" + R2S(height) + "=" + I2S(weatherType) + "="
+        endif
     endfunction
 
     function Load_RestoreGUDR takes unit generator, string restoreStr returns nothing
@@ -106,6 +115,8 @@ static if LIBRARY_UserDefinedRects then
         local real length
         local real height
         local integer weatherType
+        
+        local TerrainFog fog
         
         //Str = "length=height=weather= (we need an equal at the end in order to make future versions backwards-compatible
         
@@ -119,11 +130,49 @@ static if LIBRARY_UserDefinedRects then
         
         set splitterIndex = CutToCharacter(restoreStr, "=")
         set weatherType = S2I(SubString(restoreStr,0,splitterIndex))
-        //set restoreStr = SubString(restoreStr,splitterIndex+1,StringLength(restoreStr))
+        set restoreStr = SubString(restoreStr,splitterIndex+1,StringLength(restoreStr))
+        
+        set splitterIndex = CutToCharacter(restoreStr, "=")
+        // show/hide
+        set restoreStr = SubString(restoreStr,splitterIndex+1,StringLength(restoreStr))
         
         call CreateGUDR(generator)
         call MoveGUDR(generator, length, height, false)
         call ChangeGUDRWeatherNew(generator, 0, weatherType)
+        
+        set splitterIndex = CutToCharacter(restoreStr, "=")
+        if splitterIndex != 0 and splitterIndex < StringLength(restoreStr) then
+            set fog = RectEnvironment.get(GUDR_GetGeneratorRect(generator)).fog
+
+            set fog.style = S2I(SubString(restoreStr,0,splitterIndex))
+            set restoreStr = SubString(restoreStr,splitterIndex+1,StringLength(restoreStr))
+            
+            set splitterIndex = CutToCharacter(restoreStr, "=")
+            set fog.zStart = S2R(SubString(restoreStr,0,splitterIndex))
+            set restoreStr = SubString(restoreStr,splitterIndex+1,StringLength(restoreStr))
+            
+            set splitterIndex = CutToCharacter(restoreStr, "=")
+            set fog.zEnd = S2R(SubString(restoreStr,0,splitterIndex))
+            set restoreStr = SubString(restoreStr,splitterIndex+1,StringLength(restoreStr))
+            
+            set splitterIndex = CutToCharacter(restoreStr, "=")
+            set fog.density = S2R(SubString(restoreStr,0,splitterIndex))/10000.
+            set restoreStr = SubString(restoreStr,splitterIndex+1,StringLength(restoreStr))
+            
+            set splitterIndex = CutToCharacter(restoreStr, "=")
+            set fog.red = S2R(SubString(restoreStr,0,splitterIndex))
+            set restoreStr = SubString(restoreStr,splitterIndex+1,StringLength(restoreStr))
+            
+            set splitterIndex = CutToCharacter(restoreStr, "=")
+            set fog.green = S2R(SubString(restoreStr,0,splitterIndex))
+            set restoreStr = SubString(restoreStr,splitterIndex+1,StringLength(restoreStr))
+            
+            set splitterIndex = CutToCharacter(restoreStr, "=")
+            set fog.blue = S2R(SubString(restoreStr,0,splitterIndex))
+            set restoreStr = SubString(restoreStr,splitterIndex+1,StringLength(restoreStr))
+            
+            call AutoRectEnvironment_RegisterRect(GUDR_GetGeneratorRect(generator))
+        endif
     endfunction
 endif
 

@@ -53,6 +53,10 @@ struct RectEnvironment extends array
 
     //! runtextmacro TableStruct_NewStructField("fog", "TerrainFog")
     
+    method hasFog takes nothing returns boolean
+        return .fogExists()
+    endmethod
+    
     method apply takes nothing returns nothing
         local integer fog = this.fog
         if this.fog != 0 then
