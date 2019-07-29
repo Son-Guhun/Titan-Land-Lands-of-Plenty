@@ -50,8 +50,6 @@ function Trig_LoadUnit_Extra_Actions takes nothing returns nothing
         return
     endif
     
-    
-    
     if     cmdStr == "=n " then
         call GUMSSetUnitName(udg_save_LastLoadedUnit[playerId], SubString(eventStr, 3, StringLength(eventStr)))
     elseif cmdStr == "=w " then

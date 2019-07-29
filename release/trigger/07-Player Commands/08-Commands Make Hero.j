@@ -21,6 +21,10 @@ library LoPHeroicUnit requires LoPHeader, LoPWidgets
     function LoP_GetPlayerHeroicUnitCount takes player whichPlayer returns integer
         return heroicUnitCount[GetPlayerId(whichPlayer)]
     endfunction
+    
+    function LoP_IsUnitCustomHero takes unit whichUnit returns boolean
+        return IsUnitInGroup(whichUnit, countedUnits)
+    endfunction
 
     function GiveHeroStats takes unit whichUnit returns nothing
         call UnitApplyTimedLife(whichUnit, 'BHwe', 1)
@@ -121,17 +125,19 @@ private function FilterUnitsMakeHero takes nothing returns boolean
     
         
         
-        if IsValidHeroicUnit(filterU, udg_GAME_MASTER) then 
-            if GetTriggerPlayer() != udg_GAME_MASTER then
-                //call DisplayTextToPlayer(udg_GAME_MASTER, 0, 0, "Player " + GetPlayerName(GetTriggerPlayer()) + " created a custom hero.")
-            endif
-            
+        if IsValidHeroicUnit(filterU, GetTriggerPlayer()) then 
             set hasMana = GetUnitState(filterU, UNIT_STATE_MAX_MANA) > 1
             
-            if LoP_GetPlayerHeroicUnitCount(GetOwningPlayer(filterU)) < 12 or GetTriggerPlayer() == udg_GAME_MASTER then
-                call LoP_UnitMakeHeroic(filterU)
-            else
+            if LoP_GetPlayerHeroicUnitCount(GetOwningPlayer(filterU)) >= 12 and GetTriggerPlayer() != udg_GAME_MASTER then
                 call DisplayTextToPlayer(GetTriggerPlayer(), 0., 0., "Heroic unit limit reached for player. Only the Titan can make heroic units over this limit.")
+            elseif GetOwningPlayer(filterU) != GetTriggerPlayer() and GetTriggerPlayer() != udg_GAME_MASTER then
+                call DisplayTextToPlayer(GetTriggerPlayer(), 0., 0., "This is not your unit.")
+            else
+            
+                if GetTriggerPlayer() != udg_GAME_MASTER then
+                    call DisplayTextToPlayer(udg_GAME_MASTER, 0, 0, "Player " + GetPlayerName(GetTriggerPlayer()) + " created a custom hero.")
+                endif
+                call LoP_UnitMakeHeroic(filterU)
             endif
             
             call RefreshHeroIcons(GetOwningPlayer(filterU))

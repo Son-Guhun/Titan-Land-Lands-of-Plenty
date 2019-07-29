@@ -1,4 +1,4 @@
-library SaveUnit requires SaveNLoad, SaveIO
+library SaveUnit requires SaveNLoad, SaveIO, optional LoPHeroicUnit
 
 globals
     force ENUM_FORCE = CreateForce()
@@ -150,6 +150,12 @@ function SaveForceLoop takes nothing returns boolean
                 
                 if Patrol_UnitIdHasPatrolPoints(unitHandleId) then
                     call Save_SaveUnitPatrolPoints(saveData, unitHandleId)
+                endif
+                
+                static if LIBRARY_LoPHeroicUnit then
+                    if LoP_IsUnitCustomHero(saveUnit) then
+                        call saveData.write(SaveNLoad_FormatString("SnL_unit_extra", "=h S"))
+                    endif
                 endif
             else
                 /*
