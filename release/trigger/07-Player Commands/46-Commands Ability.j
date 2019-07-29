@@ -17,16 +17,25 @@ private function AddAbility takes unit whichUnit, integer rawcode returns nothin
 endfunction
 
 private function RemoveAbility takes unit whichUnit, integer rawcode returns nothing
-    call UnitRemoveAbility(whichUnit, rawcode)
+    if UnitRemoveAbility(whichUnit, rawcode) then
+        if IsAbilityAuraToggle(rawcode) then
+            call UnitRemoveAbility(whichUnit, GetToggleAbilityAura(rawcode))
+        endif
+    endif
 endfunction
 
 private function ClearAbilities takes unit whichUnit returns nothing
     local ArrayList_ability abilities = UnitEnumRemoveableAbilities(whichUnit)
+    local integer abilId
     local integer i = 0
     
     loop
     exitwhen i == abilities.end()
-        call UnitRemoveAbility(whichUnit, RemoveableAbility.fromAbility(abilities[i]))
+        set abilId = RemoveableAbility.fromAbility(abilities[i])
+        call UnitRemoveAbility(whichUnit, abilId)
+        if IsAbilityAuraToggle(abilId) then
+            call UnitRemoveAbility(whichUnit, GetToggleAbilityAura(abilId))
+        endif
         set i = abilities.next(i)
     endloop
     

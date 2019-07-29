@@ -24,6 +24,14 @@ private function onCast takes nothing returns nothing
     endif
 endfunction
 
+function IsAbilityAuraToggle takes integer abilId returns boolean
+    return Globals.tab.has(abilId)
+endfunction
+
+function GetToggleAbilityAura takes integer abilId returns integer
+    return Globals.tab[abilId]
+endfunction
+
 public function Initialize takes nothing returns nothing
     local trigger trig = CreateTrigger()
     call TriggerAddAction(trig, function onCast)
