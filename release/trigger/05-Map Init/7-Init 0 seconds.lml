@@ -17,7 +17,7 @@ Action
         Const : 'Create Quests'
     CommentString
         Const : ---------------
-    CreateQuestBJ
+    Disab: CreateQuestBJ
         Preset: QuestTypeReqDiscovered
         Const : 'First Person Camera'
         Const : 'This map employs Guhun''s First Person Camera system, for a more immersive experience!
