@@ -12,6 +12,28 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 	- New units for an existing race can be added in a patch version. 
 	- New decorations for an existing deco builder can be added in a patch version.
 
+## [v1.2.2]
+
+### Fixed
+- Arin's and Blood Elf Elite Strider's models are no longer missing.
+- Female Blood Elf Lieutenants no longer spawn with size 1000.
+- Fixed buff name of Greater Bloodlust.
+- Fixed an issue where removing a togglable aura which was active would cause the aura effect to persist on the hero.
+- Units converted to heroes with **-makehero** will now maintain their visual values (such as custom name, flying height, rgb color and player color).
+
+### Changed
+- The number of abilities that can be added to a hero has been increased from 4 to 7.
+- **-makehero** was turned into a player command. Players are now limited to 12 heroic units per player, though the Titan can bypass this limit for any player. *Developer comments: Having the -makehero command as a player command was always the intention, however, a lot of testing had to be done to ensure the command would not cause any issues.*
+- Units that were turned into heroes with **-makehero** are now saved and loaded as heroes.
+- Heroes are now saved with the abilities they currently possess. When loaded, all their removeable abilities will be removed, and their ability list will be restored. In the future, when new abilities are made removeable, some heroes may be loaded without these new abilities, as they will have become removeable, but would not have been saved along with the hero.
+- Rect Generators' terrain fog settings will now be saved and loaded.
+- Units that are converted into heroes will no longer be able to cast Mirror Image. Casting this ability used to remove these units.
+- Tooltips of Cosmic Essence and Mirror Image have been updated to reflect the fact they don't function with converted heroes.
+- Greater Bloodlust can now affect units.
+
+### Removed
+- The First Person Camera documentation has been removed from the F9 manual while the system is not enabled.
+
 
 ## [v1.2.1]
 
@@ -106,6 +128,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 ## [v1.2.0]
 
 Skipped in order to avoid confusion due to there being multiple beta versions of this release.
+
 
 ## [v1.1.6]
 
