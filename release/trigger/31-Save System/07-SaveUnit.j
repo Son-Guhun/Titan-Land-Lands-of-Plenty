@@ -174,11 +174,8 @@ function SaveForceLoop takes nothing returns boolean
                 endif
                 
                 static if LIBRARY_CustomizableAbilityList then
-                    call BJDebugMsg("Hero")
                     if GetUnitAbilityLevel(saveUnit, 'AHer') > 0 then
-                        call BJDebugMsg("Hero here!")
                         call saveData.write(SaveNLoad_FormatString("SnL_unit_extra", EncodeRemoveableAbilities(saveUnit)))
-                        call BJDebugMsg("End")
                     endif
                 endif
             else

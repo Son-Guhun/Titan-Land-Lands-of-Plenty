@@ -137,7 +137,7 @@ library LoPHeroicUnit requires LoPHeader, LoPWidgets
         local Table visualValues = StoreGUMSValues(whichUnit)
         local boolean result = UnitMakeHeroic(whichUnit)
         if result then
-            // call UnitAddAbility(whichUnit, 'A09Y' )
+            // call UnitAddAbility(whichUnit, 'A008' )
             set LoP_UnitData.get(whichUnit).isHeroic = true
             call GroupAddUnit(countedUnits, whichUnit)
             set heroicUnitCount[GetPlayerId(GetOwningPlayer(whichUnit))] = heroicUnitCount[GetPlayerId(GetOwningPlayer(whichUnit))] + 1
