@@ -1200,6 +1200,26 @@ Action
     CommentString
         Const : ' '
     CommentString
+        Const : ---------------------------
+    CommentString
+        Const : 'Mirror Image'
+    CommentString
+        Const : ---------------------------
+    SetVariable
+        Var   : Spell__Ability
+        Const : AOmi
+    CommentString
+        Const : ' '
+    SetVariable
+        Var   : Spell__Trigger_OnCast
+        Var   : gg_trg_Mirror_Image
+    CommentString
+        Const : ' '
+    TriggerExecute
+        Var   : gg_trg_Spell_System
+    CommentString
+        Const : ' '
+    CommentString
         Const : ' '
     CommentString
         Const : ' '

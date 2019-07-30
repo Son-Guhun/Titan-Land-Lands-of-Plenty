@@ -77,7 +77,64 @@ library LoPHeroicUnit requires LoPHeader, LoPWidgets
         call EnableTrigger(gg_trg_System_Cleanup_Owner_Change)
     endfunction
     
+    function StoreGUMSValues takes unit whichUnit returns Table
+        local Table result = Table.create()
+        local UnitVisuals visuals = UnitVisuals.get(whichUnit)
+        
+        set result.real['flyH'] = GetUnitFlyHeight(whichUnit)
+        
+        if visuals.hasScale() then
+            set result.real['size'] = visuals.raw.getScale()
+        endif
+        
+        if visuals.hasVertexRed() then
+            set result['vtxR'] = visuals.raw.getVertexRed()
+            set result['vtxG'] = visuals.raw.getVertexGreen()
+            set result['vtxB'] = visuals.raw.getVertexBlue()
+            set result['vtxA'] = visuals.raw.getVertexAlpha()
+        endif
+        
+        if visuals.hasColor() then
+            set result['pClr'] = visuals.raw.getColor()
+        endif
+        
+        if visuals.hasAnimSpeed() then
+            set result.real['Aspd'] = visuals.raw.getAnimSpeed()
+        endif
+        
+        if GUMSUnitHasCustomName(GetHandleId(whichUnit)) then
+            set result.string['name'] = GUMSGetUnitName(whichUnit)
+        endif
+        
+        //call BJDebugMsg(visuals.raw.getAnimTag())
+        //result.string['Atag'] = visuals.rraw.getAnimTag()
+
+        return result
+    endfunction
+
+    function RestoreGUMSValues takes unit whichUnit, Table values returns nothing
+        call GUMSSetUnitFlyHeight(whichUnit, values.real['flyH'])
+        
+        if values.real.has('size') then
+            call GUMSSetUnitScale(whichUnit, values.real['size'])
+        endif
+        if values.has('vtxR') then
+            call GUMSSetUnitVertexColorInt(whichUnit, values['vtxR'], values['vtxG'], values['vtxB'], values['vtxA'])
+        endif
+        if values.has('pClr') then
+            call GUMSSetUnitColor(whichUnit, values['pClr'])
+        endif
+        if values.real.has('Aspd') then
+            call GUMSSetUnitAnimSpeed(whichUnit, values.real['Aspd'])
+        endif
+        if values.string.has('name') then
+            call GUMSSetUnitName(whichUnit, values.string['name'])
+        endif
+        //GUMSSetUnitAnimTags(whichUnit, values.
+    endfunction
+    
     function LoP_UnitMakeHeroic  takes unit whichUnit returns boolean
+        local Table visualValues = StoreGUMSValues(whichUnit)
         local boolean result = UnitMakeHeroic(whichUnit)
         if result then
             // call UnitAddAbility(whichUnit, 'A09Y' )
@@ -86,9 +143,12 @@ library LoPHeroicUnit requires LoPHeader, LoPWidgets
             set heroicUnitCount[GetPlayerId(GetOwningPlayer(whichUnit))] = heroicUnitCount[GetPlayerId(GetOwningPlayer(whichUnit))] + 1
             
             call GiveHeroStats(whichUnit)
+            call RestoreGUMSValues(whichUnit, visualValues)
         else
             call DisplayTextToPlayer(GetLocalPlayer(), 0, 0, "Unable to make unit " + GetUnitName(whichUnit) + " a hero. Report this problem please.")
         endif
+        
+        call visualValues.destroy()
         return result
     endfunction
 

@@ -255,6 +255,10 @@ struct UnitVisuals extends array
         return .values.has(whichChannel)
     endmethod
     
+    method hasVertexRed takes nothing returns boolean
+        return .hasVertexColor(RED)
+    endmethod
+    
     method hasColor takes nothing returns boolean
         return .values.has(COLOR)
     endmethod
@@ -428,6 +432,14 @@ function GUMSSetUnitVertexColor takes unit whichUnit, real red, real green, real
     call SaveInteger(hashTable, GetHandleId(whichUnit), GREEN, intGreen)
     call SaveInteger(hashTable, GetHandleId(whichUnit), BLUE, intBlue)
     call SaveInteger(hashTable, GetHandleId(whichUnit), ALPHA, intAlpha)
+endfunction
+
+function GUMSSetUnitVertexColorInt takes unit whichUnit, integer red, integer green, integer blue, integer alpha returns nothing
+    call SetUnitVertexColor(whichUnit, red, green, blue, alpha)
+    call SaveInteger(hashTable, GetHandleId(whichUnit), RED, red)
+    call SaveInteger(hashTable, GetHandleId(whichUnit), GREEN, green)
+    call SaveInteger(hashTable, GetHandleId(whichUnit), BLUE, blue)
+    call SaveInteger(hashTable, GetHandleId(whichUnit), ALPHA, alpha)
 endfunction
 
 //Set Player Color (why in hell can't this be retrieved with natives?!)
