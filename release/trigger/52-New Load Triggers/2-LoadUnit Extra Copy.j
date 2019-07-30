@@ -1,7 +1,35 @@
+function ParseAbilityString takes unit whichUnit, string whichStr returns nothing
+    local integer cutToComma
+    local integer abilCode
+    local integer count = 0
+    
+    call LoPCommandsAbility_ClearAbilities(whichUnit)
+    
+    loop
+        set cutToComma = CutToComma(whichStr)
+        exitwhen cutToComma >= StringLength(whichStr) or count >= 7
+        
+        set abilCode = S2ID(SubString(whichStr, 0, cutToComma))
+        
+        if IsAbilityAddable(abilCode) then
+            call UnitAddAbility(whichUnit, abilCode)
+        endif
+    
+        set count = count + 1
+        set whichStr = SubString(whichStr, cutToComma + 1, StringLength(whichStr))
+    endloop
+
+endfunction
+
 function Trig_LoadUnitNew_Extra_Actions takes nothing returns nothing
     local integer playerId = GetPlayerId(GetTriggerPlayer())
     local string eventStr = BlzGetTriggerSyncData()// GetEventPlayerChatString()
     local string cmdStr = SubStringBJ(eventStr, 1, 3)
+    
+    if udg_save_LastLoadedUnit[playerId] == null then
+        return
+    endif
+    
     
     if     cmdStr == "=n " then
         call GUMSSetUnitName(udg_save_LastLoadedUnit[playerId], SubString(eventStr, 3, StringLength(eventStr)))
@@ -12,24 +40,26 @@ function Trig_LoadUnitNew_Extra_Actions takes nothing returns nothing
             call Load_RestorePatrolPoints(udg_save_LastLoadedUnit[playerId], SubString(eventStr, 3, StringLength(eventStr)))
         endif
     elseif cmdStr == "=h " then
-        call BJDebugMsg("Heroic Unit")
         static if LIBRARY_LoPHeroicUnit then
             if IsValidHeroicUnit(udg_save_LastLoadedUnit[playerId], GetTriggerPlayer()) then 
                 
-                call BJDebugMsg("0")
                 if LoP_GetPlayerHeroicUnitCount(GetOwningPlayer(udg_save_LastLoadedUnit[playerId])) >= 12 and GetTriggerPlayer() != udg_GAME_MASTER then
                     call DisplayTextToPlayer(GetTriggerPlayer(), 0., 0., "Heroic unit limit reached for player. Only the Titan can make heroic units over this limit.")
                 else
-                    call BJDebugMsg("1")
                     if GetTriggerPlayer() != udg_GAME_MASTER then
                         call DisplayTextToPlayer(udg_GAME_MASTER, 0, 0, "Player " + GetPlayerName(GetTriggerPlayer()) + " loaded a custom hero.")
                     endif
                     
-                    call BJDebugMsg("2")
                     call LoP_UnitMakeHeroic(udg_save_LastLoadedUnit[playerId])
                 endif
                 
                 call RefreshHeroIcons(GetOwningPlayer(udg_save_LastLoadedUnit[playerId]))
+            endif
+        endif
+    elseif cmdStr == "=a " then
+        static if LIBRARY_CustomizableAbilityList then
+            if GetUnitAbilityLevel(udg_save_LastLoadedUnit[playerId], 'AHer') > 0 then
+                call ParseAbilityString(udg_save_LastLoadedUnit[playerId], SubString(eventStr, 3, StringLength(eventStr)))
             endif
         endif
     else

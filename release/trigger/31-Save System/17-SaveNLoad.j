@@ -395,6 +395,7 @@ function LoadUnit takes string chat_str, player un_owner returns nothing
         set udg_save_LastLoadedUnit[playerId] = resultUnit
         set resultUnit = null
     else
+        set udg_save_LastLoadedUnit[playerId] = null
         call LoadSpecialEffect(un_owner, un_type, un_posx, un_posy, un_flyH, un_fangle, size, red, green, blue, alpha, color, aSpeed, animTag)
     endif
 endfunction

@@ -1,10 +1,10 @@
-scope CommandsAbility
+library LoPCommandsAbility requires CustomizableAbilityList
 
 private function MAX_ABILITIES takes nothing returns integer
     return 7
 endfunction
 
-private function AddAbility takes unit whichUnit, integer rawcode returns nothing
+public function AddAbility takes unit whichUnit, integer rawcode returns nothing
     local ArrayList_ability abilities = UnitEnumRemoveableAbilities(whichUnit)
     
     if abilities.size() >= MAX_ABILITIES() then
@@ -20,7 +20,7 @@ private function AddAbility takes unit whichUnit, integer rawcode returns nothin
     call abilities.destroy()
 endfunction
 
-private function RemoveAbility takes unit whichUnit, integer rawcode returns nothing
+public function RemoveAbility takes unit whichUnit, integer rawcode returns nothing
     if UnitRemoveAbility(whichUnit, rawcode) then
         if IsAbilityAuraToggle(rawcode) then
             call UnitRemoveAbility(whichUnit, GetToggleAbilityAura(rawcode))
@@ -28,7 +28,7 @@ private function RemoveAbility takes unit whichUnit, integer rawcode returns not
     endif
 endfunction
 
-private function ClearAbilities takes unit whichUnit returns nothing
+public function ClearAbilities takes unit whichUnit returns nothing
     local ArrayList_ability abilities = UnitEnumRemoveableAbilities(whichUnit)
     local integer abilId
     local integer i = 0
@@ -45,6 +45,12 @@ private function ClearAbilities takes unit whichUnit returns nothing
     
     call abilities.destroy()
 endfunction
+
+endlibrary
+
+scope CommandsAbility
+
+
 
 private function OnCommand_GroupEnum takes nothing returns boolean
     local string args = LoP_Command.getArguments()
@@ -72,11 +78,11 @@ private function OnCommand_GroupEnum takes nothing returns boolean
     else
     
         if subcommand == "a" or subcommand == "add" then
-            call AddAbility(GetFilterUnit(), S2ID(args))
+            call LoPCommandsAbility_AddAbility(GetFilterUnit(), S2ID(args))
         elseif subcommand == "r" or subcommand == "rem" or subcommand == "remove" then
-            call RemoveAbility(GetFilterUnit(), S2ID(args))
+            call LoPCommandsAbility_RemoveAbility(GetFilterUnit(), S2ID(args))
         elseif subcommand == "c" or subcommand == "clear" then
-            call ClearAbilities(GetFilterUnit())
+            call LoPCommandsAbility_ClearAbilities(GetFilterUnit())
         endif
     endif
     return false

@@ -1,10 +1,25 @@
-library SaveUnit requires SaveNLoad, SaveIO, optional LoPHeroicUnit
+library SaveUnit requires SaveNLoad, SaveIO, optional LoPHeroicUnit, optional CustomizableAbilityList
 
 globals
     force ENUM_FORCE = CreateForce()
     boolean stillSaving = false
     timer loopTimer
 endglobals
+
+private function EncodeRemoveableAbilities takes unit whichUnit returns string
+    local ArrayList_ability abilities = UnitEnumRemoveableAbilities(whichUnit)
+    local integer i = 0
+    local string result = "=a "
+    
+    loop
+    exitwhen i == abilities.end()
+        set result = result + ID2S(RemoveableAbility.fromAbility(abilities[i])) + ","
+        set i = abilities.next(i)
+    endloop
+    
+    call abilities.destroy()
+    return result
+endfunction
 
 function IsUnitWaygate takes unit whichUnit returns boolean
     return GetUnitAbilityLevel(whichUnit, 'Awrp') > 0
@@ -155,6 +170,15 @@ function SaveForceLoop takes nothing returns boolean
                 static if LIBRARY_LoPHeroicUnit then
                     if LoP_IsUnitCustomHero(saveUnit) then
                         call saveData.write(SaveNLoad_FormatString("SnL_unit_extra", "=h S"))
+                    endif
+                endif
+                
+                static if LIBRARY_CustomizableAbilityList then
+                    call BJDebugMsg("Hero")
+                    if GetUnitAbilityLevel(saveUnit, 'AHer') > 0 then
+                        call BJDebugMsg("Hero here!")
+                        call saveData.write(SaveNLoad_FormatString("SnL_unit_extra", EncodeRemoveableAbilities(saveUnit)))
+                        call BJDebugMsg("End")
                     endif
                 endif
             else

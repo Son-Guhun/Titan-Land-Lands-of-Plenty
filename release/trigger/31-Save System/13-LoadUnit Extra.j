@@ -46,7 +46,7 @@ function Trig_LoadUnit_Extra_Actions takes nothing returns nothing
     local string eventStr = GetEventPlayerChatString()
     local string cmdStr = SubStringBJ(eventStr, 1, 3)
     
-    if not Save_IsPlayerLoading(playerId) then
+    if not Save_IsPlayerLoading(playerId) or udg_save_LastLoadedUnit[playerId] == null then
         return
     endif
     

@@ -80,7 +80,7 @@ library LoPHeroicUnit requires LoPHeader, LoPWidgets
     function LoP_UnitMakeHeroic  takes unit whichUnit returns boolean
         local boolean result = UnitMakeHeroic(whichUnit)
         if result then
-            call UnitAddAbility(whichUnit, 'A09Y' )
+            // call UnitAddAbility(whichUnit, 'A09Y' )
             set LoP_UnitData.get(whichUnit).isHeroic = true
             call GroupAddUnit(countedUnits, whichUnit)
             set heroicUnitCount[GetPlayerId(GetOwningPlayer(whichUnit))] = heroicUnitCount[GetPlayerId(GetOwningPlayer(whichUnit))] + 1

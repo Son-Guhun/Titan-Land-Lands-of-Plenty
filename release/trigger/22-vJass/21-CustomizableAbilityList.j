@@ -66,6 +66,10 @@ function IsAbilityRemoveable takes RemoveableAbility rawcode returns boolean
     return rawcode.isRegistered
 endfunction
 
+function IsAbilityAddable takes RemoveableAbility rawcode returns boolean
+    return rawcode.isHero
+endfunction
+
 private module Init
 
     private static method onInit takes nothing returns nothing
