@@ -120,6 +120,11 @@ private function Patrol_GetTrigger takes integer unitHandleId returns trigger
     return LoadTriggerHandle(data , -unitHandleId , Patrol_TRIGGER())
 endfunction
 
+private function Patrol_HasTrigger takes integer unitHandleId returns boolean
+    return HaveSavedHandle(data , -unitHandleId , Patrol_TRIGGER())
+endfunction
+
+
 private function Patrol_SetRegion takes integer unitHandleId, region newRegion returns nothing
     call SaveRegionHandle(data , -unitHandleId , Patrol_REGION(), newRegion)
 endfunction
@@ -243,10 +248,12 @@ function Patrol_DestroyIdPoints takes integer u_handle returns nothing
 endfunction
 
 function Patrol_ClearUnitIdData takes integer unitHandleId returns nothing
-    local trigger patrolTrig = Patrol_GetTrigger(unitHandleId)
+    local trigger patrolTrig
     
     
-    if patrolTrig != null then
+    if Patrol_HasTrigger(unitHandleId) then
+        set patrolTrig = Patrol_GetTrigger(unitHandleId)
+        
         call Patrol_DestroyIdPoints(unitHandleId)
         call RemoveRegion(Patrol_GetRegion(unitHandleId))
         

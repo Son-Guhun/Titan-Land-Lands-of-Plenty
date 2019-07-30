@@ -170,7 +170,11 @@ private function LoadMultiplier takes integer uId returns real
     static if LIBRARY_Table and USE_TABLE then
         return Table(data).real[-uId]
     else
-        return LoadReal(GMSS_GetHashtable(), KEY(), -uId)
+        if HaveSavedReal(GMSS_GetHashtable(), KEY(), -uId) then
+            return LoadReal(GMSS_GetHashtable(), KEY(), -uId)
+        else
+            return 1.0
+        endif
         
     endif
 endfunction
@@ -179,8 +183,20 @@ private function LoadBonus takes integer uId returns real
     static if LIBRARY_Table and USE_TABLE then
         return Table(data).real[uId]
     else
-        return LoadReal(GMSS_GetHashtable(), KEY(),  uId)
+        if HaveSavedReal(GMSS_GetHashtable(), KEY(),  uId) then
+            return LoadReal(GMSS_GetHashtable(), KEY(),  uId)
+        else
+            return 0.0
+        endif
     endif
+endfunction
+
+private function HasMultiplier takes integer uId returns boolean
+    return HaveSavedReal(GMSS_GetHashtable(), KEY(), -uId)
+endfunction
+
+private function HasBonus takes integer uId returns boolean
+    return HaveSavedReal(GMSS_GetHashtable(), KEY(),  uId)
 endfunction
 
 private function RemoveMultiplier takes integer uId returns nothing
@@ -225,11 +241,6 @@ function GMSS_UnitAddMoveSpeedEx takes unit whichUnit, real amount, real minSpee
     local real bonus = LoadBonus(uId)
     local real multiplier = LoadMultiplier(uId)
     
-    //Fix multiplier for when there is no saved value
-    if multiplier == 0 then
-        set multiplier = 1
-    endif
-    
     if amount != 0 then
         //Set new value and save/clear data as necessary
         set bonus = bonus + amount
@@ -251,12 +262,7 @@ function GMSS_UnitMultiplyMoveSpeedEx takes unit whichUnit, real amount, real mi
     local integer uId = GetUnitId(whichUnit)
     local real bonus = LoadBonus(uId)
     local real multiplier = LoadMultiplier(uId)
-   
-    //Fix multiplier for when there is no saved value
-    if multiplier == 0 then
-        set multiplier = 1
-    endif   
-   
+
     if amount == 1 or amount <= 0 then
     else
         //Set new value and save/clear data as necessary
@@ -301,9 +307,13 @@ endfunction
 // Clears all Hashtable or Table data stored for 'whichUnit' in the system.
 function GMSS_ClearData takes unit whichUnit returns nothing
     local integer uId = GetHandleId(whichUnit)
-
-    call RemoveBonus(uId)
-    call RemoveMultiplier(uId)
+    
+    if HasBonus(uId) then
+        call RemoveBonus(uId)
+    endif
+    if HasMultiplier(uId) then
+        call RemoveMultiplier(uId)
+    endif
 endfunction
 
 //===================================================

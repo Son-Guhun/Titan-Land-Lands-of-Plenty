@@ -18,11 +18,11 @@ library UnitEvents requires ArgumentStack, BoolExprEvaluator
         endmethod
         
         method destroy takes nothing returns nothing
-            if .onDeath_impl != 0 then
+            if .onDeath_implExists() then
                 call .onDeath_impl.destroy()
             endif
             
-            if .onRemove_impl != 0 then
+            if .onRemove_implExists() then
                 call .onRemove_impl.destroy()
             endif
             
@@ -37,7 +37,7 @@ library UnitEvents requires ArgumentStack, BoolExprEvaluator
         endmethod
         
         static method evalOnRemove takes unit whichUnit returns nothing
-            if UnitEvents.get(whichUnit).onRemove_impl != 0 then
+            if UnitEvents.get(whichUnit).onRemove_implExists() then
                 call Args.unitSet(0, whichUnit)
                 call UnitEvents.get(whichUnit).onRemove.evaluate()
                 call Args.unitFree(0)
@@ -46,7 +46,7 @@ library UnitEvents requires ArgumentStack, BoolExprEvaluator
         endmethod
         
         static method evalOnDeath takes unit whichUnit returns nothing
-            if UnitEvents.get(whichUnit).onDeath_impl != 0 then
+            if UnitEvents.get(whichUnit).onDeath_implExists() then
                 call Args.unitSet(0, whichUnit)
                 call UnitEvents.get(whichUnit).onDeath.evaluate()
                 call Args.unitFree(0)
@@ -65,24 +65,18 @@ library UnitEvents requires ArgumentStack, BoolExprEvaluator
         
         
         method operator onDeath takes nothing returns BoolExprEvaluator
-            if .onDeath_impl == 0 then
+            if not .onDeath_implExists() then
                 set .onDeath_impl = BoolExprEvaluator.create()
             endif
             return .onDeath_impl
         endmethod
-        method operator onDeath= takes BoolExprEvaluator eval returns nothing
-            set .onDeath_impl = eval
-        endmethod
         
 
         method operator onRemove takes nothing returns BoolExprEvaluator
-            if .onRemove_impl == 0 then
+            if not .onRemove_implExists() then
                 set .onRemove_impl = BoolExprEvaluator.create()
             endif
             return .onRemove_impl
-        endmethod
-        method operator onRemove= takes BoolExprEvaluator eval returns nothing
-            set .onRemove_impl = eval
         endmethod
     
     endstruct
