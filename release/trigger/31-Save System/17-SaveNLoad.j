@@ -228,6 +228,10 @@ function LoadSpecialEffect takes player owner, UnitTypeDefaultValues unitType, r
         call AddTagsStringAsSubAnimations(result, GUMSConvertTags(UnitVisualMods_TAGS_DECOMPRESS, aTags))
     endif
     
+    if unitType.hasMaxRoll() then
+        set result.roll = Deg2Rad(unitType.maxRoll+180.)
+    endif
+    
     call BlzPlaySpecialEffect(result.effect, ANIM_TYPE_STAND)
 endfunction
 
