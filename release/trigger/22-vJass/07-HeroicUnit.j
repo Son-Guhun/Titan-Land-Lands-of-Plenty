@@ -1,3 +1,5 @@
+// Things that bug: other transformations, upgrades with health bonuses
+
 //! zinc
 library HeroicUnit
 {
