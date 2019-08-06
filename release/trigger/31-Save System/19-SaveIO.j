@@ -214,7 +214,9 @@ endfunction
 
 public function LoadSave takes player whichPlayer, string path returns nothing
     set currentSave[GetPlayerId(whichPlayer)] = path
-    call Preloader(path+"\\size.txt")
+    if GetLocalPlayer() == whichPlayer then
+        call Preloader(path+"\\size.txt")
+    endif
 endfunction
 
 function TriggerRegisterAnyPlayerSyncEvent takes trigger whichTrigger, string prefix, boolean fromServer returns nothing
