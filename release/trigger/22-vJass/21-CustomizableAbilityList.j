@@ -75,6 +75,7 @@ private module Init
     private static method onInit takes nothing returns nothing
         // Default hero abilities
         call .registerAbility('AHbz', true)  // Blizzard
+        call .registerAbility('AHds', true)  // Divine Shield
         call .registerAbility('AHfs', true)  // Flamestrike
         call .registerAbility('AHhb', true)  // Holy Light
         call .registerAbility('AHwe', true)  // Water Elemental
@@ -105,6 +106,19 @@ private module Init
         call .registerAbility('AEsf', true)  // Starfall
         call .registerAbility('AEsv', true)  // Vengeance
         
+        call .registerAbility('ANba', true)  // Black Arrow
+        call .registerAbility('ANch', true)  // Charm
+        call .registerAbility('ANca', true)  // Cleaving Attack
+        call .registerAbility('ANc3', true)  // Cluster Rockets
+        call .registerAbility('ANdr', true)  // Drain Life
+        call .registerAbility('ANdb', true)  // Drunken Brawler
+        call .registerAbility('ANfl', true)  // Forked Lightning
+        call .registerAbility('ANfa', true)  // Frost Arrows
+        call .registerAbility('ANhs', true)  // Healing Spray
+        call .registerAbility('ANht', true)  // Howl of Terror
+        call .registerAbility('ANms', true)  // Mana Shield
+        call .registerAbility('Acef', true)  // Storm, Earth and Fire
+        call .registerAbility('ANto', true)  // Tornado
         
         // Aura Abilities
         call .registerAbility('A04L', true)  // Brilliance
