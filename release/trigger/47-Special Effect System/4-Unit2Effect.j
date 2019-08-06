@@ -182,7 +182,7 @@ endfunction
 private module InitModule
 
     private static method onInit takes nothing returns nothing
-        //! runtextmacro RegisterSubAnimation("alternate", "SUBANIM_TYPE_ALTERNATE_EX")
+        //! runtextmacro RegisterSubAnimation("alternate", "SUBANIM_TYPE_ROOTED")  // I guess it's because ancients use the alternate animation set for rooted forms
         //! runtextmacro RegisterSubAnimation("slam", "SUBANIM_TYPE_SLAM")
         //! runtextmacro RegisterSubAnimation("throw", "SUBANIM_TYPE_THROW")
         //! runtextmacro RegisterSubAnimation("fast", "SUBANIM_TYPE_FAST")
@@ -210,7 +210,7 @@ private module InitModule
         
         // Unused subanimtypes
         /*
-        SUBANIM_TYPE_ROOTED             = ConvertSubAnimType(11)
+        SUBANIM_TYPE_ALTERNATE_EX             = ConvertSubAnimType(12)
         SUBANIM_TYPE_LOOPING            = ConvertSubAnimType(13)
         SUBANIM_TYPE_SPIKED             = ConvertSubAnimType(16)
         SUBANIM_TYPE_TURN               = ConvertSubAnimType(23)
