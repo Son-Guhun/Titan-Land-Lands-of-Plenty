@@ -209,9 +209,7 @@ private function FilterUnitsMakeHero takes nothing returns boolean
 endfunction
 
 function Trig_Commands_Make_Hero_Conditions takes nothing returns nothing
-    if GetTriggerPlayer() == udg_GAME_MASTER then
-        call GroupEnumUnitsSelected(ENUM_GROUP, GetTriggerPlayer(), Condition(function FilterUnitsMakeHero))
-    endif
+    call GroupEnumUnitsSelected(ENUM_GROUP, GetTriggerPlayer(), Condition(function FilterUnitsMakeHero))
 endfunction
 
 //===========================================================================
