@@ -4,13 +4,10 @@ globals
     string array udg_WeaponTypeDebugStr
 endglobals
 
+
 //===========================================================================
 //  
-//  Damage Engine 5.4.2 - update requires copying of the JASS script and adding
-//  the following to variables to your map script:
-//  
-//  attacktype array udg_CONVERTED_ATTACK_TYPE
-//  damagetype array udg_CONVERTED_DAMAGE_TYPE
+//  Damage Engine 5.4.2.3 - update requires copying of the JASS script
 //  
 //===========================================================================
 library DamageEngine initializer Init
@@ -127,10 +124,10 @@ endglobals
    
     private function RunTrigs takes integer i returns nothing
         local integer cat = i
-        //if dreaming then
-        //    call BJDebugMsg("Tried to run triggers while triggers were already running.")
-        //    return
-        //endif
+        if dreaming then
+            //call BJDebugMsg("Tried to run triggers while triggers were already running.")
+            return
+        endif
         set dreaming = true
         //call BJDebugMsg("Start of event running")
         loop
@@ -395,10 +392,7 @@ endglobals
                 call GroupAddUnit(udg_DamageEventAOEGroup, tgt)
             endif
             set udg_DamageEventType             = udg_NextDamageType
-            if udg_NextDamageType != 0 then
-                set udg_DamageEventType         = udg_NextDamageType
-                set udg_IsDamageCode            = true //New in 5.1 - requested by chopinski to allow user to detect Code damage
-            endif
+            set udg_IsDamageCode                = udg_NextDamageType != 0
             set udg_DamageEventOverride         = dt == null //Got rid of NextDamageOverride in 5.1 for simplicity
             set udg_DamageEventPrevAmt          = amt
             set udg_DamageEventSource           = src
