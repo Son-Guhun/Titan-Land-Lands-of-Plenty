@@ -12,6 +12,38 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 	- New units for an existing race can be added in a patch version. 
 	- New decorations for an existing deco builder can be added in a patch version.
 
+## [v1.2.3]
+
+### Fixed
+- Horizontal logs will now load correctly, instead of becoming vertical.
+- Fixed crashes that would occur when some caster units were converted to heroes.
+- Fixed an issue that would cause decorations to lose the *alternate* tag when made unselectable.
+- Fixed an issue that made players other than the Titan unable to use the **-makehero** command.
+- Fixed a small issue that could cause bugs when two players loaded builds which had the same name.
+- Fixed models for:
+	- Fleshless Lesser Lich
+	- Blood Elf Phoenix Crusader
+
+### Changed
+- Many of the Titan Palace buildings (such as the hero towers and item shops) now longer display on the minimap. This should reduce clutter in the area. The Titan Powers still display, and they can be used to identify the player who is the Titan from the minimap.
+- Divine Shield has been rebalanced. Duration is now 5 seconds, cooldown is now 15 seconds.
+- Made more abilities compatible with the **-ability** command. **Note:** heroes saved in older versions may lose these abilities when being loaded into the map. 
+	- Divine Shield
+	- Black Arrow
+	- Charm
+	- Cleaving Attack
+	- Cluster Rockets
+	- Drain Life
+	- Drunken Brawler
+	- Forked Lightning
+	- Frost Arrows
+	- Healing Spray
+	- Howl of Terror
+	- Mana Shield
+	- Storm, Earth and Fire
+- Standardized tooltip and hotkey for some of the new compatible abilities.
+
+
 ## [v1.2.2]
 
 ### Fixed
