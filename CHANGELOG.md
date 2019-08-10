@@ -12,7 +12,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 	- New units for an existing race can be added in a patch version. 
 	- New decorations for an existing deco builder can be added in a patch version.
 
-## [v1.2.3]
+## [v1.2.3] - 2019-08-08
 
 ### Fixed
 - Horizontal logs will now load correctly, instead of becoming vertical.
@@ -25,7 +25,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 	- Blood Elf Phoenix Crusader
 
 ### Changed
-- Many of the Titan Palace buildings (such as the hero towers and item shops) now longer display on the minimap. This should reduce clutter in the area. The Titan Powers still display, and they can be used to identify the player who is the Titan from the minimap.
+- Many of the Titan Palace buildings (such as the hero towers and item shops) no longer display on the minimap. This should reduce clutter in the area. The Titan Powers still display, and they can be used to identify the player who is the Titan from the minimap.
 - Divine Shield has been rebalanced. Duration is now 5 seconds, cooldown is now 15 seconds.
 - Made more abilities compatible with the **-ability** command. **Note:** heroes saved in older versions may lose these abilities when being loaded into the map. 
 	- Divine Shield
@@ -44,7 +44,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 - Standardized tooltip and hotkey for some of the new compatible abilities.
 
 
-## [v1.2.2]
+## [v1.2.2] - 2019-07-31
 
 ### Fixed
 - Arin's and Blood Elf Elite Strider's models are no longer missing.
@@ -67,7 +67,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 - The First Person Camera documentation has been removed from the F9 manual while the system is not enabled.
 
 
-## [v1.2.1]
+## [v1.2.1] - 2019-07-24
 
 ### Added
 - New version of the Save system. The external SaveNLoad program is no longer required, saving and loading is done entirely using Warcraft III's functionalities. To transfer old saves to the new system, they must be loaded using the new **-req** command. Using SaveNLoad.exe will be required for this. After loading the old save, it can be saved using the save commands and afterwards it can be loaded with the **-request** command.
@@ -157,19 +157,19 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 - Removed creep huts from the Titan Palace, since they now have a deco builder.
 
 
-## [v1.2.0]
+## [v1.2.0] - 2019-07-24
 
 Skipped in order to avoid confusion due to there being multiple beta versions of this release.
 
 
-## [v1.1.6]
+## [v1.1.6] - 2019-05-31
 
 ### Fixed
 - Most of the models in the map have been sanitzed, using https://viewer.hiveworkshop.com/check/ and hard work.
 - Some models (like the Blood Elf Phoenix Crusader) will no longer crash the game in patch 1.31.0.
 - Spell damage will now kill units in patch 1.31.0.
 
-## [v1.1.5]
+## [v1.1.5] - 2019-05-24
 
 ### Added
 - New tips system to give new players useful information regarding Lands of Plenty (intended for players who already played Titan Land).
@@ -231,7 +231,7 @@ Skipped in order to avoid confusion due to there being multiple beta versions of
 - Noldor (old High Elf) units can no longer be produced. A new production building will be added for them in a future version. For now, you can create them by loading old saves and copying the units to get as many as you need.
 
 
-## [v1.1.4]
+## [v1.1.4] - 2019-05-18
 
 ### Added
 - New (Warcraft) High Elf Heroes:
@@ -271,7 +271,7 @@ Skipped in order to avoid confusion due to there being multiple beta versions of
 - Nightmare (Legends Tower) now has more fitting abilities.
 
 
-## [v1.1.3]
+## [v1.1.3] - 2019-05-15
 
 ### Added:
 - A few multitiles have been replaced by tiles that are present in *Titan Land Kingdoms of Terfall*. A transparent tile has also been added.
@@ -299,13 +299,13 @@ Skipped in order to avoid confusion due to there being multiple beta versions of
 - Dragonspawn Flamebalde hero has been renamed to Lord of Red Scales.
 
 
-## [v1.1.2]
+## [v1.1.2] - 2019-05-14
 
 ## Skipped
 	**Please see changes for version 1.1.3 insead.**
 
 
-## [v1.1.1]
+## [v1.1.1] - 2019-05-06
 
 ### Added:
 - The Goblin Merchant now has many kinds of Orbs in stock.
@@ -333,7 +333,7 @@ Skipped in order to avoid confusion due to there being multiple beta versions of
 - The Drow Dark Princess's Raven Form now actually flies (at a height of 200).
 
 
-## [v1.1.0]
+## [v1.1.0] - 2019-05-05
 
 ### Added:
 - New terrain:
