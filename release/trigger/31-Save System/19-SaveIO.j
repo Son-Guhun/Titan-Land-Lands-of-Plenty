@@ -214,8 +214,9 @@ endfunction
 
 public function LoadSave takes player whichPlayer, string path returns nothing
     set currentSave[GetPlayerId(whichPlayer)] = path
+    set path = path+"\\size.txt"
     if GetLocalPlayer() == whichPlayer then
-        call Preloader(path+"\\size.txt")
+        call Preloader(path)
     endif
 endfunction
 
