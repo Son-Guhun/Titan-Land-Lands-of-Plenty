@@ -103,6 +103,9 @@ are listed first, though.
             // Arabian 2
             set i = ( i + 1 )
             set rawcodes[i] = 'u02H'
+            // Black Empire
+            set i = ( i + 1 )
+            set rawcodes[i] = 'u00T'
             // Blacksmith
             set i = ( i + 1 )
             set rawcodes[i] = 'u01E'
@@ -166,6 +169,9 @@ are listed first, though.
             // Gurubashi
             set i = ( i + 1 )
             set rawcodes[i] = 'u00O'
+            // Hellfire Citadel
+            set i = ( i + 1 )
+            set rawcodes[i] = 'u04W'
             // Huts
             set i = ( i + 1 )
             set rawcodes[i] = 'u002'
@@ -241,6 +247,9 @@ are listed first, though.
             // Trees
             set i = ( i + 1 )
             set rawcodes[i] = 'u01B'
+            // Vampiric
+            set i = ( i + 1 )
+            set rawcodes[i] = 'u04O'
             // Village
             set i = ( i + 1 )
             set rawcodes[i] = 'u01O'
