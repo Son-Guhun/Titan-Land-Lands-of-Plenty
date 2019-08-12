@@ -260,6 +260,23 @@ Commands:
     
     // Titan Land Creators
     set quest_text = "
+- Guhun (Creator & Director)
+- King_Katanova (Senior Race Designer)
+
+|cffffcc00Contributers|r
+- Aragorns: Ratfolk Race Designer
+- Paillan: Assistant Terrainer for 1.3.0
+- Lesslife: Assistant Designer for Angel Race in beta
+- titans_zealot: Terrainer for 0.9.0
+- LichKing76: Contributed with multiple skins for models
+- Testers: LichKing76, no_one_only_me, 12tommita, LisPL, hiworm, Gilgo, mattcos, Urain, Frostbiter, Tunshi
+"
+    call CreateQuestBJ(questType, "|cffff0000LoP Team|r", quest_text, "ReplaceableTextures\\CommandButtons\\BTNReincarnation.blp")
+    // ----------
+    
+    
+    // Titan Land Creators
+    set quest_text = "
 -MetalWarrior (Original Creator)
 -Vhalyr and Loganrules (Improved RPE)
 -Dhaniels (The Beginning of the End)
@@ -269,7 +286,7 @@ Commands:
 \"If I have seen further, it is by standing on the shoulders of giants.\"
 -Isaac Newton
 "
-    call CreateQuestBJ(questType, "|cffff0000TL Creators|r", quest_text, "ReplaceableTextures\\CommandButtons\\BTNReincarnation.blp")
+    call CreateQuestBJ(questType, "|cff00ff00TL Creators|r", quest_text, "ReplaceableTextures\\CommandButtons\\BTNReincarnation.blp")
     // ----------
     
     // Model Credits 1
@@ -283,7 +300,7 @@ XiaolianhuaStudio
 |cffff0000wc3campaigns:|r
 TiJil, unwirklich
 "
-    call CreateQuestBJ(questType, "|cff00ff00Art 1|r", quest_text, "ReplaceableTextures\\CommandButtons\\BTNTemp.blp")
+    call CreateQuestBJ(questType, "|cff0000ffArt 1|r", quest_text, "ReplaceableTextures\\CommandButtons\\BTNTemp.blp")
     // ----------
     
     // Model Credits 2
@@ -294,7 +311,7 @@ PrinceYaser, shiik, Dr.Death, Sant, Eagle XI, Afroknight_76, Deleted member 2382
 |cffff0000XGM:|r
 P4ela, Kolbosa, Wulfrein, DampirTBs, Feleer, Jack Sparrow, DiKey51, Ket, LongbowMan
 "
-    call CreateQuestBJ(questType, "|cff00ff00Art 2|r", quest_text, "ReplaceableTextures\\CommandButtons\\BTNTemp.blp")
+    call CreateQuestBJ(questType, "|cffff0000Art 2|r", quest_text, "ReplaceableTextures\\CommandButtons\\BTNTemp.blp")
     // ----------
     
     // Coding and Tools
@@ -316,7 +333,18 @@ Magtheridon96 => GroupTools
 feelerly => Id2String
 Doomlord => Custom Stat System
 "
-    call CreateQuestBJ(questType, "|cff0000ffCoding & Tools|r", quest_text, "ReplaceableTextures\\CommandButtons\\BTNTemp.blp")
+    call CreateQuestBJ(questType, "|cff00ff00Coding & Tools|r", quest_text, "ReplaceableTextures\\CommandButtons\\BTNEngineeringUpgrade.blp")
+    // ----------
+    
+    // Changelog and Contact
+    set quest_text = "
+Link to changelog: |cffffcc00tiny.cc/LoPchangelog|r
+LoP Repository: |cffffcc00github.com/Son-Guhun/Titan-Land-Lands-of-Plenty|r
+The Hive Wokrshop: |cffffcc00_Guhun_|r
+Discord: |cffffcc00SonGuhun#4510|r
+E-mail me at: |cffffcc00songuhun@hotmail.com|r
+"
+    call CreateQuestBJ(questType, "|cff0000ffChangelog and Contact|r", quest_text, "ReplaceableTextures\\CommandButtons\\BTNSpellBookBLS.blp")
     // ----------
 endfunction
 endlibrary

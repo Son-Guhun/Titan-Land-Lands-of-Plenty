@@ -31,26 +31,6 @@ Commands:
         Const : ReplaceableTextures\CommandButtons\BTNAmbush.blp
     CustomScriptCode
         Const : 'call InitQuests()'
-    CreateQuestBJ
-        Preset: QuestTypeOptDiscovered
-        Const : 'Changelog
-'
-        Const : 'Version 1.0.0 Features:
--Custom Races:
-Humans,Orcs,Undead,Fleshless,Night Elves, Elves, Ogres, Bandits, Pirates, Murlocs, Naga
--Save/Load System
--Expanded terrain and a few tweaks to original
--New decos'
-        Const : ReplaceableTextures\CommandButtons\BTNSpellBookBLS.blp
-    CreateQuestBJ
-        Preset: QuestTypeOptDiscovered
-        Const : 'Contact Me'
-        Const : 'I''m mostly working on this project alone, so I would appreciate any help you can give me, any suggestions or any bug reports (please don''t report buggy tooltips/icons yet)
-
-songuhun@hotmail.com
-You can find me on The Hive Wokrshop: _Guhun_
-And discord: SonGuhun#4510'
-        Const : ReplaceableTextures\CommandButtons\BTNSnazzyScroll.blp
     CommentString
         Const : ---------------
     CommentString
