@@ -62,7 +62,7 @@ function SearchSelectFilter takes nothing returns boolean
         set str = SubString(str,0,CutToCharacter(str," "))
         
         //Compare strings and Select Unit for local player only
-        if StartsString(udg_System_searchStr, str) then//str == udg_System_searchStr then
+        if StartsString(udg_System_searchStr, StringCase(str,true)) then//str == udg_System_searchStr then
             call ShowUnit(GetFilterUnit(), true)
             if GetLocalPlayer() == GetTriggerPlayer() then
                 call SelectUnit(GetFilterUnit(), true)
@@ -75,7 +75,6 @@ function SearchSelectFilter takes nothing returns boolean
 endfunction
 
 function SearchSelectMain takes nothing returns boolean
-    local string str
     local string args = LoP_Command.getArguments()
     local integer argsLength = StringLength(args)
     
@@ -87,11 +86,8 @@ function SearchSelectMain takes nothing returns boolean
     endif
     
     if argsLength > 0 then
-        //Make first letter capitalized
-        set str = StringCase(SubString(args, 0, 1),true)
-        
-        //Make rest of the word uncapitalized and save to global variable
-        set udg_System_searchStr = str + StringCase(SubString(args, 1, argsLength),false)
+        // Capitalize (all strings will be capitalized when compared)
+        set udg_System_searchStr = StringCase(args, true)
         
         // Handle special cases
         if udg_System_searchStr == "Rect" then
