@@ -190,6 +190,9 @@ are listed first, though.
             // Mushrooms
             set i = ( i + 1 )
             set rawcodes[i] = 'u046'
+            // NPC
+            set i = ( i + 1 )
+            set rawcodes[i] = 'u048'
             // Naga 1
             set i = ( i + 1 )
             set rawcodes[i] = 'u03R'
