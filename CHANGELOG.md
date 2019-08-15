@@ -12,6 +12,86 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 	- New units for an existing race can be added in a patch version. 
 	- New decorations for an existing deco builder can be added in a patch version.
 
+## [Unreleased]
+
+### Added
+- New Races:
+	- Undead/Demons:
+		- Cultists
+		- Dark Dwarves
+		- Faceless
+		- Vampires
+- New Deco Builders:
+	- Deco Builder Black Empire
+	- Deco Builder Hellfire Citadel
+	- Deco Builder NPC
+- New Heroes:
+	- Human:
+		- Dark Enchantress
+	- Drow:
+		- Drow Prince
+		- Drow Master Sorceress
+	- Lizardmen:
+		- Lizardman Archdruidess
+		- Serpent Temple Champion
+	- Ratfolk:
+		- Nillish Fril, the White Death
+		- Kobold Overlord
+		- Kobold Trailblazer
+	- Norse:
+		- Norse Drott
+		- Yaene Ebenherzen, Lady of Baronstead
+	- Fleshless:
+		- Celsius
+- New Units:
+	- Black Legion:
+		- Black Legion Sacred Maiden
+	- Lizardmen:
+		- Lizardman Druidess
+		- Lizardman Priest
+		- Serpent Temple Disciple
+		- Serpent Temple Guardian
+	- Norse:
+		- Norse Knight
+		- Norse Valkdottir
+	- Templar:
+		- Templar Saint
+- New Decorations:
+	- Village Houses
+	- Misc Generators
+
+### Fixed
+- Huge terrain overhaul:
+	- Northwest Snow Lands has become a more diverse environment:
+		- Barrens-like North.
+		- A small scorched island.
+		- Canyon-like south.
+		- Long lava river splitting it.
+		- Surrounded by mountains and a snowy path.
+	- Scorched Lands have been removed. Instead we now have:
+		- New LoP-original island.
+		- New island ported from KoT.
+	- Snow Peaks:
+		- Snow peaks have been unified, there is no longer a river splitting them.
+		- Huge waterfall now flows from the peaks into the part of the river that was maintained.
+	- Snow Lands has been split into two environments, and has been covered with gray rocks:
+		- East icy-grass environment.
+		- West snowy environemnt.
+	- A Blighted Forest has appeared to the north of the Summer forest.
+- Selection commands (-sele/-seln) will now correctly recognize names with capital letters in the middle.
+- Added hero glow to many heroes that were missing it.
+- Removed food cost from Gnolls (in the Titan Palace) and militia.
+- Fixed wrong tooltips:
+	- Units: Fleshless Serpent and Lesser Lich, Militia
+	- Abilities: Holy Inspiration, Sword Throw and Mass Rejuvenation
+
+### Changed
+- Misc Dummy and Misc Target no longer have shadows. Units no longer emit sounds when hitting these decorations. Misc Dummy now has default RGB when created.
+- Added a helpful description to the Water Square decoration.
+- Polished stats for Lizardmen and Ratfolk units.
+- Lizardman Juggernaut now starts with 200 mana.
+
+
 ## [v1.2.3] - 2019-08-08
 
 ### Fixed
@@ -23,6 +103,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 - Fixed models for:
 	- Fleshless Lesser Lich
 	- Blood Elf Phoenix Crusader
+	- Tree Nordrassil decoration (no longer bugs near transparent models)
 
 ### Changed
 - Many of the Titan Palace buildings (such as the hero towers and item shops) no longer display on the minimap. This should reduce clutter in the area. The Titan Powers still display, and they can be used to identify the player who is the Titan from the minimap.
