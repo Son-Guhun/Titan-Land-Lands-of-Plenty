@@ -306,7 +306,7 @@ TiJil, unwirklich
     // Model Credits 2
     set quest_text = "
 |cff00b300The Hive Workshop:|r
-PrinceYaser, shiik, Dr.Death, Sant, Eagle XI, Afroknight_76, Deleted member 238226 (unknown), GhostThruster, Whitewolf8, WhiteDeath, A.R., Xezko, Deep Sea Kraken, Hellx-Magnus, -Berz-, CRAZYRUSSIAN, HappyCockroach, Tamplier777, Kehel, Radagast, Lordaeron Creator, The D3ath, Gottfrei, bu3ny, CloudWolf, Gyrosphinx, Marenko, Talavaj, !!GORO!!, THE_SILENT
+PrinceYaser, shiik, Dr.Death, Sant, Eagle XI, Afroknight_76, Deleted member 238226 (unknown), GhostThruster, Whitewolf8, WhiteDeath, A.R., Xezko, Deep Sea Kraken, Hellx-Magnus, -Berz-, CRAZYRUSSIAN, HappyCockroach, Tamplier777, Kehel, Radagast, Lordaeron Creator, The D3ath, Gottfrei, bu3ny, CloudWolf, Gyrosphinx, Marenko, Talavaj, !!GORO!!, THE_SILENT, Kenntaur, skrab, simkitty181, olyvian
 
 |cffff0000XGM:|r
 P4ela, Kolbosa, Wulfrein, DampirTBs, Feleer, Jack Sparrow, DiKey51, Ket, LongbowMan
@@ -338,9 +338,11 @@ Doomlord => Custom Stat System
     
     // Changelog and Contact
     set quest_text = "
+Want to support the project? You can do so at: |cffffcc00ko-fi.com/songuhun|r
+    
 Link to changelog: |cffffcc00tiny.cc/LoPchangelog|r
 LoP Repository: |cffffcc00github.com/Son-Guhun/Titan-Land-Lands-of-Plenty|r
-The Hive Wokrshop: |cffffcc00_Guhun_|r
+The Hive Workshop: |cffffcc00_Guhun_|r
 Discord: |cffffcc00SonGuhun#4510|r
 E-mail me at: |cffffcc00songuhun@hotmail.com|r
 "
