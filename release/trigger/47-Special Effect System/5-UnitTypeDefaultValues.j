@@ -61,9 +61,7 @@ private module InitModule
         set UnitTypeDefaultValues('h0LG').animProps = "second"
         set UnitTypeDefaultValues('h0MF').maxRoll = -90.
         set UnitTypeDefaultValues('h0MG').maxRoll = -90.
-        set UnitTypeDefaultValues('u00C').red = 150
-        set UnitTypeDefaultValues('u00C').green = 100
-        set UnitTypeDefaultValues('u00C').blue = 100
+        set UnitTypeDefaultValues('h15L').modelScale = 0.6
         set UnitTypeDefaultValues('u02F').modelScale = 0.52
     endmethod
 endmodule
