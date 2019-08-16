@@ -342,30 +342,6 @@ Damage_Mod_Reset: boolean
     Def   : true
 Damage_Mod_AllowReflect: boolean
     Def   : true
-CSS_Abilities: abilcode
-    Array : 1
-CSS_GemBonusBoolean: boolean
-CSS_GemLevel: integer
-CSS_Hashtable: hashtable
-CSS_Power: integer
-    Array : 1
-CSS_PreloadBoolean: boolean
-    Def   : true
-CSS_SocketingEnabled: boolean
-EVENT_SOCKET_FINISH: real
-CSS_EventMainItem: item
-CSS_EventSocketItem: item
-CSS_EventUnit: unit
-CSS_EventMainItemStacked: item
-    Array : 1
-CSS_EventSocketItemStacked: item
-    Array : 1
-CSS_EventUnitStacked: unit
-    Array : 1
-CSS_Counter: integer
-CSS_CustomSwitch: boolean
-CSS_String: string
-    Array : 1
 GCOS_Hashtable: hashtable
 GCOS_InstanceArray: integer
     Array : 1

@@ -1,5 +1,0 @@
-APIs:
-
-call CSS_GemInitialize (integer itemRawCode, integer armorBonus, integer attackSpeedBonus, integer damageBonus, integer agilityBonus, integer intelligenceBonus, integer strengthBonus, integer lifeRegenBonus, integer manaRegenBonus, integer lifeBonus, integer manaBonus, integer sightRangeBonus)
-
-call CSS_ItemInitialize (integer itemRawCode, integer armorBonus, integer attackSpeedBonus, integer damageBonus, integer agilityBonus, integer intelligenceBonus, integer strengthBonus, integer lifeRegenBonus, integer manaRegenBonus, integer lifeBonus, integer manaBonus, integer sightRangeBonus, integer socket)

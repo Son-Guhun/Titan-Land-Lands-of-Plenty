@@ -248,25 +248,7 @@
 24-External: External
     Comment
 '25-CSS System': 'CSS System'
-    01-CustomStatSystem: CustomStatSystem
-    02-CustomStatSystemConstants: CustomStatSystemConstants
-    '03-BonusMod standalone': 'BonusMod standalone'
-        Comment
-    '04-CSS Standalone Bonus': 'CSS Standalone Bonus'
-    '05-Color codes for info panel': 'Color codes for info panel'
-        Comment
-    '06-Color Code Setting': 'Color Code Setting'
-        Disab
-    07-Instruction: Instruction
-        Comment
-    '08-CSS Item Functions': 'CSS Item Functions'
-        Disab
-    '09-Item Declaration': 'Item Declaration'
-        Comment
-    '10-Examplary Item Declaration': 'Examplary Item Declaration'
-        Comment
-    '11-Item Declaration': 'Item Declaration'
-        Disab
+    1-CustomStatSystem: CustomStatSystem
 '26-Unit Event': 'Unit Event'
     '1-Unit Event Config': 'Unit Event Config'
     '2-Unit Event': 'Unit Event'

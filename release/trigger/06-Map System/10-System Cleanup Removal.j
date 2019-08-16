@@ -15,8 +15,6 @@ function LoP_onRemoval takes unit whichUnit returns nothing
         set g_unitHasBeenRemoved = true
         // CLEAR KNOCKBACK DATA FOR SPELLS
         call FlushChildHashtable(udg_Hashtable_2, -GetUnitUserData(whichUnit))
-        // CLEAR CUSTOM STAT HASHTABLE
-        call FlushChildHashtable(udg_CSS_Hashtable, GetHandleId(whichUnit))
         // DECO BUILDER DECREASE COUNT
         call DecoBuilderCount_ReduceCount(whichUnit)
 
