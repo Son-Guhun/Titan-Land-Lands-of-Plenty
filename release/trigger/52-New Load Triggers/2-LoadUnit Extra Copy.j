@@ -2,6 +2,7 @@ function ParseAbilityString takes unit whichUnit, string whichStr returns nothin
     local integer cutToComma
     local integer abilCode
     local integer count = 0
+    local LinkedHashSet defaultAbils = UnitEnumRemoveableAbilityIds(whichUnit)
     
     call LoPCommandsAbility_ClearAbilities(whichUnit)
     
@@ -11,7 +12,7 @@ function ParseAbilityString takes unit whichUnit, string whichStr returns nothin
         
         set abilCode = S2ID(SubString(whichStr, 0, cutToComma))
         
-        if IsAbilityAddable(abilCode) then
+        if IsAbilityAddable(abilCode) or defaultAbils.contains(abilCode) then
             call UnitAddAbility(whichUnit, abilCode)
         endif
     
@@ -19,6 +20,7 @@ function ParseAbilityString takes unit whichUnit, string whichStr returns nothin
         set whichStr = SubString(whichStr, cutToComma + 1, StringLength(whichStr))
     endloop
 
+    call defaultAbils.destroy()
 endfunction
 
 function Trig_LoadUnitNew_Extra_Actions takes nothing returns nothing

@@ -59,6 +59,25 @@ function UnitEnumRemoveableAbilities takes unit whichUnit returns ArrayList_abil
         set i = i + 1
     endloop
     
+    set a = null
+    return result
+endfunction
+
+function UnitEnumRemoveableAbilityIds takes unit whichUnit returns LinkedHashSet
+    local ability a
+    local integer i = 0
+    local LinkedHashSet result = LinkedHashSet.create()
+    
+    loop
+        set a = BlzGetUnitAbilityByIndex(whichUnit, i)
+        exitwhen a == null
+        if RemoveableAbility.isAbilityOfRegisteredType(a) then
+            call result.append(RemoveableAbility.fromAbility(a))
+        endif
+        set i = i + 1
+    endloop
+    
+    set a = null
     return result
 endfunction
 
