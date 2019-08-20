@@ -28,7 +28,7 @@ function Trig_SaveRequest_Actions takes nothing returns nothing
     
     set save_decoration_effects[playerNumber] = EnumDecorationsOfPlayer(GetTriggerPlayer())
 
-    call BlzGroupAddGroupFast(udg_save_grp[playerNumber], udg_System_NeutralUnits[(playerNumber - 1)])
+    call BlzGroupAddGroupFast(udg_System_NeutralUnits[(playerNumber - 1)], udg_save_grp[playerNumber])
     set udg_save_unit_nmbr[playerNumber] = 0
     set udg_save_load_boolean[playerNumber] = true
     call DisplayTextToPlayer(GetLocalPlayer(), 0, 0, udg_RealNames[playerNumber] + ( " has started saving."))// Expected save time: " + R2S(BlzGroupGetSize(udg_save_grp[playerNumber])/25.00)))
