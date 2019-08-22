@@ -26,7 +26,7 @@ endfunction
 function Trig_LoadUnitNew_Extra_Actions takes nothing returns nothing
     local integer playerId = GetPlayerId(GetTriggerPlayer())
     local string eventStr = BlzGetTriggerSyncData()// GetEventPlayerChatString()
-    local string cmdStr = SubStringBJ(eventStr, 1, 3)
+    local string cmdStr = SubString(eventStr, 0, 3)
     
     if udg_save_LastLoadedUnit[playerId] == null then
         return
