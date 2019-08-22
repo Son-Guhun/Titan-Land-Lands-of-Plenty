@@ -84,9 +84,11 @@ function CSS_AddBonus takes unit u, integer amount, BonusType bonusType returns 
         call SetUnitAbilityLevel(u, abilCode, 1)
         
         if bonusType == CSS_BONUS_REGEN_LIFE then  // Refresh health regen (required in 1.31.1)
-            set max = BlzGetUnitMaxHP(GetEnumUnit())
-            call BlzSetUnitMaxHP(GetEnumUnit(), max + 1)
-            call BlzSetUnitMaxHP(GetEnumUnit(), max)
+            //set max = BlzGetUnitMaxHP(GetEnumUnit())
+            call UnitAddAbility(u, 'AIl2')
+            call UnitRemoveAbility(u, 'AIl2')
+            //call BlzSetUnitMaxHP(GetEnumUnit(), max + 1)
+            //call BlzSetUnitMaxHP(GetEnumUnit(), max)
         endif
         
         
