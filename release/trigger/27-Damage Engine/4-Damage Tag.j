@@ -6,21 +6,21 @@ endglobals
 
 function DamageDetectionFunctions_Both takes nothing returns nothing
 
+    if LoP_IsUnitHero(udg_DamageEventTarget) then
+        // Blessed Bulwark
+        if GetUnitAbilityLevel(udg_DamageEventTarget, 'A04J') > 0 then
+            set udg_Damage_Mod_Multiplier = ( udg_Damage_Mod_Multiplier * 0.90)
+        endif
+        
+        // Profaned Aegis
+        if GetUnitAbilityLevel(udg_DamageEventTarget, 'A04K') > 0 then
+            set udg_Damage_Mod_Multiplier = ( udg_Damage_Mod_Multiplier * 0.85)
+        endif
+    endif
+
     //Divine Shell
     if ( GetUnitAbilityLevel(udg_DamageEventTarget, 'B02C') > 0) then
         set udg_Damage_Mod_Multiplier = ( udg_Damage_Mod_Multiplier / 2.00 )
-    endif
-
-    //Lich King (The Immortal King passive)
-    if GetUnitAbilityLevel(udg_DamageEventSource, 'A030') > 0 then
-        call SetUnitState(udg_DamageEventSource, UNIT_STATE_LIFE, RMaxBJ(0,GetUnitState(udg_DamageEventSource, UNIT_STATE_LIFE) + udg_DamageEventAmount/5))
-        call SetUnitState(udg_DamageEventSource, UNIT_STATE_MANA, RMaxBJ(0,GetUnitState(udg_DamageEventSource, UNIT_STATE_MANA) + udg_DamageEventAmount/10))
-        call DestroyEffect(AddSpecialEffectTarget("Abilities\\Spells\\Other\\HealingSpray\\HealBottleMissile.mdl", udg_DamageEventSource, "origin"))
-        call CreateTextTagUnitBJ( ( "+" + I2S(R2I(RAbsBJ(udg_DamageEventAmount/5))) ), udg_DamageEventSource, 50.00, 13.00, 5.00, 100.00, 10.00, 0 )
-        call SetTextTagVelocityBJ( bj_lastCreatedTextTag, 75.00, 90.00 )
-        call SetTextTagPermanent( bj_lastCreatedTextTag, false )
-        call SetTextTagLifespan( bj_lastCreatedTextTag, 3.50 )
-        call SetTextTagFadepoint( bj_lastCreatedTextTag, 1.40 )
     endif
 
     if GetUnitAbilityLevel(udg_DamageEventTarget, 'A030') > 0 then
@@ -122,6 +122,32 @@ function DamageDetectionFunctions_Last takes nothing returns nothing
         set udg_DamageEventAmount = storeDamage
     endif
     
+    //Lich King (The Immortal King passive)
+    if GetUnitAbilityLevel(udg_DamageEventSource, 'A030') > 0 then
+        call SetUnitState(udg_DamageEventSource, UNIT_STATE_LIFE, RMaxBJ(0,GetUnitState(udg_DamageEventSource, UNIT_STATE_LIFE) + udg_DamageEventAmount/5))
+        call SetUnitState(udg_DamageEventSource, UNIT_STATE_MANA, RMaxBJ(0,GetUnitState(udg_DamageEventSource, UNIT_STATE_MANA) + udg_DamageEventAmount/10))
+        call DestroyEffect(AddSpecialEffectTarget("Abilities\\Spells\\Other\\HealingSpray\\HealBottleMissile.mdl", udg_DamageEventSource, "origin"))
+        call CreateTextTagUnitBJ( ( "+" + I2S(R2I(RAbsBJ(udg_DamageEventAmount/5))) ), udg_DamageEventSource, 50.00, 13.00, 5.00, 100.00, 10.00, 0 )
+        call SetTextTagVelocityBJ( bj_lastCreatedTextTag, 75.00, 90.00 )
+        call SetTextTagPermanent( bj_lastCreatedTextTag, false )
+        call SetTextTagLifespan( bj_lastCreatedTextTag, 3.50 )
+        call SetTextTagFadepoint( bj_lastCreatedTextTag, 1.40 )
+    endif
+    
+    if LoP_IsUnitHero(udg_DamageEventTarget) then
+        // Blessed Bulwark
+        if GetUnitAbilityLevel(udg_DamageEventTarget, 'A04J') > 0 then
+            set udg_TimerBonuses[CSS_BONUS_REGEN_LIFE] = R2I(udg_DamageEventAmount/30 + 0.5)
+            call AddTimedBonus(udg_DamageEventTarget, 0, 1, 10.)
+        endif
+        
+        // Profaned Aegis
+        if GetUnitAbilityLevel(udg_DamageEventTarget, 'A04K') > 0 then
+            set udg_TimerBonuses[CSS_BONUS_REGEN_LIFE] = -R2I(udg_DamageEventAmount/20 + 0.5)
+            call AddTimedBonus(udg_DamageEventSource, 0, 1, 5.)
+        endif
+    endif
+    
 endfunction
 
 function Trig_Damage_Tag_Actions takes nothing returns nothing
@@ -160,14 +186,9 @@ function Trig_Damage_Tag_Actions takes nothing returns nothing
         endif
         */
     endif
-    /*if ( udg_DamageEventType == udg_DamageTypeHeal ) then
-        call CreateTextTagUnitBJ( ( "+" + I2S(R2I(RAbsBJ(udg_DamageEventAmount))) ), udg_DamageEventTarget, 50.00, 13.00, 5.00, 100.00, 10.00, 0 )
-        call SetTextTagVelocityBJ( GetLastCreatedTextTag(), 75.00, 90.00 )
-        call SetTextTagPermanent( GetLastCreatedTextTag(), false )
-        call SetTextTagLifespan( GetLastCreatedTextTag(), 3.50 )
-        call SetTextTagFadepoint( GetLastCreatedTextTag(), 1.40 )
-    else*/
     
+    if udg_DamageEventDamageT != GetHandleId(DAMAGE_TYPE_SPIRIT_LINK) then
+
         call DamageDetectionFunctions_Both()
         
         if ( udg_IsDamageSpell == true ) then
@@ -185,16 +206,17 @@ function Trig_Damage_Tag_Actions takes nothing returns nothing
             set udg_DamageEventAmount = udg_Damage_Mod_Maximum
         endif
             
-        if ENABLE_TAGS then
-            call CombatTag_Register(udg_DamageEventTarget, udg_DamageEventAmount, damageType)
-        endif
-            
         if udg_Damage_Mod_AllowReflect then
             call DamageDetectionFunctions_Last()
         else
             set udg_Damage_Mod_AllowReflect = true
         endif
-    //endif
+        
+    endif
+    
+    if ENABLE_TAGS then
+        call CombatTag_Register(udg_DamageEventTarget, udg_DamageEventAmount, damageType)
+    endif
 endfunction
 
 //===========================================================================

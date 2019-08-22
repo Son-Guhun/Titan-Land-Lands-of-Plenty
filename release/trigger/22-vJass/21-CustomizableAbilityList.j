@@ -92,6 +92,14 @@ endfunction
 private module Init
 
     private static method onInit takes nothing returns nothing
+        call .registerAbility('A017', true)  // Raise Flesh Golem
+        call .registerAbility('A027', true)  // Raise Skeletal Legion
+        call .registerAbility('A028', true)  // Summon Elemental: Void
+        call .registerAbility('A02H', true)  // Greater Spirit Link
+        call .registerAbility('A02I', true)  // Summoning Ritual: Black Legion
+        call .registerAbility('A049', true)  // Summoning Ritual: Angels
+        call .registerAbility('A04G', true)  // Summon Angels
+    
         // Default hero abilities
         call .registerAbility('AHbz', true)  // Blizzard
         call .registerAbility('AHds', true)  // Divine Shield
