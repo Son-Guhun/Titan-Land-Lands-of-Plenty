@@ -102,6 +102,7 @@
     '01-Commands Fix': 'Commands Fix'
     '02-Commands Ability': 'Commands Ability'
     '03-Commands Editor': 'Commands Editor'
+        Disab
     '04-Commands Collision': 'Commands Collision'
     '05-Commands Tips': 'Commands Tips'
     '06-Commands Spawn Stuff': 'Commands Spawn Stuff'
@@ -249,6 +250,7 @@
     Comment
 '25-CSS System': 'CSS System'
     1-CustomStatSystem: CustomStatSystem
+    2-NeoBonus: NeoBonus
 '26-Unit Event': 'Unit Event'
     '1-Unit Event Config': 'Unit Event Config'
     '2-Unit Event': 'Unit Event'
@@ -438,16 +440,25 @@
 '49-Terrain Libraries': 'Terrain Libraries'
     1-TerrainTools: TerrainTools
     2-Deformations: Deformations
+        Disab
     3-DeformationTools: DeformationTools
+        Disab
 50-ControlState: ControlState
     1-SelectionStates: SelectionStates
+        Disab
     2-PlayerEventTools: PlayerEventTools
+        Disab
     3-PlayerEvent: PlayerEvent
+        Disab
     4-PlayerMouseEvent: PlayerMouseEvent
+        Disab
     5-ControlState: ControlState
+        Disab
 51-TerrainEditor: TerrainEditor
     1-TerrainEditor: TerrainEditor
+        Disab
     2-TerrainEditorUI: TerrainEditorUI
+        Disab
 '52-New Load Triggers': 'New Load Triggers'
     '1-LoadUnit Copy': 'LoadUnit Copy'
         Closed
