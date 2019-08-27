@@ -9,7 +9,7 @@ Action
     SetUnitManaPercentBJ
         Call  : GetTriggerUnit
         Const : 100
-    IfThenElseMultiple
+    Disab: IfThenElseMultiple
         Condition
             OperatorCompareAbilityId
                 Call  : GetSpellAbilityId
@@ -20,7 +20,7 @@ Action
                 Const : 'In case the unit had other damaging spells, we don''t want those spells to trigger an unwanted knockback'
             Disab: SetVariable
                 Disab: 
-                Const : false
+                Disab: 
         Action
             IfThenElseMultiple
                 Condition
@@ -33,4 +33,4 @@ Action
                         Const : 'Same goes for here'
                     Disab: SetVariable
                         Disab: 
-                        Const : false
+                        Disab: 

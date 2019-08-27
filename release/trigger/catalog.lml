@@ -16,21 +16,11 @@
         Comment
     08-Hashtables: Hashtables
         Comment
-    09-Mentality: Mentality
+    '09-Ability Ideas': 'Ability Ideas'
         Comment
-    '10-Ability Ideas': 'Ability Ideas'
+    '10-Unit Balance': 'Unit Balance'
         Comment
-    '11-Unit Balance': 'Unit Balance'
-        Comment
-    12-TODO: TODO
-        Comment
-    13-DONE: DONE
-        Comment
-    '14-DONE 2': 'DONE 2'
-        Comment
-    '15-DONE 3': 'DONE 3'
-        Comment
-    '16-DONE 3': 'DONE 3'
+    11-TODO: TODO
         Comment
 '02-External Commands': 'External Commands'
     '1-Generate Missing Doodad Globals': 'Generate Missing Doodad Globals'

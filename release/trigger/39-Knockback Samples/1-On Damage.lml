@@ -5,7 +5,7 @@ Event
         Const : 1.00
 Condition
 Action
-    IfThenElseMultiple
+    Disab: IfThenElseMultiple
         Condition
             OperatorCompareBoolean
                 Var   : IsDamageSpell
@@ -47,9 +47,7 @@ Action
                     Var   : DamageEventTarget
             Disab: SetVariable
                 Var   : Knockback2DAngle
-                Call  : AngleBetweenPoints
-                    Disab: 
-                    Disab: 
+                Disab: 
             CustomScriptCode
                 Const : 'call RemoveLocation(udg_CenterPoint)'
             CustomScriptCode
@@ -218,9 +216,7 @@ Action
                             Var   : DamageEventTarget
                     Disab: SetVariable
                         Var   : Knockback2DAngle
-                        Call  : AngleBetweenPoints
-                            Disab: 
-                            Disab: 
+                        Disab: 
                     CustomScriptCode
                         Const : 'call RemoveLocation(udg_CenterPoint)'
                     CustomScriptCode

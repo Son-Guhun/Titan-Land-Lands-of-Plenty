@@ -4,7 +4,7 @@ Event
         Preset: PlayerUnitEventSpellEffect
 Condition
 Action
-    IfThenElseMultiple
+    Disab: IfThenElseMultiple
         Condition
             OperatorCompareAbilityId
                 Call  : GetSpellAbilityId
@@ -13,7 +13,7 @@ Action
         Action
             Disab: SetVariable
                 Disab: 
-                Const : true
+                Disab: 
             CommentString
                 Const : ---------------------
             Disab: SetVariable
@@ -25,14 +25,10 @@ Action
                 Call  : GetSpellTargetLoc
             Disab: SetVariable
                 Var   : Knockback2DAngle
-                Call  : AngleBetweenPoints
-                    Disab: 
-                    Disab: 
+                Disab: 
             Disab: SetVariable
                 Var   : Knockback2DDistance
-                Call  : DistanceBetweenPoints
-                    Disab: 
-                    Disab: 
+                Disab: 
             SetVariable
                 Var   : Knockback2DDistance
                 Const : 800.00
@@ -79,4 +75,4 @@ Action
                 Action
                     Disab: SetVariable
                         Disab: 
-                        Const : true
+                        Disab: 
