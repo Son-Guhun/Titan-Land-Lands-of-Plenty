@@ -5,10 +5,13 @@ Smash:
 Jump up, fall in a location, exploding and dealing damage.
 
 Second Wind:
-Fully restores the hero's HP. 45 second cooldown.
-
-Ressurgence:
-Fully restores the hero's Mana and HP. 1 minute cooldown.
+Restore 66% of the heroes' HP. 30 second cooldown.
 
 Lightning Bolt:
 Deals 400 damage in an AoE. Units in the AoE have their attack speed reduced by 400% and movement speed reduced by 400. Over the next 4 seconds, they gain 100% attack speed and 100 movement speed per second.
+
+Magicbane Strike:
+Deals 150 damage. Dispells all benefitial magical buffs from the enemy. Burns 50 mana.
+
+???:
+Reduces duration of stuns and silences on the hero by 50%. When cast, removes all disarming, ensnaring, Slow or Chill effects on the hero. While the spell is on cooldown, the stun and silence duration reduction does not apply (check cooldown when effect is applied). 10 second cooldown.

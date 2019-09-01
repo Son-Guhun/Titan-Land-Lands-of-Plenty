@@ -98,8 +98,8 @@ private module InitModule
                          */ "This map employs a multipatrol system. Whenever a unit is issued a Patrol order, it retains all its past patrol points and patrols all of them. Patrol points are saved by the Save System. Check F9 for commands.") 
         call LoP_Tip.create(PERIODIC_TIPS, /*
                          */ "This map contains many camera commands, so you can take screenshots of your builds from any angle! There is also a third person camera. Check F9 for more info.") 
-        call LoP_Tip.create(PERIODIC_TIPS, /*
-                         */ "You can access the ingame Terrain Editor with the |cffffff00-editor terrain|r command. To return to play mode, use |cffffff00-editor none|r.")
+        // call LoP_Tip.create(PERIODIC_TIPS, /*
+        //                  */ "You can access the ingame Terrain Editor with the |cffffff00-editor terrain|r command. To return to play mode, use |cffffff00-editor none|r.")
         call LoP_Tip.create(PERIODIC_TIPS, /*
                          */ "You can add or remove many abilities from your heroes using the |cffffff00-ability|r  command (see F9). This includes units made into heroes using the |cffffff00-makehero|r command.")                
         

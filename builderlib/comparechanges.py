@@ -36,5 +36,12 @@ class Comparator:
                 print(obj,': ' + data[obj][property])
             else:
                 print(obj)
+
+    def printChanges(self, list, property='Name'):
+        for obj in list:
+            try:
+                print(obj, *compare(self.source[obj],self.target[obj]))
+            except Exception as e:
+                print(obj, e)
                     
         

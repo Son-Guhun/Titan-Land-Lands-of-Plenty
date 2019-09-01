@@ -47,7 +47,7 @@ Action
                     Var   : DamageEventTarget
             Disab: SetVariable
                 Var   : Knockback2DAngle
-                Disab: 
+                Const : 
             CustomScriptCode
                 Const : 'call RemoveLocation(udg_CenterPoint)'
             CustomScriptCode
@@ -216,7 +216,7 @@ Action
                             Var   : DamageEventTarget
                     Disab: SetVariable
                         Var   : Knockback2DAngle
-                        Disab: 
+                        Const : 
                     CustomScriptCode
                         Const : 'call RemoveLocation(udg_CenterPoint)'
                     CustomScriptCode

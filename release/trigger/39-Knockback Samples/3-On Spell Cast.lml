@@ -25,10 +25,10 @@ Action
                 Call  : GetSpellTargetLoc
             Disab: SetVariable
                 Var   : Knockback2DAngle
-                Disab: 
+                Const : 
             Disab: SetVariable
                 Var   : Knockback2DDistance
-                Disab: 
+                Const : 
             SetVariable
                 Var   : Knockback2DDistance
                 Const : 800.00

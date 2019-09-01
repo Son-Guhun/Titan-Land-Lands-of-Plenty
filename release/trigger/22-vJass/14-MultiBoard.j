@@ -34,7 +34,7 @@ struct MultiBoard extends array
         call MultiboardSetItemWidth(.get(i,j), width)
     endmethod
     
-    static method refresh takes multiboard mb returns integer
+    static method refresh takes multiboard mb returns MultiBoard
         local integer this = GetHandleId(mb)
         local integer rows = MultiboardGetRowCount(mb)
         local integer cols = MultiboardGetColumnCount(mb)
