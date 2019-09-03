@@ -170,7 +170,9 @@ endfunction
 
 // Call this when a unit is removed from the game.
 function GUMSClearUnitData takes unit whichUnit returns nothing
-    call GroupRemoveUnit(loopGroup, whichUnit)
+    if IsUnitInGroup(whichUnit, loopGroup) then
+        call GroupRemoveUnit(loopGroup, whichUnit)
+    endif
     call FlushChildHashtable(hashTable, GetHandleId(whichUnit))
 endfunction
 

@@ -7,26 +7,30 @@ function TimedBonusTimerFunc takes nothing returns nothing
     local integer tId = GetAgentKey(t)
     local unit timerUnit = AgentLoadUnit(tId, -1)
     local integer bonusType = 0
+    
+    if GetUnitTypeId(timerUnit) != 0 then  // Do nothing is unit has been removed from the game
 
-    loop
-    exitwhen bonusType>10
-        if -AgentLoadInteger(tId, bonusType) != 0. then
-            call CSS_AddBonus(timerUnit, -AgentLoadInteger(tId, bonusType) , bonusType)
+        loop
+        exitwhen bonusType>10
+            if -AgentLoadInteger(tId, bonusType) != 0. then
+                call CSS_AddBonus(timerUnit, -AgentLoadInteger(tId, bonusType) , bonusType)
+            endif
+            set bonusType = bonusType + 1
+        endloop
+        
+        if AgentHaveSavedReal(tId, bonusType) then
+            call GMSS_UnitAddMoveSpeed(timerUnit, -AgentLoadReal(tId, bonusType))
         endif
-        set bonusType = bonusType + 1
-    endloop
-    
-    if AgentHaveSavedReal(tId, bonusType) then
-        call GMSS_UnitAddMoveSpeed(timerUnit, -AgentLoadReal(tId, bonusType))
-    endif
-    if AgentHaveSavedReal(tId, bonusType+1) then
-        call GMSS_UnitMultiplyMoveSpeed(timerUnit, 1./AgentLoadReal(tId, bonusType + 1))
-    endif
-    
-    call PauseTimer(t)
-    call DestroyTimer(t)
-    call AgentFlush(tId)
+        if AgentHaveSavedReal(tId, bonusType+1) then
+            call GMSS_UnitMultiplyMoveSpeed(timerUnit, 1./AgentLoadReal(tId, bonusType + 1))
+        endif
+        
+        call PauseTimer(t)
+        call DestroyTimer(t)
+        call AgentFlush(tId)
 
+    endif
+    
     set t = null
     set timerUnit = null
 endfunction
