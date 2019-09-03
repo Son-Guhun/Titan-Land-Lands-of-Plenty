@@ -42,6 +42,10 @@ Action
             Array : UDexPrev
                 Var   : UDexLastRecycled
     Disab: SetVariable
+        Array : CheckDeathInList
+            Const : 0
+        Const : false
+    Disab: SetVariable
         Array : UDexUnits
             Var   : UDex
         Array : SummonerOfUnit

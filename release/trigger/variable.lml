@@ -544,3 +544,5 @@ DefenseTypeDebugStr: string
     Array : 1
 ArmorTypeDebugStr: string
     Array : 1
+CheckDeathInList: boolean
+    Array : 1

@@ -1,4 +1,4 @@
-//===========================================================================
+ //===========================================================================
 function UnitEventDestroyGroup takes integer i returns nothing
     if udg_CargoTransportGroup[i] != null then
         call DestroyGroup(udg_CargoTransportGroup[i])
@@ -6,9 +6,9 @@ function UnitEventDestroyGroup takes integer i returns nothing
     endif
 endfunction
 function UnitEventCheckAfter takes nothing returns nothing
-    local integer i = udg_CheckDeathList[0]
-    set udg_CheckDeathList[0] = 0
+    local integer i = 0
     loop
+        set i = udg_CheckDeathList[i]
         exitwhen i == 0
         if udg_IsUnitNew[i] then
             //The unit was just created.
@@ -29,16 +29,19 @@ function UnitEventCheckAfter takes nothing returns nothing
             set udg_DeathEvent = 0.50
             set udg_DeathEvent = 0.00
         endif
-        set i = udg_CheckDeathList[i]
+        set udg_CheckDeathInList[i] = false
     endloop
+    //Empty the list
+    set udg_CheckDeathList[0] = 0
 endfunction
 function UnitEventCheckAfterProxy takes integer i returns nothing
-    if udg_CheckDeathList[0] != i then
-        if udg_CheckDeathList[0] == 0 then
-            call TimerStart(udg_CheckDeathTimer, 0.00, false, function UnitEventCheckAfter)
-        endif
+    if udg_CheckDeathList[0] == 0 then
+        call TimerStart(udg_CheckDeathTimer, 0.00, false, function UnitEventCheckAfter)
+    endif
+    if not udg_CheckDeathInList[i] then
         set udg_CheckDeathList[i] = udg_CheckDeathList[0]
         set udg_CheckDeathList[0] = i
+        set udg_CheckDeathInList[i] = true
     endif
 endfunction
 
@@ -59,7 +62,7 @@ function UnitEventOnDeath takes nothing returns boolean
     local integer pdex = udg_UDex
     set udg_UDex = GetUnitUserData(GetTriggerUnit())
     if udg_UDex != 0 then
-        set udg_KillerOfUnit[udg_UDex] = GetKillingUnit() //Added 29 May 2017 for GIMLI_2 
+        set udg_KillerOfUnit[udg_UDex] = GetKillingUnit() //Added 29 May 2017 for GIMLI_2
         set udg_IsUnitAlive[udg_UDex] = false
         set udg_DeathEvent = 0.00
         set udg_DeathEvent = 1.00
@@ -72,7 +75,7 @@ function UnitEventOnDeath takes nothing returns boolean
     set udg_UDex = pdex
     return false
 endfunction
-  
+ 
 function UnitEventOnOrder takes nothing returns boolean
     local integer pdex = udg_UDex
     local unit u = GetFilterUnit()
@@ -84,20 +87,20 @@ function UnitEventOnOrder takes nothing returns boolean
                 set udg_IsUnitRemoved[i] = true
                 set udg_IsUnitAlive[i] = false
                 set udg_SummonerOfUnit[i] = null
-                
+               
                 //For backwards-compatibility:
                 set udg_DeathEvent = 0.00
                 set udg_DeathEvent = 3.00
                 set udg_DeathEvent = 0.00
-                
+               
                 //Fire deindex event for UDex:
                 set udg_UnitIndexEvent = 0.00
                 set udg_UnitIndexEvent = 2.00
                 set udg_UnitIndexEvent = 0.00
-                
+               
                 set udg_UDexNext[udg_UDexPrev[i]] = udg_UDexNext[i]
                 set udg_UDexPrev[udg_UDexNext[i]] = udg_UDexPrev[i]
-                
+               
                 // Recycle the index for later use
                 set udg_UDexUnits[i] = null
                 set udg_UDexPrev[i] = udg_UDexLastRecycled
@@ -162,7 +165,7 @@ function UnitEventOnLoad takes nothing returns boolean
             call SetUnitX(udg_UDexUnits[i], udg_WorldMaxX)
             call SetUnitY(udg_UDexUnits[i], udg_WorldMaxY)
         endif
-        
+       
         set udg_CargoTransportUnit[i] = GetTransportUnit()
         set index = GetUnitUserData(udg_CargoTransportUnit[i])
         if udg_CargoTransportGroup[index] == null then
@@ -197,13 +200,15 @@ function UnitEventEnter takes nothing returns boolean
         //Link index to unit, unit to index
         set udg_UDexUnits[i] = u
         call SetUnitUserData(u, i)
-        
+       
         //For backwards-compatibility, add the unit to a linked list
         set udg_UDexNext[i] = udg_UDexNext[0]
         set udg_UDexPrev[udg_UDexNext[0]] = i
         set udg_UDexNext[0] = i
         set udg_UDexPrev[i] = 0
-        
+
+        set udg_CheckDeathInList[i] = false
+
         call UnitAddAbility(u, udg_DetectRemoveAbility)
         call UnitMakeAbilityPermanent(u, true, udg_DetectRemoveAbility)
         call UnitAddAbility(u, udg_DetectTransformAbility)
@@ -214,7 +219,7 @@ function UnitEventEnter takes nothing returns boolean
         set udg_IsUnitReincarnating[i] = false
         set udg_IsUnitPreplaced[i] = udg_IsUnitPreplaced[0] //Added 29 May 2017 for Spellbound
         call UnitEventCheckAfterProxy(i)
-        
+       
         //Fire index event for UDex
         set udg_UDex = i
         set udg_UnitIndexEvent = 0.00
@@ -233,7 +238,7 @@ function UnitEventEnter takes nothing returns boolean
 endfunction
 //===========================================================================
 function UnitEventInit takes nothing returns nothing
-    local integer i = bj_MAX_PLAYER_SLOTS //update to make it work with 1.29 
+    local integer i = bj_MAX_PLAYER_SLOTS //update to make it work with 1.29
     local player p
     local trigger t = CreateTrigger()
     local trigger load = CreateTrigger()
@@ -249,7 +254,8 @@ function UnitEventInit takes nothing returns nothing
     call RemoveRect(r)
     call UnitEventDestroyGroup(0)
     call UnitEventDestroyGroup(1)
-    
+   
+    set udg_CheckDeathList[0] = 0
     set udg_UnitIndexerEnabled = true
     call TriggerRegisterEnterRegion(CreateTrigger(), re, enterB)
     call TriggerAddCondition(load, Filter(function UnitEventOnLoad))
@@ -276,6 +282,4 @@ function UnitEventInit takes nothing returns nothing
     set p = null
     set r = null
     set t = null
-endfunction
-function InitTrig_Unit_Event takes nothing returns nothing
 endfunction
