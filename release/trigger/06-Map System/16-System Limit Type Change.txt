@@ -1,1 +1,0 @@
-This trigger is used when a unit changes from a unit type to another, changing its limit category (from a ground to a flying unit, for example)

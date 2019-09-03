@@ -1,4 +1,4 @@
-library LoPCleanUpDeath requires PlayerUnitLimit, LoPWidgets, MoveSpeedBonus, UserDefinedRects, DummyDmg, MultiPatrol, UnitEvents, LoPNeutralUnits
+library LoPCleanUpDeath requires LoPWidgets, MoveSpeedBonus, UserDefinedRects, DummyDmg, MultiPatrol, UnitEvents, LoPNeutralUnits
 
 function LoP_onDeath takes unit whichUnit returns nothing
     debug call BJDebugMsg("OnDeath")
@@ -16,9 +16,6 @@ function LoP_onDeath takes unit whichUnit returns nothing
             if LoP_IsUnitDecoBuilder(whichUnit)  then
                 call RemoveUnit(whichUnit)
             else
-                if ( Limit_IsPlayerLimited(GetOwningPlayer(whichUnit)) and Limit_IsUnitLimited(whichUnit) ) then
-                    call Limit_UnregisterUnit(whichUnit)
-                endif
                 if LoP_UnitData.get(whichUnit).isHeroic then
                     call DisableTrigger(gg_trg_System_Cleanup_Owner_Change)
                     call SetUnitOwner(whichUnit, Player(bj_PLAYER_NEUTRAL_EXTRA), false)

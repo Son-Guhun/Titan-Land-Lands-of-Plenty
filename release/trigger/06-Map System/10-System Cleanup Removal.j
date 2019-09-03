@@ -24,11 +24,6 @@ function LoP_onRemoval takes unit whichUnit returns nothing
         call GMSS_ClearData(whichUnit)
         call LoP_ClearNeutralData(whichUnit)
         
-        if Limit_IsPlayerLimited(GetOwningPlayer(whichUnit)) and Limit_IsUnitLimited(whichUnit) then
-            call Limit_UnregisterUnit(whichUnit)
-        endif
-        
-        
         if LoP_UnitData.get(whichUnit).isHeroic then
             call LoPHeroicUnit_OnRemove(whichUnit)
             

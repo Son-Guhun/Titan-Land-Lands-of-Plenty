@@ -5,7 +5,7 @@ Condition
 Action
     SetVariable
         Var   : load_limit
-        Const : 200
+        Const : 1000000000
     SetVariable
         Var   : save_WholeMapRect
         Call  : GetEntireMapRect

@@ -5,18 +5,6 @@ function LoP_onChangeOwner takes unit whichUnit, player ownerOld returns nothing
     local UnitVisuals unitId = GetHandleId(whichUnit)
     
     if not LoP_IsUnitDecoration(whichUnit) then
-    
-        if ( Limit_IsUnitLimited(whichUnit) ) then
-        
-            if Limit_IsPlayerLimited(ownerOld) then
-                call Limit_UnregisterUnitEx(whichUnit, ownerOld)
-            endif
-            
-            if Limit_IsPlayerLimited(owner) then
-                call Limit_RegisterUnit(whichUnit)
-            endif
-        endif
-        
         // DECO BUILDER DECREASE AND INCREASE COUNT
         call DecoBuilderCount_SwitchOwner(whichUnit, ownerOld)
     endif

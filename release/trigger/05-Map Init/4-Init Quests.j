@@ -74,9 +74,6 @@ Deletes all units (neutral included) inside the titan palace of a player.
 
 |cffffff00-load limit|r (number)
 Sets the limit of how many terrain areas, units or doodads can be loaded at a time.
-|cff0000ffMaximum: 9999|r\n\n|cffffff00-limit|r (p|a|g) (number)
-Limits how many units players can have. <p> is for passive units (no attack), <a> is for air and <g> for ground.
-|cff0000ffDefaults: 150p | 24a | 150g|r
 "
     call CreateQuestBJ(questType, "Titan Commands 1", quest_text, "ReplaceableTextures\\CommandButtons\\BTNBloodMage2.blp")
     // ----------
