@@ -90,6 +90,9 @@
         Comment
     '23-System PreventSave Catch': 'System PreventSave Catch'
     '24-System PreventSave Clear': 'System PreventSave Clear'
+    25-Upgrade: Upgrade
+        Comment
+    '26-System Instant Upgrade': 'System Instant Upgrade'
 '07-Player Commands': 'Player Commands'
     '01-Commands Fix': 'Commands Fix'
     '02-Commands Ability': 'Commands Ability'
@@ -155,8 +158,9 @@
     '6-DecoBuilder RangedBuild': 'DecoBuilder RangedBuild'
     '7-DecoBuilder Cast Ability': 'DecoBuilder Cast Ability'
 10-Decorations: Decorations
-    '1-Deco DisableMovement': 'Deco DisableMovement'
-    '2-Deco Instant Upgrade': 'Deco Instant Upgrade'
+    '1-Deco OnEnterMap': 'Deco OnEnterMap'
+    2----------: ---------
+        Comment
     '3-Deco Root Anywhere': 'Deco Root Anywhere'
     4-Abilities: Abilities
         Comment

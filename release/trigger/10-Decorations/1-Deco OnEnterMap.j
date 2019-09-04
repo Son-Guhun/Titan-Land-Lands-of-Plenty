@@ -61,11 +61,11 @@ function Trig_Deco_DisableMovement_Conditions takes nothing returns boolean
 endfunction
 
 //===========================================================================
-function InitTrig_Deco_DisableMovement takes nothing returns nothing
-    set gg_trg_Deco_DisableMovement = CreateTrigger(  )
+function InitTrig_Deco_OnEnterMap takes nothing returns nothing
+    set gg_trg_Deco_OnEnterMap = CreateTrigger(  )
 
-    call TriggerRegisterEnterRectSimple( gg_trg_Deco_DisableMovement, GetEntireMapRect() )
-    call TriggerRegisterAnyUnitEventBJ( gg_trg_Deco_DisableMovement, EVENT_PLAYER_UNIT_UPGRADE_FINISH )
-    call TriggerAddCondition( gg_trg_Deco_DisableMovement, Condition( function Trig_Deco_DisableMovement_Conditions ) )
+    call TriggerRegisterEnterRectSimple( gg_trg_Deco_OnEnterMap, GetEntireMapRect() )
+    call TriggerRegisterAnyUnitEventBJ( gg_trg_Deco_OnEnterMap, EVENT_PLAYER_UNIT_UPGRADE_FINISH )
+    call TriggerAddCondition( gg_trg_Deco_OnEnterMap, Condition( function Trig_Deco_DisableMovement_Conditions ) )
 endfunction
 

@@ -2,7 +2,7 @@ Event
     TriggerRegisterAnyUnitEventBJ
         Preset: PlayerUnitEventUpgrade_Start
 Condition
-    OperatorCompareInteger
+    Disab: OperatorCompareInteger
         Call  : GetUnitAbilityLevelSwapped
             Const : A0C6
             Call  : GetTriggerUnit
