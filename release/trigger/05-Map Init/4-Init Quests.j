@@ -182,10 +182,10 @@ Sets the camera distance to target.
 |cffffff00-camera|r/|cffffff00-cam|r/|cffffff00-c|r
 This command accepts many different kinds of arguments
     |cffffff00(field)|r |cffffff00(value)|r
-    Sets the value of the specified field. Fields are: zoom, roll, rotate, pitch. 
+    Sets the value of the specified field. Fields are: zoom, roll, rotate, pitch, zoffset. 
     |cff0000ffExample: -c rotate 270|r
     |cffffff00lock|r/|cffffff00unlock|r
-    Locks or unlocks the camera to the current view. Disables the mouse scroll-wheel adjustment.
+    Locks or unlocks the camera to the current view. Locking disables the mouse scroll-wheel adjustment.
     |cffffff00(preset)|r
     Sets the camera to a certain preset. Available presets: far
 "

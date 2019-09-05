@@ -11,6 +11,7 @@ struct CameraValues extends array
     static real rotate = 0
     static real roll = 0
     static real pitch = 0
+    static real zoffset = 0
     static boolean locked = false
     
     private static key static_members_key
@@ -78,6 +79,11 @@ function Trig_Commands_Camera takes nothing returns boolean
                     set CameraValues.pitch = value
                     call SetCameraField(CAMERA_FIELD_ANGLE_OF_ATTACK, value, 0 )
                 endif
+            elseif ( field == "zoffset" ) then
+                if GetLocalPlayer() == GetTriggerPlayer() then
+                    set CameraValues.zoffset = value
+                    call SetCameraField(CAMERA_FIELD_ZOFFSET, value, 0 )
+                endif
             endif
         else
             // Lock/Unlock
@@ -87,6 +93,7 @@ function Trig_Commands_Camera takes nothing returns boolean
                     set CameraValues.rotate = GetCameraField(CAMERA_FIELD_ROTATION)*bj_RADTODEG
                     set CameraValues.roll = GetCameraField(CAMERA_FIELD_ROLL)*bj_RADTODEG
                     set CameraValues.pitch = GetCameraField(CAMERA_FIELD_ANGLE_OF_ATTACK)*bj_RADTODEG
+                    set CameraValues.zoffset = GetCameraField(CAMERA_FIELD_ZOFFSET)
                     call CameraValues.lock()
                 endif
             elseif ( field == "unlock" ) then
