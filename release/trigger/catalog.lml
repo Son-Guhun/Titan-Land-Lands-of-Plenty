@@ -93,6 +93,7 @@
     25-Upgrade: Upgrade
         Comment
     '26-System Instant Upgrade': 'System Instant Upgrade'
+    '27-System Ugrade Remove Rally': 'System Ugrade Remove Rally'
 '07-Player Commands': 'Player Commands'
     '01-Commands Fix': 'Commands Fix'
     '02-Commands Ability': 'Commands Ability'

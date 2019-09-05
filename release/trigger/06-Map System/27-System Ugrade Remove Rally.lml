@@ -1,0 +1,12 @@
+Event
+    TriggerRegisterAnyUnitEventBJ
+        Preset: PlayerUnitEventUpgrade_Finish
+Condition
+Action
+    CustomScriptCode
+        Const : 'if GetUnitTypeId(GetTriggerUnit()) == ''e000'' then'
+    UnitRemoveAbilityBJ
+        Const : ARal
+        Call  : GetTriggerUnit
+    CustomScriptCode
+        Const : endif
