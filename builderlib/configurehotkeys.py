@@ -32,11 +32,12 @@ def configure_trained_units(unit_data, building_list, **kwargs):
     for building in building_list:
         try:
             series = [building]
-            if 'Upgrade' in unit_data[building]:
-                upgrade = unit_data[building]['Upgrade'][1:-1]
+            data = unit_data[building]
+            if 'Upgrade' in data and data['Upgrade'] != '""':
+                upgrade = data['Upgrade'][1:-1]
                 while upgrade != building:
                     series.append(upgrade)
-                    upgrade = unit_data[building]['Upgrade'][1:-1]
+                    upgrade = unit_data[upgrade]['Upgrade'][1:-1]
                     if len(series) > MAX_UPGRADES:
                         raise ValueError('Could not find original building ({}) in upgrade depth of {}.'.format(building, MAX_UPGRADES))
             
@@ -62,6 +63,7 @@ def configure_selectors(unit_data, selector_list, **kwargs):
 
 file_path = '../development/table/unit.ini'
 buildings = [
+    # Human
     'h00L',  # Bandit
     'h0T0',  # Bandit Magic
     'h085',  # Black Legion
@@ -76,6 +78,83 @@ buildings = [
     'h0RJ',  # Lordaeron
     'h02Y',  # Nihonjin
     'h09J',  # Nihonjin Magic
+    'h0NF',  # Norse
+    'h0Q2',  # Norse Magic
+    'h06C',  # Pandaren
+    'h06E',  # Pandaren Magic
+    'h005',  # Pirate
+    'h06H',  # Rostrodle
+    'h06M',  # Rostrodle Magic
+    'h0DY',  # Runic
+    'h0DZ',  # Runic Magic
+    'h0RP',  # Stormwind
+    'h05X',  # Templar
+    'h05Y',  # Templar Magic
+    'h0A1',  # Templar Fort
+    'h0ZY',  # Worgen
+    'h100',  # Worgen Magic
+
+    # Orc
+    'o02V',  # Centuar
+    'o00O',  # Fel Orc
+    'o00P',  # Fel Orc Bestiary
+    'o00Q',  # Fel Orc Magic
+    'o02F',  # Goblin Magic
+    'o02D',  # Goblin
+    'o005',  # Ogre
+    'o008',  # Ogre Magic
+    'o00Y',  # Razormane
+    'o00V',  # Son'Gar
+    'o00W',  # Son'Gar Magic
+    'o020',  # Tauren
+    'o00K',  # Troll Darkspear
+    'o01Q',  # Troll Forest
+    'o01R',  # Troll Ice
+    'o01C',  # Troll Raptor
+    'o025',  # Troll Magic
+
+    # Undead
+    'u04M',  # Cultist Magic
+    'u04L',  # Cultist
+    'u051',  # Dark Dwarf Magic
+    'u052',  # Dark Dwarf
+    'u05I',  # Dark Human
+    'u05H',  # Dark Human Magic
+    'u01H',  # Demon
+    'u01I',  # Demon Magic
+    'u049',  # Faceless Magic
+    'u04D',  # Faceless
+    'u05O',  # Fel Elf Magic
+    'e03M',  # Fel Elf
+    'u05Q',  # Fel Troll Magic
+    'u05P',  # Fel Troll
+    'u05B',  # Embalmed
+    'u05C',  # Embalmed Magic
+    'u04T',  # Vampire
+    'u04V',  # Vampire Magic
+
+    # Night Elf
+    'e011',  # Draenei
+    'e012',  # Draenei Magic
+    'e00Y',  # Drow Magic
+    'e00K',  # Drow
+    'e02B',  # Forest Elf Magic
+    'e02C',  # Forest Elf
+    'h0TU',  # Gray Elf
+    'h0TT',  # Gray Elf Magic
+    'h06N',  # High Elf Magic
+    'h06O',  # High Elf
+    'h101',  # Middle-earth Elvwes
+    'e02O',  # Wood Elf
+
+    # Naga
+
+    # Creep
+    'h0G9',  # Elemental
+    'h0G8',  # Elemental Magic
+    'h12L',  # Lizardman
+    'h12M',  # Lizardman Magic
+    'h11U',  # Ratfolk
     ]
 
 selectors = [
