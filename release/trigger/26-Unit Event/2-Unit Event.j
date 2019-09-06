@@ -13,14 +13,14 @@ function UnitEventCheckAfter takes nothing returns nothing
         if udg_IsUnitNew[i] then
             //The unit was just created.
             set udg_IsUnitNew[i] = false
-        elseif udg_IsUnitTransforming[i] then
-           //Added 21 July 2017 to fix the issue re-adding this ability in the same instant
-           set udg_UDex = i
-           set udg_UnitTypeEvent = 0.00
-           set udg_UnitTypeEvent = 1.00
-           set udg_UnitTypeOf[i] = GetUnitTypeId(udg_UDexUnits[i]) //Set this afterward to give the user extra reference
-           set udg_IsUnitTransforming[i] = false
-           call UnitAddAbility(udg_UDexUnits[i], udg_DetectTransformAbility)
+//        elseif udg_IsUnitTransforming[i] then
+//           Added 21 July 2017 to fix the issue re-adding this ability in the same instant
+//           set udg_UDex = i
+//           set udg_UnitTypeEvent = 0.00
+//           set udg_UnitTypeEvent = 1.00
+//           set udg_UnitTypeOf[i] = GetUnitTypeId(udg_UDexUnits[i]) //Set this afterward to give the user extra reference
+//           set udg_IsUnitTransforming[i] = false
+//           call UnitAddAbility(udg_UDexUnits[i], udg_DetectTransformAbility)
         elseif udg_IsUnitAlive[i] then
             //The unit has started reincarnating.
             set udg_IsUnitReincarnating[i] = true
@@ -126,9 +126,9 @@ function UnitEventOnOrder takes nothing returns boolean
                 //The unit may have just started reincarnating.
                 call UnitEventCheckAfterProxy(i)
             endif
-        elseif GetUnitAbilityLevel(u, udg_DetectTransformAbility) == 0 and not udg_IsUnitTransforming[i] then
-            set udg_IsUnitTransforming[i] = true
-            call UnitEventCheckAfterProxy(i)  //This block has been updated on 21 July 2017
+//        elseif GetUnitAbilityLevel(u, udg_DetectTransformAbility) == 0 and not udg_IsUnitTransforming[i] then
+//            set udg_IsUnitTransforming[i] = true
+//            call UnitEventCheckAfterProxy(i)  //This block has been updated on 21 July 2017
         endif
         if udg_CargoTransportUnit[i] != null and not udg_IsUnitBeingUnloaded[i] and not IsUnitLoaded(u) or IsUnitType(u, UNIT_TYPE_DEAD) then
             call UnitEventOnUnload()
@@ -211,7 +211,7 @@ function UnitEventEnter takes nothing returns boolean
 
         call UnitAddAbility(u, udg_DetectRemoveAbility)
         call UnitMakeAbilityPermanent(u, true, udg_DetectRemoveAbility)
-        call UnitAddAbility(u, udg_DetectTransformAbility)
+        // call UnitAddAbility(u, udg_DetectTransformAbility)
         set udg_UnitTypeOf[i] = GetUnitTypeId(u)
         set udg_IsUnitNew[i] = true
         set udg_IsUnitAlive[i] = true
