@@ -5,15 +5,7 @@ Make Heroic Strike based on channel instead of Shadowstrike
 
 
 -Fix dalaran town hall
--Tauren worker model
--Night elf artisian model
--Drow deco builder
-- QoL: Change Icons for the main buildings of the races to make it easier to select them from the Race Selector
--Reaper (Malthael model)
-
-
 -Remove female nihonjin hero glow
--Get Archmaiden description from older version
 
 
 ______________________________

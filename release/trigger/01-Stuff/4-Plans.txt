@@ -1,12 +1,3 @@
-Races:
-
-Ghast
-
- ->Hero Categories:
- 1: God
- 2: Legend
- 3: Leader
- 4: Hero
 AURIEL:
 It is through the archangel Auriel that the power of hope flows into the fabric of creation. Her eternal light illuminates even the darkest souls. Seeking harmony in all things, she is a mediator, a counselor, and when the need arises, a fearless warrior.
 

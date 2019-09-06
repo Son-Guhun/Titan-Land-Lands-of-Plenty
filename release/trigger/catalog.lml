@@ -1,26 +1,22 @@
-01-Credits: Credits
+01-Stuff: Stuff
     Comment
-    01-IMPORTANT: IMPORTANT
+    1-IMPORTANT: IMPORTANT
         Comment
-    02-Tutorials: Tutorials
+    2-Tutorials: Tutorials
         Comment
-    03-Models: Models
+    3-Models: Models
         Comment
-    '04-Add to Credits': 'Add to Credits'
+    4-Plans: Plans
         Comment
-    '05-Model Bugs': 'Model Bugs'
+    5-Organization: Organization
         Comment
-    06-Plans: Plans
+    6-Hashtables: Hashtables
         Comment
-    07-Organization: Organization
+    '7-Ability Ideas': 'Ability Ideas'
         Comment
-    08-Hashtables: Hashtables
+    '8-Unit Balance': 'Unit Balance'
         Comment
-    '09-Ability Ideas': 'Ability Ideas'
-        Comment
-    '10-Unit Balance': 'Unit Balance'
-        Comment
-    11-TODO: TODO
+    9-TODO: TODO
         Comment
 '02-External Commands': 'External Commands'
     '1-Generate Missing Doodad Globals': 'Generate Missing Doodad Globals'
@@ -74,26 +70,20 @@
     '11-System Cleanup Owner Change': 'System Cleanup Owner Change'
     '12-System Cleanup UnitGroups': 'System Cleanup UnitGroups'
     '13-System Cleanup Items': 'System Cleanup Items'
-    14--------: -------
+    '14-Titan Powers': 'Titan Powers'
         Comment
-    15--------: -------
+    '15-System Titan Palace Item Prot': 'System Titan Palace Item Prot'
+    '16-System Titan Palace Prot': 'System Titan Palace Prot'
+    '17-System Titan GiveUnit': 'System Titan GiveUnit'
+    '18-System Titan Powers': 'System Titan Powers'
+    '19-Prevent Saving': 'Prevent Saving'
         Comment
-    16--------: -------
+    '20-System PreventSave Catch': 'System PreventSave Catch'
+    '21-System PreventSave Clear': 'System PreventSave Clear'
+    22-Upgrade: Upgrade
         Comment
-    '17-Titan Powers': 'Titan Powers'
-        Comment
-    '18-System Titan Palace Item Prot': 'System Titan Palace Item Prot'
-    '19-System Titan Palace Prot': 'System Titan Palace Prot'
-    '20-System Titan GiveUnit': 'System Titan GiveUnit'
-    '21-System Titan Powers': 'System Titan Powers'
-    '22-Prevent Saving': 'Prevent Saving'
-        Comment
-    '23-System PreventSave Catch': 'System PreventSave Catch'
-    '24-System PreventSave Clear': 'System PreventSave Clear'
-    25-Upgrade: Upgrade
-        Comment
-    '26-System Instant Upgrade': 'System Instant Upgrade'
-    '27-System Ugrade Remove Rally': 'System Ugrade Remove Rally'
+    '23-System Instant Upgrade': 'System Instant Upgrade'
+    '24-System Ugrade Remove Rally': 'System Ugrade Remove Rally'
 '07-Player Commands': 'Player Commands'
     '01-Commands Fix': 'Commands Fix'
     '02-Commands Ability': 'Commands Ability'
@@ -125,70 +115,70 @@
     '26-CommandsR Time': 'CommandsR Time'
     '27-CommandsR Toggle Prot': 'CommandsR Toggle Prot'
     '28-CommandsR Make Titan': 'CommandsR Make Titan'
-    29--------: -------
+    '29-CommandsR Delete': 'CommandsR Delete'
+    '30-CommandsR Fog': 'CommandsR Fog'
+    '31-CommandsR Water Color': 'CommandsR Water Color'
+    '32-CommandsR Mind': 'CommandsR Mind'
+    '33-CommandsR Kick': 'CommandsR Kick'
+    '34-CommandsR The Creator': 'CommandsR The Creator'
+    '35-CommandsR Toggle Dmg Tags': 'CommandsR Toggle Dmg Tags'
+    '36-Decoration Commands': 'Decoration Commands'
         Comment
-    '30-CommandsR Delete': 'CommandsR Delete'
-    '31-CommandsR Fog': 'CommandsR Fog'
-    '32-CommandsR Water Color': 'CommandsR Water Color'
-    '33-CommandsR Mind': 'CommandsR Mind'
-    '34-CommandsR Kick': 'CommandsR Kick'
-    '35-CommandsR The Creator': 'CommandsR The Creator'
-    '36-CommandsR Toggle Dmg Tags': 'CommandsR Toggle Dmg Tags'
-    '37-Decoration Commands': 'Decoration Commands'
-        Comment
-    '38-CommandsD Control': 'CommandsD Control'
-    '39-CommandsD Set AoE': 'CommandsD Set AoE'
-    '40-CommandsD Set Tree Space': 'CommandsD Set Tree Space'
-    '41-CommandsD Set Parameters': 'CommandsD Set Parameters'
-    '42-CommandsD Set RGB': 'CommandsD Set RGB'
-    '43-CommandsD Unit Mods': 'CommandsD Unit Mods'
-    '44-CommandsD Add Tag': 'CommandsD Add Tag'
-    '45-CommandsD Select No': 'CommandsD Select No'
-    '46-CommandsD Variation': 'CommandsD Variation'
-    '47-CommandsD Rotate': 'CommandsD Rotate'
+    '37-CommandsD Control': 'CommandsD Control'
+    '38-CommandsD Set AoE': 'CommandsD Set AoE'
+    '39-CommandsD Set Tree Space': 'CommandsD Set Tree Space'
+    '40-CommandsD Set Parameters': 'CommandsD Set Parameters'
+    '41-CommandsD Set RGB': 'CommandsD Set RGB'
+    '42-CommandsD Unit Mods': 'CommandsD Unit Mods'
+    '43-CommandsD Add Tag': 'CommandsD Add Tag'
+    '44-CommandsD Select No': 'CommandsD Select No'
+    '45-CommandsD Variation': 'CommandsD Variation'
+    '46-CommandsD Rotate': 'CommandsD Rotate'
 '08-Decoration Systems': 'Decoration Systems'
     Comment
 '09-Deco Builders': 'Deco Builders'
-    1-Libraries: Libraries
+    01-Libraries: Libraries
         Comment
-    2-DecoBuilderCount: DecoBuilderCount
-    3-Triggers: Triggers
+    02-DecoBuilderCount: DecoBuilderCount
+    03-Triggers: Triggers
         Comment
-    '4-DecoBuilder Movement': 'DecoBuilder Movement'
-    '5-DecoBuilder Increase Count': 'DecoBuilder Increase Count'
-    '6-DecoBuilder RangedBuild': 'DecoBuilder RangedBuild'
-    '7-DecoBuilder Cast Ability': 'DecoBuilder Cast Ability'
+    '04-DecoBuilder Movement': 'DecoBuilder Movement'
+    '05-DecoBuilder Increase Count': 'DecoBuilder Increase Count'
+    '06-DecoBuilder RangedBuild': 'DecoBuilder RangedBuild'
+    '07-Unit Mods': 'Unit Mods'
+        Comment
+    '08-DecoBuilder Cast Ability': 'DecoBuilder Cast Ability'
+    '09-Terrain Mods': 'Terrain Mods'
+        Comment
+    '10-TerrainSystem Cast Ability': 'TerrainSystem Cast Ability'
+    '11-Tree Mods': 'Tree Mods'
+        Comment
+    '12-TreeSystem Create Trees': 'TreeSystem Create Trees'
+    '13-TreeSystem Cast Ability': 'TreeSystem Cast Ability'
+    '14-TreeSystem Choose Tree': 'TreeSystem Choose Tree'
 10-Decorations: Decorations
     '1-Deco OnEnterMap': 'Deco OnEnterMap'
-    2----------: ---------
+    '2-Deco Root Anywhere': 'Deco Root Anywhere'
+    3-Abilities: Abilities
         Comment
-    '3-Deco Root Anywhere': 'Deco Root Anywhere'
-    4-Abilities: Abilities
-        Comment
-    '5-Deco Movement': 'Deco Movement'
-    '6-Deco Waygate': 'Deco Waygate'
-    '7-Deco Gates': 'Deco Gates'
-'11-Terrain Changer': 'Terrain Changer'
-    '1-TerrainSystem Cast Ability': 'TerrainSystem Cast Ability'
-'12-Tree Spawning': 'Tree Spawning'
-    '1-TreeSystem Create Trees': 'TreeSystem Create Trees'
-    '2-TreeSystem Cast Ability': 'TreeSystem Cast Ability'
-    '3-TreeSystem Choose Tree': 'TreeSystem Choose Tree'
-13----------------------------------------: ---------------------------------------
+    '4-Deco Movement': 'Deco Movement'
+    '5-Deco Waygate': 'Deco Waygate'
+    '6-Deco Gates': 'Deco Gates'
+11----------------------------------------: ---------------------------------------
     Comment
-14-Systems: Systems
+12-Systems: Systems
     Comment
-15-------------------: ------------------
+13-------------------: ------------------
     Comment
-16-vJass: vJass
+14-vJass: vJass
     Comment
-'17-Data Structures': 'Data Structures'
+'15-Data Structures': 'Data Structures'
     1-Lists: Lists
     '2-GLHS Main': 'GLHS Main'
     '3-GMUI Main': 'GMUI Main'
     '4-GAL Main': 'GAL Main'
     '5-GLHS Generics': 'GLHS Generics'
-18-Tables: Tables
+16-Tables: Tables
     1-External: External
         Comment
     2-Table: Table
@@ -197,19 +187,20 @@
     4-ConstTable: ConstTable
     5-HashtableWrapper: HashtableWrapper
     6-TableStruct: TableStruct
-'19-Multipatrol (TODO)': 'Multipatrol (TODO)'
+    7-HashStruct: HashStruct
+'17-Multipatrol (TODO)': 'Multipatrol (TODO)'
     1-MultiPatrol: MultiPatrol
     '2-MultiPatrol Addons': 'MultiPatrol Addons'
-20-Rects: Rects
+18-Rects: Rects
     1-UserDefinedRects: UserDefinedRects
     2-RectGenerator: RectGenerator
     3-RectEnvironment: RectEnvironment
     4-AutoRectEnvironment: AutoRectEnvironment
-21-Tiles: Tiles
+19-Tiles: Tiles
     1-TileDefinition: TileDefinition
     2-StructureTileDefinition: StructureTileDefinition
     3-AnyTileDefinition: AnyTileDefinition
-22-vJass: vJass
+20-vJass: vJass
     01-External: External
         Comment
     02-WorldBounds: WorldBounds
@@ -236,7 +227,7 @@
     '20-Create Water': 'Create Water'
         Disab
     21-CustomizableAbilityList: CustomizableAbilityList
-23-Map-specific: Map-specific
+21-Map-specific: Map-specific
     1-Debug: Debug
     2-ArrayAgent: ArrayAgent
     3-DummyDmg: DummyDmg
@@ -245,15 +236,12 @@
     5-TimedBonus: TimedBonus
     '6-Victim Tracker': 'Victim Tracker'
         Disab
-24-External: External
+22-External: External
     Comment
-'25-CSS System': 'CSS System'
-    1-CustomStatSystem: CustomStatSystem
-    2-NeoBonus: NeoBonus
-'26-Unit Event': 'Unit Event'
+'23-Unit Event': 'Unit Event'
     '1-Unit Event Config': 'Unit Event Config'
     '2-Unit Event': 'Unit Event'
-'27-Damage Engine': 'Damage Engine'
+'24-Damage Engine': 'Damage Engine'
     '1-Damage Engine Config': 'Damage Engine Config'
     '2-Damage Engine Old': 'Damage Engine Old'
         Disab
@@ -263,12 +251,12 @@
     '6-Combat Tag': 'Combat Tag'
     '7-Damage Engine 5 1': 'Damage Engine 5 1'
         Disab
-'28-GUI Spell System': 'GUI Spell System'
+'25-GUI Spell System': 'GUI Spell System'
     '1-Read Me': 'Read Me'
         Comment
     '2-Spell System Config': 'Spell System Config'
     '3-Spell System': 'Spell System'
-'29-Knockback 2D': 'Knockback 2D'
+'26-Knockback 2D': 'Knockback 2D'
     '1-Knockback 2D Config': 'Knockback 2D Config'
     '2-Knockback 2D Destroy': 'Knockback 2D Destroy'
     '3-Knockback 2D': 'Knockback 2D'
@@ -277,9 +265,9 @@
         Disab
     '6-K2D OnLoop Template': 'K2D OnLoop Template'
         Disab
-'30-By Guhun': 'By Guhun'
+'27-By Guhun': 'By Guhun'
     Comment
-'31-Save System': 'Save System'
+'28-Save System': 'Save System'
     '01-How to Import': 'How to Import'
         Comment
     '02-SaveLoad Setup': 'SaveLoad Setup'
@@ -300,25 +288,63 @@
         Closed
     14-LoadDestructable: LoadDestructable
     15-LoadTerrain: LoadTerrain
-    16-vJass: vJass
+    '16-Load New': 'Load New'
         Comment
-    17-SaveNLoad: SaveNLoad
-    '18-Commands Req': 'Commands Req'
-    19-SaveIO: SaveIO
-'32-Circle Object System': 'Circle Object System'
+    '17-LoadUnit Copy': 'LoadUnit Copy'
+        Closed
+    '18-LoadUnit Extra Copy': 'LoadUnit Extra Copy'
+        Closed
+    '19-LoadDestructable Copy': 'LoadDestructable Copy'
+    '20-LoadTerrain Copy': 'LoadTerrain Copy'
+    21-vJass: vJass
+        Comment
+    22-SaveNLoad: SaveNLoad
+    '23-Commands Req': 'Commands Req'
+    24-SaveIO: SaveIO
+'29-Circle Object System': 'Circle Object System'
     '1-GCOS Init Copy': 'GCOS Init Copy'
     '2-Circle Object System': 'Circle Object System'
-'33-Disable System - GDS': 'Disable System - GDS'
+'30-Disable System - GDS': 'Disable System - GDS'
     '1-GDS Setup': 'GDS Setup'
     '2-GDS Main Modifier': 'GDS Main Modifier'
     '3-GDS Main': 'GDS Main'
-34----------------------------------------: ---------------------------------------
+31-NeoBonus: NeoBonus
+    1-CustomStatSystem: CustomStatSystem
+    2-NeoBonus: NeoBonus
+'32-Special Effect System': 'Special Effect System'
+    1-SpecialEffect: SpecialEffect
+    2-DecorationSFX: DecorationSFX
+    3-Unit2Effect: Unit2Effect
+    4-UnitTypeDefaultValues: UnitTypeDefaultValues
+'33-Terrain Libraries': 'Terrain Libraries'
+    1-TerrainTools: TerrainTools
+    2-Deformations: Deformations
+        Disab
+    3-DeformationTools: DeformationTools
+        Disab
+34-ControlState: ControlState
+    1-SelectionStates: SelectionStates
+        Disab
+    2-PlayerEventTools: PlayerEventTools
+        Disab
+    3-PlayerEvent: PlayerEvent
+        Disab
+    4-PlayerMouseEvent: PlayerMouseEvent
+        Disab
+    5-ControlState: ControlState
+        Disab
+35-TerrainEditor: TerrainEditor
+    1-TerrainEditor: TerrainEditor
+        Disab
+    2-TerrainEditorUI: TerrainEditorUI
+        Disab
+36----------------------------------------: ---------------------------------------
     Comment
-35-Spells: Spells
+37-Spells: Spells
     Comment
-36-------------------: ------------------
+38-------------------: ------------------
     Comment
-'37-Spell System Spells': 'Spell System Spells'
+'39-Spell System Spells': 'Spell System Spells'
     '01-Spell System Filter Decorations': 'Spell System Filter Decorations'
     '02-Initialize Spells': 'Initialize Spells'
     '03-Spell System Sample Config': 'Spell System Sample Config'
@@ -372,18 +398,21 @@
     '45-Cosmosis Obliterate': 'Cosmosis Obliterate'
     '46-Critter Wander': 'Critter Wander'
     '47-Mirror Image': 'Mirror Image'
-'38-No Spell System Spells': 'No Spell System Spells'
-    1-FilterTransformations: FilterTransformations
-    '2-Ability Cooldown': 'Ability Cooldown'
-    3-Summon: Summon
-    '4-Sargeras Silence New': 'Sargeras Silence New'
-    '5-Aura Of Restitution': 'Aura Of Restitution'
-    '6-Cosmosis Stop Time': 'Cosmosis Stop Time'
-    '7-Cosmosis StTm Noise': 'Cosmosis StTm Noise'
+'40-No Spell System Spells': 'No Spell System Spells'
+    01-FilterTransformations: FilterTransformations
+    '02-Ability Cooldown': 'Ability Cooldown'
+    03-Summon: Summon
+    '04-Sargeras Silence New': 'Sargeras Silence New'
+    '05-Aura Of Restitution': 'Aura Of Restitution'
+    '06-Cosmosis Stop Time': 'Cosmosis Stop Time'
+    '07-Cosmosis StTm Noise': 'Cosmosis StTm Noise'
         Closed
-    '8-Cosmosis Give Item': 'Cosmosis Give Item'
-    '9-TheCreator Invincibility': 'TheCreator Invincibility'
-'39-Knockback Samples': 'Knockback Samples'
+    '08-Cosmosis Give Item': 'Cosmosis Give Item'
+    '09-TheCreator Invincibility': 'TheCreator Invincibility'
+    10-Items: Items
+        Comment
+    '11-Silver Key': 'Silver Key'
+'41-Knockback Samples': 'Knockback Samples'
     '1-On Damage': 'On Damage'
         Disab
     '2-On Impact': 'On Impact'
@@ -396,19 +425,9 @@
         Disab
     6-Test: Test
         Disab
-40-Items: Items
+42----------------------------------------: ---------------------------------------
     Comment
-'41-Fixed Spells': 'Fixed Spells'
-42-Items: Items
-    '1-Silver Key': 'Silver Key'
-        Comment
-    '2-Silver Key Trigger': 'Silver Key Trigger'
-'43-Legendary Scroll Spell': 'Legendary Scroll Spell'
-    '1-Legendary Scroll Spell': 'Legendary Scroll Spell'
-        Comment
-44----------------------------------------: ---------------------------------------
-    Comment
-45-TESTING: TESTING
+43-TESTING: TESTING
     Comment
     '1-Global Return Library': 'Global Return Library'
         Disab
@@ -418,50 +437,15 @@
         Disab
     '4-Test SetUnitX': 'Test SetUnitX'
         Disab
-'46-Destructable Systems': 'Destructable Systems'
+'44-Destructable Systems': 'Destructable Systems'
     '1-Untitled Trigger 002': 'Untitled Trigger 002'
         Disab
     '2-Create Destructable': 'Create Destructable'
         Disab
-'47-Special Effect System': 'Special Effect System'
-    1-HashStruct: HashStruct
-    2-SpecialEffect: SpecialEffect
-    3-DecorationSFX: DecorationSFX
-    4-Unit2Effect: Unit2Effect
-    5-UnitTypeDefaultValues: UnitTypeDefaultValues
-48-Memory: Memory
+45-Memory: Memory
     1-TimerMemory: TimerMemory
         Disab
     2-TriggerMemory: TriggerMemory
         Disab
     3-RegionMemory: RegionMemory
         Disab
-'49-Terrain Libraries': 'Terrain Libraries'
-    1-TerrainTools: TerrainTools
-    2-Deformations: Deformations
-        Disab
-    3-DeformationTools: DeformationTools
-        Disab
-50-ControlState: ControlState
-    1-SelectionStates: SelectionStates
-        Disab
-    2-PlayerEventTools: PlayerEventTools
-        Disab
-    3-PlayerEvent: PlayerEvent
-        Disab
-    4-PlayerMouseEvent: PlayerMouseEvent
-        Disab
-    5-ControlState: ControlState
-        Disab
-51-TerrainEditor: TerrainEditor
-    1-TerrainEditor: TerrainEditor
-        Disab
-    2-TerrainEditorUI: TerrainEditorUI
-        Disab
-'52-New Load Triggers': 'New Load Triggers'
-    '1-LoadUnit Copy': 'LoadUnit Copy'
-        Closed
-    '2-LoadUnit Extra Copy': 'LoadUnit Extra Copy'
-        Closed
-    '3-LoadDestructable Copy': 'LoadDestructable Copy'
-    '4-LoadTerrain Copy': 'LoadTerrain Copy'

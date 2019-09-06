@@ -1,7 +1,6 @@
 Custom models to import:
 
 Lantern statue (also has other night elf stuff)
-Destroyed town hall
 Magical message (magicletter)
 picture frame
 .
