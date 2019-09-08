@@ -29,10 +29,11 @@ def get_models_in_dir(mypath):
 
 # print('{}: {}'.format(rawcode, unit_data[rawcode]['Name']))
 
-def do(dataBase, modelsFolder, category):
+def do(dataBase, modelsFolder, category, isbldg=False):
     filenames = get_models_in_dir(modelsFolder)
     paths = [get_relative_path(os.path.join(modelsFolder, f)) for f in filenames]
-
+    created_units = []
+    
     with open(dataBase) as f:
         unit_data = load_unit_data(f)
 
@@ -43,9 +44,12 @@ def do(dataBase, modelsFolder, category):
         unit_data[rawcode] = unit_data['h038']
         unit_data[rawcode]['file'] = '"{}"'.format(path).replace("\\","\\\\")
         unit_data[rawcode]['Name'] = '"{} {}"'.format(category, model)
+        if isbldg:
+            del unit_data[rawcode]['isbldg']
+        created_units.append(rawcode)
 
     with open(dataBase, 'w') as f:
         unit_data.write(f)
 
-    return unit_data
+    return created_units
 
