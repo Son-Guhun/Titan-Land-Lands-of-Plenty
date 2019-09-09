@@ -48,7 +48,7 @@ You can customize your heroes' abilities, including units that were made into he
 The |cffffff00-ability|r command also has an alias: |cffffff00-abil|r.
 
 |cffffff00-ability|r add/a (code)
-Adds an ability to all selected heroes. Only hero abilities can be added, unit abilities can only be removed. Heroes can have at most 4 compatible abilities.
+Adds an ability to all selected heroes. Only hero abilities can be added, unit abilities can only be removed. Heroes can have at most 7 compatible abilities.
 
 |cffffff00-ability|r remove/rem/r (code)
 Removes an ability from all selected heroes.
@@ -57,6 +57,38 @@ Removes an ability from all selected heroes.
 Removes all compatible abilities from all selected heroes.
 "
     call CreateQuestBJ(questType, "Ability Commands", quest_text, "ReplaceableTextures\\CommandButtons\\BTNSpellBookBLS.blp")
+    // ----------
+    
+    // Animations
+    set quest_text = "
+In Warcraft III, there are animation names and animation tags. A model can have different sets of animations by using animation tags. For example, the Demon Hunter has 2 animation sets, one for its normal form and another for its demonic form. The demonic form uses the 'alternate' tag.
+
+|cffff0000Animation names:|r
+birth, death, decay, dissipate, stand, walk, attack, morph, sleep, spell, portrait
+
+|cffff0000Animation tags:|r
+gold, lumber, work, flesh, ready, one, two, throw, slam, large, medium, small, victory, alternate, defend, swim, spin, fast, upgrade, first, second, third, fourth, fifth
+
+Most units don't have any animation tags, and not every model has every animation. If a unit or decoration has animation tags, that will usually be documented in its tooltip (unless it's a common tag, such as Work/Gold/Lumber for builders). The animation that a unit is current playing is not saved by the Save System. However, animation tags given to a unit using the |cffffff00-tag|r command are saved.
+"
+    call CreateQuestBJ(questType, "Animation Lists", quest_text, "ReplaceableTextures\\CommandButtons\\BTNManual.blp")
+    // ----------
+    
+    // Animation
+    set quest_text = "
+|cffff0000Animation commands:|r
+|cffffff00-tag (animation tags)|r
+Removes old animation tags and adds new animation tag to a unit. Multiple animation tags can be specified, separated by a space. These animation tags are kept even when a unit plays a new animation.
+|cffffff00-anim <animation name> <animation tags>|r
+Set the animation for the 'anim command. If no animation name is given, 'Stand' is assumed. Any animation tags are lost when new a animation is played.
+|cffffff00'anim <animation name> <animation tags>|r
+Play a unit's animation. If no animation name is specified, then the default value set by -anim is used.
+
+|cffff0000Examples:|r
+'anim stand alternate: This will make a demon hunter become a demon as long as they stand still.
+-tag alternate: This will make a demon hunter turn into its demon form, as if it had used Metamorphosis. 
+"
+    call CreateQuestBJ(questType, "Animation Commands", quest_text, "ReplaceableTextures\\CommandButtons\\BTNManual.blp")
     // ----------
         
     // Titan Commands 1
@@ -122,7 +154,10 @@ Adds deco builders whose name starts with the entered characters to your selecti
 |cff0000ffExamples: -sele wall, -sele sp, -sele pand, -sele gen|r
 |cffffff00-remove|r
 |cffffff00-kill|r
+|cffffff00-give (color)|r
 |cffffff00-collision (on/off)|r
+|cffffff00-rotate (angle)|r
+Sets the rotation angle of the Rotate ability used by decorations.
 "
     call CreateQuestBJ(questType, "Unit Commands 2", quest_text, "ReplaceableTextures\\CommandButtons\\BTNFootman.blp")
     // ----------
@@ -130,14 +165,14 @@ Adds deco builders whose name starts with the entered characters to your selecti
     // Unit Modification Commands
     set quest_text = "
 |cffff0000Unit Modification Commands:|r
-|cffffff00-tag (tag name |ex: first, second, alternate, defend)|r
-Removes old animation tag and adds new animation tag to a unit.
-|cffffff00-color (number)|r\nSet the color for the 'color command.
-|cffffff00-size (number)|r\nSet the size for the 'size command.
+|cffffff00-nameunit <name>|r
+Gives a unit a new name. If no name is specified, then the unit's name is reset.
+|cffffff00-color (number)|r
+Set the color for the 'color command.
+|cffffff00-size (number)|r
+Set the size for the 'size command.
 |cffffff00-rgb (red green blue transparency)|r
 Set the colors for the 'rgb command.
-|cffffff00-anim (animation name)|r
-Set the animation for the 'anim command.
 |cffffff00-speed (number)|r
 Set the animation speed for the 'speed command.
 |cffffff00-fly (number)|r
@@ -145,7 +180,7 @@ Set the flying height for the 'fly command. Has a -h alias.
 |cffffff00-face (number)|r
 Set the facing angle for the 'face command. Has a -f alias.
 
-|cffffff00'fly|r | |cffffff00'rgb|r | |cffffff00'face|r | |cffffff00'size|r | |cffffff00'color|r | |cffffff00'anim|r
+|cffffff00'fly|r | |cffffff00'rgb|r | |cffffff00'face|r | |cffffff00'size|r | |cffffff00'color|r
 Use the commands above to apply unit modifications. Alternatively, you can use Deco Modifier Special's (use the command |cffffcc00-seln sp|r to select it) abilities.
 "
     call CreateQuestBJ(questType, "Unit Modification Commands", quest_text, "ReplaceableTextures\\CommandButtons\\BTNFootman.blp")
@@ -154,8 +189,8 @@ Use the commands above to apply unit modifications. Alternatively, you can use D
     // Player Commands
     set quest_text = "
 |cffff0000Alliance Commands:|r (Color names are case-insensitive for all commands. You can use a player number instead.)
-|cffffff00-ally|r 'color'
-|cffffff00-unally|r 'color'
+|cffffff00-ally|r (color)
+|cffffff00-unally|r (color)
 
 |cffff0000Tips/Hints Commands:|r
 |cffffff00-tips|r (on/off)
@@ -163,13 +198,17 @@ If no arguments are given, then tips are toggled on/off, according to their curr
 |cffffff00-hints|r (on/off)
 An alias for the |cffffff00-tips|r command.
 
-|cffff0000Player Commands:|r
+|cffff0000Other Commands:|r
 |cffffff00-deleteme|r
 Removes all your units that are not in the Titan Palace from the game, except your neutral units.
 |cffffff00-start|r
 Gives you a Wandering Soul to make a Race Selector.
 |cffffff00-decos|r (special/basic/all)
 Spawns any decos you may be missing (hidden decos are not considered missing).
+|cffffff00-setcolor|r (color)
+Sets the color of all your current and future units.
+|cffffff00-roll|r
+Rolls dice. You can specify a single number to get a result from 1 to that number, or use 1d6+10 syntax.
 "
     call CreateQuestBJ(questType, "Player Commands", quest_text, "ReplaceableTextures\\CommandButtons\\BTNScrollOfRegenerationGreen.blp")
     // ----------
