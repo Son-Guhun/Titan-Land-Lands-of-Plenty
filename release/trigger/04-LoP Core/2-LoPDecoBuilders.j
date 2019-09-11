@@ -256,6 +256,12 @@ are listed first, though.
             // Trees
             set i = ( i + 1 )
             set rawcodes[i] = 'u01B'
+            // Vanilla Orc
+            set i = ( i + 1 )
+            set rawcodes[i] = 'u05T'
+            // Vanilla Undead
+            set i = ( i + 1 )
+            set rawcodes[i] = 'u00U'
             // Vampiric
             set i = ( i + 1 )
             set rawcodes[i] = 'u04O'
