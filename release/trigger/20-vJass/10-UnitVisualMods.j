@@ -36,7 +36,7 @@ globals
     
     private constant boolean INIT_HASHTABLE = true // DOES NOT WORK YET! NEED TO CHANGE FUNCTIONS THAT USE HASGTABLE API
     
-    private string allTags = "gold lumber work flesh ready one two throw slam large medium small victory alternate morph defend swim spin fast upgrade first second third fourth fifth"
+    private string allTags = "gold lumber work flesh ready one two throw slam large medium small victory alternate defend swim spin fast upgrade first second third fourth fifth"
 endglobals
 
 //==================================================================================================
@@ -872,7 +872,6 @@ private module InitModule
 
         //! runtextmacro GUMS_RegisterTag("victory", "v")
         //! runtextmacro GUMS_RegisterTag("alternate", "a")
-        //! runtextmacro GUMS_RegisterTag("morph", "m")
         //! runtextmacro GUMS_RegisterTag("defend", "d")
         //! runtextmacro GUMS_RegisterTag("swim", "s")
         

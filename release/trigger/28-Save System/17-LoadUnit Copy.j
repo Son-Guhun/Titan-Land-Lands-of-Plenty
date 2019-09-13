@@ -1,6 +1,5 @@
 function Trig_LoadUnitNew_Actions takes nothing returns nothing
-    local integer playerId = GetPlayerId(GetTriggerPlayer())
-    local integer playerNumber = playerId+1
+    local integer playerNumber = GetPlayerId(GetTriggerPlayer())+1
     
     if udg_load_number[playerNumber] < udg_load_limit then
         set udg_load_number[playerNumber] = ( udg_load_number[playerNumber] + 1 )
