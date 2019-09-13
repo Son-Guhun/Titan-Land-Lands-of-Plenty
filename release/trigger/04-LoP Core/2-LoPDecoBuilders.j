@@ -77,7 +77,7 @@ are listed first, though.
             // Statue 1
             set i = ( i + 1 )
             set rawcodes[i] = 'u01N'
-            // Walls (Wood)
+            // Walls (Original)
             set i = ( i + 1 )
             set rawcodes[i] = 'u000'
             // Walls 1
@@ -127,6 +127,12 @@ are listed first, though.
             // Dalaran
             set i = ( i + 1 )
             set rawcodes[i] = 'u02D'
+            // Dalaran Modular 1
+            set i = ( i + 1 )
+            set rawcodes[i] = 'u012'
+            // Dalaran Modular 2
+            set i = ( i + 1 )
+            set rawcodes[i] = 'u010'
             // Draenei
             set i = ( i + 1 )
             set rawcodes[i] = 'u02O'
@@ -268,15 +274,6 @@ are listed first, though.
             // Village
             set i = ( i + 1 )
             set rawcodes[i] = 'u01O'
-            // Walls (Icecrown)
-            set i = ( i + 1 )
-            set rawcodes[i] = 'u011'
-            // Walls (Ruins)
-            set i = ( i + 1 )
-            set rawcodes[i] = 'u012'
-            // Walls (Stone)
-            set i = ( i + 1 )
-            set rawcodes[i] = 'u010'
             
             set LoP_DecoBuilders.AdvDecoLastIndex = i
             // ---------
