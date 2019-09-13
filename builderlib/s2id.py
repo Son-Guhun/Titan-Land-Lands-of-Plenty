@@ -32,6 +32,7 @@ class Rawcode(str):
 
     def __repr__(self):
         return "Rawcode('{}')".format(self)
+        
 
 class RawcodeSafe(Rawcode):
     
@@ -44,5 +45,9 @@ class RawcodeSafe(Rawcode):
                 raise ValueError("Rawcode string must be ASCII.")
         return r
 
-        
-        
+def rawcode_range(init, size):
+    if type('init') == str:
+        init = Rawcode(init)
+    for i in range(size):
+        yield init
+        init += 1
