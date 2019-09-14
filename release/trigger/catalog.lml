@@ -43,6 +43,7 @@
     5-LoPCommands: LoPCommands
     6-LoPUtils: LoPUtils
     7-LoPTip: LoPTip
+    8-LoPDeprecated: LoPDeprecated
 '05-Map Init': 'Map Init'
     1-Functions: Functions
         Comment
