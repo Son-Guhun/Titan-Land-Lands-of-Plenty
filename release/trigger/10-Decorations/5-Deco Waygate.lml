@@ -1,9 +1,51 @@
 Event
 Condition
 Action
-    WaygateSetDestinationLocBJ
-        Var   : Spell__Caster
-        Var   : Spell__TargetPoint
-    WaygateActivateBJ
-        Preset: EnableDisableEnable
-        Var   : Spell__Caster
+    CustomScriptCode
+        Const : 'local location udg_temp_point'
+    IfThenElseMultiple
+        Condition
+            OperatorCompareAbilityId
+                Var   : Spell__Ability
+                Preset: OperatorEqualENE
+                Const : A01Y
+        Action
+            WaygateActivateBJ
+                Preset: EnableDisableDisable
+                Var   : Spell__Caster
+            UnitRemoveAbilityBJ
+                Const : Awrp
+                Var   : Spell__Caster
+            UnitAddAbilityBJ
+                Const : Awrp
+                Var   : Spell__Caster
+            WaygateSetDestinationLocBJ
+                Var   : Spell__Caster
+                Var   : Spell__TargetPoint
+            WaygateActivateBJ
+                Preset: EnableDisableEnable
+                Var   : Spell__Caster
+        Action
+            SetVariable
+                Var   : temp_point
+                Call  : WaygateGetDestinationLocBJ
+                    Var   : Spell__Caster
+            WaygateActivateBJ
+                Preset: EnableDisableDisable
+                Var   : Spell__Caster
+            UnitRemoveAbilityBJ
+                Const : Awrp
+                Var   : Spell__Caster
+            UnitAddAbilityBJ
+                Const : Awrp
+                Var   : Spell__Caster
+            WaygateSetDestinationLocBJ
+                Var   : Spell__Caster
+                Var   : temp_point
+            WaygateActivateBJ
+                Preset: EnableDisableEnable
+                Var   : Spell__Caster
+            CustomScriptCode
+                Const : 'call RemoveLocation(udg_temp_point)'
+            CustomScriptCode
+                Const : 'set udg_temp_point = null'

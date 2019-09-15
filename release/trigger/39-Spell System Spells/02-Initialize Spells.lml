@@ -888,6 +888,26 @@ Action
     CommentString
         Const : ---------------------------
     CommentString
+        Const : 'Deco Waygate'
+    CommentString
+        Const : ---------------------------
+    SetVariable
+        Var   : Spell__Ability
+        Const : A04T
+    CommentString
+        Const : ' '
+    SetVariable
+        Var   : Spell__Trigger_OnEffect
+        Var   : gg_trg_Deco_Waygate
+    CommentString
+        Const : ' '
+    TriggerExecute
+        Var   : gg_trg_Spell_System
+    CommentString
+        Const : ' '
+    CommentString
+        Const : ---------------------------
+    CommentString
         Const : 'Deco Gate Open'
     CommentString
         Const : ---------------------------
