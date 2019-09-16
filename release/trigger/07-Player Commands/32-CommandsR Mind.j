@@ -31,7 +31,7 @@ function Trig_CommandsR_Mind_Conditions takes nothing returns boolean
             set playerNumber = Commands_GetChatMessagePlayerNumber(args)
             if  PlayerNumberIsNotExtraOrVictim(playerNumber) then
                 set udg_PowerSystem_Player = Player(playerNumber-1)
-                call SetUnitColor( POWER_MIND(), GetPlayerColor(udg_PowerSystem_Player) )
+                call GUMSSetUnitColor( POWER_MIND(), GetPlayerId(udg_PowerSystem_Player)+1 )
             endif
         endif
     endif
