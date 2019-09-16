@@ -29,7 +29,7 @@ endfunction
 
 endlibrary
 
-library SaveNLoad requires UnitVisualMods, Rawcode2String, Base36, TerrainTools, DecorationSFX, UnitTypeDefaultValues, optional UserDefinedRects, optional SaveNLoadConfig
+library SaveNLoad requires UnitVisualMods, Rawcode2String, Base36, TerrainTools, DecorationSFX, UnitTypeDefaultValues, optional UserDefinedRects, optional SaveNLoadConfig optional LoPDeprecated
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 //SaveNLoad v3.0
 ////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -355,6 +355,16 @@ function LoadUnit takes string chat_str, player un_owner returns nothing
     endif
     if un_posy < GetRectMinY(udg_save_WholeMapRect) then
         return
+    endif
+    
+    static if LIBRARY_LoPDeprecated then
+        if DeprecatedData.isUnitTypeIdDeprecated(un_type) then
+            if DeprecatedData(un_type).hasYawOffset() then
+                set un_fangle = ModuloReal(un_fangle + DeprecatedData(un_type).yawOffset, 360.)
+            endif
+            
+            set un_type = DeprecatedData(un_type).equivalent
+        endif
     endif
     
     // Only selectable decorations should become units. Except: structres with pathing map and no height, waygates.
