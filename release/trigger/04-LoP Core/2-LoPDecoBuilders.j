@@ -214,6 +214,9 @@ are listed first, though.
             // Pandaren
             set i = ( i + 1 )
             set rawcodes[i] = 'u02N'
+            // Plants
+            set i = ( i + 1 )
+            set rawcodes[i] = 'u011'
             // Quilboar
             set i = ( i + 1 )
             set rawcodes[i] = 'u026'

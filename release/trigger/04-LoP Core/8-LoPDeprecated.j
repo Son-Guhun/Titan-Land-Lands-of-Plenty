@@ -91,6 +91,13 @@ private module InitModule
         set unitType = 'h037' // | (NT)
         set unitType.equivalent = 'h034'
         set unitType.yawOffset = 90.
+        
+
+        // Fant Env Small Rocks
+        set unitType = 'h0VI' // 2
+        set unitType.equivalent = 'h0VL'
+        set unitType = 'h0VJ' // 3
+        set unitType.equivalent = 'h0VM'
     endmethod
 endmodule
 
