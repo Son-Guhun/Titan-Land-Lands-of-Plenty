@@ -12,7 +12,7 @@ Action
     SetVariable
         Var   : temp_point
         Call  : GetRectCenter
-            Var   : gg_rct_WarpIn
+            Var   : gg_rct_Titan_Palace_Warp_In
     SetUnitPositionLoc
         Call  : GetSpellAbilityUnit
         Var   : temp_point
