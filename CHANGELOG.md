@@ -12,19 +12,40 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 	- New units for an existing race can be added in a patch version. 
 	- New decorations for an existing deco builder can be added in a patch version.
 
-## [Unreleased]
+## [v1.3.0]
 
 ### Added
 - New Races:
-	- Undead/Demons:
-		- Cultists
-		- Dark Dwarves
-		- Faceless
-		- Vampires
-- New Deco Builders:
-	- Deco Builder Black Empire
-	- Deco Builder Hellfire Citadel
-	- Deco Builder NPC
+	- Cultists
+	- Dark Dwarves
+	- Embalmed
+	- Heretics
+	- Incorporeal
+	- Faceless
+	- Fel Elves
+	- Fel Troll
+	- Flesh
+	- Vampires
+- New Deco Builders (272 total decorations):
+	- Deco Builder Black Empire (10 total)
+	- Deco Builder Dalaran Modular 1&2 (60 total)
+	- Deco Builder Hellfire Citadel (9 total)
+	- Deco Builder NPC (6 total)
+	- Deco Builder S&S Shire 1&2 (187 total)
+	- Deco Builder Vanilla Orc (11 total)
+	- Deco Builder Vanilla Undead (11 total)
+- New Hero Towers (40 new heroes):
+	- Cultists (5 total)
+	- Dark Dwarves (3 total)
+	- Embalmed (5 total)
+	- Gray Elves
+	- Heretics (4 total)
+	- Incorporeal (5 total)
+	- Fel Elves (4 total)
+	- Fel Troll (5 total)
+	- Flesh (3 total)
+	- Vampires (6 total)
+	- Worgen
 - New Heroes:
 	- Human:
 		- Dark Enchantress
@@ -34,6 +55,8 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 	- Lizardmen:
 		- Lizardman Archdruidess
 		- Serpent Temple Champion
+	- Night Elf:
+		- Druid of Autumn
 	- Ratfolk:
 		- Nillish Fril, the White Death
 		- Kobold Overlord
@@ -41,6 +64,11 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 	- Norse:
 		- Norse Drott
 		- Yaene Ebenherzen, Lady of Baronstead
+	- Faceless:
+		- Faceless King
+		- Faceless Myrmidon
+		- Faceless Reaper
+		- Overseer of Oblivion
 	- Fleshless:
 		- Celsius
 - New Units:
@@ -57,11 +85,65 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 	- Templar:
 		- Templar Saint
 - New Decorations:
+	- Misc Generators (2 variations)
+	- Nihonjin Dojo (4 variations)
 	- Village Houses
-	- Misc Generators
+	- Water Ripples (2 variations)
+- New Hero Abilities:
+	- Greater Spirit Link
+	- Raise Flesh Golem
+	- Raise Skeleton Legion
+	- Summon Angels
+	- Summon Elemental: Void
+	- Summoning Ritual: Black Legion
+	- Summoning Ritual: Black Legion
+- Added new argument to -camera command: *zoffset*
+- Added suitable models for some workers:
+	- Bandit
+	- Blood Elf
+	- Fleshless
+	- Forest Elf
+	- Gray Elf
+	- Haradrim
+	- Murloc
+	- Norse
+	- Night Elf
+	- Pandaren
+	- Son'gar
+	- Tauren
+- Improved documentation in the F9 manual:
+	- Created two new quests to document animations and animation commands
+	- Added -nameunit command to Unit Modification Commands quest
+	- Documented -give and -rotate commands in Unit Commands 2 quest
+	- Documented -setcolor and -roll commands in Player Commands quest
+	- Now correctly shows 7 instead of 4 in limit of addable abilities
 
 ### Fixed
+- Fixed a bug that would cause neutral units to not be saved.
+- Selection commands (-sele/-seln) will now correctly recognize names with capital letters in the middle.
+- Added hero glow to many heroes that were missing it.
+- Removed food cost from Gnolls (in the Titan Palace) and militia.
+- Fixed wrong tooltips:
+	- Units: Fleshless Serpent and Lesser Lich, Militia
+	- Abilities: Holy Inspiration, Sword Throw and Mass Rejuvenation
+- Fixed hotkeys for terrain abilities and documented them in tooltips.
+- Fixed models for some units:
+	- Forgotten Eye Stalk
+	- Kraken Tentacle
+	- Pandaren Priest
+	- Pandaren Shaman
+	- Pandaren Wanderer
+- Fixed selection scale for many heroes (like Fel Lord and Sally)
+- Highborne decorations now upgrade into their high elf counterparts
+- Fixed tooltip for High Elf Altar
+- Standardized Siphon Mana ability
+
+### Changed
+- Units in production buildings are now hotkeyed (QWERASDFZXC).
+- Race Selector now trains workers instead of upgrading into main building (except for angels). Workers are now hotkeyed.
+- Default load limit is now 1 billion
 - Huge terrain overhaul:
+	- Slightly expanded west camera bounds border.
 	- Northwest Snow Lands has become a more diverse environment:
 		- Barrens-like North.
 		- A small scorched island.
@@ -78,18 +160,34 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 		- East icy-grass environment.
 		- West snowy environemnt.
 	- A Blighted Forest has appeared to the north of the Summer forest.
-- Selection commands (-sele/-seln) will now correctly recognize names with capital letters in the middle.
-- Added hero glow to many heroes that were missing it.
-- Removed food cost from Gnolls (in the Titan Palace) and militia.
-- Fixed wrong tooltips:
-	- Units: Fleshless Serpent and Lesser Lich, Militia
-	- Abilities: Holy Inspiration, Sword Throw and Mass Rejuvenation
-
-### Changed
 - Misc Dummy and Misc Target no longer have shadows. Units no longer emit sounds when hitting these decorations. Misc Dummy now has default RGB when created.
+- Added Multitile to every terrain spellbook in Deco Modifier Terrain.
 - Added a helpful description to the Water Square decoration.
 - Polished stats for Lizardmen and Ratfolk units.
 - Lizardman Juggernaut now starts with 200 mana.
+- Unit abilities that a unit possesses by default will no longer be lost when loading that unit as a hero.
+- All structures will now upgrade instantly, instead of only decorations.
+- Fixed soundsets for Ratfolk heroes.
+- Added new hero abilities to some heroes:
+  - Kel'thuzad: Raise Flesh Golem
+  - Skeleton King: Raise Skeletal Legion
+  - Elven High Conjurer: Summon Elemental:Void & Greater Spirit Link
+  - Sally Whitemane: Summon Angels
+  - Yaerius: Summoning Ritual: Angels
+  - Gaufridos: Summoning Ritual: Black Legion
+- Reduced animation time for Deco Modifier Special and Deco Modifier Terrain (will increase shift-click speeds).
+- Way Gate is now a unit and no longer has to be aligned to the 64x64 grid.
+
+### Deprecated (will be fully removed in 1.4.0)
+- Deprecated many old wall decorations. They can no longer be built from deco builders.
+	- Deco Builder Wall (Wood) has become Deco Builder Wall (Original).
+	- Deco Builder Wall (Ruins) and Deco Builder Wall (Stone) have been converted into Deco Builder Dalaran Modular 1&2
+	- Deco Builder Wall (Icecrown) reanmed to UNUSED
+
+### Removed
+- Removed limit system and -limit command for the Titan
+- Terrain Editor has been disabled (suspected of causing loading screen crashes).
+- Greatly reduced the number of abilities in the map by leveraging the power of the new patch 1.31 instance API added by Blizzard. This should somewhat reduce loading time at the end of the loading bar.
 
 
 ## [v1.2.3] - 2019-08-08
