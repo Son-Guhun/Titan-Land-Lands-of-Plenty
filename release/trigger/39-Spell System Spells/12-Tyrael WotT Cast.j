@@ -88,8 +88,9 @@ private function onCast takes nothing returns nothing
     local integer tKey = CreateAgentKey(t)
     local group slowGroup = CreateGroup()
     local unit dummy = DummyDmg_CreateDummyAt(udg_Spell__Caster, 'A04B', GetLocationX(udg_Spell__TargetPoint), GetLocationY(udg_Spell__TargetPoint), -1.)
-
-    call UnitAddAbility(dummy,'A045')
+    
+    call DummyDmg_AddAbility(dummy,'A045')
+    
     call AgentSaveInteger(tKey, 0, circleId)
     call AgentSaveAgent(tKey,   1, dummy)
     call AgentSaveAgent(tKey,   2, udg_Spell__Caster)

@@ -120,14 +120,14 @@ library DummyRecycler /*
         // - Lesser the turning time for the Dummy Units.
         // - Higher the total number of Dummy Units created at Map Initialization.
         //          Recommended Value: 10 (Max difference of 18 degrees)
-        private constant integer ANGLES_COUNT = 10
+        private constant integer ANGLES_COUNT = 1
      
         //The number of Dummy units per ANGLES_COUNT. The higher the value the:
         // - Higher the number of units that can be recycled per angle, when
         //   no more units are in queue, the system will resort to use CreateUnit.
         // - Higher the total number of Dummy Units created at Map Initialization.
         //    Recommended Value: 3 to 5 (for less overhead in Map Loading Screen)
-        private constant integer STORED_UNIT_COUNT = 3
+        private constant integer STORED_UNIT_COUNT = 10
      
         //The maximum number of Dummy units that can exist. When the system resort
         //to using CreateUnit, the unit will be permanently added to the Dummy
@@ -155,10 +155,12 @@ library DummyRecycler /*
     //Every time a new dummy unit is retrieved, it will apply this resets
     //If it is redundant/you dont need it, remove it.
     //! textmacro DUMMY_UNIT_RESET
+    /*
         call SetUnitScale(bj_lastCreatedUnit, 1, 0, 0)
         call SetUnitVertexColor(bj_lastCreatedUnit, 255, 255, 255, 255)
         call SetUnitAnimationByIndex(bj_lastCreatedUnit, 90)
         call ShowDummy(bj_lastCreatedUnit, true)
+    */
     //! endtextmacro
 // =============================================================== //
 // ==================== END CONFIGURATION ======================== //
@@ -262,7 +264,7 @@ library DummyRecycler /*
                     else
                         set dummy[this] = CreateUnit(OWNER, DUMMY_ID, 0, 0, a)
                     endif
-                    call PauseUnit(dummy[this], true)
+                    // call PauseUnit(dummy[this], true)
                     static if LIBRARY_Table then
                         set tb[GetHandleId(dummy[this])] = this
                     else
@@ -369,7 +371,7 @@ library DummyRecycler /*
             endif
         else
             set bj_lastCreatedUnit = CreateUnit(OWNER, DUMMY_ID, x, y, facing)
-            call PauseUnit(bj_lastCreatedUnit, true)
+            // call PauseUnit(bj_lastCreatedUnit, true)
             call SetUnitFlyHeight(bj_lastCreatedUnit, z, 0)
             if dummyCount < MAX_DUMMY_COUNT then
                 set this = lastInstance
@@ -408,7 +410,7 @@ library DummyRecycler /*
             set prev[next[this]] = this
             //Update Status
             call SetUnitFacing(u, angle[head])
-            call PauseUnit(u, true)
+            // call PauseUnit(u, true)
             call SetUnitOwner(u, OWNER, false)
             static if HIDE_ON_MAP_CORNER then
                 static if LIBRARY_WorldBounds then

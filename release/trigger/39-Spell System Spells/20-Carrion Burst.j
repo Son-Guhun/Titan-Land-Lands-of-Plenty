@@ -1,11 +1,9 @@
 function CarrionBurstCastAction takes nothing returns nothing
     local integer circleId = CreateGCOS(0, GetLocationX(udg_Spell__TargetPoint), GetLocationY(udg_Spell__TargetPoint), 200, 200, 4, Atan2(GetLocationY(udg_Spell__TargetPoint)-GetUnitY(udg_Spell__Caster),GetLocationX(udg_Spell__TargetPoint)-GetUnitX(udg_Spell__Caster)), bj_PI/4)
-    local unit dummy = CreateUnit(udg_Spell__CasterOwner, 'h07Q', GetLocationX(udg_Spell__TargetPoint), GetLocationY(udg_Spell__TargetPoint), 270)//GetRecycledDummy(GetLocationX(udg_Spell__TargetPoint), GetLocationY(udg_Spell__TargetPoint), 0, 270)
+    local unit dummy = DummyDmg_CreateDummyAt(udg_Spell__Caster, 0, GetLocationX(udg_Spell__TargetPoint), GetLocationY(udg_Spell__TargetPoint), 2.)
     local integer i = 0
 
-    call UnitAddAbility(dummy, 'A001')
-    call UnitApplyTimedLife(dummy, 'BTLF', 2)
-    call DummyDmg_SetCaster(DummyDmg_GetKey(dummy), udg_Spell__Caster)
+    call DummyDmg_AddAbility(dummy, 'A001')
     
     loop
     exitwhen i > 4

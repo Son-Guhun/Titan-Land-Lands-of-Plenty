@@ -8,7 +8,7 @@ function LoP_onRemoval takes unit whichUnit returns nothing
     if DummyDmg_IsDummy(DummyDmg_GetKey(whichUnit)) then
     
         debug call BJDebugMsg("Dummy Removed from the game!")
-        //call DummyDmg_FlushKey(DummyDmg_GetKey(whichUnit))
+        call DummyDmg_ClearData(whichUnit)
         
     else
 

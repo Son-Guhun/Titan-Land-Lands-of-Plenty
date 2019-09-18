@@ -6,8 +6,8 @@ function ChainSlowCastAction takes nothing returns nothing
     local unit dummy = DummyDmg_CreateDummy(udg_Spell__Caster, SpellId_CHAINSLOW(), 3.)
     local integer dummyKey = DummyDmg_GetKey(dummy)
 
-    call UnitAddAbility(dummy, 'A04E')
-    call UnitAddAbility(dummy, 'A04F')
+    call DummyDmg_AddAbility(dummy, 'A04E')
+    call DummyDmg_AddAbility(dummy, 'A04F')
     call IssueTargetOrder(dummy, "chainlightning", udg_Spell__Target)
         
     set dummy = null

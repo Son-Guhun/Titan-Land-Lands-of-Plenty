@@ -1,4 +1,33 @@
-library DummyDmg requires ArrayAgent, optional DummyRecycler
+library DummyDmg requires ArrayAgent, TableStruct, optional DummyRecycler
+
+globals
+    public constant boolean RECYCLE = true
+endglobals
+
+private function GetDummy takes real x, real y returns unit
+    static if not RECYCLE then
+        return CreateUnit(GetOwningPlayer(spellCaster), 'h07Q', x, y, bj_UNIT_FACING)
+    else
+        return GetRecycledDummyAnyAngle(x, y, 0)
+    endif
+endfunction
+
+function DummyDmg_ApplyTimedLife takes unit whichUnit, real timeout returns nothing
+    static if not RECYCLE then
+        call UnitApplyTimedLife(whichUnit, 'BTLF', timeout)
+    else
+        call DummyAddRecycleTimer(whichUnit, timeout)
+    endif
+endfunction
+
+function DummyDmg_RemoveDummy takes unit whichUnit returns nothing
+    static if not RECYCLE then
+        call RemoveUnit(whichUnit)
+    else
+        call RecycleDummy(whichUnit)
+    endif
+endfunction
+
 
 function InitializeOnDamageTrigger takes trigger whichTrigger, integer abilityId, code handlerFunc returns nothing
     if udg_Hashtable_2 == null then
@@ -20,16 +49,6 @@ function DummyDmg_GetKey takes unit whichUnit returns integer
     return -GetHandleId(whichUnit)
 endfunction
 //===========================================================================
-
-function DummyDmg_ApplyTimedLife takes unit whichUnit, real timeout returns nothing
-    //call UnitApplyTimedLife(whichUnit, 'BTLF', timeout + GetRandomReal(0,1))
-    call DummyAddRecycleTimer(whichUnit, timeout)
-endfunction
-
-function DummyDmg_RemoveDummy takes unit whichUnit returns nothing
-    // call RemoveUnit(whichUnit)
-    call RecycleDummy(whichUnit)
-endfunction
 
 function DummyDmg_GetCaster takes integer dummyKey returns unit
     return LoadUnitHandle(DummyDmg_HASHTABLE(), dummyKey, 0)
@@ -55,21 +74,59 @@ function DummyDmg_HasTrigger takes integer dummyKey returns boolean
     return HaveSavedInteger(DummyDmg_HASHTABLE(), dummyKey, 1)
 endfunction
 
-function DummyDmg_FlushKey takes integer dummyKey returns nothing
-    debug call Debug_PrintIf(DummyDmg_IsDummy(dummyKey), "Dummy Data cleared!")
-    debug call Debug_PrintIf(not DummyDmg_IsDummy(dummyKey), "Cleared Dummy Data for none-dummy?!")
-    call FlushChildHashtable(DummyDmg_HASHTABLE(), dummyKey)
+private struct DummyData extends array
+    //! runtextmacro TableStruct_NewStructField("abilities", "LinkedHashSet")
+    
+    method hasAbilities takes nothing returns boolean
+        return abilitiesExists()
+    endmethod
+    
+    method clear takes nothing returns nothing
+        call abilitiesClear()
+    endmethod
+    
+    static method get takes unit whichUnit returns DummyData
+        return GetHandleId(whichUnit)
+    endmethod
+endstruct
+
+function DummyDmg_ClearData takes unit dummy returns nothing
+    debug call Debug_PrintIf(DummyDmg_IsDummy(DummyDmg_GetKey(dummy)), "Dummy Data cleared!")
+    debug call Debug_PrintIf(not DummyDmg_IsDummy(DummyDmg_GetKey(dummy)), "Cleared Dummy Data for none-dummy?!")
+    
+    static if RECYCLE then
+        local integer abilCode
+        local LinkedHashSet abilities
+        local DummyData data = DummyData.get(dummy)
+        
+        if data.hasAbilities() then
+            set abilities = data.abilities
+            set abilCode = abilities.begin()
+            loop
+            exitwhen abilCode == abilities.end()
+                call UnitRemoveAbility(dummy, abilCode)
+                set abilCode = abilities.next(abilCode)
+            endloop
+            
+            call abilities.destroy()
+            call data.clear()  // if more data other than just abilities is added, move this out of if block
+        endif
+    endif
+    
+    call FlushChildHashtable(DummyDmg_HASHTABLE(), DummyDmg_GetKey(dummy))
 endfunction
 
-function DummyDmg_CreateDummyEx takes unit spellCaster, integer unitId, integer abilityId, real x, real y, real expiration returns unit
+function DummyDmg_CreateDummyAt takes unit spellCaster, integer abilityId, real x, real y, real expiration returns unit
     local integer dummyKey
-    local unit realSpellCaster = spellCaster  // spellCaster is actually the Dummy
+    local unit realSpellCaster = spellCaster  // save original spellCaster
     
-    //set spellCaster = CreateUnit(GetOwningPlayer(spellCaster), unitId, x, y, bj_UNIT_FACING)
-    set spellCaster = GetRecycledDummyAnyAngle(x, y, 0)
-    call DummyDmg_FlushKey(DummyDmg_GetKey(spellCaster))
-    call PauseUnit(spellCaster, false)
-    call SetUnitOwner(spellCaster, GetOwningPlayer(realSpellCaster), false)
+    set spellCaster = GetDummy(x, y)  // spellCaster is actually the Dummy
+    static if RECYCLE then
+        call DummyDmg_ClearData(spellCaster)
+        call SetUnitOwner(spellCaster, GetOwningPlayer(realSpellCaster), false)
+    endif
+    
+    call BJDebugMsg(I2S(GetUnitUserData(spellCaster)))
     
     set dummyKey = DummyDmg_GetKey(spellCaster)
     
@@ -83,17 +140,32 @@ function DummyDmg_CreateDummyEx takes unit spellCaster, integer unitId, integer 
     endif
     
     set realSpellCaster = null
-    return spellCaster  // No need to null paramters
-endfunction
-
-
-function DummyDmg_CreateDummyAt takes unit spellCaster, integer abilityId, real x, real y, real expiration returns unit
-    return DummyDmg_CreateDummyEx(spellCaster, 'h07Q', abilityId, x, y, expiration)
+    return spellCaster  // No need to null parameters
 endfunction
 
 function DummyDmg_CreateDummy takes unit spellCaster, integer abilityId, real expiration returns unit
     return DummyDmg_CreateDummyAt(spellCaster, abilityId, GetUnitX(spellCaster), GetUnitY(spellCaster), expiration)
 endfunction
 
+public function AddAbility takes unit whichUnit, integer abilCode returns nothing
+    static if RECYCLE then
+        local DummyData data = DummyData.get(whichUnit)
+        
+        
+        if not data.hasAbilities() then
+            set data.abilities = LinkedHashSet.create()
+        endif
+        
+        if not data.abilities.contains(abilCode) then
+            if UnitAddAbility(whichUnit, abilCode) then
+                call data.abilities.append(abilCode)
+            endif
+        else
+            call UnitAddAbility(whichUnit, abilCode)  // Just in case?
+        endif
+    else
+        call UnitAddAbility(whichUnit, abilCode)
+    endif
+endfunction
 
 endlibrary

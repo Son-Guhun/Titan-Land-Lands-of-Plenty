@@ -7,7 +7,7 @@ function LoP_onDeath takes unit whichUnit returns nothing
     
     if ( GetUnitPointValue(whichUnit) == 37 ) then
     
-        call DummyDmg_FlushKey(DummyDmg_GetKey(whichUnit))
+        call DummyDmg_ClearData(whichUnit)
         //call RemoveUnit( whichUnit )
         
     else
