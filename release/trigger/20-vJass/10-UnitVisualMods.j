@@ -688,6 +688,8 @@ endfunction
 
 private struct TimerData extends array
     //! runtextmacro TableStruct_NewHandleField("unit","unit")
+    //! runtextmacro TableStruct_NewPrimitiveField("owner","integer")
+    //! runtextmacro TableStruct_NewPrimitiveField("isSelected","boolean")
     
     static method get takes timer t returns thistype
         return GetHandleId(t)
@@ -695,27 +697,42 @@ private struct TimerData extends array
     
     method destroy takes nothing returns nothing
         call .unitClear()
+        call .ownerClear()
+        call .isSelectedClear()
     endmethod
 endstruct
 
 globals
-    private group hiddenGrp = CreateGroup()
+    private boolean hasStructureFly = false
 endglobals
 
-private function ForGroupUnhide takes nothing returns nothing
-    // call ShowUnit(GetEnumUnit(), true)
-    call BlzUnitDisableAbility(GetEnumUnit(), 'Amov', false, false)
+private function EnableAmov takes boolean flag returns nothing
+    local integer i = 0
+    loop
+    exitwhen i >= bj_MAX_PLAYER_SLOTS
+        call SetPlayerAbilityAvailable(Player(0), 'Amov', flag)
+        set i = i + 1
+    endloop
 endfunction
 
 private function onTimer3 takes nothing returns nothing
     local timer t = GetExpiredTimer()
     local TimerData tData = TimerData.get(t)
     local unit u = tData.unit
+    local player owner = Player(tData.owner)
     
     call UnitRemoveAbility(u, 'DEDF')
-    
-    call ForGroup(hiddenGrp, function ForGroupUnhide)
-    call GroupClear(hiddenGrp)
+
+    if hasStructureFly then
+        call EnableAmov(true)
+        set hasStructureFly = false
+    endif
+    call SetUnitOwner(u, owner, false)
+    if tData.isSelected then
+        if GetLocalPlayer() == owner then
+            call SelectUnit(u, true)
+        endif
+    endif
     
     call PauseTimer(t)
     call DestroyTimer(t)
@@ -725,29 +742,21 @@ private function onTimer3 takes nothing returns nothing
     set u = null
 endfunction
 
-private function FilterHide takes nothing returns boolean
-    local unit filterU = GetFilterUnit()
-    if GetUnitAbilityLevel(filterU, 'Amov') > 0 then
-        //call ShowUnit(filterU, false)
-        call BlzUnitDisableAbility(filterU, 'Amov', true, false)
-        call GroupAddUnit(hiddenGrp, filterU)
-    endif
-    set filterU = null
-    return false
-endfunction
-
 private function onTimer2 takes nothing returns nothing
     local timer t = GetExpiredTimer()
     local unit u = TimerData.get(t).unit
+    local player owner = GetOwningPlayer(u)
     
     // Here, we make sure that units below the building don't stop it from instantly rooting (they have to move away first)
-    call GroupEnumUnitsInRange(ENUM_GROUP, GetUnitX(u), GetUnitY(u), 1000., Filter(function FilterHide))
+    //call GroupEnumUnitsInRange(ENUM_GROUP, GetUnitX(u), GetUnitY(u), 1000., Filter(function FilterHide))
     
-    // More efficient then the method used above, but units below still move out of the way: 
-    // call SetUnitOwner(u, Player(bj_PLAYER_NEUTRAL_VICTIM), false)
+    // More efficient than the method used above, but units below still move out of the way: 
+    call SetUnitOwner(u, Player(bj_PLAYER_NEUTRAL_VICTIM), false)
     
     call IssuePointOrder(u, "root", GetUnitX(u), GetUnitY(u))
     call TimerStart(t, 0, false, function onTimer3)
+    set TimerData.get(t).owner = GetPlayerId(owner)
+    set TimerData.get(t).isSelected = IsUnitSelected(u, owner)
     
     set t = null
     set u = null
@@ -794,6 +803,11 @@ function GUMSGroupFunction takes nothing returns nothing
                 call TimerStart(t, 0, false, function onTimer2)
                 call SetUnitAnimation(enumUnit, "stand")
                 set t = null
+                
+                if not hasStructureFly then
+                    call EnableAmov(false)
+                    set hasStructureFly = true
+                endif
             endif
             call GroupRemoveUnit(loopGroup, enumUnit)
         else
