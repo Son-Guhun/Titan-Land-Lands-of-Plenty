@@ -1240,6 +1240,26 @@ Action
     CommentString
         Const : ' '
     CommentString
+        Const : ---------------------------
+    CommentString
+        Const : 'Breath of Frost'
+    CommentString
+        Const : ---------------------------
+    SetVariable
+        Var   : Spell__Ability
+        Const : A05W
+    CommentString
+        Const : ' '
+    SetVariable
+        Var   : Spell__Trigger_OnCast
+        Var   : gg_trg_Breath_of_Frost
+    CommentString
+        Const : ' '
+    TriggerExecute
+        Var   : gg_trg_Spell_System
+    CommentString
+        Const : ' '
+    CommentString
         Const : ' '
     CommentString
         Const : ' '

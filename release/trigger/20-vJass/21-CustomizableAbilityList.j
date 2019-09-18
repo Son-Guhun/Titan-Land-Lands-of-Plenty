@@ -99,6 +99,7 @@ private module Init
         call .registerAbility('A02I', true)  // Summoning Ritual: Black Legion
         call .registerAbility('A049', true)  // Summoning Ritual: Angels
         call .registerAbility('A04G', true)  // Summon Angels
+        call .registerAbility('A05W', true)  // Breath of Frost
     
         // Default hero abilities
         call .registerAbility('AHbz', true)  // Blizzard
