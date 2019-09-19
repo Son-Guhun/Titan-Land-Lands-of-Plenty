@@ -108,6 +108,63 @@ private module InitModule
         set unitType.equivalent = 'h0VL'
         set unitType = 'h0VJ' // 3
         set unitType.equivalent = 'h0VM'
+        
+        // Human Town Structures
+        set unitType = 'hkee' // Castle
+        set unitType.equivalent = 'htow'
+        set unitType.animTags = "first"
+        set unitType = 'hcas' // Keep
+        set unitType.equivalent = 'htow'
+        set unitType.animTags = "second"
+        
+        set unitType = 'hgtw' // Guard Tower
+        set unitType.equivalent = 'hwtw'
+        set unitType.animTags = "first"
+        set unitType = 'hctw' // Cannon Tower
+        set unitType.equivalent = 'hwtw'
+        set unitType.animTags = "second"
+        set unitType = 'hatw' // Arcane Tower
+        set unitType.equivalent = 'hwtw'
+        set unitType.animTags = "third"
+        
+        
+        // Orc Town Halls
+        set unitType = 'ogre' // 2
+        set unitType.equivalent = 'h176'
+        set unitType = 'ostr' // 2
+        set unitType.equivalent = 'h176'
+        set unitType.animTags = "first"
+        set unitType = 'ofrt' // 3
+        set unitType.equivalent = 'h176'
+        set unitType.animTags = "second"
+        
+        // Temple of Tides
+        set unitType = 'nntt'
+        set unitType.equivalent = 'h0PE'
+        set unitType.animTags = "first"
+        
+        // Removed Town Halls
+        set unitType = 'h12K' // Lizardman Village
+        set unitType.equivalent = 'h11T'
+        set unitType = 'o02U' // Centaur Main Hut
+        set unitType.equivalent = 'nct2'
+        set unitType = 'o00I' // Troll Main Hut
+        set unitType.equivalent = 'h17C'
+        set unitType = 'ogre' // Great Hall
+        set unitType.equivalent = 'h176'
+        set unitType = 'h004' // Dwarven Temple
+        set unitType.equivalent = 'hbla'
+        set unitType = 'o00L' // Fel Great Hall
+        set unitType.equivalent = 'h176'
+        set unitType = 'o01Z' // Tauren Main Hut
+        set unitType.equivalent = 'h176'
+        set unitType = 'u04K' // Cultist Necropolis
+        set unitType.equivalent = 'h165'
+        set unitType = 'h0ZZ' // Worgen Manor
+        set unitType.equivalent = 'htow'
+        set unitType = 'u047' // Faceless Aspirant Spire
+        set unitType.equivalent = 'u04D'
+        
     endmethod
 endmodule
 
