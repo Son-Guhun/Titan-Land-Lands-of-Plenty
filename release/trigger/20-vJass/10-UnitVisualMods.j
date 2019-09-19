@@ -572,7 +572,7 @@ function GUMSCopyValues takes unit source, unit target returns nothing
         call GUMSSetUnitAnimSpeed(target, data[sourceId].real[ASPEED])
     endif
     if sourceId.hasAnimTag() then
-        call GUMSAddUnitAnimationTag(target, data[sourceId].string[ATAG])
+        call GUMSAddUnitAnimationTag(target, GUMSConvertTags(UnitVisualMods_TAGS_DECOMPRESS,data[sourceId].string[ATAG]))
     endif
 endfunction
 

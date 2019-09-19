@@ -6,6 +6,8 @@ struct DeprecatedData extends array
     implement InitModule
     //! runtextmacro TableStruct_NewReadonlyPrimitiveField("equivalent", "integer")
     //! runtextmacro TableStruct_NewReadonlyPrimitiveField("yawOffset", "real")
+    //! runtextmacro TableStruct_NewReadonlyPrimitiveField("animTags", "string")
+    //! runtextmacro TableStruct_NewReadonlyPrimitiveField("scale", "real")
     
     static method isUnitTypeIdDeprecated takes DeprecatedData unitId returns boolean
         return unitId.equivalentExists()
@@ -13,6 +15,14 @@ struct DeprecatedData extends array
     
     method hasYawOffset takes nothing returns boolean
         return yawOffsetExists()
+    endmethod
+    
+    method hasAnimTags takes nothing returns boolean
+        return animTagsExists()
+    endmethod
+    
+    method hasScale takes nothing returns boolean
+        return scaleExists()
     endmethod
 endstruct
 

@@ -362,6 +362,16 @@ function LoadUnit takes string chat_str, player un_owner returns nothing
             if DeprecatedData(un_type).hasYawOffset() then
                 set un_fangle = ModuloReal(un_fangle + DeprecatedData(un_type).yawOffset, 360.)
             endif
+            if DeprecatedData(un_type).hasAnimTags() then
+                if animTag == "D" then
+                    set animTag = DeprecatedData(un_type).animTags
+                endif
+            endif
+            if DeprecatedData(un_type).hasScale() then
+                if size == "D" then
+                    set size = R2S(DeprecatedData(un_type).scale)
+                endif
+            endif
             
             set un_type = DeprecatedData(un_type).equivalent
         endif
