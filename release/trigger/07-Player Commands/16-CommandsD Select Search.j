@@ -90,8 +90,8 @@ function SearchSelectMain takes nothing returns boolean
         set udg_System_searchStr = StringCase(args, true)
         
         // Handle special cases
-        if udg_System_searchStr == "Rect" then
-            set udg_System_searchStr = "Generator"  // -sele rect will select rect generator
+        if udg_System_searchStr == "RECT" then
+            set udg_System_searchStr = "GENERATOR"  // -sele rect will select rect generator
         endif
         
         call GroupEnumUnitsOfPlayer(ENUM_GROUP, GetTriggerPlayer(), Condition(function SearchSelectFilter))
@@ -100,7 +100,7 @@ function SearchSelectMain takes nothing returns boolean
 endfunction
 
 //===========================================================================
-function InitTrig_Commands_Select_Search takes nothing returns nothing
+function InitTrig_CommandsD_Select_Search takes nothing returns nothing
     call LoP_Command.create("-seln", ACCESS_USER, Condition(function SearchSelectMain ))
     call LoP_Command.create("-sele", ACCESS_USER, Condition(function SearchSelectMain ))
 endfunction

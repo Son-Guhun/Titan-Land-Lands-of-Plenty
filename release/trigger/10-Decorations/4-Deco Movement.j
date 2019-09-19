@@ -81,8 +81,11 @@ scope DecoMovement
         endif
         
         if ( GetUnitTypeId(trigU) == CONTROLLER ) then
-            call ForGroup( udg_Player_ControlGroup[PlayerNumber(trigU)], function Controller_ForGroupFunc )
-			
+            if ( spellId == RectGenerator_MOVE ) then
+                call SetUnitPosition(trigU, GetSpellTargetX(), GetSpellTargetY())
+            else
+                call ForGroup( udg_Player_ControlGroup[PlayerNumber(trigU)], function Controller_ForGroupFunc )
+            endif
 			
         elseif ( spellId == MOVE_LEFT ) then
             call SetUnitPosition(trigU, X(trigU) - udg_System_DecoGrid[PlayerNumber(trigU)], Y(trigU))

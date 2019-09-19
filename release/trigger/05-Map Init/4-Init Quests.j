@@ -82,7 +82,7 @@ Removes old animation tags and adds new animation tag to a unit. Multiple animat
 |cffffff00-anim <animation name> <animation tags>|r
 Set the animation for the 'anim command. If no animation name is given, 'Stand' is assumed. Any animation tags are lost when new a animation is played.
 |cffffff00'anim <animation name> <animation tags>|r
-Play a unit's animation. If no animation name is specified, then the default value set by -anim is used.
+Play a unit's animation, ignoring any tags set by -tag. If no animation name is specified, then the default value set by -anim is used.
 
 |cffff0000Examples:|r
 'anim stand alternate: This will make a demon hunter become a demon as long as they stand still.
