@@ -177,6 +177,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
   - Gaufridos: Summoning Ritual: Black Legion
 - Reduced animation time for Deco Modifier Special and Deco Modifier Terrain (will increase shift-click speeds).
 - Way Gate is now a unit and no longer has to be aligned to the 64x64 grid.
+- Rally ability icon will no longer show up in production structures.
 
 ### Deprecated (will be fully removed in 1.4.0)
 - Deprecated many old wall decorations. They can no longer be built from deco builders.
