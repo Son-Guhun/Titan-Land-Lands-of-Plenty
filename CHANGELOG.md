@@ -12,10 +12,10 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 	- New units for an existing race can be added in a patch version. 
 	- New decorations for an existing deco builder can be added in a patch version.
 
-## [v1.3.0] - 2019-09-19
+## [v1.3.1] - 2019-09-19
 
 ### Added
-- Added a new ability to Waygates that allows the player to fix them after heving moved them with decoration abilities.
+- Added a new ability to Waygates that allows the player to fix them after having moved them with decoration abilities.
 - Created new multishot ability and added it to the Drow Archer Elite unit.
 - New hero ability: Breat of Frost. This ability has been added to the following heroes:
   - Fleshless Forgotten Wyrm
@@ -282,8 +282,6 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 	- Abilities: Holy Inspiration, Sword Throw and Mass Rejuvenation
 - Fixed hotkeys for terrain abilities and documented them in tooltips.
 - Fixed models for some units:
-	- Forgotten Eye Stalk
-	- Kraken Tentacle
 	- Pandaren Priest
 	- Pandaren Shaman
 	- Pandaren Wanderer
