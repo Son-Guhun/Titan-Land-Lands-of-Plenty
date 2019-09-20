@@ -12,7 +12,161 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 	- New units for an existing race can be added in a patch version. 
 	- New decorations for an existing deco builder can be added in a patch version.
 
-## [v1.3.0]
+## [v1.3.0] - 2019-09-19
+
+### Added
+- Added a new ability to Waygates that allows the player to fix them after heving moved them with decoration abilities.
+- Created new multishot ability and added it to the Drow Archer Elite unit.
+- New hero ability: Breat of Frost. This ability has been added to the following heroes:
+  - Fleshless Forgotten Wyrm
+  - Icecrown Lich
+  - Lord of Blue Scales
+  - Lord of Frost
+- Added a new deco builder (Deco Builder Plants) which creates some plant decorations that had been left in the Titan Palace. This was added as an exception to the general rule of no new deco builders in a patch version, as the decorations that it creates were already in the map.
+
+### Fixed
+- Fixed a bug which would cause copies of units to lose not keep the original's animation tags.
+- Fixed an issue that could cause units to become unable to move if they were close to two structures which were given or loaded with a flying height.
+- Fixed an issue where decorations would change height slightly when they were made unselectable/selectable near a cliff.
+- S&S Shire Tree 1 (Autumnal) will now upgrade correctly, instead of upgrading to itself.
+- Fixed models for:
+	- Embalmed Tomb Knight
+	- Fel Ent
+	- Blacksmith Table
+	- Blacksmith Forge
+- Removed food cost from units:
+	- Wraith
+	- Flesh Dire Wolf
+	- Flesh Dog
+- Fixed special case for "rect" argument in -seln command.
+- Reduced build time of Flesh builder from 5 seconds to 3 seconds.
+- Fixed soundset for the Ancient of Anarachy.
+- Fixed tooltips for S&S Shire deco builders.
+- Fixed damage value in Greater Shockwave tooltip.
+- Fixed error in Greater Spirit Link tooltip.
+- Fixed soundset for Expert Assassin human hero.
+- Fixed an issue where selecting Drow Blade-Princess would show her level on top of other nearby heroes.
+- Fixed Wood Elf Rider name.
+- Adjusted default scale for some Norse units:
+	- Speaman
+	- Footman
+	- Elite
+	- Cavalier
+	- Valkdottir
+- Fixed icons for:
+	- Norse Berserker
+	- Norse Elite
+	- Norse Veteran
+	- City Lamp and Lantern
+	- Block decorations
+	- Effect decortions
+	- Runic Decorations
+	- Tableware Decorations
+- Fixed teleportation for Deco Modifier Controller.
+- Fixed tooltip for Ruined Rowboat.
+- Fixed units that would not decay into skeletons persisting as corpses:
+	- Norse Elite
+	- Norse Berserker
+	- Drow Shadow Witch
+- Added a hero glow to the heroes that were missing one:
+	- Everchief
+	- Legendary Thief
+- Changed primary attribute of Goblin Trade prince hero to Intelligence (from Agility).
+
+### Changed
+- Deco Builder Nordic has been renamed to Deco Builder Norse.
+- Deco Builder Medieval 1 has been renamed to Deco Builder Feudal (along with the old Medieval decorations).
+- Feudal Decorations have been renamed as follows (respectively):
+	- Workshop, Market, Armory, Stables -> Workshop 1,2,3,4
+	- House, Tavern, Lumber Mill -> House 1,2,3
+	- Barracks, Academy, Archery, Town Center -> Barracks 1,2,3,4
+	- Watch Tower, Guard Tower, Wizardry Tower -> Tower 1,2,3
+	- Arcane Sanctum, Castle -> Palace 1,2
+- The following heroes are now available at hero Towers:
+	- Paladin
+	- Goblin Alchemist
+	- Goblin Tinker
+	- Pit Lord
+	- Dark Ranger
+- The -setcolor command will no longer affect the Titan Powers.
+- Removed proper names from Tavern neutral heroes.
+- Incorporeal units no longer have the flying movement type (except the Wyvern).
+- Changed armor sounds of Incorporeal units to etheral sounds.
+- Added village decorations that were in the Titan Palace to Deco Builder Village.
+- Gave splash damage to Drow Shadow Witch.
+- Gave bouncing attack to Drow Witcher.
+- The Spirit Touch unit ability will no longer target the caster.
+- Improved the Battle Priest's  Purge ability.
+- Fleshless ancient boneyard now trains Skeletal Raptors.
+- Added attack values to incorporeal sorcerer and wyvern.
+- Added spells to units of the races added in 1.3.0.
+- Changed the Lord of Green Scale's primary attribute to Agility and gave him appropriate (non-dreadlord) abilities.
+- Norse Wizard's Tower no longer trains human casters.
+- Added documentation in quests that the 'anim command does not take into account animation tags previously set.
+- Draenei Relic Vault has been renamed to Draenei Vault 1 and now upgrades into the old Draenei Vault (now numbered 2).
+- Renamed Draenei Pylon to Draenei Tower 1 (and the old tower to Tower 2).
+- Pandaren Statue is now Statue Pandaren and thus is now built by Deco Builder Statues 2.
+- Norse Tavern is now Feudal House 4.
+- The following buildings have been converted to decorations:
+	- Bandit Hideout (Ruined Cathedral)
+	- Black Legion Castle (Medieval Castle)
+	- Dark Human Stronghold (Chaos Stronghold)
+	- Draenei Metropolis
+	- Drow Dark Hall
+	- Elven Citadel (Dalaran Town Hall 2)
+	- Fleshless Great Crypt (Gravestone Graveyard)
+	- Forest Elf Hall of Nature (Forest Elf Town Hall)
+	- Goblin Center
+	- Haradrim Palace (Arabian Palace)
+	- High Elven Castle (High Elf Castle)
+	- Norse Hall
+	- Pandaren City Hall
+	- Pirate Tower (Ruined Dalaran Citadel)
+	- Ratfolk Nest (Medieval Mine)
+	- Rostrodle Castle
+	- Runic Town Hall
+	- Templar Cathedral (Medieval Church)
+	- (Human) Altar
+	- (Human) Arcane Vault
+	- (Human) Blacksmith
+	- (Human) Farm
+	- (Human) Lumber Mill
+	- (Human) Tower
+	- (Human) Town Hall
+- Faceless Ziggurat has been renamed to Faceless Spire and uses the old Faceless Aspirant Spire model.
+- Small terrain changes to the Titan Palace.
+
+### Deprecated
+- The following deprecated units will no longer be loaded into the game. Instead, they will be replaced by an equivalent unit (in parenthesis). When they are eventually removed, this automatic replacement will no longer occur and they may be loaded as different units:
+	- FantEnv Rock Small 2 (FantEnv Rock 2)
+	- FantEnv Rock Small 2 (FantEnv Rock 3)
+	- Keep (Human Town Hall with "first" tag)
+	- Castle (Human Town Hall with "second" tag)
+	- Guard Tower (Human Tower with "first" tag)
+	- Cannon Tower (Human Tower with "second" tag)
+	- Arcane Tower (Human Tower with "third" tag)
+	- Great Hall (Vanilla Great Hall)
+	- Stronghold (Vanilla Great Hall with "first" tag)
+	- Fortress (Vanilla Great Hall with "second" tag)
+	- Temple of Tides  (Naga Temple of Tides with "first" tag)
+	- Lizardman Village (Medieval Mine)
+	- Centaur Main Hut (Hut Centaur 2)
+	- Troll Main Hut (Vanilla Voodoo Lounge)
+	- Great Hall (Vanilla Great Hall)
+	- Dwarven Temple (Human Blacksmith)
+	- Fel Great Hall (Vanilla Great Hall)
+	- Tauren Main Hut (Vanilla Great Hall)
+	- Cultist Necropolis (Vanilla Necropolis)
+	- Worgen Manor (Human Town Hall)
+	- Faceless Aspirant Spire (Faceless Spire)
+
+### Removed
+- Removed all partially implemented decorations from the Titan Palace, since they are now fully implemented.
+- Removed Skeletal Raptor from Titan Palace, since it can now be produce by the Fleshless.
+- The Tavern no longer sells heroes. The heroes that used to be sold there can now be bought at the Hero Towers.
+
+
+## [v1.3.0] - 2019-09-14
 
 ### Added
 - New Races:
