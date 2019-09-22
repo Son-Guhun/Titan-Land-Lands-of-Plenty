@@ -126,8 +126,6 @@ function DummyDmg_CreateDummyAt takes unit spellCaster, integer abilityId, real 
         call SetUnitOwner(spellCaster, GetOwningPlayer(realSpellCaster), false)
     endif
     
-    call BJDebugMsg(I2S(GetUnitUserData(spellCaster)))
-    
     set dummyKey = DummyDmg_GetKey(spellCaster)
     
     call DummyDmg_SetCaster(dummyKey, realSpellCaster)

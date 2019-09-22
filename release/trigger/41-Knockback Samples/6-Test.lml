@@ -30,7 +30,7 @@ Action
     Disab: CustomScriptCode
         Const : 'call GroupEnumUnitsInRangeOfLoc(udg_LeaklessGroup, udg_TargetPoint, 128.00, null)'
     Disab: ForGroupMultiple
-        Var   : LeaklessGroup
+        Disab: 
         Action
             UnitAddAbilityBJ
                 Const : Aeth
@@ -59,7 +59,7 @@ Action
     Disab: TriggerSleepAction
         Const : 0.00
     Disab: ForGroupMultiple
-        Var   : LeaklessGroup
+        Disab: 
         Action
             IfThenElseMultiple
                 Condition

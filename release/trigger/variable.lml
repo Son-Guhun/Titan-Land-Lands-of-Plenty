@@ -2,12 +2,8 @@ ALL_PLAYERS_FORCE: force
 RootUnit: unit
 ItemAbilityForInteger: integer
 WholeMapRegion: rect
-CometUnit: unit
-LegendaryScrollSpellGroup: group
-LegendaryScrollSpellInteger: integer
 RealNames: string
     Array : 1
-PathWayForInteger: integer
 temp_integer: integer
 save_password: string
     Array : 1
@@ -265,14 +261,11 @@ IsUnitReincarnating: boolean
 IsUnitRemoved: boolean
     Array : 1
 UnitIndexerEnabled: boolean
-DamageBlockingAbility: abilcode
-SpellDamageAbility: abilcode
 DamageTypeExplosive: integer
 DamageTypeCriticalStrike: integer
 DamageTypeHeal: integer
 DamageTypeReduced: integer
 DamageTypeBlocked: integer
-DmgEvBracers: itemcode
 AfterDamageEvent: real
 DamageEvent: real
 DamageModifierEvent: real
@@ -284,19 +277,14 @@ NextDamageOverride: boolean
 DamageEventSource: unit
 DamageEventTarget: unit
 DamageEventTrigger: trigger
-DmgEvTrig: trigger
 DamageEventType: integer
 LastDmgPrevType: integer
     Array : 1
 NextDamageType: integer
-DmgEvRecursionN: integer
-DmgEvRunning: boolean
-DmgEvStarted: boolean
 IsDamageSpell: boolean
 LastDmgWasSpell: boolean
     Array : 1
 LastDamageHP: real
-DmgEvTimer: timer
 LastDmgPrevAmount: real
     Array : 1
 LastDmgValue: real
@@ -479,7 +467,6 @@ K2DUnbiasedCollision: boolean
     Array : 1
 Knockback2DUnbiasedCollision: boolean
 LoopInt: integer
-LeaklessGroup: group
 save_LastLoadedUnit: unit
     Array : 1
 System_AutonameBoolean: boolean

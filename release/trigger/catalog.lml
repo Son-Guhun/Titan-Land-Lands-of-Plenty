@@ -244,14 +244,10 @@
     '2-Unit Event': 'Unit Event'
 '24-Damage Engine': 'Damage Engine'
     '1-Damage Engine Config': 'Damage Engine Config'
-    '2-Damage Engine Old': 'Damage Engine Old'
-        Disab
-    '3-Damage Engine': 'Damage Engine'
-    '4-Damage Tag': 'Damage Tag'
-    5-Bash: Bash
-    '6-Combat Tag': 'Combat Tag'
-    '7-Damage Engine 5 1': 'Damage Engine 5 1'
-        Disab
+    '2-Damage Engine': 'Damage Engine'
+    '3-Damage Tag': 'Damage Tag'
+    4-Bash: Bash
+    '5-Combat Tag': 'Combat Tag'
 '25-GUI Spell System': 'GUI Spell System'
     '1-Read Me': 'Read Me'
         Comment

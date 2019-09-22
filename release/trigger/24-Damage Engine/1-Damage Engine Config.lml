@@ -13,24 +13,6 @@ Action
     CommentString
         Const : -
     CommentString
-        Const : 'Copy the Cheat Death Ability from Object Editor into your map and set the following variable respectively:'
-    CommentString
-        Const : -
-    SetVariable
-        Var   : DamageBlockingAbility
-        Const : A01S
-    CommentString
-        Const : -
-    CommentString
-        Const : 'Copy the Detect Spell Damage Ability from Object Editor into your map and set the following variable respectively:'
-    CommentString
-        Const : -
-    SetVariable
-        Var   : SpellDamageAbility
-        Const : A01T
-    CommentString
-        Const : -
-    CommentString
         Const : 'You can add extra classifications here if you want to differentiate between your triggered damage'
     CommentString
         Const : 'Use DamageTypeExplosive (or any negative value damage type) if you want a unit killed by that damage to explode'
