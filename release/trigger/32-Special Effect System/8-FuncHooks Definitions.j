@@ -27,9 +27,9 @@ endfunction
 private function SetUnitFlyHeight takes unit u, real h, real r returns nothing
     call OrglSetUnitFlyHeight(u,h,r)
     
-    if UnitHasAttachedEffect(u) then
+    // if UnitHasAttachedEffect(u) then
         call AttachedSFX_onSetHeight(u, h, r)
-    endif
+    // endif
 endfunction
 
 private function AddUnitAnimationProperties takes unit u, string p, boolean a returns nothing

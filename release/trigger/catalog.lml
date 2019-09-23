@@ -213,7 +213,8 @@
     '08-By Guhun': 'By Guhun'
         Comment
     09-CutToComma: CutToComma
-    10-UnitVisualMods: UnitVisualMods
+    10----------------------------: ---------------------------
+        Comment
     '11-Camera System': 'Camera System'
         Disab
     12-MoveSpeedBonus: MoveSpeedBonus
@@ -228,6 +229,8 @@
     '20-Create Water': 'Create Water'
         Disab
     21-CustomizableAbilityList: CustomizableAbilityList
+    22-UnitVisualMods: UnitVisualMods
+    23-UnitVisualValues: UnitVisualValues
 21-Map-specific: Map-specific
     1-Debug: Debug
     2-ArrayAgent: ArrayAgent

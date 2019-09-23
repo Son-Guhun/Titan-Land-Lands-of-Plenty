@@ -89,6 +89,14 @@ struct DecorationEffect extends array
     method operator unitType takes nothing returns integer
         return SpecialEffect(this).unitType
     endmethod
+    
+    method operator height takes nothing returns real
+        return SpecialEffect(this).height
+    endmethod
+    
+    method operator height= takes real value returns nothing
+        set SpecialEffect(this).height = value
+    endmethod
 
     method operator x takes nothing returns real
         return BlzGetLocalSpecialEffectX(.effect)
@@ -101,6 +109,8 @@ struct DecorationEffect extends array
         call DecorationEffectBlock.get(BlzGetLocalSpecialEffectX(decoration), y).effects.remove(this)
         call DecorationEffectBlock.get(value, y).effects.append(this)
         call BlzSetSpecialEffectX(decoration, value)
+        call BlzSetSpecialEffectHeight(.effect, .height)
+        
         
         set decoration = null
     endmethod
@@ -116,16 +126,9 @@ struct DecorationEffect extends array
         call DecorationEffectBlock.get(x, BlzGetLocalSpecialEffectY(decoration)).effects.remove(this)
         call DecorationEffectBlock.get(x, value).effects.append(this)
         call BlzSetSpecialEffectY(decoration, value)
+        call BlzSetSpecialEffectHeight(.effect, .height)
         
         set decoration = null
-    endmethod
-    
-    method operator height takes nothing returns real
-        return SpecialEffect(this).height
-    endmethod
-    
-    method operator height= takes real value returns nothing
-        set SpecialEffect(this).height = value
     endmethod
     
     method operator yaw takes nothing returns real
@@ -254,12 +257,17 @@ struct DecorationEffect extends array
         endif
     endmethod
     
-    static method create takes player playerid, integer unitType, real x, real y returns DecorationEffect
-        local integer this = SpecialEffect.create(unitType, x, y)
-        call .setOwner(playerid)
-        call DecorationEffectBlock.get(x, y).effects.append(this)
-        return this
+    static method convertSpecialEffect takes player playerid, SpecialEffect sfx returns DecorationEffect
+        call DecorationEffect(sfx).setOwner(playerid)
+        call DecorationEffectBlock.get(sfx.x, sfx.y).effects.append(sfx) 
+        return sfx
     endmethod
+    
+    static method create takes player playerid, integer unitType, real x, real y returns DecorationEffect
+        return thistype.convertSpecialEffect(playerid, SpecialEffect.create(unitType, x, y))
+    endmethod
+    
+    
     
     method destroy takes nothing returns nothing
         local effect e = .effect

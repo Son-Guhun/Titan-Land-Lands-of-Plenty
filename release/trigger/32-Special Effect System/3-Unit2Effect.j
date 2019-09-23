@@ -1,9 +1,9 @@
-library Unit2Effect requires SpecialEffect, StringSubanimations, UnitVisualMods, UnitTypeDefaultValues
+library Unit2Effect requires DecorationSFX, StringSubanimations, UnitVisualValues, UnitTypeDefaultValues
 
-function Unit2EffectEx takes unit whichUnit, player owner returns DecorationEffect
+function Unit2SpecialEffect takes unit whichUnit returns SpecialEffect
     local UnitTypeDefaultValues unitType = GetUnitTypeId(whichUnit)
     local UnitVisuals unitData = GetHandleId(whichUnit)
-    local DecorationEffect result = DecorationEffect.create(owner, unitType, GetUnitX(whichUnit), GetUnitY(whichUnit))
+    local SpecialEffect result = SpecialEffect.create(unitType, GetUnitX(whichUnit), GetUnitY(whichUnit))
     local real value
     
     local integer red
@@ -66,9 +66,17 @@ function Unit2EffectEx takes unit whichUnit, player owner returns DecorationEffe
     return result
 endfunction
 
-function Unit2Effect takes unit whichUnit returns DecorationEffect
-    return Unit2EffectEx(whichUnit, GetOwningPlayer(whichUnit))
+function Unit2EffectEx takes player owner, unit whichUnit returns DecorationEffect
+    return DecorationEffect.convertSpecialEffect(owner, Unit2SpecialEffect(whichUnit))
 endfunction
+
+function Unit2Effect takes unit whichUnit returns DecorationEffect
+    return Unit2EffectEx(GetOwningPlayer(whichUnit), whichUnit)
+endfunction
+
+endlibrary
+
+library Effect2Unit requires DecorationSFX, StringSubanimations, UnitVisualMods, UnitTypeDefaultValues
 
 function Effect2Unit takes DecorationEffect whichEffect returns unit
     local unit u = CreateUnit(whichEffect.getOwner(), whichEffect.unitType, whichEffect.x, whichEffect.y, Rad2Deg(whichEffect.yaw))

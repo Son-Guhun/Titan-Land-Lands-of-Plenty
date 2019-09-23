@@ -22,11 +22,11 @@ private function EnumFunc takes nothing returns nothing
             if GetUnitFlyHeight(enumUnit) < GUMS_MINIMUM_FLY_HEIGHT() or GetUnitAbilityLevel(enumUnit, 'Awrp') > 0 then
                 call GUMSMakeUnitUnSelectable(enumUnit)
             else
-                call Unit2EffectEx(enumUnit, LoP_GetOwningPlayer(enumUnit))
+                call Unit2EffectEx(LoP_GetOwningPlayer(enumUnit), enumUnit)
                 call KillUnit(enumUnit)
             endif
         else
-            call Unit2EffectEx(enumUnit, LoP_GetOwningPlayer(enumUnit))
+            call Unit2EffectEx(LoP_GetOwningPlayer(enumUnit), enumUnit)
             call KillUnit(enumUnit)
         endif
     endif

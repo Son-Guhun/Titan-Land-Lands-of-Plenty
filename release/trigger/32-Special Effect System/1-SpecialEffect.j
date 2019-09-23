@@ -54,6 +54,7 @@ struct SpecialEffect extends array
     
     method operator x= takes real value returns nothing
         call BlzSetSpecialEffectX(.effect, value)
+        call BlzSetSpecialEffectHeight(.effect, .height_impl)
     endmethod
     
     method operator y takes nothing returns real
@@ -62,6 +63,7 @@ struct SpecialEffect extends array
     
     method operator y= takes real value returns nothing
         call BlzSetSpecialEffectY(.effect, value)
+        call BlzSetSpecialEffectHeight(.effect, .height_impl)
     endmethod
     
     method operator height takes nothing returns real

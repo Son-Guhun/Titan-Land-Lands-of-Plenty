@@ -1,4 +1,4 @@
-library AttachedSFX requires SpecialEffect, StringSubanimations, TableStruct
+library AttachedSFX requires Unit2Effect, TableStruct
 
 struct UnitData extends array
 
@@ -23,7 +23,7 @@ function GetUnitAttachedEffect takes unit whichUnit returns SpecialEffect
 endfunction
 
 function UnitCreateAttachedEffect takes unit whichUnit returns SpecialEffect
-    local SpecialEffect sfx = SpecialEffect.create(GetUnitTypeId(whichUnit), GetUnitX(whichUnit), GetUnitY(whichUnit))
+    local SpecialEffect sfx = Unit2SpecialEffect(whichUnit)
     
     set UnitData.get(whichUnit).attachedEffect = sfx
     call SetUnitVertexColor(whichUnit, 0, 0, 0, 0)
@@ -38,9 +38,15 @@ public function onSetPosition takes unit whichUnit, real x, real y returns nothi
 endfunction
 
 public function onSetHeight takes unit whichUnit, real height, real rate returns nothing
-    local SpecialEffect sfx = UnitData.get(whichUnit).attachedEffect
+    local SpecialEffect sfx
     
-    set sfx.height = height
+    if UnitHasAttachedEffect(whichUnit) then
+        set sfx = UnitData.get(whichUnit).attachedEffect
+        set sfx.height = height
+    elseif height < 0 then
+        set sfx = UnitCreateAttachedEffect(whichUnit)
+        set sfx.height = height
+    endif
 endfunction
 
 public function onAddAnimationProperties takes unit whichUnit, string properties, boolean add returns nothing
