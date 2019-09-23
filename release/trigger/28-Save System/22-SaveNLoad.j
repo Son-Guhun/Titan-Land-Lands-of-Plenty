@@ -225,7 +225,7 @@ function LoadSpecialEffect takes player owner, UnitTypeDefaultValues unitType, r
     endif
     
     if aTags != "D" then
-        call AddTagsStringAsSubAnimations(result, GUMSConvertTags(UnitVisualMods_TAGS_DECOMPRESS, aTags))
+        call AddTagsStringAsSubAnimations(result, GUMSConvertTags(UnitVisualMods_TAGS_DECOMPRESS, aTags), true)
     endif
     
     if unitType.hasMaxRoll() then
