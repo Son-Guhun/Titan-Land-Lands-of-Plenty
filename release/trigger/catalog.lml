@@ -313,6 +313,10 @@
     2-DecorationSFX: DecorationSFX
     3-Unit2Effect: Unit2Effect
     4-UnitTypeDefaultValues: UnitTypeDefaultValues
+    5-AttachedSFX: AttachedSFX
+    6-StringSubanimations: StringSubanimations
+    7-FuncHooks: FuncHooks
+    '8-FuncHooks Definitions': 'FuncHooks Definitions'
 '33-Terrain Libraries': 'Terrain Libraries'
     1-TerrainTools: TerrainTools
     2-Deformations: Deformations
