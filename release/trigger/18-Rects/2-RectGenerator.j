@@ -12,7 +12,9 @@ library RectGenerator initializer onInit /*
     
     */optional StructureTileDefinition /* This is used to safely align generators to the map grid.
     
-    */optional TileDefiniton // This is used to allow terrain alignment for generators. Requires StructureTileDefinition.
+    */optional TileDefiniton /* This is used to allow terrain alignment for generators. Requires StructureTileDefinition.
+    
+    */optional FuncHooks
 
 // Import instructions after configuration.
 //===================================================
@@ -212,6 +214,8 @@ library, if you have not done so.
 '                                                                                                  '
 '                                         Source Code                                              '
 //! endnovjass
+
+//! runtextmacro optional DefineHooks()
 
 static if LIBRARY_AutoRectEnvironment then
     private struct FogStyle extends array

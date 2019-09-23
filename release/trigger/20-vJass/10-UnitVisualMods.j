@@ -4,7 +4,9 @@ library UnitVisualMods requires CutToComma, GroupTools, optional UnitVisualModsD
     
     */ optional Table, /*  Required if a hashtable is not intialized.
     
-    */ optional ConstTable  // If present, then ConstHashTable is used instead of HashTable.
+    */ optional ConstTable  /* If present, then ConstHashTable is used instead of HashTable.
+    
+    */ optional FuncHooks  // Hooks for attached special effects
 //////////////////////////////////////////////////////
 //Guhun's Unit Modification System v1.3.1
 
@@ -63,6 +65,14 @@ endstruct
 //==================================================================================================
 //                                        Source Code
 //==================================================================================================
+
+// hooks should be below, no need to hook setunitposition if the unit position is the same as before
+function GUMS_RedrawUnit takes unit whichUnit returns nothing
+    call SetUnitPosition(whichUnit, GetUnitX(whichUnit), GetUnitY(whichUnit))
+endfunction
+
+// hooks here
+//! runtextmacro optional DefineHooks()
 
 function GUMS_RegisterImmovableUnit takes unit whichUnit returns nothing
     call GroupAddUnit(loopGroup, whichUnit)
@@ -785,15 +795,15 @@ function GUMSGroupFunction takes nothing returns nothing
     //Move unit to it's own position to fix flying height and facing
     if not HaveSavedInteger(hashTable, unitId, COUNTER) then
         call SaveInteger(hashTable, unitId, COUNTER, 0)
-        call SetUnitPosition(enumUnit, GetUnitX(enumUnit), GetUnitY(enumUnit))
+        call GUMS_RedrawUnit(enumUnit)
     elseif GetUnitFacing(enumUnit) < face - 0.001 or GetUnitFacing(enumUnit) > face + 0.001 then
-        call SetUnitPosition(enumUnit, GetUnitX(enumUnit), GetUnitY(enumUnit))
+        call GUMS_RedrawUnit(enumUnit)
     else
         call RemoveSavedInteger(hashTable, unitId, COUNTER)
         if removeReal then //Not sure if removing unexisting stuff can cause crashes, but might as well avoid it
             call RemoveSavedReal(hashTable, unitId, TARGET_ANGLE)
         endif
-        call SetUnitPosition(enumUnit, GetUnitX(enumUnit), GetUnitY(enumUnit))
+        call GUMS_RedrawUnit(enumUnit)
         
         if data[unitId].boolean.has(STRUCTURE_HEIGHT) then
             call data[unitId].boolean.remove(STRUCTURE_HEIGHT)

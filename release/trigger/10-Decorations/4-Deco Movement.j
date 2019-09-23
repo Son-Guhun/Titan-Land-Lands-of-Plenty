@@ -1,4 +1,5 @@
 scope DecoMovement
+    //! runtextmacro optional DefineHooks()
 
     globals
         public constant integer CONTROLLER = 'h0KD'

@@ -1,5 +1,7 @@
 scope TitanPalaceProt
 
+//! runtextmacro optional DefineHooks()
+
 function Trig_System_Titan_Palace_Prot_Func002C takes nothing returns boolean
     if ( not ( UnitHasItemOfTypeBJ(GetEnteringUnit(), 'I008') == false ) ) then
         return false

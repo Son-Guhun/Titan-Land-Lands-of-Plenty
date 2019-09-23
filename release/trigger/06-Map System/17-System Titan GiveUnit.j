@@ -1,5 +1,7 @@
 scope GiveUnit
 
+//! runtextmacro optional DefineHooks()
+
 function Trig_System_Titan_GiveUnit_Conditions takes nothing returns boolean
     if ( not ( GetTriggerUnit() != HERO_COSMOSIS() ) ) then
         return false
