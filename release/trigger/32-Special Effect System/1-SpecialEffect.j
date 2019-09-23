@@ -53,7 +53,6 @@ struct SpecialEffect extends array
     endmethod
     
     method operator x= takes real value returns nothing
-        // change block
         call BlzSetSpecialEffectX(.effect, value)
     endmethod
     
@@ -62,7 +61,6 @@ struct SpecialEffect extends array
     endmethod
     
     method operator y= takes real value returns nothing
-        // change block
         call BlzSetSpecialEffectY(.effect, value)
     endmethod
     
@@ -201,7 +199,6 @@ struct SpecialEffect extends array
         
         set this.unitType= unitType
         set this.effect = e
-        //call DecorationEffectBlock.get(x, y).effects.append(this)
         
         set e = null
         return this
@@ -209,6 +206,8 @@ struct SpecialEffect extends array
     
     method destroy takes nothing returns nothing
         local effect e = .effect
+        
+        call .clearSubAnimations()
         
         call DestroyEffect(e)
         call BlzPlaySpecialEffect(e, ANIM_TYPE_STAND)

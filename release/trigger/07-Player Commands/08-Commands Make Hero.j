@@ -1,4 +1,4 @@
-library LoPHeroicUnit requires LoPHeader, LoPWidgets
+library LoPHeroicUnit requires LoPHeader, LoPWidgets, UnitVisualMods
 
     globals
         private integer array heroicUnitCount
