@@ -2,7 +2,8 @@ library AnyTileDefinition /* v1.2b    By IcemanBo - Credits to WaterKnight
                              
                
    */ requires /*
-
+        */ TableStruct             /*
+        
         */ optional WorldBounds    /* github.com/nestharus/JASS/blob/master/jass/Systems/WorldBounds/script.j  
  
  

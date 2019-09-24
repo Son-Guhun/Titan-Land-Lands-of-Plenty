@@ -36,6 +36,26 @@ library UnitEvents requires ArgumentStack, BoolExprEvaluator
             return Args.unitGet(0)
         endmethod
         
+        method setRemoveOnDeath takes nothing returns nothing
+            set .removeOnDeath = true
+        endmethod
+        
+        
+        method operator onDeath takes nothing returns BoolExprEvaluator
+            if not .onDeath_implExists() then
+                set .onDeath_impl = BoolExprEvaluator.create()
+            endif
+            return .onDeath_impl
+        endmethod
+        
+
+        method operator onRemove takes nothing returns BoolExprEvaluator
+            if not .onRemove_implExists() then
+                set .onRemove_impl = BoolExprEvaluator.create()
+            endif
+            return .onRemove_impl
+        endmethod
+        
         static method evalOnRemove takes unit whichUnit returns nothing
             if UnitEvents.get(whichUnit).onRemove_implExists() then
                 call Args.unitSet(0, whichUnit)
@@ -55,28 +75,6 @@ library UnitEvents requires ArgumentStack, BoolExprEvaluator
                 call UnitEvents.get(whichUnit).evalOnRemove(whichUnit)
                 call RemoveUnit(whichUnit)
             endif
-        endmethod
-        
-        
-        
-        method setRemoveOnDeath takes nothing returns nothing
-            set .removeOnDeath = true
-        endmethod
-        
-        
-        method operator onDeath takes nothing returns BoolExprEvaluator
-            if not .onDeath_implExists() then
-                set .onDeath_impl = BoolExprEvaluator.create()
-            endif
-            return .onDeath_impl
-        endmethod
-        
-
-        method operator onRemove takes nothing returns BoolExprEvaluator
-            if not .onRemove_implExists() then
-                set .onRemove_impl = BoolExprEvaluator.create()
-            endif
-            return .onRemove_impl
         endmethod
     
     endstruct

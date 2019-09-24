@@ -61,6 +61,37 @@ public function IsValidList takes integer listKey returns boolean
     return HaveSavedInteger(Lists_GetHashtable(), listKey, INDEX_SIZE())
 endfunction
 
+// TODO
+private struct Temp extends array
+    // Operators must be declared here because private module operators are not supported
+    static constant method RECYCLE_KEY takes nothing returns integer
+        return Lists_RECYCLE_KEY
+    endmethod
+
+    static method create takes nothing returns thistype
+        local integer this
+        implement GMUI_allocate_this
+        call GAL_SetSize(this, 0)
+        return this
+    endmethod
+    
+    method destroy takes nothing returns nothing
+        if GAL_IsValidList(this) then
+            call FlushChildHashtable(Lists_GetHashtable(), this)
+            implement GMUI_deallocate_this
+        endif   
+    endmethod
+endstruct
+
+
+public function CreateList takes nothing returns integer
+    return Temp.create()
+endfunction
+
+public function DestroyList takes integer this returns nothing
+    call Temp(this).destroy()
+endfunction
+
 //==============
 // Structs
 
@@ -164,49 +195,38 @@ library_once GAL$type$ requires GAL
             private static integer EnumIndex = 0
             private static $type$ EnumValue = $NULL$
             
+            static method create takes nothing returns ArrayList_$type$
+                return GAL_CreateList()
+            endmethod
+            
+            method destroy takes nothing returns nothing
+                call GAL_DestroyList(this)
+            endmethod
+            
             implement Methods
             implement ArrayListIteratorMethods
             implement EnumGetters
             implement ArrayListForEachMethods
-            
-            static method create takes nothing returns thistype
-                return ArrayList.create()
-            endmethod
-            
-            method destroy takes nothing returns nothing
-                call ArrayList(this).destroy()
-            endmethod
         endstruct
     else
         struct ArrayList extends array
         
-            // Operators must be declared here because private module operators are not supported
-            static constant method RECYCLE_KEY takes nothing returns integer
-                return Lists_RECYCLE_KEY
-            endmethod
-
             private static thistype EnumList = 0
             private static integer EnumIndex = 0
             private static $type$ EnumValue = $NULL$
+            
+            static method create takes nothing returns ArrayList
+                return GAL_CreateList()
+            endmethod
+            
+            method destroy takes nothing returns nothing
+                call GAL_DestroyList(this)
+            endmethod
             
             implement Methods
             implement ArrayListIteratorMethods
             implement EnumGetters
             implement ArrayListForEachMethods
-            
-            static method create takes nothing returns ArrayList
-                local integer this
-                implement GMUI_allocate_this
-                call GAL_SetSize(this, 0)
-                return this
-            endmethod
-            
-            method destroy takes nothing returns nothing
-                if GAL_IsValidList(this) then
-                    call FlushChildHashtable(Lists_GetHashtable(), this)
-                    implement GMUI_deallocate_this
-                endif   
-            endmethod
         endstruct
     endif
 endlibrary

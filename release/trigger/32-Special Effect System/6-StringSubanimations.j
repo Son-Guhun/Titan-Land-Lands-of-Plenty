@@ -1,4 +1,4 @@
-library StringSubanimations requires TableStruct
+library StringSubanimations requires SpecialEffect, TableStruct
 
 private struct SubAnimString extends array
     //! runtextmacro TableStruct_NewPrimitiveField("subanimtypeId", "integer")

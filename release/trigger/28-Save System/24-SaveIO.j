@@ -154,27 +154,6 @@ private struct SaveLoader extends array
     private method eof takes nothing returns boolean
         return .current == .totalFiles
     endmethod
-
-    // This function is exectued every 0.5 seconds, and it reads the next file of a SaveData that is currently being read.
-    private static method onTimer takes nothing returns nothing
-        local PlayerData playerId = 0
-        local SaveLoader saveData
-
-        loop
-        exitwhen playerId == bj_MAX_PLAYERS
-            set saveData = playerId.loadRequests.begin()
-
-            if saveData != playerId.loadRequests.end() then
-                call saveData.read()
-                if saveData.eof() then
-                    call saveData.destroy()
-                    call playerId.loadRequests.remove(saveData)
-                endif
-            endif
-            set playerId = playerId + 1
-        endloop
-
-    endmethod
     
     // This method does not immediately read the file. It puts it in queue for reading.
     method loadData takes nothing returns nothing
@@ -199,6 +178,27 @@ private struct SaveLoader extends array
         call .folderClear()
         call .playerClear()
         call .totalFilesClear()
+    endmethod
+    
+        // This function is exectued every 0.5 seconds, and it reads the next file of a SaveData that is currently being read.
+    private static method onTimer takes nothing returns nothing
+        local PlayerData playerId = 0
+        local SaveLoader saveData
+
+        loop
+        exitwhen playerId == bj_MAX_PLAYERS
+            set saveData = playerId.loadRequests.begin()
+
+            if saveData != playerId.loadRequests.end() then
+                call saveData.read()
+                if saveData.eof() then
+                    call saveData.destroy()
+                    call playerId.loadRequests.remove(saveData)
+                endif
+            endif
+            set playerId = playerId + 1
+        endloop
+
     endmethod
 
     implement InitModule
