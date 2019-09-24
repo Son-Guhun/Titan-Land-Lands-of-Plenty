@@ -81,7 +81,9 @@ struct SpecialEffect extends array
     
     method operator yaw= takes real value returns nothing
         set .yaw_impl = value
-        call BlzSetSpecialEffectYaw(.effect, value)
+        // call BlzSetSpecialEffectYaw(.effect, value)
+        call BlzSetSpecialEffectOrientation(.effect, value, .pitch, .roll)
+        call BlzSetSpecialEffectMatrixScale(.effect, .scaleX, .scaleY, .scaleZ)
     endmethod
     
     method operator pitch takes nothing returns real
@@ -90,7 +92,9 @@ struct SpecialEffect extends array
     
     method operator pitch= takes real value returns nothing
         set .pitch_impl = value
-        call BlzSetSpecialEffectPitch(.effect, value)
+        //call BlzSetSpecialEffectPitch(.effect, value)
+        call BlzSetSpecialEffectOrientation(.effect, .yaw, value, .roll)
+        call BlzSetSpecialEffectMatrixScale(.effect, .scaleX, .scaleY, .scaleZ)
     endmethod
     
     method operator roll takes nothing returns real
@@ -99,7 +103,9 @@ struct SpecialEffect extends array
     
     method operator roll= takes real value returns nothing
         set .roll_impl = value
-        call BlzSetSpecialEffectRoll(.effect, value)
+        //call BlzSetSpecialEffectRoll(.effect, value)
+        call BlzSetSpecialEffectOrientation(.effect, .yaw, .pitch, value)
+        call BlzSetSpecialEffectMatrixScale(.effect, .scaleX, .scaleY, .scaleZ)
     endmethod
     
     method setOrientation takes real yaw, real pitch, real roll returns nothing
@@ -107,6 +113,7 @@ struct SpecialEffect extends array
         set .pitch_impl = pitch
         set .roll_impl = roll
         call BlzSetSpecialEffectOrientation(.effect, yaw, pitch, roll)
+        call BlzSetSpecialEffectMatrixScale(.effect, .scaleX, .scaleY, .scaleZ)
     endmethod
     
     method operator color takes nothing returns integer
@@ -124,6 +131,9 @@ struct SpecialEffect extends array
         set .scaleX = scaleX
         set .scaleY = scaleY
         set .scaleZ = scaleZ
+        
+        // call BlzResetSpecialEffectMatrix(.effect)
+        call BlzSetSpecialEffectOrientation(.effect, .yaw, .pitch, .roll)
         call BlzSetSpecialEffectMatrixScale(.effect, scaleX, scaleY, scaleZ)
     endmethod
     

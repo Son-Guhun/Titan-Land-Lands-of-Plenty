@@ -1,5 +1,35 @@
+scope CommandsDUnitMods
+
+private function SetMatrixScale takes unit u, string args returns nothing
+    local real scaleX
+    local real scaleY
+    local real scaleZ
+    
+    local integer cutToComma = CutToCharacter(args," ")
+    set scaleX = S2R(SubString(args, 0, cutToComma))/100.
+    
+    if cutToComma < StringLength(args) then
+        set args = SubString(args, cutToComma+1, StringLength(args))
+        
+        set cutToComma = CutToCharacter(args," ")
+        set scaleY = S2R(SubString(args, 0, cutToComma))/100.
+        
+        if cutToComma < StringLength(args) then
+            set args = SubString(args, cutToComma+1, StringLength(args))
+        
+            set scaleZ = S2R(args)/100.
+        else
+            set scaleZ = 100.
+        endif
+        
+        call GUMSSetUnitMatrixScale(u, scaleX, scaleY, scaleZ)
+    else
+        call GUMSSetUnitScale(u, scaleX)
+    endif
+endfunction
+
 // Check if unit is Deco Special so this trigger is not run for every unit that casts a ability
-function Trig_CommandsD_Unit_Mods_Copy_Func009A takes nothing returns nothing
+private function groupFunc takes nothing returns nothing
     local player trigPlayer = GetTriggerPlayer()
     local string command
     local string args
@@ -20,7 +50,7 @@ function Trig_CommandsD_Unit_Mods_Copy_Func009A takes nothing returns nothing
         if args == "" then
             call GUMSSetUnitScale(enumUnit, udg_DecoSystem_Scale[playerNumber]/100)
         else
-            call GUMSSetUnitScale(enumUnit, S2R(args)/100)
+            call SetMatrixScale(enumUnit, args)
         endif
     elseif ( command == "'fly" or command == "'h") then
         if IsUnitType(enumUnit, UNIT_TYPE_STRUCTURE) then
@@ -66,12 +96,28 @@ function Trig_CommandsD_Unit_Mods_Copy_Func009A takes nothing returns nothing
         else
             call GUMSSetUnitColor(enumUnit,  Commands_GetChatMessagePlayerNumber(args))
         endif
+    elseif ( command == "'roll" ) then
+        if args != "" then
+            if not UnitHasAttachedEffect(enumUnit) then
+                set UnitCreateAttachedEffect(enumUnit).roll = S2R(args)*bj_DEGTORAD
+            else
+                set GetUnitAttachedEffect(enumUnit).roll = S2R(args)*bj_DEGTORAD
+            endif
+        endif
+    elseif ( command == "'pitch" ) then
+        if args != "" then
+            if not UnitHasAttachedEffect(enumUnit) then
+                set UnitCreateAttachedEffect(enumUnit).pitch = S2R(args)*bj_DEGTORAD
+            else
+                set GetUnitAttachedEffect(enumUnit).pitch = S2R(args)*bj_DEGTORAD
+            endif
+        endif
     endif
     
     set enumUnit = null
 endfunction
 
-function Trig_CommandsD_Unit_Mods_Copy_Conditions takes nothing returns boolean
+private function onCommand takes nothing returns boolean
     local group udg_temp_group
     local integer genId
     local unit enumUnit
@@ -80,7 +126,7 @@ function Trig_CommandsD_Unit_Mods_Copy_Conditions takes nothing returns boolean
     // PICK SELECTED UNITS AND CHECK FOR RECT GENERATOR
     call Commands_EnumSelectedCheckForGenerator(udg_temp_group, GetTriggerPlayer(), null)
     // ---------------------------------------------
-    call ForGroup( udg_temp_group, function Trig_CommandsD_Unit_Mods_Copy_Func009A )
+    call ForGroup( udg_temp_group, function groupFunc )
     call DestroyGroup(udg_temp_group)
     set udg_temp_group = null
     set enumUnit = null
@@ -89,15 +135,19 @@ endfunction
 
 //===========================================================================
 function InitTrig_CommandsD_Unit_Mods takes nothing returns nothing
-    call LoP_Command.create("'size", ACCESS_USER, Condition(function Trig_CommandsD_Unit_Mods_Copy_Conditions))
-    call LoP_Command.create("'face", ACCESS_USER, Condition(function Trig_CommandsD_Unit_Mods_Copy_Conditions))
-    call LoP_Command.create("'f", ACCESS_USER, Condition(function Trig_CommandsD_Unit_Mods_Copy_Conditions))
-    call LoP_Command.create("'fly", ACCESS_USER, Condition(function Trig_CommandsD_Unit_Mods_Copy_Conditions))
-    call LoP_Command.create("'h", ACCESS_USER, Condition(function Trig_CommandsD_Unit_Mods_Copy_Conditions))
-    call LoP_Command.create("'anim", ACCESS_USER, Condition(function Trig_CommandsD_Unit_Mods_Copy_Conditions))
-    call LoP_Command.create("'speed", ACCESS_USER, Condition(function Trig_CommandsD_Unit_Mods_Copy_Conditions))
-    call LoP_Command.create("'color", ACCESS_USER, Condition(function Trig_CommandsD_Unit_Mods_Copy_Conditions))
+    call LoP_Command.create("'size", ACCESS_USER, Condition(function onCommand))
+    call LoP_Command.create("'face", ACCESS_USER, Condition(function onCommand))
+    call LoP_Command.create("'f", ACCESS_USER, Condition(function onCommand))
+    call LoP_Command.create("'fly", ACCESS_USER, Condition(function onCommand))
+    call LoP_Command.create("'h", ACCESS_USER, Condition(function onCommand))
+    call LoP_Command.create("'anim", ACCESS_USER, Condition(function onCommand))
+    call LoP_Command.create("'speed", ACCESS_USER, Condition(function onCommand))
+    call LoP_Command.create("'color", ACCESS_USER, Condition(function onCommand))
+    call LoP_Command.create("'pitch", ACCESS_USER, Condition(function onCommand))
+    call LoP_Command.create("'roll", ACCESS_USER, Condition(function onCommand))
     
-    call LoP_Command.create("'rgb", ACCESS_USER, Condition(function Trig_CommandsD_Unit_Mods_Copy_Conditions))
+    call LoP_Command.create("'rgb", ACCESS_USER, Condition(function onCommand))
 endfunction
+
+endscope
 

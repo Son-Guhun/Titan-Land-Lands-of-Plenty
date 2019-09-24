@@ -22,6 +22,7 @@ private function SetUnitScale takes unit u, real x, real y, real z returns nothi
     call OrglSetUnitScale(u,x,y,z)
     
     // Here
+    call AttachedSFX_onSetScale(u, x, y, z)
 endfunction
 
 private function SetUnitFlyHeight takes unit u, real h, real r returns nothing

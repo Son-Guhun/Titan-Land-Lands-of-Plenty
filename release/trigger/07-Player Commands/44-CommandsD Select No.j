@@ -4,6 +4,16 @@ private function SELECTABLE_ONLY_ABILITY takes nothing returns integer
     return 'A04U'
 endfunction
 
+private function ToEffect takes unit whichUnit returns nothing
+    if UnitHasAttachedEffect(whichUnit) then
+        call DecorationEffect.convertSpecialEffect(LoP_GetOwningPlayer(whichUnit), UnitDetachEffect(whichUnit))        
+        call KillUnit(whichUnit)
+    else
+        call Unit2EffectEx(LoP_GetOwningPlayer(whichUnit), whichUnit)
+        call KillUnit(whichUnit)
+    endif
+endfunction
+
 private function EnumFunc takes nothing returns nothing
     local player trigP = GetTriggerPlayer()
     local unit enumUnit = GetEnumUnit()
@@ -22,12 +32,10 @@ private function EnumFunc takes nothing returns nothing
             if GetUnitFlyHeight(enumUnit) < GUMS_MINIMUM_FLY_HEIGHT() or GetUnitAbilityLevel(enumUnit, 'Awrp') > 0 then
                 call GUMSMakeUnitUnSelectable(enumUnit)
             else
-                call Unit2EffectEx(LoP_GetOwningPlayer(enumUnit), enumUnit)
-                call KillUnit(enumUnit)
+                call ToEffect(enumUnit)
             endif
         else
-            call Unit2EffectEx(LoP_GetOwningPlayer(enumUnit), enumUnit)
-            call KillUnit(enumUnit)
+            call ToEffect(enumUnit)
         endif
     endif
     

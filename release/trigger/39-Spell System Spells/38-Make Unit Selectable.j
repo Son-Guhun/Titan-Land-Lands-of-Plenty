@@ -1,12 +1,16 @@
 function Trig_Make_Unit_Selectable_Func003A takes nothing returns nothing
     local unit enumUnit = GetEnumUnit()
+    local unit newUnit
     local real unitX = GetUnitX(enumUnit)
     local real unitY = GetUnitY(enumUnit)
     local real locX = GetLocationX(udg_Spell__TargetPoint)
     local real locY = GetLocationY(udg_Spell__TargetPoint)
     if SquareRoot( (unitX-locX)*(unitX-locX) + (unitY-locY)*(unitY-locY)  ) <= 300. then
         if GUMS_GetUnitSelectionType(enumUnit) != 0 then
-            call GUMSMakeUnitSelectable(enumUnit)
+            set newUnit = GUMSCopyUnitSameType(enumUnit, GetOwningPlayer(enumUnit))
+            if UnitHasAttachedEffect(enumUnit) then
+                call UnitAttachEffect(newUnit, UnitDetachEffect(enumUnit))
+            endif
             call KillUnit( enumUnit )
         endif
     endif

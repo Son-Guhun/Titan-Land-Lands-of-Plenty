@@ -7,6 +7,10 @@ struct UnitData extends array
     method hasAttachedEffect takes nothing returns boolean
         return .attachedEffectExists()
     endmethod
+    
+    method clearAttachedEffect takes nothing returns nothing
+        call .attachedEffectClear()
+    endmethod
 
     static method get takes unit whichUnit returns thistype
         return GetHandleId(whichUnit)
@@ -28,6 +32,22 @@ function UnitCreateAttachedEffect takes unit whichUnit returns SpecialEffect
     set UnitData.get(whichUnit).attachedEffect = sfx
     call SetUnitVertexColor(whichUnit, 0, 0, 0, 0)
     return sfx
+endfunction
+
+function UnitAttachEffect takes unit whichUnit, SpecialEffect sfx returns nothing
+    set UnitData.get(whichUnit).attachedEffect = sfx
+    call SetUnitVertexColor(whichUnit, 0, 0, 0, 0)
+endfunction
+
+function UnitDetachEffect takes unit whichUnit returns SpecialEffect
+    local UnitData data = UnitData.get(whichUnit)
+    local SpecialEffect sfx
+    if data.hasAttachedEffect() then
+        set sfx = data.attachedEffect
+        call data.clearAttachedEffect()
+        return sfx
+    endif
+    return 0
 endfunction
 
 public function onSetPosition takes unit whichUnit, real x, real y returns nothing
@@ -65,8 +85,16 @@ endfunction
 
 public function onSetScale takes unit whichUnit, real x, real y, real z returns nothing
     local SpecialEffect sfx = UnitData.get(whichUnit).attachedEffect
+    
+    call BJDebugMsg(R2S(x) + " " + R2S(y) + " " + R2S(z))
 
-    call sfx.setScale(x, x, x)
+    if UnitHasAttachedEffect(whichUnit) then
+        set sfx = UnitData.get(whichUnit).attachedEffect
+        call sfx.setScale(x, y, z)
+    elseif x!=y or x!=z then
+        set sfx = UnitCreateAttachedEffect(whichUnit)
+        call sfx.setScale(x, y, z)
+    endif
 endfunction
 
 public function onSetVertexColor takes unit whichUnit, integer red, integer green, integer blue, integer alpha returns nothing

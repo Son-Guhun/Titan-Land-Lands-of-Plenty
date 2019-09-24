@@ -228,6 +228,11 @@ function GUMSSetStructureFlyHeight takes unit structure, real newHeight, boolean
 endfunction
 
 //Set Scale
+function GUMSSetUnitMatrixScale takes unit whichUnit, real scaleX, real scaleY, real scaleZ returns nothing
+    call SetUnitScale(whichUnit, scaleX, scaleY, scaleZ)
+    set data[GetHandleId(whichUnit)].real[SCALE] = scaleX
+endfunction
+
 function GUMSSetUnitScale takes unit whichUnit, real scale returns nothing
     call SetUnitScale(whichUnit, scale, scale, scale)
     set data[GetHandleId(whichUnit)].real[SCALE] = scale
@@ -449,18 +454,6 @@ function GUMSMakeUnitDragSelectable takes unit whichUnit returns nothing
         call ShowUnit(whichUnit,false)
         call ShowUnit(whichUnit,true)
     endif
-endfunction
-
-function GUMSMakeUnitSelectable takes unit whichUnit returns nothing
-    local integer unitId = GetHandleId(whichUnit)
-    local integer selectionType = data[unitId][SELECT]
-    
-    if selectionType == GUMS_SELECTION_DEFAULT() then
-        return //Unit has not been give a special selection type, do nothing.
-    endif
-
-    call ShowUnit(whichUnit, false) //Hide old unit.
-    call GUMSCopyUnit(whichUnit, GetOwningPlayer(whichUnit), GUMS_SELECTION_DEFAULT()) //Create fresh copy that is selectable.
 endfunction
 
 
