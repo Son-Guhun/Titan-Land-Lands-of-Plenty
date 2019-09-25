@@ -24,13 +24,12 @@ function TimedBonusTimerFunc takes nothing returns nothing
         if AgentHaveSavedReal(tId, bonusType+1) then
             call GMSS_UnitMultiplyMoveSpeed(timerUnit, 1./AgentLoadReal(tId, bonusType + 1))
         endif
-        
-        call PauseTimer(t)
-        call DestroyTimer(t)
-        call AgentFlush(tId)
-
     endif
     
+    call PauseTimer(t)
+    call DestroyTimer(t)
+    call AgentFlush(tId)
+
     set t = null
     set timerUnit = null
 endfunction

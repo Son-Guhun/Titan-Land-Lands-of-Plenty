@@ -198,34 +198,14 @@ function ParseScaleEffect takes DecorationEffect sfx, string scaleStr returns no
     endif
 endfunction
 
-function ParseFacingEffect takes DecorationEffect sfx, string scaleStr returns nothing
-    local real yaw
-    local real pitch
-    local real roll
-    local integer cutToComma = CutToCharacter(scaleStr,"|")
-    
-    set yaw = S2R(SubString(scaleStr, 0, cutToComma))
-    if cutToComma < StringLength(scaleStr) then
-        set scaleStr = SubString(scaleStr, cutToComma+1, StringLength(scaleStr))
-        
-        set cutToComma = CutToCharacter(scaleStr,"|")
-        set pitch = S2R(SubString(scaleStr, 0, cutToComma))
-        set roll = S2R(SubString(scaleStr, cutToComma+1, StringLength(scaleStr)))
-        
-        call sfx.setOrientation(yaw/128, pitch/128, roll/128)
-    else
-        set sfx.yaw = yaw*bj_RADTODEG
-    endif
-endfunction
-
-function LoadSpecialEffect takes player owner, UnitTypeDefaultValues unitType, real x, real y, real height, string facing, string scale, string red, string green, string blue, string alpha, string color, string aSpeed, string aTags returns nothing
+function LoadSpecialEffect takes player owner, UnitTypeDefaultValues unitType, real x, real y, real height, real facing, real pitch, real roll, string scale, string red, string green, string blue, string alpha, string color, string aSpeed, string aTags returns nothing
     local DecorationEffect result = DecorationEffect.create(owner, unitType, x, y)
     local real value
     local integer redRaw
     local integer greenRaw
     
     set result.height = height
-    call ParseFacingEffect(result, facing)
+    call result.setOrientation(facing*bj_DEGTORAD, pitch, roll)
     // set result.yaw = Deg2Rad(facing)
     
     if scale != "D" then
@@ -331,7 +311,6 @@ function LoadUnit takes string chat_str, player un_owner returns nothing
     local real un_posy
     local real un_flyH
     local real un_fangle
-    local string un_fangle_str
     local integer len_str = StringLength(chat_str)
     local unit resultUnit
     local integer playerId = GetPlayerId(un_owner)
@@ -378,8 +357,7 @@ function LoadUnit takes string chat_str, player un_owner returns nothing
     set len_str = StringLength(chat_str)
 
     set str_index = CutToComma(chat_str)
-    set un_fangle_str = SubString(chat_str,0,str_index)
-    set un_fangle = ParseFacing(un_fangle_str)
+    set un_fangle = ParseFacing(SubString(chat_str,0,str_index))
     set chat_str = SubString(chat_str,str_index+1,len_str)
     set len_str = StringLength(chat_str)
     
@@ -517,7 +495,7 @@ function LoadUnit takes string chat_str, player un_owner returns nothing
         set udg_save_LastLoadedUnit[playerId] = resultUnit
         set resultUnit = null
     else
-        call LoadSpecialEffect(un_owner, un_type, un_posx, un_posy, un_flyH, un_fangle_str, size, red, green, blue, alpha, color, aSpeed, animTag)
+        call LoadSpecialEffect(un_owner, un_type, un_posx, un_posy, un_flyH, un_fangle, g_pitch, g_roll, size, red, green, blue, alpha, color, aSpeed, animTag)
     endif
 endfunction
 

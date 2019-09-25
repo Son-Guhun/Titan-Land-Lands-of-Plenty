@@ -94,6 +94,10 @@ function LoP_IsUnitProtected takes unit whichUnit returns boolean
     return IsUnitInGroup(whichUnit, udg_System_ProtectedGroup)
 endfunction
 
+function LoP_IsUnitDummy takes unit whichUnit returns boolean
+    return GetUnitPointValue(whichUnit) == 37
+endfunction
+
 // Returns a unit group containing all protected units.
 function LoP_GetProtectedUnits takes nothing returns group
     return udg_System_ProtectedGroup

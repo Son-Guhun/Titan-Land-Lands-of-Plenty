@@ -36,6 +36,31 @@ function LoP_onRemoval takes unit whichUnit returns nothing
         call LoP_UnitData.get(whichUnit).destroy()
     endif
 endfunction
+
+function LoP_RemoveUnit takes unit whichUnit returns nothing
+    if LoP_IsUnitProtected(whichUnit) or LoP_IsUnitDummy(whichUnit) then
+        // do nothing
+    else
+        if not LoP_IsUnitDecoration(whichUnit) then
+            call RemoveUnit(whichUnit)  // Removing unit does not fire event immediately.
+        else
+            call DisableTrigger(gg_trg_System_Cleanup_Death)
+            call KillUnit(whichUnit)
+            call LoP_onDeath(whichUnit)
+            call EnableTrigger(gg_trg_System_Cleanup_Death)
+        endif
+    endif
+endfunction
+
+function LoP_KillUnit takes unit whichUnit returns nothing
+     if not LoP_IsUnitProtected(whichUnit) then
+        call DisableTrigger(gg_trg_System_Cleanup_Death)
+        call KillUnit(whichUnit)  // More efficient to not even call this at all for decorations. TODO
+        call LoP_onDeath(whichUnit)
+        call EnableTrigger(gg_trg_System_Cleanup_Death)
+    endif   
+endfunction
+
 endlibrary
 
 function Trig_System_Cleanup_Removal_Conditions takes nothing returns boolean

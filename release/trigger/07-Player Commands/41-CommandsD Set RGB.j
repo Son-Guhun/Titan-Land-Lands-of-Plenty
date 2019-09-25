@@ -13,17 +13,17 @@ function ColorSystem_Set_RGB_Conditions takes nothing returns boolean
         set output = SubString(args,0,red)
         set udg_ColorSystem_Red[pN] = S2R(output)
         
-        set args = SubString( args , red+1 , ( StringLength(args) + 1) )
+        set args = SubString( args , red+1 , StringLength(args) )
         set green = CutToCharacter(args," ")
         set output = SubString(args,0,green)
         set udg_ColorSystem_Green[pN] = S2R(output)
 
-        set args = SubString(args,green+1,StringLength(args))
+        set args = SubString(args,green+1, StringLength(args))
         set blue = CutToCharacter(args," ")
         set output = SubString(args,0,blue)
         set udg_ColorSystem_Blue[pN] = S2R(output)
 
-        set args = SubString(args,blue+1,StringLength(args))
+        set args = SubString(args,blue+1, StringLength(args))
         set alpha = CutToCharacter(args," ")
         set output = SubString(args,0,alpha)
         set udg_ColorSystem_Alpha[pN] = S2R(output)

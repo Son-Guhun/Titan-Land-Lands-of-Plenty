@@ -1,31 +1,3 @@
-library LoPthree requires LoPCleanUpDeath, LoPCleanUpRemoval
-
-function LoP_RemoveUnit takes unit whichUnit returns nothing       // Dummy point value
-    if not IsUnitInGroup(whichUnit, udg_System_ProtectedGroup) and GetUnitPointValue(whichUnit) != 37 then
-        if not LoP_IsUnitDecoration(whichUnit) then
-            //call DisableTrigger(gg_trg_System_Cleanup_Removal)
-            //call LoP_onRemoval(whichUnit)
-            call RemoveUnit(whichUnit)  // Removing unit does not fire event immediately.
-            //call EnableTrigger(gg_trg_System_Cleanup_Removal)
-        else
-            call DisableTrigger(gg_trg_System_Cleanup_Death)
-            call LoP_onDeath(whichUnit)
-            call KillUnit(whichUnit)
-            call EnableTrigger(gg_trg_System_Cleanup_Death)
-        endif
-    endif
-endfunction
-
-function LoP_KillUnit takes unit whichUnit returns nothing
-     if not IsUnitInGroup(whichUnit, udg_System_ProtectedGroup) then
-        call DisableTrigger(gg_trg_System_Cleanup_Death)
-        call KillUnit(whichUnit)  // More efficient to not even call this at all for decorations. TODO
-        call LoP_onDeath(whichUnit)
-        call EnableTrigger(gg_trg_System_Cleanup_Death)
-    endif   
-endfunction
-endlibrary
-
 scope TitanPowers initializer onInit
 
 private function GroupFilter takes nothing returns boolean

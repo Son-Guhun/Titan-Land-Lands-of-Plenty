@@ -10,13 +10,17 @@ function Trig_Commands_Take_Func004Func009A takes nothing returns nothing
 endfunction
 
 function Trig_Commands_Take_Func004Func013A takes nothing returns nothing
-    call GroupRemoveUnit(udg_System_NeutralUnits[( GetConvertedPlayerId(GetTriggerPlayer()) - 1 )], GetEnumUnit())
+    local unit enumUnit = GetEnumUnit()
     
-    if ( GetOwningPlayer(GetEnumUnit()) == Player(PLAYER_NEUTRAL_PASSIVE) ) then
-        call SetUnitOwner( GetEnumUnit(), GetTriggerPlayer(), false )
+    call GroupRemoveUnit(udg_System_NeutralUnits[GetPlayerId(GetTriggerPlayer())], enumUnit)
+    
+    if ( GetOwningPlayer(enumUnit) == Player(PLAYER_NEUTRAL_PASSIVE) ) then
+        call SetUnitOwner(enumUnit, GetTriggerPlayer(), false)
     else
         call DisplayTextToPlayer(GetTriggerPlayer(), 0, 0, "This is not your unit.")
     endif
+    
+    set enumUnit = null
 endfunction
 
 function Trig_Commands_Take_Func004C takes nothing returns boolean

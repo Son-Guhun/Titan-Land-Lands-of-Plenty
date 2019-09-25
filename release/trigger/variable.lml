@@ -320,7 +320,6 @@ Damage_Mod_Minimum: real
 Damage_Mod_Maximum: real
 GDS_DebuffEvent: real
 GDS_Permanent: boolean
-GDS_RegisterDisable: boolean
 Player_ControlGroup: group
     Array : 1
 System_ProtectedGroup: group

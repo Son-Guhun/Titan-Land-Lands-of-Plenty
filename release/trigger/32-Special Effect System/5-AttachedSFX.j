@@ -85,8 +85,6 @@ endfunction
 
 public function onSetScale takes unit whichUnit, real x, real y, real z returns nothing
     local SpecialEffect sfx = UnitData.get(whichUnit).attachedEffect
-    
-    call BJDebugMsg(R2S(x) + " " + R2S(y) + " " + R2S(z))
 
     if UnitHasAttachedEffect(whichUnit) then
         set sfx = UnitData.get(whichUnit).attachedEffect

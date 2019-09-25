@@ -255,6 +255,3 @@ Action
     SetVariable
         Var   : GDS_Permanent
         Const : false
-    SetVariable
-        Var   : GDS_RegisterDisable
-        Const : false

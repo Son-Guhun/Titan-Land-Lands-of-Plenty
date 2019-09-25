@@ -1,28 +1,3 @@
-
-
-
-function GDSDebuffApplied takes nothing returns nothing
-    local timer t = GetExpiredTimer()
-    local integer tHandle = GetHandleId(t)
-    local integer stunType = LoadInteger(udg_GDS_Hashtable, tHandle , 1)
-    local unit u = LoadUnitHandle(udg_GDS_Hashtable, tHandle , 0)
-
-    if GetUnitAbilityLevel( u , udg_GDS_BUFF[stunType]) != 0 then
-        
-        call FlushChildHashtable(udg_GDS_Hashtable, GetHandleId(t))
-        call PauseTimer(t)
-        call DestroyTimer(t)
-
-        set udg_GDS_DebuffEvent = stunType
-        set udg_GDS_Target = u
-        set udg_GDS_DebuffEvent = 0.5
-    else
-        call TimerStart(t, udg_GDS_zMIN, false, function GDSDebuffApplied)  
-    endif
-    set u = null
-    set t = null
-endfunction
-
 function GDSDebuffEnd takes nothing returns nothing
     local timer t = GetExpiredTimer()
     local integer tHandle = GetHandleId(t)
@@ -30,7 +5,9 @@ function GDSDebuffEnd takes nothing returns nothing
     local unit u = LoadUnitHandle(udg_GDS_Hashtable, tHandle , 0)
     local integer uHandle = LoadInteger(udg_GDS_Hashtable, tHandle , 1)
 
-    call UnitRemoveAbility(u, udg_GDS_BUFF[stunType])
+    if GetUnitTypeId(u) != 0 then  // Stunned unit has been removed from the game
+        call UnitRemoveAbility(u, udg_GDS_BUFF[stunType])
+    endif
 
     call FlushChildHashtable(udg_GDS_Hashtable, GetHandleId(t))
     call RemoveSavedHandle(udg_GDS_Hashtable, uHandle , stunType)
@@ -66,14 +43,6 @@ function GDSMain takes nothing returns nothing
             else
                 set udg_GDS_Remaining = 0
             endif
-        endif
-
-        if udg_GDS_RegisterDisable then
-            set t = CreateTimer()
-            call SaveUnitHandle(udg_GDS_Hashtable, GetHandleId(t) , 0 , udg_GDS_Target)
-            call SaveInteger(udg_GDS_Hashtable , GetHandleId(t) , 1 , udg_GDS_Type)
-            call TimerStart(t, udg_GDS_zMIN, false, function GDSDebuffApplied)
-            set t = null               
         endif
 
         return
@@ -153,13 +122,6 @@ function GDSMain takes nothing returns nothing
     
     set udg_GDS_Remaining = duration
     
-
-    if udg_GDS_RegisterDisable then
-        set t = CreateTimer()
-        call SaveUnitHandle(udg_GDS_Hashtable, GetHandleId(t) , 0 , udg_GDS_Target)
-        call SaveInteger(udg_GDS_Hashtable , GetHandleId(t) , 1 , udg_GDS_Type)
-        call TimerStart(t, 2*udg_GDS_zMIN, false, function GDSDebuffApplied)               
-    endif
     
     set timerOld = null
     set t = null

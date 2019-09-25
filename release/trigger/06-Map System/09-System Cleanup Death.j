@@ -28,6 +28,10 @@ function LoP_onDeath takes unit whichUnit returns nothing
             call GUMSClearUnitData(whichUnit)
             call LoP_ClearNeutralData(whichUnit)
             
+            if UnitHasAttachedEffect(whichUnit) then
+                call UnitDetachEffect(whichUnit).destroy()
+            endif
+            
             // Performance: Instantly remove decorations from the game
             set g_unitHasBeenRemoved = true
             call RemoveUnit( whichUnit )
