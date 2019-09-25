@@ -29,7 +29,9 @@ endfunction
 
 endlibrary
 
-library SaveNLoad requires UnitVisualMods, Rawcode2String, Base36, TerrainTools, DecorationSFX, UnitTypeDefaultValues, optional UserDefinedRects, optional SaveNLoadConfig optional LoPDeprecated
+library SaveNLoad requires UnitVisualMods, Rawcode2String, Base36, TerrainTools, DecorationSFX, UnitTypeDefaultValues, AttachedSFX/* 
+
+   */ optional UserDefinedRects, optional SaveNLoadConfig optional LoPDeprecated
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 //SaveNLoad v3.0
 ////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -176,18 +178,58 @@ static if LIBRARY_UserDefinedRects then
     endfunction
 endif
 
-function LoadSpecialEffect takes player owner, UnitTypeDefaultValues unitType, real x, real y, real height, real facing, string scale, string red, string green, string blue, string alpha, string color, string aSpeed, string aTags returns nothing
+function ParseScaleEffect takes DecorationEffect sfx, string scaleStr returns nothing
+    local real scaleX
+    local real scaleY
+    local real scaleZ
+    local integer cutToComma = CutToCharacter(scaleStr,"|")
+    
+    set scaleX = S2R(SubString(scaleStr, 0, cutToComma))
+    if cutToComma < StringLength(scaleStr) then
+        set scaleStr = SubString(scaleStr, cutToComma+1, StringLength(scaleStr))
+        
+        set cutToComma = CutToCharacter(scaleStr,"|")
+        set scaleY = S2R(SubString(scaleStr, 0, cutToComma))
+        set scaleZ = S2R(SubString(scaleStr, cutToComma+1, StringLength(scaleStr)))
+        
+        call sfx.setScale(scaleX, scaleY, scaleZ)
+    else
+        call sfx.setScale(scaleX, scaleX, scaleX)
+    endif
+endfunction
+
+function ParseFacingEffect takes DecorationEffect sfx, string scaleStr returns nothing
+    local real yaw
+    local real pitch
+    local real roll
+    local integer cutToComma = CutToCharacter(scaleStr,"|")
+    
+    set yaw = S2R(SubString(scaleStr, 0, cutToComma))
+    if cutToComma < StringLength(scaleStr) then
+        set scaleStr = SubString(scaleStr, cutToComma+1, StringLength(scaleStr))
+        
+        set cutToComma = CutToCharacter(scaleStr,"|")
+        set pitch = S2R(SubString(scaleStr, 0, cutToComma))
+        set roll = S2R(SubString(scaleStr, cutToComma+1, StringLength(scaleStr)))
+        
+        call sfx.setOrientation(yaw/128, pitch/128, roll/128)
+    else
+        set sfx.yaw = yaw*bj_RADTODEG
+    endif
+endfunction
+
+function LoadSpecialEffect takes player owner, UnitTypeDefaultValues unitType, real x, real y, real height, string facing, string scale, string red, string green, string blue, string alpha, string color, string aSpeed, string aTags returns nothing
     local DecorationEffect result = DecorationEffect.create(owner, unitType, x, y)
     local real value
     local integer redRaw
     local integer greenRaw
     
     set result.height = height
-    set result.yaw = Deg2Rad(facing)
+    call ParseFacingEffect(result, facing)
+    // set result.yaw = Deg2Rad(facing)
     
     if scale != "D" then
-        set value = S2R(scale)
-        call result.setScale(value, value, value)
+        call ParseScaleEffect(result, scale)
     elseif unitType.hasModelScale() then
         set value = unitType.modelScale
         call result.setScale(value, value, value)
@@ -235,6 +277,53 @@ function LoadSpecialEffect takes player owner, UnitTypeDefaultValues unitType, r
     call BlzPlaySpecialEffect(result.effect, ANIM_TYPE_STAND)
 endfunction
 
+function ParseScale takes unit u, string scaleStr returns nothing
+    local real scaleX
+    local real scaleY
+    local real scaleZ
+    local integer cutToComma = CutToCharacter(scaleStr,"|")
+    
+    set scaleX = S2R(SubString(scaleStr, 0, cutToComma))
+    if cutToComma < StringLength(scaleStr) then
+        set scaleStr = SubString(scaleStr, cutToComma+1, StringLength(scaleStr))
+        
+        set cutToComma = CutToCharacter(scaleStr,"|")
+        set scaleY = S2R(SubString(scaleStr, 0, cutToComma))
+        set scaleZ = S2R(SubString(scaleStr, cutToComma+1, StringLength(scaleStr)))
+        
+        call GUMSSetUnitMatrixScale(u, scaleX, scaleY, scaleZ)
+    else
+        call GUMSSetUnitScale(u, scaleX)
+    endif
+endfunction
+
+globals
+    private real g_pitch
+    private real g_roll
+endglobals
+
+function ParseFacing takes string scaleStr returns real
+    local real sfx
+    local real yaw
+    local real pitch
+    local real roll
+    local integer cutToComma = CutToCharacter(scaleStr,"|")
+    
+    set yaw = S2R(SubString(scaleStr, 0, cutToComma))
+    if cutToComma < StringLength(scaleStr) then
+        set scaleStr = SubString(scaleStr, cutToComma+1, StringLength(scaleStr))
+        
+        set cutToComma = CutToCharacter(scaleStr,"|")
+        set g_pitch = S2R(SubString(scaleStr, 0, cutToComma))/128
+        set g_roll = S2R(SubString(scaleStr, cutToComma+1, StringLength(scaleStr)))/128
+        return yaw/128*bj_RADTODEG
+    else
+        set g_pitch = 0.
+        set g_roll = 0.
+        return yaw
+    endif
+endfunction
+
 function LoadUnit takes string chat_str, player un_owner returns nothing
     local integer str_index
     local integer un_type
@@ -242,6 +331,7 @@ function LoadUnit takes string chat_str, player un_owner returns nothing
     local real un_posy
     local real un_flyH
     local real un_fangle
+    local string un_fangle_str
     local integer len_str = StringLength(chat_str)
     local unit resultUnit
     local integer playerId = GetPlayerId(un_owner)
@@ -288,7 +378,8 @@ function LoadUnit takes string chat_str, player un_owner returns nothing
     set len_str = StringLength(chat_str)
 
     set str_index = CutToComma(chat_str)
-    set un_fangle = S2R(SubString(chat_str,0,str_index))
+    set un_fangle_str = SubString(chat_str,0,str_index)
+    set un_fangle = ParseFacing(un_fangle_str)
     set chat_str = SubString(chat_str,str_index+1,len_str)
     set len_str = StringLength(chat_str)
     
@@ -382,6 +473,13 @@ function LoadUnit takes string chat_str, player un_owner returns nothing
         //Create the unit and modify it according to the chat input data
         set resultUnit = CreateUnit (un_owner, un_type, un_posx, un_posy, un_fangle )
         
+        if g_pitch != 0. or g_roll != 0. then
+            if UnitHasAttachedEffect(resultUnit) then
+                call GetUnitAttachedEffect(resultUnit).setOrientation(un_fangle*bj_DEGTORAD, g_pitch, g_roll)
+            else
+                call UnitCreateAttachedEffect(resultUnit).setOrientation(un_fangle*bj_DEGTORAD, g_pitch, g_roll)
+            endif
+        endif
         
         if IsUnitType(resultUnit, UNIT_TYPE_STRUCTURE) then
             static if LIBRARY_SaveNLoadConfig then
@@ -396,7 +494,7 @@ function LoadUnit takes string chat_str, player un_owner returns nothing
         
         //GUMS modifications
         if size != "D" then
-            call GUMSSetUnitScale(resultUnit, S2R(size))
+            call ParseScale(resultUnit, size)
         endif
         if red != "D" then
             call GUMSSetUnitVertexColor(resultUnit, S2I(red)/2.55, S2I(green)/2.55, S2I(blue)/2.55, (255 - S2I(alpha))/2.55)
@@ -419,7 +517,7 @@ function LoadUnit takes string chat_str, player un_owner returns nothing
         set udg_save_LastLoadedUnit[playerId] = resultUnit
         set resultUnit = null
     else
-        call LoadSpecialEffect(un_owner, un_type, un_posx, un_posy, un_flyH, un_fangle, size, red, green, blue, alpha, color, aSpeed, animTag)
+        call LoadSpecialEffect(un_owner, un_type, un_posx, un_posy, un_flyH, un_fangle_str, size, red, green, blue, alpha, color, aSpeed, animTag)
     endif
 endfunction
 

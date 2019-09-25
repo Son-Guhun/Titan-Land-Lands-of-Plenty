@@ -41,6 +41,23 @@ function Save_SaveUnitPatrolPoints takes SaveData saveData, integer unitHandleId
     endloop
 endfunction
 
+private function GetFacingStringEffect takes SpecialEffect sfx returns string
+    if sfx.roll == 0 and sfx.pitch == 0 then
+        return R2S(sfx.yaw*bj_RADTODEG)
+    else
+        return R2S(sfx.yaw*128) + "|" + R2S(sfx.pitch*128) + "|" + R2S(sfx.roll*128)
+    endif
+endfunction
+
+private function GetScaleStringEffect takes SpecialEffect sfx returns string
+    if sfx.scaleY == 1. and sfx.scaleZ == 1. then
+        return R2S(sfx.scaleX)
+    else
+        return R2S(sfx.scaleX) + "|" + R2S(sfx.scaleY) + "|" + R2S(sfx.scaleZ)
+    endif
+endfunction
+
+
 function GenerateSpecialEffectSaveString takes DecorationEffect whichEffect returns string
     local string animTags
     local string color
@@ -62,8 +79,8 @@ function GenerateSpecialEffectSaveString takes DecorationEffect whichEffect retu
         */ R2S(whichEffect.x - Save_GetCenterX(playerId)) + "," +/*
         */ R2S(whichEffect.y - Save_GetCenterY(playerId)) + "," +/*
         */ R2S(whichEffect.height) + "," +/*
-        */ R2S(Rad2Deg(whichEffect.yaw)) + "," +/*
-        */ R2S(whichEffect.scaleX) + "," +/*
+        */ GetFacingStringEffect(whichEffect) + "," +/*
+        */ GetScaleStringEffect(whichEffect) + "," +/*
         */ I2S(whichEffect.red) + "," +/*
         */ I2S(whichEffect.green) + "," +/*
         */ I2S(whichEffect.blue) + "," +/*
@@ -104,6 +121,30 @@ globals
     SaveData array saveFile
 endglobals
 
+private function GetFacingString takes unit whichUnit returns string
+    if UnitHasAttachedEffect(whichUnit) then
+        return GetFacingStringEffect(GetUnitAttachedEffect(whichUnit))
+    else
+        return R2S(GetUnitFacing(whichUnit))
+    endif
+endfunction
+
+private function GetScaleString takes unit whichUnit, UnitVisuals data returns string
+    if UnitHasAttachedEffect(whichUnit) then
+        return GetScaleStringEffect(GetUnitAttachedEffect(whichUnit))
+    else
+        return data.getScale()
+    endif
+endfunction
+
+private function GetHeightString takes unit whichUnit returns string
+    if UnitHasAttachedEffect(whichUnit) then
+        return R2S(GetUnitAttachedEffect(whichUnit).height)
+    else
+        return R2S(GetUnitFlyHeight(whichUnit))
+    endif
+endfunction
+
 function SaveForceLoop takes nothing returns boolean
     local integer playerId = GetPlayerId(GetFilterPlayer())
     local integer playerNumber = playerId + 1
@@ -133,9 +174,9 @@ function SaveForceLoop takes nothing returns boolean
                 set saveStr = ID2S((GetUnitTypeId(saveUnit))) + "," + /*
                             */   R2S(GetUnitX(saveUnit) - Save_GetCenterX(playerId))+","+  /*
                             */   R2S(GetUnitY(saveUnit) - Save_GetCenterY(playerId)) + "," + /*
-                            */   R2S(GetUnitFlyHeight(saveUnit)) + "," + /*
-                            */   R2S(GetUnitFacing(saveUnit)) + "," + /*
-                            */   unitHandleId.getScale() + "," + /*
+                            */   GetHeightString(saveUnit) + "," + /*
+                            */   GetFacingString(saveUnit) + "," + /*
+                            */   GetScaleString(saveUnit, unitHandleId) + "," + /*
                             */   unitHandleId.getVertexRed() + "," + /*
                             */   unitHandleId.getVertexGreen() + "," + /*
                             */   unitHandleId.getVertexBlue() + "," + /*
