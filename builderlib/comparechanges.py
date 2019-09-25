@@ -1,3 +1,4 @@
+"""This script compares two .ini database files to determine any additions, removals or changes between them."""
 from myconfigparser import MyConfigParser, load_unit_data, get_decorations
 
 

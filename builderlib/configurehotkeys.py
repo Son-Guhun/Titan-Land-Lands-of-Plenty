@@ -1,3 +1,11 @@
+"""This script iterates over a pre-defined list of buildings in a .ini database and assigns hotkeys to all units produced by those buildings.
+
+Hotkey order: [Q,W,E,R,A,S,D,F,Z,W,C,V]
+Production buildings: sets hotkeys for trained units in the order that they appear.
+Race Selectors: configures hotkeys for upgrades, then for trained units, in the order that each appears.
+
+"""
+
 from myconfigparser import MyConfigParser, load_unit_data, get_decorations
 import traceback
 

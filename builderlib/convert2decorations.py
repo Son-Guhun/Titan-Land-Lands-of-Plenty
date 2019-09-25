@@ -1,3 +1,7 @@
+"""This script converts each CUSTOM unit in a list to a decoration, using 'h038' as the base unit.
+
+Does not function for default units, as the _parent object field is overriden.
+"""
 import os
 from myconfigparser import MyConfigParser, load_unit_data, get_decorations
 

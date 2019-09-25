@@ -1,3 +1,8 @@
+"""Used to work with FourCC object codes used by Warcraft III.
+
+Provides a Rawcode class which inherits from str and can be added with integers.
+Example: Rawcode('H009') + 2 => Rawcode('H00B')
+"""
 alphabet = 'abcdefghijklmnpqrstuvwxyz'
 dictionary = {k:v for (k,v) in zip(alphabet,range(len(alphabet)))}
 
@@ -46,6 +51,7 @@ class RawcodeSafe(Rawcode):
         return r
 
 def rawcode_range(init, size):
+    """Example: rawcode_range('H000',3) => yields 'H000','H001','H002'"""
     if type('init') == str:
         init = Rawcode(init)
     for i in range(size):

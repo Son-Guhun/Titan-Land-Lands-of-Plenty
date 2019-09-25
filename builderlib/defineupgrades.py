@@ -1,9 +1,15 @@
+"""This script takes a list of lists of units in a .ini database and creates an "upgrade chain" from them.
+
+Example:
+['h111','u000','o123] => h111 will upgrade to u000 which will upgrade to o123 which will upgrade to h111.
+"""
 from myconfigparser import MyConfigParser, load_unit_data, get_decorations
 import s2id
 
 dataBase = "..\\development\\table\\unit.ini"
 
 def rawcode_range(*args):
+    """Returns a rawcode range with the first letter in lower case for each rawcode."""
     return [unit[0].lower() + unit[1:] for unit in s2id.rawcode_range(*args)]
 
 upgrades = [

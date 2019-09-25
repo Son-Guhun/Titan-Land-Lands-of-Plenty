@@ -1,3 +1,7 @@
+"""Gets properties from all decorations a .ini database and generates code to be used in the
+UnitTypeDefaultValues library. This code is copied to the clipboard and can be pasted in a text
+editor or inside the World Editor.
+"""
 from myconfigparser import MyConfigParser, load_unit_data, get_decorations
 
 

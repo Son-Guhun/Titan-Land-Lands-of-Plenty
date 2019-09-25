@@ -1,3 +1,4 @@
+"""Translates a .json of doodads into JASS code that generates equivalent DoodadEffects."""
 import subprocess
 import os
 import json

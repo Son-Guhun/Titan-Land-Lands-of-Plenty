@@ -1,3 +1,7 @@
+"""Iterates over all unit abilities an a .ini database and returns generated code
+for the CustomizeAbleAbilityList library. This can be copied to the clipboard using
+pyperclip in order to paste it in the World Editor or a text editor.
+"""
 from myconfigparser import MyConfigParser, load_unit_data, get_decorations
 
 

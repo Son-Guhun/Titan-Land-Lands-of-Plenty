@@ -1,3 +1,7 @@
+"""This script scans a folder (does not scan subfolders) and creates a new decorations in
+a .ini database for each .mdx file found inside the folder. Files with _portrait at the end
+of their names are not included.
+"""
 import os
 from myconfigparser import MyConfigParser, load_unit_data, get_decorations
 
