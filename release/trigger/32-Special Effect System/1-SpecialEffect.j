@@ -79,6 +79,14 @@ struct SpecialEffect extends array
         return .yaw_impl
     endmethod
     
+    method operator pitch takes nothing returns real
+        return .pitch_impl
+    endmethod
+    
+    method operator roll takes nothing returns real
+        return .roll_impl
+    endmethod
+    
     method operator yaw= takes real value returns nothing
         set .yaw_impl = value
         // call BlzSetSpecialEffectYaw(.effect, value)
@@ -86,19 +94,11 @@ struct SpecialEffect extends array
         call BlzSetSpecialEffectMatrixScale(.effect, .scaleX, .scaleY, .scaleZ)
     endmethod
     
-    method operator pitch takes nothing returns real
-        return .pitch_impl
-    endmethod
-    
     method operator pitch= takes real value returns nothing
         set .pitch_impl = value
         //call BlzSetSpecialEffectPitch(.effect, value)
         call BlzSetSpecialEffectOrientation(.effect, .yaw, value, .roll)
         call BlzSetSpecialEffectMatrixScale(.effect, .scaleX, .scaleY, .scaleZ)
-    endmethod
-    
-    method operator roll takes nothing returns real
-        return .roll_impl
     endmethod
     
     method operator roll= takes real value returns nothing

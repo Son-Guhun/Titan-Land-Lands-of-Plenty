@@ -10,6 +10,22 @@ private function SetUnitPosition takes unit u, real x, real y returns nothing
     endif
 endfunction
 
+private function SetUnitFacing takes unit u, real angle returns nothing
+    call OrglSetUnitFacing(u, angle)
+    
+    if UnitHasAttachedEffect(u) then
+        call AttachedSFX_onSetFacing(u, angle)
+    endif
+endfunction
+
+private function SetUnitFacingTimed takes unit u, real angle, real time returns nothing
+    call OrglSetUnitFacingTimed(u, angle, time)
+    
+    if UnitHasAttachedEffect(u) then
+        call AttachedSFX_onSetFacingTimed(u, angle, time)
+    endif
+endfunction
+
 private function SetUnitTimeScale takes unit u, real scale returns nothing
     call OrglSetUnitTimeScale(u,scale)
     

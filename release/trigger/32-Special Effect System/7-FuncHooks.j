@@ -2,6 +2,8 @@
 library FuncHooks requires AttachedSFX
 
 //! runtextmacro FuncHooks("Orgl", "SetUnitPosition", "unit u, real x, real y", "u,x,y")
+//! runtextmacro FuncHooks("Orgl", "SetUnitFacing", "unit u, real a", "u,a")
+//! runtextmacro FuncHooks("Orgl", "SetUnitFacingTimed", "unit u, real a, real t", "u,a,t")
 //! runtextmacro FuncHooks("Orgl", "SetUnitTimeScale", "unit u, real scale", "u,scale")
 //! runtextmacro FuncHooks("Orgl", "SetUnitScale", "unit u, real x, real y, real z", "u,x,y,z")
 //! runtextmacro FuncHooks("Orgl", "SetUnitFlyHeight", "unit u, real h, real r", "u,h,r")
@@ -12,6 +14,8 @@ library FuncHooks requires AttachedSFX
 //! runtextmacro optional FuncHooks_Definitions()
 
 //! runtextmacro FuncHooks("Hkd", "SetUnitPosition", "unit u, real x, real y", "u,x,y")
+//! runtextmacro FuncHooks("Hkd", "SetUnitFacing", "unit u, real a", "u,a")
+//! runtextmacro FuncHooks("Hkd", "SetUnitFacingTimed", "unit u, real a, real t", "u,a,t")
 //! runtextmacro FuncHooks("Hkd", "SetUnitTimeScale", "unit u, real scale", "u,scale")
 //! runtextmacro FuncHooks("Hkd", "SetUnitScale", "unit u, real x, real y, real z", "u,x,y,z")
 //! runtextmacro FuncHooks("Hkd", "SetUnitFlyHeight", "unit u, real h, real r", "u,h,r")
@@ -30,6 +34,14 @@ endlibrary
 //! textmacro DefineHooks
 private function SetUnitPosition takes unit u, real x, real y returns nothing
     call HkdSetUnitPosition(u, x, y)
+endfunction
+
+private function SetUnitFacing takes unit u, real a returns nothing
+    call HkdSetUnitFacing(u, a)
+endfunction
+
+private function SetUnitFacingTimed takes unit u, real a, real t returns nothing
+    call HkdSetUnitFacingTimed(u, a, t)
 endfunction
 
 private function SetUnitTimeScale takes unit u, real scale returns nothing

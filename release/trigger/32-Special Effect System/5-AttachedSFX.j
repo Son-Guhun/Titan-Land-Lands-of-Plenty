@@ -57,6 +57,14 @@ public function onSetPosition takes unit whichUnit, real x, real y returns nothi
     set sfx.y = GetUnitY(whichUnit)
 endfunction
 
+public function onSetFacing takes unit whichUnit, real angle returns nothing
+    set UnitData.get(whichUnit).attachedEffect.yaw = angle*bj_DEGTORAD
+endfunction
+
+public function onSetFacingTimed takes unit whichUnit, real angle, real time returns nothing
+    set UnitData.get(whichUnit).attachedEffect.yaw = angle*bj_DEGTORAD
+endfunction
+
 public function onSetHeight takes unit whichUnit, real height, real rate returns nothing
     local SpecialEffect sfx
     
@@ -70,17 +78,11 @@ public function onSetHeight takes unit whichUnit, real height, real rate returns
 endfunction
 
 public function onAddAnimationProperties takes unit whichUnit, string properties, boolean add returns nothing
-    local SpecialEffect sfx = UnitData.get(whichUnit).attachedEffect
-    
-    if add then
-        call AddTagsStringAsSubAnimations(sfx, properties, add)
-    endif
+    call AddTagsStringAsSubAnimations(UnitData.get(whichUnit).attachedEffect, properties, add)
 endfunction
 
 public function onSetColor takes unit whichUnit, playercolor color returns nothing
-    local SpecialEffect sfx = UnitData.get(whichUnit).attachedEffect
-    
-    set sfx.color = GetHandleId(color)
+    set UnitData.get(whichUnit).attachedEffect .color = GetHandleId(color)
 endfunction
 
 public function onSetScale takes unit whichUnit, real x, real y, real z returns nothing
@@ -103,15 +105,7 @@ public function onSetVertexColor takes unit whichUnit, integer red, integer gree
 endfunction
 
 public function onSetTimeScale takes unit whichUnit, real scale returns nothing
-    local SpecialEffect sfx = UnitData.get(whichUnit).attachedEffect
-    
-    set sfx.animationSpeed = scale
-endfunction
-
-public function onSetFacing takes unit whichUnit, real facing returns nothing
-    local SpecialEffect sfx = UnitData.get(whichUnit).attachedEffect
-    
-    set sfx.yaw = facing
+    set UnitData.get(whichUnit).attachedEffect.animationSpeed = scale
 endfunction
 
 endlibrary
