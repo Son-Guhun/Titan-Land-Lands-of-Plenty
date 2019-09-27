@@ -72,6 +72,9 @@ def configure_selectors(unit_data, selector_list, **kwargs):
 file_path = '../development/table/unit.ini'
 buildings = [
     # Human
+    'hgra',  # Gryphon Aviary
+    'harm',  # Workshop
+    
     'h00L',  # Bandit
     'h0T0',  # Bandit Magic
     'h085',  # Black Legion
@@ -103,6 +106,10 @@ buildings = [
     'h100',  # Worgen Magic
 
     # Orc
+    'obar',  # Barracks
+    'obea',  # Bestiary
+    'otto',  # Tauren Totem
+    
     'o02V',  # Centuar
     'o00O',  # Fel Orc
     'o00P',  # Fel Orc Bestiary
@@ -122,6 +129,13 @@ buildings = [
     'o025',  # Troll Magic
 
     # Undead
+    'usep',  # Flesh
+    'uslh',  # Flesh Magic
+    'ubon',  # Fleshless Magic
+    'utod',  # Fleshless
+    'usap',  # Incorporeal
+    'ugrv',  # Incorporeal Magic
+    
     'u04M',  # Cultist Magic
     'u04L',  # Cultist
     'u051',  # Dark Dwarf Magic
@@ -142,6 +156,11 @@ buildings = [
     'u04V',  # Vampire Magic
 
     # Night Elf
+    'nheb',  # Blood Elf
+    'hars',  # Blood Elf Magic
+    'edob',  # Night Elf
+    'nbwd',  # Night Elf Magic
+    
     'e011',  # Draenei
     'e012',  # Draenei Magic
     'e00Y',  # Drow Magic
@@ -156,8 +175,17 @@ buildings = [
     'e02O',  # Wood Elf
 
     # Naga
+    'nnsa',  # Shrine of Azshara
+    'nnsg',  # Spawning Grounds
+
+    'n009',  # Murloc
+    'n00A',  # Murloc Magic
 
     # Creep
+    'eaom',  # Forest Dwellers
+    'eaoe',  # Forest Dwellers Magic
+    'eaow',  # Forest Dwellers Flyers
+    
     'h0G9',  # Elemental
     'h0G8',  # Elemental Magic
     'h12L',  # Lizardman
@@ -187,8 +215,8 @@ def do_everything(file_path=file_path, buildings=buildings, selectors=selectors,
     else:
         tip_lambda = lambda x: '"{} - [|cffffcc00{}|r]"'.format(x['Name'][1:-1], x['Hotkey'][1:-1])
         ubertip_lambda = lambda x: '""' if 'Ubertip' not in x else x['Ubertip']
-        configure_trained_units(unit_data, buildings, Tip=tip_lambda, Ubertip=ubertip_lambda, buildtm='5', fused='0', goldcost='0', lumbercost='0')
-        configure_selectors(unit_data, selectors, Tip=tip_lambda, Ubertip=ubertip_lambda, buildtm='1', fused='0', goldcost='0', lumbercost='0')
+        configure_trained_units(unit_data, buildings, Tip=tip_lambda, Ubertip=ubertip_lambda, bldtm='2', fused='0', goldcost='0', lumbercost='0')
+        configure_selectors(unit_data, selectors, Tip=tip_lambda, Ubertip=ubertip_lambda, bldtm='1', fused='0', goldcost='0', lumbercost='0')
 
     with open(file_path, 'w') as f:
         unit_data.write(f)

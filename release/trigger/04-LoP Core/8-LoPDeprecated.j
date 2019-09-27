@@ -170,6 +170,12 @@ private module InitModule
         set unitType.equivalent = 'hbla'
         set unitType = 'o00L' // Fel Great Hall
         set unitType.equivalent = 'h176'
+        set unitType = 'o00N' // Fel Stronghold
+        set unitType.equivalent = 'h176'
+        set unitType.animTags = "first"
+        set unitType = 'o00M' // Fel Fortress
+        set unitType.equivalent = 'h176'
+        set unitType.animTags = "second"
         set unitType = 'o01Z' // Tauren Main Hut
         set unitType.equivalent = 'h176'
         set unitType = 'u04K' // Cultist Necropolis
