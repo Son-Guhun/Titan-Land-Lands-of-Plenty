@@ -66,7 +66,6 @@ DecoSystem_animSpeed: real
     Array : 1
 DecoSystem_Anims: string
     Array : 1
-temp_ability: abilcode
 temp_player: player
 PowerSystem_Player: player
     Def   : Player00
@@ -297,11 +296,6 @@ HideDamageFrom: boolean
     Array : 1
 UnitDamageRegistered: boolean
     Array : 1
-System_PlayerArmy: integer
-    Array : 1
-System_PArmyLimit: integer
-    Array : 1
-    Def   : 0
 Commands_Integer: integer
 System_LimitUnitCategory: integer
     Array : 1

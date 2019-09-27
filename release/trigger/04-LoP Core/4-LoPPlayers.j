@@ -1,5 +1,23 @@
 library LoPPlayers requires TableStruct, DecorationSFX
 
+function LoP_PlayerOwnsUnit takes player whichPlayer, unit whichUnit returns boolean
+    local player p = GetOwningPlayer(whichUnit)
+    
+    if p == whichPlayer then
+        return true
+    endif
+    return IsUnitInGroup(whichUnit, udg_System_NeutralUnits[GetPlayerId(whichPlayer)]) and p == Player(PLAYER_NEUTRAL_PASSIVE)
+endfunction
+
+function PlayerNumberIsNotExtraOrVictim takes integer ID returns boolean
+    return (ID <= bj_MAX_PLAYERS or ID == PLAYER_NEUTRAL_AGGRESSIVE+1 or ID == PLAYER_NEUTRAL_PASSIVE+1) and (ID >= 1)
+endfunction
+
+function PlayerNumberIsNotNeutral takes integer ID returns boolean
+    return ID <= bj_MAX_PLAYERS and ID > 0
+endfunction
+
+
 struct LoP_PlayerData extends array
     
     static method get takes player whichPlayer returns LoP_PlayerData

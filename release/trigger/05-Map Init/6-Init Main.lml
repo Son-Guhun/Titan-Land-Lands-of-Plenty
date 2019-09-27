@@ -17,18 +17,12 @@ Action
     SetVariable
         Var   : WholeMapRegion
         Call  : GetEntireMapRect
-    SetVariable
-        Array : System_PArmyLimit
-            Const : 1
-        Const : 150
-    SetVariable
-        Array : System_PArmyLimit
-            Const : 2
-        Const : 24
-    SetVariable
-        Array : System_PArmyLimit
-            Const : 3
-        Const : 150
+    CustomScriptCode
+        Const : 'call PauseTimer(bj_stockUpdateTimer)'
+    CustomScriptCode
+        Const : 'call DestroyTimer(bj_stockUpdateTimer)'
+    CustomScriptCode
+        Const : 'set bj_stockUpdateTimer = null'
     CommentString
         Const : 'Create Hashtables'
     CustomScriptCode

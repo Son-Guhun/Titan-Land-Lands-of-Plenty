@@ -169,19 +169,21 @@ Sets the rotation angle of the Rotate ability used by decorations.
 Gives a unit a new name. If no name is specified, then the unit's name is reset.
 |cffffff00-color (number)|r
 Set the color for the 'color command.
-|cffffff00-size (number)|r
-Set the size for the 'size command.
-|cffffff00-rgb (red green blue transparency)|r
+|cffffff00-size (x) <y> <z>|r
+Set the size for the 'size command. Decorations can have distinct scales for each dimension.
+|cffffff00-rgb (red) <green> <blue> <transparency>|r
 Set the colors for the 'rgb command.
 |cffffff00-speed (number)|r
 Set the animation speed for the 'speed command.
-|cffffff00-fly (number)|r
-Set the flying height for the 'fly command. Has a -h alias.
-|cffffff00-face (number)|r
-Set the facing angle for the 'face command. Has a -f alias.
+|cffffff00-fly/-h (number)|r
+Set the flying height for the 'fly command. For decorations, you can use a negative value.
+|cffffff00-face/-f (angle)|r
+Set the facing angle for the 'face command.
+|cffffff00'pitch (angle) | 0roll (angle)|r
+Turns a decoration in the x or y axes.
 
-|cffffff00'fly|r | |cffffff00'rgb|r | |cffffff00'face|r | |cffffff00'size|r | |cffffff00'color|r
-Use the commands above to apply unit modifications. Alternatively, you can use Deco Modifier Special's (use the command |cffffcc00-seln sp|r to select it) abilities.
+|cffffff00'fly|r | 'rgb | face | 'size | 'color|r
+Use the commands above to apply unit modifications. Alternatively, you can use the abilities of Deco Modifier Special (command |cffffcc00-seln sp|r to select it).
 "
     call CreateQuestBJ(questType, "Unit Modification Commands", quest_text, "ReplaceableTextures\\CommandButtons\\BTNFootman.blp")
     // ----------
@@ -294,6 +296,25 @@ Commands:
     // ====================
     set questType = bj_QUESTTYPE_OPT_DISCOVERED
     
+    
+    // Changelog and Contact
+    set quest_text = "
+Want to support the project? You can do so at: |cffffcc00ko-fi.com/songuhun|r
+
+Development of Lands of Plenty takes up a good chunk of my time, and I try to keep a pretty rapid update cycle. Of course, this requires a good bit of motivation, since I actually enjoy doing quite a lot of things. If you enjoy playing LoP, please consider supporting the project. It would be incredibly appreciated.
+
+Supporters will be mentioned in the loading screen and quest log (F9).
+
+Link to changelog: |cffffcc00tiny.cc/LoPchangelog|r
+LoP Repository: |cffffcc00github.com/Son-Guhun/Titan-Land-Lands-of-Plenty|r
+The Hive Workshop: |cffffcc00_Guhun_|r
+Discord: |cffffcc00SonGuhun#4510|r
+E-mail me at: |cffffcc00songuhun@hotmail.com|r
+"
+    call CreateQuestBJ(questType, "About LoP", quest_text, "ReplaceableTextures\\CommandButtons\\BTNSpellBookBLS.blp")
+    // ----------
+    
+    
     // Titan Land Creators
     set quest_text = "
 - Guhun (Creator & Director)
@@ -370,19 +391,6 @@ feelerly => Id2String
 Doomlord => Custom Stat System
 "
     call CreateQuestBJ(questType, "|cff00ff00Coding & Tools|r", quest_text, "ReplaceableTextures\\CommandButtons\\BTNEngineeringUpgrade.blp")
-    // ----------
-    
-    // Changelog and Contact
-    set quest_text = "
-Want to support the project? You can do so at: |cffffcc00ko-fi.com/songuhun|r
-    
-Link to changelog: |cffffcc00tiny.cc/LoPchangelog|r
-LoP Repository: |cffffcc00github.com/Son-Guhun/Titan-Land-Lands-of-Plenty|r
-The Hive Workshop: |cffffcc00_Guhun_|r
-Discord: |cffffcc00SonGuhun#4510|r
-E-mail me at: |cffffcc00songuhun@hotmail.com|r
-"
-    call CreateQuestBJ(questType, "|cff0000ffChangelog and Contact|r", quest_text, "ReplaceableTextures\\CommandButtons\\BTNSpellBookBLS.blp")
     // ----------
 endfunction
 endlibrary
