@@ -1,6 +1,8 @@
 // Missing Facing hook
 library FuncHooks requires AttachedSFX
 
+//! runtextmacro FuncHooks("Orgl", "SetUnitX", "unit u, real x", "u,x")
+//! runtextmacro FuncHooks("Orgl", "SetUnitY", "unit u, real y", "u,y")
 //! runtextmacro FuncHooks("Orgl", "SetUnitPosition", "unit u, real x, real y", "u,x,y")
 //! runtextmacro FuncHooks("Orgl", "SetUnitFacing", "unit u, real a", "u,a")
 //! runtextmacro FuncHooks("Orgl", "SetUnitFacingTimed", "unit u, real a, real t", "u,a,t")
@@ -13,6 +15,8 @@ library FuncHooks requires AttachedSFX
 
 //! runtextmacro optional FuncHooks_Definitions()
 
+//! runtextmacro FuncHooks("Hkd", "SetUnitX", "unit u, real x", "u,x")
+//! runtextmacro FuncHooks("Hkd", "SetUnitY", "unit u, real y", "u,y")
 //! runtextmacro FuncHooks("Hkd", "SetUnitPosition", "unit u, real x, real y", "u,x,y")
 //! runtextmacro FuncHooks("Hkd", "SetUnitFacing", "unit u, real a", "u,a")
 //! runtextmacro FuncHooks("Hkd", "SetUnitFacingTimed", "unit u, real a, real t", "u,a,t")
@@ -32,6 +36,14 @@ endlibrary
 //! endtextmacro
 
 //! textmacro DefineHooks
+private function SetUnitX takes unit u, real x returns nothing
+    call HkdSetUnitX(u, x)
+endfunction
+
+private function SetUnitY takes unit u, real y returns nothing
+    call HkdSetUnitY(u, y)
+endfunction
+
 private function SetUnitPosition takes unit u, real x, real y returns nothing
     call HkdSetUnitPosition(u, x, y)
 endfunction

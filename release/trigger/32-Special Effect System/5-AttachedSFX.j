@@ -55,7 +55,7 @@ function UnitDetachEffect takes unit whichUnit returns SpecialEffect
     return 0
 endfunction
 
-public function onSetPosition takes unit whichUnit, real x, real y returns nothing
+public function onSetPosition takes unit whichUnit returns nothing
     local SpecialEffect sfx = UnitData.get(whichUnit).attachedEffect
     
     set sfx.x = GetUnitX(whichUnit)

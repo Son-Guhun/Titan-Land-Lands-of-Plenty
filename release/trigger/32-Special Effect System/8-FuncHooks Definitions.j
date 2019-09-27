@@ -2,11 +2,27 @@
 hooked to, check the FuncHooks library.*/
 //! textmacro FuncHooks_Definitions
 
+private function SetUnitX takes unit u, real x returns nothing
+    call OrglSetUnitX(u, x)
+    
+    if UnitHasAttachedEffect(u) then
+        call AttachedSFX_onSetPosition(u)
+    endif
+endfunction
+
+private function SetUnitY takes unit u, real y returns nothing
+    call OrglSetUnitY(u, y)
+    
+    if UnitHasAttachedEffect(u) then
+        call AttachedSFX_onSetPosition(u)
+    endif
+endfunction
+
 private function SetUnitPosition takes unit u, real x, real y returns nothing
     call OrglSetUnitPosition(u, x, y)
     
     if UnitHasAttachedEffect(u) then
-        call AttachedSFX_onSetPosition(u, x, y)
+        call AttachedSFX_onSetPosition(u)
     endif
 endfunction
 
