@@ -97,19 +97,23 @@ private function groupFunc takes nothing returns nothing
             call GUMSSetUnitColor(enumUnit,  Commands_GetChatMessagePlayerNumber(args))
         endif
     elseif ( command == "'roll" ) then
-        if args != "" then
-            if not UnitHasAttachedEffect(enumUnit) then
-                set UnitCreateAttachedEffect(enumUnit).roll = S2R(args)*bj_DEGTORAD
-            else
-                set GetUnitAttachedEffect(enumUnit).roll = S2R(args)*bj_DEGTORAD
+        if AttachedSFX_IsUnitValid(enumUnit) then
+            if args != "" then
+                if not UnitHasAttachedEffect(enumUnit) then
+                    set UnitCreateAttachedEffect(enumUnit).roll = S2R(args)*bj_DEGTORAD
+                else
+                    set GetUnitAttachedEffect(enumUnit).roll = S2R(args)*bj_DEGTORAD
+                endif
             endif
         endif
     elseif ( command == "'pitch" ) then
-        if args != "" then
-            if not UnitHasAttachedEffect(enumUnit) then
-                set UnitCreateAttachedEffect(enumUnit).pitch = S2R(args)*bj_DEGTORAD
-            else
-                set GetUnitAttachedEffect(enumUnit).pitch = S2R(args)*bj_DEGTORAD
+        if AttachedSFX_IsUnitValid(enumUnit) then
+            if args != "" then
+                if not UnitHasAttachedEffect(enumUnit) then
+                    set UnitCreateAttachedEffect(enumUnit).pitch = S2R(args)*bj_DEGTORAD
+                else
+                    set GetUnitAttachedEffect(enumUnit).pitch = S2R(args)*bj_DEGTORAD
+                endif
             endif
         endif
     endif

@@ -1,4 +1,9 @@
-library AttachedSFX requires Unit2Effect, TableStruct
+library AttachedSFX requires Unit2Effect, TableStruct, optional LoPHeader
+
+public function IsUnitValid takes unit whichUnit returns boolean
+    return LoP_IsUnitDecoration(whichUnit)
+    // return GetUnitTypeIdModel(GetUnitTypeId(whichUnit))
+endfunction
 
 struct UnitData extends array
 
@@ -68,12 +73,14 @@ endfunction
 public function onSetHeight takes unit whichUnit, real height, real rate returns nothing
     local SpecialEffect sfx
     
-    if UnitHasAttachedEffect(whichUnit) then
-        set sfx = UnitData.get(whichUnit).attachedEffect
-        set sfx.height = height
-    elseif height < 0 then
-        set sfx = UnitCreateAttachedEffect(whichUnit)
-        set sfx.height = height
+    if IsUnitValid(whichUnit) then
+        if UnitHasAttachedEffect(whichUnit) then
+            set sfx = UnitData.get(whichUnit).attachedEffect
+            set sfx.height = height
+        elseif height < 0 then
+            set sfx = UnitCreateAttachedEffect(whichUnit)
+            set sfx.height = height
+        endif
     endif
 endfunction
 
@@ -88,12 +95,14 @@ endfunction
 public function onSetScale takes unit whichUnit, real x, real y, real z returns nothing
     local SpecialEffect sfx = UnitData.get(whichUnit).attachedEffect
 
-    if UnitHasAttachedEffect(whichUnit) then
-        set sfx = UnitData.get(whichUnit).attachedEffect
-        call sfx.setScale(x, y, z)
-    elseif x!=y or x!=z then
-        set sfx = UnitCreateAttachedEffect(whichUnit)
-        call sfx.setScale(x, y, z)
+    if IsUnitValid(whichUnit) then
+        if UnitHasAttachedEffect(whichUnit) then
+            set sfx = UnitData.get(whichUnit).attachedEffect
+            call sfx.setScale(x, y, z)
+        elseif x!=y or x!=z then
+            set sfx = UnitCreateAttachedEffect(whichUnit)
+            call sfx.setScale(x, y, z)
+        endif
     endif
 endfunction
 

@@ -452,10 +452,12 @@ function LoadUnit takes string chat_str, player un_owner returns nothing
         set resultUnit = CreateUnit (un_owner, un_type, un_posx, un_posy, un_fangle )
         
         if g_pitch != 0. or g_roll != 0. then
-            if UnitHasAttachedEffect(resultUnit) then
-                call GetUnitAttachedEffect(resultUnit).setOrientation(un_fangle*bj_DEGTORAD, g_pitch, g_roll)
-            else
-                call UnitCreateAttachedEffect(resultUnit).setOrientation(un_fangle*bj_DEGTORAD, g_pitch, g_roll)
+            if AttachedSFX_IsUnitValid(resultUnit) then
+                if UnitHasAttachedEffect(resultUnit) then
+                    call GetUnitAttachedEffect(resultUnit).setOrientation(un_fangle*bj_DEGTORAD, g_pitch, g_roll)
+                else
+                    call UnitCreateAttachedEffect(resultUnit).setOrientation(un_fangle*bj_DEGTORAD, g_pitch, g_roll)
+                endif
             endif
         endif
         
