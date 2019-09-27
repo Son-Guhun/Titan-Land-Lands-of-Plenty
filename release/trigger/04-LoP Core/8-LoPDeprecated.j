@@ -3,7 +3,6 @@ library LoPDeprecated requires TableStruct
 private keyword InitModule
 
 struct DeprecatedData extends array
-    implement InitModule
     //! runtextmacro TableStruct_NewReadonlyPrimitiveField("equivalent", "integer")
     //! runtextmacro TableStruct_NewReadonlyPrimitiveField("yawOffset", "real")
     //! runtextmacro TableStruct_NewReadonlyPrimitiveField("animTags", "string")
@@ -24,6 +23,8 @@ struct DeprecatedData extends array
     method hasScale takes nothing returns boolean
         return scaleExists()
     endmethod
+    
+    implement InitModule
 endstruct
 
 private module InitModule
@@ -109,7 +110,7 @@ private module InitModule
         set unitType = 'h0VJ' // 3
         set unitType.equivalent = 'h0VM'
         
-        // Human Town Structures
+        // Human Structures
         set unitType = 'hkee' // Castle
         set unitType.equivalent = 'htow'
         set unitType.animTags = "first"
@@ -128,7 +129,7 @@ private module InitModule
         set unitType.animTags = "third"
         
         
-        // Orc Town Halls
+        // Orc Structures
         set unitType = 'ogre' // 2
         set unitType.equivalent = 'h176'
         set unitType = 'ostr' // 2
@@ -137,6 +138,19 @@ private module InitModule
         set unitType = 'ofrt' // 3
         set unitType.equivalent = 'h176'
         set unitType.animTags = "second"
+        
+        set unitType = 'oalt'  // Altar
+        set unitType.equivalent = 'h175'
+        set unitType = 'otrb'  // Burrow
+        set unitType.equivalent = 'h17E'
+        set unitType = 'osld'  // Spirit Lodge
+        set unitType.equivalent = 'h17A'
+        set unitType = 'ovln'  // Voodoo Lounge
+        set unitType.equivalent = 'h17C'
+        set unitType = 'ofor'  // War Mill
+        set unitType.equivalent = 'h178'
+        set unitType = 'owtw'  // Watch Tower
+        set unitType.equivalent = 'h17F'
         
         // Temple of Tides
         set unitType = 'nntt'
