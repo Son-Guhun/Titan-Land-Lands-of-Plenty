@@ -5,17 +5,41 @@
 // It also gives an ability based on Root (zz_Enable/Disable Fly in Custom->Special->Units) to any structures.
 // This ability allows them to have a flying height.
 
+// This is executed as soon as a unit is created (before the next line of code) and is called in the Unit Event trigger
 
-function Trig_Deco_DisableMovement_Conditions takes nothing returns boolean
-    local unit trigU
 
-    if not LoP_IsUnitDecoration(GetTriggerUnit()) then
-        return false
-    endif
 
-    set trigU = GetTriggerUnit()
+library DecoOnEnterMap requires UnitVisualValues, RectGenerator
 
-    // -
+globals
+    private group G = CreateGroup()
+    private timer T = CreateTimer()
+endglobals
+
+private function PlayAnim takes nothing returns nothing
+    local unit u = FirstOfGroup(G)
+    local effect e
+    loop
+    exitwhen u == null
+        if GetUnitTypeId(u)==0 then
+            call GroupRefresh(G)
+        else
+            call SetUnitAnimation(u, "death alternate")
+            if UnitHasAttachedEffect(u) then
+                set e = GetUnitAttachedEffect(u).effect
+                call BlzSpecialEffectAddSubAnimation(e, SUBANIM_TYPE_ROOTED)
+                call BlzPlaySpecialEffect(e, ANIM_TYPE_DEATH)
+                call BlzSpecialEffectRemoveSubAnimation(e, SUBANIM_TYPE_ROOTED)
+            endif
+            call GroupRemoveUnit(G, u)
+        endif
+        set u = FirstOfGroup(G)
+    endloop
+    set u = null
+    set e = null
+endfunction
+
+function DecoOnEnterMap takes unit trigU returns nothing
     // REMOVE ATTACK AND MOVE ABILITIES
     call UnitRemoveAbility(trigU, 'Amov')
     call UnitRemoveAbility(trigU, 'Aatk')
@@ -28,7 +52,7 @@ function Trig_Deco_DisableMovement_Conditions takes nothing returns boolean
         if GetUnitAbilityLevel(trigU, 'A037') != 0 then
         else
             call GUMS_AddStructureFlightAbility(trigU)
-            
+
             call BlzUnitDisableAbility(trigU, 'A011', false, false)
             call BlzUnitDisableAbility(trigU, 'A012', false, false)
             call BlzUnitDisableAbility(trigU, 'UDR4', false, false)
@@ -44,28 +68,20 @@ function Trig_Deco_DisableMovement_Conditions takes nothing returns boolean
                 // if GUMS_HaveSavedAnimationTag(trigU) then
                     // call SetUnitAnimation(trigU, "death alternate " +GUMSConvertTags( GUMSGetUnitAnimationTag(trigU)))
                 // else
-                    call SetUnitAnimation(trigU, "death alternate")
+                    call GroupAddUnit(G, trigU)
+                    // call SetUnitAnimation(trigU, "death alternate")
+                    call TimerStart(T, 0., false, function PlayAnim)
                 // endif
             else
                 // if GUMS_HaveSavedAnimationTag(trigU) then
                     // call SetUnitAnimation(trigU, "stand " +GUMSConvertTags( GUMSGetUnitAnimationTag(trigU)))
                 // else
-                    call SetUnitAnimation(trigU, "stand")
+                    call SetUnitAnimation(trigU, "death")
                 // endif
             endif
         endif
     endif
 
     set trigU = null
-    return false
 endfunction
-
-//===========================================================================
-function InitTrig_Deco_OnEnterMap takes nothing returns nothing
-    set gg_trg_Deco_OnEnterMap = CreateTrigger(  )
-
-    call TriggerRegisterEnterRectSimple( gg_trg_Deco_OnEnterMap, GetEntireMapRect() )
-    call TriggerRegisterAnyUnitEventBJ( gg_trg_Deco_OnEnterMap, EVENT_PLAYER_UNIT_UPGRADE_FINISH )
-    call TriggerAddCondition( gg_trg_Deco_OnEnterMap, Condition( function Trig_Deco_DisableMovement_Conditions ) )
-endfunction
-
+endlibrary

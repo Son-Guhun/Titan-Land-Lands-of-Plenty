@@ -186,6 +186,7 @@ function UnitEventEnter takes nothing returns boolean
     //IF UNIT AS DECORATION ABILITY, DO NOT INDEX THIS UNIT
     if LoP_IsUnitDecoration(u) then
         call SetUnitUserData(u, 0)
+        call DecoOnEnterMap(u)
         set u = null
         return false
     endif

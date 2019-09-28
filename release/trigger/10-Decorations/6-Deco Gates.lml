@@ -2,9 +2,9 @@ Event
 Condition
 Action
     CustomScriptCode
-        Const : 'call LopCopyUnit(udg_Spell__Caster, udg_Spell__CasterOwner,LoadInteger(udg_Hashtable_1, GetUnitTypeId(udg_Spell__Caster), 0))'
-    KillUnit
-        Var   : Spell__Caster
+        Const : 'local unit udg_temp_unit = LopCopyUnit(udg_Spell__Caster, udg_Spell__CasterOwner,LoadInteger(udg_Hashtable_1, GetUnitTypeId(udg_Spell__Caster), 0))'
+    CustomScriptCode
+        Const : 'local player udg_temp_player = udg_Spell__CasterOwner'
     IfThenElseMultiple
         Condition
             OperatorCompareBoolean
@@ -14,6 +14,13 @@ Action
                 Preset: OperatorEqualENE
                 Const : true
         Action
+            KillUnit
+                Var   : Spell__Caster
             SelectUnitAddForPlayer
-                Call  : GetLastCreatedUnit
-                Var   : Spell__CasterOwner
+                Var   : temp_unit
+                Var   : temp_player
+        Action
+            KillUnit
+                Var   : Spell__Caster
+    CustomScriptCode
+        Const : 'set udg_temp_unit = null'
