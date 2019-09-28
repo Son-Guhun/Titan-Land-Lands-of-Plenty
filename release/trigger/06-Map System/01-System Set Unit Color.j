@@ -1,3 +1,7 @@
+scope SystemSetUnitColor
+
+//! runtextmacro DefineHooks()
+
 function Filter_UnitSetPlayerColor takes nothing returns boolean
     local unit filterU = GetFilterUnit()
 
@@ -18,3 +22,4 @@ function InitTrig_System_Set_Unit_Color takes nothing returns nothing
     call TriggerRegisterEnterRegion( gg_trg_System_Set_Unit_Color, WorldBounds.worldRegion, Filter(function Filter_UnitSetPlayerColor) )
 endfunction
 
+endscope

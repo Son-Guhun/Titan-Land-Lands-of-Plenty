@@ -5,8 +5,11 @@ private function SELECTABLE_ONLY_ABILITY takes nothing returns integer
 endfunction
 
 private function ToEffect takes unit whichUnit returns nothing
+    local DecorationEffect sfx
+
     if UnitHasAttachedEffect(whichUnit) then
-        call DecorationEffect.convertSpecialEffect(LoP_GetOwningPlayer(whichUnit), UnitDetachEffect(whichUnit))        
+        set sfx = UnitDetachEffect(whichUnit)
+        call DecorationEffect.convertSpecialEffect(LoP_GetOwningPlayer(whichUnit), sfx, UnitVisuals.get(whichUnit).hasColor())
         call KillUnit(whichUnit)
     else
         call Unit2EffectEx(LoP_GetOwningPlayer(whichUnit), whichUnit)

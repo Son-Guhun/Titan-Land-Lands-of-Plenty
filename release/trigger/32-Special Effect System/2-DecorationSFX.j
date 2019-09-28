@@ -257,14 +257,19 @@ struct DecorationEffect extends array
         endif
     endmethod
     
-    static method convertSpecialEffect takes player playerid, SpecialEffect sfx returns DecorationEffect
-        call DecorationEffect(sfx).setOwner(playerid)
+    static method convertSpecialEffect takes player playerid, SpecialEffect sfx, boolean useCustomColor returns DecorationEffect
+        if useCustomColor then
+            set DecorationEffect(sfx).owner = GetHandleId(playerid)
+            set DecorationEffect(sfx).hasCustomColor = true
+        else
+            call DecorationEffect(sfx).setOwner(playerid)
+        endif
         call DecorationEffectBlock.get(sfx.x, sfx.y).effects.append(sfx) 
         return sfx
     endmethod
     
     static method create takes player playerid, integer unitType, real x, real y returns DecorationEffect
-        return thistype.convertSpecialEffect(playerid, SpecialEffect.create(unitType, x, y))
+        return thistype.convertSpecialEffect(playerid, SpecialEffect.create(unitType, x, y), false)
     endmethod
     
     
@@ -331,6 +336,10 @@ endstruct
 
 public function SetPlayerColor takes player whichPlayer, integer color returns nothing
     set PlayerData(GetPlayerId(whichPlayer)).color = color
+endfunction
+
+function DecorationSFX_GetPlayerColor takes player whichPlayer returns integer
+    return PlayerData(GetPlayerId(whichPlayer)).color
 endfunction
 
 // Create Linked Hash Set

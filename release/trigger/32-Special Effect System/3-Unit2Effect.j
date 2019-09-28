@@ -45,6 +45,8 @@ function Unit2SpecialEffect takes unit whichUnit returns SpecialEffect
     
     if unitData.hasColor() then
         set result.color = unitData.raw.getColor() - 1
+    else
+        set result.color = DecorationSFX_GetPlayerColor(GetOwningPlayer(whichUnit))
     endif
     
     if unitData.hasAnimSpeed() then
@@ -67,7 +69,7 @@ function Unit2SpecialEffect takes unit whichUnit returns SpecialEffect
 endfunction
 
 function Unit2EffectEx takes player owner, unit whichUnit returns DecorationEffect
-    return DecorationEffect.convertSpecialEffect(owner, Unit2SpecialEffect(whichUnit))
+    return DecorationEffect.convertSpecialEffect(owner, Unit2SpecialEffect(whichUnit), UnitVisuals.get(whichUnit).hasColor())
 endfunction
 
 function Unit2Effect takes unit whichUnit returns DecorationEffect
