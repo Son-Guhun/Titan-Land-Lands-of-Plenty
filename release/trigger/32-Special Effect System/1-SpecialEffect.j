@@ -228,6 +228,31 @@ struct SpecialEffect extends array
         
         set e = null
     endmethod
+    
+    method copy takes integer newType returns SpecialEffect
+        local SpecialEffect result = SpecialEffect.create(newType, this.x, this.y)
+        local LinkedHashSet subanims
+        local integer subanim
+        
+        set result.height = this.height
+        call result.setOrientation(this.yaw, this.pitch, this.roll)
+        call result.setScale(this.scaleX, this.scaleY, this.scaleZ)
+        set result.color = this.color
+        call result.setVertexColor(this.red, this.green, this.blue)
+        set result.alpha = this.alpha
+        set result.animationSpeed = this.animationSpeed
+        
+        if this.hasSubAnimations() then
+            set subanims = this.subanimations
+            set subanim = subanims.begin()
+            loop
+                exitwhen subanim == subanims.end()
+                call result.addSubAnimation(ConvertSubAnimType(subanim))
+                set subanim = subanims.next(subanim)
+            endloop
+        endif
+        return result
+    endmethod
 
 endstruct
 

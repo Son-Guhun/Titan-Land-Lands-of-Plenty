@@ -62,7 +62,7 @@ scope DecoMovement
                     
                 elseif ( spellId == COPY ) then
                     if not IsUnitInGroup(enumU, udg_System_ProtectedGroup) then
-                        call GUMSCopyUnit(enumU, GetOwningPlayer(enumU),0)
+                        call LopCopyUnitSameType(enumU, GetOwningPlayer(enumU))
                     endif
                 endif
                 
@@ -114,7 +114,7 @@ scope DecoMovement
             call GUMSSetUnitFacing(trigU, angle)
             
         elseif ( spellId == COPY ) then
-            call GUMSCopyUnit(trigU, GetOwningPlayer(trigU),0)
+            call LopCopyUnitSameType(trigU, GetOwningPlayer(trigU))
         endif
         
         set trigU = null

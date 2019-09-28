@@ -399,7 +399,7 @@ function GUMSCopyUnit takes unit whichUnit, player owner, integer newType return
     local unit newUnit
     
     if newType < 1 then
-        set newType = GetUnitTypeId(whichUnit)
+        return null
     endif
     set newUnit = CreateUnit( owner, newType, GetUnitX(whichUnit), GetUnitY(whichUnit), fangle)
     

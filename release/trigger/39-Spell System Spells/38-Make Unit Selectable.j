@@ -7,7 +7,7 @@ function Trig_Make_Unit_Selectable_Func003A takes nothing returns nothing
     local real locY = GetLocationY(udg_Spell__TargetPoint)
     if SquareRoot( (unitX-locX)*(unitX-locX) + (unitY-locY)*(unitY-locY)  ) <= 300. then
         if GUMS_GetUnitSelectionType(enumUnit) != 0 then
-            set newUnit = GUMSCopyUnitSameType(enumUnit, GetOwningPlayer(enumUnit))
+            set newUnit = LopCopyUnitSameType(enumUnit, GetOwningPlayer(enumUnit))
             if UnitHasAttachedEffect(enumUnit) then
                 call UnitAttachEffect(newUnit, UnitDetachEffect(enumUnit))
             endif

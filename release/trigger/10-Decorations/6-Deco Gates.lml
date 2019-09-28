@@ -2,10 +2,18 @@ Event
 Condition
 Action
     CustomScriptCode
-        Const : 'call GUMSCopyUnit(udg_Spell__Caster, GetTriggerPlayer(),LoadInteger(udg_Hashtable_1, GetUnitTypeId(udg_Spell__Caster), 0))'
+        Const : 'call LopCopyUnit(udg_Spell__Caster, udg_Spell__CasterOwner,LoadInteger(udg_Hashtable_1, GetUnitTypeId(udg_Spell__Caster), 0))'
     KillUnit
         Var   : Spell__Caster
-    SelectUnitAddForPlayer
-        Call  : GetLastCreatedUnit
-        Call  : GetOwningPlayer
-            Call  : GetLastCreatedUnit
+    IfThenElseMultiple
+        Condition
+            OperatorCompareBoolean
+                Call  : IsUnitSelected
+                    Var   : Spell__Caster
+                    Var   : Spell__CasterOwner
+                Preset: OperatorEqualENE
+                Const : true
+        Action
+            SelectUnitAddForPlayer
+                Call  : GetLastCreatedUnit
+                Var   : Spell__CasterOwner

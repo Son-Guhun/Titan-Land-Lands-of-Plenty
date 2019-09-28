@@ -1,5 +1,5 @@
 function Trig_Commands_Copy_Func016A takes nothing returns nothing
-    call GUMSCopyUnitSameType(GetEnumUnit(), GetTriggerPlayer())
+    call LopCopyUnitSameType(GetEnumUnit(), GetTriggerPlayer())
 endfunction
 
 function Trig_Commands_Copy_Conditions takes nothing returns boolean
