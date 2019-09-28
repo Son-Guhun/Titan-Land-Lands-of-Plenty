@@ -18,12 +18,16 @@ private function UnitAddAbilities takes unit whichUnit, LinkedHashSet abilities 
     call oldAbilities.destroy()
 endfunction
 
-function LopCopyUnit takes unit u, player owner, integer unitType returns unit
+function LopCopyUnit takes unit u, player owner, integer newType returns unit
     local unit whichUnit = u
     
-    set u = GUMSCopyUnit(whichUnit, owner, unitType)
+    if newType < 1 then
+        set newType = GetUnitTypeId(whichUnit)
+    endif
+    
+    set u = GUMSCopyUnit(whichUnit, owner, newType)
     if UnitHasAttachedEffect(whichUnit) then
-        call UnitAttachEffect(u, GetUnitAttachedEffect(whichUnit).copy(unitType))
+        call UnitAttachEffect(u, GetUnitAttachedEffect(whichUnit).copy(newType))
     endif
     
     if LoP_IsUnitHero(whichUnit) then
@@ -36,7 +40,7 @@ endfunction
 
 
 function LopCopyUnitSameType takes unit whichUnit, player owner returns unit
-    return LopCopyUnit(whichUnit, owner, GetUnitTypeId(whichUnit))
+    return LopCopyUnit(whichUnit, owner, 0)
 endfunction
 
 
