@@ -55,9 +55,8 @@ ColorSystem_Blue: real
     Def   : 100.00
 ColorSystem_Alpha: real
     Array : 1
-DecoSystem_Scale: real
+DecoSystem_Scale: string
     Array : 1
-    Def   : 100.00
 DecoSystem_Facing: real
     Array : 1
 DecoSystem_Height: real

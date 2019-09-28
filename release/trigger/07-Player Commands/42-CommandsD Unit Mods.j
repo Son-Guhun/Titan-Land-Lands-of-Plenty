@@ -1,32 +1,35 @@
-scope CommandsDUnitMods
+library CommandsDUnitMods requires CutToComma, UnitVisualMods
 
-private function SetMatrixScale takes unit u, string args returns nothing
-    local real scaleX
-    local real scaleY
-    local real scaleZ
-    
-    local integer cutToComma = CutToCharacter(args," ")
-    set scaleX = S2R(SubString(args, 0, cutToComma))/100.
-    
-    if cutToComma < StringLength(args) then
-        set args = SubString(args, cutToComma+1, StringLength(args))
+public function SetMatrixScale takes unit u, string args returns nothing
+        local real scaleX
+        local real scaleY
+        local real scaleZ
         
-        set cutToComma = CutToCharacter(args," ")
-        set scaleY = S2R(SubString(args, 0, cutToComma))/100.
+        local integer cutToComma = CutToCharacter(args," ")
+        set scaleX = S2R(SubString(args, 0, cutToComma))/100.
         
         if cutToComma < StringLength(args) then
             set args = SubString(args, cutToComma+1, StringLength(args))
-        
-            set scaleZ = S2R(args)/100.
+            
+            set cutToComma = CutToCharacter(args," ")
+            set scaleY = S2R(SubString(args, 0, cutToComma))/100.
+            
+            if cutToComma < StringLength(args) then
+                set args = SubString(args, cutToComma+1, StringLength(args))
+            
+                set scaleZ = S2R(args)/100.
+            else
+                set scaleZ = 100.
+            endif
+            
+            call GUMSSetUnitMatrixScale(u, scaleX, scaleY, scaleZ)
         else
-            set scaleZ = 100.
+            call GUMSSetUnitScale(u, scaleX)
         endif
-        
-        call GUMSSetUnitMatrixScale(u, scaleX, scaleY, scaleZ)
-    else
-        call GUMSSetUnitScale(u, scaleX)
-    endif
-endfunction
+    endfunction
+endlibrary
+
+scope CommandsUnitMods
 
 // Check if unit is Deco Special so this trigger is not run for every unit that casts a ability
 private function groupFunc takes nothing returns nothing
@@ -48,9 +51,9 @@ private function groupFunc takes nothing returns nothing
 
     if ( command == "'size" ) then
         if args == "" then
-            call GUMSSetUnitScale(enumUnit, udg_DecoSystem_Scale[playerNumber]/100)
+            call CommandsDUnitMods_SetMatrixScale(enumUnit, udg_DecoSystem_Scale[playerNumber])
         else
-            call SetMatrixScale(enumUnit, args)
+            call CommandsDUnitMods_SetMatrixScale(enumUnit, args)
         endif
     elseif ( command == "'fly" or command == "'h") then
         if IsUnitType(enumUnit, UNIT_TYPE_STRUCTURE) then

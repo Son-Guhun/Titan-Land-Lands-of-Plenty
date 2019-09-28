@@ -187,7 +187,7 @@ Action
             SetVariable
                 Array : DecoSystem_Scale
                     Var   : temp_integer
-                Const : 100.00
+                Const : 100
             SetVariable
                 Array : DecoSystem_Value
                     Var   : temp_integer

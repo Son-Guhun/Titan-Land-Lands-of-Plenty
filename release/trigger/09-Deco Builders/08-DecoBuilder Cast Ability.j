@@ -18,7 +18,7 @@ scope DecoModAbils
         
         
         elseif spellId == 'A0C0' then
-            call GUMSSetUnitScale(targetU, udg_DecoSystem_Scale[playerNumber]/100)
+            call CommandsDUnitMods_SetMatrixScale(targetU, udg_DecoSystem_Scale[playerNumber])
             
         elseif spellId == 'A04A' then
             call GUMSSetUnitFlyHeight(targetU, udg_DecoSystem_Height[playerNumber])

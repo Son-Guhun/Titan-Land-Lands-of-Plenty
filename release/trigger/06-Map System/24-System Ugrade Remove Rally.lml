@@ -4,9 +4,25 @@ Event
 Condition
 Action
     CustomScriptCode
-        Const : 'if GetUnitTypeId(GetTriggerUnit()) == ''e000'' then'
+        Const : 'local unit trigU = GetTriggerUnit()'
+    CustomScriptCode
+        Const : 'local SpecialEffect sfx'
+    CustomScriptCode
+        Const : 'if GetUnitTypeId(trigU) == ''e000'' then'
     UnitRemoveAbilityBJ
         Const : ARal
         Call  : GetTriggerUnit
     CustomScriptCode
         Const : endif
+    CustomScriptCode
+        Const : 'if UnitHasAttachedEffect(trigU) then'
+    CustomScriptCode
+        Const : '    set sfx = GetUnitAttachedEffect(trigU)'
+    CustomScriptCode
+        Const : '    call UnitAttachEffect(trigU, sfx.copy(GetUnitTypeId(trigU)))'
+    CustomScriptCode
+        Const : '    call sfx.destroy()'
+    CustomScriptCode
+        Const : endif
+    CustomScriptCode
+        Const : 'set trigU = null'

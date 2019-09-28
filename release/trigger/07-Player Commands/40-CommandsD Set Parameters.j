@@ -6,7 +6,7 @@ function Trig_CommandsD_Set_Parameters_Conditions takes nothing returns boolean
     
     if command == "-size" then
         call DisplayTextToPlayer(trigPlayer, 0, 0, "Size Set" )
-        set udg_DecoSystem_Scale[playerNumber] = RMinBJ(S2R(args), 2000.)
+        set udg_DecoSystem_Scale[playerNumber] = args
     elseif command == "-face" or command == "-f" then
         call DisplayTextToPlayer(trigPlayer, 0, 0, "Facing Set" )
         set udg_DecoSystem_Facing[playerNumber] = S2R(args)

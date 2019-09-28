@@ -305,7 +305,7 @@ endfunction
 ///////////////////////////
 
 function GUMSUnitHasCustomName takes integer unitHandle returns boolean
-    return data[unitHandle].has(NAME)
+    return data[unitHandle].string.has(NAME)
 endfunction
 
 function GUMSGetDefaultName takes integer unitHandle returns string
