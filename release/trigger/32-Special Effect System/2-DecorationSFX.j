@@ -273,13 +273,19 @@ struct DecorationEffect extends array
     endmethod
     
     
-    
     method destroy takes nothing returns nothing
         local effect e = .effect
         call DecorationEffectBlock.get(BlzGetLocalSpecialEffectX(e), BlzGetLocalSpecialEffectY(e)).effects.remove(this)
         
         call SpecialEffect(this).destroy()
         set e = null
+    endmethod
+    
+    method convertToSpecialEffect takes nothing returns SpecialEffect
+        call .owner_clear()
+        set .hasCustomColor = false  // this clears it, since it is a boolean field with default "false"
+        call DecorationEffectBlock.get(.x, .y).effects.remove(this)
+        return this
     endmethod
     
     static method enumDecorationsOfPlayer takes player whichPlayer returns LinkedHashSet
