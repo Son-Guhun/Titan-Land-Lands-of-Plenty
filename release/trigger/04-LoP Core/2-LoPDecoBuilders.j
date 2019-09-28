@@ -193,6 +193,9 @@ are listed first, though.
             // Medieval 2
             set i = ( i + 1 )
             set rawcodes[i] = 'u02L'
+            // Murloc
+            set i = ( i + 1 )
+            set rawcodes[i] = 'u060'
             // Mushrooms
             set i = ( i + 1 )
             set rawcodes[i] = 'u046'
