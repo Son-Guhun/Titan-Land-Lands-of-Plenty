@@ -50,20 +50,21 @@ private function GetFacingStringEffect takes SpecialEffect sfx returns string
 endfunction
 
 private function GetScaleStringEffect takes SpecialEffect sfx returns string
-    if sfx.scaleY == 1. and sfx.scaleZ == 1. then
-        return R2S(sfx.scaleX)
-    else
+    local real scaleX = sfx.scaleX
+    if sfx.scaleY != scaleX  or sfx.scaleZ != scaleX then
         return R2S(sfx.scaleX) + "|" + R2S(sfx.scaleY) + "|" + R2S(sfx.scaleZ)
+    else
+        return R2S(sfx.scaleX)
     endif
 endfunction
 
 
-function GenerateSpecialEffectSaveString takes DecorationEffect whichEffect returns string
+function GetSFXSaveStr takes SpecialEffect whichEffect, player owner, boolean hasCustomColor, integer selectionType returns string
     local string animTags
     local string color
-    local integer playerId = GetPlayerId(whichEffect.getOwner())
+    local integer playerId = GetPlayerId(owner)
     
-    if whichEffect.hasCustomColor then
+    if hasCustomColor then
         set color = I2S(whichEffect.color + 1)
     else
         set color = "D"
@@ -88,7 +89,7 @@ function GenerateSpecialEffectSaveString takes DecorationEffect whichEffect retu
         */ color + "," +/*
         */ R2S(whichEffect.animationSpeed) + "," +/*
         */ animTags + "," +/*
-        */ I2S(GUMS_SELECTION_UNSELECTABLE())
+        */ I2S(selectionType)
 endfunction
 
 function SaveEffectDecos takes integer playerNumber, SaveData saveData returns integer
@@ -101,7 +102,7 @@ function SaveEffectDecos takes integer playerNumber, SaveData saveData returns i
     loop
         exitwhen counter == 25 or decorations == 0 or decoration == decorations.end()
         
-        call saveData.write(SaveNLoad_FormatString("SnL_unit", GenerateSpecialEffectSaveString(decoration)))
+        call saveData.write(SaveNLoad_FormatString("SnL_unit", GetSFXSaveStr(decoration, decoration.getOwner(), decoration.hasCustomColor, GUMS_SELECTION_UNSELECTABLE())))
         
         set decoration = decorations.next(decoration)
         call decorations.remove(decorations.prev(decoration))
@@ -121,32 +122,9 @@ globals
     SaveData array saveFile
 endglobals
 
-private function GetFacingString takes unit whichUnit returns string
-    if UnitHasAttachedEffect(whichUnit) then
-        return GetFacingStringEffect(GetUnitAttachedEffect(whichUnit))
-    else
-        return R2S(GetUnitFacing(whichUnit))
-    endif
-endfunction
-
-private function GetScaleString takes unit whichUnit, UnitVisuals data returns string
-    if UnitHasAttachedEffect(whichUnit) then
-        return GetScaleStringEffect(GetUnitAttachedEffect(whichUnit))
-    else
-        return data.getScale()
-    endif
-endfunction
-
-private function GetHeightString takes unit whichUnit returns string
-    if UnitHasAttachedEffect(whichUnit) then
-        return R2S(GetUnitAttachedEffect(whichUnit).height)
-    else
-        return R2S(GetUnitFlyHeight(whichUnit))
-    endif
-endfunction
-
 function SaveForceLoop takes nothing returns boolean
-    local integer playerId = GetPlayerId(GetFilterPlayer())
+    local player filterPlayer = GetFilterPlayer()
+    local integer playerId = GetPlayerId(filterPlayer)
     local integer playerNumber = playerId + 1
     local unit saveUnit
     local integer saveUnitCount = 0
@@ -157,7 +135,7 @@ function SaveForceLoop takes nothing returns boolean
     if udg_save_load_boolean[playerNumber] == true then
         set stillSaving = true
         if saveFile[playerId] == 0 then
-            set saveFile[playerId] = SaveData.create(Player(playerId), SaveNLoad_FOLDER() + udg_save_password[playerNumber])
+            set saveFile[playerId] = SaveData.create(filterPlayer, SaveNLoad_FOLDER() + udg_save_password[playerNumber])
         endif
         set saveData = saveFile[playerId]
         
@@ -169,22 +147,28 @@ function SaveForceLoop takes nothing returns boolean
             call GroupRemoveUnit(udg_save_grp[playerNumber] , saveUnit)
 
             //Check if Unit has been removed
-            if GetUnitTypeId(saveUnit) != 0 then
-            
-                set saveStr = ID2S((GetUnitTypeId(saveUnit))) + "," + /*
-                            */   R2S(GetUnitX(saveUnit) - Save_GetCenterX(playerId))+","+  /*
-                            */   R2S(GetUnitY(saveUnit) - Save_GetCenterY(playerId)) + "," + /*
-                            */   GetHeightString(saveUnit) + "," + /*
-                            */   GetFacingString(saveUnit) + "," + /*
-                            */   GetScaleString(saveUnit, unitHandleId) + "," + /*
-                            */   unitHandleId.getVertexRed() + "," + /*
-                            */   unitHandleId.getVertexGreen() + "," + /*
-                            */   unitHandleId.getVertexBlue() + "," + /*
-                            */   unitHandleId.getVertexAlpha() + "," + /*
-                            */   unitHandleId.getColor() + "," + /*
-                            */   unitHandleId.getAnimSpeed() + "," + /*
-                            */   SaveIO_CleanUpString(unitHandleId.getAnimTag()) + "," + /*
-                            */   I2S(GUMS_GetUnitSelectionType(saveUnit))
+            if GetUnitTypeId(saveUnit) == 0 then
+                // Removed unit
+                call GroupRefresh(udg_save_grp[playerNumber])
+            else
+                if UnitHasAttachedEffect(saveUnit) then
+                    set saveStr = GetSFXSaveStr(GetUnitAttachedEffect(saveUnit), filterPlayer, unitHandleId.hasColor(), GUMS_GetUnitSelectionType(saveUnit))
+                else
+                    set saveStr = ID2S((GetUnitTypeId(saveUnit))) + "," + /*
+                                */   R2S(GetUnitX(saveUnit) - Save_GetCenterX(playerId))+","+  /*
+                                */   R2S(GetUnitY(saveUnit) - Save_GetCenterY(playerId)) + "," + /*
+                                */   R2S(GetUnitFlyHeight(saveUnit)) + "," + /*
+                                */   R2S(GetUnitFacing(saveUnit)) + "," + /*
+                                */   unitHandleId.getScale() + "," + /*
+                                */   unitHandleId.getVertexRed() + "," + /*
+                                */   unitHandleId.getVertexGreen() + "," + /*
+                                */   unitHandleId.getVertexBlue() + "," + /*
+                                */   unitHandleId.getVertexAlpha() + "," + /*
+                                */   unitHandleId.getColor() + "," + /*
+                                */   unitHandleId.getAnimSpeed() + "," + /*
+                                */   SaveIO_CleanUpString(unitHandleId.getAnimTag()) + "," + /*
+                                */   I2S(GUMS_GetUnitSelectionType(saveUnit))
+                endif
                 
                 call saveData.write(SaveNLoad_FormatString("SnL_unit", saveStr))
                 
@@ -219,21 +203,13 @@ function SaveForceLoop takes nothing returns boolean
                         call saveData.write(SaveNLoad_FormatString("SnL_unit_extra", EncodeRemoveableAbilities(saveUnit)))
                     endif
                 endif
-            else
-                /*
-                set saveStr = "Removed Unit"
-                if isLocalPlayer then
-                    call Preload(saveStr)
-                endif
-                */
-                call GroupRefresh(udg_save_grp[playerNumber])
             endif
-            //End of Check
                 
             //This block should be below the group refresh check in order to always produce correct results
             if IsGroupEmpty(udg_save_grp[playerNumber]) then
                 set udg_save_load_boolean[playerNumber] = false
-                call DisplayTextToPlayer( Player(playerNumber - 1),0,0, "Finished Saving" )
+                call DisplayTextToPlayer(filterPlayer,0,0, (I2S(udg_save_unit_nmbr[playerNumber])))
+                call DisplayTextToPlayer(filterPlayer,0,0, "Finished Saving" )
                 exitwhen true
             endif
                 
@@ -241,12 +217,13 @@ function SaveForceLoop takes nothing returns boolean
         endloop
         
         //This if statement must remain inside (if udg_save_load_boolean[playerNumber] == true) statement to avoid output for people who aren't saving
-        call DisplayTextToPlayer(Player(playerNumber - 1), 0, 0, (I2S(udg_save_unit_nmbr[playerNumber])))
-        set udg_save_unit_nmbr[playerNumber] = ( udg_save_unit_nmbr[playerNumber] + 1 )
         if udg_save_load_boolean[playerNumber] == false then
             call saveData.destroy()
             call save_decoration_effects[playerNumber].destroy()
             set saveFile[playerId] = 0
+        else
+            call DisplayTextToPlayer(filterPlayer,0,0, (I2S(udg_save_unit_nmbr[playerNumber])))
+            set udg_save_unit_nmbr[playerNumber] = ( udg_save_unit_nmbr[playerNumber] + 1 )
         endif
     endif
     
@@ -283,4 +260,3 @@ function InitTrig_SaveUnit takes nothing returns nothing
     call TimerStart(loopTimer, 0.5, true, function SaveLoopActions)
 endfunction
 endlibrary
-
