@@ -1,4 +1,4 @@
-[![ko-fi](https://www.ko-fi.com/img/githubbutton_sm.svg)](https://ko-fi.com/F1F61117L)
+[![ko-fi](https://www.ko-fi.com/img/githubbutton_sm.svg)](https://ko-fi.com/F1F61117L) <a href='https://github.com/Son-Guhun/Titan-Land-Lands-of-Plenty/releases' target='_blank'><img height='36' style='border:0px;height:36px;' src='http://www.pngall.com/wp-content/uploads/2/Download-Button-PNG-Download-Image.png' border='0' alt='Download map' /></a>
 # Titan Land: Lands of Plenty (TL: LoP)
 A WC3 sandbox roleplaying map inspired by those that came before. The main aim of the map is to bridge the gap that has always existed between Titan Land maps and MRP-style maps. In other words, **LoP** aims to provide most of the flexibility os MRP maps, while maintaing the user-friendliness and structure of Titan Land maps. In the future, more elements of MRP-style maps may be added, such as spawners.
 
