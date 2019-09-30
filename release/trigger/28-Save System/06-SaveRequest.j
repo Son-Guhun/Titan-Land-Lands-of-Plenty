@@ -12,7 +12,7 @@ function Trig_SaveRequest_Conditions takes nothing returns boolean
 endfunction
 
 function EnumFilter takes nothing returns boolean
-    return not (RectContainsUnit(gg_rct_Titan_Palace, GetFilterUnit()) or GetUnitTypeId(GetFilterUnit()) == 'h07Q' /*dummy unit*/)
+    return not (RectContainsUnit(gg_rct_Titan_Palace, GetFilterUnit()) and GetUnitTypeId(GetFilterUnit()) != 'h07Q' /*dummy unit*/)
 endfunction
 
 function Trig_SaveRequest_Actions takes nothing returns nothing

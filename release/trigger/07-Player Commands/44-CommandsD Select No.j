@@ -31,12 +31,8 @@ private function EnumFunc takes nothing returns nothing
         call DisplayTextToPlayer(trigP, 0, 0, "This decoration cannot be made unselectable." )
         
     elseif CheckCommandOverflow() then
-        if IsUnitType(enumUnit, UNIT_TYPE_STRUCTURE) then
-            if GetUnitFlyHeight(enumUnit) < GUMS_MINIMUM_FLY_HEIGHT() or GetUnitAbilityLevel(enumUnit, 'Awrp') > 0 then
-                call GUMSMakeUnitUnSelectable(enumUnit)
-            else
-                call ToEffect(enumUnit)
-            endif
+        if GetUnitAbilityLevel(enumUnit, 'Awrp') > 0 or (IsUnitType(enumUnit, UNIT_TYPE_STRUCTURE) and GetUnitFlyHeight(enumUnit) < GUMS_MINIMUM_FLY_HEIGHT()) then
+            call GUMSMakeUnitUnSelectable(enumUnit)
         else
             call ToEffect(enumUnit)
         endif

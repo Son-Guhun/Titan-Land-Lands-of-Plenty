@@ -259,7 +259,7 @@ struct DecorationEffect extends array
     
     static method convertSpecialEffect takes player playerid, SpecialEffect sfx, boolean useCustomColor returns DecorationEffect
         if useCustomColor then
-            set DecorationEffect(sfx).owner = GetHandleId(playerid)
+            set DecorationEffect(sfx).owner = GetPlayerId(playerid)
             set DecorationEffect(sfx).hasCustomColor = true
         else
             call DecorationEffect(sfx).setOwner(playerid)
