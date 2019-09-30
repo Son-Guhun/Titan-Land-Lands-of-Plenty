@@ -54,7 +54,6 @@ function Unit2SpecialEffect takes unit whichUnit returns SpecialEffect
     endif
     
     if unitData.hasAnimTag() then
-        debug call BJDebugMsg("Tags: " + unitData.raw.getAnimTag())
         call AddTagsStringAsSubAnimations(result, GUMSConvertTags(UnitVisualMods_TAGS_DECOMPRESS, unitData.raw.getAnimTag()), true)
     elseif unitType.hasAnimProps() then
         call AddTagsStringAsSubAnimations(result, unitType.animProps, true)
@@ -64,7 +63,6 @@ function Unit2SpecialEffect takes unit whichUnit returns SpecialEffect
         set result.roll = Deg2Rad(unitType.maxRoll+180.)
     endif
     
-    call BlzPlaySpecialEffect(result.effect, ANIM_TYPE_STAND)
     return result
 endfunction
 

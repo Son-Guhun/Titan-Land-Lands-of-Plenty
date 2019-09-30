@@ -51,6 +51,7 @@ function AddTagsStringAsSubAnimations takes SpecialEffect whichEffect, string ta
         set tags = SubString(tags, cutToComma + 1, StringLength(tags))
         set cutToComma = CutToCharacter(tags, " ")
     endloop
+    call BlzPlaySpecialEffect(whichEffect.effect, ANIM_TYPE_STAND)
 endfunction
 
 function SubAnimations2Tags takes LinkedHashSet subanims returns string

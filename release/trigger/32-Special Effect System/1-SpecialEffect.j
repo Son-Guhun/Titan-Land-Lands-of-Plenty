@@ -212,6 +212,7 @@ struct SpecialEffect extends array
         set this.unitType= unitType
         set this.effect = e
         
+        call BlzPlaySpecialEffect(e, ANIM_TYPE_STAND)
         set e = null
         return this
     endmethod

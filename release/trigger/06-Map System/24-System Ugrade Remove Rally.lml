@@ -25,4 +25,10 @@ Action
     CustomScriptCode
         Const : endif
     CustomScriptCode
+        Const : 'if LoP_IsUnitDecoration(trigU) then'
+    CustomScriptCode
+        Const : '    call DecoOnEnterMap(trigU)'
+    CustomScriptCode
+        Const : endif
+    CustomScriptCode
         Const : 'set trigU = null'
