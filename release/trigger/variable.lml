@@ -316,7 +316,6 @@ GDS_Permanent: boolean
 Player_ControlGroup: group
     Array : 1
 System_ProtectedGroup: group
-save_WholeMapRect: rect
 Hashtable_2: hashtable
 Damage_Mod_Reset: boolean
     Def   : true

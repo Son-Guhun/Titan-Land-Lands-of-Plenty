@@ -245,20 +245,17 @@ function UnitEventInit takes nothing returns nothing
     local trigger load = CreateTrigger()
     local trigger death = CreateTrigger()
     local trigger summon = CreateTrigger()
-    local rect r = GetWorldBounds()
-    local region re = CreateRegion()
+    local rect r = WorldBounds.world
     local boolexpr enterB = Filter(function UnitEventEnter)
     local boolexpr orderB = Filter(function UnitEventOnOrder)
     set udg_WorldMaxX = GetRectMaxX(r)
     set udg_WorldMaxY = GetRectMaxY(r)
-    call RegionAddRect(re, r)
-    call RemoveRect(r)
     call UnitEventDestroyGroup(0)
     call UnitEventDestroyGroup(1)
    
     set udg_CheckDeathList[0] = 0
     set udg_UnitIndexerEnabled = true
-    call TriggerRegisterEnterRegion(CreateTrigger(), re, enterB)
+    call TriggerRegisterEnterRegion(CreateTrigger(), WorldBounds.worldRegion, enterB)
     call TriggerAddCondition(load, Filter(function UnitEventOnLoad))
     call TriggerAddCondition(death, Filter(function UnitEventOnDeath))
     call TriggerAddCondition(summon, Filter(function UnitEventOnSummon))
@@ -277,10 +274,8 @@ function UnitEventInit takes nothing returns nothing
     set summon = null
     set death = null
     set load = null
-    set re = null
     set enterB = null
     set orderB = null
     set p = null
-    set r = null
     set t = null
 endfunction

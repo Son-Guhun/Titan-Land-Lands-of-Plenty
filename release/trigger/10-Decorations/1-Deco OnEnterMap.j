@@ -86,7 +86,7 @@ function DecoOnEnterMap takes unit trigU returns nothing
                 // if GUMS_HaveSavedAnimationTag(trigU) then
                     // call SetUnitAnimation(trigU, "stand " +GUMSConvertTags( GUMSGetUnitAnimationTag(trigU)))
                 // else
-                    call SetUnitAnimation(trigU, "death")
+                    call SetUnitAnimation(trigU, "stand")
                 // endif
             endif
         endif

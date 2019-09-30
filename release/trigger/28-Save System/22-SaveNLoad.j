@@ -29,7 +29,7 @@ endfunction
 
 endlibrary
 
-library SaveNLoad requires UnitVisualMods, Rawcode2String, Base36, TerrainTools, DecorationSFX, UnitTypeDefaultValues, AttachedSFX/* 
+library SaveNLoad requires WorldBounds, UnitVisualMods, Rawcode2String, Base36, TerrainTools, DecorationSFX, UnitTypeDefaultValues, AttachedSFX/* 
 
    */ optional UserDefinedRects, optional SaveNLoadConfig optional LoPDeprecated
 ////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -413,16 +413,16 @@ function LoadUnit takes string chat_str, player un_owner returns nothing
     endif
 
     //If the desired position is outside of the playable map area, abort the opertaion
-    if  un_posx > GetRectMaxX(udg_save_WholeMapRect) then
+    if  un_posx > WorldBounds.maxX then
         return
     endif
-    if un_posx < GetRectMinX(udg_save_WholeMapRect) then
+    if un_posx < WorldBounds.minX then
         return
     endif
-    if un_posy > GetRectMaxY(udg_save_WholeMapRect) then
+    if un_posy > WorldBounds.maxY then
         return
     endif
-    if un_posy < GetRectMinY(udg_save_WholeMapRect) then
+    if un_posy < WorldBounds.minY then
         return
     endif
     

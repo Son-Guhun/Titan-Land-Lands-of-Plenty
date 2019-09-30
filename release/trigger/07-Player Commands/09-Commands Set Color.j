@@ -1,4 +1,6 @@
-function Trig_Commands_Toggle_Autoname_Copy_Actions takes nothing returns nothing
+scope CommandsSetColor
+
+private function onCommand takes nothing returns boolean
     local integer color = Commands_GetChatMessagePlayerNumber(LoP_Command.getArguments())
     local player p = GetTriggerPlayer()
 
@@ -9,12 +11,14 @@ function Trig_Commands_Toggle_Autoname_Copy_Actions takes nothing returns nothin
         call LoP_PlayerData.get(p).setUnitColor(ConvertPlayerColor(color-1))
     endif
     
-    call GroupEnumUnitsOfPlayer(ENUM_GROUP, p, Filter(function Filter_UnitSetPlayerColor))
+    call GroupEnumUnitsOfPlayer(ENUM_GROUP, p, Filter(function Filter_UnitSetPlayerColor))  // Defined in System Set Unit Color
     call DecorationEffect.updateColorsForPlayer(GetTriggerPlayer())
+    return false
 endfunction
 
 //===========================================================================
 function InitTrig_Commands_Set_Color takes nothing returns nothing
-    call LoP_Command.create("-setcolor", ACCESS_USER, Condition(function Trig_Commands_Toggle_Autoname_Copy_Actions ))
+    call LoP_Command.create("-setcolor", ACCESS_USER, Condition(function onCommand))
 endfunction
 
+endscope
