@@ -14,26 +14,36 @@ library DecoOnEnterMap requires UnitVisualValues, RectGenerator
 globals
     private group G = CreateGroup()
     private timer T = CreateTimer()
+    private unit U
 endglobals
 
+function FirstOfGroupSafe takes group g returns unit
+    set U = FirstOfGroup(g)
+    if U == null then
+        if BlzGroupGetSize(g) > 0 then
+            call GroupRefresh(g)
+            return FirstOfGroup(g)
+        else
+            return null
+        endif
+    endif
+    return U
+endfunction
+
 private function PlayAnim takes nothing returns nothing
-    local unit u = FirstOfGroup(G)
+    local unit u = FirstOfGroupSafe(G)
     local effect e
     loop
-    exitwhen u == null
-        if GetUnitTypeId(u)==0 then
-            call GroupRefresh(G)
-        else
-            call SetUnitAnimation(u, "death alternate")
-            if UnitHasAttachedEffect(u) then
-                set e = GetUnitAttachedEffect(u).effect
-                call BlzSpecialEffectAddSubAnimation(e, SUBANIM_TYPE_ROOTED)
-                call BlzPlaySpecialEffect(e, ANIM_TYPE_DEATH)
-                call BlzSpecialEffectRemoveSubAnimation(e, SUBANIM_TYPE_ROOTED)
-            endif
-            call GroupRemoveUnit(G, u)
+        exitwhen u == null
+        call SetUnitAnimation(u, "death alternate")
+        if UnitHasAttachedEffect(u) then
+            set e = GetUnitAttachedEffect(u).effect
+            call BlzSpecialEffectAddSubAnimation(e, SUBANIM_TYPE_ROOTED)
+            call BlzPlaySpecialEffect(e, ANIM_TYPE_DEATH)
+            call BlzSpecialEffectRemoveSubAnimation(e, SUBANIM_TYPE_ROOTED)
         endif
-        set u = FirstOfGroup(G)
+        call GroupRemoveUnit(G, u)
+        set u = FirstOfGroupSafe(G)
     endloop
     set u = null
     set e = null

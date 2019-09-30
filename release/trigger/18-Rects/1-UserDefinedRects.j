@@ -298,8 +298,8 @@ function GroupGUDR takes unit whichUnit,  boolean unlock  returns boolean
     
     //This loop clears the group and restores pathing and unpauses
     loop
-    exitwhen firstUnit == null
-        if GetUnitTypeId(firstUnit) != 0 then
+    exitwhen BlzGroupGetSize(g) == 0
+        if firstUnit != null then
             call SetUnitPathing(firstUnit,true)
             call GroupRemoveUnit(g, firstUnit)
         else

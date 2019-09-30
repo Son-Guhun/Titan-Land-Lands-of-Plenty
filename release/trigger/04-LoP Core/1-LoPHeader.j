@@ -9,20 +9,7 @@ function LoP_IsUnitDecoration takes unit whichUnit returns boolean
 endfunction
 
 function IsGroupEmpty takes group whichGroup returns boolean
-    local unit firstUnit = FirstOfGroup(whichGroup)
-    
-    // If unit was removed from the game, refresh the group
-    if GetUnitTypeId(firstUnit) == 0 then
-        call GroupRefresh(whichGroup)
-        set firstUnit = FirstOfGroup(whichGroup)
-    endif
-    
-    if firstUnit != null then
-        set firstUnit = null
-        return false
-    endif
-    
-    return true
+    return BlzGroupGetSize(whichGroup) == 0
 endfunction
 
 endlibrary

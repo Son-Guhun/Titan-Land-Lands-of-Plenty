@@ -33,9 +33,7 @@ library GroupTools
         private constant real MAX_COLLISION_SIZE = 197.
         // Data Variables
         private group array groups
-        private group gT = null
         private integer gN = 0
-        private boolean f = false
         // Global Group (Change it to CreateGroup() if you want)
         group ENUM_GROUP = bj_lastCreatedGroup
     endglobals
@@ -46,25 +44,17 @@ library GroupTools
         endstruct
     endif
    
-    private function AE takes nothing returns nothing
-        if (f) then
-            call GroupClear(gT)
-            set f = false
-        endif
-        call GroupAddUnit(gT,GetEnumUnit())
-    endfunction
-   
     function GroupRefresh takes group g returns nothing
         debug if null==g then
             debug call DisplayTimedTextToPlayer(GetLocalPlayer(),0,0,60,"[GroupUtils]Error: Attempt to refresh null group!")
             debug return
         debug endif
-        set f = true
-        set gT = g
-        call ForGroup(gT,function AE)
-        if (f) then
-            call GroupClear(g)
-        endif
+        local group tempG = CreateGroup()
+        call BlzGroupAddGroupFast(g, tempG)
+        call GroupClear(g)
+        call BlzGroupAddGroupFast(tempG, g)
+        call DestroyGroup(tempG)
+        set g = null
     endfunction
    
     function NewGroup takes nothing returns group

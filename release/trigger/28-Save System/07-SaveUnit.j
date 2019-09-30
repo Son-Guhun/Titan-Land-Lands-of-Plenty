@@ -147,9 +147,11 @@ function SaveForceLoop takes nothing returns boolean
             call GroupRemoveUnit(udg_save_grp[playerNumber] , saveUnit)
 
             //Check if Unit has been removed
-            if GetUnitTypeId(saveUnit) == 0 then
+            if saveUnit == null then
                 // Removed unit
-                call GroupRefresh(udg_save_grp[playerNumber])
+                if not IsGroupEmpty(udg_save_grp[playerNumber]) then
+                    call GroupRefresh(udg_save_grp[playerNumber])
+                endif
             else
                 if UnitHasAttachedEffect(saveUnit) then
                     set saveStr = GetSFXSaveStr(GetUnitAttachedEffect(saveUnit), filterPlayer, unitHandleId.hasColor(), GUMS_GetUnitSelectionType(saveUnit))
