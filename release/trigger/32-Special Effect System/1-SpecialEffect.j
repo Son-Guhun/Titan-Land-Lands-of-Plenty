@@ -251,6 +251,7 @@ struct SpecialEffect extends array
                 call result.addSubAnimation(ConvertSubAnimType(subanim))
                 set subanim = subanims.next(subanim)
             endloop
+            call BlzPlaySpecialEffect(result.effect, ANIM_TYPE_STAND)
         endif
         return result
     endmethod
