@@ -98,6 +98,7 @@ buildings = [
     'h06M',  # Rostrodle Magic
     'h0DY',  # Runic
     'h0DZ',  # Runic Magic
+    'h1DQ',  # Siege Workshop
     'h0RP',  # Stormwind
     'h05X',  # Templar
     'h05Y',  # Templar Magic
