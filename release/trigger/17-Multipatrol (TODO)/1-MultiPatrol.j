@@ -412,6 +412,10 @@ function Patrol_RegisterPoint takes unit trigU, real newX, real newY returns not
     if errorCode == ERROR_NULL_POINTER then
         if not Patrol_Create(trigU, GetUnitX(trigU), GetUnitY(trigU), newX, newY) then
             call DisplayTextToPlayer(GetOwningPlayer(trigU), 0, 0, "This patrol point is too close to the unit")
+        else
+            if GetUnitCurrentOrder(trigU) == 0 then
+                call Patrol_ResumePatrol(trigU)
+            endif
         endif
     elseif errorCode == ERROR_OVERFLOW then
         call DisplayTextToPlayer(GetOwningPlayer(trigU), 0, 0, "This unit has too many patrol points.")

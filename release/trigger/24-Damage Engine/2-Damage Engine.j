@@ -527,6 +527,13 @@ endglobals
         set trig = CreateTrigger()
         call TriggerRegisterAnyUnitEventBJ(trig, EVENT_PLAYER_UNIT_DAMAGING) //The new 1.31 event which fires before damage.
         call TriggerAddCondition(trig, Filter(function OnPreDamage))
+        
+        // Added by Guhun to work around W3X2LNI renaming vars when it shouldn't
+        call TriggerRegisterVariableEvent(null, "udg_DamageModifierEvent", null, 0.)
+        call TriggerRegisterVariableEvent(null, "udg_DamageEvent", null, 0.)
+        call TriggerRegisterVariableEvent(null, "udg_AfterDamageEvent", null, 0.)
+        call TriggerRegisterVariableEvent(null, "udg_LethalDamageEvent", null, 0.)
+        call TriggerRegisterVariableEvent(null, "udg_AOEDamageEvent", null, 0.)
         set trig = null
     endfunction
    
@@ -665,11 +672,11 @@ endglobals
         //call BJDebugMsg("Registered " + I2S(userTrigs) + " to " + I2S(index))
     endfunction
    
-    private function PreSetup takes trigger whichTrig, string var, limitop op, real value returns nothing
-        call SetupEvent(whichTrig, var, R2I(value))
-    endfunction
+    // private function PreSetup takes trigger whichTrig, string var, limitop op, real value returns nothing
+        // call SetupEvent(whichTrig, var, R2I(value))
+    // endfunction
    
-    hook TriggerRegisterVariableEvent PreSetup
+    // hook TriggerRegisterVariableEvent PreSetup
    
 endlibrary
  
