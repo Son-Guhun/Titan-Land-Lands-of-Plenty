@@ -52,18 +52,6 @@ Action
                     Preset: ChatMatchTypeExact
             CommentString
                 Const : 'Deco Commands'
-            AddTriggerEvent
-                Var   : gg_trg_CommandsD_Control
-                Event: TriggerRegisterPlayerChatEvent
-                    Var   : temp_player
-                    Const : -control
-                    Preset: ChatMatchTypeExact
-            AddTriggerEvent
-                Var   : gg_trg_CommandsD_Control
-                Event: TriggerRegisterPlayerChatEvent
-                    Var   : temp_player
-                    Const : -uncontrol
-                    Preset: ChatMatchTypeSubstring
             SetVariable
                 Array : TileSystem_Var
                     Var   : temp_integer

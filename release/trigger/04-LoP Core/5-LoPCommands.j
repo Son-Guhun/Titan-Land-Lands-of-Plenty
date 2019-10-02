@@ -17,8 +17,16 @@ function Commands_StartsWithCommand takes nothing returns boolean
     return SubString(GetEventPlayerChatString(), 0, StringLength(GetEventPlayerChatStringMatched())) == GetEventPlayerChatStringMatched()
 endfunction
 
+// The filter is only called for the units selected by the player.
 function Commands_EnumSelectedCheckForGenerator takes group whichGroup, player whichPlayer, boolexpr filter returns integer
     call GroupEnumUnitsSelected(whichGroup, whichPlayer, filter)
+    
+    if GetUnitTypeId(FirstOfGroup(whichGroup)) == 'h0KD' and BlzGroupGetSize(whichGroup) == 1 then
+        call GroupClear(whichGroup)
+        call BlzGroupAddGroupFast(udg_Player_ControlGroup[GetPlayerId(whichPlayer) + 1], whichGroup)
+        return 0
+    endif
+    
     return GUDR_SwapGroup_UnitsInsideUDR(whichGroup, false, null)
 endfunction
 

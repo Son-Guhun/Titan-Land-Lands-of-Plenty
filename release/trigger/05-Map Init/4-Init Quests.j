@@ -90,6 +90,21 @@ Play a unit's animation, ignoring any tags set by -tag. If no animation name is 
 "
     call CreateQuestBJ(questType, "Animation Commands", quest_text, "ReplaceableTextures\\CommandButtons\\BTNManual.blp")
     // ----------
+    
+    // Controller
+    set quest_text = "
+You can use the special unit Deco Modifier Controller to control up to 48 units using the same abilities used by decorations. Additionally, when selecting a Controller, many commands (such as |cffffff00'rgb|r) will affect all units you are currently controlling, instead of the Controller itself.
+
+|cffff0000Commands:|r
+|cffffff00-controller|r
+Creates a controller at your start location. Use |cffffff00-seln controller|r to select it.
+|cffffff00-control|r
+Adds a unit that you own to your control group (can be a neutral unit that you own).
+|cffffff00-uncontrol <all>|r
+Removes your selected units from your control group. When the argument |cffffff00all|r is used, your control group is fully cleared.
+"
+    call CreateQuestBJ(questType, "Controller System", quest_text, "ReplaceableTextures\\CommandButtons\\BTNDevotion.blp")
+    // ----------
         
     // Titan Commands 1
     set quest_text = "

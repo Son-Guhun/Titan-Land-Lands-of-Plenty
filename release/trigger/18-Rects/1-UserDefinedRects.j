@@ -189,7 +189,7 @@ function GUDR_SwapGroup_UnitsInsideUDR takes group whichGroup, boolean includeGe
         set bj_groupRandomCurrentPick = firstOfGroup
         
         call GroupClear(whichGroup)
-        call GroupEnumUnitsInRect(whichGroup,GUDR_GetGeneratorIdRect(genId),filter)
+        call GroupEnumUnitsInRect(whichGroup, GUDR_GetGeneratorIdRect(genId), filter)
         
         if not includeGenerator then
             call GroupRemoveUnit(whichGroup, firstOfGroup)
