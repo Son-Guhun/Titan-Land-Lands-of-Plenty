@@ -157,6 +157,22 @@ Action
         Const : ' '
     CommentString
         Const : ---------------------------
+    SetVariable
+        Var   : Spell__Ability
+        Const : A01S
+    CommentString
+        Const : ' '
+    SetVariable
+        Var   : Spell__Trigger_OnEffect
+        Var   : gg_trg_Make_Unit_Selectable
+    CommentString
+        Const : ' '
+    TriggerExecute
+        Var   : gg_trg_Spell_System
+    CommentString
+        Const : ' '
+    CommentString
+        Const : ---------------------------
     CommentString
         Const : 'JUDGEMENT (ANGEL STUN)'
     CommentString

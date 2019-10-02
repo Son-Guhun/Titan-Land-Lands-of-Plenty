@@ -1,15 +1,4 @@
 scope CommandsControl
-//! textmacro ForUnitInGroup takes UNIT, GROUP
-    set $UNIT$ = FirstOfGroup($GROUP$)
-    exitwhen $UNIT$ == null
-    call GroupRemoveUnit($GROUP$, $UNIT$)
-//! endtextmacro
-
-//! textmacro ForUnitInGroupWhile takes UNIT, GROUP, CONDITION
-    set $UNIT$ = FirstOfGroup($GROUP$)
-    exitwhen $UNIT$ == null or not $CONDITION$
-    call GroupRemoveUnit($GROUP$, $UNIT$)
-//! endtextmacro
 
 private function MAX_CONTROLLED takes nothing returns integer
     return 48

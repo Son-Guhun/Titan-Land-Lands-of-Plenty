@@ -21,20 +21,31 @@ private function EnumFunc takes nothing returns nothing
     local player trigP = GetTriggerPlayer()
     local unit enumUnit = GetEnumUnit()
     
-    if not LoP_IsUnitDecoration(enumUnit) then
-        call DisplayTextToPlayer(trigP, 0, 0, "Only decorations may be made unselectable." )
-        
-    elseif not LoP_PlayerOwnsUnit(trigP, enumUnit) and udg_GAME_MASTER != trigP then
+    if not LoP_PlayerOwnsUnit(trigP, enumUnit) and udg_GAME_MASTER != trigP then
         call DisplayTextToPlayer(trigP, 0, 0, "This is not your unit." )
-    
-    elseif GetUnitAbilityLevel(enumUnit, SELECTABLE_ONLY_ABILITY()) > 0 then
-        call DisplayTextToPlayer(trigP, 0, 0, "This decoration cannot be made unselectable." )
         
-    elseif CheckCommandOverflow() then
+    elseif GetUnitAbilityLevel(enumUnit, SELECTABLE_ONLY_ABILITY()) > 0 then
+        call DisplayTextToPlayer(trigP, 0, 0, "This type of unit cannot be made unselectable." )
+        
+    elseif not LoP_IsUnitDecoration(enumUnit) then
+        if LoP_IsUnitHero(enumUnit) then
+            call DisplayTextToPlayer(trigP, 0, 0, "Heroes cannot be unselectable." ) 
+        else
+            if LoP_Command.getArguments() == "no f" then
+               call PauseUnit(enumUnit, true)
+               call GUMSMakeUnitUnSelectable(enumUnit)
+            else
+                call DisplayTextToPlayer(trigP, 0, 0, "You must use |cffffff00-select no f|r to make non-decorations unselectable." ) 
+            endif
+        endif
+        
+    else 
         if GetUnitAbilityLevel(enumUnit, 'Awrp') > 0 or (IsUnitType(enumUnit, UNIT_TYPE_STRUCTURE) and GetUnitFlyHeight(enumUnit) < GUMS_MINIMUM_FLY_HEIGHT()) then
             call GUMSMakeUnitUnSelectable(enumUnit)
         else
-            call ToEffect(enumUnit)
+            if CheckCommandOverflow() then
+                call ToEffect(enumUnit)
+            endif
         endif
     endif
     
@@ -44,7 +55,7 @@ endfunction
 private function onCommand takes nothing returns boolean
     local group g
 
-    if LoP_Command.getArguments() == "no" then
+    if LoP_Command.getArguments() == "no" or LoP_Command.getArguments() == "no f" then
         set g = CreateGroup()
         
         call Commands_EnumSelectedCheckForGenerator(g, GetTriggerPlayer(), null)
