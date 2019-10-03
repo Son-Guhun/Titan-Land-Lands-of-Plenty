@@ -12,6 +12,109 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 	- New units for an existing race can be added in a patch version. 
 	- New decorations for an existing deco builder can be added in a patch version.
 
+## [v1.3.4] - 2019-09-30
+
+### Added
+- Added new heroes:
+	- Nihonjin Blademaster
+	- Pandaren Bamboo-master
+	- Rostrodle General
+- Added new units:
+	- Siege units for some human races (Black Legion, Templar, Norse):
+		- Ballista
+		- Ballista Catapult
+		- Ballista Scorpion
+		- Catapult
+		- Organ Cannon
+		- Wheeled Bombard
+		- Wheeled Trebuchet
+	- Rostrodle Soldier
+
+### Fixed
+- Fixed an issue where decorations would gain the move and attack abilities when they were upgraded.
+- Fixed an issue where the copy of a decoration with pitch, roll, dimensional scale and/or negative height would play its birth animation upon being created and not keep animation tags.
+- Way Gates will no longer stop functioning after having been made unselectable.
+- Fixed an issue where decorations with pitch, roll, dimensional scale and/or negative height would have the wrong color after changing player ownership.
+
+### Changed
+- Improved efficiency of the Save System when saving units.
+- Made additional small performance upgrades related to creating large regions in the map.
+
+## [v1.3.3] - 2019-09-28
+
+### Added
+- -scale command will now also accept 3 arguments, just as the 'scale command.
+- Added Deco Builder Murloc.
+
+### Fixed
+- Decorations will no longer have the wrong player color after having been made unselectable.
+- Pitch, roll, dimensional scale and/or negative height are now correctly transferred when copying a unit.
+- Decorations with pitch, roll, dimensional scale and/or negative height can now be upgraded correctly.
+- Gates with pitch, roll, dimensional scale and/or negative height now operate correctly.
+- Pitch, roll, dimensional scale and/or negative height are no longer lost when a decoration is made selectable.
+- Fixed an issue where unit custom names were not being saved and/or where being lost when the unit was made a hero.
+
+### Changed
+- When copying a hero, its abilities will now also be copied.
+- Made small performance upgrades related to creating large regions in the map.
+- Adjusted hotkeys for production buildings of all races. Mundane troop production buildings will generally use the B hotkey, while magical troop buildings will use the N hotkey.
+
+
+## [v1.3.2] - 2019-09-26
+
+### Added
+- New commands: 'yaw and 'roll. These commands can change the facing of decorations in the x and y axes.
+- Command improvements:
+	- The 'size command now accepts 3 arguments, allowing decorations to have a different scale for each dimension (x, y, z).
+	- The -fly and 'fly commands now accept negative arguments. This will only function for decorations.
+- New Dragon Aspect heroes:
+	- Alextraza
+	- Deathwing
+	- Kalecgos
+	- Malygos
+	- Nozdormu
+	- Ysera
+- Added Altar of Storms to Deco Builder Vanilla Orc
+- New hero tower: Tauren
+
+### Fixed
+- Human Town Hall decoration no langer trains peasants and militia.
+- Removed an unintended debug message that would sometimes occur when casting certain abilities.
+- Fixed some small bugs that could lead to the map crashing in certain situations:
+	- Casting a builder's Fly and Teleport abilities simultaneously.
+	- Removing a unit from the game while it was stunned/silenced or otherwise disabled.
+	- Removing a unit from the game while it was buffed by certain abilities.
+- Human Altar & Arcane Vault no longer become invisible after having been made unselectable.
+
+### Changed
+- Reduced training time of workers from 3 seconds to 1 second.
+- Reduced training time of army units from 5 seconds to 2 seconds.
+- Added abilities to many heroes which had been implemented in 1.3.0.
+- Barracks now trains Human Militia.
+- Removed flying movement type from Incorporeal heroes.
+- Renamed Sword of Destruction 1 to Sword of Creation and also renamed the Angel of Creation's passive to Hands of Creation.
+- Fixed icons for Sword of Destruction and Sword of Creation and also the Angel of Creation's passive.
+- Arcane Sanctum renamed to Blood Elf Arcane Sanctum.
+- Adjusted hotkeys for units in production buildings of many races:
+	- Flesh
+	- Fleshless
+	- Incorporeal
+	- Orcs
+	- Tauren
+	- Dwarves
+	- Blood Elves
+	- Night Elves
+	- Naga
+	- Murlocs
+	- Forest Dwellers
+
+### Deprecated
+- Orc structures have been deprecated and will automatically load into the game as their decoration counterparts (except production buildings).
+- The following deprecated units will no longer be loaded into the game. Instead, they will be replaced by an equivalent unit (in parenthesis). When they are eventually removed, this automatic replacement will no longer occur and they may be loaded as different units:
+	- Fel Stronghold (Orc Great Hall with "first" tag)
+	- Fel Fortress (Orc Great Hall with "second" tag)
+
+
 ## [v1.3.1] - 2019-09-19
 
 ### Added
