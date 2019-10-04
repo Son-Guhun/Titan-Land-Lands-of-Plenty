@@ -1,4 +1,4 @@
-"""This script iterates over a pre-defined list of buildings in a .ini database and assigns hotkeys to all units produced by those buildings.
+"""This script iterates over all production buildings (see tags) in a .ini database and assigns hotkeys to all units produced by those buildings.
 
 Hotkey order: [Q,W,E,R,A,S,D,F,Z,W,C,V]
 Production buildings: sets hotkeys for trained units in the order that they appear.
@@ -70,145 +70,14 @@ def configure_selectors(unit_data, selector_list, **kwargs):
 
 
 file_path = '../development/table/unit.ini'
-buildings = [
-    # Human
-    'hgra',  # Gryphon Aviary
-    'harm',  # Workshop
-    
-    'h00L',  # Bandit
-    'h0T0',  # Bandit Magic
-    'h085',  # Black Legion
-    'h086',  # Black Legion Magic
-    'h00K',  # Dwarven
-    'h0N8',  # Dwarven Magic
-    'h0J2',  # Angel
-    'h0HQ',  # Haradrim
-    'h0HR',  # Haradrim Magic
-    'hbar',  # Human
-    'h0PT',  # Human Magic
-    'h0RJ',  # Lordaeron
-    'h02Y',  # Nihonjin
-    'h09J',  # Nihonjin Magic
-    'h0NF',  # Norse
-    'h0Q2',  # Norse Magic
-    'h06C',  # Pandaren
-    'h06E',  # Pandaren Magic
-    'h005',  # Pirate
-    'h06H',  # Rostrodle
-    'h06M',  # Rostrodle Magic
-    'h0DY',  # Runic
-    'h0DZ',  # Runic Magic
-    'h1DQ',  # Siege Workshop
-    'h0RP',  # Stormwind
-    'h05X',  # Templar
-    'h05Y',  # Templar Magic
-    'h0A1',  # Templar Fort
-    'h0ZY',  # Worgen
-    'h100',  # Worgen Magic
 
-    # Orc
-    'obar',  # Barracks
-    'obea',  # Bestiary
-    'otto',  # Tauren Totem
-    
-    'o02V',  # Centuar
-    'o00O',  # Fel Orc
-    'o00P',  # Fel Orc Bestiary
-    'o00Q',  # Fel Orc Magic
-    'o02F',  # Goblin Magic
-    'o02D',  # Goblin
-    'o005',  # Ogre
-    'o008',  # Ogre Magic
-    'o00Y',  # Razormane
-    'o00V',  # Son'Gar
-    'o00W',  # Son'Gar Magic
-    'o020',  # Tauren
-    'o00K',  # Troll Darkspear
-    'o01Q',  # Troll Forest
-    'o01R',  # Troll Ice
-    'o01C',  # Troll Raptor
-    'o025',  # Troll Magic
-
-    # Undead
-    'usep',  # Flesh
-    'uslh',  # Flesh Magic
-    'ubon',  # Fleshless Magic
-    'utod',  # Fleshless
-    'usap',  # Incorporeal
-    'ugrv',  # Incorporeal Magic
-    
-    'u04M',  # Cultist Magic
-    'u04L',  # Cultist
-    'u051',  # Dark Dwarf Magic
-    'u052',  # Dark Dwarf
-    'u05I',  # Dark Human
-    'u05H',  # Dark Human Magic
-    'u01H',  # Demon
-    'u01I',  # Demon Magic
-    'u049',  # Faceless Magic
-    'u04D',  # Faceless
-    'u05O',  # Fel Elf Magic
-    'e03M',  # Fel Elf
-    'u05Q',  # Fel Troll Magic
-    'u05P',  # Fel Troll
-    'u05B',  # Embalmed
-    'u05C',  # Embalmed Magic
-    'u04T',  # Vampire
-    'u04V',  # Vampire Magic
-
-    # Night Elf
-    'nheb',  # Blood Elf
-    'hars',  # Blood Elf Magic
-    'edob',  # Night Elf
-    'nbwd',  # Night Elf Magic
-    
-    'e011',  # Draenei
-    'e012',  # Draenei Magic
-    'e00Y',  # Drow Magic
-    'e00K',  # Drow
-    'e02B',  # Forest Elf Magic
-    'e02C',  # Forest Elf
-    'h0TU',  # Gray Elf
-    'h0TT',  # Gray Elf Magic
-    'h06N',  # High Elf Magic
-    'h06O',  # High Elf
-    'h101',  # Middle-earth Elvwes
-    'e02O',  # Wood Elf
-
-    # Naga
-    'nnsa',  # Shrine of Azshara
-    'nnsg',  # Spawning Grounds
-
-    'n009',  # Murloc
-    'n00A',  # Murloc Magic
-
-    # Creep
-    'eaom',  # Forest Dwellers
-    'eaoe',  # Forest Dwellers Magic
-    'eaow',  # Forest Dwellers Flyers
-    
-    'h0G9',  # Elemental
-    'h0G8',  # Elemental Magic
-    'h12L',  # Lizardman
-    'h12M',  # Lizardman Magic
-    'h11U',  # Ratfolk
-    ]
-
-selectors = [
-    'e005',  # Corrupted
-    'e039',  # Corrupted (Demons)
-    'e037',  # Corrupted (Undead)
-    'e004',  # Creeps
-    'e00V',  # Elves
-    'e002',  # Humans and Dwarves
-    'e00F',  # Naga and Murlocs
-    'e003',  # Orcs, Ogres, Trolls, Tauren
-    ]
-
-
-def do_everything(file_path=file_path, buildings=buildings, selectors=selectors, simple=True):
+def do(file_path=file_path, simple=True):
     with open(file_path) as f:
         unit_data = load_unit_data(f)
+
+    has_tag = lambda x,tag: 'EditorSuffix' in unit_data[x] and tag in unit_data[x]['EditorSuffix']
+    buildings = [x for x in unit_data if has_tag(x,'[prod]')]
+    selectors = [x for x in unit_data if has_tag(x,'[sele]')]
     
     if simple:
         configure_trained_units(unit_data, buildings)
