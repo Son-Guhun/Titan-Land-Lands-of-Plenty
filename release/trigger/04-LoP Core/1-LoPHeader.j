@@ -20,8 +20,8 @@ endfunction
 
 //! textmacro ForUnitInGroupWhile takes UNIT, GROUP, CONDITION
     set $UNIT$ = FirstOfGroup($GROUP$)
-    call GroupRemoveUnit($GROUP$, $UNIT$)
     exitwhen $UNIT$ == null or not $CONDITION$
+    call GroupRemoveUnit($GROUP$, $UNIT$)
 //! endtextmacro
 
 function ExecuteCode takes code callback returns nothing

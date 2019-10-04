@@ -56,6 +56,9 @@ function DecoOnEnterMap takes unit trigU returns nothing
     if RectGenerator_Conditions(trigU) then
         //! runtextmacro GUDR_FirstPage("Add","trigU")
     endif
+    call SetUnitPathing(trigU, false)  // If UNIT_IF_MOVE_TYPE ever works, check if this line is only necessary before or after the unit move type is set
+    call BlzSetUnitIntegerField(trigU, UNIT_IF_MOVE_TYPE, GetHandleId(MOVE_TYPE_AMPHIBIOUS))
+    call SetUnitPathing(trigU, false)
     // -
     // ADD ENABLE/DISABLE FLY TO STRUCTURES
     if IsUnitType(trigU, UNIT_TYPE_STRUCTURE) then

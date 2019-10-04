@@ -22,7 +22,7 @@ function LoP_onChangeOwner takes unit whichUnit, player ownerOld returns nothing
     endif
     
     if LoP_UnitData.get(whichUnit).isHeroic then
-            call LoPHeroicUnit_OnChangeOwner(whichUnit, ownerOld)
+        call LoPHeroicUnit_OnChangeOwner(whichUnit, ownerOld)
     endif
 endfunction
 
