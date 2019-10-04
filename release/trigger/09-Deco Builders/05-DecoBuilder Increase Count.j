@@ -1,11 +1,9 @@
 function Trig_DecoBuilder_Increase_Count_Conditions takes nothing returns boolean
     local unit u = udg_UDexUnits[udg_UDex]
     
-    if not LoP_IsUnitDecoBuilder(u) then
-        return false
+    if LoP_IsUnitDecoBuilder(u) then
+        call DecoBuilderCount_IncreaseCount(u)
     endif
-    
-    call DecoBuilderCount_IncreaseCount(u)
     
     set u = null
     return true

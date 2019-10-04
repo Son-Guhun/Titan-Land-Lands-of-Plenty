@@ -1,4 +1,4 @@
-library DecoBuilderCount
+library DecoBuilderCount requires LoPDecoBuilders
 /*
 This library defines functions that keep track of the number of units of a certain type, for each player.
 
@@ -7,6 +7,10 @@ This library defines functions that keep track of the number of units of a certa
 public function IncreaseCount takes unit whichUnit returns nothing
     local integer unitType = GetUnitTypeId(whichUnit)
     local integer playerNumber = GetPlayerId(GetOwningPlayer(whichUnit)) + 1
+    
+    if GetUnitTypeId(whichUnit) == DECO_BUILDER_SPECIAL then
+        call LoPDecoBuilders_AdjustSpecialAbilities(whichUnit)
+    endif
 
     call SaveInteger(udg_Hashtable_2, playerNumber, unitType, LoadInteger(udg_Hashtable_2, playerNumber, unitType ) + 1)
 endfunction
@@ -28,6 +32,10 @@ private function SwitchOwner_impl takes unit whichUnit, player ownerOld, integer
     local integer playerNumberOld = GetPlayerId( ownerOld ) + 1
     local integer unitType =  GetUnitTypeId(whichUnit)
     
+    if GetUnitTypeId(whichUnit) == DECO_BUILDER_SPECIAL then
+        call LoPDecoBuilders_AdjustSpecialAbilities(whichUnit)
+    endif
+    
     call SaveInteger(udg_Hashtable_2, playerNumberOld, unitType, decoCount - 1)
     call SaveInteger(udg_Hashtable_2, playerNumber, unitType, LoadInteger(udg_Hashtable_2, playerNumber, unitType ) + 1)
 endfunction
@@ -38,6 +46,10 @@ public function SwitchOwner takes unit whichUnit, player oldOwner returns nothin
     if decoCount > 0 then
         call SwitchOwner_impl(whichUnit, oldOwner, decoCount)
     endif
+endfunction
+
+public function GetForPlayer takes player whichPlayer, integer unitType returns integer
+    return LoadInteger(udg_Hashtable_2, GetPlayerId(whichPlayer) + 1, unitType )
 endfunction
 
 /*
