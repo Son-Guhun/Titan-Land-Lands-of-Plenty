@@ -90,6 +90,9 @@ def pull(dirs = ['map','table', 'trigger', 'w3x2lni']):
     if not os.path.exists(development):
         os.mkdir(development)
 
+    if not os.path.exists('development/.w3x'):
+        shutil.copy('release/.w3x', 'development/.w3x')
+
     for directory in dirs:
         if os.path.exists(development+directory):
             shutil.rmtree(development+directory)

@@ -10,13 +10,19 @@ verb
 gerund or present participle: roleplaying
 
     1.
-    act out or perform the part of a person or character, for example as a technique in training or psychotherapy.
+    act out or perform the part of a person or character.
 ```
 This is a map about imagining your own characters and playing them out in an interactive and free-form world with other players. To achieve this, the map not only offers a large amount of custom models, but it also provides functionalities to edit units and decorations to fit your needs, such as adjusting their size, color, rotation and more.
 
 ## For Developers:
 
-If you are a map developer, and are interested in building or extending **Titan Land: Lands of Plenty**, you can follow the steps below.
+If you are a map developer, and are interested in building or extending **Titan Land: Lands of Plenty**, you can follow the steps below. Alternatively, if you want to create your own map, you can just grab the latest unprotected version from the releases page.
+
+### What you will need:
+- [W3x2Lni](https://www.hiveworkshop.com/threads/w3x2lni-v2-5-2.305201/)
+- [WEX](https://www.hiveworkshop.com/threads/sharpcraft-world-editor-extended-bundle.292127/)
+- Warcraft III version that works with WEX
+- Python 3
 
 ### Builder Script:
 
@@ -24,6 +30,20 @@ Titan Land LoP is developed using both external tools and the World Editor. Havi
 
 Because of this, a Python 3 builder script is used to facilitate the saving and testing process of development. The builder script copies all files from the 'release' folder into a folder called 'development'. It does not, however, copy resource files. This development folder, therefore, is also a LNI map, and can be converted into OBJ or SLK as such. This conversion is much faster than converting the release folder.
 
+### Setting up:
+- Clone the repository to your computer.
+- Execute the builder script using an interactive python console and then call the following function: **generate_config()**.
+- A file called config.ini will be created in the directory. Set the following values:
+```
+    [paths]
+    w2l = path_to_w2l.exe (in your w3x2lni folder)
+    war3 = path to Warcraft III.exe (in your current patch's Warcraft III directory)
+    worldedit = path to World Editor Extended.exe (in your Sharpcraft World Editor Extended folder)
+```
+- Restart the builder script in interactive mode. Type **pull()** to populate your development folder.
+- Type **build('development')** to create the development.w3x map.
+- Type **open_with_editor()** to open the map in your Sharpcraft editor.
+- Done!
 
 ### Editing Routine
 
@@ -37,7 +57,7 @@ open_with_editor() => Opens the OBJ development map in the World Editor.
 
 commit(DEVELOPMENT) = > Creates the LNI folder of the development OBJ file, overwriting the development folder.
 
-push() => Updates the release folder with all the changes made to the development folder.
+push_all() => Updates the release folder with all the changes made to the development folder.
 
 
 
@@ -55,3 +75,4 @@ test_full(RELEASE) => Builds SLK version of the release OBJ map. Then opens the 
 #### Low-level commands
 
 test(version='',build='development') => Version can be an empty string or 'slk'. Build can be 'development' or 'release'.
+test_map(path='development_slk.w3x') => Opens a map using the current Warcraft III version.
