@@ -74,6 +74,7 @@ scope DecoMovement
         local unit trigU = GetTriggerUnit()
         local integer spellId = GetSpellAbilityId()
         local real angle
+        local UpgradeData typeId
         
         // Checking if a unit is a rect generator is necesarry because this reuses their ability. Maybe change?
         if not LoP_IsUnitDecoration(trigU) or RectGenerator_Conditions(trigU) then 
@@ -115,6 +116,16 @@ scope DecoMovement
             
         elseif ( spellId == COPY ) then
             call LopCopyUnitSameType(trigU, GetOwningPlayer(trigU))
+        
+        elseif ( spellId == 'A01T'  or spellId == 'A048' ) then
+            set typeId = GetUnitTypeId(trigU)
+            if typeId.hasUpgrades() then
+                if spellId == 'A048' and typeId.hasPrev() then
+                    call IssueImmediateOrderById(trigU, typeId.prev)
+                else
+                    call IssueImmediateOrderById(trigU, typeId.next)
+                endif
+            endif
         endif
         
         set trigU = null

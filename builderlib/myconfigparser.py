@@ -39,4 +39,10 @@ def get_decorations(unit_data, deco_ability = 'A0C6'):
             result.append(unit)
     return result
 
+def iter_deco_builders(unit_data, builder_only = False, ability = 'A00J'):
+    for unit in unit_data:
+        unit = unit_data[unit]
+        if 'abilList' in unit and ability in unit['abilList']:
+            if not (builder_only and ('Builds' not in unit or unit['Builds'] == '""')):
+                yield unit
 

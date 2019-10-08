@@ -159,13 +159,19 @@
     '13-TreeSystem Cast Ability': 'TreeSystem Cast Ability'
     '14-TreeSystem Choose Tree': 'TreeSystem Choose Tree'
 10-Decorations: Decorations
-    '1-Deco OnEnterMap': 'Deco OnEnterMap'
-    '2-Deco Root Anywhere': 'Deco Root Anywhere'
-    3-Abilities: Abilities
+    '01-Deco OnEnterMap': 'Deco OnEnterMap'
+    '02-Deco Root Anywhere': 'Deco Root Anywhere'
+    03-Abilities: Abilities
         Comment
-    '4-Deco Movement': 'Deco Movement'
-    '5-Deco Waygate': 'Deco Waygate'
-    '6-Deco Gates': 'Deco Gates'
+    '04-Deco Movement': 'Deco Movement'
+    '05-Deco Waygate': 'Deco Waygate'
+    '06-Deco Gates': 'Deco Gates'
+    07-Libraries: Libraries
+        Comment
+    08-UpgradeSystem: UpgradeSystem
+    09-Init: Init
+        Comment
+    10-UpgradeSystemInit: UpgradeSystemInit
 11----------------------------------------: ---------------------------------------
     Comment
 12-Systems: Systems

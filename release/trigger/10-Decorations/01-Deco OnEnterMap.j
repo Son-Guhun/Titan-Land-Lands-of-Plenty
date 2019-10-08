@@ -50,6 +50,7 @@ private function PlayAnim takes nothing returns nothing
 endfunction
 
 function DecoOnEnterMap takes unit trigU returns nothing
+    local UpgradeData typeId = GetUnitTypeId(trigU)
     // REMOVE ATTACK AND MOVE ABILITIES
     call UnitRemoveAbility(trigU, 'Amov')
     call UnitRemoveAbility(trigU, 'Aatk')
@@ -59,6 +60,11 @@ function DecoOnEnterMap takes unit trigU returns nothing
     call SetUnitPathing(trigU, false)  // If UNIT_IF_MOVE_TYPE ever works, check if this line is only necessary before or after the unit move type is set
     call BlzSetUnitIntegerField(trigU, UNIT_IF_MOVE_TYPE, GetHandleId(MOVE_TYPE_AMPHIBIOUS))
     call SetUnitPathing(trigU, false)
+    
+    if typeId.hasUpgrades() then
+        call UnitAddAbility(trigU, 'A01T')
+        call UnitAddAbility(trigU, 'A048')
+    endif
     // -
     // ADD ENABLE/DISABLE FLY TO STRUCTURES
     if IsUnitType(trigU, UNIT_TYPE_STRUCTURE) then
