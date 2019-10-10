@@ -85,7 +85,9 @@
     22-Upgrade: Upgrade
         Comment
     '23-System Instant Upgrade': 'System Instant Upgrade'
-    '24-System Ugrade Remove Rally': 'System Ugrade Remove Rally'
+    '24-System On Upgrade Finish': 'System On Upgrade Finish'
+    '25-System On Upgrade Cancel': 'System On Upgrade Cancel'
+        Disab
 '07-Player Commands': 'Player Commands'
     '01-Commands Fix': 'Commands Fix'
     '02-Commands Ability': 'Commands Ability'

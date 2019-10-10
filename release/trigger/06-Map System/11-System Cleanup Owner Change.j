@@ -14,7 +14,7 @@ function LoP_onChangeOwner takes unit whichUnit, player ownerOld returns nothing
     // If ownership was changed with -neut command, no need to change colors.
     if not IsUnitInGroup(whichUnit, LoP_GetPlayerNeutralUnits(ownerOld)) then
         if unitId.hasColor() then
-            call SetUnitColor(whichUnit, GetPlayerColor(Player(unitId.raw.getColor())))
+            call SetUnitColor(whichUnit, GetPlayerColor(Player(unitId.raw.getColor() - 1)))
         else
             call SetUnitColor(whichUnit, LoP_PlayerData.get(GetOwningPlayer(whichUnit)).getUnitColor())
         endif

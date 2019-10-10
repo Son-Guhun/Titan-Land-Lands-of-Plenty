@@ -10,6 +10,9 @@ library UnitVisualMods requires UnitVisualValues, CutToComma, GroupTools, option
 //////////////////////////////////////////////////////
 //Guhun's Unit Modification System v1.3.1
 
+globals
+    constant boolean AUTOMATIC_ON_UPGRADE = false
+endglobals
 
 //Hashtable values:
 globals
@@ -632,14 +635,7 @@ function GUMSTimerFunction takes nothing returns nothing
     call ForGroup(loopGroup, function GUMSGroupFunction)
 endfunction
 
-
-
-// When a unit cancels of finishes an upgrade, reapply its Visual modifications.
-private module InitModule
-
-
-    private static method onUpgradeHandler takes nothing returns nothing
-        local unit trigU = GetTriggerUnit()
+function GUMSOnUpgradeHandler takes unit trigU returns nothing
         local SaveFlyHeight unitData = GetHandleId(trigU)
         local real height
         
@@ -655,17 +651,29 @@ private module InitModule
         endif
         
         set trigU = null
-    endmethod
+endfunction
+
+// When a unit cancels of finishes an upgrade, reapply its Visual modifications.
+private module InitModule
+
+    static if AUTOMATIC_ON_UPGRADE then
+        private static method onUpgradeHandler takes nothing returns nothing
+            call GUMSOnUpgradeHandler(GetTriggerUnit())
+        endmethod
+    endif
 
 
     private static method onInit takes nothing returns nothing
-        local trigger fixUpgrades = CreateTrigger()
+        local trigger fixUpgrades
         local integer i
         local timer t = CreateTimer()
         
-        call TriggerRegisterAnyUnitEventBJ( fixUpgrades, EVENT_PLAYER_UNIT_UPGRADE_CANCEL )
-        call TriggerRegisterAnyUnitEventBJ( fixUpgrades, EVENT_PLAYER_UNIT_UPGRADE_FINISH )
-        call TriggerAddAction( fixUpgrades, function thistype.onUpgradeHandler )
+        static if AUTOMATIC_ON_UPGRADE then
+            set fixUpgrades = CreateTrigger()
+            call TriggerRegisterAnyUnitEventBJ( fixUpgrades, EVENT_PLAYER_UNIT_UPGRADE_CANCEL )
+            call TriggerRegisterAnyUnitEventBJ( fixUpgrades, EVENT_PLAYER_UNIT_UPGRADE_FINISH )
+            call TriggerAddAction( fixUpgrades, function thistype.onUpgradeHandler )
+        endif
         
         call TimerStart( t, 0.1, true, function GUMSTimerFunction)
     
