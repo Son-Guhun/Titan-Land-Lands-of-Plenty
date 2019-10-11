@@ -45,8 +45,12 @@ def do(dataBase, upgrade_lists):
 
     for sequence in upgrade_lists:
         length = len(sequence)
-        for i,unit in enumerate(sequence):
-            data[unit]['Upgrade'] = '"{}"'.format(sequence[(i+1)%length])
+        if length > 2:
+            for i,unit in enumerate(sequence):
+                data[unit]['Upgrade'] = '"{},{}"'.format(sequence[(i+1)%length], sequence[(i-1)%length])
+        else:
+            for i,unit in enumerate(sequence):
+                data[unit]['Upgrade'] = '"{}"'.format(sequence[(i+1)%length])
 
     with open(dataBase, 'w') as f:
         data.write(f)
