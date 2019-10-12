@@ -138,6 +138,9 @@
     '44-CommandsD Select No': 'CommandsD Select No'
     '45-CommandsD Variation': 'CommandsD Variation'
     '46-CommandsD Rotate': 'CommandsD Rotate'
+    47-New: New
+        Comment
+    '48-Commands Count': 'Commands Count'
 '08-Decoration Systems': 'Decoration Systems'
     Comment
 '09-Deco Builders': 'Deco Builders'
