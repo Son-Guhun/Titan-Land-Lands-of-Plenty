@@ -12,11 +12,11 @@ endglobals
 public function AdjustSpecialAbilities takes unit deco returns nothing
     local integer playerNumber = GetPlayerId(GetOwningPlayer(deco)) + 1
     call BlzSetAbilityRealLevelField(BlzGetUnitAbility(deco, 'A01S'), ABILITY_RLF_AREA_OF_EFFECT, 0, 100.*udg_DecoSystem_Value[playerNumber])
-    call IncUnitAbilityLevel(deco, 'A01S')
-    call SetUnitAbilityLevel(deco, 'A01S', 1)
+    // call IncUnitAbilityLevel(deco, 'A01S')
+    // call SetUnitAbilityLevel(deco, 'A01S', 1)
     call BlzSetAbilityRealLevelField(BlzGetUnitAbility(deco, 'A03N'), ABILITY_RLF_AREA_OF_EFFECT, 0, 100.*udg_DecoSystem_Value[playerNumber])
-    call IncUnitAbilityLevel(deco, 'A03N')
-    call SetUnitAbilityLevel(deco, 'A03N', 1)
+    // call IncUnitAbilityLevel(deco, 'A03N')
+    // call SetUnitAbilityLevel(deco, 'A03N', 1)
 endfunction
 
 private module InitModule    

@@ -14,13 +14,15 @@ endfunction
 
 //! textmacro ForUnitInGroup takes UNIT, GROUP
     set $UNIT$ = FirstOfGroup($GROUP$)
-    exitwhen $UNIT$ == null
-    call GroupRemoveUnit($GROUP$, $UNIT$)
-//! endtextmacro
-
-//! textmacro ForUnitInGroupWhile takes UNIT, GROUP, CONDITION
-    set $UNIT$ = FirstOfGroup($GROUP$)
-    exitwhen $UNIT$ == null or not $CONDITION$
+    if $UNIT$ == null then
+        if BlzGroupGetSize($GROUP$) > 0 then
+            call GroupRefresh($GROUP$)
+            set $UNIT$ = FirstOfGroup($GROUP$)
+            exitwhen $UNIT$ == null
+        else
+            exitwhen true
+        endif
+    endif
     call GroupRemoveUnit($GROUP$, $UNIT$)
 //! endtextmacro
 

@@ -9,32 +9,18 @@
 
 
 
-library DecoOnEnterMap requires UnitVisualValues, RectGenerator
+library DecoOnEnterMap requires UnitVisualValues, RectGenerator, LoPHeader  // for textmacro
 
 globals
     private group G = CreateGroup()
     private timer T = CreateTimer()
-    private unit U
 endglobals
 
-function FirstOfGroupSafe takes group g returns unit
-    set U = FirstOfGroup(g)
-    if U == null then
-        if BlzGroupGetSize(g) > 0 then
-            call GroupRefresh(g)
-            return FirstOfGroup(g)
-        else
-            return null
-        endif
-    endif
-    return U
-endfunction
-
 private function PlayAnim takes nothing returns nothing
-    local unit u = FirstOfGroupSafe(G)
+    local unit u
     local effect e
     loop
-        exitwhen u == null
+        //! runtextmacro ForUnitInGroup("u", "G")
         call SetUnitAnimation(u, "death alternate")
         if UnitHasAttachedEffect(u) then
             set e = GetUnitAttachedEffect(u).effect
@@ -42,8 +28,6 @@ private function PlayAnim takes nothing returns nothing
             call BlzPlaySpecialEffect(e, ANIM_TYPE_DEATH)
             call BlzSpecialEffectRemoveSubAnimation(e, SUBANIM_TYPE_ROOTED)
         endif
-        call GroupRemoveUnit(G, u)
-        set u = FirstOfGroupSafe(G)
     endloop
     set u = null
     set e = null

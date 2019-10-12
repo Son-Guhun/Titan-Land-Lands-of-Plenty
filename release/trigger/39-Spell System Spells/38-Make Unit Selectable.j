@@ -5,19 +5,16 @@ private function MakeLocustUnitsSelectable takes nothing returns nothing
     local real locX = GetLocationX(udg_Spell__TargetPoint)
     local real locY = GetLocationY(udg_Spell__TargetPoint)
     local unit u
-    local real unitX
-    local real unitY
     local unit newUnit
     local boolean includeDecos = udg_Spell__Ability != 'A01S'
+    local real range = udg_DecoSystem_Value[GetPlayerId(udg_Spell__CasterOwner) + 1]*100.
 
     call GroupEnumUnitsOfPlayer(g, udg_Spell__CasterOwner, null)
 
     loop
         //! runtextmacro ForUnitInGroup("u", "g")
         if GUMS_GetUnitSelectionType(u) != 0 then
-            set unitX = GetUnitX(u)
-            set unitY = GetUnitY(u)
-            if SquareRoot( (unitX-locX)*(unitX-locX) + (unitY-locY)*(unitY-locY)  ) <= 300. then
+            if IsUnitInRangeXY(u, locX, locY, range) then
                 if LoP_IsUnitDecoration(u) then
                     if includeDecos then
                         set newUnit = GUMSCopyUnitSameType(u, GetOwningPlayer(u))
@@ -44,11 +41,12 @@ private function onCast takes nothing returns nothing
     local unit u
     local LinkedHashSet_DecorationEffect decorations
     local DecorationEffect deco
+    local real range = udg_DecoSystem_Value[GetPlayerId(udg_Spell__CasterOwner) + 1]*100.
     
     call ExecuteCode(function MakeLocustUnitsSelectable)
 
     if udg_Spell__Ability != 'A01S' then
-        set decorations = EnumDecorationsOfPlayerInRange(GetOwningPlayer(GetTriggerUnit()), GetLocationX(udg_Spell__TargetPoint), GetLocationY(udg_Spell__TargetPoint), 300.)
+        set decorations = EnumDecorationsOfPlayerInRange(GetOwningPlayer(GetTriggerUnit()), GetLocationX(udg_Spell__TargetPoint), GetLocationY(udg_Spell__TargetPoint), range)
         set deco = decorations.begin()
         
         loop
