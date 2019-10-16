@@ -378,7 +378,7 @@ TiJil, unwirklich
     // Model Credits 2
     set quest_text = "
 |cff00b300The Hive Workshop:|r
-PrinceYaser, shiik, Dr.Death, Sant, Eagle XI, Afroknight_76, Deleted member 238226 (unknown), GhostThruster, Whitewolf8, WhiteDeath, A.R., Xezko, Deep Sea Kraken, Hellx-Magnus, -Berz-, CRAZYRUSSIAN, HappyCockroach, Tamplier777, Kehel, Radagast, Lordaeron Creator, The D3ath, Gottfrei, bu3ny, CloudWolf, Gyrosphinx, Marenko, Talavaj, !!GORO!!, THE_SILENT, Kenntaur, skrab, simkitty181, olyvian, Darkfang, JollyD, paulH, apaka, Just_Spectating, Leopard, GiFun, erwtenpeller, wc3neverdies, Spinel, Miseracord, JesusHipster, Shakral
+PrinceYaser, shiik, Dr.Death, Sant, Eagle XI, Afroknight_76, Deleted member 238226 (unknown), GhostThruster, Whitewolf8, WhiteDeath, A.R., Xezko, Deep Sea Kraken, Hellx-Magnus, -Berz-, CRAZYRUSSIAN, HappyCockroach, Tamplier777, Kehel, Radagast, Lordaeron Creator, The D3ath, Gottfrei, bu3ny, CloudWolf, Gyrosphinx, Marenko, Talavaj, !!GORO!!, THE_SILENT, Kenntaur, skrab, simkitty181, olyvian, Darkfang, JollyD, paulH, apaka, Just_Spectating, Leopard, GiFun, erwtenpeller, wc3neverdies, Spinel, Miseracord, JesusHipster, Shakral, strongwill, Blood Raven
 
 |cffff0000XGM:|r
 P4ela, Kolbosa, Wulfrein, DampirTBs, Feleer, Jack Sparrow, DiKey51, Ket, LongbowMan
