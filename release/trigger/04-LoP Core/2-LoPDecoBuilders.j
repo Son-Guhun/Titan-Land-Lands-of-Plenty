@@ -42,6 +42,9 @@ private module InitModule
         // Archways
         set i = ( i + 1 )
         set rawcodes[i] = 'u014'
+        // Blacksmith
+        set i = ( i + 1 )
+        set rawcodes[i] = 'u01E'
         // Bushes
         set i = ( i + 1 )
         set rawcodes[i] = 'u00A'
@@ -69,36 +72,57 @@ private module InitModule
         // Effects
         set i = ( i + 1 )
         set rawcodes[i] = 'u036'
+        // Fence
+        set i = ( i + 1 )
+        set rawcodes[i] = 'u03I'
         // Fire
         set i = ( i + 1 )
         set rawcodes[i] = 'u01C'
+        // Flags
+        set i = ( i + 1 )
+        set rawcodes[i] = 'u005'
+        // Flowers 1
+        set i = ( i + 1 )
+        set rawcodes[i] = 'u004'
         // Furniture Deco
         set i = ( i + 1 )
         set rawcodes[i] = 'u03Q'
         // Gates
         set i = ( i + 1 )
         set rawcodes[i] = 'u00V'
+        // Gravestones
+        set i = ( i + 1 )
+        set rawcodes[i] = 'u02S'
         // Ice
         set i = ( i + 1 )
         set rawcodes[i] = 'u03P'
+        // Market
+        set i = ( i + 1 )
+        set rawcodes[i] = 'u01D'
+        // NPC
+        set i = ( i + 1 )
+        set rawcodes[i] = 'u048'
+        // Obelisks
+        set i = ( i + 1 )
+        set rawcodes[i] = 'u00Y'
         // Rocks
         set i = ( i + 1 )
         set rawcodes[i] = 'u013'
+        // Ruined 1
+        set i = ( i + 1 )
+        set rawcodes[i] = 'u02T'
         // Seats
         set i = ( i + 1 )
         set rawcodes[i] = 'u01R'
         // Statue 1
         set i = ( i + 1 )
         set rawcodes[i] = 'u01N'
+        // Trees
+        set i = ( i + 1 )
+        set rawcodes[i] = 'u01B'
         // Walls (Original)
         set i = ( i + 1 )
         set rawcodes[i] = 'u000'
-        // Walls 1
-        set i = ( i + 1 )
-        set rawcodes[i] = 'u02J'
-        // Walls 2
-        set i = ( i + 1 )
-        set rawcodes[i] = 'u02K'
         // Water
         set i = ( i + 1 )
         set rawcodes[i] = 'u00Z'
@@ -119,9 +143,6 @@ private module InitModule
         // Black Empire
         set i = ( i + 1 )
         set rawcodes[i] = 'u00T'
-        // Blacksmith
-        set i = ( i + 1 )
-        set rawcodes[i] = 'u01E'
         // Blocks
         set i = ( i + 1 )
         set rawcodes[i] = 'u03A'
@@ -161,18 +182,12 @@ private module InitModule
         // Elves Forest
         set i = ( i + 1 )
         set rawcodes[i] = 'u040'
-        // Fence
+        // Feudal
         set i = ( i + 1 )
-        set rawcodes[i] = 'u03I'
-        // Flags
-        set i = ( i + 1 )
-        set rawcodes[i] = 'u005'
+        set rawcodes[i] = 'u01S'
         // Floors
         set i = ( i + 1 )
         set rawcodes[i] = 'u02C'
-        // Flowers 1
-        set i = ( i + 1 )
-        set rawcodes[i] = 'u004'
         // Flowers 2
         set i = ( i + 1 )
         set rawcodes[i] = 'u006'
@@ -182,9 +197,6 @@ private module InitModule
         // Goblin
         set i = ( i + 1 )
         set rawcodes[i] = 'u02R'
-        // Gravestones
-        set i = ( i + 1 )
-        set rawcodes[i] = 'u02S'
         // Gurubashi
         set i = ( i + 1 )
         set rawcodes[i] = 'u00O'
@@ -197,13 +209,7 @@ private module InitModule
         // Mansion
         set i = ( i + 1 )
         set rawcodes[i] = 'u02I'
-        // Market
-        set i = ( i + 1 )
-        set rawcodes[i] = 'u01D'
-        // Medieval 1
-        set i = ( i + 1 )
-        set rawcodes[i] = 'u01S'
-        // Medieval 2
+        // Medieval
         set i = ( i + 1 )
         set rawcodes[i] = 'u02L'
         // Murloc
@@ -212,9 +218,6 @@ private module InitModule
         // Mushrooms
         set i = ( i + 1 )
         set rawcodes[i] = 'u046'
-        // NPC
-        set i = ( i + 1 )
-        set rawcodes[i] = 'u048'
         // Naga 1
         set i = ( i + 1 )
         set rawcodes[i] = 'u03R'
@@ -224,9 +227,9 @@ private module InitModule
         // Nordic
         set i = ( i + 1 )
         set rawcodes[i] = 'u03S'
-        // Obelisks
+        // Orc
         set i = ( i + 1 )
-        set rawcodes[i] = 'u00Y'
+        set rawcodes[i] = 'u05T'
         // Pandaren
         set i = ( i + 1 )
         set rawcodes[i] = 'u02N'
@@ -239,10 +242,7 @@ private module InitModule
         // Rostrodle
         set i = ( i + 1 )
         set rawcodes[i] = 'u02Q'
-        // Ruined
-        set i = ( i + 1 )
-        set rawcodes[i] = 'u02T'
-        // Ruined
+        // Ruined 2
         set i = ( i + 1 )
         set rawcodes[i] = 'u044'
         // Ruins
@@ -278,13 +278,7 @@ private module InitModule
         // Tableware
         set i = ( i + 1 )
         set rawcodes[i] = 'u007'
-        // Trees
-        set i = ( i + 1 )
-        set rawcodes[i] = 'u01B'
-        // Vanilla Orc
-        set i = ( i + 1 )
-        set rawcodes[i] = 'u05T'
-        // Vanilla Undead
+        // Undead
         set i = ( i + 1 )
         set rawcodes[i] = 'u00U'
         // Vampiric
@@ -293,6 +287,12 @@ private module InitModule
         // Village
         set i = ( i + 1 )
         set rawcodes[i] = 'u01O'
+        // Walls 1
+        set i = ( i + 1 )
+        set rawcodes[i] = 'u02J'
+        // Walls 2
+        set i = ( i + 1 )
+        set rawcodes[i] = 'u02K'
         
         set LoP_DecoBuilders.AdvDecoLastIndex = i
         // ---------
