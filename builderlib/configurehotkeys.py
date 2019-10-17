@@ -71,8 +71,9 @@ def configure_selectors(unit_data, selector_list, **kwargs):
 def configure_decorations(unit_data, **kwargs):
     keys = ('Buttonpos_2', 'Buttonpos_1', 'Hotkey')
     get_build_list = lambda x: x['Builds'][1:-1].split(',')
-    ignore = set(get_build_list(unit_data['u00W']))  # Ignore anything built by Deco Builder Misc (includes spawners)
-    for decoration in (unit_data[d] for d in get_decorations(unit_data) if d not in ignore):
+    misc = set(get_build_list(unit_data['u00W']))  # Ignore anything built by Deco Builder Misc (includes spawners)
+    ignore = lambda d: d.name in misc or ('EditorSuffix' in d and '[spawn]' in d['EditorSuffix'])
+    for decoration in (unit_data[d] for d in get_decorations(unit_data) if not ignore(unit_data[d])):
         for key in itertools.chain(keys, kwargs):
             if key in decoration: del decoration[key]
     for builder in iter_deco_builders(unit_data, builder_only=True):

@@ -23,7 +23,7 @@ def do(file_path):
     result = []
     decos = []
     added = set()
-    cond = lambda x: '[spawn]' in unit_data[x]['EditorSuffix'] if 'EditorSuffix' in unit_data[x] else True
+    cond = lambda x: '[spawn]' not in unit_data[x]['EditorSuffix'] if 'EditorSuffix' in unit_data[x] else True
     for builder in iter_deco_builders(unit_data, builder_only=True):
         for decoration in builder['Builds'][1:-1].split(','):
             if decoration not in added and 'Upgrade' in unit_data[decoration] and cond(decoration):
