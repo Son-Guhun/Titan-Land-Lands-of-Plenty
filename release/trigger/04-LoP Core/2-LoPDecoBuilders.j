@@ -155,9 +155,6 @@ private module InitModule
         // Chaos
         set i = ( i + 1 )
         set rawcodes[i] = 'u039'
-        // Chess
-        set i = ( i + 1 )
-        set rawcodes[i] = 'u027'
         // Dalaran
         set i = ( i + 1 )
         set rawcodes[i] = 'u02D'
@@ -194,6 +191,9 @@ private module InitModule
         // Forsaken
         set i = ( i + 1 )
         set rawcodes[i] = 'u025'
+        // Games
+        set i = ( i + 1 )
+        set rawcodes[i] = 'u027'
         // Goblin
         set i = ( i + 1 )
         set rawcodes[i] = 'u02R'

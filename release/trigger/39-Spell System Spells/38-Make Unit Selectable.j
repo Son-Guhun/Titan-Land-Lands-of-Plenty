@@ -2,8 +2,6 @@ scope MakeUnitsSeletable
 
 private function MakeLocustUnitsSelectable takes nothing returns nothing
     local group g = CreateGroup()
-    local real locX = GetLocationX(udg_Spell__TargetPoint)
-    local real locY = GetLocationY(udg_Spell__TargetPoint)
     local unit u
     local unit newUnit
     local boolean includeDecos = udg_Spell__Ability != 'A01S'
@@ -14,7 +12,7 @@ private function MakeLocustUnitsSelectable takes nothing returns nothing
     loop
         //! runtextmacro ForUnitInGroup("u", "g")
         if GUMS_GetUnitSelectionType(u) != 0 then
-            if IsUnitInRangeXY(u, locX, locY, range) then
+            if IsUnitInRangeLoc(u, udg_Spell__TargetPoint, range) then
                 if LoP_IsUnitDecoration(u) then
                     if includeDecos then
                         set newUnit = GUMSCopyUnitSameType(u, GetOwningPlayer(u))

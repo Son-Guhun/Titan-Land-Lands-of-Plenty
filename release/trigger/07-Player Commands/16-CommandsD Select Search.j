@@ -51,7 +51,7 @@ endfunction
 function SearchSelectFilter takes nothing returns boolean
     local string str
     
-    if IsUnitType(GetFilterUnit(), UNIT_TYPE_PEON) then
+    if IsUnitType(GetFilterUnit(), UNIT_TYPE_PEON) and LoP_IsUnitDecoBuilder(GetFilterUnit()) then
         //Get full unit name (Deco Builder/Modifier [Proper Name])
         set str = GetUnitName(GetFilterUnit())
         //Skip first word (Deco)
@@ -62,7 +62,7 @@ function SearchSelectFilter takes nothing returns boolean
         set str = SubString(str,0,CutToCharacter(str," "))
         
         //Compare strings and Select Unit for local player only
-        if StartsString(udg_System_searchStr, StringCase(str,true)) then//str == udg_System_searchStr then
+        if StartsString(udg_System_searchStr, StringCase(str,true)) then
             call ShowUnit(GetFilterUnit(), true)
             if GetLocalPlayer() == GetTriggerPlayer() then
                 call SelectUnit(GetFilterUnit(), true)
