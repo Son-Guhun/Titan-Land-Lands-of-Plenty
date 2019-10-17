@@ -53,6 +53,9 @@ function DecoOnEnterMap takes unit trigU returns nothing
     if typeId.hasUpgrades() then
         call UnitAddAbility(trigU, 'A01T')
         call UnitAddAbility(trigU, 'A048')
+        if IsUnitType(trigU, UNIT_TYPE_STRUCTURE) and GetUnitAbilityLevel(trigU, 'A0B5') == 0 and GetUnitAbilityLevel(trigU, 'A0B3') == 0 and GetUnitAbilityLevel(trigU, 'A00T') == 0 then
+            call UnitAddAbility(trigU, 'A05Z')
+        endif
     endif
     // -
     // ADD ENABLE/DISABLE FLY TO STRUCTURES
