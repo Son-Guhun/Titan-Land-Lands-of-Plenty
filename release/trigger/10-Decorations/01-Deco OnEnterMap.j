@@ -21,7 +21,7 @@ private function PlayAnim takes nothing returns nothing
     local effect e
     loop
         //! runtextmacro ForUnitInGroup("u", "G")
-        call SetUnitAnimation(u, "death alternate")
+        call SetUnitAnimation(u, "death alternate")  // call SetUnitAnimation(trigU, "death alternate " +GUMSConvertTags( GUMSGetUnitAnimationTag(trigU)))
         if UnitHasAttachedEffect(u) then
             set e = GetUnitAttachedEffect(u).effect
             call BlzSpecialEffectAddSubAnimation(e, SUBANIM_TYPE_ROOTED)
@@ -31,6 +31,11 @@ private function PlayAnim takes nothing returns nothing
     endloop
     set u = null
     set e = null
+endfunction
+
+function PlayGateOpenAnimation takes unit u returns nothing
+    call GroupAddUnit(G, u)
+    call TimerStart(T, 0., false, function PlayAnim)
 endfunction
 
 function DecoOnEnterMap takes unit trigU returns nothing
@@ -68,19 +73,9 @@ function DecoOnEnterMap takes unit trigU returns nothing
             // PLAY OPEN ANIMATION FOR OPENED GATES
             // OTHERWISE, PLAY STAND ANIMATION
             if ( GetUnitAbilityLevel(trigU, 'A0B5') != 0 ) then
-                // if GUMS_HaveSavedAnimationTag(trigU) then
-                    // call SetUnitAnimation(trigU, "death alternate " +GUMSConvertTags( GUMSGetUnitAnimationTag(trigU)))
-                // else
-                    call GroupAddUnit(G, trigU)
-                    // call SetUnitAnimation(trigU, "death alternate")
-                    call TimerStart(T, 0., false, function PlayAnim)
-                // endif
+                call PlayGateOpenAnimation(trigU)
             else
-                // if GUMS_HaveSavedAnimationTag(trigU) then
-                    // call SetUnitAnimation(trigU, "stand " +GUMSConvertTags( GUMSGetUnitAnimationTag(trigU)))
-                // else
                     call SetUnitAnimation(trigU, "stand")
-                // endif
             endif
         endif
     endif

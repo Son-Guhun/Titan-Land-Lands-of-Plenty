@@ -15,6 +15,12 @@ scope DecoMovement
         public constant integer FACE = 'A00T'
         public constant integer COPY = 'A012'
         public constant integer ROTATE = 'A011'
+        
+        public constant integer UPGRADE_PREV = 'A048'
+        public constant integer UPGRADE_NEXT = 'A01T'
+        
+        public constant integer GATE_OPEN = 'A0B3'
+        public constant integer GATE_CLOSE = 'A0B5'
     endglobals
 
     private function PlayerNumber takes unit whichUnit returns integer
@@ -117,10 +123,10 @@ scope DecoMovement
         elseif ( spellId == COPY ) then
             call LopCopyUnitSameType(trigU, GetOwningPlayer(trigU))
         
-        elseif ( spellId == 'A01T'  or spellId == 'A048' ) then
+        elseif ( spellId == UPGRADE_NEXT  or spellId == UPGRADE_PREV ) then
             set typeId = GetUnitTypeId(trigU)
             if typeId.hasUpgrades() then
-                if spellId == 'A048' and typeId.hasPrev() then
+                if spellId == UPGRADE_PREV and typeId.hasPrev() then
                     call IssueImmediateOrderById(trigU, typeId.prev)
                 else
                     call IssueImmediateOrderById(trigU, typeId.next)
@@ -128,17 +134,42 @@ scope DecoMovement
             endif
         endif
         
+        if IsUnitType(trigU, UNIT_TYPE_STRUCTURE) and GetUnitAbilityLevel(trigU, GATE_CLOSE) > 0 then
+            call PlayGateOpenAnimation(trigU)
+        endif
         set trigU = null
         return false
     endfunction
     
-endscope
-
-
+    
 //===========================================================================
 function InitTrig_Deco_Movement takes nothing returns nothing
+    local unit u = CreateUnit(Player(0), 'hpea', 0., 0., 0.)
+    
     set gg_trg_Deco_Movement = CreateTrigger(  )
     call TriggerRegisterAnyUnitEventBJ( gg_trg_Deco_Movement, EVENT_PLAYER_UNIT_SPELL_CAST )
     call TriggerAddCondition( gg_trg_Deco_Movement, Condition( function DecoMovement_Trigger_Conditions ) )
+    
+    call UnitAddAbility(u, MOVE_UP)
+    call UnitAddAbility(u, MOVE_LEFT)
+    call UnitAddAbility(u, MOVE_RIGHT)
+    call UnitAddAbility(u, MOVE_DOWN)
+    call UnitAddAbility(u, MOVE)
+    call UnitAddAbility(u, SUICIDE)
+    call UnitAddAbility(u, FACE)
+    call UnitAddAbility(u, COPY)
+    call UnitAddAbility(u, ROTATE)
+    call UnitAddAbility(u, UPGRADE_NEXT)
+    call UnitAddAbility(u, UPGRADE_PREV)
+    
+    call UnitAddAbility(u, GATE_CLOSE)  // Gate Close
+    call UnitAddAbility(u, GATE_OPEN)  // Gate Open
+    call UnitAddAbility(u, 'DEDF')  // Enable/Disable Fly
+    call RemoveUnit(u)
+    set u= null
 endfunction
+endscope
+
+
+
 
