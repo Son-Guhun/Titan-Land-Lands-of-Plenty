@@ -57,6 +57,11 @@ private function OnCommand_GroupEnum takes nothing returns boolean
     local integer cutToComma = CutToCharacter(args, " ")
     local string subcommand = SubString(args, 0, cutToComma)
     
+    if LoP_IsUnitProtected(GetFilterUnit()) then
+        call DisplayTextToPlayer(GetTriggerPlayer(), 0., 0., "This hero's abilities cannot be altered.")
+        return false
+    endif
+    
     if StringLength(args) != cutToComma then
         set args = SubString(args, cutToComma + 1, 0)
         

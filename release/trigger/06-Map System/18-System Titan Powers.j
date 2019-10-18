@@ -1,8 +1,9 @@
 scope TitanPowers initializer onInit
 
 private function GroupFilter takes nothing returns boolean
+    // No need to check if the units are protected, since it's only enumerating units outside of the titan palace
     if not RectContainsUnit(gg_rct_Titan_Palace, GetFilterUnit()) then
-        call SetUnitOwner( GetFilterUnit(), udg_PowerSystem_Player, true )
+        call SetUnitOwner( GetFilterUnit(), udg_PowerSystem_Player, false )
     endif
     return false
 endfunction
@@ -27,7 +28,9 @@ private function MindPower takes unit target returns nothing
             call GroupEnumUnitsOfPlayer(ENUM_GROUP, owner, Condition(function GroupFilter))
             set udg_PowerSystem_allFlag = false
         else
-            call SetUnitOwner( target, udg_PowerSystem_Player, true )
+            if not LoP_IsUnitProtected(target) or target == HERO_COSMOSIS() or target == HERO_CREATOR() then 
+                call SetUnitOwner(target, udg_PowerSystem_Player, false)
+            endif
     endif
 endfunction
 

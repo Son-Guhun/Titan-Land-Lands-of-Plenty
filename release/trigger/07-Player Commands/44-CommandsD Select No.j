@@ -59,6 +59,7 @@ private function onCommand takes nothing returns boolean
         set g = CreateGroup()
         
         call Commands_EnumSelectedCheckForGenerator(g, GetTriggerPlayer(), null)
+        call BlzGroupRemoveGroupFast(udg_System_ProtectedGroup, g)
         set udg_Commands_Counter = 0
         set udg_Commands_Counter_Max = 500
         call ForGroup( g, function EnumFunc )
