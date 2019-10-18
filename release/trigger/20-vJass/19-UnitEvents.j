@@ -1,4 +1,4 @@
-library UnitEvents requires ArgumentStack, BoolExprEvaluator
+library UnitEvents requires ArgumentStack, BoolExprEvaluator, optional NativeRedefinitions
     /* Simple unit events library by Guhun
     
     These are supposed to be called by the user in their own global unit event triggers.
@@ -6,6 +6,8 @@ library UnitEvents requires ArgumentStack, BoolExprEvaluator
     
     (See System Cleanup Death and System Cleanup Removal triggers in the Map System category).
     */
+    
+    //! runtextmacro optional RedefineNatives()
 
     struct UnitEvents extends array
         

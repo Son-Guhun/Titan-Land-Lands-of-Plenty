@@ -1,5 +1,7 @@
 scope MakeUnitsSeletable
 
+//! runtextmacro optional RedefineNatives()
+
 private function MakeLocustUnitsSelectable takes nothing returns nothing
     local group g = CreateGroup()
     local unit u

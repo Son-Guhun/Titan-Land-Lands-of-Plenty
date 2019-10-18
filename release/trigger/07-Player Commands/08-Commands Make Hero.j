@@ -1,4 +1,6 @@
-library LoPHeroicUnit requires LoPHeader, LoPWidgets, UnitVisualMods
+library LoPHeroicUnit requires LoPHeader, LoPWidgets, UnitVisualMods, optional NativeRedefinitions
+
+//! runtextmacro optional RedefineNatives()
 
     globals
         private integer array heroicUnitCount

@@ -1,4 +1,6 @@
-library LoPCleanUpDeath requires LoPWidgets, MoveSpeedBonus, UnitVisualMods, UserDefinedRects, DummyDmg, MultiPatrol, UnitEvents, LoPNeutralUnits
+library LoPCleanUpDeath requires LoPWidgets, MoveSpeedBonus, UnitVisualMods, UserDefinedRects, DummyDmg, MultiPatrol, UnitEvents, LoPNeutralUnits, optional NativeRedefinitions
+
+//! runtextmacro optional RedefineNatives()
 
 function LoP_onDeath takes unit whichUnit returns nothing
     debug call BJDebugMsg("OnDeath")

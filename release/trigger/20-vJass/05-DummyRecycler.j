@@ -27,6 +27,9 @@ library DummyRecycler /*
      
     */ optional WorldBounds /*
         if not found, this system will initialize its own Map Boundaries.
+    
+    */ optional NativeRedefinitions /*
+        This library calls RemoveUnit
 //
 //
 //  Features:
@@ -108,6 +111,8 @@ library DummyRecycler /*
 // =============================================================== //
 // ====================== CONFIGURATION ========================== //
 // =============================================================== */
+
+//! runtextmacro optional RedefineNatives()
 
     globals
         //The rawcode of the Dummy Unit

@@ -1,4 +1,6 @@
-library LoPCleanUpRemoval requires LoPCleanUpDeath, UnitEvents
+library LoPCleanUpRemoval requires LoPCleanUpDeath, UnitEvents, optional RedefineNatives
+
+//! runtextmacro optional RedefineNatives()
 
 function LoP_onRemoval takes unit whichUnit returns nothing
     debug call BJDebugMsg("OnRemove")

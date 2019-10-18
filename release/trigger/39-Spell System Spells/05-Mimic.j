@@ -1,6 +1,6 @@
 native UnitAlive takes unit whichUnit returns boolean
 
-library Mimic requires LoPHeroicUnit, UnitVisualMods, UnitEvents
+library Mimic requires LoPHeroicUnit, UnitVisualMods, UnitEvents, optional RedefineNatives
 /*
 Allows heroes to "mimic" other units, while mantaining some of their original stats. The hero that is
 mimicing ("original") is hidden, and a copy of the mimicked unit is created. If the target unit was
@@ -16,6 +16,8 @@ All items are transfered from the original hero to the mimic, or from an old mim
 When a mimic dies, the original unit reappears at the dying position, and the mimic is removed from
 the game. When a mimic is directly removed from the game, the original unit is also removed.
 */
+
+//! runtextmacro optional RedefineNatives()
 
 private function MAX_INVENTORY takes nothing returns integer
     return bj_MAX_INVENTORY
@@ -98,9 +100,11 @@ function CreateUnitMimic takes unit whichUnit, unit target returns nothing
     local unit mimic
     local integer mimicId
     local unit original
-
+    local player owner = GetOwningPlayer(whichUnit)
+    local boolean wasSelected = IsUnitSelected(whichUnit, owner)
+    
     call ShowUnit(whichUnit, false)
-    set mimic = CreateUnit(GetOwningPlayer(whichUnit), GetUnitTypeId(target), GetUnitX(whichUnit), GetUnitY(whichUnit), GetUnitFacing(whichUnit))
+    set mimic = CreateUnit(owner, GetUnitTypeId(target), GetUnitX(whichUnit), GetUnitY(whichUnit), GetUnitFacing(whichUnit))
     set mimicId = GetHandleId(mimic)
     
     if IsUnitType(mimic, UNIT_TYPE_HERO) or UnitMakeHeroic(mimic) then
@@ -138,8 +142,11 @@ function CreateUnitMimic takes unit whichUnit, unit target returns nothing
         call UnitEvents(mimicId).onRemove.register(Condition(function OnRemove))
         call UnitEvents(mimicId).setRemoveOnDeath()
         if not IsUnitType(mimic, UNIT_TYPE_HERO) then
-            call RefreshHeroIcons(GetOwningPlayer(mimic))
+            call RefreshHeroIcons(owner)
             set LoP_UnitData.get(mimic).isHeroic = true
+        endif
+        if wasSelected and GetLocalPlayer() == owner then
+            call SelectUnit(mimic, true)
         endif
     else
         call RemoveUnit(mimic)
