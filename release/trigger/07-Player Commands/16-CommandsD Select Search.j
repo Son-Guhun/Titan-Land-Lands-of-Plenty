@@ -51,7 +51,7 @@ endfunction
 function SearchSelectFilter takes nothing returns boolean
     local string str
     
-    if IsUnitType(GetFilterUnit(), UNIT_TYPE_PEON) and LoP_IsUnitDecoBuilder(GetFilterUnit()) then
+    if IsUnitType(GetFilterUnit(), UNIT_TYPE_PEON) and (LoP_IsUnitDecoBuilder(GetFilterUnit()) or LoP_IsUnitDecoration(GetFilterUnit())) then
         //Get full unit name (Deco Builder/Modifier [Proper Name])
         set str = GetUnitName(GetFilterUnit())
         //Skip first word (Deco)

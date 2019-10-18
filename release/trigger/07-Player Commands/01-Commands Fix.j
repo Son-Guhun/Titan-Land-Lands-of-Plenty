@@ -3,12 +3,9 @@ scope CommandsFix
 private function OnCommand takes nothing returns boolean
     local string args = LoP_Command.getArguments()
     
-    if args == "selection" then
-        call BlzEnableSelections(true, true)
-        call EnableDragSelect(true, true)
-        call EnablePreSelect(true, true)
-    elseif args == "darkness" then
+    if args == "darkness" then
         call ResetTerrainFog()
+        call SetDayNightModels("Environment\\DNC\\DNCLordaeron\\DNCLordaeronTerrain\\DNCLordaeronTerrain.mdl", "Environment\\DNC\\DNCLordaeron\\DNCLordaeronUnit\\DNCLordaeronUnit.mdl")
     endif
     
     return false
