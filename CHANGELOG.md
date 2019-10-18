@@ -12,6 +12,77 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 	- New units for an existing race can be added in a patch version. 
 	- New decorations for an existing deco builder can be added in a patch version.
 
+## [v1.3.5] - 2019-10-18
+
+### Added
+- New command:
+	- -count: Counts all selectable units currently in the map. Maximum recommended is 1500. Also shows individual count for player who used the command and for the player with most units. Individual counts include unselectable decorations that block pathing, unselecatble waygates, unselectable units and hidden deco builder, but does not count most unselectable decorations.
+- New decorations:
+	- Deco Builder Games (old Deco Builder Chess):
+		- 3 new chess piece variations
+		- Trading Cards
+		- Die
+		- Backgammon Piece
+		- Checker Piece and Queen
+- New heroes:
+	- Emperor of Mankind
+	- Nihonjin Wanderer
+- New units:
+	- Haradrim Assassin Female
+	- Night Elf Runner
+	- Night Elf Sentry
+	- Night Elf Warden
+- Added quest in F9 manual explaining the controller system and listing commands.
+- New Decoration abilities:
+	- **Next Variation**
+	- **Previous Variation**
+	- These abilities replace the old method of using upgrades to cycle between variations.
+
+### Fixed
+- Fixed a crash that could occur when a hero cast Mirror Image after having used Metamorph (heroes with Metamorph can no longer use Mirror Image).
+- Fixed issue where moving a Deco Modifier Controller with its aligned move ability would cause an invisble unit to appear and the Controller to not move at all.
+- Units with only a single patrol point will now resume their patrol as normal when loaded.
+- Fixed an issue where a unit with a custom color (*'color* command) would not keep the correct color when given to another player.
+- *-sele* and *-seln* commands will no longer sometimes select non-deco builders.
+- Cosmosis and Angel of Creation can no longer use Staff of Mimic. Even if they somehow use it, the game should no longer crash.
+- Hero Towers and Titan Powers can no longer have their owner changed.
+- Fixed names for Gate Icecrown and Gate Ice Rock.
+- Added arabian gate to Deco Builder Arabian 2.
+- Fixed a small issue that did not allow w3x2lni's variable name confusion to be used, which made the map a little slower.
+
+
+### Changed
+- Deco Builder Chess has been renamed to Deco Builder Games.
+- Decorations will now float on water, making their behaviour when selectable the same as their behaviour when unselectable.
+- Improved controller system. When using modification commands (such as 'face and 'size) while selecting a controller, the command will apply to all controlled units.
+- Non-decorations can now also be made unselectable. To make them unselectable, use *-select no f*.
+- The Make Selectable ability of Deco Modifier Special will now scale with the value set by the *-val* command.
+- Decorations with a square pathing map (such as rocks or wall connectors) can now use the Facing ability.
+- Hotkeys and position for **Open/Close Gate** and **Enable/Disable Flight** have been changed to accomodate the new variation abilities.
+- Open gates can now use movement abilities.
+- Deco Builders now use QWER hotkeys when building decorations.
+- Changed Basic Deco Builders:
+	- New basic decos:
+		- Blacksmith
+		- Fence
+		- Flags
+		- Flowers
+		- Gravestones
+		- Market
+		- NPC
+		- Obelisks
+		- Ruined
+		- Trees
+	- No longer basic:
+		- Walls 1
+		- Walls 2
+- Cosmosis and Angel of Creation can no longer have their abilities altered. (safety measure)
+
+### Removed
+- Removed Statue, Lamp and Bonfire decorations from the top of the Dirt Peaks.
+- Removed selection argument from *-fix* command. It did not work.
+
+
 ## [v1.3.4] - 2019-09-30
 
 ### Added
