@@ -114,7 +114,7 @@ function Trig_Commands_Camera takes nothing returns boolean
 endfunction
 
 //===========================================================================
-function InitTrig_Commands_StartRectCamera takes nothing returns nothing
+function InitTrig_Commands_Camera takes nothing returns nothing
     call LoP_Command.create("-c", ACCESS_USER, Condition(function Trig_Commands_Camera))
     call LoP_Command.create("-cam", ACCESS_USER, Condition(function Trig_Commands_Camera))
     call LoP_Command.create("-camera", ACCESS_USER, Condition(function Trig_Commands_Camera))
