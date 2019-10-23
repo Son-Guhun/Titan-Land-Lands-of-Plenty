@@ -1,6 +1,10 @@
 
-development/
+development/*
 development.w3x
+!development/Scripts
+development/Scripts/*
+!development/Scripts/common.j
+!development/Scripts/Blizzard.j
 release/resource
 release/sound
 config.ini
