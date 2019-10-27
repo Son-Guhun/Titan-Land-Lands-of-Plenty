@@ -112,12 +112,19 @@ constant function GUMS_SELECTION_DEFAULT takes nothing returns integer
     return 0
 endfunction
 
+// Units that can only be drag-selected.
 constant function GUMS_SELECTION_DRAG takes nothing returns integer
     return 1
 endfunction
 
+// Units that are unselectable and may be converted to SFX.
 constant function GUMS_SELECTION_UNSELECTABLE takes nothing returns integer
     return 2
+endfunction
+
+// Units that are unselectable and should not be converted to SFX.
+constant function GUMS_SELECTION_LOCUST takes nothing returns integer
+    return 3
 endfunction
 //==========================================
 constant function GUMS_MINIMUM_FLY_HEIGHT takes nothing returns real
@@ -420,21 +427,6 @@ endfunction
 //==========================================
 // GUMS Unit Selectability Utilities
 
-function GUMSMakeUnitUnSelectable takes unit whichUnit returns nothing
-    local integer unitId = GetHandleId(whichUnit)
-    local integer selectionType = data[unitId][SELECT]
-
-    if selectionType == GUMS_SELECTION_UNSELECTABLE() then
-        return //Unit is already unselectable, do nothing.
-    endif
-
-    if UnitAddAbility(whichUnit,'Aloc') then //Do nothing is unit has locust by default.
-        call UnitRemoveAbility(whichUnit,'Aloc')
-        set data[unitId][SELECT] = GUMS_SELECTION_UNSELECTABLE()
-        call SetUnitInvulnerable(whichUnit, true)
-    endif
-endfunction
-
 function GUMSMakeUnitDragSelectable takes unit whichUnit returns nothing
     local integer unitId = GetHandleId(whichUnit)
     local integer selectionType = data[unitId][SELECT]
@@ -457,6 +449,33 @@ function GUMSMakeUnitDragSelectable takes unit whichUnit returns nothing
         call ShowUnit(whichUnit,false)
         call ShowUnit(whichUnit,true)
     endif
+endfunction
+
+function GUMSSetUnitSelectionType takes unit whichUnit, integer selectType returns nothing
+    local integer unitId = GetHandleId(whichUnit) 
+
+    if selectType == GUMS_SELECTION_UNSELECTABLE() or selectType == GUMS_SELECTION_LOCUST() then
+        if data[unitId][SELECT] >= GUMS_SELECTION_UNSELECTABLE() then
+            set data[unitId][SELECT] = selectType
+            return //Unit is already unselectable, do nothing.
+        endif
+
+        if UnitAddAbility(whichUnit,'Aloc') then //Do nothing is unit has locust by default.
+            call UnitRemoveAbility(whichUnit,'Aloc')
+            set data[unitId][SELECT] = selectType
+            call SetUnitInvulnerable(whichUnit, true)
+        endif
+    elseif selectType == GUMS_SELECTION_DRAG() then
+        call GUMSMakeUnitDragSelectable(whichUnit)
+    endif
+endfunction
+
+function GUMSMakeUnitUnSelectable takes unit whichUnit returns nothing
+    call GUMSSetUnitSelectionType(whichUnit, GUMS_SELECTION_UNSELECTABLE())
+endfunction
+
+function GUMSMakeUnitLocust takes unit whichUnit returns nothing
+    call GUMSSetUnitSelectionType(whichUnit, GUMS_SELECTION_LOCUST())
 endfunction
 
 

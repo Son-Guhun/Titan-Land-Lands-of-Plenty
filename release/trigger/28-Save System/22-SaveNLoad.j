@@ -486,12 +486,10 @@ function LoadUnit takes string chat_str, player un_owner returns nothing
             call GUMSSetUnitAnimSpeed(resultUnit, S2R(aSpeed))
         endif
         if animTag != "D" then
-            call GUMSAddUnitAnimationTag(resultUnit,GUMSConvertTags(UnitVisualMods_TAGS_DECOMPRESS, animTag))
+            call GUMSAddUnitAnimationTag(resultUnit, GUMSConvertTags(UnitVisualMods_TAGS_DECOMPRESS, animTag))
         endif
-        if select == "1" then
-            call GUMSMakeUnitDragSelectable(resultUnit)
-        elseif select == "2" then
-            call GUMSMakeUnitUnSelectable(resultUnit)
+        if select != "0" then
+            call GUMSSetUnitSelectionType(resultUnit, S2I(select))
         endif
         
         set udg_save_LastLoadedUnit[playerId] = resultUnit
