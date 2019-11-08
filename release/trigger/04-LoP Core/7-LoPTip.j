@@ -101,7 +101,9 @@ private module InitModule
         // call LoP_Tip.create(PERIODIC_TIPS, /*
         //                  */ "You can access the ingame Terrain Editor with the |cffffff00-editor terrain|r command. To return to play mode, use |cffffff00-editor none|r.")
         call LoP_Tip.create(PERIODIC_TIPS, /*
-                         */ "You can add or remove many abilities from your heroes using the |cffffff00-ability|r  command (see F9). This includes units made into heroes using the |cffffff00-makehero|r command.")                
+                         */ "You can add or remove many abilities from your heroes using the |cffffff00-ability|r  command (see F9). This includes units made into heroes using the |cffffff00-makehero|r command.")
+        call LoP_Tip.create(PERIODIC_TIPS, /*
+                         */ "If you are experiencing lag, try using the |cffffff00-count|r command to see how many units exist in the map and try to prune unecessary units.")
         
         call TimerStart(CreateTimer(), DELAY_MINUTES()*60. + DELAY_SECONDS(), true, function onTimer)
     endmethod
