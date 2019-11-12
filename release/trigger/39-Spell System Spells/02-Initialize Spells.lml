@@ -1276,6 +1276,46 @@ Action
     CommentString
         Const : ' '
     CommentString
+        Const : ---------------------------
+    CommentString
+        Const : 'Pick Up Rider'
+    CommentString
+        Const : ---------------------------
+    SetVariable
+        Var   : Spell__Ability
+        Const : A04S
+    CommentString
+        Const : ' '
+    SetVariable
+        Var   : Spell__Trigger_OnCast
+        Var   : gg_trg_Pick_Up_Rider
+    CommentString
+        Const : ' '
+    TriggerExecute
+        Var   : gg_trg_Spell_System
+    CommentString
+        Const : ' '
+    CommentString
+        Const : ---------------------------
+    CommentString
+        Const : 'Ditch Rider'
+    CommentString
+        Const : ---------------------------
+    SetVariable
+        Var   : Spell__Ability
+        Const : A060
+    CommentString
+        Const : ' '
+    SetVariable
+        Var   : Spell__Trigger_OnCast
+        Var   : gg_trg_Ditch_Rider
+    CommentString
+        Const : ' '
+    TriggerExecute
+        Var   : gg_trg_Spell_System
+    CommentString
+        Const : ' '
+    CommentString
         Const : ' '
     CommentString
         Const : ' '
