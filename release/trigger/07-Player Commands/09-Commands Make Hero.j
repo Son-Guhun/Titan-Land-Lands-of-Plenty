@@ -65,6 +65,10 @@ library LoPHeroicUnit requires LoPHeader, LoPWidgets, UnitVisualMods, optional N
         elseif GetUnitAbilityLevel(whichUnit, 'AInv') > 0 then  // Detects all inventory skills. Add inventory to units with morph so they don't crash.
             // call DisplayTextToPlayer(errorMsgPlayer, 0, 0, "This unit has an inventory, it can't be a hero.")
             call DisplayTextToPlayer(errorMsgPlayer, 0, 0, "This type of unit cannot become a hero.")
+            
+        elseif LoP_TransportHasUnits(whichUnit) then
+            call DisplayTextToPlayer(errorMsgPlayer, 0, 0, "Must unload transport first.")
+        
         else
             return true
         endif

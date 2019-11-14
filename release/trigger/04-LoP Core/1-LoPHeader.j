@@ -30,4 +30,8 @@ function ExecuteCode takes code callback returns nothing
     call ForForce(bj_FORCE_PLAYER[0], callback)
 endfunction
 
+function LoP_TransportHasUnits takes unit transport returns boolean
+    return not IsGroupEmpty(udg_CargoTransportGroup[GetUnitUserData(transport)])
+endfunction
+
 endlibrary

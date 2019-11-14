@@ -187,6 +187,7 @@
     '3-GAL Main': 'GAL Main'
     '4-GLHS Main': 'GLHS Main'
     '5-GLHS Generics': 'GLHS Generics'
+    6-StaticLinkedSet: StaticLinkedSet
 16-Tables: Tables
     1-External: External
         Comment
@@ -249,6 +250,9 @@
     5-TimedBonus: TimedBonus
     '6-Victim Tracker': 'Victim Tracker'
         Disab
+    '7-Under Construction': 'Under Construction'
+        Comment
+    8-MountSystem: MountSystem
 22-External: External
     Comment
 '23-Unit Event': 'Unit Event'
@@ -414,6 +418,8 @@
     48-New: New
         Comment
     '49-Breath of Frost': 'Breath of Frost'
+    '50-Pick Up Rider': 'Pick Up Rider'
+    '51-Ditch Rider': 'Ditch Rider'
 '40-No Spell System Spells': 'No Spell System Spells'
     01-FilterTransformations: FilterTransformations
     '02-Ability Cooldown': 'Ability Cooldown'
