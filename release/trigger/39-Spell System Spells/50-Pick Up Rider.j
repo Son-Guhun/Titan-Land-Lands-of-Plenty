@@ -1,5 +1,7 @@
 function Trig_Pick_Up_Rider_Actions takes nothing returns nothing
-    call MountSystem_MountUnit(udg_Spell__Target, udg_Spell__Caster)
+    if LoP_PlayerOwnsUnit(udg_Spell__CasterOwner, udg_Spell__Target) then
+        call MountSystem_MountUnit(udg_Spell__Target, udg_Spell__Caster)
+    endif
 endfunction
 
 //===========================================================================

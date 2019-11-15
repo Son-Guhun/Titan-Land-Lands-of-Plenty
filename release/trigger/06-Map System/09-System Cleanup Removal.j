@@ -25,6 +25,7 @@ function LoP_onRemoval takes unit whichUnit returns nothing
         call Patrol_ClearUnitData(whichUnit)
         call GMSS_ClearData(whichUnit)
         call LoP_ClearNeutralData(whichUnit)
+        call MountSystem_ClearData(whichUnit)
         
         if LoP_UnitData.get(whichUnit).isHeroic then
             call LoPHeroicUnit_OnRemove(whichUnit)

@@ -1,4 +1,4 @@
-library LoPCleanUpDeath requires LoPWidgets, MoveSpeedBonus, UnitVisualMods, UserDefinedRects, DummyDmg, MultiPatrol, UnitEvents, LoPNeutralUnits, optional NativeRedefinitions
+library LoPCleanUpDeath requires LoPWidgets, MoveSpeedBonus, UnitVisualMods, UserDefinedRects, DummyDmg, MultiPatrol, UnitEvents, LoPNeutralUnits, MountSystem, optional NativeRedefinitions
 
 //! runtextmacro optional RedefineNatives()
 
@@ -14,6 +14,8 @@ function LoP_onDeath takes unit whichUnit returns nothing
         
     else
         if not LoP_IsUnitDecoration(whichUnit) then
+            call MountSystem_ClearData(whichUnit)
+        
         // DECO BUILDER DECREASE COUNT
             if LoP_IsUnitDecoBuilder(whichUnit)  then
                 call RemoveUnit(whichUnit)

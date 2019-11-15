@@ -16,15 +16,22 @@ private struct UnitData extends array
     
     method ditchRider takes nothing returns nothing
         if .rider != null then
+            call .delete()
+            
+            call SetUnitPathing(.unit, true)
+            call SetUnitPathing(.rider, true)
+            call BlzUnitDisableAbility(.rider, 'Amov', false, false)
+            
             set UnitData.get(.rider).mount = null
             set .rider = null
-            call .delete()
         endif
     endmethod
     
     method dismount takes nothing returns nothing
+        // call BJDebugMsg("Dismounting")
         if .mount != null then
-            call UnitData.get(.rider).ditchRider()
+            // call BJDebugMsg("Mount found")
+            call UnitData.get(.mount).ditchRider()
         endif
     endmethod
     
@@ -40,7 +47,7 @@ private function onTimer takes nothing returns nothing
     local unit mount
     local unit rider
     
-    call BJDebugMsg(I2S(UnitData.head.next))
+    // call BJDebugMsg(I2S(UnitData.head.next))
     if mountData.head == mountData then
         call PauseTimer(GetExpiredTimer())
         call DestroyTimer(GetExpiredTimer())
@@ -51,7 +58,9 @@ private function onTimer takes nothing returns nothing
             
             call SetUnitPathing(rider, false)
             call SetUnitPathing(mount, false)
-            call SetUnitFacing(rider, GetUnitFacing(mount))
+            if GetUnitCurrentOrder(rider) == 0 then
+                call SetUnitFacing(rider, GetUnitFacing(mount))
+            endif
             call SetUnitX(rider, GetUnitX(mount))
             call SetUnitY(rider, GetUnitY(mount))
             
@@ -62,8 +71,33 @@ endfunction
 
 public function MountUnit takes unit rider, unit mount returns nothing
     local UnitData mountData = UnitData.get(mount)
+    local UnitData riderData = UnitData.get(rider)
     
     if rider != null and mount != null then
+        if GetUnitAbilityLevel(rider, 'Amov') == 0 then
+            // Error: A unit without Amov cannot mount (since SetUnitX/Y doesn't function).
+            return
+        elseif rider == mount then
+            // Error: Unit cannot ride itself.
+            return
+        elseif mountData.mount != null and rider == mountData.mount then
+            // Error: Mount cannot ride its own rider.
+            return
+        endif
+        
+        if mountData.rider != null then
+            if rider == mountData.rider then
+                // No need to do anything in this case, rider is already riding this mount.
+                return
+            else
+                call mountData.ditchRider()
+            endif
+        endif
+        
+        if riderData.mount != null then
+            call riderData.dismount()  // case for riding own rider already handled above
+        endif
+        
         set UnitData.get(rider).mount = mount
         set UnitData.get(mount).rider = rider
         
