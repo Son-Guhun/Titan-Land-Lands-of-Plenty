@@ -51,31 +51,6 @@ public function FormatString takes string prefix, string data returns string
     return SaveIO_FormatString(prefix, data)
 endfunction
 
-
-public struct PlayerData extends array
-    
-    private static real array loadCenter
-    
-    public method operator centerX takes nothing returns real
-        return loadCenter[this]
-    endmethod
-    
-    public method operator centerY takes nothing returns real
-        return loadCenter[this + bj_MAX_PLAYERS]
-    endmethod
-    
-    public method operator centerX= takes real value returns nothing
-        set loadCenter[this] = value
-    endmethod
-    
-    public method operator centerY= takes real value returns nothing
-        set loadCenter[this + bj_MAX_PLAYERS] = value
-    endmethod
-    
-    
-    
-endstruct
-
 function B2S takes boolean bool returns string
     if bool then
         return "True"
@@ -325,7 +300,7 @@ function LoadUnit takes string chat_str, player un_owner returns nothing
     local string aSpeed
     local string animTag
     local string select
-    // local string 
+    local string isUnrooted
 
     set udg_save_LastLoadedUnit[playerId] = null
     set str_index = CutToComma(chat_str)
@@ -408,6 +383,14 @@ function LoadUnit takes string chat_str, player un_owner returns nothing
                 set select = (SubString(chat_str,0,str_index))
                 set chat_str = SubString(chat_str,str_index+1,len_str+1)
                 set len_str = StringLength(chat_str)
+                if chat_str != "" then
+                    set str_index = CutToComma(chat_str)
+                    set isUnrooted = (SubString(chat_str,0,str_index))
+                else
+                    set isUnrooted = ""
+                    // set chat_str = SubString(chat_str,str_index+1,len_str+1)
+                    // set len_str = StringLength(chat_str)
+                endif
             endif
         endif
         
@@ -451,6 +434,13 @@ function LoadUnit takes string chat_str, player un_owner returns nothing
     if select != "2" or (IsUnitIdType(un_type, UNIT_TYPE_STRUCTURE) and un_flyH < GUMS_MINIMUM_FLY_HEIGHT()) or (un_type == 'nwgt') then
         //Create the unit and modify it according to the chat input data
         set resultUnit = CreateUnit (un_owner, un_type, un_posx, un_posy, un_fangle )
+        
+        if IsUnitIdType(un_type, UNIT_TYPE_ANCIENT) then
+            call SetUnitFacing(resultUnit, un_fangle)
+            if isUnrooted =="t" then
+                call IssueImmediateOrder(resultUnit, "unroot")
+            endif
+        endif
         
         if g_pitch != 0. or g_roll != 0. then
             if AttachedSFX_IsUnitValid(resultUnit) then

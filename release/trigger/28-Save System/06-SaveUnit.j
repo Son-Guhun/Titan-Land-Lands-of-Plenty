@@ -188,6 +188,11 @@ private function SaveForceLoop takes nothing returns boolean
                                 */   unitHandleId.getAnimSpeed() + "," + /*
                                 */   SaveIO_CleanUpString(unitHandleId.getAnimTag()) + "," + /*
                                 */   I2S(GUMS_GetUnitSelectionType(saveUnit))
+                    if IsUnitType(saveUnit, UNIT_TYPE_ANCIENT) and BlzGetUnitIntegerField(saveUnit, UNIT_IF_DEFENSE_TYPE) == GetHandleId(DEFENSE_TYPE_LARGE) then
+                        set saveStr = saveStr + ",t"
+                    // else
+                        // set saveStr = saveStr + ",f"
+                    endif
                 endif
                 
                 call saveData.write(SaveNLoad_FormatString("SnL_unit", saveStr))

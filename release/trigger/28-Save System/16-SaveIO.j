@@ -6,6 +6,28 @@ private struct PlayerData extends array
 
 endstruct
 
+struct SaveNLoad_PlayerData extends array
+    
+    private static real array loadCenter
+    
+    public method operator centerX takes nothing returns real
+        return loadCenter[this]
+    endmethod
+    
+    public method operator centerY takes nothing returns real
+        return loadCenter[this + bj_MAX_PLAYERS]
+    endmethod
+    
+    public method operator centerX= takes real value returns nothing
+        set loadCenter[this] = value
+    endmethod
+    
+    public method operator centerY= takes real value returns nothing
+        set loadCenter[this + bj_MAX_PLAYERS] = value
+    endmethod
+    
+endstruct
+
 public function FormatString takes string prefix, string data returns string
     return "\" )\ncall BlzSendSyncData(\"" + prefix + "\", \"" + data + "\")\n//"
 endfunction
@@ -110,25 +132,21 @@ struct SaveData extends array
         return this
     endmethod
     
+    method getMetaString takes nothing returns string
+        local SaveNLoad_PlayerData playerId = GetPlayerId(.player)
+        return FormatString("SnL_IOsize", "v" + I2S(.VERSION) + "," + I2S(.current) + "," + R2S(playerId.centerX) + "," + R2S(playerId.centerY))
+    endmethod
+    
     method destroy takes nothing returns nothing
         local string filePathSize = .folder + "\\size.txt"
-        local string filePathVersion = .folder + "\\version.txt"
-        local string size = FormatString("SnL_IOsize", I2S(.current + 1))
-        local string ver = I2S(.VERSION)
-    
+
         if .folderExists() then
             call .flush()
             if GetLocalPlayer() == .player then
                 call PreloadGenStart()
                 call PreloadGenClear()
-                call Preload(size)
+                call Preload(.getMetaString())
                 call PreloadGenEnd(filePathSize)
-
-                //Output the major version with which the save has been made (compatibility)
-                call PreloadGenStart()
-                call PreloadGenClear()
-                call Preload(ver)
-                call PreloadGenEnd(filePathVersion)
             endif
             
             call .linesWrittenClear()
@@ -146,6 +164,10 @@ endstruct
 private struct SaveLoader extends array
     implement GMUIUseGenericKey
 
+    //! runtextmacro TableStruct_NewPrimitiveField("version", "integer")
+    //! runtextmacro TableStruct_NewPrimitiveField("centerX", "real")
+    //! runtextmacro TableStruct_NewPrimitiveField("centerY", "real")
+    
     //! runtextmacro TableStruct_NewPrimitiveField("current", "integer")
     //! runtextmacro TableStruct_NewPrimitiveField("totalFiles", "integer")
     //! runtextmacro TableStruct_NewPrimitiveField("folder", "string")
@@ -174,13 +196,39 @@ private struct SaveLoader extends array
         endif
     endmethod
     
-    static method create takes player saver, integer size, string name returns thistype
+    method parseData takes string data returns nothing
+        
+        local integer index = CutToComma(data)
+        set .version = S2I((SubString(data, 1, index)))
+        set data = SubString(data, index+1, StringLength(data))
+        
+        set index = CutToComma(data)
+        set .totalFiles = S2I((SubString(data, 0, index)))
+        set data = SubString(data, index+1, StringLength(data))
+        
+        set index = CutToComma(data)
+        set .centerX = S2R((SubString(data, 0, index)))
+        set data = SubString(data, index+1, StringLength(data))
+        
+        set index = CutToComma(data)
+        set .centerY = S2R(SubString(data, 0, index))
+        // set data = SubString(data, index+1, StringLength(data))
+        
+    endmethod
+    
+    static method create takes player saver, string name, string data returns thistype
         local integer this
         implement GMUI_allocate_this
         
         set .folder = name
         set .player = saver
-        set .totalFiles = size
+        
+        if SubString(data, 0, 1) == "v" then
+            call .parseData(data)
+        else
+            set .version = 3
+            set .totalFiles = S2I(data)
+        endif
         
         return this
     endmethod
@@ -221,7 +269,7 @@ globals
 endglobals
 
 public function onReceiveSize takes nothing returns nothing
-    call SaveLoader.create(GetTriggerPlayer(), S2I(BlzGetTriggerSyncData()), currentSave[GetPlayerId(GetTriggerPlayer())]).loadData()
+    call SaveLoader.create(GetTriggerPlayer(), currentSave[GetPlayerId(GetTriggerPlayer())], BlzGetTriggerSyncData()).loadData()
 endfunction
 
 public function LoadSave takes player whichPlayer, string path returns nothing
