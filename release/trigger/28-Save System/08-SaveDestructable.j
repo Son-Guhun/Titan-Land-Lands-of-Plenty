@@ -4,12 +4,16 @@ globals
     private SaveData saveData
 endglobals
 
+private function GetSavingPlayerId takes nothing returns SaveNLoad_PlayerData
+    return udg_temp_integer
+endfunction
+
 function SaveFilter takes nothing returns boolean
     local destructable dest = GetFilterDestructable()
     local string saveStr
     
     if  IsDestructableTree(dest) then
-        set saveStr = SaveNLoad_FormatString("SnL_dest",  I2S(GetDestructableTypeId(dest))+"|"+R2S(GetDestructableX(dest)- Save_GetCenterX(udg_temp_integer))+"|"+R2S(GetDestructableY(dest)- Save_GetCenterY(udg_temp_integer))+"|")
+        set saveStr = SaveNLoad_FormatString("SnL_dest",  I2S(GetDestructableTypeId(dest))+"|"+R2S(GetDestructableX(dest)- GetSavingPlayerId().centerX)+"|"+R2S(GetDestructableY(dest)- GetSavingPlayerId().centerY)+"|")
         call saveData.write(saveStr)
     endif
     

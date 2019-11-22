@@ -1,3 +1,8 @@
+function Trig_LoadUnit_Conditions takes nothing returns boolean
+    // Can't load Cosmosis or Angel of Creation
+    return udg_save_LoadUnitType != 'H00V' and udg_save_LoadUnitType != 'H00S'
+endfunction
+
 function Trig_LoadUnitNew_Actions takes nothing returns nothing
     local integer playerNumber = GetPlayerId(GetTriggerPlayer())+1
     

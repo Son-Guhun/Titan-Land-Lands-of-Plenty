@@ -15,27 +15,13 @@ Action
                 Var   : temp_integer
                 Call  : GetConvertedPlayerId
                     Call  : GetEnumPlayer
-            AddTriggerEvent
-                Var   : gg_trg_LoadRequest
+            Disab: AddTriggerEvent
+                Disab: 
                 Event: TriggerRegisterPlayerChatEvent
                     Call  : ConvertedPlayer
                         Var   : temp_integer
                     Const : '-request '
                     Preset: ChatMatchTypeSubstring
-            AddTriggerEvent
-                Var   : gg_trg_LoadRequest
-                Event: TriggerRegisterPlayerChatEvent
-                    Call  : ConvertedPlayer
-                        Var   : temp_integer
-                    Const : '-load ini'
-                    Preset: ChatMatchTypeExact
-            AddTriggerEvent
-                Var   : gg_trg_LoadRequest
-                Event: TriggerRegisterPlayerChatEvent
-                    Call  : ConvertedPlayer
-                        Var   : temp_integer
-                    Const : '-load end'
-                    Preset: ChatMatchTypeExact
             AddTriggerEvent
                 Var   : gg_trg_SaveLoad_Commands
                 Event: TriggerRegisterPlayerChatEvent
@@ -80,34 +66,6 @@ Action
                     Preset: ChatMatchTypeSubstring
             CommentString
                 Const : 'PLEASE DO NOT TOUCH BELOW'
-            AddTriggerEvent
-                Var   : gg_trg_LoadUnit
-                Event: TriggerRegisterPlayerChatEvent
-                    Call  : ConvertedPlayer
-                        Var   : temp_integer
-                    Const : ,
-                    Preset: ChatMatchTypeSubstring
-            AddTriggerEvent
-                Var   : gg_trg_LoadUnit_Extra
-                Event: TriggerRegisterPlayerChatEvent
-                    Call  : ConvertedPlayer
-                        Var   : temp_integer
-                    Const : =
-                    Preset: ChatMatchTypeSubstring
-            AddTriggerEvent
-                Var   : gg_trg_LoadDestructable
-                Event: TriggerRegisterPlayerChatEvent
-                    Call  : ConvertedPlayer
-                        Var   : temp_integer
-                    Const : |
-                    Preset: ChatMatchTypeSubstring
-            AddTriggerEvent
-                Var   : gg_trg_LoadTerrain
-                Event: TriggerRegisterPlayerChatEvent
-                    Call  : ConvertedPlayer
-                        Var   : temp_integer
-                    Const : @
-                    Preset: ChatMatchTypeSubstring
             AddTriggerEvent
                 Var   : gg_trg_SaveLoad_Set_Center_Numbers
                 Event: TriggerRegisterPlayerChatEvent

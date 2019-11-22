@@ -292,28 +292,18 @@
     07-SaveUnit: SaveUnit
     08-SaveDestructable: SaveDestructable
     09-SaveTerrain: SaveTerrain
-    10-Load: Load
+    '10-Load New': 'Load New'
         Comment
-    11-LoadRequest: LoadRequest
-    12-LoadUnit: LoadUnit
+    '11-LoadUnit Copy': 'LoadUnit Copy'
         Closed
-    '13-LoadUnit Extra': 'LoadUnit Extra'
+    '12-LoadUnit Extra Copy': 'LoadUnit Extra Copy'
         Closed
-    14-LoadDestructable: LoadDestructable
-    15-LoadTerrain: LoadTerrain
-    '16-Load New': 'Load New'
+    '13-LoadDestructable Copy': 'LoadDestructable Copy'
+    '14-LoadTerrain Copy': 'LoadTerrain Copy'
+    15-vJass: vJass
         Comment
-    '17-LoadUnit Copy': 'LoadUnit Copy'
-        Closed
-    '18-LoadUnit Extra Copy': 'LoadUnit Extra Copy'
-        Closed
-    '19-LoadDestructable Copy': 'LoadDestructable Copy'
-    '20-LoadTerrain Copy': 'LoadTerrain Copy'
-    21-vJass: vJass
-        Comment
-    22-SaveNLoad: SaveNLoad
-    '23-Commands Req': 'Commands Req'
-    24-SaveIO: SaveIO
+    16-SaveNLoad: SaveNLoad
+    17-SaveIO: SaveIO
 '29-Circle Object System': 'Circle Object System'
     '1-GCOS Init Copy': 'GCOS Init Copy'
     '2-Circle Object System': 'Circle Object System'

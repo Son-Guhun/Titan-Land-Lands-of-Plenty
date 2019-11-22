@@ -51,22 +51,19 @@ public function FormatString takes string prefix, string data returns string
     return "\" )\ncall BlzSendSyncData(\"" + prefix + "\", \"" + data + "\")\n//"
 endfunction
 
-//////////////////////////////////////////////////////
-//SaveNLoad by Guhun
 
-// Requires:
-// -GUDR
-// -GUMS
-// -ID2S function (Takes raw obejct ID, returns string)
-// -Hexa to Decimal
-//////////////////////////////////////////////////////
-function Save_GetCenterX takes integer playerId returns real
-    return udg_load_center[playerId + 1]
-endfunction
-
-function Save_GetCenterY takes integer playerId returns real
-    return udg_load_center[playerId + 1 + bj_MAX_PLAYERS]
-endfunction
+public struct PlayerData extends array
+    
+    public method operator centerX takes nothing returns real
+        return udg_load_center[this + 1]
+    endmethod
+    
+    public method operator centerY takes nothing returns real
+        return udg_load_center[this + 1 + bj_MAX_PLAYERS]
+    endmethod
+    
+    
+endstruct
 
 function Save_IsPlayerLoading takes integer playerId returns boolean
     return udg_save_load_boolean[playerId + 1 + bj_MAX_PLAYERS]
@@ -313,7 +310,7 @@ function LoadUnit takes string chat_str, player un_owner returns nothing
     local real un_fangle
     local integer len_str = StringLength(chat_str)
     local unit resultUnit
-    local integer playerId = GetPlayerId(un_owner)
+    local SaveNLoad_PlayerData playerId = GetPlayerId(un_owner)
     
     //Values saved by GUMS
     local string size
@@ -325,6 +322,7 @@ function LoadUnit takes string chat_str, player un_owner returns nothing
     local string aSpeed
     local string animTag
     local string select
+    // local string 
 
     set udg_save_LastLoadedUnit[playerId] = null
     set str_index = CutToComma(chat_str)
@@ -334,7 +332,7 @@ function LoadUnit takes string chat_str, player un_owner returns nothing
     set udg_save_LoadUnitType = un_type
     
     //LoadUnit Trigger Conidtions
-    if not TriggerEvaluate(gg_trg_LoadUnit) then
+    if not TriggerEvaluate(gg_trg_LoadUnit_Copy) then
         set udg_save_LoadUnitType = 0
         return
     endif
@@ -342,12 +340,12 @@ function LoadUnit takes string chat_str, player un_owner returns nothing
 
     //Start translating the chat input
     set str_index = CutToComma(chat_str)
-    set un_posx = S2R(SubString(chat_str,0,str_index)) + Save_GetCenterX(playerId)
+    set un_posx = S2R(SubString(chat_str,0,str_index)) + playerId.centerX
     set chat_str = SubString(chat_str,str_index+1,len_str)
     set len_str = StringLength(chat_str)
 
     set str_index = CutToComma(chat_str)
-    set un_posy = S2R(SubString(chat_str,0,str_index)) + Save_GetCenterY(playerId)
+    set un_posy = S2R(SubString(chat_str,0,str_index)) + playerId.centerY
     set chat_str = SubString(chat_str,str_index+1,len_str)
     set len_str = StringLength(chat_str)
 
@@ -405,8 +403,8 @@ function LoadUnit takes string chat_str, player un_owner returns nothing
             if chat_str != "" then
                 set str_index = CutToComma(chat_str)
                 set select = (SubString(chat_str,0,str_index))
-                //set chat_str = SubString(chat_str,str_index+1,len_str+1)
-                //set len_str = StringLength(chat_str)
+                set chat_str = SubString(chat_str,str_index+1,len_str+1)
+                set len_str = StringLength(chat_str)
             endif
         endif
         
@@ -504,7 +502,7 @@ function LoadDestructable takes string chatStr returns nothing
     local real destX
     local real destY
     local integer cutToComma
-    local integer playerId = GetPlayerId(GetTriggerPlayer())
+    local SaveNLoad_PlayerData playerId = GetPlayerId(GetTriggerPlayer())
     
     
     set cutToComma = CutToCharacter(chatStr,"|")
@@ -512,11 +510,11 @@ function LoadDestructable takes string chatStr returns nothing
     set chatStr = SubString(chatStr,cutToComma+1,StringLength(chatStr))
     
     set cutToComma = CutToCharacter(chatStr,"|")
-    set destX = S2R(SubString(chatStr,0,cutToComma)) + Save_GetCenterX(playerId)
+    set destX = S2R(SubString(chatStr,0,cutToComma)) + playerId.centerX
     set chatStr = SubString(chatStr,cutToComma+1,StringLength(chatStr))
     
     set cutToComma = CutToCharacter(chatStr,"|")
-    set destY = S2R(SubString(chatStr,0,cutToComma)) + Save_GetCenterY(playerId)
+    set destY = S2R(SubString(chatStr,0,cutToComma)) + playerId.centerY
     //set chatStr = SubString(chatStr,cutToComma+1,StringLength(chatStr))
     
     //call BJDebugMsg(I2S(destType) + " " + R2S(destX) + " " + R2S(destY))
@@ -530,7 +528,7 @@ endfunction
 function LoadTerrain takes string chatStr returns nothing
 
     local integer cutToComma
-    local integer playerNumber = GetPlayerId(GetTriggerPlayer())
+    local SaveNLoad_PlayerData playerId = GetPlayerId(GetTriggerPlayer())
     local integer i = 1
     local integer strSize
     
@@ -541,49 +539,49 @@ function LoadTerrain takes string chatStr returns nothing
 
     if not (SubString(chatStr, 0, 1) == "@") then
     
-    set cutToComma = CutToCharacter(chatStr,"@")
-    set udg_save_XYminmaxcur[playerNumber] = S2I(SubString(chatStr,0,cutToComma))
-    set chatStr = SubString(chatStr,cutToComma+1,StringLength(chatStr))
+        set cutToComma = CutToCharacter(chatStr,"@")
+        set udg_save_XYminmaxcur[playerId] = S2I(SubString(chatStr,0,cutToComma))
+        set chatStr = SubString(chatStr,cutToComma+1,StringLength(chatStr))
 
-    set cutToComma = CutToCharacter(chatStr,"@")
-    set udg_save_XYminmaxcur[playerNumber+bj_MAX_PLAYERS] = S2I(SubString(chatStr,0,cutToComma))
-    set chatStr = SubString(chatStr,cutToComma+1,StringLength(chatStr))
-    
-    set cutToComma = CutToCharacter(chatStr,"@")
-    set udg_save_XYminmaxcur[playerNumber+3*bj_MAX_PLAYERS] = S2I(SubString(chatStr,0,cutToComma))
-    set chatStr = SubString(chatStr,cutToComma+1,StringLength(chatStr))
-    
-    set cutToComma = CutToCharacter(chatStr,"@")
-    set udg_save_XYminmaxcur[playerNumber+4*bj_MAX_PLAYERS] = S2I(SubString(chatStr,0,cutToComma))
-    
-    if Save_GetCenterX(playerNumber) != 0 or Save_GetCenterY(playerNumber) != 0 then
-        set centerX = (udg_save_XYminmaxcur[playerNumber] + udg_save_XYminmaxcur[playerNumber+bj_MAX_PLAYERS])/2
-        set centerY = (udg_save_XYminmaxcur[playerNumber+3*bj_MAX_PLAYERS] + udg_save_XYminmaxcur[playerNumber+4*bj_MAX_PLAYERS])/2
-        set offsetX = Save_GetCenterX(playerNumber) - centerX
-        set offsetY = Save_GetCenterY(playerNumber) - centerY
+        set cutToComma = CutToCharacter(chatStr,"@")
+        set udg_save_XYminmaxcur[playerId+bj_MAX_PLAYERS] = S2I(SubString(chatStr,0,cutToComma))
+        set chatStr = SubString(chatStr,cutToComma+1,StringLength(chatStr))
         
-        set udg_save_XYminmaxcur[playerNumber] = udg_save_XYminmaxcur[playerNumber] + offsetX
-        set udg_save_XYminmaxcur[playerNumber+bj_MAX_PLAYERS] = udg_save_XYminmaxcur[playerNumber+bj_MAX_PLAYERS] + offsetX
-        set udg_save_XYminmaxcur[playerNumber+3*bj_MAX_PLAYERS] = udg_save_XYminmaxcur[playerNumber+3*bj_MAX_PLAYERS] + offsetY
-        set udg_save_XYminmaxcur[playerNumber+4*bj_MAX_PLAYERS] = udg_save_XYminmaxcur[playerNumber+4*bj_MAX_PLAYERS] + offsetY
-    endif
+        set cutToComma = CutToCharacter(chatStr,"@")
+        set udg_save_XYminmaxcur[playerId+3*bj_MAX_PLAYERS] = S2I(SubString(chatStr,0,cutToComma))
+        set chatStr = SubString(chatStr,cutToComma+1,StringLength(chatStr))
+        
+        set cutToComma = CutToCharacter(chatStr,"@")
+        set udg_save_XYminmaxcur[playerId+4*bj_MAX_PLAYERS] = S2I(SubString(chatStr,0,cutToComma))
+        
+        if playerId.centerY != 0 or playerId.centerY != 0 then
+            set centerX = (udg_save_XYminmaxcur[playerId] + udg_save_XYminmaxcur[playerId+bj_MAX_PLAYERS])/2
+            set centerY = (udg_save_XYminmaxcur[playerId+3*bj_MAX_PLAYERS] + udg_save_XYminmaxcur[playerId+4*bj_MAX_PLAYERS])/2
+            set offsetX = playerId.centerX - centerX
+            set offsetY = playerId.centerY - centerY
+            
+            set udg_save_XYminmaxcur[playerId] = udg_save_XYminmaxcur[playerId] + offsetX
+            set udg_save_XYminmaxcur[playerId+bj_MAX_PLAYERS] = udg_save_XYminmaxcur[playerId+bj_MAX_PLAYERS] + offsetX
+            set udg_save_XYminmaxcur[playerId+3*bj_MAX_PLAYERS] = udg_save_XYminmaxcur[playerId+3*bj_MAX_PLAYERS] + offsetY
+            set udg_save_XYminmaxcur[playerId+4*bj_MAX_PLAYERS] = udg_save_XYminmaxcur[playerId+4*bj_MAX_PLAYERS] + offsetY
+        endif
     
-    set udg_save_XYminmaxcur[playerNumber+2*bj_MAX_PLAYERS] = udg_save_XYminmaxcur[playerNumber]
-    set udg_save_XYminmaxcur[playerNumber+5*bj_MAX_PLAYERS] = udg_save_XYminmaxcur[playerNumber+3*bj_MAX_PLAYERS]
-    
-    return
+        set udg_save_XYminmaxcur[playerId+2*bj_MAX_PLAYERS] = udg_save_XYminmaxcur[playerId]
+        set udg_save_XYminmaxcur[playerId+5*bj_MAX_PLAYERS] = udg_save_XYminmaxcur[playerId+3*bj_MAX_PLAYERS]
+        
+        return
     endif
     
     set strSize = StringLength(chatStr)
     loop
     exitwhen i >= strSize
-        call SetTerrainType(udg_save_XYminmaxcur[playerNumber+2*bj_MAX_PLAYERS], udg_save_XYminmaxcur[playerNumber+5*bj_MAX_PLAYERS], TerrainTools_GetTexture(LoadH2D(SubString(chatStr,i,i+1))), LoadH2D(SubString(chatStr,i+1,i+2)), 1, 0)
+        call SetTerrainType(udg_save_XYminmaxcur[playerId+2*bj_MAX_PLAYERS], udg_save_XYminmaxcur[playerId+5*bj_MAX_PLAYERS], TerrainTools_GetTexture(LoadH2D(SubString(chatStr,i,i+1))), LoadH2D(SubString(chatStr,i+1,i+2)), 1, 0)
         set i = i + 2
-        if udg_save_XYminmaxcur[playerNumber+2*bj_MAX_PLAYERS] > udg_save_XYminmaxcur[playerNumber+bj_MAX_PLAYERS] then
-            set udg_save_XYminmaxcur[playerNumber+5*bj_MAX_PLAYERS] = udg_save_XYminmaxcur[playerNumber+5*bj_MAX_PLAYERS] + 128
-            set udg_save_XYminmaxcur[playerNumber+2*bj_MAX_PLAYERS] = udg_save_XYminmaxcur[playerNumber]
+        if udg_save_XYminmaxcur[playerId+2*bj_MAX_PLAYERS] > udg_save_XYminmaxcur[playerId+bj_MAX_PLAYERS] then
+            set udg_save_XYminmaxcur[playerId+5*bj_MAX_PLAYERS] = udg_save_XYminmaxcur[playerId+5*bj_MAX_PLAYERS] + 128
+            set udg_save_XYminmaxcur[playerId+2*bj_MAX_PLAYERS] = udg_save_XYminmaxcur[playerId]
         else
-            set udg_save_XYminmaxcur[playerNumber+2*bj_MAX_PLAYERS] = udg_save_XYminmaxcur[playerNumber+2*bj_MAX_PLAYERS] + 128
+            set udg_save_XYminmaxcur[playerId+2*bj_MAX_PLAYERS] = udg_save_XYminmaxcur[playerId+2*bj_MAX_PLAYERS] + 128
         endif
     endloop
 

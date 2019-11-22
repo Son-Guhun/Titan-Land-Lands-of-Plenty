@@ -62,7 +62,7 @@ endfunction
 function GetSFXSaveStr takes SpecialEffect whichEffect, player owner, boolean hasCustomColor, integer selectionType returns string
     local string animTags
     local string color
-    local integer playerId = GetPlayerId(owner)
+    local SaveNLoad_PlayerData playerId = GetPlayerId(owner)
     
     if hasCustomColor then
         set color = I2S(whichEffect.color + 1)
@@ -77,8 +77,8 @@ function GetSFXSaveStr takes SpecialEffect whichEffect, player owner, boolean ha
     endif
 
     return ID2S(whichEffect.unitType) + "," +/*
-        */ R2S(whichEffect.x - Save_GetCenterX(playerId)) + "," +/*
-        */ R2S(whichEffect.y - Save_GetCenterY(playerId)) + "," +/*
+        */ R2S(whichEffect.x - playerId.centerX) + "," +/*
+        */ R2S(whichEffect.y - playerId.centerY) + "," +/*
         */ R2S(whichEffect.height) + "," +/*
         */ GetFacingStringEffect(whichEffect) + "," +/*
         */ GetScaleStringEffect(whichEffect) + "," +/*
@@ -124,7 +124,7 @@ endglobals
 
 function SaveForceLoop takes nothing returns boolean
     local player filterPlayer = GetFilterPlayer()
-    local integer playerId = GetPlayerId(filterPlayer)
+    local SaveNLoad_PlayerData playerId = GetPlayerId(filterPlayer)
     local integer playerNumber = playerId + 1
     local unit saveUnit
     local integer saveUnitCount = 0
@@ -157,8 +157,8 @@ function SaveForceLoop takes nothing returns boolean
                     set saveStr = GetSFXSaveStr(GetUnitAttachedEffect(saveUnit), filterPlayer, unitHandleId.hasColor(), GUMS_GetUnitSelectionType(saveUnit))
                 else
                     set saveStr = ID2S((GetUnitTypeId(saveUnit))) + "," + /*
-                                */   R2S(GetUnitX(saveUnit) - Save_GetCenterX(playerId))+","+  /*
-                                */   R2S(GetUnitY(saveUnit) - Save_GetCenterY(playerId)) + "," + /*
+                                */   R2S(GetUnitX(saveUnit) - playerId.centerX)+","+  /*
+                                */   R2S(GetUnitY(saveUnit) - playerId.centerY) + "," + /*
                                 */   R2S(GetUnitFlyHeight(saveUnit)) + "," + /*
                                 */   R2S(GetUnitFacing(saveUnit)) + "," + /*
                                 */   unitHandleId.getScale() + "," + /*
