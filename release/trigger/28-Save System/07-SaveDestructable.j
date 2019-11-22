@@ -32,8 +32,6 @@ function SaveLoopActions2 takes nothing returns nothing
         return
     endif
     
-    set udg_save_password[playerId+1] = SubString(GetEventPlayerChatString(), 6, 129)
-    
     set genId =  GUDR_PlayerGetSelectedGeneratorId(saver)
     if genId == 0 then
         return
@@ -42,7 +40,7 @@ function SaveLoopActions2 takes nothing returns nothing
     set tempInteger = udg_temp_integer  // store global value in local
     set udg_temp_integer = playerId
     
-    set saveData = SaveData.create(saver, SaveNLoad_FOLDER() + udg_save_password[playerId+1])
+    set saveData = SaveData.create(saver, SaveNLoad_FOLDER() + SubString(GetEventPlayerChatString(), 6, 129))
     call EnumDestructablesInRect(GUDR_GetGeneratorIdRect(genId), Condition(function SaveFilter), null)
     call saveData.destroy()
 

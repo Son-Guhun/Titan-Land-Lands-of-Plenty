@@ -5,10 +5,6 @@ WholeMapRegion: rect
 RealNames: string
     Array : 1
 temp_integer: integer
-save_password: string
-    Array : 1
-save_grp: group
-    Array : 1
 save_unit_nmbr: integer
     Array : 1
 save_load_boolean: boolean
@@ -18,8 +14,6 @@ load_number: integer
     Array : 1
 temp_group: group
 temp_point: location
-load_center: real
-    Array : 1
 load_limit: integer
 GAME_MASTER: player
     Def   : Player00

@@ -137,6 +137,8 @@
     '45-CommandsD Select No': 'CommandsD Select No'
     '46-CommandsD Variation': 'CommandsD Variation'
     '47-CommandsD Rotate': 'CommandsD Rotate'
+    '48-Commands Save': 'Commands Save'
+    '49-Commands Request': 'Commands Request'
 '08-Decoration Systems': 'Decoration Systems'
     Comment
 '09-Deco Builders': 'Deco Builders'
@@ -241,6 +243,7 @@
     22-UnitVisualMods: UnitVisualMods
     23-UnitVisualValues: UnitVisualValues
     24-NativeRedefinitions: NativeRedefinitions
+    25-OOP: OOP
 21-Map-specific: Map-specific
     1-Debug: Debug
     2-ArrayAgent: ArrayAgent
@@ -288,22 +291,21 @@
     '04-SaveLoad Set Center Numbers': 'SaveLoad Set Center Numbers'
     05-Save: Save
         Comment
-    06-SaveRequest: SaveRequest
-    07-SaveUnit: SaveUnit
-    08-SaveDestructable: SaveDestructable
-    09-SaveTerrain: SaveTerrain
-    '10-Load New': 'Load New'
+    06-SaveUnit: SaveUnit
+    07-SaveDestructable: SaveDestructable
+    08-SaveTerrain: SaveTerrain
+    '09-Load New': 'Load New'
         Comment
-    '11-LoadUnit Copy': 'LoadUnit Copy'
+    '10-LoadUnit Copy': 'LoadUnit Copy'
         Closed
-    '12-LoadUnit Extra Copy': 'LoadUnit Extra Copy'
+    '11-LoadUnit Extra Copy': 'LoadUnit Extra Copy'
         Closed
-    '13-LoadDestructable Copy': 'LoadDestructable Copy'
-    '14-LoadTerrain Copy': 'LoadTerrain Copy'
-    15-vJass: vJass
+    '12-LoadDestructable Copy': 'LoadDestructable Copy'
+    '13-LoadTerrain Copy': 'LoadTerrain Copy'
+    14-vJass: vJass
         Comment
-    16-SaveNLoad: SaveNLoad
-    17-SaveIO: SaveIO
+    15-SaveNLoad: SaveNLoad
+    16-SaveIO: SaveIO
 '29-Circle Object System': 'Circle Object System'
     '1-GCOS Init Copy': 'GCOS Init Copy'
     '2-Circle Object System': 'Circle Object System'

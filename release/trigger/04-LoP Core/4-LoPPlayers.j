@@ -34,6 +34,12 @@ struct LoP_PlayerData extends array
     endmethod
     
     //==================================
+    
+    method operator realName takes nothing returns string
+        return udg_RealNames[.toPlayerNumber()]
+    endmethod
+    
+    //==================================
 
     static playercolor array playerColors
 

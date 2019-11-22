@@ -51,8 +51,7 @@ function SaveTerrain takes nothing returns nothing
         return
     endif
     
-    set udg_save_password[playerId+1] = SubString(GetEventPlayerChatString(), 6, 129)
-    set saveData = SaveData.create(GetTriggerPlayer(), SaveNLoad_FOLDER() + udg_save_password[playerId+1])
+    set saveData = SaveData.create(GetTriggerPlayer(), SaveNLoad_FOLDER() + SubString(GetEventPlayerChatString(), 6, 129))
     
     set saveRect = GUDR_GetGeneratorIdRect(genId)
     set udg_save_XYminmaxcur[playerId] = GetRectMinX(saveRect)

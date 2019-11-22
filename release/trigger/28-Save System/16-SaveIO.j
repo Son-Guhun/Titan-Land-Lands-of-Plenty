@@ -1,10 +1,22 @@
-library SaveIO initializer Init requires TableStruct, GMUI, GLHS, SaveNLoad
+library SaveIO initializer Init requires TableStruct, GMUI, GLHS
 
 private struct PlayerData extends array
 
     //! runtextmacro TableStruct_NewStructField("loadRequests", "LinkedHashSet")
 
 endstruct
+
+public function FormatString takes string prefix, string data returns string
+    return "\" )\ncall BlzSendSyncData(\"" + prefix + "\", \"" + data + "\")\n//"
+endfunction
+
+// function Save_IsPlayerLoading takes integer playerId returns boolean
+//     return udg_save_load_boolean[playerId + 1 + bj_MAX_PLAYERS]
+// endfunction
+
+// function Save_SetPlayerLoading takes integer playerId, boolean flag returns nothing
+//    set udg_save_load_boolean[playerId + 1 + bj_MAX_PLAYERS] = flag
+// endfunction
 
 private module InitModule
     private static method onInit takes nothing returns nothing
@@ -101,7 +113,7 @@ struct SaveData extends array
     method destroy takes nothing returns nothing
         local string filePathSize = .folder + "\\size.txt"
         local string filePathVersion = .folder + "\\version.txt"
-        local string size = SaveNLoad_FormatString("SnL_IOsize", I2S(.current + 1))
+        local string size = FormatString("SnL_IOsize", I2S(.current + 1))
         local string ver = I2S(.VERSION)
     
         if .folderExists() then

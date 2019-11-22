@@ -1,4 +1,24 @@
-library SaveUnit requires SaveNLoad, SaveIO, optional LoPHeroicUnit, optional CustomizableAbilityList
+library SaveUnit requires SaveNLoad, SaveIO, OOP, optional LoPHeroicUnit, optional CustomizableAbilityList
+
+private struct InternalPlayerData extends array
+    group units
+    LinkedHashSet effects
+    integer savedCount
+    boolean isSaving
+    
+    //! runtextmacro InheritFieldReadonly("SaveNLoad_PlayerData", "centerX", "real")
+    //! runtextmacro InheritFieldReadonly("SaveNLoad_PlayerData", "centerY", "real")
+endstruct
+
+public struct PlayerData extends array
+
+    //! runtextmacro InheritField("InternalPlayerData", "units", "group")
+    //! runtextmacro InheritField("InternalPlayerData", "effects", "LinkedHashSet")
+    
+    //! runtextmacro InheritFieldReadonly("InternalPlayerData", "savedCount", "integer")
+    //! runtextmacro InheritFieldReadonly("InternalPlayerData", "isSaving", "boolean")
+
+endstruct
 
 globals
     force ENUM_FORCE = CreateForce()
@@ -59,7 +79,7 @@ private function GetScaleStringEffect takes SpecialEffect sfx returns string
 endfunction
 
 
-function GetSFXSaveStr takes SpecialEffect whichEffect, player owner, boolean hasCustomColor, integer selectionType returns string
+private function GetSFXSaveStr takes SpecialEffect whichEffect, player owner, boolean hasCustomColor, integer selectionType returns string
     local string animTags
     local string color
     local SaveNLoad_PlayerData playerId = GetPlayerId(owner)
@@ -92,8 +112,8 @@ function GetSFXSaveStr takes SpecialEffect whichEffect, player owner, boolean ha
         */ I2S(selectionType)
 endfunction
 
-function SaveEffectDecos takes integer playerNumber, SaveData saveData returns integer
-    local LinkedHashSet_DecorationEffect decorations = save_decoration_effects[playerNumber]
+private function SaveEffectDecos takes InternalPlayerData playerId, SaveData saveData returns integer
+    local LinkedHashSet_DecorationEffect decorations = playerId.effects
     local DecorationEffect decoration = decorations.begin()
 
     local integer counter = 0
@@ -109,7 +129,7 @@ function SaveEffectDecos takes integer playerNumber, SaveData saveData returns i
         if decoration == decorations.end() then
             call decorations.destroy()
             set decorations = 0
-            set save_decoration_effects[playerNumber] = 0
+            set playerId.effects = 0
         endif
 
         set counter = counter + 1
@@ -122,35 +142,33 @@ globals
     SaveData array saveFile
 endglobals
 
-function SaveForceLoop takes nothing returns boolean
+private function SaveForceLoop takes nothing returns boolean
     local player filterPlayer = GetFilterPlayer()
-    local SaveNLoad_PlayerData playerId = GetPlayerId(filterPlayer)
-    local integer playerNumber = playerId + 1
+    local InternalPlayerData playerId = GetPlayerId(filterPlayer)
     local unit saveUnit
     local integer saveUnitCount = 0
     local string saveStr
     local UnitVisuals unitHandleId
     local SaveData saveData
+    local group grp 
     
-    if udg_save_load_boolean[playerNumber] == true then
+    if playerId.isSaving == true then
         set stillSaving = true
-        if saveFile[playerId] == 0 then
-            set saveFile[playerId] = SaveData.create(filterPlayer, SaveNLoad_FOLDER() + udg_save_password[playerNumber])
-        endif
         set saveData = saveFile[playerId]
         
-        set saveUnitCount = SaveEffectDecos(playerNumber, saveData)  // Only begin saving units once all decorations have been saved.
+        set saveUnitCount = SaveEffectDecos(playerId, saveData)  // Only begin saving units once all decorations have been saved.
         loop
         exitwhen saveUnitCount >= 25
-            set saveUnit = FirstOfGroup(udg_save_grp[playerNumber])
+            set grp = playerId.units
+            set saveUnit = FirstOfGroup(grp)
             set unitHandleId = GetHandleId(saveUnit)
-            call GroupRemoveUnit(udg_save_grp[playerNumber] , saveUnit)
+            call GroupRemoveUnit(grp, saveUnit)
 
             //Check if Unit has been removed
             if saveUnit == null then
                 // Removed unit
-                if not IsGroupEmpty(udg_save_grp[playerNumber]) then
-                    call GroupRefresh(udg_save_grp[playerNumber])
+                if not IsGroupEmpty(grp) then
+                    call GroupRefresh(grp)
                 endif
             else
                 if UnitHasAttachedEffect(saveUnit) then
@@ -208,9 +226,9 @@ function SaveForceLoop takes nothing returns boolean
             endif
                 
             //This block should be below the group refresh check in order to always produce correct results
-            if IsGroupEmpty(udg_save_grp[playerNumber]) then
-                set udg_save_load_boolean[playerNumber] = false
-                call DisplayTextToPlayer(filterPlayer,0,0, (I2S(udg_save_unit_nmbr[playerNumber])))
+            if IsGroupEmpty(grp) then
+                set playerId.isSaving = false
+                call DisplayTextToPlayer(filterPlayer,0,0, (I2S(playerId.savedCount)))
                 call DisplayTextToPlayer(filterPlayer,0,0, "Finished Saving" )
                 exitwhen true
             endif
@@ -218,14 +236,14 @@ function SaveForceLoop takes nothing returns boolean
             set saveUnitCount = saveUnitCount +1
         endloop
         
-        //This if statement must remain inside (if udg_save_load_boolean[playerNumber] == true) statement to avoid output for people who aren't saving
-        if udg_save_load_boolean[playerNumber] == false then
+        //This if statement must remain inside (if playerId.isSaving == true) statement to avoid output for people who aren't saving
+        if playerId.isSaving == false then
             call saveData.destroy()
-            call save_decoration_effects[playerNumber].destroy()
+            // call playerId.effects.destroy()
             set saveFile[playerId] = 0
         else
-            call DisplayTextToPlayer(filterPlayer,0,0, (I2S(udg_save_unit_nmbr[playerNumber])))
-            set udg_save_unit_nmbr[playerNumber] = ( udg_save_unit_nmbr[playerNumber] + 1 )
+            call DisplayTextToPlayer(filterPlayer,0,0, (I2S(playerId.savedCount)))
+            set playerId.savedCount = playerId.savedCount + 1
         endif
     endif
     
@@ -233,7 +251,7 @@ function SaveForceLoop takes nothing returns boolean
     return false
 endfunction
 
-function SaveLoopActions takes nothing returns nothing
+private function SaveLoopActions takes nothing returns nothing
 
     debug call BJDebugMsg("SaveLoop Timer executed")
 
@@ -246,7 +264,16 @@ function SaveLoopActions takes nothing returns nothing
 
 endfunction
 
-function SaveLoopStartTimer takes nothing returns nothing
+function SaveUnitsForPlayer takes player whichPlayer, string saveName returns nothing
+    local InternalPlayerData playerId = GetPlayerId(whichPlayer)
+
+    set playerId.savedCount = 0
+    set playerId.isSaving = true
+    
+    if saveFile[playerId] != 0 then
+        call saveFile[playerId].destroy()
+    endif
+    set saveFile[playerId] = SaveData.create(whichPlayer, SaveNLoad_FOLDER() + saveName)
     
     if not stillSaving then
         call TimerStart(loopTimer, 0.5, true, function SaveLoopActions)
@@ -258,7 +285,5 @@ endfunction
 //===========================================================================
 function InitTrig_SaveUnit takes nothing returns nothing
     set loopTimer = CreateTimer()
-    
-    call TimerStart(loopTimer, 0.5, true, function SaveLoopActions)
 endfunction
 endlibrary

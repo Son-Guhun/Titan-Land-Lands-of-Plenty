@@ -1,12 +1,12 @@
 function Trig_SaveLoad_Set_Center_New_Actions takes nothing returns nothing
     local string chatStr = SubString(GetEventPlayerChatString(), 13, StringLength(GetEventPlayerChatString()) + 1)
-    local integer playerNumber = GetPlayerId(GetTriggerPlayer()) + 1
+    local SaveNLoad_PlayerData playerId = GetPlayerId(GetTriggerPlayer())
     local integer cutToComma = CutToComma(chatStr)
     local real newX = S2R(SubString(chatStr,0,cutToComma))
     local real newY = S2R(SubString(chatStr,cutToComma+1,StringLength(chatStr)))
     
-    set udg_load_center[playerNumber] = newX
-    set udg_load_center[playerNumber + bj_MAX_PLAYERS ] = newY
+    set playerId.centerX = newX
+    set playerId.centerY = newY
 
     call DisplayTextToPlayer( GetTriggerPlayer(), 0, 0, "Save/Load Center set to: (" + R2S(newX) + " | " + R2S(newY) + ")")
 endfunction

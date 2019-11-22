@@ -29,7 +29,7 @@ endfunction
 
 endlibrary
 
-library SaveNLoad requires WorldBounds, UnitVisualMods, Rawcode2String, Base36, TerrainTools, DecorationSFX, UnitTypeDefaultValues, AttachedSFX/* 
+library SaveNLoad requires WorldBounds, UnitVisualMods, Rawcode2String, Base36, TerrainTools, DecorationSFX, UnitTypeDefaultValues, AttachedSFX, SaveIO/* 
 
    */ optional UserDefinedRects, optional SaveNLoadConfig optional LoPDeprecated
 ////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -48,30 +48,33 @@ globals
 endglobals
 
 public function FormatString takes string prefix, string data returns string
-    return "\" )\ncall BlzSendSyncData(\"" + prefix + "\", \"" + data + "\")\n//"
+    return SaveIO_FormatString(prefix, data)
 endfunction
 
 
 public struct PlayerData extends array
     
+    private static real array loadCenter
+    
     public method operator centerX takes nothing returns real
-        return udg_load_center[this + 1]
+        return loadCenter[this]
     endmethod
     
     public method operator centerY takes nothing returns real
-        return udg_load_center[this + 1 + bj_MAX_PLAYERS]
+        return loadCenter[this + bj_MAX_PLAYERS]
+    endmethod
+    
+    public method operator centerX= takes real value returns nothing
+        set loadCenter[this] = value
+    endmethod
+    
+    public method operator centerY= takes real value returns nothing
+        set loadCenter[this + bj_MAX_PLAYERS] = value
     endmethod
     
     
+    
 endstruct
-
-function Save_IsPlayerLoading takes integer playerId returns boolean
-    return udg_save_load_boolean[playerId + 1 + bj_MAX_PLAYERS]
-endfunction
-
-function Save_SetPlayerLoading takes integer playerId, boolean flag returns nothing
-    set udg_save_load_boolean[playerId + 1 + bj_MAX_PLAYERS] = flag
-endfunction
 
 function B2S takes boolean bool returns string
     if bool then

@@ -15,13 +15,6 @@ Action
                 Var   : temp_integer
                 Call  : GetConvertedPlayerId
                     Call  : GetEnumPlayer
-            Disab: AddTriggerEvent
-                Disab: 
-                Event: TriggerRegisterPlayerChatEvent
-                    Call  : ConvertedPlayer
-                        Var   : temp_integer
-                    Const : '-request '
-                    Preset: ChatMatchTypeSubstring
             AddTriggerEvent
                 Var   : gg_trg_SaveLoad_Commands
                 Event: TriggerRegisterPlayerChatEvent
@@ -36,20 +29,6 @@ Action
                         Var   : temp_integer
                     Const : '-load center'
                     Preset: ChatMatchTypeExact
-            Disab: AddTriggerEvent
-                Var   : gg_trg_SaveLoad_Commands
-                Event: TriggerRegisterPlayerChatEvent
-                    Call  : ConvertedPlayer
-                        Var   : temp_integer
-                    Const : '-nosave units'
-                    Preset: ChatMatchTypeExact
-            AddTriggerEvent
-                Var   : gg_trg_SaveRequest
-                Event: TriggerRegisterPlayerChatEvent
-                    Call  : ConvertedPlayer
-                        Var   : temp_integer
-                    Const : '-save '
-                    Preset: ChatMatchTypeSubstring
             AddTriggerEvent
                 Var   : gg_trg_SaveDestructable
                 Event: TriggerRegisterPlayerChatEvent
@@ -76,24 +55,6 @@ Action
     CommentString
         Const : 'LISTING ALL VARIABLES FOR IMPORTING'
     Disab: SetVariable
-        Disab: 
-        Disab: 
-    Disab: SetVariable
-        Disab: 
-        Call  : GetLastCreatedGroup
-    Disab: SetVariable
-        Array : load_center
-            Const : 0
-        Const : 0.00
-    Disab: SetVariable
-        Array : load_center
-            Const : 0
-        Const : 0.00
-    Disab: SetVariable
-        Array : load_center
-            Const : 0
-        Const : 0.00
-    Disab: SetVariable
         Var   : load_limit
         Const : 0
     Disab: SetVariable
@@ -103,21 +64,5 @@ Action
     Disab: SetVariable
         Var   : save_LoadUnitType
         Const : hpea
-    Disab: SetVariable
-        Array : save_grp
-            Const : 0
-        Call  : GetLastCreatedGroup
-    Disab: SetVariable
-        Array : save_load_boolean
-            Const : 0
-        Const : false
-    Disab: SetVariable
-        Array : save_password
-            Const : 0
-        Const : 
-    Disab: SetVariable
-        Array : save_unit_nmbr
-            Const : 0
-        Const : 0
     CommentString
         Const : 'LISTING ALL VARIABLES FOR IMPORTING'
