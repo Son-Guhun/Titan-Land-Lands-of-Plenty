@@ -1,32 +1,33 @@
 
 function Trig_SaveLoad_Commands_Actions takes nothing returns nothing
-    local group udg_temp_group
-    local unit udg_temp_unit
-    local location udg_temp_point
+    local group g
+    local unit u
+    local location loc
     local SaveNLoad_PlayerData playerId = GetPlayerId(GetTriggerPlayer())
     
     if ( GetEventPlayerChatString() == "-load center" ) then
-        set udg_temp_group = CreateGroup()
+        set g = CreateGroup()
         
-        call GroupEnumUnitsSelected(udg_temp_group, GetTriggerPlayer(), null)
-        set udg_temp_unit = FirstOfGroup(udg_temp_group)
-        if IsUnitType(udg_temp_unit, UNIT_TYPE_STRUCTURE) then
-            set udg_temp_point = GetUnitRallyPoint(udg_temp_unit)
-            if udg_temp_point == null then
-                set udg_temp_point = GetUnitLoc(GetUnitRallyUnit(udg_temp_unit))
+        call GroupEnumUnitsSelected(g, GetTriggerPlayer(), null)
+        set u = FirstOfGroup(g)
+        if IsUnitType(u, UNIT_TYPE_STRUCTURE) then
+            set loc = GetUnitRallyPoint(u)
+            if loc == null then
+                set loc = GetUnitLoc(GetUnitRallyUnit(u))
             endif
         else
-            set udg_temp_point = GetUnitLoc(udg_temp_unit)
+            set loc = GetUnitLoc(u)
         endif
         
-        set playerId.centerX = GetLocationX(udg_temp_point)
-        set playerId.centerY = GetLocationY(udg_temp_point)
+        set playerId.centerX = GetLocationX(loc)
+        set playerId.centerY = GetLocationY(loc)
+        call DisplayTextToPlayer( GetTriggerPlayer(), 0, 0, "Save/Load Center set to: (" + R2S(playerId.centerX) + " | " + R2S(playerId.centerY) + ")")
         
-        call RemoveLocation (udg_temp_point)
-        call DestroyGroup (udg_temp_group)
-        set udg_temp_group = null
-        set udg_temp_unit = null
-        set udg_temp_point = null
+        call RemoveLocation (loc)
+        call DestroyGroup (g)
+        set g = null
+        set u = null
+        set loc = null
     else
         // SET LOAD LIMIT COMMAND
         if ( GetTriggerPlayer() == udg_GAME_MASTER ) then

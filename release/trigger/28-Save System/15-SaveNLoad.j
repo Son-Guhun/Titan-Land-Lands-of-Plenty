@@ -397,6 +397,10 @@ function LoadUnit takes string chat_str, player un_owner returns nothing
     endif
 
     //If the desired position is outside of the playable map area, abort the opertaion
+    if not IsPointInRegion(WorldBounds.worldRegion, un_posx, un_posy) then
+        return
+    endif
+    /*
     if  un_posx > WorldBounds.maxX then
         return
     endif
@@ -409,6 +413,7 @@ function LoadUnit takes string chat_str, player un_owner returns nothing
     if un_posy < WorldBounds.minY then
         return
     endif
+    */
     
     static if LIBRARY_LoPDeprecated then
         if DeprecatedData.isUnitTypeIdDeprecated(un_type) then

@@ -12,12 +12,10 @@ private function OnCommand takes nothing returns boolean
     
     call GroupEnumUnitsOfPlayer(g, Player(0), null)
     set mostCount = BlzGroupGetSize(g)
-    // set totalCount = mostCount
     loop
         exitwhen i >= bj_MAX_PLAYERS
         call GroupEnumUnitsOfPlayer(g, Player(i), null)
         set count = BlzGroupGetSize(g)
-        // set totalCount = totalCount + count
         
         if count > mostCount then
             set mostCount = count
@@ -31,10 +29,10 @@ private function OnCommand takes nothing returns boolean
     
     call GroupEnumUnitsInRect(g, WorldBounds.world, null)
     
-    call DisplayTextToPlayer(trigP, 0, 0, "Total unselectable units (Recommended: less than 1500): " + I2S(BlzGroupGetSize(g)))
-    call DisplayTextToPlayer(trigP, 0, 0, "Player with most units: (" + I2S(mostPlayerId) + ") " + GetPlayerName(Player(mostPlayerId)) + ": " + I2S(mostCount))
+    call DisplayTextToPlayer(trigP, 0, 0, "Total unselectable units: |cffffff00" + I2S(BlzGroupGetSize(g)) + "|r (less than 1500 is recommended)")
+    call DisplayTextToPlayer(trigP, 0, 0, "Player with most units: (" + I2S(mostPlayerId) + ") " + GetPlayerName(Player(mostPlayerId)) + ": |cffffff00" + I2S(mostCount) + "|r")
     if trigPId != mostPlayerId then
-        call DisplayTextToPlayer(trigP, 0, 0, "Your unit count: " + I2S(trigPCount))
+        call DisplayTextToPlayer(trigP, 0, 0, "Your unit count: |cffffff00" + I2S(trigPCount) + "|r")
     endif
     
     call DestroyGroup(g)
