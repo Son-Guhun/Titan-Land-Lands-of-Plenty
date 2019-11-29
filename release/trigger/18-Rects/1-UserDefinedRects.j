@@ -96,6 +96,18 @@ private struct Indices extends array
     //! runtextmacro GUDR_INDEX("GROUP", "6")
     //! runtextmacro GUDR_INDEX("HIDDEN", "7")
     //! runtextmacro GUDR_INDEX("WEATHER_TYPE", "8")
+    //! runtextmacro GUDR_INDEX("OFFSET_X", "9")
+    //! runtextmacro GUDR_INDEX("OFFSET_Y", "10")
+endstruct
+
+//! runtextmacro DeclareParentHashtableWrapperModule("hashTable", "true", "hT", "private")
+//! runtextmacro DeclareParentHashtableWrapperStruct("hT","private")
+
+private struct UserDefinedRect extends array
+    // //! runtextmacro HashStruct_SetHashtableWrapper("hashTable")
+
+    //! runtextmacro HashStruct_NewPrimitiveFieldEx("hT", "offsetX","real","Indices.OFFSET_X")
+    //! runtextmacro HashStruct_NewPrimitiveFieldEx("hT", "offsetY","real","Indices.OFFSET_Y")
 endstruct
 //=============================
 //FUNCTIONS THAT RETURN BOOLEANS
@@ -404,7 +416,7 @@ function ToggleGUDRVisibility takes unit whichUnit, boolean toggle, boolean show
 endfunction
 
 function MoveGUDR takes unit centerUnit, real offsetX, real offsetY, boolean expand returns boolean
-    local integer unitId = GetHandleId(centerUnit)
+    local UserDefinedRect unitId = GetHandleId(centerUnit)
     local real centerX = GetUnitX(centerUnit)
     local real centerY = GetUnitY(centerUnit)
     local rect userDefRect
@@ -423,9 +435,14 @@ function MoveGUDR takes unit centerUnit, real offsetX, real offsetY, boolean exp
     
     //If user wants to expand or contract the current region, Load the current value of its borders
     if expand then
-        set offsetX = offsetX + GetRectMaxX(userDefRect) - GetRectCenterX(userDefRect)
-        set offsetY = offsetY + GetRectMaxY(userDefRect) - GetRectCenterY(userDefRect)
+        set offsetX = RMaxBJ(offsetX + unitId.offsetX, 32)
+        set offsetY = RMaxBJ(offsetY + unitId.offsetY, 32)
+    else
+        set offsetX = RMaxBJ(offsetX, 32)
+        set offsetY = RMaxBJ(offsetY, 32)
     endif
+    set unitId.offsetX = offsetX
+    set unitId.offsetY = offsetY
     
     //Set the values of the borders based on the offsets
     set minX = centerX - offsetX
@@ -433,18 +450,23 @@ function MoveGUDR takes unit centerUnit, real offsetX, real offsetY, boolean exp
     set minY = centerY - offsetY
     set maxY = centerY + offsetY
     
-    //Update Lightnings
-    call MoveLightning(LoadLightningHandle(hashTable, unitId, Indices.LIGHT_T), true, minX,maxY,maxX,maxY)
-    call MoveLightning(LoadLightningHandle(hashTable, unitId, Indices.LIGHT_B), true, minX,minY,maxX,minY)
-    call MoveLightning(LoadLightningHandle(hashTable, unitId, Indices.LIGHT_L), true, minX,minY,minX,maxY)
-    call MoveLightning(LoadLightningHandle(hashTable, unitId, Indices.LIGHT_R), true, maxX,minY,maxX,maxY)
-    
     //Update Rect
     static if LIBRARY_AutoRectEnvironment then
         call AutoRectEnvironment_SetRect(userDefRect, minX, minY, maxX, maxY)
     else
         call SetRect(userDefRect, minX, minY, maxX, maxY)
     endif
+    
+    set minX = GetRectMinX(userDefRect)
+    set maxX = GetRectMaxX(userDefRect)
+    set minY = GetRectMinY(userDefRect)
+    set maxY = GetRectMaxY(userDefRect)
+    
+    //Update Lightnings
+    call MoveLightning(LoadLightningHandle(hashTable, unitId, Indices.LIGHT_T), false, minX,maxY,maxX,maxY)
+    call MoveLightning(LoadLightningHandle(hashTable, unitId, Indices.LIGHT_B), false, minX,minY,maxX,minY)
+    call MoveLightning(LoadLightningHandle(hashTable, unitId, Indices.LIGHT_L), false, minX,minY,minX,maxY)
+    call MoveLightning(LoadLightningHandle(hashTable, unitId, Indices.LIGHT_R), false, maxX,minY,maxX,maxY)
     
     // Update Weather Effect
     set weatherId = LoadInteger(hashTable, unitId, 5)
@@ -462,7 +484,7 @@ endfunction
 
 
 function CreateGUDR takes unit centerUnit returns boolean
-    local integer unitId = GetHandleId(centerUnit)
+    local UserDefinedRect unitId = GetHandleId(centerUnit)
     local real centerX = GetUnitX(centerUnit)
     local real centerY = GetUnitY(centerUnit)
     local rect userDefRect 
@@ -484,13 +506,16 @@ function CreateGUDR takes unit centerUnit returns boolean
     endif
     
     call SaveRectHandle(hashTable, unitId, Indices.RECT, userDefRect)
-    call SaveLightningHandle(hashTable, unitId, Indices.LIGHT_T, AddLightning("DRAM", true, centerX-32, centerY+32, centerX+32, centerY+32))
-    call SaveLightningHandle(hashTable, unitId, Indices.LIGHT_B, AddLightning("DRAM", true, centerX-32, centerY-32, centerX+32, centerY-32))
-    call SaveLightningHandle(hashTable, unitId, Indices.LIGHT_L, AddLightning("DRAM", true, centerX-32, centerY-32, centerX-32, centerY+32))
-    call SaveLightningHandle(hashTable, unitId, Indices.LIGHT_R, AddLightning("DRAM", true, centerX+32, centerY-32, centerX+32, centerY+32))
+    call SaveLightningHandle(hashTable, unitId, Indices.LIGHT_T, AddLightning("DRAM", false, centerX-32, centerY+32, centerX+32, centerY+32))
+    call SaveLightningHandle(hashTable, unitId, Indices.LIGHT_B, AddLightning("DRAM", false, centerX-32, centerY-32, centerX+32, centerY-32))
+    call SaveLightningHandle(hashTable, unitId, Indices.LIGHT_L, AddLightning("DRAM", false, centerX-32, centerY-32, centerX-32, centerY+32))
+    call SaveLightningHandle(hashTable, unitId, Indices.LIGHT_R, AddLightning("DRAM", false, centerX+32, centerY-32, centerX+32, centerY+32))
     call SaveGroupHandle(hashTable, unitId, Indices.GROUP, CreateGroup())
     call SaveBoolean(hashTable, unitId, Indices.HIDDEN, true) //Save show/hide boolean as true, because nothing is being hidden
     call SaveInteger(hashTable, unitId, Indices.WEATHER_TYPE, 1) //Save 1 as it is the value of 'RAhr'
+    
+    set unitId.offsetX = 32
+    set unitId.offsetY = 32
     
     set userDefRect = null
     return true
