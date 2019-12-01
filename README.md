@@ -1,5 +1,11 @@
-[![ko-fi](https://www.ko-fi.com/img/githubbutton_sm.svg)](https://ko-fi.com/F1F61117L) <a href='https://github.com/Son-Guhun/Titan-Land-Lands-of-Plenty/releases' target='_blank'><img height='36' style='border:0px;height:36px;' src='http://www.pngall.com/wp-content/uploads/2/Download-Button-PNG-Download-Image.png' border='0' alt='Download map' /></a>
+[![ko-fi](https://www.ko-fi.com/img/githubbutton_sm.svg)](https://ko-fi.com/F1F61117L) <a href='https://discord.gg/FDAMDBS' target='_blank'><img height='36' style='border:0px;height:36px;' src='https://i.imgur.com/YNyTNuw.png' border='0' alt='Join us on Discord' /></a> <a href='https://github.com/Son-Guhun/Titan-Land-Lands-of-Plenty/releases' target='_blank'><img height='36' style='border:0px;height:36px;' src='http://www.pngall.com/wp-content/uploads/2/Download-Button-PNG-Download-Image.png' border='0' alt='Download map' /></a>
 # Titan Land: Lands of Plenty (TL: LoP)
+
+[![Version](https://img.shields.io/github/v/release/Son-Guhun/Titan-Land-Lands-Of-Plenty?label=version)](https://github.com/Son-Guhun/Titan-Land-Lands-Of-Plenty/releases)
+[![Downloads](https://img.shields.io/github/downloads/Son-Guhun/Titan-Land-Lands-Of-Plenty/total.svg)](https://github.com/Son-Guhun/Titan-Land-Lands-Of-Plenty/releases)
+[![Activity](https://img.shields.io/github/commit-activity/m/Son-Guhun/Titan-Land-Lands-Of-Plenty?color=purple)](https://github.com/Son-Guhun/Titan-Land-Lands-of-Plenty/pulse)
+[![Donate](https://img.shields.io/badge/donate-$$$-yellow.svg)](https://ko-fi.com/F1F61117L)
+
 A WC3 sandbox roleplaying map inspired by those that came before. The main aim of the map is to bridge the gap that has always existed between Titan Land maps and MRP-style maps. In other words, **LoP** aims to provide most of the flexibility os MRP maps, while maintaing the user-friendliness and structure of Titan Land maps. In the future, more elements of MRP-style maps may be added, such as spawners.
 
 ## What is Roleplaying?
@@ -76,3 +82,6 @@ test_full(RELEASE) => Builds SLK version of the release OBJ map. Then opens the 
 
 test(version='',build='development') => Version can be an empty string or 'slk'. Build can be 'development' or 'release'.
 test_map(path='development_slk.w3x') => Opens a map using the current Warcraft III version.
+
+## Credits
+[Eqilux-](https://www.reddit.com/user/Eqilux-/): Join discord button.
