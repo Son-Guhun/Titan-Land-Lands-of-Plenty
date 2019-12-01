@@ -3,7 +3,8 @@
 
 [![Version](https://img.shields.io/github/v/release/Son-Guhun/Titan-Land-Lands-Of-Plenty?label=version)](https://github.com/Son-Guhun/Titan-Land-Lands-Of-Plenty/releases)
 [![Downloads](https://img.shields.io/github/downloads/Son-Guhun/Titan-Land-Lands-Of-Plenty/total.svg)](https://github.com/Son-Guhun/Titan-Land-Lands-Of-Plenty/releases)
-[![Activity](https://img.shields.io/github/commit-activity/m/Son-Guhun/Titan-Land-Lands-Of-Plenty?color=purple)](https://github.com/Son-Guhun/Titan-Land-Lands-of-Plenty/pulse)
+[![commit-monthly](https://img.shields.io/github/commit-activity/m/Son-Guhun/Titan-Land-Lands-of-Plenty?color=purple)](https://github.com/Son-Guhun/Titan-Land-Lands-of-Plenty/pulse)
+[![commit-yearly](https://img.shields.io/github/commit-activity/y/Son-Guhun/Titan-Land-Lands-of-Plenty?color=purple&label=%20)](https://github.com/Son-Guhun/Titan-Land-Lands-of-Plenty/pulse)
 [![Donate](https://img.shields.io/badge/donate-$$$-yellow.svg)](https://ko-fi.com/F1F61117L)
 
 A WC3 sandbox roleplaying map inspired by those that came before. The main aim of the map is to bridge the gap that has always existed between Titan Land maps and MRP-style maps. In other words, **LoP** aims to provide most of the flexibility os MRP maps, while maintaing the user-friendliness and structure of Titan Land maps. In the future, more elements of MRP-style maps may be added, such as spawners.
