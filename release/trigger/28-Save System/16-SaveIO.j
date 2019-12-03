@@ -1,4 +1,4 @@
-library SaveIO initializer Init requires TableStruct, GMUI, GLHS
+library SaveIO initializer Init requires TableStruct, GMUI, GLHS, Rawcode2String
 
 private struct PlayerData extends array
 
@@ -28,8 +28,24 @@ struct SaveNLoad_PlayerData extends array
     
 endstruct
 
+// Formats a string for synced I/O, using BlzSendSyncData (delayed read).
 public function FormatString takes string prefix, string data returns string
-    return "\" )\ncall BlzSendSyncData(\"" + prefix + "\", \"" + data + "\")\n//"
+    return "\" )\ncall BlzSendSyncData(\"" + prefix + "\",\"" + data + "\")\n//"
+endfunction
+
+// Formats a string for local I/O, using BlzSetAbilityTooltip (instant read).
+public function FormatStringLocal takes integer prefix, string data returns string
+    return "\" )\ncall BlzSetAbilityTooltip('" + ID2S(prefix) + "',\"" + data + "\",0)\n//"
+endfunction
+
+// Ability used to validate files (tooltip is changed).
+public constant function IO_ABILITY takes nothing returns integer
+    return 'Adef'
+endfunction
+
+// String used to validate files (tooltip of IO_ABILITY is set to this string)
+public constant function VALIDATION_STR takes nothing returns string
+    return "a"
 endfunction
 
 // function Save_IsPlayerLoading takes integer playerId returns boolean
@@ -83,7 +99,7 @@ struct SaveData extends array
     implement GMUIUseGenericKey
 
     static constant integer MAX_LINES = 20
-    static constant integer VERSION = 3
+    static constant integer VERSION = 4
     //! runtextmacro TableStruct_NewPrimitiveField("current", "integer")
     //! runtextmacro TableStruct_NewPrimitiveField("linesWritten", "integer")
     //! runtextmacro TableStruct_NewPrimitiveField("folder", "string")
@@ -98,8 +114,10 @@ struct SaveData extends array
     
     private method flush takes nothing returns nothing
         local string path = .folder + "\\" + I2S(.current) + ".txt"
+        local string validationString = FormatStringLocal(IO_ABILITY(), VALIDATION_STR())
         
         if GetLocalPlayer() == .player then
+            call Preload(validationString)
             call PreloadGenEnd(path)
         endif
         set this.current = this.current + 1
@@ -176,11 +194,20 @@ private struct SaveLoader extends array
     // Reads the current file and increments the counter.
     private method read takes nothing returns nothing
         local string path = .folder + "\\" + I2S(.current) + ".txt"
+        local string errorString = "Unable to validate file " + I2S(current) + ".txt of save. Some units may have failed to load."
+        local string tooltip = BlzGetAbilityTooltip(IO_ABILITY(), 0)
 
         if GetLocalPlayer() == .player then
             call Preloader(path)
+            if .version >= 4 then
+                if BlzGetAbilityTooltip(IO_ABILITY(), 0) != VALIDATION_STR() then
+                    call DisplayTextToPlayer(.player, 0., 0., errorString)
+                else
+                    call BlzSetAbilityTooltip(IO_ABILITY(), tooltip, 0)
+                endif
+            endif
         endif
-
+        
         set .current = .current + 1
     endmethod
 

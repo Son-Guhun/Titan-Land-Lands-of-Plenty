@@ -29,7 +29,7 @@ endfunction
 
 endlibrary
 
-library SaveNLoad requires WorldBounds, UnitVisualMods, Rawcode2String, Base36, TerrainTools, DecorationSFX, UnitTypeDefaultValues, AttachedSFX, SaveIO/* 
+library SaveNLoad requires WorldBounds, UnitVisualMods, Base36, TerrainTools, DecorationSFX, UnitTypeDefaultValues, AttachedSFX, SaveIO/* 
 
    */ optional UserDefinedRects, optional SaveNLoadConfig optional LoPDeprecated
 ////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -440,52 +440,55 @@ function LoadUnit takes string chat_str, player un_owner returns nothing
         //Create the unit and modify it according to the chat input data
         set resultUnit = CreateUnit (un_owner, un_type, un_posx, un_posy, un_fangle )
         
-        if IsUnitIdType(un_type, UNIT_TYPE_ANCIENT) then
-            call SetUnitFacing(resultUnit, un_fangle)
-            if isUnrooted =="t" then
-                call IssueImmediateOrder(resultUnit, "unroot")
-            endif
-        endif
-        
-        if g_pitch != 0. or g_roll != 0. then
-            if AttachedSFX_IsUnitValid(resultUnit) then
-                if UnitHasAttachedEffect(resultUnit) then
-                    call GetUnitAttachedEffect(resultUnit).setOrientation(un_fangle*bj_DEGTORAD, g_pitch, g_roll)
-                else
-                    call UnitCreateAttachedEffect(resultUnit).setOrientation(un_fangle*bj_DEGTORAD, g_pitch, g_roll)
+        if resultUnit != null then
+            if IsUnitIdType(un_type, UNIT_TYPE_ANCIENT) then
+                call SetUnitFacing(resultUnit, un_fangle)
+                if isUnrooted =="t" then
+                    call IssueImmediateOrder(resultUnit, "unroot")
                 endif
             endif
-        endif
-        
-        if IsUnitType(resultUnit, UNIT_TYPE_STRUCTURE) then
-            static if LIBRARY_SaveNLoadConfig then
-                call GUMSSetStructureFlyHeight(resultUnit, un_flyH, SaveNLoadConfig_StructureShouldAutoLand(resultUnit))
+            
+            if g_pitch != 0. or g_roll != 0. then
+                if AttachedSFX_IsUnitValid(resultUnit) then
+                    if UnitHasAttachedEffect(resultUnit) then
+                        call GetUnitAttachedEffect(resultUnit).setOrientation(un_fangle*bj_DEGTORAD, g_pitch, g_roll)
+                    else
+                        call UnitCreateAttachedEffect(resultUnit).setOrientation(un_fangle*bj_DEGTORAD, g_pitch, g_roll)
+                    endif
+                endif
+            endif
+            
+            if IsUnitType(resultUnit, UNIT_TYPE_STRUCTURE) then
+                static if LIBRARY_SaveNLoadConfig then
+                    call GUMSSetStructureFlyHeight(resultUnit, un_flyH, SaveNLoadConfig_StructureShouldAutoLand(resultUnit))
+                else
+                    call GUMSSetStructureFlyHeight(resultUnit, un_flyH, AUTO_LAND)
+                endif
             else
-                call GUMSSetStructureFlyHeight(resultUnit, un_flyH, AUTO_LAND)
+                call GUMSSetUnitFlyHeight(resultUnit, un_flyH)
+            endif
+
+            //GUMS modifications
+            if size != "D" then
+                call ParseScale(resultUnit, size)
+            endif
+            if red != "D" then
+                call GUMSSetUnitVertexColor(resultUnit, S2I(red)/2.55, S2I(green)/2.55, S2I(blue)/2.55, (255 - S2I(alpha))/2.55)
+            endif
+            if color != "D" then
+                call GUMSSetUnitColor(resultUnit, S2I(color))
+            endif
+            if aSpeed != "D" then
+                call GUMSSetUnitAnimSpeed(resultUnit, S2R(aSpeed))
+            endif
+            if animTag != "D" then
+                call GUMSAddUnitAnimationTag(resultUnit, GUMSConvertTags(UnitVisualMods_TAGS_DECOMPRESS, animTag))
+            endif
+            if select != "0" then
+                call GUMSSetUnitSelectionType(resultUnit, S2I(select))
             endif
         else
-            call GUMSSetUnitFlyHeight(resultUnit, un_flyH)
-        endif
-
-        
-        //GUMS modifications
-        if size != "D" then
-            call ParseScale(resultUnit, size)
-        endif
-        if red != "D" then
-            call GUMSSetUnitVertexColor(resultUnit, S2I(red)/2.55, S2I(green)/2.55, S2I(blue)/2.55, (255 - S2I(alpha))/2.55)
-        endif
-        if color != "D" then
-            call GUMSSetUnitColor(resultUnit, S2I(color))
-        endif
-        if aSpeed != "D" then
-            call GUMSSetUnitAnimSpeed(resultUnit, S2R(aSpeed))
-        endif
-        if animTag != "D" then
-            call GUMSAddUnitAnimationTag(resultUnit, GUMSConvertTags(UnitVisualMods_TAGS_DECOMPRESS, animTag))
-        endif
-        if select != "0" then
-            call GUMSSetUnitSelectionType(resultUnit, S2I(select))
+            call DisplayTextToPlayer(un_owner, 0., 0., "Failed to load unit of type: " + ID2S(un_type))
         endif
         
         set udg_save_LastLoadedUnit[playerId] = resultUnit
