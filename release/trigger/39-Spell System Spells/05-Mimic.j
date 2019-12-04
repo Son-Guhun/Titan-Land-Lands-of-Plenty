@@ -48,7 +48,7 @@ function HeroTransferInventory takes unit source, unit target returns nothing
     set i = null
 endfunction
 
-function RemoveUnitMimic takes unit mimic returns nothing
+function RemoveUnitMimic_impl takes unit mimic, boolean swapItems returns unit
     local unit original = UnitData(GetHandleId(mimic)).original
     local player owner = GetOwningPlayer(mimic)
     
@@ -65,7 +65,9 @@ function RemoveUnitMimic takes unit mimic returns nothing
         
         call SetUnitOwner(original, owner, false)
         call ShowUnit(original, true)
-        call HeroTransferInventory(mimic, original)
+        if swapItems then
+            call HeroTransferInventory(mimic, original)
+        endif
         
         call DisableTrigger(gg_trg_System_Cleanup_Owner_Change)
         call SetUnitOwner(mimic, Player(0), false)
@@ -75,22 +77,36 @@ function RemoveUnitMimic takes unit mimic returns nothing
         call SetUnitY(original, GetUnitY(mimic))
         call DestroyEffect(AddSpecialEffect("Abilities\\Spells\\Orc\\FeralSpirit\\feralspirittarget.mdl", GetUnitX(mimic), GetUnitY(mimic)))
         // remove heroic unit
-        set original = null
     endif
+    
+    set mimic = original
+    set original = null
+    return mimic
+endfunction
+
+function RemoveUnitMimic takes unit mimic returns unit
+    return RemoveUnitMimic_impl(mimic, true)
 endfunction
 
 private function OnRemove takes nothing returns boolean
-    local unit original = UnitData(GetHandleId(UnitEvents.getEventUnit())).original
-    call RemoveUnitMimic(UnitEvents.getEventUnit())
-    call RemoveUnit(original)
-    set original = null
+    call RemoveUnit(RemoveUnitMimic_impl(UnitEvents.getEventUnit(), false))
     return false
 endfunction
 
 private function OnDeath takes nothing returns boolean
-    call RemoveUnitMimic(UnitEvents.getEventUnit())
-    call UnitEvents.get(UnitEvents.getEventUnit()).onRemove.deregister(Condition(function OnDeath))
-    call UnitEvents.get(UnitEvents.getEventUnit()).onRemove.deregister(Condition(function OnRemove))
+    local unit u = UnitEvents.getEventUnit()
+    local player owner = GetOwningPlayer(u)
+    local boolean isSelected = IsUnitSelected(u, owner)
+    
+    call UnitEvents.get(u).onRemove.deregister(Condition(function OnDeath))
+    call UnitEvents.get(u).onRemove.deregister(Condition(function OnRemove))
+    
+    if GetLocalPlayer() == owner and isSelected then
+        call SelectUnit(RemoveUnitMimic(u), true)
+    else
+        call RemoveUnitMimic(u)
+    endif
+
     return false
 endfunction
 
