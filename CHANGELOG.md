@@ -114,7 +114,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 ## [v1.3.3] - 2019-09-28
 
 ### Added
-- -scale command will now also accept 3 arguments, just as the 'scale command.
+- -size command will now also accept 3 arguments, just as the 'size command.
 - Added Deco Builder Murloc.
 
 ### Fixed

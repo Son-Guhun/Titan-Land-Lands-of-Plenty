@@ -1,5 +1,8 @@
 from myconfigparser import MyConfigParser, load_unit_data, get_decorations
 
+# TODO: Iterate over all units in source database and see which units that are not mentioned in new list reference a unit from the new list (add reference in the target database)
+
+
 def merge(source, data, new):
 
     # These fields reference other units, so they have to be updated when generating new rawcodes.

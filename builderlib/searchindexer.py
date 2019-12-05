@@ -1,6 +1,7 @@
-"""This script iterates over all decorations in a .ini database and set their Specialart field
-to the format expected by the SpecialEffect system.
 """
+Credits to gohagga for the algorithm.
+"""
+
 from myconfigparser import MyConfigParser, load_unit_data, get_decorations
 
 def get_substrings(string):
