@@ -67,7 +67,7 @@ private module InitModule
             set playerId = playerId + 1
         endloop
 
-        call TimerStart(CreateTimer(), 0.5, true, function thistype.onTimer)
+        call TimerStart(CreateTimer(), 0.25, true, function thistype.onTimer)
     endmethod
 endmodule
 
@@ -118,6 +118,9 @@ struct SaveData extends array
         
         if GetLocalPlayer() == .player then
             call Preload(validationString)
+            call Preload( "\" )
+endfunction
+function SomeRandomName takes nothing returns nothing //")  // Not calling PreloadEnd in a preload file greatly improves loading performance.
             call PreloadGenEnd(path)
         endif
         set this.current = this.current + 1
@@ -279,6 +282,7 @@ private struct SaveLoader extends array
             if saveData != playerId.loadRequests.end() then
                 call saveData.read()
                 if saveData.eof() then
+                    call DisplayTextToPlayer(Player(playerId), 0., 0., "Finished loading!")
                     call saveData.destroy()
                     call playerId.loadRequests.remove(saveData)
                 endif
