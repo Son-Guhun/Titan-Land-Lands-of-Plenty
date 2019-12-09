@@ -1,44 +1,86 @@
 scope SaveTrigger
 
-globals
-    private SaveData saveData
-endglobals
+//! textmacro SaveXYMethod takes name, offset
+    method operator $name$ takes nothing returns real
+        return udg_save_XYminmaxcur[this$offset$]
+    endmethod
+    
+    method operator $name$= takes real value returns nothing
+        set udg_save_XYminmaxcur[this$offset$] = value
+    endmethod
+//! endtextmacro
 
-function SaveTiles takes nothing returns boolean
-        local integer playerId = GetPlayerId(GetTriggerPlayer())
-        local string temp1
-        local string temp2
+private struct PlayerData extends array
+    SaveData saveData
+    //! runtextmacro SaveXYMethod("minX", "")
+    //! runtextmacro SaveXYMethod("maxX", "+bj_MAX_PLAYERS")
+    //! runtextmacro SaveXYMethod("curX", "+2*bj_MAX_PLAYERS")
+    //! runtextmacro SaveXYMethod("minY", "+3*bj_MAX_PLAYERS")
+    //! runtextmacro SaveXYMethod("maxY", "+4*bj_MAX_PLAYERS")
+    //! runtextmacro SaveXYMethod("curY", "+5*bj_MAX_PLAYERS")
+endstruct
+
+function SaveTiles takes PlayerData playerId returns boolean
+    local real curX = playerId.curX
+    local real curY = playerId.curY
+    local integer i
+    local string saveStr
+    local real maxX = playerId.maxX
+    local real maxY = playerId.maxY
+    local integer j = 0
+    local SaveData saveData = playerId.saveData
+
+    loop
+    exitwhen j >= 25 /* avoid OP limit */ or curY > maxY  
+        set saveStr = "@"
+        set i = 0
         
-        local integer i = 0
-        local string saveStr = "@"
-
         loop
-        exitwhen i >= 60 // exit loop to avoid op_limit
-            if udg_save_XYminmaxcur[playerId+5*bj_MAX_PLAYERS] > udg_save_XYminmaxcur[playerId+4*bj_MAX_PLAYERS] then
-                set i = 121  // exit loop, since we already traversed all of the rows
-            endif
+        exitwhen i >= 60 // 60 tiles per single string (avoid desync)
             
-            set saveStr = saveStr + LoadD2H(TerrainTools_GetTextureId(GetTerrainType(udg_save_XYminmaxcur[playerId+2*bj_MAX_PLAYERS],/*
-                                                                                  */udg_save_XYminmaxcur[playerId+5*bj_MAX_PLAYERS])))/*
-                                */+ LoadD2H(GetTerrainVariance(udg_save_XYminmaxcur[playerId+2*bj_MAX_PLAYERS],udg_save_XYminmaxcur[playerId+5*bj_MAX_PLAYERS]))
+            set saveStr = saveStr + LoadD2H(TerrainTools_GetTextureId(GetTerrainType(curX, curY)))/*
+                                */+ LoadD2H(GetTerrainVariance(curX, curY))
             
             set i = i+1
-            if udg_save_XYminmaxcur[playerId+2*bj_MAX_PLAYERS] > udg_save_XYminmaxcur[playerId+bj_MAX_PLAYERS] then // x cur > x min
-                set udg_save_XYminmaxcur[playerId+5*bj_MAX_PLAYERS] = udg_save_XYminmaxcur[playerId+5*bj_MAX_PLAYERS] + 128 // y cur = next y cur
-                set udg_save_XYminmaxcur[playerId+2*bj_MAX_PLAYERS] = udg_save_XYminmaxcur[playerId] // x cur = x min
+            if curX > maxX then
+                set curY = curY + 128
+                set curX = playerId.minX
+                exitwhen curY > maxY
             else
-                set udg_save_XYminmaxcur[playerId+2*bj_MAX_PLAYERS] = udg_save_XYminmaxcur[playerId+2*bj_MAX_PLAYERS] + 128  // x cur = next x cur
+                set curX = curX + 128
             endif
         endloop
-
+        
         call saveData.write(SaveNLoad_FormatString("SnL_ter", saveStr))
+        set j = j + 1
+    endloop
+
+    set playerId.curX = curX
+    set playerId.curY = curY
+        
     return false
+endfunction
+
+private function onTimer takes nothing returns nothing
+    local PlayerData playerId = 0
+    
+    loop
+    exitwhen playerId == bj_MAX_PLAYER_SLOTS
+        if playerId.saveData != 0 then
+            call SaveTiles(playerId)
+            if playerId.curY > playerId.maxY then
+                call playerId.saveData.destroy()
+                set playerId.saveData = 0
+                call DisplayTextToPlayer( Player(playerId),0,0, "Finished Saving" )
+            endif
+        endif
+        set playerId = playerId + 1
+    endloop
 endfunction
 
 function SaveTerrain takes nothing returns nothing
     local integer i
-    local integer playerId = GetPlayerId(GetTriggerPlayer())
-    local triggercondition cond
+    local PlayerData playerId = GetPlayerId(GetTriggerPlayer())
     local rect saveRect
     local integer genId
     
@@ -51,35 +93,23 @@ function SaveTerrain takes nothing returns nothing
         return
     endif
     
-    set saveData = SaveData.create(GetTriggerPlayer(), SaveNLoad_FOLDER() + SubString(GetEventPlayerChatString(), 6, 129))
+    if playerId.saveData != 0 then
+        call playerId.saveData.destroy()
+    endif
+    
+    set playerId.saveData = SaveData.create(GetTriggerPlayer(), SaveNLoad_FOLDER() + SubString(GetEventPlayerChatString(), 6, 129))
     
     set saveRect = GUDR_GetGeneratorIdRect(genId)
-    set udg_save_XYminmaxcur[playerId] = GetRectMinX(saveRect)
-    set udg_save_XYminmaxcur[playerId+bj_MAX_PLAYERS] = GetRectMaxX(saveRect)
-    set udg_save_XYminmaxcur[playerId+3*bj_MAX_PLAYERS] = GetRectMinY(saveRect)
-    set udg_save_XYminmaxcur[playerId+4*bj_MAX_PLAYERS] = GetRectMaxY(saveRect)
-    set udg_save_XYminmaxcur[playerId+2*bj_MAX_PLAYERS] = udg_save_XYminmaxcur[playerId]
-    set udg_save_XYminmaxcur[playerId+5*bj_MAX_PLAYERS] = udg_save_XYminmaxcur[playerId+3*bj_MAX_PLAYERS]
+    set playerId.minX = GetRectMinX(saveRect)
+    set playerId.maxX = GetRectMaxX(saveRect)
+    set playerId.minY = GetRectMinY(saveRect)
+    set playerId.maxY = GetRectMaxY(saveRect)
+    set playerId.curX = playerId.minX
+    set playerId.curY = playerId.minY
     
-    call saveData.write(SaveNLoad_FormatString("SnL_ter", R2S(udg_save_XYminmaxcur[playerId]) + "@" +/*
-                                                        */R2S(udg_save_XYminmaxcur[playerId+bj_MAX_PLAYERS]) + "@" +/*
-                                                        */R2S(udg_save_XYminmaxcur[playerId+3*bj_MAX_PLAYERS]) + "@" +/* 
-                                                        */R2S(udg_save_XYminmaxcur[playerId+4*bj_MAX_PLAYERS]) + "@"))
+    call playerId.saveData.write(SaveNLoad_FormatString("SnL_ter", R2S(playerId.minX) + "@" + R2S(playerId.maxX) + "@" +/*
+                                                        */R2S(playerId.minY) + "@" + R2S(playerId.maxY) + "@"))
     
-    
-    set cond = TriggerAddCondition(gg_trg_SaveTerrain, Condition(function SaveTiles))
-    loop
-    exitwhen udg_save_XYminmaxcur[playerId+5*bj_MAX_PLAYERS] > udg_save_XYminmaxcur[playerId+4*bj_MAX_PLAYERS]
-        
-        call TriggerEvaluate(gg_trg_SaveTerrain)
-        
-    endloop
-    call TriggerRemoveCondition(gg_trg_SaveTerrain, cond)
-    
-    call saveData.destroy()
-    call DisplayTextToPlayer( Player(playerId),0,0, "Finished Saving" )
-    
-    set cond = null
     set saveRect = null
 endfunction
 
@@ -88,6 +118,7 @@ endfunction
 function InitTrig_SaveTerrain takes nothing returns nothing
     set gg_trg_SaveTerrain = CreateTrigger(  )
     call TriggerAddAction( gg_trg_SaveTerrain, function SaveTerrain )
+    call TimerStart(CreateTimer(), 0.5, true, function onTimer)
 endfunction
 
 endscope
