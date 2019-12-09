@@ -1,6 +1,6 @@
 scope CommandsSave
 
-function EnumFilter takes nothing returns boolean
+private function EnumFilter takes nothing returns boolean
     return not (RectContainsUnit(gg_rct_Titan_Palace, GetFilterUnit()) and GetUnitTypeId(GetFilterUnit()) != 'h07Q' /*dummy unit*/)
 endfunction
 
@@ -13,8 +13,8 @@ private function onCommand takes nothing returns boolean
         set playerData.units = CreateGroup()
     endif
     call GroupEnumUnitsOfPlayer(playerData.units, trigP, Filter(function EnumFilter))
-    call BlzGroupRemoveGroupFast(LoP_GetProtectedUnits(), playerData.units)
     call BlzGroupAddGroupFast(LoP_GetPlayerNeutralUnits(trigP), playerData.units)
+    call BlzGroupRemoveGroupFast(LoP_GetProtectedUnits(), playerData.units)  // Order matters, protected units may be in neutral group
     
     
     call SaveUnitsForPlayer(trigP, LoP_Command.getArguments())
