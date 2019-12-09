@@ -1,4 +1,5 @@
 //! runtextmacro GAL_Generate_List("true","ability","AbilityHandle","Handle","null")
+//! runtextmacro GAL_Generate_List("true","destructable","DestructableHandle","Handle","null")
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 //Guhun's Array Lists v.1.0.0
 library GAL requires Lists
@@ -23,8 +24,10 @@ struct ArrayList
     method forEachCodeCounted(code c)
 
 // You can create lists of different types. The syntax of each list type is as follows:
-struct ArrayListunit   // for a list of units
-struct ArrayListgroup  // for a list of groups
+struct ArrayList_unit   // for a list of units
+struct ArrayList_group  // for a list of groups
+library GALunit
+library GALgroup
 
 //You can create a new list of using the following macro:
 //! runtextmacro GRAL_Generate_List("true","unit","UnitHandle","Handle","null")
