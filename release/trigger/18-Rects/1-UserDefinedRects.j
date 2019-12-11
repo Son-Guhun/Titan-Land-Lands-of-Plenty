@@ -214,10 +214,7 @@ function GUDR_SwapGroup_UnitsInsideUDR takes group whichGroup, boolean includeGe
     return genId
 endfunction
 
-//Returns the Handle Id of an active UDR generator selected by a player
-//Additionally, the global bj_groupRandomCurrentPick will be set to the selected generator
-function GUDR_PlayerGetSelectedGeneratorId takes player whichPlayer returns integer
-    local unit firstOfGroup
+private function GetSelectedGenerator_impl takes player whichPlayer, unit firstOfGroup returns unit
     local integer unitId
     local group slctGrp = CreateGroup()
     
@@ -229,13 +226,21 @@ function GUDR_PlayerGetSelectedGeneratorId takes player whichPlayer returns inte
     set slctGrp = null
     
     if GUDR_IsUnitIdGenerator(unitId) then
-        set bj_groupRandomCurrentPick = firstOfGroup
-        set firstOfGroup = null
-        return unitId
+        set bj_groupRandomCurrentPick = firstOfGroup  // TODO: Get Rid of this
+        return firstOfGroup
+    else
+        return null
     endif
-    
-    set firstOfGroup = null
-    return 0
+endfunction
+
+function GUDR_PlayerGetSelectedGenerator takes player whichPlayer returns unit
+    return GetSelectedGenerator_impl(whichPlayer, null)
+endfunction
+
+//Returns the Handle Id of an active UDR generator selected by a player
+//Additionally, the global bj_groupRandomCurrentPick will be set to the selected generator
+function GUDR_PlayerGetSelectedGeneratorId takes player whichPlayer returns integer
+    return GetHandleId(GUDR_PlayerGetSelectedGenerator(whichPlayer))
 endfunction
 
 
