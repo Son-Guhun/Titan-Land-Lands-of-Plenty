@@ -1,10 +1,15 @@
 function Trig_LoadTerrainNew_Actions takes nothing returns nothing
-    local integer playerId = GetPlayerId(GetTriggerPlayer())
+    local SaveNLoad_PlayerData playerId = GetPlayerId(GetTriggerPlayer())
     local integer playerNumber = playerId + 1
+    local string syncStr = BlzGetTriggerSyncData()
     
     if udg_load_number[playerNumber] < udg_load_limit then
         set udg_load_number[playerNumber] = udg_load_number[playerNumber] + 1
-        call LoadTerrain(BlzGetTriggerSyncData())
+        if IsTerrainHeader(syncStr) then
+            call LoadTerrainHeader(syncStr, playerId.centerX, playerId.centerY, true)
+        else
+            call LoadTerrain(syncStr)
+        endif
     endif
 endfunction
 

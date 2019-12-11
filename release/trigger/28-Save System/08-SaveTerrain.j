@@ -1,23 +1,23 @@
 scope SaveTrigger
 
-//! textmacro SaveXYMethod takes name, offset
+//! textmacro SaveXYMethodTerrain takes name
     method operator $name$ takes nothing returns real
-        return udg_save_XYminmaxcur[this$offset$]
+        return SaveNLoad_PlayerData(this).terrain.$name$
     endmethod
     
     method operator $name$= takes real value returns nothing
-        set udg_save_XYminmaxcur[this$offset$] = value
+        set SaveNLoad_PlayerData(this).terrain.$name$ = value
     endmethod
 //! endtextmacro
 
 private struct PlayerData extends array
     SaveData saveData
-    //! runtextmacro SaveXYMethod("minX", "")
-    //! runtextmacro SaveXYMethod("maxX", "+bj_MAX_PLAYERS")
-    //! runtextmacro SaveXYMethod("curX", "+2*bj_MAX_PLAYERS")
-    //! runtextmacro SaveXYMethod("minY", "+3*bj_MAX_PLAYERS")
-    //! runtextmacro SaveXYMethod("maxY", "+4*bj_MAX_PLAYERS")
-    //! runtextmacro SaveXYMethod("curY", "+5*bj_MAX_PLAYERS")
+    //! runtextmacro SaveXYMethodTerrain("minX")
+    //! runtextmacro SaveXYMethodTerrain("maxX")
+    //! runtextmacro SaveXYMethodTerrain("curX")
+    //! runtextmacro SaveXYMethodTerrain("minY")
+    //! runtextmacro SaveXYMethodTerrain("maxY")
+    //! runtextmacro SaveXYMethodTerrain("curY")
 endstruct
 
 function SaveTiles takes PlayerData playerId returns boolean
@@ -118,6 +118,7 @@ function SaveTerrain takes nothing returns nothing
                                                         */R2S(playerId.minY - playerId.saveData.centerY) + "@" + R2S(playerId.maxY - playerId.saveData.centerY) + "@"))
     
     set saveRect = null
+    set generator = null
 endfunction
 
 

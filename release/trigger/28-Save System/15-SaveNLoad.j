@@ -35,13 +35,58 @@ library SaveNLoad requires WorldBounds, UnitVisualMods, Base36, TerrainTools, De
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 //SaveNLoad v3.0
 ////////////////////////////////////////////////////////////////////////////////////////////////////
-constant function SaveLoadVersion takes nothing returns integer
-    return 3
+public constant function OLDFOLDER takes nothing returns string
+    return "TitanLandLoP\\"
 endfunction
 
 public constant function FOLDER takes nothing returns string
-    return "TitanLandLoP\\"
+    return "TLLoP\\Saves\\"
 endfunction
+
+//! textmacro SaveXYMethod takes name, offset
+    method operator $name$ takes nothing returns real
+        return udg_save_XYminmaxcur[this$offset$]
+    endmethod
+    
+    method operator $name$= takes real value returns nothing
+        set udg_save_XYminmaxcur[this$offset$] = value
+    endmethod
+//! endtextmacro
+
+private struct PlayerTerrainData extends array
+    //! runtextmacro SaveXYMethod("minX", "")
+    //! runtextmacro SaveXYMethod("maxX", "+bj_MAX_PLAYERS")
+    //! runtextmacro SaveXYMethod("curX", "+2*bj_MAX_PLAYERS")
+    //! runtextmacro SaveXYMethod("minY", "+3*bj_MAX_PLAYERS")
+    //! runtextmacro SaveXYMethod("maxY", "+4*bj_MAX_PLAYERS")
+    //! runtextmacro SaveXYMethod("curY", "+5*bj_MAX_PLAYERS")
+endstruct
+
+struct SaveNLoad_PlayerData extends array
+    
+    private static real array loadCenter
+    
+    public method operator centerX takes nothing returns real
+        return loadCenter[this]
+    endmethod
+    
+    public method operator centerY takes nothing returns real
+        return loadCenter[this + bj_MAX_PLAYERS]
+    endmethod
+    
+    public method operator centerX= takes real value returns nothing
+        set loadCenter[this] = value
+    endmethod
+    
+    public method operator centerY= takes real value returns nothing
+        set loadCenter[this + bj_MAX_PLAYERS] = value
+    endmethod
+    
+    method operator terrain takes nothing returns PlayerTerrainData
+        return this
+    endmethod
+    
+endstruct
 
 globals
     public boolean AUTO_LAND = false  // Can be overwritten by SaveNLoadConfig StructureShouldAutoLand
@@ -279,7 +324,7 @@ function ParseFacing takes string scaleStr returns real
     endif
 endfunction
 
-function LoadUnit takes string chat_str, player un_owner returns nothing
+function LoadUnit takes string chat_str, player un_owner, real centerX, real centerY returns nothing
     local integer str_index
     local integer un_type
     local real un_posx
@@ -318,12 +363,12 @@ function LoadUnit takes string chat_str, player un_owner returns nothing
 
     //Start translating the chat input
     set str_index = CutToComma(chat_str)
-    set un_posx = S2R(SubString(chat_str,0,str_index)) + playerId.centerX
+    set un_posx = S2R(SubString(chat_str,0,str_index)) + centerX
     set chat_str = SubString(chat_str,str_index+1,len_str)
     set len_str = StringLength(chat_str)
 
     set str_index = CutToComma(chat_str)
-    set un_posy = S2R(SubString(chat_str,0,str_index)) + playerId.centerY
+    set un_posy = S2R(SubString(chat_str,0,str_index)) + centerY
     set chat_str = SubString(chat_str,str_index+1,len_str)
     set len_str = StringLength(chat_str)
 
@@ -498,7 +543,7 @@ function LoadUnit takes string chat_str, player un_owner returns nothing
     endif
 endfunction
 
-function LoadDestructable takes string chatStr returns nothing
+function LoadDestructable takes string chatStr, real centerX, real centerY returns nothing
     local integer destType
     local real destX
     local real destY
@@ -511,11 +556,11 @@ function LoadDestructable takes string chatStr returns nothing
     set chatStr = SubString(chatStr,cutToComma+1,StringLength(chatStr))
     
     set cutToComma = CutToCharacter(chatStr,"|")
-    set destX = S2R(SubString(chatStr,0,cutToComma)) + playerId.centerX
+    set destX = S2R(SubString(chatStr,0,cutToComma)) + centerX
     set chatStr = SubString(chatStr,cutToComma+1,StringLength(chatStr))
     
     set cutToComma = CutToCharacter(chatStr,"|")
-    set destY = S2R(SubString(chatStr,0,cutToComma)) + playerId.centerY
+    set destY = S2R(SubString(chatStr,0,cutToComma)) + centerY
     //set chatStr = SubString(chatStr,cutToComma+1,StringLength(chatStr))
     
     //call BJDebugMsg(I2S(destType) + " " + R2S(destX) + " " + R2S(destY))
@@ -526,63 +571,66 @@ function LoadDestructable takes string chatStr returns nothing
     //endif
 endfunction
 
-function LoadTerrain takes string chatStr returns nothing
+function IsTerrainHeader takes string chatStr returns boolean
+    return not (SubString(chatStr, 0, 1) == "@")
+endfunction
 
+function LoadTerrainHeader takes string chatStr, real offsetX, real offsetY, boolean offsetIsCenter returns nothing
     local integer cutToComma
     local SaveNLoad_PlayerData playerId = GetPlayerId(GetTriggerPlayer())
-    local integer i = 1
-    local integer strSize
     
-    local real offsetX
-    local real offsetY
     local real centerY
     local real centerX
 
-    if not (SubString(chatStr, 0, 1) == "@") then
-    
-        set cutToComma = CutToCharacter(chatStr,"@")
-        set udg_save_XYminmaxcur[playerId] = S2I(SubString(chatStr,0,cutToComma))
-        set chatStr = SubString(chatStr,cutToComma+1,StringLength(chatStr))
+    set cutToComma = CutToCharacter(chatStr,"@")
+    set playerId.terrain.minX = S2I(SubString(chatStr,0,cutToComma))
+    set chatStr = SubString(chatStr,cutToComma+1,StringLength(chatStr))
 
-        set cutToComma = CutToCharacter(chatStr,"@")
-        set udg_save_XYminmaxcur[playerId+bj_MAX_PLAYERS] = S2I(SubString(chatStr,0,cutToComma))
-        set chatStr = SubString(chatStr,cutToComma+1,StringLength(chatStr))
-        
-        set cutToComma = CutToCharacter(chatStr,"@")
-        set udg_save_XYminmaxcur[playerId+3*bj_MAX_PLAYERS] = S2I(SubString(chatStr,0,cutToComma))
-        set chatStr = SubString(chatStr,cutToComma+1,StringLength(chatStr))
-        
-        set cutToComma = CutToCharacter(chatStr,"@")
-        set udg_save_XYminmaxcur[playerId+4*bj_MAX_PLAYERS] = S2I(SubString(chatStr,0,cutToComma))
-        
-        if playerId.centerY != 0 or playerId.centerY != 0 then
-            set centerX = (udg_save_XYminmaxcur[playerId] + udg_save_XYminmaxcur[playerId+bj_MAX_PLAYERS])/2
-            set centerY = (udg_save_XYminmaxcur[playerId+3*bj_MAX_PLAYERS] + udg_save_XYminmaxcur[playerId+4*bj_MAX_PLAYERS])/2
-            set offsetX = playerId.centerX - centerX
-            set offsetY = playerId.centerY - centerY
-            
-            set udg_save_XYminmaxcur[playerId] = udg_save_XYminmaxcur[playerId] + offsetX
-            set udg_save_XYminmaxcur[playerId+bj_MAX_PLAYERS] = udg_save_XYminmaxcur[playerId+bj_MAX_PLAYERS] + offsetX
-            set udg_save_XYminmaxcur[playerId+3*bj_MAX_PLAYERS] = udg_save_XYminmaxcur[playerId+3*bj_MAX_PLAYERS] + offsetY
-            set udg_save_XYminmaxcur[playerId+4*bj_MAX_PLAYERS] = udg_save_XYminmaxcur[playerId+4*bj_MAX_PLAYERS] + offsetY
-        endif
+    set cutToComma = CutToCharacter(chatStr,"@")
+    set playerId.terrain.maxX = S2I(SubString(chatStr,0,cutToComma))
+    set chatStr = SubString(chatStr,cutToComma+1,StringLength(chatStr))
     
-        set udg_save_XYminmaxcur[playerId+2*bj_MAX_PLAYERS] = udg_save_XYminmaxcur[playerId]
-        set udg_save_XYminmaxcur[playerId+5*bj_MAX_PLAYERS] = udg_save_XYminmaxcur[playerId+3*bj_MAX_PLAYERS]
+    set cutToComma = CutToCharacter(chatStr,"@")
+    set playerId.terrain.minY = S2I(SubString(chatStr,0,cutToComma))
+    set chatStr = SubString(chatStr,cutToComma+1,StringLength(chatStr))
+    
+    set cutToComma = CutToCharacter(chatStr,"@")
+    set playerId.terrain.maxY = S2I(SubString(chatStr,0,cutToComma))
+    
+    if offsetX != 0 or offsetY != 0 then
+    
+        if offsetIsCenter then // old versions support
+            set centerX = (playerId.terrain.minX + playerId.terrain.maxX)/2
+            set centerY = (playerId.terrain.minY + playerId.terrain.maxY)/2
+            set offsetX = offsetX - centerX
+            set offsetY = offsetY - centerY
+        endif
         
-        return
+        set playerId.terrain.minX = playerId.terrain.minX + offsetX
+        set playerId.terrain.maxX = playerId.terrain.maxX + offsetX
+        set playerId.terrain.minY = playerId.terrain.minY + offsetY
+        set playerId.terrain.maxY = playerId.terrain.maxY + offsetY
     endif
+
+    set playerId.terrain.curX = playerId.terrain.minX
+    set playerId.terrain.curY = playerId.terrain.minY
+endfunction
+
+function LoadTerrain takes string chatStr returns nothing
+    local SaveNLoad_PlayerData playerId = GetPlayerId(GetTriggerPlayer())
+    local integer strSize
+    local integer i = 1
     
     set strSize = StringLength(chatStr)
     loop
     exitwhen i >= strSize
-        call SetTerrainType(udg_save_XYminmaxcur[playerId+2*bj_MAX_PLAYERS], udg_save_XYminmaxcur[playerId+5*bj_MAX_PLAYERS], TerrainTools_GetTexture(LoadH2D(SubString(chatStr,i,i+1))), LoadH2D(SubString(chatStr,i+1,i+2)), 1, 0)
+        call SetTerrainType(playerId.terrain.curX, playerId.terrain.curY, TerrainTools_GetTexture(LoadH2D(SubString(chatStr,i,i+1))), LoadH2D(SubString(chatStr,i+1,i+2)), 1, 0)
         set i = i + 2
-        if udg_save_XYminmaxcur[playerId+2*bj_MAX_PLAYERS] > udg_save_XYminmaxcur[playerId+bj_MAX_PLAYERS] then
-            set udg_save_XYminmaxcur[playerId+5*bj_MAX_PLAYERS] = udg_save_XYminmaxcur[playerId+5*bj_MAX_PLAYERS] + 128
-            set udg_save_XYminmaxcur[playerId+2*bj_MAX_PLAYERS] = udg_save_XYminmaxcur[playerId]
+        if playerId.terrain.curX > playerId.terrain.maxX then
+            set playerId.terrain.curY = playerId.terrain.curY + 128
+            set playerId.terrain.curX = playerId.terrain.minX
         else
-            set udg_save_XYminmaxcur[playerId+2*bj_MAX_PLAYERS] = udg_save_XYminmaxcur[playerId+2*bj_MAX_PLAYERS] + 128
+            set playerId.terrain.curX = playerId.terrain.curX + 128
         endif
     endloop
 
