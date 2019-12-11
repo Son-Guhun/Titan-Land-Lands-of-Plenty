@@ -20,18 +20,18 @@ endfunction
 private function onCommand takes nothing returns boolean
     local player trigP = GetTriggerPlayer()
     local SaveUnit_PlayerData playerData = GetPlayerId(trigP)
-    local integer genId
+    local unit generator = GUDR_PlayerGetSelectedGenerator(trigP)
+    local SaveData saveData = SaveData.create(trigP, SaveNLoad_FOLDER() + LoP_Command.getArguments())
     
     if playerData.units == null then
         set playerData.units = CreateGroup()
     endif
     
-    set genId = GUDR_PlayerGetSelectedGeneratorId(trigP)
-    if genId == 0 then
+    if generator == null then
         call GroupEnumUnitsSelected(playerData.units, trigP, null)
         call BlzGroupRemoveGroupFast(LoP_GetProtectedUnits(), playerData.units)
     else
-        set userRect = GUDR_GetGeneratorIdRect(genId)
+        set userRect = GUDR_GetGeneratorIdRect(GetHandleId(generator))
     
         set playerData.effects = EnumDecorationsOfPlayerInRect(trigP, GetRectMinX(userRect), GetRectMinY(userRect), GetRectMaxX(userRect), GetRectMaxY(userRect))
         
@@ -39,9 +39,16 @@ private function onCommand takes nothing returns boolean
         call GroupEnumUnitsOfPlayer(playerData.units, trigP, Filter(function EnumFilter))
         call ForGroup(LoP_GetPlayerNeutralUnits(trigP), function FilterNeutrals)
         call BlzGroupRemoveGroupFast(LoP_GetProtectedUnits(), playerData.units)  // Order matters, protected units may be in neutral group
+        
+        set saveData.centerX = GetUnitX(generator)
+        set saveData.centerY = GetUnitY(generator)
+        set saveData.minX = GetRectMinX(userRect)
+        set saveData.minY = GetRectMinY(userRect)
+        set saveData.maxX = GetRectMaxX(userRect)
+        set saveData.maxY = GetRectMaxY(userRect)
     endif
     
-    call SaveUnitsForPlayer(trigP, LoP_Command.getArguments())
+    call SaveUnits(saveData)
     call DisplayTextToPlayer(GetLocalPlayer(), 0, 0, LoP_PlayerData(playerData).realName + ( " has started saving."))// Expected save time: " + R2S(BlzGroupGetSize(udg_save_grp[playerNumber])/25.00)))        
     
     return false

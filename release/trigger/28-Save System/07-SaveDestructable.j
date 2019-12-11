@@ -21,7 +21,7 @@ private function SaveDestructables takes PlayerData playerId returns nothing
     exitwhen i == final
         set dest = destructables[i]
         if IsDestructableTree(dest) then
-            call saveData.write(SaveNLoad_FormatString("SnL_dest",  I2S(GetDestructableTypeId(dest))+"|"+R2S(GetDestructableX(dest)- GetSavingPlayerId().centerX)+"|"+R2S(GetDestructableY(dest)- GetSavingPlayerId().centerY)+"|"))
+            call saveData.write(SaveNLoad_FormatString("SnL_dest",  I2S(GetDestructableTypeId(dest))+"|"+R2S(GetDestructableX(dest)- saveData.centerX)+"|"+R2S(GetDestructableY(dest)- saveData.centerY)+"|"))
         endif
         set i = i + 1
     endloop
@@ -55,7 +55,7 @@ endfunction
 
 function SaveLoopActions2 takes nothing returns nothing
     local player saver = GetTriggerPlayer()
-    local integer genId
+    local unit generator
     local rect rectangle
     local PlayerData playerId = GetPlayerId(saver)
     local integer tempInteger
@@ -64,10 +64,11 @@ function SaveLoopActions2 takes nothing returns nothing
         return
     endif
     
-    set genId =  GUDR_PlayerGetSelectedGeneratorId(saver)
-    if genId == 0 then
+    set generator =  GUDR_PlayerGetSelectedGenerator(saver)
+    if generator == null then
         return
     endif
+    set rectangle = GUDR_GetGeneratorRect(generator)
 
     set tempInteger = udg_temp_integer  // store global value in local
     set udg_temp_integer = playerId
@@ -78,10 +79,18 @@ function SaveLoopActions2 takes nothing returns nothing
     endif
     
     set playerId.saveData = SaveData.create(saver, SaveNLoad_FOLDER() + SubString(GetEventPlayerChatString(), 6, 129))
+    set playerId.saveData.centerX = GetUnitX(generator)
+    set playerId.saveData.centerY = GetUnitY(generator)
+    set playerId.saveData.minX = GetRectMinX(rectangle)
+    set playerId.saveData.minY = GetRectMinY(rectangle)
+    set playerId.saveData.maxX = GetRectMaxX(rectangle)
+    set playerId.saveData.maxY = GetRectMaxY(rectangle)
     
-    call EnumDestructablesInRect(GUDR_GetGeneratorIdRect(genId), Condition(function SaveFilter), null)
+    call EnumDestructablesInRect(rectangle, Condition(function SaveFilter), null)
 
     set udg_temp_integer = tempInteger  // restore global variable value
+    set generator = null
+    set rectangle = null
 endfunction
 
 //===========================================================================

@@ -79,7 +79,7 @@ private function GetScaleStringEffect takes SpecialEffect sfx returns string
 endfunction
 
 
-private function GetSFXSaveStr takes SpecialEffect whichEffect, player owner, boolean hasCustomColor, integer selectionType returns string
+private function GetSFXSaveStr takes SpecialEffect whichEffect, player owner, SaveData saveData, boolean hasCustomColor, integer selectionType returns string
     local string animTags
     local string color
     local SaveNLoad_PlayerData playerId = GetPlayerId(owner)
@@ -97,8 +97,8 @@ private function GetSFXSaveStr takes SpecialEffect whichEffect, player owner, bo
     endif
 
     return ID2S(whichEffect.unitType) + "," +/*
-        */ R2S(whichEffect.x - playerId.centerX) + "," +/*
-        */ R2S(whichEffect.y - playerId.centerY) + "," +/*
+        */ R2S(whichEffect.x - saveData.centerX) + "," +/*
+        */ R2S(whichEffect.y - saveData.centerY) + "," +/*
         */ R2S(whichEffect.height) + "," +/*
         */ GetFacingStringEffect(whichEffect) + "," +/*
         */ GetScaleStringEffect(whichEffect) + "," +/*
@@ -122,7 +122,7 @@ private function SaveEffectDecos takes InternalPlayerData playerId, SaveData sav
     loop
         exitwhen counter == 25 or decorations == 0 or decoration == decorations.end()
         
-        call saveData.write(SaveNLoad_FormatString("SnL_unit", GetSFXSaveStr(decoration, decoration.getOwner(), decoration.hasCustomColor, GUMS_SELECTION_UNSELECTABLE())))
+        call saveData.write(SaveNLoad_FormatString("SnL_unit", GetSFXSaveStr(decoration, decoration.getOwner(), saveData, decoration.hasCustomColor, GUMS_SELECTION_UNSELECTABLE())))
         
         set decoration = decorations.next(decoration)
         call decorations.remove(decorations.prev(decoration))
@@ -172,11 +172,11 @@ private function SaveForceLoop takes nothing returns boolean
                 endif
             else
                 if UnitHasAttachedEffect(saveUnit) then
-                    set saveStr = GetSFXSaveStr(GetUnitAttachedEffect(saveUnit), filterPlayer, unitHandleId.hasColor(), GUMS_GetUnitSelectionType(saveUnit))
+                    set saveStr = GetSFXSaveStr(GetUnitAttachedEffect(saveUnit), filterPlayer, saveData, unitHandleId.hasColor(), GUMS_GetUnitSelectionType(saveUnit))
                 else
                     set saveStr = ID2S((GetUnitTypeId(saveUnit))) + "," + /*
-                                */   R2S(GetUnitX(saveUnit) - playerId.centerX)+","+  /*
-                                */   R2S(GetUnitY(saveUnit) - playerId.centerY) + "," + /*
+                                */   R2S(GetUnitX(saveUnit) - saveData.centerX)+","+  /*
+                                */   R2S(GetUnitY(saveUnit) - saveData.centerY) + "," + /*
                                 */   R2S(GetUnitFlyHeight(saveUnit)) + "," + /*
                                 */   R2S(GetUnitFacing(saveUnit)) + "," + /*
                                 */   unitHandleId.getScale() + "," + /*
@@ -269,8 +269,8 @@ private function SaveLoopActions takes nothing returns nothing
 
 endfunction
 
-function SaveUnitsForPlayer takes player whichPlayer, string saveName returns nothing
-    local InternalPlayerData playerId = GetPlayerId(whichPlayer)
+function SaveUnits takes SaveData saveData returns nothing
+    local InternalPlayerData playerId = GetPlayerId(saveData.player)
 
     set playerId.savedCount = 0
     set playerId.isSaving = true
@@ -278,7 +278,7 @@ function SaveUnitsForPlayer takes player whichPlayer, string saveName returns no
     if saveFile[playerId] != 0 then
         call saveFile[playerId].destroy()
     endif
-    set saveFile[playerId] = SaveData.create(whichPlayer, SaveNLoad_FOLDER() + saveName)
+    set saveFile[playerId] = saveData
     
     if not stillSaving then
         call TimerStart(loopTimer, 0.5, true, function SaveLoopActions)

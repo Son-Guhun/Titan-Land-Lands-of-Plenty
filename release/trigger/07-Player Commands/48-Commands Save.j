@@ -17,7 +17,7 @@ private function onCommand takes nothing returns boolean
     call BlzGroupRemoveGroupFast(LoP_GetProtectedUnits(), playerData.units)  // Order matters, protected units may be in neutral group
     
     
-    call SaveUnitsForPlayer(trigP, LoP_Command.getArguments())
+    call SaveUnits(SaveData.create(trigP, SaveNLoad_FOLDER() + LoP_Command.getArguments()))
     call DisplayTextToPlayer(GetLocalPlayer(), 0, 0, LoP_PlayerData(playerData).realName + ( " has started saving."))// Expected save time: " + R2S(BlzGroupGetSize(udg_save_grp[playerNumber])/25.00)))        
     
     return false

@@ -82,24 +82,31 @@ function SaveTerrain takes nothing returns nothing
     local integer i
     local PlayerData playerId = GetPlayerId(GetTriggerPlayer())
     local rect saveRect
-    local integer genId
+    local unit generator
     
     if SubString(GetEventPlayerChatString(), 0, 6) != "-tsav " then
         return
     endif
     
-    set genId =  GUDR_PlayerGetSelectedGeneratorId(GetTriggerPlayer())
-    if genId == 0 then
+    set generator =  GUDR_PlayerGetSelectedGenerator(Player(playerId))
+    if generator == null then
         return
     endif
+    set saveRect = GUDR_GetGeneratorRect(generator)
     
     if playerId.saveData != 0 then
         call playerId.saveData.destroy()
     endif
     
     set playerId.saveData = SaveData.create(GetTriggerPlayer(), SaveNLoad_FOLDER() + SubString(GetEventPlayerChatString(), 6, 129))
+    set playerId.saveData.centerX = GetUnitX(generator)
+    set playerId.saveData.centerY = GetUnitY(generator)
+    set playerId.saveData.minX = GetRectMinX(saveRect)
+    set playerId.saveData.minY = GetRectMinY(saveRect)
+    set playerId.saveData.maxX = GetRectMaxX(saveRect)
+    set playerId.saveData.maxY = GetRectMaxY(saveRect)
     
-    set saveRect = GUDR_GetGeneratorIdRect(genId)
+    set saveRect = GUDR_GetGeneratorRect(generator)
     set playerId.minX = GetRectMinX(saveRect)
     set playerId.maxX = GetRectMaxX(saveRect)
     set playerId.minY = GetRectMinY(saveRect)
@@ -107,8 +114,8 @@ function SaveTerrain takes nothing returns nothing
     set playerId.curX = playerId.minX
     set playerId.curY = playerId.minY
     
-    call playerId.saveData.write(SaveNLoad_FormatString("SnL_ter", R2S(playerId.minX) + "@" + R2S(playerId.maxX) + "@" +/*
-                                                        */R2S(playerId.minY) + "@" + R2S(playerId.maxY) + "@"))
+    call playerId.saveData.write(SaveNLoad_FormatString("SnL_ter", R2S(playerId.minX - playerId.saveData.centerX) + "@" + R2S(playerId.maxX - playerId.saveData.centerX) + "@" +/*
+                                                        */R2S(playerId.minY - playerId.saveData.centerY) + "@" + R2S(playerId.maxY - playerId.saveData.centerY) + "@"))
     
     set saveRect = null
 endfunction
