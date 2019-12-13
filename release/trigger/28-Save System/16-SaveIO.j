@@ -1,4 +1,4 @@
-library SaveIO initializer Init requires TableStruct, GMUI, GLHS, Rawcode2String, optional RectGenerator
+library SaveIO requires TableStruct, GMUI, GLHS, Rawcode2String, optional RectGenerator
 
 private struct PlayerData extends array
 
@@ -22,16 +22,16 @@ public function FormatStringEx takes string jassCode returns string
 endfunction
 
 // Ability used to validate files (tooltip is changed).
-public constant function IO_ABILITY takes nothing returns integer
+private constant function IO_ABILITY takes nothing returns integer
     return 'Adef'
 endfunction
 
-public constant function IO_ABILITY_STR takes nothing returns string
+private constant function IO_ABILITY_STR takes nothing returns string
     return "Adef"
 endfunction
 
 // String used to validate files (tooltip of IO_ABILITY is set to this string)
-public constant function VALIDATION_STR takes nothing returns string
+private constant function VALIDATION_STR takes nothing returns string
     return "a"
 endfunction
 
@@ -93,10 +93,10 @@ struct SaveData extends array
 
     static constant integer MAX_LINES = 20
     static constant integer VERSION = 4
-    //! runtextmacro TableStruct_NewPrimitiveField("current", "integer")
-    //! runtextmacro TableStruct_NewPrimitiveField("linesWritten", "integer")
-    //! runtextmacro TableStruct_NewPrimitiveField("folder", "string")
-    //! runtextmacro TableStruct_NewHandleField("player", "player")
+    //! runtextmacro TableStruct_NewReadonlyPrimitiveField("current", "integer")
+    //! runtextmacro TableStruct_NewReadonlyPrimitiveField("linesWritten", "integer")
+    //! runtextmacro TableStruct_NewReadonlyPrimitiveField("folder", "string")
+    //! runtextmacro TableStruct_NewReadonlyHandleField("player", "player")
     
     //! runtextmacro TableStruct_NewPrimitiveField("centerX", "real")
     //! runtextmacro TableStruct_NewPrimitiveField("centerY", "real")
@@ -153,7 +153,7 @@ function SomeRandomName takes nothing returns nothing //")  // Not calling Prelo
         return this
     endmethod
     
-    method getMetaString takes nothing returns string
+    private method getMetaString takes nothing returns string
         return FormatStringLocal(IO_ABILITY(), "v" + I2S(.VERSION) + "," + I2S(.current) + "," + R2S(.centerX) + "," + R2S(.centerY) + "," + /*
                         */  R2S(.minX) + "," + R2S(.minY) + "," + R2S(.maxX) + "," + R2S(maxY))
     endmethod
@@ -169,7 +169,7 @@ function SomeRandomName takes nothing returns nothing //")  // Not calling Prelo
 
         if .folderExists() then
             call .flush()
-            set metaString = .getMetaString()  // Order matters
+            set metaString = .getMetaString()  // Order matters for line and .flush()
             if GetLocalPlayer() == .player then
                 call PreloadGenStart()
                 call PreloadGenClear()
@@ -195,21 +195,25 @@ function SomeRandomName takes nothing returns nothing //")  // Not calling Prelo
     
 endstruct
 
-private struct SaveLoader extends array
+struct SaveLoader extends array
     implement GMUIUseGenericKey
 
-    //! runtextmacro TableStruct_NewPrimitiveField("version", "integer")
+    //! runtextmacro TableStruct_NewReadonlyPrimitiveField("version", "integer")
     //! runtextmacro TableStruct_NewPrimitiveField("centerX", "real")
     //! runtextmacro TableStruct_NewPrimitiveField("centerY", "real")
-    //! runtextmacro TableStruct_NewPrimitiveField("minX", "real")
-    //! runtextmacro TableStruct_NewPrimitiveField("minY", "real")
-    //! runtextmacro TableStruct_NewPrimitiveField("maxX", "real")
-    //! runtextmacro TableStruct_NewPrimitiveField("maxY", "real")
+    //! runtextmacro TableStruct_NewReadonlyPrimitiveField("minX", "real")
+    //! runtextmacro TableStruct_NewReadonlyPrimitiveField("minY", "real")
+    //! runtextmacro TableStruct_NewReadonlyPrimitiveField("maxX", "real")
+    //! runtextmacro TableStruct_NewReadonlyPrimitiveField("maxY", "real")
     
-    //! runtextmacro TableStruct_NewPrimitiveField("current", "integer")
-    //! runtextmacro TableStruct_NewPrimitiveField("totalFiles", "integer")
-    //! runtextmacro TableStruct_NewPrimitiveField("folder", "string")
-    //! runtextmacro TableStruct_NewHandleField("player", "player")
+    //! runtextmacro TableStruct_NewReadonlyPrimitiveField("current", "integer")
+    //! runtextmacro TableStruct_NewReadonlyPrimitiveField("totalFiles", "integer")
+    //! runtextmacro TableStruct_NewReadonlyPrimitiveField("folder", "string")
+    //! runtextmacro TableStruct_NewReadonlyHandleField("player", "player")
+    
+    method isRectSave takes nothing returns boolean
+        return this.minX != 0
+    endmethod
 
     // Reads the current file and increments the counter.
     private method read takes nothing returns nothing
@@ -243,7 +247,7 @@ private struct SaveLoader extends array
         endif
     endmethod
     
-    method parseData takes string data returns nothing
+    private method parseData takes string data returns nothing
         
         local integer index = CutToComma(data)
         set .version = S2I((SubString(data, 1, index)))
@@ -306,6 +310,10 @@ private struct SaveLoader extends array
         call .folderClear()
         call .playerClear()
         call .totalFilesClear()
+        if PlayerData(GetPlayerId(.player)).loadRequests.contains(this) then
+            call PlayerData(GetPlayerId(.player)).loadRequests.remove(this)
+        endif
+        implement GMUI_deallocate_this
     endmethod
     
         // This function is exectued every 0.5 seconds, and it reads the next file of a SaveData that is currently being read.
@@ -318,11 +326,12 @@ private struct SaveLoader extends array
             set saveData = playerId.loadRequests.begin()
 
             if saveData != playerId.loadRequests.end() then
-                call saveData.read()
-                if saveData.eof() then
-                    call DisplayTextToPlayer(Player(playerId), 0., 0., "Finished loading!")
-                    call saveData.destroy()
-                    call playerId.loadRequests.remove(saveData)
+                if not saveData.eof() then
+                    call saveData.read()
+                    if saveData.eof() then
+                        call DisplayTextToPlayer(Player(playerId), 0., 0., "Finished loading!")
+                        call BlzSendSyncData("SnL_IOsize", "end")
+                    endif
                 endif
             endif
             set playerId = playerId + 1
@@ -333,97 +342,38 @@ private struct SaveLoader extends array
     implement InitModule
 endstruct
 
-globals
-    private string array currentSave
-endglobals
-
-private struct UnitData extends array
-    //! runtextmacro TableStruct_NewStructField("saveData", "SaveLoader")
-    
-    method destroy takes nothing returns nothing
-        if .saveDataExists() then
-            call .saveDataClear()
-        endif
-    endmethod
-    
-    static method get takes unit whichUnit returns thistype
-        return GetHandleId(whichUnit)
-    endmethod
-endstruct
-
-function ClearSaveLoaderData takes unit whichUnit returns nothing
-    call UnitData.get(whichUnit).destroy()
-endfunction
-        
-
-public function onReceiveSize takes nothing returns nothing
-    local unit generator
-    local string syncData = BlzGetTriggerSyncData()
-    local SaveLoader saveData
-    
-    if SubString(syncData, 0, 2) == "OG" then
-        set saveData = SaveLoader.create(GetTriggerPlayer(), currentSave[GetPlayerId(GetTriggerPlayer())], SubString(syncData, 2, StringLength(syncData)))
-        set generator = CreateUnit(GetTriggerPlayer(), RectGenerator_GENERATOR_ID, saveData.centerX, saveData.centerY, 270.)
-    
-        call UnitRemoveAbility(generator, RectGenerator_CREATE_OR_DESTROY)
-        call UnitRemoveAbility(generator, RectGenerator_TOGGLE_VISIBILITY)
-        call UnitRemoveAbility(generator, RectGenerator_PAGE_NEXT)
-        call UnitRemoveAbility(generator, RectGenerator_PAGE_PREV)
-        
-        call UnitRemoveAbility(generator, RectGenerator_RETRACT_X)
-        call UnitRemoveAbility(generator, RectGenerator_EXPAND_X)
-        call UnitRemoveAbility(generator, RectGenerator_RETRACT_Y)
-        call UnitRemoveAbility(generator, RectGenerator_EXPAND_Y)
-        
-        call UnitRemoveAbility(generator, RectGenerator_LOCK_UNITS)
-        call UnitRemoveAbility(generator, RectGenerator_UNLOCK_UNITS)
-        
-        call UnitAddAbility(generator, 'A061')
-        call UnitAddAbility(generator, 'A062')
-        
-        set UnitData.get(generator).saveData = saveData
-        call CreateGUDR(generator)
-        call MoveGUDR(generator, saveData.maxX - saveData.centerX, saveData.maxY - saveData.centerY, false)
-        
-        if GetLocalPlayer() == GetTriggerPlayer() then
-            call ClearSelection()
-            call SelectUnit(generator, true)
-            call SetCameraPosition(GetUnitX(generator), GetUnitY(generator))
-        endif
-    else
-        call SaveLoader.create(GetTriggerPlayer(), currentSave[GetPlayerId(GetTriggerPlayer())], syncData).loadData()
-    endif
-    
-    // call SaveLoader.create(GetTriggerPlayer(), currentSave[GetPlayerId(GetTriggerPlayer())], BlzGetTriggerSyncData()).loadData()
-
-    
-    // Create Rect Generator with the following abilities: Move (64), Move (128), load here, load original
-    // Attach this SaveLoader object to the unit
-    // When load ability is cast, start loading SaveLoader
-endfunction
-
 // This function returns a value that is async. It will be false if the file failed to load, and ONLY for 'whichPlayer'.
 public function LoadSaveEx takes boolean newVersion, player whichPlayer, string path, boolean originalPosition returns boolean
     local string tooltip = BlzGetAbilityTooltip(IO_ABILITY(), 0)
-    set currentSave[GetPlayerId(whichPlayer)] = path
+    local string pathString = "p=" + path
+    
     set path = path+"\\size.txt"
+    
     if GetLocalPlayer() == whichPlayer then
         call Preloader(path)
+        if not newVersion then
+            call BlzSendSyncData("SnL_IOsize", pathString)
+        endif
     endif
     if newVersion then
         if BlzGetAbilityTooltip(IO_ABILITY(), 0) == tooltip then
             return GetLocalPlayer() != whichPlayer
         else
+            call BlzSendSyncData("SnL_IOsize", pathString)
             if originalPosition then
                 call BlzSendSyncData("SnL_IOsize", BlzGetAbilityTooltip(IO_ABILITY(), 0))
             else
-                call BlzSendSyncData("SnL_IOsize", "OG" + BlzGetAbilityTooltip(IO_ABILITY(), 0))
+                call BlzSendSyncData("SnL_IOsize", "RS" + BlzGetAbilityTooltip(IO_ABILITY(), 0))
             endif
             call BlzSetAbilityTooltip(IO_ABILITY(), tooltip, 0)
             return true
         endif
     endif
     return false
+endfunction
+
+public function GetCurrentlyLoadingSave takes player whichPlayer returns SaveLoader
+    return PlayerData(GetPlayerId(whichPlayer)).loadRequests.begin()
 endfunction
 
 // This function returns a value that is async. It will be false if the file failed to load, and ONLY for 'whichPlayer'.
@@ -433,39 +383,6 @@ endfunction
 
 public function LoadSaveOld takes player whichPlayer, string path returns nothing
     call LoadSaveEx(false, whichPlayer, path, true)
-endfunction
-
-function TriggerRegisterAnyPlayerSyncEvent takes trigger whichTrigger, string prefix, boolean fromServer returns nothing
-    local integer i = 0
-    local player slot
-    
-    loop
-    exitwhen i == bj_MAX_PLAYERS
-        set slot = Player(i)
-        if GetPlayerController(slot) == MAP_CONTROL_USER then
-            call BlzTriggerRegisterPlayerSyncEvent(whichTrigger, slot, prefix, fromServer)
-        endif
-        
-        set i = i + 1
-    endloop
-endfunction
-
-private function onAbility takes nothing returns nothing
-    if GetSpellAbilityId() == 'A061' then
-        call UnitData.get(GetTriggerUnit()).saveData.loadData()
-        call KillUnit(GetTriggerUnit())
-    endif
-endfunction
-
-private function Init takes nothing returns nothing
-    local trigger t = CreateTrigger()
-    
-    call TriggerAddAction(t, function onReceiveSize)
-    call TriggerRegisterAnyPlayerSyncEvent(t, "SnL_IOsize", false)
-    
-    set t = CreateTrigger()
-    call TriggerAddAction(t, function onAbility)
-    call TriggerRegisterAnyUnitEventBJ(t, EVENT_PLAYER_UNIT_SPELL_EFFECT)
 endfunction
 
 endlibrary

@@ -1,4 +1,4 @@
-library LoPCleanUpDeath requires LoPWidgets, MoveSpeedBonus, UnitVisualMods, UserDefinedRects, DummyDmg, MultiPatrol, UnitEvents, LoPNeutralUnits, MountSystem, optional NativeRedefinitions
+library LoPCleanUpDeath requires LoPWidgets, MoveSpeedBonus, UnitVisualMods, UserDefinedRects, DummyDmg, MultiPatrol, UnitEvents, LoPNeutralUnits, MountSystem, RectSaveLoader, optional NativeRedefinitions
 
 //! runtextmacro optional RedefineNatives()
 
@@ -31,6 +31,7 @@ function LoP_onDeath takes unit whichUnit returns nothing
             call DestroyGUDR(whichUnit)
             call GUMSClearUnitData(whichUnit)
             call LoP_ClearNeutralData(whichUnit)
+            call ClearSaveLoaderData(whichUnit)
             
             if UnitHasAttachedEffect(whichUnit) then
                 call UnitDetachEffect(whichUnit).destroy()
