@@ -7,10 +7,15 @@ endfunction
 function Trig_LoadUnitNew_Actions takes nothing returns nothing
     local integer playerNumber = GetPlayerId(GetTriggerPlayer())+1
     local SaveNLoad_PlayerData playerId = playerNumber - 1
+    local SaveLoader saveData = SaveIO_GetCurrentlyLoadingSave(Player(playerId))
     
     if udg_load_number[playerNumber] < udg_load_limit then
         set udg_load_number[playerNumber] = ( udg_load_number[playerNumber] + 1 )
-        call LoadUnit(BlzGetTriggerSyncData()/*GetEventPlayerChatString()*/,GetTriggerPlayer(), playerId.centerX, playerId.centerY)
+        if saveData.atOriginal then
+            call LoadUnit(BlzGetTriggerSyncData()/*GetEventPlayerChatString()*/,GetTriggerPlayer(), saveData.centerX + playerId.centerX, saveData.centerY + playerId.centerY)
+        else
+            call LoadUnit(BlzGetTriggerSyncData()/*GetEventPlayerChatString()*/,GetTriggerPlayer(), saveData.centerX, saveData.centerY)
+        endif
     endif
 endfunction
 

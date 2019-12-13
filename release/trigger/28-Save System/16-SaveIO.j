@@ -1,4 +1,9 @@
 library SaveIO requires TableStruct, GMUI, GLHS, Rawcode2String, optional RectGenerator
+/*
+This library requires some trigger to be listening to SnL_IOsize sync data event in order to work.
+
+In the Save System folder, the RectSaveLoader library provides such a trigger.
+*/
 
 private struct PlayerData extends array
 
@@ -12,12 +17,12 @@ public function FormatString takes string prefix, string data returns string
 endfunction
 
 // Formats a string for local I/O, using BlzSetAbilityTooltip (instant read).
-public function FormatStringLocal takes integer prefix, string data returns string
+private function FormatStringLocal takes integer prefix, string data returns string
     return "\" )\ncall BlzSetAbilityTooltip('" + ID2S(prefix) + "',\"" + data + "\",0)\n//"
 endfunction
 
-// Formats a string for local I/O, using BlzSetAbilityTooltip (instant read).
-public function FormatStringEx takes string jassCode returns string
+// Formats any line of JASS code in order to insert it into a preload file
+private function FormatStringEx takes string jassCode returns string
     return "\" )\n" + jassCode + "\n//"
 endfunction
 
@@ -206,6 +211,8 @@ struct SaveLoader extends array
     //! runtextmacro TableStruct_NewReadonlyPrimitiveField("maxX", "real")
     //! runtextmacro TableStruct_NewReadonlyPrimitiveField("maxY", "real")
     
+    //! runtextmacro TableStruct_NewReadonlyPrimitiveField("atOriginal", "boolean")
+    
     //! runtextmacro TableStruct_NewReadonlyPrimitiveField("current", "integer")
     //! runtextmacro TableStruct_NewReadonlyPrimitiveField("totalFiles", "integer")
     //! runtextmacro TableStruct_NewReadonlyPrimitiveField("folder", "string")
@@ -241,6 +248,7 @@ struct SaveLoader extends array
     endmethod
     
     // This method does not immediately read the file. It puts it in queue for reading.
+    // You can assume that calling this method will destroy the SaveLoader once all data has been synced.
     method loadData takes nothing returns nothing
         if not PlayerData(GetPlayerId(.player)).loadRequests.contains(this) then
             call PlayerData(GetPlayerId(.player)).loadRequests.append(this)
@@ -292,11 +300,22 @@ struct SaveLoader extends array
         set .folder = name
         set .player = saver
         
+        if SubString(data, 0, 2) == "RS" then
+            set .atOriginal = false
+            set data = SubString(data, 2, StringLength(data))
+        else
+            set .atOriginal = true
+        endif
+            
         if SubString(data, 0, 1) == "v" then
             call .parseData(data)
         else
             set .version = 3
             set .totalFiles = S2I(data)
+        endif
+
+        if .totalFiles < 0 then  // avoids issues, but there should be a better way. Maybe destroy when calling .loadData
+            set .totalFiles = 1
         endif
         
         call BJDebugMsg(R2S(.centerX) + "," + R2S(.centerY))
@@ -313,10 +332,20 @@ struct SaveLoader extends array
         if PlayerData(GetPlayerId(.player)).loadRequests.contains(this) then
             call PlayerData(GetPlayerId(.player)).loadRequests.remove(this)
         endif
+        
+        
+        call .centerXClear()
+        call .centerYClear()
+        call .minXClear()
+        call .maxXClear()
+        call .minYClear()
+        call .maxYClear()
+        
+        call .atOriginalClear()
         implement GMUI_deallocate_this
     endmethod
     
-        // This function is exectued every 0.5 seconds, and it reads the next file of a SaveData that is currently being read.
+    // This function is exectued periodically, and it reads the next file of a SaveLoader that is currently being read.
     private static method onTimer takes nothing returns nothing
         local PlayerData playerId = 0
         local SaveLoader saveData
@@ -350,10 +379,10 @@ public function LoadSaveEx takes boolean newVersion, player whichPlayer, string 
     set path = path+"\\size.txt"
     
     if GetLocalPlayer() == whichPlayer then
-        call Preloader(path)
         if not newVersion then
             call BlzSendSyncData("SnL_IOsize", pathString)
         endif
+        call Preloader(path)
     endif
     if newVersion then
         if BlzGetAbilityTooltip(IO_ABILITY(), 0) == tooltip then

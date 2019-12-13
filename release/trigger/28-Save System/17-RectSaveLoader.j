@@ -36,13 +36,10 @@ public function onReceiveSize takes nothing returns nothing
         return
     endif
     
-    if SubString(syncData, 0, 2) == "RS" then
-        set saveData = SaveLoader.create(GetTriggerPlayer(), nextSave[GetPlayerId(GetTriggerPlayer())], SubString(syncData, 2, StringLength(syncData)))
-    else
-        set saveData = SaveLoader.create(GetTriggerPlayer(), nextSave[GetPlayerId(GetTriggerPlayer())], syncData)
-    endif
+    set saveData = SaveLoader.create(GetTriggerPlayer(), nextSave[GetPlayerId(GetTriggerPlayer())], syncData)
+    call BJDebugMsg(nextSave[GetPlayerId(GetTriggerPlayer())])
     
-    if SubString(syncData, 0, 2) == "RS" and saveData.isRectSave() then
+    if not saveData.atOriginal then
         set generator = CreateUnit(GetTriggerPlayer(), RectGenerator_GENERATOR_ID, saveData.centerX, saveData.centerY, 270.)
     
         call UnitRemoveAbility(generator, RectGenerator_CREATE_OR_DESTROY)
