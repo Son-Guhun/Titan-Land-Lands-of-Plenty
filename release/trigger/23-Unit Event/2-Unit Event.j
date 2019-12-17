@@ -1,4 +1,7 @@
- //===========================================================================
+library BribesUnitEvent
+endlibrary
+
+//===========================================================================
 function UnitEventDestroyGroup takes integer i returns nothing
     if udg_CargoTransportGroup[i] != null then
         call DestroyGroup(udg_CargoTransportGroup[i])

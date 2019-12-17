@@ -1,4 +1,4 @@
-library NativeRedefinitions
+library NativeRedefinitions requires LoPHeader
 
 globals
     group REMOVE_GRP = CreateGroup()

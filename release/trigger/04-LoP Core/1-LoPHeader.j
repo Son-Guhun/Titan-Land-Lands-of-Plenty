@@ -1,4 +1,4 @@
-library LoPHeader
+library LoPHeader requires TransportUtils
 /*
 This library defines many functions that are used across the map's code.
 
@@ -31,7 +31,7 @@ function ExecuteCode takes code callback returns nothing
 endfunction
 
 function LoP_TransportHasUnits takes unit transport returns boolean
-    return not IsGroupEmpty(udg_CargoTransportGroup[GetUnitUserData(transport)])
+    return not IsGroupEmpty(GetTransportedUnits(transport))
 endfunction
 
 endlibrary
