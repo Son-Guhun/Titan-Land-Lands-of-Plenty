@@ -141,14 +141,20 @@ endfunction
 // GUMS API
 //==========================================
 
-// Call this when a unit is removed from the game.
-function GUMSClearUnitData takes unit whichUnit returns nothing
-    if IsUnitInGroup(whichUnit, loopGroup) then
-        call GroupRemoveUnit(loopGroup, whichUnit)
-    endif
-    call data.flushChild(GetHandleId(whichUnit))
+globals
+    private boolean unitHasBeenRemoved = false
+endglobals
+
+// Clears all data stored with a unit handle ID.
+function GUMSClearHandleId takes integer handleId returns nothing
+    call data.flushChild(handleId)
+    set unitHasBeenRemoved = true
 endfunction
 
+// Call this when a unit is removed from the game. It supports both in-scope units and units that are out of scope (aren't null, but can't really be manipulated)
+function GUMSClearUnitData takes unit whichUnit returns nothing
+    call GUMSClearHandleId(GetHandleId(whichUnit))
+endfunction
 
 
 private struct SaveFlyHeight extends array
@@ -651,6 +657,10 @@ endfunction
 
 //THIS FUNCTION IS RUN ON A TIMER THAT CALLS THE FUNCTION ABOVE
 function GUMSTimerFunction takes nothing returns nothing
+    if unitHasBeenRemoved then
+        call GroupRefresh(loopGroup)
+        set unitHasBeenRemoved = true
+    endif
     call ForGroup(loopGroup, function GUMSGroupFunction)
 endfunction
 

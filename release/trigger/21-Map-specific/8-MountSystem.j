@@ -1,10 +1,12 @@
-library MountSystem requires StaticLinkedSet 
+library MountSystem requires StaticLinkedSet, TableStruct
 
 private struct UnitData extends array
     implement StaticLinkedSetNode
 
     unit rider
     unit mount
+    //! runtextmacro TableStruct_NewStructField("riderData", "UnitData")
+    //! runtextmacro TableStruct_NewStructField("mountData", "UnitData")
     
     method operator unit takes nothing returns unit
         return udg_UDexUnits[this]
@@ -22,8 +24,10 @@ private struct UnitData extends array
             call SetUnitPathing(.rider, true)
             call BlzUnitDisableAbility(.rider, 'Amov', false, false)
             
-            set UnitData.get(.rider).mount = null
+            set .riderData.mount = null
             set .rider = null
+            call .riderData.mountDataClear()
+            call .riderDataClear()
         endif
     endmethod
     
@@ -31,7 +35,7 @@ private struct UnitData extends array
         // call BJDebugMsg("Dismounting")
         if .mount != null then
             // call BJDebugMsg("Mount found")
-            call UnitData.get(.mount).ditchRider()
+            call .mountData.ditchRider()
         endif
     endmethod
     
@@ -99,7 +103,9 @@ public function MountUnit takes unit rider, unit mount returns nothing
         endif
         
         set UnitData.get(rider).mount = mount
+        set UnitData.get(rider).mountData = GetUnitUserData(mount)
         set UnitData.get(mount).rider = rider
+        set UnitData.get(mount).riderData = GetUnitUserData(rider)
         
         call BlzUnitDisableAbility(rider, 'Amov', true, false)
         call mountData.append()
@@ -118,6 +124,7 @@ public function DitchRider takes unit mount returns nothing
     call UnitData.get(mount).ditchRider()
 endfunction
 
+// This function accepts in-scope and out-of-scope units.
 public function ClearData takes unit whichUnit returns nothing
     call UnitData.get(whichUnit).destroy()
 endfunction

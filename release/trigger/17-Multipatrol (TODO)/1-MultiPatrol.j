@@ -247,7 +247,8 @@ function Patrol_DestroyIdPoints takes integer u_handle returns nothing
     endloop
 endfunction
 
-function Patrol_ClearUnitIdData takes integer unitHandleId returns nothing
+// This function accepts in-scope and out-of-scope units.
+function Patrol_ClearHandleId takes integer unitHandleId returns nothing
     local trigger patrolTrig
     
     
@@ -268,7 +269,7 @@ function Patrol_ClearUnitIdData takes integer unitHandleId returns nothing
 endfunction
 
 function Patrol_ClearUnitData takes unit whichUnit returns nothing
-    call Patrol_ClearUnitIdData(GetHandleId(whichUnit))
+    call Patrol_ClearHandleId(GetHandleId(whichUnit))
 endfunction
 
 function Patrol_IsValidPatrolOrder takes integer orderId returns boolean

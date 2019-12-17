@@ -304,16 +304,19 @@ function GMSS_UnitGetMoveMultiplier takes unit whichUnit returns real
     return multiplier
 endfunction
 
+// This function accepts in-scope and out-of-scope units.
+function GMSS_ClearHandleId takes integer handleId returns nothing
+    if HasBonus(handleId) then
+        call RemoveBonus(handleId)
+    endif
+    if HasMultiplier(handleId) then
+        call RemoveMultiplier(handleId)
+    endif
+endfunction
+
 // Clears all Hashtable or Table data stored for 'whichUnit' in the system.
 function GMSS_ClearData takes unit whichUnit returns nothing
-    local integer uId = GetHandleId(whichUnit)
-    
-    if HasBonus(uId) then
-        call RemoveBonus(uId)
-    endif
-    if HasMultiplier(uId) then
-        call RemoveMultiplier(uId)
-    endif
+    call GMSS_ClearHandleId(GetHandleId(whichUnit))
 endfunction
 
 //===================================================

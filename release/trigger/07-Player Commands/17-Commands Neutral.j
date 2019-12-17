@@ -39,7 +39,12 @@ function LoP_TakeFromNeutral takes unit whichUnit returns nothing
     endif
 endfunction
 
-// This function is called when a unit changes owner and is not inside of the old owner's neutral grp
+function LoP_ClearNeutralHandleId takes UnitData handleId returns nothing
+    call handleId.clearOwner()
+endfunction
+
+// This function should be called when a unit changes owner and is not inside of the old owner's neutral grp.
+// This function accepts in-scope and out-of-scope units.
 function LoP_ClearNeutralData takes unit whichUnit returns nothing
     call UnitData.get(whichUnit).clearOwner()
 endfunction
