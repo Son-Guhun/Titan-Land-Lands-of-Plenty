@@ -309,6 +309,9 @@ struct SaveLoader extends array
             
         if SubString(data, 0, 1) == "v" then
             call .parseData(data)
+            if .minX == 0 then
+                set .atOriginal = true
+            endif
         else
             set .version = 3
             set .totalFiles = S2I(data)

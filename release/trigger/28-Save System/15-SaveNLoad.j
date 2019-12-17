@@ -575,6 +575,8 @@ function IsTerrainHeader takes string chatStr returns boolean
     return not (SubString(chatStr, 0, 1) == "@")
 endfunction
 
+// Loads the first line of a terrain save, which contains the coords of the rect
+// offsetIsCenter indicates that offsetX and offsetY should be interpreted as the coords of a new center for the rect, and not actual offsets. Used for version 3 saves.
 function LoadTerrainHeader takes string chatStr, real offsetX, real offsetY, boolean offsetIsCenter returns nothing
     local integer cutToComma
     local SaveNLoad_PlayerData playerId = GetPlayerId(GetTriggerPlayer())

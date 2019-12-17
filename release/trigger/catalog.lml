@@ -140,6 +140,7 @@
     '48-Commands Save': 'Commands Save'
     '49-Commands Request': 'Commands Request'
     '50-Commands Usav': 'Commands Usav'
+    '51-Commands Compat': 'Commands Compat'
 '08-Decoration Systems': 'Decoration Systems'
     Comment
 '09-Deco Builders': 'Deco Builders'
