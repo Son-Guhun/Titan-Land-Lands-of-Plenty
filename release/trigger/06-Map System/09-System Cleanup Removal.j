@@ -1,9 +1,18 @@
+/*
+// Handle Id
+call Patrol_ClearHandleId
+call GUMSClearHandleId
+call GMSS_ClearHandleId
+call LoP_ClearNeutralHandleId
+*/
+
 library LoPCleanUpRemoval requires LoPCleanUpDeath, UnitEvents, optional RedefineNatives
 
 //! runtextmacro optional RedefineNatives()
 
-function LoP_onRemoval takes unit whichUnit returns nothing
-    debug call BJDebugMsg("OnRemove")
+function LoP_onRemoval takes integer userData returns nothing
+    local unit whichUnit = udg_UDexUnits[userData]
+    call BJDebugMsg("OnRemove")
     
     call UnitEvents.evalOnRemove(whichUnit)
     
@@ -16,9 +25,9 @@ function LoP_onRemoval takes unit whichUnit returns nothing
 
         set g_unitHasBeenRemoved = true
         // CLEAR KNOCKBACK DATA FOR SPELLS
-        call FlushChildHashtable(udg_Hashtable_2, -GetUnitUserData(whichUnit))
+        call FlushChildHashtable(udg_Hashtable_2, -userData)
         // DECO BUILDER DECREASE COUNT
-        call DecoBuilderCount_ReduceCount(whichUnit)
+        // call DecoBuilderCount_ReduceCount(whichUnit)  // DecoBuilderCount relies on UnitTypeId, which does not function for out-of-scope units
 
         
         call GUMSClearUnitData(whichUnit)
@@ -26,26 +35,35 @@ function LoP_onRemoval takes unit whichUnit returns nothing
         call GMSS_ClearData(whichUnit)
         call LoP_ClearNeutralData(whichUnit)
         call MountSystem_ClearData(whichUnit)
+        call ClearTransportData(whichUnit)
         
         if LoP_UnitData.get(whichUnit).isHeroic then
             call LoPHeroicUnit_OnRemove(whichUnit)
             
             // Avoid crashes due to invalid hero icon in sidebar
-            call DisableTrigger(gg_trg_System_Cleanup_Owner_Change)
-            call SetUnitOwner(whichUnit, Player(bj_PLAYER_NEUTRAL_EXTRA), false)
-            call EnableTrigger(gg_trg_System_Cleanup_Owner_Change)
+            // call DisableTrigger(gg_trg_System_Cleanup_Owner_Change)
+            // call SetUnitOwner(whichUnit, Player(bj_PLAYER_NEUTRAL_EXTRA), false)
+            // call EnableTrigger(gg_trg_System_Cleanup_Owner_Change)
         endif
         
         call LoP_UnitData.get(whichUnit).destroy()
     endif
+    set whichUnit = null
 endfunction
 
 function LoP_RemoveUnit takes unit whichUnit returns nothing
     if LoP_IsUnitProtected(whichUnit) or LoP_IsUnitDummy(whichUnit) then
         // do nothing
     else
-        if not LoP_IsUnitDecoration(whichUnit) then
+        if not LoP_IsUnitDecoration(whichUnit) and not LoP_IsUnitDecoBuilder(whichUnit) then
             call RemoveUnit(whichUnit)  // Removing unit does not fire event immediately.
+            if LoP_UnitData.get(whichUnit).isHeroic then
+                call LoPHeroicUnit_OnRemove(whichUnit)
+            
+                call DisableTrigger(gg_trg_System_Cleanup_Owner_Change)
+                call SetUnitOwner(whichUnit, Player(bj_PLAYER_NEUTRAL_EXTRA), false)
+                call EnableTrigger(gg_trg_System_Cleanup_Owner_Change)
+            endif
         else
             call DisableTrigger(gg_trg_System_Cleanup_Death)
             call KillUnit(whichUnit)
@@ -67,7 +85,7 @@ endfunction
 endlibrary
 
 function Trig_System_Cleanup_Removal_Conditions takes nothing returns boolean
-    call LoP_onRemoval(udg_UDexUnits[udg_UDex])
+    call LoP_onRemoval(udg_UDex)
     return false
 endfunction
 
