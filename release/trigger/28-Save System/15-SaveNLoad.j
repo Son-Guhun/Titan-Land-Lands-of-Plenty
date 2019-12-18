@@ -1,26 +1,3 @@
-library Base36
-constant function LoadAlphabet takes nothing returns string
-
-return "0123456789abcdefghijklmnopqrstuvwxyz"
-
-endfunction
-
-function LoadD2H takes integer int returns string
-    return SubString(LoadAlphabet(),int,int+1)
-endfunction
-
-function LoadH2D takes string char returns integer
-    local integer i = 0
-    
-    loop
-    exitwhen SubString(LoadAlphabet(),i,i+1) == char
-        set i = i+1
-    endloop
-    
-    return i
-endfunction
-endlibrary
-
 library SaveNLoadConfig requires LoPHeader
     
 public function StructureShouldAutoLand takes unit structure returns boolean
@@ -29,11 +6,11 @@ endfunction
 
 endlibrary
 
-library SaveNLoad requires WorldBounds, UnitVisualMods, Base36, TerrainTools, DecorationSFX, UnitTypeDefaultValues, AttachedSFX, SaveIO/* 
+library SaveNLoad requires WorldBounds, UnitVisualMods, AnyBase, TerrainTools, DecorationSFX, UnitTypeDefaultValues, AttachedSFX, SaveIO/* 
 
    */ optional UserDefinedRects, optional SaveNLoadConfig optional LoPDeprecated
 ////////////////////////////////////////////////////////////////////////////////////////////////////
-//SaveNLoad v3.0
+//SaveNLoad v4.0
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 public constant function OLDFOLDER takes nothing returns string
     return "TitanLandLoP\\"
@@ -41,6 +18,14 @@ endfunction
 
 public constant function FOLDER takes nothing returns string
     return "TLLoP\\Saves\\"
+endfunction
+
+function LoadD2H takes integer int returns string
+    return SubString(AnyBase.digits,int,int+1)
+endfunction
+
+function LoadH2D takes string char returns integer
+    return AnyBase.values[StringHash(char)]
 endfunction
 
 //! textmacro SaveXYMethod takes name, offset
