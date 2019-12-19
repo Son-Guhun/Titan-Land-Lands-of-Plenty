@@ -1,4 +1,4 @@
-library SaveNLoadConfig requires LoPHeader
+library SaveNLoadConfig requires LoPHeader, LoPNeutralUnits
     
 public function StructureShouldAutoLand takes unit structure returns boolean
     return not LoP_IsUnitDecoration(structure)
@@ -27,6 +27,28 @@ endfunction
 function LoadH2D takes string char returns integer
     return AnyBase.values[StringHash(char)]
 endfunction
+
+public struct BoolFlags extends array
+    static method isAnyFlag takes integer data, integer flags returns boolean
+        return BlzBitAnd(data, flags) > 0
+    endmethod
+    
+    static method isAllFlags takes integer data, integer flags returns boolean
+        return BlzBitAnd(data, flags) == flags
+    endmethod
+
+    static constant method operator UNROOTED takes nothing returns integer
+        return 1
+    endmethod
+    
+    static constant method operator NEUTRAL takes nothing returns integer
+        return 2
+    endmethod
+    
+    static constant method operator FLAG_3 takes nothing returns integer
+        return 4
+    endmethod
+endstruct
 
 //! textmacro SaveXYMethod takes name, offset
     method operator $name$ takes nothing returns real
@@ -309,6 +331,16 @@ function ParseFacing takes string scaleStr returns real
     endif
 endfunction
 
+function LoadUnitFlags takes unit whichUnit, integer flags returns nothing
+    if BoolFlags.isAnyFlag(flags, BoolFlags.UNROOTED) then
+        call IssueImmediateOrder(whichUnit, "unroot")
+    endif
+    
+    if BoolFlags.isAnyFlag(flags, BoolFlags.NEUTRAL) then
+        call LoP_GiveToNeutral(whichUnit)
+    endif
+endfunction
+
 function LoadUnit takes string chat_str, player un_owner, real centerX, real centerY returns nothing
     local integer str_index
     local integer un_type
@@ -330,7 +362,7 @@ function LoadUnit takes string chat_str, player un_owner, real centerX, real cen
     local string aSpeed
     local string animTag
     local string select
-    local string isUnrooted
+    local integer flags
 
     set udg_save_LastLoadedUnit[playerId] = null
     set str_index = CutToComma(chat_str)
@@ -415,9 +447,9 @@ function LoadUnit takes string chat_str, player un_owner, real centerX, real cen
                 set len_str = StringLength(chat_str)
                 if chat_str != "" then
                     set str_index = CutToComma(chat_str)
-                    set isUnrooted = (SubString(chat_str,0,str_index))
+                    set flags = S2I(SubString(chat_str,0,str_index))  // TODO: When max flag is larger than 4, we need to use AnyBase(92)
                 else
-                    set isUnrooted = ""
+                    set flags = 0
                     // set chat_str = SubString(chat_str,str_index+1,len_str+1)
                     // set len_str = StringLength(chat_str)
                 endif
@@ -473,10 +505,9 @@ function LoadUnit takes string chat_str, player un_owner, real centerX, real cen
         if resultUnit != null then
             if IsUnitIdType(un_type, UNIT_TYPE_ANCIENT) then
                 call SetUnitFacing(resultUnit, un_fangle)
-                if isUnrooted =="t" then
-                    call IssueImmediateOrder(resultUnit, "unroot")
-                endif
             endif
+            
+            call LoadUnitFlags(resultUnit, flags)
             
             if g_pitch != 0. or g_roll != 0. then
                 if AttachedSFX_IsUnitValid(resultUnit) then

@@ -142,6 +142,17 @@ globals
     SaveData array saveFile
 endglobals
 
+private function GenerateFlagsStr takes unit saveUnit returns string
+    local integer result = 0
+    if IsUnitType(saveUnit, UNIT_TYPE_ANCIENT) and BlzGetUnitIntegerField(saveUnit, UNIT_IF_DEFENSE_TYPE) == GetHandleId(DEFENSE_TYPE_LARGE) then
+        set result = result + SaveNLoad_BoolFlags.UNROOTED
+    endif
+    if GetOwningPlayer(saveUnit) == Player(PLAYER_NEUTRAL_PASSIVE) then
+        set result = result + SaveNLoad_BoolFlags.NEUTRAL
+    endif
+    return I2S(result)  // TODO: If max flag exceeds 4, we need to use AnyBase(92) instead of I2S
+endfunction
+
 private function SaveForceLoop takes nothing returns boolean
     local player filterPlayer = GetFilterPlayer()
     local InternalPlayerData playerId = GetPlayerId(filterPlayer)
@@ -170,6 +181,8 @@ private function SaveForceLoop takes nothing returns boolean
                 if not IsGroupEmpty(grp) then
                     call GroupRefresh(grp)
                 endif
+            elseif (IsUnitHidden(saveUnit) and not IsUnitLoaded(saveUnit)) or not UnitAlive(saveUnit) then
+                // Don't save dead and hidden units
             else
                 if UnitHasAttachedEffect(saveUnit) then
                     set saveStr = GetSFXSaveStr(GetUnitAttachedEffect(saveUnit), filterPlayer, saveData, unitHandleId.hasColor(), GUMS_GetUnitSelectionType(saveUnit))
@@ -187,12 +200,8 @@ private function SaveForceLoop takes nothing returns boolean
                                 */   unitHandleId.getColor() + "," + /*
                                 */   unitHandleId.getAnimSpeed() + "," + /*
                                 */   SaveIO_CleanUpString(unitHandleId.getAnimTag()) + "," + /*
-                                */   I2S(GUMS_GetUnitSelectionType(saveUnit))
-                    if IsUnitType(saveUnit, UNIT_TYPE_ANCIENT) and BlzGetUnitIntegerField(saveUnit, UNIT_IF_DEFENSE_TYPE) == GetHandleId(DEFENSE_TYPE_LARGE) then
-                        set saveStr = saveStr + ",t"
-                    // else
-                        // set saveStr = saveStr + ",f"
-                    endif
+                                */   I2S(GUMS_GetUnitSelectionType(saveUnit)) + "," + /*
+                                */   GenerateFlagsStr(saveUnit)
                 endif
                 
                 call saveData.write(SaveNLoad_FormatString("SnL_unit", saveStr))
