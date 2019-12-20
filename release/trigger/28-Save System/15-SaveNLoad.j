@@ -121,8 +121,8 @@ static if LIBRARY_UserDefinedRects then
     function Save_GetGUDRSaveString takes integer generatorId returns string
         local rect userRect = GUDR_GetGeneratorIdRect(generatorId)
         
-        local real length = GetRectMaxX(userRect) - GetRectCenterX(userRect)
-        local real height = GetRectMaxY(userRect) - GetRectCenterY(userRect)
+        local real length = GUDR_GetGeneratorIdExtentX(generatorId)
+        local real height = GUDR_GetGeneratorIdExtentY(generatorId)
         local integer weatherType = GUDR_GetGeneratorIdWeatherType(generatorId)
         local boolean hidden 
         local TerrainFog fog

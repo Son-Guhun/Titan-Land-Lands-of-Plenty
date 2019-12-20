@@ -42,10 +42,8 @@ private function onCommand takes nothing returns boolean
         
         set saveData.centerX = GetUnitX(generator)
         set saveData.centerY = GetUnitY(generator)
-        set saveData.minX = GetRectMinX(userRect)
-        set saveData.minY = GetRectMinY(userRect)
-        set saveData.maxX = GetRectMaxX(userRect)
-        set saveData.maxY = GetRectMaxY(userRect)
+        set saveData.extentX = GUDR_GetGeneratorExtentX(generator)
+        set saveData.extentY = GUDR_GetGeneratorExtentY(generator)
     endif
     
     call SaveUnits(saveData)

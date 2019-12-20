@@ -81,10 +81,8 @@ function SaveLoopActions2 takes nothing returns nothing
     set playerId.saveData = SaveData.create(saver, SaveNLoad_FOLDER() + SubString(GetEventPlayerChatString(), 6, 129))
     set playerId.saveData.centerX = GetUnitX(generator)
     set playerId.saveData.centerY = GetUnitY(generator)
-    set playerId.saveData.minX = GetRectMinX(rectangle)
-    set playerId.saveData.minY = GetRectMinY(rectangle)
-    set playerId.saveData.maxX = GetRectMaxX(rectangle)
-    set playerId.saveData.maxY = GetRectMaxY(rectangle)
+    set playerId.saveData.extentX = GUDR_GetGeneratorExtentX(generator)
+    set playerId.saveData.extentY = GUDR_GetGeneratorExtentY(generator)
     
     call EnumDestructablesInRect(rectangle, Condition(function SaveFilter), null)
 

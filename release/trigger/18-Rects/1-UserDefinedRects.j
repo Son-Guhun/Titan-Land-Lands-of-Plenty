@@ -40,10 +40,10 @@ function ToggleGUDRVisibility takes unit whichUnit, boolean switch, boolean show
     boolean show => //!If switch is false, the visibility will be set to this value.
 endfunction
 
-function MoveGUDR takes unit centerUnit, real offsetX, real offsetY, boolean expand returns boolean
+function MoveGUDR takes unit centerUnit, real extentX, real extentY, boolean expand returns boolean
     unit centerUnit => //!The GUDR generator.
-    real offsetX
-    real offsetY
+    real extentX
+    real extentY
     boolean expand => //!If true, the region's current borders will be expanded by the offsets.
                       //!If false, the region's borders will be set to the specified offets. (center +- offset)
 endfunction
@@ -96,8 +96,8 @@ private struct Indices extends array
     //! runtextmacro GUDR_INDEX("GROUP", "6")
     //! runtextmacro GUDR_INDEX("HIDDEN", "7")
     //! runtextmacro GUDR_INDEX("WEATHER_TYPE", "8")
-    //! runtextmacro GUDR_INDEX("OFFSET_X", "9")
-    //! runtextmacro GUDR_INDEX("OFFSET_Y", "10")
+    //! runtextmacro GUDR_INDEX("EXTENT_X", "9")
+    //! runtextmacro GUDR_INDEX("EXTENT_Y", "10")
 endstruct
 
 //! runtextmacro DeclareParentHashtableWrapperModule("hashTable", "true", "hT", "private")
@@ -106,8 +106,12 @@ endstruct
 private struct UserDefinedRect extends array
     // //! runtextmacro HashStruct_SetHashtableWrapper("hashTable")
 
-    //! runtextmacro HashStruct_NewPrimitiveFieldEx("hT", "offsetX","real","Indices.OFFSET_X")
-    //! runtextmacro HashStruct_NewPrimitiveFieldEx("hT", "offsetY","real","Indices.OFFSET_Y")
+    //! runtextmacro HashStruct_NewPrimitiveFieldEx("hT", "extentX","real","Indices.EXTENT_X")
+    //! runtextmacro HashStruct_NewPrimitiveFieldEx("hT", "extentY","real","Indices.EXTENT_Y")
+    
+    static method get takes unit whichUnit returns thistype
+        return GetHandleId(whichUnit)
+    endmethod
 endstruct
 //=============================
 //FUNCTIONS THAT RETURN BOOLEANS
@@ -162,6 +166,14 @@ function GUDR_GetGeneratorIdWeatherType takes integer generatorId returns intege
     return LoadInteger(hashTable, generatorId, Indices.WEATHER_TYPE)
 endfunction
 
+function GUDR_GetGeneratorIdExtentX takes UserDefinedRect generatorId returns real
+    return generatorId.extentX
+endfunction
+
+function GUDR_GetGeneratorIdExtentY takes UserDefinedRect generatorId returns real
+    return generatorId.extentY
+endfunction
+
 //Unit as parameter
 
 function GUDR_GetGeneratorRect takes unit generator returns rect
@@ -180,9 +192,18 @@ function GUDR_GetGeneratorWeatherType takes unit generator returns integer
     return GUDR_GetGeneratorIdWeatherType(GetHandleId(generator))
 endfunction
 
+function GUDR_GetGeneratorExtentX takes unit generator returns real
+    return GUDR_GetGeneratorIdExtentX(GetHandleId(generator))
+endfunction
+
+function GUDR_GetGeneratorExtentY takes unit generator returns real
+    return GUDR_GetGeneratorIdExtentY(GetHandleId(generator))
+endfunction
+
 function GUDR_ConvertWeatherType takes integer weatherType returns integer
     return LoadInteger(hashTable, 0, weatherType)
 endfunction
+ 
 
 private function GetGeneratorIdLightning takes integer genId, integer i returns lightning
     return LoadLightningHandle(hashTable, genId, i)
@@ -420,7 +441,7 @@ function ToggleGUDRVisibility takes unit whichUnit, boolean toggle, boolean show
     return true
 endfunction
 
-function MoveGUDR takes unit centerUnit, real offsetX, real offsetY, boolean expand returns boolean
+function MoveGUDR takes unit centerUnit, real extentX, real extentY, boolean expand returns boolean
     local UserDefinedRect unitId = GetHandleId(centerUnit)
     local real centerX = GetUnitX(centerUnit)
     local real centerY = GetUnitY(centerUnit)
@@ -440,20 +461,20 @@ function MoveGUDR takes unit centerUnit, real offsetX, real offsetY, boolean exp
     
     //If user wants to expand or contract the current region, Load the current value of its borders
     if expand then
-        set offsetX = RMaxBJ(offsetX + unitId.offsetX, 32)
-        set offsetY = RMaxBJ(offsetY + unitId.offsetY, 32)
+        set extentX = RMaxBJ(extentX + unitId.extentX, 32)
+        set extentY = RMaxBJ(extentY + unitId.extentY, 32)
     else
-        set offsetX = RMaxBJ(offsetX, 32)
-        set offsetY = RMaxBJ(offsetY, 32)
+        set extentX = RMaxBJ(extentX, 32)
+        set extentY = RMaxBJ(extentY, 32)
     endif
-    set unitId.offsetX = offsetX
-    set unitId.offsetY = offsetY
+    set unitId.extentX = extentX
+    set unitId.extentY = extentY
     
     //Set the values of the borders based on the offsets
-    set minX = centerX - offsetX
-    set maxX = centerX + offsetX
-    set minY = centerY - offsetY
-    set maxY = centerY + offsetY
+    set minX = centerX - extentX
+    set maxX = centerX + extentX
+    set minY = centerY - extentY
+    set maxY = centerY + extentY
     
     //Update Rect
     static if LIBRARY_AutoRectEnvironment then
@@ -519,8 +540,8 @@ function CreateGUDR takes unit centerUnit returns boolean
     call SaveBoolean(hashTable, unitId, Indices.HIDDEN, true) //Save show/hide boolean as true, because nothing is being hidden
     call SaveInteger(hashTable, unitId, Indices.WEATHER_TYPE, 1) //Save 1 as it is the value of 'RAhr'
     
-    set unitId.offsetX = 32
-    set unitId.offsetY = 32
+    set unitId.extentX = 32
+    set unitId.extentY = 32
     
     set userDefRect = null
     return true

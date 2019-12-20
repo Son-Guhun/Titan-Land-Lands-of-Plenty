@@ -101,10 +101,8 @@ function SaveTerrain takes nothing returns nothing
     set playerId.saveData = SaveData.create(GetTriggerPlayer(), SaveNLoad_FOLDER() + SubString(GetEventPlayerChatString(), 6, 129))
     set playerId.saveData.centerX = GetUnitX(generator)
     set playerId.saveData.centerY = GetUnitY(generator)
-    set playerId.saveData.minX = GetRectMinX(saveRect)
-    set playerId.saveData.minY = GetRectMinY(saveRect)
-    set playerId.saveData.maxX = GetRectMaxX(saveRect)
-    set playerId.saveData.maxY = GetRectMaxY(saveRect)
+    set playerId.saveData.extentX = GUDR_GetGeneratorExtentX(generator)
+    set playerId.saveData.extentY = GUDR_GetGeneratorExtentY(generator)
     
     set saveRect = GUDR_GetGeneratorRect(generator)
     set playerId.minX = GetRectMinX(saveRect)

@@ -6,6 +6,8 @@ private function OnCommand takes nothing returns boolean
     if args == "darkness" then
         call ResetTerrainFog()
         call SetDayNightModels("Environment\\DNC\\DNCLordaeron\\DNCLordaeronTerrain\\DNCLordaeronTerrain.mdl", "Environment\\DNC\\DNCLordaeron\\DNCLordaeronUnit\\DNCLordaeronUnit.mdl")
+    elseif args == "selection" then
+        call BlzFrameSetFocus(BlzGetOriginFrame(ORIGIN_FRAME_WORLD_FRAME, 0), true)
     endif
     
     return false

@@ -105,10 +105,8 @@ struct SaveData extends array
     
     //! runtextmacro TableStruct_NewPrimitiveField("centerX", "real")
     //! runtextmacro TableStruct_NewPrimitiveField("centerY", "real")
-    //! runtextmacro TableStruct_NewPrimitiveField("minX", "real")
-    //! runtextmacro TableStruct_NewPrimitiveField("minY", "real")
-    //! runtextmacro TableStruct_NewPrimitiveField("maxX", "real")
-    //! runtextmacro TableStruct_NewPrimitiveField("maxY", "real")
+    //! runtextmacro TableStruct_NewPrimitiveField("extentX", "real")
+    //! runtextmacro TableStruct_NewPrimitiveField("extentY", "real")
 
     private method start takes nothing returns nothing
         if GetLocalPlayer() == .player then
@@ -160,7 +158,7 @@ function SomeRandomName takes nothing returns nothing //")  // Not calling Prelo
     
     private method getMetaString takes nothing returns string
         return FormatStringLocal(IO_ABILITY(), "v" + I2S(.VERSION) + "," + I2S(.current) + "," + R2S(.centerX) + "," + R2S(.centerY) + "," + /*
-                        */  R2S(.minX) + "," + R2S(.minY) + "," + R2S(.maxX) + "," + R2S(maxY))
+                        */  R2S(.extentX) + "," + R2S(.extentY))
     endmethod
     
     method destroy takes nothing returns nothing
@@ -192,6 +190,10 @@ function SomeRandomName takes nothing returns nothing //")  // Not calling Prelo
             call .currentClear()
             call .folderClear()
             call .playerClear()
+            call .centerXClear()
+            call .centerYClear()
+            call .extentXClear()
+            call .extentYClear()
             
             implement GMUI_deallocate_this
         endif
@@ -206,10 +208,8 @@ struct SaveLoader extends array
     //! runtextmacro TableStruct_NewReadonlyPrimitiveField("version", "integer")
     //! runtextmacro TableStruct_NewPrimitiveField("centerX", "real")
     //! runtextmacro TableStruct_NewPrimitiveField("centerY", "real")
-    //! runtextmacro TableStruct_NewReadonlyPrimitiveField("minX", "real")
-    //! runtextmacro TableStruct_NewReadonlyPrimitiveField("minY", "real")
-    //! runtextmacro TableStruct_NewReadonlyPrimitiveField("maxX", "real")
-    //! runtextmacro TableStruct_NewReadonlyPrimitiveField("maxY", "real")
+    //! runtextmacro TableStruct_NewReadonlyPrimitiveField("extentX", "real")
+    //! runtextmacro TableStruct_NewReadonlyPrimitiveField("extentY", "real")
     
     //! runtextmacro TableStruct_NewReadonlyPrimitiveField("atOriginal", "boolean")
     
@@ -219,7 +219,7 @@ struct SaveLoader extends array
     //! runtextmacro TableStruct_NewReadonlyHandleField("player", "player")
     
     method isRectSave takes nothing returns boolean
-        return this.minX != 0
+        return this.extentX != 0
     endmethod
 
     // Reads the current file and increments the counter.
@@ -275,19 +275,11 @@ struct SaveLoader extends array
         
         if data != "" then
             set index = CutToComma(data)
-            set .minX = S2R((SubString(data, 0, index)))
+            set .extentX = S2R((SubString(data, 0, index)))
             set data = SubString(data, index+1, StringLength(data))
             
             set index = CutToComma(data)
-            set .minY = S2R(SubString(data, 0, index))
-            set data = SubString(data, index+1, StringLength(data))
-        
-            set index = CutToComma(data)
-            set .maxX = S2R((SubString(data, 0, index)))
-            set data = SubString(data, index+1, StringLength(data))
-            
-            set index = CutToComma(data)
-            set .maxY = S2R(SubString(data, 0, index))
+            set .extentY = S2R(SubString(data, 0, index))
             set data = SubString(data, index+1, StringLength(data))
         endif
         
@@ -309,7 +301,7 @@ struct SaveLoader extends array
             
         if SubString(data, 0, 1) == "v" then
             call .parseData(data)
-            if .minX == 0 then
+            if .extentX == 0 then
                 set .atOriginal = true
             endif
         else
@@ -322,7 +314,7 @@ struct SaveLoader extends array
         endif
         
         call BJDebugMsg(R2S(.centerX) + "," + R2S(.centerY))
-        call BJDebugMsg(R2S(.minX) + "," + R2S(.minY) + "," + R2S(.maxX) + "," + R2S(.maxY))
+        call BJDebugMsg(R2S(.extentX) + "," + R2S(.extentY))
         
         return this
     endmethod
@@ -339,10 +331,8 @@ struct SaveLoader extends array
         
         call .centerXClear()
         call .centerYClear()
-        call .minXClear()
-        call .maxXClear()
-        call .minYClear()
-        call .maxYClear()
+        call .extentXClear()
+        call .extentYClear()
         
         call .atOriginalClear()
         implement GMUI_deallocate_this

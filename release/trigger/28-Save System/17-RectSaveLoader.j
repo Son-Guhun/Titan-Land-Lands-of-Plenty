@@ -60,7 +60,7 @@ public function onReceiveSize takes nothing returns nothing
         
         set UnitData.get(generator).saveData = saveData
         call CreateGUDR(generator)
-        call MoveGUDR(generator, saveData.maxX - saveData.centerX, saveData.maxY - saveData.centerY, false)
+        call MoveGUDR(generator, saveData.extentX, saveData.extentY, false)
         
         if GetLocalPlayer() == GetTriggerPlayer() then
             call ClearSelection()
