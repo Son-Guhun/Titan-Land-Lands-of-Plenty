@@ -497,8 +497,8 @@ function LoadUnit takes string chat_str, player un_owner, real centerX, real cen
         endif
     endif
     
-    // Only selectable decorations should become units. Except: structres with pathing map and no height, waygates.
-    if select != "2" or (IsUnitIdType(un_type, UNIT_TYPE_STRUCTURE) and un_flyH < GUMS_MINIMUM_FLY_HEIGHT()) or (un_type == 'nwgt') then
+    // Selection type 3 (locust) was only added in version 4, so version 3 saves must handle exceptions for unselectable decorations that should be loaded as units
+    if select != "2" or (SaveIO_GetCurrentlyLoadingSave(un_owner).version < 4 and ((IsUnitIdType(un_type, UNIT_TYPE_STRUCTURE) and un_flyH < GUMS_MINIMUM_FLY_HEIGHT()) or (un_type == 'nwgt'))) then
         //Create the unit and modify it according to the chat input data
         set resultUnit = CreateUnit (un_owner, un_type, un_posx, un_posy, un_fangle )
         

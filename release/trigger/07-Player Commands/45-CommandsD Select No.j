@@ -32,8 +32,8 @@ private function EnumFunc takes nothing returns nothing
             call DisplayTextToPlayer(trigP, 0, 0, "Heroes cannot be unselectable." ) 
         else
             if LoP_Command.getArguments() == "no f" then
+               call LoP_TakeFromNeutral(enumUnit)  // This is required, otherwise neutral units must be enumed when a unit is made unselectable.
                call PauseUnit(enumUnit, true)
-               call SetUnitOwner(enumUnit, trigP, false)  // This is required, otherwise neutral units must be enumed when a unit is made unselectable.
                call GUMSMakeUnitLocust(enumUnit)
             else
                 call DisplayTextToPlayer(trigP, 0, 0, "You must use |cffffff00-select no f|r to make non-decorations unselectable." ) 
@@ -42,7 +42,8 @@ private function EnumFunc takes nothing returns nothing
         
     else 
         if GetUnitAbilityLevel(enumUnit, 'Awrp') > 0 or (IsUnitType(enumUnit, UNIT_TYPE_STRUCTURE) and GetUnitFlyHeight(enumUnit) < GUMS_MINIMUM_FLY_HEIGHT()) then
-            call GUMSMakeUnitUnSelectable(enumUnit)
+            call LoP_TakeFromNeutral(enumUnit)
+            call GUMSMakeUnitLocust(enumUnit)
         else
             if CheckCommandOverflow() then
                 call ToEffect(enumUnit)

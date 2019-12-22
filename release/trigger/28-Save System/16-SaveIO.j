@@ -183,6 +183,9 @@ function SomeRandomName takes nothing returns nothing //")  // Not calling Prelo
                 */
                 call Preload(metaString)
                 // call Preload(endifStr)
+                call Preload( "\" )
+endfunction
+function SomeRandomName takes nothing returns nothing //")  // Not calling PreloadEnd in a preload file greatly improves loading performance.
                 call PreloadGenEnd(filePathSize)
             endif
             
@@ -312,9 +315,6 @@ struct SaveLoader extends array
         if .totalFiles < 0 then  // avoids issues, but there should be a better way. Maybe destroy when calling .loadData
             set .totalFiles = 1
         endif
-        
-        call BJDebugMsg(R2S(.centerX) + "," + R2S(.centerY))
-        call BJDebugMsg(R2S(.extentX) + "," + R2S(.extentY))
         
         return this
     endmethod

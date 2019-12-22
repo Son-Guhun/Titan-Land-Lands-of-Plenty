@@ -12,6 +12,51 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 	- New units for an existing race can be added in a patch version. 
 	- New decorations for an existing deco builder can be added in a patch version.
 
+## [v1.4.0] - YYYY-MM-DD
+
+### Added
+- Save System improvements:
+  - Saves made with Rect Generators (-tsav, -dsav, -usav) will now spawn a special Rect Generator when loaded into the game. This Rect Generator can be used to move the save around, so it can be loaded anywhere on the map.
+  - If you want to automatically load a Rect save at its original location, use the **-req** instead of **-request**.
+- New commands:
+  - **-usav:** This command can be used to save all your units inside of a Rect Generator, but not any unit outside of it..
+  - **-compat:** This command must be used to load old saves (made between 1.2.1 and 1.3.0) instead of the -request command.
+- Riderless Horses and Pack Horses now have a **Pick Up Rider** ability, allowing them to be ridden by a unit.
+- New tip/hint for the **-count** command.
+- Save Files now have integrity checks. If a file is missing or can not be read, the game will now warn the player. If a single unit's data is corrupted, the game will also warn the player.
+
+### Fixed
+- Fixed an issue that caused unselectable non-decoration units to be loaded incorrectly.
+- Fixed a crash that could occur when converting certain orc spellcasters into heroes.
+- Fixed an issue that would cause Ancients to always face the defeault angle when loaded from a save.
+- Strange behaviour of inverting a rect's size when making it smaller than minimum size has been removed.
+- Fixed a crash that could occur when using Staff of Mimic.
+
+### Changed
+- Changed commands:
+  - **-req:** This command is no longer used to load old saves. Instead, it is used to automatically load saves made with Rect Generators at their original position, instead of choosing a new position.
+- Saves will now be located in the folder: **Documents\Warcraft III\CustomMapData\TLLoP\Saves**
+- Ancients' rooted/unrooted status is now saved by the Save System.
+- Neutral units are now also loaded as neutral units.
+- Improved Rect Generator behaviour near map borders:
+  - Rect Generator lightning indicators will no longer behave strangely when near a map border.
+  - Rect Generator will now remember its old size when leaving a map border.
+  - You can now expand a Rect Generator when it is near a map border.
+- Vastly improved loading performance:
+  - Saves will now load twice as fast (still testing)
+  - Loading will no longer cause frame losses for the requesting player.
+  - Improved performance when loading terrain.
+  - A message is now shown to the loading player when finished.
+- Vastly improved saving perfomance:
+  - Players can now save the entire map's terrain and trees without causing the game to freeze for many seconds.
+- When setting a save center while selecting a unit, a message will now pop up with the new coords.
+- Added colored text to -count command.
+
+### Removed
+- The external SaveNLoad program is no longer supported. Old saves from before 1.2.1 can no longer be loaded into the game, and must be converted in a version that supports both systems (1.2.1 to 1.3.5).
+- All units that had been deprecated after version 1.3.0 have been removed from the game entirely. To load old saves that contained this unit, use a version up to 1.3.5.
+- The map no longer uses the UnitEvent library. This may avoid crashes when removing a unit from the game.
+
 ## [v1.3.5] - 2019-10-18
 
 ### Added

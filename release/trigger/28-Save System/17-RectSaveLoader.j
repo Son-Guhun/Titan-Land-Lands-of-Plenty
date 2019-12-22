@@ -37,7 +37,6 @@ public function onReceiveSize takes nothing returns nothing
     endif
     
     set saveData = SaveLoader.create(GetTriggerPlayer(), nextSave[GetPlayerId(GetTriggerPlayer())], syncData)
-    call BJDebugMsg(nextSave[GetPlayerId(GetTriggerPlayer())])
     
     if not saveData.atOriginal then
         set generator = CreateUnit(GetTriggerPlayer(), RectGenerator_GENERATOR_ID, saveData.centerX, saveData.centerY, 270.)
@@ -101,7 +100,15 @@ private function onAbility takes nothing returns nothing
         call KillUnit(trigU)
         
         set trigU = null
+    elseif GetSpellAbilityId() == 'A062' then
+        set trigU = GetTriggerUnit()
+        set saveData = UnitData.get(trigU).saveData
+        
+        call SetUnitPosition(trigU, saveData.centerX, saveData.centerY)
+        call MoveGUDR(trigU, 0, 0, true)
     endif
+    
+    set trigU = null
 endfunction
 
 private function Init takes nothing returns nothing
