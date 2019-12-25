@@ -65,6 +65,7 @@ private module InitModule
             set playerId = playerId + 1
         endloop
 
+        set .loadingQueue = LinkedHashSet.create()
         call TimerStart(CreateTimer(), 0.25, true, function thistype.onTimer)
     endmethod
 endmodule
@@ -253,8 +254,12 @@ struct SaveLoader extends array
     // This method does not immediately read the file. It puts it in queue for reading.
     // You can assume that calling this method will destroy the SaveLoader once all data has been synced.
     method loadData takes nothing returns nothing
-        if not PlayerData(GetPlayerId(.player)).loadRequests.contains(this) then
-            call PlayerData(GetPlayerId(.player)).loadRequests.append(this)
+        local integer playerId = GetPlayerId(.player)
+        if not PlayerData(playerId).loadRequests.contains(this) then
+            call PlayerData(playerId).loadRequests.append(this)
+            if not .loadingQueue.contains(playerId + 1) then
+                call .loadingQueue.append(playerId + 1)
+            endif
         endif
     endmethod
     
@@ -312,7 +317,7 @@ struct SaveLoader extends array
             set .totalFiles = S2I(data)
         endif
 
-        if .totalFiles < 0 then  // avoids issues, but there should be a better way. Maybe destroy when calling .loadData
+        if .totalFiles < 0 then  // avoids issues, but there should be a better way. Maybe destroy when calling .loadData and no files found
             set .totalFiles = 1
         endif
         
@@ -320,14 +325,14 @@ struct SaveLoader extends array
     endmethod
     
     method destroy takes nothing returns nothing
-        call .currentClear()
-        call .folderClear()
-        call .playerClear()
-        call .totalFilesClear()
         if PlayerData(GetPlayerId(.player)).loadRequests.contains(this) then
             call PlayerData(GetPlayerId(.player)).loadRequests.remove(this)
         endif
         
+        call .currentClear()
+        call .folderClear()
+        call .playerClear()
+        call .totalFilesClear()
         
         call .centerXClear()
         call .centerYClear()
@@ -338,7 +343,37 @@ struct SaveLoader extends array
         implement GMUI_deallocate_this
     endmethod
     
+    static LinkedHashSet loadingQueue
+    
+    private static method onTimer takes nothing returns nothing
+        local PlayerData playerId
+        local SaveLoader saveData
+
+        loop
+            set playerId = loadingQueue.begin() - 1
+            exitwhen playerId == -1
+            call loadingQueue.remove(playerId + 1)
+            set saveData = playerId.loadRequests.begin()
+            exitwhen saveData != playerId.loadRequests.end()
+            // call BJDebugMsg("A player had finished loading.")
+        endloop
+        
+        if playerId != -1 then
+            // call BJDebugMsg(I2S(playerId) + " (" + I2S(saveData.current) + "/" + I2S(saveData.totalFiles) + ")")
+            call loadingQueue.append(playerId + 1)
+            if not saveData.eof() then
+                call saveData.read()
+                if saveData.eof() then
+                    call DisplayTextToPlayer(Player(playerId), 0., 0., "Finished loading!")
+                    if GetLocalPlayer() == Player(playerId) then
+                        call BlzSendSyncData("SnL_IOsize", "end")
+                    endif
+                endif
+            endif
+        endif
+    endmethod
     // This function is exectued periodically, and it reads the next file of a SaveLoader that is currently being read.
+    /*
     private static method onTimer takes nothing returns nothing
         local PlayerData playerId = 0
         local SaveLoader saveData
@@ -360,6 +395,7 @@ struct SaveLoader extends array
         endloop
 
     endmethod
+    */
 
     implement InitModule
 endstruct
