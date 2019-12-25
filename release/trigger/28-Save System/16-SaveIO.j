@@ -66,7 +66,7 @@ private module InitModule
         endloop
 
         set .loadingQueue = LinkedHashSet.create()
-        call TimerStart(CreateTimer(), 0.25, true, function thistype.onTimer)
+        call TimerStart(CreateTimer(), 0.5, true, function thistype.onTimer)
     endmethod
 endmodule
 
@@ -364,7 +364,7 @@ struct SaveLoader extends array
             if not saveData.eof() then
                 call saveData.read()
                 if saveData.eof() then
-                    call DisplayTextToPlayer(Player(playerId), 0., 0., "Finished loading!")
+                    // call DisplayTextToPlayer(Player(playerId), 0., 0., "Finished loading!")
                     if GetLocalPlayer() == Player(playerId) then
                         call BlzSendSyncData("SnL_IOsize", "end")
                     endif

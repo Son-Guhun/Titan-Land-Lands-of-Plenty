@@ -28,6 +28,7 @@ public function onReceiveSize takes nothing returns nothing
     local SaveLoader saveData
     
     if syncData == "end" then
+        call DisplayTextToPlayer(GetTriggerPlayer(), 0., 0., "Finished loading!")
         set saveData = SaveIO_GetCurrentlyLoadingSave(GetTriggerPlayer())
         call saveData.destroy()
         return
