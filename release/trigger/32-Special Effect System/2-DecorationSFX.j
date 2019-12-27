@@ -1,22 +1,42 @@
 library DecorationSFX requires SpecialEffect, TableStruct
 
+///////////////////////////////////////////////////////////////
+// Configuration
+///////////////////////////////////////////////////////////////
+
+// Allows you to specify that a player's decorations should use another player's color, using DecorationSFX_SetPlayerColor.
 globals
     public constant boolean USE_CUSTOM_PLAYER_COLORS = true
 endglobals
 
 //! novjass
+'                                        Documentation                                             '
+
+// This function only works if USE_CUSTOM_PLAYER_COLORS is true
+public function SetPlayerColor takes player whichPlayer, integer color returns nothing
+
 /*Doc:
     A struct that extends SpecialEffect. These effects are tracked on the map and can be enumerated
     using the functions provided by this library's API.
 */
 struct DecorationEffect extends array
 
-    real x
-    real y
+    real x // The setter is redefined from SpecialEffect. You should not use the SpecialEffect setter for DecorationEffect objects.
+    real y // The setter is redefined from SpecialEffect. You should not use the SpecialEffect setter for DecorationEffect objects.
+    integer color // The setter is redefined from SpecialEffect. You should not use the SpecialEffect setter for DecorationEffect objects.
 
     method getOwner takes nothing returns player
     
     method setOwner takes player newOwner returns nothing
+    
+    /* Creates a SpecialEffect and converts it using convertSpecialEffect */
+    static method convertSpecialEffect takes player playerid, SpecialEffect sfx, boolean useCustomColor returns DecorationEffect
+    
+    /* If a player's color for this system is changed, this method must be called to update values for all of their existing effects */
+    static method updateColorsForPlayer takes player whichPlayer returns nothing
+    
+    /* Destroys all DecorationSFX data, effectively turning the object into a SpecialEffect */
+    method convertToSpecialEffect takes nothing returns SpecialEffect
     
     static method create takes player id, integer unitType, real x, real y returns DecorationEffect
     
@@ -27,11 +47,15 @@ endstruct
 // Struct defined using LinkedHashSet generics
 struct LinkedHashSet_DecorationEffect extends array
 
+// Enumeration functions
 
 // The Sets returned by these fucntions are not meant to persist, they are meant solely for iteration.
 // DecorationEffects are not reference-counted, and they may be replaced by other effects after removed.
+function EnumDecorationsOfPlayer takes player whichPlayer returns LinkedHashSet
 function EnumDecorationsInRect takes real minX, real minY, real maxX, real maxY returns LinkedHashSet_DecorationEffect
 function EnumDecorationsOfPlayerInRect takes player whichPlayer, real minX, real minY, real maxX, real maxY returns LinkedHashSet_DecorationEffect
+function EnumDecorationsInRange takes real centerX, real centerY, real radius returns LinkedHashSet_DecorationEffect
+function EnumDecorationsOfPlayerInRange takes player whichPlayer, real centerX, real centerY, real radius returns LinkedHashSet_DecorationEffect
 
 '                                         Source Code                                              '
 //! endnovjass
@@ -268,10 +292,10 @@ struct DecorationEffect extends array
         return sfx
     endmethod
     
+
     static method create takes player playerid, integer unitType, real x, real y returns DecorationEffect
         return thistype.convertSpecialEffect(playerid, SpecialEffect.create(unitType, x, y), false)
     endmethod
-    
     
     method destroy takes nothing returns nothing
         local effect e = .effect
