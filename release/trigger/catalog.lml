@@ -355,6 +355,8 @@
         Disab
     5-ControlState: ControlState
         Disab
+    '6-Free Cam': 'Free Cam'
+        Disab
 35-TerrainEditor: TerrainEditor
     1-TerrainEditor: TerrainEditor
         Disab
