@@ -173,6 +173,12 @@ Commands:
     CustomScriptCode
         Const : 'call SaveInteger(udg_Hashtable_1, ''h00E'', 0, ''h0WY'')'
     CommentString
+        Const : 'Magical Pen'
+    CustomScriptCode
+        Const : 'call SaveInteger(udg_Hashtable_1, ''h1F9'', 0, ''h000'')'
+    CustomScriptCode
+        Const : 'call SaveInteger(udg_Hashtable_1, ''h000'', 0, ''h1F9'')'
+    CommentString
         Const : ---------------------
     CommentString
         Const : ---------------------

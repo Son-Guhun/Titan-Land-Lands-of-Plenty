@@ -206,6 +206,9 @@ private module InitModule
         // Huts
         set i = ( i + 1 )
         set rawcodes[i] = 'u002'
+        // Icecrown
+        set i = ( i + 1 )
+        set rawcodes[i] = 'u061'
         // Mansion
         set i = ( i + 1 )
         set rawcodes[i] = 'u02I'
@@ -239,6 +242,9 @@ private module InitModule
         // Quilboar
         set i = ( i + 1 )
         set rawcodes[i] = 'u026'
+        // Rohan
+        set i = ( i + 1 )
+        set rawcodes[i] = 'u063'
         // Rostrodle
         set i = ( i + 1 )
         set rawcodes[i] = 'u02Q'
@@ -293,6 +299,9 @@ private module InitModule
         // Walls 2
         set i = ( i + 1 )
         set rawcodes[i] = 'u02K'
+        // Wintergarde
+        set i = ( i + 1 )
+        set rawcodes[i] = 'u062'
         
         set LoP_DecoBuilders.AdvDecoLastIndex = i
         // ---------
