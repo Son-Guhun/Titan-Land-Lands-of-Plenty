@@ -1,9 +1,14 @@
 function Trig_Commands_Name_Unit_Func006A takes nothing returns nothing
-    if ( GetOwningPlayer(GetEnumUnit()) == GetTriggerPlayer() ) then
-        call GUMSSetUnitName(GetEnumUnit(), LoP_Command.getArguments())
+    local unit enumUnit = GetEnumUnit()
+    if ( GetOwningPlayer(enumUnit) == GetTriggerPlayer() ) then
+        call GUMSSetUnitName(enumUnit, LoP_Command.getArguments())
+        if LoP_UnitData.get(enumUnit).isHeroic then
+            call UnitName_SetUnitName(enumUnit, GetUnitName(enumUnit))
+        endif
     else
         call DisplayTextToPlayer(GetTriggerPlayer(), 0, 0, "This is not your unit!")
     endif
+    set enumUnit = null
 endfunction
 
 function Trig_Commands_Name_Unit_Conditions takes nothing returns boolean

@@ -1,4 +1,4 @@
-library LoPHeroicUnit requires LoPHeader, LoPWidgets, UnitVisualMods, optional NativeRedefinitions
+library LoPHeroicUnit requires LoPHeader, LoPWidgets, UnitVisualMods, optional NativeRedefinitions, UnitName
 
 //! runtextmacro optional RedefineNatives()
 
@@ -29,9 +29,11 @@ library LoPHeroicUnit requires LoPHeader, LoPWidgets, UnitVisualMods, optional N
     endfunction
 
     function GiveHeroStats takes unit whichUnit returns nothing
-        call UnitApplyTimedLife(whichUnit, 'BHwe', 1)
+        // call UnitApplyTimedLife(whichUnit, 'BHwe', 1)
         call UnitPauseTimedLife(whichUnit, true)
-        call UnitAddItemById(whichUnit, 'I013')
+        call UnitAddAbility(whichUnit, 'A09Y')
+        call UnitAddAbility(whichUnit, 'A008')
+        call UnitAddItemById(whichUnit, 'I013')  // Add item in order to keep unit separate in selection
         call BlzSetUnitMaxHP(whichUnit, 100)
         call BlzSetUnitMaxMana(whichUnit, 0)
         call BlzSetUnitDiceNumber(whichUnit, 2, 0)
@@ -150,6 +152,7 @@ library LoPHeroicUnit requires LoPHeader, LoPWidgets, UnitVisualMods, optional N
             
             call GiveHeroStats(whichUnit)
             call RestoreGUMSValues(whichUnit, visualValues)
+            call UnitName_SetUnitName(whichUnit, GetUnitName(whichUnit))
         else
             call DisplayTextToPlayer(GetLocalPlayer(), 0, 0, "Unable to make unit " + GetUnitName(whichUnit) + " a hero. Report this problem please.")
         endif

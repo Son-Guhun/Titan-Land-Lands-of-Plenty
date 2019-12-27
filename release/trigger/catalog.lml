@@ -86,6 +86,9 @@
     '23-System On Upgrade Finish': 'System On Upgrade Finish'
     '24-System On Upgrade Cancel': 'System On Upgrade Cancel'
         Disab
+    25-New: New
+        Comment
+    '26-System HeroicUnit InfoPanel': 'System HeroicUnit InfoPanel'
 '07-Player Commands': 'Player Commands'
     '01-Commands Count': 'Commands Count'
     '02-Commands Fix': 'Commands Fix'
@@ -247,6 +250,7 @@
     24-NativeRedefinitions: NativeRedefinitions
     25-OOP: OOP
     26-TransportUtils: TransportUtils
+    27-UnitName: UnitName
 21-Map-specific: Map-specific
     1-Debug: Debug
     2-ArrayAgent: ArrayAgent
