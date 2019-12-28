@@ -22,7 +22,7 @@ class Comparator:
     def __init__(self, source_path, target_path):
         with open(file_path) as f:
             source = load_unit_data(f)
-        with open(compare_to) as f:
+        with open(target_path) as f:
             target = load_unit_data(f)
 
         self.removed,self.changed,self.added = compare(source, target)
