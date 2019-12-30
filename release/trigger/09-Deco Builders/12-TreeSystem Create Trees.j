@@ -13,7 +13,7 @@ function TreeSystemCreateTrees takes nothing returns nothing
         set y = -val
         loop
             exitwhen y > val
-            call SetDestructableAnimation(CreateDestructable( udg_TreeSystem_TREES[GetPlayerId(GetOwningPlayer(GetTriggerUnit())) + 1], X - space*I2R(x), Y + - space*I2R(y), GetRandomDirectionDeg(), GetRandomReal(0.90, 1.10), 0 ), "birth")
+            call CreateDestructable( udg_TreeSystem_TREES[GetPlayerId(GetOwningPlayer(GetTriggerUnit())) + 1], X - space*I2R(x), Y + - space*I2R(y), GetRandomDirectionDeg(), GetRandomReal(0.90, 1.10), 0 )
             set y = y+1
         endloop
         set x = x + 1
@@ -21,4 +21,3 @@ function TreeSystemCreateTrees takes nothing returns nothing
 endfunction
 
 endlibrary
-
