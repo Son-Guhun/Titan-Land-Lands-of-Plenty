@@ -1,4 +1,4 @@
-library UnitVisualMods requires UnitVisualValues, CutToComma, GroupTools, optional UnitVisualModsDefaults/*
+library UnitVisualMods requires UnitVisualValues, UnitName, CutToComma, GroupTools, optional UnitVisualModsDefaults/*
 
     */ /*optional*/ HashtableWrapper,  /* Required to initialize a hashtable.
     
@@ -332,40 +332,24 @@ function GUMSResetUnitName takes unit whichUnit returns nothing
     local integer unitHandle = GetHandleId(whichUnit)
     
     if GUMSUnitHasCustomName(unitHandle) then
-        if IsUnitType(whichUnit, UNIT_TYPE_HERO) then
-            call BlzSetHeroProperName(whichUnit, GUMSGetDefaultName(unitHandle))
-        else
-            call BlzSetUnitName(whichUnit, GUMSGetDefaultName(unitHandle))
-        endif
-    
+        call UnitName_SetUnitName(whichUnit, GUMSGetDefaultName(unitHandle))
         call data[unitHandle].string.remove(NAME)
     endif
 endfunction
 
 function GUMSSetUnitName takes unit whichUnit, string name returns nothing
     if name != "" then
-        if IsUnitType(whichUnit, UNIT_TYPE_HERO) then
-            if not GUMSUnitHasCustomName(GetHandleId(whichUnit)) then
-                set data[GetHandleId(whichUnit)].string[NAME] = GetHeroProperName(whichUnit)
-            endif
-            call BlzSetHeroProperName(whichUnit, GUMSConvertToCustomName(name))
-        else
-            if not GUMSUnitHasCustomName(GetHandleId(whichUnit)) then
-                set data[GetHandleId(whichUnit)].string[NAME] = GetUnitName(whichUnit)
-            endif
-            call BlzSetUnitName(whichUnit, GUMSConvertToCustomName(name))
+        if not GUMSUnitHasCustomName(GetHandleId(whichUnit)) then
+            set data[GetHandleId(whichUnit)].string[NAME] = UnitName_GetUnitName(whichUnit)
         endif
+        call UnitName_SetUnitName(whichUnit, GUMSConvertToCustomName(name))
     else
         call GUMSResetUnitName(whichUnit)
     endif
 endfunction
 
 function GUMSGetUnitName takes unit whichUnit returns string
-    if IsUnitType(whichUnit, UNIT_TYPE_HERO) then
-        return GUMSConvertFromCustomName(GetHeroProperName(whichUnit))
-    else
-        return GUMSConvertFromCustomName(GetUnitName(whichUnit))  
-    endif
+    return GUMSConvertFromCustomName(UnitName_GetUnitName(whichUnit))
 endfunction
 
 //==========================================

@@ -152,7 +152,7 @@ library LoPHeroicUnit requires LoPHeader, LoPWidgets, UnitVisualMods, optional N
             
             call GiveHeroStats(whichUnit)
             call RestoreGUMSValues(whichUnit, visualValues)
-            call UnitName_SetUnitName(whichUnit, GetUnitName(whichUnit))
+            call UnitName_Register(whichUnit)
         else
             call DisplayTextToPlayer(GetLocalPlayer(), 0, 0, "Unable to make unit " + GetUnitName(whichUnit) + " a hero. Report this problem please.")
         endif

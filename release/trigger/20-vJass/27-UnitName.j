@@ -2,6 +2,8 @@ library UnitName
 /*
 This library is used to add a unit's UserData to its name, which makes it possible to determine which
 unit is being selected in an async manner.
+
+It also handles a hero's proper name instead of their class name.
 */
 
 public function ValidateName takes string name returns boolean
@@ -12,18 +14,37 @@ public function GetActualName takes string validatedName returns string
     return SubString(validatedName, 7, StringLength(validatedName))
 endfunction
 
+private function GetFullPrefix takes string validatedName returns string
+    return SubString(validatedName, 0, 7)
+endfunction
+
 public function GetUserData takes string validatedName returns integer
     return S2I(SubString(validatedName, 2, 7))
 endfunction
 
 public function SetUnitName takes unit whichUnit, string name returns nothing
-    local string size = "00000"
-    local string userData = I2S(GetUnitUserData(whichUnit))
-    
     if IsUnitType(whichUnit, UNIT_TYPE_HERO) then
-        call BlzSetHeroProperName(whichUnit, "u#" + (SubString(size, 0, 5 - StringLength(userData)) + userData) + name)
+        if ValidateName(GetHeroProperName(whichUnit)) then
+            call BlzSetHeroProperName(whichUnit, GetFullPrefix(GetHeroProperName(whichUnit)) + name)
+        else
+            call BlzSetHeroProperName(whichUnit, name)
+        endif
     else
-        call BlzSetUnitName(whichUnit, "u#" + (SubString(size, 0, 5 - StringLength(userData)) + userData) + name)
+        if ValidateName(GetUnitName(whichUnit)) then
+            call BlzSetUnitName(whichUnit, GetFullPrefix(GetUnitName(whichUnit)) + name)
+        else
+            call BlzSetUnitName(whichUnit, name)
+        endif
+    endif
+endfunction
+
+public function Register takes unit whichUnit returns nothing
+    local string userData = I2S(GetUnitUserData(whichUnit))
+
+    if IsUnitType(whichUnit, UNIT_TYPE_HERO) then
+        call BlzSetHeroProperName(whichUnit, "u#" + (SubString("00000", 0, 5 - StringLength(userData)) + userData) + GetHeroProperName(whichUnit))
+    else
+        call BlzSetUnitName(whichUnit, "u#" + (SubString("00000", 0, 5 - StringLength(userData)) + userData) + GetUnitName(whichUnit))
     endif
 endfunction
 
