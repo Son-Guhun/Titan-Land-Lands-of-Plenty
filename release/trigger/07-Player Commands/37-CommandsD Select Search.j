@@ -81,6 +81,7 @@ function SearchSelectMain takes nothing returns boolean
     //Check for (clear selection) tag
     if LoP_Command.getCommand() == "-seln" then
         if GetLocalPlayer() == GetTriggerPlayer() then
+            call ForceUICancel()
             call ClearSelection()
         endif
     endif

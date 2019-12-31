@@ -124,6 +124,12 @@ private function onChatMessage takes nothing returns boolean
     endif
     
     set chatMsg = GetEventPlayerChatString()
+    
+    if SubString(chatMsg, 0, 1) != GetEventPlayerChatStringMatched() then
+        // This can happen when a command is issued and the other command prefix is in its arguments
+        return false
+    endif
+    
     set cutToComma = CutToCharacter(chatMsg, " ")
     set beforeSpace = SubString(chatMsg, 0, cutToComma)
     if cutToComma < StringLength(chatMsg) then

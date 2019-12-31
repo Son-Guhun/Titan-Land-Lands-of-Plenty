@@ -63,6 +63,7 @@ public function onReceiveSize takes nothing returns nothing
         call MoveGUDR(generator, saveData.extentX, saveData.extentY, false)
         
         if GetLocalPlayer() == GetTriggerPlayer() then
+            call ForceUICancel()
             call ClearSelection()
             call SelectUnit(generator, true)
             call SetCameraPosition(GetUnitX(generator), GetUnitY(generator))
