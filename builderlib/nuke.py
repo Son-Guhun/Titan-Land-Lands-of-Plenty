@@ -2,59 +2,16 @@ import os
 from myconfigparser import MyConfigParser, load_unit_data, get_decorations
 
 to_remove=[
-         'h000'
-        ,'h007'
-        ,'h008'
-        ,'h01Y'
-        ,'h006'
-        ,'h01Z'
-        ,'h028'
-        ,'h021'
-        ,'h026'
-        ,'h02A'
-        ,'h027'
-        ,'h02B'
-        ,'h020'
-        ,'h025'
-        ,'h022'
-        ,'h01U'
-        ,'h01V'
-        ,'h023'
-        ,'h030'
-        ,'h031'
-        ,'h032'
-        ,'h036'
-        ,'h033'
-        ,'h037'
-        ,'h0VI'
-        ,'h0VJ'
-        ,'hkee'
-        ,'hcas'
-        ,'hgtw'
-        ,'hctw'
-        ,'hatw'
-        ,'ogre'
-        ,'ostr'
-        ,'ofrt'
-        ,'oalt'
-        ,'otrb'
-        ,'osld'
-        ,'ovln'
-        ,'ofor'
-        ,'owtw'
-        ,'nntt'
-        ,'h12K'
-        ,'o02U'
-        ,'o00I'
-        ,'ogre'
-        ,'h004'
-        ,'o00L'
-        ,'o00N'
-        ,'o00M'
-        ,'o01Z'
-        ,'u04K'
-        ,'h0ZZ'
-        ,'u047'
+'h1KY',
+'h1LL',
+'h1L0',
+'h1KZ',
+'h1L8',
+'h1L9',
+'h1L2',
+'h1LB',
+'h1L1',
+'h18P',
         ]
 
 
