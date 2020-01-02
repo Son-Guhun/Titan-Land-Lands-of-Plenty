@@ -84,6 +84,10 @@ function Trig_Commands_Camera takes nothing returns boolean
                     set CameraValues.zoffset = value
                     call SetCameraField(CAMERA_FIELD_ZOFFSET, value, 0 )
                 endif
+            elseif (field == "smoothness") then
+                if GetLocalPlayer() == GetTriggerPlayer() then
+                    call CameraSetSmoothingFactor(value)
+                endif
             endif
         else
             // Lock/Unlock

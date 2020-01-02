@@ -145,6 +145,7 @@
     '49-Commands Request': 'Commands Request'
     '50-Commands Usav': 'Commands Usav'
     '51-Commands Compat': 'Commands Compat'
+    '52-Commands Freecam': 'Commands Freecam'
 '08-Decoration Systems': 'Decoration Systems'
     Comment
 '09-Deco Builders': 'Deco Builders'
@@ -252,6 +253,8 @@
     25-OOP: OOP
     26-TransportUtils: TransportUtils
     27-UnitName: UnitName
+    '28-PlayerUtils Lite': 'PlayerUtils Lite'
+    29-BitFlags: BitFlags
 21-Map-specific: Map-specific
     1-Debug: Debug
     2-ArrayAgent: ArrayAgent
@@ -357,7 +360,7 @@
     5-ControlState: ControlState
         Disab
     '6-Free Cam': 'Free Cam'
-        Disab
+    7-OSKeyLib: OSKeyLib
 35-TerrainEditor: TerrainEditor
     1-TerrainEditor: TerrainEditor
         Disab
