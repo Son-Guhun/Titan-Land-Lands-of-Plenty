@@ -124,6 +124,7 @@ function DummyDmg_CreateDummyAt takes unit spellCaster, integer abilityId, real 
     static if RECYCLE then
         call DummyDmg_ClearData(spellCaster)
         call SetUnitOwner(spellCaster, GetOwningPlayer(realSpellCaster), false)
+        call BlzPauseUnitEx(spellCaster, false)
     endif
     
     set dummyKey = DummyDmg_GetKey(spellCaster)
