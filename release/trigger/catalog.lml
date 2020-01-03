@@ -255,6 +255,8 @@
     27-UnitName: UnitName
     '28-PlayerUtils Lite': 'PlayerUtils Lite'
     29-BitFlags: BitFlags
+    30-Maths: Maths
+    31-MathParser: MathParser
 21-Map-specific: Map-specific
     1-Debug: Debug
     2-ArrayAgent: ArrayAgent

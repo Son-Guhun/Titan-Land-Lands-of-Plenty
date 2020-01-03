@@ -1,6 +1,6 @@
 library BitFlags
 /*
-*   v1.0.0 - by Guhun
+*   v1.1.0 - by Guhun
 *
 *
 *   With patch 1.31, Blizzard introduced many new natives that function as flags in a a bit field,
@@ -8,7 +8,19 @@ library BitFlags
 * code featuring boolean flags in bit fields much clearer. It also provides constants for all powers
 * of 2 available (these can be used as actual flags for the bit field).
 *
+*
+*
+************
+* Configuration
+************
 */
+globals
+
+// If this is set to true, then the library will initialize an array for all powers of 2 from 0 to 31.
+// Be aware that the 31st power is negative, because 32 bit integers cannot hold this value as a positive number.
+public constant boolean CACHE_POWERS = false
+
+endglobals
 //! novjass
 '                                                                                                  '
 '                                              API                                                 '
@@ -26,6 +38,9 @@ struct Pow2 extends array
     ...
     static constant n30 = 1073741824
     static constant n31 = - 2147483648 $negative$
+    
+    // Returns a power of 2. If <power> == 31, returns the negative value. Set CACHE_POWERS to true to make this faster.
+    method operator [] takes integer power returns integer
 
 endstruct
 
@@ -85,6 +100,7 @@ BitCountZeroes(-1)                          -> 0
 '                                         Source Code                                              '
 //! endnovjass
 
+private keyword InitModule
 //! textmacro BitFlags_Pow2 takes pow, value
     static constant method operator n$pow$ takes nothing returns integer
         return $value$
@@ -123,6 +139,25 @@ struct Pow2 extends array
     //! runtextmacro BitFlags_Pow2("29","536870912")
     //! runtextmacro BitFlags_Pow2("30","1073741824")
     //! runtextmacro BitFlags_Pow2("31","-2147483648")
+    
+    private integer value
+    
+    method operator[] takes integer power returns integer
+        static if CACHE_POWERS then
+            return .value
+        else
+            if power == 31 then
+                return thistype.n31
+            else
+                return R2I(Pow(2, power))
+            endif
+        endif
+    endmethod
+    
+    static if CACHE_POWERS then
+        implement InitModule
+    endif
+            
 endstruct
 
 function BitAll takes integer field, integer flags returns boolean
@@ -203,6 +238,42 @@ endfunction
 function BitCountZeroes takes integer x returns integer
     return 32 - BitCountOnes(x)
 endfunction
-    
+
+private module InitModule
+    private static method onInit takes nothing returns nothing
+        set thistype(0).value = thistype.n0
+        set thistype(1).value = thistype.n1
+        set thistype(2).value = thistype.n2
+        set thistype(3).value = thistype.n3
+        set thistype(4).value = thistype.n4
+        set thistype(5).value = thistype.n5
+        set thistype(6).value = thistype.n6
+        set thistype(7).value = thistype.n7
+        set thistype(8).value = thistype.n8
+        set thistype(9).value = thistype.n9
+        set thistype(10).value = thistype.n10
+        set thistype(11).value = thistype.n11
+        set thistype(12).value = thistype.n12
+        set thistype(13).value = thistype.n13
+        set thistype(14).value = thistype.n14
+        set thistype(15).value = thistype.n15
+        set thistype(16).value = thistype.n16
+        set thistype(17).value = thistype.n17
+        set thistype(18).value = thistype.n18
+        set thistype(19).value = thistype.n19
+        set thistype(20).value = thistype.n20
+        set thistype(21).value = thistype.n21
+        set thistype(22).value = thistype.n22
+        set thistype(23).value = thistype.n23
+        set thistype(24).value = thistype.n24
+        set thistype(25).value = thistype.n25
+        set thistype(26).value = thistype.n26
+        set thistype(27).value = thistype.n27
+        set thistype(28).value = thistype.n28
+        set thistype(29).value = thistype.n29
+        set thistype(30).value = thistype.n30
+        set thistype(31).value = thistype.n31
+    endmethod
+endmodule
     
 endlibrary
