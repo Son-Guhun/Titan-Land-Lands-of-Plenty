@@ -9,18 +9,18 @@ function Trig_CommandsD_Set_Parameters_Conditions takes nothing returns boolean
         set udg_DecoSystem_Scale[playerNumber] = args
     elseif command == "-face" or command == "-f" then
         call DisplayTextToPlayer(trigPlayer, 0, 0, "Facing Set" )
-        set udg_DecoSystem_Facing[playerNumber] = S2R(args)
+        set udg_DecoSystem_Facing[playerNumber] = MathParser.calculate(args)
     elseif command == "-fly" or command == "-h" then
         call DisplayTextToPlayer(trigPlayer, 0, 0, "Fly Height Set" )
-        set udg_DecoSystem_Height[playerNumber] = RMinBJ(S2R(args), 10000.)
+        set udg_DecoSystem_Height[playerNumber] = RMinBJ(MathParser.calculate(args), 10000.)
     elseif command == "-anim" then
         call DisplayTextToPlayer(trigPlayer, 0, 0, "Animation Set" )
         set udg_DecoSystem_Anims[playerNumber] = args
     elseif command == "-speed" then
         call DisplayTextToPlayer(trigPlayer, 0, 0, "Animation Speed Set" )
-        set udg_DecoSystem_animSpeed[playerNumber] = RMinBJ(S2R(args), 2000.)
+        set udg_DecoSystem_animSpeed[playerNumber] = RMinBJ(MathParser.calculate(args), 2000.)
     elseif command == "-grid" then
-        set udg_System_DecoGrid[playerNumber] = S2R(args)
+        set udg_System_DecoGrid[playerNumber] = MathParser.calculate(args)
     elseif command == "-color" then
         set udg_DecoSystem_PlayerColor[playerNumber] = Commands_GetChatMessagePlayerNumber(args)
     endif

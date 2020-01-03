@@ -15,7 +15,7 @@ function Trig_CommandsR_Time_Conditions takes nothing returns boolean
     if cutToComma < StringLength(args) /* use StringLength since str may have changed */ then
         set value = value + S2I(SubString(args,0,cutToComma)) + S2I(SubString(args,cutToComma+1,StringLength(args)))/60.
     else
-        set value = value + S2R(args)
+        set value = value + Arguments_ParseNumber(args)
     endif
     
     call SetFloatGameState(GAME_STATE_TIME_OF_DAY, value)

@@ -1,6 +1,5 @@
 function Trig_CommandsD_Set_Tree_Space_Conidtions takes nothing returns boolean
-    local real value = S2R(LoP_Command.getArguments())
-    set udg_TreeSystem_Space[GetConvertedPlayerId(GetTriggerPlayer())] = RMaxBJ(value, 0.)
+    set udg_TreeSystem_Space[GetConvertedPlayerId(GetTriggerPlayer())] = RMaxBJ(0., Arguments_ParseNumber(LoP_Command.getArguments()))
     return false
 endfunction
 

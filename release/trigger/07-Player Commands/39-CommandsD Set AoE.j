@@ -4,7 +4,7 @@ endfunction
 
 
 function Trig_CommandsD_Set_AoE_Conditions takes nothing returns boolean
-    local integer value = S2I(LoP_Command.getArguments())
+    local integer value = R2I(Arguments_ParseNumber(LoP_Command.getArguments()))
     local player trigP = GetTriggerPlayer()
     local group g
     local unit u

@@ -30,7 +30,7 @@ function Commands_EnumSelectedCheckForGenerator takes group whichGroup, player w
     return GUDR_SwapGroup_UnitsInsideUDR(whichGroup, false, null)
 endfunction
 
-function Commands_GetChatMessagePlayerNumber takes string str returns integer
+function Arguments_ParsePlayer takes string str returns integer
     local integer s2i = S2I(str)
     local integer strHash
     if  s2i == 0 then//and str != "0" then
@@ -40,6 +40,18 @@ function Commands_GetChatMessagePlayerNumber takes string str returns integer
         endif
     endif
     return s2i
+endfunction
+
+function Arguments_ParseNumber takes string number returns real
+    static if LIBRARY_MathParser then
+        return MathParser.calculate(number)
+    else
+        return R2S(number)
+    endif
+endfunction
+
+function Commands_GetChatMessagePlayerNumber takes string str returns integer
+    return Arguments_ParsePlayer(str)
 endfunction
 
 /*

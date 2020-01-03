@@ -4,7 +4,7 @@ function Trig_CommandsD_Rotate_Conditions takes nothing returns boolean
     local string toolTip = "Rotate " + args + " Degrees- [|cffffcc00R|r]"
     local string extendedToolTip = "Makes this unit face an angle equal to the smallest multiple of " + args + " that is larger than its current angle. For structures (likes gates and walls), their pathing block will only be updated if they are rotate to either 0 degrees or 180 degrees. Any other angle will use the default angle (270 degrees) pathing block."
     
-    set LoP_PlayerData.get(GetTriggerPlayer()).rotationStep = S2I(args)
+    set LoP_PlayerData.get(GetTriggerPlayer()).rotationStep = R2I(Arguments_ParseNumber(args))
     
     if GetLocalPlayer() == GetTriggerPlayer() then
         call BlzSetAbilityTooltip('A011', toolTip, 0)

@@ -30,19 +30,19 @@ function ColorSystem_Set_RGB_Conditions takes nothing returns boolean
         call DisplayTextToPlayer(GetTriggerPlayer(), 0, 0, "RGBT has been set")
         
     elseif command == "-red" then
-        set udg_ColorSystem_Red[pN] = S2R(args)
+        set udg_ColorSystem_Red[pN]   = Arguments_ParseNumber(args)
         call DisplayTextToPlayer(GetTriggerPlayer(), 0, 0, "Red has been set")
         
     elseif command == "-green" then
-        set udg_ColorSystem_Green[pN] = S2R(args)
+        set udg_ColorSystem_Green[pN] = Arguments_ParseNumber(args)
         call DisplayTextToPlayer(GetTriggerPlayer(), 0, 0, "Green has been set")
         
     elseif command == "-blue" then
-        set udg_ColorSystem_Blue[pN] = S2R(args)
+        set udg_ColorSystem_Blue[pN]  = Arguments_ParseNumber(args)
         call DisplayTextToPlayer(GetTriggerPlayer(), 0, 0, "Blue has been set")
         
     elseif command == "-alpha" then
-        set udg_ColorSystem_Alpha[pN] = S2R(args)
+        set udg_ColorSystem_Alpha[pN] = Arguments_ParseNumber(args)
         call DisplayTextToPlayer(GetTriggerPlayer(), 0, 0, "Transparency has been set")
         
     endif
