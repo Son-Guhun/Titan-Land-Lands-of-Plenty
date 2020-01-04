@@ -42,7 +42,7 @@ private function EnumDestructablesInRange takes real x, real y, real radius, boo
     if (radius >= 0) then
         set bj_enumDestructableCenter = Location(x, y)
         set bj_enumDestructableRadius = radius*radius
-        set r = GetRectFromCircleBJ(bj_enumDestructableCenter, bj_enumDestructableRadius)
+        set r = GetRectFromCircleBJ(bj_enumDestructableCenter, radius)
         call EnumDestructablesInRect(r, actionFunc, null)
         call RemoveRect(r)
         call RemoveLocation(bj_enumDestructableCenter)

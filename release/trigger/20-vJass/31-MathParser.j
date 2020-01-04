@@ -93,6 +93,9 @@ library MathParser /* v 1.1.0.0
         private static constant integer DIVISION = 4
         private static constant integer EXPONENTIATION = 5
         private static constant integer MODULO = 6
+        
+        private static constant integer PLUS = 1
+        private static constant integer MINUS = 2
        
         private static method getPriority takes string op returns integer
             return LoadInteger(Maths_h, StringHash(op), 0)
@@ -125,7 +128,19 @@ library MathParser /* v 1.1.0.0
         static constant method operator UNARY_m takes nothing returns string
             return "}"
         endmethod
-            
+        
+        private static method isOperator takes string s returns boolean
+            return HaveSavedInteger(Maths_h, StringHash(s), 0)
+        endmethod
+        
+        private static method isUnaryOperator takes string s returns boolean
+            return HaveSavedInteger(Maths_h, StringHash(s), 2)
+        endmethod
+        
+        private static method getUnaryOp takes string s returns integer
+            return LoadInteger(Maths_h, StringHash(s), 2)
+        endmethod
+       
    
         static integer wasError = 0
         static string errorString = ""
@@ -311,10 +326,6 @@ library MathParser /* v 1.1.0.0
             return 0.0
         endmethod
        
-        private static method isOperator takes string s returns boolean
-            return HaveSavedInteger(Maths_h, StringHash(s), 0)
-        endmethod
-       
         private static method prepareExpression takes string expression returns string
             local integer stringLen = StringLength(expression)
             local integer i = 0
@@ -405,13 +416,13 @@ library MathParser /* v 1.1.0.0
                         set stackCounter = stackCounter + 1
                         set stack[stackCounter] = actualToken
                     else
-                        if not (actualToken == "m " or actualToken == "p " or actualToken == "M " or actualToken == "P ") then
+                        if not (isUnaryOperator(actualToken)) then
                             set result = thistype.subCalc(stack[stackCounter - 1], stack[stackCounter], actualToken)
                             set stack[stackCounter] = ""
                             set stack[stackCounter - 1] = R2S(result)
                             set stackCounter = stackCounter - 1
                         else
-                            if actualToken == "m " or actualToken == "M " then
+                            if getUnaryOp(actualToken) == MINUS then
                                 if S2R(stack[stackCounter]) > 0 then
                                     set stack[stackCounter] = "-"+stack[stackCounter]
                                 else
@@ -569,12 +580,18 @@ library MathParser /* v 1.1.0.0
             call SaveInteger(Maths_h, StringHash(thistype.UNARY_M), 0, 5)
             call SaveInteger(Maths_h, StringHash(thistype.UNARY_P), 0, 5)
             call SaveInteger(Maths_h, StringHash("("), 0, 6)
+            
             call SaveInteger(Maths_h, StringHash("+ "), 1, ADDITION)
             call SaveInteger(Maths_h, StringHash("- "), 1, SUBSTRACTION)
             call SaveInteger(Maths_h, StringHash("* "), 1, MULTIPLICATION)
             call SaveInteger(Maths_h, StringHash("/ "), 1, DIVISION)
             call SaveInteger(Maths_h, StringHash("^ "), 1, EXPONENTIATION)
             call SaveInteger(Maths_h, StringHash("% "), 1, MODULO)
+            
+            call SaveInteger(Maths_h, StringHash(thistype.UNARY_P + " "), 2, PLUS)
+            call SaveInteger(Maths_h, StringHash(thistype.UNARY_M + " "), 2, MINUS)
+            call SaveInteger(Maths_h, StringHash(thistype.UNARY_p + " "), 2, PLUS)
+            call SaveInteger(Maths_h, StringHash(thistype.UNARY_m + " "), 2, MINUS)
         endmethod
        
         implement Init

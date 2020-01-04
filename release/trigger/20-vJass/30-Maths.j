@@ -224,6 +224,65 @@ library Maths/* v 1.2.0.0
             endif
             return r2
         endmethod
+        
+        // Rounding
+        static method floor takes real r returns real
+            if r < 0 then
+                return -I2R(R2I(-r))
+            endif
+            return I2R(R2I(r))
+        endmethod
+       
+        static method ceil takes real r returns real
+            if floor(r) == r then
+                return r
+            elseif r < 0 then
+                return -(I2R(R2I(-r)) + 1.0)
+            endif
+            return I2R(R2I(r)) + 1.0
+        endmethod
+       
+        static method round takes real r returns real
+            if r > 0 then
+                return I2R(R2I(r + 0.5))
+            endif
+            return I2R(R2I(r - 0.5))
+        endmethod
+
+        static method fractional takes real r returns real
+            return r - floor(r)
+        endmethod
+       
+        static method mergeFloat takes real r returns real
+            local real afterC = fractional(r)
+            local real beforeC = floor(r)
+            local string beforeComma = R2S(beforeC)
+            local string afterComma = R2S(afterC)
+            local string subString
+            local integer i = 0
+            local integer stringLen = StringLength(beforeComma)
+            local integer endPosition = 0
+           
+            if afterC == 0 then
+                return beforeC
+            endif
+            loop
+                exitwhen SubString(beforeComma, i, i + 1) == "."
+                set i = i + 1
+            endloop
+            set beforeComma = SubString(beforeComma, 0, i)
+            set i = StringLength(afterComma)
+            loop
+                set subString = SubString(afterComma, i, i + 1)
+                exitwhen subString == "."
+                if endPosition == 0 and subString != "0" and subString != "" then
+                    set endPosition = i
+                endif
+                set i = i - 1
+            endloop
+
+            return S2R(beforeComma+SubString(afterComma, i + 1, endPosition + 1))
+        endmethod
        
         // Modulus
         static method mod takes real r1, real r2  returns real
@@ -375,65 +434,6 @@ library Maths/* v 1.2.0.0
        
         static method atanh takes real r returns real
             return 0.5*ln((1 + r)/(1 - r))
-        endmethod
-       
-        // Rounding
-        static method floor takes real r returns real
-            if r < 0 then
-                return -I2R(R2I(-r))
-            endif
-            return I2R(R2I(r))
-        endmethod
-       
-        static method ceil takes real r returns real
-            if floor(r) == r then
-                return r
-            elseif r < 0 then
-                return -(I2R(R2I(-r)) + 1.0)
-            endif
-            return I2R(R2I(r)) + 1.0
-        endmethod
-       
-        static method round takes real r returns real
-            if r > 0 then
-                return I2R(R2I(r + 0.5))
-            endif
-            return I2R(R2I(r - 0.5))
-        endmethod
-
-        static method fractional takes real r returns real
-            return r - floor(r)
-        endmethod
-       
-        static method mergeFloat takes real r returns real
-            local real afterC = fractional(r)
-            local real beforeC = floor(r)
-            local string beforeComma = R2S(beforeC)
-            local string afterComma = R2S(afterC)
-            local string subString
-            local integer i = 0
-            local integer stringLen = StringLength(beforeComma)
-            local integer endPosition = 0
-           
-            if afterC == 0 then
-                return beforeC
-            endif
-            loop
-                exitwhen SubString(beforeComma, i, i + 1) == "."
-                set i = i + 1
-            endloop
-            set beforeComma = SubString(beforeComma, 0, i)
-            set i = StringLength(afterComma)
-            loop
-                set subString = SubString(afterComma, i, i + 1)
-                exitwhen subString == "."
-                if endPosition == 0 and subString != "0" and subString != "" then
-                    set endPosition = i
-                endif
-                set i = i - 1
-            endloop
-
-            return S2R(beforeComma+SubString(afterComma, i + 1, endPosition + 1))
         endmethod
        
         // Type checks

@@ -14,32 +14,32 @@ private struct Globals extends array
 endstruct
 
 public function SetMatrixScale takes unit u, string args returns nothing
-        local real scaleX
-        local real scaleY
-        local real scaleZ
+    local real scaleX
+    local real scaleY
+    local real scaleZ
+    
+    local integer cutToComma = CutToCharacter(args," ")
+    set scaleX = Arguments_ParseNumber(SubString(args, 0, cutToComma))/100.
+    
+    if cutToComma < StringLength(args) then
+        set args = SubString(args, cutToComma+1, StringLength(args))
         
-        local integer cutToComma = CutToCharacter(args," ")
-        set scaleX = MathParser.calculate(SubString(args, 0, cutToComma))/100.
+        set cutToComma = CutToCharacter(args," ")
+        set scaleY = Arguments_ParseNumber(SubString(args, 0, cutToComma))/100.
         
         if cutToComma < StringLength(args) then
             set args = SubString(args, cutToComma+1, StringLength(args))
-            
-            set cutToComma = CutToCharacter(args," ")
-            set scaleY = MathParser.calculate(SubString(args, 0, cutToComma))/100.
-            
-            if cutToComma < StringLength(args) then
-                set args = SubString(args, cutToComma+1, StringLength(args))
-            
-                set scaleZ = Globals.value/100.
-            else
-                set scaleZ = 100.
-            endif
-            
-            call GUMSSetUnitMatrixScale(u, scaleX, scaleY, scaleZ)
+        
+            set scaleZ = Arguments_ParseNumber(args)/100.
         else
-            call GUMSSetUnitScale(u, scaleX)
+            set scaleZ = 100.
         endif
-    endfunction
+        
+        call GUMSSetUnitMatrixScale(u, scaleX, scaleY, scaleZ)
+    else
+        call GUMSSetUnitScale(u, scaleX)
+    endif
+endfunction
 
 // Check if unit is Deco Special so this trigger is not run for every unit that casts a ability
 private function groupFunc takes nothing returns nothing
