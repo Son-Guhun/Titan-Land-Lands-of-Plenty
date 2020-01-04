@@ -90,6 +90,7 @@
     25-New: New
         Comment
     '26-System HeroicUnit InfoPanel': 'System HeroicUnit InfoPanel'
+        Disab
 '07-Player Commands': 'Player Commands'
     '01-Commands Count': 'Commands Count'
     '02-Commands Fix': 'Commands Fix'

@@ -38,7 +38,9 @@ public function SetUnitName takes unit whichUnit, string name returns nothing
     endif
 endfunction
 
+// Disabled due to currently being unnecessary
 public function Register takes unit whichUnit returns nothing
+    return /*
     local string userData = I2S(GetUnitUserData(whichUnit))
 
     if IsUnitType(whichUnit, UNIT_TYPE_HERO) then
@@ -46,6 +48,7 @@ public function Register takes unit whichUnit returns nothing
     else
         call BlzSetUnitName(whichUnit, "u#" + (SubString("00000", 0, 5 - StringLength(userData)) + userData) + GetUnitName(whichUnit))
     endif
+    */
 endfunction
 
 private function NativeGetUnitName takes unit whichUnit returns string
