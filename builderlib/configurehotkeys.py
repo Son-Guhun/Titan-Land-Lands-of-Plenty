@@ -32,7 +32,7 @@ def set_hotkeys(unit_data, unit_list, **kwargs):
                         unit[key] = value
                 except:
                     print('Error in {} for {}.'.format(key, unit.name))
-                    traceback.print_exc()
+                    # traceback.print_exc()
         except KeyError:
             print('Could not find data for trained unit: ' + unit)
 
@@ -58,7 +58,7 @@ def configure_trained_units(unit_data, building_list, **kwargs):
                     print('Could not find any units trained by: ' + building)
         except Exception as e:
             print('Exception in building: ' + building)
-            traceback.print_exc()
+            # traceback.print_exc()
 
 def configure_selectors(unit_data, selector_list, **kwargs):
     for selector in selector_list:

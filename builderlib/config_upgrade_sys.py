@@ -33,14 +33,14 @@ def do(file_path):
                 upgrade = upgrades[0]
                 i = 0
                 while upgrade != decoration:
+                    if i > 20 or 'Upgrade' not in unit_data[upgrade]:
+                        print('Broken upgrade chain: {}'.format(decoration))
+                        break
                     upgrades = unit_data[upgrade]['Upgrade'][1:-1].split(',')
                     decos.append(Decoration(upgrade, upgrades, decoration))
                     upgrade = upgrades[0]
                     added.add(upgrade)
                     i += 1
-                    if i > 20:
-                        print('Broken upgrade chain: {}'.format(decoration))
-                        break
 
     series = None  # Assuming decorations will be listed in chunks, where the next chunk is the first decoration of another upgrade line
     for decoration in decos:

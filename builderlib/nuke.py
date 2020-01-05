@@ -1,17 +1,13 @@
-import os
-from myconfigparser import MyConfigParser, load_unit_data, get_decorations
+from myconfigparser import load_unit_data
 
 to_remove=[
-'h1KY',
-'h1LL',
-'h1L0',
-'h1KZ',
-'h1L8',
-'h1L9',
-'h1L2',
-'h1LB',
-'h1L1',
-'h18P',
+'h1IG',
+'h1IB',
+'h1IA',
+'h1I8',
+'h1II',
+'h1ID',
+'h1IC',
         ]
 
 
