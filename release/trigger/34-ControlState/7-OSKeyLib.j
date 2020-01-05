@@ -1,4 +1,176 @@
-library OSKeyLib requires PlayerUtils
+library OSKeyLib requires PlayerUtils, Timeline
+/*
+*   v1.0.0 - by Guhun
+*
+*
+* This is a library that facilitates usage of the oskey API added in patch 1.31.
+*
+*
+* You can register a listener (event) that will fire for every keypress of any key that was registered
+* in the system. You can also determined whether any key is currently up or down, and you can also get
+* the time that a key has been pressed/released for.
+*
+************
+* Configuration
+************
+*/
+// No configuration available.
+//! novjass
+'                                                                                                  '
+'                                              API                                                 '
+$inline$ -> "this means a function inlines, so only natives are actually called"
+
+/* 
+    Structs
+*/
+
+struct MetaKeys extends array
+    static constant integer NONE  = 0
+    static constant integer SHIFT = 1
+    static constant integer CTRL  = 2
+    static constant integer ALT   = 4
+endstruct
+
+struct OSKeys extends array
+    
+    // This method must be called for OSKeys that you will use. It should be called at initialization.
+    method register takes nothing returns nothing
+    
+    // Check whether a player is pressing a key.
+    $inline$ method isPressedId takes integer pId returns boolean
+    $inline$ method isPressedPlayer takes player whichPlayer returns boolean
+    
+    // Check whether the local player (GetLocalPlayer) is pressing a key.
+    $inline$ method isPressed takes nothing returns boolean
+    
+    // Returns the amount of time since a key was pressed (isPressed -> true) or released (isPressed -> false).
+    // If the key was never pressed, returns the amount of time since it was registered.
+    $inline$ method getDuration takes nothing returns real
+    
+    // Adds a listener, which will evalute a boolexpr whenever any key is pressed. The boolexpr should return true.
+    /*
+    You can use these natives in listeners:
+    GetTriggerPlayer()
+    BlzGetTriggerPlayerKey()
+    BlzGetTriggerPlayerMetaKey()
+    BlzGetTriggerPlayerIsKeyDown()
+    
+    NOTE: listeners will be executed in the order they were added
+    */
+    $inline$ static method addListener takes boolexpr expr returns triggercondition
+    
+    // Removes a previously added listener.
+    $inline$ static method removeListener takes triggercondition listener returns nothing
+    
+    readonly oskeytype handle
+    readonly boolean isRegistered
+endstruct
+
+/*
+    Examples
+*/
+OSKeys.BACKSPACE.register()
+OSKeys.CONTROL.isPressed()
+
+// This is for number 2 on the keyboard, not the numpad
+OSKeys.KEY2.getDuration()
+
+// This is for number 4 on the numpad
+OSKeys.NUMPAD4.isPressedPlayer(Player(2))
+
+OSKeys.A.handle
+OSKeys.ESCAPE.isRegistered
+
+// This will fire whenever any player presses/releases any key while holding any meta key.
+function onKeyPressFunc takes nothing returns boolean
+    
+    // If we registered CONROL, we can check if it's pressed instead of using BlzGetTriggerPlayerMetaKey()
+    if GetTriggerPlayer() == Player(0) and OSKeys.CONTROL.isPressedId(0) then
+        // Do something
+    endif
+
+    return true // important to return true here
+endfunction
+
+triggercondition listener
+
+// Add a listener
+set listener = OSKeys.addListener(Filter(function onKeyPressFunc))
+
+// Remove listener when no longer needed
+call OSKeys.removeListener(listener)
+
+/*
+    Constants
+*/
+OSKeys.BACKSPACE    OSKeys.TAB          OSKeys.CLEAR
+OSKeys.RETURN       OSKeys.SHIFT        OSKeys.CONTROL
+OSKeys.ALT          OSKeys.PAUSE        OSKeys.CAPSLOCK
+OSKeys.KANA         OSKeys.HANGUL       OSKeys.JUNJA
+OSKeys.FINAL        OSKeys.HANJA        OSKeys.KANJI
+OSKeys.ESCAPE       OSKeys.CONVERT      OSKeys.NONCONVERT
+OSKeys.ACCEPT       OSKeys.MODECHANGE   OSKeys.SPACE
+OSKeys.PAGEUP       OSKeys.PAGEDOWN     OSKeys.END
+OSKeys.HOME         OSKeys.LEFT         OSKeys.UP
+OSKeys.RIGHT        OSKeys.DOWN         OSKeys.SELECT
+OSKeys.PRINT        OSKeys.EXECUTE      OSKeys.PRINTSCREEN
+OSKeys.INSERT       OSKeys.DELETE       OSKeys.HELP
+OSKeys.KEY0         OSKeys.KEY1         OSKeys.KEY2
+OSKeys.KEY3         OSKeys.KEY4         OSKeys.KEY5
+OSKeys.KEY6         OSKeys.KEY7         OSKeys.KEY8
+OSKeys.KEY9         OSKeys.A            OSKeys.B
+OSKeys.C            OSKeys.D            OSKeys.E
+OSKeys.F            OSKeys.G            OSKeys.H
+OSKeys.I            OSKeys.J            OSKeys.K
+OSKeys.L            OSKeys.M            OSKeys.N
+OSKeys.O            OSKeys.P            OSKeys.Q
+OSKeys.R            OSKeys.S            OSKeys.T
+OSKeys.U            OSKeys.V            OSKeys.W
+OSKeys.X            OSKeys.Y            OSKeys.Z
+OSKeys.LMETA        OSKeys.RMETA        OSKeys.APPS
+OSKeys.SLEEP        OSKeys.NUMPAD0      OSKeys.NUMPAD1
+OSKeys.NUMPAD2      OSKeys.NUMPAD3      OSKeys.NUMPAD4
+OSKeys.NUMPAD5      OSKeys.NUMPAD6      OSKeys.NUMPAD7
+OSKeys.NUMPAD8      OSKeys.NUMPAD9      OSKeys.MULTIPLY
+OSKeys.ADD          OSKeys.SEPARATOR    OSKeys.SUBTRACT
+OSKeys.DECIMAL      OSKeys.DIVIDE       OSKeys.F1
+OSKeys.F2           OSKeys.F3           OSKeys.F4
+OSKeys.F5           OSKeys.F6           OSKeys.F7
+OSKeys.F8           OSKeys.F9           OSKeys.F10
+OSKeys.F11          OSKeys.F12          OSKeys.F13
+OSKeys.F14          OSKeys.F15          OSKeys.F16
+OSKeys.F17          OSKeys.F18          OSKeys.F19
+OSKeys.F20          OSKeys.F21          OSKeys.F22
+OSKeys.F23          OSKeys.F24          OSKeys.NUMLOCK
+OSKeys.SCROLLLOCK           OSKeys.OEM_NEC_EQUAL    OSKeys.OEM_FJ_JISHO
+OSKeys.OEM_FJ_MASSHOU       OSKeys.OEM_FJ_TOUROKU   OSKeys.OEM_FJ_LOYA
+OSKeys.OEM_FJ_ROYA          OSKeys.LSHIFT           OSKeys.RSHIFT
+OSKeys.LCONTROL             OSKeys.RCONTROL         OSKeys.LALT
+OSKeys.RALT                 OSKeys.BROWSER_BACK     OSKeys.BROWSER_FORWARD
+OSKeys.BROWSER_REFRESH      OSKeys.BROWSER_STOP     OSKeys.BROWSER_SEARCH
+OSKeys.BROWSER_FAVORITES    OSKeys.BROWSER_HOME     OSKeys.OEM_CLEAR
+OSKeys.VOLUME_MUTE          OSKeys.VOLUME_DOWN      OSKeys.VOLUME_UP
+OSKeys.MEDIA_NEXT_TRACK     OSKeys.MEDIA_PREV_TRACK OSKeys.MEDIA_STOP
+OSKeys.MEDIA_PLAY_PAUSE     OSKeys.LAUNCH_MAIL      OSKeys.LAUNCH_MEDIA_SELECT
+OSKeys.LAUNCH_APP1          OSKeys.LAUNCH_APP2      OSKeys.OEM_1
+OSKeys.OEM_PLUS             OSKeys.OEM_COMMA        OSKeys.OEM_MINUS
+OSKeys.OEM_PERIOD           OSKeys.OEM_2            OSKeys.OEM_3
+OSKeys.OEM_4                OSKeys.OEM_5            OSKeys.OEM_6
+OSKeys.OEM_7                OSKeys.OEM_8            OSKeys.OEM_AX
+OSKeys.OEM_102              OSKeys.ICO_HELP         OSKeys.ICO_00
+OSKeys.PROCESSKEY           OSKeys.ICO_CLEAR        OSKeys.PACKET
+OSKeys.OEM_RESET            OSKeys.OEM_JUMP         OSKeys.OEM_PA1
+OSKeys.OEM_PA2              OSKeys.OEM_PA3          OSKeys.OEM_WSCTRL
+OSKeys.OEM_CUSEL            OSKeys.OEM_ATTN         OSKeys.OEM_FINISH
+OSKeys.OEM_COPY             OSKeys.OEM_AUTO         OSKeys.OEM_ENLW
+OSKeys.OEM_BACKTAB          OSKeys.ATTN             OSKeys.CRSEL
+OSKeys.EXSEL                OSKeys.EREOF            OSKeys.PLAY
+OSKeys.ZOOM                 OSKeys.NONAME           OSKeys.PA1
+    
+endstruct
+'                                                                                                  '
+'                                         Source Code                                              '
+//! endnovjass
 
 struct MetaKeys extends array
 
@@ -50,6 +222,7 @@ private keyword Constants
 
 struct OSKeys extends array
     private static boolean array g_isPressed[256][24]
+    private static real array timestamp[256][24]
     readonly boolean isRegistered
     private static trigger eventResponder = null
     private static trigger executer = CreateTrigger()
@@ -71,7 +244,11 @@ struct OSKeys extends array
     endmethod
     
     method isPressed takes nothing returns boolean
-        return .isPressedPlayer(GetLocalPlayer())
+        return .isPressedId(User.fromLocal().id)
+    endmethod
+    
+    method getDuration takes nothing returns real
+        return Timeline.game.elapsed - timestamp[this][User.fromLocal().id]
     endmethod
     
     method operator handle takes nothing returns oskeytype
@@ -87,6 +264,7 @@ struct OSKeys extends array
                 loop
                     exitwhen p >= bj_MAX_PLAYERS
                     call RegisterKeyEvent(.eventResponder, p.handle, this.handle)
+                    set timestamp[this][p.id] = Timeline.game.elapsed
                     set p = p + 1
                 endloop
             endif
@@ -94,7 +272,14 @@ struct OSKeys extends array
     endmethod
     
     private static method onKey takes nothing returns nothing
-        set g_isPressed[GetHandleId(BlzGetTriggerPlayerKey())][GetPlayerId(GetTriggerPlayer())] = BlzGetTriggerPlayerIsKeyDown()
+        local boolean pressed = BlzGetTriggerPlayerIsKeyDown()
+        local integer key = GetHandleId(BlzGetTriggerPlayerKey())
+        local integer pId = GetPlayerId(GetTriggerPlayer())
+        
+        set g_isPressed[key][pId] = pressed
+        
+        set timestamp[key][pId] = Timeline.game.elapsed
+        
         call TriggerEvaluate(executer)
     endmethod
     
@@ -112,6 +297,7 @@ struct OSKeys extends array
                 loop
                     exitwhen p >= bj_MAX_PLAYERS
                     call RegisterKeyEvent(trig, p.handle, key.handle)
+                    set timestamp[key][p.id] = Timeline.game.elapsed
                     set p = p + 1
                 endloop
             endif
@@ -122,6 +308,7 @@ struct OSKeys extends array
         
         call PauseTimer(GetExpiredTimer())
         call DestroyTimer(GetExpiredTimer())
+
         set trig = null
     endmethod
     

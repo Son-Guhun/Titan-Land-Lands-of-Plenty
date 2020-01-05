@@ -258,6 +258,7 @@
     29-BitFlags: BitFlags
     30-Maths: Maths
     31-MathParser: MathParser
+    '32-Timeline Lite': 'Timeline Lite'
 21-Map-specific: Map-specific
     1-Debug: Debug
     2-ArrayAgent: ArrayAgent

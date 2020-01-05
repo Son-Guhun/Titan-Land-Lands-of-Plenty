@@ -1,4 +1,41 @@
 library FreeCam initializer Init requires OSKeyLib
+/*
+*   v1.0.0 - by Guhun
+*
+*
+*   This is a simple free-moving camera.
+*
+* Controls:
+* WASD -> Move on X or Y axis.
+* IJKL -> Camera rotation
+* SPACEBAR -> Move on up Z axis.
+* CTRL + SPACEBAR -> Move down on Z axis.
+*
+*
+************
+* Configuration
+************
+*/
+
+//! novjass
+'                                                                                                  '
+'                                              API                                                 '
+
+/* 
+    Functions
+*/
+$inline$ -> "this means a function inlines, so only natives are actually called"
+
+// Enables or disables the system for a player.
+$inline$
+public function Enable takes player whichPlayer, boolean flag returns nothing
+
+// Checks whether the system is enabled for a player.
+$inline$
+public function IsEnabled takes player whichPlayer returns boolean
+'                                                                                                  '
+'                                         Source Code                                              '
+//! endnovjass
 
 globals
     private boolean array isEnabled
@@ -16,6 +53,9 @@ endfunction
 private function onTimer takes nothing returns nothing
     local real x = 0
     local real y = 0 
+    
+    local real pitch = 0
+    local real yaw = 0
     
     if not isEnabled[User.fromLocal().id] then
         return
@@ -45,9 +85,9 @@ private function onTimer takes nothing returns nothing
     
     if OSKeys.SPACE.isPressed() then
         if OSKeys.LCONTROL.isPressed() then
-            call SetCameraField(CAMERA_FIELD_ZOFFSET, GetCameraField(CAMERA_FIELD_ZOFFSET) - speed, 1/60.)
+            call AdjustCameraField(CAMERA_FIELD_ZOFFSET, -speed, 1/64.)
         else
-            call SetCameraField(CAMERA_FIELD_ZOFFSET, GetCameraField(CAMERA_FIELD_ZOFFSET) + speed, 1/60.)
+            call AdjustCameraField(CAMERA_FIELD_ZOFFSET, speed, 1/64.)
         endif
     endif
     
@@ -67,10 +107,34 @@ private function onTimer takes nothing returns nothing
     if OSKeys.NUMPAD4.isPressed() then
         set speed = RMaxBJ(speed - 1./16, 0)
     endif
+    
+    if OSKeys.I.isPressed() then
+        set pitch = pitch + 1
+    endif
+    
+    if OSKeys.K.isPressed() then
+        set pitch = pitch - 1
+    endif
+    
+    if OSKeys.L.isPressed() then
+        set yaw = yaw - 1
+    endif
+    
+    if OSKeys.J.isPressed() then
+        set yaw = yaw + 1
+    endif
+    
+    if pitch != 0 then
+        call AdjustCameraField(CAMERA_FIELD_ANGLE_OF_ATTACK, pitch, 1/64.)
+    endif
+    
+    if yaw != 0 then
+        call AdjustCameraField(CAMERA_FIELD_ROTATION, yaw, 1/64.)
+    endif
 endfunction
 
 private function Init takes nothing returns nothing
-    call TimerStart(CreateTimer(), 1./60, true, function onTimer)
+    call TimerStart(CreateTimer(), 1./64, true, function onTimer)
     
     call OSKeys.W.register()
     call OSKeys.S.register()
@@ -82,6 +146,11 @@ private function Init takes nothing returns nothing
     call OSKeys.NUMPAD2.register()
     call OSKeys.NUMPAD4.register()
     call OSKeys.NUMPAD6.register()
+    
+    call OSKeys.I.register()
+    call OSKeys.K.register()
+    call OSKeys.J.register()
+    call OSKeys.L.register()
 endfunction
 
 endlibrary
