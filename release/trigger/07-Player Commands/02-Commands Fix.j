@@ -4,6 +4,7 @@ private function OnCommand takes nothing returns boolean
     local string args = LoP_Command.getArguments()
     
     if args == "darkness" then
+        call ResetToGameCamera(0.)
         call ResetTerrainFog()
         call SetDayNightModels("Environment\\DNC\\DNCLordaeron\\DNCLordaeronTerrain\\DNCLordaeronTerrain.mdl", "Environment\\DNC\\DNCLordaeron\\DNCLordaeronUnit\\DNCLordaeronUnit.mdl")
     elseif args == "selection" then
