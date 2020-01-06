@@ -155,6 +155,9 @@ private module InitModule
         // Chaos
         set i = ( i + 1 )
         set rawcodes[i] = 'u039'
+        // Creeps
+        set i = ( i + 1 )
+        set rawcodes[i] = 'u06M'
         // Dalaran
         set i = ( i + 1 )
         set rawcodes[i] = 'u02D'
@@ -179,6 +182,9 @@ private module InitModule
         // Elves Forest
         set i = ( i + 1 )
         set rawcodes[i] = 'u040'
+        // Elves Night
+        set i = ( i + 1 )
+        set rawcodes[i] = 'u06N'
         // Feudal
         set i = ( i + 1 )
         set rawcodes[i] = 'u01S'
@@ -203,6 +209,9 @@ private module InitModule
         // Hellfire Citadel
         set i = ( i + 1 )
         set rawcodes[i] = 'u04W'
+        // Human
+        set i = ( i + 1 )
+        set rawcodes[i] = 'u06I'
         // Huts
         set i = ( i + 1 )
         set rawcodes[i] = 'u002'
@@ -221,6 +230,9 @@ private module InitModule
         // Mushrooms
         set i = ( i + 1 )
         set rawcodes[i] = 'u046'
+        // Naga (Original)
+        set i = ( i + 1 )
+        set rawcodes[i] = 'u06J'
         // Naga 1
         set i = ( i + 1 )
         set rawcodes[i] = 'u03R'
@@ -233,9 +245,15 @@ private module InitModule
         // Orc
         set i = ( i + 1 )
         set rawcodes[i] = 'u05T'
+        // Orc Fort
+        set i = ( i + 1 )
+        set rawcodes[i] = 'u06O'
         // Pandaren
         set i = ( i + 1 )
         set rawcodes[i] = 'u02N'
+        // Pirate
+        set i = ( i + 1 )
+        set rawcodes[i] = 'u06H'
         // Plants
         set i = ( i + 1 )
         set rawcodes[i] = 'u011'
@@ -287,6 +305,9 @@ private module InitModule
         // Undead
         set i = ( i + 1 )
         set rawcodes[i] = 'u00U'
+        // Underwater
+        set i = ( i + 1 )
+        set rawcodes[i] = 'u06L'
         // Vampiric
         set i = ( i + 1 )
         set rawcodes[i] = 'u04O'

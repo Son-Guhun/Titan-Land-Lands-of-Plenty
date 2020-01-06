@@ -26,13 +26,16 @@ def do(file_path):
     cond = lambda x: '[spawn]' not in unit_data[x]['EditorSuffix'] if 'EditorSuffix' in unit_data[x] else True
     for builder in iter_deco_builders(unit_data, builder_only=True):
         for decoration in builder['Builds'][1:-1].split(','):
-            if decoration not in added and 'Upgrade' in unit_data[decoration] and cond(decoration):
+            if decoration not in added and 'Upgrade' in unit_data[decoration] and unit_data[decoration]['Upgrade'] != '""' and cond(decoration):
                 upgrades = unit_data[decoration]['Upgrade'][1:-1].split(',')
                 decos.append(Decoration(decoration, upgrades, decoration))
                 added.add(decoration)
                 upgrade = upgrades[0]
                 i = 0
                 while upgrade != decoration:
+                    if upgrade not in unit_data:
+                        print('({}) Inexistant upgrade: '.format(decoration) + upgrade)
+                        break
                     if i > 20 or 'Upgrade' not in unit_data[upgrade]:
                         print('Broken upgrade chain: {}'.format(decoration))
                         break
