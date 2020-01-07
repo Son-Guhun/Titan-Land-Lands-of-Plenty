@@ -120,21 +120,28 @@ endfunction
 static if LIBRARY_UserDefinedRects then
     function Save_GetGUDRSaveString takes integer generatorId returns string
         local rect userRect = GUDR_GetGeneratorIdRect(generatorId)
-        
         local real length = GUDR_GetGeneratorIdExtentX(generatorId)
         local real height = GUDR_GetGeneratorIdExtentY(generatorId)
-        local integer weatherType = GUDR_GetGeneratorIdWeatherType(generatorId)
-        local boolean hidden 
+        local string hidden
+        local DNC dnc
         local TerrainFog fog
+        
+        if GUDR_IsGeneratorIdHidden(generatorId) then
+            set hidden = "0"
+        else
+            set hidden = "1"
+        endif
         
         if RectEnvironment.get(userRect).hasFog() then
             set fog = RectEnvironment.get(userRect).fog
+            set dnc = RectEnvironment.get(userRect).dnc
             
-            return R2S(length) + "=" + R2S(height) + "=" + I2S(weatherType) + "=" + "T" + "=" +/*
+            return R2S(length) + "=" + R2S(height) + "=" + I2S(GUDR_GetGeneratorIdWeatherType(generatorId)) + "=" + hidden + "=" +/*
                  */ I2S(fog.style) + "=" + R2S(fog.zStart) + "=" + R2S(fog.zEnd) + "=" +/*
-                 */ R2S(fog.density*10000) + "=" + R2S(fog.red) + "=" + R2S(fog.green) + "=" + R2S(fog.blue) + "="
+                 */ R2S(fog.density*10000) + "=" + R2S(fog.red) + "=" + R2S(fog.green) + "=" + R2S(fog.blue) + "=" +/*
+                 */ I2S(dnc.lightTerrain) + "=" + I2S(dnc.lightUnit) + "="
         else
-            return R2S(length) + "=" + R2S(height) + "=" + I2S(weatherType) + "="
+            return R2S(length) + "=" + R2S(height) + "=" + I2S(GUDR_GetGeneratorIdWeatherType(generatorId)) + "=" + hidden
         endif
     endfunction
 
@@ -146,6 +153,7 @@ static if LIBRARY_UserDefinedRects then
         local integer weatherType
         
         local TerrainFog fog
+        local DNC dnc
         
         //Str = "length=height=weather= (we need an equal at the end in order to make future versions backwards-compatible
         
@@ -161,17 +169,22 @@ static if LIBRARY_UserDefinedRects then
         set weatherType = S2I(SubString(restoreStr,0,splitterIndex))
         set restoreStr = SubString(restoreStr,splitterIndex+1,StringLength(restoreStr))
         
-        set splitterIndex = CutToCharacter(restoreStr, "=")
-        // show/hide
-        set restoreStr = SubString(restoreStr,splitterIndex+1,StringLength(restoreStr))
-        
         call CreateGUDR(generator)
         call MoveGUDR(generator, length, height, false)
         call ChangeGUDRWeatherNew(generator, 0, weatherType)
         
         set splitterIndex = CutToCharacter(restoreStr, "=")
+        if SubString(restoreStr,0,splitterIndex) != "0" then
+            call ToggleGUDRVisibility(generator, false, true)
+        else
+            call ToggleGUDRVisibility(generator, false, false)
+        endif
+        set restoreStr = SubString(restoreStr,splitterIndex+1,StringLength(restoreStr))
+        
+        set splitterIndex = CutToCharacter(restoreStr, "=")
         if splitterIndex != 0 and splitterIndex < StringLength(restoreStr) then
             set fog = RectEnvironment.get(GUDR_GetGeneratorRect(generator)).fog
+            set dnc = RectEnvironment.get(GUDR_GetGeneratorRect(generator)).dnc
 
             set fog.style = S2I(SubString(restoreStr,0,splitterIndex))
             set restoreStr = SubString(restoreStr,splitterIndex+1,StringLength(restoreStr))
@@ -198,6 +211,14 @@ static if LIBRARY_UserDefinedRects then
             
             set splitterIndex = CutToCharacter(restoreStr, "=")
             set fog.blue = S2R(SubString(restoreStr,0,splitterIndex))
+            set restoreStr = SubString(restoreStr,splitterIndex+1,StringLength(restoreStr))
+            
+            set splitterIndex = CutToCharacter(restoreStr, "=")
+            set dnc.lightTerrain = S2I(SubString(restoreStr,0,splitterIndex))
+            set restoreStr = SubString(restoreStr,splitterIndex+1,StringLength(restoreStr))
+            
+            set splitterIndex = CutToCharacter(restoreStr, "=")
+            set dnc.lightUnit = S2I(SubString(restoreStr,0,splitterIndex))
             set restoreStr = SubString(restoreStr,splitterIndex+1,StringLength(restoreStr))
             
             call AutoRectEnvironment_RegisterRect(GUDR_GetGeneratorRect(generator))

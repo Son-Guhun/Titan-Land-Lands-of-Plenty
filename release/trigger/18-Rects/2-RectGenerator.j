@@ -75,6 +75,9 @@ globals
     
     public constant integer FOG_BLUE_UP      = 'AUR2'
     public constant integer FOG_BLUE_DOWN    = 'UDRF'
+    
+    public constant integer LIGHTING_NEXT      = 'A063'
+    public constant integer LIGHTING_PREV      = 'A064'
 endglobals
 
 //===================================================
@@ -167,6 +170,10 @@ endfunction
     call BlzUnitDisableAbility($U$, RectGenerator_FOG_GREEN_DOWN, $BOOL$, false)
     call BlzUnitDisableAbility($U$, RectGenerator_FOG_BLUE_UP, $BOOL$, false)
     call BlzUnitDisableAbility($U$, RectGenerator_FOG_BLUE_DOWN, $BOOL$, false)
+    
+    
+    call BlzUnitDisableAbility($U$, RectGenerator_LIGHTING_NEXT, $BOOL$, false)
+    call BlzUnitDisableAbility($U$, RectGenerator_LIGHTING_PREV, $BOOL$, false)
 //! endtextmacro
 
 private function InThirdPage takes unit u returns boolean
@@ -183,6 +190,8 @@ endfunction
 	call Unit$FUNC$Ability($U$, RectGenerator_FOG_GREEN_DOWN)
 	call Unit$FUNC$Ability($U$, RectGenerator_FOG_BLUE_UP )
 	call Unit$FUNC$Ability($U$, RectGenerator_FOG_BLUE_DOWN)
+    call Unit$FUNC$Ability($U$, RectGenerator_LIGHTING_NEXT)
+	call Unit$FUNC$Ability($U$, RectGenerator_LIGHTING_PREV)
     
     if not AutoRectEnvironment_IsRectRegistered(GUDR_GetGeneratorRect($U$)) then
         call BlzUnitDisableAbility($U$, RectGenerator_FOG_DENSITY_UP, true, false)
@@ -193,6 +202,8 @@ endfunction
         call BlzUnitDisableAbility($U$, RectGenerator_FOG_GREEN_DOWN, true, false)
         call BlzUnitDisableAbility($U$, RectGenerator_FOG_BLUE_UP, true, false)
         call BlzUnitDisableAbility($U$, RectGenerator_FOG_BLUE_DOWN, true, false)
+        call BlzUnitDisableAbility($U$, RectGenerator_LIGHTING_NEXT, true, false)
+        call BlzUnitDisableAbility($U$, RectGenerator_LIGHTING_PREV, true, false)
     endif
 
 //! endtextmacro
@@ -505,6 +516,14 @@ private function onCast takes nothing returns boolean
                     call AutoRectEnvironment_RegisterRect(GUDR_GetGeneratorRect(GetTriggerUnit()))
                     //! runtextmacro GUDR_DisableFogAbilities("GetTriggerUnit()","false")
                 endif
+            elseif abilityId == LIGHTING_NEXT then
+                set RectEnvironment.get(GUDR_GetGeneratorRect(GetTriggerUnit())).dnc.lightTerrain = ModuloInteger(RectEnvironment.get(GUDR_GetGeneratorRect(GetTriggerUnit())).dnc.lightTerrain + 1, DNC.totalLights)
+                set RectEnvironment.get(GUDR_GetGeneratorRect(GetTriggerUnit())).dnc.lightUnit = ModuloInteger(RectEnvironment.get(GUDR_GetGeneratorRect(GetTriggerUnit())).dnc.lightUnit + 1, DNC.totalLights)
+                call DisplayTextToPlayer(GetTriggerPlayer(), 0., 0., "Set lighting to: " + I2S(RectEnvironment.get(GUDR_GetGeneratorRect(GetTriggerUnit())).dnc.lightTerrain))
+            elseif abilityId == LIGHTING_PREV then
+                set RectEnvironment.get(GUDR_GetGeneratorRect(GetTriggerUnit())).dnc.lightTerrain = ModuloInteger(RectEnvironment.get(GUDR_GetGeneratorRect(GetTriggerUnit())).dnc.lightTerrain - 1, DNC.totalLights)
+                set RectEnvironment.get(GUDR_GetGeneratorRect(GetTriggerUnit())).dnc.lightUnit = ModuloInteger(RectEnvironment.get(GUDR_GetGeneratorRect(GetTriggerUnit())).dnc.lightUnit - 1, DNC.totalLights)
+                call DisplayTextToPlayer(GetTriggerPlayer(), 0., 0., "Set lighting to: " + I2S(RectEnvironment.get(GUDR_GetGeneratorRect(GetTriggerUnit())).dnc.lightTerrain))
             endif
         endif
         static if LIBRARY_StructureTileDefinition and LIBRARY_TileDefinition then
