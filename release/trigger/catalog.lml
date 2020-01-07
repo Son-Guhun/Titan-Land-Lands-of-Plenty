@@ -259,6 +259,8 @@
     30-Maths: Maths
     31-MathParser: MathParser
     '32-Timeline Lite': 'Timeline Lite'
+    33-LockableStructs: LockableStructs
+        Disab
 21-Map-specific: Map-specific
     1-Debug: Debug
     2-ArrayAgent: ArrayAgent
