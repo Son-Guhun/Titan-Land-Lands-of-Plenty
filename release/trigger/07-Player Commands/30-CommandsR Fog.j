@@ -14,7 +14,6 @@ function Trig_CommandsR_Fog_Conditions takes nothing returns boolean
     endif
     
     if chatStr == "reset" then
-        call RectEnvironment.default.fog.destroy()
         set RectEnvironment.default.fog = 0
         return false
     endif

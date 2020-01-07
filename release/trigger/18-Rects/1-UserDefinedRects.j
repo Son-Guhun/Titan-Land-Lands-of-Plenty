@@ -422,7 +422,7 @@ function ToggleGUDRVisibility takes unit whichUnit, boolean toggle, boolean show
         set show = not LoadBoolean(hashTable, unitId, Indices.HIDDEN)
     endif
     
-    call SaveBoolean(hashTable, unitId, Indices.HIDDEN, show)//Save current show/hide boolean
+    call SaveBoolean(hashTable, unitId, Indices.HIDDEN, not show)//Save current show/hide boolean
     
     //Convert Boolean to Real T/F = 1/0
     if show then
@@ -513,10 +513,10 @@ function CreateGUDR takes unit centerUnit returns boolean
     local UserDefinedRect unitId = GetHandleId(centerUnit)
     local real centerX = GetUnitX(centerUnit)
     local real centerY = GetUnitY(centerUnit)
-    local rect userDefRect 
+    local rect userDefRect
     
     static if LIBRARY_AutoRectEnvironment then
-        local TerrainFog fog
+        local RectEnvironment env
     endif
     
     if GUDR_IsUnitIdGenerator(unitId) then
@@ -526,9 +526,12 @@ function CreateGUDR takes unit centerUnit returns boolean
     set userDefRect = Rect(centerX-32, centerY-32, centerX+32, centerY+32) 
     
     static if LIBRARY_AutoRectEnvironment then
-        set fog = TerrainFog.create()
-        set RectEnvironment.get(userDefRect).fog = fog
-        set fog.style = TerrainFog.EXPONENTIAL
+        set env = RectEnvironment.get(userDefRect)
+    
+        set env.fog = TerrainFog.create()
+        set env.fog.style = TerrainFog.EXPONENTIAL
+        
+        set env.dnc = DNC.create()
     endif
     
     call SaveRectHandle(hashTable, unitId, Indices.RECT, userDefRect)
@@ -537,7 +540,7 @@ function CreateGUDR takes unit centerUnit returns boolean
     call SaveLightningHandle(hashTable, unitId, Indices.LIGHT_L, AddLightning("DRAM", false, centerX-32, centerY-32, centerX-32, centerY+32))
     call SaveLightningHandle(hashTable, unitId, Indices.LIGHT_R, AddLightning("DRAM", false, centerX+32, centerY-32, centerX+32, centerY+32))
     call SaveGroupHandle(hashTable, unitId, Indices.GROUP, CreateGroup())
-    call SaveBoolean(hashTable, unitId, Indices.HIDDEN, true) //Save show/hide boolean as true, because nothing is being hidden
+    call SaveBoolean(hashTable, unitId, Indices.HIDDEN, false) //Save show/hide boolean as true, because nothing is being hidden
     call SaveInteger(hashTable, unitId, Indices.WEATHER_TYPE, 1) //Save 1 as it is the value of 'RAhr'
     
     set unitId.extentX = 32
@@ -551,20 +554,13 @@ function DestroyGUDR takes unit centerUnit returns nothing
     local integer unitId = GetHandleId(centerUnit)
     local rect udr = GUDR_GetGeneratorIdRect(unitId)
     
-    static if LIBRARY_AutoRectEnvironment then
-        local TerrainFog fog = RectEnvironment.get(udr).fog
-    endif
-    
     if udr == null then
         return
     endif
     
     static if LIBRARY_AutoRectEnvironment then
         call AutoRectEnvironment_DeRegisterRect(udr)
-        
-        if fog > 0 then
-            call fog.destroy()
-        endif
+        call RectEnvironment.get(udr).destroy()
     endif
 
     call DestroyWeather(centerUnit)
