@@ -212,7 +212,7 @@ function onTimer takes nothing returns nothing
 endfunction
 
 globals
-    private constant real PERIOD = 0.03
+    private constant real PERIOD = 1/64.
 endglobals
 
 private module InitModule
