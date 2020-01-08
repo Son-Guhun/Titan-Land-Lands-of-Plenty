@@ -60,6 +60,9 @@ private module InitModule
         // City 3
         set i = ( i + 1 )
         set rawcodes[i] = 'u01T'
+        // Columns
+        set i = ( i + 1 )
+        set rawcodes[i] = 'u06P'        
         // Corpses
         set i = ( i + 1 )
         set rawcodes[i] = 'u00N'
