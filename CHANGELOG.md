@@ -12,7 +12,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 	- New units for an existing race can be added in a patch version. 
 	- New decorations for an existing deco builder can be added in a patch version.
 
-## [v1.4.0] - YYYY-MM-DD
+## [v1.4.0] - 2020-01-08
 
 ### Added
 - Save System improvements:
@@ -21,9 +21,59 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 - New commands:
   - **-usav:** This command can be used to save all your units inside of a Rect Generator, but not any unit outside of it..
   - **-compat:** This command must be used to load old saves (made between 1.2.1 and 1.3.0) instead of the -request command.
+  - **-freecam:** This command allows players to use a new controllable camera. The camera works as a 3rd person camera, but it can be a first person camera by setting zoom to 0.
+    - **Hotkeys**:
+	  - **WASD:** Moves the camera North/West/South/East
+	  - **IJKL:** Rotates the camera.
+	  - **SPACE:** Moves the camera up.
+	  - **CTRL+SPACE:** Moves the camera down.
+	  - **NUMPAD 4 and 6:** Adjusts the speed of movement.
+	  - **NUMPAD 2 and 8:** Slightly adjusts the speed of movement.
+- New Deco Builders:
+  - Deco Builder Columns
+  - Deco Builder Creep
+  - Deco Builder Elves Night
+  - Deco Builder Human
+  - Deco Builder Icecrown
+  - Deco Builder Orc Fort
+  - Deco Builder Pirate
+  - Deco Builder Rohan
+  - Deco Builder Underwater
+  - Deco Builder Vanilla Naga
+  - Deco Builder Wintergarde
+- New Races:
+  - Lordaeron (separated from human)
+  - Stormwind (separated from human)
+  - Stromgarde
+  - Kul Tiras
+  - Scarlet Crusade
+  - Celtic
+  - Imperials (Warhammer)
+  - Free Men (Middle Earth)
+  - Gnolls
+- New Heroes:
+  - Pirate:
+    - Cursed Pirate Captain
+	- Spell Captain
+  - Middle Earth
+    - Gandalf the White
+	- Gandalf the Gray
+	- Aragorn
+	- King Aragorn
+	- Théoden
+	- Ekenbrand
+- New Units:
+  - Norse War Wolf
+  - Norse Wolf
+  - Norse Thane
+  - Fel Shivarra
+- **Rect Generators** now have a new ability which allows players to control the environment lighting inside of them. Along with decrations that emit light (such as lanterns), this can be used for better dynamic lighting.
+- New animals: Dolphin, Shark and Manta Ray.
+- Many commands now accept mathematical expressions. For example, you can type **'fly 2^5** instead of **'fly 32**. Supports addition, subtraction, multiplication, division, exponentiation and modulo (%).
 - Riderless Horses and Pack Horses now have a **Pick Up Rider** ability, allowing them to be ridden by a unit.
 - New tip/hint for the **-count** command.
 - Save Files now have integrity checks. If a file is missing or can not be read, the game will now warn the player. If a single unit's data is corrupted, the game will also warn the player.
+- The **-time** command now accepts AM/PM. For example, **-time 10am** or **-time 10 PM**.
 
 ### Fixed
 - Fixed an issue that caused unselectable non-decoration units to be loaded incorrectly.
@@ -31,10 +81,15 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 - Fixed an issue that would cause Ancients to always face the defeault angle when loaded from a save.
 - Strange behaviour of inverting a rect's size when making it smaller than minimum size has been removed.
 - Fixed a crash that could occur when using Staff of Mimic.
+- Fixed a crash that could occur when removing units from the game.
+- Fixed an issue where a command could run twice. This was especially harmful when loading saves.
+- Fixed an issue that caused abilities to be inaccessible when switching selection using the **-select no** command. This fix may cause unit training for any selected structures to be canceled for the currently trained unit when using this command.
+- Fixed hotkeys and tooltips for many units.
 
 ### Changed
 - Changed commands:
   - **-req:** This command is no longer used to load old saves. Instead, it is used to automatically load saves made with Rect Generators at their original position, instead of choosing a new position.
+- Players can now load simultaneously without affecting performance. Players will take turns loading pieces of their saves, which means if two players are loading, they will take twice as long (until one of them finishes loading.)
 - Saves will now be located in the folder: **Documents\Warcraft III\CustomMapData\TLLoP\Saves**
 - Ancients' rooted/unrooted status is now saved by the Save System.
 - Neutral units are now also loaded as neutral units.
@@ -43,19 +98,22 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
   - Rect Generator will now remember its old size when leaving a map border.
   - You can now expand a Rect Generator when it is near a map border.
 - Vastly improved loading performance:
-  - Saves will now load twice as fast (still testing)
-  - Loading will no longer cause frame losses for the requesting player.
+  - Loading will no longer cause largely disproportionate frame losses for the requesting player.
   - Improved performance when loading terrain.
   - A message is now shown to the loading player when finished.
+  - Warnings will now show for corrupted units or files.
 - Vastly improved saving perfomance:
   - Players can now save the entire map's terrain and trees without causing the game to freeze for many seconds.
 - When setting a save center while selecting a unit, a message will now pop up with the new coords.
 - Added colored text to -count command.
+- Trees no longer play their birth animation when being created or revived.
 
 ### Removed
 - The external SaveNLoad program is no longer supported. Old saves from before 1.2.1 can no longer be loaded into the game, and must be converted in a version that supports both systems (1.2.1 to 1.3.5).
-- All units that had been deprecated after version 1.3.0 have been removed from the game entirely. To load old saves that contained this unit, use a version up to 1.3.5.
+- All units that had been deprecated after version 1.3.0 have been removed, which means their IDs may be overwritten by new units. To transfer saves that used this units, they must be loaded and saved in 1.3.5 first.
 - The map no longer uses the UnitEvent library. This may avoid crashes when removing a unit from the game.
+- Gnoll units in the Titan Palace, and the Fel Shivarra hero, have been removed. This is because they have been implemented into the game and are now trainable.
+
 
 ## [v1.3.5] - 2019-10-18
 
