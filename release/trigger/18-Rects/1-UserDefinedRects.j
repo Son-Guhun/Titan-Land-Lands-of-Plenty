@@ -106,8 +106,17 @@ endstruct
 private struct UserDefinedRect extends array
     // //! runtextmacro HashStruct_SetHashtableWrapper("hashTable")
 
-    //! runtextmacro HashStruct_NewPrimitiveFieldEx("hT", "extentX","real","Indices.EXTENT_X")
-    //! runtextmacro HashStruct_NewPrimitiveFieldEx("hT", "extentY","real","Indices.EXTENT_Y")
+    //! runtextmacro HashStruct_NewPrimitiveFieldEx("hT", "rect",        "rect",      "Indices.RECT")
+    //! runtextmacro HashStruct_NewPrimitiveFieldEx("hT", "lightTop",    "lightning", "Indices.LIGHT_T")
+    //! runtextmacro HashStruct_NewPrimitiveFieldEx("hT", "lightBot",    "lightning", "Indices.LIGHT_B")
+    //! runtextmacro HashStruct_NewPrimitiveFieldEx("hT", "lightLef",   "lightning", "Indices.LIGHT_L")
+    //! runtextmacro HashStruct_NewPrimitiveFieldEx("hT", "lightRig",  "lightning", "Indices.LIGHT_R")
+    //! runtextmacro HashStruct_NewPrimitiveFieldEx("hT", "weatherId",   "integer",   "Indices.WEATHER")
+    //! runtextmacro HashStruct_NewPrimitiveFieldEx("hT", "group",       "group",     "Indices.GROUP")
+    //! runtextmacro HashStruct_NewPrimitiveFieldEx("hT", "isHidden",    "boolean",   "Indices.HIDDEN")
+    //! runtextmacro HashStruct_NewPrimitiveFieldEx("hT", "weatherType", "integer",   "Indices.WEATHER_TYPE")
+    //! runtextmacro HashStruct_NewPrimitiveFieldEx("hT", "extentX",     "real",      "Indices.EXTENT_X")
+    //! runtextmacro HashStruct_NewPrimitiveFieldEx("hT", "extentY",     "real",      "Indices.EXTENT_Y")
     
     static method get takes unit whichUnit returns thistype
         return GetHandleId(whichUnit)
@@ -266,8 +275,7 @@ endfunction
 
 
 function ChangeGUDRWeatherNew takes unit whichUnit, integer changeWeather, integer finalWeather returns integer
-    local integer curWeather
-    local integer unitId = GetHandleId(whichUnit)
+    local UserDefinedRect unitId = GetHandleId(whichUnit)
     local integer weatherId
     
     if not GUDR_IsUnitIdGenerator(unitId) then
@@ -275,31 +283,17 @@ function ChangeGUDRWeatherNew takes unit whichUnit, integer changeWeather, integ
     endif
 
     if finalWeather < 1 or finalWeather > 21 then
-        set curWeather = GUDR_GetGeneratorIdWeatherType(unitId)
-        set finalWeather = curWeather + changeWeather
+        set finalWeather = 1 + ModuloInteger((unitId.weatherType - 1) + changeWeather, 21)
     endif
         
-
-    if finalWeather > 21 then
-        loop
-        exitwhen finalWeather <= 21
-                set finalWeather = finalWeather - 21
-        endloop
-    elseif finalWeather < 1 then
-        loop
-        exitwhen finalWeather >= 1
-                set finalWeather = finalWeather + 21
-        endloop
-    endif
-    
-    call SaveInteger(hashTable, unitId, Indices.WEATHER_TYPE, finalWeather)
+    set unitId.weatherType = finalWeather
     
     // Update Weather, if it exists.
-    set weatherId = LoadInteger(hashTable, unitId, 5)
+    set weatherId = unitId.weatherId
     if weatherId > 0 then
         call EnableWeatherEffect(weatherEffects[weatherId],false) //BUG: If weather effect is not disabled before destruction, it's sound effect will remain
         call RemoveWeatherEffect(weatherEffects[weatherId])
-        set weatherEffects[weatherId] = AddWeatherEffect(GUDR_GetGeneratorIdRect(unitId), GUDR_ConvertWeatherType(finalWeather))
+        set weatherEffects[weatherId] = AddWeatherEffect(unitId.rect, GUDR_ConvertWeatherType(finalWeather))
         call EnableWeatherEffect(weatherEffects[weatherId], true)
     endif
     
@@ -320,7 +314,7 @@ function GroupGUDRFilter takes nothing returns boolean
 endfunction
 
 function GroupGUDR takes unit whichUnit,  boolean unlock  returns boolean
-    local integer unitId = GetHandleId(whichUnit)
+    local UserDefinedRect unitId = GetHandleId(whichUnit)
     local group g
     local unit firstUnit
     local player storeGlobal = bj_forceRandomCurrentPick
@@ -329,7 +323,7 @@ function GroupGUDR takes unit whichUnit,  boolean unlock  returns boolean
         return false
     endif
     
-    set g = GUDR_GetGeneratorIdGroup(unitId)
+    set g = unitId.group
     
     //Save the GURD's owner in the Hashtable for use in the EnumFilter function
     set firstUnit = FirstOfGroup(g)
@@ -349,7 +343,7 @@ function GroupGUDR takes unit whichUnit,  boolean unlock  returns boolean
     //We only want to add new units to the group if the user doesn't want to unlock it
     if not unlock then 
         set bj_forceRandomCurrentPick = GetOwningPlayer(whichUnit)
-        call GroupEnumUnitsInRect(g, GUDR_GetGeneratorIdRect(unitId), Condition(function GroupGUDRFilter))
+        call GroupEnumUnitsInRect(g, unitId.rect, Condition(function GroupGUDRFilter))
         set bj_forceRandomCurrentPick = storeGlobal
     endif
     
@@ -412,32 +406,30 @@ endfunction
 
 function ToggleGUDRVisibility takes unit whichUnit, boolean toggle, boolean show returns boolean
     local real alpha
-    local integer unitId = GetHandleId(whichUnit)
+    local UserDefinedRect unitId = GetHandleId(whichUnit)
     
     if not GUDR_IsUnitIdGenerator(unitId) then
         return false
     endif
     
-    if toggle then //If user wants to switch the current value, change the value of show to opposite of current value
-        set show = not LoadBoolean(hashTable, unitId, Indices.HIDDEN)
+    if toggle then
+        set show = unitId.isHidden  // when toggling, show becomes equal to hidden
     endif
     
-    call SaveBoolean(hashTable, unitId, Indices.HIDDEN, not show)//Save current show/hide boolean
+    set unitId.isHidden = not show
     
-    //Convert Boolean to Real T/F = 1/0
     if show then
-        set alpha = 1 //Show > Alpha = 100%
+        set alpha = 1.
     else
-        set alpha = 0 //Hide > Alpha = 0%
+        set alpha = 0.
     endif
-    //End of Conversion
 
     //After it has been decided if the GUDR should be shown or hidden, apply the choice
     call SetUnitVertexColor(whichUnit, 255, 255, 255, 255*R2I(alpha))
-    call SetLightningColor(LoadLightningHandle(hashTable, unitId, Indices.LIGHT_T),1,1,1,alpha)
-    call SetLightningColor(LoadLightningHandle(hashTable, unitId, Indices.LIGHT_B),1,1,1,alpha)
-    call SetLightningColor(LoadLightningHandle(hashTable, unitId, Indices.LIGHT_L),1,1,1,alpha)
-    call SetLightningColor(LoadLightningHandle(hashTable, unitId, Indices.LIGHT_R),1,1,1,alpha)
+    call SetLightningColor(unitId.lightTop, 1, 1, 1, alpha)
+    call SetLightningColor(unitId.lightBot, 1, 1, 1, alpha)
+    call SetLightningColor(unitId.lightLef, 1, 1, 1, alpha)
+    call SetLightningColor(unitId.lightRig, 1, 1, 1, alpha)
     return true
 endfunction
 
@@ -489,18 +481,17 @@ function MoveGUDR takes unit centerUnit, real extentX, real extentY, boolean exp
     set maxY = GetRectMaxY(userDefRect)
     
     //Update Lightnings
-    call MoveLightning(LoadLightningHandle(hashTable, unitId, Indices.LIGHT_T), false, minX,maxY,maxX,maxY)
-    call MoveLightning(LoadLightningHandle(hashTable, unitId, Indices.LIGHT_B), false, minX,minY,maxX,minY)
-    call MoveLightning(LoadLightningHandle(hashTable, unitId, Indices.LIGHT_L), false, minX,minY,minX,maxY)
-    call MoveLightning(LoadLightningHandle(hashTable, unitId, Indices.LIGHT_R), false, maxX,minY,maxX,maxY)
+    call MoveLightning(unitId.lightTop, false, minX, maxY, maxX, maxY)
+    call MoveLightning(unitId.lightBot, false, minX, minY, maxX, minY)
+    call MoveLightning(unitId.lightLef, false, minX, minY, minX, maxY)
+    call MoveLightning(unitId.lightRig, false, maxX, minY, maxX, maxY)
     
     // Update Weather Effect
-    set weatherId = LoadInteger(hashTable, unitId, 5)
+    set weatherId = unitId.weatherId
     if weatherId > 0 then
         call EnableWeatherEffect(weatherEffects[weatherId], false) //BUG: If weather effect is not disabled before destruction, it's sound effect will remain
         call RemoveWeatherEffect(weatherEffects[weatherId])
-        set weatherEffects[weatherId] = AddWeatherEffect(userDefRect, /*
-                                                       */GUDR_ConvertWeatherType(GUDR_GetGeneratorIdWeatherType(unitId)))
+        set weatherEffects[weatherId] = AddWeatherEffect(userDefRect, GUDR_ConvertWeatherType(unitId.weatherType))
         call EnableWeatherEffect(weatherEffects[weatherId], true)
     endif
     
@@ -534,15 +525,14 @@ function CreateGUDR takes unit centerUnit returns boolean
         set env.dnc = DNC.create()
     endif
     
-    call SaveRectHandle(hashTable, unitId, Indices.RECT, userDefRect)
-    call SaveLightningHandle(hashTable, unitId, Indices.LIGHT_T, AddLightning("DRAM", false, centerX-32, centerY+32, centerX+32, centerY+32))
-    call SaveLightningHandle(hashTable, unitId, Indices.LIGHT_B, AddLightning("DRAM", false, centerX-32, centerY-32, centerX+32, centerY-32))
-    call SaveLightningHandle(hashTable, unitId, Indices.LIGHT_L, AddLightning("DRAM", false, centerX-32, centerY-32, centerX-32, centerY+32))
-    call SaveLightningHandle(hashTable, unitId, Indices.LIGHT_R, AddLightning("DRAM", false, centerX+32, centerY-32, centerX+32, centerY+32))
-    call SaveGroupHandle(hashTable, unitId, Indices.GROUP, CreateGroup())
-    call SaveBoolean(hashTable, unitId, Indices.HIDDEN, false) //Save show/hide boolean as true, because nothing is being hidden
-    call SaveInteger(hashTable, unitId, Indices.WEATHER_TYPE, 1) //Save 1 as it is the value of 'RAhr'
-    
+    set unitId.rect = userDefRect
+    set unitId.lightTop = AddLightning("DRAM", false, centerX-32, centerY+32, centerX+32, centerY+32)
+    set unitId.lightBot = AddLightning("DRAM", false, centerX-32, centerY-32, centerX+32, centerY-32)
+    set unitId.lightLef = AddLightning("DRAM", false, centerX-32, centerY-32, centerX-32, centerY+32)
+    set unitId.lightRig = AddLightning("DRAM", false, centerX+32, centerY-32, centerX+32, centerY+32)
+    set unitId.group = CreateGroup()
+    set unitId.isHidden = false
+    set unitId.weatherType = 1 //Save 1 as it is the value of 'RAhr'
     set unitId.extentX = 32
     set unitId.extentY = 32
     
@@ -551,7 +541,7 @@ function CreateGUDR takes unit centerUnit returns boolean
 endfunction
 
 function DestroyGUDR takes unit centerUnit returns nothing
-    local integer unitId = GetHandleId(centerUnit)
+    local UserDefinedRect unitId = GetHandleId(centerUnit)
     local rect udr = GUDR_GetGeneratorIdRect(unitId)
     
     if udr == null then
@@ -565,12 +555,12 @@ function DestroyGUDR takes unit centerUnit returns nothing
 
     call DestroyWeather(centerUnit)
     call GroupGUDR(centerUnit, true)
-    call DestroyLightning(GetGeneratorIdLightning(unitId, Indices.LIGHT_T))
-    call DestroyLightning(GetGeneratorIdLightning(unitId, Indices.LIGHT_B))
-    call DestroyLightning(GetGeneratorIdLightning(unitId, Indices.LIGHT_L))
-    call DestroyLightning(GetGeneratorIdLightning(unitId, Indices.LIGHT_R))
+    call DestroyLightning(unitId.lightTop)
+    call DestroyLightning(unitId.lightBot)
+    call DestroyLightning(unitId.lightLef)
+    call DestroyLightning(unitId.lightRig)
     call RemoveRect(udr)
-    call DestroyGroup(GUDR_GetGeneratorIdGroup(unitId))
+    call DestroyGroup(unitId.group)
     
     call FlushChildHashtable(hashTable, unitId)
 
