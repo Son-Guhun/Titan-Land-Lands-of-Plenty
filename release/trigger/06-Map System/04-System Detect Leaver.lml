@@ -81,10 +81,6 @@ Action
                 Var   : GAME_MASTER
                 Preset: ChangeColorFalse
             SetUnitOwner
-                Var   : gg_unit_e00D_0409
-                Var   : GAME_MASTER
-                Preset: ChangeColorFalse
-            SetUnitOwner
                 Var   : gg_unit_e00A_0411
                 Var   : GAME_MASTER
                 Preset: ChangeColorFalse

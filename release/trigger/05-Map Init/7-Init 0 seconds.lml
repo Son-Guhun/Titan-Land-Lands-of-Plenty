@@ -246,10 +246,6 @@ Commands:
         Const : 'call GUMSSetUnitVertexColor(POWER_REMOVE(), 50, 50, 50, 0)'
     CustomScriptCode
         Const : 'call BlzSetUnitName(POWER_REMOVE(), "Power: Remove")'
-    CustomScriptCode
-        Const : 'call GUMSSetUnitColor(POWER_MIND(), 1)'
-    CustomScriptCode
-        Const : 'call BlzSetUnitName(POWER_MIND(), "Power: Mind")'
     EnumDestructablesInRectAllMultiple
         Var   : gg_rct_Titan_Palace_Inner
         Action

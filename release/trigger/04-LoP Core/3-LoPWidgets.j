@@ -22,10 +22,6 @@ library POWER
         return gg_unit_e00C_0408
     endfunction
     
-    public function MIND takes nothing returns unit
-        return gg_unit_e00D_0409
-    endfunction
-    
     public function REMOVE takes nothing returns unit
         return gg_unit_e007_0410
     endfunction
@@ -117,7 +113,6 @@ function LoP_InitProtectedUnitsFilter takes nothing returns boolean
         */ or filterU == POWER_REMOVE() /*
         */ or filterU == POWER_VULNERABILITY() /*
         */ or filterU == POWER_INVULNERABILITY() /*
-        */ or filterU == POWER_MIND() /*
         */ or filterU == POWER_LEVEL() /*
         */ or filterU == POWER_DELEVEL() /*
         */ or GetUnitTypeId(filterU) == 'n000' /* give unit to
