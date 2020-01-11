@@ -36,16 +36,17 @@
 '03-Main Systems': 'Main Systems'
     Comment
 '04-LoP Core': 'LoP Core'
-    1-LoPHeader: LoPHeader
-    2-LoPDecoBuilders: LoPDecoBuilders
-    3-LoPWidgets: LoPWidgets
-    4-LoPPlayers: LoPPlayers
-    5-LoPCommands: LoPCommands
-    6-LoPUtils: LoPUtils
-    7-LoPTip: LoPTip
-    8-LoPDeprecated: LoPDeprecated
+    01-LoPHeader: LoPHeader
+    02-LoPDecoBuilders: LoPDecoBuilders
+    03-LoPWidgets: LoPWidgets
+    04-LoPPlayers: LoPPlayers
+    05-LoPCommands: LoPCommands
+    06-LoPUtils: LoPUtils
+    07-LoPTip: LoPTip
+    08-LoPDeprecated: LoPDeprecated
         Disab
-    9-LoPStdlib: LoPStdlib
+    09-LoPStdlib: LoPStdlib
+    10-LoPWarn: LoPWarn
 '05-Map Init': 'Map Init'
     1-Functions: Functions
         Comment

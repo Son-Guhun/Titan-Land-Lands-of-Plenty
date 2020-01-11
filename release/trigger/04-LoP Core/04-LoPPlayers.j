@@ -40,6 +40,16 @@ struct LoP_PlayerData extends array
     endmethod
     
     //==================================
+    
+    static boolean array atWar[24][24]
+    
+    method isAtWar takes player other returns boolean
+        return atWar[this][GetPlayerId(other)]
+    endmethod
+    
+    method setAtWar takes player other, boolean enable returns nothing
+        set atWar[this][GetPlayerId(other)] = enable
+    endmethod
 
     static playercolor array playerColors
 
