@@ -1,12 +1,7 @@
-library LoPPlayers requires TableStruct, DecorationSFX
+library LoPPlayers requires TableStruct, DecorationSFX, LoPNeutralUnits
 
 function LoP_PlayerOwnsUnit takes player whichPlayer, unit whichUnit returns boolean
-    local player p = GetOwningPlayer(whichUnit)
-    
-    if p == whichPlayer then
-        return true
-    endif
-    return IsUnitInGroup(whichUnit, udg_System_NeutralUnits[GetPlayerId(whichPlayer)]) and p == Player(PLAYER_NEUTRAL_PASSIVE)
+    return GetPlayerAlliance(LoP_GetOwningPlayer(whichUnit), whichPlayer, ALLIANCE_SHARED_ADVANCED_CONTROL)
 endfunction
 
 function PlayerNumberIsNotExtraOrVictim takes integer ID returns boolean

@@ -108,10 +108,6 @@ Removes your selected units from your control group. When the argument |cffffff0
         
     // Titan Commands 1
     set quest_text = "
-|cffffff00-mind|r <number>
-Will set the target player for Power: Mind. If you write just \"-mind\", it will flag changing ownership of all units on/off.
-|cffffff00'mind|r
-Use this command to change ownership of units you have selected without having to select the Power: Mind unit.
 |cffffff00-kick|r (color or #)
 The Titan Player can kick people that make the game suck.
 |cffffff00-delete|r/|cffffff00-delneu|r (color or #)
@@ -170,6 +166,8 @@ Adds deco builders whose name starts with the entered characters to your selecti
 |cffffff00-remove|r
 |cffffff00-kill|r
 |cffffff00-give (color)|r
+|cffffff00-give all (color)|r
+This command will give all units of the owner of your currently selected unit to another player. If you are not the Titan, you can only give your own units away.
 |cffffff00-collision (on/off)|r
 |cffffff00-rotate (angle)|r
 Sets the rotation angle of the Rotate ability used by decorations.
@@ -208,6 +206,9 @@ Use the commands above to apply unit modifications. Alternatively, you can use t
 |cffff0000Alliance Commands:|r (Color names are case-insensitive for all commands. You can use a player number instead.)
 |cffffff00-ally|r (color)
 |cffffff00-unally|r (color)
+|cffffff00-share|r (color)
+|cffffff00-share|r (color) (color)
+This command can be used by the Titan to force a player to share their units with another.
 
 |cffff0000Tips/Hints Commands:|r
 |cffffff00-tips|r (on/off)
@@ -234,6 +235,9 @@ Rolls dice. You can specify a single number to get a result from 1 to that numbe
     set quest_text = "
 |cffffff00-zoom|r (value)
 Sets the camera distance to target.
+
+|cffffff00-freecam|r (value)
+Activates the free camera. Use WASD to move your camera and IJKL to rotate it. Press SPACE to go up and CTRL+SPACE to go down. NUMPAD 2 and 8 will decrease and increase speed slightly, while NUMPAD 4 and 6 will make more significant speed changes.
 
 |cffffff00-camera|r/|cffffff00-cam|r/|cffffff00-c|r
 This command accepts many different kinds of arguments
@@ -378,7 +382,7 @@ TiJil, unwirklich
     // Model Credits 2
     set quest_text = "
 |cff00b300The Hive Workshop:|r
-PrinceYaser, shiik, Dr.Death, Sant, Eagle XI, Afroknight_76, Deleted member 238226 (unknown), GhostThruster, Whitewolf8, WhiteDeath, A.R., Xezko, Deep Sea Kraken, Hellx-Magnus, -Berz-, CRAZYRUSSIAN, HappyCockroach, Tamplier777, Kehel, Radagast, Lordaeron Creator, The D3ath, Gottfrei, bu3ny, CloudWolf, Gyrosphinx, Marenko, Talavaj, !!GORO!!, THE_SILENT, Kenntaur, skrab, simkitty181, olyvian, Darkfang, JollyD, paulH, apaka, Just_Spectating, Leopard, GiFun, erwtenpeller, wc3neverdies, Spinel, Miseracord, JesusHipster, Shakral, strongwill, Blood Raven, Kanadaj, PrinceYaser, The Leader, hortaxman, Cihparg, muna420, Aeroblyctos, Adikutz, AlienArsonist, Eagle XI, maxor_gan, Amigurumi, NFWar, 
+PrinceYaser, shiik, Dr.Death, Sant, Eagle XI, Afroknight_76, Deleted member 238226 (unknown), GhostThruster, Whitewolf8, WhiteDeath, A.R., Xezko, Deep Sea Kraken, Hellx-Magnus, -Berz-, CRAZYRUSSIAN, HappyCockroach, Tamplier777, Kehel, Radagast, Lordaeron Creator, The D3ath, Gottfrei, bu3ny, CloudWolf, Gyrosphinx, Marenko, Talavaj, !!GORO!!, THE_SILENT, Kenntaur, skrab, simkitty181, olyvian, Darkfang, JollyD, paulH, apaka, Just_Spectating, Leopard, GiFun, erwtenpeller, wc3neverdies, Spinel, Miseracord, JesusHipster, Shakral, strongwill, Blood Raven, Kanadaj, PrinceYaser, The Leader, hortaxman, Cihparg, muna420, Aeroblyctos, Adikutz, AlienArsonist, Eagle XI, maxor_gan, Amigurumi, NFWar, GreyArchon, Kadzhamit, ~Void~, zadelim, L_Lawliet
 
 |cffff0000XGM:|r
 P4ela, Kolbosa, Wulfrein, DampirTBs, Feleer, Jack Sparrow, DiKey51, Ket, LongbowMan
