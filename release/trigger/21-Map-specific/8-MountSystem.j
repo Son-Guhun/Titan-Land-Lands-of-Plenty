@@ -111,7 +111,7 @@ public function MountUnit takes unit rider, unit mount returns nothing
         call mountData.append()
         
         if mountData.getFirst() == mountData then
-            call TimerStart(CreateTimer(), 0.03, true, function onTimer)
+            call TimerStart(CreateTimer(), 1/32., true, function onTimer)
         endif
     endif
 endfunction

@@ -48,7 +48,7 @@ Action
         Call  : OperatorReal
             Const : 1.00
             Preset: OperatorDivide
-            Const : 60.00
+            Const : 64.00
     CommentString
         Const : ' '
     CommentString

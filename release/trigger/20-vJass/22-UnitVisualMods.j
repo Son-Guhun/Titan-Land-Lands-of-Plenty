@@ -688,7 +688,7 @@ private module InitModule
             call TriggerAddAction( fixUpgrades, function thistype.onUpgradeHandler )
         endif
         
-        call TimerStart( t, 0.1, true, function GUMSTimerFunction)
+        call TimerStart( t, 1/8., true, function GUMSTimerFunction)
     
         //! runtextmacro GUMS_RegisterTag("gold", "g")
         //! runtextmacro GUMS_RegisterTag("lumber", "l")

@@ -5,6 +5,7 @@ globals
     private constant boolean ENABLE_SET_HOOK = false
     private constant boolean ENABLE_MOVE_HOOK = false
     private constant boolean ENABLE_REMOVE_HOOK = false
+    private constant real PERIOD = 1/32.
 endglobals
 
 private struct Globals extends array
@@ -12,8 +13,6 @@ private struct Globals extends array
     static real lastCameraX = 0.  // this is a localplayer value
     static real lastCameraY = 0. // this is a localplayer value
     static boolean rectWasMoved = false // this is a localplayer value
-    
-    static rect lastCameraRect = null // this is a localplayer value
     
     //! runtextmacro TableStruct_NewConstTableField("public","id2")
 endstruct
@@ -103,11 +102,6 @@ endfunction
 public function DeRegisterRect takes rect r returns nothing
     local integer rId = GetHandleId(r)
     
-    // This rect can be different for each player. Null the handle to reduce reference counter.
-    if r == Globals.lastCameraRect then
-        set Globals.lastCameraRect = null  // This possibly avoids desyncs.
-    endif
-    
     if r != null and IsRectIdRegistered(rId) then
     
         set Globals.rectWasMoved = true
@@ -159,16 +153,6 @@ function onTimer takes nothing returns nothing
     
     local LinkedHashSet rectSet
     
-    if Globals.lastCameraRect != null then
-        if GetRectMinX(Globals.lastCameraRect) <= x and x <= GetRectMaxX(Globals.lastCameraRect) and GetRectMinY(Globals.lastCameraRect) <= y and y <= GetRectMaxY(Globals.lastCameraRect) then
-            // call BJDebugMsg("In last rect.")
-            call RectEnvironment.get(Globals.lastCameraRect).apply()
-            return
-        else
-            // Do not set Globals.lastCameraRect to null, it's likely the camera will soon return to the last rect.
-        endif
-    endif
-    
     if Globals.rectWasMoved then
         set Globals.rectWasMoved = false
     else
@@ -188,7 +172,6 @@ function onTimer takes nothing returns nothing
             
             if GetRectMinX(r) <= x and x <= GetRectMaxX(r) and GetRectMinY(r) <= y and y <= GetRectMaxY(r) then
                 // call BJDebugMsg("Found rect!")
-                set Globals.lastCameraRect = r
                 call RectEnvironment.get(r).apply()
                 exitwhen true
             endif
@@ -210,10 +193,6 @@ function onTimer takes nothing returns nothing
     set Globals.lastCameraX = x
     set Globals.lastCameraY = y
 endfunction
-
-globals
-    private constant real PERIOD = 1/64.
-endglobals
 
 private module InitModule
     private static method onInit takes nothing returns nothing

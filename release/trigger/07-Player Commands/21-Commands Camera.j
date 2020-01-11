@@ -23,11 +23,12 @@ struct CameraValues extends array
             call SetCameraField(CAMERA_FIELD_ROTATION, .rotate, 0)
             call SetCameraField(CAMERA_FIELD_ROLL, .roll, 0)
             call SetCameraField(CAMERA_FIELD_ANGLE_OF_ATTACK, .pitch, 0)
+            call SetCameraField(CAMERA_FIELD_ZOFFSET, .zoffset, 0)
         endif
     endmethod
     
     static method startTimer takes nothing returns nothing
-        call TimerStart(.timer, 0.03, true, function thistype.onTimer)
+        call TimerStart(.timer, 1/32., true, function thistype.onTimer)
     endmethod
     
     static method lock takes nothing returns nothing

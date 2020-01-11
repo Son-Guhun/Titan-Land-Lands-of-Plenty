@@ -27,7 +27,7 @@ private function onExpire_EnumInRange takes nothing returns nothing
     
     if not IsPlayerAlly(GetOwningPlayer(caster), GetOwningPlayer(filterU)) then
         if IsUnitInRangeXY(filterU, Args.getReal(0), Args.getReal(1), 200) then
-            call UnitDamageTarget( caster, filterU, 20., true, false, ATTACK_TYPE_NORMAL, DAMAGE_TYPE_MAGIC, WEAPON_TYPE_WHOKNOWS )
+            call UnitDamageTarget( caster, filterU, 25., true, false, ATTACK_TYPE_NORMAL, DAMAGE_TYPE_MAGIC, WEAPON_TYPE_WHOKNOWS )
         endif
     endif
     
@@ -78,7 +78,7 @@ function Trig_Spatial_Distortion_Cast_Conditions takes nothing returns boolean
     set tData.x = GetLocationX(udg_Spell__CastPoint)
     set tData.y = GetLocationY(udg_Spell__CastPoint)
     set tData.counter = 0
-    call TimerStart(t, 0.2, true, function onExpire)
+    call TimerStart(t, 0.25, true, function onExpire)
     
     set t = null
     return false
