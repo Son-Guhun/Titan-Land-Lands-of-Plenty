@@ -152,6 +152,19 @@ endfunction
 
 function Trig_Damage_Tag_Actions takes nothing returns nothing
     local integer damageType
+    local player targetOwner = GetOwningPlayer(udg_DamageEventTarget)
+    local player sourceOwner = GetOwningPlayer(udg_DamageEventSource)
+    
+    if not LoP_PlayerData.get(targetOwner).isAtWar(sourceOwner) and GetPlayerAlliance(targetOwner, sourceOwner, ALLIANCE_PASSIVE) then
+    
+        if targetOwner != sourceOwner then
+        
+            call LoP_WarnPlayer(GetOwningPlayer(udg_DamageEventTarget), 7.5, "Use the -war command to allow others to damage your units.")
+            call LoP_WarnPlayer(GetOwningPlayer(udg_DamageEventSource), 10., "You cannot damage units of players that are allied to you!")
+            set udg_DamageEventAmount = 0
+            return
+        endif
+    endif
 
     if udg_Damage_Mod_Reset then
         set udg_Damage_Mod_Multiplier = 1.
