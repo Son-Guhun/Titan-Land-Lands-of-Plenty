@@ -10,8 +10,6 @@ endglobals
 
 private struct Globals extends array
 
-    static real lastCameraX = 0.  // this is a localplayer value
-    static real lastCameraY = 0. // this is a localplayer value
     static boolean rectWasMoved = false // this is a localplayer value
     
     //! runtextmacro TableStruct_NewConstTableField("public","id2")
@@ -155,11 +153,6 @@ function onTimer takes nothing returns nothing
     
     if Globals.rectWasMoved then
         set Globals.rectWasMoved = false
-    else
-        if Globals.lastCameraX == x and Globals.lastCameraY == y then
-            //call BJDebugMsg("Camera did not move, no rects moved: do nothing.")
-            return
-        endif
     endif
     
     set rectSet = AutoRectBlock.get(x, y).rects
@@ -189,9 +182,6 @@ function onTimer takes nothing returns nothing
         //call BJDebugMsg("Camera in block with no rects.")
         call RectEnvironment.default.apply()
     endif
-    
-    set Globals.lastCameraX = x
-    set Globals.lastCameraY = y
 endfunction
 
 private module InitModule

@@ -213,13 +213,16 @@ static if LIBRARY_UserDefinedRects then
             set fog.blue = S2R(SubString(restoreStr,0,splitterIndex))
             set restoreStr = SubString(restoreStr,splitterIndex+1,StringLength(restoreStr))
             
-            set splitterIndex = CutToCharacter(restoreStr, "=")
-            set dnc.lightTerrain = S2I(SubString(restoreStr,0,splitterIndex))
-            set restoreStr = SubString(restoreStr,splitterIndex+1,StringLength(restoreStr))
             
             set splitterIndex = CutToCharacter(restoreStr, "=")
-            set dnc.lightUnit = S2I(SubString(restoreStr,0,splitterIndex))
-            set restoreStr = SubString(restoreStr,splitterIndex+1,StringLength(restoreStr))
+            if splitterIndex < StringLength(restoreStr)-1 then
+                set dnc.lightTerrain = S2I(SubString(restoreStr,0,splitterIndex))
+                set restoreStr = SubString(restoreStr,splitterIndex+1,StringLength(restoreStr))
+                
+                set splitterIndex = CutToCharacter(restoreStr, "=")
+                set dnc.lightUnit = S2I(SubString(restoreStr,0,splitterIndex))
+                set restoreStr = SubString(restoreStr,splitterIndex+1,StringLength(restoreStr))
+            endif
             
             call AutoRectEnvironment_RegisterRect(GUDR_GetGeneratorRect(generator))
         endif
