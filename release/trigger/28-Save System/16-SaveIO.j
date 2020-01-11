@@ -210,6 +210,8 @@ struct SaveLoader extends array
     implement GMUIUseGenericKey
 
     //! runtextmacro TableStruct_NewReadonlyPrimitiveField("version", "integer")
+    //! runtextmacro TableStruct_NewReadonlyPrimitiveField("originalCenterX", "real")
+    //! runtextmacro TableStruct_NewReadonlyPrimitiveField("originalCenterY", "real")
     //! runtextmacro TableStruct_NewPrimitiveField("centerX", "real")
     //! runtextmacro TableStruct_NewPrimitiveField("centerY", "real")
     //! runtextmacro TableStruct_NewReadonlyPrimitiveField("extentX", "real")
@@ -274,11 +276,13 @@ struct SaveLoader extends array
         set data = SubString(data, index+1, StringLength(data))
         
         set index = CutToComma(data)
-        set .centerX = S2R((SubString(data, 0, index)))
+        set .originalCenterX = S2R((SubString(data, 0, index)))
+        set .centerX = .originalCenterX
         set data = SubString(data, index+1, StringLength(data))
         
         set index = CutToComma(data)
-        set .centerY = S2R(SubString(data, 0, index))
+        set .originalCenterY = S2R(SubString(data, 0, index))
+        set .centerY = .originalCenterY
         set data = SubString(data, index+1, StringLength(data))
         
         if data != "" then

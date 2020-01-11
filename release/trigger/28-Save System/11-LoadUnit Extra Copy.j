@@ -24,15 +24,14 @@ function ParseAbilityString takes unit whichUnit, string whichStr returns nothin
 endfunction
 
 static if LIBRARY_MultiPatrol then
-    function Load_RestorePatrolPoints takes unit whichUnit, string chatStr returns nothing
+    function Load_RestorePatrolPoints takes unit whichUnit, SaveLoader saveData, string chatStr returns nothing
         local integer cutToComma = CutToCharacter(chatStr, "=")
-        local real x = S2R(CutToCommaResult(chatStr, cutToComma))
+        local real x = S2R(CutToCommaResult(chatStr, cutToComma)) - saveData.originalCenterX + saveData.centerX
         local real y
         
         set chatStr = CutToCommaShorten(chatStr, cutToComma)
-        set cutToComma = CutToCharacter(chatStr, "=")
-        set y = S2R(CutToCommaResult(chatStr, cutToComma))
-        
+        set cutToComma = CutToCharacter(chatStr, "=") 
+        set y = S2R(CutToCommaResult(chatStr, cutToComma)) - saveData.originalCenterY + saveData.centerY
         
         // TODO: Create function to set first patrol in the GPS library
         if not Patrol_UnitHasPatrolPoints(whichUnit) then
@@ -45,20 +44,28 @@ static if LIBRARY_MultiPatrol then
     endfunction
 endif
 
-function Load_RestoreWaygate takes string ha, unit whichGate returns nothing
+function Load_RestoreWaygate takes string ha, SaveLoader saveData, unit whichGate returns nothing
     local integer cutToComma = CutToCharacter(ha, "=")
-    local real wayGateX = S2R(CutToCommaResult(ha, cutToComma))
-    local real wayGateY
+    local real x = S2R(CutToCommaResult(ha, cutToComma)) - saveData.originalCenterX
+    local real y
     local string activate
 
     set ha = CutToCommaShorten(ha, cutToComma)
     set cutToComma = CutToCharacter(ha, "=")
-    set wayGateY = S2R(CutToCommaResult(ha, cutToComma))
+    set y = S2R(CutToCommaResult(ha, cutToComma)) - saveData.originalCenterY
     set ha = CutToCommaShorten(ha, cutToComma)
     set cutToComma = CutToCharacter(ha, "=")
     set activate = CutToCommaResult(ha, cutToComma)
     
-    call WaygateSetDestination(whichGate, wayGateX, wayGateY)
+    if RAbsBJ(x) < saveData.extentX and RAbsBJ(y) < saveData.extentY then
+        set x = x + saveData.centerX
+        set y = y + saveData.centerY
+    else
+        set x = x + saveData.originalCenterX
+        set y = y + saveData.originalCenterY
+    endif
+    
+    call WaygateSetDestination(whichGate, x, y)
     if activate == "T" then
         call WaygateActivate(whichGate, true)
     else
@@ -79,10 +86,10 @@ function Trig_LoadUnitNew_Extra_Actions takes nothing returns nothing
     if     cmdStr == "=n " then
         call GUMSSetUnitName(udg_save_LastLoadedUnit[playerId], SubString(eventStr, 3, StringLength(eventStr)))
     elseif cmdStr == "=w " then
-        call Load_RestoreWaygate(SubString(eventStr, 3, StringLength(eventStr)), udg_save_LastLoadedUnit[playerId])
+        call Load_RestoreWaygate(SubString(eventStr, 3, StringLength(eventStr)), SaveIO_GetCurrentlyLoadingSave(GetTriggerPlayer()), udg_save_LastLoadedUnit[playerId])
     elseif cmdStr == "=p " then
         static if LIBRARY_MultiPatrol then
-            call Load_RestorePatrolPoints(udg_save_LastLoadedUnit[playerId], SubString(eventStr, 3, StringLength(eventStr)))
+            call Load_RestorePatrolPoints(udg_save_LastLoadedUnit[playerId], SaveIO_GetCurrentlyLoadingSave(GetTriggerPlayer()), SubString(eventStr, 3, StringLength(eventStr)))
         endif
     elseif cmdStr == "=h " then
         static if LIBRARY_LoPHeroicUnit then
