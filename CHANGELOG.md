@@ -12,6 +12,49 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 	- New units for an existing race can be added in a patch version. 
 	- New decorations for an existing deco builder can be added in a patch version.
 
+## [v1.4.1] - 2020-01-11
+
+### Added
+- New anti-griefing system:
+	- Players can only damage units owned by players that are unallied to them.
+	- Players can use the **-war** command to allow other players to damage their units, without having to unally them.
+- New commands:
+	- **-war**
+	- **-give all:** Gives all units of the owner of your selected unit to another player. If you are not the titan, you can only use this on your own units. This command replaces the old Mind Titan Power, which is being removed.
+	- **-share (player) (player):** The Titan can use this new syntax of the -share command in order to force a player to share their units with another. You cannot use colors with spaces when using this form of the command (so you must use darkgreen instead of dark green, for example).
+- New Night Elf Units:
+  - Elf
+  - Sage
+  - Strider
+  - Druid Apprentice
+  - Veteran Archer
+  - Elune's Disciple
+  - Spearthrower
+  - Druidess
+  - Seedmother
+  - Grove Archer
+  - Autumn Mage
+- Added -give all, -freecam and new -share to F9, along with new credit
+
+### Fixed
+- Fixed an issue that caused generators loaded from old saves to have a "Total Darkness" lighting value by default, instead of "Lordaeron" lighting.
+- Fixed an issue that made the Show/Hide ability of Rect Generators  non-functional.
+- Fixed a lighting issue with both Mansion Wall decorations.
+- Internal changes that may reduce desyncs.
+- Waygates and Patrol Points will now be correctly loaded for builts which were requested at a location different from their original. Waygates that were pointing to a location which was outside the saved Rect will still point to that original location.
+- Fixed portrait and voice sounds for many Forest Elf units.
+- Fixed a small invisible hill in the Titan Palace.
+
+### Changed
+- You can now use modification commands on units of player that have shared control with you. This does not apply to forced shares caused by the Titan.
+- Renamed Deco Builder Creep to Deco Builder Creeps (to match race selector name).
+- Many deco builders now use unique icons, in order to make browser the Deco tents more convenient: Norse, Runes, Huts, Flags, Gurubashi, Celtic, Elves Blood, Runic, Draenei, Webs, Rostrodle, Gravestones, Effects, Ice, Norse, Drow, Elves Forest, Icecrown, Wintergarde, Creeps, Elves Forest, Columns, Flowers, Tableware, S&S (Manor, Kingdom & Shire), Crops, Castle, Gate, Archways, Village, Seats, Games, Floors, Mansion, Walls, Medieval, Ruined, Blocks, Fences, Furniture, Rohan
+
+### Removed
+- Removed Power: Mind from the Titan Palace.
+- Deprecated -mind command and 'mind command. An error message will show when trying to use them.
+
+
 ## [v1.4.0] - 2020-01-08
 
 ### Added
