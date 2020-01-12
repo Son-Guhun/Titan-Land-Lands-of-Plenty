@@ -48,18 +48,21 @@ function HasString takes string str, string subStr returns boolean
     return j>= subStrSize 
 endfunction
 
+function GetThirdName takes string str returns string
+    //Skip first word (Deco)
+    set str = SubString(str,CutToCharacter(str," ")+1,StringLength(str))
+    //Skip second word (Builder or Modifier)
+    set str = SubString(str,CutToCharacter(str," ")+1,StringLength(str))
+    //Use third word (the proper name that we want)
+    return SubString(str,0,CutToCharacter(str," "))
+endfunction
+
 function SearchSelectFilter takes nothing returns boolean
     local string str
     
     if IsUnitType(GetFilterUnit(), UNIT_TYPE_PEON) and (LoP_IsUnitDecoBuilder(GetFilterUnit()) or LoP_IsUnitDecoration(GetFilterUnit())) then
         //Get full unit name (Deco Builder/Modifier [Proper Name])
-        set str = GetUnitName(GetFilterUnit())
-        //Skip first word (Deco)
-        set str = SubString(str,CutToCharacter(str," ")+1,StringLength(str))
-        //Skip second word (Builder or Modifier)
-        set str = SubString(str,CutToCharacter(str," ")+1,StringLength(str))
-        //Use third word (the proper name that we want)
-        set str = SubString(str,0,CutToCharacter(str," "))
+        set str = GetThirdName(GetUnitName(GetFilterUnit()))
         
         //Compare strings and Select Unit for local player only
         if StartsString(udg_System_searchStr, StringCase(str,true)) then
@@ -72,6 +75,29 @@ function SearchSelectFilter takes nothing returns boolean
     
     //Return false because this is a condition
     return false
+endfunction
+
+function SelcHandler takes player whichPlayer, string name returns nothing
+    local integer i = 0
+    local unit deco
+    local integer pId = GetPlayerId(whichPlayer)
+    set name = StringCase(name, true)
+
+    loop
+        exitwhen i == LoP_DecoBuilders.AdvDecoLastIndex
+        
+        if LoadInteger(udg_Hashtable_2, pId+1, LoP_DecoBuilders.rawcodes[i]) == 0 and  StartsString(StringCase(GetThirdName(GetObjectName(LoP_DecoBuilders.rawcodes[i])), true), name) then
+            
+            set deco = CreateUnitAtLoc(whichPlayer, LoP_DecoBuilders.rawcodes[i], udg_PLAYER_LOCATIONS[pId+1], 270.)
+            set LoP_UnitData.get(deco).hideOnDeselect = true
+            if User.fromLocal().id == pId then
+                call SelectUnit(deco, true)
+            endif
+        endif
+        set i = i + 1
+    endloop
+    
+    set deco = null
 endfunction
 
 function SearchSelectMain takes nothing returns boolean
@@ -97,6 +123,11 @@ function SearchSelectMain takes nothing returns boolean
         
         call GroupEnumUnitsOfPlayer(ENUM_GROUP, GetTriggerPlayer(), Condition(function SearchSelectFilter))
     endif
+    
+    if LoP_Command.getCommand() == "-selc" then
+        call SelcHandler(GetTriggerPlayer(), args)
+    endif
+    
     return false
 endfunction
 
@@ -104,5 +135,6 @@ endfunction
 function InitTrig_CommandsD_Select_Search takes nothing returns nothing
     call LoP_Command.create("-seln", ACCESS_USER, Condition(function SearchSelectMain ))
     call LoP_Command.create("-sele", ACCESS_USER, Condition(function SearchSelectMain ))
+    call LoP_Command.create("-selc", ACCESS_USER, Condition(function SearchSelectMain ))
 endfunction
 

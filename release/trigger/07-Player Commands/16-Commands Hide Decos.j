@@ -1,7 +1,16 @@
+scope CommandsHide
+
 function Trig_Commands_Hide_Decos_Func006A takes nothing returns nothing
     if LoP_IsUnitDecoBuilder(GetEnumUnit()) then
         call ShowUnit(GetEnumUnit(), false)
     endif
+endfunction
+
+private function Unhide takes nothing returns boolean
+    if IsUnitHidden(GetFilterUnit()) and LoP_IsUnitDecoBuilder(GetFilterUnit()) then
+        call ShowUnit(GetFilterUnit(), true)
+    endif
+    return false
 endfunction
 
 function Trig_Commands_Hide_Decos_Conditions takes nothing returns boolean
@@ -9,8 +18,9 @@ function Trig_Commands_Hide_Decos_Conditions takes nothing returns boolean
     local group g = CreateGroup()
     
     if ( args == "all" ) then
-        set g = CreateGroup()
         call GroupEnumUnitsOfPlayer(g, GetTriggerPlayer(), null)
+    elseif (args == "off" ) then
+        call GroupEnumUnitsOfPlayer(g, GetTriggerPlayer(), Filter(function Unhide))
     else
         call Commands_EnumSelectedCheckForGenerator(g, GetTriggerPlayer(), null)
     endif
@@ -26,3 +36,4 @@ function InitTrig_Commands_Hide_Decos takes nothing returns nothing
     call LoP_Command.create("-hide", ACCESS_USER, Condition(function Trig_Commands_Hide_Decos_Conditions))
 endfunction
 
+endscope

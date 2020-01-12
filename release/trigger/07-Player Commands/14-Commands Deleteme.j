@@ -9,26 +9,38 @@ function GroupEnum_RemoveOutsidePalace takes nothing returns boolean
     return false
 endfunction
 
+function GroupEnum_RemoveDecoBuilders takes nothing returns boolean
+    if LoP_IsUnitDecoBuilder(GetFilterUnit()) and Commands_CheckOverflow()then
+        call LoP_RemoveUnit(GetFilterUnit())
+    endif
+    return false
+endfunction
+
 function Trig_Commands_Deleteme_Conditions takes nothing returns boolean
     local LinkedHashSet_DecorationEffect test = EnumDecorationsOfPlayer(GetTriggerPlayer())
     local DecorationEffect i = test.begin()
 
-    set udg_Commands_Counter = 0
-    set udg_Commands_Counter_Max = 1500
-    loop
-    exitwhen i == test.end() or not CheckCommandOverflow()
-        call i.destroy()
-        set i = test.next(i)
-    endloop
-    
-    set udg_Commands_Counter = udg_Commands_Counter/3
-    set udg_Commands_Counter_Max = 500
-    if udg_Commands_Counter < 250 then  // not worth less than 250 executions
-        set commandsDeleteInsideTitanPalace = false
-        call GroupEnumUnitsOfPlayer(ENUM_GROUP, GetTriggerPlayer(), Filter(function GroupEnum_RemoveOutsidePalace))
-    elseif udg_Commands_Counter < udg_Commands_Counter_Max then
-        set udg_Commands_Counter = udg_Commands_Counter_Max
-        call CheckCommandOverflow()
+    if LoP_Command.getArguments() == "decos" then
+        set udg_Commands_Counter_Max = 500
+        call GroupEnumUnitsOfPlayer(ENUM_GROUP, GetTriggerPlayer(), Filter(function GroupEnum_RemoveDecoBuilders))
+    else
+        set udg_Commands_Counter = 0
+        set udg_Commands_Counter_Max = 1500
+        loop
+        exitwhen i == test.end() or not CheckCommandOverflow()
+            call i.destroy()
+            set i = test.next(i)
+        endloop
+        
+        set udg_Commands_Counter = udg_Commands_Counter/3
+        set udg_Commands_Counter_Max = 500
+        if udg_Commands_Counter < 250 then  // not worth less than 250 executions
+            set commandsDeleteInsideTitanPalace = false
+            call GroupEnumUnitsOfPlayer(ENUM_GROUP, GetTriggerPlayer(), Filter(function GroupEnum_RemoveOutsidePalace))
+        elseif udg_Commands_Counter < udg_Commands_Counter_Max then
+            set udg_Commands_Counter = udg_Commands_Counter_Max
+            call CheckCommandOverflow()
+        endif
     endif
     
     call test.destroy()
