@@ -390,6 +390,10 @@ library MathParser /* v 1.1.0.0
                     set expression = SubString(expression, 0, i + 1)+"*"+SubString(expression, i + 1, stringLen)
                     set stringLen = StringLength(expression)
                     set i = i - 1
+                elseif actualChar == "." and not Math.isDigit(prevChar) then
+                    set expression = SubString(expression, 0, i)+"0"+SubString(expression, i, stringLen)
+                    set stringLen = StringLength(expression)
+                    set i = i - 1
                 endif
                 set i = i + 1
                 set prevChar = SubString(expression, i - 1, i)
