@@ -21,8 +21,12 @@ function LoP_onChangeOwner takes unit whichUnit, player ownerOld returns nothing
         call LoP_ClearNeutralData(whichUnit)
     endif
     
-    if LoP_UnitData.get(whichUnit).isHeroic then
+    if LoP_UnitData(unitId).isHeroic then
         call LoPHeroicUnit_OnChangeOwner(whichUnit, ownerOld)
+    endif
+    
+    if LoP_UnitData(unitId).hideOnDeselect then
+        set LoP_UnitData(unitId).hideOnDeselect = false
     endif
 endfunction
 

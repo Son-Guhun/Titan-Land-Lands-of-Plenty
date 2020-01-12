@@ -282,4 +282,41 @@ endstruct
     endmethod
 //! endtextmacro
 
+public function SetBooleanField takes boolean default, integer parentKey, integer childKey, boolean value returns nothing
+    
+    if value == default then
+        call TableStruct.type(parentKey).boolean.remove(childKey)
+    else
+        set TableStruct.type(parentKey).boolean[childKey] = true
+    endif
+
+endfunction
+
+// Boolean Fields
+//! textmacro TableStruct_NewBooleanFieldWithDefault takes NAME, DEFAULT
+    public static key $NAME$_impl
+    public static constant boolean $NAME$_DEFAULT = $DEFAULT$
+    
+    method operator $NAME$ takes nothing returns boolean
+        return TableStruct.type(thistype.$NAME$_impl).boolean.has(this) != $DEFAULT$
+    endmethod
+    
+    method operator $NAME$= takes boolean value returns nothing
+        call TableStruct_SetBooleanField($DEFAULT$, $NAME$_impl, this, value)
+    endmethod
+//! endtextmacro
+
+//! textmacro TableStruct_NewReadonlyBooleanFieldWithDefault takes NAME, DEFAULT
+    public static key $NAME$_impl
+    public static constant boolean $NAME$_DEFAULT = $DEFAULT$
+    
+    method operator $NAME$ takes nothing returns boolean
+        return TableStruct.type(thistype.$NAME$_impl).boolean.has(this) != $DEFAULT$
+    endmethod
+    
+    private method operator $NAME$= takes boolean value returns nothing
+        call TableStruct_SetBooleanField($DEFAULT$, $NAME$_impl, this, value)
+    endmethod
+//! endtextmacro
+
 endlibrary

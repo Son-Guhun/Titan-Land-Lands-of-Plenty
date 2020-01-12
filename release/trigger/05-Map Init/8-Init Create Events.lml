@@ -30,6 +30,11 @@ Action
                 Event: TriggerRegisterPlayerSelectionEventBJ
                     Var   : temp_player
                     Preset: SelDeselOptionSel
+            AddTriggerEvent
+                Var   : gg_trg_System_Deselect
+                Event: TriggerRegisterPlayerSelectionEventBJ
+                    Var   : temp_player
+                    Preset: SelDeselOptionDesel
             SetVariable
                 Array : System_AutonameBoolean
                     Var   : temp_integer

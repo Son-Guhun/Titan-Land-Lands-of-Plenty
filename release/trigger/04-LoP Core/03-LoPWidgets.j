@@ -73,6 +73,9 @@ struct LoP_UnitData extends array
     // This field is used by heroic units so that they can be easily recognized as heroic. It should never be set to false, if it had been set to true.
     //! runtextmacro TableStruct_NewPrimitiveField("isHeroic","boolean")
     
+    // //! runtextmacro TableStruct_NewBooleanFieldWithDefault("hideOnDeselect","false")
+    //! runtextmacro TableStruct_NewPrimitiveField("hideOnDeselect","boolean")
+    
     method destroy takes nothing returns nothing
         call .isHeroicClear()
     endmethod
