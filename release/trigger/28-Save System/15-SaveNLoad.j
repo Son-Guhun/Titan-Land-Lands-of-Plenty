@@ -10,7 +10,7 @@ library SaveNLoad requires WorldBounds, UnitVisualMods, AnyBase, TerrainTools, D
 
    */ optional UserDefinedRects, optional SaveNLoadConfig optional LoPDeprecated
 ////////////////////////////////////////////////////////////////////////////////////////////////////
-//SaveNLoad v4.0
+//SaveNLoad v5.0
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 public constant function OLDFOLDER takes nothing returns string
     return "TitanLandLoP\\"

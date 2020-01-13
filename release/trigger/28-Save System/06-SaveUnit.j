@@ -1,4 +1,4 @@
-library SaveUnit requires SaveNLoad, SaveIO, OOP, optional LoPHeroicUnit, optional CustomizableAbilityList
+library SaveUnit requires SaveNLoad, SaveIO, OOP, Maths, optional LoPHeroicUnit, optional CustomizableAbilityList
 
 private struct InternalPlayerData extends array
     group units
@@ -8,7 +8,60 @@ private struct InternalPlayerData extends array
     
     //! runtextmacro InheritFieldReadonly("SaveNLoad_PlayerData", "centerX", "real")
     //! runtextmacro InheritFieldReadonly("SaveNLoad_PlayerData", "centerY", "real")
+    
+    //! runtextmacro TableStruct_NewPrimitiveField("maxX", "real")
+    //! runtextmacro TableStruct_NewPrimitiveField("minX", "real")
+    //! runtextmacro TableStruct_NewPrimitiveField("maxY", "real")
+    //! runtextmacro TableStruct_NewPrimitiveField("minY", "real")
 endstruct
+
+private function CalculateRectSave takes InternalPlayerData playerId, SaveData saveData returns nothing
+    local real extentX = (playerId.maxX - playerId.minX)/2
+    local real extentY = (playerId.maxY - playerId.minY)/2
+    
+    local real centerX = playerId.maxX - extentX
+    local real centerY = playerId.maxY - extentY
+    
+    local real offsetX = GetTileCenterCoordinate(centerX) - centerX
+    local real offsetY = GetTileCenterCoordinate(centerY) - centerY
+    
+    set centerX = centerX + offsetX
+    set centerY = centerY + offsetY
+    set extentX = extentX + RAbsBJ(offsetX)
+    set extentY = extentY + RAbsBJ(offsetY)
+    
+    set extentX = Math.ceil(extentX)
+    set extentY = Math.ceil(extentY)
+    
+    if ModuloReal(extentX, 64) != 32 then
+        set extentX = 64*R2I(extentX/64) + 96
+    endif
+    if ModuloReal(extentY, 64) != 32 then
+        set extentY = 64*R2I(extentY/64) + 96
+    endif
+    
+    if extentX < 10000 and extentY < 10000 then
+        set saveData.centerX = centerX
+        set saveData.centerY = centerY
+        set saveData.extentX = extentX
+        set saveData.extentY = extentY
+    endif
+endfunction
+
+function UpdatePlayerExtents takes InternalPlayerData playerId, real x, real y returns nothing
+    if x > playerId.maxX then
+        set playerId.maxX = x
+    endif
+    if x < playerId.minX then
+        set playerId.minX = x
+    endif
+    if y > playerId.maxY then
+        set playerId.maxY = y
+    endif
+    if y < playerId.minY then
+        set playerId.minY = y
+    endif
+endfunction
 
 public struct PlayerData extends array
 
@@ -97,8 +150,8 @@ private function GetSFXSaveStr takes SpecialEffect whichEffect, player owner, Sa
     endif
 
     return ID2S(whichEffect.unitType) + "," +/*
-        */ R2S(whichEffect.x - saveData.centerX) + "," +/*
-        */ R2S(whichEffect.y - saveData.centerY) + "," +/*
+        */ R2S(whichEffect.x) + "," +/*
+        */ R2S(whichEffect.y) + "," +/*
         */ R2S(whichEffect.height) + "," +/*
         */ GetFacingStringEffect(whichEffect) + "," +/*
         */ GetScaleStringEffect(whichEffect) + "," +/*
@@ -123,6 +176,10 @@ private function SaveEffectDecos takes InternalPlayerData playerId, SaveData sav
         exitwhen counter == 25 or decorations == 0 or decoration == decorations.end()
         
         call saveData.write(SaveNLoad_FormatString("SnL_unit", GetSFXSaveStr(decoration, decoration.getOwner(), saveData, decoration.hasCustomColor, GUMS_SELECTION_UNSELECTABLE())))
+        
+        if not saveData.isRectSave() then
+            call UpdatePlayerExtents(playerId, decoration.x, decoration.y)
+        endif
         
         set decoration = decorations.next(decoration)
         call decorations.remove(decorations.prev(decoration))
@@ -188,8 +245,8 @@ private function SaveForceLoop takes nothing returns boolean
                     set saveStr = GetSFXSaveStr(GetUnitAttachedEffect(saveUnit), filterPlayer, saveData, unitHandleId.hasColor(), GUMS_GetUnitSelectionType(saveUnit))
                 else
                     set saveStr = ID2S((GetUnitTypeId(saveUnit))) + "," + /*
-                                */   R2S(GetUnitX(saveUnit) - saveData.centerX)+","+  /*
-                                */   R2S(GetUnitY(saveUnit) - saveData.centerY) + "," + /*
+                                */   R2S(GetUnitX(saveUnit))+","+  /*
+                                */   R2S(GetUnitY(saveUnit)) + "," + /*
                                 */   R2S(GetUnitFlyHeight(saveUnit)) + "," + /*
                                 */   R2S(GetUnitFacing(saveUnit)) + "," + /*
                                 */   unitHandleId.getScale() + "," + /*
@@ -205,6 +262,10 @@ private function SaveForceLoop takes nothing returns boolean
                 endif
                 
                 call saveData.write(SaveNLoad_FormatString("SnL_unit", saveStr))
+                
+                if not saveData.isRectSave() then
+                    call UpdatePlayerExtents(playerId, GetUnitX(saveUnit), GetUnitY(saveUnit))
+                endif
                 
                 if GUMSUnitHasCustomName(unitHandleId) then
                     call saveData.write(SaveNLoad_FormatString("SnL_unit_extra", "=n " + SaveIO_CleanUpString(GUMSGetUnitName(saveUnit))))
@@ -252,6 +313,9 @@ private function SaveForceLoop takes nothing returns boolean
         
         //This if statement must remain inside (if playerId.isSaving == true) statement to avoid output for people who aren't saving
         if playerId.isSaving == false then
+            if not saveData.isRectSave() then
+                call CalculateRectSave(playerId, saveData)
+            endif
             call saveData.destroy()
             // call playerId.effects.destroy()
             set saveFile[playerId] = 0
@@ -283,6 +347,11 @@ function SaveUnits takes SaveData saveData returns nothing
 
     set playerId.savedCount = 0
     set playerId.isSaving = true
+    
+    set playerId.maxX = -Pow(2, 23)
+    set playerId.minX = Pow(2, 23)
+    set playerId.maxY = -Pow(2, 23)
+    set playerId.minY = Pow(2, 23)
     
     if saveFile[playerId] != 0 then
         call saveFile[playerId].destroy()

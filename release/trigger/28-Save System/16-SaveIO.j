@@ -98,7 +98,7 @@ struct SaveData extends array
     implement GMUIUseGenericKey
 
     static constant integer MAX_LINES = 20
-    static constant integer VERSION = 4
+    static constant integer VERSION = 5
     //! runtextmacro TableStruct_NewReadonlyPrimitiveField("current", "integer")
     //! runtextmacro TableStruct_NewReadonlyPrimitiveField("linesWritten", "integer")
     //! runtextmacro TableStruct_NewReadonlyPrimitiveField("folder", "string")
@@ -108,6 +108,10 @@ struct SaveData extends array
     //! runtextmacro TableStruct_NewPrimitiveField("centerY", "real")
     //! runtextmacro TableStruct_NewPrimitiveField("extentX", "real")
     //! runtextmacro TableStruct_NewPrimitiveField("extentY", "real")
+    
+    method isRectSave takes nothing returns boolean
+        return this.extentX != 0
+    endmethod
 
     private method start takes nothing returns nothing
         if GetLocalPlayer() == .player then
