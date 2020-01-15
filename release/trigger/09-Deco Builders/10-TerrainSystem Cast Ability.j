@@ -13,26 +13,21 @@ function Trig_TerrainSystem_Cast_Ability_Actions takes nothing returns nothing
     local player owner = GetOwningPlayer(GetTriggerUnit())
     local integer playerNumber = GetPlayerId(owner) + 1
     
-    loop
-        exitwhen index > 15
-        if trigAbility == udg_TileSystem_ABILITIES[index] then
-            call SetTerrainType(x, y, TerrainTools_GetTexture(index), udg_TileSystem_Var[playerNumber], udg_DecoSystem_Value[playerNumber], 0 )
-            exitwhen true
-        endif
-        set index = index + 1
-    endloop
-    
     if GetSpellAbilityId() == 'A0BR' then
         call SetTerrainType( x, y, TerrainTools_GetTexture(4), -1, udg_DecoSystem_Value[playerNumber], 0 )
         call SetBlight(owner, x, y, ( 128.00 * ( I2R(udg_DecoSystem_Value[playerNumber]) - 1 ) ), true)
-    else
-    endif
-    if GetSpellAbilityId() == 'A002' then
+    elseif GetSpellAbilityId() == 'A002' then
         call SetBlight(owner, x, y, ( 128.00 * ( I2R(udg_DecoSystem_Value[playerNumber]) - 1 ) ), false)
     else
+        loop
+            exitwhen index > 15
+            if trigAbility == udg_TileSystem_ABILITIES[index] then
+                call SetTerrainType(x, y, TerrainTools_GetTexture(index), udg_TileSystem_Var[playerNumber], udg_DecoSystem_Value[playerNumber], 0 )
+                exitwhen true
+            endif
+            set index = index + 1
+        endloop
     endif
-    call RemoveLocation(udg_temp_point)
-    set udg_temp_point = null
 endfunction
 
 //===========================================================================

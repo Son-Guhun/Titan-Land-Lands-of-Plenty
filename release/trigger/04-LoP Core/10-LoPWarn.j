@@ -1,4 +1,4 @@
-library LoPWarn initializer Init requires Timeline, Table
+library LoPWarn initializer Init requires Timeline, TableStruct
 
 
 private struct PlayerData extends array

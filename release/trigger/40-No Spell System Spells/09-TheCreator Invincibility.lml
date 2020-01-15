@@ -5,7 +5,7 @@ Event
 Condition
 Action
     CustomScriptCode
-        Const : 'local location temp_point'
+        Const : 'local location udg_temp_point'
     TriggerSleepAction
         Const : 1.00
     SetVariable
