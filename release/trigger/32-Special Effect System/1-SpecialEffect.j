@@ -49,45 +49,65 @@ struct SpecialEffect extends array
     //! runtextmacro HashStruct_NewReadonlyStructField("subanimations","LinkedHashSet")
     
     method operator x takes nothing returns real
+        implement assertNotNull
+        
         return BlzGetLocalSpecialEffectX(.effect)
     endmethod
     
     method operator x= takes real value returns nothing
+        implement assertNotNull
+        
         call BlzSetSpecialEffectX(.effect, value)
         call BlzSetSpecialEffectHeight(.effect, .height_impl)
     endmethod
     
     method operator y takes nothing returns real
+        implement assertNotNull
+        
         return BlzGetLocalSpecialEffectY(.effect)
     endmethod
     
     method operator y= takes real value returns nothing
+        implement assertNotNull
+        
         call BlzSetSpecialEffectY(.effect, value)
         call BlzSetSpecialEffectHeight(.effect, .height_impl)
     endmethod
     
     method operator height takes nothing returns real
+        implement assertNotNull
+        
         return .height_impl
     endmethod
     
     method operator height= takes real value returns nothing
+        implement assertNotNull
+        
         set .height_impl = value
         call BlzSetSpecialEffectHeight(.effect, value)
     endmethod
     
     method operator yaw takes nothing returns real
+        implement assertNotNull
+        
         return .yaw_impl
     endmethod
     
     method operator pitch takes nothing returns real
+        implement assertNotNull
+        
         return .pitch_impl
     endmethod
     
     method operator roll takes nothing returns real
+        implement assertNotNull
+        
         return .roll_impl
     endmethod
     
     method operator yaw= takes real value returns nothing
+        implement assertNotNull
+        
         set .yaw_impl = value
         // call BlzSetSpecialEffectYaw(.effect, value)
         call BlzSetSpecialEffectOrientation(.effect, value, .pitch, .roll)
@@ -95,6 +115,8 @@ struct SpecialEffect extends array
     endmethod
     
     method operator pitch= takes real value returns nothing
+        implement assertNotNull
+        
         set .pitch_impl = value
         //call BlzSetSpecialEffectPitch(.effect, value)
         call BlzSetSpecialEffectOrientation(.effect, .yaw, value, .roll)
@@ -102,6 +124,8 @@ struct SpecialEffect extends array
     endmethod
     
     method operator roll= takes real value returns nothing
+        implement assertNotNull
+        
         set .roll_impl = value
         //call BlzSetSpecialEffectRoll(.effect, value)
         call BlzSetSpecialEffectOrientation(.effect, .yaw, .pitch, value)
@@ -109,6 +133,8 @@ struct SpecialEffect extends array
     endmethod
     
     method setOrientation takes real yaw, real pitch, real roll returns nothing
+        implement assertNotNull
+        
         set .yaw_impl = yaw
         set .pitch_impl = pitch
         set .roll_impl = roll
@@ -117,10 +143,14 @@ struct SpecialEffect extends array
     endmethod
     
     method operator color takes nothing returns integer
+        implement assertNotNull
+        
         return .color_impl
     endmethod
     
     method operator color= takes integer value returns nothing
+        implement assertNotNull
+        
         if 0 <= value and bj_MAX_PLAYER_SLOTS > value then
             set .color_impl = value
             call BlzSetSpecialEffectColorByPlayer(.effect, Player(value))
@@ -128,6 +158,8 @@ struct SpecialEffect extends array
     endmethod
     
     method setScale takes real scaleX, real scaleY, real scaleZ returns nothing
+        implement assertNotNull
+        
         set .scaleX = scaleX
         set .scaleY = scaleY
         set .scaleZ = scaleZ
@@ -138,6 +170,8 @@ struct SpecialEffect extends array
     endmethod
     
     method setVertexColor takes integer red, integer green, integer blue returns nothing
+        implement assertNotNull
+        
         set .red = red
         set .green = green
         set .blue = blue
@@ -145,29 +179,40 @@ struct SpecialEffect extends array
     endmethod
     
     method operator alpha takes nothing returns integer
+        implement assertNotNull
+        
         return .alpha_impl
     endmethod
     
     method operator alpha= takes integer alpha returns nothing
+        implement assertNotNull
+        
         set .alpha_impl = alpha
         call BlzSetSpecialEffectAlpha(.effect, alpha)
     endmethod
     
     method operator animationSpeed takes nothing returns real
+        implement assertNotNull
+        
         return .animationSpeed_impl
     endmethod
     
     method operator animationSpeed= takes real value returns nothing
+        implement assertNotNull
+        
         set .animationSpeed_impl = value
         call BlzSetSpecialEffectTimeScale(.effect, value)
     endmethod
     
     method hasSubAnimations takes nothing returns boolean
+        implement assertNotNull
+        
         return .subanimations_exists()
     endmethod
     
     method addSubAnimation takes subanimtype anim returns nothing
         local integer animId = GetHandleId(anim)
+        implement assertNotNull
         
         if not .subanimations_exists() then
             set .subanimations = LinkedHashSet.create()
@@ -182,6 +227,7 @@ struct SpecialEffect extends array
     
     method removeSubAnimation takes subanimtype anim returns nothing
         local integer animId = GetHandleId(anim)
+        implement assertNotNull
         
         if .subanimations_exists() then
             if .subanimations.contains(animId) then
@@ -197,6 +243,8 @@ struct SpecialEffect extends array
     endmethod
     
     method clearSubAnimations takes nothing returns nothing
+        implement assertNotNull
+        
         if .subanimations_exists() then
             call BlzSpecialEffectClearSubAnimations(.effect)
             call .subanimations.destroy()
@@ -219,6 +267,7 @@ struct SpecialEffect extends array
     
     method destroy takes nothing returns nothing
         local effect e = .effect
+        implement assertNotNull
         
         call .clearSubAnimations()
         
@@ -234,6 +283,7 @@ struct SpecialEffect extends array
         local SpecialEffect result = SpecialEffect.create(newType, this.x, this.y)
         local LinkedHashSet subanims
         local integer subanim
+        implement assertNotNull
         
         set result.height = this.height
         call result.setOrientation(this.yaw, this.pitch, this.roll)

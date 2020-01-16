@@ -1,4 +1,4 @@
-library TableStruct requires Table, optional ConstTable
+library TableStruct requires Table, optional ConstTable, LoPDebug
 // Defines Structs that use Table (or ConstTable) as a backend, instead of arrays.
 // You should use your own allocator (for non-static structs).
 
@@ -171,18 +171,22 @@ endstruct
 //! textmacro TableStruct_NewStructField takes NAME, TYPE
     private static key $NAME$_impl
     method operator $NAME$ takes nothing returns $TYPE$
+        implement assertNotNull
         return TableStruct.type(thistype.$NAME$_impl)[this]
     endmethod
     
     method operator $NAME$= takes $TYPE$ new_$NAME$ returns nothing
+        implement assertNotNull
         set TableStruct.type(thistype.$NAME$_impl)[this] = new_$NAME$
     endmethod
     
     private method $NAME$Clear takes nothing returns nothing
+        implement assertNotNull
         call TableStruct.type(thistype.$NAME$_impl).remove(this)
     endmethod
     
     private method $NAME$Exists takes nothing returns boolean
+        implement assertNotNull
         return TableStruct.type(thistype.$NAME$_impl).has(this)
     endmethod
 //! endtextmacro
@@ -190,18 +194,22 @@ endstruct
 //! textmacro TableStruct_NewPrimitiveField takes NAME, TYPE
     private static key $NAME$_impl
     method operator $NAME$ takes nothing returns $TYPE$
+        implement assertNotNull
         return TableStruct.type(thistype.$NAME$_impl).$TYPE$[this]
     endmethod
     
     method operator $NAME$= takes $TYPE$ new_$NAME$ returns nothing
+        implement assertNotNull
         set TableStruct.type(thistype.$NAME$_impl).$TYPE$[this] = new_$NAME$
     endmethod
     
     private method $NAME$Clear takes nothing returns nothing
+        implement assertNotNull
         call TableStruct.type(thistype.$NAME$_impl).$TYPE$.remove(this)
     endmethod
     
     private method $NAME$Exists takes nothing returns boolean
+        implement assertNotNull
         return TableStruct.type(thistype.$NAME$_impl).$TYPE$.has(this)
     endmethod
 //! endtextmacro
@@ -209,18 +217,22 @@ endstruct
 //! textmacro TableStruct_NewHandleField takes NAME, TYPE
     private static key $NAME$_impl
     method operator $NAME$ takes nothing returns $TYPE$
+        implement assertNotNull
         return TableStruct.type(thistype.$NAME$_impl).$TYPE$[this]
     endmethod
     
     method operator $NAME$= takes $TYPE$ new_$NAME$ returns nothing
+        implement assertNotNull
         call TableStruct.setHandle(thistype.$NAME$_impl, this, new_$NAME$)
     endmethod
     
     private method $NAME$Clear takes nothing returns nothing
+        implement assertNotNull
         call TableStruct.type(thistype.$NAME$_impl).$TYPE$.remove(this)
     endmethod
     
     private method $NAME$Exists takes nothing returns boolean
+        implement assertNotNull
         return TableStruct.type(thistype.$NAME$_impl).$TYPE$.has(this)
     endmethod
 //! endtextmacro
@@ -228,18 +240,22 @@ endstruct
 //! textmacro TableStruct_NewReadonlyStructField takes NAME, TYPE
     private static key $NAME$_impl
     method operator $NAME$ takes nothing returns $TYPE$
+        implement assertNotNull
         return TableStruct.type(thistype.$NAME$_impl)[this]
     endmethod
     
     private method operator $NAME$= takes $TYPE$ new_$NAME$ returns nothing
+        implement assertNotNull
         set TableStruct.type(thistype.$NAME$_impl)[this] = new_$NAME$
     endmethod
     
     private method $NAME$Clear takes nothing returns nothing
+        implement assertNotNull
         call TableStruct.type(thistype.$NAME$_impl).remove(this)
     endmethod
     
     private method $NAME$Exists takes nothing returns boolean
+        implement assertNotNull
         return TableStruct.type(thistype.$NAME$_impl).has(this)
     endmethod
 //! endtextmacro
@@ -247,18 +263,22 @@ endstruct
 //! textmacro TableStruct_NewReadonlyPrimitiveField takes NAME, TYPE
     private static key $NAME$_impl
     method operator $NAME$ takes nothing returns $TYPE$
+        implement assertNotNull
         return TableStruct.type(thistype.$NAME$_impl).$TYPE$[this]
     endmethod
     
     private method operator $NAME$= takes $TYPE$ new_$NAME$ returns nothing
+        implement assertNotNull
         set TableStruct.type(thistype.$NAME$_impl).$TYPE$[this] = new_$NAME$
     endmethod
     
     private method $NAME$Clear takes nothing returns nothing
+        implement assertNotNull
         call TableStruct.type(thistype.$NAME$_impl).$TYPE$.remove(this)
     endmethod
     
     private method $NAME$Exists takes nothing returns boolean
+        implement assertNotNull
         return TableStruct.type(thistype.$NAME$_impl).$TYPE$.has(this)
     endmethod
 //! endtextmacro
@@ -266,18 +286,22 @@ endstruct
 //! textmacro TableStruct_NewReadonlyHandleField takes NAME, TYPE
     private static key $NAME$_impl
     method operator $NAME$ takes nothing returns $TYPE$
+        implement assertNotNull
         return TableStruct.type(thistype.$NAME$_impl).$TYPE$[this]
     endmethod
     
     private method operator $NAME$= takes $TYPE$ new_$NAME$ returns nothing
+        implement assertNotNull
         call TableStruct.setHandle(thistype.$NAME$_impl, this, new_$NAME$)
     endmethod
     
     private method $NAME$Clear takes nothing returns nothing
+        implement assertNotNull
         call TableStruct.type(thistype.$NAME$_impl).$TYPE$.remove(this)
     endmethod
     
     private method $NAME$Exists takes nothing returns boolean
+        implement assertNotNull
         return TableStruct.type(thistype.$NAME$_impl).$TYPE$.has(this)
     endmethod
 //! endtextmacro
@@ -298,10 +322,12 @@ endfunction
     public static constant boolean $NAME$_DEFAULT = $DEFAULT$
     
     method operator $NAME$ takes nothing returns boolean
+        implement assertNotNull
         return TableStruct.type(thistype.$NAME$_impl).boolean.has(this) != $DEFAULT$
     endmethod
     
     method operator $NAME$= takes boolean value returns nothing
+        implement assertNotNull
         call TableStruct_SetBooleanField($DEFAULT$, $NAME$_impl, this, value)
     endmethod
 //! endtextmacro
@@ -311,10 +337,12 @@ endfunction
     public static constant boolean $NAME$_DEFAULT = $DEFAULT$
     
     method operator $NAME$ takes nothing returns boolean
+        implement assertNotNull
         return TableStruct.type(thistype.$NAME$_impl).boolean.has(this) != $DEFAULT$
     endmethod
     
     private method operator $NAME$= takes boolean value returns nothing
+        implement assertNotNull
         call TableStruct_SetBooleanField($DEFAULT$, $NAME$_impl, this, value)
     endmethod
 //! endtextmacro

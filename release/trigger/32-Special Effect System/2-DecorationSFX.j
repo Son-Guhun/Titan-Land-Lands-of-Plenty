@@ -61,6 +61,8 @@ function EnumDecorationsOfPlayerInRange takes player whichPlayer, real centerX, 
 //! endnovjass
 
 private struct PlayerData extends array
+
+    implement DebugPlayerStruct
     
     static if USE_CUSTOM_PLAYER_COLORS then
         //! runtextmacro TableStruct_NewReadonlyPrimitiveField("color_impl", "integer")
@@ -88,6 +90,8 @@ endstruct
 
 
 private struct DecorationEffectBlock extends array
+
+    implement DebugNegativeIsNull
 
     static constant integer BLOCK_SIZE = 2048
 
@@ -123,12 +127,14 @@ struct DecorationEffect extends array
     endmethod
 
     method operator x takes nothing returns real
+        implement assertNotNull
         return BlzGetLocalSpecialEffectX(.effect)
     endmethod
     
     method operator x= takes real value returns nothing
         local effect decoration = .effect
         local real y = BlzGetLocalSpecialEffectY(decoration)
+        implement assertNotNull
     
         call DecorationEffectBlock.get(BlzGetLocalSpecialEffectX(decoration), y).effects.remove(this)
         call DecorationEffectBlock.get(value, y).effects.append(this)
@@ -140,12 +146,14 @@ struct DecorationEffect extends array
     endmethod
     
     method operator y takes nothing returns real
+        implement assertNotNull
         return BlzGetLocalSpecialEffectY(.effect)
     endmethod
     
     method operator y= takes real value returns nothing
         local effect decoration = .effect
         local real x = BlzGetLocalSpecialEffectX(decoration)
+        implement assertNotNull
     
         call DecorationEffectBlock.get(x, BlzGetLocalSpecialEffectY(decoration)).effects.remove(this)
         call DecorationEffectBlock.get(x, value).effects.append(this)

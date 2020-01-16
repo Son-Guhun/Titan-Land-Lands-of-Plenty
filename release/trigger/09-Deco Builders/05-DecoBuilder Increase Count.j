@@ -1,5 +1,8 @@
+scope DecoBuilderIncreaseCount
+
 function Trig_DecoBuilder_Increase_Count_Conditions takes nothing returns boolean
     local unit u = udg_UDexUnits[udg_UDex]
+    //! runtextmacro ASSERT("u != null")
     
     if LoP_IsUnitDecoBuilder(u) then
         call DecoBuilderCount_IncreaseCount(u)
@@ -17,3 +20,4 @@ function InitTrig_DecoBuilder_Increase_Count takes nothing returns nothing
     call TriggerAddCondition( gg_trg_DecoBuilder_Increase_Count, Condition( function Trig_DecoBuilder_Increase_Count_Conditions ) )
 endfunction
 
+endscope

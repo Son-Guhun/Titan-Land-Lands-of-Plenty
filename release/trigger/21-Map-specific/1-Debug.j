@@ -9,4 +9,51 @@ function Debug_PrintIf takes boolean condition, string message returns nothing
         call BJDebugMsg(message)
     endif
 endfunction
+
+function ASSERT_impl takes boolean assertion, string funcName, string message returns nothing
+    if not assertion then
+        call BJDebugMsg("Assertion error (" + funcName + "): " + message)
+    endif
+endfunction
+
+/*
+function ASSERT takes boolean assertion, string message returns nothing
+    call ASSERT_impl(assertion, SCOPE_PREFIX + "$FUNC_NAME", message)
+endfunction
+
+function ASSERT_NOTNULL takes handle h, string varName returns nothing
+    call ASSERT(h != null, "Null pointer: " + varName)
+endfunction
+
+function ASSERT_NOTZERO takes integer num, string varName returns nothing
+    call ASSERT(num != 0, "Null pointer: " + varName)
+endfunction
+*/
+
+//! textmacro ASSERT takes assertion
+    debug call ASSERT_impl($assertion$, SCOPE_PREFIX+"$FUNC_NAME", "$assertion$")
+//! endtextmacro
+
+module DebugNegativeIsNull
+    static constant boolean REDEFINE_NULL = true
+    method isNotNull takes nothing returns boolean
+        return integer(this) >= 0
+    endmethod
+endmodule
+
+module DebugPlayerStruct
+    static constant boolean REDEFINE_NULL = true
+    method isNotNull takes nothing returns boolean
+        return integer(this) >= 0 and integer(this) < bj_MAX_PLAYERS
+    endmethod
+endmodule
+
+module assertNotNull
+    static if thistype.REDEFINE_NULL then
+        call ASSERT_impl(this.isNotNull(), I2S(thistype.typeid), "Null object!")
+    else
+        call ASSERT_impl(this != null, I2S(thistype.typeid), "Null object!")
+    endif
+endmodule
+
 endlibrary

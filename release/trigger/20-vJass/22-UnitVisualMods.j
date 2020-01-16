@@ -183,6 +183,7 @@ endstruct
 // unit is not saved within the struct.
 
 function GUMSSetUnitFacing takes unit whichUnit, real newAngle returns nothing
+    //! runtextmacro ASSERT("whichUnit != null")
     call SetUnitFacing(whichUnit, newAngle)
     
     if GetUnitAbilityLevel(whichUnit, 'Amov') == 0 then
@@ -192,6 +193,7 @@ function GUMSSetUnitFacing takes unit whichUnit, real newAngle returns nothing
 endfunction
 
 function GUMSSetUnitFlyHeight takes unit whichUnit, real newHeight returns nothing
+    //! runtextmacro ASSERT("whichUnit != null")
     if UnitAddAbility(whichUnit, 'Amrf' ) then
         call UnitRemoveAbility(whichUnit, 'Amrf')
     endif
@@ -206,6 +208,8 @@ endfunction
 
 function GUMS_AddStructureFlightAbility takes unit structure returns nothing
     local real facing
+    //! runtextmacro ASSERT("structure != null")
+    //! runtextmacro ASSERT("IsUnitType(structure, UNIT_TYPE_STRUCTURE)")
 
     if not data[GetHandleId(structure)].has(TARGET_ANGLE)  then
         set facing = GetUnitFacing(structure)
@@ -219,6 +223,8 @@ function GUMS_AddStructureFlightAbility takes unit structure returns nothing
 endfunction
 
 function GUMSSetStructureFlyHeight takes unit structure, real newHeight, boolean autoLand returns nothing
+    //! runtextmacro ASSERT("structure != null")
+    //! runtextmacro ASSERT("IsUnitType(structure, UNIT_TYPE_STRUCTURE)")
     if GetUnitFlyHeight(structure) < GUMS_MINIMUM_FLY_HEIGHT() and newHeight < GUMS_MINIMUM_FLY_HEIGHT() then  // 0.01 seems to be the minimum flying height
         call SetUnitFlyHeight( structure, newHeight, 0)  // this is needed for hooked stuff
         return
@@ -245,11 +251,13 @@ endfunction
 
 //Set Scale
 function GUMSSetUnitMatrixScale takes unit whichUnit, real scaleX, real scaleY, real scaleZ returns nothing
+    //! runtextmacro ASSERT("whichUnit != null")
     call SetUnitScale(whichUnit, scaleX, scaleY, scaleZ)
     set data[GetHandleId(whichUnit)].real[SCALE] = scaleX
 endfunction
 
 function GUMSSetUnitScale takes unit whichUnit, real scale returns nothing
+    //! runtextmacro ASSERT("whichUnit != null")
     call SetUnitScale(whichUnit, scale, scale, scale)
     set data[GetHandleId(whichUnit)].real[SCALE] = scale
 endfunction
@@ -260,6 +268,7 @@ function GUMSSetUnitVertexColor takes unit whichUnit, real red, real green, real
     local integer intGreen = R2I(2.55 * green + 0.5)
     local integer intBlue = R2I(2.55 * blue + 0.5)
     local integer intAlpha = R2I(2.55 * (100. - trans) + 0.5)
+    //! runtextmacro ASSERT("whichUnit != null")
     
     call SetUnitVertexColor(whichUnit, intRed, intGreen, intBlue, intAlpha)
     set data[GetHandleId(whichUnit)][RED]   = intRed
@@ -269,6 +278,7 @@ function GUMSSetUnitVertexColor takes unit whichUnit, real red, real green, real
 endfunction
 
 function GUMSSetUnitVertexColorInt takes unit whichUnit, integer red, integer green, integer blue, integer alpha returns nothing
+    //! runtextmacro ASSERT("whichUnit != null")
     call SetUnitVertexColor(whichUnit, red, green, blue, alpha)
     set data[GetHandleId(whichUnit)][RED]   = red
     set data[GetHandleId(whichUnit)][GREEN] = green
@@ -278,6 +288,7 @@ endfunction
 
 //Set Player Color (why in hell can't this be retrieved with natives?!)
 function GUMSSetUnitColor takes unit whichUnit, integer color returns nothing
+    //! runtextmacro ASSERT("whichUnit != null")
     if color <= bj_MAX_PLAYER_SLOTS and color >= 1 then
         set data[GetHandleId(whichUnit)][COLOR] = color
         call SetUnitColor(whichUnit, ConvertPlayerColor(color-1))
@@ -290,6 +301,7 @@ endfunction
 
 //Set Animation Speed
 function GUMSSetUnitAnimSpeed takes unit whichUnit, real speedMultiplier returns nothing
+    //! runtextmacro ASSERT("whichUnit != null")
     call SetUnitTimeScale(whichUnit, speedMultiplier)
     set data[GetHandleId(whichUnit)].real[ASPEED] = speedMultiplier
 endfunction
@@ -297,6 +309,7 @@ endfunction
 //Set Animation Tag
 function GUMSAddUnitAnimationTag takes unit whichUnit, string whichTag returns nothing
     local UnitVisuals unitId = GetHandleId(whichUnit)
+    //! runtextmacro ASSERT("whichUnit != null")
     
     if unitId.hasAnimTag() then
         call AddUnitAnimationProperties(whichUnit, GUMSConvertTags(TAGS_DECOMPRESS, unitId.raw.getAnimTag()), false)
@@ -321,15 +334,18 @@ endfunction
 ///////////////////////////
 
 function GUMSUnitHasCustomName takes integer unitHandle returns boolean
+    //! runtextmacro ASSERT("unitHandle != 0")
     return data[unitHandle].string.has(NAME)
 endfunction
 
 function GUMSGetDefaultName takes integer unitHandle returns string
+    //! runtextmacro ASSERT("unitHandle != 0")
     return data[unitHandle].string[NAME]
 endfunction
 
 function GUMSResetUnitName takes unit whichUnit returns nothing
     local integer unitHandle = GetHandleId(whichUnit)
+    //! runtextmacro ASSERT("whichUnit != null")
     
     if GUMSUnitHasCustomName(unitHandle) then
         call UnitName_SetUnitName(whichUnit, GUMSGetDefaultName(unitHandle))
@@ -338,6 +354,7 @@ function GUMSResetUnitName takes unit whichUnit returns nothing
 endfunction
 
 function GUMSSetUnitName takes unit whichUnit, string name returns nothing
+    //! runtextmacro ASSERT("whichUnit != null")
     if name != "" then
         if not GUMSUnitHasCustomName(GetHandleId(whichUnit)) then
             set data[GetHandleId(whichUnit)].string[NAME] = UnitName_GetUnitName(whichUnit)
@@ -349,6 +366,7 @@ function GUMSSetUnitName takes unit whichUnit, string name returns nothing
 endfunction
 
 function GUMSGetUnitName takes unit whichUnit returns string
+    //! runtextmacro ASSERT("whichUnit != null")
     return GUMSConvertFromCustomName(UnitName_GetUnitName(whichUnit))
 endfunction
 
@@ -363,6 +381,8 @@ endfunction
 function GUMSCopyValues takes unit source, unit target returns nothing
     local real fangle = GetUnitFacing(source)
     local UnitVisuals sourceId = GetHandleId(source)
+    //! runtextmacro ASSERT("source != null")
+    //! runtextmacro ASSERT("target != null")
     
     if IsUnitType(target, UNIT_TYPE_STRUCTURE) then
         call GUMSSetStructureFlyHeight(target, GetUnitFlyHeight(source), GetUnitAbilityLevel(source, 'DEDF') == 0)
@@ -397,6 +417,7 @@ endfunction
 function GUMSCopyUnit takes unit whichUnit, player owner, integer newType returns unit
     local real fangle = GetUnitFacing(whichUnit)
     local unit newUnit
+    //! runtextmacro ASSERT("whichUnit != null")
     
     if newType < 1 then
         set newType = GetUnitTypeId(whichUnit)
@@ -420,6 +441,7 @@ endfunction
 function GUMSMakeUnitDragSelectable takes unit whichUnit returns nothing
     local integer unitId = GetHandleId(whichUnit)
     local integer selectionType = data[unitId][SELECT]
+    //! runtextmacro ASSERT("whichUnit != null")
 
     if selectionType == GUMS_SELECTION_DRAG() then
         return //Unit is already drag-selectable, do nothing.
@@ -443,6 +465,7 @@ endfunction
 
 function GUMSSetUnitSelectionType takes unit whichUnit, integer selectType returns nothing
     local integer unitId = GetHandleId(whichUnit) 
+    //! runtextmacro ASSERT("whichUnit != null")
 
     if selectType == GUMS_SELECTION_UNSELECTABLE() or selectType == GUMS_SELECTION_LOCUST() then
         if data[unitId][SELECT] >= GUMS_SELECTION_UNSELECTABLE() then
@@ -479,6 +502,7 @@ function GUMSSetUnitVertexColorString takes unit whichUnit, string args, string 
     local real cGreen
     local real cBlue
     local real cAlpha
+    //! runtextmacro ASSERT("whichUnit != null")
     
     set cutToComma = CutToCharacter(args, separator)
     set cRed = S2R(CutToCommaResult(args, cutToComma))
@@ -535,6 +559,7 @@ private function onTimer3 takes nothing returns nothing
     local TimerData tData = TimerData.get(t)
     local unit u = tData.unit
     local player owner = Player(tData.owner)
+    //! runtextmacro ASSERT("u != null")
     
     call UnitRemoveAbility(u, 'DEDF')
 
@@ -561,6 +586,7 @@ private function onTimer2 takes nothing returns nothing
     local timer t = GetExpiredTimer()
     local unit u = TimerData.get(t).unit
     local player owner = GetOwningPlayer(u)
+    //! runtextmacro ASSERT("u != null")
     
     // Here, we make sure that units below the building don't stop it from instantly rooting (they have to move away first)
     //call GroupEnumUnitsInRange(ENUM_GROUP, GetUnitX(u), GetUnitY(u), 1000., Filter(function FilterHide))
@@ -583,10 +609,9 @@ function GUMSGroupFunction takes nothing returns nothing
     local integer unitId = GetHandleId(enumUnit)
     local real face
     local boolean removeReal
-    
     local timer t
     
-    debug call BJDebugMsg(GetUnitName(enumUnit))
+    //! runtextmacro ASSERT("enumUnit != null")
     
     //Check if unit is having it's facing changed and apply values accordingly
     if not data[unitId].real.has(TARGET_ANGLE) then
@@ -651,6 +676,7 @@ endfunction
 function GUMSOnUpgradeHandler takes unit trigU returns nothing
         local SaveFlyHeight unitData = GetHandleId(trigU)
         local real height
+        //! runtextmacro ASSERT("trigU != null")
         
         
         if unitData.hasHeight() and unitData.height > GUMS_MINIMUM_FLY_HEIGHT() then

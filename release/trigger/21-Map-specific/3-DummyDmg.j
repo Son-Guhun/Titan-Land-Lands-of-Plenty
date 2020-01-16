@@ -91,9 +91,6 @@ private struct DummyData extends array
 endstruct
 
 function DummyDmg_ClearData takes unit dummy returns nothing
-    debug call Debug_PrintIf(DummyDmg_IsDummy(DummyDmg_GetKey(dummy)), "Dummy Data cleared!")
-    debug call Debug_PrintIf(not DummyDmg_IsDummy(DummyDmg_GetKey(dummy)), "Cleared Dummy Data for none-dummy?!")
-    
     static if RECYCLE then
         local integer abilCode
         local LinkedHashSet abilities
@@ -112,6 +109,8 @@ function DummyDmg_ClearData takes unit dummy returns nothing
             call data.clear()  // if more data other than just abilities is added, move this out of if block
         endif
     endif
+    
+    debug call Debug_PrintIf(not DummyDmg_IsDummy(DummyDmg_GetKey(dummy)), "Cleared Dummy Data for none-dummy?!")
     
     call FlushChildHashtable(DummyDmg_HASHTABLE(), DummyDmg_GetKey(dummy))
 endfunction

@@ -378,9 +378,9 @@ library Maths/* v 1.2.0.0
         static method ln takes real r returns real
             local real sum = 0.0
             local real sign = 1.0
-            debug if r < 0.0 then
-                debug call ThrowError(true, "Maths", "ln", "Math", 0, "Logarithm of negative number is undefined!")
-            debug endif
+            // debug if r < 0.0 then
+               // debug call ThrowError(true, "Maths", "ln", "Math", 0, "Logarithm of negative number is undefined!")
+            // debug endif
             if r < 1.0 then
                 set r = 1.0/r
                 set sign = -1.0
@@ -588,9 +588,9 @@ library Maths/* v 1.2.0.0
         static method factorial takes real r returns real
             local real z = 1.0
             if floor(r) == r then
-                debug if r < 0 then
-                    debug call ThrowError(true, "Maths", "factorial", "Math", 0, "Factorial of negative number is not defined!")
-                debug endif
+                // debug if r < 0 then
+                   //  debug call ThrowError(true, "Maths", "factorial", "Math", 0, "Factorial of negative number is not defined!")
+                // debug endif
                 if r == 0 then
                     return 1.0
                 endif

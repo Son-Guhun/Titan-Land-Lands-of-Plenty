@@ -6,6 +6,7 @@ In the Save System folder, the RectSaveLoader library provides such a trigger.
 */
 
 private struct PlayerData extends array
+    implement DebugPlayerStruct
 
     //! runtextmacro TableStruct_NewStructField("loadRequests", "LinkedHashSet")
 

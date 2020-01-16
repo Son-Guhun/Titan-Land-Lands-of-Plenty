@@ -12,7 +12,7 @@ library LoPCleanUpRemoval requires LoPCleanUpDeath, UnitEvents, optional Redefin
 
 function LoP_onRemoval takes integer userData returns nothing
     local unit whichUnit = udg_UDexUnits[userData]
-    debug call BJDebugMsg("OnRemove")
+    // call BJDebugMsg("OnRemove")
     
     call UnitEvents.evalOnRemove(whichUnit)
     

@@ -45,11 +45,13 @@ library GroupTools
     endif
    
     function GroupRefresh takes group g returns nothing
+        local group tempG = CreateGroup()
+        
         debug if null==g then
             debug call DisplayTimedTextToPlayer(GetLocalPlayer(),0,0,60,"[GroupUtils]Error: Attempt to refresh null group!")
             debug return
         debug endif
-        local group tempG = CreateGroup()
+        
         call BlzGroupAddGroupFast(g, tempG)
         call GroupClear(g)
         call BlzGroupAddGroupFast(tempG, g)

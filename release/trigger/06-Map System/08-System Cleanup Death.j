@@ -3,7 +3,7 @@ library LoPCleanUpDeath requires LoPWidgets, MoveSpeedBonus, UnitVisualMods, Use
 //! runtextmacro optional RedefineNatives()
 
 function LoP_onDeath takes unit whichUnit returns nothing
-    debug call BJDebugMsg("OnDeath")
+    // call BJDebugMsg("OnDeath")
     
     call UnitEvents.evalOnDeath(whichUnit)
     

@@ -198,7 +198,7 @@ struct RectEnvironment extends array
     endmethod
     
     static method operator default takes nothing returns RectEnvironment
-        return 0
+        return 1
     endmethod
     
     static method get takes rect r returns thistype
