@@ -16,7 +16,7 @@ function Trig_System_On_Upgrade_Finish_Actions takes nothing returns nothing
     endif
     
     if LoP_IsUnitDecoration(trigU) then
-        call DecoOnEnterMap(trigU)
+        call DecoOnUpgrade(trigU)
     endif
     set trigU = null
 endfunction

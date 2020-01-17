@@ -38,8 +38,11 @@ function PlayGateOpenAnimation takes unit u returns nothing
     call TimerStart(T, 0., false, function PlayAnim)
 endfunction
 
-function DecoOnEnterMap takes unit trigU returns nothing
+private function DecoOnEnterMapEx takes unit trigU, boolean isUpgrade returns nothing
     local UpgradeData typeId = GetUnitTypeId(trigU)
+    //! runtextmacro ASSERT("trigU != null")
+    //! runtextmacro ASSERT("LoP_IsUnitDecoration(trigU)")
+    
     // REMOVE ATTACK AND MOVE ABILITIES
     call UnitRemoveAbility(trigU, 'Amov')
     call UnitRemoveAbility(trigU, 'Aatk')
@@ -64,14 +67,16 @@ function DecoOnEnterMap takes unit trigU returns nothing
         else
             call GUMS_AddStructureFlightAbility(trigU)
 
-            call BlzUnitDisableAbility(trigU, 'A011', false, false)
-            call BlzUnitDisableAbility(trigU, 'A012', false, false)
-            call BlzUnitDisableAbility(trigU, 'UDR4', false, false)
-            call BlzUnitDisableAbility(trigU, 'A02Y', false, false)
-            call BlzUnitDisableAbility(trigU, 'A02Z', false, false)
-            call BlzUnitDisableAbility(trigU, 'A031', false, false)
-            call BlzUnitDisableAbility(trigU, 'A032', false, false)
-            call BlzUnitDisableAbility(trigU, 'A0B7', false, false)
+            if not isUpgrade then
+                call BlzUnitDisableAbility(trigU, 'A011', false, false)
+                call BlzUnitDisableAbility(trigU, 'A012', false, false)
+                call BlzUnitDisableAbility(trigU, 'UDR4', false, false)
+                call BlzUnitDisableAbility(trigU, 'A02Y', false, false)
+                call BlzUnitDisableAbility(trigU, 'A02Z', false, false)
+                call BlzUnitDisableAbility(trigU, 'A031', false, false)
+                call BlzUnitDisableAbility(trigU, 'A032', false, false)
+                call BlzUnitDisableAbility(trigU, 'A0B7', false, false)
+            endif
             // -
             // PLAY OPEN ANIMATION FOR OPENED GATES
             // OTHERWISE, PLAY STAND ANIMATION
@@ -85,4 +90,13 @@ function DecoOnEnterMap takes unit trigU returns nothing
 
     set trigU = null
 endfunction
+
+function DecoOnEnterMap takes unit trigU returns nothing
+    call DecoOnEnterMapEx(trigU, false)
+endfunction
+
+function DecoOnUpgrade takes unit trigU returns nothing
+    call DecoOnEnterMapEx(trigU, true)
+endfunction
+
 endlibrary
