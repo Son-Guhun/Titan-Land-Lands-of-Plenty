@@ -9,6 +9,9 @@ endfunction
 private function Unhide takes nothing returns boolean
     if IsUnitHidden(GetFilterUnit()) and LoP_IsUnitDecoBuilder(GetFilterUnit()) then
         call ShowUnit(GetFilterUnit(), true)
+        if LoP_UnitData.get(GetFilterUnit()).hideOnDeselect then
+            set LoP_UnitData.get(GetFilterUnit()).hideOnDeselect = false
+        endif
     endif
     return false
 endfunction

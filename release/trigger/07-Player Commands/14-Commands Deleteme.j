@@ -21,6 +21,7 @@ function Trig_Commands_Deleteme_Conditions takes nothing returns boolean
     local DecorationEffect i = test.begin()
 
     if LoP_Command.getArguments() == "decos" then
+        set udg_Commands_Counter = 0
         set udg_Commands_Counter_Max = 500
         call GroupEnumUnitsOfPlayer(ENUM_GROUP, GetTriggerPlayer(), Filter(function GroupEnum_RemoveDecoBuilders))
     else

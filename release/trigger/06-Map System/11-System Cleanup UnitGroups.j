@@ -9,8 +9,10 @@ function Trig_System_Cleanup_UnitGroups_Actions takes nothing returns nothing
         set playerNumber = 1
         loop
         exitwhen playerNumber > bj_MAX_PLAYERS
-            call GroupRefresh(udg_System_NeutralUnits[playerNumber - 1])
-            call GroupRefresh(udg_Player_ControlGroup[playerNumber])
+            if IsPlayerInForce(Player(playerNumber -1), bj_FORCE_ALL_PLAYERS) then
+                call GroupRefresh(udg_System_NeutralUnits[playerNumber - 1])
+                call GroupRefresh(udg_Player_ControlGroup[playerNumber])
+            endif
             set playerNumber = playerNumber + 1
         endloop
         
