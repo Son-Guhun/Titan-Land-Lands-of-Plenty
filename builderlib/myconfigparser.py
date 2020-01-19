@@ -13,6 +13,10 @@ class MyConfigParser(ConfigParser):
                          strict=strict,
                          comment_prefixes=comment_prefixes,
                          **kwargs)
+    def __iter__(self):
+        for section in super().__iter__():
+            if section != 'DEFAULT':
+                yield section
 
     @staticmethod
     def optionxform(x):
@@ -46,3 +50,36 @@ def iter_deco_builders(unit_data, builder_only = False, ability = 'A00J'):
             if not (builder_only and ('Builds' not in unit or unit['Builds'] == '""')):
                 yield unit
 
+defaults_path = 'unit.ini'
+with open(defaults_path) as f:
+    defaults = load_unit_data(f)
+
+class Section:
+    
+    def __init__(self, section):
+        if '_parent' not in section: print(section.name)
+        self._section = section
+        self._default = defaults[section['_parent'][1:-1]]
+        self.name = section.name
+        
+    def __getitem__(self, i):
+        if i in self._section:
+            return self._section[i]
+        return self._default[i.lower()]
+    
+    def __setitem__(self, i, value):
+        in_defaults = i.lower() in self._default
+        if in_defaults and self._default[i.lower()] == value and i in self._section:
+            del self._section[i]
+        else:
+            if value == '""' and not in_defaults:
+                if i in self._section:
+                    del self._section[i]
+            else:
+                self._section[i] = value
+        
+    def __contains__(self, i):
+         return i in self._section
+        
+    def __delitem__(self, i):
+        del self._section[i]

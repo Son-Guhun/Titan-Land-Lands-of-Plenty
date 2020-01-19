@@ -6,47 +6,13 @@ Race Selectors: configures hotkeys for upgrades, then for trained units, in the 
 
 """
 
-from myconfigparser import MyConfigParser, load_unit_data, get_decorations, iter_deco_builders
+from myconfigparser import Section, load_unit_data, get_decorations, iter_deco_builders
 import traceback
 import itertools
 
 HOTKEYS = ['"Q"','"W"','"E"','"R"',
            '"A"','"S"','"D"','"F"',
            '"Z"','"X"','"C"','"V"']
-
-defaults_path = 'unit.ini'
-with open(defaults_path) as f:
-    defaults = load_unit_data(f)
-
-class Section:
-    
-    def __init__(self, section):
-        if '_parent' not in section: print(section.name)
-        self._section = section
-        self._default = defaults[section['_parent'][1:-1]]
-        self.name = section.name
-        
-    def __getitem__(self, i):
-        if i in self._section:
-            return self._section[i]
-        return self._default[i.lower()]
-    
-    def __setitem__(self, i, value):
-        in_defaults = i.lower() in self._default
-        if in_defaults and self._default[i.lower()] == value and i in self._section:
-            del self._section[i]
-        else:
-            if value == '""' and not in_defaults:
-                if i in self._section:
-                    del self._section[i]
-            else:
-                self._section[i] = value
-        
-    def __contains__(self, i):
-         return i in self._section
-        
-    def __delitem__(self, i):
-        del self._section[i]
 
 def set_hotkeys(unit_data, unit_list, **kwargs):
     for i,u in enumerate(unit_list):
