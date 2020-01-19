@@ -12,6 +12,24 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 	- New units for an existing race can be added in a patch version. 
 	- New decorations for an existing deco builder can be added in a patch version.
 
+## [v1.4.2] - 2020-01-19
+
+### Added
+- New commands:
+	- **-selc (deco_name):** this command is used just like the old **-sele** and **-seln** commands. However, it will also create any missing deco builders that the player did not have which match the given name. Decos created with this command will be automatically hidden upon being deselected.
+	- **-deleteme decos:** this command is used to delete all your existing deco builders.
+	- **-hide off:** This command will unhide all your deco builders. It will also stop deco builders created with the **-selc** command from being hidden when deselected.
+
+### Fixed
+- Decimal numbers can now be used without a leading zero in commands that use the new math syntax.
+- Fixed many internal bugs that were not noticeable to players.
+- Fixed wrong icons for Norse Builder and Deco Builder Rostrodle.
+
+### Changed
+- Saves in which no two units are more than 10000 apart on either axis will now be automatically converted to Rect saves (SaveNLoad v5).
+- Many units which had large shadows no longer have them. This change had to be made in order to fix a crash that could occasionally occur when these units where near the top border of the map while on water.
+
+
 ## [v1.4.1] - 2020-01-11
 
 ### Added
