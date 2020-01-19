@@ -670,7 +670,10 @@ function GUMSTimerFunction takes nothing returns nothing
         call GroupRefresh(loopGroup)
         set unitHasBeenRemoved = true
     endif
-    call ForGroup(loopGroup, function GUMSGroupFunction)
+    // if BlzGroupGetSize(loopGroup) > 0 then
+        // call BJDebugMsg("GUMS Loop group: " + I2S(BlzGroupGetSize(loopGroup)))
+        call ForGroup(loopGroup, function GUMSGroupFunction)
+    // endif
 endfunction
 
 function GUMSOnUpgradeHandler takes unit trigU returns nothing

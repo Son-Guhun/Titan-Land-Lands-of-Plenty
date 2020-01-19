@@ -239,6 +239,8 @@ struct SaveLoader extends array
         local string errorString = "Unable to validate file " + I2S(current) + ".txt of save. Some units may have failed to load."
         local string tooltip = BlzGetAbilityTooltip(IO_ABILITY(), 0)
 
+        // call BJDebugMsg("Loading file: " + I2S(.current))
+
         if GetLocalPlayer() == .player then
             call Preloader(path)
             if .version >= 4 then
