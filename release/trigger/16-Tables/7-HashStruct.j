@@ -22,8 +22,6 @@ when setting.
 //! endtextmacro
 
 
-
-
 //! textmacro HashStruct_NewPrimitiveGetterSetter takes NAME, TYPE
     public static key $NAME$_INDEX
     
@@ -184,6 +182,155 @@ when setting.
     method operator $NAME$= takes $TYPE$ new_$NAME$ returns nothing
         implement assertNotNull
         set $HASHTABLE$[this][$INDEX$] = new_$NAME$
+    endmethod
+    
+    private method $NAME$_clear takes nothing returns nothing
+        implement assertNotNull
+        call $HASHTABLE$[this].remove($INDEX$)
+    endmethod
+    
+    private method $NAME$_exists takes nothing returns boolean
+        implement assertNotNull
+        return $HASHTABLE$[this].has($INDEX$)
+    endmethod
+//! endtextmacro
+
+// ==================================
+// Handle Fields
+
+//! textmacro HashStruct_NewHandleField takes NAME, TYPE
+    public static key $NAME$_INDEX
+    
+    method operator $NAME$ takes nothing returns $TYPE$ 
+        implement assertNotNull
+        return thistype.getChildTable(this).$TYPE$[$NAME$_INDEX]
+    endmethod
+    
+    method operator $NAME$= takes $TYPE$ new_$NAME$ returns nothing
+        implement assertNotNull
+        call thistype.getChildTable(this).handle.set($NAME$_INDEX, new_$NAME$)
+    endmethod
+    
+    private method $NAME$_clear takes nothing returns nothing
+        implement assertNotNull
+        call thistype.getChildTable(this).remove($NAME$_INDEX)
+    endmethod
+    
+    private method $NAME$_exists takes nothing returns boolean
+        implement assertNotNull
+        return thistype.getChildTable(this).has($NAME$_INDEX)
+    endmethod
+//! endtextmacro
+
+//! textmacro HashStruct_NewReadonlyHandleField takes NAME, TYPE
+    public static key $NAME$_INDEX
+    
+    method operator $NAME$ takes nothing returns $TYPE$
+        implement assertNotNull
+        return thistype.getChildTable(this).$TYPE$[$NAME$_INDEX]
+    endmethod
+    
+    method operator $NAME$= takes $TYPE$ new_$NAME$ returns nothing
+        implement assertNotNull
+        call thistype.getChildTable(this).handle.set($NAME$_INDEX, new_$NAME$)
+    endmethod
+    
+    private method $NAME$_clear takes nothing returns nothing
+        implement assertNotNull
+        call thistype.getChildTable(this).remove($NAME$_INDEX)
+    endmethod
+    
+    private method $NAME$_exists takes nothing returns boolean
+        implement assertNotNull
+        return thistype.getChildTable(this).has($NAME$_INDEX)
+    endmethod
+//! endtextmacro
+
+// Used if you want to have control over the indices, instead of using a constant key variable
+//! textmacro HashStruct_NewHandleFieldEx takes HASHTABLE, NAME, TYPE, INDEX
+    method operator $NAME$ takes nothing returns $TYPE$
+        implement assertNotNull
+        return $HASHTABLE$[this].$TYPE$[$INDEX$]
+    endmethod
+    
+    method operator $NAME$= takes $TYPE$ new_$NAME$ returns nothing
+        implement assertNotNull
+        call thistype.getChildTable(this).handle.set($NAME$_INDEX, new_$NAME$)
+    endmethod
+    
+    private method $NAME$_clear takes nothing returns nothing
+        implement assertNotNull
+        call $HASHTABLE$[this].remove($INDEX$)
+    endmethod
+    
+    private method $NAME$_exists takes nothing returns boolean
+        implement assertNotNull
+        return $HASHTABLE$[this].has($INDEX$)
+    endmethod
+//! endtextmacro
+
+
+// ==================================
+// Agent Fields
+
+//! textmacro HashStruct_NewAgentField takes NAME, TYPE
+    public static key $NAME$_INDEX
+    
+    method operator $NAME$ takes nothing returns $TYPE$ 
+        implement assertNotNull
+        return thistype.getChildTable(this).$TYPE$[$NAME$_INDEX]
+    endmethod
+    
+    method operator $NAME$= takes $TYPE$ new_$NAME$ returns nothing
+        implement assertNotNull
+        call thistype.getChildTable(this).agent.setVal($NAME$_INDEX, new_$NAME$)
+    endmethod
+    
+    private method $NAME$_clear takes nothing returns nothing
+        implement assertNotNull
+        call thistype.getChildTable(this).remove($NAME$_INDEX)
+    endmethod
+    
+    private method $NAME$_exists takes nothing returns boolean
+        implement assertNotNull
+        return thistype.getChildTable(this).has($NAME$_INDEX)
+    endmethod
+//! endtextmacro
+
+//! textmacro HashStruct_NewReadonlyAgentField takes NAME, TYPE
+    public static key $NAME$_INDEX
+    
+    method operator $NAME$ takes nothing returns $TYPE$
+        implement assertNotNull
+        return thistype.getChildTable(this).$TYPE$[$NAME$_INDEX]
+    endmethod
+    
+    method operator $NAME$= takes $TYPE$ new_$NAME$ returns nothing
+        implement assertNotNull
+        call thistype.getChildTable(this).agent.setVal($NAME$_INDEX, new_$NAME$)
+    endmethod
+    
+    private method $NAME$_clear takes nothing returns nothing
+        implement assertNotNull
+        call thistype.getChildTable(this).remove($NAME$_INDEX)
+    endmethod
+    
+    private method $NAME$_exists takes nothing returns boolean
+        implement assertNotNull
+        return thistype.getChildTable(this).has($NAME$_INDEX)
+    endmethod
+//! endtextmacro
+
+// Used if you want to have control over the indices, instead of using a constant key variable
+//! textmacro HashStruct_NewAgentFieldEx takes HASHTABLE, NAME, TYPE, INDEX
+    method operator $NAME$ takes nothing returns $TYPE$
+        implement assertNotNull
+        return $HASHTABLE$[this].$TYPE$[$INDEX$]
+    endmethod
+    
+    method operator $NAME$= takes $TYPE$ new_$NAME$ returns nothing
+        implement assertNotNull
+        call thistype.getChildTable(this).agent.setVal($NAME$_INDEX, new_$NAME$)
     endmethod
     
     private method $NAME$_clear takes nothing returns nothing

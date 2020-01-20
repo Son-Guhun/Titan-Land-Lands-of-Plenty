@@ -1,4 +1,4 @@
-library UnitVisualMods requires UnitVisualValues, UnitName, CutToComma, GroupTools, optional UnitVisualModsDefaults/*
+library UnitVisualMods requires HashStruct, UnitVisualValues, UnitName, CutToComma, GroupTools, optional UnitVisualModsDefaults/*
 
     */ /*optional*/ HashtableWrapper,  /* Required to initialize a hashtable.
     
@@ -526,19 +526,12 @@ endfunction
 // GUMS Flying Height and Facing Timer
 
 private struct TimerData extends array
-    //! runtextmacro TableStruct_NewAgentField("unit","unit")
-    //! runtextmacro TableStruct_NewPrimitiveField("owner","integer")
-    //! runtextmacro TableStruct_NewPrimitiveField("isSelected","boolean")
-    
-    static method get takes timer t returns thistype
-        return GetHandleId(t)
-    endmethod
-    
-    method destroy takes nothing returns nothing
-        call .unitClear()
-        call .ownerClear()
-        call .isSelectedClear()
-    endmethod
+
+    implement AgentStruct
+
+    //! runtextmacro HashStruct_NewAgentField("unit","unit")
+    //! runtextmacro HashStruct_NewPrimitiveField("owner","integer")
+    //! runtextmacro HashStruct_NewPrimitiveField("isSelected","boolean")
 endstruct
 
 globals

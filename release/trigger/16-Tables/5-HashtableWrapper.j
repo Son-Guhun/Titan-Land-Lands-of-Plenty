@@ -196,6 +196,26 @@ endlibrary
 '                                         Source Code                                              '
 //! endnovjass
 
+public function SetHandle takes hashtable hash, integer parent, integer child, handle h returns nothing
+    if null != h then
+        call SaveFogStateHandle(hash, parent, child, ConvertFogState(GetHandleId(h)))
+    else
+        if HaveSavedHandle(hash, parent, child) then
+            call RemoveSavedHandle(hash, parent, child)
+        endif
+    endif
+endfunction
+
+public function SetAgent takes hashtable hash, integer parent, integer child, agent a returns nothing
+    if null != a then
+        call SaveAgentHandle(hash, parent, child, a)
+    else
+        if HaveSavedHandle(hash, parent, child) then
+            call RemoveSavedHandle(hash, parent, child)
+        endif
+    endif
+endfunction
+
 //! textmacro DeclareParentHashtableWrapperModule takes HASHTABLE, USE_HANDLES, NAME, ACCESS
 private function $NAME$_GetWrappedHashtable takes nothing returns hashtable
     return $HASHTABLE$
@@ -289,12 +309,21 @@ private struct $NAME$_handles extends array
     method remove takes integer key returns nothing
         call RemoveSavedHandle($NAME$_GetWrappedHashtable(), this, key)
     endmethod
+    method []= takes integer key, handle h returns nothing
+        call SaveFogStateHandle($NAME$_GetWrappedHashtable(), this, key, ConvertFogState(GetHandleId(h)))
+    endmethod
+    method set takes integer key, handle h returns nothing
+        call HashtableWrapper_SetHandle($NAME$_GetWrappedHashtable(), this, key, h)
+    endmethod
 endstruct
 
 static if  $USE_HANDLES$ then
     private struct $NAME$_agents extends array
         method operator []= takes integer key, agent value returns nothing
             call SaveAgentHandle($NAME$_GetWrappedHashtable(), this, key, value)
+        endmethod
+        method setVal takes integer key, agent a returns nothing
+            call HashtableWrapper_SetAgent($NAME$_GetWrappedHashtable(), this, key, a)
         endmethod
     endstruct
 
@@ -1140,6 +1169,8 @@ $ACCESS$ struct $NAME$_Child extends array
     method flush takes nothing returns nothing
         call FlushChildHashtable($NAME$_GetWrappedHashtable(), this)
     endmethod
+    
+    
 endstruct
 
 private module $NAME$_ParentHashtableWrapper

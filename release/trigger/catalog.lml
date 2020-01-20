@@ -212,6 +212,7 @@
     5-HashtableWrapper: HashtableWrapper
     6-TableStruct: TableStruct
     7-HashStruct: HashStruct
+    8-AgentStruct: AgentStruct
 '17-Multipatrol (TODO)': 'Multipatrol (TODO)'
     1-MultiPatrol: MultiPatrol
     '2-MultiPatrol Addons': 'MultiPatrol Addons'

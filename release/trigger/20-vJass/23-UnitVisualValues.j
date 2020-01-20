@@ -1,4 +1,4 @@
-library UnitVisualValues
+library UnitVisualValues requires HashtableWrapper
 
 globals
     private hashtable hashTable = null

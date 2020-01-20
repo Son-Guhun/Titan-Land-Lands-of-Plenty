@@ -1,4 +1,4 @@
-library UpgradeSystem
+library UpgradeSystem requires HashStruct
 
 globals
         private hashtable hashTableHandle = InitHashtable()

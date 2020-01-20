@@ -2,23 +2,13 @@ scope SpatialDistortion
 
 private struct TimerData extends array
     
-    //! runtextmacro TableStruct_NewAgentField("caster","unit")
-    //! runtextmacro TableStruct_NewPrimitiveField("counter","integer")
-    //! runtextmacro TableStruct_NewPrimitiveField("x","real")
-    //! runtextmacro TableStruct_NewPrimitiveField("y","real")
+    implement AgentStruct
     
-    method flushCaster takes nothing returns nothing
-        call casterClear()
-    endmethod
-    method flushCounter takes nothing returns nothing
-        call counterClear()
-    endmethod
-    method flushX takes nothing returns nothing
-        call xClear()
-    endmethod
-    method flushY takes nothing returns nothing
-        call yClear()
-    endmethod
+    //! runtextmacro HashStruct_NewAgentField("caster","unit")
+    //! runtextmacro HashStruct_NewPrimitiveField("counter","integer")
+    //! runtextmacro HashStruct_NewPrimitiveField("x","real")
+    //! runtextmacro HashStruct_NewPrimitiveField("y","real")
+    
 endstruct
 
 private function onExpire_EnumInRange takes nothing returns nothing
@@ -50,10 +40,7 @@ private function onExpire takes nothing returns nothing
     call Args.freeUnit(0)
     
     if tData.counter >= 4 then
-        call tData.flushCaster()
-        call tData.flushCounter()
-        call tData.flushX()
-        call tData.flushY()
+        call tData.destroy()
         call PauseTimer(t)
         call DestroyTimer(t)
     else
