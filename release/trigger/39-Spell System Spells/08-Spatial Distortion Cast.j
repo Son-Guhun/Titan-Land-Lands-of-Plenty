@@ -2,7 +2,7 @@ scope SpatialDistortion
 
 private struct TimerData extends array
     
-    //! runtextmacro TableStruct_NewHandleField("caster","unit")
+    //! runtextmacro TableStruct_NewAgentField("caster","unit")
     //! runtextmacro TableStruct_NewPrimitiveField("counter","integer")
     //! runtextmacro TableStruct_NewPrimitiveField("x","real")
     //! runtextmacro TableStruct_NewPrimitiveField("y","real")

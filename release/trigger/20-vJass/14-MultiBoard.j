@@ -8,7 +8,7 @@ struct MultiBoard extends array
     //! runtextmacro TableStruct_NewReadonlyPrimitiveField("cols", "integer")
     //! runtextmacro TableStruct_NewReadonlyPrimitiveField("rows", "integer")
     
-    //! runtextmacro TableStruct_NewReadonlyHandleField("multiboard", "multiboard")
+    //! runtextmacro TableStruct_NewReadonlyAgentField("multiboard", "multiboard")
     
     method get takes integer i, integer j returns multiboarditem
         return .items[i].multiboarditem[j]

@@ -2,7 +2,7 @@ scope WillOfTheTribunal
 
 private struct CasterData extends array
 
-    //! runtextmacro TableStruct_NewHandleField("timer","timer")
+    //! runtextmacro TableStruct_NewAgentField("timer","timer")
 
     method destroy takes nothing returns nothing
         call timerClear()

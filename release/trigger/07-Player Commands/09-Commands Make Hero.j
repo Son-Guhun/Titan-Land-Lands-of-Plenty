@@ -14,7 +14,7 @@ library LoPHeroicUnit requires LoPHeader, LoPWidgets, UnitVisualMods, optional N
     endmodule
     public struct Globals extends array
         private static key static_members_key
-        //! runtextmacro TableStruct_NewStaticHandleField("dummy","unit")
+        //! runtextmacro TableStruct_NewStaticAgentField("dummy","unit")
         
         implement InitModule
     endstruct

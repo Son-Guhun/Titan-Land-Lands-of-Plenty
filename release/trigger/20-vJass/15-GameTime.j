@@ -7,8 +7,8 @@ struct GameTime extends array
     //! runtextmacro TableStruct_NewReadonlyStaticPrimitiveField("minutes", "integer")
     //! runtextmacro TableStruct_NewReadonlyStaticPrimitiveField("seconds", "integer")
     
-    //! runtextmacro TableStruct_NewReadonlyStaticHandleField("timer", "timer")
-    //! runtextmacro TableStruct_NewReadonlyStaticHandleField("multiboard", "multiboard")
+    //! runtextmacro TableStruct_NewReadonlyStaticAgentField("timer", "timer")
+    //! runtextmacro TableStruct_NewReadonlyStaticAgentField("multiboard", "multiboard")
     
     private static method toString takes nothing returns string
         return I2S(thistype.hours) + " : " + I2S(thistype.minutes) + " : " + I2S(thistype.seconds)

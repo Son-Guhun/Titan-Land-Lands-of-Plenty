@@ -25,7 +25,7 @@ endfunction
 
 private struct UnitData extends array
     
-    //! runtextmacro TableStruct_NewHandleField("original","unit")
+    //! runtextmacro TableStruct_NewAgentField("original","unit")
 
     method destroy takes nothing returns nothing
         call .originalClear()

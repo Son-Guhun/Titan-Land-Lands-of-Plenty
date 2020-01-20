@@ -15,7 +15,7 @@ struct CameraValues extends array
     static boolean locked = false
     
     private static key static_members_key
-    //! runtextmacro TableStruct_NewStaticHandleField("timer","timer")
+    //! runtextmacro TableStruct_NewStaticAgentField("timer","timer")
     
     private static method onTimer takes nothing returns nothing
         if .locked then

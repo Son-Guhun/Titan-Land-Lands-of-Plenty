@@ -6,7 +6,7 @@ struct LockableStructs extends array
     private static integer total
     
     //! runtextmacro TableStruct_NewReadonlyPrimitiveField("pLock", "integer", "LOCK_INDEX")
-    //! runtextmacro TableStruct_NewReadonlyHandleField("onCleanup", "boolexpr", "CLEANUP_INDEX")
+    //! runtextmacro TableStruct_NewReadonlyAgentField("onCleanup", "boolexpr", "CLEANUP_INDEX")
     
     static method onTimer takes nothing returns nothing
         local integer i = 0

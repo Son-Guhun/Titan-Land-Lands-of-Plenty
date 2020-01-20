@@ -6,7 +6,7 @@ endglobals
 struct BoolExprEvaluator extends array
 
     //! runtextmacro TableStruct_NewReadonlyStructField("tab", "Table")
-    //! runtextmacro TableStruct_NewReadonlyHandleField("trigger", "trigger")
+    //! runtextmacro TableStruct_NewReadonlyAgentField("trigger", "trigger")
     // //! runtextmacro TableStruct_NewReadonlyStructField("exprs", "LinkedHashSet")
     
     method hasRegistered takes boolexpr expr returns boolean

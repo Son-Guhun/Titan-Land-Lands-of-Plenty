@@ -526,7 +526,7 @@ endfunction
 // GUMS Flying Height and Facing Timer
 
 private struct TimerData extends array
-    //! runtextmacro TableStruct_NewHandleField("unit","unit")
+    //! runtextmacro TableStruct_NewAgentField("unit","unit")
     //! runtextmacro TableStruct_NewPrimitiveField("owner","integer")
     //! runtextmacro TableStruct_NewPrimitiveField("isSelected","boolean")
     

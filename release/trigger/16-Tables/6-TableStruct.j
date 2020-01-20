@@ -110,6 +110,25 @@ endstruct
     endmethod
 //! endtextmacro
 
+//! textmacro TableStruct_NewReadonlyStaticAgentField takes NAME, TYPE
+    private static key $NAME$_impl
+    static method operator $NAME$ takes nothing returns $TYPE$
+        return TableStruct.type(thistype.static_members_key).$TYPE$[thistype.$NAME$_impl]
+    endmethod
+    
+    private static method operator $NAME$= takes $TYPE$ new_$NAME$ returns nothing
+        call TableStruct.setHandle(thistype.static_members_key, thistype.$NAME$_impl, new_$NAME$)
+    endmethod
+    
+    private static method $NAME$Clear takes nothing returns nothing
+        call TableStruct.type(thistype.static_members_key).$TYPE$.remove(thistype.$NAME$_impl)
+    endmethod
+    
+    private static method $NAME$Exists takes nothing returns boolean
+        return TableStruct.type(thistype.static_members_key).$TYPE$.has(thistype.$NAME$_impl)
+    endmethod
+//! endtextmacro
+
 //! textmacro TableStruct_NewStaticStructField takes NAME, TYPE
     private static key $NAME$_impl
     static method operator $NAME$ takes nothing returns $TYPE$
@@ -149,6 +168,25 @@ endstruct
 //! endtextmacro
 
 //! textmacro TableStruct_NewStaticHandleField takes NAME, TYPE
+    private static key $NAME$_impl
+    static method operator $NAME$ takes nothing returns $TYPE$
+        return TableStruct.type(thistype.static_members_key).$TYPE$[thistype.$NAME$_impl]
+    endmethod
+    
+    static method operator $NAME$= takes $TYPE$ new_$NAME$ returns nothing
+        call TableStruct.setHandle(thistype.static_members_key, thistype.$NAME$_impl, new_$NAME$)
+    endmethod
+    
+    private static method $NAME$Clear takes nothing returns nothing
+        call TableStruct.type(thistype.static_members_key).$TYPE$.remove(thistype.$NAME$_impl)
+    endmethod
+    
+    private static method $NAME$Exists takes nothing returns boolean
+        return TableStruct.type(thistype.static_members_key).$TYPE$.has(thistype.$NAME$_impl)
+    endmethod
+//! endtextmacro
+
+//! textmacro TableStruct_NewStaticAgentField takes NAME, TYPE
     private static key $NAME$_impl
     static method operator $NAME$ takes nothing returns $TYPE$
         return TableStruct.type(thistype.static_members_key).$TYPE$[thistype.$NAME$_impl]
@@ -237,6 +275,29 @@ endstruct
     endmethod
 //! endtextmacro
 
+//! textmacro TableStruct_NewAgentField takes NAME, TYPE
+    private static key $NAME$_impl
+    method operator $NAME$ takes nothing returns $TYPE$
+        implement assertNotNull
+        return TableStruct.type(thistype.$NAME$_impl).$TYPE$[this]
+    endmethod
+    
+    method operator $NAME$= takes $TYPE$ new_$NAME$ returns nothing
+        implement assertNotNull
+        call TableStruct.setHandle(thistype.$NAME$_impl, this, new_$NAME$)
+    endmethod
+    
+    private method $NAME$Clear takes nothing returns nothing
+        implement assertNotNull
+        call TableStruct.type(thistype.$NAME$_impl).$TYPE$.remove(this)
+    endmethod
+    
+    private method $NAME$Exists takes nothing returns boolean
+        implement assertNotNull
+        return TableStruct.type(thistype.$NAME$_impl).$TYPE$.has(this)
+    endmethod
+//! endtextmacro
+
 //! textmacro TableStruct_NewReadonlyStructField takes NAME, TYPE
     private static key $NAME$_impl
     method operator $NAME$ takes nothing returns $TYPE$
@@ -284,6 +345,29 @@ endstruct
 //! endtextmacro
 
 //! textmacro TableStruct_NewReadonlyHandleField takes NAME, TYPE
+    private static key $NAME$_impl
+    method operator $NAME$ takes nothing returns $TYPE$
+        implement assertNotNull
+        return TableStruct.type(thistype.$NAME$_impl).$TYPE$[this]
+    endmethod
+    
+    private method operator $NAME$= takes $TYPE$ new_$NAME$ returns nothing
+        implement assertNotNull
+        call TableStruct.setHandle(thistype.$NAME$_impl, this, new_$NAME$)
+    endmethod
+    
+    private method $NAME$Clear takes nothing returns nothing
+        implement assertNotNull
+        call TableStruct.type(thistype.$NAME$_impl).$TYPE$.remove(this)
+    endmethod
+    
+    private method $NAME$Exists takes nothing returns boolean
+        implement assertNotNull
+        return TableStruct.type(thistype.$NAME$_impl).$TYPE$.has(this)
+    endmethod
+//! endtextmacro
+
+//! textmacro TableStruct_NewReadonlyAgentField takes NAME, TYPE
     private static key $NAME$_impl
     method operator $NAME$ takes nothing returns $TYPE$
         implement assertNotNull

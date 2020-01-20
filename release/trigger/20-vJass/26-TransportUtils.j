@@ -4,7 +4,7 @@ library TransportUtils requires TableStruct
 static if not LIBRARY_BribesUnitEvent then
     private struct UnitData extends array
 
-            //! runtextmacro TableStruct_NewHandleField("group", "group")
+            //! runtextmacro TableStruct_NewAgentField("group", "group")
             
             method hasGroup takes nothing returns boolean
                 return .groupExists()

@@ -84,7 +84,7 @@ struct LoP_Command extends array
         return StringHash(str)
     endmethod
 
-    //! runtextmacro TableStruct_NewHandleField("boolexpr","boolexpr")
+    //! runtextmacro TableStruct_NewAgentField("boolexpr","boolexpr")
     //! runtextmacro TableStruct_NewPrimitiveField("string","string")
     //! runtextmacro TableStruct_NewPrimitiveField("accessLevel","integer")
     
@@ -114,8 +114,8 @@ endstruct
 public struct Globals extends array
     private static key static_members_key
 
-    //! runtextmacro TableStruct_NewStaticHandleField("trigger","trigger")
-    //! runtextmacro TableStruct_NewStaticHandleField("evaluator","trigger")
+    //! runtextmacro TableStruct_NewStaticAgentField("trigger","trigger")
+    //! runtextmacro TableStruct_NewStaticAgentField("evaluator","trigger")
 endstruct
 
 

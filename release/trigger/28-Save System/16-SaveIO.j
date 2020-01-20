@@ -103,7 +103,7 @@ struct SaveData extends array
     //! runtextmacro TableStruct_NewReadonlyPrimitiveField("current", "integer")
     //! runtextmacro TableStruct_NewReadonlyPrimitiveField("linesWritten", "integer")
     //! runtextmacro TableStruct_NewReadonlyPrimitiveField("folder", "string")
-    //! runtextmacro TableStruct_NewReadonlyHandleField("player", "player")
+    //! runtextmacro TableStruct_NewReadonlyAgentField("player", "player")
     
     //! runtextmacro TableStruct_NewPrimitiveField("centerX", "real")
     //! runtextmacro TableStruct_NewPrimitiveField("centerY", "real")
@@ -227,7 +227,7 @@ struct SaveLoader extends array
     //! runtextmacro TableStruct_NewReadonlyPrimitiveField("current", "integer")
     //! runtextmacro TableStruct_NewReadonlyPrimitiveField("totalFiles", "integer")
     //! runtextmacro TableStruct_NewReadonlyPrimitiveField("folder", "string")
-    //! runtextmacro TableStruct_NewReadonlyHandleField("player", "player")
+    //! runtextmacro TableStruct_NewReadonlyAgentField("player", "player")
     
     method isRectSave takes nothing returns boolean
         return this.extentX != 0
