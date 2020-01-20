@@ -302,9 +302,11 @@ save_XYminmaxcur: real
 System_NeutralUnits: group
     Array : 1
 Damage_Mod_Multiplier: real
+    Def   : 1.00
 Damage_Mod_Add: real
 Damage_Mod_Minimum: real
 Damage_Mod_Maximum: real
+    Def   : -1.00
 GDS_DebuffEvent: real
 GDS_Permanent: boolean
 Player_ControlGroup: group

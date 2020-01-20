@@ -5,7 +5,6 @@ globals
 endglobals
 
 function DamageDetectionFunctions_Both takes nothing returns nothing
-
     if LoP_IsUnitHero(udg_DamageEventTarget) then
         // Blessed Bulwark
         if GetUnitAbilityLevel(udg_DamageEventTarget, 'A04J') > 0 then
@@ -147,16 +146,20 @@ function DamageDetectionFunctions_Last takes nothing returns nothing
             call AddTimedBonus(udg_DamageEventSource, 0, 1, 5.)
         endif
     endif
-    
 endfunction
 
+// When a unit is removed from the game, DamageEventSource is null
 function Trig_Damage_Tag_Actions takes nothing returns nothing
     local integer damageType
     local player targetOwner = GetOwningPlayer(udg_DamageEventTarget)
     local player sourceOwner = GetOwningPlayer(udg_DamageEventSource)
     
-    if not LoP_PlayerData.get(targetOwner).isAtWar(sourceOwner) and GetPlayerAlliance(targetOwner, sourceOwner, ALLIANCE_PASSIVE) then
+    if udg_DamageEventSource == null or sourceOwner == null then
+        return
+    endif
     
+    // Getting the alliance state with a null player will crash the game
+    if not LoP_PlayerData.get(targetOwner).isAtWar(sourceOwner) and GetPlayerAlliance(targetOwner, sourceOwner, ALLIANCE_PASSIVE) then
         if targetOwner != sourceOwner then
         
             call LoP_WarnPlayer(GetOwningPlayer(udg_DamageEventTarget), 7.5, "Use the -war command to allow others to damage your units.")
