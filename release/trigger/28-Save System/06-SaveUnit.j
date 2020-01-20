@@ -1,6 +1,9 @@
 library SaveUnit requires SaveNLoad, SaveIO, OOP, Maths, optional LoPHeroicUnit, optional CustomizableAbilityList
 
 private struct InternalPlayerData extends array
+
+    implement DebugPlayerStruct
+
     group units
     LinkedHashSet effects
     integer savedCount

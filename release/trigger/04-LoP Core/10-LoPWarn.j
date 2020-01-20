@@ -2,6 +2,8 @@ library LoPWarn initializer Init requires Timeline, TableStruct
 
 
 private struct PlayerData extends array
+    
+    implement DebugPlayerStruct
 
     //! runtextmacro TableStruct_NewStructField("messages", "Table")
 

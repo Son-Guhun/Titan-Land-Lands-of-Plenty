@@ -35,24 +35,24 @@ endfunction
 //! endtextmacro
 
 module DebugNegativeIsNull
-    static constant boolean REDEFINE_NULL = true
-    method isNotNull takes nothing returns boolean
-        return integer(this) >= 0
-    endmethod
+    debug static constant boolean REDEFINE_NULL = true
+    debug method isNotNull takes nothing returns boolean
+        debug return integer(this) >= 0
+    debug endmethod
 endmodule
 
 module DebugPlayerStruct
-    static constant boolean REDEFINE_NULL = true
-    method isNotNull takes nothing returns boolean
-        return integer(this) >= 0 and integer(this) < bj_MAX_PLAYERS
-    endmethod
+    debug static constant boolean REDEFINE_NULL = true
+    debug method isNotNull takes nothing returns boolean
+        debug return integer(this) >= 0 and integer(this) < bj_MAX_PLAYERS
+    debug endmethod
 endmodule
 
 module assertNotNull
     static if thistype.REDEFINE_NULL then
-        call ASSERT_impl(this.isNotNull(), I2S(thistype.typeid), "Null object!")
+        debug call ASSERT_impl(this.isNotNull(), I2S(thistype.typeid), "Null object!")
     else
-        call ASSERT_impl(this != null, I2S(thistype.typeid), "Null object!")
+        debug call ASSERT_impl(this != null, I2S(thistype.typeid), "Null object!")
     endif
 endmodule
 
