@@ -1,14 +1,17 @@
 """This script iterates over all decorations in a .ini database and set their Specialart field
 to the format expected by the SpecialEffect system.
 """
-from myconfigparser import MyConfigParser, load_unit_data, get_decorations
+from myconfigparser import MyConfigParser, load_unit_data, get_decorations, Section
 
 
 def configure_decorations(unit_data, decoration_list):
     for decoration in decoration_list:
-        data = unit_data[decoration]
+        data = Section(unit_data[decoration])
         try:
-            data['Specialart'] = '"{}"'.format(',' + data['file'][1:-1])
+            file = data['file'][1:-1]
+            if file[-4] != '.':
+                file = file + '.mdx'
+            data['Specialart'] = '"{}"'.format(',' + file)
         except:
             print("Could not find model data for {}.".format(decoration))
         data['elevPts'] = '0'
