@@ -75,7 +75,8 @@ def push(dirs = ['table', 'trigger', 'w3x2lni']):
     release= 'release/'
     development = 'development/'
     for directory in dirs:
-        shutil.rmtree(release+directory)
+        if os.path.exists(release+directory):
+            shutil.rmtree(release+directory)
         shutil.copytree(development+directory, release+directory)
 
 def push_all():
