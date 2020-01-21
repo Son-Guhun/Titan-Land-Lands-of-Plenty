@@ -12,6 +12,35 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 	- New units for an existing race can be added in a patch version. 
 	- New decorations for an existing deco builder can be added in a patch version.
 
+## [v1.4.3] - 2020-01-21
+
+### Added
+- New hero: Lord Admiral Jaina
+- New decorations:
+	- City: 3 Angmar towers
+	- Misc: 2 Bells
+	- Trees: 2 Roots
+	- Tableware: Glass and new Mug
+	- Flags:
+		- Rack
+		- Triple
+		- 5 WoW flags
+
+### Fixed
+- Fixed debug messages showing up in certain situations.
+- Fixed a crash that was introduced in 1.4.1 which occured when removing a unit which had cast a DoT effect that was currently affecting another unit.
+- Units' mana shield ability now functions.
+- Removed weapon/armor upgrades from a few Alliance units that had them.
+- Fixed Deco Builder Pirate's model.
+- Fixed Game Die model.
+
+### Changed
+- Effeciency imporvements to some parts of the codebase.
+- Changed icons for many human heroes to avoid duplicates in the same hero tower.
+- Renamed Tableware Mana Mug to Tableware Mug 1.
+- Different Human, Human Long and Orc flags have been merged into variations and removed from the deco builder.
+
+
 ## [v1.4.2] - 2020-01-19
 
 ### Added
