@@ -385,7 +385,7 @@ TiJil, unwirklich
 PrinceYaser, shiik, Dr.Death, Sant, Eagle XI, Afroknight_76, Deleted member 238226 (unknown), GhostThruster, Whitewolf8, WhiteDeath, A.R., Xezko, Deep Sea Kraken, Hellx-Magnus, -Berz-, CRAZYRUSSIAN, HappyCockroach, Tamplier777, Kehel, Radagast, Lordaeron Creator, The D3ath, Gottfrei, bu3ny, CloudWolf, Gyrosphinx, Marenko, Talavaj, !!GORO!!, THE_SILENT, Kenntaur, skrab, simkitty181, olyvian, Darkfang, JollyD, paulH, apaka, Just_Spectating, Leopard, GiFun, erwtenpeller, wc3neverdies, Spinel, Miseracord, JesusHipster, Shakral, strongwill, Blood Raven, Kanadaj, PrinceYaser, The Leader, hortaxman, Cihparg, muna420, Aeroblyctos, Adikutz, AlienArsonist, Eagle XI, maxor_gan, Amigurumi, NFWar, GreyArchon, Kadzhamit, ~Void~, zadelim, L_Lawliet
 
 |cffff0000XGM:|r
-P4ela, Kolbosa, Wulfrein, DampirTBs, Feleer, Jack Sparrow, DiKey51, Ket, LongbowMan
+P4ela, Kolbosa, Wulfrein, DampirTBs, Feleer, Jack Sparrow, DiKey51, Ket, LongbowMan, TassAvadar
 "
     call CreateQuestBJ(questType, "|cffff0000Art 2|r", quest_text, "ReplaceableTextures\\CommandButtons\\BTNTemp.blp")
     // ----------
