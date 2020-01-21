@@ -8,8 +8,8 @@ private function filterUnitsFunc takes nothing returns boolean
     local real locY = GetLocationY(udg_Spell__TargetPoint)
     
     if GUMS_GetUnitSelectionType(filterUnit) != 0 then
-        if SquareRoot( (unitX-locX)*(unitX-locX) + (unitY-locY)*(unitY-locY)  ) <= 300. then
-            call KillUnit( filterUnit )
+        if IsUnitInRangeXY(filterUnit, locX, locY, 300.) then
+            call LoP_RemoveUnit( filterUnit )
         endif
     endif
     
