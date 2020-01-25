@@ -1,5 +1,11 @@
 scope TitanPalaceProt
 
+globals
+    
+    region titanPalaceInner
+
+endglobals
+
 //! runtextmacro optional DefineHooks()
 
 function Trig_System_Titan_Palace_Prot_Func002C takes nothing returns boolean
@@ -27,8 +33,11 @@ endfunction
 
 //===========================================================================
 function InitTrig_System_Titan_Palace_Prot takes nothing returns nothing
-    set gg_trg_System_Titan_Palace_Prot = CreateTrigger(  )
-    call TriggerRegisterEnterRectSimple( gg_trg_System_Titan_Palace_Prot, gg_rct_Titan_Palace_Inner )
+    set titanPalaceInner = CreateRegion()
+    call RegionAddRect(titanPalaceInner, gg_rct_Titan_Palace_Inner)
+    
+    set gg_trg_System_Titan_Palace_Prot = CreateTrigger()
+    call TriggerRegisterEnterRegion( gg_trg_System_Titan_Palace_Prot, titanPalaceInner, null)
     call TriggerAddCondition( gg_trg_System_Titan_Palace_Prot, Condition( function Trig_System_Titan_Palace_Prot_Conditions ) )
     call TriggerAddAction( gg_trg_System_Titan_Palace_Prot, function Trig_System_Titan_Palace_Prot_Actions )
 endfunction

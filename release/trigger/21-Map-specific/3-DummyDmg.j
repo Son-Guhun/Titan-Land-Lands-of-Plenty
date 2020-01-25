@@ -1,4 +1,4 @@
-library DummyDmg requires ArrayAgent, TableStruct, optional DummyRecycler
+library DummyDmg requires TableStruct, optional DummyRecycler
 
 globals
     public constant boolean RECYCLE = true
@@ -41,8 +41,12 @@ endfunction
 // This system uses a hacky solution in order to keep Hashtable_1 and Hashtable_2 as free as possible:
 // It uses the negative parent keys of ArrayAgent_Hashtable!!
 // Using negative integers makes it so Dummies are fully compatible with the ArrayAgent system.
+globals
+    private hashtable hash = InitHashtable()
+endglobals
+
 constant function DummyDmg_HASHTABLE takes nothing returns hashtable
-    return ArrayAgent_hashTable
+    return hash
 endfunction
 
 function DummyDmg_GetKey takes unit whichUnit returns integer
@@ -123,7 +127,7 @@ function DummyDmg_CreateDummyAt takes unit spellCaster, integer abilityId, real 
     static if RECYCLE then
         call DummyDmg_ClearData(spellCaster)
         call SetUnitOwner(spellCaster, GetOwningPlayer(realSpellCaster), false)
-        call BlzPauseUnitEx(spellCaster, false)
+        // call BlzPauseUnitEx(spellCaster, false)
     endif
     
     set dummyKey = DummyDmg_GetKey(spellCaster)

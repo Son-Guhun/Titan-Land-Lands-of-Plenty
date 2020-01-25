@@ -1,7 +1,7 @@
 library AgentStruct requires HashStruct
 
 globals
-    private hashtable hash
+    private hashtable hash = InitHashtable()
 endglobals  
 //! runtextmacro DeclareParentHashtableWrapperModule("hash", "true", "data", "public")
 //! runtextmacro DeclareParentHashtableWrapperStruct("data","public")
