@@ -269,7 +269,7 @@ library DummyRecycler /*
                     else
                         set dummy[this] = CreateUnit(OWNER, DUMMY_ID, 0, 0, a)
                     endif
-                    call BlzPauseUnitEx(dummy[this], true)
+                    // call BlzPauseUnitEx(dummy[this], true)
                     static if LIBRARY_Table then
                         set tb[GetHandleId(dummy[this])] = this
                     else
@@ -376,7 +376,7 @@ library DummyRecycler /*
             endif
         else
             set bj_lastCreatedUnit = CreateUnit(OWNER, DUMMY_ID, x, y, facing)
-            call BlzPauseUnitEx(bj_lastCreatedUnit, true)
+            // call BlzPauseUnitEx(bj_lastCreatedUnit, true)
             call SetUnitFlyHeight(bj_lastCreatedUnit, z, 0)
             if dummyCount < MAX_DUMMY_COUNT then
                 set this = lastInstance
@@ -415,7 +415,7 @@ library DummyRecycler /*
             set prev[next[this]] = this
             //Update Status
             call SetUnitFacing(u, angle[head])
-            call BlzPauseUnitEx(u, true)
+            // call BlzPauseUnitEx(u, true)
             call SetUnitOwner(u, OWNER, false)
             static if HIDE_ON_MAP_CORNER then
                 static if LIBRARY_WorldBounds then
