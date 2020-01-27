@@ -1,5 +1,9 @@
 library SaveUnit requires SaveNLoad, SaveIO, OOP, Maths, optional LoPHeroicUnit, optional CustomizableAbilityList
 
+globals
+    SaveData array saveFile
+endglobals
+
 private struct InternalPlayerData extends array
 
     implement DebugPlayerStruct
@@ -73,7 +77,7 @@ public struct PlayerData extends array
     
     //! runtextmacro InheritFieldReadonly("InternalPlayerData", "savedCount", "integer")
     //! runtextmacro InheritFieldReadonly("InternalPlayerData", "isSaving", "boolean")
-
+    
 endstruct
 
 globals
@@ -197,10 +201,6 @@ private function SaveEffectDecos takes InternalPlayerData playerId, SaveData sav
     
     return counter
 endfunction
-
-globals
-    SaveData array saveFile
-endglobals
 
 private function GenerateFlagsStr takes unit saveUnit returns string
     local integer result = 0
@@ -357,6 +357,7 @@ function SaveUnits takes SaveData saveData returns nothing
     set playerId.minY = Pow(2, 23)
     
     if saveFile[playerId] != 0 then
+        call DisplayTextToPlayer(saveData.player, 0., 0., "|cffff0000Warning:|r Did not finish saving previous file!")
         call saveFile[playerId].destroy()
     endif
     set saveFile[playerId] = saveData

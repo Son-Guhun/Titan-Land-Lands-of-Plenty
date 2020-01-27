@@ -74,6 +74,7 @@ function SaveLoopActions2 takes nothing returns nothing
     set udg_temp_integer = playerId
     
     if playerId.saveData != 0 then
+        call DisplayTextToPlayer(playerId.saveData.player, 0., 0., "|cffff0000Warning:|r Did not finish saving previous file!")
         call playerId.saveData.destroy()
         call playerId.destructables.clear()
     endif

@@ -95,6 +95,7 @@ function SaveTerrain takes nothing returns nothing
     set saveRect = GUDR_GetGeneratorRect(generator)
     
     if playerId.saveData != 0 then
+        call DisplayTextToPlayer(playerId.saveData.player, 0., 0., "|cffff0000Warning:|r Did not finish saving previous file!")
         call playerId.saveData.destroy()
     endif
     
