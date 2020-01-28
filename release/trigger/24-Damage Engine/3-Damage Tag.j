@@ -151,7 +151,7 @@ endfunction
 // When a unit is removed from the game, DamageEventSource is null
 function Trig_Damage_Tag_Actions takes nothing returns nothing
     local integer damageType
-    local player targetOwner = GetOwningPlayer(udg_DamageEventTarget)
+    local player targetOwner = LoP_GetOwningPlayer(udg_DamageEventTarget)
     local player sourceOwner = GetOwningPlayer(udg_DamageEventSource)
     
     if udg_DamageEventSource == null or sourceOwner == null then
@@ -159,13 +159,15 @@ function Trig_Damage_Tag_Actions takes nothing returns nothing
     endif
     
     // Getting the alliance state with a null player will crash the game
-    if not LoP_PlayerData.get(targetOwner).isAtWar(sourceOwner) and GetPlayerAlliance(targetOwner, sourceOwner, ALLIANCE_PASSIVE) then
-        if targetOwner != sourceOwner then
-        
-            call LoP_WarnPlayer(GetOwningPlayer(udg_DamageEventTarget), 7.5, "Use the -war command to allow others to damage your units.")
-            call LoP_WarnPlayer(GetOwningPlayer(udg_DamageEventSource), 10., "You cannot damage units of players that are allied to you!")
-            set udg_DamageEventAmount = 0
-            return
+    if GetPlayerId(targetOwner) < bj_MAX_PLAYERS and GetPlayerSlotState(targetOwner) == PLAYER_SLOT_STATE_PLAYING then
+        if not LoP_PlayerData.get(targetOwner).isAtWar(sourceOwner) and GetPlayerAlliance(targetOwner, sourceOwner, ALLIANCE_PASSIVE) then
+            if targetOwner != sourceOwner then
+            
+                call LoP_WarnPlayer(targetOwner, 7.5, "Use the -war command to allow others to damage your units.")
+                call LoP_WarnPlayer(sourceOwner, 10., "You cannot damage units of players that are allied to you!")
+                set udg_DamageEventAmount = 0
+                return
+            endif
         endif
     endif
 

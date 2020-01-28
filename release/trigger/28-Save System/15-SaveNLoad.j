@@ -365,6 +365,14 @@ function LoadUnitFlags takes unit whichUnit, integer flags returns nothing
     endif
 endfunction
 
+globals
+    private constant key forbiddenTypes // ConstTable
+endglobals
+
+public function ForbidUnitType takes integer unitType returns nothing
+    set ConstTable(forbiddenTypes).boolean[unitType] = false
+endfunction
+
 function LoadUnit takes string chat_str, player un_owner, real centerX, real centerY returns nothing
     local integer str_index
     local integer un_type
@@ -393,14 +401,10 @@ function LoadUnit takes string chat_str, player un_owner, real centerX, real cen
     set un_type = (S2ID((SubString(chat_str,0,str_index))))
     set chat_str = SubString(chat_str,str_index+1,len_str)
     set len_str = StringLength(chat_str)
-    set udg_save_LoadUnitType = un_type
     
-    //LoadUnit Trigger Conidtions
-    if not TriggerEvaluate(gg_trg_LoadUnit_Copy) then
-        set udg_save_LoadUnitType = 0
+    if ConstTable(forbiddenTypes).has(un_type) then
         return
     endif
-    set udg_save_LoadUnitType = 0
 
     //Start translating the chat input
     set str_index = CutToComma(chat_str)

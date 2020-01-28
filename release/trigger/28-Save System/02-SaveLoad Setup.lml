@@ -55,14 +55,8 @@ Action
     CommentString
         Const : 'LISTING ALL VARIABLES FOR IMPORTING'
     Disab: SetVariable
-        Var   : load_limit
-        Const : 0
-    Disab: SetVariable
         Array : load_number
             Const : 0
         Const : 0
-    Disab: SetVariable
-        Var   : save_LoadUnitType
-        Const : hpea
     CommentString
         Const : 'LISTING ALL VARIABLES FOR IMPORTING'

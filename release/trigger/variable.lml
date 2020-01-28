@@ -17,7 +17,6 @@ temp_point: location
 load_limit: integer
 GAME_MASTER: player
     Def   : Player00
-save_LoadUnitType: unitcode
 temp_point2: location
 Hashtable_1: hashtable
 PLAYER_LOCATIONS: location
