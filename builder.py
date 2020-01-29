@@ -24,6 +24,7 @@ config_values = \
 {
     'paths': {'w2l':'',
             'war3':'',
+            'war3r':'',
             'worldedit': ''},
     # Accept any number of programs, and executes them in order
     'jass-preprocessors': { 
@@ -36,12 +37,17 @@ config_values = \
     },
 }
 
+def switch():
+    temp = p['paths']['war3']
+    p['paths']['war3'] = p['paths']['war3r']
+    p['paths']['war3r'] = temp
+
 def test(version='',build='development'):
     """Opens a .w3x map with Warcraft III."""
-    subprocess.Popen([p['paths']['war3'],'-loadfile',os.path.abspath(build+'{}.w3x'.format('_' + version if version else ''))])
+    subprocess.Popen([p['paths']['war3'],'-loadfile',os.path.abspath(build+'{}.w3x'.format('_' + version if version else '')),'-launch'])
     
 def test_map(map=DEVELOPMENT_SLK):
-    subprocess.Popen([p['paths']['war3'],'-loadfile',os.path.abspath(map)])
+    subprocess.Popen([p['paths']['war3'], '-loadfile',os.path.abspath(map),'-launch'])
 
 def open_with_editor(file=DEVELOPMENT):
     subprocess.Popen([p['paths']['worldedit'],'-loadfile',os.path.abspath(file)])
