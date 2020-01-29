@@ -19,7 +19,16 @@ function GetUnitTypeIdModel takes integer unitTypeId returns string
     endif
 endfunction
 
+module InitModule
+    private static method onInit takes nothing returns nothing
+        set .loc = Location(0., 0.)
+    endmethod
+endmodule
+
 struct SpecialEffect extends array
+    private static location loc
+    implement InitModule
+
     //! runtextmacro HashStruct_SetHashtableWrapper("SpecialEffect_hT")
 
     //! runtextmacro HashStruct_NewReadonlyPrimitiveField("unitType","integer")
@@ -84,7 +93,9 @@ struct SpecialEffect extends array
         implement assertNotNull
         
         set .height_impl = value
-        call BlzSetSpecialEffectHeight(.effect, value)
+        call MoveLocation(.loc, .x, .y)
+        // call BlzSetSpecialEffectHeight(.effect, value)
+        call BlzSetSpecialEffectZ(.effect, GetLocationZ(.loc) + value)
     endmethod
     
     method operator yaw takes nothing returns real
