@@ -574,7 +574,11 @@ function LoadUnit takes string chat_str, player un_owner, real centerX, real cen
                 call GUMSAddUnitAnimationTag(resultUnit, GUMSConvertTags(UnitVisualMods_TAGS_DECOMPRESS, animTag))
             endif
             if select != "0" then
-                call GUMSSetUnitSelectionType(resultUnit, S2I(select))
+                if select == "2" then
+                    call GUMSSetUnitSelectionType(resultUnit, 3)
+                else
+                    call GUMSSetUnitSelectionType(resultUnit, S2I(select))
+                endif
             endif
         else
             call DisplayTextToPlayer(un_owner, 0., 0., "Failed to load unit of type: " + ID2S(un_type))
