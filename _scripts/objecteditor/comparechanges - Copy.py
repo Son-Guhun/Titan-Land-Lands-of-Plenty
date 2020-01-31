@@ -1,6 +1,7 @@
 #!/usr/bin/env Python3
 import PySimpleGUI as sg
 from myconfigparser import load_unit_data, Section
+from objecteditor.view import newselector
 
 dataBase = '../development/table/unit.ini'
 
@@ -43,17 +44,8 @@ menu_def = [['File', ['Open', 'Save', 'Exit', 'Properties']],
             ['Edit', ['Paste', ['Special', 'Normal', ], 'Undo'], ],      
             ['Help', 'About...'], ]      
 
-layout = [
-    [sg.Menu(menu_def, tearoff=True)],
-    [sg.Text('Unit Name')],
-    [sg.Input(change_submits=True, key ='a')],
-    [sg.Text('Unit Parent')],
-    [sg.Listbox(options,size=(30, 10),key='b')],      
-    [sg.Submit(tooltip='Click to submit this window'), sg.Cancel()]    
-]      
 
-
-window = sg.Window('Everything bagel', layout, default_element_size=(40, 1), grab_anywhere=False)      
+window = sg.Window('Everything bagel', newselector.layout, default_element_size=(40, 1), grab_anywhere=False)      
 
 while True:
     event, values = window.read()      
