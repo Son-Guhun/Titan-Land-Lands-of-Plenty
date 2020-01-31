@@ -54,6 +54,8 @@ defaults_path = 'unit.ini'
 with open(defaults_path) as f:
     defaults = load_unit_data(f)
 
+fields = set(('EditorSuffix', 'Hotkey'))
+
 class Section:
     
     def __init__(self, section):
@@ -64,8 +66,12 @@ class Section:
         
     def __getitem__(self, i):
         if i in self._section:
-            return self._section[i]
-        return self._default[i.lower()]
+                return self._section[i]
+        try:
+            return self._default[i.lower()]
+        except KeyError:
+            if i in fields:
+                return '""'
     
     def __setitem__(self, i, value):
         in_defaults = i.lower() in self._default
