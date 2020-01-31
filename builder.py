@@ -3,7 +3,13 @@ import subprocess
 import os
 import shutil
 import webbrowser
-import builderlib
+import types
+
+def get_user_functions(table):
+    """An iterator that returns all user-defined functions in the global namespace."""
+    for f in [(f) for f in table.values() if type(f) == types.FunctionType]:
+        yield f
+
 
 try:
     p = configparser.ConfigParser()
@@ -116,14 +122,14 @@ def open_in_explorer(file):
 
 def helpme():
     """Prints all available user-defined functions and their doc strings"""
-    for f in builderlib.get_user_functions(globals()):
+    for f in get_user_functions(globals()):
         help(f)
         print("==============================")
 
 
 def ls():
     """Prints all avaiable user-defined functions."""
-    for f in builderlib.get_user_functions(globals()):
+    for f in get_user_functions(globals()):
         print (str(f).split()[1])
 
 print('For help type ls()')
