@@ -8,20 +8,30 @@ endglobals
 //! runtextmacro DeclareParentHashtableWrapperStruct("hT","public")
 
 globals
-    constant boolean IS_SLK = true
+    /*constant*/ boolean IS_SLK = true
 endglobals
-function GetUnitTypeIdModel takes integer unitTypeId returns string 
+function GetUnitTypeIdModel takes integer unitTypeId returns string
+    local string str
+    if IS_SLK then
+        return GetAbilityEffectById(unitTypeId, EFFECT_TYPE_SPECIAL, 1)
+    else
+        set str = GetAbilityEffectById(unitTypeId, EFFECT_TYPE_SPECIAL, 1)
+        return SubString(str, CutToComma(str)+1, StringLength(str))
+    endif
+/*
     static if IS_SLK then
         return GetAbilityEffectById(unitTypeId, EFFECT_TYPE_SPECIAL, 1)
     else
         local string str = GetAbilityEffectById(unitTypeId, EFFECT_TYPE_SPECIAL, 1)
         return SubString(str, CutToComma(str)+1, StringLength(str))
     endif
+*/
 endfunction
 
 module InitModule
     private static method onInit takes nothing returns nothing
         set .loc = Location(0., 0.)
+        set IS_SLK = GetAbilityEffectById('h0HS', EFFECT_TYPE_SPECIAL, 1) == "war3mapImported\\ArabianArchery_squished.mdl"
     endmethod
 endmodule
 
