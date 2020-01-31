@@ -3,6 +3,10 @@
 Created on Sat Jan 18 22:05:21 2020
 
 @author: SonGuhun
+
+This script is used to remove shadows from units which have large shadows. It was
+determined that large shadow images could cause crash when on water near the map
+borders.
 """
 
 from myconfigparser import Section, load_unit_data

@@ -1,3 +1,8 @@
+"""
+This script adds the prefix 'war3.w3mod:' to the model and icon path for all units
+which do not use a custom model. This was used to force SD models for old units
+even in HD mode.
+"""
 import os
 
 rootdir = '../release/resource'
