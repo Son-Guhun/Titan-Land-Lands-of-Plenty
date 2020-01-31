@@ -92,7 +92,7 @@ private module InitModule
         set i = 0
         loop
         exitwhen abilities[i] == 0
-            call BlzSetAbilityIcon(abilities[i], "_")
+            call BlzSetAbilityIcon(abilities[i], "__")
         endloop
 
 
@@ -281,12 +281,12 @@ struct SaveLoader extends array
             set abil = abilities[i]
             exitwhen abil == 0
             set icon = BlzGetAbilityIcon(abil)
-            if icon == "_" then
+            if icon == "__" then
                 set end = true
             else
                 set index = CutToCharacter(icon, "|")
                 call BlzSendSyncData(SubString(icon, 0, index) + "", SubString(icon, index + 1, StringLength(icon))+"")
-                call BlzSetAbilityIcon(abil, "_")
+                call BlzSetAbilityIcon(abil, "__")
                 if end then
                     call DisplayTextToPlayer(GetLocalPlayer(), 0., 0., errorString)
                 endif
@@ -395,7 +395,7 @@ struct SaveLoader extends array
             set .totalFiles = S2I(data)
         endif
 
-        if .totalFiles < 0 then  // avoids issues, but there should be a better way. Maybe destroy when calling .loadData and no files found
+        if .totalFiles < 1 then  // avoids issues, but there should be a better way. Maybe destroy when calling .loadData and no files found
             call DisplayTextToPlayer(saver, 0., 0., "Save metadata could not be read (probably Reforged bug). Attempting to load with workaround.")
             set .totalFiles = 300
             set .centerX = 0
