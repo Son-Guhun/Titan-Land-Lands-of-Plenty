@@ -15,17 +15,18 @@ def open_window(data):
     strings = map_substrings(options)
 
 
-    window = sg.Window('Everything bagel', newselector.layout, default_element_size=(40, 1), grab_anywhere=False).Finalize()     
+    window = sg.Window('Everything bagel', newselector.get_layout(), default_element_size=(40, 1), grab_anywhere=False).Finalize()     
     window.find_element('Options').Update(options)
 
     while True:
         event, values = window.read()
 
-        search = values['Search'].lower()
-        if search in strings:
-            window.find_element('Options').Update(strings[search])
-        else:
-            window.find_element('Options').Update(options)
+        if event == 'Search':
+            search = values['Search'].lower()
+            if search in strings:
+                window.find_element('Options').Update(strings[search])
+            else:
+                window.find_element('Options').Update(options)
 
         if event is None:
             break

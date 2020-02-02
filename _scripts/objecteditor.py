@@ -10,4 +10,18 @@ dataBase = '../development/table/unit.ini'
 with open(dataBase) as f:
     data = load_unit_data(f)
 
-open_window(data)
+layout = [
+    [sg.Button('New Selector', key='New Selector')]
+]
+
+window = sg.Window('Everything bagel', layout)
+
+while True:
+        event, values = window.read()
+
+        if event is None:
+            break
+        elif event == 'New Selector':
+            window.Hide()
+            open_window(data)
+            window.UnHide()
