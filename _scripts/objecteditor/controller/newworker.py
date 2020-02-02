@@ -1,7 +1,7 @@
 import PySimpleGUI as sg
 from ..model.objectdata import ObjectData
 from ..model.search import map_substrings
-from ..view import newselector
+from ..view import newworker
 
 from myconfigparser import Section
 
@@ -15,7 +15,7 @@ def open_window(data):
     strings = map_substrings(options)
 
 
-    window = sg.Window('New Selector', newselector.get_layout(), default_element_size=(40, 1), grab_anywhere=False).Finalize()     
+    window = sg.Window('New Worker', newworker.get_layout(), default_element_size=(40, 1), grab_anywhere=False).Finalize()     
     window.find_element('Options').Update(options)
 
     while True:
