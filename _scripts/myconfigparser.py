@@ -54,7 +54,7 @@ defaults_path = 'unit.ini'
 with open(defaults_path) as f:
     defaults = load_unit_data(f)
 
-fields = set(('EditorSuffix', 'Hotkey'))
+fields = set(('EditorSuffix', 'Hotkey', 'Builds', 'Trains'))
 
 class Section:
     
@@ -72,6 +72,8 @@ class Section:
         except KeyError:
             if i in fields:
                 return '""'
+            else:
+                raise KeyError("Unknown field:", i)
     
     def __setitem__(self, i, value):
         in_defaults = i.lower() in self._default
