@@ -302,7 +302,7 @@ struct SaveLoader extends array
     // Reads the current file and increments the counter.
     private method read takes nothing returns nothing
         local string path = .folder + "\\" + I2S(.current) + ".txt"
-        local string errorString = "Unable to validate file " + I2S(current) + ".txt of save. Some units may have failed to load."
+        local string errorString = "Unable to validate file " + I2S(.current) + ".txt of save. Some units may have failed to load."
         local string tooltip = BlzGetAbilityTooltip(IO_ABILITY(), 0)
 
         if GetLocalPlayer() == .player then

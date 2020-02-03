@@ -1,5 +1,9 @@
 library CustomizableAbilityList requires TableStruct, Rawcode2String, GALability
 
+globals
+    private boolean isBugged = false
+endglobals
+
 private keyword Init
 
 private struct Tooltip2Rawcode extends array
@@ -26,12 +30,14 @@ struct RemoveableAbility extends array
     private static method registerAbility takes thistype whichAbility, boolean isHero returns nothing
         local string tooltip = BlzGetAbilityTooltip(whichAbility, 0)
         
-        set whichAbility.isRegistered = true
-        set whichAbility.isHero = isHero
-    
-        set tooltip = tooltip + " |c99999999Code: [" + ID2S(whichAbility) + "]|r"
-        call BlzSetAbilityTooltip(whichAbility, tooltip, 0)
-        set Tooltip2Rawcode(StringHash(tooltip)).rawcode = whichAbility
+        if not isBugged then
+            set whichAbility.isRegistered = true
+            set whichAbility.isHero = isHero
+        
+            set tooltip = tooltip + " |c99999999Code: [" + ID2S(whichAbility) + "]|r"
+            call BlzSetAbilityTooltip(whichAbility, tooltip, 0)
+            set Tooltip2Rawcode(StringHash(tooltip)).rawcode = whichAbility
+        endif
     endmethod
     
     static method fromTooltip takes string tooltip returns thistype
@@ -92,6 +98,18 @@ endfunction
 private module Init
 
     private static method onInit takes nothing returns nothing
+        local string tooltip = BlzGetAbilityTooltip('A017', 0)
+        local string a
+        local string test = "1234567890abcdefghijklmnopqrstuvwxyz[]()1234567890abcdefghijklmnopqrstuvwxyz1234567890abcdefghijklmnopqrstuvwxyz1234567890abcdefghijklmnopqrstuvwxyz"
+        call BlzSetAbilityTooltip('A017', test, 0)
+        call BlzSetAbilityTooltip('A017', tooltip, 0)
+        
+        set a = BlzGetAbilityTooltip('A017', 0)
+        if a != tooltip then
+            call DisplayTextToPlayer(GetLocalPlayer(), 0., 0., "Detected Reforged tooltip bug!")
+            set isBugged = true
+        endif
+  
         call .registerAbility('A017', true)  // Raise Flesh Golem
         call .registerAbility('A027', true)  // Raise Skeletal Legion
         call .registerAbility('A028', true)  // Summon Elemental: Void
