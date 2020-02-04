@@ -20,12 +20,20 @@ struct DNC extends array
     //! runtextmacro TableStruct_NewPrimitiveField("lightTerrain", "integer")
     //! runtextmacro TableStruct_NewPrimitiveField("lightUnit", "integer")
     
+    static thistype lastApplied = 5
+    
     static method applyDefault takes nothing returns nothing
-        call SetDayNightModels(.terrainLights[.DEFAULT_TERRAIN_LIGHT], .unitLights[.DEFAULT_UNIT_LIGHT])
+        if lastApplied != DEFAULT_TERRAIN_LIGHT then
+            call SetDayNightModels(terrainLights[DEFAULT_TERRAIN_LIGHT], unitLights[DEFAULT_UNIT_LIGHT])
+            set lastApplied = DEFAULT_TERRAIN_LIGHT
+        endif
     endmethod
-
+    
     method apply takes nothing returns nothing
-        call SetDayNightModels(.terrainLights[.lightTerrain], .unitLights[.lightUnit])
+        if lastApplied != .lightTerrain then
+            call SetDayNightModels(terrainLights[.lightTerrain], unitLights[.lightUnit])
+            set lastApplied = .lightTerrain
+        endif
     endmethod
     
     method applyForPlayer takes player whichPlayer returns nothing
@@ -37,8 +45,8 @@ struct DNC extends array
     static method create takes nothing returns thistype
         local thistype this = thistype.allocate()
         set this.pLock = 0
-        set this.lightTerrain = .DEFAULT_TERRAIN_LIGHT
-        set this.lightUnit = .DEFAULT_UNIT_LIGHT
+        set this.lightTerrain = DEFAULT_TERRAIN_LIGHT
+        set this.lightUnit = DEFAULT_UNIT_LIGHT
         return this
     endmethod
     
@@ -71,6 +79,7 @@ struct DNC extends array
         endif
     endmethod
     
+    //war3.w3mod:_hd.w3mod:
     static method onInit takes nothing returns nothing
         set .terrainLights[0] = ""
         set .unitLights[0] = ""
@@ -184,7 +193,7 @@ struct RectEnvironment extends array
         return .fog_implExists()
     endmethod
     
-    method apply takes nothing returns nothing        
+    method apply takes nothing returns nothing 
         if this.fog != 0 then
             call this.fog.apply()
         else
