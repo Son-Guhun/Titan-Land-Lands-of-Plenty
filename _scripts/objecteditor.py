@@ -6,6 +6,7 @@ from myconfigparser import load_unit_data, Section
 from objecteditor.controller import newselector
 from objecteditor.controller import newworker
 from objecteditor.controller import newproduction
+from objecteditor.controller import newunit
 
 dataBase = '../development/table/unit.ini'
 
@@ -38,3 +39,5 @@ while True:
             show_window(newworker)
         elif event == 'New Production':
             show_window(newproduction)
+        elif event == 'New Unit':
+            show_window(newunit)

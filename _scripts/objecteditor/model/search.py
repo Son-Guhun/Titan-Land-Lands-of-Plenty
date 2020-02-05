@@ -10,8 +10,7 @@ def map_substrings(deco_names):
     """
     stuff = {}
     for string in deco_names:
-        for substring in set(get_substrings(string)):
-            substring = substring.lower()
+        for substring in set(get_substrings(string.lower())):
             if substring not in stuff:
                 stuff[substring] = [string]
             else:
