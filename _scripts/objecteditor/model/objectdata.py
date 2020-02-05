@@ -3,7 +3,7 @@ from myconfigparser import Section
 EMPTY = '""'
 
 def count_fields(unit, *args):
-    result = 0
+    result = 0 if 'Aro1' not in Section(unit)['abilList'] else 1
     for field in args:
         if field in unit:
             if unit[field] != '""':
@@ -90,11 +90,14 @@ class ObjectData:
         last_trained = trained[-1]
         del trained[-1]
         prev['Trains'] = '"{}"'.format(','.join(trained))
-        prev['Upgrade'] = '"{}"'.format(unit)
+        prev['Upgrade'] = '"{}"'.format(unit.name)
         
-        unit['Name'] = prev['Name'] + ' (New)'
+        unit['Name'] = '"{}"'.format(Section(prev)['Name'][1:-1] + ' (New)')
         unit['Trains'] = '"{}"'.format(last_trained)
-        unit['Upgrade'] = '"{}"'.format(next)
+        unit['Upgrade'] = '"{}"'.format(next.name)
+
+        print(unit.name)
+        return data[unit.name]
 
     def create_unit(self, name, production, base):
         data = self.data
@@ -108,8 +111,9 @@ class ObjectData:
 
         while count_fields(production, 'Upgrade', 'Trains') >= 12:
             upgrade = Section(production)['Upgrade'][1:-1]
+            print(upgrade)
             if upgrade == '' or upgrade == first:
-                self._create_upgrade(production.name, first)
+                production = self._create_upgrade(production.name, first)
             else:
                 production = data[upgrade]
 
