@@ -2,8 +2,9 @@ import PySimpleGUI as sg
 from ..model.objectdata import ObjectData
 from ..model.search import map_substrings
 from ..view import newworker
-
+from . import get_string_unit
 from myconfigparser import Section
+import traceback
 
 def open_window(data):
     options = []
@@ -31,4 +32,8 @@ def open_window(data):
         if event is None:
             break
         elif event == 'Submit':
-            sg.popup('Success')
+            try:
+                ObjectData(data).create_worker(values['Name'], get_string_unit(values['Options'][0]))
+                sg.popup('Success')
+            except Exception as e:
+                sg.popup(str(e), traceback.format_exc(),title='Error')

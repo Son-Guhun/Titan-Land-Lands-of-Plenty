@@ -2,14 +2,24 @@ import PySimpleGUI as sg
 from ..model.objectdata import ObjectData
 from ..model.search import map_substrings
 from ..view import newproduction
+from . import get_string_unit
 
 from myconfigparser import Section
+
+RACES = {
+    'Human': 'human',
+    'Orc': 'orc',
+    'Undead': 'undead',
+    'Night Elf': 'nightelf',
+    'Naga': 'naga',
+    'Creep': 'creeps'
+}
 
 def open_window(data):
     options = []
     for u in data:
         unit = Section(data[u])
-        if unit['Builds'] != '""' and u != 'e000' and 'A00J' not in unit['abilList']:
+        if 'peon' in unit['type'].lower() and u != 'e000' and u != 'udr' and 'A00J' not in unit['abilList']:
             options.append('{name} [{code}]'.format(code=u, name=unit['Name'][1:-1]))
             
     strings = map_substrings(options)
@@ -31,4 +41,8 @@ def open_window(data):
         if event is None:
             break
         elif event == 'Submit':
-            sg.popup('Success')
+            try:
+                ObjectData(data).create_production(values['Name'], get_string_unit(values['Options'][0]), RACES[values['Race']])
+                sg.popup('Success')
+            except Exception as e:
+                sg.popup(str(e),title='Error')

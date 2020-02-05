@@ -2,10 +2,9 @@ import PySimpleGUI as sg
 from ..model.objectdata import ObjectData
 from ..model.search import map_substrings
 from ..view import newunit
+from . import get_string_unit
 
 from myconfigparser import Section
-
-get_string_unit = lambda string: string[-5:-1]
 
 
 races = {

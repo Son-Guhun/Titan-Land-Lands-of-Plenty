@@ -22,16 +22,17 @@ class ObjectData:
 
     def create_selector(self, name, parent):
         data = self.data
-        rawcode = data.new_rawcode('E001')
+        rawcode = data.new_rawcode('E000')
         rawcode = rawcode[0].lower() + rawcode[1:]
 
-        data[rawcode] = 'e001'
+        data[rawcode] = data['e037']
         unit = data[rawcode]
         parent = data[parent]
 
-        unit['Name'] = name
+        unit['Name'] = '"{}"'.format(name)
         unit['Upgrade'] = EMPTY
         unit['Trains'] = EMPTY
+        print(unit['EditorSuffix'])
         if count_fields(parent, 'Upgrade', 'Trains') < 12:
             append_rawcode(parent, 'Upgrade', rawcode)
         else:
@@ -42,11 +43,11 @@ class ObjectData:
         rawcode = data.new_rawcode('H000')
         rawcode = rawcode[0].lower() + rawcode[1:]
 
-        data[rawcode] = 'hpea'
+        data[rawcode] = data['hpea']
         unit = data[rawcode]
         selector = data[selector]
 
-        unit['Name'] = name
+        unit['Name'] = '"{}"'.format(name)
         unit['Builds'] = EMPTY
         if count_fields(selector, 'Upgrade', 'Trains') < 12:
             append_rawcode(selector, 'Trains', rawcode)
@@ -71,10 +72,13 @@ class ObjectData:
         unit = data[rawcode]
         worker = data[worker]
         
-        unit['Name'] = name
+        unit['Name'] = '"{}"'.format(name)
         unit['Trains'] = EMPTY
         unit['race'] = '"{}"'.format(race)
-        append_rawcode(worker, 'Builds', rawcode)
+        if count_fields(worker, 'Builds') < 12:
+            append_rawcode(worker, 'Builds', rawcode)
+        else:
+            raise IndexError('Adding more units than supported to "{}" field in [{}]'.format('Builds', worker.name))
 
     def _create_upgrade(self, prev, next):
         data = self.data
@@ -117,7 +121,7 @@ class ObjectData:
             else:
                 production = data[upgrade]
 
-        unit['Name'] = name
+        unit['Name'] = '"{}"'.format(name)
         unit['race'] = Section(production)['race']
         append_rawcode(production, 'Trains', rawcode)
 
