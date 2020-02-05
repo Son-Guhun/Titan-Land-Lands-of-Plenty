@@ -1,10 +1,19 @@
 # -*- coding: utf-8 -*-
+from myconfigparser import Section
 EMPTY = '""'
 
+def count_fields(unit, *args):
+    result = 0
+    for field in args:
+        if field in unit:
+            if unit[field] != '""':
+                result += unit[field].count(',') + 1
+    return result
+
 def append_rawcode(unit, field, rawcode):
-    stuff = unit['Upgrade'][1:-1].split(',') if 'Upgrade' in unit else []
+    stuff = unit[field][1:-1].split(',') if field in unit else []
     stuff.append(rawcode)
-    unit['Upgrades'] = '"{}"'.format(','.join(stuff))
+    unit[field] = '"{}"'.format(','.join(stuff))
 
 class ObjectData:
 
@@ -23,7 +32,10 @@ class ObjectData:
         unit['Name'] = name
         unit['Upgrade'] = EMPTY
         unit['Trains'] = EMPTY
-        append_rawcode(parent, 'Upgrade', rawcode)
+        if count_fields(parent, 'Upgrade', 'Trains') < 12:
+            append_rawcode(parent, 'Upgrade', rawcode)
+        else:
+            raise IndexError('Adding more units than supported to "{}" field in [{}]'.format('Upgrade', parent.name))
         
     def create_worker(self, name, selector):
         data = self.data
@@ -36,30 +48,72 @@ class ObjectData:
 
         unit['Name'] = name
         unit['Builds'] = EMPTY
-        append_rawcode(selector, 'Trains', rawcode)
+        if count_fields(selector, 'Upgrade', 'Trains') < 12:
+            append_rawcode(selector, 'Trains', rawcode)
+        else:
+            raise IndexError('Adding more units than supported to "{}" field in [{}]'.format('Trains', selector.name))
+
+    BUILDINGS = {
+        'human': 'hbar',
+        'orc': 'obar',
+        'undead': 'usep',
+        'nightelf': 'edob',
+        'naga': 'nnsa'
+    }
 
     def create_production(self, name, worker, race):
         data = self.data
-        rawcode = data.new_rawcode('H000')
+        base = self.BUILDINGS[race] if race in self.BUILDINGS else 'hbar'
+        rawcode = data.new_rawcode(base[0].upper() + '000')
         rawcode = rawcode[0].lower() + rawcode[1:]
 
-        data[rawcode] = 'hbar'
+        data[rawcode] = data[base]
         unit = data[rawcode]
         worker = data[worker]
         
         unit['Name'] = name
         unit['Trains'] = EMPTY
+        unit['race'] = '"{}"'.format(race)
         append_rawcode(worker, 'Builds', rawcode)
+
+    def _create_upgrade(self, prev, next):
+        data = self.data
+        rawcode = data.new_rawcode(prev[0].upper() + '000')
+        rawcode = rawcode[0].lower() + rawcode[1:]
+ 
+        prev = data[prev]
+        next = data[next]
+        data[rawcode] = prev
+        unit = data[rawcode]
+
+        trained = prev['Trains'][1:-1].split(',')
+        last_trained = trained[-1]
+        del trained[-1]
+        prev['Trains'] = '"{}"'.format(','.join(trained))
+        prev['Upgrade'] = '"{}"'.format(unit)
+        
+        unit['Name'] = prev['Name'] + ' (New)'
+        unit['Trains'] = '"{}"'.format(last_trained)
+        unit['Upgrade'] = '"{}"'.format(next)
 
     def create_unit(self, name, production, base):
         data = self.data
-        rawcode = data.new_rawcode('H000')
+        rawcode = data.new_rawcode(base[0].upper() + '000')
         rawcode = rawcode[0].lower() + rawcode[1:]
 
-        data[rawcode] = base
+        data[rawcode] = data[base]
         unit = data[rawcode]
+        first = production
         production = data[production]
-        
+
+        while count_fields(production, 'Upgrade', 'Trains') >= 12:
+            upgrade = Section(production)['Upgrade'][1:-1]
+            if upgrade == '' or upgrade == first:
+                self._create_upgrade(production.name, first)
+            else:
+                production = data[upgrade]
+
         unit['Name'] = name
+        unit['race'] = Section(production)['race']
         append_rawcode(production, 'Trains', rawcode)
 

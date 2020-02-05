@@ -17,7 +17,8 @@ layout = [
     [sg.Button('New Selector', key='New Selector')],
     [sg.Button('New Worker', key='New Worker')],
     [sg.Button('New Production', key='New Production')],
-    [sg.Button('New Unit', key='New Unit')]
+    [sg.Button('New Unit', key='New Unit')],
+    [sg.Submit(tooltip='Click to submit this window')]    
 ]
 
 window = sg.Window('LoP Object Editor', layout,
@@ -33,6 +34,9 @@ while True:
 
         if event is None:
             break
+        elif event == 'Submit':
+            with open(dataBase, 'w') as f:
+                data.write(f)
         elif event == 'New Selector':
             show_window(newselector)
         elif event == 'New Worker':
