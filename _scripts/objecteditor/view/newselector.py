@@ -11,5 +11,5 @@ def get_layout():
         [sg.Text('Selector Parent')],
         [sg.Input(enable_events=True, key ='Search', tooltip='Search for a unit.')],
         [sg.Listbox('', select_mode=sg.LISTBOX_SELECT_MODE_BROWSE, size=(30, 10),key='Options')],
-        [sg.Submit(tooltip='Click to submit this window'), sg.Cancel()]    
+        [sg.Submit(tooltip='Click to submit this window')]    
     ]

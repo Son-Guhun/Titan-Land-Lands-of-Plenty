@@ -23,5 +23,5 @@ def get_layout():
             sg.InputCombo(('Both', 'Classic', 'Reforged'),default_value='Both',enable_events=True,key='Mode 2')
         ],
         [sg.Listbox('',size=(30, 10),key='Options 2')],
-        [sg.Submit(tooltip='Click to submit this window'), sg.Cancel()]    
+        [sg.Submit(tooltip='Click to submit this window')]    
     ]
