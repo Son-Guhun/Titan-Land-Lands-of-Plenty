@@ -32,6 +32,8 @@ class ObjectData:
         unit['Name'] = '"{}"'.format(name)
         unit['Upgrade'] = EMPTY
         unit['Trains'] = EMPTY
+        unit['campaign'] = parent['campaign']
+
         print(unit['EditorSuffix'])
         if count_fields(parent, 'Upgrade', 'Trains') < 12:
             append_rawcode(parent, 'Upgrade', rawcode)
@@ -49,6 +51,8 @@ class ObjectData:
 
         unit['Name'] = '"{}"'.format(name)
         unit['Builds'] = EMPTY
+        unit['campaign'] = Section(selector)['campaign']
+
         if count_fields(selector, 'Upgrade', 'Trains') < 12:
             append_rawcode(selector, 'Trains', rawcode)
         else:
@@ -75,6 +79,7 @@ class ObjectData:
         unit['Name'] = '"{}"'.format(name)
         unit['Trains'] = EMPTY
         unit['race'] = '"{}"'.format(race)
+        unit['campaign'] = Section(worker)['campaign']
         if count_fields(worker, 'Builds') < 12:
             append_rawcode(worker, 'Builds', rawcode)
         else:
@@ -123,5 +128,6 @@ class ObjectData:
 
         unit['Name'] = '"{}"'.format(name)
         unit['race'] = Section(production)['race']
+        unit['campaign'] = Section(production)['campaign']
         append_rawcode(production, 'Trains', rawcode)
 

@@ -14,7 +14,7 @@ def open_window(data):
         options.clear()
         for u in data:
             unit = Section(data[u])
-            if '[sele]' in unit['EditorSuffix'] or u =='e001':
+            if '[sele]' in unit['EditorSuffix']:
                 options.append('{name} [{code}]'.format(code=u, name=unit['Name'][1:-1]))
                 
         strings = map_substrings(options)
@@ -37,8 +37,16 @@ def open_window(data):
             except Exception as e:
                 sg.popup(str(e), traceback.format_exc(),title='Error')
 
+
         search = values['Search'].lower()
         if search in strings:
-            window.find_element('Options').Update(strings[search])
+            current = strings[search]
         else:
-            window.find_element('Options').Update(options)
+            current = options
+
+        mode = values['Mode']
+        if mode != 'Both':
+            mode = '1' if mode == 'Reforged' else '0'
+            current = [string for string in current if Section(data[get_string_unit(string)])['campaign'] == mode]
+
+        window.find_element('Options').Update(current)
