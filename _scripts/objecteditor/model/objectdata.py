@@ -39,13 +39,21 @@ class ObjectData:
             append_rawcode(parent, 'Upgrade', rawcode)
         else:
             raise IndexError('Adding more units than supported to "{}" field in [{}]'.format('Upgrade', parent.name))
-        
-    def create_worker(self, name, selector):
+
+    WORKERS = {
+        'human': 'hpea',
+        'orc': 'opeo',
+        'undead': 'uaco',
+        'nightelf': 'ewsp',
+        'naga': 'nmpe'
+    }
+
+    def create_worker(self, name, selector, race):
         data = self.data
         rawcode = data.new_rawcode('H000')
         rawcode = rawcode[0].lower() + rawcode[1:]
 
-        data[rawcode] = data['hpea']
+        data[rawcode] = data[self.WORKERS[race]]
         unit = data[rawcode]
         selector = data[selector]
 
@@ -77,6 +85,7 @@ class ObjectData:
         worker = data[worker]
         
         unit['Name'] = '"{}"'.format(name)
+        unit['Upgrade'] = EMPTY
         unit['Trains'] = EMPTY
         unit['race'] = '"{}"'.format(race)
         unit['campaign'] = Section(worker)['campaign']
