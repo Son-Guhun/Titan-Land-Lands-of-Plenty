@@ -11,7 +11,7 @@ def count_fields(unit, *args):
     return result
 
 def append_rawcode(unit, field, rawcode):
-    stuff = unit[field][1:-1].split(',') if field in unit else []
+    stuff = unit[field][1:-1].split(',') if field in unit and unit[field] != EMPTY else []
     stuff.append(rawcode)
     unit[field] = '"{}"'.format(','.join(stuff))
 
