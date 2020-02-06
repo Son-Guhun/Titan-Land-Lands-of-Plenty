@@ -16,3 +16,10 @@ def map_substrings(deco_names):
             else:
                 stuff[substring].append(string)
     return stuff
+
+def add_to_map(map, string):
+    for substring in set(get_substrings(string.lower())):
+            if substring not in map:
+                map[substring] = [string]
+            else:
+                map[substring].append(string)

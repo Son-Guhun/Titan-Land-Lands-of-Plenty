@@ -1,8 +1,9 @@
 import PySimpleGUI as sg
 from ..model.objectdata import ObjectData
-from ..model.search import map_substrings
+from ..model.search import map_substrings, add_to_map
 from ..view import newunit
 from . import get_string_unit
+from ..model import Production
 
 from myconfigparser import Section
 
@@ -21,22 +22,21 @@ def open_window(data):
     options2 = set()
 
     for s in data:
-        structure = Section(data[s])
+        structure = Production(data[s])
         if '[prod]' in structure['EditorSuffix']:
             options.append('{name} [{code}]'.format(code=s, name=structure['Name'][1:-1]))
-            for u in structure['Trains'][1:-1].split(','):
-                if u != '':
-                    options2.add('{name} [{code}]'.format(code=u, name=Section(data[u])['Name'][1:-1]))
+            for u in structure.trained(asString=True):
+                options2.add('{name} [{code}]'.format(code=u, name=Section(data[u])['Name'][1:-1]))
     
-    options2 = sorted(options2)
+    options2 = list(options2)
             
     strings = map_substrings(options)
     strings2 = map_substrings(options2)
 
 
     window = sg.Window('New Unit', newunit.get_layout(), default_element_size=(40, 1), grab_anywhere=False).Finalize()     
-    window.find_element('Options').Update(options)
-    window.find_element('Options 2').Update(options2)
+    window.find_element('Options').Update(sorted(options))
+    window.find_element('Options 2').Update(sorted(options2))
 
     while True:
         event, values = window.read()
@@ -44,25 +44,27 @@ def open_window(data):
         if event is None:
             break
         elif event == 'Submit':
-            ObjectData(data).create_unit(values['Name'], get_string_unit(values['Options'][0]), get_string_unit(values['Options 2'][0]))
+            u = ObjectData(data).create_unit(values['Name'], get_string_unit(values['Options'][0]), get_string_unit(values['Options 2'][0]))
+            options2.append('{name} [{code}]'.format(code=u, name=Section(data[u])['Name'][1:-1]))
+            add_to_map(strings2, options2[-1])
             sg.popup('Success')
-        else:
-            def a(a, stuff, stuff2):
-                search = values['Search'+a].lower()
-                if search in stuff2:
-                    current = stuff2[search]
-                else:
-                    current = stuff
 
-                race = values['Race'+a]
-                if race != 'Any':
-                    current = [string for string in current if Section(data[get_string_unit(string)])['race'][1:-1] in races[race]]
+        def a(a, stuff, stuff2):
+            search = values['Search'+a].lower()
+            if search in stuff2:
+                current = stuff2[search]
+            else:
+                current = stuff
 
-                mode = values['Mode'+a]
-                if mode != 'Both':
-                    mode = '1' if mode == 'Reforged' else '0'
-                    current = [string for string in current if Section(data[get_string_unit(string)])['campaign'] == mode]
+            race = values['Race'+a]
+            if race != 'Any':
+                current = [string for string in current if Section(data[get_string_unit(string)])['race'][1:-1] in races[race]]
 
-                window.find_element('Options'+a).Update(sorted(current))
-            a('', options, strings)
-            a(' 2', options2, strings2)
+            mode = values['Mode'+a]
+            if mode != 'Both':
+                mode = '1' if mode == 'Reforged' else '0'
+                current = [string for string in current if Section(data[get_string_unit(string)])['campaign'] == mode]
+
+            window.find_element('Options'+a).Update(sorted(current))
+        a('', options, strings)
+        a(' 2', options2, strings2)

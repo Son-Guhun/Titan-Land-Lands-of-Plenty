@@ -130,4 +130,5 @@ class ObjectData:
         unit['race'] = Section(production)['race']
         unit['campaign'] = Section(production)['campaign']
         append_rawcode(production, 'Trains', rawcode)
+        return rawcode
 

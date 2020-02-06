@@ -62,7 +62,15 @@ class Section:
         if '_parent' not in section: print(section.name)
         self._section = section
         self._default = defaults[section['_parent'][1:-1]]
-        self.name = section.name
+        # self.name = section.name
+
+    @property
+    def name(self):
+        return self._section.name
+        
+    @property
+    def parser(self):
+        return self._section.parser
         
     def __getitem__(self, i):
         if i in self._section:
