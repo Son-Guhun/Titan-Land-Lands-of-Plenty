@@ -5,7 +5,7 @@ from myconfigparser import load_unit_data, Section
 
 from objecteditor.controller import newselector, newworker, newproduction, newunit
 from objecteditor.controller import newtower, newhero
-from objecteditor.controller import newdecobuilder
+from objecteditor.controller import newdecobuilder, newdecoration, newvariation
 
 dataBase = '../development/table/unit.ini'
 
@@ -23,6 +23,8 @@ layout = [
     [sg.Button('New Hero', key='New Hero')],
     [sg.Text('Decorations')],
     [sg.Button('New Deco Builder', key='New Deco Builder')],
+    [sg.Button('New Decoration', key='New Decoration')],
+    [sg.Button('New Variation', key='New Variation')],
     [sg.Text('____________')],
     [sg.Submit(tooltip='Click to submit this window')]    
 ]
@@ -60,3 +62,7 @@ while True:
         # Decorations
         elif event == 'New Deco Builder':
             show_window(newdecobuilder)
+        elif event == 'New Decoration':
+            show_window(newdecoration)
+        elif event == 'New Variation':
+            show_window(newvariation)

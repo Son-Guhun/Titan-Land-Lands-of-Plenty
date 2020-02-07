@@ -239,7 +239,7 @@ class ObjectData:
         rawcode = data.new_rawcode('H000')
         rawcode = rawcode[0].lower() + rawcode[1:]
 
-        data[rawcode] = data['h038']
+        data[rawcode] = data[parent]
         unit = data[rawcode]
         parent = Decoration(data[parent])
 
