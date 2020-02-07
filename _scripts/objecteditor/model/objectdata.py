@@ -175,16 +175,33 @@ class ObjectData:
         unit['Sellunits'] = EMPTY
 
     @database_safe
-    def create_hero(self, name, race, base):
+    def create_hero(self, name, propername, tower, race, base):
         data = self.data
         rawcode = data.new_rawcode(base[0].upper() + '000')
-        rawcode = rawcode[0].lower() + rawcode[1:]
 
-        data[rawcode] = data[base]
+        if base[0].lower() == base[0]:
+            raise ValueError("Base unit must be a hero!")
+
+        tower = data[tower]
+        if count_fields(tower, 'Sellunits') >= 12:
+            raise IndexError('Adding more units than supported to "{}" field in [{}]'.format('Sellunits', tower.name))
+
+        data[rawcode] = data[base] if base in data else {'_parent': f'"{DEFAULTS[base].name}"'}
         unit = data[rawcode]
 
+        if Section(tower)['campaign'] == '1':
+            name = '_HD ' + name
+            if propername: 
+                propername = '_HD ' + propername
+
         unit['Name'] = f'"{name}"'
+        unit['Propernames'] = f'"{propername}"' if propername else '" "'
         unit['race'] = f'"{race}"'
+        unit['campaign'] = '1' if propername else '0'
+        
+        append_rawcode(tower, 'Sellunits', rawcode)
+
+        return rawcode
 
     @database_safe
     def create_deco_builder(self, name):

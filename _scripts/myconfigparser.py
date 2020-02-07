@@ -54,7 +54,7 @@ defaults_path = 'unit.ini'
 with open(defaults_path) as f:
     DEFAULTS = load_unit_data(f)
 
-FIELDS = set(('EditorSuffix', 'Hotkey', 'Builds', 'Trains', 'Upgrade', 'abilList'))
+FIELDS = set(('EditorSuffix', 'Hotkey', 'Builds', 'Trains', 'Upgrade', 'abilList', 'Sellunits', 'Propernames'))
 
 class Section:
     

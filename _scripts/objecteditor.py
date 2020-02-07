@@ -3,12 +3,9 @@ import PySimpleGUI as sg
 from myconfigparser import load_unit_data, Section
 
 
-from objecteditor.controller import newselector
-from objecteditor.controller import newworker
-from objecteditor.controller import newproduction
-from objecteditor.controller import newunit
+from objecteditor.controller import newselector, newworker, newproduction, newunit
+from objecteditor.controller import newtower, newhero
 from objecteditor.controller import newdecobuilder
-from objecteditor.controller import newtower
 
 dataBase = '../development/table/unit.ini'
 
@@ -23,6 +20,7 @@ layout = [
     [sg.Button('New Unit', key='New Unit')],
     [sg.Text('Heroes')],
     [sg.Button('New Tower', key='New Tower')],
+    [sg.Button('New Hero', key='New Hero')],
     [sg.Text('Decorations')],
     [sg.Button('New Deco Builder', key='New Deco Builder')],
     [sg.Text('____________')],
@@ -57,6 +55,8 @@ while True:
         # Heroes
         elif event == 'New Tower':
             show_window(newtower)
+        elif event == 'New Hero':
+            show_window(newhero)
         # Decorations
         elif event == 'New Deco Builder':
             show_window(newdecobuilder)

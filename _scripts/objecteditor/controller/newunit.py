@@ -2,20 +2,10 @@ import PySimpleGUI as sg
 from ..model.objectdata import ObjectData
 from ..model.search import map_substrings, add_to_map
 from ..view import newunit
-from . import get_string_unit
+from . import get_string_unit, filter_listbox
 from ..model import Production
 
 from myconfigparser import Section, DEFAULTS
-
-
-races = {
-    'Human': ['human'],
-    'Orc': ['orc'],
-    'Undead': ['undead'],
-    'Night Elf': ['nightelf'],
-    'Naga': ['naga'],
-    'Creep': set(['commoner','creeps','critters','demon','other','unkown'])
-}
 
 template = '{name} [{code}]'
 
@@ -51,31 +41,5 @@ def open_window(data):
             add_to_map(strings2, options2[-1])
             sg.popup('Success')
 
-        def a(a, stuff, stuff2):
-            search = values['Search'+a].lower()
-            if search[0:3] != 'id:':
-                if search in stuff2:
-                    current = stuff2[search]
-                else:
-                    current = stuff
-
-                race = values['Race'+a]
-                if race != 'Any':
-                    current = [string for string in current if Section(data[get_string_unit(string)])['race'][1:-1] in races[race]]
-
-                mode = values['Mode'+a]
-                if mode != 'Both':
-                    mode = '1' if mode == 'Reforged' else '0'
-                    current = [string for string in current if Section(data[get_string_unit(string)])['campaign'] == mode]
-            else:
-                rawcode = values['Search'+a][3:]
-                if rawcode in data:
-                    current = [template.format(code=rawcode,name=Section(data[rawcode])['Name'][1:-1])]
-                elif rawcode in DEFAULTS:
-                    current = [template.format(code=rawcode,name=DEFAULTS[rawcode]['name'][1:-1])]
-                else:
-                    current = []
-
-            window.find_element('Options'+a).Update(sorted(current))
-        a('', options, strings)
-        a(' 2', options2, strings2)
+        filter_listbox(data, window, values, '', options, strings)
+        filter_listbox(data, window, values, ' 2', options2, strings2)
