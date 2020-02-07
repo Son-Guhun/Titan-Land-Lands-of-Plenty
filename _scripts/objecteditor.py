@@ -8,6 +8,7 @@ from objecteditor.controller import newworker
 from objecteditor.controller import newproduction
 from objecteditor.controller import newunit
 from objecteditor.controller import newdecobuilder
+from objecteditor.controller import newtower
 
 dataBase = '../development/table/unit.ini'
 
@@ -20,6 +21,8 @@ layout = [
     [sg.Button('New Worker', key='New Worker')],
     [sg.Button('New Production', key='New Production')],
     [sg.Button('New Unit', key='New Unit')],
+    [sg.Text('Heroes')],
+    [sg.Button('New Tower', key='New Tower')],
     [sg.Text('Decorations')],
     [sg.Button('New Deco Builder', key='New Deco Builder')],
     [sg.Text('____________')],
@@ -42,6 +45,7 @@ while True:
         elif event == 'Submit':
             with open(dataBase, 'w') as f:
                 data.write(f)
+        # Units
         elif event == 'New Selector':
             show_window(newselector)
         elif event == 'New Worker':
@@ -50,5 +54,9 @@ while True:
             show_window(newproduction)
         elif event == 'New Unit':
             show_window(newunit)
+        # Heroes
+        elif event == 'New Tower':
+            show_window(newtower)
+        # Decorations
         elif event == 'New Deco Builder':
             show_window(newdecobuilder)
