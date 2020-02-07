@@ -1,5 +1,7 @@
 # -*- coding: utf-8 -*-
 from myconfigparser import Section
+from . import Decoration
+import traceback
 EMPTY = '""'
 
 def count_fields(unit, *args):
@@ -15,11 +17,26 @@ def append_rawcode(unit, field, rawcode):
     stuff.append(rawcode)
     unit[field] = '"{}"'.format(','.join(stuff))
 
+def database_safe(func):
+    """This decorator is used to make sure the state of the database doesn't become invalid when an exception occurs."""
+    def wrapper(self, *args, **kwargs):
+        data = self.data
+        backup = {section:{k:v for k,v in data[section].items()} for section in data}
+        try:
+            return func(self, *args, **kwargs)
+        except:
+            for section in backup:
+                data[section] = backup[section]
+            raise
+    return wrapper
+
+
 class ObjectData:
 
     def __init__(self, data):
         self.data = data
 
+    @database_safe
     def create_selector(self, name, parent):
         data = self.data
         rawcode = data.new_rawcode('E000')
@@ -48,6 +65,7 @@ class ObjectData:
         'naga': 'nmpe'
     }
 
+    @database_safe
     def create_worker(self, name, selector, race):
         data = self.data
         rawcode = data.new_rawcode('H000')
@@ -74,6 +92,7 @@ class ObjectData:
         'naga': 'nnsa'
     }
 
+    @database_safe
     def create_production(self, name, worker, race):
         data = self.data
         base = self.BUILDINGS[race] if race in self.BUILDINGS else 'hbar'
@@ -118,6 +137,7 @@ class ObjectData:
         print(unit.name)
         return data[unit.name]
 
+    @database_safe
     def create_unit(self, name, production, base):
         data = self.data
         rawcode = data.new_rawcode(base[0].upper() + '000')
@@ -142,6 +162,7 @@ class ObjectData:
         append_rawcode(production, 'Trains', rawcode)
         return rawcode
 
+    @database_safe
     def create_tower(self, name):
         data = self.data
         rawcode = data.new_rawcode('N000')
@@ -153,6 +174,7 @@ class ObjectData:
         unit['Name'] = f'"Tower: {name}"'
         unit['Sellunits'] = EMPTY
 
+    @database_safe
     def create_hero(self, name, race, base):
         data = self.data
         rawcode = data.new_rawcode(base[0].upper() + '000')
@@ -164,6 +186,7 @@ class ObjectData:
         unit['Name'] = f'"{name}"'
         unit['race'] = f'"{race}"'
 
+    @database_safe
     def create_deco_builder(self, name):
         data = self.data
         rawcode = data.new_rawcode('U000')
@@ -175,6 +198,7 @@ class ObjectData:
         unit['Name'] = f'"{name}"'
         unit['Builds'] = EMPTY
 
+    @database_safe
     def create_decoration(self, name, model, builder):
         data = self.data
         rawcode = data.new_rawcode('H000')
@@ -191,6 +215,20 @@ class ObjectData:
         unit['Upgrade'] = EMPTY
         unit['file'] = f'"{model}"'
         append_rawcode(builder, 'Builds', rawcode)
+
+    @database_safe
+    def create_variation(self, name, model, parent):
+        data = self.data
+        rawcode = data.new_rawcode('H000')
+        rawcode = rawcode[0].lower() + rawcode[1:]
+
+        data[rawcode] = data['h038']
+        unit = data[rawcode]
+        parent = Decoration(data[parent])
+
+        index = parent.add_upgrade(rawcode)
+        unit['Name'] = f'"{name.format(index=index)}"'
+        unit['file'] = f'"{model}"'
             
 
 
