@@ -22,7 +22,7 @@ races = {
 
 def filter_listbox(data, window, values, suffix, options, searchmap):
             search = values['Search'+suffix].lower()
-            if search[0:3] != 'id:':
+            if not search.startswith('id:'):
                 if search in searchmap:
                     current = searchmap[search]
                 else:

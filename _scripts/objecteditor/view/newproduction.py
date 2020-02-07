@@ -8,7 +8,7 @@ def get_layout():
     return [
         [sg.Menu(menu.menu_def, tearoff=True)],
         [sg.Text('Production Name')],
-        [sg.Input(key ='Name'), sg.InputCombo(RACES, default_value='Human', key='Race')],
+        [sg.Input(key ='Name'), sg.InputCombo(RACES, default_value='Human', key='ProdRace')],
         [sg.Text('Built by:')],
         [
             sg.Input(enable_events=True, key ='Search', tooltip='Search for a unit.'),

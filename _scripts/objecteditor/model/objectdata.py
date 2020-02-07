@@ -51,7 +51,6 @@ class ObjectData:
         unit['Trains'] = EMPTY
         unit['campaign'] = parent['campaign']
 
-        print(unit['EditorSuffix'])
         if count_fields(parent, 'Upgrade', 'Trains') < 12:
             append_rawcode(parent, 'Upgrade', rawcode)
         else:
@@ -134,7 +133,6 @@ class ObjectData:
         unit['Trains'] = '"{}"'.format(last_trained)
         unit['Upgrade'] = '"{}"'.format(next.name)
 
-        print(unit.name)
         return data[unit.name]
 
     @database_safe
@@ -150,7 +148,6 @@ class ObjectData:
 
         while count_fields(production, 'Upgrade', 'Trains') >= 12:
             upgrade = Section(production)['Upgrade'][1:-1]
-            print(upgrade)
             if upgrade == '' or upgrade == first:
                 production = self._create_upgrade(production.name, first)
             else:
@@ -246,6 +243,3 @@ class ObjectData:
         index = parent.add_upgrade(rawcode)
         unit['Name'] = f'"{name.format(index=index)}"'
         unit['file'] = f'"{model}"'
-            
-
-

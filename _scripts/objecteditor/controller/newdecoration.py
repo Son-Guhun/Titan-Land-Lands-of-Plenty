@@ -17,7 +17,7 @@ def open_window(data):
 
 
     window = sg.Window('New Decoration', newdecoration.get_layout(), default_element_size=(40, 1), grab_anywhere=False).Finalize()     
-    window.find_element('Options').Update(options)
+    window.find_element('Options').Update(sorted(options))
 
     while True:
         event, values = window.read()
@@ -32,3 +32,4 @@ def open_window(data):
                 sg.popup(str(e),title='Error')
 
         filter_listbox(data, window, values, '', options, strings)
+

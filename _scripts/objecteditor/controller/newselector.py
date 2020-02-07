@@ -2,7 +2,7 @@ import PySimpleGUI as sg
 from ..model.objectdata import ObjectData
 from ..model.search import map_substrings
 from ..view import newselector
-from . import get_string_unit
+from . import get_string_unit, filter_listbox
 import traceback
 from myconfigparser import Section
 
@@ -22,7 +22,7 @@ def open_window(data):
     populate()
 
     window = sg.Window('New Selector', newselector.get_layout(), default_element_size=(40, 1), grab_anywhere=False).Finalize()     
-    window.find_element('Options').Update(options)
+    window.find_element('Options').Update(sorted(options))
 
     while True:
         event, values = window.read()
@@ -37,16 +37,4 @@ def open_window(data):
             except Exception as e:
                 sg.popup(str(e), traceback.format_exc(),title='Error')
 
-
-        search = values['Search'].lower()
-        if search in strings:
-            current = strings[search]
-        else:
-            current = options
-
-        mode = values['Mode']
-        if mode != 'Both':
-            mode = '1' if mode == 'Reforged' else '0'
-            current = [string for string in current if Section(data[get_string_unit(string)])['campaign'] == mode]
-
-        window.find_element('Options').Update(current)
+        filter_listbox(data, window, values, '', options, strings)

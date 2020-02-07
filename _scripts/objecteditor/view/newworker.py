@@ -11,7 +11,7 @@ def get_layout():
     return [
         [sg.Menu(menu.menu_def, tearoff=True)],
         [sg.Text('Worker Name')],
-        [sg.Input(key ='Name'), sg.InputCombo(RACES,default_value=RACES[0],enable_events=True,key='Race')],
+        [sg.Input(key ='Name'), sg.InputCombo(RACES,default_value=RACES[0],key='WorkerRace')],
         [sg.Text('Selector')],
         [
             sg.Input(enable_events=True, key ='Search', tooltip='Search for a unit.'),
