@@ -53,18 +53,18 @@ class ObjectData:
         rawcode = data.new_rawcode('H000')
         rawcode = rawcode[0].lower() + rawcode[1:]
 
+        selector = data[selector]
+        if count_fields(selector, 'Upgrade', 'Trains') >= 12:
+            raise IndexError('Adding more units than supported to "{}" field in [{}]'.format('Trains', selector.name))
+
         data[rawcode] = data[self.WORKERS[race]]
         unit = data[rawcode]
-        selector = data[selector]
 
         unit['Name'] = '"{}"'.format(name)
         unit['Builds'] = EMPTY
         unit['campaign'] = Section(selector)['campaign']
-
-        if count_fields(selector, 'Upgrade', 'Trains') < 12:
-            append_rawcode(selector, 'Trains', rawcode)
-        else:
-            raise IndexError('Adding more units than supported to "{}" field in [{}]'.format('Trains', selector.name))
+        append_rawcode(selector, 'Trains', rawcode)
+            
 
     BUILDINGS = {
         'human': 'hbar',
@@ -80,19 +80,20 @@ class ObjectData:
         rawcode = data.new_rawcode(base[0].upper() + '000')
         rawcode = rawcode[0].lower() + rawcode[1:]
 
+        worker = data[worker]
+        if count_fields(worker, 'Builds') >= 11:
+            raise IndexError('Adding more units than supported to "{}" field in [{}]'.format('Builds', worker.name))
+
         data[rawcode] = data[base]
         unit = data[rawcode]
-        worker = data[worker]
         
         unit['Name'] = '"{}"'.format(name)
         unit['Upgrade'] = EMPTY
         unit['Trains'] = EMPTY
         unit['race'] = '"{}"'.format(race)
         unit['campaign'] = Section(worker)['campaign']
-        if count_fields(worker, 'Builds') < 12:
-            append_rawcode(worker, 'Builds', rawcode)
-        else:
-            raise IndexError('Adding more units than supported to "{}" field in [{}]'.format('Builds', worker.name))
+        append_rawcode(worker, 'Builds', rawcode)
+            
 
     def _create_upgrade(self, prev, next):
         data = self.data
@@ -140,4 +141,56 @@ class ObjectData:
         unit['campaign'] = Section(production)['campaign']
         append_rawcode(production, 'Trains', rawcode)
         return rawcode
+
+    def create_tower(self, name):
+        data = self.data
+        rawcode = data.new_rawcode('N000')
+        rawcode = rawcode[0].lower() + rawcode[1:]
+
+        data[rawcode] = data['n03D']
+        unit = data[rawcode]
+        
+        unit['Name'] = f'"Tower: {name}"'
+        unit['Sellunits'] = EMPTY
+
+    def create_hero(self, name, race, base):
+        data = self.data
+        rawcode = data.new_rawcode(base[0].upper() + '000')
+        rawcode = rawcode[0].lower() + rawcode[1:]
+
+        data[rawcode] = data[base]
+        unit = data[rawcode]
+
+        unit['Name'] = f'"{name}"'
+        unit['race'] = f'"{race}"'
+
+    def create_deco_builder(self, name):
+        data = self.data
+        rawcode = data.new_rawcode('U000')
+        rawcode = rawcode[0].lower() + rawcode[1:]
+
+        data[rawcode] = data['u014']
+        unit = data[rawcode]
+
+        unit['Name'] = f'"{name}"'
+        unit['Builds'] = EMPTY
+
+    def create_decoration(self, name, model, builder):
+        data = self.data
+        rawcode = data.new_rawcode('H000')
+        rawcode = rawcode[0].lower() + rawcode[1:]
+
+        builder = data[builder]
+        if count_fields(builder, 'Builds') >= 11:
+            raise IndexError('Adding more units than supported to "{}" field in [{}]'.format('Builds', builder.name))
+
+        data[rawcode] = data['h038']
+        unit = data[rawcode]
+
+        unit['Name'] = f'"{name}"'
+        unit['Upgrade'] = EMPTY
+        unit['file'] = f'"{model}"'
+        append_rawcode(builder, 'Builds', rawcode)
+            
+
 
