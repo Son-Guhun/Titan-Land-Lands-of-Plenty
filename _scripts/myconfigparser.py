@@ -52,16 +52,16 @@ def iter_deco_builders(unit_data, builder_only = False, ability = 'A00J'):
 
 defaults_path = 'unit.ini'
 with open(defaults_path) as f:
-    defaults = load_unit_data(f)
+    DEFAULTS = load_unit_data(f)
 
-fields = set(('EditorSuffix', 'Hotkey', 'Builds', 'Trains', 'Upgrade', 'abilList'))
+FIELDS = set(('EditorSuffix', 'Hotkey', 'Builds', 'Trains', 'Upgrade', 'abilList'))
 
 class Section:
     
     def __init__(self, section):
         if '_parent' not in section: print(section.name)
         self._section = section
-        self._default = defaults[section['_parent'][1:-1]]
+        self._default = DEFAULTS[section['_parent'][1:-1]]
         # self.name = section.name
 
     @property
@@ -78,7 +78,7 @@ class Section:
         try:
             return self._default[i.lower()]
         except KeyError:
-            if i in fields:
+            if i in FIELDS:
                 return '""'
             else:
                 raise KeyError("Unknown field:", i)

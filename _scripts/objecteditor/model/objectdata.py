@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-from myconfigparser import Section
+from myconfigparser import Section, DEFAULTS
 from . import Decoration
 import traceback
 EMPTY = '""'
@@ -143,7 +143,7 @@ class ObjectData:
         rawcode = data.new_rawcode(base[0].upper() + '000')
         rawcode = rawcode[0].lower() + rawcode[1:]
 
-        data[rawcode] = data[base]
+        data[rawcode] = data[base] if base in data else {'_parent': f'"{DEFAULTS[base].name}"'}  # make sure exception is raised if base does not exist
         unit = data[rawcode]
         first = production
         production = data[production]
