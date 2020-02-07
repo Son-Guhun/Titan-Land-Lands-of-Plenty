@@ -20,11 +20,11 @@ races = {
     'Creep': set(['commoner','creeps','critters','demon','other','unkown'])
 }
 
-def filter_listbox(data, window, values, suffix, options, searchmap):
+def filter_listbox(data, window, values, suffix, options):
             search = values['Search'+suffix].lower()
             if not search.startswith('id:'):
-                if search in searchmap:
-                    current = searchmap[search]
+                if options.search(search):
+                    current = options.search(search)
                 else:
                     current = options
 

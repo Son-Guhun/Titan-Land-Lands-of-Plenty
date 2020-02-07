@@ -1,23 +1,20 @@
 import PySimpleGUI as sg
 from ..model.objectdata import ObjectData
-from ..model.search import map_substrings
+from ..model.search import SearchableList
 from ..view import newselector
 from . import get_string_unit, filter_listbox
 import traceback
 from myconfigparser import Section
 
 def open_window(data):
-    options, strings = [], {}
+    options = SearchableList()
 
     def populate():
-        nonlocal strings
         options.clear()
         for u in data:
             unit = Section(data[u])
             if '[sele]' in unit['EditorSuffix']:
                 options.append('{name} [{code}]'.format(code=u, name=unit['Name'][1:-1]))
-                
-        strings = map_substrings(options)
 
     populate()
 
@@ -37,4 +34,4 @@ def open_window(data):
             except Exception as e:
                 sg.popup(str(e), traceback.format_exc(),title='Error')
 
-        filter_listbox(data, window, values, '', options, strings)
+        filter_listbox(data, window, values, '', options)

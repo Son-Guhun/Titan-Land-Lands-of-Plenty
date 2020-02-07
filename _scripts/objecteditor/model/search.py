@@ -23,3 +23,21 @@ def add_to_map(map, string):
                 map[substring] = [string]
             else:
                 map[substring].append(string)
+
+
+class SearchableList(list):
+
+    def __init__(self, *args):
+        super().__init__(*args)
+        self._searchmap = map_substrings(self)
+
+    def search(self, query):
+        return self._searchmap[query] if query in self._searchmap else None
+
+    def append(self, string):
+        super().append(string)
+        add_to_map(self._searchmap, string)
+
+    def clear(self):
+        super().clear()
+        self._searchmap.clear()

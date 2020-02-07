@@ -1,14 +1,14 @@
 import PySimpleGUI as sg
 from ..model.objectdata import ObjectData
-from ..model.search import map_substrings, add_to_map
+from ..model.search import SearchableList
 from ..view import newhero
 from . import get_string_unit, filter_listbox, RACES
 import traceback
 from myconfigparser import Section
 
 def open_window(data):
-    options = []
-    options2 = []
+    options = SearchableList()
+    options2 = SearchableList()
 
     for t in data:
         tower = Section(data[t])
@@ -26,10 +26,6 @@ def open_window(data):
                         name = name[4:]
                     
                     options2.append('{name} [{code}]'.format(code=u, name=name))
-
-            
-    strings = map_substrings(options)
-    strings2 = map_substrings(options2)
 
     window = sg.Window('New Selector', newhero.get_layout(), default_element_size=(40, 1), grab_anywhere=False).Finalize()     
     window.find_element('Options 1').Update(sorted(options))
@@ -53,11 +49,10 @@ def open_window(data):
                     name = name[4:]
                 
                 options2.append('{name} [{code}]'.format(code=u, name=name))
-                add_to_map(strings2, options2[-1])
                 sg.popup('Success')
             except Exception as e:
                 sg.popup(str(e), traceback.format_exc(),title='Error')
 
 
-        filter_listbox(data, window, values, ' 1', options, strings)
-        filter_listbox(data, window, values, ' 2', options2, strings2)
+        filter_listbox(data, window, values, ' 1', options)
+        filter_listbox(data, window, values, ' 2', options2)
