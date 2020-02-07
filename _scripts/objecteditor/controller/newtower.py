@@ -16,7 +16,7 @@ def open_window(data):
             break
         elif event == 'Submit':
             try:
-                ObjectData(data).create_tower(values['Name'])
+                ObjectData(data).create_tower(values['Name'], values['Mode']=='Reforged')
                 sg.popup('Success')
             except Exception as e:
                 sg.popup(str(e), traceback.format_exc(),title='Error')

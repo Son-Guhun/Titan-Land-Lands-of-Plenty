@@ -163,12 +163,12 @@ class ObjectData:
         return rawcode
 
     @database_safe
-    def create_tower(self, name):
+    def create_tower(self, name, isReforged):
         data = self.data
         rawcode = data.new_rawcode('N000')
         rawcode = rawcode[0].lower() + rawcode[1:]
 
-        data[rawcode] = data['n03D']
+        data[rawcode] = data['n07L'] if isReforged else data['n03D']
         unit = data[rawcode]
         
         unit['Name'] = f'"Tower: {name}"'
