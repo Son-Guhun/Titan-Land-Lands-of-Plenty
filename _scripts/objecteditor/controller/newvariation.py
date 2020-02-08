@@ -25,8 +25,8 @@ def open_window(data):
             break
         elif event == 'Submit':
             try:
-                ObjectData(data).create_variation(values['Name'], values['Model'], get_string_unit(values['Options'][0]))
-                sg.popup('Success')
+                u = ObjectData(data).create_variation(values['Name'], values['Model'], get_string_unit(values['Options'][0]))
+                sg.popup('Success, created: ' + data[u]['Name'][1:-1])
             except Exception as e:
                 sg.popup(str(e),title='Error')
 

@@ -201,7 +201,7 @@ class ObjectData:
         return rawcode
 
     @database_safe
-    def create_deco_builder(self, name):
+    def create_deco_builder(self, name, isReforged):
         data = self.data
         rawcode = data.new_rawcode('U000')
         rawcode = rawcode[0].lower() + rawcode[1:]
@@ -211,6 +211,7 @@ class ObjectData:
 
         unit['Name'] = f'"{name}"'
         unit['Builds'] = EMPTY
+        unit['campaign'] = '1' if isReforged else '0'
 
     @database_safe
     def create_decoration(self, name, model, builder):
@@ -227,7 +228,8 @@ class ObjectData:
 
         unit['Name'] = f'"{name}"'
         unit['Upgrade'] = EMPTY
-        unit['file'] = f'"{model}"'
+        unit['file'] = f'"{model}"'.replace('\\', '\\\\').replace('\\\\\\\\', '\\\\')
+        unit['campaign'] = builder['campaign']
         append_rawcode(builder, 'Builds', rawcode)
 
     @database_safe
@@ -241,5 +243,7 @@ class ObjectData:
         parent = Decoration(data[parent])
 
         index = parent.add_upgrade(rawcode)
-        unit['Name'] = f'"{name.format(index=index)}"'
-        unit['file'] = f'"{model}"'
+        unit['Name'] = f'"{name.format(index=index+1)}"'
+        unit['file'] = f'"{model.format(index=index)}"'.replace('\\', '\\\\').replace('\\\\\\\\', '\\\\')
+
+        return rawcode

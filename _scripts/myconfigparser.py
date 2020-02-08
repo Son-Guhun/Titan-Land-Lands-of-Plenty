@@ -32,6 +32,10 @@ class MyConfigParser(ConfigParser):
     
 class UnitParser(MyConfigParser):
 
+    def sections(self):
+            for key in self:
+                yield Section(self[key])
+
     def get_with_ability(self, ability, asString=False):
         for u in self:
             unit = Section(self[u])
