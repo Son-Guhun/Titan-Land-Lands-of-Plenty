@@ -332,12 +332,50 @@ private module InitModule
         // End of Deco Creation
         // ---------
         set LoP_DecoBuilders.DecoLastIndex = i
+        
+        set i = 0
+        loop
+            exitwhen i > LoP_DecoBuilders.SpecialDecoLastIndex
+            set reforgedRawcodes[i] = rawcodes[i]
+            set i = i + 1
+        endloop
+        
+        // ---------
+        // Reforged Decos
+        // ---------
+        // Human
+        set reforgedRawcodes[i] = 'u07M'
+        // Night Elf
+        set i = ( i + 1 )
+        set reforgedRawcodes[i] = 'u07P'
+        // Orc
+        set i = ( i + 1 )
+        set reforgedRawcodes[i] = 'u07N'
+        // Plants 1
+        set i = ( i + 1 )
+        set reforgedRawcodes[i] = 'u07K'
+        // Plants 2
+        set i = ( i + 1 )
+        set reforgedRawcodes[i] = 'u07I'
+        // Rocks 1
+        set i = ( i + 1 )
+        set reforgedRawcodes[i] = 'u07L'
+        // Rocks 2
+        set i = ( i + 1 )
+        set reforgedRawcodes[i] = 'u07J'
+        // Undead
+        set i = ( i + 1 )
+        set reforgedRawcodes[i] = 'u07O'
+        
+        set LoP_DecoBuilders.ReforgedDecoLastIndex = i
+        
     endmethod
 endmodule
 
 struct LoP_DecoBuilders extends array
 
     static integer array rawcodes
+    static integer array reforgedRawcodes
 
     static constant method operator SpecialDecoFirstIndex takes nothing returns integer
         return 0
@@ -350,6 +388,7 @@ struct LoP_DecoBuilders extends array
     //! runtextmacro TableStruct_NewReadonlyStaticPrimitiveField("AdvDecoFirstIndex","integer")
     //! runtextmacro TableStruct_NewReadonlyStaticPrimitiveField("AdvDecoLastIndex","integer")
     //! runtextmacro TableStruct_NewReadonlyStaticPrimitiveField("DecoLastIndex","integer")
+    //! runtextmacro TableStruct_NewReadonlyStaticPrimitiveField("ReforgedDecoLastIndex","integer")
 
 
 

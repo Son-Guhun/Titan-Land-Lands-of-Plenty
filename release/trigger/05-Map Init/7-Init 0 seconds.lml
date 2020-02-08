@@ -209,6 +209,8 @@ Commands:
     CustomScriptCode
         Const : 'call InitDecoTents()'
     CustomScriptCode
+        Const : 'call InitReforgedTents()'
+    CustomScriptCode
         Const : 'call LoP_InitProtectedUnits()'
     CustomScriptCode
         Const : 'call GUMSSetUnitColor(POWER_INVULNERABILITY(), 4)'
