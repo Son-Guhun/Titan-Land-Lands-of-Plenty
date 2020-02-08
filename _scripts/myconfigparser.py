@@ -30,9 +30,27 @@ class MyConfigParser(ConfigParser):
             initial += 1
         return str(initial)
     
+class UnitParser(MyConfigParser):
 
-def load_unit_data(fp):
-    unit_data = MyConfigParser()
+    def get_with_ability(self, ability, asString=False):
+        for u in self:
+            unit = Section(self[u])
+            if ability in unit['abilList']:
+                yield u if asString else unit
+    
+    def get_decobuilders(self, asString=False, builder_only = False):
+        for unit in self.get_with_ability('A00J', asString):
+            if not builder_only or unit['Builds'] != '""':
+                yield unit.name if asString else unit
+
+    def get_decorations(self, asString=False):
+        yield from self.get_with_ability('A0C6', asString)
+
+    
+
+
+def load_unit_data(fp, parser=MyConfigParser):
+    unit_data = parser()
     unit_data.readfp(fp, 'unit.ini')
     return unit_data
 

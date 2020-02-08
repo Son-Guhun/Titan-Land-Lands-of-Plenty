@@ -1,6 +1,6 @@
 #!/usr/bin/env Python3
 import PySimpleGUI as sg
-from myconfigparser import load_unit_data, Section
+from myconfigparser import load_unit_data, Section, UnitParser
 
 
 from objecteditor.controller import newselector, newworker, newproduction, newunit
@@ -10,7 +10,7 @@ from objecteditor.controller import newdecobuilder, newdecoration, newvariation
 dataBase = '../development/table/unit.ini'
 
 with open(dataBase) as f:
-    data = load_unit_data(f)
+    data = load_unit_data(f, parser=UnitParser)
 
 layout = [
     [sg.Text('Racial Units')],
