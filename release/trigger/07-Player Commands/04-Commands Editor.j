@@ -1,5 +1,9 @@
 scope CommandsEditor
 
+globals
+    boolean heightEnabled = false
+endglobals
+
 function onCommand takes nothing returns boolean
     local string args = LoP_Command.getArguments()
     
@@ -7,6 +11,18 @@ function onCommand takes nothing returns boolean
         call TerrainEditorUI_Deactivate(GetTriggerPlayer())
     elseif args == "terrain" then
         call TerrainEditorUI_Activate(GetTriggerPlayer())
+    elseif args == "height on" then
+        if heightEnabled then
+            call TerrainEditor_SetHeightTool(GetTriggerPlayer(), 1)
+        endif
+    elseif args == "height off" then
+        call TerrainEditor_SetHeightTool(GetTriggerPlayer(), 0)
+    elseif args == "painting on" then
+        call TerrainEditor_EnablePainting(GetTriggerPlayer(), true)
+    elseif args == "painting off" then
+        call TerrainEditor_EnablePainting(GetTriggerPlayer(), false)
+    elseif args == "enable height" and GetTriggerPlayer() == udg_GAME_MASTER then
+        set heightEnabled = true
     endif
     
     return false

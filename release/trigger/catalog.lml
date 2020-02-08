@@ -100,7 +100,6 @@
     '02-Commands Fix': 'Commands Fix'
     '03-Commands Ability': 'Commands Ability'
     '04-Commands Editor': 'Commands Editor'
-        Disab
     '05-Commands Collision': 'Commands Collision'
     '06-Commands Tips': 'Commands Tips'
     '07-Commands Spawn Stuff': 'Commands Spawn Stuff'
@@ -357,27 +356,18 @@
 '33-Terrain Libraries': 'Terrain Libraries'
     1-TerrainTools: TerrainTools
     2-Deformations: Deformations
-        Disab
     3-DeformationTools: DeformationTools
-        Disab
 34-ControlState: ControlState
     1-SelectionStates: SelectionStates
-        Disab
     2-PlayerEventTools: PlayerEventTools
-        Disab
     3-PlayerEvent: PlayerEvent
-        Disab
     4-PlayerMouseEvent: PlayerMouseEvent
-        Disab
     5-ControlState: ControlState
-        Disab
     '6-Free Cam': 'Free Cam'
     7-OSKeyLib: OSKeyLib
 35-TerrainEditor: TerrainEditor
     1-TerrainEditor: TerrainEditor
-        Disab
     2-TerrainEditorUI: TerrainEditorUI
-        Disab
 36----------------------------------------: ---------------------------------------
     Comment
 37-Spells: Spells

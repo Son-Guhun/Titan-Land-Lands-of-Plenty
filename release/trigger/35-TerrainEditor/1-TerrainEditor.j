@@ -55,7 +55,13 @@ globals
     public integer array currentTexture
 endglobals
 
+public function SetHeightTool takes  player whichPlayer, integer tool returns nothing
+    set currentHeightTool[GetPlayerId(whichPlayer)] = tool
+endfunction
 
+public function EnablePainting takes player whichPlayer, boolean enable returns nothing
+    set applyTexture[GetPlayerId(whichPlayer)] = enable
+endfunction
 
 public function SetBrushSize takes player whichPlayer, integer size returns nothing
     local integer playerId = GetPlayerId(whichPlayer)

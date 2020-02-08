@@ -149,8 +149,7 @@ private function onEvent takes nothing returns boolean
     return false
 endfunction
 
-
-private function onInit takes nothing returns nothing
+function onStart takes nothing returns nothing
     local integer i = 0
     local trigger onMouseButton = CreateTrigger()
     local trigger onMouseMove = CreateTrigger()
@@ -183,6 +182,14 @@ private function onInit takes nothing returns nothing
         endif
         set i = i + 1
     endloop
+    
+    call PauseTimer(GetExpiredTimer())
+    call DestroyTimer(GetExpiredTimer())
+endfunction
+
+
+private function onInit takes nothing returns nothing
+    call TimerStart(CreateTimer(), 0., false, function onStart)
 endfunction
 
 endlibrary
