@@ -1,15 +1,9 @@
-library TerrainEditorUIController initializer Init requires PlayerUtils, BitFlags, TerrainEditorUIView
+library TerrainEditorUIController initializer Init requires UILib, PlayerUtils, BitFlags, TerrainEditorUIView
 
 globals
     public boolean heightEnabled = false
     public ScreenController controller
 endglobals
-
-function LocalFrameSetText takes player whichPlayer, framehandle frame, string text returns nothing
-    if whichPlayer == User.Local then
-        call BlzFrameSetText(frame, text)
-    endif
-endfunction
 
 function ButtonCallBack takes nothing returns nothing
     local framehandle trigButton = BlzGetTriggerFrame()

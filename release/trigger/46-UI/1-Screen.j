@@ -7,13 +7,17 @@ struct Screen
     framehandle main
     private Table frames
 
-    static method create takes nothing returns thistype
+    static method fromFrame takes framehandle mainFrame returns thistype
         local thistype this = thistype.allocate()
         
-        set .main = BlzCreateFrameByType("FRAME", "ScreenFrame", BlzGetOriginFrame(ORIGIN_FRAME_GAME_UI,0),"", 0)
+        set .main = mainFrame
         set .isVisible = true
         set .frames = Table.create()
         return this
+    endmethod
+
+    static method create takes nothing returns thistype
+        return fromFrame(BlzCreateFrameByType("FRAME", "ScreenFrame", BlzGetOriginFrame(ORIGIN_FRAME_GAME_UI,0),"", 0))
     endmethod
     
     method show takes boolean show returns nothing

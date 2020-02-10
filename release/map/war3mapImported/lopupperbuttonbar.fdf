@@ -1,0 +1,86 @@
+
+Texture "LoPUpperMenuButtonBackground" {
+    File "UpperMenuButtonTexture",
+    TexCoord 0.0, 0.6640625, 0.0, 0.171875,
+}
+Texture "LoPUpperMenuButtonPushedBackground" {
+    File "UpperMenuButtonTexture",
+    TexCoord 0.0, 0.6640625, 0.25, 0.421875,
+}
+Texture "LoPUpperMenuButtonDisabledBackground" {
+    File "UpperMenuButtonTexture",
+    TexCoord 0.0, 0.6640625, 0.5, 0.671875,
+}
+Texture "LoPUpperMenuButtonHighlight" {
+    File "UpperMenuButtonTexture",
+    TexCoord 0.0, 0.6640625, 0.75, 0.921875,
+    AlphaMode "ADD",
+}
+
+Frame "SIMPLEBUTTON" "LoPUpperButtonBarButtonTemplate" {
+    DecorateFileNames,
+    Width 0.085,
+    Height 0.022,
+    ButtonPushedTextOffset 0.001 -0.001,
+    NormalTexture "LoPUpperMenuButtonBackground",
+    PushedTexture "LoPUpperMenuButtonPushedBackground",
+    DisabledTexture "LoPUpperMenuButtonDisabledBackground",
+    UseHighlight "LoPUpperMenuButtonHighlight",
+}
+
+String "LoPUpperButtonBarButtonTextTemplate" {
+    Font "MasterFont",0.01,
+    FontColor 1.0 1.0 1.0,
+}
+
+String "LoPUpperButtonBarButtonDisabledTextTemplate" INHERITS "LoPUpperButtonBarButtonTextTemplate" {
+    FontColor 0.4 0.4 0.4,
+}
+
+String "LoPUpperButtonBarButtonHighlightTextTemplate" INHERITS "LoPUpperButtonBarButtonTextTemplate" {
+    FontColor 1.0 0.83 0.07,
+}
+
+StringList {
+    LoP_MENU "LoP Menu",
+    LOP_KEY_MENU "LoP Menu (|cffffcc00Esc|r)",
+	LoP_UNITS "Units ",
+    LOP_KEY_UNITS "Units (|cffffcc00F7|r)",
+	LoP_DECOS "Decos",
+    LOP_KEY_DECOS "Decos (|cffffcc00F8|r)",
+	LoP_EDITORS "Editors",
+    LOP_KEY_EDITORS "Editors (|cffffcc00Bksp|r)",
+}
+
+Frame "SIMPLEFRAME" "LoPUpperButtonBarFrame" {
+    Width 0.34,
+    Height 0.022,
+
+    Frame "SIMPLEBUTTON" "LoPUpperButtonBarButtonOne" INHERITS "LoPUpperButtonBarButtonTemplate" {
+        SetPoint TOPLEFT,"LoPUpperButtonBarFrame",TOPLEFT,-0.002,0,
+        NormalText "LoPUpperButtonBarButtonTextTemplate" "LOP_KEY_UNITS",
+        DisabledText "LoPUpperButtonBarButtonDisabledTextTemplate" "LoP_UNITS",
+        HighlightText "LoPUpperButtonBarButtonHighlightTextTemplate" "LOP_KEY_UNITS",
+    }
+
+    Frame "SIMPLEBUTTON" "LoPUpperButtonBarButtonTwo" INHERITS "LoPUpperButtonBarButtonTemplate" {
+        SetPoint LEFT,"LoPUpperButtonBarButtonOne",RIGHT,0.002,0,
+        NormalText "LoPUpperButtonBarButtonTextTemplate" "LOP_KEY_DECOS",
+        DisabledText "LoPUpperButtonBarButtonDisabledTextTemplate" "LoP_DECOS",
+        HighlightText "LoPUpperButtonBarButtonHighlightTextTemplate" "LOP_KEY_DECOS",
+    }
+
+    Frame "SIMPLEBUTTON" "LoPUpperButtonBarButtonThree" INHERITS "LoPUpperButtonBarButtonTemplate" {
+        SetPoint LEFT,"LoPUpperButtonBarButtonTwo",RIGHT,0,0,
+        NormalText "LoPUpperButtonBarButtonTextTemplate" "LOP_KEY_EDITORS",
+        DisabledText "LoPUpperButtonBarButtonDisabledTextTemplate" "LoP_EDITORS",
+        HighlightText "LoPUpperButtonBarButtonHighlightTextTemplate" "LOP_KEY_EDITORS",
+    }
+
+    Frame "SIMPLEBUTTON" "LoPUpperButtonBarButtonFour" INHERITS "LoPUpperButtonBarButtonTemplate" {
+        SetPoint LEFT,"LoPUpperButtonBarButtonThree",RIGHT,0,0,
+        NormalText "LoPUpperButtonBarButtonTextTemplate" "LOP_KEY_MENU",
+        DisabledText "LoPUpperButtonBarButtonDisabledTextTemplate" "LoP_MENU",
+        HighlightText "LoPUpperButtonBarButtonHighlightTextTemplate" "LOP_KEY_MENU",
+    }
+}
