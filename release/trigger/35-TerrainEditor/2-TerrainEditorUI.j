@@ -20,7 +20,7 @@
 TODO:
 This library should define a ControlState whose parent is the TerrainEditor ControlState.
 */
-library TerrainEditorUI requires TerrainEditor
+library TerrainEditorUI requires TerrainEditor, TerrainEditorUIController
 
     //! textmacro TerrainEditorUI_InitTextureArray
 
@@ -101,6 +101,7 @@ library TerrainEditorUI requires TerrainEditor
         
         call ShowUnit(editor, true)
         call TerrainEditor_controlState.activateForPlayer(whichPlayer)
+        call TerrainEditorUIController_controller.enable(whichPlayer, true)
         if GetLocalPlayer() == whichPlayer then
             call SelectUnit(editor, true)
         endif
@@ -109,6 +110,7 @@ library TerrainEditorUI requires TerrainEditor
     public function Deactivate takes player whichPlayer returns nothing
         call ShowUnit(terrainEditors[GetPlayerId(whichPlayer)], false)
         call ControlState.default.activateForPlayer(whichPlayer)
+        call TerrainEditorUIController_controller.enable(whichPlayer, false)
     endfunction
 
     private module InitModule

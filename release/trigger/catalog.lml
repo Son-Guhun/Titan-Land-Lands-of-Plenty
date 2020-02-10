@@ -369,6 +369,8 @@
 35-TerrainEditor: TerrainEditor
     1-TerrainEditor: TerrainEditor
     2-TerrainEditorUI: TerrainEditorUI
+    '3-TerrainEditorUI View': 'TerrainEditorUI View'
+    '4-TerrainEditorUI Controller': 'TerrainEditorUI Controller'
 36----------------------------------------: ---------------------------------------
     Comment
 37-Spells: Spells
@@ -486,3 +488,5 @@
         Disab
     3-RegionMemory: RegionMemory
         Disab
+46-UI: UI
+    1-Screen: Screen

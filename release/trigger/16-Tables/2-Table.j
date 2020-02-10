@@ -87,6 +87,15 @@ private struct handles extends array
     method remove takes integer key returns nothing
         call RemoveSavedHandle(ht, this, key)
     endmethod
+    method setValue takes integer key, handle h returns nothing
+        if null != h then
+            call SaveFogStateHandle(ht, this, key, ConvertFogState(GetHandleId(h)))
+        else
+            if HaveSavedHandle(ht, this, key) then
+                call RemoveSavedHandle(ht, this, key)
+            endif
+        endif
+    endmethod
 endstruct
    
 private struct agents extends array
@@ -148,6 +157,7 @@ endmodule
 //New textmacro to allow table.integer[] syntax for compatibility with textmacros that might desire it.
 //! runtextmacro NEW_ARRAY_BASIC("Integer", "Integer", "integer")
    
+//! runtextmacro NEW_ARRAY("Frame", "framehandle")
 //! runtextmacro NEW_ARRAY("Player", "player")
 //! runtextmacro NEW_ARRAY("Widget", "widget")
 //! runtextmacro NEW_ARRAY("Destructable", "destructable")
@@ -194,6 +204,8 @@ struct Table extends array
     implement integerm
     implement booleanm
     implement stringm
+    
+    implement framehandlem
     implement playerm
     implement widgetm
     implement destructablem

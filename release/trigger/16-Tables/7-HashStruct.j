@@ -9,7 +9,7 @@ when setting.
 
 //! textmacro HashStruct_SetHashtableWrapper takes WRAPPER
     static constant method operator hashTable takes nothing returns $WRAPPER$
-        return 0  // Return type does not matter, since this is not used as a hashtable.
+        return 0  // Return value does not matter, since this is not used as a hashtable.
     endmethod
     
     static method operator hashTableHandle takes nothing returns hashtable
@@ -21,6 +21,17 @@ when setting.
     endmethod
 //! endtextmacro
 
+module ExtendsTable
+
+    static method getChildTable takes integer i returns Table
+        return i
+    endmethod
+    
+    method operator tab takes nothing returns Table
+        return this
+    endmethod
+    
+endmodule
 
 //! textmacro HashStruct_NewPrimitiveGetterSetter takes NAME, TYPE
     public static key $NAME$_INDEX
@@ -208,7 +219,7 @@ when setting.
     
     method operator $NAME$= takes $TYPE$ new_$NAME$ returns nothing
         implement assertNotNull
-        call thistype.getChildTable(this).handle.set($NAME$_INDEX, new_$NAME$)
+        call thistype.getChildTable(this).handle.setValue($NAME$_INDEX, new_$NAME$)
     endmethod
     
     private method $NAME$_clear takes nothing returns nothing
@@ -232,7 +243,7 @@ when setting.
     
     method operator $NAME$= takes $TYPE$ new_$NAME$ returns nothing
         implement assertNotNull
-        call thistype.getChildTable(this).handle.set($NAME$_INDEX, new_$NAME$)
+        call thistype.getChildTable(this).handle.setValue($NAME$_INDEX, new_$NAME$)
     endmethod
     
     private method $NAME$_clear takes nothing returns nothing
@@ -255,7 +266,7 @@ when setting.
     
     method operator $NAME$= takes $TYPE$ new_$NAME$ returns nothing
         implement assertNotNull
-        call thistype.getChildTable(this).handle.set($NAME$_INDEX, new_$NAME$)
+        call thistype.getChildTable(this).handle.setValue($NAME$_INDEX, new_$NAME$)
     endmethod
     
     private method $NAME$_clear takes nothing returns nothing

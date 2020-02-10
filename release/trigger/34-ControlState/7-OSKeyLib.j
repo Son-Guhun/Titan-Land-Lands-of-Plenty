@@ -370,7 +370,7 @@ private module Constants
     //! runtextmacro OSKeyLib_Const("KEY6                          ","$36")
     //! runtextmacro OSKeyLib_Const("KEY7                          ","$37")
     //! runtextmacro OSKeyLib_Const("KEY8                          ","$38")
-    //! runtextmacro OSKeyLib_Const("KEY                           ","$39")
+    //! runtextmacro OSKeyLib_Const("KEY9                          ","$39")
     //! runtextmacro OSKeyLib_Const("A                             ","$41")
     //! runtextmacro OSKeyLib_Const("B                             ","$42")
     //! runtextmacro OSKeyLib_Const("C                             ","$43")
