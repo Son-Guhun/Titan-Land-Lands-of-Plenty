@@ -84,6 +84,7 @@ function SaveLoopActions2 takes nothing returns nothing
     set playerId.saveData.centerY = GetUnitY(generator)
     set playerId.saveData.extentX = GUDR_GetGeneratorExtentX(generator)
     set playerId.saveData.extentY = GUDR_GetGeneratorExtentY(generator)
+    set playerId.current = 0
     
     call EnumDestructablesInRect(rectangle, Condition(function SaveFilter), null)
 
