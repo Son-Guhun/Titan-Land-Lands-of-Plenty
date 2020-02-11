@@ -15,6 +15,16 @@ private function onClick takes nothing returns nothing
             call FullScreen(true, 255)
         endif
         call controller.enable(trigP, false)
+    elseif trigButton == MainMenuView_mainFrame["sotdrp"] then
+        set sotdrp = not sotdrp
+        call BlzFrameSetVisible(BlzGetOriginFrame(ORIGIN_FRAME_CHAT_MSG, 0), sotdrp)
+        if sotdrp then
+            call BlzFrameSetText(MainMenuView_mainFrame["sotdrp"], "Normal Chat")
+        else
+            call BlzFrameSetText(MainMenuView_mainFrame["sotdrp"], "SotDRP Chat")
+        endif
+    elseif trigButton == MainMenuView_mainFrame["freeCamera"] then
+        call FreeCam_Enable(GetTriggerPlayer(), FreeCam_IsEnabled(GetTriggerPlayer()))
     endif
     
     if trigP == User.Local then

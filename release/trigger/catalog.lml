@@ -95,6 +95,7 @@
     '26-System HeroicUnit InfoPanel': 'System HeroicUnit InfoPanel'
         Disab
     '27-System Deselect': 'System Deselect'
+    '28-SotDRP Chat': 'SotDRP Chat'
 '07-Player Commands': 'Player Commands'
     '01-Commands Count': 'Commands Count'
     '02-Commands Fix': 'Commands Fix'

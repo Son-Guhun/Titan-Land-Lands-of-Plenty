@@ -25,7 +25,7 @@ endglobals
     set mainButton = BlzCreateFrame("ScriptDialogButton", mainFrame.main, 0,0)
     call BlzFrameSetSize(mainButton, 0.12, 0.05)
     call BlzFrameSetAbsPoint(mainButton, FRAMEPOINT_CENTER, View4by3.w/2, 5*View4by3.h/8)
-    call BlzFrameSetText(mainButton, "SotDRP Mode")
+    call BlzFrameSetText(mainButton, "SotDRP Chat")
     set mainFrame["sotdrp"] = mainButton
     
     set mainButton = BlzCreateFrame("ScriptDialogButton", mainFrame.main, 0,0)
