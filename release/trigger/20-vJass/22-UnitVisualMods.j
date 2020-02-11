@@ -477,6 +477,7 @@ function GUMSSetUnitSelectionType takes unit whichUnit, integer selectType retur
             call UnitRemoveAbility(whichUnit,'Aloc')
             set data[unitId][SELECT] = selectType
             call SetUnitInvulnerable(whichUnit, true)
+            call BlzUnitDisableAbility(whichUnit, 'Aatk', true, true)
         endif
     elseif selectType == GUMS_SELECTION_DRAG() then
         call GUMSMakeUnitDragSelectable(whichUnit)

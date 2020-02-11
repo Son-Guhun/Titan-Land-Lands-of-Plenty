@@ -73,26 +73,6 @@ struct SpecialEffect extends array
         return BlzGetLocalSpecialEffectX(.effect)
     endmethod
     
-    method operator x= takes real value returns nothing
-        implement assertNotNull
-        
-        call BlzSetSpecialEffectX(.effect, value)
-        call BlzSetSpecialEffectHeight(.effect, .height_impl)
-    endmethod
-    
-    method operator y takes nothing returns real
-        implement assertNotNull
-        
-        return BlzGetLocalSpecialEffectY(.effect)
-    endmethod
-    
-    method operator y= takes real value returns nothing
-        implement assertNotNull
-        
-        call BlzSetSpecialEffectY(.effect, value)
-        call BlzSetSpecialEffectHeight(.effect, .height_impl)
-    endmethod
-    
     method operator height takes nothing returns real
         implement assertNotNull
         
@@ -106,6 +86,28 @@ struct SpecialEffect extends array
         call MoveLocation(.loc, .x, .y)
         // call BlzSetSpecialEffectHeight(.effect, value)
         call BlzSetSpecialEffectZ(.effect, GetLocationZ(.loc) + value)
+    endmethod
+    
+    method operator x= takes real value returns nothing
+        implement assertNotNull
+        
+        call BlzSetSpecialEffectX(.effect, value)
+        // call BlzSetSpecialEffectHeight(.effect, .height_impl)
+        set .height = .height
+    endmethod
+    
+    method operator y takes nothing returns real
+        implement assertNotNull
+        
+        return BlzGetLocalSpecialEffectY(.effect)
+    endmethod
+    
+    method operator y= takes real value returns nothing
+        implement assertNotNull
+        
+        call BlzSetSpecialEffectY(.effect, value)
+        // call BlzSetSpecialEffectHeight(.effect, .height_impl)
+        set .height = .height
     endmethod
     
     method operator yaw takes nothing returns real

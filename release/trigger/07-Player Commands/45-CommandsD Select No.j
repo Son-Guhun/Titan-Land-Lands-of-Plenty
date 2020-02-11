@@ -33,7 +33,7 @@ private function EnumFunc takes nothing returns nothing
         else
             if LoP_Command.getArguments() == "no f" then
                call LoP_TakeFromNeutral(enumUnit)  // This is required, otherwise neutral units must be enumed when a unit is made unselectable.
-               call PauseUnit(enumUnit, true)
+               // call PauseUnit(enumUnit, true)
                call GUMSMakeUnitLocust(enumUnit)
             else
                 call DisplayTextToPlayer(trigP, 0, 0, "You must use |cffffff00-select no f|r to make non-decorations unselectable." ) 
