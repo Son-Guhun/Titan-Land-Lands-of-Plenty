@@ -7,6 +7,8 @@ endglobals
 //! runtextmacro BeginInitializer("Init")
     local framehandle mainButton
     
+    call BlzLoadTOCFile("war3mapimported\\BoxedText.toc")
+    
     set mainFrame = Screen.create()
     call mainFrame.show(false)
     
@@ -15,24 +17,46 @@ endglobals
     call BlzFrameSetAbsPoint(mainButton, FRAMEPOINT_CENTER, View4by3.w/2, 7*View4by3.h/8)
     call BlzFrameSetText(mainButton, "Terrain Editor")
     set mainFrame["terrainEditor"] = mainButton
+    call BlzFrameSetText(CreateTooltip(mainButton, "Terrain Editor", 0.30, 0.15, 0.002, 0.002), "
+Allows you to edit the map's terrain as if you were using the World Editor. Works in multiplayer, with a small delay.
+
+Hotkeys:
+H: Changes current height tool.
+P: Enables/Disables texturing.
+1, 2, 3, 4 and 5: Changes the brush size.")
     
     set mainButton = BlzCreateFrame("ScriptDialogButton", mainFrame.main, 0,0)
     call BlzFrameSetSize(mainButton, 0.12, 0.05)
     call BlzFrameSetAbsPoint(mainButton, FRAMEPOINT_CENTER, View4by3.w/2, 6*View4by3.h/8)
     call BlzFrameSetText(mainButton, "Free Camera")
     set mainFrame["freeCamera"] = mainButton
+    call BlzFrameSetText(CreateTooltip(mainButton, "Free Camera", 0.30, 0.15, 0.002, 0.002), "
+Allows you to explore the world using a first-person camera style. For best results, use a zoom value of 0.
+
+Hotkeys:
+WASD: Moves the camera.
+IJKL: Rotates the camera sidewayds (JL) or up/down (IK)
+NUMPAD 4/6: Decreases/increases speed.
+NUMPAD 8/9: Decreases/increases speed (precise ajustment).")
     
     set mainButton = BlzCreateFrame("ScriptDialogButton", mainFrame.main, 0,0)
     call BlzFrameSetSize(mainButton, 0.12, 0.05)
     call BlzFrameSetAbsPoint(mainButton, FRAMEPOINT_CENTER, View4by3.w/2, 5*View4by3.h/8)
     call BlzFrameSetText(mainButton, "SotDRP Chat")
     set mainFrame["sotdrp"] = mainButton
+    call BlzFrameSetText(CreateTooltip(mainButton, "SotDRP Mode", 0.30, 0.15, 0.002, 0.002), "
+Changes the chat to function like the chat in SotDRP-style maps. Your name will be the name of your currently selected unit, if that unit has a custom name. This will also hide the chat.
+
+OOC prefix: ((
+OOC suffix: ))")
+
     
     set mainButton = BlzCreateFrame("ScriptDialogButton", mainFrame.main, 0,0)
     call BlzFrameSetSize(mainButton, 0.12, 0.05)
     call BlzFrameSetAbsPoint(mainButton, FRAMEPOINT_CENTER, View4by3.w/2, 4*View4by3.h/8)
     call BlzFrameSetText(mainButton, "Special Units")
     set mainFrame["specialUnits"] = mainButton
+    call CreateTooltip(mainButton, "Spawn Special Units", 0.15, 0.08, 0.002, 0.002)
 //! runtextmacro EndInitializer()
 
 

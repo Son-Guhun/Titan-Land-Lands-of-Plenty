@@ -26,4 +26,18 @@ function LocalFrameSetText takes player whichPlayer, framehandle frame, string t
     endif
 endfunction
 
+function CreateTooltip takes framehandle frame, string title, real sizeX, real sizeY, real xOffset, real yOffset returns framehandle
+    local framehandle tooltip = BlzCreateFrame("BoxedText", frame, 0, 0)
+    call BJDebugMsg(I2S(GetHandleId(tooltip)))
+
+    call BlzFrameSetTooltip(frame, tooltip)
+
+    call BlzFrameSetPoint(tooltip, FRAMEPOINT_LEFT, frame, FRAMEPOINT_RIGHT, xOffset, yOffset)
+    call BlzFrameSetSize(tooltip, sizeX, sizeY)
+    call BlzFrameSetText(BlzGetFrameByName("BoxedTextTitle",0), title)
+   
+    set tooltip = null
+    return BlzGetFrameByName("BoxedTextValue",0)
+endfunction
+
 endlibrary
