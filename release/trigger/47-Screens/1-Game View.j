@@ -29,6 +29,7 @@ private module InitModule
         set buttons[6] = BlzGetFrameByName("LoPUpperButtonBarButtonThree", 0)
         set buttons[7] = BlzGetFrameByName("LoPUpperButtonBarButtonFour", 0)
         
+        call BlzFrameSetEnable(mainButton, false)  // Disable the parent frame to allow players to move camera by dragging mouse to upper border
         call BlzFrameSetEnable(buttons[4], false)
         call BlzFrameSetEnable(buttons[5], false)
         call BlzFrameSetEnable(buttons[6], false)
