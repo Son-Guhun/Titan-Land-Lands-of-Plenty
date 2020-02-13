@@ -5,7 +5,8 @@ private keyword InitModule
 struct UpperButtonBar extends array
     
     readonly static framehandle array buttons
-    readonly static framehandle mainFrame
+    readonly static framehandle leftFrame
+    // readonly static framehandle rightFrame
     
     implement InitModule
 
@@ -16,9 +17,9 @@ private module InitModule
         local framehandle mainButton
         call BlzLoadTOCFile("war3mapImported\\Templates.toc")
 
-        set thistype.mainFrame = BlzGetFrameByName("UpperButtonBarFrame",0)
-        set mainButton = BlzCreateSimpleFrame("LoPUpperButtonBarFrame", thistype.mainFrame,0)
-        call BlzFrameSetAllPoints(mainButton, BlzGetFrameByName("ResourceBarFrame",0))
+        // If the parent is set to UpperButtonBarFrame or ResourceBarFrame, camera mouse will bug after a unit is selected
+        set leftFrame = BlzCreateSimpleFrame("LoPUpperButtonBarFrame", BlzGetFrameByName("ConsoleUI",0),0)
+        call BlzFrameSetAllPoints(leftFrame, BlzGetFrameByName("ResourceBarFrame",0))
         
         set buttons[0] = BlzGetFrameByName("UpperButtonBarQuestButton", 0)
         set buttons[1] = BlzGetFrameByName("UpperButtonBarMenuButton", 0)
@@ -29,7 +30,6 @@ private module InitModule
         set buttons[6] = BlzGetFrameByName("LoPUpperButtonBarButtonThree", 0)
         set buttons[7] = BlzGetFrameByName("LoPUpperButtonBarButtonFour", 0)
         
-        call BlzFrameSetEnable(mainButton, false)  // Disable the parent frame to allow players to move camera by dragging mouse to upper border
         call BlzFrameSetEnable(buttons[4], false)
         call BlzFrameSetEnable(buttons[5], false)
         call BlzFrameSetEnable(buttons[6], false)

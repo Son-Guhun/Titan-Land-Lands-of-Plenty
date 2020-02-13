@@ -1,4 +1,4 @@
-library LoPStdLib initializer Init requires AttachedSFX, UnitVisualMods, LoPWidgets, LoPCommandsAbility
+library LoPStdLib initializer Init requires AttachedSFX, UnitVisualMods, LoPWidgets, LoPCommandsAbility, GameView
 
 private function UnitAddAbilities takes unit whichUnit, LinkedHashSet abilities returns nothing
     local LinkedHashSet oldAbilities = UnitEnumRemoveableAbilityIds(whichUnit)
@@ -63,6 +63,7 @@ function FullScreen takes boolean enable, integer cmdBtnAlpha returns nothing
         call BlzHideOriginFrames(enable)
         call BlzEnableUIAutoPosition(not enable)
         call BlzFrameSetVisible(ConsoleUIBackdrop, not enable)
+        call BlzFrameSetVisible(UpperButtonBar.leftFrame, not enable)
     endif
 
     if not enable then
