@@ -23,10 +23,12 @@ def open_window(data):
             break
         elif event == 'Submit':
             try:
-                ObjectData(data).create_decoration(values['Name'], values['Model'], get_string_unit(values['Options'][0]))
+                ObjectData(data).create_decoration(values['Name'], values['Model'], get_string_unit(values['Options'][0]), values['isBuilding'], values['PathingMap'])
                 sg.popup('Success')
             except Exception as e:
                 sg.popup(str(e),title='Error')
+        elif event == 'isBuilding':
+            window.find_element('PathingMap').Update(visible=values['isBuilding'])
+            window.find_element('PathingMapText').Update(visible=values['isBuilding'])
 
         filter_listbox(data, window, values, '', options)
-

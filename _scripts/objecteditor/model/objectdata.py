@@ -214,7 +214,7 @@ class ObjectData:
         unit['campaign'] = '1' if isReforged else '0'
 
     @database_safe
-    def create_decoration(self, name, model, builder):
+    def create_decoration(self, name, model, builder, isBuilding, pathTex):
         data = self.data
         rawcode = data.new_rawcode('H000')
         rawcode = rawcode[0].lower() + rawcode[1:]
@@ -223,13 +223,14 @@ class ObjectData:
         if count_fields(builder, 'Builds') >= 11:
             raise IndexError('Adding more units than supported to "{}" field in [{}]'.format('Builds', builder.name))
 
-        data[rawcode] = data['h038']
+        data[rawcode] = data['h038'] if not isBuilding else data['h01S']
         unit = data[rawcode]
 
         unit['Name'] = f'"{name}"'
         unit['Upgrade'] = EMPTY
         unit['file'] = f'"{model}"'.replace('\\', '\\\\').replace('\\\\\\\\', '\\\\')
-        unit['campaign'] = builder['campaign']
+        unit['campaign'] = Section(builder)['campaign']
+        unit['pathTex'] = pathTex if isBuilding else ''
         append_rawcode(builder, 'Builds', rawcode)
 
     @database_safe

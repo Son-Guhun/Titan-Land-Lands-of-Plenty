@@ -7,9 +7,11 @@ def get_layout():
     return [
         [sg.Menu(menu.menu_def, tearoff=True)],
         [sg.Text('Decoration Name')],
-        [sg.Input(key ='Name')],
+        [sg.Input(key ='Name'), sg.Checkbox("Is Building", key='isBuilding', enable_events=True)],
         [sg.Text('Model Path')],
         [sg.Input(key ='Model')],
+        [sg.Text('Pathing Map', key='PathingMapText', visible=False)],
+        [sg.Input(key ='PathingMap', visible=False)],
         [sg.Text('Built by:')],
         [
             sg.Input(enable_events=True, key ='Search', tooltip='Search for a unit.'),
