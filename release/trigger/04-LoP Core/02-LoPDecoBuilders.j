@@ -343,8 +343,14 @@ private module InitModule
         // ---------
         // Reforged Decos
         // ---------
+        // Dalaran
+        set reforgedRawcodes[i] = 'u07Q'
         // Human
+        set i = ( i + 1 )
         set reforgedRawcodes[i] = 'u07M'
+        // Market
+        set i = ( i + 1 )
+        set reforgedRawcodes[i] = 'u07R'
         // Night Elf
         set i = ( i + 1 )
         set reforgedRawcodes[i] = 'u07P'
@@ -366,6 +372,9 @@ private module InitModule
         // Undead
         set i = ( i + 1 )
         set reforgedRawcodes[i] = 'u07O'
+        // Walls
+        set i = ( i + 1 )
+        set reforgedRawcodes[i] = 'u083'
         
         set LoP_DecoBuilders.ReforgedDecoLastIndex = i
         
