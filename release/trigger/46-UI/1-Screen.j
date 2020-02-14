@@ -49,8 +49,10 @@ struct ScreenController extends array
         local thistype this = Table.create()
         
         set .screen = screen
-        set .buttonHandler = buttonHandler
-        call OSKeys.addListener(buttonHandler)
+        if buttonHandler != null then
+            set .buttonHandler = buttonHandler
+            call OSKeys.addListener(buttonHandler)
+        endif
         return this
     endmethod
     
@@ -58,7 +60,6 @@ struct ScreenController extends array
         local User pId = User[p]
         
         if .tab.boolean[pId] != enable then
-        
             set .tab.boolean[pId] = enable
             if User.fromLocal() == pId then
                 call .screen.show(enable)

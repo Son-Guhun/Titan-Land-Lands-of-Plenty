@@ -45,7 +45,7 @@ NUMPAD 8/9: Decreases/increases speed (precise ajustment).")
     call BlzFrameSetText(mainButton, "SotDRP Chat")
     set mainFrame["sotdrp"] = mainButton
     call BlzFrameSetText(CreateTooltip(mainButton, "SotDRP Mode", 0.30, 0.15, 0.002, 0.002), "
-Changes the chat to function like the chat in SotDRP-style maps. Your name will be the name of your currently selected unit, if that unit has a custom name. This will also hide the chat.
+Changes the chat to function like the chat in SotDRP-style maps. Your name will be the name of your currently selected unit, if that unit has a custom name. This will also hide the chat. To be able to communicate with players who aren't using this chat mode, you must not send messages to the observer chat.
 
 OOC prefix: ((
 OOC suffix: ))")
@@ -57,6 +57,13 @@ OOC suffix: ))")
     call BlzFrameSetText(mainButton, "Special Units")
     set mainFrame["specialUnits"] = mainButton
     call CreateTooltip(mainButton, "Spawn Special Units", 0.15, 0.08, 0.002, 0.002)
+    
+    set mainButton = BlzCreateFrame("ScriptDialogButton", mainFrame.main, 0,0)
+    call BlzFrameSetSize(mainButton, 0.12, 0.05)
+    call BlzFrameSetAbsPoint(mainButton, FRAMEPOINT_CENTER, View4by3.w/2, 3*View4by3.h/8)
+    call BlzFrameSetText(mainButton, "Chat Logs")
+    set mainFrame["chatLogs"] = mainButton
+    // call CreateTooltip(mainButton, "Spawn Special Units", 0.15, 0.08, 0.002, 0.002)
 //! runtextmacro EndInitializer()
 
 

@@ -1,5 +1,5 @@
 globals
-    boolean sotdrp = true
+    boolean sotdrp = false
     string array playerColors
 endglobals
 
@@ -10,13 +10,17 @@ function Trig_Untitled_Trigger_003_Actions takes nothing returns nothing
     
     if len > 2 then
         if SubString(msg, 0, 2) == "((" or SubString(msg, len-2, len) == "))" then
+            set msg = playerColors[id] + "[OOC]|r |cff00ced1" + msg + "|r"
             if sotdrp then
-                call DisplayTextToPlayer(User.Local, 0., 0., playerColors[id] + "[OOC]|r |cff00ced1" + msg + "|r")
+                call DisplayTextToPlayer(User.Local, 0., 0., msg)
             endif
+            call BlzFrameAddText(ChatLogView_mainFrame["OOC log"], msg)
         elseif not (SubString(msg, 0, 1) == "-" or SubString(msg, 0, 1) == "'") then
+            set msg = playerColors[id] + "Character|r: |cff40e0d0" + msg + "|r"
             if sotdrp then
-                call DisplayTextToPlayer(User.Local, 0., 0., playerColors[id] + "Character|r: |cff40e0d0" + msg + "|r")
+                call DisplayTextToPlayer(User.Local, 0., 0., msg)
             endif
+            call BlzFrameAddText(ChatLogView_mainFrame["IC log"], msg)
         endif
     endif
             

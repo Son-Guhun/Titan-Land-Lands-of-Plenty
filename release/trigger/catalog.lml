@@ -498,3 +498,5 @@
     '2-UpperButtonBar Controller': 'UpperButtonBar Controller'
     '3-MainMenu View': 'MainMenu View'
     '4-MainMenu Controller': 'MainMenu Controller'
+    '5-ChatLog View': 'ChatLog View'
+    '6-ChatLog Controller': 'ChatLog Controller'
