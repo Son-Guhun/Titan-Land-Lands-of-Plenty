@@ -6,13 +6,13 @@ private function onCommand takes nothing returns boolean
     if args == "none" then
         call TerrainEditorUI_Deactivate(GetTriggerPlayer())
         if User.Local == GetTriggerPlayer() then
-            set LoPStdLib_altZEnabled = true
+            set LoPUI_altZEnabled = true
             call FullScreen(false, 255)
         endif
     elseif args == "terrain" then
         call TerrainEditorUI_Activate(GetTriggerPlayer())
         if User.Local == GetTriggerPlayer() then
-            set LoPStdLib_altZEnabled = false
+            set LoPUI_altZEnabled = false
             call FullScreen(true, 255)
         endif
     elseif args == "height on" then

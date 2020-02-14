@@ -3,7 +3,7 @@ scope Fullscreen
 private function onPress takes nothing returns boolean
     
     if BlzGetTriggerPlayerKey() == OSKEY_Z and BlzGetTriggerPlayerIsKeyDown() and BitAny(BlzGetTriggerPlayerMetaKey(), MetaKeys.ALT) and GetLocalPlayer() == GetTriggerPlayer() then
-        if LoPStdLib_altZEnabled then
+        if LoPUI_altZEnabled then
             call FullScreen(not IsFullScreen(), 30)
         endif
     endif

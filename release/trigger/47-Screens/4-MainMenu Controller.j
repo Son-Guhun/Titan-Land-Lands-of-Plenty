@@ -1,4 +1,4 @@
-library MainMenuController initializer Init requires UILib, MainMenuView, TerrainEditorUI, LoPStdLib
+library MainMenuController initializer Init requires UILib, MainMenuView, TerrainEditorUI, LoPUI
 
 globals
     public ScreenController controller
@@ -11,7 +11,7 @@ private function onClick takes nothing returns nothing
     if trigButton == MainMenuView_mainFrame["terrainEditor"] then
         call TerrainEditorUI_Activate(GetTriggerPlayer())
         if User.Local == trigP then
-            set LoPStdLib_altZEnabled = false
+            set LoPUI_altZEnabled = false
             call FullScreen(true, 255)
         endif
         call controller.enable(trigP, false)

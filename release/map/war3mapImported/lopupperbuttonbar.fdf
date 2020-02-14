@@ -42,14 +42,14 @@ String "LoPUpperButtonBarButtonHighlightTextTemplate" INHERITS "LoPUpperButtonBa
 }
 
 StringList {
-    LoP_MENU "LoP Menu",
-    LOP_KEY_MENU "LoP Menu (|cffffcc00Esc|r)",
+    LoP_MENU "Tools",
+    LOP_KEY_MENU "Tools (|cffffcc00C+F4|r)",
 	LoP_UNITS "Units ",
-    LOP_KEY_UNITS "Units (|cffffcc00F7|r)",
+    LOP_KEY_UNITS "Units (|cffffcc00C+F1|r)",
 	LoP_DECOS "Decos",
-    LOP_KEY_DECOS "Decos (|cffffcc00F8|r)",
+    LOP_KEY_DECOS "Decos (|cffffcc00C+F2|r)",
 	LoP_EDITORS "Editors",
-    LOP_KEY_EDITORS "Editors (|cffffcc00Bksp|r)",
+    LOP_KEY_EDITORS "Editors (|cffffcc00C+F3|r)",
 }
 
 Frame "SIMPLEFRAME" "LoPUpperButtonBarFrame" {

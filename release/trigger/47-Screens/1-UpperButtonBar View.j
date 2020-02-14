@@ -1,4 +1,4 @@
-library GameView requires Screen
+library UpperButtonBarView requires Screen
 
 private keyword InitModule
 
@@ -6,6 +6,7 @@ struct UpperButtonBar extends array
     
     readonly static framehandle array buttons
     readonly static framehandle leftFrame
+    static boolean isEnabled = true
     // readonly static framehandle rightFrame
     
     implement InitModule
@@ -21,7 +22,7 @@ private module InitModule
         set leftFrame = BlzCreateSimpleFrame("LoPUpperButtonBarFrame", BlzGetFrameByName("ConsoleUI",0),0)
         call BlzFrameSetAllPoints(leftFrame, BlzGetFrameByName("ResourceBarFrame",0))
         
-        set buttons[0] = BlzGetFrameByName("UpperButtonBarQuestButton", 0)
+        set buttons[0] = BlzGetFrameByName("UpperButtonBarQuestsButton", 0)
         set buttons[1] = BlzGetFrameByName("UpperButtonBarMenuButton", 0)
         set buttons[2] = BlzGetFrameByName("UpperButtonBarAllyButton", 0)
         set buttons[3] = BlzGetFrameByName("UpperButtonBarChatButton", 0)

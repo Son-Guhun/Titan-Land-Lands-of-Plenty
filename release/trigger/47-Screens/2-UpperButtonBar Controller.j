@@ -1,4 +1,4 @@
-library GameController initializer Init requires UILib, MainMenuController
+library UpperButtonBarController initializer Init requires UILib, MainMenuController
 
 globals
     private sound clickSound
@@ -20,11 +20,18 @@ private function onClick takes nothing returns nothing
     endif
 endfunction
 
+private function onTimer takes nothing returns nothing
+    if (BlzFrameGetEnable(UpperButtonBar.buttons[1])) != UpperButtonBar.isEnabled then
+        set UpperButtonBar.isEnabled = not UpperButtonBar.isEnabled
+        call BlzFrameSetEnable(UpperButtonBar.buttons[7], UpperButtonBar.isEnabled)
+    endif
+endfunction
+
 private function onHotkey takes nothing returns boolean
     local player trigP = GetTriggerPlayer()
     
-    if BlzGetTriggerPlayerIsKeyDown() then
-        if trigP == User.Local and BlzGetTriggerPlayerKey() == OSKEY_ESCAPE then
+    if BlzGetTriggerPlayerIsKeyDown() and BlzGetTriggerPlayerMetaKey() == MetaKeys.CTRL then
+        if trigP == User.Local and BlzGetTriggerPlayerKey() == OSKEY_F4 then
             call BlzFrameClick(UpperButtonBar.buttons[7])
         endif
     endif
@@ -37,6 +44,8 @@ private function Init takes nothing returns nothing
     local trigger trig = CreateTrigger() //The Trigger Handling the Frameevent
     call TriggerAddAction(trig, function onClick) //Function onClick will run when mainButton is clicked
     
+    call TimerStart(CreateTimer(), 1/32., true, function onTimer)
+    
     set clickSound = CreateSound("Sound\\Interface\\GamePause.wav", false, false, false, 10, 10, "DefaultEAXON")
     call SetSoundVolume(clickSound, 100)
     call SetSoundChannel(clickSound, 8)
@@ -48,7 +57,7 @@ private function Init takes nothing returns nothing
     call BlzTriggerRegisterFrameEvent(trig, UpperButtonBar.buttons[7], FRAMEEVENT_CONTROL_CLICK)
     call OSKeys.addListener(Condition(function onHotkey))
     
-    call OSKeys.ESCAPE.register()
+    call OSKeys.F4.register()
 endfunction
 
 endlibrary
