@@ -156,6 +156,8 @@ class ObjectData:
         unit['Name'] = '"{}"'.format(name)
         unit['race'] = Section(production)['race']
         unit['campaign'] = Section(production)['campaign']
+        if unit['race'][1:-1] not in ('human', 'orc', 'undead', 'nightelf', 'naga'):
+            unit['hostilePal'] = '1'
         append_rawcode(production, 'Trains', rawcode)
         return rawcode
 
