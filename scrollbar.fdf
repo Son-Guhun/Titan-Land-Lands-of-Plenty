@@ -1,0 +1,51 @@
+Frame "SLIDER" "VerticalSliderTemplate" {
+    Height 0.012,
+    Width 0.139,
+    SliderLayoutHorizontal,
+
+    ControlBackdrop "VerticalSliderBackdropTemplate",
+    Frame "BACKDROP" "VerticalSliderBackdropTemplate" {
+        DecorateFileNames,
+        BackdropTileBackground,
+        BackdropBackground  "EscMenuSliderBackground",
+        BackdropCornerFlags "UL|UR|BL|BR|T|L|B|R",
+        BackdropCornerSize  0.006,
+        BackdropBackgroundSize 0.006,
+        BackdropBackgroundInsets 0.0025 0.0025 0.0025 0.0025,
+        BackdropEdgeFile  "EscMenuSliderBorder",
+        BackdropBlendAll,
+    }
+
+    ControlDisabledBackdrop "VerticalSliderDisabledBackdrop",
+    Frame "BACKDROP" "VerticalSliderDisabledBackdrop" {
+        DecorateFileNames,
+        BackdropTileBackground,
+        BackdropBackground  "EscMenuSliderBackground",
+        BackdropCornerFlags "UL|UR|BL|BR|T|L|B|R",
+        BackdropCornerSize  0.006,
+        BackdropBackgroundSize 0.006,
+        BackdropBackgroundInsets 0.0025 0.0025 0.0025 0.0025,
+        BackdropEdgeFile  "EscMenuSliderDisabledBorder",
+        BackdropBlendAll,
+    }
+
+    SliderThumbButtonFrame "VerticalSliderThumbButtonTemplate",
+    Frame "BUTTON" "VerticalSliderThumbButtonTemplate" {
+        Width 0.016,
+        Height 0.016,
+
+        ControlBackdrop "VerticalSliderThumbButtonBackdropTemplate",
+        Frame "BACKDROP" "VerticalSliderThumbButtonBackdropTemplate" {
+            DecorateFileNames,
+            BackdropBlendAll,
+            BackdropBackground  "EscMenuSliderThumbButton",
+        }
+
+        ControlDisabledBackdrop "VerticalSliderThumbButtonDisabledBackdrop",
+        Frame "BACKDROP" "VerticalSliderThumbButtonDisabledBackdrop" {
+            DecorateFileNames,
+            BackdropBlendAll,
+            BackdropBackground  "EscMenuSliderDisabledThumbButton",
+        }
+    }
+}

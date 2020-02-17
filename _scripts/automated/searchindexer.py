@@ -2,7 +2,7 @@
 Credits to gohagga for the algorithm.
 """
 
-from myconfigparser import MyConfigParser, load_unit_data, get_decorations
+from myconfigparser import UnitParser, load_unit_data, get_decorations
 
 def get_substrings(string):
     "Returns all possible substrings of a string."
@@ -33,20 +33,23 @@ def do_everything(file_path):
     Opens a file as a ConfigParser and returns the result of map_names() using all decorations found.
     """
     with open(file_path) as f:
-        unit_data = load_unit_data(f)
+        unit_data = load_unit_data(f, parser=UnitParser)
     
-    decorations = get_decorations(unit_data)
+    decorations = []
+    for builder in unit_data.get_decobuilders(builder_only=True):
+        for decoration in builder["Builds"][1:-1].split(','):
+            decorations.append(decoration)
     return map_names(unit_data, decorations)
     
 
 def map_substrings(deco_names):
     """
     Returns a map of (substrings)->(rawcodes), i.e. a map from each substring
-    to all units whose name includes that substrings.
+    to all units whose name includes that substring.
     """
     stuff = {}
     for string in deco_names:
-        for substring in get_substrings(string):
+        for substring in set(get_substrings(string.lower())):
             if substring not in stuff:
                 stuff[substring] = [deco_names[string]]
             else:
