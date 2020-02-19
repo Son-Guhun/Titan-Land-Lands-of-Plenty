@@ -1,0 +1,55 @@
+
+Texture "TerrainEditorNormalTexture" {
+	File "war3mapImported\Icon.tga",
+	AlphaMode "BLEND",
+}
+
+Texture "TerrainEditorPushedTexture" {
+	File "war3mapImported\Pushed.tga",
+	AlphaMode "BLEND",
+}
+
+Texture "TerrainEditorDisabledTexture" {
+    File "Images\SelectionSquare.tga",
+    TexCoord 0, 1, 0, 1,
+    AlphaMode "ADD",
+}
+
+Texture "TerrainEditorHighlightTexture" {
+    File "UI\Glues\ScoreScreen\scorescreen-tab-hilight.blp",
+    TexCoord 0, 1, 0, 1,
+    AlphaMode "ADD",
+}
+
+
+Frame "SIMPLEBUTTON" "TerrainEditorSimpleButton" {
+	Width 0.1,
+    Height 0.1,
+	// ButtonPushedTextOffset 0.001 -0.001,
+
+	NormalTexture "TerrainEditorNormalTexture",
+	PushedTexture "TerrainEditorPushedTexture",
+	DisabledTexture "TerrainEditorDisabledTexture",
+	UseHighlight "TerrainEditorHighlightTexture",
+	
+	Layer "BACKGROUND" {
+		Texture "TerrainEditorEightBackground" {
+			File "war3mapImported\PAS__EmptyDummy.tga",
+			TexCoord 0.0, 0.125 , 0.0, 0.25,
+			AlphaMode "BLEND",
+		}
+		
+		Texture "TerrainEditorQuarterBackground" {
+			File "war3mapImported\PAS__EmptyDummy.tga",
+			TexCoord 0.0, 0.25 , 0.0, 0.25,
+			AlphaMode "BLEND",
+		}
+		
+		Texture "TerrainEditorHalfBackground" {
+			File "war3mapImported\PAS__EmptyDummy.tga",
+			TexCoord 0.5, 1.0 , 0., 1.0,
+			AlphaMode "BLEND",
+		}
+    }
+	
+}
