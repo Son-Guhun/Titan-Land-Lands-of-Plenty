@@ -12,7 +12,7 @@ Texture "TerrainEditorPushedTexture" {
 Texture "TerrainEditorDisabledTexture" {
     File "Images\SelectionSquare.tga",
     TexCoord 0, 1, 0, 1,
-    AlphaMode "ADD",
+    AlphaMode "BLEND",
 }
 
 Texture "TerrainEditorHighlightTexture" {
@@ -33,7 +33,7 @@ Frame "SIMPLEBUTTON" "TerrainEditorSimpleButton" {
 	UseHighlight "TerrainEditorHighlightTexture",
 	
 	Layer "BACKGROUND" {
-		Texture "TerrainEditorEightBackground" {
+		Texture "TerrainEditorEighthBackground" {
 			File "war3mapImported\PAS__EmptyDummy.tga",
 			TexCoord 0.0, 0.125 , 0.0, 0.25,
 			AlphaMode "BLEND",
@@ -53,3 +53,62 @@ Frame "SIMPLEBUTTON" "TerrainEditorSimpleButton" {
     }
 	
 }
+
+Frame "SIMPLEFRAME" "TerrainEditorSimpleBackground" {
+	Width 0.1,
+    Height 0.1,
+	// ButtonPushedTextOffset 0.001 -0.001,
+	
+	Layer "BACKGROUND" {
+		Texture "TerrainEditorEighthBackground" {
+			File "war3mapImported\PAS__EmptyDummy.tga",
+			TexCoord 0.0, 0.125 , 0.0, 0.25,
+			AlphaMode "BLEND",
+		}
+		
+		Texture "TerrainEditorQuarterBackground" {
+			File "war3mapImported\PAS__EmptyDummy.tga",
+			TexCoord 0.0, 0.25 , 0.0, 0.25,
+			AlphaMode "BLEND",
+		}
+		
+		Texture "TerrainEditorHalfBackground" {
+			File "war3mapImported\PAS__EmptyDummy.tga",
+			TexCoord 0.5, 1.0 , 0., 1.0,
+			AlphaMode "BLEND",
+		}
+    }
+	
+}
+
+Frame "BUTTON" "TerrainEditorButton" {
+		Height 0.025,
+        Width 0.087,
+		ControlStyle "AUTOTRACK|HIGHLIGHTONMOUSEOVER",
+
+        ControlBackdrop "TerrainEditorButtonBackdrop",
+        Frame "BACKDROP" "TerrainEditorButtonBackdrop" {
+            BackdropBackground  "war3mapImported\Icon.tga",
+			BackdropBlendAll,
+        }
+
+        ControlDisabledBackdrop "TerrainEditorButtonDisabledBackdrop",
+        Frame "BACKDROP" "TerrainEditorButtonDisabledBackdrop" {
+            BackdropBackground  "Images\SelectionSquare.tga",
+			BackdropBlendAll,
+        }
+		
+		ControlPushedBackdrop "TerrainEditorButtonPushedBackdrop",
+        Frame "BACKDROP" "TerrainEditorButtonPushedBackdrop" {
+            BackdropBackground  "war3mapImported\Pushed.tga",
+			BackdropBlendAll,
+        }
+		
+		ControlMouseOverHighlight "TerrainEditorButtonMouseOverHighlight",
+        Frame "HIGHLIGHT" "TerrainEditorButtonMouseOverHighlight" {
+			HighlightType "FILETEXTURE",
+			HighlightAlphaFile "UI\Glues\ScoreScreen\scorescreen-tab-hilight.blp",
+			HighlightAlphaMode "ADD",
+        }
+
+    }
