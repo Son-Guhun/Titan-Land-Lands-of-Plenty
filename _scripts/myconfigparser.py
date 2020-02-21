@@ -50,6 +50,11 @@ class UnitParser(MyConfigParser):
     def get_decorations(self, asString=False):
         yield from self.get_with_ability('A0C6', asString)
 
+    def get_primary_decorations(self, asString=False):
+        for builder in self.get_decobuilders(builder_only=True):
+            for decoration in builder['Builds'][1:-1].split(','):
+                yield decoration if asString else Section(self[decoration])
+
     
 
 
