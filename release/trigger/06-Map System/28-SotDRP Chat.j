@@ -1,26 +1,38 @@
+library SotDRPChat requires ChatLogView
+
 globals
     boolean sotdrp = false
     string array playerColors
 endglobals
 
-function Trig_Untitled_Trigger_003_Actions takes nothing returns nothing
+function ChatMessageHandler takes integer id, string msg, boolean ooc returns nothing
+    if ooc then
+        set msg = playerColors[id] + "[OOC]|r |cff00ced1" + msg + "|r"
+        if sotdrp then
+            call DisplayTextToPlayer(User.Local, 0., 0., msg)
+        endif
+        call BlzFrameAddText(ChatLogView_mainFrame["OOC log"], msg)
+    else
+        set msg = playerColors[id] + "Character|r: |cff40e0d0" + msg + "|r"
+        if sotdrp then
+            call DisplayTextToPlayer(User.Local, 0., 0., msg)
+        endif
+        call BlzFrameAddText(ChatLogView_mainFrame["IC log"], msg)
+    endif
+endfunction
+
+function SotDRP_Chat_Actions takes nothing returns nothing
     local string msg = GetEventPlayerChatString()
     local integer len = StringLength(msg)
     local integer id = GetPlayerId(GetTriggerPlayer())
     
     if len > 2 then
-        if SubString(msg, 0, 2) == "((" or SubString(msg, len-2, len) == "))" then
-            set msg = playerColors[id] + "[OOC]|r |cff00ced1" + msg + "|r"
-            if sotdrp then
-                call DisplayTextToPlayer(User.Local, 0., 0., msg)
-            endif
-            call BlzFrameAddText(ChatLogView_mainFrame["OOC log"], msg)
+        if SubString(msg, 0, 2) == "((" then
+            call ChatMessageHandler(id, SubString(msg, 2, len), true)
+        elseif SubString(msg, len-2, len) == "))" then
+            call ChatMessageHandler(id, SubString(msg, 0, len-2), true)
         elseif not (SubString(msg, 0, 1) == "-" or SubString(msg, 0, 1) == "'") then
-            set msg = playerColors[id] + "Character|r: |cff40e0d0" + msg + "|r"
-            if sotdrp then
-                call DisplayTextToPlayer(User.Local, 0., 0., msg)
-            endif
-            call BlzFrameAddText(ChatLogView_mainFrame["IC log"], msg)
+            call ChatMessageHandler(id, msg, false)
         endif
     endif
             
@@ -30,7 +42,7 @@ endfunction
 function InitTrig_SotDRP_Chat takes nothing returns nothing
     set gg_trg_SotDRP_Chat = CreateTrigger(  )
     call TriggerRegisterPlayerChatEvent( gg_trg_SotDRP_Chat, Player(0), "", false )
-    call TriggerAddAction( gg_trg_SotDRP_Chat, function Trig_Untitled_Trigger_003_Actions )
+    call TriggerAddAction( gg_trg_SotDRP_Chat, function SotDRP_Chat_Actions )
     
     set playerColors[0] = "|c00ff0303"
     set playerColors[1] = "|c000042ff"
@@ -58,3 +70,4 @@ function InitTrig_SotDRP_Chat takes nothing returns nothing
     set playerColors[23] = "|c00a46f33"
 endfunction
 
+endlibrary

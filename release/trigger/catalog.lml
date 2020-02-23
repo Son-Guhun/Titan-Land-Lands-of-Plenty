@@ -96,6 +96,7 @@
         Disab
     '27-System Deselect': 'System Deselect'
     '28-SotDRP Chat': 'SotDRP Chat'
+    '29-AdvChatBox LoP': 'AdvChatBox LoP'
 '07-Player Commands': 'Player Commands'
     '01-Commands Count': 'Commands Count'
     '02-Commands Fix': 'Commands Fix'
@@ -506,3 +507,6 @@
     '1-Register Decoration Names': 'Register Decoration Names'
     '2-Decoration Browser View': 'Decoration Browser View'
     '3-Decoration Browser Controller': 'Decoration Browser Controller'
+49-AdvChatBox: AdvChatBox
+    '1-AdvChatBox View': 'AdvChatBox View'
+    '2-AdvChatBox Controller': 'AdvChatBox Controller'
