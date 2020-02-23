@@ -8,24 +8,22 @@ import pyperclip
 
 
 LIBRARY_DECLARATION = """
-library LoPUnitCompatibility requires ConstTable
+library LoPUnitCompatibility requires TableStruct
 
-private key InitModule
+private keyword InitModule
 
 // This is an optional textmacro that will replace GetObjectName when implemented
-//! textmacro LoPUnitCompatibility takes nothing returns nothing
-    function GetObjectName takes integer objectCode returns nothing
-        return LoPUnitCompatibility.name.string[objectCode]
+//! textmacro LoPUnitCompatibility
+    private function GetObjectName takes integer objectCode returns string
+        return LoPUnitType(objectCode).name
     endfunction
 //! endtextmacro
 
-struct LoPUnitCompatibility extends array
+struct LoPUnitType extends array
     static key table_impl
 
-    method operator name takes nothing returns ConstTable
-        return table_impl
-    endmethod
-
+    //! runtextmacro TableStruct_NewPrimitiveField("name", "string")
+    
     implement InitModule
 endstruct
 
@@ -48,6 +46,6 @@ def do(database):
 
     lines = []
     for unit in data:
-        lines.append(f"""set name.string['{unit}'] = "{Section(data[unit])['Name']}"\n""")
+        lines.append(f"set LoPUnitType('{unit}').name = {Section(data[unit])['Name']}\n")
     pyperclip.copy(LIBRARY_DECLARATION.format(''.join(lines)))
 

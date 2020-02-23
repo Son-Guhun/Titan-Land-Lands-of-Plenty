@@ -32,7 +32,6 @@ private module InitModule
         set buttons[7] = BlzGetFrameByName("LoPUpperButtonBarButtonFour", 0)
         
         call BlzFrameSetEnable(buttons[4], false)
-        call BlzFrameSetEnable(buttons[5], false)
         call BlzFrameSetEnable(buttons[6], false)
     endmethod
 endmodule

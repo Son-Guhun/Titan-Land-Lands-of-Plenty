@@ -17,6 +17,14 @@ private function onClick takes nothing returns nothing
             call MainMenuController_controller.enable(trigP, true)
             call StartSoundForPlayerBJ(trigP, clickSound)        
         endif
+    elseif trigButton == UpperButtonBar.buttons[5] then
+        if DecorationBrowserController_controller.isEnabled(trigP) then
+            call DecorationBrowserController_controller.enable(trigP, false)
+            call StartSoundForPlayerBJ(trigP, clickSoundBig)
+        else
+            call DecorationBrowserController_controller.enable(trigP, true)
+            call StartSoundForPlayerBJ(trigP, clickSound) 
+        endif
     endif
 endfunction
 
@@ -54,6 +62,7 @@ private function Init takes nothing returns nothing
     call SetSoundVolume(clickSoundBig, 100)
     call SetSoundChannel(clickSoundBig, 8)
     call SetSoundDuration(clickSoundBig, 390)
+    call BlzTriggerRegisterFrameEvent(trig, UpperButtonBar.buttons[5], FRAMEEVENT_CONTROL_CLICK)
     call BlzTriggerRegisterFrameEvent(trig, UpperButtonBar.buttons[7], FRAMEEVENT_CONTROL_CLICK)
     call OSKeys.addListener(Condition(function onHotkey))
     

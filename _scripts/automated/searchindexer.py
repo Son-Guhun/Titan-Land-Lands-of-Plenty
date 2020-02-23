@@ -95,7 +95,7 @@ for decor in decorations:
         lines.append('endmethod\nendmodule' if i > 0 else '')
         lines.append(f'module A{i}')
         lines.append(f'private static method onInit takes nothing returns nothing')
-    lines.append(f"call RegisterThing({decor['Name']})")
+    lines.append(f"call RegisterThing('{decor.name}')")
     i += 1
 
 if lines[-1] != 'endmethod\nendmodule':
