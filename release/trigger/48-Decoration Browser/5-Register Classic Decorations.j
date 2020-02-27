@@ -1,5 +1,4 @@
-library RegisterDecorationNames requires StringHashEx, HashStruct, Table optional LoPUnitCompatibility
-
+library RegisterClassicDecorations requires RegisterDecorationNames
 
 //! runtextmacro optional LoPUnitCompatibility()
 
@@ -7,21 +6,6 @@ private function StringHash takes string str returns integer
     return StringHashEx(str)
 endfunction
 
-function StringContains takes string str, string subStr returns boolean
-    local integer step = StringLength(subStr)
-    local integer size = StringLength(str)
-    local integer i = size - step
-    
-    loop
-        exitwhen i < 0
-        if SubString(str, i, i+step) == subStr then
-            return true
-        endif
-        
-        set i = i - 1
-    endloop
-    return false
-endfunction
 
 globals
     private hashtable hashHandle = InitHashtable()
@@ -32,160 +16,17 @@ endglobals
 struct DecorationList extends array
     //! runtextmacro HashStruct_SetHashtableWrapper("GeneralHashtable")
     
-    method operator[] takes integer index returns integer
-        return thistype.getChildTable(this)[index]
-    endmethod
-    
-    method operator[]= takes integer index, integer newVal returns nothing
-        set thistype.getChildTable(this)[index] = newVal
-    endmethod
-    
     //! runtextmacro HashStruct_NewPrimitiveFieldEx("GeneralHashtable", "size", "integer", "-1")
     //! runtextmacro HashStruct_NewStructFieldEx("GeneralHashtable", "sub", "thistype", "-2")
     //! runtextmacro HashStruct_NewStructFieldEx("GeneralHashtable", "sup", "thistype", "-3")
-    
-    method calculateSize takes string searchStr, thistype list returns integer
-        local integer i = 0
-        local integer size = 0
-        local integer rawcode
-        // populate a new list using the first 4 chars
-        call BJDebugMsg(searchStr)
-        
-        loop
-            exitwhen i >=  list.size
-            set rawcode = list[i]
-            
-            if StringContains(StringCase(GetObjectName(rawcode), false), searchStr) then
-                set this[size] = rawcode
-                set size = size + 1
-            endif
-        
-            set i = i + 1
-        endloop
-        
-        if size > 0 then
-            set .size = size
-        endif
-        return size
-    endmethod
-    
-    // if the size of a substr is equal to size of the current search, then return substr 
-    method a takes string searchStr returns string
-        local integer i = StringLength(searchStr) - 1
 
-        if DecorationList(StringHash(SubString(searchStr, 0, 4))).size > 0 then
-            loop
-                exitwhen i < 4
-                if DecorationList(StringHash(SubString(searchStr, 0, i))).size > 0 then
-                    return SubString(searchStr, 0, i)
-                else
-                    set DecorationList(StringHash(SubString(searchStr, 0, i))).sup = this
-                endif
-                
-                set i = i - 1
-            endloop
-        endif
-        
-        return null
-    endmethod
-    
-    static method get takes string searchStr returns thistype
-        local thistype this = StringHash(searchStr)
-        local thistype sub
-        local string temp
-        
-        if this.sub_exists() then
-            set sub = this.sub
-            // This block would not exist if the lists for all substrings is already calculated
-            if sub.sub_exists() then
-                loop
-                    set this.sub = sub.sub
-                    set this = sub
-                    set sub = sub.sub
-                    exitwhen not sub.sub_exists()
-                endloop
-            endif
-            set this = sub
-        elseif not this.size_exists() then
-            if StringLength(searchStr) > 4 then
-                set temp = .a(searchStr)
-                if temp != null then
-                    set sub = StringHash(temp)
-                    
-                    if .calculateSize(searchStr, sub) == sub.size then
-                        call getChildTable(this).flush()
-                        set .sub = sub
-                        set this = sub
-                    endif
-                    
-                    // This block would not exist if the lists for all substrings is already calculated
-                    if this.sup_exists() and this.sup.size == this.size then
-                        call BJDebugMsg("a")
-                        call getChildTable(this.sup).flush()
-                        if this.sub_exists() then
-                            set this.sup.sub = this.sub
-                        else
-                            set this.sup.sub = this
-                        endif
-                        call this.sup_clear()
-                    endif
-                endif
-                
-            endif
-        endif
-        
-        return this
-    endmethod
+    implement DecorationListTemplate
 endstruct
     
-globals
-    key seen
-endglobals
-
-function RegisterThing takes integer rawcode returns nothing
-    local string str = GetObjectName(rawcode)
-    local integer i = 0
-    local integer j = 1
-    local string subStr
-    local integer size = StringLength(str)
-    local integer lastIndex = IMinBJ(i+4, size)
-    local DecorationList hash
-    
-    call Table(seen).flush()
-    set str = StringCase(str, false)
-    
-    set hash = StringHash("")
-    set hash[hash.size] = rawcode
-    set hash.size = hash.size + 1
-    loop
-        exitwhen i == size
-        set subStr = SubString(str, i, j)
-        
-        
-        set hash = StringHash(subStr)
-        if not Table(seen).boolean.has(hash) then
-            set hash[hash.size] = rawcode
-            set hash.size = hash.size + 1
-            set Table(seen).boolean[hash] = true
-        endif
-        
-
-        if j == lastIndex then
-            set i = i + 1
-            set j = i + 1
-            if i+4 >= size then
-                set lastIndex = size
-            else
-                set lastIndex = i+4
-            endif
-        else
-            set j = j + 1
-        endif
-    endloop
-endfunction
+//! runtextmacro RegisterDecorationNamesFunctionTemplate("DecorationList")
 
 
-module A0
+private module A0
 private static method onInit takes nothing returns nothing
 call RegisterThing('h08J')
 call RegisterThing('h00R')
@@ -337,13 +178,10 @@ call RegisterThing('h0CI')
 call RegisterThing('h0CK')
 call RegisterThing('h0CJ')
 call RegisterThing('h0EG')
-call RegisterThing('h1XR')
 call RegisterThing('h0EH')
 call RegisterThing('h0EI')
 call RegisterThing('h0EP')
-call RegisterThing('h1X0')
 call RegisterThing('h0EQ')
-call RegisterThing('h1WZ')
 call RegisterThing('h1CA')
 call RegisterThing('h1CE')
 call RegisterThing('h1CG')
@@ -361,16 +199,10 @@ call RegisterThing('h1D4')
 call RegisterThing('h1D8')
 call RegisterThing('h1DA')
 call RegisterThing('h1DE')
-call RegisterThing('h1X3')
-call RegisterThing('h1X2')
-call RegisterThing('h1X1')
 call RegisterThing('h0EK')
 call RegisterThing('h0EL')
-call RegisterThing('h1XS')
 call RegisterThing('h0EM')
 call RegisterThing('h0EO')
-call RegisterThing('h1X4')
-call RegisterThing('h1X5')
 call RegisterThing('h0EN')
 call RegisterThing('h0GA')
 call RegisterThing('h0GG')
@@ -496,6 +328,10 @@ call RegisterThing('h0SM')
 call RegisterThing('h0SN')
 call RegisterThing('h0SO')
 call RegisterThing('h0SP')
+endmethod
+endmodule
+private module A300
+private static method onInit takes nothing returns nothing
 call RegisterThing('e02D')
 call RegisterThing('h0SQ')
 call RegisterThing('h0D1')
@@ -586,31 +422,15 @@ call RegisterThing('h0WR')
 call RegisterThing('h0WT')
 call RegisterThing('h0WV')
 call RegisterThing('h0WX')
-call RegisterThing('h1VV')
-endmethod
-endmodule
-module A400
-private static method onInit takes nothing returns nothing
 call RegisterThing('halt')
 call RegisterThing('h1IF')
-call RegisterThing('h1W0')
 call RegisterThing('hvlt')
-call RegisterThing('h1W3')
 call RegisterThing('h1I9')
-call RegisterThing('h1VW')
 call RegisterThing('hbla')
-call RegisterThing('h1VY')
 call RegisterThing('hhou')
-call RegisterThing('h1VU')
-call RegisterThing('h1W1')
 call RegisterThing('hlum')
-call RegisterThing('h1VX')
-call RegisterThing('h1W2')
-call RegisterThing('hshy')
 call RegisterThing('hwtw')
 call RegisterThing('htow')
-call RegisterThing('h1VT')
-call RegisterThing('h1VZ')
 call RegisterThing('ncnt')
 call RegisterThing('ndh0')
 call RegisterThing('nfh0')
@@ -640,8 +460,6 @@ call RegisterThing('h1EP')
 call RegisterThing('h1EQ')
 call RegisterThing('h1EJ')
 call RegisterThing('h1ER')
-call RegisterThing('h1ZX')
-call RegisterThing('h1ZU')
 call RegisterThing('h1ES')
 call RegisterThing('h0JA')
 call RegisterThing('h0AZ')
@@ -654,23 +472,15 @@ call RegisterThing('h0J4')
 call RegisterThing('h0J3')
 call RegisterThing('h0B2')
 call RegisterThing('h04D')
-call RegisterThing('h1XT')
 call RegisterThing('h048')
 call RegisterThing('h04A')
 call RegisterThing('h047')
-call RegisterThing('h1XU')
 call RegisterThing('h046')
 call RegisterThing('h049')
 call RegisterThing('h04C')
 call RegisterThing('h04B')
-call RegisterThing('h1XW')
-call RegisterThing('h1XZ')
 call RegisterThing('h04F')
 call RegisterThing('h04E')
-call RegisterThing('h1XV')
-call RegisterThing('h1XY')
-call RegisterThing('h1XX')
-call RegisterThing('h1Y0')
 call RegisterThing('h084')
 call RegisterThing('h05W')
 call RegisterThing('h11T')
@@ -715,16 +525,6 @@ call RegisterThing('h0PE')
 call RegisterThing('h0PF')
 call RegisterThing('h0PG')
 call RegisterThing('h136')
-call RegisterThing('h1WR')
-call RegisterThing('h1WW')
-call RegisterThing('h1WT')
-call RegisterThing('h1WU')
-call RegisterThing('h1WY')
-call RegisterThing('h1WX')
-call RegisterThing('h1WV')
-call RegisterThing('h1WS')
-call RegisterThing('h1WQ')
-call RegisterThing('eshy')
 call RegisterThing('h0NE')
 call RegisterThing('h0PZ')
 call RegisterThing('h0PW')
@@ -748,10 +548,6 @@ call RegisterThing('h015')
 call RegisterThing('h017')
 call RegisterThing('h01E')
 call RegisterThing('h016')
-call RegisterThing('h1W5')
-call RegisterThing('h1W6')
-call RegisterThing('h1WA')
-call RegisterThing('h1WB')
 call RegisterThing('h1MK')
 call RegisterThing('h1ML')
 call RegisterThing('h1MN')
@@ -762,14 +558,6 @@ call RegisterThing('h1M7')
 call RegisterThing('h1MD')
 call RegisterThing('h1M2')
 call RegisterThing('h1M6')
-call RegisterThing('h1W4')
-call RegisterThing('h1WE')
-call RegisterThing('oshy')
-call RegisterThing('h1W9')
-call RegisterThing('h1W8')
-call RegisterThing('h1WD')
-call RegisterThing('h1W7')
-call RegisterThing('h1WC')
 call RegisterThing('h0ID')
 call RegisterThing('h0J0')
 call RegisterThing('h0IJ')
@@ -796,20 +584,6 @@ call RegisterThing('h1I7')
 call RegisterThing('h0BV')
 call RegisterThing('h0BW')
 call RegisterThing('h0BY')
-call RegisterThing('h1P5')
-call RegisterThing('h1P6')
-call RegisterThing('h1P7')
-call RegisterThing('h1P8')
-call RegisterThing('h1P9')
-call RegisterThing('h1PA')
-call RegisterThing('h1PB')
-call RegisterThing('h1PC')
-call RegisterThing('h1PD')
-call RegisterThing('h1PI')
-call RegisterThing('h1PE')
-call RegisterThing('h1PF')
-call RegisterThing('h1PG')
-call RegisterThing('h1PH')
 call RegisterThing('h0BX')
 call RegisterThing('h0DE')
 call RegisterThing('h0DF')
@@ -822,34 +596,12 @@ call RegisterThing('h0DL')
 call RegisterThing('h0DM')
 call RegisterThing('h0DN')
 call RegisterThing('h02N')
-call RegisterThing('h1RD')
-call RegisterThing('h1R9')
 call RegisterThing('u031')
 call RegisterThing('u00K')
-call RegisterThing('h1QX')
-call RegisterThing('h1RC')
 call RegisterThing('h0VK')
 call RegisterThing('h0VH')
-call RegisterThing('h1R7')
-call RegisterThing('h1RE')
-call RegisterThing('h1R8')
-call RegisterThing('h1R6')
-call RegisterThing('h1QY')
-call RegisterThing('h1RB')
-call RegisterThing('h1R4')
-call RegisterThing('h1QZ')
 call RegisterThing('h0VG')
-call RegisterThing('h1RA')
 call RegisterThing('h0KI')
-call RegisterThing('h1RG')
-call RegisterThing('h1R2')
-call RegisterThing('h1R3')
-call RegisterThing('h1R0')
-call RegisterThing('h1R1')
-call RegisterThing('h1RI')
-call RegisterThing('h1RH')
-call RegisterThing('h1R5')
-call RegisterThing('h1RF')
 call RegisterThing('h1F5')
 call RegisterThing('h1F7')
 call RegisterThing('h1F8')
@@ -880,6 +632,10 @@ call RegisterThing('h0K7')
 call RegisterThing('h0K9')
 call RegisterThing('h0V6')
 call RegisterThing('h0V4')
+endmethod
+endmodule
+private module A600
+private static method onInit takes nothing returns nothing
 call RegisterThing('h0KB')
 call RegisterThing('h0KC')
 call RegisterThing('h0K8')
@@ -890,8 +646,6 @@ call RegisterThing('h012')
 call RegisterThing('h012')
 call RegisterThing('h011')
 call RegisterThing('h010')
-call RegisterThing('h1ZW')
-call RegisterThing('h1ZT')
 call RegisterThing('h0KV')
 call RegisterThing('h08R')
 call RegisterThing('h08S')
@@ -991,10 +745,6 @@ call RegisterThing('h08H')
 call RegisterThing('h1NH')
 call RegisterThing('h06X')
 call RegisterThing('h0BG')
-endmethod
-endmodule
-module A800
-private static method onInit takes nothing returns nothing
 call RegisterThing('h0K4')
 call RegisterThing('h06V')
 call RegisterThing('h0V8')
@@ -1010,8 +760,6 @@ call RegisterThing('h00Y')
 call RegisterThing('h00Z')
 call RegisterThing('h06Y')
 call RegisterThing('h06W')
-call RegisterThing('h1ZY')
-call RegisterThing('h1ZV')
 call RegisterThing('u01U')
 call RegisterThing('h0XG')
 call RegisterThing('h0XB')
@@ -1025,18 +773,6 @@ call RegisterThing('h04X')
 call RegisterThing('h13K')
 call RegisterThing('h04Y')
 call RegisterThing('h1NK')
-call RegisterThing('h1WH')
-call RegisterThing('h1WN')
-call RegisterThing('h1WI')
-call RegisterThing('h1WK')
-call RegisterThing('h1WO')
-call RegisterThing('h1WF')
-call RegisterThing('h1WJ')
-call RegisterThing('ushp')
-call RegisterThing('h1WL')
-call RegisterThing('h1WM')
-call RegisterThing('h1WP')
-call RegisterThing('h1WG')
 call RegisterThing('h1KP')
 call RegisterThing('h1KQ')
 call RegisterThing('h1KR')
@@ -1175,10 +911,10 @@ call RegisterThing('h1F3')
 call RegisterThing('h1F1')
 endmethod
 endmodule
-struct Nice extends array
+private struct Nice extends array
 implement A0
-implement A400
-implement A800
+implement A300
+implement A600
 endstruct
 
 endlibrary

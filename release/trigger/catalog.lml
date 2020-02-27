@@ -269,6 +269,7 @@
     33-LockableStructs: LockableStructs
         Disab
     34-StringHashEx: StringHashEx
+    35-Packets: Packets
 21-Map-specific: Map-specific
     1-Debug: Debug
     2-ArrayAgent: ArrayAgent
@@ -504,9 +505,13 @@
     '5-ChatLog View': 'ChatLog View'
     '6-ChatLog Controller': 'ChatLog Controller'
 '48-Decoration Browser': 'Decoration Browser'
-    '1-Register Decoration Names': 'Register Decoration Names'
+    1----------------------------: ---------------------------
+        Comment
     '2-Decoration Browser View': 'Decoration Browser View'
     '3-Decoration Browser Controller': 'Decoration Browser Controller'
+    '4-Register Decoration Names': 'Register Decoration Names'
+    '5-Register Classic Decorations': 'Register Classic Decorations'
+    '6-Register Reforged Decorations': 'Register Reforged Decorations'
 49-AdvChatBox: AdvChatBox
     '1-AdvChatBox View': 'AdvChatBox View'
     '2-AdvChatBox Controller': 'AdvChatBox Controller'
