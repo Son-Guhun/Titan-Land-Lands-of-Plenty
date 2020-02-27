@@ -1,0 +1,114 @@
+
+Texture "TerrainEditorNormalTexture" {
+	File "Images\TerrainEditor\Icon.tga",
+	AlphaMode "BLEND",
+}
+
+Texture "TerrainEditorPushedTexture" {
+	File "Images\TerrainEditor\Pushed.tga",
+	AlphaMode "BLEND",
+}
+
+Texture "TerrainEditorDisabledTexture" {
+    File "Images\SelectionSquare.tga",
+    TexCoord 0, 1, 0, 1,
+    AlphaMode "BLEND",
+}
+
+Texture "TerrainEditorHighlightTexture" {
+    File "UI\Glues\ScoreScreen\scorescreen-tab-hilight.blp",
+    TexCoord 0, 1, 0, 1,
+    AlphaMode "ADD",
+}
+
+
+Frame "SIMPLEBUTTON" "TerrainEditorSimpleButton" {
+	Width 0.1,
+    Height 0.1,
+	// ButtonPushedTextOffset 0.001 -0.001,
+
+	NormalTexture "TerrainEditorNormalTexture",
+	PushedTexture "TerrainEditorPushedTexture",
+	DisabledTexture "TerrainEditorDisabledTexture",
+	UseHighlight "TerrainEditorHighlightTexture",
+	
+	Layer "BACKGROUND" {
+		Texture "TerrainEditorEighthBackground" {
+			File "ReplaceableTextures\CommandButtons\PAS__EmptyDummy.tga",
+			TexCoord 0.0, 0.125 , 0.0, 0.25,
+			AlphaMode "BLEND",
+		}
+		
+		Texture "TerrainEditorQuarterBackground" {
+			File "ReplaceableTextures\CommandButtons\PAS__EmptyDummy.tga",
+			TexCoord 0.0, 0.25 , 0.0, 0.25,
+			AlphaMode "BLEND",
+		}
+		
+		Texture "TerrainEditorHalfBackground" {
+			File "ReplaceableTextures\CommandButtons\PAS__EmptyDummy.tga",
+			TexCoord 0.5, 1.0 , 0., 1.0,
+			AlphaMode "BLEND",
+		}
+    }
+	
+}
+
+Frame "SIMPLEFRAME" "TerrainEditorSimpleBackground" {
+	Width 0.1,
+    Height 0.1,
+	// ButtonPushedTextOffset 0.001 -0.001,
+	
+	Layer "BACKGROUND" {
+		Texture "TerrainEditorEighthBackground" {
+			File "ReplaceableTextures\CommandButtons\PAS__EmptyDummy.tga",
+			TexCoord 0.0, 0.125 , 0.0, 0.25,
+			AlphaMode "BLEND",
+		}
+		
+		Texture "TerrainEditorQuarterBackground" {
+			File "ReplaceableTextures\CommandButtons\PAS__EmptyDummy.tga",
+			TexCoord 0.0, 0.25 , 0.0, 0.25,
+			AlphaMode "BLEND",
+		}
+		
+		Texture "TerrainEditorHalfBackground" {
+			File "ReplaceableTextures\CommandButtons\PAS__EmptyDummy.tga",
+			TexCoord 0.5, 1.0 , 0., 1.0,
+			AlphaMode "BLEND",
+		}
+    }
+	
+}
+
+Frame "BUTTON" "TerrainEditorButton" {
+		Height 0.025,
+        Width 0.087,
+		ControlStyle "AUTOTRACK|HIGHLIGHTONMOUSEOVER",
+
+        ControlBackdrop "TerrainEditorButtonBackdrop",
+        Frame "BACKDROP" "TerrainEditorButtonBackdrop" {
+            BackdropBackground  "Images\TerrainEditor\Icon.tga",
+			BackdropBlendAll,
+        }
+
+        ControlDisabledBackdrop "TerrainEditorButtonDisabledBackdrop",
+        Frame "BACKDROP" "TerrainEditorButtonDisabledBackdrop" {
+            BackdropBackground  "Images\SelectionSquare.tga",
+			BackdropBlendAll,
+        }
+		
+		ControlPushedBackdrop "TerrainEditorButtonPushedBackdrop",
+        Frame "BACKDROP" "TerrainEditorButtonPushedBackdrop" {
+            BackdropBackground  "Images\TerrainEditor\Pushed.tga",
+			BackdropBlendAll,
+        }
+		
+		ControlMouseOverHighlight "TerrainEditorButtonMouseOverHighlight",
+        Frame "HIGHLIGHT" "TerrainEditorButtonMouseOverHighlight" {
+			HighlightType "FILETEXTURE",
+			HighlightAlphaFile "UI\Glues\ScoreScreen\scorescreen-tab-hilight.blp",
+			HighlightAlphaMode "ADD",
+        }
+
+    }

@@ -1,4 +1,4 @@
-library TerrainEditor initializer onInit requires TerrainTools, DeformationTools, ControlState
+library TerrainEditor initializer onInit requires TerrainTools, DeformationTools, ControlState, PlayerUtils, PlayerColorUtils
 /*
 This library is the backbone of the ingame Terrain Editor.
 
@@ -20,6 +20,7 @@ scope HEIGHT
         globals
             public constant integer HILL    = 1
             public constant integer PLATEAU = 2
+            public constant integer SMOOTH = 3
         endglobals
     endscope
 endscope
@@ -33,7 +34,7 @@ endglobals
 
 // This is the path to the image used for the square brush.
 private function SQUARE_PATH takes nothing returns string
-    return "Images\\SelectionSquare.tga"
+    return "Images\\SelectionSquareWhite.tga"
 endfunction
 
 globals
@@ -53,23 +54,42 @@ globals
     private integer array currentHeightTool
     
     public integer array currentTexture
+    public boolean array isLocked
+    
+    public real array plateauLevel
 endglobals
 
 public function SetHeightTool takes  player whichPlayer, integer tool returns nothing
     set currentHeightTool[GetPlayerId(whichPlayer)] = tool
 endfunction
 
+public function GetHeightTool takes player whichPlayer returns integer
+    return currentHeightTool[GetPlayerId(whichPlayer)]
+endfunction
+
 public function EnablePainting takes player whichPlayer, boolean enable returns nothing
     set applyTexture[GetPlayerId(whichPlayer)] = enable
+endfunction
+
+public function IsPainting takes player whichPlayer returns boolean
+    return applyTexture[GetPlayerId(whichPlayer)]
 endfunction
 
 public function SetBrushSize takes player whichPlayer, integer size returns nothing
     local integer playerId = GetPlayerId(whichPlayer)
     set size = (size/2)*2 + 1  // Makes sure value is odd (convert to nearest low even, add 1)
-    call DestroyImage(myImage[playerId])
-    call SetImageRenderAlways(CreateImage(SQUARE_PATH(), 128*size, 128*size, 0, 0, 0, 0, 128*size/2,128*size/2,0, 1), true)
-    call SetImagePosition(myImage[playerId], GetTileCenterCoordinate(GetPlayerLastMouseX(Player(0))), GetTileCenterCoordinate(GetPlayerLastMouseY(Player(0))), 0)
-    set brushSize[playerId] = size
+    
+    if brushSize[playerId] != size then
+        call DestroyImage(myImage[playerId])
+        call SetImageRenderAlways(CreateImage(SQUARE_PATH(), 128*size, 128*size, 0, 0, 0, 0, 128*size/2,128*size/2,0, 1), true)
+        call SetImagePosition(myImage[playerId], GetTileCenterCoordinate(GetPlayerLastMouseX(Player(0))), GetTileCenterCoordinate(GetPlayerLastMouseY(Player(0))), 0)
+        if User.fromLocal() != playerId then
+            call SetImageColor(myImage[playerId], UserColor(playerId).red, UserColor(playerId).green, UserColor(playerId).blue, 120)
+        else
+            call SetImageColor(myImage[playerId], 0, 255, 127, 120)
+        endif
+        set brushSize[playerId] = size
+    endif
 endfunction
 
 public function GetBrushSize takes player whichPlayer returns integer
@@ -77,22 +97,22 @@ public function GetBrushSize takes player whichPlayer returns integer
 endfunction
 
 private function onMousePress takes nothing returns boolean
-    local real x = PlayerMouseEvent_GetTriggerPlayerMouseX()
-    local real y = PlayerMouseEvent_GetTriggerPlayerMouseY()
+    local real x = GetTileCenterCoordinate(PlayerMouseEvent_GetTriggerPlayerMouseX())
+    local real y = GetTileCenterCoordinate(PlayerMouseEvent_GetTriggerPlayerMouseY())
     local integer radius = brushSize[GetPlayerId(PlayerEvent_GetTriggerPlayer())]/2
     local integer playerId = GetPlayerId(PlayerEvent_GetTriggerPlayer())
     local real step
     
-     if PlayerMouseEvent_GetTriggerPlayerMouseButton() == MOUSE_BUTTON_TYPE_RIGHT then
+    if (x == 0. and y == 0.) or isLocked[playerId] then
+        return false
+    endif
+    
+    if PlayerMouseEvent_GetTriggerPlayerMouseButton() == MOUSE_BUTTON_TYPE_RIGHT then
         set isRightButtonPressed[playerId] = true
     else
         set isLeftButtonPressed[playerId] = true
     endif
-    
-    if x == 0. and y == 0. then
-        return false
-    endif
-    
+
     if PlayerMouseEvent_GetTriggerPlayerMouseButton() == MOUSE_BUTTON_TYPE_RIGHT then
         set step =  0.125
     else
@@ -100,7 +120,11 @@ private function onMousePress takes nothing returns boolean
     endif
     
     if currentHeightTool[playerId] == HEIGHT_TOOL_HILL then
-            call DeformationTools_Hill(x, y, step, radius)
+        call DeformationTools_Hill(x, y, step, radius)
+    elseif currentHeightTool[playerId] == HEIGHT_TOOL_PLATEAU then
+        call DeformationTools_Plateau(x, y, plateauLevel[playerId], radius, false)
+    elseif currentHeightTool[playerId] == HEIGHT_TOOL_SMOOTH then
+            call DeformationTools_Smooth(x, y, radius, false)
     endif
     
     if applyTexture[playerId] then
@@ -140,19 +164,25 @@ function onMoveMouse takes nothing returns boolean
         endif
     endif
     
-    if isLeftButtonPressed[playerId] then
-    
-        if applyTexture[playerId] then
-            call SetTerrainType(x, y, currentTexture[playerId], -1, brushSize[playerId]/2+1, TerrainTools_SHAPE_SQUARE)
-        endif
+    if not isLocked[playerId] then
+        if isLeftButtonPressed[playerId] then
         
-        if currentHeightTool[playerId] == HEIGHT_TOOL_HILL then
-            call DeformationTools_Hill(x, y, -0.125/4, radius)
-        endif
-    elseif isRightButtonPressed[playerId] then
-    
-        if currentHeightTool[playerId] == HEIGHT_TOOL_HILL then
-            call DeformationTools_Hill(x, y, 0.125/4, radius)
+            if applyTexture[playerId] then
+                call SetTerrainType(x, y, currentTexture[playerId], -1, brushSize[playerId]/2+1, TerrainTools_SHAPE_SQUARE)
+            endif
+            
+            if currentHeightTool[playerId] == HEIGHT_TOOL_HILL then
+                call DeformationTools_Hill(x, y, -0.125/4, radius)
+            elseif currentHeightTool[playerId] == HEIGHT_TOOL_PLATEAU then
+                call DeformationTools_Plateau(x, y, plateauLevel[playerId], radius, false)
+            elseif currentHeightTool[playerId] == HEIGHT_TOOL_SMOOTH then
+                call DeformationTools_Smooth(x, y, radius, false)
+            endif
+        elseif isRightButtonPressed[playerId] then
+        
+            if currentHeightTool[playerId] == HEIGHT_TOOL_HILL then
+                call DeformationTools_Hill(x, y, 0.125/4, radius)
+            endif
         endif
     endif
     
@@ -195,6 +225,11 @@ private function onInit takes nothing returns nothing
     exitwhen i > bj_MAX_PLAYERS
         if GetPlayerController(Player(i)) == MAP_CONTROL_USER then
             set myImage[i] = CreateImage(SQUARE_PATH(), 128*5, 128*5, 0, 0, 0, 0, 128*5/2,128*5/2,0, 1)
+            if User.fromLocal() != i then
+                call SetImageColor(myImage[i], UserColor(i).red, UserColor(i).green, UserColor(i).blue, 120)
+            else
+                call SetImageColor(myImage[i], 0, 255, 127, 120)
+            endif
             set brushSize[i] = 5
             
             set applyTexture[i] = DEFAULT_APPLY_TEXTURE

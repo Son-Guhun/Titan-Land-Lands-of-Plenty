@@ -5,6 +5,7 @@ struct Screen
 
     private boolean isVisible
     framehandle main
+    framehandle simpleContainer
     private Table frames
 
     static method fromFrame takes framehandle mainFrame returns thistype
@@ -20,9 +21,16 @@ struct Screen
         return fromFrame(BlzCreateFrameByType("FRAME", "ScreenFrame", BlzGetOriginFrame(ORIGIN_FRAME_GAME_UI,0),"", 0))
     endmethod
     
+    static method createWithSimple takes nothing returns thistype
+        local thistype this = create()
+        set .simpleContainer = BlzCreateFrameByType("SIMPLEFRAME", "SimpleScreenFrame", BlzGetOriginFrame(ORIGIN_FRAME_GAME_UI,0),"", 0)
+        return this
+    endmethod
+    
     method show takes boolean show returns nothing
         if .isVisible != show then
             set .isVisible = show
+            call BlzFrameSetVisible(.simpleContainer, show)
             call BlzFrameSetVisible(.main, show)
         endif
     endmethod

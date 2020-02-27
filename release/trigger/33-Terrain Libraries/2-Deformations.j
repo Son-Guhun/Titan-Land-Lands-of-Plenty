@@ -22,6 +22,7 @@ endglobals
 struct Deformation extends array
 
     //! runtextmacro TableStruct_NewPrimitiveField("depth_impl","real")
+    //! runtextmacro TableStruct_NewPrimitiveField("depth_actual","integer")
     
     static constant method operator CELL_SIZE takes nothing returns real
         static if INLINE_bj_CELLWIDTH then
@@ -40,8 +41,11 @@ struct Deformation extends array
     endmethod
     
     method operator depth= takes real depth returns nothing
-        call TerrainDeformCrater(GetTileCenterXById(this), GetTileCenterYById(this), .CELL_SIZE, depth - .depth_impl, 1, true)
-        set .depth_impl = depth
+        if this >= 0 then
+            call TerrainDeformCrater(GetTileCenterXById(this), GetTileCenterYById(this), .CELL_SIZE, R2I(depth) - .depth_actual, 1, true)
+            set .depth_impl = depth
+            set .depth_actual = R2I(depth)
+        endif
     endmethod
 endstruct
 

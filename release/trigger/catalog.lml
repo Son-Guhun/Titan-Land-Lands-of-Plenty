@@ -375,6 +375,8 @@
     2-TerrainEditorUI: TerrainEditorUI
     '3-TerrainEditorUI View': 'TerrainEditorUI View'
     '4-TerrainEditorUI Controller': 'TerrainEditorUI Controller'
+    5-TileDefs: TileDefs
+    6-PlayerColorUtils: PlayerColorUtils
 36----------------------------------------: ---------------------------------------
     Comment
 37-Spells: Spells

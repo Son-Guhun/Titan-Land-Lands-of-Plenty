@@ -1,37 +1,67 @@
-library TerrainEditorUIController initializer Init requires UILib, PlayerUtils, BitFlags, TerrainEditorUIView
+library TerrainEditorUIController initializer Init requires UILib, PlayerUtils, BitFlags, TerrainEditorUIView, TerrainEditor
 
 globals
-    public boolean heightEnabled = false
+    public boolean heightEnabled = true//false
     public ScreenController controller
+    private framehandle lastButton = null
+
 endglobals
 
-function ButtonCallBack takes nothing returns nothing
-    local framehandle trigButton = BlzGetTriggerFrame()
-    local string buttonName = BlzFrameGetText(trigButton)
-    local player trigP = GetTriggerPlayer()
+
+
+function ButtonCallback takes player trigP, framehandle trigButton returns nothing
+    local User pId = User[trigP]
     
-    if buttonName == "Heighting: Hill" then
-        call LocalFrameSetText(trigP, trigButton, "Heighting: None")
+    if trigButton == terrainEditorScreen["heightButton"] then
         call TerrainEditor_SetHeightTool(trigP, 0)
-    elseif buttonName == "Heighting: None" then
-        if heightEnabled then
-            call LocalFrameSetText(trigP, trigButton, "Heighting: Hill")
-            call TerrainEditor_SetHeightTool(trigP, 1)
+        //! textmacro TerrainEditor_ButtonCallback_onPress takes condition, tool
+            if $condition$ then
+                call TerrainEditor_SetHeightTool(trigP, $tool$)
+        
+                if User.Local == trigP then
+                    call BlzFrameSetEnable(terrainEditorScreen["heightButton"], trigButton != terrainEditorScreen["heightButton"])
+                    call BlzFrameSetEnable(terrainEditorScreen["hillButton"], trigButton != terrainEditorScreen["hillButton"])
+                    call BlzFrameSetEnable(terrainEditorScreen["plateauButton"], trigButton != terrainEditorScreen["plateauButton"])
+                    call BlzFrameSetEnable(terrainEditorScreen["smoothButton"], trigButton != terrainEditorScreen["smoothButton"])
+                    call BlzFrameSetVisible(terrainEditorScreen["plateauInput"], trigButton == terrainEditorScreen["plateauButton"])
+                endif
+            else
+                call DisplayTextToPlayer(trigP, 0., 0., "The Titan must enable height with |cffffff00-editor enable height|r. Not recommended for multiplayer.")
+            endif
+        //! endtextmacro
+        //! runtextmacro TerrainEditor_ButtonCallback_onPress("true", "0")
+    elseif trigButton == terrainEditorScreen["plateauButton"] then
+        //! runtextmacro TerrainEditor_ButtonCallback_onPress("heightEnabled", "TerrainEditor_HEIGHT_TOOL_PLATEAU")
+    elseif trigButton == terrainEditorScreen["hillButton"] then
+        //! runtextmacro TerrainEditor_ButtonCallback_onPress("heightEnabled", "TerrainEditor_HEIGHT_TOOL_HILL")
+    elseif trigButton == terrainEditorScreen["smoothButton"] then
+        //! runtextmacro TerrainEditor_ButtonCallback_onPress("heightEnabled", "TerrainEditor_HEIGHT_TOOL_SMOOTH")
+    elseif trigButton == terrainEditorScreen["paintButton"] then
+        if TerrainEditor_IsPainting(trigP) then
+            call LocalFrameSetText(trigP, trigButton, "Texturing: Off")
+            call TerrainEditor_EnablePainting(trigP, false)
         else
-            call DisplayTextToPlayer(trigP, 0., 0., "The Titan must enable height with |cffffff00-editor enable height|r. Not recommended for multiplayer.")
+            call LocalFrameSetText(trigP, trigButton, "Texturing: On")
+            call TerrainEditor_EnablePainting(trigP, true)
         endif
-    elseif buttonName == "Texturing: On" then
-        call LocalFrameSetText(trigP, trigButton, "Texturing: Off")
-        call TerrainEditor_EnablePainting(trigP, false)
-    elseif buttonName == "Texturing: Off" then
-        call LocalFrameSetText(trigP, trigButton, "Texturing: On")
-        call TerrainEditor_EnablePainting(trigP, true)
+    else
+        set TerrainEditor_currentTexture[pId] = TerrainTools_GetTexture(TerrainEditorButton.fromHandle(trigButton))
+    
+        if User.fromLocal() == pId then
+            call BlzFrameSetEnable(trigButton, false)
+            call BlzFrameSetEnable(lastButton, true)
+            set lastButton = trigButton
+        endif
     endif
     
-    if trigP == User.Local then
+    if trigP == User.Local and BlzFrameGetEnable(trigButton) then
         call BlzFrameSetEnable(trigButton, false) //disable the clicked button
         call BlzFrameSetEnable(trigButton, true) //enable it again.
     endif
+endfunction
+
+private function onClick takes nothing returns nothing
+    call ButtonCallback(GetTriggerPlayer(), BlzGetTriggerFrame())
 endfunction
 
 private function onPress takes nothing returns boolean
@@ -39,28 +69,99 @@ private function onPress takes nothing returns boolean
     local player trigP = GetTriggerPlayer()
     
     if controller.isEnabled(trigP) then
-        call BJDebugMsg("a")
-        
         if BlzGetTriggerPlayerIsKeyDown() then
-            if number > 0 and number < 6 then
-                call TerrainEditor_SetBrushSize(trigP, number*2-1)
-            elseif trigP == User.Local and BlzGetTriggerPlayerKey() == OSKEY_H then
-                call BlzFrameClick(TerrainEditorUIView_mainFrame["heightButton"])
-            elseif trigP == User.Local and BlzGetTriggerPlayerKey() == OSKEY_P then
-                call BlzFrameClick(TerrainEditorUIView_mainFrame["paintButton"])
+            if BlzGetTriggerPlayerMetaKey() == 0 then
+                if number > 0 and number < 6 then
+                    call TerrainEditor_SetBrushSize(trigP, number*2-1)
+                    if User.Local == trigP then
+                        call BlzFrameSetValue(terrainEditorScreen["brushSizeSlider"], number)
+                    endif
+                elseif BlzGetTriggerPlayerKey() == OSKEY_H then
+                    call ButtonCallback(trigP, terrainEditorScreen["heightButton"])
+                elseif BlzGetTriggerPlayerKey() == OSKEY_P then
+                    call ButtonCallback(trigP, terrainEditorScreen["paintButton"])
+                endif
+            else
+                if number > 0 and number < 9 then
+                    if BlzGetTriggerPlayerMetaKey() == MetaKeys.ALT then
+                        set number = number + 7
+                    else
+                        set number = number - 1
+                    endif
+                    if TerrainEditor_currentTexture[User[trigP]] != TerrainTools_GetTexture(number) then
+                        call ButtonCallback(trigP, TerrainEditorButton(number).button)
+                    endif
+                endif
             endif
         endif
     endif
     return true
 endfunction
 
+function onChangeValue takes nothing returns nothing
+    call TerrainEditor_SetBrushSize(GetTriggerPlayer(), R2I(BlzGetTriggerFrameValue())*2-1)
+endfunction
+
+function onEditText takes nothing returns nothing
+    local string text = BlzGetTriggerFrameText()
+    
+    set TerrainEditor_plateauLevel[User[GetTriggerPlayer()]] = -S2R(text)
+endfunction
+
+private function onEnter takes nothing returns nothing
+    set TerrainEditor_isLocked[User[GetTriggerPlayer()]] = true
+endfunction
+
+private function onLeave takes nothing returns nothing
+    set TerrainEditor_isLocked[User[GetTriggerPlayer()]] = false
+endfunction
+
 //===========================================================================
 private function Init takes nothing returns nothing
-    local trigger trig = CreateTrigger() //The Trigger Handling the Frameevent
-    call TriggerAddAction(trig, function ButtonCallBack) //Function ButtonCallBack will run when mainButton is clicked
+    local trigger trig = CreateTrigger()
+    local integer i = 0
     
-    call BlzTriggerRegisterFrameEvent(trig, TerrainEditorUIView_mainFrame["paintButton"], FRAMEEVENT_CONTROL_CLICK)
-    call BlzTriggerRegisterFrameEvent(trig, TerrainEditorUIView_mainFrame["heightButton"], FRAMEEVENT_CONTROL_CLICK)
+    call BlzTriggerRegisterFrameEvent(TerrainEditorButton.mouseClickHandler, terrainEditorScreen["paintButton"], FRAMEEVENT_CONTROL_CLICK)
+    call BlzTriggerRegisterFrameEvent(TerrainEditorButton.mouseClickHandler, terrainEditorScreen["heightButton"], FRAMEEVENT_CONTROL_CLICK)
+    call BlzTriggerRegisterFrameEvent(TerrainEditorButton.mouseClickHandler, terrainEditorScreen["hillButton"], FRAMEEVENT_CONTROL_CLICK)
+    call BlzTriggerRegisterFrameEvent(TerrainEditorButton.mouseClickHandler, terrainEditorScreen["plateauButton"], FRAMEEVENT_CONTROL_CLICK)
+    call BlzTriggerRegisterFrameEvent(TerrainEditorButton.mouseClickHandler, terrainEditorScreen["smoothButton"], FRAMEEVENT_CONTROL_CLICK)
+    
+    call TriggerAddAction(TerrainEditorButton.mouseClickHandler, function onClick)
+    call TriggerAddAction(TerrainEditorButton.mouseEnterHandler, function onEnter)
+    call TriggerAddAction(TerrainEditorButton.mouseLeaveHandler, function onLeave)
+    
+    call BlzTriggerRegisterFrameEvent(TerrainEditorButton.mouseEnterHandler, terrainEditorScreen["paintButton"], FRAMEEVENT_MOUSE_ENTER)
+    call BlzTriggerRegisterFrameEvent(TerrainEditorButton.mouseLeaveHandler, terrainEditorScreen["paintButton"], FRAMEEVENT_MOUSE_LEAVE)
+    call BlzTriggerRegisterFrameEvent(TerrainEditorButton.mouseEnterHandler, terrainEditorScreen["heightButton"], FRAMEEVENT_MOUSE_ENTER)
+    call BlzTriggerRegisterFrameEvent(TerrainEditorButton.mouseLeaveHandler, terrainEditorScreen["heightButton"], FRAMEEVENT_MOUSE_LEAVE)
+    call BlzTriggerRegisterFrameEvent(TerrainEditorButton.mouseEnterHandler, terrainEditorScreen["hillButton"], FRAMEEVENT_MOUSE_ENTER)
+    call BlzTriggerRegisterFrameEvent(TerrainEditorButton.mouseLeaveHandler, terrainEditorScreen["hillButton"], FRAMEEVENT_MOUSE_LEAVE)
+    call BlzTriggerRegisterFrameEvent(TerrainEditorButton.mouseEnterHandler, terrainEditorScreen["plateauButton"], FRAMEEVENT_MOUSE_ENTER)
+    call BlzTriggerRegisterFrameEvent(TerrainEditorButton.mouseLeaveHandler, terrainEditorScreen["plateauButton"], FRAMEEVENT_MOUSE_LEAVE)
+    call BlzTriggerRegisterFrameEvent(TerrainEditorButton.mouseEnterHandler, terrainEditorScreen["smoothButton"], FRAMEEVENT_MOUSE_ENTER)
+    call BlzTriggerRegisterFrameEvent(TerrainEditorButton.mouseLeaveHandler, terrainEditorScreen["smoothButton"], FRAMEEVENT_MOUSE_LEAVE)
+    
+    loop
+        exitwhen i > 15
+            call BlzTriggerRegisterFrameEvent(TerrainEditorButton.mouseEnterHandler, TerrainEditorButton(i).button, FRAMEEVENT_MOUSE_ENTER)
+            call BlzTriggerRegisterFrameEvent(TerrainEditorButton.mouseLeaveHandler, TerrainEditorButton(i).button, FRAMEEVENT_MOUSE_LEAVE)
+        set i = i + 1
+    endloop
+        
+    call BlzTriggerRegisterFrameEvent(trig, terrainEditorScreen["plateauInput"], FRAMEEVENT_EDITBOX_TEXT_CHANGED)
+    call TriggerAddAction(trig, function onEditText)
+    
+    set trig = CreateTrigger()
+    call BlzFrameSetValue(terrainEditorScreen["brushSizeSlider"], 3.)
+    call TriggerAddAction(trig, function onChangeValue)
+    call BlzTriggerRegisterFrameEvent(trig, terrainEditorScreen["brushSizeSlider"], FRAMEEVENT_SLIDER_VALUE_CHANGED)
+    call BlzTriggerRegisterFrameEvent(TerrainEditorButton.mouseEnterHandler, terrainEditorScreen["brushSizeSlider"], FRAMEEVENT_MOUSE_ENTER)
+    call BlzTriggerRegisterFrameEvent(TerrainEditorButton.mouseLeaveHandler, terrainEditorScreen["brushSizeSlider"], FRAMEEVENT_MOUSE_LEAVE)
+    call BlzTriggerRegisterFrameEvent(TerrainEditorButton.mouseEnterHandler, terrainEditorScreen["brushSizeSliderButton"], FRAMEEVENT_MOUSE_ENTER)
+    call BlzTriggerRegisterFrameEvent(TerrainEditorButton.mouseLeaveHandler, terrainEditorScreen["brushSizeSliderButton"], FRAMEEVENT_MOUSE_LEAVE)
+    
+    
     
     call OSKeys.KEY1.register()
     call OSKeys.KEY2.register()
@@ -73,7 +174,7 @@ private function Init takes nothing returns nothing
     call OSKeys.KEY9.register()
     call OSKeys.H.register()
     call OSKeys.P.register()
-    set controller = ScreenController.create(TerrainEditorUIView_mainFrame, Condition(function onPress))
+    set controller = ScreenController.create(terrainEditorScreen, Condition(function onPress))
 endfunction
 
 endlibrary
