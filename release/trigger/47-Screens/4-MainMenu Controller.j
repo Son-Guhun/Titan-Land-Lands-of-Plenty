@@ -1,4 +1,4 @@
-library MainMenuController initializer Init requires UILib, MainMenuView, ChatLogController, TerrainEditorUI, LoPUI
+library MainMenuController initializer Init requires UILib, MainMenuView, ChatLogController, LoPUI, TerrainEditorUI
 
 globals
     public ScreenController controller

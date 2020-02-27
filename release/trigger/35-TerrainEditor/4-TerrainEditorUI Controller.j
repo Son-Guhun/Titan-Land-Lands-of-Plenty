@@ -1,7 +1,7 @@
 library TerrainEditorUIController initializer Init requires UILib, PlayerUtils, BitFlags, TerrainEditorUIView, TerrainEditor
 
 globals
-    public boolean heightEnabled = true//false
+    public boolean heightEnabled = false
     public ScreenController controller
     private framehandle lastButton = null
 
