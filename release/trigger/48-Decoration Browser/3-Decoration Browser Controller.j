@@ -57,10 +57,10 @@ struct DecorationsListbox extends array
         set packet[1] = GetCameraTargetPositionY()
 
         if isReforged[pId] then
-            call BJDebugMsg(I2S(listIndex) + ": " + GetObjectName(ReforgedDecorationList(playerLists[pId])[listIndex]))
+            // call BJDebugMsg(I2S(listIndex) + ": " + GetObjectName(ReforgedDecorationList(playerLists[pId])[listIndex]))
             set packet.metaData[0] = ReforgedDecorationList(playerLists[User[trigP]])[listIndex]
         else
-            call BJDebugMsg(I2S(listIndex) + ": " + GetObjectName(playerLists[pId][listIndex]))
+            // call BJDebugMsg(I2S(listIndex) + ": " + GetObjectName(playerLists[pId][listIndex]))
             set packet.metaData[0] = playerLists[User[trigP]][listIndex]
         endif
         

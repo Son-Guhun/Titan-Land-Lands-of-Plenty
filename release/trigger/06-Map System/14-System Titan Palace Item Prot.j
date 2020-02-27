@@ -47,8 +47,6 @@ function System_TPalaceProtection_Timer takes nothing returns nothing
     local unit u = tId.unit
     local item i = tId.item
     
-    call BJDebugMsg(GetUnitName(u))
-    
     call UnitRemoveItem(u, i)
     call RemoveItem(i)
     
@@ -65,8 +63,6 @@ function Trig_System_Titan_Palace_Item_Prot_Actions takes nothing returns nothin
     local timer t
     local TimerData tId
     local item i = GetSoldItem()
-    
-    call BJDebugMsg(GetUnitName(GetBuyingUnit()))
 
     if IsItemPowerup(i) then
         call RemoveItem( i )

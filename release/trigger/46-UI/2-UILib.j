@@ -28,7 +28,6 @@ endfunction
 
 function CreateTooltip takes framehandle frame, string title, real sizeX, real sizeY, real xOffset, real yOffset returns framehandle
     local framehandle tooltip = BlzCreateFrame("BoxedText", frame, 0, 0)
-    call BJDebugMsg(I2S(GetHandleId(tooltip)))
 
     call BlzFrameSetTooltip(frame, tooltip)
 
