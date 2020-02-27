@@ -33,6 +33,9 @@ endfunction
 private function onTimer takes nothing returns nothing
     if (BlzFrameGetEnable(UpperButtonBar.buttons[1])) != UpperButtonBar.isEnabled then
         set UpperButtonBar.isEnabled = not UpperButtonBar.isEnabled
+        // call BlzFrameSetEnable(UpperButtonBar.buttons[4], UpperButtonBar.isEnabled)
+        call BlzFrameSetEnable(UpperButtonBar.buttons[5], UpperButtonBar.isEnabled)
+        // call BlzFrameSetEnable(UpperButtonBar.buttons[6], UpperButtonBar.isEnabled)
         call BlzFrameSetEnable(UpperButtonBar.buttons[7], UpperButtonBar.isEnabled)
     endif
 endfunction
@@ -41,7 +44,7 @@ private function onHotkey takes nothing returns boolean
     local integer index
     
     if BlzGetTriggerPlayerIsKeyDown() and BlzGetTriggerPlayerMetaKey() == MetaKeys.CTRL then
-        set index = 4 + GetHandleId(BlzGetTriggerPlayerKey()) - $70
+        set index = 4 + GetHandleId(BlzGetTriggerPlayerKey()) - OSKeys.F1
         if index != 4 and index != 6 then
             call HandleButton(GetTriggerPlayer(), UpperButtonBar.buttons[index])
         endif

@@ -57,6 +57,7 @@ OOC suffix: ))")
     call BlzFrameSetText(mainButton, "Special Units")
     set mainFrame["specialUnits"] = mainButton
     call CreateTooltip(mainButton, "Spawn Special Units", 0.15, 0.08, 0.002, 0.002)
+    call BlzFrameSetEnable(mainButton, false)
     
     set mainButton = BlzCreateFrame("ScriptDialogButton", mainFrame.main, 0,0)
     call BlzFrameSetSize(mainButton, 0.12, 0.05)
