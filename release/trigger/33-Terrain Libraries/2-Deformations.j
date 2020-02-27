@@ -12,6 +12,8 @@ set d.depth = d.depth + 10
 globals
     // The value bj_CELLWIDTH in Blizzard.j is unlikely to ever changed. Thus, it's inlined here.
     constant boolean INLINE_bj_CELLWIDTH = true
+    public constant real MAX_HEIGHT = 2000.
+    public constant real MIN_HEIGHT = -2000.
 endglobals
 
 // =================================================================================================
@@ -42,6 +44,11 @@ struct Deformation extends array
     
     method operator depth= takes real depth returns nothing
         if this >= 0 then
+            if depth > MAX_HEIGHT then
+                set depth = MAX_HEIGHT
+            elseif depth < MIN_HEIGHT then
+                set depth = MIN_HEIGHT
+            endif
             call TerrainDeformCrater(GetTileCenterXById(this), GetTileCenterYById(this), .CELL_SIZE, R2I(depth) - .depth_actual, 1, true)
             set .depth_impl = depth
             set .depth_actual = R2I(depth)

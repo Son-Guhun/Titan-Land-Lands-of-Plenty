@@ -103,9 +103,20 @@ function onChangeValue takes nothing returns nothing
 endfunction
 
 function onEditText takes nothing returns nothing
-    local string text = BlzGetTriggerFrameText()
+    local framehandle frame = BlzGetTriggerFrame()
+    local player trigP = GetTriggerPlayer()
+    local real value = -S2R(BlzGetTriggerFrameText())
     
-    set TerrainEditor_plateauLevel[User[GetTriggerPlayer()]] = -S2R(text)
+    if value > Deformations_MAX_HEIGHT then
+        set value = Deformations_MAX_HEIGHT
+        call LocalFrameSetText(trigP, frame, I2S(R2I(-value)))
+    elseif value < Deformations_MIN_HEIGHT then
+        set value = Deformations_MIN_HEIGHT
+        call LocalFrameSetText(trigP, frame, I2S(R2I(-value)))
+    endif
+    
+    
+    set TerrainEditor_plateauLevel[User[trigP]] = value
 endfunction
 
 private function onEnter takes nothing returns nothing
@@ -139,8 +150,12 @@ private function Init takes nothing returns nothing
     call BlzTriggerRegisterFrameEvent(TerrainEditorButton.mouseLeaveHandler, terrainEditorScreen["hillButton"], FRAMEEVENT_MOUSE_LEAVE)
     call BlzTriggerRegisterFrameEvent(TerrainEditorButton.mouseEnterHandler, terrainEditorScreen["plateauButton"], FRAMEEVENT_MOUSE_ENTER)
     call BlzTriggerRegisterFrameEvent(TerrainEditorButton.mouseLeaveHandler, terrainEditorScreen["plateauButton"], FRAMEEVENT_MOUSE_LEAVE)
+    call BlzTriggerRegisterFrameEvent(TerrainEditorButton.mouseEnterHandler, terrainEditorScreen["plateauInput"], FRAMEEVENT_MOUSE_ENTER)
+    call BlzTriggerRegisterFrameEvent(TerrainEditorButton.mouseLeaveHandler, terrainEditorScreen["plateauInput"], FRAMEEVENT_MOUSE_LEAVE)
     call BlzTriggerRegisterFrameEvent(TerrainEditorButton.mouseEnterHandler, terrainEditorScreen["smoothButton"], FRAMEEVENT_MOUSE_ENTER)
     call BlzTriggerRegisterFrameEvent(TerrainEditorButton.mouseLeaveHandler, terrainEditorScreen["smoothButton"], FRAMEEVENT_MOUSE_LEAVE)
+    call BlzTriggerRegisterFrameEvent(TerrainEditorButton.mouseEnterHandler, terrainEditorScreen["exitButton"], FRAMEEVENT_MOUSE_ENTER)
+    call BlzTriggerRegisterFrameEvent(TerrainEditorButton.mouseLeaveHandler, terrainEditorScreen["exitButton"], FRAMEEVENT_MOUSE_LEAVE)
     
     loop
         exitwhen i > 15

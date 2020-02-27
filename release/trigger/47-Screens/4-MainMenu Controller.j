@@ -27,6 +27,12 @@ private function onClick takes nothing returns nothing
         call FreeCam_Enable(trigP, not FreeCam_IsEnabled(trigP))
     elseif trigButton == MainMenuView_mainFrame["chatLogs"] then
         call ChatLogController_controller.enable(trigP, true)
+    elseif trigButton == terrainEditorScreen["exitButton"] then
+        call TerrainEditorUI_Deactivate(GetTriggerPlayer())
+        if User.Local == trigP then
+            set LoPUI_altZEnabled = true
+            call FullScreen(false, 255)
+        endif
     endif
     
     if trigP == User.Local then
@@ -56,6 +62,8 @@ private function Init takes nothing returns nothing
     call BlzTriggerRegisterFrameEvent(trig, MainMenuView_mainFrame["sotdrp"], FRAMEEVENT_CONTROL_CLICK)
     call BlzTriggerRegisterFrameEvent(trig, MainMenuView_mainFrame["freeCamera"], FRAMEEVENT_CONTROL_CLICK)
     call BlzTriggerRegisterFrameEvent(trig, MainMenuView_mainFrame["chatLogs"], FRAMEEVENT_CONTROL_CLICK)
+    
+    call BlzTriggerRegisterFrameEvent(trig, terrainEditorScreen["exitButton"], FRAMEEVENT_CONTROL_CLICK)
     
     call OSKeys.T.register()
     set controller = ScreenController.create(MainMenuView_mainFrame, Condition(function onHotkey))

@@ -2,6 +2,8 @@
 InfoPanelIconHeroIconAGI=Images\UI\AttrAgility.blp
 InfoPanelIconHeroIconINT=Images\UI\AttrIntelligence.blp
 InfoPanelIconHeroIconSTR=Images\UI\AttrStamina.blp
+[Errors]
+Emptycontrolgroup= 
 [FrameDef]
 KEY_QUESTS=Manual (|Cfffed312F9|R)
 QUESTS=Manual

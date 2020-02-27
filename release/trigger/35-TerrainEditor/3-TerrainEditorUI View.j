@@ -14,6 +14,12 @@ endglobals
     call terrainEditorScreen.show(false)
     
     set mainButton = BlzCreateFrame("ScriptDialogButton", terrainEditorScreen.main, 0,0)
+    call BlzFrameSetSize(mainButton, 0.06, 0.05)
+    call BlzFrameSetAbsPoint(mainButton, FRAMEPOINT_LEFT, 0.0,0.595)
+    call BlzFrameSetText(mainButton, "Exit")
+    set terrainEditorScreen["exitButton"] = mainButton
+    
+    set mainButton = BlzCreateFrame("ScriptDialogButton", terrainEditorScreen.main, 0,0)
     call BlzFrameSetSize(mainButton, 0.12, 0.05)
     call BlzFrameSetAbsPoint(mainButton, FRAMEPOINT_CENTER, 0.3,0.595)
     call BlzFrameSetText(mainButton, "Texturing: On")
@@ -48,7 +54,7 @@ endglobals
     call BlzFrameSetPoint(mainButton, FRAMEPOINT_TOPLEFT, terrainEditorScreen["plateauButton"], FRAMEPOINT_BOTTOMLEFT, 0., 0.)  
     call BlzFrameSetPoint(mainButton, FRAMEPOINT_TOPRIGHT, terrainEditorScreen["plateauButton"], FRAMEPOINT_BOTTOMRIGHT, 0., 0.)  
     call BlzFrameSetSize(mainButton, 0.12, 0.03)
-    call BlzFrameSetTextSizeLimit(mainButton, 4)
+    call BlzFrameSetTextSizeLimit(mainButton, 5)
     set terrainEditorScreen["plateauInput"] = mainButton
     call BlzFrameSetText(mainButton, "0")
     call BlzFrameSetVisible(mainButton, false)
@@ -72,7 +78,6 @@ endglobals
     set terrainEditorScreen["brushSizeSlider"] = mainButton
     
     set terrainEditorScreen["brushSizeSliderButton"] = BlzGetFrameByName("EscMenuThumbButtonTemplate",0)
-    call BJDebugMsg("ID: " + I2S(GetHandleId(terrainEditorScreen["brushSizeSliderButton"])))
     
     set mainButton = BlzCreateFrameByType("TEXT", "HotkeyIndicator", terrainEditorScreen.main, "StandardExtraSmallTextTemplate", 0)
     call BlzFrameSetPoint(mainButton, FRAMEPOINT_TOP, terrainEditorScreen["brushSizeSlider"], FRAMEPOINT_BOTTOMLEFT, 0.0031 + 0.1*BlzFrameGetWidth(terrainEditorScreen["brushSizeSlider"])/4, 0)

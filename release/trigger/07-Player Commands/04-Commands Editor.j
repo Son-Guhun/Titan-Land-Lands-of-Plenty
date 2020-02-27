@@ -19,7 +19,7 @@ private function onCommand takes nothing returns boolean
     elseif args == "enable height" and GetTriggerPlayer() == udg_GAME_MASTER then
         set TerrainEditorUIController_heightEnabled = true
     elseif args == "disable height" and GetTriggerPlayer() == udg_GAME_MASTER then
-        set TerrainEditorUIController_heightEnabled = true
+        set TerrainEditorUIController_heightEnabled = false
     endif
     
     return false
