@@ -5,10 +5,7 @@ globals
     private sound clickSoundBig
 endglobals
 
-private function onClick takes nothing returns nothing
-    local framehandle trigButton = BlzGetTriggerFrame()
-    local player trigP = GetTriggerPlayer()
-
+private function HandleButton takes player trigP, framehandle trigButton returns nothing
     if trigButton == UpperButtonBar.buttons[7] then
         if MainMenuController_controller.isEnabled(trigP) then
             call MainMenuController_controller.enable(trigP, false)
@@ -28,6 +25,11 @@ private function onClick takes nothing returns nothing
     endif
 endfunction
 
+private function onClick takes nothing returns nothing
+
+    call HandleButton(GetTriggerPlayer(), BlzGetTriggerFrame())
+endfunction
+
 private function onTimer takes nothing returns nothing
     if (BlzFrameGetEnable(UpperButtonBar.buttons[1])) != UpperButtonBar.isEnabled then
         set UpperButtonBar.isEnabled = not UpperButtonBar.isEnabled
@@ -36,11 +38,12 @@ private function onTimer takes nothing returns nothing
 endfunction
 
 private function onHotkey takes nothing returns boolean
-    local player trigP = GetTriggerPlayer()
+    local integer index
     
     if BlzGetTriggerPlayerIsKeyDown() and BlzGetTriggerPlayerMetaKey() == MetaKeys.CTRL then
-        if trigP == User.Local and BlzGetTriggerPlayerKey() == OSKEY_F4 then
-            call BlzFrameClick(UpperButtonBar.buttons[7])
+        set index = 4 + GetHandleId(BlzGetTriggerPlayerKey()) - $70
+        if index != 4 and index != 6 then
+            call HandleButton(GetTriggerPlayer(), UpperButtonBar.buttons[index])
         endif
     endif
 
@@ -66,6 +69,9 @@ private function Init takes nothing returns nothing
     call BlzTriggerRegisterFrameEvent(trig, UpperButtonBar.buttons[7], FRAMEEVENT_CONTROL_CLICK)
     call OSKeys.addListener(Condition(function onHotkey))
     
+    // call OSKeys.F1.register()
+    call OSKeys.F2.register()
+    // call OSKeys.F3.register()
     call OSKeys.F4.register()
 endfunction
 

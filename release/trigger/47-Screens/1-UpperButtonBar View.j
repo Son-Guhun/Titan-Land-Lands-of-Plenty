@@ -5,7 +5,8 @@ private keyword InitModule
 struct UpperButtonBar extends array
     
     readonly static framehandle array buttons
-    readonly static framehandle leftFrame
+    readonly static framehandle rightFrame
+    readonly static framehandle resourceBar
     static boolean isEnabled = true
     // readonly static framehandle rightFrame
     
@@ -19,8 +20,10 @@ private module InitModule
         call BlzLoadTOCFile("war3mapImported\\Templates.toc")
 
         // If the parent is set to UpperButtonBarFrame or ResourceBarFrame, camera mouse will bug after a unit is selected
-        set leftFrame = BlzCreateSimpleFrame("LoPUpperButtonBarFrame", BlzGetFrameByName("ConsoleUI",0),0)
-        call BlzFrameSetAllPoints(leftFrame, BlzGetFrameByName("ResourceBarFrame",0))
+        set rightFrame = BlzCreateSimpleFrame("LoPUpperButtonBarFrame", BlzGetFrameByName("ConsoleUI",0),0)
+        set resourceBar = BlzGetFrameByName("ResourceBarFrame",0)
+        call BlzFrameSetAllPoints(rightFrame, resourceBar)
+        call BlzFrameSetVisible(resourceBar, false)
         
         set buttons[0] = BlzGetFrameByName("UpperButtonBarQuestsButton", 0)
         set buttons[1] = BlzGetFrameByName("UpperButtonBarMenuButton", 0)

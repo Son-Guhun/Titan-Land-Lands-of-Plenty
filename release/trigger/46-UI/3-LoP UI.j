@@ -18,7 +18,8 @@ function FullScreen takes boolean enable, integer cmdBtnAlpha returns nothing
         call BlzHideOriginFrames(enable)
         call BlzEnableUIAutoPosition(not enable)
         call BlzFrameSetVisible(ConsoleUIBackdrop, not enable)
-        call BlzFrameSetVisible(UpperButtonBar.leftFrame, not enable)
+        call BlzFrameSetVisible(UpperButtonBar.rightFrame, not enable)
+        call BlzFrameSetVisible(UpperButtonBar.resourceBar, false)
     endif
 
     if not enable then
