@@ -1,8 +1,7 @@
 library CustomizableAbilityList requires TableStruct, Rawcode2String, GALability
 
 globals
-    private boolean isBugged = false
-    private framehandle textArea
+    private framehandle abilityListTextArea
 endglobals
 
 private keyword Init
@@ -32,19 +31,17 @@ struct RemoveableAbility extends array
         local string tooltip = BlzGetAbilityTooltip(whichAbility, 0)
         local string id
         
-        if not isBugged then
-            set whichAbility.isRegistered = true
-            set whichAbility.isHero = isHero
-            
-            set id = ID2S(whichAbility)
+        set whichAbility.isRegistered = true
+        set whichAbility.isHero = isHero
         
-            if isHero then
-                call BlzFrameAddText(textArea, "[" + id + "] - " + tooltip)
-            endif
-            set tooltip = tooltip + " |c99999999Code: [" + id + "]|r"
-            call BlzSetAbilityTooltip(whichAbility, tooltip, 0)
-            set Tooltip2Rawcode(StringHash(tooltip)).rawcode = whichAbility
+        set id = ID2S(whichAbility)
+    
+        if isHero then
+            call BlzFrameAddText(abilityListTextArea, "[" + id + "] - " + tooltip)
         endif
+        set tooltip = tooltip + " |c99999999Code: [" + id + "]|r"
+        call BlzSetAbilityTooltip(whichAbility, tooltip, 0)
+        set Tooltip2Rawcode(StringHash(tooltip)).rawcode = whichAbility
     endmethod
     
     static method fromTooltip takes string tooltip returns thistype
@@ -105,23 +102,11 @@ endfunction
 private module Init
 
     private static method onInit takes nothing returns nothing
-        local string tooltip = BlzGetAbilityTooltip('A017', 0)
-        local string a
-        local string test = "1234567890abcdefghijklmnopqrstuvwxyz[]()1234567890abcdefghijklmnopqrstuvwxyz1234567890abcdefghijklmnopqrstuvwxyz1234567890abcdefghijklmnopqrstuvwxyz"
-        call BlzSetAbilityTooltip('A017', test, 0)
-        call BlzSetAbilityTooltip('A017', tooltip, 0)
-        
         call BlzLoadTOCFile( "war3mapImported\\Templates.toc" )
-        set textArea = BlzCreateFrame("EscMenuTextAreaTemplate", BlzGetOriginFrame(ORIGIN_FRAME_GAME_UI, 0),0,0)
-        call BlzFrameSetAbsPoint(textArea, FRAMEPOINT_TOPLEFT, 0.5, 0.5)
-        call BlzFrameSetSize(textArea, 0.25, 0.25)
-        
-        set a = BlzGetAbilityTooltip('A017', 0)
-        if a != tooltip then
-            call DisplayTextToPlayer(GetLocalPlayer(), 0., 0., "Detected Reforged tooltip bug!")
-            set isBugged = true
-        endif
-        call BlzFrameSetVisible(textArea, false)
+        set abilityListTextArea = BlzCreateFrame("EscMenuTextAreaTemplate", BlzGetOriginFrame(ORIGIN_FRAME_GAME_UI, 0),0,0)
+        call BlzFrameSetAbsPoint(abilityListTextArea, FRAMEPOINT_TOPLEFT, 0.5, 0.5)
+        call BlzFrameSetSize(abilityListTextArea, 0.25, 0.25)
+        call BlzFrameSetVisible(abilityListTextArea, false)
   
         call .registerAbility('A017', true)  // Raise Flesh Golem
         call .registerAbility('A027', true)  // Raise Skeletal Legion
