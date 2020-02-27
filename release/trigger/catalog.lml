@@ -1,5 +1,4 @@
 01-Stuff: Stuff
-    Comment
     1-IMPORTANT: IMPORTANT
         Comment
     2-Tutorials: Tutorials
@@ -36,7 +35,6 @@
     '8-Stress Test 1': 'Stress Test 1'
         Disab
 '03-Main Systems': 'Main Systems'
-    Comment
 '04-LoP Core': 'LoP Core'
     01-LoPHeader: LoPHeader
     02-LoPDecoBuilders: LoPDecoBuilders
@@ -154,7 +152,6 @@
     '52-Commands Freecam': 'Commands Freecam'
     '53-Hotkey Fullscreen': 'Hotkey Fullscreen'
 '08-Decoration Systems': 'Decoration Systems'
-    Comment
 '09-Deco Builders': 'Deco Builders'
     01-Libraries: Libraries
         Comment
@@ -190,13 +187,9 @@
         Comment
     10-UpgradeSystemInit: UpgradeSystemInit
 11----------------------------------------: ---------------------------------------
-    Comment
 12-Systems: Systems
-    Comment
 13-------------------: ------------------
-    Comment
 14-vJass: vJass
-    Comment
 '15-Data Structures': 'Data Structures'
     '1-GMUI Main': 'GMUI Main'
     2-Lists: Lists
@@ -284,7 +277,6 @@
         Comment
     8-MountSystem: MountSystem
 22-External: External
-    Comment
 '23-Unit Event': 'Unit Event'
     '1-Unit Event Config': 'Unit Event Config'
         Disab
@@ -313,7 +305,6 @@
     '6-K2D OnLoop Template': 'K2D OnLoop Template'
         Disab
 '27-By Guhun': 'By Guhun'
-    Comment
 '28-Save System': 'Save System'
     '01-How to Import': 'How to Import'
         Comment
@@ -378,11 +369,8 @@
     5-TileDefs: TileDefs
     6-PlayerColorUtils: PlayerColorUtils
 36----------------------------------------: ---------------------------------------
-    Comment
 37-Spells: Spells
-    Comment
 38-------------------: ------------------
-    Comment
 '39-Spell System Spells': 'Spell System Spells'
     '01-Spell System Filter Decorations': 'Spell System Filter Decorations'
     '02-Initialize Spells': 'Initialize Spells'
@@ -471,9 +459,7 @@
     6-Test: Test
         Disab
 42----------------------------------------: ---------------------------------------
-    Comment
 43-TESTING: TESTING
-    Comment
     '1-Global Return Library': 'Global Return Library'
         Disab
     '2-Ban Player': 'Ban Player'
