@@ -17,7 +17,7 @@ module AdvChatBoxController
         if elapsed > 3. then
             loop
                 exitwhen pId == bj_MAX_PLAYERS
-                if elapsed - timeStamps[pId] < 3.0 then
+                if User.fromLocal() != pId and elapsed - timeStamps[pId] < 3.0 then
                     if playerCount > 0 then
                         if playerCount > MAX_TYPING_DISPLAY_COUNT then
                             set msg = "Many players"

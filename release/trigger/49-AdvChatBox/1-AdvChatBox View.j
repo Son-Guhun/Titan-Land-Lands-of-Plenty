@@ -17,6 +17,7 @@ struct AdvChatBox extends array
         call BlzFrameSetAbsPoint(AdvChatBox.editBox, FRAMEPOINT_CENTER, 0.4, 0.18)    
         call BlzFrameSetSize(AdvChatBox.editBox, 0.6, 0.03)
         call BlzFrameSetVisible(AdvChatBox.editBox, false)
+        call BlzFrameSetTextSizeLimit(AdvChatBox.editBox, 255)
         
         set AdvChatBox.typingIndicator = BlzCreateFrameByType("TEXT", "TypingIndicator", BlzGetOriginFrame(ORIGIN_FRAME_GAME_UI, 0), "StandardExtraSmallTextTemplate", 0)
         call BlzFrameSetPoint(AdvChatBox.typingIndicator, FRAMEPOINT_TOPRIGHT, AdvChatBox.editBox, FRAMEPOINT_TOPLEFT, 0, 0.02)

@@ -45,14 +45,28 @@ struct AdvChatBoxLoP extends array
         
         if extendedMsg != "" then
             set oldName = GetPlayerName(sender)
-            call BlzDisplayChatMessage(sender, 0, msg)
+            if OOC then
+                call BlzDisplayChatMessage(sender, 0, "((" + msg)
+            else
+                call BlzDisplayChatMessage(sender, 0, msg)
+            endif
+            
             call SetPlayerName(sender, " ")
-            call BlzDisplayChatMessage(sender, 0, extendedMsg)
+            if OOC then
+                call BlzDisplayChatMessage(sender, 0, extendedMsg + "))")
+            else
+                call BlzDisplayChatMessage(sender, 0, extendedMsg)
+            endif
+            
             call SetPlayerName(sender, oldName)
         else
-            call BlzDisplayChatMessage(sender, 0, msg)
+            if OOC then
+                call BlzDisplayChatMessage(sender, 0, "((" + msg)
+            else
+                call BlzDisplayChatMessage(sender, 0, msg)
+            endif
         endif
-        // call DisplayTextToPlayer(GetLocalPlayer(), 0., 0., msg)
+        call ChatMessageHandler(User[sender], msg, OOC)
         
         if User.Local == sender then
             call BlzFrameSetText(AdvChatBox.editBox, "")
