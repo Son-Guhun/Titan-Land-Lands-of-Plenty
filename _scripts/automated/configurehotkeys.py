@@ -14,7 +14,7 @@ HOTKEYS = ['"Q"','"W"','"E"','"R"',
            '"A"','"S"','"D"','"F"',
            '"Z"','"X"','"C"','"V"']
 
-def set_hotkeys(unit_data, unit_list, **kwargs):
+def set_hotkeys(unit_data, unit_list, structure, **kwargs):
     for i,u in enumerate(unit_list):
         #if i > 6:
         #    i += 1  # Skip rally point ability
@@ -34,7 +34,7 @@ def set_hotkeys(unit_data, unit_list, **kwargs):
                     print('Error in {} for {}.'.format(key, unit.name))
                     # traceback.print_exc()
         except KeyError as e:
-            print('Could not find data for trained unit: ' + u)
+            print(f'Could not find data for trained unit [{u}] in [{structure}]')
 
 MAX_UPGRADES = 10  # Maximum number of upgrades that a single production building can have.
 def configure_trained_units(unit_data, building_list, **kwargs):
@@ -46,27 +46,41 @@ def configure_trained_units(unit_data, building_list, **kwargs):
                 upgrade = data['Upgrade'][1:-1]
                 while upgrade != building:
                     series.append(upgrade)
+                    if 'Upgrade' not in unit_data[upgrade]:
+                        raise ValueError(f'In chain [{building}], upgrade [{upgrade}] has no upgrades')
                     upgrade = unit_data[upgrade]['Upgrade'][1:-1]
                     if len(series) > MAX_UPGRADES:
                         raise ValueError('Could not find original building ({}) in upgrade depth of {}.'.format(building, MAX_UPGRADES))
             
             for structure in series:
                 try:
+                    if unit_data[structure]['Trains'] == '""':
+                         raise ValueError()
                     trained_list = unit_data[structure]['Trains'][1:-1].split(',')
-                    set_hotkeys(unit_data, trained_list, **kwargs)
-                except KeyError:
-                    print('Could not find any units trained by: ' + building)
+                    set_hotkeys(unit_data, trained_list, structure, **kwargs)
+                except (KeyError, ValueError):
+                    print('Could not find any units trained by: ' + structure)
         except Exception as e:
             print('Exception in building: ' + building)
-            # traceback.print_exc()
+            traceback.print_exc()
 
 def configure_selectors(unit_data, selector_list, **kwargs):
     for selector in selector_list:
-        upgrade_list = unit_data[selector]['Upgrade'][1:-1].split(',')
-        upgrade_list.remove('e001')  # Ignore Race Selector (e001)
+        count = 0
+        if unit_data[selector]['Upgrade'] != '""':
+            upgrade_list = unit_data[selector]['Upgrade'][1:-1].split(',')
+            upgrade_list.remove('e001')  # Ignore Race Selector (e001)
+        else:
+            count += 1
 
-        trained_list = unit_data[selector]['Trains'][1:-1].split(',')
-        set_hotkeys(unit_data, upgrade_list + trained_list, **kwargs)
+        if unit_data[selector]['Trains'] != '""':
+            trained_list = unit_data[selector]['Trains'][1:-1].split(',')
+            set_hotkeys(unit_data, upgrade_list + trained_list, selector, **kwargs)
+        else:
+            count += 1
+
+        if count == 2:
+            print(f'Empty selector: [{selector}]')
 
 def configure_decorations(unit_data, **kwargs):
     keys = ('Buttonpos_2', 'Buttonpos_1', 'Hotkey')
@@ -78,7 +92,7 @@ def configure_decorations(unit_data, **kwargs):
             if key in decoration: del decoration[key]
     for builder in iter_deco_builders(unit_data, builder_only=True):
         if builder.name != 'u00W':
-            set_hotkeys(unit_data, get_build_list(builder), **kwargs)
+            set_hotkeys(unit_data, get_build_list(builder), builder, **kwargs)
 
 
 
