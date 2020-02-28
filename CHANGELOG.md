@@ -12,6 +12,110 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 	- New units for an existing race can be added in a patch version. 
 	- New decorations for an existing deco builder can be added in a patch version.
 
+## [v1.5.0]
+
+### Added
+- Complete UI redesign:
+	- Right Upper Bar Buttons:
+		- Gold, Lumber, Food and Upkeep are no longer shown and have been replaced by new buttons.
+		- New Decoration Browser:"
+			- Allows you to select decorations from a scrollable list.
+			- Separate lists for reforged anc classic decorations.
+			- You can type into the search bar at the top to search for specific decorations.
+		- New Tools menu includes:
+			- The Terrain Editor has returned with a complete UI redesign. The ability to create terrain deformations has also been enabled. Using deformations in mutliplayer is not recommend, though you can load them from saved made in singleplayer.
+			- Button to access Free Camera.
+			- SotDRP chat mode which allows players to chat using a SotDRP-style system.
+			- Chat logs for OOC and IC conversations.
+	- New Advanced Chat Box:
+		- Can be accessed using the Backspace key.
+		- Allows you to switch between OOC and IC typing without having to type (( into the chat box.
+		- Supports both normal chat mode and SotDRP chat mode.
+		- Keeps your text even when you click out if it.
+		- Separate buffers for OOC/IC messages (this means you can switch to OOC mode, type a new message, and retain your original message when going back to IC mode).
+		- Shows which players are currently typing in the Adv Chat Box (does not support original chat box).
+		- You cannot type commands into the Advanced Chat Box.
+	- Players can now press Alt+Z to enter Full Screen mode
+- Race Selector has been split into Reforged Races and Classic Races:
+	- Added Reforged Races (Over 200 new Reforged models):
+		- Humans
+		- Orcs
+		- Trolls
+		- Night Elves
+		- High Elves
+		- Naga
+		- Murlocs
+		- Pandaren
+		- Corrupted:
+			- Undead
+			- Demons
+			- Faceless
+		- Creeps:
+			- Anthropomorphic: Furbolgs, Quillboars, Gnolls and Tuskarr
+			- Beasts
+			- Arachnid: Nerubian, Scorpid, Spider
+			- Golems
+			- Dragonspawn
+			- Elementals
+			- Monsters: Wendigos, Sasquatches, Mangataurs
+			- Broken (Draenei)
+			- Centaurs
+			- Corrupted Forest: Satyrs and Fel Ents
+			- Forest Dwellers: Treant, Jungle Stalkers, Harpies and Wildkin
+- Titan Palace has been split into two sections: Reforged and Classic:
+	- Reforged section is in the upper part of the Titan Palace. The item shops and the Titan's exclusive area have been moved to accomodate this new section.
+	- Added Reforged Heroes
+		- Added all heroes available in the base game.
+		- Humans (two towers)
+		- Orcs
+		- Fel Orcs
+		- Undead
+		- Demons
+		- Night Elves
+		- High/Blood Elves
+		- Naga
+		- Misc
+	- Added Reforged Deco Builders (Over 200 new Reforged models):
+		- New command: **-decos reforged**
+		- Plants 1 & 2
+		- Rocks 1 & 2
+		- Dalaran
+		- Market
+		- Walls
+		- Human
+		- Orc
+		- Undead
+		- Night Elf
+- Added Reforged Dragons to the Titan Palace dragon roosts.
+- Added missing trees in the Titan Palace palette.
+
+### Fixed
+- Fixed broken shadows in Reforged graphics.
+- Fixed a critical bug when saving destructables more than once.
+- Fixed an issue introduced in Reforged that would cause decorations with dimensional scaling, pitch, roll or negative height to disappear when being moved.
+- Fixed model scale for Black Legion Sacred Maiden and some doodads in Reforged mode.
+
+### Changed
+- Titan Land LoP is no longer compatible with patch 1.31 and below and now requires Reforged.
+- Unselectable units are no longer paused and can now maintain a patrol path.
+- The map's script is again optimized, which should avoid some performance issues.
+
+
+## [v1.4.5]
+
+### Fixed
+- Fixed a desync that could occur due to the tooltip bug introduced by Reforged.
+
+
+## [v1.4.4]
+
+### Fixed
+- Fixed many issues introduced by Reforged.
+
+### Changed
+- Forced use of SD models in HD mode (for consistency between players). A future version will be released that makes reforged models available.
+
+
 ## [v1.4.3] - 2020-01-21
 
 ### Added
