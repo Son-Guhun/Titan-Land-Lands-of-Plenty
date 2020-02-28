@@ -99,3 +99,20 @@ def inline_constants(line):
     result.append(noise[-1])
     
     return ''.join(result) #, noise, symbols
+
+a = """
+    function s__AnyBase_encode takes integer this,integer x returns string
+        local string result= ""
+        local integer index
+        
+        loop
+        exitwhen x == 0
+
+                set index=x - ( x / this ) * this
+                set result=SubString(("0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ[]{}()|/,.?!@#$%^&*'`+-=<>~:;_"), index, index + 1) + result // INLINED!!
+                set x=x / this
+        endloop
+        
+        return result
+    endfunction
+"""

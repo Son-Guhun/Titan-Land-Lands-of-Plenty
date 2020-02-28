@@ -3,7 +3,7 @@ import subprocess
 
 PJASS = '_tests\\pjass.exe'
 COMMON = '..\..\development\scripts\common.j'
-BLIZZARD = '..\..\development\scripts\common.jblizzard.j'
+BLIZZARD = '..\..\development\scripts\blizzard.j'
 
 def test_inliner():
     with open('_tests\\test-opt.j','w') as f:

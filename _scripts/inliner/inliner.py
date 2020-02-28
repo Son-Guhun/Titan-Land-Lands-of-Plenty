@@ -104,13 +104,11 @@ def parse(file, out=sys.stdout):
 
 def inline_strings(file, out):
     is_string = False
-    first_slash = False
-    escape = False
-
     for line in file:
+        escape = False
+        first_slash = False
         for char in line:
             if first_slash and char == '/':
-                first_slash = False
                 break
             if is_string:
                 if escape:
