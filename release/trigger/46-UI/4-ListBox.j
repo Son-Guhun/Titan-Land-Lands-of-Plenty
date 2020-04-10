@@ -1,18 +1,61 @@
 library ListBox requires Table, PlayerUtils
 
-module ListBoxTemplate
-    readonly static framehandle array buttons
-    readonly static framehandle scrollBar
-    readonly static integer array lastValue
-    readonly static integer array sizes
-    readonly static integer array wheelSpins
+/*
+  DOCUMENTATION
+To implement this module in a struct, you will need to define the following fields/methods before the line in which the module is implemented:
+*/
+
+//! novjass
+    static framepointtype startFramepoint = FRAMEPOINT_TOP  // absolute framepoint that will be set for the first button
+    static real startPointX = 0.4  // X center for the framepoint of the first button
+    static real startPointY = 0.57 // Y for the framepoint of the first button
+    static constant integer numberOfEntries = 3  // Number of buttons displayed
+    static integer initialSize = 6  // Initial number of options
+    static constant string frameName = "BrowserButton"  // Frame used for buttons
+    static constant real sizeX = 0.125  // X size of the whole listbox
+    static constant real sizeY = 0.028*numberOfEntries  // Y size of the whole listbox
+    static constant boolean LISTBOX_SKIP_INIT = true  // If this is not set, then you must create a listBoxInit function
+
+    // Called when a button is updated.
+    // This entire function is locally executed. Avoid functions that change game state.
+    static method updateFrame takes integer frameIndex, integer listIndex returns nothing
+        call BlzFrameSetText(buttons[frameIndex], GetObjectName(rawcodes[listIndex]))
+    endmethod
     
-    private static key tab
+    // Called when the frames are created at map start.
+    // You can override the value of buttons[i] here
+    static method onCreateFrame takes integer frameIndex returns nothing
+        call BlzFrameSetText(buttons[frameIndex], GetObjectName(rawcodes[frameIndex]))
+    endmethod
+    
+    //     Called when a player clicks on a button. 'listIndex' will depend on the current number of total
+    // options for a player. 
+    static method onClickHandler takes player trigP, integer frameIndex, integer listIndex returns nothing
+        call BJDebugMsg(BlzFrameGetText(buttons[frameIndex]))
+        call BJDebugMsg(I2S(listIndex))
+    endmethod
+
+    implement ListBoxTemplate  // Important: template should be implemented last
+//! endnovjass
+
+
+// SOURCE CODE BELOW
+///////////////////////////////////////////////
+
+module ListBoxTemplate
+    readonly static framehandle array buttons  // contains all the buttons in the listbox
+    readonly static framehandle scrollBar
+    readonly static integer array lastValue  // for each player, stores the last value of the scrollBar frame
+    readonly static integer array sizes // for each player, stores the size of the list displayed by the listbox (all items)
+    readonly static integer array wheelSpins  // for each player, stores how many mouse wheel spins they have made whose value changed event has not triggered
+    
+    private static key tab  // a map from handleID to button frame, using a static Table
     
     static constant method operator minValue takes nothing returns integer
         return numberOfEntries - 1
     endmethod
     
+    // From the index of a frame in the buttons array, returns the index of the value held by that frame in the list of the given player
     static method getListIndex takes player whichPlayer, integer frameIndex returns integer
         local integer pId = User[whichPlayer]
         return sizes[pId] - lastValue[pId] + frameIndex
