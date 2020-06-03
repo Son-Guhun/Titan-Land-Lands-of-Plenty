@@ -5,6 +5,7 @@ library DecorationBrowserController initializer Init requires Packets, Decoratio
 globals
     private DecorationList array playerLists
     private boolean array isReforged
+    private key searchStrings  // table of search strings for each player. Used so RefreshList can be used when a player swaps lists, instead of having to fire an editbox event.
 endglobals
 
 
@@ -37,10 +38,18 @@ struct DecorationsListbox extends array
     endmethod
 
     static method updateFrame takes integer frameIndex, integer listIndex returns nothing
+        local integer typeId
+        
         if isReforged[User.fromLocal()] then
-            call BlzFrameSetText(buttons[frameIndex], GetObjectName(ReforgedDecorationList(playerLists[User.fromLocal()])[listIndex]))
+            set typeId = ReforgedDecorationList(playerLists[User.fromLocal()])[listIndex]
         else
-            call BlzFrameSetText(buttons[frameIndex], GetObjectName(playerLists[User.fromLocal()][listIndex]))
+            set typeId = playerLists[User.fromLocal()][listIndex]
+        endif
+        
+        if typeId != 0 then
+            call BlzFrameSetText(buttons[frameIndex], GetObjectName(typeId))
+        else
+            call BlzFrameSetText(buttons[frameIndex], "")
         endif
     endmethod
     
@@ -89,7 +98,12 @@ private function RefreshList takes User pId, string searchStr returns nothing
 endfunction
 
 private function onEditText takes nothing returns boolean
-    call RefreshList(User[GetTriggerPlayer()], BlzGetTriggerFrameText())
+    local string text = BlzGetTriggerFrameText()
+    local User pId = User[GetTriggerPlayer()]
+
+    call RefreshList(pId, text)
+    set Table(searchStrings).string[pId] = text
+    
     return true
 endfunction
 
@@ -97,15 +111,20 @@ private function onClick takes nothing returns nothing
     local User pId = User[GetTriggerPlayer()]
     local framehandle trigButton = BlzGetTriggerFrame()
     
-    set isReforged[pId] = not isReforged[pId]
-    if User.fromLocal() == pId then
-        if isReforged[pId] then
-            call BlzFrameSetText(decorationBrowserScreen["titleText"], "Reforged Decorations")
-        else
-            call BlzFrameSetText(decorationBrowserScreen["titleText"], "Classic Decorations")
+    // Swap button
+        set isReforged[pId] = not isReforged[pId]
+        if User.fromLocal() == pId then
+            if isReforged[pId] then
+                call BlzFrameSetText(decorationBrowserScreen["titleText"], "Reforged Decorations")
+            else
+                call BlzFrameSetText(decorationBrowserScreen["titleText"], "Classic Decorations")
+            endif
         endif
-        call RefreshList(pId, BlzFrameGetText(decorationBrowserScreen["editBox"]))
-    endif
+        if not Table(searchStrings).string.has(pId) then
+            set Table(searchStrings).string[pId] = ""
+        endif
+        call RefreshList(pId, Table(searchStrings).string[pId])
+    // end swap button
     
     if User.fromLocal() == pId then
         call BlzFrameSetEnable(trigButton, false) //disable the clicked button
