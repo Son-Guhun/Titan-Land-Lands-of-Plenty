@@ -1,4 +1,16 @@
 library RegisterDecorationNames requires StringHashEx, HashStruct, Table, optional LoPUnitCompatibility
+/*
+This library defines DecorationListTemplate, a module used to create a searchable list. To see an example
+of this module in use, see the "Register Classic Decorations" or "Register Reforged Decorations" triggers.
+
+module DecorationListTemplate
+
+static method get takes string searchStr returns thistype
+- This is a factory method to return a sublist of the complete list. The sublist will contain all
+strings which have "searchStr" as a substring. This is not case-sensitive.
+
+endmodule
+*/
 
 
 //! runtextmacro optional LoPUnitCompatibility()

@@ -26,6 +26,12 @@ endstruct
 //! runtextmacro RegisterDecorationNamesFunctionTemplate("ReforgedDecorationList")
 
 
+/*
+Registering unit names on the decoration list takes quite a lot of processing, which means it can 
+easily hit the OP limit imposed by JASS. To avoid this, we have to execute the code in separate threads.
+
+This code is automatically generated using the searchindexernew.py script in the repository.
+*/
 private module A0
 private static method onInit takes nothing returns nothing
 call RegisterThing('h1XR')
