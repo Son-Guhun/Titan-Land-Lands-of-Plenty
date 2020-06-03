@@ -3,10 +3,10 @@ library AdvChatBoxController requires OSKeyLib, AdvChatBoxView, PlayerUtils
 module AdvChatBoxController
 
     private static integer timerTicks = 0
-    private static string lastText = ""  // stores the last text held by the chat box
+    private static string lastText = ""  // async. stores the last text held by the chat box
     private static real array timeStamps  // stores last timestamp of the last time a player typed
-    private static boolean in = false
-    private static string buffer = ""
+    private static boolean in = false  // async
+    private static string buffer = ""  // async
     
     private static method setTypingText takes integer trailingDots returns nothing
         local string msg = ""
@@ -163,7 +163,7 @@ module AdvChatBoxController
 
     // Executed when a player clicks a mouse button. If outisde the chat box, remove focus from it.
     private static method onWorld takes nothing returns nothing
-        if not in then
+        if not in and User.Local == GetTriggerPlayer() then  // checking for trigger player is necessary, otherwise focus lost when another player clicks and mouse is outside editbox
             call BlzFrameSetFocus(AdvChatBox.editBox, false)
         endif
     endmethod

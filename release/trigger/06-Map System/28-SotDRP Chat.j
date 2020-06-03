@@ -40,9 +40,18 @@ endfunction
 
 //===========================================================================
 function InitTrig_SotDRP_Chat takes nothing returns nothing
+    local User pId = 0
+    
     set gg_trg_SotDRP_Chat = CreateTrigger(  )
-    call TriggerRegisterPlayerChatEvent( gg_trg_SotDRP_Chat, Player(0), "", false )
     call TriggerAddAction( gg_trg_SotDRP_Chat, function SotDRP_Chat_Actions )
+    
+    loop
+        exitwhen pId == bj_MAX_PLAYERS
+        if GetPlayerController(pId.handle) == MAP_CONTROL_USER then
+            call TriggerRegisterPlayerChatEvent(gg_trg_SotDRP_Chat, pId.handle, "", false)
+        endif
+        set pId = pId + 1
+    endloop
     
     set playerColors[0] = "|c00ff0303"
     set playerColors[1] = "|c000042ff"
