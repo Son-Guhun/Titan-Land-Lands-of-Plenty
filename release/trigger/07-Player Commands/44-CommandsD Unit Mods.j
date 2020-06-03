@@ -10,6 +10,8 @@ private struct Globals extends array
     static real green
     static real blue
     static real alpha
+    
+    static location loc
 
 endstruct
 
@@ -77,6 +79,23 @@ private function groupFunc takes nothing returns nothing
                 call GUMSSetUnitFlyHeight(enumUnit, udg_DecoSystem_Height[playerNumber])
             else
                 call GUMSSetUnitFlyHeight(enumUnit, Globals.value)
+            endif
+        endif
+    elseif ( command == "'ah" ) then
+        if LoP_IsUnitDecoration(enumUnit) then
+            call MoveLocation(Globals.loc, GetUnitX(enumUnit), GetUnitY(enumUnit))
+            if IsUnitType(enumUnit, UNIT_TYPE_STRUCTURE) then
+                if args == "" then
+                    call GUMSSetStructureFlyHeight(enumUnit, udg_DecoSystem_Height[playerNumber] - GetLocationZ(Globals.loc), not LoP_IsUnitDecoration(enumUnit))
+                else
+                    call GUMSSetStructureFlyHeight(enumUnit, Globals.value - GetLocationZ(Globals.loc), not LoP_IsUnitDecoration(enumUnit))
+                endif
+            else
+                if args == "" then
+                    call GUMSSetUnitFlyHeight(enumUnit, udg_DecoSystem_Height[playerNumber] - GetLocationZ(Globals.loc))
+                else
+                    call GUMSSetUnitFlyHeight(enumUnit, Globals.value - GetLocationZ(Globals.loc))
+                endif
             endif
         endif
     elseif ( command == "'face" or command == "'f") then
@@ -179,6 +198,7 @@ function InitTrig_CommandsD_Unit_Mods takes nothing returns nothing
     call LoP_Command.create("'f", ACCESS_USER, Condition(function onCommand))
     call LoP_Command.create("'fly", ACCESS_USER, Condition(function onCommand))
     call LoP_Command.create("'h", ACCESS_USER, Condition(function onCommand))
+    call LoP_Command.create("'ah", ACCESS_USER, Condition(function onCommand))
     call LoP_Command.create("'anim", ACCESS_USER, Condition(function onCommand))
     call LoP_Command.create("'speed", ACCESS_USER, Condition(function onCommand))
     call LoP_Command.create("'color", ACCESS_USER, Condition(function onCommand))
@@ -186,6 +206,8 @@ function InitTrig_CommandsD_Unit_Mods takes nothing returns nothing
     call LoP_Command.create("'roll", ACCESS_USER, Condition(function onCommand))
     
     call LoP_Command.create("'rgb", ACCESS_USER, Condition(function onCommand))
+    
+    set Globals.loc = Location(0., 0.)
 endfunction
 
 endlibrary
