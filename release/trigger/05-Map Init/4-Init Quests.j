@@ -279,21 +279,20 @@ Toggles autoname on or off.
     
     // SaveNLoad Commands
     set quest_text = "
-Commands:
-|cffffff00-load center <x,y>|r
-Set the center for future save/loads. If no x and y arguments are given, then the save center is set to the position of your currently selected unit or the rally point of your currently selected building.
 |cffffff00-save (SaveName)|r
-Save all your units (including unselectable and neutral units)
+Save all your units (including unselectable and neutral units).
+|cffffff00-usav (SaveName)|r
+Save all your units (including unselectable and neutral units) inside the region of your currently selected Rect Generator. Can be used to save selected units only, if not selecting a Rect Generator.
 |cffffff00-dsav (SaveName)|r
-Save all trees inside the region of your currently selected Rect Generator. (|cffffcc00-rect|r to spawn and |cffffcc00-seln gen|r to select)
+Save all trees inside the region of your currently selected Rect Generator. (|cffffcc00-rect|r to spawn and |cffffcc00-seln gen|r to select).
 |cffffff00-tsav (SaveName)|r
-Save terrain inside the region of your currently selected Rect Generator. (|cffffcc00-rect|r to spawn and |cffffcc00-seln gen|r to select)
+Save terrain inside the region of your currently selected Rect Generator. (|cffffcc00-rect|r to spawn and |cffffcc00-seln gen|r to select).
 |cffffff00-request (SaveName)|r
-Load a save from your local storage.
+Load a save from your local storage. If the save was made with a Rect Generator or is small enough, you will be able to load anywhere you want.
 |cffffff00-req (SaveName)|r
-Send a request to the SaveNLoad program (it must be open) to load a save. This command is used to load legacy saves (before version 1.2.0).
+Load a save from your local storage, at its original location.
 "
-    call CreateQuestBJ(questType, "SaveNLoad System", quest_text, "ReplaceableTextures\\CommandButtons\\BTNSpellBookBLS.blp")
+    call CreateQuestBJ(questType, "Save/Load Commands", quest_text, "ReplaceableTextures\\CommandButtons\\BTNSpellBookBLS.blp")
     // ----------
     
     // Patrol System Commands
