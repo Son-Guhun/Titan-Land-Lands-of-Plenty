@@ -74,33 +74,42 @@ globals
     public ScreenController controller
 endglobals
 
-private function onEditText takes nothing returns boolean
-    local player trigP = GetTriggerPlayer()
+private function RefreshList takes User pId, string searchStr returns nothing
     local DecorationList list
     
-    
-    if isReforged[User[trigP]] then
-        set list = ReforgedDecorationList.get(BlzGetTriggerFrameText())
-        set playerLists[User[trigP]] = list
-        call DecorationsListbox.changeSize(trigP, ReforgedDecorationList(list).size - 1)
+    if isReforged[pId] then
+        set list = ReforgedDecorationList.get(searchStr)
+        set playerLists[pId] = list
+        call DecorationsListbox.changeSize(pId.handle, ReforgedDecorationList(list).size - 1)
     else
-        set list = DecorationList.get(BlzGetTriggerFrameText())
-        set playerLists[User[trigP]] = list
-        call DecorationsListbox.changeSize(trigP, list.size - 1)
+        set list = DecorationList.get(searchStr)
+        set playerLists[pId] = list
+        call DecorationsListbox.changeSize(pId.handle, list.size - 1)
     endif
+endfunction
+
+private function onEditText takes nothing returns boolean
+    call RefreshList(User[GetTriggerPlayer()], BlzGetTriggerFrameText())
     return true
 endfunction
 
 private function onClick takes nothing returns nothing
-    local player trigP = GetTriggerPlayer()
-    set isReforged[User[trigP]] = not isReforged[User[trigP]]
-    if User.Local == trigP then
-        if isReforged[User.fromLocal()] then
+    local User pId = User[GetTriggerPlayer()]
+    local framehandle trigButton = BlzGetTriggerFrame()
+    
+    set isReforged[pId] = not isReforged[pId]
+    if User.fromLocal() == pId then
+        if isReforged[pId] then
             call BlzFrameSetText(decorationBrowserScreen["titleText"], "Reforged Decorations")
         else
             call BlzFrameSetText(decorationBrowserScreen["titleText"], "Classic Decorations")
         endif
-        call BlzFrameSetText(decorationBrowserScreen["editBox"], BlzFrameGetText(decorationBrowserScreen["editBox"]))
+        call RefreshList(pId, BlzFrameGetText(decorationBrowserScreen["editBox"]))
+    endif
+    
+    if User.fromLocal() == pId then
+        call BlzFrameSetEnable(trigButton, false) //disable the clicked button
+        call BlzFrameSetEnable(trigButton, true) //enable it again.
     endif
 endfunction
 
