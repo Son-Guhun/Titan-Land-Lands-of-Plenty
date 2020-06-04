@@ -129,7 +129,7 @@ struct SaveData extends array
     implement GMUIUseGenericKey
 
     static constant integer MAX_LINES = 20
-    static constant integer VERSION = 6
+    static constant integer VERSION = 7
     //! runtextmacro TableStruct_NewReadonlyPrimitiveField("current", "integer")
     //! runtextmacro TableStruct_NewReadonlyPrimitiveField("linesWritten", "integer")
     //! runtextmacro TableStruct_NewReadonlyPrimitiveField("folder", "string")
@@ -307,7 +307,7 @@ struct SaveLoader extends array
 
         if GetLocalPlayer() == .player then
             call Preloader(path)
-            if .version == 6 then
+            if .version >= 6 then
                 call thistype.handlerV6(errorString)
             elseif .version >= 4 then
                 if BlzGetAbilityTooltip(IO_ABILITY(), 0) != VALIDATION_STR() then

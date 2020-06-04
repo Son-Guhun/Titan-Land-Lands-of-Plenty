@@ -6,7 +6,7 @@ function Trig_LoadTerrainNew_Actions takes nothing returns nothing
     
     if udg_load_number[playerNumber] < udg_load_limit then
         set udg_load_number[playerNumber] = udg_load_number[playerNumber] + 1
-        if IsTerrainHeader(syncStr) then
+        if (saveData.version < 7 and IsTerrainHeader(syncStr)) or IsTerrainHeaderV7(syncStr) then
             if saveData.atOriginal then
                 if saveData.version == 3 then
                     call LoadTerrainHeader(syncStr, playerId.centerX, playerId.centerY, true)

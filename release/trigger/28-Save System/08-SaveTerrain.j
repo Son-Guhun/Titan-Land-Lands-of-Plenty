@@ -25,6 +25,56 @@ function SaveTiles takes PlayerData playerId returns boolean
     local real curY = playerId.curY
     local integer i
     local string saveStr
+    local string heightStr
+    local real maxX = playerId.maxX
+    local real maxY = playerId.maxY
+    local integer j = 0
+    local SaveData saveData = playerId.saveData
+
+    loop
+    exitwhen j >= 25 /* avoid OP limit */ or curY > maxY  
+        set saveStr = ""
+        set i = 0
+        
+        loop
+        exitwhen i >= 30 // 60 tiles per single string (avoid desync)
+            
+            set saveStr = saveStr + LoadD2H(TerrainTools_GetTextureId(GetTerrainType(curX, curY)))/*
+                                */+ LoadD2H(GetTerrainVariance(curX, curY))
+                                
+            set heightStr = AnyBase(92).encode(Deformation.fromCoords(curX, curY).idepth + SaveNLoad_BASE_92_OFFSET())
+            if StringLength(heightStr) == 1 then
+                set saveStr = saveStr + ("0" + heightStr)
+            else
+                set saveStr = saveStr + heightStr
+            endif
+            
+            set i = i+1
+            if curX > maxX then
+                set curY = curY + 128
+                set curX = playerId.minX
+                exitwhen curY > maxY
+            else
+                set curX = curX + 128
+            endif
+        endloop
+        
+        call saveData.write(SaveNLoad_FormatString("SnL_ter", saveStr))
+        set j = j + 1
+    endloop
+
+    set playerId.curX = curX
+    set playerId.curY = curY
+        
+    return false
+endfunction
+
+/*
+function SaveTiles takes PlayerData playerId returns boolean
+    local real curX = playerId.curX
+    local real curY = playerId.curY
+    local integer i
+    local string saveStr
     local real maxX = playerId.maxX
     local real maxY = playerId.maxY
     local integer j = 0
@@ -60,6 +110,7 @@ function SaveTiles takes PlayerData playerId returns boolean
         
     return false
 endfunction
+*/
 
 private function onTimer takes nothing returns nothing
     local PlayerData playerId = 0
@@ -113,7 +164,7 @@ function SaveTerrain takes nothing returns nothing
     set playerId.curX = playerId.minX
     set playerId.curY = playerId.minY
     
-    call playerId.saveData.write(SaveNLoad_FormatString("SnL_ter", R2S(playerId.minX - playerId.saveData.centerX) + "@" + R2S(playerId.maxX - playerId.saveData.centerX) + "@" +/*
+    call playerId.saveData.write(SaveNLoad_FormatString("SnL_ter", "=" + R2S(playerId.minX - playerId.saveData.centerX) + "@" + R2S(playerId.maxX - playerId.saveData.centerX) + "@" +/*
                                                         */R2S(playerId.minY - playerId.saveData.centerY) + "@" + R2S(playerId.maxY - playerId.saveData.centerY) + "@"))
     
     set saveRect = null
