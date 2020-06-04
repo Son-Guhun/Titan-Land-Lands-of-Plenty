@@ -1,4 +1,24 @@
-library Deformations requires TileDefinition, optional HashtableWrapper, optional Table
+library LoPDeformLimit initializer init requires TileDefinition
+
+globals
+    public integer limitTile
+endglobals
+
+//! textmacro LoPDeformLimitInline
+    if (integer(this) - (integer(this) / WorldTilesX) * WorldTilesX) < LoPDeformLimit_limitTile then
+        return
+    endif
+//! endtextmacro
+
+private function init takes nothing returns nothing
+    set limitTile = GetTileId(14300, WorldBounds.minY)
+    call BJDebugMsg(I2S(limitTile))
+endfunction
+
+endlibrary
+
+
+library Deformations requires TileDefinition, TableStruct, optional LoPDeformLimit
 /*
 This library handles the creation and indexing of terrain deformation. Each terrain tile has its own
 deformation. Terrain tiles and their IDs are defined in the TileDefinition library.
@@ -42,16 +62,28 @@ struct Deformation extends array
         return .depth_impl
     endmethod
     
+    method operator idepth takes nothing returns integer
+        return .depth_actual
+    endmethod
+    
     method operator depth= takes real depth returns nothing
+        local integer delta
+        
+        //! runtextmacro LoPDeformLimitInline()
+        
         if this >= 0 then
             if depth > MAX_HEIGHT then
                 set depth = MAX_HEIGHT
             elseif depth < MIN_HEIGHT then
                 set depth = MIN_HEIGHT
             endif
-            call TerrainDeformCrater(GetTileCenterXById(this), GetTileCenterYById(this), .CELL_SIZE, R2I(depth) - .depth_actual, 1, true)
-            set .depth_impl = depth
-            set .depth_actual = R2I(depth)
+            set delta =  R2I(depth) - .depth_actual
+            
+            if delta != 0 then
+                call TerrainDeformCrater(GetTileCenterXById(this), GetTileCenterYById(this), .CELL_SIZE, delta, 1, true)
+                set .depth_impl = depth
+                set .depth_actual = R2I(depth)
+            endif
         endif
     endmethod
 endstruct
