@@ -40,8 +40,6 @@ Action
                     Var   : temp_integer
                 Const : true
             CommentString
-                Const : a
-            CommentString
                 Const : 'Titan Commands'
             AddTriggerEvent
                 Var   : gg_trg_CommandsR_The_Creator
@@ -55,14 +53,6 @@ Action
                 Array : TileSystem_Var
                     Var   : temp_integer
                 Const : -1
-            CommentString
-                Const : 'Other Commands'
-            AddTriggerEvent
-                Var   : gg_trg_Commands_Real_Name
-                Event: TriggerRegisterPlayerChatEvent
-                    Var   : temp_player
-                    Const : '-real '
-                    Preset: ChatMatchTypeSubstring
             CommentString
                 Const : Systems
             AddTriggerEvent
