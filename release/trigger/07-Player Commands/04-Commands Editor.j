@@ -15,7 +15,6 @@ private function onCommand takes nothing returns boolean
             set LoPUI_altZEnabled = false
             call FullScreen(true, 255)
         endif
-        call TerrainEditor_EnablePainting(GetTriggerPlayer(), false)
     elseif args == "enable height" and GetTriggerPlayer() == udg_GAME_MASTER then
         set TerrainEditorUIController_heightEnabled = true
     elseif args == "disable height" and GetTriggerPlayer() == udg_GAME_MASTER then

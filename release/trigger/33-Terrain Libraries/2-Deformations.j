@@ -12,7 +12,6 @@ endglobals
 
 private function init takes nothing returns nothing
     set limitTile = GetTileId(14300, WorldBounds.minY)
-    call BJDebugMsg(I2S(limitTile))
 endfunction
 
 endlibrary

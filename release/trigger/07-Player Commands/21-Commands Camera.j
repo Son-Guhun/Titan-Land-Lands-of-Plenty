@@ -1,10 +1,3 @@
-/*
-This trigger contains commands for:
-
--Spawning a Wandering Soul
--Spawning a Rect Generator
--Camera adjustments
-*/
 struct CameraValues extends array
     
     static real zoom = 0

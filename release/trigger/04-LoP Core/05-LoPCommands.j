@@ -4,18 +4,6 @@ globals
     constant integer ACCESS_TITAN = 1
     constant integer ACCESS_USER = 0
 endglobals
-// Save string. MUST MATCH.
-
-/*
- Old Commands API
-*/
-function Commands_GetArguments takes nothing returns string
-    return SubString(GetEventPlayerChatString(), StringLength(GetEventPlayerChatStringMatched()), StringLength(GetEventPlayerChatString()))
-endfunction
-
-function Commands_StartsWithCommand takes nothing returns boolean
-    return SubString(GetEventPlayerChatString(), 0, StringLength(GetEventPlayerChatStringMatched())) == GetEventPlayerChatStringMatched()
-endfunction
 
 // The filter is only called for the units selected by the player.
 function Commands_EnumSelectedCheckForGenerator takes group whichGroup, player whichPlayer, boolexpr filter returns integer
