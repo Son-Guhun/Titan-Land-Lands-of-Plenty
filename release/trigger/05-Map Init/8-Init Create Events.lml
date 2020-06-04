@@ -44,12 +44,6 @@ Action
             CommentString
                 Const : 'Titan Commands'
             AddTriggerEvent
-                Var   : gg_trg_CommandsR_Make_Titan
-                Event: TriggerRegisterPlayerChatEvent
-                    Var   : temp_player
-                    Const : '-titan '
-                    Preset: ChatMatchTypeSubstring
-            AddTriggerEvent
                 Var   : gg_trg_CommandsR_The_Creator
                 Event: TriggerRegisterPlayerChatEvent
                     Var   : temp_player
