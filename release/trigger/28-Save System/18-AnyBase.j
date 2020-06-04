@@ -1,4 +1,4 @@
-library AnyBase requires ConstTable
+library AnyBase requires ConstTable, StringHashEx
 /* Provides functionality to convert a number to a string in any base from 2 to 92. */
 
 //! novjass
@@ -63,7 +63,7 @@ struct AnyBase extends array
     endmethod
     
     method decode takes string x returns integer
-        local integer i = StringLength(x)
+        local integer i = StringLength(x) - 1
         local integer pow = 1
         local integer result = 0
         
@@ -81,11 +81,11 @@ struct AnyBase extends array
 endstruct
 private module AnyBaseInit
     private static method onInit takes nothing returns nothing
-        local integer i = StringLength(digits)
+        local integer i = StringLength(digits) - 1
         
         loop
         exitwhen i < 0
-            set .values[StringHash(SubString(.digits, i, i+1))] = i
+            set .values[StringHashEx(SubString(.digits, i, i+1))] = i
             set i = i - 1
         endloop
     endmethod
