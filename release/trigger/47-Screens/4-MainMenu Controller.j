@@ -9,19 +9,21 @@ private function onClick takes nothing returns nothing
     local player trigP = GetTriggerPlayer()
     
     if trigButton == MainMenuView_mainFrame["terrainEditor"] then
-        call TerrainEditorUI_Activate(GetTriggerPlayer())
+        call TerrainEditorUI_Activate(trigP)
         if User.Local == trigP then
             set LoPUI_altZEnabled = false
             call FullScreen(true, 255)
         endif
         call controller.enable(trigP, false)
     elseif trigButton == MainMenuView_mainFrame["sotdrp"] then
-        set sotdrp = not sotdrp
-        call BlzFrameSetVisible(BlzGetOriginFrame(ORIGIN_FRAME_CHAT_MSG, 0), not sotdrp)
-        if sotdrp then
-            call BlzFrameSetText(MainMenuView_mainFrame["sotdrp"], "Normal Chat")
-        else
-            call BlzFrameSetText(MainMenuView_mainFrame["sotdrp"], "SotDRP Chat")
+        if User.Local == trigP then
+            set sotdrp = not sotdrp
+            call BlzFrameSetVisible(BlzGetOriginFrame(ORIGIN_FRAME_CHAT_MSG, 0), not sotdrp)
+            if sotdrp then
+                call BlzFrameSetText(MainMenuView_mainFrame["sotdrp"], "Normal Chat")
+            else
+                call BlzFrameSetText(MainMenuView_mainFrame["sotdrp"], "SotDRP Chat")
+            endif
         endif
     elseif trigButton == MainMenuView_mainFrame["freeCamera"] then
         call FreeCam_Enable(trigP, not FreeCam_IsEnabled(trigP))

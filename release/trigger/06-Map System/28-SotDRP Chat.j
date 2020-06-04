@@ -5,7 +5,7 @@ globals
     string array playerColors
 endglobals
 
-function ChatMessageHandler takes integer id, string msg, boolean ooc returns nothing
+function SotDRPMessageHandler takes integer id, string msg, boolean ooc returns nothing
     if ooc then
         set msg = playerColors[id] + "[OOC]|r |cff00ced1" + msg + "|r"
         if sotdrp then
@@ -21,38 +21,8 @@ function ChatMessageHandler takes integer id, string msg, boolean ooc returns no
     endif
 endfunction
 
-function SotDRP_Chat_Actions takes nothing returns nothing
-    local string msg = GetEventPlayerChatString()
-    local integer len = StringLength(msg)
-    local integer id = GetPlayerId(GetTriggerPlayer())
-    
-    if len > 2 then
-        if SubString(msg, 0, 2) == "((" then
-            call ChatMessageHandler(id, SubString(msg, 2, len), true)
-        elseif SubString(msg, len-2, len) == "))" then
-            call ChatMessageHandler(id, SubString(msg, 0, len-2), true)
-        elseif not (SubString(msg, 0, 1) == "-" or SubString(msg, 0, 1) == "'") then
-            call ChatMessageHandler(id, msg, false)
-        endif
-    endif
-            
-endfunction
-
 //===========================================================================
-function InitTrig_SotDRP_Chat takes nothing returns nothing
-    local User pId = 0
-    
-    set gg_trg_SotDRP_Chat = CreateTrigger(  )
-    call TriggerAddAction( gg_trg_SotDRP_Chat, function SotDRP_Chat_Actions )
-    
-    loop
-        exitwhen pId == bj_MAX_PLAYERS
-        if GetPlayerController(pId.handle) == MAP_CONTROL_USER then
-            call TriggerRegisterPlayerChatEvent(gg_trg_SotDRP_Chat, pId.handle, "", false)
-        endif
-        set pId = pId + 1
-    endloop
-    
+function InitTrig_SotDRP_Chat takes nothing returns nothing    
     set playerColors[0] = "|c00ff0303"
     set playerColors[1] = "|c000042ff"
     set playerColors[2] = "|c001ce6b9"

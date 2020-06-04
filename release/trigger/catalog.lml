@@ -95,6 +95,7 @@
     '27-System Deselect': 'System Deselect'
     '28-SotDRP Chat': 'SotDRP Chat'
     '29-AdvChatBox LoP': 'AdvChatBox LoP'
+    '30-Chat Message Handler': 'Chat Message Handler'
 '07-Player Commands': 'Player Commands'
     '01-Commands Count': 'Commands Count'
     '02-Commands Fix': 'Commands Fix'

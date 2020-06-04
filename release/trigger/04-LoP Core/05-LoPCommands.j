@@ -113,14 +113,10 @@ endstruct
 
 public struct Globals extends array
     private static key static_members_key
-
-    //! runtextmacro TableStruct_NewStaticAgentField("trigger","trigger")
     //! runtextmacro TableStruct_NewStaticAgentField("evaluator","trigger")
 endstruct
 
-
-
-private function onChatMessage takes nothing returns boolean
+public function MessageHandler takes nothing returns boolean
     local string chatMsg
     local integer cutToComma
     local string beforeSpace
@@ -128,18 +124,14 @@ private function onChatMessage takes nothing returns boolean
     local LoP_Command command
     local triggercondition condition
     local trigger evaluator
+    local boolean value
     
     local integer accessLevel
     
-    if not LoP_PlayerData.get(GetTriggerPlayer()).commandsEnabled then
-        return false
-    endif
-    
     set chatMsg = GetEventPlayerChatString()
     
-    if SubString(chatMsg, 0, 1) != GetEventPlayerChatStringMatched() then
-        // This can happen when a command is issued and the other command prefix is in its arguments
-        return false
+    if Globals.evaluator == null then  // Initialization
+        set Globals.evaluator = CreateTrigger()
     endif
     
     set cutToComma = CutToCharacter(chatMsg, " ")
@@ -153,57 +145,36 @@ private function onChatMessage takes nothing returns boolean
     
     
     if GetTriggerPlayer() == udg_GAME_MASTER then
-        set accessLevel = 1
+        set accessLevel = ACCESS_TITAN
     else
-        set accessLevel = 0
+        set accessLevel = ACCESS_USER
     endif
     
     
-    debug call BJDebugMsg("Command called")
-    if beforeSpace == command.string and accessLevel >= command.accessLevel then
-        set evaluator = Globals.evaluator
-        debug call BJDebugMsg(beforeSpace)
-        
-        set condition = TriggerAddCondition(evaluator, command.boolexpr)
-        
-        call Args.setString(0, beforeSpace)
-        call Args.setString(1, arguments)
-        call TriggerEvaluate(evaluator)
-        call Args.freeString(0)
-        call Args.freeString(1)
-        call TriggerRemoveCondition(evaluator, condition)
-        
-        set condition = null
-        set evaluator = null
+    if beforeSpace == command.string then
+        if accessLevel >= command.accessLevel and LoP_PlayerData.get(GetTriggerPlayer()).commandsEnabled then
+            set evaluator = Globals.evaluator
+            debug call BJDebugMsg("Command called: " + beforeSpace)
+            
+            set condition = TriggerAddCondition(evaluator, command.boolexpr)
+            
+            call Args.setString(0, beforeSpace)
+            call Args.setString(1, arguments)
+            call TriggerEvaluate(evaluator)
+            call Args.freeString(0)
+            call Args.freeString(1)
+            call TriggerRemoveCondition(evaluator, condition)
+            
+            set condition = null
+            set evaluator = null
+        else
+            call DisplayTextToPlayer(GetTriggerPlayer(), 0., 0., "You do not have permission to use this command.")
+        endif
+        return true
     endif
 
     return false
 endfunction
-
-
-
-
-function onInit takes nothing returns nothing
-    local integer playerId = 0
-    local trigger trig = CreateTrigger()
-    
-    set Globals.trigger = trig
-    set Globals.evaluator = CreateTrigger()
-    
-    loop
-    exitwhen playerId == bj_MAX_PLAYERS
-        if GetPlayerController(Player(playerId)) == MAP_CONTROL_USER then
-            call TriggerRegisterPlayerChatEvent(trig, Player(playerId), "'", false)
-            call TriggerRegisterPlayerChatEvent(trig, Player(playerId), "-", false)
-        endif
-        set playerId = playerId + 1
-    endloop
-    call TriggerAddCondition(trig, Condition(function onChatMessage))
-
-    set trig = null
-endfunction
-
-
 
 
 endlibrary

@@ -67,7 +67,7 @@ struct AdvChatBoxLoP extends array
             endif
         endif
         
-        call ChatMessageHandler(User[sender], msg + extendedMsg, OOC)
+        call SotDRPMessageHandler(User[sender], msg + extendedMsg, OOC)
         
         if User.Local == sender then
             call BlzFrameSetText(AdvChatBox.editBox, "")
