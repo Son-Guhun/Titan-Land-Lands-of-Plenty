@@ -1,4 +1,4 @@
-library SpecialEffect requires AnyTileDefinition, GLHS, HashStruct
+library SpecialEffect requires AnyTileDefinition, GLHS, HashStruct, UnitModels
 
 globals
         private hashtable hashTableHandle = InitHashtable()
@@ -7,31 +7,13 @@ endglobals
 //! runtextmacro DeclareParentHashtableWrapperModule("hashTableHandle", "true", "hT", "public")
 //! runtextmacro DeclareParentHashtableWrapperStruct("hT","public")
 
-globals
-    /*constant*/ boolean IS_SLK = true
-endglobals
 function GetUnitTypeIdModel takes integer unitTypeId returns string
-    local string str
-    if IS_SLK then
-        return GetAbilityEffectById(unitTypeId, EFFECT_TYPE_SPECIAL, 1)
-    else
-        set str = GetAbilityEffectById(unitTypeId, EFFECT_TYPE_SPECIAL, 1)
-        return SubString(str, CutToComma(str)+1, StringLength(str))
-    endif
-/*
-    static if IS_SLK then
-        return GetAbilityEffectById(unitTypeId, EFFECT_TYPE_SPECIAL, 1)
-    else
-        local string str = GetAbilityEffectById(unitTypeId, EFFECT_TYPE_SPECIAL, 1)
-        return SubString(str, CutToComma(str)+1, StringLength(str))
-    endif
-*/
+    return UnitModels[unitTypeId]
 endfunction
 
 module InitModule
     private static method onInit takes nothing returns nothing
         set .loc = Location(0., 0.)
-        set IS_SLK = GetAbilityEffectById('h0HS', EFFECT_TYPE_SPECIAL, 1) == "war3mapImported\\ArabianArchery_squished.mdl"
     endmethod
 endmodule
 
@@ -42,6 +24,7 @@ struct SpecialEffect extends array
     //! runtextmacro HashStruct_SetHashtableWrapper("SpecialEffect_hT")
 
     //! runtextmacro HashStruct_NewReadonlyPrimitiveField("unitType","integer")
+    //! runtextmacro HashStruct_NewReadonlyPrimitiveField("skin_impl","integer")
     //! runtextmacro HashStruct_NewReadonlyPrimitiveField("effect","effect")
     
     //! runtextmacro HashStruct_NewReadonlyPrimitiveField("height_impl","real")
@@ -66,6 +49,14 @@ struct SpecialEffect extends array
     
     // Ideally this should return a list that, when modified, modfies the SFX as well. For now, don't remove elements from this list.
     //! runtextmacro HashStruct_NewReadonlyStructField("subanimations","LinkedHashSet")
+    
+    method operator skin takes nothing returns integer
+        if .skin_impl_exists() then
+            return .skin_impl
+        else
+            return .unitType
+        endif
+    endmethod
     
     method operator x takes nothing returns real
         implement assertNotNull
@@ -281,6 +272,19 @@ struct SpecialEffect extends array
         local SpecialEffect this = GetHandleId(e)
         
         set this.unitType= unitType
+        set this.effect = e
+        
+        call BlzPlaySpecialEffect(e, ANIM_TYPE_STAND)
+        set e = null
+        return this
+    endmethod
+    
+    static method createWithSkin takes integer unitType, integer skin, real x, real y returns SpecialEffect
+        local effect e = AddSpecialEffect(GetUnitTypeIdModel(skin), x, y)
+        local SpecialEffect this = GetHandleId(e)
+        
+        set this.unitType = unitType
+        set this.skin_impl = skin
         set this.effect = e
         
         call BlzPlaySpecialEffect(e, ANIM_TYPE_STAND)

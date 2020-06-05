@@ -3,11 +3,17 @@ library Unit2Effect requires DecorationSFX, StringSubanimations, UnitVisualValue
 function Unit2SpecialEffect takes unit whichUnit returns SpecialEffect
     local UnitTypeDefaultValues unitType = GetUnitTypeId(whichUnit)
     local UnitVisuals unitData = GetHandleId(whichUnit)
-    local SpecialEffect result = SpecialEffect.create(unitType, GetUnitX(whichUnit), GetUnitY(whichUnit))
+    local SpecialEffect result
     local real value
     
     local integer red
     local integer green
+    
+    if BlzGetUnitSkin(whichUnit) == GetUnitTypeId(whichUnit) then
+        set result = SpecialEffect.create(unitType, GetUnitX(whichUnit), GetUnitY(whichUnit))
+    else
+        set result = SpecialEffect.createWithSkin(unitType, BlzGetUnitSkin(whichUnit), GetUnitX(whichUnit), GetUnitY(whichUnit))
+    endif
     
     set result.height = GetUnitFlyHeight(whichUnit)
     set result.yaw = Deg2Rad(GetUnitFacing(whichUnit))
@@ -81,7 +87,7 @@ library Effect2Unit requires DecorationSFX, StringSubanimations, UnitVisualMods,
 function Effect2Unit takes DecorationEffect whichEffect returns unit
     local unit u = CreateUnit(whichEffect.getOwner(), whichEffect.unitType, whichEffect.x, whichEffect.y, Rad2Deg(whichEffect.yaw))
     
-    
+    call BlzSetUnitSkin(u, whichEffect.skin)
     call GUMSSetUnitScale(u, whichEffect.scaleX)
     call GUMSSetUnitVertexColor(u, whichEffect.red/2.55, whichEffect.green/2.55, whichEffect.blue/2.55, 100. - whichEffect.alpha/2.55)
     call GUMSSetUnitFlyHeight(u, whichEffect.height)

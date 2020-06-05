@@ -118,6 +118,10 @@ struct DecorationEffect extends array
         return SpecialEffect(this).unitType
     endmethod
     
+    method operator skin takes nothing returns integer
+        return SpecialEffect(this).skin
+    endmethod
+    
     method operator height takes nothing returns real
         return SpecialEffect(this).height
     endmethod
