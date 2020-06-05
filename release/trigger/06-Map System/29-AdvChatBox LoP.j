@@ -75,4 +75,20 @@ struct AdvChatBoxLoP extends array
     endmethod
 
     implement AdvChatBoxController
+    
+    /*
+    static method onTimer takes nothing returns nothing
+        local framehandle chatBox = FindChatBox()
+        
+        if BlzFrameIsVisible(chatBox) then
+            call BlzFrameSetVisible(chatBox, false)
+            call BlzFrameSetVisible(AdvChatBox.editBox, true)
+            call BlzFrameSetFocus(AdvChatBox.editBox, true)
+        endif
+    endmethod
+    
+    static method onInit takes nothing returns nothing
+        call TimerStart(CreateTimer(), 0.03, true, function thistype.onTimer)
+    endmethod
+    */
 endstruct

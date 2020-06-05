@@ -1,5 +1,23 @@
 library AdvChatBoxController requires OSKeyLib, AdvChatBoxView, PlayerUtils
 
+function FindChatBox takes nothing returns framehandle
+    local framehandle origin = BlzGetOriginFrame(ORIGIN_FRAME_GAME_UI, 0)
+    local integer i = BlzFrameGetChildrenCount(origin) - 1
+    local framehandle frame
+    
+    loop
+    exitwhen i < 0
+        set frame = BlzFrameGetChild(origin, i)
+    
+        if BlzFrameGetHeight(frame) == 0.03 and BlzFrameGetWidth(frame) == 0.4 then
+            return frame
+        endif
+        set i = i - 1
+    endloop
+
+    return null
+endfunction
+
 module AdvChatBoxController
 
     private static integer timerTicks = 0
@@ -136,6 +154,10 @@ module AdvChatBoxController
         if BlzGetTriggerPlayerKey() == OSKEY_BACKSPACE and BlzGetTriggerPlayerIsKeyDown() and User.Local == GetTriggerPlayer() then
             call BlzFrameSetVisible(AdvChatBox.editBox, true)
             call BlzFrameSetFocus(AdvChatBox.editBox, true)
+        elseif BlzGetTriggerPlayerKey() == OSKEY_RETURN and BlzGetTriggerPlayerMetaKey() == MetaKeys.SHIFT then
+            call BlzFrameSetVisible(FindChatBox(), false)
+            call BlzFrameSetVisible(AdvChatBox.editBox, true)
+            call BlzFrameSetFocus(AdvChatBox.editBox, true)
         elseif BlzGetTriggerPlayerKey() == OSKEY_ESCAPE and BlzGetTriggerPlayerMetaKey() == MetaKeys.SHIFT then 
             call handleButton(GetTriggerPlayer(), AdvChatBox.closeButton)
         endif
@@ -209,6 +231,7 @@ module AdvChatBoxController
         
         call OSKeys.BACKSPACE.register()
         call OSKeys.ESCAPE.register()
+        call OSKeys.RETURN.register()
         call OSKeys.addListener(Condition(function thistype.onHotkey))
     endmethod
 
