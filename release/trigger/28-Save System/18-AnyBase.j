@@ -69,7 +69,7 @@ struct AnyBase extends array
         
         loop
         exitwhen i < 0
-            set result = result + AnyBase.values[StringHash(SubString(x, i, i+1))]*pow
+            set result = result + AnyBase.values[StringHashEx(SubString(x, i, i+1))]*pow
             set pow = pow * this
             set i = i - 1
         endloop
