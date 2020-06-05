@@ -64,6 +64,11 @@ OOC suffix: ))")
     call BlzFrameSetAbsPoint(mainButton, FRAMEPOINT_CENTER, View4by3.w/2, 3*View4by3.h/8)
     call BlzFrameSetText(mainButton, "Chat Logs")
     set mainFrame["chatLogs"] = mainButton
+    call BlzFrameSetText(CreateTooltip(mainButton, "Chat Logs", 0.30, 0.15, 0.002, 0.002), "
+Allows you to view separate chat logs for OOC/IC messages. These chat logs should reach further into past messages than the game's default chat log.
+
+This chat log is also the only way to view messages sent using the Advanced Chat Box. To access the advanced chat box, use the hotkey |cffffcc00Shift|r+Enter.
+")
     // call CreateTooltip(mainButton, "Spawn Special Units", 0.15, 0.08, 0.002, 0.002)
 //! runtextmacro EndInitializer()
 

@@ -1,5 +1,9 @@
 library AdvChatBoxController requires OSKeyLib, AdvChatBoxView, PlayerUtils
 
+globals
+    private framehandle g_defaultChatBox
+endglobals
+
 function FindChatBox takes nothing returns framehandle
     local framehandle origin = BlzGetOriginFrame(ORIGIN_FRAME_GAME_UI, 0)
     local integer i = BlzFrameGetChildrenCount(origin) - 1
@@ -25,6 +29,10 @@ module AdvChatBoxController
     private static real array timeStamps  // stores last timestamp of the last time a player typed
     private static boolean in = false  // async
     private static string buffer = ""  // async
+    
+    public static method operator defaultChatBox takes nothing returns framehandle
+        return g_defaultChatBox
+    endmethod
     
     private static method setTypingText takes integer trailingDots returns nothing
         local string msg = ""
@@ -92,19 +100,24 @@ module AdvChatBoxController
         endif
     endmethod
 
-    private static method EditBoxEnter takes nothing returns nothing
+    private static method editBoxEnter takes nothing returns nothing
         local string msg = BlzGetTriggerFrameText()
+        local integer len = StringLength(msg)
+        local player trigP = GetTriggerPlayer()
         
-        if StringLength(msg) > 128 then
-            call sendMessageHandler(GetTriggerPlayer(), SubString(msg, 0, 128), SubString(msg, 128, StringLength(msg)))
+        if len == 0 then
+            if User.Local == trigP then
+                call BlzFrameSetVisible(AdvChatBox.editBox, false)
+                call BlzFrameSetFocus(AdvChatBox.editBox, false)
+            endif
+        elseif len > 128 then
+            call sendMessageHandler(trigP, SubString(msg, 0, 128), SubString(msg, 128, len))
         else
-            call sendMessageHandler(GetTriggerPlayer(), msg, "")
+            call sendMessageHandler(trigP, msg, "")
         endif
         
-        set timeStamps[GetPlayerId(GetTriggerPlayer())] = 0.
+        set timeStamps[User[trigP]] = 0.
     endmethod
-
-
 
     private static method handleButton takes player whichPlayer, framehandle whichButton returns nothing
         local string temp
@@ -151,11 +164,8 @@ module AdvChatBoxController
 
     private static method onHotkey takes nothing returns boolean
 
-        if BlzGetTriggerPlayerKey() == OSKEY_BACKSPACE and BlzGetTriggerPlayerIsKeyDown() and User.Local == GetTriggerPlayer() then
-            call BlzFrameSetVisible(AdvChatBox.editBox, true)
-            call BlzFrameSetFocus(AdvChatBox.editBox, true)
-        elseif BlzGetTriggerPlayerKey() == OSKEY_RETURN and BlzGetTriggerPlayerMetaKey() == MetaKeys.SHIFT then
-            call BlzFrameSetVisible(FindChatBox(), false)
+        if BlzGetTriggerPlayerKey() == OSKEY_RETURN and BlzGetTriggerPlayerMetaKey() == MetaKeys.SHIFT and User.Local == GetTriggerPlayer() then
+            call BlzFrameSetVisible(defaultChatBox, false)
             call BlzFrameSetVisible(AdvChatBox.editBox, true)
             call BlzFrameSetFocus(AdvChatBox.editBox, true)
         elseif BlzGetTriggerPlayerKey() == OSKEY_ESCAPE and BlzGetTriggerPlayerMetaKey() == MetaKeys.SHIFT then 
@@ -195,11 +205,12 @@ module AdvChatBoxController
         local trigger eventHandler
         local integer pId = 0
 
+        set g_defaultChatBox = FindChatBox()
         call TimerStart(GetExpiredTimer(), 1/4., true, function thistype.onTimer)
         
 
         set eventHandler = CreateTrigger()
-        call TriggerAddAction(eventHandler, function thistype.EditBoxEnter)
+        call TriggerAddAction(eventHandler, function thistype.editBoxEnter)
         call BlzTriggerRegisterFrameEvent(eventHandler, AdvChatBox.editBox, FRAMEEVENT_EDITBOX_ENTER)
         
         set eventHandler = CreateTrigger()
@@ -228,8 +239,7 @@ module AdvChatBoxController
             set pId = pId + 1
         endloop
         call TriggerAddAction(eventHandler, function thistype.onWorld)
-        
-        call OSKeys.BACKSPACE.register()
+
         call OSKeys.ESCAPE.register()
         call OSKeys.RETURN.register()
         call OSKeys.addListener(Condition(function thistype.onHotkey))
