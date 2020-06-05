@@ -2531,6 +2531,11 @@ function SetMusicVolumeBJ takes real volumePercent returns nothing
 endfunction
 
 //===========================================================================
+function SetThematicMusicVolumeBJ takes real volumePercent returns nothing
+    call SetThematicMusicVolume(PercentToInt(volumePercent, 127))
+endfunction
+
+//===========================================================================
 function GetSoundDurationBJ takes sound soundHandle returns real
     if (soundHandle == null) then
         return bj_NOTHING_SOUND_DURATION
@@ -6767,7 +6772,7 @@ function PlayDialogueFromSpeakerEx takes force toForce, unit speaker, integer sp
     //Make sure that the runtime unit type and the parameter are the same,
     //otherwise the offline animations will not match and will fail
     if GetUnitTypeId(speaker) != speakerType then
-        call BJDebugMsg(("Attempted to play FacialAnimation with the wrong speaker UnitType - Param: " + I2S(speakerType) + " Runtime: " +  I2S(GetUnitTypeId(speaker))))
+        debug call BJDebugMsg(("Attempted to play FacialAnimation with the wrong speaker UnitType - Param: " + I2S(speakerType) + " Runtime: " +  I2S(GetUnitTypeId(speaker))))
         //return false
     endif
 

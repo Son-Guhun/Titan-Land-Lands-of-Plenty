@@ -830,6 +830,7 @@ globals
     constant playerunitevent    EVENT_PLAYER_UNIT_SPELL_FINISH          = ConvertPlayerUnitEvent(275)
     constant playerunitevent    EVENT_PLAYER_UNIT_SPELL_ENDCAST         = ConvertPlayerUnitEvent(276)
     constant playerunitevent    EVENT_PLAYER_UNIT_PAWN_ITEM             = ConvertPlayerUnitEvent(277)
+    constant playerunitevent    EVENT_PLAYER_UNIT_STACK_ITEM            = ConvertPlayerUnitEvent(319)
 
     //===================================================
     // For use with TriggerRegisterUnitEvent
@@ -844,6 +845,7 @@ globals
     constant unitevent          EVENT_UNIT_SPELL_FINISH                 = ConvertUnitEvent(292)
     constant unitevent          EVENT_UNIT_SPELL_ENDCAST                = ConvertUnitEvent(293)
     constant unitevent          EVENT_UNIT_PAWN_ITEM                    = ConvertUnitEvent(294)
+    constant unitevent          EVENT_UNIT_STACK_ITEM                   = ConvertUnitEvent(318)
 
     //===================================================
     // Limit Event API constants
@@ -2634,6 +2636,17 @@ constant native GetChangingUnitPrevOwner    takes nothing returns player
 constant native GetManipulatingUnit takes nothing returns unit
 constant native GetManipulatedItem  takes nothing returns item
 
+// For EVENT_PLAYER_UNIT_PICKUP_ITEM, returns the item absorbing the picked up item in case it is stacking.
+// Returns null if the item was a powerup and not a stacking item.
+constant native BlzGetAbsorbingItem takes nothing returns item
+constant native BlzGetManipulatedItemWasAbsorbed takes nothing returns boolean
+
+// EVENT_PLAYER_UNIT_STACK_ITEM
+// Source is the item that is losing charges, Target is the item getting charges.
+constant native BlzGetStackingItemSource takes nothing returns item
+constant native BlzGetStackingItemTarget takes nothing returns item
+constant native BlzGetStackingItemTargetPreviousCharges takes nothing returns integer
+
 // EVENT_PLAYER_UNIT_ISSUED_ORDER
 constant native GetOrderedUnit takes nothing returns unit
 constant native GetIssuedOrderId takes nothing returns integer
@@ -2746,6 +2759,9 @@ constant native GetEventTargetUnit takes nothing returns unit
 // EVENT_UNIT_PICKUP_ITEM
 // EVENT_UNIT_USE_ITEM
 // See the Player Unit/Item manipulation Event API above for event info funcs
+
+// EVENT_UNIT_STACK_ITEM
+// See the Player Unit/Item stack Event API above for event info funcs
 
 // EVENT_UNIT_ISSUED_ORDER
 // EVENT_UNIT_ISSUED_POINT_ORDER
@@ -3714,6 +3730,7 @@ native EndThematicMusic             takes nothing returns nothing
 
 native SetMusicVolume               takes integer volume returns nothing
 native SetMusicPlayPosition         takes integer millisecs returns nothing
+native SetThematicMusicVolume       takes integer volume returns nothing
 native SetThematicMusicPlayPosition takes integer millisecs returns nothing
 
 // other music and sound calls
@@ -4050,6 +4067,8 @@ native BlzFrameGetHeight                           takes framehandle frame retur
 native BlzFrameGetWidth                            takes framehandle frame returns real
 native BlzFrameSetFont                             takes framehandle frame, string fileName, real height, integer flags returns nothing
 native BlzFrameSetTextAlignment                    takes framehandle frame, textaligntype vert, textaligntype horz returns nothing
+native BlzFrameGetChildrenCount                    takes framehandle frame returns integer
+native BlzFrameGetChild                            takes framehandle frame, integer index returns framehandle
 native BlzTriggerRegisterFrameEvent                takes trigger whichTrigger, framehandle frame, frameeventtype eventId returns event
 native BlzGetTriggerFrame                          takes nothing returns framehandle
 native BlzGetTriggerFrameEvent                     takes nothing returns frameeventtype
