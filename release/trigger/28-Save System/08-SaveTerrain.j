@@ -37,7 +37,7 @@ function SaveTiles takes PlayerData playerId returns boolean
         set i = 0
         
         loop
-        exitwhen i >= 30 // 60 tiles per single string (avoid desync)
+        exitwhen i >= 30 // 30 tiles per single string (avoid desync)
             
             set saveStr = saveStr + LoadD2H(TerrainTools_GetTextureId(GetTerrainType(curX, curY)))/*
                                 */+ LoadD2H(GetTerrainVariance(curX, curY))
@@ -114,7 +114,8 @@ endfunction
 
 private function onTimer takes nothing returns nothing
     local PlayerData playerId = 0
-    
+    local integer total
+
     loop
     exitwhen playerId == bj_MAX_PLAYER_SLOTS
         if playerId.saveData != 0 then
@@ -123,6 +124,14 @@ private function onTimer takes nothing returns nothing
                 call playerId.saveData.destroy()
                 set playerId.saveData = 0
                 call DisplayTextToPlayer( Player(playerId),0,0, "Finished Saving" )
+                if User.fromLocal() == playerId then
+                    call BlzFrameSetVisible(saveTerrainBar, false)
+                endif
+            else
+                if User.fromLocal() == playerId then
+                    call BlzFrameSetValue(saveTerrainBar, 100.*((playerId.curY-playerId.minY)*(playerId.maxX-playerId.minX) + (playerId.maxX - playerId.curX)) / ((playerId.maxY-playerId.minY)*(playerId.maxX-playerId.minX)))
+                    call BlzFrameSetText(saveTerrainBarText, I2S(R2I((playerId.curY-playerId.minY)*(playerId.maxX-playerId.minX)+(playerId.maxX - playerId.curX))/16384) + "/" + I2S(R2I((playerId.maxY-playerId.minY)*(playerId.maxX-playerId.minX))/16384))
+                endif
             endif
         endif
         set playerId = playerId + 1
@@ -130,8 +139,9 @@ private function onTimer takes nothing returns nothing
 endfunction
 
 function SaveTerrain takes nothing returns nothing
+    local player trigP = GetTriggerPlayer()
     local integer i
-    local PlayerData playerId = GetPlayerId(GetTriggerPlayer())
+    local PlayerData playerId = GetPlayerId(trigP)
     local rect saveRect
     local unit generator
     
@@ -150,7 +160,7 @@ function SaveTerrain takes nothing returns nothing
         call playerId.saveData.destroy()
     endif
     
-    set playerId.saveData = SaveData.create(GetTriggerPlayer(), SaveNLoad_FOLDER() + SubString(GetEventPlayerChatString(), 6, 129))
+    set playerId.saveData = SaveData.create(trigP, SaveNLoad_FOLDER() + SubString(GetEventPlayerChatString(), 6, 129))
     set playerId.saveData.centerX = GetUnitX(generator)
     set playerId.saveData.centerY = GetUnitY(generator)
     set playerId.saveData.extentX = GUDR_GetGeneratorExtentX(generator)
@@ -169,6 +179,12 @@ function SaveTerrain takes nothing returns nothing
     
     set saveRect = null
     set generator = null
+    
+    if User.Local == trigP then
+        call BlzFrameSetText(saveTerrainBarText, "Waiting...")
+        call BlzFrameSetValue(saveTerrainBar, 0.)
+        call BlzFrameSetVisible(saveTerrainBar, true)
+    endif
 endfunction
 
 

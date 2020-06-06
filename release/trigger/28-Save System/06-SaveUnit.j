@@ -1,4 +1,4 @@
-library SaveUnit requires SaveNLoad, SaveIO, OOP, Maths, optional LoPHeroicUnit, optional CustomizableAbilityList
+library SaveUnit requires SaveNLoad, SaveIO, OOP, Maths, optional LoPHeroicUnit, optional CustomizableAbilityList, SaveNLoadProgressBars
 
 globals
     SaveData array saveFile
@@ -12,6 +12,7 @@ private struct InternalPlayerData extends array
     LinkedHashSet effects
     integer savedCount
     boolean isSaving
+    integer total
     
     //! runtextmacro InheritFieldReadonly("SaveNLoad_PlayerData", "centerX", "real")
     //! runtextmacro InheritFieldReadonly("SaveNLoad_PlayerData", "centerY", "real")
@@ -221,7 +222,11 @@ private function SaveForceLoop takes nothing returns boolean
     local string saveStr
     local UnitVisuals unitHandleId
     local SaveData saveData
-    local group grp 
+    local group grp
+    
+    if playerId.savedCount == 0 then
+        set playerId.total = BlzGroupGetSize(playerId.units) + playerId.effects.size()  // count total here to avoid OP limit
+    endif
     
     if playerId.isSaving == true then
         set stillSaving = true
@@ -306,8 +311,10 @@ private function SaveForceLoop takes nothing returns boolean
             //This block should be below the group refresh check in order to always produce correct results
             if IsGroupEmpty(grp) then
                 set playerId.isSaving = false
-                call DisplayTextToPlayer(filterPlayer,0,0, (I2S(playerId.savedCount)))
                 call DisplayTextToPlayer(filterPlayer,0,0, "Finished Saving" )
+                if User.fromLocal() == playerId then
+                    call BlzFrameSetVisible(saveUnitBar, false)
+                endif
                 exitwhen true
             endif
                 
@@ -323,8 +330,11 @@ private function SaveForceLoop takes nothing returns boolean
             // call playerId.effects.destroy()
             set saveFile[playerId] = 0
         else
-            call DisplayTextToPlayer(filterPlayer,0,0, (I2S(playerId.savedCount)))
             set playerId.savedCount = playerId.savedCount + 1
+            if User.fromLocal() == playerId then
+                call BlzFrameSetText(saveUnitBarText, I2S(playerId.savedCount*25)+"/"+I2S(playerId.total))
+                call BlzFrameSetValue(saveUnitBar, 100.*playerId.savedCount*25/I2R(playerId.total))
+            endif
         endif
     endif
     
@@ -333,9 +343,6 @@ private function SaveForceLoop takes nothing returns boolean
 endfunction
 
 private function SaveLoopActions takes nothing returns nothing
-
-    debug call BJDebugMsg("SaveLoop Timer executed")
-
     set stillSaving = false
     call ForceEnumPlayers(ENUM_FORCE, Condition(function SaveForceLoop))
     
@@ -366,6 +373,11 @@ function SaveUnits takes SaveData saveData returns nothing
         call TimerStart(loopTimer, 0.5, true, function SaveLoopActions)
     endif
     
+    if User.fromLocal() == playerId then
+        call BlzFrameSetText(saveUnitBarText, "Waiting...")
+        call BlzFrameSetVisible(saveUnitBar, true)
+        call BlzFrameSetValue(saveUnitBar, 0.)
+    endif
 endfunction
 
 
