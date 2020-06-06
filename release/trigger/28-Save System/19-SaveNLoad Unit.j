@@ -425,13 +425,7 @@ function LoadUnit takes string chat_str, player un_owner, real centerX, real cen
             call LoadUnitFlags(resultUnit, unitData.flags)
             
             if unitData.pitch != 0. or unitData.yaw != 0. then
-                if AttachedSFX_IsUnitValid(resultUnit) then
-                    if UnitHasAttachedEffect(resultUnit) then
-                        call GetUnitAttachedEffect(resultUnit).setOrientation(unitData.yaw*bj_DEGTORAD, unitData.pitch, unitData.roll)
-                    else
-                        call UnitCreateAttachedEffect(resultUnit).setOrientation(unitData.yaw*bj_DEGTORAD, unitData.pitch, unitData.roll)
-                    endif
-                endif
+                call UnitSetOrientation(resultUnit, unitData.yaw*bj_DEGTORAD, unitData.pitch, unitData.roll)
             endif
             
             if IsUnitType(resultUnit, UNIT_TYPE_STRUCTURE) then

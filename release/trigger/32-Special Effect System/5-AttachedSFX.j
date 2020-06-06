@@ -55,6 +55,42 @@ function UnitDetachEffect takes unit whichUnit returns SpecialEffect
     return 0
 endfunction
 
+function UnitSetPitch takes unit whichUnit, real pitch returns boolean    
+    if AttachedSFX_IsUnitValid(whichUnit) then
+        if UnitHasAttachedEffect(whichUnit) then
+            set GetUnitAttachedEffect(whichUnit).pitch = pitch
+        else
+            set UnitCreateAttachedEffect(whichUnit).pitch = pitch
+        endif
+        return true
+    endif
+    return false
+endfunction
+
+function UnitSetRoll takes unit whichUnit, real roll returns boolean
+    if AttachedSFX_IsUnitValid(whichUnit) then
+        if UnitHasAttachedEffect(whichUnit) then
+            set GetUnitAttachedEffect(whichUnit).roll = roll
+        else
+            set UnitCreateAttachedEffect(whichUnit).roll = roll
+        endif
+        return true
+    endif
+    return false
+endfunction
+
+function UnitSetOrientation takes unit whichUnit, real yaw, real pitch, real roll returns boolean
+    if AttachedSFX_IsUnitValid(whichUnit) then
+        if UnitHasAttachedEffect(whichUnit) then
+            call GetUnitAttachedEffect(whichUnit).setOrientation(yaw, pitch, roll)
+        else
+            call UnitCreateAttachedEffect(whichUnit).setOrientation(yaw, pitch, roll)
+        endif
+        return true
+    endif
+    return false
+endfunction
+
 public function onSetPosition takes unit whichUnit returns nothing
     local SpecialEffect sfx = UnitData.get(whichUnit).attachedEffect
     

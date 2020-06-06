@@ -129,24 +129,12 @@ private function groupFunc takes nothing returns nothing
             call GUMSSetUnitColor(enumUnit,  Commands_GetChatMessagePlayerNumber(args))
         endif
     elseif ( command == "'roll" ) then
-        if AttachedSFX_IsUnitValid(enumUnit) then
-            if args != "" then
-                if not UnitHasAttachedEffect(enumUnit) then
-                    set UnitCreateAttachedEffect(enumUnit).roll = Globals.value*bj_DEGTORAD
-                else
-                    set GetUnitAttachedEffect(enumUnit).roll = Globals.value*bj_DEGTORAD
-                endif
-            endif
+        if args != "" then
+            call UnitSetRoll(enumUnit, Globals.value*bj_DEGTORAD)
         endif
     elseif ( command == "'pitch" ) then
-        if AttachedSFX_IsUnitValid(enumUnit) then
-            if args != "" then
-                if not UnitHasAttachedEffect(enumUnit) then
-                    set UnitCreateAttachedEffect(enumUnit).pitch = Globals.value*bj_DEGTORAD
-                else
-                    set GetUnitAttachedEffect(enumUnit).pitch = Globals.value*bj_DEGTORAD
-                endif
-            endif
+        if args != "" then
+            call UnitSetPitch(enumUnit, Globals.value*bj_DEGTORAD)
         endif
     endif
     
