@@ -1,4 +1,4 @@
-library SaveIO requires TableStruct, GMUI, GLHS, Rawcode2String, optional RectGenerator
+library SaveIO requires TableStruct, GMUI, GLHS, Rawcode2String, PlayerUtils, optional RectGenerator
 /*
 This library requires some trigger to be listening to SnL_IOsize sync data event in order to work.
 
@@ -428,6 +428,7 @@ struct SaveLoader extends array
     
     static LinkedHashSet loadingQueue
     
+    // This function is exectued periodically, and it reads the next file of a SaveLoader that is currently being read.
     private static method onTimer takes nothing returns nothing
         local PlayerData playerId
         local SaveLoader saveData
@@ -444,39 +445,20 @@ struct SaveLoader extends array
             call loadingQueue.append(playerId + 1)
             if not saveData.eof() then
                 call saveData.read()
+
                 if saveData.eof() then
-                    // call DisplayTextToPlayer(Player(playerId), 0., 0., "Finished loading!")
-                    if GetLocalPlayer() == Player(playerId) then
+                    if User.fromLocal() == playerId then
                         call BlzSendSyncData("SnL_IOsize", "end")
+                        call BlzFrameSetVisible(loadBar, false)
                     endif
+                elseif User.fromLocal() == playerId then
+                    call BlzFrameSetText(loadBarText, I2S(saveData.current)+"/"+I2S(saveData.totalFiles))
+                    call BlzFrameSetValue(loadBar, 100.*I2R(saveData.current)/saveData.totalFiles)
+                    call BlzFrameSetVisible(loadBar, true)
                 endif
             endif
         endif
     endmethod
-    // This function is exectued periodically, and it reads the next file of a SaveLoader that is currently being read.
-    /*
-    private static method onTimer takes nothing returns nothing
-        local PlayerData playerId = 0
-        local SaveLoader saveData
-
-        loop
-        exitwhen playerId == bj_MAX_PLAYERS
-            set saveData = playerId.loadRequests.begin()
-
-            if saveData != playerId.loadRequests.end() then
-                if not saveData.eof() then
-                    call saveData.read()
-                    if saveData.eof() then
-                        call DisplayTextToPlayer(Player(playerId), 0., 0., "Finished loading!")
-                        call BlzSendSyncData("SnL_IOsize", "end")
-                    endif
-                endif
-            endif
-            set playerId = playerId + 1
-        endloop
-
-    endmethod
-    */
 
     implement InitModule
 endstruct
