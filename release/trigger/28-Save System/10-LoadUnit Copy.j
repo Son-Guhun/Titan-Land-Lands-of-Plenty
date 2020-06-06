@@ -7,15 +7,15 @@ function Trig_LoadUnitNew_Actions takes nothing returns nothing
         set udg_load_number[playerNumber] = ( udg_load_number[playerNumber] + 1 )
         if saveData.atOriginal then
             if saveData.version < 5 then
-                call LoadUnit(BlzGetTriggerSyncData()/*GetEventPlayerChatString()*/,GetTriggerPlayer(), saveData.centerX + playerId.centerX, saveData.centerY + playerId.centerY)
+                call LoadUnit(BlzGetTriggerSyncData(), GetTriggerPlayer(), saveData.centerX + playerId.centerX, saveData.centerY + playerId.centerY)
             else
-                call LoadUnit(BlzGetTriggerSyncData()/*GetEventPlayerChatString()*/,GetTriggerPlayer(), playerId.centerX, playerId.centerY)
+                call LoadUnit(BlzGetTriggerSyncData(), GetTriggerPlayer(), playerId.centerX, playerId.centerY)
             endif
         else
             if saveData.version < 5 then
-                call LoadUnit(BlzGetTriggerSyncData()/*GetEventPlayerChatString()*/,GetTriggerPlayer(), saveData.centerX, saveData.centerY)
+                call LoadUnit(BlzGetTriggerSyncData(), GetTriggerPlayer(), saveData.centerX, saveData.centerY)
             else
-                call LoadUnit(BlzGetTriggerSyncData()/*GetEventPlayerChatString()*/,GetTriggerPlayer(), saveData.centerX - saveData.originalCenterX, saveData.centerY - saveData.originalCenterY)
+                call LoadUnit(BlzGetTriggerSyncData(), GetTriggerPlayer(), saveData.centerX - saveData.originalCenterX, saveData.centerY - saveData.originalCenterY)
             endif
         endif
     endif

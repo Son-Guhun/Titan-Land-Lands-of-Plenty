@@ -336,6 +336,8 @@
     16-SaveIO: SaveIO
     17-RectSaveLoader: RectSaveLoader
     18-AnyBase: AnyBase
+    '19-SaveNLoad Unit': 'SaveNLoad Unit'
+    '20-SaveNLoad Terrain': 'SaveNLoad Terrain'
 '29-Circle Object System': 'Circle Object System'
     '1-GCOS Init Copy': 'GCOS Init Copy'
     '2-Circle Object System': 'Circle Object System'
