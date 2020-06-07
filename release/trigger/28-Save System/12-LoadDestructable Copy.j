@@ -3,8 +3,8 @@ function Trig_LoadDestNew_Actions takes nothing returns nothing
     local integer playerNumber = playerId + 1
     local SaveLoader saveData = SaveIO_GetCurrentlyLoadingSave(Player(playerId))
     
-    if udg_load_number[playerNumber] < udg_load_limit then
-        set udg_load_number[playerNumber] = udg_load_number[playerNumber] + 1
+    if stringsLoaded[playerNumber] < loadLimit then
+        set stringsLoaded[playerNumber] = stringsLoaded[playerNumber] + 1
         if saveData.atOriginal then
             call LoadDestructable(BlzGetTriggerSyncData(), saveData.centerX + playerId.centerX, saveData.centerY+playerId.centerY)
         else

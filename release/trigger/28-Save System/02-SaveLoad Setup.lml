@@ -3,9 +3,6 @@ Event
         Const : 0.00
 Condition
 Action
-    SetVariable
-        Var   : load_limit
-        Const : 1000000000
     ForForceMultiple
         Call  : GetPlayersAll
         Action
@@ -52,11 +49,3 @@ Action
                         Var   : temp_integer
                     Const : '-load center '
                     Preset: ChatMatchTypeSubstring
-    CommentString
-        Const : 'LISTING ALL VARIABLES FOR IMPORTING'
-    Disab: SetVariable
-        Array : load_number
-            Const : 0
-        Const : 0
-    CommentString
-        Const : 'LISTING ALL VARIABLES FOR IMPORTING'

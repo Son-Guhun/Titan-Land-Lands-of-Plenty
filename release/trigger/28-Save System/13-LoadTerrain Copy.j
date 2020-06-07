@@ -4,8 +4,8 @@ function Trig_LoadTerrainNew_Actions takes nothing returns nothing
     local string syncStr = BlzGetTriggerSyncData()
     local SaveLoader saveData = SaveIO_GetCurrentlyLoadingSave(Player(playerId))
     
-    if udg_load_number[playerNumber] < udg_load_limit then
-        set udg_load_number[playerNumber] = udg_load_number[playerNumber] + 1
+    if stringsLoaded[playerNumber] < loadLimit then
+        set stringsLoaded[playerNumber] = stringsLoaded[playerNumber] + 1
         if (saveData.version < 7 and IsTerrainHeader(syncStr)) or IsTerrainHeaderV7(syncStr) then
             if saveData.atOriginal then
                 if saveData.version == 3 then

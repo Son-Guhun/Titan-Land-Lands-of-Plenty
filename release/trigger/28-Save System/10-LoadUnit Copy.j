@@ -1,10 +1,16 @@
+globals
+    // These variables are used by the load triggers for the load limit.
+    integer array stringsLoaded
+    integer loadLimit  = 2147483647
+endglobals
+
 function Trig_LoadUnitNew_Actions takes nothing returns nothing
     local integer playerNumber = GetPlayerId(GetTriggerPlayer())+1
     local SaveNLoad_PlayerData playerId = playerNumber - 1
     local SaveLoader saveData = SaveIO_GetCurrentlyLoadingSave(Player(playerId))
     
-    if udg_load_number[playerNumber] < udg_load_limit then
-        set udg_load_number[playerNumber] = ( udg_load_number[playerNumber] + 1 )
+    if stringsLoaded[playerNumber] < loadLimit then
+        set stringsLoaded[playerNumber] = ( stringsLoaded[playerNumber] + 1 )
         if saveData.atOriginal then
             if saveData.version < 5 then
                 call LoadUnit(BlzGetTriggerSyncData(), GetTriggerPlayer(), saveData.centerX + playerId.centerX, saveData.centerY + playerId.centerY)
