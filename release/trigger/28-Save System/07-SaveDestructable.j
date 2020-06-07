@@ -1,10 +1,12 @@
 library SaveDestructable requires SaveNLoad, SaveIO
 
 private struct PlayerData extends array
-    SaveData saveData
-    ArrayList_destructable destructables
-    integer current
-    
+
+    //! runtextmacro TableStruct_NewStructField("saveData", "SaveData")
+    //! runtextmacro TableStruct_NewStructField("destructables", "ArrayList_destructable")
+    //! runtextmacro TableStruct_NewPrimitiveField("current", "integer")
+
+
     static method operator enumPlayerId takes nothing returns integer
         return bj_forLoopAIndex
     endmethod

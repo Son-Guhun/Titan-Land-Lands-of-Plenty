@@ -11,7 +11,7 @@ library SaveTerrain requires SaveNLoad, SaveIO, SaveNLoadProgressBars
 //! endtextmacro
 
 private struct PlayerData extends array
-    SaveData saveData
+    //! runtextmacro TableStruct_NewStructField("saveData", "SaveData")
     //! runtextmacro SaveXYMethodTerrain("minX")
     //! runtextmacro SaveXYMethodTerrain("maxX")
     //! runtextmacro SaveXYMethodTerrain("curX")
