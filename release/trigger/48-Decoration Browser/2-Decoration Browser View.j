@@ -1,4 +1,4 @@
-library DecorationBrowserView
+library DecorationBrowserView requires Screen
 
 globals
     Screen decorationBrowserScreen

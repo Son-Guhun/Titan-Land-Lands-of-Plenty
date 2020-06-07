@@ -26,15 +26,15 @@ struct SelectionState extends array
         return .enabled_impl
     endmethod
     
+    method operator circles takes nothing returns boolean
+        return .circles_impl
+    endmethod
+    
     method operator enabled= takes boolean flag returns nothing
         if thistype.current == this then
             call EnableSelect(flag, .circles)
         endif
         set .enabled_impl = flag
-    endmethod
-    
-    method operator circles takes nothing returns boolean
-        return .circles_impl
     endmethod
     
     method operator circles= takes boolean flag returns nothing
@@ -82,15 +82,15 @@ struct DragSelectionState extends array
         return .enabled_impl
     endmethod
     
+    method operator box takes nothing returns boolean
+        return .box_impl
+    endmethod
+    
     method operator enabled= takes boolean flag returns nothing
         if thistype.current == this then
             call EnableDragSelect(flag, .box)
         endif
         set .enabled_impl = flag
-    endmethod
-    
-    method operator box takes nothing returns boolean
-        return .box_impl
     endmethod
     
     method operator box= takes boolean flag returns nothing
@@ -138,15 +138,15 @@ struct PreSelectionState extends array
         return .enabled_impl
     endmethod
     
+    method operator info takes nothing returns boolean
+        return .info_impl
+    endmethod
+    
     method operator enabled= takes boolean flag returns nothing
         if thistype.current == this then
             call EnablePreSelect(flag, .info)
         endif
         set .enabled_impl = flag
-    endmethod
-    
-    method operator info takes nothing returns boolean
-        return .info_impl
     endmethod
     
     method operator info= takes boolean flag returns nothing

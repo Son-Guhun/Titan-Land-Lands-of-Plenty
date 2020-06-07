@@ -85,7 +85,7 @@ module GMUIAllocatorMethods
 endmodule
 
 module GMUINewRecycleKey
-    private constant key _recycleKey
+    private static key _recycleKey
     
     static constant method RECYCLE_KEY takes nothing returns integer
         return _recycleKey

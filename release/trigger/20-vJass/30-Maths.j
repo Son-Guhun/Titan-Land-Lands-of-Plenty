@@ -183,7 +183,7 @@ library Maths/* v 1.2.0.0
         private constant real LN_FACTOR_INV = 0.7788008
     endglobals
    
-    struct Math //extends array
+    struct Math extends array
         // Constants
         static constant real Pi = 3.141593
         static constant real E = 2.718282

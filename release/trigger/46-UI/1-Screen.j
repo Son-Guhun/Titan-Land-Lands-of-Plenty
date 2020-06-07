@@ -1,7 +1,10 @@
-library Screen requires OSKeyLib, Table, PlayerUtils
+library Screen requires OSKeyLib, Table, PlayerUtils, GMUI
 
 
-struct Screen
+struct Screen extends array
+
+    implement GMUINewRecycleKey
+    implement GMUIAllocatorMethods
 
     private boolean isVisible
     framehandle main

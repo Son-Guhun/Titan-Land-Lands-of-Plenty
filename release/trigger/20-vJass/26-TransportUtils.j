@@ -1,4 +1,3 @@
-// TODO: Clear Data on removal!
 library TransportUtils requires TableStruct
 
 static if not LIBRARY_BribesUnitEvent then

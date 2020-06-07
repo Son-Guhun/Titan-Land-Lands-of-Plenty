@@ -64,6 +64,12 @@ struct SpecialEffect extends array
         return BlzGetLocalSpecialEffectX(.effect)
     endmethod
     
+    method operator y takes nothing returns real
+        implement assertNotNull
+        
+        return BlzGetLocalSpecialEffectY(.effect)
+    endmethod
+    
     method operator height takes nothing returns real
         implement assertNotNull
         
@@ -85,12 +91,6 @@ struct SpecialEffect extends array
         call BlzSetSpecialEffectX(.effect, value)
         // call BlzSetSpecialEffectHeight(.effect, .height_impl)
         set .height = .height
-    endmethod
-    
-    method operator y takes nothing returns real
-        implement assertNotNull
-        
-        return BlzGetLocalSpecialEffectY(.effect)
     endmethod
     
     method operator y= takes real value returns nothing

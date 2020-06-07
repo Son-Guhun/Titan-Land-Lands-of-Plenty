@@ -1,4 +1,4 @@
-library Packets requires Table, optional PlayerUtils
+library Packets requires Table, optional PlayerUtils, optional GMUI
 /*
 Example:
 
@@ -29,7 +29,7 @@ globals
     public constant real MIN_VALUE = -8388608.
 endglobals
 
-struct RealPacket
+struct RealPacket extends array
 
     private Table localData
     public Table metaData
@@ -47,6 +47,47 @@ struct RealPacket
     method isSynced takes nothing returns boolean
         return .missingData <= 0
     endmethod
+    
+    method operator [] takes integer index returns real
+        return localData.real[index]
+    endmethod
+    
+    method operator []= takes integer index, real value returns nothing
+        set localData.real[index] = value
+    endmethod
+    
+    static if LIBRARY_GMUI then
+        implement optional GMUINewRecycleKey
+        implement optional GMUIAllocatorMethods
+    else
+        //Generated allocator of RealPacket
+        static method allocate takes nothing returns thistype
+            local integer this=F
+            if (this!=0) then
+                set F=V[this]
+            else
+                set I=I+1
+                set this=I
+            endif
+            if (this>8190) then
+                return 0
+            endif
+
+            set V[this]=-1
+            return this
+        endmethod
+
+        //Generated destructor of RealPacket
+        method deallocate takes nothing returns nothing
+            if this==null then
+                return
+            elseif (V[this]!=-1) then
+                return
+            endif
+            set V[this]=F
+            set F=this
+        endmethod
+    endif
     
     static method create takes integer size, boolexpr onSync returns thistype
         local thistype this = thistype.allocate()
@@ -92,15 +133,6 @@ struct RealPacket
             call .deallocate()
         endif
     endmethod
-        
-    method operator [] takes integer index returns real
-        return localData.real[index]
-    endmethod
-    
-    method operator []= takes integer index, real value returns nothing
-        set localData.real[index] = value
-    endmethod
-    
     
     private static method onReceiveData takes nothing returns nothing
         local integer pId = GetPlayerId(GetTriggerPlayer())
