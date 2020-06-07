@@ -1,4 +1,11 @@
-library RectSaveLoader initializer Init requires SaveIO
+library RectSaveLoader initializer Init requires SaveIO, RectGenerator
+/*
+This library defines a listener for the SnL_IOsize sync event, which is fired by SaveIO and is 
+required to load saves.
+
+This listener uses the RectGenerator library to allow the user to load saves wherever they wish in
+the map.
+*/
 
 globals
     private string array nextSave

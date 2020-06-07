@@ -31,8 +31,8 @@ function Trig_SaveLoad_Commands_Actions takes nothing returns nothing
     else
         // SET LOAD LIMIT COMMAND
         if ( GetTriggerPlayer() == udg_GAME_MASTER ) then
-            set udg_load_limit = S2I(SubStringBJ(GetEventPlayerChatString(), 13, StringLength(GetEventPlayerChatString())))
-            call DisplayTextToForce( GetPlayersAll(), ( "Unit Load Limit has been set to " + I2S(udg_load_limit) ) )
+            set loadLimit = S2I(SubStringBJ(GetEventPlayerChatString(), 13, StringLength(GetEventPlayerChatString())))
+            call DisplayTextToForce( GetPlayersAll(), ( "Unit Load Limit has been set to " + I2S(loadLimit) ) )
             // Double conversion ensures that, if for some reason the first conversion did not work out, the players won't receive the correct message
         else
         endif

@@ -10,11 +10,8 @@ save_unit_nmbr: integer
 save_load_boolean: boolean
     Array : 1
 temp_unit: unit
-load_number: integer
-    Array : 1
 temp_group: group
 temp_point: location
-load_limit: integer
 GAME_MASTER: player
     Def   : Player00
 temp_point2: location

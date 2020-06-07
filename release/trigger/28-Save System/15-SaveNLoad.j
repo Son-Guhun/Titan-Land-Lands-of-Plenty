@@ -6,9 +6,7 @@ endfunction
 
 endlibrary
 
-library SaveNLoad requires WorldBounds, UnitVisualMods, AnyBase, TerrainTools, DecorationSFX, UnitTypeDefaultValues, AttachedSFX, SaveIO/* 
-
-   */ optional UserDefinedRects, optional SaveNLoadConfig optional LoPDeprecated
+library SaveNLoad requires WorldBounds, SaveIO, optional SaveNLoadConfig
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 //SaveNLoad v7.0
 ////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -115,12 +113,12 @@ function LoadDestructable takes string chatStr, real centerX, real centerY retur
     set destY = S2R(SubString(chatStr,0,cutToComma)) + centerY
     //set chatStr = SubString(chatStr,cutToComma+1,StringLength(chatStr))
     
-    //call BJDebugMsg(I2S(destType) + " " + R2S(destX) + " " + R2S(destY))
-    
-    set bj_lastCreatedDestructable = CreateDestructable(destType, destX, destY, 270, 1, 0)
-    //if not IsDestructableTree(bj_lastCreatedDestructable) then
-      //  call RemoveDestructable(bj_lastCreatedDestructable)
-    //endif
+    if IsPointInRegion(WorldBounds.worldRegion, destX, destY) then
+        set bj_lastCreatedDestructable = CreateDestructable(destType, destX, destY, 270, 1, 0)
+        //if not IsDestructableTree(bj_lastCreatedDestructable) then
+          //  call RemoveDestructable(bj_lastCreatedDestructable)
+        //endif
+    endif
 endfunction
 
 

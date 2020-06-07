@@ -1,4 +1,4 @@
-library SaveNLoadTerrain requires SaveNLoad
+library SaveNLoadTerrain requires SaveNLoad, TerrainTools
 
 function LoadD2H takes integer int returns string
     return SubString(AnyBase.digits,int,int+1)
