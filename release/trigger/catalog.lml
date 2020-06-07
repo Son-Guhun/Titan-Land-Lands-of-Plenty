@@ -339,6 +339,7 @@
     '19-SaveNLoad Unit': 'SaveNLoad Unit'
     '20-SaveNLoad Terrain': 'SaveNLoad Terrain'
     '21-SaveNLoad ProgressBars': 'SaveNLoad ProgressBars'
+    22-SaveUnitExtras: SaveUnitExtras
 '29-Circle Object System': 'Circle Object System'
     '1-GCOS Init Copy': 'GCOS Init Copy'
     '2-Circle Object System': 'Circle Object System'

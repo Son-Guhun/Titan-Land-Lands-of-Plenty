@@ -1,28 +1,73 @@
-library SaveUnit requires SaveNLoad, SaveIO, OOP, Maths, optional LoPHeroicUnit, optional CustomizableAbilityList, SaveNLoadProgressBars
+library SaveUnit requires SaveNLoad, SaveIO, OOP, Maths, SaveNLoadProgressBars, optional SaveUnitExtras
+/* 
+This library defines functionality to save a group of units and effects using SaveIO over timer. Due
+to performance issues, saving all units instantly is not a good idea, as that will lag the game and may
+cause disconnects.
+
+Calling the SaveUnits function will schedule saving for a player. Every 0.5 seconds, units and effects in
+the SaveUnit_PlayerData fields "effects" and "units" will be saved, 25 units at a time. This library
+also handles cases where a save is made while another is not finished. In this case, the previous save
+is terminated and a warning is shown to the player.
+
+The same principles used in this library are used for SaveUnit and SaveDestructable libraries. Since
+those libraries are simpler, it might be easier to understand them first before looking at this library.
+
+This is a fairly LoP-specific implementation, though it could easily be adapted to work elsewhere.
+
+
+SaveUnitExtras library:
+    If this library exists, it must define the following function:
+    
+    function SaveUnitExtraStrings takes SaveData saveData, unit saveUnit, integer unitHandleId returns nothing
+    
+    This function is executed after a unit's save string is saved, and is intended to save extra information.
+    In LoP, this extra information includes waygate destinations, patrol points and rects.
+*/
 
 globals
-    SaveData array saveFile
+    private force ENUM_FORCE = CreateForce()
+    public boolean stillSaving = false  // used to determine whether any players are still saving
+    private timer loopTimer
 endglobals
 
 private struct InternalPlayerData extends array
 
     implement DebugPlayerStruct
-
-    group units
-    LinkedHashSet effects
-    integer savedCount
-    boolean isSaving
-    integer total
     
+    //! runtextmacro TableStruct_NewStructField("saveData", "SaveData")
+
+    // Contains units and effects to be saved
+    //! runtextmacro TableStruct_NewHandleField("units", "group")
+    //! runtextmacro TableStruct_NewStructField("effects", "LinkedHashSet")
+    
+    // Used for iteration
+    //! runtextmacro TableStruct_NewPrimitiveField("savedCount", "integer")
+    //! runtextmacro TableStruct_NewPrimitiveField("isSaving", "boolean")
+    //! runtextmacro TableStruct_NewPrimitiveField("total", "integer")
+    
+    // Required when saving a unit's position (probably will be deprecated)
     //! runtextmacro InheritFieldReadonly("SaveNLoad_PlayerData", "centerX", "real")
     //! runtextmacro InheritFieldReadonly("SaveNLoad_PlayerData", "centerY", "real")
     
+    // Used for calculating save extents
     //! runtextmacro TableStruct_NewPrimitiveField("maxX", "real")
     //! runtextmacro TableStruct_NewPrimitiveField("minX", "real")
     //! runtextmacro TableStruct_NewPrimitiveField("maxY", "real")
     //! runtextmacro TableStruct_NewPrimitiveField("minY", "real")
 endstruct
 
+// Public-facing struct. Users must manipulate the 'units' and 'effects' fields before calling the 'SaveUnits' function.
+public struct PlayerData extends array
+
+    //! runtextmacro InheritField("InternalPlayerData", "units", "group")
+    //! runtextmacro InheritField("InternalPlayerData", "effects", "LinkedHashSet")
+    
+    //! runtextmacro InheritFieldReadonly("InternalPlayerData", "savedCount", "integer")
+    //! runtextmacro InheritFieldReadonly("InternalPlayerData", "isSaving", "boolean")
+    
+endstruct
+
+// Calculates the extents for a normal save. If the extents are smaller than 10k, then it will be saved as a Rect save.
 private function CalculateRectSave takes InternalPlayerData playerId, SaveData saveData returns nothing
     local real extentX = (playerId.maxX - playerId.minX)/2
     local real extentY = (playerId.maxY - playerId.minY)/2
@@ -56,7 +101,7 @@ private function CalculateRectSave takes InternalPlayerData playerId, SaveData s
     endif
 endfunction
 
-function UpdatePlayerExtents takes InternalPlayerData playerId, real x, real y returns nothing
+private function UpdatePlayerExtents takes InternalPlayerData playerId, real x, real y returns nothing
     if x > playerId.maxX then
         set playerId.maxX = x
     endif
@@ -69,57 +114,6 @@ function UpdatePlayerExtents takes InternalPlayerData playerId, real x, real y r
     if y < playerId.minY then
         set playerId.minY = y
     endif
-endfunction
-
-public struct PlayerData extends array
-
-    //! runtextmacro InheritField("InternalPlayerData", "units", "group")
-    //! runtextmacro InheritField("InternalPlayerData", "effects", "LinkedHashSet")
-    
-    //! runtextmacro InheritFieldReadonly("InternalPlayerData", "savedCount", "integer")
-    //! runtextmacro InheritFieldReadonly("InternalPlayerData", "isSaving", "boolean")
-    
-endstruct
-
-globals
-    force ENUM_FORCE = CreateForce()
-    boolean stillSaving = false
-    timer loopTimer
-endglobals
-
-private function EncodeRemoveableAbilities takes unit whichUnit returns string
-    local ArrayList_ability abilities = UnitEnumRemoveableAbilities(whichUnit)
-    local integer i = 0
-    local string result = "=a "
-    
-    loop
-    exitwhen i == abilities.end()
-        set result = result + ID2S(RemoveableAbility.fromAbility(abilities[i])) + ","
-        set i = abilities.next(i)
-    endloop
-    
-    call abilities.destroy()
-    return result
-endfunction
-
-function IsUnitWaygate takes unit whichUnit returns boolean
-    return GetUnitAbilityLevel(whichUnit, 'Awrp') > 0
-endfunction
-
-function Save_PatrolPointStr takes real x, real y returns string
-    return SaveNLoad_FormatString("SnL_unit_extra", "=p " + R2S(x) + "=" +  R2S(y))
-endfunction
-
-function Save_SaveUnitPatrolPoints takes SaveData saveData, integer unitHandleId returns nothing
-    local integer i = 1
-    local integer totalPoints = Patrol_GetTotalPatrolPoints(unitHandleId)
-    local string saveStr
-    
-    loop
-    exitwhen i > totalPoints
-        call saveData.write(Save_PatrolPointStr(Patrol_GetPointX(unitHandleId, i),Patrol_GetPointY(unitHandleId, i)))
-        set i = i+1
-    endloop
 endfunction
 
 private function GetFacingStringEffect takes SpecialEffect sfx returns string
@@ -230,7 +224,7 @@ private function SaveForceLoop takes nothing returns boolean
     
     if playerId.isSaving == true then
         set stillSaving = true
-        set saveData = saveFile[playerId]
+        set saveData = playerId.saveData
         
         set saveUnitCount = SaveEffectDecos(playerId, saveData)  // Only begin saving units once all decorations have been saved.
         loop
@@ -279,32 +273,8 @@ private function SaveForceLoop takes nothing returns boolean
                     call saveData.write(SaveNLoad_FormatString("SnL_unit_extra", "=n " + SaveIO_CleanUpString(GUMSGetUnitName(saveUnit))))
                 endif
                 
-                if GUDR_IsUnitIdGenerator(unitHandleId) then
-                    call saveData.write(SaveNLoad_FormatString("SnL_unit_extra", Save_GetGUDRSaveString(unitHandleId)))
-                endif
-                
-                if IsUnitWaygate(saveUnit) then
-                    if WaygateIsActive(saveUnit) then
-                        call saveData.write(SaveNLoad_FormatString("SnL_unit_extra", "=w " + R2S(WaygateGetDestinationX(saveUnit)) + "=" + R2S(WaygateGetDestinationY(saveUnit)) + "=T="))
-                    else
-                        call saveData.write(SaveNLoad_FormatString("SnL_unit_extra", "=w " + R2S(WaygateGetDestinationX(saveUnit)) + "=" + R2S(WaygateGetDestinationY(saveUnit)) + "=F="))
-                    endif
-                endif
-                
-                if Patrol_UnitIdHasPatrolPoints(unitHandleId) then
-                    call Save_SaveUnitPatrolPoints(saveData, unitHandleId)
-                endif
-                
-                static if LIBRARY_LoPHeroicUnit then
-                    if LoP_IsUnitCustomHero(saveUnit) then
-                        call saveData.write(SaveNLoad_FormatString("SnL_unit_extra", "=h S"))
-                    endif
-                endif
-                
-                static if LIBRARY_CustomizableAbilityList then
-                    if GetUnitAbilityLevel(saveUnit, 'AHer') > 0 then
-                        call saveData.write(SaveNLoad_FormatString("SnL_unit_extra", EncodeRemoveableAbilities(saveUnit)))
-                    endif
+                static if LIBRARY_SaveUnitExtras then
+                    call SaveUnitExtraStrings(saveData, saveUnit, unitHandleId)
                 endif
             endif
                 
@@ -328,7 +298,7 @@ private function SaveForceLoop takes nothing returns boolean
             endif
             call saveData.destroy()
             // call playerId.effects.destroy()
-            set saveFile[playerId] = 0
+            set playerId.saveData = 0
         else
             set playerId.savedCount = playerId.savedCount + 1
             if User.fromLocal() == playerId then
@@ -363,11 +333,11 @@ function SaveUnits takes SaveData saveData returns nothing
     set playerId.maxY = -Pow(2, 23)
     set playerId.minY = Pow(2, 23)
     
-    if saveFile[playerId] != 0 then
+    if playerId.saveData != 0 then
         call DisplayTextToPlayer(saveData.player, 0., 0., "|cffff0000Warning:|r Did not finish saving previous file!")
-        call saveFile[playerId].destroy()
+        call playerId.saveData.destroy()
     endif
-    set saveFile[playerId] = saveData
+    set playerId.saveData = saveData
     
     if not stillSaving then
         call TimerStart(loopTimer, 0.5, true, function SaveLoopActions)

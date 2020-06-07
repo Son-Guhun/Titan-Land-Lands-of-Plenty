@@ -23,6 +23,91 @@ function ParseAbilityString takes unit whichUnit, string whichStr returns nothin
     call defaultAbils.destroy()
 endfunction
 
+static if LIBRARY_UserDefinedRects then
+    function Load_RestoreGUDR takes unit generator, string restoreStr returns nothing
+        local integer splitterIndex
+        
+        local real length
+        local real height
+        local integer weatherType
+        
+        local TerrainFog fog
+        local DNC dnc
+        
+        //Str = "length=height=weather= (we need an equal at the end in order to make future versions backwards-compatible
+        
+        set splitterIndex = CutToCharacter(restoreStr, "=")
+        set length = S2R(SubString(restoreStr,0,splitterIndex))
+        set restoreStr = SubString(restoreStr,splitterIndex+1,StringLength(restoreStr))
+            
+        set splitterIndex = CutToCharacter(restoreStr, "=")
+        set height = S2R(SubString(restoreStr,0,splitterIndex))
+        set restoreStr = SubString(restoreStr,splitterIndex+1,StringLength(restoreStr))
+        
+        set splitterIndex = CutToCharacter(restoreStr, "=")
+        set weatherType = S2I(SubString(restoreStr,0,splitterIndex))
+        set restoreStr = SubString(restoreStr,splitterIndex+1,StringLength(restoreStr))
+        
+        call CreateGUDR(generator)
+        call MoveGUDR(generator, length, height, false)
+        call ChangeGUDRWeatherNew(generator, 0, weatherType)
+        
+        set splitterIndex = CutToCharacter(restoreStr, "=")
+        if SubString(restoreStr,0,splitterIndex) != "0" then
+            call ToggleGUDRVisibility(generator, false, true)
+        else
+            call ToggleGUDRVisibility(generator, false, false)
+        endif
+        set restoreStr = SubString(restoreStr,splitterIndex+1,StringLength(restoreStr))
+        
+        set splitterIndex = CutToCharacter(restoreStr, "=")
+        if splitterIndex != 0 and splitterIndex < StringLength(restoreStr) then
+            set fog = RectEnvironment.get(GUDR_GetGeneratorRect(generator)).fog
+            set dnc = RectEnvironment.get(GUDR_GetGeneratorRect(generator)).dnc
+
+            set fog.style = S2I(SubString(restoreStr,0,splitterIndex))
+            set restoreStr = SubString(restoreStr,splitterIndex+1,StringLength(restoreStr))
+            
+            set splitterIndex = CutToCharacter(restoreStr, "=")
+            set fog.zStart = S2R(SubString(restoreStr,0,splitterIndex))
+            set restoreStr = SubString(restoreStr,splitterIndex+1,StringLength(restoreStr))
+            
+            set splitterIndex = CutToCharacter(restoreStr, "=")
+            set fog.zEnd = S2R(SubString(restoreStr,0,splitterIndex))
+            set restoreStr = SubString(restoreStr,splitterIndex+1,StringLength(restoreStr))
+            
+            set splitterIndex = CutToCharacter(restoreStr, "=")
+            set fog.density = S2R(SubString(restoreStr,0,splitterIndex))/10000.
+            set restoreStr = SubString(restoreStr,splitterIndex+1,StringLength(restoreStr))
+            
+            set splitterIndex = CutToCharacter(restoreStr, "=")
+            set fog.red = S2R(SubString(restoreStr,0,splitterIndex))
+            set restoreStr = SubString(restoreStr,splitterIndex+1,StringLength(restoreStr))
+            
+            set splitterIndex = CutToCharacter(restoreStr, "=")
+            set fog.green = S2R(SubString(restoreStr,0,splitterIndex))
+            set restoreStr = SubString(restoreStr,splitterIndex+1,StringLength(restoreStr))
+            
+            set splitterIndex = CutToCharacter(restoreStr, "=")
+            set fog.blue = S2R(SubString(restoreStr,0,splitterIndex))
+            set restoreStr = SubString(restoreStr,splitterIndex+1,StringLength(restoreStr))
+            
+            
+            set splitterIndex = CutToCharacter(restoreStr, "=")
+            if splitterIndex < StringLength(restoreStr)-1 then
+                set dnc.lightTerrain = S2I(SubString(restoreStr,0,splitterIndex))
+                set restoreStr = SubString(restoreStr,splitterIndex+1,StringLength(restoreStr))
+                
+                set splitterIndex = CutToCharacter(restoreStr, "=")
+                set dnc.lightUnit = S2I(SubString(restoreStr,0,splitterIndex))
+                set restoreStr = SubString(restoreStr,splitterIndex+1,StringLength(restoreStr))
+            endif
+            
+            call AutoRectEnvironment_RegisterRect(GUDR_GetGeneratorRect(generator))
+        endif
+    endfunction
+endif
+
 static if LIBRARY_MultiPatrol then
     function Load_RestorePatrolPoints takes unit whichUnit, SaveLoader saveData, string chatStr returns nothing
         local integer cutToComma = CutToCharacter(chatStr, "=")
