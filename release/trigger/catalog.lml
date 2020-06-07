@@ -157,6 +157,10 @@
     55-Hotkeys: Hotkeys
         Comment
     '56-Hotkey Fullscreen': 'Hotkey Fullscreen'
+    57-New: New
+        Comment
+    '58-Commands Dsav': 'Commands Dsav'
+    '59-Commands Tsav': 'Commands Tsav'
 '08-Decoration Systems': 'Decoration Systems'
 '09-Deco Builders': 'Deco Builders'
     01-Libraries: Libraries

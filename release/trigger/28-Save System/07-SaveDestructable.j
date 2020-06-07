@@ -1,16 +1,20 @@
-scope SaveDestructable
-
-private function GetSavingPlayerId takes nothing returns SaveNLoad_PlayerData
-    return udg_temp_integer
-endfunction
+library SaveDestructable requires SaveNLoad, SaveIO
 
 private struct PlayerData extends array
     SaveData saveData
     ArrayList_destructable destructables
     integer current
+    
+    static method operator enumPlayerId takes nothing returns integer
+        return bj_forLoopAIndex
+    endmethod
+    
+    static method operator enumPlayerId= takes integer val returns nothing
+        set bj_forLoopAIndex = val
+    endmethod
 endstruct
 
-private function SaveDestructables takes PlayerData playerId returns nothing
+private function SaveNextDestructables takes PlayerData playerId returns nothing
     local integer i = playerId.current
     local ArrayList_destructable destructables = playerId.destructables
     local integer final = IMinBJ(i + 60, destructables.size())
@@ -36,7 +40,7 @@ private function onTimer takes nothing returns nothing
     loop
     exitwhen playerId == bj_MAX_PLAYER_SLOTS
         if playerId.saveData != 0 then
-            call SaveDestructables(playerId)
+            call SaveNextDestructables(playerId)
             if playerId.current == playerId.destructables.size() then
                 call playerId.saveData.destroy()
                 set playerId.saveData = 0
@@ -48,57 +52,35 @@ private function onTimer takes nothing returns nothing
     endloop
 endfunction
 
-function SaveFilter takes nothing returns boolean
-    call PlayerData(GetSavingPlayerId()).destructables.append(GetFilterDestructable())
+private function AddToArrayList takes nothing returns boolean
+    call PlayerData(PlayerData.enumPlayerId).destructables.append(GetFilterDestructable())
     return false
 endfunction
 
-function SaveLoopActions2 takes nothing returns nothing
-    local player saver = GetTriggerPlayer()
-    local unit generator
-    local rect rectangle
-    local PlayerData playerId = GetPlayerId(saver)
+function SaveDestructables takes SaveData saveData, rect rectangle returns nothing
     local integer tempInteger
-    
-    if SubString(GetEventPlayerChatString(), 0, 6) != "-dsav " then
-        return
-    endif
-    
-    set generator =  GUDR_PlayerGetSelectedGenerator(saver)
-    if generator == null then
-        return
-    endif
-    set rectangle = GUDR_GetGeneratorRect(generator)
-
-    set tempInteger = udg_temp_integer  // store global value in local
-    set udg_temp_integer = playerId
+    local PlayerData playerId = GetPlayerId(saveData.player)
     
     if playerId.saveData != 0 then
         call DisplayTextToPlayer(playerId.saveData.player, 0., 0., "|cffff0000Warning:|r Did not finish saving previous file!")
         call playerId.saveData.destroy()
         call playerId.destructables.clear()
     endif
-    
-    set playerId.saveData = SaveData.create(saver, SaveNLoad_FOLDER() + SubString(GetEventPlayerChatString(), 6, 129))
-    set playerId.saveData.centerX = GetUnitX(generator)
-    set playerId.saveData.centerY = GetUnitY(generator)
-    set playerId.saveData.extentX = GUDR_GetGeneratorExtentX(generator)
-    set playerId.saveData.extentY = GUDR_GetGeneratorExtentY(generator)
+    set playerId.saveData = saveData
     set playerId.current = 0
-    
-    call EnumDestructablesInRect(rectangle, Condition(function SaveFilter), null)
 
-    set udg_temp_integer = tempInteger  // restore global variable value
-    set generator = null
-    set rectangle = null
+    set tempInteger = PlayerData.enumPlayerId  // store global value in local
+    set PlayerData.enumPlayerId = playerId
+
+    call EnumDestructablesInRect(rectangle, Condition(function AddToArrayList), null)
+    
+    set PlayerData.enumPlayerId = tempInteger  // restore global variable value
 endfunction
 
 //===========================================================================
 function InitTrig_SaveDestructable takes nothing returns nothing
     local PlayerData playerId = 0
-    
-    set gg_trg_SaveDestructable = CreateTrigger(  )
-    call TriggerAddAction( gg_trg_SaveDestructable, function SaveLoopActions2 )
+
     call TimerStart(CreateTimer(), 0.5, true, function onTimer)
     
     loop
@@ -110,4 +92,4 @@ function InitTrig_SaveDestructable takes nothing returns nothing
     endloop
 endfunction
 
-endscope
+endlibrary

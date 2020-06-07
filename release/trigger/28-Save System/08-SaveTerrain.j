@@ -1,4 +1,4 @@
-scope SaveTrigger
+library SaveTerrain requires SaveNLoad, SaveIO, SaveNLoadProgressBars
 
 //! textmacro SaveXYMethodTerrain takes name
     method operator $name$ takes nothing returns real
@@ -138,35 +138,15 @@ private function onTimer takes nothing returns nothing
     endloop
 endfunction
 
-function SaveTerrain takes nothing returns nothing
-    local player trigP = GetTriggerPlayer()
-    local integer i
-    local PlayerData playerId = GetPlayerId(trigP)
-    local rect saveRect
-    local unit generator
-    
-    if SubString(GetEventPlayerChatString(), 0, 6) != "-tsav " then
-        return
-    endif
-    
-    set generator =  GUDR_PlayerGetSelectedGenerator(Player(playerId))
-    if generator == null then
-        return
-    endif
-    set saveRect = GUDR_GetGeneratorRect(generator)
-    
+function SaveTerrain takes SaveData saveData, rect saveRect returns nothing
+    local PlayerData playerId = GetPlayerId(saveData.player)
+
     if playerId.saveData != 0 then
         call DisplayTextToPlayer(playerId.saveData.player, 0., 0., "|cffff0000Warning:|r Did not finish saving previous file!")
         call playerId.saveData.destroy()
     endif
+    set playerId.saveData = saveData
     
-    set playerId.saveData = SaveData.create(trigP, SaveNLoad_FOLDER() + SubString(GetEventPlayerChatString(), 6, 129))
-    set playerId.saveData.centerX = GetUnitX(generator)
-    set playerId.saveData.centerY = GetUnitY(generator)
-    set playerId.saveData.extentX = GUDR_GetGeneratorExtentX(generator)
-    set playerId.saveData.extentY = GUDR_GetGeneratorExtentY(generator)
-    
-    set saveRect = GUDR_GetGeneratorRect(generator)
     set playerId.minX = GetRectMinX(saveRect)
     set playerId.maxX = GetRectMaxX(saveRect)
     set playerId.minY = GetRectMinY(saveRect)
@@ -174,25 +154,20 @@ function SaveTerrain takes nothing returns nothing
     set playerId.curX = playerId.minX
     set playerId.curY = playerId.minY
     
-    call playerId.saveData.write(SaveNLoad_FormatString("SnL_ter", "=" + R2S(playerId.minX - playerId.saveData.centerX) + "@" + R2S(playerId.maxX - playerId.saveData.centerX) + "@" +/*
-                                                        */R2S(playerId.minY - playerId.saveData.centerY) + "@" + R2S(playerId.maxY - playerId.saveData.centerY) + "@"))
+    call saveData.write(SaveNLoad_FormatString("SnL_ter", "=" + R2S(playerId.minX - saveData.centerX) + "@" + R2S(playerId.maxX - saveData.centerX) + "@" +/*
+                                                        */R2S(playerId.minY - saveData.centerY) + "@" + R2S(playerId.maxY - saveData.centerY) + "@"))
     
-    set saveRect = null
-    set generator = null
     
-    if User.Local == trigP then
+    if User.fromLocal() == playerId then
         call BlzFrameSetText(saveTerrainBarText, "Waiting...")
         call BlzFrameSetValue(saveTerrainBar, 0.)
         call BlzFrameSetVisible(saveTerrainBar, true)
     endif
 endfunction
 
-
 //===========================================================================
 function InitTrig_SaveTerrain takes nothing returns nothing
-    set gg_trg_SaveTerrain = CreateTrigger(  )
-    call TriggerAddAction( gg_trg_SaveTerrain, function SaveTerrain )
     call TimerStart(CreateTimer(), 0.5, true, function onTimer)
 endfunction
 
-endscope
+endlibrary

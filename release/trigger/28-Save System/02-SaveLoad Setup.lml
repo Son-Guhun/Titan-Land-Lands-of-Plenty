@@ -26,20 +26,6 @@ Action
                         Var   : temp_integer
                     Const : '-load center'
                     Preset: ChatMatchTypeExact
-            AddTriggerEvent
-                Var   : gg_trg_SaveDestructable
-                Event: TriggerRegisterPlayerChatEvent
-                    Call  : ConvertedPlayer
-                        Var   : temp_integer
-                    Const : '-dsav '
-                    Preset: ChatMatchTypeSubstring
-            AddTriggerEvent
-                Var   : gg_trg_SaveTerrain
-                Event: TriggerRegisterPlayerChatEvent
-                    Call  : ConvertedPlayer
-                        Var   : temp_integer
-                    Const : '-tsav '
-                    Preset: ChatMatchTypeSubstring
             CommentString
                 Const : 'PLEASE DO NOT TOUCH BELOW'
             AddTriggerEvent
