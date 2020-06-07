@@ -43,8 +43,12 @@ struct AnyBase extends array
         return "0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ[]{}()|/,.?!@#$%^&*'`+-=<>~:;_"
     endmethod
     
-    static constant method operator values takes nothing returns ConstTable
+    private static constant method operator values takes nothing returns ConstTable
         return tab
+    endmethod
+    
+    static method getDigitValue takes string digit returns integer
+        return AnyBase.values[StringHashEx(digit)]
     endmethod
     
     method encode takes integer x returns string

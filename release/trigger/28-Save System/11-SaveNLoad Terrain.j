@@ -5,7 +5,7 @@ function LoadD2H takes integer int returns string
 endfunction
 
 function LoadH2D takes string char returns integer
-    return AnyBase.values[StringHashEx(char)]
+    return AnyBase.getDigitValue(char)
 endfunction
 
 constant function SaveNLoad_BASE_92_OFFSET takes nothing returns integer
