@@ -272,6 +272,7 @@
         Disab
     34-StringHashEx: StringHashEx
     35-Packets: Packets
+    36-AnyBase: AnyBase
 21-Map-specific: Map-specific
     1-Debug: Debug
     2-ArrayAgent: ArrayAgent
@@ -315,34 +316,32 @@
         Disab
 '27-By Guhun': 'By Guhun'
 '28-Save System': 'Save System'
-    '01-How to Import': 'How to Import'
+    '01-SaveLoad Commands': 'SaveLoad Commands'
+    '02-SaveLoad Set Center Numbers': 'SaveLoad Set Center Numbers'
+    03-Save: Save
         Comment
-    '02-SaveLoad Setup': 'SaveLoad Setup'
-    '03-SaveLoad Commands': 'SaveLoad Commands'
-    '04-SaveLoad Set Center Numbers': 'SaveLoad Set Center Numbers'
-    05-Save: Save
+    04-SaveUnit: SaveUnit
+    05-SaveUnitExtras: SaveUnitExtras
+    06-SaveDestructable: SaveDestructable
+    07-SaveTerrain: SaveTerrain
+    08-Load: Load
         Comment
-    06-SaveUnit: SaveUnit
-    07-SaveDestructable: SaveDestructable
-    08-SaveTerrain: SaveTerrain
-    '09-Load New': 'Load New'
+    09-SaveNLoad: SaveNLoad
+    '10-SaveNLoad Unit': 'SaveNLoad Unit'
+    '11-SaveNLoad Terrain': 'SaveNLoad Terrain'
+    12-IO_UI: IO/UI
         Comment
-    '10-LoadUnit Copy': 'LoadUnit Copy'
+    13-SaveIO: SaveIO
+    '14-SaveNLoad ProgressBars': 'SaveNLoad ProgressBars'
+    '15-Sync Listeners': 'Sync Listeners'
+        Comment
+    16-RectSaveLoader: RectSaveLoader
+    17-LoadUnit: LoadUnit
         Closed
-    '11-LoadUnit Extra Copy': 'LoadUnit Extra Copy'
+    '18-LoadUnit Extra': 'LoadUnit Extra'
         Closed
-    '12-LoadDestructable Copy': 'LoadDestructable Copy'
-    '13-LoadTerrain Copy': 'LoadTerrain Copy'
-    14-vJass: vJass
-        Comment
-    15-SaveNLoad: SaveNLoad
-    16-SaveIO: SaveIO
-    17-RectSaveLoader: RectSaveLoader
-    18-AnyBase: AnyBase
-    '19-SaveNLoad Unit': 'SaveNLoad Unit'
-    '20-SaveNLoad Terrain': 'SaveNLoad Terrain'
-    '21-SaveNLoad ProgressBars': 'SaveNLoad ProgressBars'
-    22-SaveUnitExtras: SaveUnitExtras
+    19-LoadDestructable: LoadDestructable
+    20-LoadTerrain: LoadTerrain
 '29-Circle Object System': 'Circle Object System'
     '1-GCOS Init Copy': 'GCOS Init Copy'
     '2-Circle Object System': 'Circle Object System'

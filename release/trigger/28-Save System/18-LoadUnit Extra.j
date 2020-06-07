@@ -207,9 +207,9 @@ function Trig_LoadUnitNew_Extra_Actions takes nothing returns nothing
 endfunction
 
 //===========================================================================
-function InitTrig_LoadUnit_Extra_Copy takes nothing returns nothing
-    set gg_trg_LoadUnit_Extra_Copy = CreateTrigger(  )
-    call TriggerAddAction( gg_trg_LoadUnit_Extra_Copy, function Trig_LoadUnitNew_Extra_Actions )
-    call TriggerRegisterAnyPlayerSyncEvent( gg_trg_LoadUnit_Extra_Copy, "SnL_unit_extra", false)
+function InitTrig_LoadUnit_Extra takes nothing returns nothing
+    set gg_trg_LoadUnit_Extra = CreateTrigger(  )
+    call TriggerAddAction( gg_trg_LoadUnit_Extra, function Trig_LoadUnitNew_Extra_Actions )
+    call TriggerRegisterAnyPlayerSyncEvent( gg_trg_LoadUnit_Extra, "SnL_unit_extra", false)
 endfunction
 

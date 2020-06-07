@@ -14,9 +14,9 @@ function Trig_LoadDestNew_Actions takes nothing returns nothing
 endfunction
 
 //===========================================================================
-function InitTrig_LoadDestructable_Copy takes nothing returns nothing
-    set gg_trg_LoadDestructable_Copy = CreateTrigger(  )
-    call TriggerAddAction( gg_trg_LoadDestructable_Copy, function Trig_LoadDestNew_Actions )
-    call TriggerRegisterAnyPlayerSyncEvent( gg_trg_LoadDestructable_Copy, "SnL_dest", false)
+function InitTrig_LoadDestructable takes nothing returns nothing
+    set gg_trg_LoadDestructable = CreateTrigger(  )
+    call TriggerAddAction( gg_trg_LoadDestructable, function Trig_LoadDestNew_Actions )
+    call TriggerRegisterAnyPlayerSyncEvent( gg_trg_LoadDestructable, "SnL_dest", false)
 endfunction
 

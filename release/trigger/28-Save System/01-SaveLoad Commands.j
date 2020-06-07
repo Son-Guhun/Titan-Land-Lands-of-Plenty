@@ -39,9 +39,19 @@ function Trig_SaveLoad_Commands_Actions takes nothing returns nothing
     endif
 endfunction
 
+function Trig_SaveLoad_Setup_Func002A takes nothing returns nothing
+    local integer udg_temp_integer
+    set udg_temp_integer = GetConvertedPlayerId(GetEnumPlayer())
+    call TriggerRegisterPlayerChatEvent( gg_trg_SaveLoad_Commands, ConvertedPlayer(udg_temp_integer), "-load limit", false )
+    call TriggerRegisterPlayerChatEvent( gg_trg_SaveLoad_Commands, ConvertedPlayer(udg_temp_integer), "-load center", true )
+    // PLEASE DO NOT TOUCH BELOW
+    call TriggerRegisterPlayerChatEvent( gg_trg_SaveLoad_Set_Center_Numbers, ConvertedPlayer(udg_temp_integer), "-load center ", false )
+endfunction
+
 //===========================================================================
 function InitTrig_SaveLoad_Commands takes nothing returns nothing
     set gg_trg_SaveLoad_Commands = CreateTrigger(  )
     call TriggerAddAction( gg_trg_SaveLoad_Commands, function Trig_SaveLoad_Commands_Actions )
+    call ForForce( GetPlayersAll(), function Trig_SaveLoad_Setup_Func002A )
 endfunction
 
