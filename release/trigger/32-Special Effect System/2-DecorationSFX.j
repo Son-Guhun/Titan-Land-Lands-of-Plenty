@@ -1,4 +1,4 @@
-library DecorationSFX requires SpecialEffect, TableStruct
+library DecorationSFX requires SpecialEffect, TableStruct, OOP
 
 ///////////////////////////////////////////////////////////////
 // Configuration
@@ -103,37 +103,14 @@ private struct DecorationEffectBlock extends array
 
 endstruct
 
+private keyword InheritedFromSpecialEffect
 struct DecorationEffect extends array
  
+    implement InheritedFromSpecialEffect
     
     //! runtextmacro HashStruct_SetHashtableWrapper("SpecialEffect_hT")
     //! runtextmacro HashStruct_NewReadonlyPrimitiveField("owner","integer")
     //! runtextmacro HashStruct_NewReadonlyBooleanFieldWithDefault("hasCustomColor","false")
-    
-    method operator effect takes nothing returns effect
-        return SpecialEffect(this).effect
-    endmethod
-    
-    method operator unitType takes nothing returns integer
-        return SpecialEffect(this).unitType
-    endmethod
-    
-    method operator skin takes nothing returns integer
-        return SpecialEffect(this).skin
-    endmethod
-    
-    method operator height takes nothing returns real
-        return SpecialEffect(this).height
-    endmethod
-    
-    method operator height= takes real value returns nothing
-        set SpecialEffect(this).height = value
-    endmethod
-
-    method operator x takes nothing returns real
-        implement assertNotNull
-        return BlzGetLocalSpecialEffectX(.effect)
-    endmethod
     
     method operator x= takes real value returns nothing
         local effect decoration = .effect
@@ -149,11 +126,6 @@ struct DecorationEffect extends array
         set decoration = null
     endmethod
     
-    method operator y takes nothing returns real
-        implement assertNotNull
-        return BlzGetLocalSpecialEffectY(.effect)
-    endmethod
-    
     method operator y= takes real value returns nothing
         local effect decoration = .effect
         local real x = BlzGetLocalSpecialEffectX(decoration)
@@ -166,39 +138,7 @@ struct DecorationEffect extends array
         
         set decoration = null
     endmethod
-    
-    method operator yaw takes nothing returns real
-        return SpecialEffect(this).yaw
-    endmethod
-    
-    method operator yaw= takes real value returns nothing
-        set SpecialEffect(this).yaw = value
-    endmethod
-    
-    method operator pitch takes nothing returns real
-        return SpecialEffect(this).pitch
-    endmethod
-    
-    method operator pitch= takes real value returns nothing
-        set SpecialEffect(this).pitch = value
-    endmethod
-    
-    method operator roll takes nothing returns real
-        return SpecialEffect(this).roll
-    endmethod
-    
-    method operator roll= takes real value returns nothing
-        set SpecialEffect(this).roll = value
-    endmethod
-    
-    method setOrientation takes real yaw, real pitch, real roll returns nothing
-        call SpecialEffect(this).setOrientation(yaw, pitch, roll)
-    endmethod
-    
-    method operator color takes nothing returns integer
-        return SpecialEffect(this).color
-    endmethod
-    
+
     method operator color= takes integer value returns nothing
         set .hasCustomColor = true
         set SpecialEffect(this).color = value
@@ -207,74 +147,6 @@ struct DecorationEffect extends array
     method resetColor takes nothing returns nothing
         set .hasCustomColor = false
         set SpecialEffect(this).color = PlayerData(.owner).color
-    endmethod
-    
-    method operator scaleX takes nothing returns real
-        return SpecialEffect(this).scaleX
-    endmethod
-    
-    method operator scaleY takes nothing returns real
-        return SpecialEffect(this).scaleY
-    endmethod
-    
-    method operator scaleZ takes nothing returns real
-        return SpecialEffect(this).scaleZ
-    endmethod
-    
-    method setScale takes real scaleX, real scaleY, real scaleZ returns nothing
-        call SpecialEffect(this).setScale(scaleX, scaleY, scaleZ)
-    endmethod
-    
-    method operator red takes nothing returns integer
-        return SpecialEffect(this).red
-    endmethod
-    
-    method operator green takes nothing returns integer
-        return SpecialEffect(this).green
-    endmethod
-    
-    method operator blue takes nothing returns integer
-        return SpecialEffect(this).blue
-    endmethod
-    
-    method setVertexColor takes integer red, integer green, integer blue returns nothing
-        call SpecialEffect(this).setVertexColor(red, green, blue)
-    endmethod
-    
-    method operator alpha takes nothing returns integer
-        return SpecialEffect(this).alpha
-    endmethod
-    
-    method operator alpha= takes integer alpha returns nothing
-        set SpecialEffect(this).alpha = alpha
-    endmethod
-    
-    method operator animationSpeed takes nothing returns real
-        return SpecialEffect(this).animationSpeed
-    endmethod
-    
-    method operator animationSpeed= takes real value returns nothing
-        set SpecialEffect(this).animationSpeed = value
-    endmethod
-    
-    method operator subanimations takes nothing returns LinkedHashSet
-        return SpecialEffect(this).subanimations
-    endmethod
-    
-    method hasSubAnimations takes nothing returns boolean
-        return SpecialEffect(this).hasSubAnimations()
-    endmethod
-    
-    method addSubAnimation takes subanimtype anim returns nothing
-        call SpecialEffect(this).addSubAnimation(anim)
-    endmethod    
-    
-    method removeSubAnimation takes subanimtype anim returns nothing
-        call SpecialEffect(this).removeSubAnimation(anim)
-    endmethod
-    
-    method clearSubAnimations takes nothing returns nothing
-        call SpecialEffect(this).clearSubAnimations()
     endmethod
     
     method getOwner takes nothing returns player
@@ -293,6 +165,7 @@ struct DecorationEffect extends array
         endif
     endmethod
     
+    // Factory method, converts a SpecialEffect to a DecorationEffect
     static method convertSpecialEffect takes player playerid, SpecialEffect sfx, boolean useCustomColor returns DecorationEffect
         if useCustomColor then
             set DecorationEffect(sfx).owner = GetPlayerId(playerid)
@@ -587,5 +460,58 @@ endmodule
 private struct InitStruct extends array
     implement InitModule
 endstruct
+
+private module InheritedFromSpecialEffect
+    //! runtextmacro InheritFieldReadonly("SpecialEffect", "x", "real")
+    //! runtextmacro InheritFieldReadonly("SpecialEffect", "y", "real")
+    
+    //! runtextmacro InheritFieldReadonly("SpecialEffect", "effect", "effect")
+    //! runtextmacro InheritFieldReadonly("SpecialEffect", "unitType", "integer")
+    //! runtextmacro InheritFieldReadonly("SpecialEffect", "skin", "integer")
+    //! runtextmacro InheritField("SpecialEffect", "height", "real")
+    
+    //! runtextmacro InheritField("SpecialEffect", "yaw", "real")
+    //! runtextmacro InheritField("SpecialEffect", "pitch", "real")
+    //! runtextmacro InheritField("SpecialEffect", "roll", "real")
+    //! runtextmacro InheritFieldReadonly("SpecialEffect", "color", "integer")
+    //! runtextmacro InheritFieldReadonly("SpecialEffect", "scaleX", "real")
+    //! runtextmacro InheritFieldReadonly("SpecialEffect", "scaleY", "real")
+    //! runtextmacro InheritFieldReadonly("SpecialEffect", "scaleZ", "real")
+    //! runtextmacro InheritFieldReadonly("SpecialEffect", "red", "integer")
+    //! runtextmacro InheritFieldReadonly("SpecialEffect", "green", "integer")
+    //! runtextmacro InheritFieldReadonly("SpecialEffect", "blue", "integer")
+    //! runtextmacro InheritField("SpecialEffect", "alpha", "integer")
+    //! runtextmacro InheritField("SpecialEffect", "animationSpeed", "real")
+    //! runtextmacro InheritFieldReadonly("SpecialEffect", "subanimations", "LinkedHashSet")
+
+
+    method setOrientation takes real yaw, real pitch, real roll returns nothing
+        call SpecialEffect(this).setOrientation(yaw, pitch, roll)
+    endmethod
+    
+    method setScale takes real scaleX, real scaleY, real scaleZ returns nothing
+        call SpecialEffect(this).setScale(scaleX, scaleY, scaleZ)
+    endmethod
+    
+    method setVertexColor takes integer red, integer green, integer blue returns nothing
+        call SpecialEffect(this).setVertexColor(red, green, blue)
+    endmethod
+    
+    method hasSubAnimations takes nothing returns boolean
+        return SpecialEffect(this).hasSubAnimations()
+    endmethod
+    
+    method addSubAnimation takes subanimtype anim returns nothing
+        call SpecialEffect(this).addSubAnimation(anim)
+    endmethod    
+    
+    method removeSubAnimation takes subanimtype anim returns nothing
+        call SpecialEffect(this).removeSubAnimation(anim)
+    endmethod
+    
+    method clearSubAnimations takes nothing returns nothing
+        call SpecialEffect(this).clearSubAnimations()
+    endmethod
+endmodule
 
 endlibrary
