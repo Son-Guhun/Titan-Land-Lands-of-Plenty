@@ -44,7 +44,6 @@
     06-LoPUtils: LoPUtils
     07-LoPTip: LoPTip
     08-LoPDeprecated: LoPDeprecated
-        Disab
     09-LoPStdlib: LoPStdlib
     10-LoPWarn: LoPWarn
 '05-Map Init': 'Map Init'

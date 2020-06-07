@@ -294,6 +294,16 @@ function LoadUnit takes string chat_str, player un_owner, real centerX, real cen
                     set unitData.size = R2S(DeprecatedData(un_type).scale)
                 endif
             endif
+            if DeprecatedData(un_type).hasRoll() then
+                if unitData.roll == 0 then
+                    set unitData.roll = DeprecatedData(un_type).roll
+                endif
+            endif
+            if DeprecatedData(un_type).hasPitch() then
+                if unitData.pitch == 0 then
+                    set unitData.pitch = DeprecatedData(un_type).pitch
+                endif
+            endif
             
             set un_type = DeprecatedData(un_type).equivalent
         endif
