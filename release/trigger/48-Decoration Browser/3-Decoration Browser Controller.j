@@ -1,4 +1,4 @@
-library DecorationBrowserController initializer Init requires Packets, DecorationBrowserView, ListBox, RegisterClassicDecorations, optional LoPUnitCompatibility
+library DecorationBrowserController initializer Init requires DecorationBrowserView, ListBox, RegisterClassicDecorations, SpecialEffect, ControlState, optional LoPUnitCompatibility
 
 //! runtextmacro optional LoPUnitCompatibility()
 
@@ -17,6 +17,12 @@ private function onPacket takes nothing returns boolean
     call packet.destroy()
     return false
 endfunction
+
+globals
+    public ScreenController controller
+    public ControlState controlState
+    private SpecialEffect array effects
+endglobals
 
 struct DecorationsListbox extends array
     static constant framepointtype startFramepoint = FRAMEPOINT_RIGHT
@@ -59,29 +65,22 @@ struct DecorationsListbox extends array
     
     static method onClickHandler takes player trigP, integer frameIndex, integer listIndex returns nothing
         local User pId = User[trigP]
-        local RealPacket packet = RealPacket.create(2, Condition(function onPacket))
-
         
-        set packet[0] = GetCameraTargetPositionX()
-        set packet[1] = GetCameraTargetPositionY()
-
+        if effects[pId] != 0 then
+            call effects[pId].destroy()
+        endif
+    
         if isReforged[pId] then
-            // call BJDebugMsg(I2S(listIndex) + ": " + GetObjectName(ReforgedDecorationList(playerLists[pId])[listIndex]))
-            set packet.metaData[0] = ReforgedDecorationList(playerLists[User[trigP]])[listIndex]
+            set effects[pId] = SpecialEffect.create(ReforgedDecorationList(playerLists[User[trigP]])[listIndex], GetPlayerLastMouseX(trigP), GetPlayerLastMouseY(trigP))
         else
-            // call BJDebugMsg(I2S(listIndex) + ": " + GetObjectName(playerLists[pId][listIndex]))
-            set packet.metaData[0] = playerLists[User[trigP]][listIndex]
+            set effects[pId] = SpecialEffect.create(playerLists[User[trigP]][listIndex], GetPlayerLastMouseX(trigP), GetPlayerLastMouseY(trigP))
         endif
         
-        call packet.sync(trigP)
+        set effects[pId].alpha = 128
     endmethod
 
     implement ListBoxTemplate
 endstruct
-
-globals
-    public ScreenController controller
-endglobals
 
 private function RefreshList takes User pId, string searchStr returns nothing
     local DecorationList list
@@ -132,6 +131,57 @@ private function onClick takes nothing returns nothing
     endif
 endfunction
 
+private function onStateEnter takes nothing returns boolean
+    call controller.enable(GetTriggerPlayer(), true)
+    return false
+endfunction
+
+private function onStateExit takes nothing returns boolean
+    call controller.enable(GetTriggerPlayer(), false)
+    return false
+endfunction
+
+private function onMoveMouse takes nothing returns boolean
+    local integer playerId = User[PlayerEvent_GetTriggerPlayer()]
+
+    if effects[playerId] != 0 then
+        set effects[playerId].x = PlayerMouseEvent_GetTriggerPlayerMouseX()
+        set effects[playerId].y = PlayerMouseEvent_GetTriggerPlayerMouseY()
+    endif
+    
+    return false
+endfunction
+
+private function onMousePress takes nothing returns boolean
+    local User playerId = User[PlayerEvent_GetTriggerPlayer()]
+    
+
+    if effects[playerId] != 0 and PlayerMouseEvent_GetTriggerPlayerMouseButton() == MOUSE_BUTTON_TYPE_LEFT then
+        call CreateUnit(playerId.handle, effects[playerId].unitType, PlayerMouseEvent_GetTriggerPlayerMouseX(), PlayerMouseEvent_GetTriggerPlayerMouseY(), 0.)
+        if not OSKeys.LSHIFT.isPressedId(playerId) and not OSKeys.RSHIFT.isPressedId(playerId) then
+            call effects[playerId].destroy()
+            set effects[playerId] = 0
+        endif
+    endif
+    
+    return false
+endfunction
+
+private function onKey takes nothing returns boolean
+    local User pId = User[GetTriggerPlayer()]
+
+    if ControlState.getPlayerIdActiveState(pId) == controlState then
+        if BlzGetTriggerPlayerKey() == OSKEY_ESCAPE then
+            if effects[pId] != 0 then
+                call effects[pId].destroy()
+                set effects[pId] = 0
+            endif
+        endif
+    endif
+    
+    return true
+endfunction
+
 //===========================================================================
 private function Init takes nothing returns nothing
     local trigger trig = CreateTrigger()
@@ -153,6 +203,29 @@ private function Init takes nothing returns nothing
     call BlzTriggerRegisterFrameEvent(trig, decorationBrowserScreen["switchButton"], FRAMEEVENT_CONTROL_CLICK)
     
     set controller = ScreenController.create(decorationBrowserScreen, null)
+    
+    set controlState = controlState.create()
+    
+    set trig = CreateTrigger()
+    call TriggerAddCondition(trig, Condition(function onStateEnter))
+    set controlState.onActivate = trig
+    
+    set trig = CreateTrigger()
+    call TriggerAddCondition(trig, Condition(function onStateExit))
+    set controlState.onDeactivate = trig
+    
+    set trig = CreateTrigger()
+    call TriggerAddCondition(trig, Condition(function onMoveMouse))
+    set controlState.trigger[EVENT_PLAYER_MOUSE_MOVE] = trig
+    
+    set trig = CreateTrigger()
+    call TriggerAddCondition(trig, Condition(function onMousePress))
+    set controlState.trigger[EVENT_PLAYER_MOUSE_UP] = trig
+    
+    call OSKeys.LSHIFT.register()
+    call OSKeys.RSHIFT.register()
+    call OSKeys.ESCAPE.register()
+    call OSKeys.addListener(Condition(function onKey))
 endfunction
 
 endlibrary

@@ -16,11 +16,15 @@ private function HandleButton takes player trigP, framehandle trigButton returns
         endif
     elseif trigButton == UpperButtonBar.buttons[5] then
         if DecorationBrowserController_controller.isEnabled(trigP) then
-            call DecorationBrowserController_controller.enable(trigP, false)
+            // call DecorationBrowserController_controller.enable(trigP, false)
+            call ControlState.default.activateForPlayer(trigP)
             call StartSoundForPlayerBJ(trigP, clickSoundBig)
         else
-            call DecorationBrowserController_controller.enable(trigP, true)
-            call StartSoundForPlayerBJ(trigP, clickSound) 
+            // call DecorationBrowserController_controller.enable(trigP, true)
+            if ControlState.getPlayerIdActiveState(User[trigP]) == ControlState.default then
+                call DecorationBrowserController_controlState.activateForPlayer(trigP)
+                call StartSoundForPlayerBJ(trigP, clickSound)
+            endif
         endif
     endif
 endfunction
