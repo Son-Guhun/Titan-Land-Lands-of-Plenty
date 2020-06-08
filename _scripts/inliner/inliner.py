@@ -110,6 +110,7 @@ def inline_strings(file, out):
         for char in line:
             if first_slash and char == '/':
                 break
+            first_slash = False
             if is_string:
                 if escape:
                     escape = False
