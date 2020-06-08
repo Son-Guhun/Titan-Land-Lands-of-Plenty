@@ -31,6 +31,7 @@ easily hit the OP limit imposed by JASS. To avoid this, we have to execute the c
 
 This code is automatically generated using the searchindexernew.py script in the repository.
 */
+
 private module A0
 private static method onInit takes nothing returns nothing
 call RegisterThing('h08J')
@@ -87,7 +88,6 @@ call RegisterThing('h04J')
 call RegisterThing('h0LZ')
 call RegisterThing('h0M1')
 call RegisterThing('h0MB')
-call RegisterThing('h0MF')
 call RegisterThing('h0MD')
 call RegisterThing('h0C9')
 call RegisterThing('h0CA')
@@ -333,11 +333,11 @@ call RegisterThing('h0SM')
 call RegisterThing('h0SN')
 call RegisterThing('h0SO')
 call RegisterThing('h0SP')
+call RegisterThing('e02D')
 endmethod
 endmodule
 private module A300
 private static method onInit takes nothing returns nothing
-call RegisterThing('e02D')
 call RegisterThing('h0SQ')
 call RegisterThing('h0D1')
 call RegisterThing('h0D5')
@@ -637,11 +637,11 @@ call RegisterThing('h0K7')
 call RegisterThing('h0K9')
 call RegisterThing('h0V6')
 call RegisterThing('h0V4')
+call RegisterThing('h0KB')
 endmethod
 endmodule
 private module A600
 private static method onInit takes nothing returns nothing
-call RegisterThing('h0KB')
 call RegisterThing('h0KC')
 call RegisterThing('h0K8')
 call RegisterThing('h00X')
@@ -898,7 +898,6 @@ call RegisterThing('h01J')
 call RegisterThing('nwgt')
 call RegisterThing('h05H')
 call RegisterThing('h05I')
-call RegisterThing('h05J')
 call RegisterThing('h09S')
 call RegisterThing('h09T')
 call RegisterThing('h05F')
