@@ -1,6 +1,6 @@
 library OSKeyLib requires PlayerUtils, Timeline
 /*
-*   v1.0.0 - by Guhun
+*   v1.1.1 - by Guhun
 *
 *
 * This is a library that facilitates usage of the oskey API added in patch 1.31.
@@ -55,15 +55,26 @@ struct OSKeys extends array
     BlzGetTriggerPlayerMetaKey()
     BlzGetTriggerPlayerIsKeyDown()
     
-    NOTE: listeners will be executed in the order they were added
+    NOTE: listeners will be executed in the order they were added.
     */
+    
+    // Add a listener that will be executed when the key is pressed or released.
     $inline$ static method addListener takes boolexpr expr returns triggercondition
+    
+    // Add a listener that will be periodically executed when a key is held down. Uses the default behaviour of the oskey API, not timers.
+    $inline$ static method addHoldListener takes boolexpr expr returns triggercondition
     
     // Removes a previously added listener.
     $inline$ static method removeListener takes triggercondition listener returns nothing
     
+    // Removes a previously added listener.
+    $inline$ static method removeHoldListener takes triggercondition listener returns nothing
+    
     readonly oskeytype handle
     readonly boolean isRegistered
+    
+    // A factory function to convert from an oskeytype handle to this struct type.
+    $inline$ static method fromHandle takes oskeytype key returns OSKeys
 endstruct
 
 /*
@@ -226,6 +237,7 @@ struct OSKeys extends array
     readonly boolean isRegistered
     private static trigger eventResponder = null
     private static trigger executer = CreateTrigger()
+    private static trigger holdExecuter = CreateTrigger()
     
     static method addListener takes boolexpr expr returns triggercondition
         return TriggerAddCondition(executer, expr)
@@ -233,6 +245,14 @@ struct OSKeys extends array
     
     static method removeListener takes triggercondition listener returns nothing
         call TriggerRemoveCondition(executer, listener)
+    endmethod
+    
+    static method addHoldListener takes boolexpr expr returns triggercondition
+        return TriggerAddCondition(holdExecuter, expr)
+    endmethod
+    
+    static method removeHoldListener takes triggercondition listener returns nothing
+        call TriggerRemoveCondition(holdExecuter, listener)
     endmethod
 
     method isPressedId takes integer playerId returns boolean
@@ -249,6 +269,10 @@ struct OSKeys extends array
     
     method getDuration takes nothing returns real
         return Timeline.game.elapsed - timestamp[this][User.fromLocal().id]
+    endmethod
+    
+    static method fromHandle takes oskeytype key returns thistype
+        return GetHandleId(key)
     endmethod
     
     method operator handle takes nothing returns oskeytype
@@ -276,11 +300,15 @@ struct OSKeys extends array
         local integer key = GetHandleId(BlzGetTriggerPlayerKey())
         local integer pId = GetPlayerId(GetTriggerPlayer())
         
-        set g_isPressed[key][pId] = pressed
-        
-        set timestamp[key][pId] = Timeline.game.elapsed
-        
-        call TriggerEvaluate(executer)
+        if not pressed or not g_isPressed[key][pId] then
+            set g_isPressed[key][pId] = pressed
+            
+            set timestamp[key][pId] = Timeline.game.elapsed
+            
+            call TriggerEvaluate(executer)
+        else
+            call TriggerEvaluate(holdExecuter)
+        endif
     endmethod
     
     private static method onStart takes nothing returns nothing
