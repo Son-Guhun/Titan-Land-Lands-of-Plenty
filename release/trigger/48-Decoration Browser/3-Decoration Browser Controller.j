@@ -1,4 +1,4 @@
-library DecorationBrowserController initializer Init requires DecorationBrowserView, ListBox, RegisterClassicDecorations, SpecialEffect, ControlState, optional LoPUnitCompatibility
+library DecorationBrowserController requires DecorationBrowserView, ListBox, RegisterClassicDecorations, SpecialEffect, ControlState, optional LoPUnitCompatibility
 
 //! runtextmacro optional LoPUnitCompatibility()
 
@@ -132,12 +132,18 @@ private function onClick takes nothing returns nothing
 endfunction
 
 private function onStateEnter takes nothing returns boolean
-    call controller.enable(GetTriggerPlayer(), true)
+    call controller.enable(ControlState.getChangingPlayer(), true)
     return false
 endfunction
 
 private function onStateExit takes nothing returns boolean
-    call controller.enable(GetTriggerPlayer(), false)
+    local User pId = User[ControlState.getChangingPlayer()]
+
+    call controller.enable(pId.handle, false)
+    if effects[pId] != 0 then
+        call effects[pId].destroy()
+        set effects[pId] = 0
+    endif
     return false
 endfunction
 
@@ -183,7 +189,7 @@ private function onKey takes nothing returns boolean
 endfunction
 
 //===========================================================================
-private function Init takes nothing returns nothing
+//! runtextmacro Begin0SecondInitializer("Init")
     local trigger trig = CreateTrigger()
     call TriggerAddAction(trig, function onEditText)
     
@@ -226,6 +232,6 @@ private function Init takes nothing returns nothing
     call OSKeys.RSHIFT.register()
     call OSKeys.ESCAPE.register()
     call OSKeys.addListener(Condition(function onKey))
-endfunction
+//! runtextmacro End0SecondInitializer()
 
 endlibrary

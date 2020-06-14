@@ -1,4 +1,4 @@
-library TerrainEditorUIController initializer Init requires UILib, PlayerUtils, BitFlags, TerrainEditorUIView, TerrainEditor
+library TerrainEditorUIController requires UILib, PlayerUtils, BitFlags, TerrainEditorUIView, TerrainEditor
 
 globals
     public boolean heightEnabled = false
@@ -128,7 +128,7 @@ private function onLeave takes nothing returns nothing
 endfunction
 
 //===========================================================================
-private function Init takes nothing returns nothing
+//! runtextmacro Begin0SecondInitializer("Init")
     local trigger trig = CreateTrigger()
     local integer i = 0
     
@@ -190,6 +190,6 @@ private function Init takes nothing returns nothing
     call OSKeys.H.register()
     call OSKeys.P.register()
     set controller = ScreenController.create(terrainEditorScreen, Condition(function onPress))
-endfunction
+//! runtextmacro End0SecondInitializer()
 
 endlibrary

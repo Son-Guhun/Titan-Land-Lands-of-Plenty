@@ -1,10 +1,10 @@
-library ChatLogView requires Screen, UILib
+library ChatLogView requires Screen, UILib, OOP
 
 globals
     public Screen mainFrame
 endglobals
 
-//! runtextmacro BeginInitializer("Init")
+//! runtextmacro Begin0SecondInitializer("Init")
     local framehandle mainButton
     
     call BlzLoadTOCFile("war3mapimported\\Templates.toc")
@@ -39,7 +39,7 @@ endglobals
     call BlzFrameSetPoint(mainButton, FRAMEPOINT_RIGHT, mainFrame["switchButton"], FRAMEPOINT_LEFT, -0.002, 0)
     call BlzFrameSetText(mainButton, "Close")
     set mainFrame["closeButton"] = mainButton
-//! runtextmacro EndInitializer()
+//! runtextmacro End0SecondInitializer()
 
 
 

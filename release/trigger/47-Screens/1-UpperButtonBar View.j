@@ -15,7 +15,7 @@ struct UpperButtonBar extends array
 endstruct
 
 private module InitModule
-    private static method onInit takes nothing returns nothing
+    private static method onStart takes nothing returns nothing
         local framehandle mainButton
         call BlzLoadTOCFile("war3mapImported\\Templates.toc")
 
@@ -36,6 +36,12 @@ private module InitModule
         
         call BlzFrameSetEnable(buttons[4], false)
         call BlzFrameSetEnable(buttons[6], false)
+        
+        call DestroyTimer(GetExpiredTimer())
+    endmethod
+    
+    private static method onInit takes nothing returns nothing
+        call TimerStart(CreateTimer(), 0., false, function thistype.onStart)
     endmethod
 endmodule
 

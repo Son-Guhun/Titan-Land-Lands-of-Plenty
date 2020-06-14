@@ -4,7 +4,7 @@ globals
     public Screen mainFrame
 endglobals
 
-//! runtextmacro BeginInitializer("Init")
+//! runtextmacro Begin0SecondInitializer("Init")
     local framehandle mainButton
     
     call BlzLoadTOCFile("war3mapimported\\BoxedText.toc")
@@ -70,7 +70,7 @@ Allows you to view separate chat logs for OOC/IC messages. These chat logs shoul
 This chat log is also the only way to view messages sent using the Advanced Chat Box. To access the advanced chat box, use the hotkey |cffffcc00Shift|r+Enter.
 ")
     // call CreateTooltip(mainButton, "Spawn Special Units", 0.15, 0.08, 0.002, 0.002)
-//! runtextmacro EndInitializer()
+//! runtextmacro End0SecondInitializer()
 
 
 

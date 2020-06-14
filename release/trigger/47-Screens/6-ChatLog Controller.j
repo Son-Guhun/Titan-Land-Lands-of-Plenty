@@ -1,4 +1,4 @@
-library ChatLogController initializer Init requires UILib, ChatLogView
+library ChatLogController requires UILib, ChatLogView
 
 globals
     public ScreenController controller
@@ -49,7 +49,7 @@ endfunction
 
 
 //===========================================================================
-private function Init takes nothing returns nothing
+//! runtextmacro Begin0SecondInitializer("Init")
     local trigger trig = CreateTrigger() //The Trigger Handling the Frameevent
     call TriggerAddAction(trig, function onClick) //Function onClick will run when mainButton is clicked
     
@@ -58,6 +58,6 @@ private function Init takes nothing returns nothing
     call BlzTriggerRegisterFrameEvent(trig, ChatLogView_mainFrame["closeButton"], FRAMEEVENT_CONTROL_CLICK)
     
     set controller = ScreenController.create(ChatLogView_mainFrame, null)
-endfunction
+//! runtextmacro End0SecondInitializer()
 
 endlibrary

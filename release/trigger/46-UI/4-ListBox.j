@@ -140,8 +140,8 @@ module ListBoxTemplate
             call BlzFrameSetEnable(frame, true)
         endif
     endmethod
-
-    private static method onInit takes nothing returns nothing
+    
+    private static method onStart takes nothing returns nothing
         local framehandle mainFrame
         local trigger clickHandler = CreateTrigger()
         local trigger wheelHandler = CreateTrigger()
@@ -195,6 +195,12 @@ module ListBoxTemplate
         call BlzFrameSetMinMaxValue(scrollBar, minValue, initialSize)
         call BlzFrameSetValue(scrollBar, initialSize)
         call BlzFrameSetStepSize(scrollBar, 1)
+    
+        call DestroyTimer(GetExpiredTimer())
+    endmethod
+
+    private static method onInit takes nothing returns nothing
+        call TimerStart(CreateTimer(), 0., false, function thistype.onStart)
     endmethod
 endmodule
 

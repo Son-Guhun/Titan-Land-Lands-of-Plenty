@@ -4,7 +4,7 @@ globals
     Screen decorationBrowserScreen
 endglobals
 
-//! runtextmacro BeginInitializer("Init")
+//! runtextmacro Begin0SecondInitializer("Init")
     local framehandle mainButton
     
     set decorationBrowserScreen = Screen.create()
@@ -32,9 +32,6 @@ endglobals
     call BlzFrameSetText(mainButton, "Classic Decorations")
     call BlzFrameSetTextAlignment(mainButton, TEXT_JUSTIFY_MIDDLE, TEXT_JUSTIFY_CENTER)
     set decorationBrowserScreen["titleText"] = mainButton
-    
-    
-    
-//! runtextmacro EndInitializer()
+//! runtextmacro End0SecondInitializer()
 
 endlibrary

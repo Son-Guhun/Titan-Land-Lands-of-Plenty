@@ -4,7 +4,7 @@ globals
     Screen terrainEditorScreen
 endglobals
 
-//! runtextmacro BeginInitializer("Init")
+//! runtextmacro Begin0SecondInitializer("Init")
     local framehandle mainButton
     
     call BlzLoadTOCFile("war3mapImported\\Templates.toc")
@@ -98,8 +98,7 @@ endglobals
     set mainButton = BlzCreateFrameByType("TEXT", "HotkeyIndicator", terrainEditorScreen.main, "StandardExtraSmallTextTemplate", 0)
     call BlzFrameSetPoint(mainButton, FRAMEPOINT_TOP, terrainEditorScreen["brushSizeSlider"], FRAMEPOINT_BOTTOMLEFT, -0.0031+3*BlzFrameGetWidth(terrainEditorScreen["brushSizeSlider"])/4, 0)
     call BlzFrameSetText(mainButton, "4")
-    
-//! runtextmacro EndInitializer()
+//! runtextmacro End0SecondInitializer()
 
 
 
@@ -138,7 +137,7 @@ struct TerrainEditorButton extends array
         return this
     endmethod
     
-    private static method onInit takes nothing returns nothing
+    private static method onStart takes nothing returns nothing
         local framehandle text
         local integer i = 1
         
@@ -177,7 +176,12 @@ struct TerrainEditorButton extends array
         set text = BlzCreateFrameByType("TEXT", "HotkeyIndicator", terrainEditorScreen.main, "StandardExtraSmallTextTemplate", 0)
         call BlzFrameSetPoint(text, FRAMEPOINT_RIGHT, thistype(8).button, FRAMEPOINT_LEFT, 0, 0)
         call BlzFrameSetText(text, "Alt+")
+        
+        call DestroyTimer(GetExpiredTimer())
+    endmethod
     
+    private static method onInit takes nothing returns nothing
+        call TimerStart(CreateTimer(), 0., false, function thistype.onStart)
     endmethod
 
 

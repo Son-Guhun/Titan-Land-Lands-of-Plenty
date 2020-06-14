@@ -1,4 +1,4 @@
-library UpperButtonBarController initializer Init requires UILib, MainMenuController
+library UpperButtonBarController requires UILib, MainMenuController
 
 globals
     private sound clickSound
@@ -58,7 +58,7 @@ private function onHotkey takes nothing returns boolean
 endfunction
 
 //===========================================================================
-private function Init takes nothing returns nothing
+//! runtextmacro Begin0SecondInitializer("Init")
     local trigger trig = CreateTrigger() //The Trigger Handling the Frameevent
     call TriggerAddAction(trig, function onClick) //Function onClick will run when mainButton is clicked
     
@@ -80,6 +80,6 @@ private function Init takes nothing returns nothing
     call OSKeys.F2.register()
     // call OSKeys.F3.register()
     call OSKeys.F4.register()
-endfunction
+//! runtextmacro End0SecondInitializer()
 
 endlibrary

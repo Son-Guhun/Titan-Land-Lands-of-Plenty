@@ -1,4 +1,4 @@
-library MainMenuController initializer Init requires UILib, MainMenuView, ChatLogController, LoPUI, TerrainEditorUI
+library MainMenuController requires UILib, MainMenuView, ChatLogController, LoPUI, TerrainEditorUI
 
 globals
     public ScreenController controller
@@ -56,7 +56,7 @@ private function onHotkey takes nothing returns boolean
 endfunction
 
 //===========================================================================
-private function Init takes nothing returns nothing
+//! runtextmacro Begin0SecondInitializer("Init")
     local trigger trig = CreateTrigger() //The Trigger Handling the Frameevent
     call TriggerAddAction(trig, function onClick) //Function onClick will run when mainButton is clicked
     
@@ -69,6 +69,6 @@ private function Init takes nothing returns nothing
     
     call OSKeys.T.register()
     set controller = ScreenController.create(MainMenuView_mainFrame, Condition(function onHotkey))
-endfunction
+//! runtextmacro End0SecondInitializer()
 
 endlibrary

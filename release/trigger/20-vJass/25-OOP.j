@@ -32,5 +32,27 @@ library OOP
         endmethod
     endmodule
 //! endtextmacro
+
+// Not really for OOP but who cares
+//! textmacro Begin0SecondInitializer takes NAME
+    private keyword $NAME$_M
+    
+    private struct $NAME$_S extends array
+        implement $NAME$_M
+    endstruct
+    
+    private module $NAME$_M
+        private static method onStart takes nothing returns nothing
+//! endtextmacro
+//! textmacro End0SecondInitializer
+            call DestroyTimer(GetExpiredTimer())
+        endmethod
+
+        private static method onInit takes nothing returns nothing
+            call TimerStart(CreateTimer(), 0., false, function thistype.onStart)
+        endmethod
+    endmodule
+//! endtextmacro
+        
         
 endlibrary

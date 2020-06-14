@@ -10,7 +10,7 @@ globals
 endglobals
 
 
-//! runtextmacro BeginInitializer("Init")
+//! runtextmacro Begin0SecondInitializer("Init")
     call BlzLoadTOCFile("war3mapimported\\simplestatusbars.toc")
 
     set saveUnitBar = BlzCreateSimpleFrame("MyBarEx", BlzGetOriginFrame(ORIGIN_FRAME_GAME_UI, 0), 0)
@@ -36,6 +36,6 @@ endglobals
     call BlzFrameSetVisible(saveUnitBar, false)
     call BlzFrameSetVisible(saveTerrainBar, false)
     call BlzFrameSetVisible(loadBar, false)
-//! runtextmacro EndInitializer()
+//! runtextmacro End0SecondInitializer()
 
 endlibrary
