@@ -101,7 +101,7 @@ endfunction
 
 private module Init
 
-    private static method onInit takes nothing returns nothing
+    private static method onStart takes nothing returns nothing
         call BlzLoadTOCFile( "war3mapImported\\Templates.toc" )
         set abilityListTextArea = BlzCreateFrame("EscMenuTextAreaTemplate", BlzGetOriginFrame(ORIGIN_FRAME_GAME_UI, 0),0,0)
         call BlzFrameSetAbsPoint(abilityListTextArea, FRAMEPOINT_TOPLEFT, 0.5, 0.5)
@@ -503,6 +503,13 @@ private module Init
         call .registerAbility('Scri', false)  //"Cripple"
         call .registerAbility('Sshm', false)  //"Shadow Meld"
         call .registerAbility('Suhf', false)  //"Unholy Frenzy"
+        
+        
+        call DestroyTimer(GetExpiredTimer())
+    endmethod
+
+    private static method onInit takes nothing returns nothing
+        call TimerStart(CreateTimer(), 0., false, function thistype.onStart)
     endmethod
 
 endmodule

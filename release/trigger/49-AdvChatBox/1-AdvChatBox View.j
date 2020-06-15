@@ -1,5 +1,7 @@
 library AdvChatBoxView
 
+private keyword Init
+
 struct AdvChatBox extends array
     readonly static framehandle editBox
     readonly static framehandle typingIndicator
@@ -9,8 +11,12 @@ struct AdvChatBox extends array
     readonly static framehandle sendButton
     readonly static framehandle oocButtonNoBuffer
     readonly static framehandle speakerButton
-    
-    private static method onInit takes nothing returns nothing
+
+    implement Init
+endstruct
+
+private module Init
+    private static method onStart takes nothing returns nothing
         call BlzLoadTOCFile("war3mapImported\\Templates.toc")
     
         set AdvChatBox.editBox = BlzCreateFrame("EscMenuEditBoxTemplate", BlzGetOriginFrame(ORIGIN_FRAME_GAME_UI, 0),0,0)
@@ -53,8 +59,14 @@ struct AdvChatBox extends array
         set AdvChatBox.charCounter = BlzCreateFrameByType("TEXT", "CharacterCounter", AdvChatBox.editBox, "StandardSmallTextTemplate", 0)
         call BlzFrameSetSize(AdvChatBox.charCounter, 0.1, 0.028)
         call BlzFrameSetText(AdvChatBox.charCounter, "0/255")
-        call BlzFrameSetPoint(AdvChatBox.charCounter, FRAMEPOINT_RIGHT, AdvChatBox.editBox, FRAMEPOINT_RIGHT, 0.05, 0)
+        call BlzFrameSetPoint(AdvChatBox.charCounter, FRAMEPOINT_RIGHT, AdvChatBox.editBox, FRAMEPOINT_RIGHT, 0.05, 0)    
+    
+        call DestroyTimer(GetExpiredTimer())
     endmethod
-endstruct
+    
+    private static method onInit takes nothing returns nothing
+        call TimerStart(CreateTimer(), 0., false, function thistype.onStart)
+    endmethod
+endmodule
 
 endlibrary
