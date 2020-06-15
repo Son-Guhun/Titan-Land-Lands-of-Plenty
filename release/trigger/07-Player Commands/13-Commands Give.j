@@ -65,11 +65,7 @@ function Trig_Commands_Give_Conditions takes nothing returns boolean
         if  playerNumber != PLAYER_NEUTRAL_PASSIVE+1 then
             set oldPlayer = udg_PowerSystem_Player
             
-            // ---------------------------------------------
-            // PICK SELECTED UNITS AND CHECK FOR RECT GENERATOR
-            call Commands_EnumSelectedCheckForGenerator(g, GetTriggerPlayer(), null)
-            
-            
+            call Commands_EnumSelectedCheckForGenerator(g, GetTriggerPlayer(), null) 
                 
             if udg_PowerSystem_allFlag then
                 if GetOwningPlayer(FirstOfGroup(g)) == GetTriggerPlayer() or GetTriggerPlayer() == udg_GAME_MASTER then
