@@ -8,8 +8,8 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 	- *Exception:* Racial deco builders can be added in a patch version for existing races.
 	- *Exception:* Extended deco builders (numbered from 2 onwards) can be added in a patch version for existing deco builders.
 - Patch versions indicate bugfixes. 
-	- Some commands, command aliases or command arguments may be added in a patch version. 
-	- New units for an existing race can be added in a patch version. 
+	- Some commands, command aliases or command arguments may be added in a patch version.
+	- New units for an existing race can be added in a patch version.
 	- New decorations for an existing deco builder can be added in a patch version.
 
 ## [v1.5.0]
@@ -19,16 +19,16 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 	- Right Upper Bar Buttons:
 		- Gold, Lumber, Food and Upkeep are no longer shown and have been replaced by new buttons.
 		- New Decoration Browser:"
-			- Allows you to select decorations from a scrollable list.
+			- Allows you to select decorations from a scrollable list and place them using your mouse.
 			- Separate lists for reforged anc classic decorations.
 			- You can type into the search bar at the top to search for specific decorations.
 		- New Tools menu includes:
-			- The Terrain Editor has returned with a complete UI redesign. The ability to create terrain deformations has also been enabled. Using deformations in mutliplayer is not recommend, though you can load them from saved made in singleplayer.
+			- The Terrain Editor has returned with a complete UI redesign. The ability to create terrain deformations has also been enabled. Using deformations in mutliplayer is not recommended, though you can load them from saves made in singleplayer.
 			- Button to access Free Camera.
 			- SotDRP chat mode which allows players to chat using a SotDRP-style system.
 			- Chat logs for OOC and IC conversations.
 	- New Advanced Chat Box:
-		- Can be accessed using the Backspace key.
+		- Can be accessed using the combination Shift+Enter.
 		- Allows you to switch between OOC and IC typing without having to type (( into the chat box.
 		- Supports both normal chat mode and SotDRP chat mode.
 		- Keeps your text even when you click out if it.
@@ -88,17 +88,24 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 		- Night Elf
 - Added Reforged Dragons to the Titan Palace dragon roosts.
 - Added missing trees in the Titan Palace palette.
+- Titan can now use -ally (source) (target). For example, "-ally hostile red" will cause neutral hostile to become allied with red. This also works for -unally and -war (and worked before for -share).
 
 ### Fixed
 - Fixed broken shadows in Reforged graphics.
 - Fixed a critical bug when saving destructables more than once.
 - Fixed an issue introduced in Reforged that would cause decorations with dimensional scaling, pitch, roll or negative height to disappear when being moved.
 - Fixed model scale for Black Legion Sacred Maiden and some doodads in Reforged mode.
+- Fixed Multitiles in Reforged mode.
 
 ### Changed
 - Titan Land LoP is no longer compatible with patch 1.31 and below and now requires Reforged.
+- Changed color of square tiles in Reforged mode.
 - Unselectable units are no longer paused and can now maintain a patrol path.
 - The map's script is again optimized, which should avoid some performance issues.
+- Updated Manual (F9) entry for save commands.
+
+### Deprecated
+- Deprecated vertical cobweb and horizontal woodlogs. Reforged caused these decorations to not work as intended anymore, but they can still be replicated with the -pitch and -roll commands.
 
 
 ## [v1.4.5]
