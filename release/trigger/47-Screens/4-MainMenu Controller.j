@@ -7,6 +7,7 @@ endglobals
 private function onClick takes nothing returns nothing
     local framehandle trigButton = BlzGetTriggerFrame()
     local player trigP = GetTriggerPlayer()
+    local framehandle chatMsgFrame = BlzGetOriginFrame(ORIGIN_FRAME_CHAT_MSG, 0)
     
     if trigButton == MainMenuView_mainFrame["terrainEditor"] then
         call TerrainEditorUI_Activate(trigP)
@@ -18,7 +19,7 @@ private function onClick takes nothing returns nothing
     elseif trigButton == MainMenuView_mainFrame["sotdrp"] then
         if User.Local == trigP then
             set sotdrp = not sotdrp
-            call BlzFrameSetVisible(BlzGetOriginFrame(ORIGIN_FRAME_CHAT_MSG, 0), not sotdrp)
+            call BlzFrameSetVisible(chatMsgFrame, not sotdrp)
             if sotdrp then
                 call BlzFrameSetText(MainMenuView_mainFrame["sotdrp"], "Normal Chat")
             else
