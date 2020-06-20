@@ -1,10 +1,9 @@
-library TerrainEditorUIController requires UILib, PlayerUtils, BitFlags, TerrainEditorUIView, TerrainEditor
+library TerrainEditorUIController requires UILib, PlayerUtils, BitFlags, TerrainEditorUIView, TerrainEditor, IsMouseOnButton
 
 globals
     public boolean heightEnabled = false
     public ScreenController controller
     private framehandle lastButton = null
-
 endglobals
 
 
@@ -118,19 +117,9 @@ function onEditText takes nothing returns nothing
     
     set TerrainEditor_plateauLevel[User[trigP]] = value
 endfunction
-
-private function onEnter takes nothing returns nothing
-    set TerrainEditor_isLocked[User[GetTriggerPlayer()]] = true
-endfunction
-
-private function onLeave takes nothing returns nothing
-    set TerrainEditor_isLocked[User[GetTriggerPlayer()]] = false
-endfunction
-
 //===========================================================================
 //! runtextmacro Begin0SecondInitializer("Init")
     local trigger trig = CreateTrigger()
-    local integer i = 0
     
     call BlzTriggerRegisterFrameEvent(TerrainEditorButton.mouseClickHandler, terrainEditorScreen["paintButton"], FRAMEEVENT_CONTROL_CLICK)
     call BlzTriggerRegisterFrameEvent(TerrainEditorButton.mouseClickHandler, terrainEditorScreen["heightButton"], FRAMEEVENT_CONTROL_CLICK)
@@ -139,30 +128,14 @@ endfunction
     call BlzTriggerRegisterFrameEvent(TerrainEditorButton.mouseClickHandler, terrainEditorScreen["smoothButton"], FRAMEEVENT_CONTROL_CLICK)
     
     call TriggerAddAction(TerrainEditorButton.mouseClickHandler, function onClick)
-    call TriggerAddAction(TerrainEditorButton.mouseEnterHandler, function onEnter)
-    call TriggerAddAction(TerrainEditorButton.mouseLeaveHandler, function onLeave)
     
-    call BlzTriggerRegisterFrameEvent(TerrainEditorButton.mouseEnterHandler, terrainEditorScreen["paintButton"], FRAMEEVENT_MOUSE_ENTER)
-    call BlzTriggerRegisterFrameEvent(TerrainEditorButton.mouseLeaveHandler, terrainEditorScreen["paintButton"], FRAMEEVENT_MOUSE_LEAVE)
-    call BlzTriggerRegisterFrameEvent(TerrainEditorButton.mouseEnterHandler, terrainEditorScreen["heightButton"], FRAMEEVENT_MOUSE_ENTER)
-    call BlzTriggerRegisterFrameEvent(TerrainEditorButton.mouseLeaveHandler, terrainEditorScreen["heightButton"], FRAMEEVENT_MOUSE_LEAVE)
-    call BlzTriggerRegisterFrameEvent(TerrainEditorButton.mouseEnterHandler, terrainEditorScreen["hillButton"], FRAMEEVENT_MOUSE_ENTER)
-    call BlzTriggerRegisterFrameEvent(TerrainEditorButton.mouseLeaveHandler, terrainEditorScreen["hillButton"], FRAMEEVENT_MOUSE_LEAVE)
-    call BlzTriggerRegisterFrameEvent(TerrainEditorButton.mouseEnterHandler, terrainEditorScreen["plateauButton"], FRAMEEVENT_MOUSE_ENTER)
-    call BlzTriggerRegisterFrameEvent(TerrainEditorButton.mouseLeaveHandler, terrainEditorScreen["plateauButton"], FRAMEEVENT_MOUSE_LEAVE)
-    call BlzTriggerRegisterFrameEvent(TerrainEditorButton.mouseEnterHandler, terrainEditorScreen["plateauInput"], FRAMEEVENT_MOUSE_ENTER)
-    call BlzTriggerRegisterFrameEvent(TerrainEditorButton.mouseLeaveHandler, terrainEditorScreen["plateauInput"], FRAMEEVENT_MOUSE_LEAVE)
-    call BlzTriggerRegisterFrameEvent(TerrainEditorButton.mouseEnterHandler, terrainEditorScreen["smoothButton"], FRAMEEVENT_MOUSE_ENTER)
-    call BlzTriggerRegisterFrameEvent(TerrainEditorButton.mouseLeaveHandler, terrainEditorScreen["smoothButton"], FRAMEEVENT_MOUSE_LEAVE)
-    call BlzTriggerRegisterFrameEvent(TerrainEditorButton.mouseEnterHandler, terrainEditorScreen["exitButton"], FRAMEEVENT_MOUSE_ENTER)
-    call BlzTriggerRegisterFrameEvent(TerrainEditorButton.mouseLeaveHandler, terrainEditorScreen["exitButton"], FRAMEEVENT_MOUSE_LEAVE)
-    
-    loop
-        exitwhen i > 15
-            call BlzTriggerRegisterFrameEvent(TerrainEditorButton.mouseEnterHandler, TerrainEditorButton(i).button, FRAMEEVENT_MOUSE_ENTER)
-            call BlzTriggerRegisterFrameEvent(TerrainEditorButton.mouseLeaveHandler, TerrainEditorButton(i).button, FRAMEEVENT_MOUSE_LEAVE)
-        set i = i + 1
-    endloop
+    call IsMouseOnButton_Register(terrainEditorScreen["paintButton"])
+    call IsMouseOnButton_Register(terrainEditorScreen["heightButton"])
+    call IsMouseOnButton_Register(terrainEditorScreen["hillButton"])
+    call IsMouseOnButton_Register(terrainEditorScreen["plateauButton"])
+    call IsMouseOnButton_Register(terrainEditorScreen["plateauInput"])
+    call IsMouseOnButton_Register(terrainEditorScreen["smoothButton"])
+    call IsMouseOnButton_Register(terrainEditorScreen["exitButton"])
         
     call BlzTriggerRegisterFrameEvent(trig, terrainEditorScreen["plateauInput"], FRAMEEVENT_EDITBOX_TEXT_CHANGED)
     call TriggerAddAction(trig, function onEditText)
@@ -171,10 +144,8 @@ endfunction
     call BlzFrameSetValue(terrainEditorScreen["brushSizeSlider"], 3.)
     call TriggerAddAction(trig, function onChangeValue)
     call BlzTriggerRegisterFrameEvent(trig, terrainEditorScreen["brushSizeSlider"], FRAMEEVENT_SLIDER_VALUE_CHANGED)
-    call BlzTriggerRegisterFrameEvent(TerrainEditorButton.mouseEnterHandler, terrainEditorScreen["brushSizeSlider"], FRAMEEVENT_MOUSE_ENTER)
-    call BlzTriggerRegisterFrameEvent(TerrainEditorButton.mouseLeaveHandler, terrainEditorScreen["brushSizeSlider"], FRAMEEVENT_MOUSE_LEAVE)
-    call BlzTriggerRegisterFrameEvent(TerrainEditorButton.mouseEnterHandler, terrainEditorScreen["brushSizeSliderButton"], FRAMEEVENT_MOUSE_ENTER)
-    call BlzTriggerRegisterFrameEvent(TerrainEditorButton.mouseLeaveHandler, terrainEditorScreen["brushSizeSliderButton"], FRAMEEVENT_MOUSE_LEAVE)
+    call IsMouseOnButton_Register(terrainEditorScreen["brushSizeSlider"])
+    call IsMouseOnButton_Register(terrainEditorScreen["brushSizeSliderButton"])
     
     
     

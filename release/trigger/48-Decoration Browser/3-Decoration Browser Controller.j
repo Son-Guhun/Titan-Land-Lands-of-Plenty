@@ -1,4 +1,4 @@
-library DecorationBrowserController requires DecorationBrowserView, ListBox, RegisterClassicDecorations, SpecialEffect, ControlState, optional LoPUnitCompatibility
+library DecorationBrowserController requires DecorationBrowserView, ListBox, RegisterClassicDecorations, SpecialEffect, ControlState, IsMouseOnButton, optional LoPUnitCompatibility
 
 //! runtextmacro optional LoPUnitCompatibility()
 
@@ -61,6 +61,7 @@ struct DecorationsListbox extends array
     
     static method onCreateFrame takes integer frameIndex returns nothing
         call BlzFrameSetText(buttons[frameIndex], GetObjectName(DecorationList.get("")[frameIndex]))
+        call IsMouseOnButton_Register(buttons[frameIndex])
     endmethod
     
     static method onClickHandler takes player trigP, integer frameIndex, integer listIndex returns nothing
@@ -162,7 +163,7 @@ private function onMousePress takes nothing returns boolean
     local User playerId = User[PlayerEvent_GetTriggerPlayer()]
     
 
-    if effects[playerId] != 0 and PlayerMouseEvent_GetTriggerPlayerMouseButton() == MOUSE_BUTTON_TYPE_LEFT then
+    if not IsPlayerIdMouseOnButton(playerId) and effects[playerId] != 0 and PlayerMouseEvent_GetTriggerPlayerMouseButton() == MOUSE_BUTTON_TYPE_LEFT then
         call CreateUnit(playerId.handle, effects[playerId].unitType, PlayerMouseEvent_GetTriggerPlayerMouseX(), PlayerMouseEvent_GetTriggerPlayerMouseY(), 0.)
         if not OSKeys.LSHIFT.isPressedId(playerId) and not OSKeys.RSHIFT.isPressedId(playerId) then
             call effects[playerId].destroy()
@@ -232,6 +233,9 @@ endfunction
     call OSKeys.RSHIFT.register()
     call OSKeys.ESCAPE.register()
     call OSKeys.addListener(Condition(function onKey))
+    
+    call IsMouseOnButton_Register(decorationBrowserScreen["switchButton"])
+    call IsMouseOnButton_Register(decorationBrowserScreen["editBox"])
 //! runtextmacro End0SecondInitializer()
 
 endlibrary

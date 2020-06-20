@@ -1,4 +1,4 @@
-library TerrainEditor initializer onInit requires TerrainTools, DeformationTools, ControlState, PlayerUtils, PlayerColorUtils
+library TerrainEditor initializer onInit requires TerrainTools, DeformationTools, ControlState, PlayerUtils, PlayerColorUtils, IsMouseOnButton
 /*
 This library is the backbone of the ingame Terrain Editor.
 
@@ -54,8 +54,7 @@ globals
     private integer array currentHeightTool
     
     public integer array currentTexture
-    public boolean array isLocked
-    
+
     public real array plateauLevel
 endglobals
 
@@ -103,7 +102,7 @@ private function onMousePress takes nothing returns boolean
     local integer playerId = GetPlayerId(PlayerEvent_GetTriggerPlayer())
     local real step
     
-    if (x == 0. and y == 0.) or isLocked[playerId] then
+    if (x == 0. and y == 0.) or IsPlayerIdMouseOnButton(playerId) then
         return false
     endif
     
@@ -164,7 +163,7 @@ function onMoveMouse takes nothing returns boolean
         endif
     endif
     
-    if not isLocked[playerId] then
+    if not IsPlayerIdMouseOnButton(playerId) then
         if isLeftButtonPressed[playerId] then
         
             if applyTexture[playerId] then

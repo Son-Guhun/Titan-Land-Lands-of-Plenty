@@ -1,4 +1,4 @@
-library MainMenuController requires UILib, MainMenuView, ChatLogController, LoPUI, TerrainEditorUI
+library MainMenuController requires UILib, MainMenuView, ChatLogController, LoPUI, TerrainEditorUI, IsMouseOnButton
 
 globals
     public ScreenController controller
@@ -70,6 +70,11 @@ endfunction
     
     call OSKeys.T.register()
     set controller = ScreenController.create(MainMenuView_mainFrame, Condition(function onHotkey))
+    
+    call IsMouseOnButton_Register(MainMenuView_mainFrame["terrainEditor"])
+    call IsMouseOnButton_Register(MainMenuView_mainFrame["sotdrp"])
+    call IsMouseOnButton_Register(MainMenuView_mainFrame["freeCamera"])
+    call IsMouseOnButton_Register(MainMenuView_mainFrame["chatLogs"])
 //! runtextmacro End0SecondInitializer()
 
 endlibrary

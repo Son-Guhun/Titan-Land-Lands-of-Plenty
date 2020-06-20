@@ -1,4 +1,4 @@
-library TerrainEditorUIView requires Screen, TerrainEditor
+library TerrainEditorUIView requires Screen, TerrainEditor, IsMouseOnButton
 
 globals
     Screen terrainEditorScreen
@@ -105,8 +105,6 @@ endglobals
 struct TerrainEditorButton extends array
 
     static trigger mouseClickHandler = CreateTrigger()
-    static trigger mouseEnterHandler = CreateTrigger()
-    static trigger mouseLeaveHandler = CreateTrigger()
     static key tabb
 
     framehandle button
@@ -128,9 +126,8 @@ struct TerrainEditorButton extends array
         
         call BlzFrameSetSize(.button, 0.05, 0.05)
         call BlzFrameSetAllPoints(.background, .button)
+        call IsMouseOnButton_Register(.button)
         call BlzTriggerRegisterFrameEvent(mouseClickHandler, .button, FRAMEEVENT_CONTROL_CLICK)
-        call BlzTriggerRegisterFrameEvent(mouseEnterHandler, .button, FRAMEEVENT_MOUSE_ENTER)
-        call BlzTriggerRegisterFrameEvent(mouseLeaveHandler, .button, FRAMEEVENT_MOUSE_LEAVE)
         
         call BlzFrameSetTexture(.eighthTexture, Tile(TerrainTools_GetTexture(this)).file, 0, false)
         set Table(tabb)[GetHandleId(.button)] = this
@@ -140,8 +137,6 @@ struct TerrainEditorButton extends array
     private static method onStart takes nothing returns nothing
         local framehandle text
         local integer i = 1
-        
-        call BlzLoadTOCFile("war3mapImported\\test.toc")
         
         set thistype(0).button = TerrainEditorButton.create(0).button
         call BlzFrameSetAbsPoint(thistype(0).button, FRAMEPOINT_LEFT, 0.2, 0.075)
