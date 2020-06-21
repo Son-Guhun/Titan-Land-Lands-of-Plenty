@@ -5,7 +5,6 @@ globals
 endglobals
 
 private function Callback takes nothing returns boolean
-    call BJDebugMsg("AA")
     if BlzGetTriggerFrameEvent() == FRAMEEVENT_MOUSE_ENTER then
         set Table(tab).boolean[GetPlayerId(GetTriggerPlayer())] = true
     else

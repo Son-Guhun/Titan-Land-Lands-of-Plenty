@@ -5,9 +5,9 @@ private function OnCommand takes nothing returns boolean
     local player trigP = GetTriggerPlayer()
     
     if PlayerNumberIsNotNeutral(playerNumber) and (trigP == udg_GAME_MASTER or trigP == Player(0)) then
-        set udg_GAME_MASTER = ConvertedPlayer(playerNumber)
-        
-        if GetPlayerSlotState(udg_GAME_MASTER) == PLAYER_SLOT_STATE_PLAYING then
+    
+        if GetPlayerSlotState(Player(playerNumber - 1)) == PLAYER_SLOT_STATE_PLAYING then
+            set udg_GAME_MASTER = Player(playerNumber - 1)
         
             call SetUnitOwner(HERO_COSMOSIS(), udg_GAME_MASTER, false)
             if GetOwningPlayer(HERO_CREATOR()) != Player(PLAYER_NEUTRAL_PASSIVE) then
