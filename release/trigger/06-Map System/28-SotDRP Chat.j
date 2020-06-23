@@ -5,15 +5,15 @@ globals
     string array playerColors
 endglobals
 
-function SotDRPMessageHandler takes integer id, string msg, boolean ooc returns nothing
+function SotDRPMessageHandler takes User pId, string msg, boolean ooc returns nothing
     if ooc then
-        set msg = playerColors[id] + "[OOC]|r |cff00ced1" + msg + "|r"
+        set msg = playerColors[pId] + "[OOC]|r |cff00ced1" + msg + "|r"
         if sotdrp then
             call DisplayTextToPlayer(User.Local, 0., 0., msg)
         endif
         call BlzFrameAddText(ChatLogView_mainFrame["OOC log"], msg)
     else
-        set msg = playerColors[id] + "Character|r: |cff40e0d0" + msg + "|r"
+        set msg = playerColors[pId] + GetPlayerName(pId.handle) + "|r: |cff40e0d0" + msg + "|r"
         if sotdrp then
             call DisplayTextToPlayer(User.Local, 0., 0., msg)
         endif
