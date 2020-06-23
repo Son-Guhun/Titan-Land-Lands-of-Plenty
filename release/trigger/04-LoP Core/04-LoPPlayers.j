@@ -1,5 +1,33 @@
 library LoPPlayers requires TableStruct, DecorationSFX, LoPNeutralUnits
 
+function LoP_SendSysMsg takes player whichPlayer, string msg returns nothing
+    call DisplayTextToPlayer(whichPlayer, 0., 0., "|cffffcc00[SYS]:|r " + msg)
+endfunction
+
+function FindFirstPlayer takes nothing returns player
+        local User pId = 0
+        loop
+            exitwhen GetPlayerSlotState(pId.handle) == PLAYER_SLOT_STATE_PLAYING
+            set pId = pId + 1
+        endloop
+        return pId.handle
+endfunction
+
+function MakeTitan takes player whichPlayer returns nothing
+        set udg_GAME_MASTER = whichPlayer
+        call SetUnitOwner(HERO_COSMOSIS(), udg_GAME_MASTER, false)
+        if GetOwningPlayer(HERO_CREATOR()) != Player(PLAYER_NEUTRAL_PASSIVE) then
+            call SetUnitOwner(HERO_CREATOR(), udg_GAME_MASTER, false)
+        endif
+        
+        call SetUnitOwner(POWER_REMOVE(), udg_GAME_MASTER, false)
+        call SetUnitOwner(POWER_KILL(), udg_GAME_MASTER, false)
+        call SetUnitOwner(POWER_DELEVEL(), udg_GAME_MASTER, false)
+        call SetUnitOwner(POWER_LEVEL(), udg_GAME_MASTER, false)
+        call SetUnitOwner(POWER_INVULNERABILITY(), udg_GAME_MASTER, false)
+        call SetUnitOwner(POWER_VULNERABILITY(), udg_GAME_MASTER, false)
+endfunction
+
 function LoP_PlayerOwnsUnit takes player whichPlayer, unit whichUnit returns boolean
     return GetPlayerAlliance(LoP_GetOwningPlayer(whichUnit), whichPlayer, ALLIANCE_SHARED_ADVANCED_CONTROL)
 endfunction

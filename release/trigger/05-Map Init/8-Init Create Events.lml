@@ -73,3 +73,13 @@ To get deco builders: |cffffff00-decos|r
 To select unit/terrain/tree modification deco: |cffffff00-seln special|r'
             CustomScriptCode
                 Const : endif
+    IfThenElseMultiple
+        Condition
+            OperatorComparePlayerSlotStatus
+                Call  : GetPlayerSlotState
+                    Var   : GAME_MASTER
+                Preset: OperatorNotEqualENE
+                Preset: PlayerSlotStatePlaying
+        Action
+            CustomScriptCode
+                Const : 'call MakeTitan(FindFirstPlayer())'
