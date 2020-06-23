@@ -163,7 +163,7 @@ module AdvChatBoxController
     endmethod
 
     private static method onHotkey takes nothing returns boolean
-        if BlzGetTriggerPlayerKey() == OSKEY_RETURN and BlzGetTriggerPlayerMetaKey() == MetaKeys.SHIFT and User.Local == GetTriggerPlayer() then
+        if BlzGetTriggerPlayerKey() == OSKEY_RETURN and BlzGetTriggerPlayerMetaKey() == MetaKeys.SHIFT+MetaKeys.CTRL and User.Local == GetTriggerPlayer() then
             call BlzFrameSetVisible(defaultChatBox, false)
             call BlzFrameSetVisible(AdvChatBox.editBox, true)
             call BlzFrameSetFocus(AdvChatBox.editBox, true)

@@ -1,5 +1,7 @@
 scope HotkeyMoveUnits
 
+//! runtextmacro DefineHooks()
+
 private struct Config extends array
 
     static constant method operator META_KEY_LEFT takes nothing returns OSKeys

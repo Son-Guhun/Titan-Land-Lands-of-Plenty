@@ -321,7 +321,7 @@ function LoadUnit takes string chat_str, player un_owner, real centerX, real cen
             
             call LoadUnitFlags(resultUnit, unitData.flags)
             
-            if unitData.pitch != 0. or unitData.yaw != 0. then
+            if unitData.pitch != 0. or unitData.roll != 0. then
                 call UnitSetOrientation(resultUnit, unitData.yaw*bj_DEGTORAD, unitData.pitch, unitData.roll)
             endif
             
