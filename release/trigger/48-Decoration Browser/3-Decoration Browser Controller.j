@@ -1,4 +1,4 @@
-library DecorationBrowserController requires DecorationBrowserView, ListBox, RegisterClassicDecorations, SpecialEffect, ControlState, IsMouseOnButton, optional LoPUnitCompatibility
+library DecorationBrowserController requires DecorationBrowserView, ListBox, RegisterClassicDecorations, SpecialEffect, ControlState, IsMouseOnButton, EditBoxFix, optional LoPUnitCompatibility
 
 //! runtextmacro optional LoPUnitCompatibility()
 
@@ -236,6 +236,7 @@ endfunction
     
     call IsMouseOnButton_Register(decorationBrowserScreen["switchButton"])
     call IsMouseOnButton_Register(decorationBrowserScreen["editBox"])
+    call EditBoxFix_Register(decorationBrowserScreen["editBox"])
 //! runtextmacro End0SecondInitializer()
 
 endlibrary

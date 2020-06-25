@@ -1,4 +1,4 @@
-library AdvChatBoxController requires OSKeyLib, AdvChatBoxView, PlayerUtils
+library AdvChatBoxController requires OSKeyLib, AdvChatBoxView, PlayerUtils, EditBoxFix, IsMouseOnButton
 
 globals
     private framehandle g_defaultChatBox
@@ -163,10 +163,14 @@ module AdvChatBoxController
     endmethod
 
     private static method onHotkey takes nothing returns boolean
-        if BlzGetTriggerPlayerKey() == OSKEY_RETURN and BlzGetTriggerPlayerMetaKey() == MetaKeys.SHIFT+MetaKeys.CTRL and User.Local == GetTriggerPlayer() then
-            call BlzFrameSetVisible(defaultChatBox, false)
-            call BlzFrameSetVisible(AdvChatBox.editBox, true)
-            call BlzFrameSetFocus(AdvChatBox.editBox, true)
+        if BlzGetTriggerPlayerKey() == OSKEY_RETURN and BlzGetTriggerPlayerMetaKey() == MetaKeys.SHIFT+MetaKeys.CTRL then
+            if User.Local == GetTriggerPlayer() then
+                call BlzFrameSetVisible(defaultChatBox, false)
+                call BlzFrameSetVisible(AdvChatBox.editBox, true)
+                call BlzFrameSetFocus(AdvChatBox.editBox, true)
+            endif
+
+            call EditBoxFix_SetPlayerFocusedEditBox(GetTriggerPlayer(), AdvChatBox.editBox)
         elseif BlzGetTriggerPlayerKey() == OSKEY_ESCAPE and BlzGetTriggerPlayerMetaKey() == MetaKeys.SHIFT then 
             call handleButton(GetTriggerPlayer(), AdvChatBox.closeButton)
         endif
@@ -176,27 +180,6 @@ module AdvChatBoxController
 
     private static method onButton takes nothing returns nothing
         call handleButton(GetTriggerPlayer(), BlzGetTriggerFrame())
-    endmethod
-
-    // Function used for tracking mouse position
-    private static method onEnter takes nothing returns nothing
-        if User.Local == GetTriggerPlayer() then
-            set in = true
-        endif
-    endmethod
-
-    // Function used for tracking mouse position
-    private static method onLeave takes nothing returns nothing
-        if User.Local == GetTriggerPlayer() then
-            set in = false
-        endif
-    endmethod
-
-    // Executed when a player clicks a mouse button. If outisde the chat box, remove focus from it.
-    private static method onWorld takes nothing returns nothing
-        if not in and User.Local == GetTriggerPlayer() then  // checking for trigger player is necessary, otherwise focus lost when another player clicks and mouse is outside editbox
-            call BlzFrameSetFocus(AdvChatBox.editBox, false)
-        endif
     endmethod
 
     //===========================================================================
@@ -212,13 +195,6 @@ module AdvChatBoxController
         call TriggerAddAction(eventHandler, function thistype.editBoxEnter)
         call BlzTriggerRegisterFrameEvent(eventHandler, AdvChatBox.editBox, FRAMEEVENT_EDITBOX_ENTER)
         
-        set eventHandler = CreateTrigger()
-        call BlzTriggerRegisterFrameEvent(eventHandler, AdvChatBox.editBox, FRAMEEVENT_MOUSE_ENTER)
-        call TriggerAddAction(eventHandler, function thistype.onEnter)
-        set eventHandler = CreateTrigger()
-        call BlzTriggerRegisterFrameEvent(eventHandler, AdvChatBox.editBox, FRAMEEVENT_MOUSE_LEAVE)
-        call TriggerAddAction(eventHandler, function thistype.onLeave)
-        
      
         set eventHandler = CreateTrigger()
         call TriggerAddAction(eventHandler, function thistype.onButton)
@@ -227,22 +203,17 @@ module AdvChatBoxController
         call BlzTriggerRegisterFrameEvent(eventHandler, AdvChatBox.speakerButton, FRAMEEVENT_CONTROL_CLICK)
         call BlzTriggerRegisterFrameEvent(eventHandler, AdvChatBox.sendButton, FRAMEEVENT_CONTROL_CLICK)
         call BlzTriggerRegisterFrameEvent(eventHandler, AdvChatBox.oocButtonNoBuffer, FRAMEEVENT_CONTROL_CLICK)
-        
-        
-        set eventHandler = CreateTrigger()
-        loop
-            exitwhen pId >= bj_MAX_PLAYERS
-            if GetPlayerSlotState(Player(pId)) == PLAYER_SLOT_STATE_PLAYING then
-                call TriggerRegisterPlayerEvent(eventHandler, Player(0), EVENT_PLAYER_MOUSE_DOWN)
-            endif
-            set pId = pId + 1
-        endloop
-        call TriggerAddAction(eventHandler, function thistype.onWorld)
 
         call OSKeys.ESCAPE.register()
         call OSKeys.RETURN.register()
         call OSKeys.addListener(Condition(function thistype.onHotkey))
         call OSKeys.addHoldListener(Condition(function thistype.onHotkey))
+        
+        call EditBoxFix_Register(AdvChatBox.editBox)
+        call IsMouseOnButton_Register(AdvChatBox.closeButton)
+        call IsMouseOnButton_Register(AdvChatBox.speakerButton)
+        call IsMouseOnButton_Register(AdvChatBox.sendButton)
+        call IsMouseOnButton_Register(AdvChatBox.oocButtonNoBuffer)
     endmethod
 
     private static method onInit takes nothing returns nothing

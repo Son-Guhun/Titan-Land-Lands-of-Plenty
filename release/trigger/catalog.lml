@@ -500,6 +500,7 @@
     '3-LoP UI': 'LoP UI'
     4-ListBox: ListBox
     5-IsMouseOnButton: IsMouseOnButton
+    6-EditBoxFix: EditBoxFix
 47-Screens: Screens
     '1-UpperButtonBar View': 'UpperButtonBar View'
     '2-UpperButtonBar Controller': 'UpperButtonBar Controller'

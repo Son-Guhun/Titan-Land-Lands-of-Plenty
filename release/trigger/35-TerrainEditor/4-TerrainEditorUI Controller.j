@@ -1,4 +1,4 @@
-library TerrainEditorUIController requires UILib, PlayerUtils, BitFlags, TerrainEditorUIView, TerrainEditor, IsMouseOnButton
+library TerrainEditorUIController requires UILib, PlayerUtils, BitFlags, TerrainEditorUIView, TerrainEditor, IsMouseOnButton, EditBoxFix
 
 globals
     public boolean heightEnabled = false
@@ -147,6 +147,7 @@ endfunction
     call IsMouseOnButton_Register(terrainEditorScreen["brushSizeSlider"])
     call IsMouseOnButton_Register(terrainEditorScreen["brushSizeSliderButton"])
     
+    call EditBoxFix_Register(terrainEditorScreen["plateauInput"])
     
     
     call OSKeys.KEY1.register()
