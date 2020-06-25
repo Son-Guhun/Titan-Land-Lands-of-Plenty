@@ -1,6 +1,6 @@
 library OSKeyLib requires PlayerUtils, Timeline
 /*
-*   v1.1.1 - by Guhun
+*   v1.2.0 - by Guhun
 *
 *
 * This is a library that facilitates usage of the oskey API added in patch 1.31.
@@ -45,7 +45,14 @@ struct OSKeys extends array
     
     // Returns the amount of time since a key was pressed (isPressed -> true) or released (isPressed -> false).
     // If the key was never pressed, returns the amount of time since it was registered.
-    $inline$ method getDuration takes nothing returns real
+    // If the player alt-tabbed or otherwise stopped pressing the key in a way that caused the up event to not fire, this method may return a wrong value.
+    $inline$ method getDurationId takes integer playerId returns real
+    $inline$ method getDurationPlayer takes player whichPlayer returns real
+    $inline$ method getDuration takes nothing returns real  // for local player
+    
+    // This method resets all keys for a player, setting them to the "up" position. This can be used to avoid bugs when a player clicks on an EditBox frame or presses Enter.
+    // Does not fire a release event for the keys.
+    static method resetKeys takes integer pId returns nothing
     
     // Adds a listener, which will evalute a boolexpr whenever any key is pressed. The boolexpr should return true.
     /*
@@ -232,12 +239,13 @@ endfunction
 private keyword Constants
 
 struct OSKeys extends array
-    private static boolean array g_isPressed[256][24]
     private static real array timestamp[256][24]
     readonly boolean isRegistered
     private static trigger eventResponder = null
     private static trigger executer = CreateTrigger()
     private static trigger holdExecuter = CreateTrigger()
+    private static boolean array firstPress[256][24]
+    private static real array latestTimestamp[256][24]
     
     static method addListener takes boolexpr expr returns triggercondition
         return TriggerAddCondition(executer, expr)
@@ -256,7 +264,8 @@ struct OSKeys extends array
     endmethod
 
     method isPressedId takes integer playerId returns boolean
-        return g_isPressed[this][playerId]
+        //return firstPress[this][playerId] or (Timeline.game.elapsed - latestTimestamp[this][playerId] < .300)
+        return Timeline.game.elapsed - latestTimestamp[this][playerId] < .800
     endmethod
     
     method isPressedPlayer takes player whichPlayer returns boolean
@@ -267,8 +276,16 @@ struct OSKeys extends array
         return .isPressedId(User.fromLocal().id)
     endmethod
     
+    method getDurationId takes integer playerId returns real
+        return Timeline.game.elapsed - timestamp[this][playerId]
+    endmethod
+    
     method getDuration takes nothing returns real
-        return Timeline.game.elapsed - timestamp[this][User.fromLocal().id]
+        return getDurationId(User.fromLocal().id)
+    endmethod
+    
+    method getDurationPlayer takes player whichPlayer returns real
+        return getDurationId(User[whichPlayer].id)
     endmethod
     
     static method fromHandle takes oskeytype key returns thistype
@@ -289,24 +306,52 @@ struct OSKeys extends array
                     exitwhen p >= bj_MAX_PLAYERS
                     call RegisterKeyEvent(.eventResponder, p.handle, this.handle)
                     set timestamp[this][p.id] = Timeline.game.elapsed
+                    set latestTimestamp[this][p.id] = -1000.
                     set p = p + 1
                 endloop
             endif
         endif
     endmethod
     
+    static method resetKeys takes integer pId returns nothing
+        local integer i = 0
+        local integer key = 0
+        local real elapsed = Timeline.game.elapsed
+        
+        loop
+            exitwhen key == 256
+            set timestamp[key][pId] = elapsed
+            set latestTimestamp[key][pId] = -1000.
+            set key = key + 1
+        endloop
+    endmethod
+    
     private static method onKey takes nothing returns nothing
         local boolean pressed = BlzGetTriggerPlayerIsKeyDown()
-        local integer key = GetHandleId(BlzGetTriggerPlayerKey())
+        local thistype key = thistype.fromHandle(BlzGetTriggerPlayerKey())
         local integer pId = GetPlayerId(GetTriggerPlayer())
         
-        if not pressed or not g_isPressed[key][pId] then
-            set g_isPressed[key][pId] = pressed
-            
+        if not pressed then
+            set latestTimestamp[key][pId] = -1000.
+            set firstPress[key][pId] = false
             set timestamp[key][pId] = Timeline.game.elapsed
-            
             call TriggerEvaluate(executer)
+
+        elseif not key.isPressedId(pId) then
+            set latestTimestamp[key][pId] = Timeline.game.elapsed
+            set firstPress[key][pId] = true
+            set timestamp[key][pId] = Timeline.game.elapsed
+            call TriggerEvaluate(executer)
+
+            if key == RETURN  then
+                call resetKeys(pId)
+            endif
         else
+            if pressed then
+                set firstPress[key][pId] = false
+                set latestTimestamp[key][pId] = Timeline.game.elapsed
+            endif
+        
             call TriggerEvaluate(holdExecuter)
         endif
     endmethod
@@ -326,6 +371,7 @@ struct OSKeys extends array
                     exitwhen p >= bj_MAX_PLAYERS
                     call RegisterKeyEvent(trig, p.handle, key.handle)
                     set timestamp[key][p.id] = Timeline.game.elapsed
+                    set latestTimestamp[key][p.id] = -1000.
                     set p = p + 1
                 endloop
             endif
