@@ -4,12 +4,8 @@ scope HotkeyMoveUnits
 
 private struct Config extends array
 
-    static constant method operator META_KEY_LEFT takes nothing returns OSKeys
-        return OSKeys.LCONTROL  // Use control because Alt would ping and Shift is used for queuing actions.
-    endmethod
-    
-    static constant method operator META_KEY_RIGHT takes nothing returns OSKeys
-        return OSKeys.RCONTROL
+    static constant method operator METAKEY takes nothing returns integer
+        return MetaKeys.CTRL + MetaKeys.SHIFT  // Use control because Alt would ping and Shift is used for queuing actions.
     endmethod
 
 endstruct
@@ -24,7 +20,10 @@ private function onMousePress takes nothing returns boolean
     local real centerY = 0.
     local boolean hasStructure = false
     
-    if PlayerMouseEvent_GetTriggerPlayerMouseButton() == MOUSE_BUTTON_TYPE_LEFT and (Config.META_KEY_LEFT.isPressedPlayer(trigP) or Config.META_KEY_RIGHT.isPressedPlayer(trigP)) then
+    call BJDebugMsg(I2S(Config.METAKEY))
+    call BJDebugMsg(I2S(OSKeys.getPressedMetaKeys(trigP)))
+    
+    if not IsPlayerMouseOnButton(trigP) and PlayerMouseEvent_GetTriggerPlayerMouseButton() == MOUSE_BUTTON_TYPE_LEFT and Config.METAKEY == OSKeys.getPressedMetaKeys(trigP) then
         set g = CreateGroup()
         set g2 = CreateGroup()
         call GroupEnumUnitsSelected(g, trigP, null)
@@ -74,9 +73,7 @@ endfunction
 function InitTrig_Hotkey_Move_Units takes nothing returns nothing
     local trigger trig = CreateTrigger()
     
-    call Config.META_KEY_LEFT.register()
-    call Config.META_KEY_RIGHT.register()
-    
+    call OSKeys.registerMetaKey(Config.METAKEY)
     
     set ControlState.default.trigger[EVENT_PLAYER_MOUSE_UP] = trig
     call TriggerAddCondition(trig, Condition(function onMousePress))

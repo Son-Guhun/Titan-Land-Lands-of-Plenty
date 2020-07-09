@@ -207,7 +207,7 @@ struct MetaKeys extends array
     static constant method operator ALT takes nothing returns integer
         return 4
     endmethod
-
+    
 endstruct
 
 private function RegisterKeyEvent takes trigger whichTrigger, player whichPlayer, oskeytype whichKey returns nothing
@@ -324,6 +324,44 @@ struct OSKeys extends array
             set latestTimestamp[key][pId] = -1000.
             set key = key + 1
         endloop
+    endmethod
+    
+    static method getPressedMetaKeys takes player whichPlayer returns integer
+        local integer result = 0
+        local integer pId = User[whichPlayer]
+    
+        if LCONTROL.isPressedId(pId) or RCONTROL.isPressedId(pId) then
+            set result = result + MetaKeys.CTRL
+        endif
+        
+        if LALT.isPressedId(pId) or RALT.isPressedId(pId) then
+            set result = result + MetaKeys.ALT
+        endif
+        
+        if LSHIFT.isPressedId(pId) or RSHIFT.isPressedId(pId) then
+            set result = result + MetaKeys.SHIFT
+        endif
+        
+        return result
+    endmethod
+    
+    static method registerMetaKey takes integer metaKey returns nothing
+    
+        if BlzBitAnd(metaKey, MetaKeys.CTRL) != 0 then
+            call LCONTROL.register()
+            call RCONTROL.register()
+        endif
+        
+        if BlzBitAnd(metaKey, MetaKeys.ALT) != 0 then
+            call LALT.register()
+            call RALT.register()
+        endif
+        
+        if BlzBitAnd(metaKey, MetaKeys.SHIFT) != 0 then
+            call LSHIFT.register()
+            call RSHIFT.register()
+        endif
+    
     endmethod
     
     private static method onKey takes nothing returns nothing
