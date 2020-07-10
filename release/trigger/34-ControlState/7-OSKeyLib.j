@@ -1,6 +1,6 @@
 library OSKeyLib requires PlayerUtils, Timeline
 /*
-*   v1.2.0 - by Guhun
+*   v1.3.0 - by Guhun
 *
 *
 * This is a library that facilitates usage of the oskey API added in patch 1.31.
@@ -14,7 +14,18 @@ library OSKeyLib requires PlayerUtils, Timeline
 * Configuration
 ************
 */
-// No configuration available.
+globals
+    
+    // The time it takes for keys to be reset after no key-down event has been received for a while.
+    // This is used to avoid keys being pressed forever if a player alt-tabs or clicks on an editbox frame.
+    // Recommeneded values: 0.6 to 1.0
+    public constant real TIMEOUT = 0.8
+
+    // The period that a timer will use to check to see if TIMEOUT has passed since the last event.
+    // Should lower than TIMEOUT.
+    public constant real ACCURACY = 0.25
+    
+endglobals
 //! novjass
 '                                                                                                  '
 '                                              API                                                 '
@@ -35,6 +46,14 @@ struct OSKeys extends array
     
     // This method must be called for OSKeys that you will use. It should be called at initialization.
     method register takes nothing returns nothing
+    
+    // This method can be used to register both left and right keys for a metakey. You can also pass multiple metakeys.
+    // E.g.: OSKeys.registerMetaKey(MetaKeys.CTRL + MetaKeys.SHIFT)
+    static method registerMetaKey takes integer metaKey returns nothing
+    
+    // Returns a bit field containing all currently pressed metakeys for a player.
+    // For example, if a player is holding LCONTROL and LALT, this method will return MetaKeys.CTRL+MetaKeys.ALT.
+    static method getPressedMetaKeys takes player whichPlayer returns integer
     
     // Check whether a player is pressing a key.
     $inline$ method isPressedId takes integer pId returns boolean
@@ -239,13 +258,14 @@ endfunction
 private keyword Constants
 
 struct OSKeys extends array
-    private static real array timestamp[256][24]
     readonly boolean isRegistered
     private static trigger eventResponder = null
     private static trigger executer = CreateTrigger()
     private static trigger holdExecuter = CreateTrigger()
-    private static boolean array firstPress[256][24]
-    private static real array latestTimestamp[256][24]
+    private static real array latestTimestamp
+    private static integer array totalPressedKeys
+    private static boolean array isPressedArray[256][24]
+    private static real array timestamp[256][24]
     
     static method addListener takes boolexpr expr returns triggercondition
         return TriggerAddCondition(executer, expr)
@@ -264,8 +284,7 @@ struct OSKeys extends array
     endmethod
 
     method isPressedId takes integer playerId returns boolean
-        //return firstPress[this][playerId] or (Timeline.game.elapsed - latestTimestamp[this][playerId] < .300)
-        return Timeline.game.elapsed - latestTimestamp[this][playerId] < .800
+        return isPressedArray[this][playerId]
     endmethod
     
     method isPressedPlayer takes player whichPlayer returns boolean
@@ -306,7 +325,6 @@ struct OSKeys extends array
                     exitwhen p >= bj_MAX_PLAYERS
                     call RegisterKeyEvent(.eventResponder, p.handle, this.handle)
                     set timestamp[this][p.id] = Timeline.game.elapsed
-                    set latestTimestamp[this][p.id] = -1000.
                     set p = p + 1
                 endloop
             endif
@@ -320,10 +338,14 @@ struct OSKeys extends array
         
         loop
             exitwhen key == 256
-            set timestamp[key][pId] = elapsed
-            set latestTimestamp[key][pId] = -1000.
+            if isPressedArray[key][pId] then
+                set timestamp[key][pId] = elapsed
+                set isPressedArray[key][pId] = false
+            endif
             set key = key + 1
         endloop
+        
+        set totalPressedKeys[pId] = 0
     endmethod
     
     static method getPressedMetaKeys takes player whichPlayer returns integer
@@ -370,28 +392,44 @@ struct OSKeys extends array
         local integer pId = GetPlayerId(GetTriggerPlayer())
         
         if not pressed then
-            set latestTimestamp[key][pId] = -1000.
-            set firstPress[key][pId] = false
             set timestamp[key][pId] = Timeline.game.elapsed
+            set isPressedArray[key][pId] = false
+            set totalPressedKeys[pId] = totalPressedKeys[pId] - 1
             call TriggerEvaluate(executer)
 
         elseif not key.isPressedId(pId) then
-            set latestTimestamp[key][pId] = Timeline.game.elapsed
-            set firstPress[key][pId] = true
+            set latestTimestamp[pId] = Timeline.game.elapsed
             set timestamp[key][pId] = Timeline.game.elapsed
+            set isPressedArray[key][pId] = true
+            set totalPressedKeys[pId] = totalPressedKeys[pId] + 1
             call TriggerEvaluate(executer)
 
             if key == RETURN  then
                 call resetKeys(pId)
             endif
         else
-            if pressed then
-                set firstPress[key][pId] = false
-                set latestTimestamp[key][pId] = Timeline.game.elapsed
+            if pressed then  // A key firing a up event while it's already up is a sign of alt-tab/unintended behaviour
+                set latestTimestamp[pId] = Timeline.game.elapsed
             endif
         
             call TriggerEvaluate(holdExecuter)
         endif
+    endmethod
+    
+    // This runs the timer that determines whether a down event is still being fired for each player.
+    private static method onTimer takes nothing returns nothing
+        local User pId = 0
+        
+        loop
+            exitwhen pId >= bj_MAX_PLAYERS
+            
+            if totalPressedKeys[pId] > 0 and Timeline.game.elapsed - latestTimestamp[pId] > TIMEOUT then
+                call resetKeys(pId)
+            endif
+            
+            set pId = pId + 1
+        endloop
+        
     endmethod
     
     private static method onStart takes nothing returns nothing
@@ -401,6 +439,8 @@ struct OSKeys extends array
         
         set .eventResponder = trig
         
+        call TimerStart(CreateTimer(), ACCURACY, true, function thistype.onTimer)
+        
         loop
             exitwhen key == 256
             if key.isRegistered then
@@ -409,7 +449,6 @@ struct OSKeys extends array
                     exitwhen p >= bj_MAX_PLAYERS
                     call RegisterKeyEvent(trig, p.handle, key.handle)
                     set timestamp[key][p.id] = Timeline.game.elapsed
-                    set latestTimestamp[key][p.id] = -1000.
                     set p = p + 1
                 endloop
             endif
