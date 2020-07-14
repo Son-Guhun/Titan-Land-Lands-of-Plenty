@@ -1,4 +1,4 @@
-library TerrainEditor initializer onInit requires TerrainTools, DeformationTools, ControlState, PlayerUtils, PlayerColorUtils, IsMouseOnButton
+library TerrainEditor requires TerrainTools, DeformationTools, ControlState, PlayerUtils, PlayerColorUtils, IsMouseOnButton
 /*
 This library is the backbone of the ingame Terrain Editor.
 
@@ -215,9 +215,9 @@ private function onStateExit takes nothing returns boolean
     return false
 endfunction
 
-
-private function onInit takes nothing returns nothing
-    local trigger trig
+private module Init
+    private static method onInit takes nothing returns nothing
+            local trigger trig
     local integer i = 0
     
     loop
@@ -268,6 +268,10 @@ private function onInit takes nothing returns nothing
     
     
     set trig = null
-endfunction
+    endmethod
+endmodule
+private struct InitStruct
+    implement Init
+endstruct
 
 endlibrary

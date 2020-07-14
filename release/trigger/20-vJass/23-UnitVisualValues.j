@@ -1,9 +1,8 @@
 library UnitVisualValues requires HashtableWrapper
 
 globals
-    private hashtable hashTable = null
-    
-    private constant boolean INIT_HASHTABLE = true
+    private constant boolean INIT_HASHTABLE = true // Set this to false if you want to use a Table-based HashTable.
+    private hashtable hashTable = InitHashtable()  // Set this to null if you want to use a Table-based HashTable.
 endglobals
 
 //==================================================================================================
@@ -247,17 +246,6 @@ struct UnitVisuals extends array
             return "D" //D stands for default
         endif
     endmethod
-endstruct
-
-private module InitModule
-    private static method onInit takes nothing returns nothing
-        static if INIT_HASHTABLE and LIBRARY_HashtableWrapper then
-            set hashTable = InitHashtable()
-        endif
-    endmethod
-endmodule
-private struct InitStruct extends array
-    implement InitModule
 endstruct
 
 //==================================================================================================

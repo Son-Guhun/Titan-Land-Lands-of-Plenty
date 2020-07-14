@@ -175,7 +175,7 @@ library Maths/* v 1.2.0.0
         *   End of customizable globals
         *************************************************************************/
        
-        public hashtable h
+        public hashtable h = InitHashtable()
         private constant real E_INV = 0.3678794
         private constant real LOG_02_FACTOR = 1.4429504
         private constant real LOG_10_FACTOR = 0.4342945
@@ -604,15 +604,5 @@ library Maths/* v 1.2.0.0
             set r = r + 1.0
             return SquareRoot((2.0*Pi)/(r))*Pow(((1.0/E)*(r + 1.0/(12.0*r - 1.0/(10.0*r)))), r)
         endmethod
-    endstruct
-   
-    private module Init
-        private static method onInit takes nothing returns nothing
-            set h = InitHashtable()
-        endmethod
-    endmodule
-   
-    private struct Inits extends array
-        implement Init
     endstruct
 endlibrary

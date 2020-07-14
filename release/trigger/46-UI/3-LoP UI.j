@@ -32,7 +32,7 @@ function FullScreen takes boolean enable, integer cmdBtnAlpha returns nothing
     endloop
 endfunction
 
-private function Init takes nothing returns nothing
+private function onStart takes nothing returns nothing
     local integer i = 0
 
     set ConsoleUIBackdrop = BlzGetFrameByName("ConsoleUIBackdrop", 0)
@@ -40,7 +40,13 @@ private function Init takes nothing returns nothing
     exitwhen i == 12
         set commandButtons[i] = BlzGetOriginFrame(ORIGIN_FRAME_COMMAND_BUTTON, i)
         set i = i + 1
-    endloop
+    endloop 
+    
+    call DestroyTimer(GetExpiredTimer())
+endfunction
+
+private function Init takes nothing returns nothing
+    call TimerStart(CreateTimer(), 0., false, function onStart)
 endfunction
 
 endlibrary
