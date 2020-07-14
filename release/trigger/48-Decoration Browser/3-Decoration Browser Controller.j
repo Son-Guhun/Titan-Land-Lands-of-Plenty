@@ -8,16 +8,6 @@ globals
     private key searchStrings  // table of search strings for each player. Used so RefreshList can be used when a player swaps lists, instead of having to fire an editbox event.
 endglobals
 
-
-private function onPacket takes nothing returns boolean
-    local RealPacket packet = RealPacket.eventPacket
-
-    call CreateUnit(GetTriggerPlayer(), packet.metaData[0], packet[0], packet[1], 270.)
-
-    call packet.destroy()
-    return false
-endfunction
-
 globals
     public ScreenController controller
     public ControlState controlState
