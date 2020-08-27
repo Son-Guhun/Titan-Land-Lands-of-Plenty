@@ -1,1 +1,0 @@
-This trigger is supposed to handle all summoning spells, regarding anything that is related to the actual unit summoned or the summoner.
