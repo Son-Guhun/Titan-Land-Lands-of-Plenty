@@ -1316,6 +1316,26 @@ Action
     CommentString
         Const : ' '
     CommentString
+        Const : ---------------------------
+    CommentString
+        Const : 'Silver Key'
+    CommentString
+        Const : ---------------------------
+    SetVariable
+        Var   : Spell__Ability
+        Const : A04M
+    CommentString
+        Const : ' '
+    SetVariable
+        Var   : Spell__Trigger_OnCast
+        Var   : gg_trg_Silver_Key
+    CommentString
+        Const : ' '
+    TriggerExecute
+        Var   : gg_trg_Spell_System
+    CommentString
+        Const : ' '
+    CommentString
         Const : ' '
     CommentString
         Const : ' '

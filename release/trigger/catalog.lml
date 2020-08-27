@@ -445,6 +445,7 @@
     '49-Breath of Frost': 'Breath of Frost'
     '50-Pick Up Rider': 'Pick Up Rider'
     '51-Ditch Rider': 'Ditch Rider'
+    '52-Silver Key': 'Silver Key'
 '40-No Spell System Spells': 'No Spell System Spells'
     01-FilterTransformations: FilterTransformations
     '02-Ability Cooldown': 'Ability Cooldown'
@@ -459,7 +460,6 @@
     '09-TheCreator Invincibility': 'TheCreator Invincibility'
     10-Items: Items
         Comment
-    '11-Silver Key': 'Silver Key'
 '41-Knockback Samples': 'Knockback Samples'
     '1-On Damage': 'On Damage'
         Disab
