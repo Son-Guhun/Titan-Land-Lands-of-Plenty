@@ -26,9 +26,13 @@ module AdvChatBoxController
 
     private static integer timerTicks = 0
     private static string lastText = ""  // async. stores the last text held by the chat box
-    private static real array timeStamps  // stores last timestamp of the last time a player typed
     private static boolean in = false  // async
     private static string buffer = ""  // async
+    
+    // To make these arrays hashtable-based, simple extract them into a separate PlayerData struct and refactor.
+    private static real array timeStamps  // stores last timestamp of the last time a player typed
+    private static string array lastSentText  // stores last sent text of a player. Used to avoid sending duplicate messages.
+    private static real array lastSentTimestamp  // stores the timestamp when a player last sent a msg. Used to avoid sending duplicate messages.
     
     public static method operator defaultChatBox takes nothing returns framehandle
         return g_defaultChatBox
@@ -104,19 +108,24 @@ module AdvChatBoxController
         local string msg = BlzGetTriggerFrameText()
         local integer len = StringLength(msg)
         local player trigP = GetTriggerPlayer()
+        local User pId = User[trigP]
         
-        if len == 0 then
-            if User.Local == trigP then
-                call BlzFrameSetVisible(AdvChatBox.editBox, false)
-                call BlzFrameSetFocus(AdvChatBox.editBox, false)
+        if msg != lastSentText[pId] and Timeline.game.elapsed > lastSentTimestamp[pId] + .5 then
+            if len == 0 then
+                if User.Local == trigP then
+                    call BlzFrameSetVisible(AdvChatBox.editBox, false)
+                    call BlzFrameSetFocus(AdvChatBox.editBox, false)
+                endif
+            elseif len > 128 then
+                call sendMessageHandler(trigP, SubString(msg, 0, 128), SubString(msg, 128, len))
+            else
+                call sendMessageHandler(trigP, msg, "")
             endif
-        elseif len > 128 then
-            call sendMessageHandler(trigP, SubString(msg, 0, 128), SubString(msg, 128, len))
-        else
-            call sendMessageHandler(trigP, msg, "")
+            
+            set timeStamps[pId] = 0.
+            set lastSentText[pId] = msg
+            set lastSentTimestamp[pId] = Timeline.game.elapsed
         endif
-        
-        set timeStamps[User[trigP]] = 0.
     endmethod
 
     private static method handleButton takes player whichPlayer, framehandle whichButton returns nothing
@@ -127,31 +136,28 @@ module AdvChatBoxController
             if User.Local == whichPlayer then
                 call BlzFrameSetVisible(AdvChatBox.editBox, false)
                 call BlzFrameSetFocus(AdvChatBox.editBox, false)
-                set lastText = BlzFrameGetText(AdvChatBox.editBox)
             endif
         elseif whichButton == AdvChatBox.syncButton then
             set timeStamps[GetPlayerId(whichPlayer)] = Timeline.game.elapsed  // This invisible button is used to sync last typing time for players
         elseif whichButton == AdvChatBox.speakerButton then
             // to do
         else
+            set isIC[User[whichPlayer]] = not isIC[User[whichPlayer]]
+            
+            if isIC[User[whichPlayer]] then
+                set temp = "IC"
+            else
+                set temp = "OOC"
+            endif
+            
             if User.Local == whichPlayer then
-                set isIC[User[whichPlayer]] = not isIC[User[whichPlayer]]
-                
-                if isIC[User[whichPlayer]] then
-                    set temp = "IC"
-                else
-                    set temp = "OOC"
-                endif
-                
-                if User.Local == whichPlayer then
-                    call BlzFrameSetText(AdvChatBox.sendButton, temp)
-                    call BlzFrameSetEnable(AdvChatBox.speakerButton, isIC[User[whichPlayer]])
-                    call BlzFrameSetFocus(AdvChatBox.editBox, true)
-                    if whichButton == AdvChatBox.sendButton then
-                        set temp = BlzFrameGetText(AdvChatBox.editBox)
-                        call BlzFrameSetText(AdvChatBox.editBox, buffer)
-                        set buffer = temp
-                    endif
+                call BlzFrameSetText(AdvChatBox.sendButton, temp)
+                call BlzFrameSetEnable(AdvChatBox.speakerButton, isIC[User[whichPlayer]])
+                call BlzFrameSetFocus(AdvChatBox.editBox, true)
+                if whichButton == AdvChatBox.sendButton then
+                    set temp = BlzFrameGetText(AdvChatBox.editBox)
+                    call BlzFrameSetText(AdvChatBox.editBox, buffer)
+                    set buffer = temp
                 endif
             endif
         endif
