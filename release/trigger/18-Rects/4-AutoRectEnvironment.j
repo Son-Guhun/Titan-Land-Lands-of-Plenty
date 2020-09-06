@@ -30,51 +30,23 @@ endstruct
     
 // Adds a rect to the .rects set of all AutoRectBlocks that it encompasses.
 private function AppendRectToBlocks takes rect r returns nothing
-    local real maxX = GetRectMaxX(r)
-    local real maxY = GetRectMaxY(r)
-    local real minY = GetRectMinY(r)
-    
-    local real x = GetRectMinX(r)
-    
-    local integer i
-    local integer maxI = AutoRectBlock.get(maxX,maxY)
-    local integer maxJ
+    //! runtextmacro TilesInRectLoopDeclare("block", "AutoRectBlock.BLOCK_SIZE", "GetRectMinX(r)", "GetRectMinY(r)", "GetRectMaxX(r)", "GetRectMaxY(r)")
     
     loop
-        set maxJ = AutoRectBlock.get(x,maxY)
-        set i = AutoRectBlock.get(x,minY)
-        exitwhen i > maxI
-        loop
-            exitwhen i > maxJ
-            call AutoRectBlock(i).rects.append(GetHandleId(r))
-            set i = i + 1
-        endloop
-        set x = x + AutoRectBlock.BLOCK_SIZE
+        call AutoRectBlock(block).rects.append(GetHandleId(r))
+
+        //! runtextmacro TilesInRectLoop("block", "AutoRectBlock.BLOCK_SIZE")
     endloop
 endfunction
 
 // Removes a rect to the .rects set of all AutoRectBlocks that it encompasses.
 private function RemoveRectFromBlocks takes rect r returns nothing
-    local real maxX = GetRectMaxX(r)
-    local real maxY = GetRectMaxY(r)
-    local real minY = GetRectMinY(r)
-    
-    local real x = GetRectMinX(r)
-    
-    local integer i
-    local integer maxI = AutoRectBlock.get(maxX,maxY)
-    local integer maxJ
+    //! runtextmacro TilesInRectLoopDeclare("block", "AutoRectBlock.BLOCK_SIZE", "GetRectMinX(r)", "GetRectMinY(r)", "GetRectMaxX(r)", "GetRectMaxY(r)")
     
     loop
-        set maxJ = AutoRectBlock.get(x,maxY)
-        set i = AutoRectBlock.get(x,minY)
-        exitwhen i > maxI
-        loop
-            exitwhen i > maxJ
-            call AutoRectBlock(i).rects.remove(GetHandleId(r))
-            set i = i + 1
-        endloop
-        set x = x + AutoRectBlock.BLOCK_SIZE
+        call AutoRectBlock(block).rects.remove(GetHandleId(r))
+
+        //! runtextmacro TilesInRectLoop("block", "AutoRectBlock.BLOCK_SIZE")
     endloop
 endfunction
 

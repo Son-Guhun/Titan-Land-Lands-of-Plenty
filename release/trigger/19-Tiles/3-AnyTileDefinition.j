@@ -58,35 +58,100 @@ endfunction
     endfunction
 //! endtextmacro
 
-private struct Globals extends array
-    //! runtextmacro TableStruct_NewConstTableField("","totalX")
-    //! runtextmacro TableStruct_NewConstTableField("","totalY")
-endstruct
+static if ENABLE_ID_FUNCTIONS and LIBRARY_WorldBounds then
+
+    private struct Globals extends array
+        //! runtextmacro TableStruct_NewConstTableField("","totalX")
+        //! runtextmacro TableStruct_NewConstTableField("","totalY")
+    endstruct
+        
+    function GetCustomTileId takes integer tileSize, real x, real y returns integer
+        local integer halfTileSize = tileSize/2
+        return ((R2I(x - WorldBounds.minX + halfTileSize) / tileSize) * Globals.totalY[tileSize] + R2I(y - WorldBounds.minY + halfTileSize) / tileSize)
+    endfunction
     
+    function GetCustomTileIdSafe takes integer tileSize, real x, real y returns integer
+        local integer halfTileSize = tileSize/2
+        
+        if x > WorldBounds.maxX then
+            set x = WorldBounds.maxX 
+        elseif x < WorldBounds.minX then
+            set x = WorldBounds.minX
+        endif
+        
+        if y > WorldBounds.maxY then
+            set y = WorldBounds.maxY
+        elseif y < WorldBounds.minY then
+            set y = WorldBounds.minY
+        endif
     
-function GetCustomTileId takes integer tileSize, real x, real y returns integer
-    local integer halfTileSize = tileSize/2
-    return ((R2I(x - WorldBounds.minX + halfTileSize) / tileSize) * Globals.totalX[tileSize] + R2I(y - WorldBounds.minY + halfTileSize) / tileSize)
-endfunction
+        return ((R2I(x - WorldBounds.minX + halfTileSize) / tileSize) * Globals.totalY[tileSize] + R2I(y - WorldBounds.minY + halfTileSize) / tileSize)
+    endfunction
 
-function IsValidCustomTileId takes integer tileSize, integer id returns boolean
-    return (id < 0) or (id >= Globals.totalX[tileSize] * Globals.totalY[tileSize])
-endfunction
+    function IsValidCustomTileId takes integer tileSize, integer id returns boolean
+        return (id > 0) and (id <= Globals.totalX[tileSize] * Globals.totalY[tileSize])
+    endfunction
 
-function GetCustomTileCenterXById takes integer tileSize, integer id returns real
-    return I2R(WorldBounds.minX + ModuloInteger(id, Globals.totalX[tileSize]) * tileSize)
-endfunction
+    function GetCustomTileCenterXById takes integer tileSize, integer id returns real
+        return I2R(WorldBounds.minX + id/Globals.totalY[tileSize] * tileSize)
+    endfunction
 
-function GetCustomTileCenterYById takes integer tileSize, integer id returns real
-    return I2R(WorldBounds.minY + id / Globals.totalX[tileSize] * tileSize)
-endfunction
+    function GetCustomTileCenterYById takes integer tileSize, integer id returns real
+        return I2R(WorldBounds.minY + ModuloInteger(id, Globals.totalY[tileSize]) * tileSize)
+    endfunction
+    
+    function GetCustomTileHorizontalCount takes integer tileSize returns integer
+        return Globals.totalX[tileSize]
+    endfunction
+    
+    function GetCustomTileVerticalCount takes integer tileSize returns integer
+        return Globals.totalY[tileSize]
+    endfunction
 
-function InitCustomTiles takes integer tileSize returns nothing
-    if not Globals.totalX.has(tileSize) then
-        set Globals.totalX[tileSize] = R2I(WorldBounds.maxX - WorldBounds.minX) / tileSize + 1
-        set Globals.totalY[tileSize] = R2I(WorldBounds.maxY - WorldBounds.minY) / tileSize + 1
-    endif
-endfunction
+    function InitCustomTiles takes integer tileSize returns nothing
+        if not Globals.totalX.has(tileSize) then
+            set Globals.totalX[tileSize] = R2I(WorldBounds.maxX - WorldBounds.minX) / tileSize + 1
+            set Globals.totalY[tileSize] = R2I(WorldBounds.maxY - WorldBounds.minY) / tileSize + 1
+        endif
+    endfunction
+    
+    // These text macros can be used to loop over tiles that overlap with a certain rect.
+    //! textmacro TilesInRectLoopDeclare takes varName, tileSize, minX, minY, maxX, maxY
+        local integer $varName$ = GetCustomTileIdSafe(($tileSize$), ($minX$), ($minY$))
+        local integer tilesInRect_maxI = GetCustomTileIdSafe(($tileSize$), ($maxX$), ($maxY$))
+        local integer tilesInRect_verticalCount = tilesInRect_maxI - GetCustomTileIdSafe(($tileSize$), ($maxX$), ($minY$))
+        local integer tilesInRect_maxJ = $varName$ + tilesInRect_verticalCount
+    //! endtextmacro
+
+    //! textmacro TilesInRectLoop takes varName, tileSize
+        if $varName$ == tilesInRect_maxJ then
+            set tilesInRect_maxJ = $varName$ + GetCustomTileVerticalCount(($tileSize$))
+            exitwhen tilesInRect_maxJ > tilesInRect_maxI
+            set $varName$ = tilesInRect_maxJ - tilesInRect_verticalCount
+        else
+            set $varName$ = $varName$ + 1
+        endif
+    //! endtextmacro
+
+    /// Doc /////////////////
+    // Example for usage of the above textmacros:
+    //! novjass
+    function TilesInRectLoopExample takes integer tileSize, real minX, real minY, real maxX, real maxY returns nothing
+        //! runtextmacro TilesInRectLoopDeclare("i", "tileSize", "minX", "minY", "maxX", "maxY")
+        
+        
+        loop
+            // do stuff here
+                    
+            
+            
+            //! runtextmacro TilesInRectLoop("i", "tileSize")
+        endloop
+    endfunction
+    //! endnovjass
+    ////////////////////////////
+    
+endif
 
    
 endlibrary

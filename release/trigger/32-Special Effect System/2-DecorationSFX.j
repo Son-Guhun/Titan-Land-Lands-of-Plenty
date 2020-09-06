@@ -7,6 +7,7 @@ library DecorationSFX requires SpecialEffect, TableStruct, OOP
 // Allows you to specify that a player's decorations should use another player's color, using DecorationSFX_SetPlayerColor.
 globals
     public constant boolean USE_CUSTOM_PLAYER_COLORS = true
+    public constant integer BLOCK_SIZE = 2048
 endglobals
 
 //! novjass
@@ -93,12 +94,10 @@ private struct DecorationEffectBlock extends array
 
     implement DebugNegativeIsNull
 
-    static constant integer BLOCK_SIZE = 2048
-
     //! runtextmacro TableStruct_NewStructField("effects","LinkedHashSet")
     
     static method get takes real x, real y returns DecorationEffectBlock
-        return GetCustomTileId(.BLOCK_SIZE, x, y)
+        return GetCustomTileId(BLOCK_SIZE, x, y)
     endmethod
 
 endstruct
@@ -264,75 +263,66 @@ function AreCoordsInRectangle takes real x, real y, real minX, real minY, real m
     return x >= minX and x <= maxX and y >= minY and y <= maxY
 endfunction
 
-function EnumDecorationsInRect takes real minX, real minY, real maxX, real maxY returns LinkedHashSet_DecorationEffect
-    local real x = minX
+public function ResetHeightsInBlock takes integer block returns nothing
+    local LinkedHashSet decorations = DecorationEffectBlock(block).effects
+    local DecorationEffect decoration = decorations.begin()
     
-    local integer i
+    if decoration != decorations.end() then
+        loop
+            exitwhen decoration == decorations.end()
+            set decoration.height = decoration.height
+            set decoration = decorations.next(decoration)
+        endloop
+    endif
+endfunction
+
+function EnumDecorationsInRect takes real minX, real minY, real maxX, real maxY returns LinkedHashSet_DecorationEffect
+    //! runtextmacro TilesInRectLoopDeclare("block", "BLOCK_SIZE", "minX", "minY", "maxX", "maxY")
     local LinkedHashSet decorations
     local DecorationEffect decoration
-    
-    local integer maxI = DecorationEffectBlock.get(maxX,maxY)
-    local integer maxJ
     
     local LinkedHashSet result = LinkedHashSet.create()
     local effect e
     
-    loop
-        set maxJ = DecorationEffectBlock.get(x,maxY)
-        set i = DecorationEffectBlock.get(x,minY)
-        exitwhen i > maxI
+    loop   
+        set decorations = DecorationEffectBlock(block).effects
+        set decoration = decorations.begin()
         loop
-            exitwhen i > maxJ
-            set decorations = DecorationEffectBlock(i).effects
-            set decoration = decorations.begin()
-            loop
-                exitwhen decoration == decorations.end()
-                set e = decoration.effect
-                if AreCoordsInRectangle(BlzGetLocalSpecialEffectX(e), BlzGetLocalSpecialEffectY(e), minX, minY, maxX, maxY) then
-                    call result.append(decoration)
-                endif
-                set decoration = decorations.next(decoration)
-            endloop
-            set i = i + 1
+            exitwhen decoration == decorations.end()
+            set e = decoration.effect
+            if AreCoordsInRectangle(BlzGetLocalSpecialEffectX(e), BlzGetLocalSpecialEffectY(e), minX, minY, maxX, maxY) then
+                call result.append(decoration)
+            endif
+            set decoration = decorations.next(decoration)
         endloop
-        set x = x + DecorationEffectBlock.BLOCK_SIZE
+        
+        //! runtextmacro TilesInRectLoop("block", "BLOCK_SIZE")
     endloop
     
     return result
 endfunction
 
 function EnumDecorationsOfPlayerInRect takes player whichPlayer, real minX, real minY, real maxX, real maxY returns LinkedHashSet_DecorationEffect
-    local real x = minX
-    
-    local integer i
+    //! runtextmacro TilesInRectLoopDeclare("block", "BLOCK_SIZE", "minX", "minY", "maxX", "maxY")
     local LinkedHashSet decorations
     local DecorationEffect decoration
-    
-    local integer maxI = DecorationEffectBlock.get(maxX,maxY)
-    local integer maxJ
     
     local LinkedHashSet result = LinkedHashSet.create()
     local effect e
     
     loop
-        set maxJ = DecorationEffectBlock.get(x,maxY)
-        set i = DecorationEffectBlock.get(x,minY)
-        exitwhen i > maxI
+        set decorations = DecorationEffectBlock(block).effects
+        set decoration = decorations.begin()
         loop
-            exitwhen i > maxJ
-            set decorations = DecorationEffectBlock(i).effects
-            set decoration = decorations.begin()
-            loop
-                exitwhen decoration == decorations.end()
-                set e = decoration.effect
-                if AreCoordsInRectangle(BlzGetLocalSpecialEffectX(e), BlzGetLocalSpecialEffectY(e), minX, minY, maxX, maxY) and decoration.getOwner() == whichPlayer then
-                    call result.append(decoration)
-                endif
-                set decoration = decorations.next(decoration)
-            endloop
-            set i = i + 1
+            exitwhen decoration == decorations.end()
+            set e = decoration.effect
+            if AreCoordsInRectangle(BlzGetLocalSpecialEffectX(e), BlzGetLocalSpecialEffectY(e), minX, minY, maxX, maxY) and decoration.getOwner() == whichPlayer then
+                call result.append(decoration)
+            endif
+            set decoration = decorations.next(decoration)
         endloop
-        set x = x + DecorationEffectBlock.BLOCK_SIZE
+        
+        //! runtextmacro TilesInRectLoop("block", "BLOCK_SIZE")
     endloop
     
     return result
@@ -349,84 +339,54 @@ private function Distance takes real x, real x0, real y, real y0 returns real
 endfunction
 
 function EnumDecorationsInRange takes real centerX, real centerY, real radius returns LinkedHashSet_DecorationEffect
-    local real minX = centerX - radius
-    local real minY = centerY - radius
-    local real maxX = centerX + radius
-    local real maxY = centerY + radius
-    
-    local real x = minX
-    
-    local integer i
+    //! runtextmacro TilesInRectLoopDeclare("block", "BLOCK_SIZE", "centerX - radius", "centerY - radius", "centerX + radius", "centerY + radius")
+
     local LinkedHashSet decorations
     local DecorationEffect decoration
-    
-    local integer maxI = DecorationEffectBlock.get(maxX,maxY)
-    local integer maxJ
     
     local LinkedHashSet result = LinkedHashSet.create()
     local effect e
     
     loop
-        set maxJ = DecorationEffectBlock.get(x,maxY)
-        set i = DecorationEffectBlock.get(x,minY)
-        exitwhen i > maxI
+        set decorations = DecorationEffectBlock(block).effects
+        set decoration = decorations.begin()
         loop
-            exitwhen i > maxJ
-            set decorations = DecorationEffectBlock(i).effects
-            set decoration = decorations.begin()
-            loop
-                exitwhen decoration == decorations.end()
-                set e = decoration.effect
-                if Distance(BlzGetLocalSpecialEffectX(e), centerX, BlzGetLocalSpecialEffectY(e), centerY) <= radius then
-                    call result.append(decoration)
-                endif
-                set decoration = decorations.next(decoration)
-            endloop
-            set i = i + 1
+            exitwhen decoration == decorations.end()
+            set e = decoration.effect
+            if Distance(BlzGetLocalSpecialEffectX(e), centerX, BlzGetLocalSpecialEffectY(e), centerY) <= radius then
+                call result.append(decoration)
+            endif
+            set decoration = decorations.next(decoration)
         endloop
-        set x = x + DecorationEffectBlock.BLOCK_SIZE
+        
+        //! runtextmacro TilesInRectLoop("block", "BLOCK_SIZE")
     endloop
     
     return result
 endfunction
 
 function EnumDecorationsOfPlayerInRange takes player whichPlayer, real centerX, real centerY, real radius returns LinkedHashSet_DecorationEffect
-    local real minX = centerX - radius
-    local real minY = centerY - radius
-    local real maxX = centerX + radius
-    local real maxY = centerY + radius
+    //! runtextmacro TilesInRectLoopDeclare("block", "BLOCK_SIZE", "centerX - radius", "centerY - radius", "centerX + radius", "centerY + radius")
     
-    local real x = minX
-    
-    local integer i
     local LinkedHashSet decorations
     local DecorationEffect decoration
-    
-    local integer maxI = DecorationEffectBlock.get(maxX,maxY)
-    local integer maxJ
     
     local LinkedHashSet result = LinkedHashSet.create()
     local effect e
     
     loop
-        set maxJ = DecorationEffectBlock.get(x,maxY)
-        set i = DecorationEffectBlock.get(x,minY)
-        exitwhen i > maxI
+        set decorations = DecorationEffectBlock(block).effects
+        set decoration = decorations.begin()
         loop
-            exitwhen i > maxJ
-            set decorations = DecorationEffectBlock(i).effects
-            set decoration = decorations.begin()
-            loop
-                exitwhen decoration == decorations.end()
-                set e = decoration.effect
-                if Distance(BlzGetLocalSpecialEffectX(e), centerX, BlzGetLocalSpecialEffectY(e), centerY) <= radius and decoration.getOwner() == whichPlayer then
-                    call result.append(decoration)
-                endif
-                set decoration = decorations.next(decoration)
-            endloop
-            set i = i + 1
+            exitwhen decoration == decorations.end()
+            set e = decoration.effect
+            if Distance(BlzGetLocalSpecialEffectX(e), centerX, BlzGetLocalSpecialEffectY(e), centerY) <= radius and decoration.getOwner() == whichPlayer then
+                call result.append(decoration)
+            endif
+            set decoration = decorations.next(decoration)
         endloop
-        set x = x + DecorationEffectBlock.BLOCK_SIZE
+        
+        //! runtextmacro TilesInRectLoop("block", "BLOCK_SIZE")
     endloop
     
     return result
@@ -441,7 +401,7 @@ private module InitModule
         local integer lastId
         local integer i = 0
         
-        call InitCustomTiles(DecorationEffectBlock.BLOCK_SIZE)
+        call InitCustomTiles(BLOCK_SIZE)
         set lastId = DecorationEffectBlock.get(WorldBounds.maxX, WorldBounds.maxY)
         loop
         exitwhen i > lastId
