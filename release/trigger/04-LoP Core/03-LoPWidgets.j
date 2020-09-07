@@ -78,6 +78,7 @@ struct LoP_UnitData extends array
     
     method destroy takes nothing returns nothing
         call .isHeroicClear()
+        call .hideOnDeselectClear()
     endmethod
 endstruct
 

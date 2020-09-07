@@ -3,7 +3,7 @@ library MathParser /* v 1.1.0.0
 *
 *   MathParser
 *   ¯¯¯¯¯¯¯¯¯¯
-*   By looking_for_help aka eey
+*   By looking_for_help aka eey  // Edited by Guhun
 *
 *   This system provides methods for parsing mathematically string expressions,
 *   represented as strings. Also methods for formating string expressions are
@@ -62,12 +62,8 @@ library MathParser /* v 1.1.0.0
         *   End of customizable globals
         *************************************************************************/
     endglobals
-
-    private module Init
-        private static method onInit takes nothing returns nothing
-            call init()
-        endmethod
-    endmodule
+    
+    private keyword Init
     
     private function SubStrSafe takes string str, integer start, integer end returns string
         if start < end then
@@ -572,7 +568,11 @@ library MathParser /* v 1.1.0.0
             return expression
         endmethod
        
-        private static method init takes nothing returns nothing
+        implement Init
+    endstruct
+    
+    private module Init
+        private static method onInit takes nothing returns nothing
             call SaveInteger(Maths_h, StringHash("+"), 0, 1)
             call SaveInteger(Maths_h, StringHash("-"), 0, 1)
             call SaveInteger(Maths_h, StringHash("*"), 0, 2)
@@ -597,7 +597,5 @@ library MathParser /* v 1.1.0.0
             call SaveInteger(Maths_h, StringHash(thistype.UNARY_p + " "), 2, PLUS)
             call SaveInteger(Maths_h, StringHash(thistype.UNARY_m + " "), 2, MINUS)
         endmethod
-       
-        implement Init
-    endstruct
+    endmodule
 endlibrary

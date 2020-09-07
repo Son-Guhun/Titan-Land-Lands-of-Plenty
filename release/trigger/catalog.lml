@@ -80,7 +80,9 @@
     '18-Prevent Saving': 'Prevent Saving'
         Comment
     '19-System PreventSave Catch': 'System PreventSave Catch'
+        Disab
     '20-System PreventSave Clear': 'System PreventSave Clear'
+        Disab
     21-Upgrade: Upgrade
         Comment
     '22-System Instant Upgrade': 'System Instant Upgrade'
