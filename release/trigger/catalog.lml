@@ -275,6 +275,8 @@
     35-Packets: Packets
         Disab
     36-AnyBase: AnyBase
+    37-WorldBoundsUtils: WorldBoundsUtils
+        Disab
 21-Map-specific: Map-specific
     1-Debug: Debug
     2-ArrayAgent: ArrayAgent
@@ -368,6 +370,7 @@
     1-TerrainTools: TerrainTools
     2-Deformations: Deformations
     3-DeformationTools: DeformationTools
+    4-DeformationToolsHooks: DeformationToolsHooks
 34-ControlState: ControlState
     1-SelectionStates: SelectionStates
     2-PlayerEventTools: PlayerEventTools
