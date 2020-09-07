@@ -187,7 +187,7 @@ function onStart takes nothing returns nothing
     call DestroyTimer(GetExpiredTimer())
 endfunction
 
-
+// Doesn't need to be a module since it doesn't initialize anything that other libraries have access to.
 private function onInit takes nothing returns nothing
     call TimerStart(CreateTimer(), 0., false, function onStart)
 endfunction

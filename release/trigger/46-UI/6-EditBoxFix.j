@@ -1,8 +1,19 @@
 library EditBoxFix requires Table, OSKeyLib, PlayerUtils
+/* 
+Version: 1.0.0
 
-/* know whether currently in or out of an edit box. When entering, save that as the current editbox.
-in a mouse event, if outside any boxes current edit box is not null, remove focus from that editbox.
-if inside box, resetKeys then set focus on that box.*/
+Why it's needed:
+When typing in an editbox, no mouse events are fired, which means we should call OSKeys.resetKeys()
+method in order to avoid issues with tracking which key is currently being held down. Additionally,
+when giving an editbox focus using BlzFrameSetFocus, the player may be unable to unfocus the frame
+unless they press Esc. So this library also handles this by removing focus from an editbox when the
+player clicks anywhere outisde of it in the UI.
+
+How it works:
+Track whether mouse is currently in or out of an edit box. When entering an editbox, save it as the 
+current one. In a mouse click event, if the mouse is outside of any boxes and current edit box is not
+null, remove focus from that editbox. If inside a box, resetKeys then set focus on that box.
+*/
 
 globals
     private constant key inside  // Table, stores trigger in key -1, booleans in keys from 0 to max player id

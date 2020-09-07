@@ -19,7 +19,7 @@ struct LinkedHashSet extends array
     method size() // returns the number of elements in the set.
     
     method contains(integer value) // returns 'true' if 'value' is in the set, false otherwise.
-    method isEmpty(integer value) // returns 'true' if the set has no elements, false otherwise.
+    method isEmpty() // returns 'true' if the set has no elements, false otherwise.
     
     
     

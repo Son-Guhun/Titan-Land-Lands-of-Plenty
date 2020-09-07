@@ -6,7 +6,7 @@ struct Screen extends array
     implement GMUINewRecycleKey
     implement GMUIAllocatorMethods
 
-    private boolean isVisible
+    private boolean isVisible  // async
     framehandle main
     framehandle simpleContainer
     private Table frames
