@@ -79,6 +79,12 @@ endglobals
     
     set terrainEditorScreen["brushSizeSliderButton"] = BlzGetFrameByName("EscMenuThumbButtonTemplate",0)
     
+    set mainButton = BlzCreateFrameByType("FRAME", "TerrainEditorButtonContainer", terrainEditorScreen.main, "", 0)
+    set terrainEditorScreen["textureButtonsContainer"] = mainButton
+    
+    set mainButton = BlzCreateFrameByType("SIMPLEFRAME", "TerrainEditorButtonSimpleContainer", terrainEditorScreen.simpleContainer, "", 0)
+    set terrainEditorScreen["textureButtonsSimpleContainer"] = mainButton
+    
     set mainButton = BlzCreateFrameByType("TEXT", "HotkeyIndicator", terrainEditorScreen.main, "StandardExtraSmallTextTemplate", 0)
     call BlzFrameSetPoint(mainButton, FRAMEPOINT_TOP, terrainEditorScreen["brushSizeSlider"], FRAMEPOINT_BOTTOMLEFT, 0.0031 + 0.1*BlzFrameGetWidth(terrainEditorScreen["brushSizeSlider"])/4, 0)
     call BlzFrameSetText(mainButton, "1")
@@ -118,8 +124,8 @@ struct TerrainEditorButton extends array
     endmethod
     
     private static method create takes integer this returns thistype
-        set .button = BlzCreateFrame("TerrainEditorButton", terrainEditorScreen.main, 0, this)
-        set .background =  BlzCreateSimpleFrame("TerrainEditorSimpleBackground", terrainEditorScreen.simpleContainer, this)
+        set .button = BlzCreateFrame("TerrainEditorButton", terrainEditorScreen["textureButtonsContainer"], 0, this)
+        set .background =  BlzCreateSimpleFrame("TerrainEditorSimpleBackground", terrainEditorScreen["textureButtonsSimpleContainer"], this)
         set .eighthTexture = BlzGetFrameByName("TerrainEditorEighthBackground", this)
         set .quarterTexture = BlzGetFrameByName("TerrainEditorEighthBackground", this)
         set .halfTexture = BlzGetFrameByName("TerrainEditorEighthBackground", this)
@@ -142,7 +148,7 @@ struct TerrainEditorButton extends array
         call BlzFrameSetAbsPoint(thistype(0).button, FRAMEPOINT_LEFT, 0.2, 0.075)
         
         loop
-            set text = BlzCreateFrameByType("TEXT", "HotkeyIndicator", terrainEditorScreen.main, "StandardExtraSmallTextTemplate", 0)
+            set text = BlzCreateFrameByType("TEXT", "HotkeyIndicator", terrainEditorScreen["textureButtonsContainer"], "StandardExtraSmallTextTemplate", 0)
             call BlzFrameSetPoint(text, FRAMEPOINT_BOTTOM, thistype(i-1).button, FRAMEPOINT_TOP, 0, 0)
             call BlzFrameSetText(text, I2S(i))
         
@@ -164,11 +170,11 @@ struct TerrainEditorButton extends array
             set i = i + 1
         endloop
         
-        set text = BlzCreateFrameByType("TEXT", "HotkeyIndicator", terrainEditorScreen.main, "StandardExtraSmallTextTemplate", 0)
+        set text = BlzCreateFrameByType("TEXT", "HotkeyIndicator", terrainEditorScreen["textureButtonsContainer"], "StandardExtraSmallTextTemplate", 0)
         call BlzFrameSetPoint(text, FRAMEPOINT_RIGHT, thistype(0).button, FRAMEPOINT_LEFT, 0, 0)
         call BlzFrameSetText(text, "Shift+")
            
-        set text = BlzCreateFrameByType("TEXT", "HotkeyIndicator", terrainEditorScreen.main, "StandardExtraSmallTextTemplate", 0)
+        set text = BlzCreateFrameByType("TEXT", "HotkeyIndicator", terrainEditorScreen["textureButtonsContainer"], "StandardExtraSmallTextTemplate", 0)
         call BlzFrameSetPoint(text, FRAMEPOINT_RIGHT, thistype(8).button, FRAMEPOINT_LEFT, 0, 0)
         call BlzFrameSetText(text, "Alt+")
         

@@ -39,9 +39,13 @@ function ButtonCallback takes player trigP, framehandle trigButton returns nothi
         if TerrainEditor_IsPainting(trigP) then
             call LocalFrameSetText(trigP, trigButton, "Texturing: Off")
             call TerrainEditor_EnablePainting(trigP, false)
+            call BlzFrameSetVisible(terrainEditorScreen["textureButtonsContainer"], false)
+            call BlzFrameSetVisible(terrainEditorScreen["textureButtonsSimpleContainer"], false)
         else
             call LocalFrameSetText(trigP, trigButton, "Texturing: On")
             call TerrainEditor_EnablePainting(trigP, true)
+            call BlzFrameSetVisible(terrainEditorScreen["textureButtonsContainer"], true)
+            call BlzFrameSetVisible(terrainEditorScreen["textureButtonsSimpleContainer"], true)
         endif
     else
         set TerrainEditor_currentTexture[pId] = TerrainTools_GetTexture(TerrainEditorButton.fromHandle(trigButton))
