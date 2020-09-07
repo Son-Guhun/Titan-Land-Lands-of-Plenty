@@ -20,50 +20,51 @@ private function onMousePress takes nothing returns boolean
     local real centerY = 0.
     local boolean hasStructure = false
     
-    call BJDebugMsg(I2S(Config.METAKEY))
-    call BJDebugMsg(I2S(OSKeys.getPressedMetaKeys(trigP)))
-    
-    if not IsPlayerMouseOnButton(trigP) and PlayerMouseEvent_GetTriggerPlayerMouseButton() == MOUSE_BUTTON_TYPE_LEFT and Config.METAKEY == OSKeys.getPressedMetaKeys(trigP) then
-        set g = CreateGroup()
-        set g2 = CreateGroup()
-        call GroupEnumUnitsSelected(g, trigP, null)
-        call BlzGroupAddGroupFast(g, g2)
-        
-        loop
-            //! runtextmacro ForUnitInGroup("u", "g")
-            if GetOwningPlayer(u) != trigP then
-                call GroupRemoveUnit(g2, u)
-            else
-                set centerX = centerX + GetUnitX(u)
-                set centerY = centerY + GetUnitY(u)
-                if IsUnitType(u, UNIT_TYPE_STRUCTURE) then
-                    set hasStructure = true
-                endif
-            endif
-        endloop
-        
-        if BlzGroupGetSize(g2) > 0 then
-            set centerX = centerX/BlzGroupGetSize(g2)
-            set centerY = centerY/BlzGroupGetSize(g2)
+    if PlayerMouseEvent_GetTriggerPlayerMouseX() == 0. and PlayerMouseEvent_GetTriggerPlayerMouseY() == 0. then
+        // do nothing
+    else
+        if not IsPlayerMouseOnButton(trigP) and PlayerMouseEvent_GetTriggerPlayerMouseButton() == MOUSE_BUTTON_TYPE_LEFT and Config.METAKEY == OSKeys.getPressedMetaKeys(trigP) then
+            set g = CreateGroup()
+            set g2 = CreateGroup()
+            call GroupEnumUnitsSelected(g, trigP, null)
+            call BlzGroupAddGroupFast(g, g2)
             
-            set centerX = PlayerMouseEvent_GetTriggerPlayerMouseX() - centerX
-            set centerY = PlayerMouseEvent_GetTriggerPlayerMouseY() - centerY
-            
-            if hasStructure then
-                set centerX = 64*(R2I(centerX)/64)
-                set centerY = 64*(R2I(centerY)/64)
-            endif
             loop
-                //! runtextmacro ForUnitInGroup("u", "g2")
-                call SetUnitPosition(u, GetUnitX(u) + centerX, GetUnitY(u) + centerY)
+                //! runtextmacro ForUnitInGroup("u", "g")
+                if GetOwningPlayer(u) != trigP then
+                    call GroupRemoveUnit(g2, u)
+                else
+                    set centerX = centerX + GetUnitX(u)
+                    set centerY = centerY + GetUnitY(u)
+                    if IsUnitType(u, UNIT_TYPE_STRUCTURE) then
+                        set hasStructure = true
+                    endif
+                endif
             endloop
+            
+            if BlzGroupGetSize(g2) > 0 then
+                set centerX = centerX/BlzGroupGetSize(g2)
+                set centerY = centerY/BlzGroupGetSize(g2)
+                
+                set centerX = PlayerMouseEvent_GetTriggerPlayerMouseX() - centerX
+                set centerY = PlayerMouseEvent_GetTriggerPlayerMouseY() - centerY
+                
+                if hasStructure then
+                    set centerX = 64*(R2I(centerX)/64)
+                    set centerY = 64*(R2I(centerY)/64)
+                endif
+                loop
+                    //! runtextmacro ForUnitInGroup("u", "g2")
+                    call SetUnitPosition(u, GetUnitX(u) + centerX, GetUnitY(u) + centerY)
+                endloop
+            endif
+            
+            call DestroyGroup(g)
+            call DestroyGroup(g2)
+            set u = null
+            set g = null
+            set g2 = null
         endif
-        
-        call DestroyGroup(g)
-        call DestroyGroup(g2)
-        set u = null
-        set g = null
-        set g2 = null
     endif
     
     return false
