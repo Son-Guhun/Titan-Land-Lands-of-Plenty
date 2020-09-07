@@ -121,6 +121,7 @@ private function onTimer takes nothing returns nothing
         if playerId.saveData != 0 then
             call SaveTiles(playerId)
             if playerId.curY > playerId.maxY then
+                call playerId.saveData.write(SaveNLoad_FormatString("SnL_ter", "end"))
                 call playerId.saveData.destroy()
                 set playerId.saveData = 0
                 call DisplayTextToPlayer( Player(playerId),0,0, "Finished Saving" )

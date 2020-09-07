@@ -1,4 +1,4 @@
-library SaveNLoadTerrain requires SaveNLoad, TerrainTools
+library SaveNLoadTerrain requires SaveNLoad, TerrainTools, Deformations, DeformationToolsHooks
 
 function LoadD2H takes integer int returns string
     return SubString(AnyBase.digits,int,int+1)
@@ -22,9 +22,8 @@ endfunction
 
 // Loads the first line of a terrain save, which contains the coords of the rect
 // offsetIsCenter indicates that offsetX and offsetY should be interpreted as the coords of a new center for the rect, and not actual offsets. Used for version 3 saves.
-function LoadTerrainHeader takes string chatStr, real offsetX, real offsetY, boolean offsetIsCenter returns nothing
+function LoadTerrainHeader takes SaveNLoad_PlayerData playerId, string chatStr, real offsetX, real offsetY, boolean offsetIsCenter returns nothing
     local integer cutToComma
-    local SaveNLoad_PlayerData playerId = GetPlayerId(GetTriggerPlayer())
     
     local real centerY
     local real centerX
@@ -67,8 +66,11 @@ function LoadTerrainHeader takes string chatStr, real offsetX, real offsetY, boo
     set playerId.terrain.curY = playerId.terrain.minY
 endfunction
 
-function LoadTerrain takes string chatStr returns nothing
-    local SaveNLoad_PlayerData playerId = GetPlayerId(GetTriggerPlayer())
+function LoadTerrainFinish takes SaveNLoad_PlayerData playerId returns nothing    
+    call DeformationToolsHooks_TagBlocks(playerId.terrain.minX, playerId.terrain.minY, playerId.terrain.maxX, playerId.terrain.maxY)
+endfunction
+
+function LoadTerrain takes SaveNLoad_PlayerData playerId, string chatStr returns nothing
     local integer strSize
     local integer i
     
