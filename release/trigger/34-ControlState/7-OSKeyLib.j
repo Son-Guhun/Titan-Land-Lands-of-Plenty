@@ -256,8 +256,11 @@ private function RegisterKeyEvent takes trigger whichTrigger, player whichPlayer
 endfunction
 
 private keyword Constants
+private keyword Init
 
 struct OSKeys extends array
+    implement Constants
+
     readonly boolean isRegistered
     private static trigger eventResponder = null
     private static trigger executer = CreateTrigger()
@@ -463,7 +466,7 @@ struct OSKeys extends array
         set trig = null
     endmethod
     
-    implement Constants
+    implement Init
 endstruct
 
 //! textmacro OSKeyLib_Const takes NAME, value
@@ -471,11 +474,13 @@ endstruct
         return $value$
     endmethod
 //! endtextmacro
-private module Constants
+private module Init
     private static method onInit takes nothing returns nothing
         call TimerStart(CreateTimer(), 0., false, function thistype.onStart)
     endmethod
+endmodule
 
+private module Constants
     //! runtextmacro OSKeyLib_Const("BACKSPACE                     ","$08")
     //! runtextmacro OSKeyLib_Const("TAB                           ","$09")
     //! runtextmacro OSKeyLib_Const("CLEAR                         ","$0C")
