@@ -1,11 +1,18 @@
-library DeformationTools requires Deformations
+library DeformationTools requires Deformations, optional DeformationToolsHooks
 /*
 Defines tools to create deformations in along a large area.
+
+The optional library DeformationToolsHooks is generally used to fix unit/structure heights after applying
+deformations.
 
 API:
 public function Hill takes real x0, real y0, real intensity, integer radius returns nothing
 
+// Sets all terrain cells to the same height.
 public function Plateau takes real x0, real y0, real depth, integer radius, boolean circle returns nothing
+
+// Uses a Gaussian Blur to smooth terrain.
+public function Smooth takes real x0, real y0, integer radius, boolean circle
 */
 
 // This function should inline
@@ -18,33 +25,6 @@ private function Distance takes real x, real x0, real y, real y0 returns real
     return SquareRoot(DistanceSquared(x,x0,y,y0))
 endfunction
 
-/*
-function UpdateEffects takes LinkedHashSet_DecorationEffect decorations, group units returns nothing
-    local SpecialEffect deco = decorations.begin()
-    local integer i = 0
-    local unit u
-
-    loop
-    exitwhen deco == decorations.end()
-        set deco.height = deco.height
-        call BJDebugMsg(I2S(deco))
-        set deco = decorations.next(deco)
-    endloop
-    call decorations.destroy()
-    
-    loop
-        set u = BlzGroupUnitAt(units, i)
-        exitwhen u == null
-        set deco = GetUnitAttachedEffect(u)
-        if deco != 0 then
-            set deco.height = deco.height
-        endif
-        set i = i + 1
-    endloop
-    call DestroyGroup(units)
-endfunction
-*/
-
 public function Hill takes real x0, real y0, real intensity, integer radius returns nothing
     local integer i = -radius
     local integer j
@@ -53,10 +33,8 @@ public function Hill takes real x0, real y0, real intensity, integer radius retu
     local real y
     
     local Deformation d
-    local real step = intensity
     
     local real maxdistance = radius*128. + 64.
-    local group units = CreateGroup()
     
     
     
@@ -67,7 +45,7 @@ public function Hill takes real x0, real y0, real intensity, integer radius retu
         loop
         exitwhen j > radius
             set d = Deformation.fromCoords(x, y)
-            set d.depth = d.depth + step*SquareRoot(RMaxBJ(maxdistance*maxdistance - DistanceSquared(x,x0,y,y0), 0.))
+            set d.depth = d.depth + intensity*SquareRoot(RMaxBJ(maxdistance*maxdistance - DistanceSquared(x,x0,y,y0), 0.))
             set j = j + 1
             set y = y + 128.
         endloop
@@ -75,8 +53,7 @@ public function Hill takes real x0, real y0, real intensity, integer radius retu
         set x = x + 128.
     endloop
     
-    //call GroupEnumUnitsInRange(units, x0, y0, maxdistance, null)
-    //call UpdateEffects(EnumDecorationsInRange(x0, y0, maxdistance), units)
+    //! runtextmacro optional DeformationToolsHook("x0", "y0", "radius")
 endfunction
 
 public function Plateau takes real x0, real y0, real depth, integer radius, boolean circle returns nothing
@@ -87,8 +64,6 @@ public function Plateau takes real x0, real y0, real depth, integer radius, bool
     local real y
 
     local real maxdistance = radius*128. + 64.
-    local group units = CreateGroup()
-    local rect r = Rect(x0, y0, x0+radius, y0+radius)
     
     loop
     exitwhen i > radius
@@ -108,9 +83,7 @@ public function Plateau takes real x0, real y0, real depth, integer radius, bool
         set x = x + 128.
     endloop
     
-    // call GroupEnumUnitsInRect(units, r, null)
-    call RemoveRect(r)
-    // call UpdateEffects(EnumDecorationsInRect(x0, y0, x0+radius, y0+radius), units)
+    //! runtextmacro optional DeformationToolsHook("x0", "y0", "radius")
 endfunction
 
 globals
@@ -169,8 +142,6 @@ public function Smooth takes real x0, real y0, integer radius, boolean circle re
     local real y
 
     local real maxdistance = radius*128. + 64.
-    local group units = CreateGroup()
-    local rect r = Rect(x0, y0, x0+radius, y0+radius)
     
     if table == 0 then
         set table = HashTable.create()
@@ -243,9 +214,7 @@ public function Smooth takes real x0, real y0, integer radius, boolean circle re
         set x = x + 128.
     endloop
     
-    // call GroupEnumUnitsInRect(units, r, null)
-    call RemoveRect(r)
-    // call UpdateEffects(EnumDecorationsInRect(x0, y0, x0+radius, y0+radius), units)
+    //! runtextmacro optional DeformationToolsHook("x0", "y0", "radius")
 endfunction
 
 
