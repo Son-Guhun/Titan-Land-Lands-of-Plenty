@@ -37,7 +37,7 @@ private function MakeLocustUnitsSelectable takes nothing returns nothing
     set newUnit = null
 endfunction
 
-private function onCast takes nothing returns nothing
+private function onEffect takes nothing returns nothing
     local unit u
     local LinkedHashSet_DecorationEffect decorations
     local DecorationEffect deco
@@ -72,8 +72,8 @@ endfunction
 
 //===========================================================================
 function InitTrig_Make_Unit_Selectable takes nothing returns nothing
-    set gg_trg_Make_Unit_Selectable = CreateTrigger(  )
-    call TriggerAddAction( gg_trg_Make_Unit_Selectable, function onCast )
+    call RegisterSpellSimple('A03N', function onEffect, null)
+    call RegisterSpellSimple('A01S', function onEffect, null)
 endfunction
 
 endscope

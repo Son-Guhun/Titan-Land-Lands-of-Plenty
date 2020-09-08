@@ -17,8 +17,8 @@ endfunction
 
 //===========================================================================
 function InitTrig_Staff_of_Mimic takes nothing returns nothing
-    set gg_trg_Staff_of_Mimic = CreateTrigger(  )
-    call TriggerAddAction( gg_trg_Staff_of_Mimic, function onStartEffect )
+    local integer i = 0
+    call RegisterSpellSimple('A01N', function onStartEffect, null)
 endfunction
 
 

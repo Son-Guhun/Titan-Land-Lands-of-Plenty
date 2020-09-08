@@ -8,7 +8,7 @@ private constant function TOTAL_POINTS takes nothing returns integer
     return 8
 endfunction
 
-private function OnCast takes nothing returns nothing
+private function onEffect takes nothing returns nothing
     local real x = GetUnitX(udg_Spell__Caster)
     local real y = GetUnitY(udg_Spell__Caster)
     local real startAngle = Atan2(GetLocationY(udg_Spell__TargetPoint)-y, GetLocationX(udg_Spell__TargetPoint)-x )
@@ -37,9 +37,7 @@ endfunction
 
 //===========================================================================
 function InitTrig_Breath_of_Frost takes nothing returns nothing
-    set gg_trg_Breath_of_Frost = CreateTrigger(  )
-    call TriggerAddAction( gg_trg_Breath_of_Frost, function OnCast )
-    
+    call RegisterSpellSimple('A05W', function onEffect, null)
     call InitializeOnDamageTrigger(CreateTrigger(), 'A05W', function OnDamage)
 endfunction
 endscope

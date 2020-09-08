@@ -1,4 +1,6 @@
-function Trig_Defend_Turn_Off_Actions takes nothing returns nothing
+scope SpellDefendOff
+
+private function onEffect takes nothing returns nothing
     local unit trigU = GetTriggerUnit()
     
     call UnitRemoveAbility(trigU, DEFEND_DUMMY)  // Disabling Elune's Grace does not negate the damage reduction, only reflect
@@ -12,7 +14,7 @@ endfunction
 
 //===========================================================================
 function InitTrig_Defend_Turn_Off takes nothing returns nothing
-    set gg_trg_Defend_Turn_Off = CreateTrigger(  )
-    call TriggerAddAction( gg_trg_Defend_Turn_Off, function Trig_Defend_Turn_Off_Actions )
+    call RegisterSpellSimple(DEFENDOFF, function onEffect, null)
 endfunction
 
+endscope

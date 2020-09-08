@@ -4,7 +4,6 @@ endfunction
 
 //===========================================================================
 function InitTrig_Ditch_Rider takes nothing returns nothing
-    set gg_trg_Ditch_Rider = CreateTrigger(  )
-    call TriggerAddAction( gg_trg_Ditch_Rider, function Trig_Ditch_Rider_Actions )
+    call RegisterSpellSimple('A060', function Trig_Ditch_Rider_Actions, null)
 endfunction
 

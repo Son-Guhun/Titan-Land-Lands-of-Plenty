@@ -1,4 +1,6 @@
-function CarrionBurstCastAction takes nothing returns nothing
+scope SpellCarrionBurst
+
+private function onEffect takes nothing returns nothing
     local integer circleId = CreateGCOS(0, GetLocationX(udg_Spell__TargetPoint), GetLocationY(udg_Spell__TargetPoint), 200, 200, 4, Atan2(GetLocationY(udg_Spell__TargetPoint)-GetUnitY(udg_Spell__Caster),GetLocationX(udg_Spell__TargetPoint)-GetUnitX(udg_Spell__Caster)), bj_PI/4)
     local unit dummy = DummyDmg_CreateDummyAt(udg_Spell__Caster, 0, GetLocationX(udg_Spell__TargetPoint), GetLocationY(udg_Spell__TargetPoint), 2.)
     local integer i = 0
@@ -16,8 +18,7 @@ function CarrionBurstCastAction takes nothing returns nothing
 endfunction
 //===========================================================================
 function InitTrig_Carrion_Burst takes nothing returns nothing
-
-    set gg_trg_Carrion_Burst = CreateTrigger(  )
-    call TriggerAddAction( gg_trg_Carrion_Burst, function CarrionBurstCastAction )
-
+    call RegisterSpellSimple('A029', function onEffect, null)
 endfunction
+
+endscope

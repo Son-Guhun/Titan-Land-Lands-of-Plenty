@@ -87,8 +87,7 @@ endfunction
 
 //===========================================================================
 function InitTrig_Comet takes nothing returns nothing
-    set gg_trg_Comet = CreateTrigger(  )
-    call TriggerAddCondition( gg_trg_Comet, Condition( function Conditions ) )
+    call RegisterSpellSimpleOnFinish('A01F', null, Condition(function Conditions))
 endfunction
 
 endscope

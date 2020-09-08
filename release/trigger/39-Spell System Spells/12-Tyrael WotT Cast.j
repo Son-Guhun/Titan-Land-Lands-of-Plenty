@@ -100,7 +100,7 @@ endfunction
 
 //===========================================================================
 // Spell Cast Event Response
-private function onCast takes nothing returns nothing
+private function onEffect takes nothing returns nothing
     local integer circleId = CreateGCOS(0, GetLocationX(udg_Spell__TargetPoint), GetLocationY(udg_Spell__TargetPoint), 200, 200, 16, 0, bj_PI/4)
     local timer t = CreateTimer()
     local TimerData tKey = TimerData.get(t)
@@ -142,12 +142,8 @@ endfunction
 
 //===========================================================================
 function InitTrig_Tyrael_WotT_Cast takes nothing returns nothing
-    set gg_trg_Tyrael_WotT_Cast = CreateTrigger()
-    call TriggerAddAction(gg_trg_Tyrael_WotT_Cast, function onCast)
-    
-    //Tyrael - Will of the Tribunal: Slow damaged Units 
+    call RegisterSpellSimple('A04B', function onEffect, null)
     call InitializeOnDamageTrigger(CreateTrigger(), 'A04B', function onDamage)
-    //-------------------------------------------------
 endfunction
 
 endscope

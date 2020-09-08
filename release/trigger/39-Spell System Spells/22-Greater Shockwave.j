@@ -1,4 +1,6 @@
-function Trig_Greater_Shockwave_Actions takes nothing returns nothing
+scope SpellGreaterShockwave
+
+private function onEffect takes nothing returns nothing
     local integer udg_temp_integer
     local integer circId
     local real startAngle = Atan2(GetLocationY(udg_Spell__TargetPoint)-GetUnitY(udg_Spell__Caster),GetLocationX(udg_Spell__TargetPoint)-GetUnitX(udg_Spell__Caster) )
@@ -22,7 +24,7 @@ endfunction
 
 //===========================================================================
 function InitTrig_Greater_Shockwave takes nothing returns nothing
-    set gg_trg_Greater_Shockwave = CreateTrigger(  )
-    call TriggerAddAction( gg_trg_Greater_Shockwave, function Trig_Greater_Shockwave_Actions )
+    call RegisterSpellSimple('A02R', function onEffect, null)
 endfunction
 
+endscope

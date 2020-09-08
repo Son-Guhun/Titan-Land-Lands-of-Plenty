@@ -61,26 +61,6 @@ Action
     CommentString
         Const : ---------------------------
     CommentString
-        Const : 'ASTROLOGER TELEPORT (SPATIAL DSTORTION)'
-    CommentString
-        Const : ---------------------------
-    SetVariable
-        Var   : Spell__Ability
-        Const : A02U
-    CommentString
-        Const : ' '
-    SetVariable
-        Var   : Spell__Trigger_OnEffect
-        Var   : gg_trg_Spatial_Distortion_Cast
-    CommentString
-        Const : ' '
-    TriggerExecute
-        Var   : gg_trg_Spell_System
-    CommentString
-        Const : ' '
-    CommentString
-        Const : ---------------------------
-    CommentString
         Const : 'MASS BANISH'
     CommentString
         Const : ---------------------------
@@ -138,42 +118,6 @@ Action
     CommentString
         Const : ---------------------------
     CommentString
-        Const : 'MAKE UNITS SELECTABLE'
-    CommentString
-        Const : ---------------------------
-    SetVariable
-        Var   : Spell__Ability
-        Const : A03N
-    CommentString
-        Const : ' '
-    SetVariable
-        Var   : Spell__Trigger_OnEffect
-        Var   : gg_trg_Make_Unit_Selectable
-    CommentString
-        Const : ' '
-    TriggerExecute
-        Var   : gg_trg_Spell_System
-    CommentString
-        Const : ' '
-    CommentString
-        Const : ---------------------------
-    SetVariable
-        Var   : Spell__Ability
-        Const : A01S
-    CommentString
-        Const : ' '
-    SetVariable
-        Var   : Spell__Trigger_OnEffect
-        Var   : gg_trg_Make_Unit_Selectable
-    CommentString
-        Const : ' '
-    TriggerExecute
-        Var   : gg_trg_Spell_System
-    CommentString
-        Const : ' '
-    CommentString
-        Const : ---------------------------
-    CommentString
         Const : 'JUDGEMENT (ANGEL STUN)'
     CommentString
         Const : ---------------------------
@@ -214,26 +158,6 @@ Action
     CommentString
         Const : ---------------------------
     CommentString
-        Const : HOJ
-    CommentString
-        Const : ---------------------------
-    SetVariable
-        Var   : Spell__Ability
-        Const : A04B
-    CommentString
-        Const : ' '
-    SetVariable
-        Var   : Spell__Trigger_OnEffect
-        Var   : gg_trg_Tyrael_WotT_Cast
-    CommentString
-        Const : ' '
-    TriggerExecute
-        Var   : gg_trg_Spell_System
-    CommentString
-        Const : ' '
-    CommentString
-        Const : ---------------------------
-    CommentString
         Const : 'CHAIN SLOW'
     CommentString
         Const : ---------------------------
@@ -245,63 +169,6 @@ Action
     SetVariable
         Var   : Spell__Trigger_OnEffect
         Var   : gg_trg_Chain_Slow
-    CommentString
-        Const : ' '
-    TriggerExecute
-        Var   : gg_trg_Spell_System
-    CommentString
-        Const : ' '
-    CommentString
-        Const : ---------------------------
-    CommentString
-        Const : STORMSTRIKE
-    CommentString
-        Const : ---------------------------
-    SetVariable
-        Var   : Spell__Ability
-        Const : A04P
-    CommentString
-        Const : ' '
-    SetVariable
-        Var   : Spell__Trigger_OnEffect
-        Var   : gg_trg_Stormstrike
-    CommentString
-        Const : ' '
-    SetVariable
-        Var   : Spell__Filter_AllowEnemy
-        Const : true
-    SetVariable
-        Var   : Spell__Filter_AllowLiving
-        Const : true
-    SetVariable
-        Var   : Spell__Filter_AllowHero
-        Const : true
-    SetVariable
-        Var   : Spell__Filter_AllowNonHero
-        Const : true
-    SetVariable
-        Var   : Spell__Filter_AllowFlying
-        Const : false
-    SetVariable
-        Var   : Spell__Filter_AllowMechanical
-        Const : true
-    SetVariable
-        Var   : Spell__Filter_AllowMagicImmune
-        Const : false
-    SetVariable
-        Var   : Spell__Filter_AllowStructure
-        Const : false
-    SetVariable
-        Var   : Spell__Filter_AllowAlly
-        Const : false
-    SetVariable
-        Var   : Spell__Filter_AllowDead
-        Const : false
-    CommentString
-        Const : ' '
-    SetVariable
-        Var   : Spell__Trigger_InRangeFilter
-        Var   : gg_trg_Spell_System_Filter_Decorations
     CommentString
         Const : ' '
     TriggerExecute
@@ -536,26 +403,6 @@ Action
     CommentString
         Const : ---------------------------
     CommentString
-        Const : 'CARRION BURST'
-    CommentString
-        Const : ---------------------------
-    SetVariable
-        Var   : Spell__Ability
-        Const : A029
-    CommentString
-        Const : ' '
-    SetVariable
-        Var   : Spell__Trigger_OnEffect
-        Var   : gg_trg_Carrion_Burst
-    CommentString
-        Const : ' '
-    TriggerExecute
-        Var   : gg_trg_Spell_System
-    CommentString
-        Const : ' '
-    CommentString
-        Const : ---------------------------
-    CommentString
         Const : 'BURST OF DESPAIR'
     CommentString
         Const : ---------------------------
@@ -604,26 +451,6 @@ Action
     SetVariable
         Var   : Spell__Trigger_InRangeFilter
         Var   : gg_trg_Spell_System_Filter_Decorations
-    CommentString
-        Const : ' '
-    TriggerExecute
-        Var   : gg_trg_Spell_System
-    CommentString
-        Const : ' '
-    CommentString
-        Const : ---------------------------
-    CommentString
-        Const : 'GREATER SHOCKWAVE'
-    CommentString
-        Const : ---------------------------
-    SetVariable
-        Var   : Spell__Ability
-        Const : A02R
-    CommentString
-        Const : ' '
-    SetVariable
-        Var   : Spell__Trigger_OnEffect
-        Var   : gg_trg_Greater_Shockwave
     CommentString
         Const : ' '
     TriggerExecute
@@ -964,86 +791,6 @@ Action
     CommentString
         Const : ---------------------------
     CommentString
-        Const : 'Defend Turn On'
-    CommentString
-        Const : ---------------------------
-    SetVariable
-        Var   : Spell__Ability
-        Const : A02S
-    CommentString
-        Const : ' '
-    SetVariable
-        Var   : Spell__Trigger_OnEffect
-        Var   : gg_trg_Defend_Turn_On
-    CommentString
-        Const : ' '
-    TriggerExecute
-        Var   : gg_trg_Spell_System
-    CommentString
-        Const : ' '
-    CommentString
-        Const : ---------------------------
-    CommentString
-        Const : 'Defend Turn Off'
-    CommentString
-        Const : ---------------------------
-    SetVariable
-        Var   : Spell__Ability
-        Const : A02X
-    CommentString
-        Const : ' '
-    SetVariable
-        Var   : Spell__Trigger_OnEffect
-        Var   : gg_trg_Defend_Turn_Off
-    CommentString
-        Const : ' '
-    TriggerExecute
-        Var   : gg_trg_Spell_System
-    CommentString
-        Const : ' '
-    CommentString
-        Const : ---------------------------
-    CommentString
-        Const : Comet
-    CommentString
-        Const : ---------------------------
-    SetVariable
-        Var   : Spell__Ability
-        Const : A01F
-    CommentString
-        Const : ' '
-    SetVariable
-        Var   : Spell__Trigger_OnFinish
-        Var   : gg_trg_Comet
-    CommentString
-        Const : ' '
-    TriggerExecute
-        Var   : gg_trg_Spell_System
-    CommentString
-        Const : ' '
-    CommentString
-        Const : ---------------------------
-    CommentString
-        Const : 'Staff of Mimic'
-    CommentString
-        Const : ---------------------------
-    SetVariable
-        Var   : Spell__Ability
-        Const : A01N
-    CommentString
-        Const : ' '
-    SetVariable
-        Var   : Spell__Trigger_OnFinish
-        Var   : gg_trg_Staff_of_Mimic
-    CommentString
-        Const : ' '
-    TriggerExecute
-        Var   : gg_trg_Spell_System
-    CommentString
-        Const : ' '
-    CommentString
-        Const : ---------------------------
-    CommentString
         Const : 'BURST OF DESPAIR'
     CommentString
         Const : ---------------------------
@@ -1169,146 +916,6 @@ Action
     SetVariable
         Var   : Spell__Trigger_OnEffect
         Var   : gg_trg_Power_Surge
-    CommentString
-        Const : ' '
-    TriggerExecute
-        Var   : gg_trg_Spell_System
-    CommentString
-        Const : ' '
-    CommentString
-        Const : ---------------------------
-    CommentString
-        Const : 'Cosmosis Obliterate'
-    CommentString
-        Const : ---------------------------
-    SetVariable
-        Var   : Spell__Ability
-        Const : A055
-    CommentString
-        Const : ' '
-    SetVariable
-        Var   : Spell__Trigger_OnEffect
-        Var   : gg_trg_Cosmosis_Obliterate
-    CommentString
-        Const : ' '
-    TriggerExecute
-        Var   : gg_trg_Spell_System
-    CommentString
-        Const : ' '
-    CommentString
-        Const : ---------------------------
-    CommentString
-        Const : 'Wander On'
-    CommentString
-        Const : ---------------------------
-    SetVariable
-        Var   : Spell__Ability
-        Const : A056
-    CommentString
-        Const : ' '
-    SetVariable
-        Var   : Spell__Trigger_OnEffect
-        Var   : gg_trg_Critter_Wander
-    CommentString
-        Const : ' '
-    TriggerExecute
-        Var   : gg_trg_Spell_System
-    CommentString
-        Const : ' '
-    CommentString
-        Const : ---------------------------
-    CommentString
-        Const : 'Wander Off'
-    CommentString
-        Const : ---------------------------
-    SetVariable
-        Var   : Spell__Ability
-        Const : A05L
-    CommentString
-        Const : ' '
-    SetVariable
-        Var   : Spell__Trigger_OnEffect
-        Var   : gg_trg_Critter_Wander
-    CommentString
-        Const : ' '
-    TriggerExecute
-        Var   : gg_trg_Spell_System
-    CommentString
-        Const : ' '
-    CommentString
-        Const : ---------------------------
-    CommentString
-        Const : 'Mirror Image'
-    CommentString
-        Const : ---------------------------
-    SetVariable
-        Var   : Spell__Ability
-        Const : AOmi
-    CommentString
-        Const : ' '
-    SetVariable
-        Var   : Spell__Trigger_OnCast
-        Var   : gg_trg_Mirror_Image
-    CommentString
-        Const : ' '
-    TriggerExecute
-        Var   : gg_trg_Spell_System
-    CommentString
-        Const : ' '
-    CommentString
-        Const : ---------------------------
-    CommentString
-        Const : 'Breath of Frost'
-    CommentString
-        Const : ---------------------------
-    SetVariable
-        Var   : Spell__Ability
-        Const : A05W
-    CommentString
-        Const : ' '
-    SetVariable
-        Var   : Spell__Trigger_OnCast
-        Var   : gg_trg_Breath_of_Frost
-    CommentString
-        Const : ' '
-    TriggerExecute
-        Var   : gg_trg_Spell_System
-    CommentString
-        Const : ' '
-    CommentString
-        Const : ---------------------------
-    CommentString
-        Const : 'Pick Up Rider'
-    CommentString
-        Const : ---------------------------
-    SetVariable
-        Var   : Spell__Ability
-        Const : A04S
-    CommentString
-        Const : ' '
-    SetVariable
-        Var   : Spell__Trigger_OnCast
-        Var   : gg_trg_Pick_Up_Rider
-    CommentString
-        Const : ' '
-    TriggerExecute
-        Var   : gg_trg_Spell_System
-    CommentString
-        Const : ' '
-    CommentString
-        Const : ---------------------------
-    CommentString
-        Const : 'Ditch Rider'
-    CommentString
-        Const : ---------------------------
-    SetVariable
-        Var   : Spell__Ability
-        Const : A060
-    CommentString
-        Const : ' '
-    SetVariable
-        Var   : Spell__Trigger_OnCast
-        Var   : gg_trg_Ditch_Rider
     CommentString
         Const : ' '
     TriggerExecute

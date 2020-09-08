@@ -19,7 +19,6 @@ endfunction
 
 //===========================================================================
 function InitTrig_Pick_Up_Rider takes nothing returns nothing
-    set gg_trg_Pick_Up_Rider = CreateTrigger(  )
-    call TriggerAddAction( gg_trg_Pick_Up_Rider, function Trig_Pick_Up_Rider_Actions )
+    call RegisterSpellSimple('A04S', function Trig_Pick_Up_Rider_Actions, null)
 endfunction
 

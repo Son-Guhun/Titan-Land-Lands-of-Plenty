@@ -14,7 +14,7 @@ endglobals
 //BlzGetUnitAbility
 
 
-private function onCast takes nothing returns nothing
+private function onEffect takes nothing returns nothing
     // local ability a = BlzGetUnitAbility(udg_Spell__Caster, ABILITY)
     
     if GetUnitAbilityLevel(udg_Spell__Caster, 'Awan') > 0 then
@@ -44,8 +44,8 @@ endfunction
 
 //===========================================================================
 function InitTrig_Critter_Wander takes nothing returns nothing
-    set gg_trg_Critter_Wander = CreateTrigger(  )
-    call TriggerAddAction( gg_trg_Critter_Wander, function onCast )
+    call RegisterSpellSimple(ABILITY_ON, function onEffect, null)
+    call RegisterSpellSimple(ABILITY_OFF, function onEffect, null)
 endfunction
 
 endscope

@@ -13,10 +13,6 @@ function ChainSlowCastAction takes nothing returns nothing
     set dummy = null
 endfunction
 
-
-//CreateUnit(udg_Spell__CasterOwner, 'h07Q', GetUnitX(udg_Spell__Caster), GetUnitY(udg_Spell__Caster), 270)//GetRecycledDummy(GetLocationX(udg_Spell__TargetPoint), GetLocationY(udg_Spell__TargetPoint), 0, 270)
-
-//===========================================================================
 function ChainSlowDamageAction takes nothing returns boolean
     debug call BJDebugMsg("Chain Slow trigger fired!")
     call IssueTargetOrder(udg_DamageEventSource, "slow", udg_DamageEventTarget)
@@ -24,11 +20,7 @@ function ChainSlowDamageAction takes nothing returns boolean
 endfunction
 
 function InitTrig_Chain_Slow takes nothing returns nothing
-    set gg_trg_Chain_Slow = CreateTrigger()
-    call TriggerAddAction(gg_trg_Chain_Slow, function ChainSlowCastAction)
-
-    //Hero - Chain Slow: Cast Slow on damaged units
+    call RegisterSpellSimple(SpellId_CHAINSLOW(), function ChainSlowCastAction, null)
     call InitializeOnDamageTrigger(CreateTrigger(), SpellId_CHAINSLOW(), function ChainSlowDamageAction)
-    //-------------------------------------------------
 endfunction
 

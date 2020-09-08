@@ -14,8 +14,7 @@ endfunction
 
 //===========================================================================
 function InitTrig_Mirror_Image takes nothing returns nothing
-    set gg_trg_Mirror_Image = CreateTrigger(  )
-    call TriggerAddAction( gg_trg_Mirror_Image, function onCast )
+    call RegisterSpellSimpleOnCast('AOmi', function onCast, null)
 endfunction
 
 endscope

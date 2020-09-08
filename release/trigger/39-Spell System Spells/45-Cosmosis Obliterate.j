@@ -2,13 +2,9 @@ scope CosmosisObliterate
 
 private function filterUnitsFunc takes nothing returns boolean
     local unit filterUnit = GetFilterUnit()
-    local real unitX = GetUnitX(filterUnit)
-    local real unitY = GetUnitY(filterUnit)
-    local real locX = GetLocationX(udg_Spell__TargetPoint)
-    local real locY = GetLocationY(udg_Spell__TargetPoint)
     
     if GUMS_GetUnitSelectionType(filterUnit) != 0 then
-        if IsUnitInRangeXY(filterUnit, locX, locY, 300.) then
+        if IsUnitInRangeXY(filterUnit, GetLocationX(udg_Spell__TargetPoint),  GetLocationY(udg_Spell__TargetPoint), 300.) then
             call LoP_RemoveUnit( filterUnit )
         endif
     endif
@@ -18,7 +14,7 @@ private function filterUnitsFunc takes nothing returns boolean
     return false
 endfunction
 
-private function onCast takes nothing returns nothing
+private function onEffect takes nothing returns nothing
     local integer playerId = 0
     
     local LinkedHashSet_DecorationEffect decorations = EnumDecorationsInRange(GetLocationX(udg_Spell__TargetPoint), GetLocationY(udg_Spell__TargetPoint), 300.)
@@ -41,8 +37,7 @@ endfunction
 
 //===========================================================================
 function InitTrig_Cosmosis_Obliterate takes nothing returns nothing
-    set gg_trg_Cosmosis_Obliterate = CreateTrigger(  )
-    call TriggerAddAction( gg_trg_Cosmosis_Obliterate, function onCast )
+    call RegisterSpellSimple('A055', function onEffect, null)
 endfunction
 
 endscope

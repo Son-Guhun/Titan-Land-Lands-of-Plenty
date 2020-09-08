@@ -14,7 +14,9 @@ globals
     constant integer DEFEND_DUMMY = 'A02C'
 endglobals
 
-function Trig_Defend_Turn_On_Actions takes nothing returns nothing
+scope SpellDefendOn
+
+private function onEffect takes nothing returns nothing
     local unit trigU = GetTriggerUnit()
     
     if ( GetUnitAbilityLevel(trigU, DEFEND_DUMMY) == 0 ) then
@@ -40,7 +42,7 @@ endfunction
 
 //===========================================================================
 function InitTrig_Defend_Turn_On takes nothing returns nothing
-    set gg_trg_Defend_Turn_On = CreateTrigger(  )
-    call TriggerAddAction( gg_trg_Defend_Turn_On, function Trig_Defend_Turn_On_Actions )
+    call RegisterSpellSimple(DEFEND, function onEffect, null)
 endfunction
 
+endscope

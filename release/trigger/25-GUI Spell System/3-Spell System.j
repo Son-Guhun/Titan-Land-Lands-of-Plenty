@@ -1,3 +1,5 @@
+library GUISpellSystem initializer Init
+
 function SpellIndexGetVars takes integer i returns nothing
     set udg_Spell__Ability = udg_Spell_i_Abil[udg_Spell_i_Head[i]]
     set udg_Spell__Index = i
@@ -455,7 +457,7 @@ function SpellPreloadEnd takes nothing returns nothing
 endfunction
 
 //===========================================================================
-function InitTrig_Spell_System takes nothing returns nothing
+private function Init takes nothing returns nothing
     local integer i = bj_MAX_PLAYER_SLOTS
     local player p
     local trigger t
@@ -514,3 +516,56 @@ function InitTrig_Spell_System takes nothing returns nothing
     call TimerStart(udg_Spell_i_Timer, 0.00, false, function SpellPreloadEnd)
     call UnitRemoveAbility(udg_Spell_i_PreloadDummy, 'Amov') //Force it to never move to cast spells
 endfunction
+
+// ===============================
+// New functions by Guhun:
+
+function RegisterSpellSimple takes integer abilId, code action, boolexpr condition returns trigger
+    set udg_Spell__Ability = abilId
+    set udg_Spell__Trigger_OnEffect = CreateTrigger()
+    
+    if action != null then
+        call TriggerAddAction(udg_Spell__Trigger_OnEffect, action)
+    endif
+    
+    if condition != null then
+        call TriggerAddCondition(udg_Spell__Trigger_OnEffect, condition)
+    endif
+    
+    call TriggerExecute(gg_trg_Spell_System)
+    return udg_Spell__Trigger_OnEffect
+endfunction
+
+function RegisterSpellSimpleOnCast takes integer abilId, code action, boolexpr condition returns trigger
+    set udg_Spell__Ability = abilId
+    set udg_Spell__Trigger_OnCast = CreateTrigger()
+    
+    if action != null then
+        call TriggerAddAction(udg_Spell__Trigger_OnCast, action)
+    endif
+    
+    if condition != null then
+        call TriggerAddCondition(udg_Spell__Trigger_OnCast, condition)
+    endif
+    
+    call TriggerExecute(gg_trg_Spell_System)
+    return udg_Spell__Trigger_OnCast
+endfunction
+
+function RegisterSpellSimpleOnFinish takes integer abilId, code action, boolexpr condition returns trigger
+    set udg_Spell__Ability = abilId
+    set udg_Spell__Trigger_OnFinish = CreateTrigger()
+    
+    if action != null then
+        call TriggerAddAction(udg_Spell__Trigger_OnFinish, action)
+    endif
+    
+    if condition != null then
+        call TriggerAddCondition(udg_Spell__Trigger_OnFinish, condition)
+    endif
+    
+    call TriggerExecute(gg_trg_Spell_System)
+    return udg_Spell__Trigger_OnFinish
+endfunction
+
+endlibrary

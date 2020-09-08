@@ -73,8 +73,7 @@ endfunction
 
 //===========================================================================
 function InitTrig_Spatial_Distortion_Cast takes nothing returns nothing
-    set gg_trg_Spatial_Distortion_Cast = CreateTrigger(  )
-    call TriggerAddCondition( gg_trg_Spatial_Distortion_Cast, Condition( function Trig_Spatial_Distortion_Cast_Conditions ) )
+    call RegisterSpellSimple('A02U', null, Condition(function Trig_Spatial_Distortion_Cast_Conditions))
 endfunction
 
 endscope

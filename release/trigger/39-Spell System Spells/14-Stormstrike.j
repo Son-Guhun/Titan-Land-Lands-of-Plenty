@@ -22,9 +22,18 @@ function StormStrikeCastAction takes nothing returns nothing
 endfunction
 //===========================================================================
 function InitTrig_Stormstrike takes nothing returns nothing
-
-    set gg_trg_Stormstrike = CreateTrigger(  )
-    call TriggerAddAction( gg_trg_Stormstrike, function StormStrikeCastAction )
-
+    set udg_Spell__Filter_AllowEnemy = true
+    set udg_Spell__Filter_AllowLiving = true
+    set udg_Spell__Filter_AllowHero = true
+    set udg_Spell__Filter_AllowNonHero = true
+    set udg_Spell__Filter_AllowFlying = false
+    set udg_Spell__Filter_AllowMechanical = true
+    set udg_Spell__Filter_AllowMagicImmune = false
+    set udg_Spell__Filter_AllowStructure = false
+    set udg_Spell__Filter_AllowAlly = false
+    set udg_Spell__Filter_AllowDead = false
+    
+    set udg_Spell__Trigger_InRangeFilter = gg_trg_Spell_System_Filter_Decorations
+    call RegisterSpellSimple('A04P', function StormStrikeCastAction, null)
 endfunction
 
