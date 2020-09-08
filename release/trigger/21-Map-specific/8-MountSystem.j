@@ -1,5 +1,12 @@
 library MountSystem requires StaticLinkedSet, TableStruct
 
+public struct Errors extends array
+    static constant integer NONE = 0
+    static constant integer NO_AMOV = 1
+    static constant integer MOUNT_SELF = 2
+    static constant integer MOUNT_RIDER = 3
+endstruct
+
 private struct UnitData extends array
     implement StaticLinkedSetNode
 
@@ -73,26 +80,26 @@ private function onTimer takes nothing returns nothing
     endif
 endfunction
 
-public function MountUnit takes unit rider, unit mount returns nothing
+public function MountUnit takes unit rider, unit mount returns integer
     local UnitData mountData = UnitData.get(mount)
     local UnitData riderData = UnitData.get(rider)
     
     if rider != null and mount != null then
         if GetUnitAbilityLevel(rider, 'Amov') == 0 then
             // Error: A unit without Amov cannot mount (since SetUnitX/Y doesn't function).
-            return
+            return Errors.NO_AMOV
         elseif rider == mount then
             // Error: Unit cannot ride itself.
-            return
+            return Errors.MOUNT_SELF
         elseif mountData.mount != null and rider == mountData.mount then
             // Error: Mount cannot ride its own rider.
-            return
+            return Errors.MOUNT_RIDER
         endif
         
         if mountData.rider != null then
             if rider == mountData.rider then
                 // No need to do anything in this case, rider is already riding this mount.
-                return
+                return Errors.NONE
             else
                 call mountData.ditchRider()
             endif
@@ -114,6 +121,7 @@ public function MountUnit takes unit rider, unit mount returns nothing
             call TimerStart(CreateTimer(), 1/32., true, function onTimer)
         endif
     endif
+    return Errors.NONE
 endfunction
 
 public function Dismount takes unit rider returns nothing
