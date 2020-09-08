@@ -27,6 +27,7 @@ endfunction
 //! endtextmacro
 
 //! textmacro ForUnitInGroupCountedReverse takes UNIT, INTEGER, GROUP
+    exitwhen i <= 0
     set $INTEGER$ = $INTEGER$ - 1
     set $UNIT$ = BlzGroupUnitAt($GROUP$, $INTEGER$)
     if $UNIT$ == null then
@@ -36,7 +37,6 @@ endfunction
             exitwhen $UNIT$ != null
         endloop
     endif
-    exitwhen i <= 0
 //! endtextmacro
 
 function ExecuteCode takes code callback returns nothing
