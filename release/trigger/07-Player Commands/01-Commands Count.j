@@ -30,7 +30,7 @@ private function OnCommand takes nothing returns boolean
     call GroupEnumUnitsInRect(g, WorldBounds.world, null)
     
     call LoP_WarnPlayer(trigP, LoPChannels.SYSTEM, "Total selectable units: |cffffff00" + I2S(BlzGroupGetSize(g)) + "|r (less than 1500 is recommended)")
-    call LoP_WarnPlayer(trigP, LoPChannels.SYSTEM, "Player with most units: (" + I2S(mostPlayerId) + ") " + GetPlayerName(Player(mostPlayerId)) + ": |cffffff00" + I2S(mostCount) + "|r")
+    call LoP_WarnPlayer(trigP, LoPChannels.SYSTEM, "Player with most units: " + UserColor(mostPlayerId).hex + "(" + I2S(mostPlayerId+1) + ") " + GetPlayerName(Player(mostPlayerId)) + "|r: |cffffff00" + I2S(mostCount) + "|r")
     if trigPId != mostPlayerId then
         call LoP_WarnPlayer(trigP, LoPChannels.SYSTEM, "Your unit count: |cffffff00" + I2S(trigPCount) + "|r")
     endif
