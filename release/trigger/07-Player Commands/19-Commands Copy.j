@@ -15,10 +15,10 @@ function Trig_Commands_Copy_Conditions takes nothing returns boolean
     endif
 
     call GroupRemoveGroup( udg_System_ProtectedGroup, g )
-    if CountUnitsInGroup(g) < 500 then
-        call ForGroupBJ( g, function Trig_Commands_Copy_Func016A )
+    if BlzGroupGetSize(g) < 500 then
+        call ForGroup(g, function Trig_Commands_Copy_Func016A)
     else
-        call DisplayTextToPlayer(GetTriggerPlayer(),0,0, "You are attempting to copy too many units.\nMax: 500" )
+        call LoP_WarnPlayer(GetTriggerPlayer(), LoPChannels.ERROR, "You are attempting to copy too many units! (Max: 500)" )
     endif
     
     if generator == null then  // Don't destroy a RectGenerator's group...

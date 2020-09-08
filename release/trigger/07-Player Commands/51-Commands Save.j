@@ -18,7 +18,7 @@ private function onCommand takes nothing returns boolean
     
     
     call SaveUnits(SaveData.create(trigP, SaveNLoad_FOLDER() + LoP_Command.getArguments()))
-    call DisplayTextToPlayer(GetLocalPlayer(), 0, 0, LoP_PlayerData(playerData).realName + ( " has started saving."))// Expected save time: " + R2S(BlzGroupGetSize(udg_save_grp[playerNumber])/25.00)))        
+    call LoP_WarnPlayer(GetLocalPlayer(), LoPChannels.WARNING, LoP_PlayerData(playerData).realName + ( " has started saving units."))// Expected save time: " + R2S(BlzGroupGetSize(udg_save_grp[playerNumber])/25.00)))        
     
     return false
 endfunction

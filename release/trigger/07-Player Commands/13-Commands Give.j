@@ -41,7 +41,7 @@ function Trig_Commands_Give_Func020A takes nothing returns nothing
             call MindPower(GetEnumUnit())
         endif
     else
-        call DisplayTextToPlayer(GetTriggerPlayer(),0,0, "This is not your unit." )
+        call LoP_WarnPlayerTimeout(GetTriggerPlayer(), LoPChannels.ERROR, LoPMsgKeys.NO_UNIT_ACCESS, 0., "This is not your unit." )
     endif
 endfunction
 
@@ -72,7 +72,7 @@ function Trig_Commands_Give_Conditions takes nothing returns boolean
                     call MindPower(FirstOfGroup(g))
                     set udg_PowerSystem_Player = oldPlayer
                 else
-                    call DisplayTextToPlayer(GetTriggerPlayer(),0,0, "This is not your unit." )
+                    call LoP_WarnPlayerTimeout(GetTriggerPlayer(), LoPChannels.ERROR, LoPMsgKeys.NO_UNIT_ACCESS, 0., "This is not your unit." )
                 endif
             else
                 set udg_Commands_Counter = 0
@@ -81,7 +81,7 @@ function Trig_Commands_Give_Conditions takes nothing returns boolean
                 set udg_PowerSystem_Player = oldPlayer
             endif
         else
-            call DisplayTextToPlayer(GetTriggerPlayer(),0,0, "DO NOT use |c00ffff00-give|r command to give units to neutral passive. Please use the |c00ffff00-neut|r command! You will be able to take your units back with |c00ffff00-take|r or |c00ffff00-take all|r." )
+            call LoP_WarnPlayer(GetTriggerPlayer(), LoPChannels.ERROR, "DO NOT use |c00ffff00-give|r command to give units to neutral passive. Please use the |c00ffff00-neut|r command! You will be able to take your units back with |c00ffff00-take|r or |c00ffff00-take all|r." )
         endif
     endif
     call DestroyGroup(g)

@@ -8,9 +8,13 @@ private function OnCommand_GroupEnum takes nothing returns boolean
     elseif args == "default" then
         call DisplayTextToPlayer(GetTriggerPlayer(), 0., 0., ID2S(GetUnitTypeId(GetFilterUnit())))
     elseif args == "reset" then
-        call BlzSetUnitSkin(GetFilterUnit(), GetUnitTypeId(GetFilterUnit()))
+        if LoP_PlayerOwnsUnit(GetTriggerPlayer(), GetFilterUnit()) then
+            call BlzSetUnitSkin(GetFilterUnit(), GetUnitTypeId(GetFilterUnit()))
+        endif
     else
-        call BlzSetUnitSkin(GetFilterUnit(), S2ID(args))
+        if LoP_PlayerOwnsUnit(GetTriggerPlayer(), GetFilterUnit()) then
+            call BlzSetUnitSkin(GetFilterUnit(), S2ID(args))
+        endif
     endif
     
     return false

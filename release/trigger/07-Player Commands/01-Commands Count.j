@@ -29,10 +29,10 @@ private function OnCommand takes nothing returns boolean
     
     call GroupEnumUnitsInRect(g, WorldBounds.world, null)
     
-    call DisplayTextToPlayer(trigP, 0, 0, "Total unselectable units: |cffffff00" + I2S(BlzGroupGetSize(g)) + "|r (less than 1500 is recommended)")
-    call DisplayTextToPlayer(trigP, 0, 0, "Player with most units: (" + I2S(mostPlayerId) + ") " + GetPlayerName(Player(mostPlayerId)) + ": |cffffff00" + I2S(mostCount) + "|r")
+    call LoP_WarnPlayer(trigP, LoPChannels.SYSTEM, "Total selectable units: |cffffff00" + I2S(BlzGroupGetSize(g)) + "|r (less than 1500 is recommended)")
+    call LoP_WarnPlayer(trigP, LoPChannels.SYSTEM, "Player with most units: (" + I2S(mostPlayerId) + ") " + GetPlayerName(Player(mostPlayerId)) + ": |cffffff00" + I2S(mostCount) + "|r")
     if trigPId != mostPlayerId then
-        call DisplayTextToPlayer(trigP, 0, 0, "Your unit count: |cffffff00" + I2S(trigPCount) + "|r")
+        call LoP_WarnPlayer(trigP, LoPChannels.SYSTEM, "Your unit count: |cffffff00" + I2S(trigPCount) + "|r")
     endif
     
     call DestroyGroup(g)

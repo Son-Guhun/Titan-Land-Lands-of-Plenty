@@ -2,7 +2,7 @@ function Trig_Commands_Real_Name_Actions takes nothing returns boolean
     local integer playerNumber = Arguments_ParsePlayer(LoP_Command.getArguments())
     
     if PlayerNumberIsNotNeutral(playerNumber) then
-        call DisplayTextToPlayer(GetTriggerPlayer(), 0., 0., "This player's real name is : " + udg_RealNames[playerNumber])
+        call LoP_WarnPlayer(GetTriggerPlayer(), LoPChannels.SYSTEM, "This player's real name is : " + udg_RealNames[playerNumber])
     endif
     
     return false

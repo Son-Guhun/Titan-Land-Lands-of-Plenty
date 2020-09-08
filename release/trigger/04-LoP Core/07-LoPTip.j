@@ -1,4 +1,4 @@
-library LoPTip requires TableStruct, GAL
+library LoPTip requires TableStruct, GAL, LoPWarn
 
 globals
     private constant key PERIODIC_TIPS
@@ -44,10 +44,6 @@ struct LoP_Tip extends array
         return this
     endmethod
     
-    method messageAsHint takes nothing returns string
-        return "|cffffcc00HINT:|r " + .message
-    endmethod
-
 endstruct
 
 /*
@@ -59,10 +55,9 @@ endstruct
 
 private function onTimer takes nothing returns nothing
     local LoP_Tip tip = LoP_TipCategory(PERIODIC_TIPS).getNextTip()
-    local string displayString = tip.messageAsHint()// do not create string in local player block
     
     if enabled then
-        call DisplayTextToPlayer(GetLocalPlayer(),0,0, displayString)
+        call LoP_WarnPlayer(GetLocalPlayer(), LoPChannels.HINT, tip.message)
     endif
 endfunction
 

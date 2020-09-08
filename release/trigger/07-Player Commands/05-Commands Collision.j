@@ -9,7 +9,7 @@ private function OnCommand_GroupLoop takes nothing returns nothing
             call SetUnitPathing(GetEnumUnit(), true)
         endif
     else
-        call DisplayTextToPlayer(GetTriggerPlayer(), 0, 0, "This is not your unit!")
+        call LoP_WarnPlayerTimeout(GetTriggerPlayer(), LoPChannels.ERROR, LoPMsgKeys.NO_UNIT_ACCESS, 0., "This is not your unit!")
     endif
 endfunction
 

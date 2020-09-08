@@ -1,11 +1,11 @@
 function Trig_CommandsR_Toggle_Prot_Conditions takes nothing returns boolean
     if LoP_Command.getArguments() == "protection" then
         if ( IsTriggerEnabled(gg_trg_System_Titan_Palace_Prot) ) then
-            call DisplayTextToPlayer(GetLocalPlayer(), 0, 0, "Inner Titan Palace Protection Disabled." )
+            call LoP_WarnPlayer(User.Local, LoPChannels.SYSTEM, "Inner Titan Palace Protection Disabled." )
             call DisableTrigger( gg_trg_System_Titan_Palace_Prot )
             call DisableTrigger( gg_trg_System_Titan_Palace_Item_Prot )
         else
-            call DisplayTextToPlayer(GetLocalPlayer(), 0, 0, "Inner Titan Palace Protection Enabled." )
+            call LoP_WarnPlayer(User.Local, LoPChannels.SYSTEM, "Inner Titan Palace Protection Enabled." )
             call EnableTrigger( gg_trg_System_Titan_Palace_Prot )
             call EnableTrigger( gg_trg_System_Titan_Palace_Item_Prot )
         endif

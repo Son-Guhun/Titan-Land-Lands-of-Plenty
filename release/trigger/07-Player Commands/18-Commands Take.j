@@ -17,7 +17,7 @@ function Trig_Commands_Take_Func004Func013A takes nothing returns nothing
     if ( GetOwningPlayer(enumUnit) == Player(PLAYER_NEUTRAL_PASSIVE) ) then
         call SetUnitOwner(enumUnit, GetTriggerPlayer(), false)
     else
-        call DisplayTextToPlayer(GetTriggerPlayer(), 0, 0, "This is not your unit.")
+        call LoP_WarnPlayerTimeout(GetTriggerPlayer(), LoPChannels.ERROR, LoPMsgKeys.NO_UNIT_ACCESS, 0., "This is not your unit.")
     endif
     
     set enumUnit = null

@@ -5,6 +5,8 @@ function Trig_CommandsR_Kick_Conditions takes nothing returns boolean
         call CustomDefeatBJ( Player(playerNumber-1), "You were kicked!" )
     endif
     
+    call LoP_WarnPlayer(User.Local, LoPChannels.WARNING, "Player " + I2S(playerNumber) + " was kicked.")
+    
     return false
 endfunction
 

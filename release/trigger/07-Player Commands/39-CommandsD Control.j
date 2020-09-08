@@ -19,7 +19,7 @@ private function onCommand takes nothing returns boolean
                 if BlzGroupGetSize(udg_Player_ControlGroup[playerNumber]) < MAX_CONTROLLED() then
                     call GroupAddUnit(udg_Player_ControlGroup[playerNumber], u)
                 else
-                    call DisplayTextToPlayer(trigPlayer, 0,0, "Control group is full (" + I2S(MAX_CONTROLLED()) + ") units)!")
+                    call LoP_WarnPlayerTimeout(trigPlayer, LoPChannels.ERROR, LoPMsgKeys.LIMIT, 0., "Control group is full (" + I2S(MAX_CONTROLLED()) + ") units)!")
                     exitwhen true
                 endif
             endif

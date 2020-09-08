@@ -9,7 +9,7 @@ private function OnCommand takes nothing returns boolean
         if GetPlayerSlotState(Player(playerNumber - 1)) == PLAYER_SLOT_STATE_PLAYING then
             call MakeTitan(Player(playerNumber - 1))
         else
-            call DisplayTextToPlayer(trigP, 0., 0., "There's no player in that slot!" )
+            call LoP_WarnPlayer(trigP, LoPChannels.ERROR, "There's no player in that slot!" )
         endif
     endif
     

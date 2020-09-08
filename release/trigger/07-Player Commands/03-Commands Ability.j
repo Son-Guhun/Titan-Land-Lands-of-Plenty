@@ -1,5 +1,10 @@
 library LoPCommandsAbility requires CustomizableAbilityList
 
+globals
+    private key MSGKEY_MAXABILS
+    private key MSGKEY_UNITABIL
+endglobals
+
 private function MAX_ABILITIES takes nothing returns integer
     return 7
 endfunction
@@ -9,10 +14,10 @@ public function AddAbility takes unit whichUnit, integer rawcode returns nothing
     
     if abilities.size() >= MAX_ABILITIES() then
     
-        call DisplayTextToPlayer(GetTriggerPlayer(), 0., 0., "This hero already has " + I2S(MAX_ABILITIES()) + " abilities.")
+        call LoP_WarnPlayerTimeout(GetTriggerPlayer(), LoPChannels.ERROR, MSGKEY_MAXABILS, 5., "This hero already has " + I2S(MAX_ABILITIES()) + " abilities.")
     elseif not RemoveableAbility(rawcode).isHero then
     
-        call DisplayTextToPlayer(GetTriggerPlayer(), 0., 0., "Unit abilities can only be removed, not added.")
+        call LoP_WarnPlayerTimeout(GetTriggerPlayer(), LoPChannels.ERROR, MSGKEY_UNITABIL, 5., "Unit abilities can only be removed, not added.")
     else
         call UnitAddAbility(whichUnit, rawcode)
     endif
@@ -58,7 +63,7 @@ private function OnCommand_GroupEnum takes nothing returns boolean
     local string subcommand = SubString(args, 0, cutToComma)
     
     if LoP_IsUnitProtected(GetFilterUnit()) then
-        call DisplayTextToPlayer(GetTriggerPlayer(), 0., 0., "This hero's abilities cannot be altered.")
+        call LoP_WarnPlayer(GetTriggerPlayer(), LoPChannels.ERROR, "This hero's abilities cannot be altered.")
         return false
     endif
     
@@ -66,7 +71,7 @@ private function OnCommand_GroupEnum takes nothing returns boolean
         set args = SubString(args, cutToComma + 1, 0)
         
         if not IsAbilityRemoveable(S2ID(args)) then
-            call DisplayTextToPlayer(GetTriggerPlayer(), 0., 0., "Invalid ability code.")
+            call LoP_WarnPlayer(GetTriggerPlayer(), LoPChannels.ERROR, "Invalid ability code.")
             return false
         endif
     else
@@ -75,10 +80,10 @@ private function OnCommand_GroupEnum takes nothing returns boolean
     
     
     if GetOwningPlayer(GetFilterUnit()) != GetTriggerPlayer() and GetTriggerPlayer() != udg_GAME_MASTER then
-        call DisplayTextToPlayer(GetTriggerPlayer(), 0, 0, "This is not your unit!")
+        call LoP_WarnPlayerTimeout(GetTriggerPlayer(), LoPChannels.ERROR, LoPMsgKeys.NO_UNIT_ACCESS, 0., "This is not your unit!")
         
     elseif not LoP_IsUnitHero(GetFilterUnit()) then
-        call DisplayTextToPlayer(GetTriggerPlayer(), 0, 0, "The ability command can only be used on heroes.")
+        call LoP_WarnPlayerTimeout(GetTriggerPlayer(), LoPChannels.ERROR, LoPMsgKeys.HERO, 0., "The ability command can only be used on heroes.")
     
     else
     

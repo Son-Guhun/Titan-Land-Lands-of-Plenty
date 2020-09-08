@@ -8,10 +8,6 @@ function LoP_SetAllianceState takes player whichPlayer, player other, integer al
     endif
 endfunction
 
-function LoP_AllyCommand takes integer allianceState returns nothing
-
-endfunction
-
 function Trig_Commands_SetAlliance_Conditions takes nothing returns boolean
     local integer i
     local integer allianceState

@@ -1,6 +1,6 @@
 function Trig_CommandsD_Add_Tag_Func008A takes nothing returns nothing
     if not LoP_PlayerOwnsUnit(GetTriggerPlayer(), GetEnumUnit()) then
-        call DisplayTextToPlayer(GetTriggerPlayer(), 0, 0, "This is not your unit." )
+        call LoP_WarnPlayerTimeout(GetTriggerPlayer(), LoPChannels.ERROR, LoPMsgKeys.NO_UNIT_ACCESS, 0., "This is not your unit." )
     else
         call GUMSAddUnitAnimationTag( GetEnumUnit() , LoP_Command.getArguments() )
     endif

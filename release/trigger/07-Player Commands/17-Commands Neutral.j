@@ -76,7 +76,7 @@ function Trig_Commands_Neutral_Func010Func003A takes nothing returns nothing
             call LoP_GiveToNeutral(GetEnumUnit())
         endif
     else
-        call DisplayTextToForce( udg_FORCES_PLAYER[( GetConvertedPlayerId(GetTriggerPlayer()) - 1 )], "This is not your unit." )
+        call LoP_WarnPlayerTimeout(GetTriggerPlayer(), LoPChannels.ERROR, LoPMsgKeys.NO_UNIT_ACCESS, 0., "This is not your unit." )
     endif
 endfunction
 

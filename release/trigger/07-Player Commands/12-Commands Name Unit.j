@@ -8,7 +8,7 @@ function Trig_Commands_Name_Unit_Func006A takes nothing returns nothing
         endif
         */
     else
-        call DisplayTextToPlayer(GetTriggerPlayer(), 0, 0, "This is not your unit!")
+        call LoP_WarnPlayerTimeout(GetTriggerPlayer(), LoPChannels.ERROR, LoPMsgKeys.NO_UNIT_ACCESS, 0., "This is not your unit!")
     endif
     set enumUnit = null
 endfunction

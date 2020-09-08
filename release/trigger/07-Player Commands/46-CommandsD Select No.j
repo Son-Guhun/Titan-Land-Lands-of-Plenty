@@ -17,26 +17,30 @@ private function ToEffect takes unit whichUnit returns nothing
     endif
 endfunction
 
+globals
+    private key MSGKEY_USE_F
+endglobals
+
 private function EnumFunc takes nothing returns nothing
     local player trigP = GetTriggerPlayer()
     local unit enumUnit = GetEnumUnit()
     
     if not LoP_PlayerOwnsUnit(trigP, enumUnit) and udg_GAME_MASTER != trigP then
-        call DisplayTextToPlayer(trigP, 0, 0, "This is not your unit." )
+        call LoP_WarnPlayerTimeout(GetTriggerPlayer(), LoPChannels.ERROR, LoPMsgKeys.NO_UNIT_ACCESS, 0., "This is not your unit." )
         
     elseif GetUnitAbilityLevel(enumUnit, SELECTABLE_ONLY_ABILITY()) > 0 then
-        call DisplayTextToPlayer(trigP, 0, 0, "This type of unit cannot be made unselectable." )
+        call LoP_WarnPlayerTimeout(GetTriggerPlayer(), LoPChannels.ERROR, LoPMsgKeys.INVALID, 0., "This type of unit cannot be made unselectable." )
         
     elseif not LoP_IsUnitDecoration(enumUnit) then
         if LoP_IsUnitHero(enumUnit) then
-            call DisplayTextToPlayer(trigP, 0, 0, "Heroes cannot be unselectable." ) 
+            call LoP_WarnPlayerTimeout(GetTriggerPlayer(), LoPChannels.ERROR, LoPMsgKeys.HERO, 0., "Heroes cannot be unselectable." ) 
         else
             if LoP_Command.getArguments() == "no f" then
                call LoP_TakeFromNeutral(enumUnit)  // This is required, otherwise neutral units must be enumed when a unit is made unselectable.
                // call PauseUnit(enumUnit, true)
                call GUMSMakeUnitLocust(enumUnit)
             else
-                call DisplayTextToPlayer(trigP, 0, 0, "You must use |cffffff00-select no f|r to make non-decorations unselectable." ) 
+                call LoP_WarnPlayerTimeout(GetTriggerPlayer(), LoPChannels.ERROR, MSGKEY_USE_F, 0., "You must use |cffffff00-select no f|r to make non-decorations unselectable." ) 
             endif
         endif
         

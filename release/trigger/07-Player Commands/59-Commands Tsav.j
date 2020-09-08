@@ -14,7 +14,10 @@ private function onCommand takes nothing returns boolean
         set saveData.extentY = GUDR_GetGeneratorExtentY(generator)
         
         call SaveTerrain(saveData, GUDR_GetGeneratorRect(generator))
+        call LoP_WarnPlayer(GetLocalPlayer(), LoPChannels.WARNING, LoP_PlayerData(User[GetTriggerPlayer()]).realName + ( " has started saving terrain."))
         set generator = null
+    else
+        call LoP_WarnPlayer(GetTriggerPlayer(), LoPChannels.ERROR, "You must be selecting a Rect Generator.")
     endif
     
     return true
