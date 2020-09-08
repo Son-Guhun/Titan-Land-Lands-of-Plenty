@@ -1,23 +1,30 @@
-function FilterUnitsKill takes nothing returns boolean
-    if GetTriggerPlayer() == udg_GAME_MASTER or GetOwningPlayer(GetFilterUnit()) == GetTriggerPlayer() then
-        call LoP_KillUnit(GetFilterUnit())
-    endif
-    return false
-endfunction
-
-function FilterUnitsRemove takes nothing returns boolean
-    if GetTriggerPlayer() == udg_GAME_MASTER or GetOwningPlayer(GetFilterUnit()) == GetTriggerPlayer() then
-        call LoP_RemoveUnit(GetFilterUnit())
-    endif
-    return false
-endfunction
-
 function Trig_Commands_Remove_Kill_Conditions takes nothing returns boolean
-    if LoP_Command.getCommand() == "-kill" then
-        call GroupEnumUnitsSelected(ENUM_GROUP, GetTriggerPlayer(), Condition(function FilterUnitsKill))
-    else
-        call GroupEnumUnitsSelected(ENUM_GROUP, GetTriggerPlayer(), Condition(function FilterUnitsRemove))
-    endif
+    local group g = CreateGroup()
+    local unit u
+    local integer i
+    local player trigP = GetTriggerPlayer()
+    local boolean remove = LoP_Command.getCommand() == "-remove"
+    local boolean GM = trigP == udg_GAME_MASTER
+    
+    call GroupEnumUnitsSelected(g, GetTriggerPlayer(), null)
+    set i = BlzGroupGetSize(g)
+    loop
+        //! runtextmacro ForUnitInGroupCountedReverse("u", "i", "g")
+        
+        if GM or LoP_PlayerOwnsUnit(trigP, u) then
+            if remove then
+                call LoP_RemoveUnit(u)
+            else
+                call LoP_KillUnit(u)
+            endif
+        else
+            call LoP_WarnPlayerTimeout(trigP, LoPChannels.ERROR, LoPMsgKeys.NO_UNIT_ACCESS, 0., "This is not your unit!")
+        endif
+    endloop
+    
+    call DestroyGroup(g)
+    set g = null
+    set u = null
     return false
 endfunction
 
