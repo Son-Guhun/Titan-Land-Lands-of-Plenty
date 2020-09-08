@@ -1,8 +1,9 @@
 from globalvars import *
 from inlineconstants import *
 import sys
+import os
 
-
+SCRIPT_PATH = "../../development/map/war3map.j"
 
 def starts_with(string, substring):
     return string[:len(substring)] == substring
@@ -132,11 +133,13 @@ def inline_strings(file, out):
 def do(file='test.j', out=sys.stdout): 
     constants.clear()
     l_vars.clear()  # not needed if the last execution was successful
+    tempfile = os.path.join(DIRECTORY, 'temp.j')
     with open(file,'r') as f:
-        with open('temp.j','w') as temp:
+        with open(tempfile,'w') as temp:
             inline_strings(f, temp)
-    with open('temp.j','r') as temp:
+    with open(tempfile,'r') as temp:
         parse(temp, out)
+    os.remove(tempfile)
 
 
 import os
