@@ -131,7 +131,8 @@
     '30-CommandsR Delete': 'CommandsR Delete'
     '31-CommandsR Fog': 'CommandsR Fog'
     '32-CommandsR Water Color': 'CommandsR Water Color'
-    '33-CommandsR Mind': 'CommandsR Mind'
+    33----------------------------: ---------------------------
+        Comment
     '34-CommandsR Kick': 'CommandsR Kick'
     '35-CommandsR The Creator': 'CommandsR The Creator'
     '36-CommandsR Toggle Dmg Tags': 'CommandsR Toggle Dmg Tags'
