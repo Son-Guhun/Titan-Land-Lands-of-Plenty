@@ -148,6 +148,11 @@ function DamageDetectionFunctions_Last takes nothing returns nothing
     endif
 endfunction
 
+globals
+    key MSGKEY_DAMAGE
+    key MSGKEY_DAMAGED
+endglobals
+
 // When a unit is removed from the game, DamageEventSource is null
 function Trig_Damage_Tag_Actions takes nothing returns nothing
     local integer damageType
@@ -163,8 +168,8 @@ function Trig_Damage_Tag_Actions takes nothing returns nothing
         if not LoP_PlayerData.get(targetOwner).isAtWar(sourceOwner) and GetPlayerAlliance(targetOwner, sourceOwner, ALLIANCE_PASSIVE) then
             if targetOwner != sourceOwner then
             
-                call LoP_WarnPlayer(targetOwner, 7.5, "Use the -war command to allow others to damage your units.")
-                call LoP_WarnPlayer(sourceOwner, 10., "You cannot damage units of players that are allied to you!")
+                call LoP_WarnPlayerTimeout(targetOwner, LoPChannels.WARNING, MSGKEY_DAMAGED, 7.5, "Use the -war command to allow others to damage your units.")
+                call LoP_WarnPlayerTimeout(sourceOwner, LoPChannels.WARNING, MSGKEY_DAMAGE, 10., "You cannot damage units of players that are allied to you!")
                 set udg_DamageEventAmount = 0
                 return
             endif

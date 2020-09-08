@@ -1,40 +1,53 @@
-library LoPWarn initializer Init requires Timeline, TableStruct
+library LoPWarn requires Timeline, TableStruct
 
+struct LoPChannels extends array
 
-private struct PlayerData extends array
-    
-    implement DebugPlayerStruct
-
-    //! runtextmacro TableStruct_NewStructField("messages", "Table")
-
-    method next takes nothing returns integer
-        return this + 1
+    static method operator ERROR takes nothing returns string
+        return "|cffff0000[ERROR]|r"
     endmethod
+
+    static method operator SYSTEM takes nothing returns string
+        return "|cffffff00[SYS]|r"
+    endmethod
+
+    static method operator WARNING takes nothing returns string
+        return "|cffffa500[WARNING]|r"
+    endmethod
+    
+    static method operator HINT takes nothing returns string
+        return "|cffffcc00[HINT]|r"
+    endmethod
+
 endstruct
 
-function LoP_WarnPlayerId takes PlayerData pId, real timeout, string message returns nothing
-    local integer msgId = StringHash(message)
+struct LoPMsgKeys extends array
+    static key NO_UNIT_ACCESS
+    static key HERO
+    static key LIMIT
+    static key INVALID
+endstruct
 
-    if pId.messages.real.has(msgId) and Timeline.game.elapsed <= pId.messages.real[msgId] then
-        return
+globals
+    private real array messageTimestamps  // async
+endglobals
+
+function LoP_WarnPlayerTimeout takes player whichPlayer, string channel, integer msgKey, real timeout, string message returns nothing
+    set message = channel + " " + message
+    
+    if msgKey == 0 then 
+        call DisplayTextToPlayer(whichPlayer, 0., 0., message)
+    else
+        if User.Local == whichPlayer then
+            if Timeline.game.elapsed > messageTimestamps[msgKey] then
+                set messageTimestamps[msgKey] = Timeline.game.elapsed + timeout
+                call DisplayTextToPlayer(User.Local, 0., 0., message)
+            endif
+        endif
     endif
-    
-    set pId.messages.real[msgId] = Timeline.game.elapsed + timeout
-    call DisplayTextToPlayer(Player(pId), 0., 0., message)
 endfunction
 
-function LoP_WarnPlayer takes player whichPlayer, real timeout, string message returns nothing
-    call LoP_WarnPlayerId(GetPlayerId(whichPlayer), timeout, message)
+function LoP_WarnPlayer takes player whichPlayer, string channel, string message returns nothing
+    call LoP_WarnPlayerTimeout(whichPlayer, channel, 0, 0., message)
 endfunction
-
-private function Init takes nothing returns nothing
-    local PlayerData pId = 0
-    
-    loop
-        set pId.messages = Table.create()
-        set pId = pId.next()
-    endloop
-endfunction
-
 
 endlibrary
