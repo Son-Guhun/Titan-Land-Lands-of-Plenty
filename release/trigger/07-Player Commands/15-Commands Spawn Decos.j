@@ -20,32 +20,6 @@ function MissingDecos_HelpMessage2 takes nothing returns string
 
 endfunction
 
-
-//Checks the deco counter for the player. If any counter is 0, create the missing deco.
-function Commands_CreateMissingDecos takes player whichPlayer, integer firstIndex, integer lastIndex returns nothing
-    local integer playerNumber = GetPlayerId( whichPlayer ) + 1
-
-    loop
-    exitwhen firstIndex > lastIndex
-        if LoadInteger(udg_Hashtable_2, playerNumber, LoP_DecoBuilders.rawcodes[firstIndex] ) == 0 then
-            call CreateUnitAtLoc( whichPlayer, LoP_DecoBuilders.rawcodes[firstIndex], udg_PLAYER_LOCATIONS[playerNumber], bj_UNIT_FACING )
-        endif
-        set firstIndex = firstIndex + 1
-    endloop
-endfunction
-
-function Commands_CreateMissingDecosReforged takes player whichPlayer, integer firstIndex, integer lastIndex returns nothing
-    local integer playerNumber = GetPlayerId( whichPlayer ) + 1
-
-    loop
-    exitwhen firstIndex > lastIndex
-        if LoadInteger(udg_Hashtable_2, playerNumber, LoP_DecoBuilders.rawcodes[firstIndex] ) == 0 then
-            call CreateUnitAtLoc( whichPlayer, LoP_DecoBuilders.reforgedRawcodes[firstIndex], udg_PLAYER_LOCATIONS[playerNumber], bj_UNIT_FACING )
-        endif
-        set firstIndex = firstIndex + 1
-    endloop
-endfunction
-
 function Trig_Commands_Deco_Spawn_Conditions takes nothing returns boolean
     local string arg = LoP_Command.getArguments()
     local integer lastIndex

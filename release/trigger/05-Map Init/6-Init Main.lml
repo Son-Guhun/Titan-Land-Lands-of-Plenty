@@ -242,7 +242,3 @@ Action
                 Call  : GetEnumUnit
                 Preset: PlayerNP
                 Preset: ChangeColorTrue
-    DisplayTextToForce
-        Call  : GetPlayersAll
-        Const : 'Map Initialization was Successful! Welcome to the Land of Plenty!
-Check out F9 for new commands or if you never played Titan Land before.'

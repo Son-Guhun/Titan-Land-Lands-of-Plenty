@@ -59,18 +59,6 @@ Action
                 Var   : gg_trg_System_Detect_Leaver
                 Event: TriggerRegisterPlayerEventLeave
                     Var   : temp_player
-            DisplayTextToForce
-                Array : FORCES_PLAYER
-                    Call  : OperatorInt
-                        Call  : GetConvertedPlayerId
-                            Var   : temp_player
-                        Preset: OperatorSubtract
-                        Const : 1
-                Const : 'Events Created Successfully.
-------
-To get a race selector: |cffffff00-start|r
-To get deco builders: |cffffff00-decos|r
-To select unit/terrain/tree modification deco: |cffffff00-seln special|r'
             CustomScriptCode
                 Const : endif
     IfThenElseMultiple

@@ -478,3 +478,7 @@ Commands:
             Const : passive
         Const : 0
         Var   : Hashtable_1
+    CustomScriptCode
+        Const : 'call LoP_WarnPlayer(User.Local, LoPChannels.WARNING, "Preloading Deco Builders. Game will freeze for a few seconds.")'
+    CustomScriptCode
+        Const : 'call PreloadDecoBuilders_Initialize(1)'

@@ -403,6 +403,41 @@ struct LoP_DecoBuilders extends array
 
     implement InitModule
 endstruct
+
+//Checks the deco counter for the player. If any counter is 0, create the missing deco.
+public function CreateMissing takes player owner, real x, real y, group g, integer firstIndex, integer lastIndex, boolean reforged returns nothing
+    local integer playerNumber = GetPlayerId(owner) + 1
+    local integer id
+
+    loop
+    exitwhen firstIndex > lastIndex
+        if reforged then
+            set id = LoP_DecoBuilders.reforgedRawcodes[firstIndex]
+        else
+            set id = LoP_DecoBuilders.rawcodes[firstIndex]
+        endif
+    
+        if LoadInteger(udg_Hashtable_2, playerNumber, id ) == 0 then
+            if g == null then
+                call CreateUnit(owner, id, x, y, bj_UNIT_FACING)
+            else
+                call GroupAddUnit(g, CreateUnit(owner, id, x, y, bj_UNIT_FACING))
+            endif
+        endif
+        
+        set firstIndex = firstIndex + 1
+    endloop
+endfunction
+
+function Commands_CreateMissingDecos takes player whichPlayer, integer firstIndex, integer lastIndex returns nothing
+    local location loc = udg_PLAYER_LOCATIONS[GetPlayerId(whichPlayer) + 1]
+    call CreateMissing(whichPlayer, GetLocationX(loc), GetLocationY(loc), null, firstIndex, lastIndex, false)
+endfunction
+
+function Commands_CreateMissingDecosReforged takes player whichPlayer, integer firstIndex, integer lastIndex returns nothing
+    local location loc = udg_PLAYER_LOCATIONS[GetPlayerId(whichPlayer) + 1]
+    call CreateMissing(whichPlayer, GetLocationX(loc), GetLocationY(loc), null, firstIndex, lastIndex, true)
+endfunction
     
 
 
