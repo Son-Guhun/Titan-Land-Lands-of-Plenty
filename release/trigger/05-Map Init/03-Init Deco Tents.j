@@ -1,6 +1,6 @@
 library LoPInitDecoTents requires LoPDecoBuilders
 /*
-    It also defines functions to create the Deco Tents in the Titan Palace, which are dynamically
+    Defines functions to create the Deco Tents in the Titan Palace, which are dynamically
     generated.
 */
     globals

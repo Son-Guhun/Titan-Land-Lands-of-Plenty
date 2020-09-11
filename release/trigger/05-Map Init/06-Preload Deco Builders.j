@@ -27,6 +27,7 @@ To select unit/terrain/tree modification deco: |cffffff00-seln special|r")
     set g = null
 endfunction
 
+// Recommended delay above 1 second, so players can see any warning messages before the system is initialized.
 public function Initialize takes real delay returns nothing
     call TimerStart(CreateTimer(), delay, false, function CreateDecos)
 endfunction
