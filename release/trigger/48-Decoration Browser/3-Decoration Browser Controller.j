@@ -12,6 +12,7 @@ globals
     public ScreenController controller
     public ControlState controlState
     private SpecialEffect array effects
+    private group array selectedUnits
 endglobals
 
 struct DecorationsListbox extends array
@@ -57,17 +58,23 @@ struct DecorationsListbox extends array
     static method onClickHandler takes player trigP, integer frameIndex, integer listIndex returns nothing
         local User pId = User[trigP]
         
-        if effects[pId] != 0 then
-            call effects[pId].destroy()
+        if ControlState.getPlayerIdActiveState(pId) == ControlState.default then
+            call controlState.activateForPlayer(trigP)
         endif
-    
-        if isReforged[pId] then
-            set effects[pId] = SpecialEffect.create(ReforgedDecorationList(playerLists[User[trigP]])[listIndex], GetPlayerLastMouseX(trigP), GetPlayerLastMouseY(trigP))
-        else
-            set effects[pId] = SpecialEffect.create(playerLists[User[trigP]][listIndex], GetPlayerLastMouseX(trigP), GetPlayerLastMouseY(trigP))
-        endif
+            
+        if ControlState.getPlayerIdActiveState(pId) == controlState then
+            if effects[pId] != 0 then
+                call effects[pId].destroy()
+            endif
         
-        set effects[pId].alpha = 128
+            if isReforged[pId] then
+                set effects[pId] = SpecialEffect.create(ReforgedDecorationList(playerLists[User[trigP]])[listIndex], GetPlayerLastMouseX(trigP), GetPlayerLastMouseY(trigP))
+            else
+                set effects[pId] = SpecialEffect.create(playerLists[User[trigP]][listIndex], GetPlayerLastMouseX(trigP), GetPlayerLastMouseY(trigP))
+            endif
+            
+            set effects[pId].alpha = 128
+        endif
     endmethod
 
     implement ListBoxTemplate
@@ -97,7 +104,7 @@ private function onEditText takes nothing returns boolean
     return true
 endfunction
 
-private function onClick takes nothing returns nothing
+private function onButton takes nothing returns nothing
     local User pId = User[GetTriggerPlayer()]
     local framehandle trigButton = BlzGetTriggerFrame()
     
@@ -122,15 +129,28 @@ private function onClick takes nothing returns nothing
     endif
 endfunction
 
+private function onControllerEnable takes nothing returns boolean
+    //! runtextmacro ScreenControllerOnEnableArguments("contrl", "whichPlayer", "enable")
+    
+    if not enable and ControlState.getPlayerIdActiveState(User[whichPlayer]) == controlState then
+        call ControlState.default.activateForPlayer(whichPlayer)
+    endif
+    return false
+endfunction
+
 private function onStateEnter takes nothing returns boolean
-    call controller.enable(ControlState.getChangingPlayer(), true)
+    local User pId = User[ControlState.getChangingPlayer()]
+    
+    
+    call GroupEnumUnitsSelected(selectedUnits[pId], pId.handle, null)
     return false
 endfunction
 
 private function onStateExit takes nothing returns boolean
     local User pId = User[ControlState.getChangingPlayer()]
 
-    call controller.enable(pId.handle, false)
+    call SelectGroupForPlayerBJ(selectedUnits[pId], pId.handle)
+    call GroupClear(selectedUnits[pId])
     if effects[pId] != 0 then
         call effects[pId].destroy()
         set effects[pId] = 0
@@ -158,8 +178,7 @@ private function onMousePress takes nothing returns boolean
         if not IsPlayerIdMouseOnButton(playerId) and effects[playerId] != 0 and PlayerMouseEvent_GetTriggerPlayerMouseButton() == MOUSE_BUTTON_TYPE_LEFT then
             call CreateUnit(playerId.handle, effects[playerId].unitType, PlayerMouseEvent_GetTriggerPlayerMouseX(), PlayerMouseEvent_GetTriggerPlayerMouseY(), 0.)
             if not OSKeys.LSHIFT.isPressedId(playerId) and not OSKeys.RSHIFT.isPressedId(playerId) then
-                call effects[playerId].destroy()
-                set effects[playerId] = 0
+                call ControlState.default.activateForPlayer(playerId.handle)
             endif
         endif
     endif
@@ -172,10 +191,7 @@ private function onKey takes nothing returns boolean
 
     if ControlState.getPlayerIdActiveState(pId) == controlState then
         if BlzGetTriggerPlayerKey() == OSKEY_ESCAPE then
-            if effects[pId] != 0 then
-                call effects[pId].destroy()
-                set effects[pId] = 0
-            endif
+            call ControlState.default.activateForPlayer(pId.handle)
         endif
     endif
     
@@ -185,6 +201,8 @@ endfunction
 //===========================================================================
 //! runtextmacro Begin0SecondInitializer("Init")
     local trigger trig = CreateTrigger()
+    local User pId = 0
+    
     call TriggerAddAction(trig, function onEditText)
     
     call BlzTriggerRegisterFrameEvent(trig, decorationBrowserScreen["editBox"], FRAMEEVENT_EDITBOX_TEXT_CHANGED)
@@ -198,13 +216,25 @@ endfunction
     call BlzFrameSetPoint(decorationBrowserScreen["backdrop"], FRAMEPOINT_RIGHT, DecorationsListbox.scrollBar, FRAMEPOINT_RIGHT, 0., 0.)
     call BlzFrameSetPoint(decorationBrowserScreen["backdrop"], FRAMEPOINT_BOTTOMLEFT, DecorationsListbox.buttons[DecorationsListbox.numberOfEntries-1], FRAMEPOINT_BOTTOMLEFT, -0.008, -0.004)
     
+    loop
+        exitwhen pId >= bj_MAX_PLAYERS
+        if GetPlayerSlotState(pId.handle) == PLAYER_SLOT_STATE_PLAYING then
+            set selectedUnits[pId] = CreateGroup()
+        endif
+        set pId = pId + 1
+    endloop
+    
     set trig = CreateTrigger()
-    call TriggerAddAction(trig, function onClick)
+    call TriggerAddAction(trig, function onButton)
     call BlzTriggerRegisterFrameEvent(trig, decorationBrowserScreen["switchButton"], FRAMEEVENT_CONTROL_CLICK)
     
     set controller = ScreenController.create(decorationBrowserScreen, null)
+    set controller.onEnable = Condition(function onControllerEnable)
     
     set controlState = controlState.create()
+    set controlState.selectionState = SelectionState.create()
+    set controlState.dragSelectionState = DragSelectionState.create()
+    set controlState.preSelectionState = PreSelectionState.create()
     
     set trig = CreateTrigger()
     call TriggerAddCondition(trig, Condition(function onStateEnter))
