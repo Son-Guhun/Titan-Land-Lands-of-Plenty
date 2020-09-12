@@ -49,12 +49,23 @@ struct Screen extends array
 
 endstruct
 
+
+
 struct ScreenController extends array
 
     implement ExtendsTable
 
     //! runtextmacro HashStruct_NewStructField("screen", "Screen")
     //! runtextmacro HashStruct_NewHandleField("buttonHandler", "boolexpr")
+    
+    //! runtextmacro HashStruct_NewHandleField("onEnable", "boolexpr")
+    
+    //! textmacro ScreenControllerOnEnableArguments takes controller, player, enable
+        local ScreenController $controller$ = FuncInterface.stack[0]
+        local player $player$ = FuncInterface.stack.player[1]
+        local boolean $enable$ = FuncInterface.stack.boolean[2]
+    //! endtextmacro
+    
 
     static method create takes Screen screen, boolexpr buttonHandler returns thistype
         local thistype this = Table.create()
@@ -75,6 +86,8 @@ struct ScreenController extends array
             if User.fromLocal() == pId then
                 call .screen.show(enable)
             endif
+            call BJDebugMsg("onEnable:" + I2S(GetHandleId(.onEnable)))
+            //! runtextmacro FuncInterfaceIntegerPlayerBoolean_evaluate(".onEnable", "this", "p", "enable")
         endif
     endmethod
     
