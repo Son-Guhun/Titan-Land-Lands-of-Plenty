@@ -270,7 +270,7 @@ private module Init
     set trig = null
     endmethod
 endmodule
-private struct InitStruct
+private struct InitStruct extends array
     implement Init
 endstruct
 

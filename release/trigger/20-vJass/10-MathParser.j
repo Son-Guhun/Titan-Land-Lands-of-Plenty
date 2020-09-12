@@ -448,7 +448,7 @@ library MathParser /* v 1.1.0.0
         endmethod
         
         private static method calculate_impl takes nothing returns nothing
-            set ans = thistype.evaluateExpression.evaluate(thistype.convertExpression(thistype.prepareExpression(thistype.errorString)))
+            set ans = thistype.evaluateExpression(thistype.convertExpression(thistype.prepareExpression(thistype.errorString)))
         endmethod
    
         static method calculate takes string expression returns real
@@ -459,8 +459,8 @@ library MathParser /* v 1.1.0.0
         
             set thistype.errorString = expression
             call ForForce(bj_FORCE_PLAYER[0], function thistype.calculate_impl)
-            if wasError != thistype.SUCCESS then
-                call DisplayTextToPlayer(GetTriggerPlayer(), 0., 0., "("+expression+"): " + errorString)
+            if thistype.wasError != thistype.SUCCESS then
+                call DisplayTextToPlayer(GetTriggerPlayer(), 0., 0., "("+expression+"): " + thistype.errorString)
                 set ans = 0
             // else
                 // call DisplayTextToPlayer(GetTriggerPlayer(), 0.7, 0.5, "("+expression+")= " + R2S(ans))
