@@ -50,7 +50,8 @@ private function DecoOnEnterMapEx takes unit trigU, boolean isUpgrade returns no
         //! runtextmacro GUDR_FirstPage("Add","trigU")
     endif
     call SetUnitPathing(trigU, false)  // If UNIT_IF_MOVE_TYPE ever works, check if this line is only necessary before or after the unit move type is set
-    call BlzSetUnitIntegerField(trigU, UNIT_IF_MOVE_TYPE, GetHandleId(MOVE_TYPE_AMPHIBIOUS))
+    // call BlzSetUnitIntegerField(trigU, UNIT_IF_MOVE_TYPE, GetHandleId(MOVE_TYPE_AMPHIBIOUS))
+    call BlzSetUnitIntegerField(trigU, UNIT_IF_MOVE_TYPE, GetHandleId(MOVE_TYPE_FLOAT))  // Use Float because Amphibious does not go above the water level in shallow water.
     call SetUnitPathing(trigU, false)
     
     if typeId.hasUpgrades() then

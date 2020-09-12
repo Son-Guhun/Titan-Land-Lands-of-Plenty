@@ -1,5 +1,9 @@
 library PreloadDecoBuilders requires LoPDecoBuilders, DecoBuilderCount, LoPWarn, LoPCleanUpRemoval
 
+globals
+    public constant boolean ENABLE = true
+endglobals
+
 private function CreateDecos takes nothing returns nothing
     local group g = CreateGroup()
     local unit u
@@ -29,7 +33,9 @@ endfunction
 
 // Recommended delay above 1 second, so players can see any warning messages before the system is initialized.
 public function Initialize takes real delay returns nothing
-    call TimerStart(CreateTimer(), delay, false, function CreateDecos)
+    static if ENABLE then
+        call TimerStart(CreateTimer(), delay, false, function CreateDecos)
+    endif
 endfunction
 
 endlibrary

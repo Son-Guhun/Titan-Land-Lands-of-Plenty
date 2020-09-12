@@ -47,16 +47,19 @@
     09-LoPStdlib: LoPStdlib
     10-LoPWarn: LoPWarn
 '05-Map Init': 'Map Init'
-    1-Functions: Functions
+    '01-Init Libraries': 'Init Libraries'
         Comment
-    '2-Init Player Circles': 'Init Player Circles'
-    '3-Init Deco Tents': 'Init Deco Tents'
-    '4-Init Quests': 'Init Quests'
-    5-Triggers: Triggers
+    '02-Init Player Circles': 'Init Player Circles'
+    '03-Init Deco Tents': 'Init Deco Tents'
+    '04-Init Quests': 'Init Quests'
+    '05-Preload Libraries': 'Preload Libraries'
         Comment
-    '6-Init Main': 'Init Main'
-    '7-Init 0 seconds': 'Init 0 seconds'
-    '8-Init Create Events': 'Init Create Events'
+    '06-Preload Deco Builders': 'Preload Deco Builders'
+    07-Triggers: Triggers
+        Comment
+    '08-Init Main': 'Init Main'
+    '09-Init 0 seconds': 'Init 0 seconds'
+    '10-Init Create Events': 'Init Create Events'
 '06-Map System': 'Map System'
     '01-System Set Unit Color': 'System Set Unit Color'
     '02-System Level Up Heroes': 'System Level Up Heroes'
@@ -133,39 +136,35 @@
     '30-CommandsR Delete': 'CommandsR Delete'
     '31-CommandsR Fog': 'CommandsR Fog'
     '32-CommandsR Water Color': 'CommandsR Water Color'
-    33----------------------------: ---------------------------
+    '33-CommandsR Kick': 'CommandsR Kick'
+    '34-CommandsR The Creator': 'CommandsR The Creator'
+    '35-CommandsR Toggle Dmg Tags': 'CommandsR Toggle Dmg Tags'
+    '36-Decoration Commands': 'Decoration Commands'
         Comment
-    '34-CommandsR Kick': 'CommandsR Kick'
-    '35-CommandsR The Creator': 'CommandsR The Creator'
-    '36-CommandsR Toggle Dmg Tags': 'CommandsR Toggle Dmg Tags'
-    '37-Decoration Commands': 'Decoration Commands'
+    '37-CommandsD Select Search': 'CommandsD Select Search'
+    '38-CommandsD Control': 'CommandsD Control'
+    '39-CommandsD Set AoE': 'CommandsD Set AoE'
+    '40-CommandsD Set Tree Space': 'CommandsD Set Tree Space'
+    '41-CommandsD Set Parameters': 'CommandsD Set Parameters'
+    '42-CommandsD Set RGB': 'CommandsD Set RGB'
+    '43-CommandsD Unit Mods': 'CommandsD Unit Mods'
+    '44-CommandsD Add Tag': 'CommandsD Add Tag'
+    '45-CommandsD Select No': 'CommandsD Select No'
+    '46-CommandsD Variation': 'CommandsD Variation'
+    '47-CommandsD Rotate': 'CommandsD Rotate'
+    '48-Commands Skin': 'Commands Skin'
+    '49-Save Commands': 'Save Commands'
         Comment
-    '38-CommandsD Select Search': 'CommandsD Select Search'
-    '39-CommandsD Control': 'CommandsD Control'
-    '40-CommandsD Set AoE': 'CommandsD Set AoE'
-    '41-CommandsD Set Tree Space': 'CommandsD Set Tree Space'
-    '42-CommandsD Set Parameters': 'CommandsD Set Parameters'
-    '43-CommandsD Set RGB': 'CommandsD Set RGB'
-    '44-CommandsD Unit Mods': 'CommandsD Unit Mods'
-    '45-CommandsD Add Tag': 'CommandsD Add Tag'
-    '46-CommandsD Select No': 'CommandsD Select No'
-    '47-CommandsD Variation': 'CommandsD Variation'
-    '48-CommandsD Rotate': 'CommandsD Rotate'
-    '49-Commands Skin': 'Commands Skin'
-    '50-Save Commands': 'Save Commands'
+    '50-Commands Save': 'Commands Save'
+    '51-Commands Request': 'Commands Request'
+    '52-Commands Usav': 'Commands Usav'
+    '53-Commands Dsav': 'Commands Dsav'
+    '54-Commands Tsav': 'Commands Tsav'
+    '55-Commands Compat': 'Commands Compat'
+    56-Hotkeys: Hotkeys
         Comment
-    '51-Commands Save': 'Commands Save'
-    '52-Commands Request': 'Commands Request'
-    '53-Commands Usav': 'Commands Usav'
-    '54-Commands Compat': 'Commands Compat'
-    55-Hotkeys: Hotkeys
-        Comment
-    '56-Hotkey Fullscreen': 'Hotkey Fullscreen'
-    57-New: New
-        Comment
-    '58-Commands Dsav': 'Commands Dsav'
-    '59-Commands Tsav': 'Commands Tsav'
-    '60-Hotkey Move Units': 'Hotkey Move Units'
+    '57-Hotkey Fullscreen': 'Hotkey Fullscreen'
+    '58-Hotkey Move Units': 'Hotkey Move Units'
 '08-Decoration Systems': 'Decoration Systems'
 '09-Deco Builders': 'Deco Builders'
     01-Libraries: Libraries
@@ -244,43 +243,46 @@
     05-DummyRecycler: DummyRecycler
     06-Id2String: Id2String
     07-HeroicUnit: HeroicUnit
-    '08-By Guhun': 'By Guhun'
+    08-StringHashEx: StringHashEx
+    09-Maths: Maths
+    10-MathParser: MathParser
+    11-Modified: Modified
         Comment
-    09-CutToComma: CutToComma
-    10----------------------------: ---------------------------
+    '12-PlayerUtils Lite': 'PlayerUtils Lite'
+    '13-Timeline Lite': 'Timeline Lite'
+    '14-By Guhun': 'By Guhun'
         Comment
-    '11-Camera System': 'Camera System'
-        Disab
-    12-MoveSpeedBonus: MoveSpeedBonus
-    '13-Move Speed Modification': 'Move Speed Modification'
-    14-MultiBoard: MultiBoard
-    15-GameTime: GameTime
-    16-ArgumentStack: ArgumentStack
-    '17-Under Construction': 'Under Construction'
+    15-CutToComma: CutToComma
+    16-PlayerColorUtils: PlayerColorUtils
+    17-UnitVisualMods: UnitVisualMods
+    18-UnitVisualValues: UnitVisualValues
+    19-AnyBase: AnyBase
+    20-BitFlags: BitFlags
+    21-OOP: OOP
+    22-MoveSpeedBonus: MoveSpeedBonus
+    23-MultiBoard: MultiBoard
+    24-GameTime: GameTime
+    25-ArgumentStack: ArgumentStack
+    26-BoolExprEvaluator: BoolExprEvaluator
+    27-Map-specific: Map-specific
         Comment
-    18-BoolExprEvaluator: BoolExprEvaluator
-    19-UnitEvents: UnitEvents
-    '20-Create Water': 'Create Water'
+    28-NativeRedefinitions: NativeRedefinitions
+    29-UnitEvents: UnitEvents
+    30-CustomizableAbilityList: CustomizableAbilityList
+    '31-Move Speed Modification': 'Move Speed Modification'
+    32-TransportUtils: TransportUtils
+    '33-Under Construction': 'Under Construction'
+        Comment
+    '34-Camera System': 'Camera System'
         Disab
-    21-CustomizableAbilityList: CustomizableAbilityList
-    22-UnitVisualMods: UnitVisualMods
-    23-UnitVisualValues: UnitVisualValues
-    24-NativeRedefinitions: NativeRedefinitions
-    25-OOP: OOP
-    26-TransportUtils: TransportUtils
-    27-UnitName: UnitName
-    '28-PlayerUtils Lite': 'PlayerUtils Lite'
-    29-BitFlags: BitFlags
-    30-Maths: Maths
-    31-MathParser: MathParser
-    '32-Timeline Lite': 'Timeline Lite'
-    33-LockableStructs: LockableStructs
+    '35-Create Water': 'Create Water'
         Disab
-    34-StringHashEx: StringHashEx
-    35-Packets: Packets
+    36-UnitName: UnitName
+    37-LockableStructs: LockableStructs
         Disab
-    36-AnyBase: AnyBase
-    37-WorldBoundsUtils: WorldBoundsUtils
+    38-Packets: Packets
+        Disab
+    39-WorldBoundsUtils: WorldBoundsUtils
         Disab
 21-Map-specific: Map-specific
     1-Debug: Debug
@@ -390,7 +392,6 @@
     '3-TerrainEditorUI View': 'TerrainEditorUI View'
     '4-TerrainEditorUI Controller': 'TerrainEditorUI Controller'
     5-TileDefs: TileDefs
-    6-PlayerColorUtils: PlayerColorUtils
 36----------------------------------------: ---------------------------------------
 37-Spells: Spells
 38-------------------: ------------------
@@ -434,26 +435,24 @@
     34-Comet: Comet
     35-Silence: Silence
     '36-Thunder Clap': 'Thunder Clap'
-    '37-Unit Abilities': 'Unit Abilities'
+    '37-Breath of Frost': 'Breath of Frost'
+    '38-Unit Abilities': 'Unit Abilities'
         Comment
-    '38-Make Unit Selectable': 'Make Unit Selectable'
-    '39-Angel Judgement': 'Angel Judgement'
-    '40-Defend Turn On': 'Defend Turn On'
-    '41-Defend Turn Off': 'Defend Turn Off'
-    '42-Item Abilities': 'Item Abilities'
+    '39-Make Unit Selectable': 'Make Unit Selectable'
+    '40-Angel Judgement': 'Angel Judgement'
+    '41-Defend Turn On': 'Defend Turn On'
+    '42-Defend Turn Off': 'Defend Turn Off'
+    '43-Item Abilities': 'Item Abilities'
         Comment
-    '43-Staff of Mimic': 'Staff of Mimic'
-    44-Special: Special
+    '44-Staff of Mimic': 'Staff of Mimic'
+    45-Special: Special
         Comment
-    '45-Cosmosis Obliterate': 'Cosmosis Obliterate'
-    '46-Critter Wander': 'Critter Wander'
-    '47-Mirror Image': 'Mirror Image'
-    48-New: New
-        Comment
-    '49-Breath of Frost': 'Breath of Frost'
-    '50-Pick Up Rider': 'Pick Up Rider'
-    '51-Ditch Rider': 'Ditch Rider'
-    '52-Silver Key': 'Silver Key'
+    '46-Cosmosis Obliterate': 'Cosmosis Obliterate'
+    '47-Critter Wander': 'Critter Wander'
+    '48-Mirror Image': 'Mirror Image'
+    '49-Pick Up Rider': 'Pick Up Rider'
+    '50-Ditch Rider': 'Ditch Rider'
+    '51-Silver Key': 'Silver Key'
 '40-No Spell System Spells': 'No Spell System Spells'
     01-FilterTransformations: FilterTransformations
     '02-Ability Cooldown': 'Ability Cooldown'
@@ -528,3 +527,6 @@
 49-AdvChatBox: AdvChatBox
     '1-AdvChatBox View': 'AdvChatBox View'
     '2-AdvChatBox Controller': 'AdvChatBox Controller'
+'50-Function Interfaces': 'Function Interfaces'
+    1-FuncInterface: FuncInterface
+    2-FuncInterfaceIntegerPlayerBoolean: FuncInterfaceIntegerPlayerBoolean
