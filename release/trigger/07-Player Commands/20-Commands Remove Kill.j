@@ -1,3 +1,11 @@
+scope CommandsRemoveKill
+
+/*
+struct G extends array
+    //! runtextmacro TableStruct_NewConstTableField("public", "allowedTypes")
+endstruct
+*/
+
 function Trig_Commands_Remove_Kill_Conditions takes nothing returns boolean
     local group g = CreateGroup()
     local unit u
@@ -11,7 +19,7 @@ function Trig_Commands_Remove_Kill_Conditions takes nothing returns boolean
     loop
         //! runtextmacro ForUnitInGroupCountedReverse("u", "i", "g")
         
-        if GM or LoP_PlayerOwnsUnit(trigP, u) then
+        if GM or LoP_PlayerOwnsUnit(trigP, u) or (/*G.allowedTypes.boolean.has(GetUnitTypeId(u)) and*/ GetOwningPlayer(u) == LoP.NEUTRAL_PASSIVE) then
             if remove then
                 call LoP_RemoveUnit(u)
             else
@@ -32,5 +40,9 @@ endfunction
 function InitTrig_Commands_Remove_Kill takes nothing returns nothing
     call LoP_Command.create("-kill", ACCESS_USER, Condition(function Trig_Commands_Remove_Kill_Conditions))
     call LoP_Command.create("-remove", ACCESS_USER, Condition(function Trig_Commands_Remove_Kill_Conditions))
+    
+    // set G.allowedTypes.boolean['nshp'] = true
+    // set G.allowedTypes.boolean['nbot'] = true
 endfunction
 
+endscope
