@@ -28,6 +28,11 @@ function MakeTitan takes player whichPlayer returns nothing
         call SetUnitOwner(POWER_VULNERABILITY(), udg_GAME_MASTER, false)
 endfunction
 
+function LoP_GivesShareAccess takes player whichPlayer, player recipient returns boolean
+    return GetPlayerAlliance(whichPlayer, recipient, ALLIANCE_SHARED_ADVANCED_CONTROL)
+endfunction
+
+
 function LoP_PlayerOwnsUnit takes player whichPlayer, unit whichUnit returns boolean
     return GetPlayerAlliance(LoP_GetOwningPlayer(whichUnit), whichPlayer, ALLIANCE_SHARED_ADVANCED_CONTROL)
 endfunction
