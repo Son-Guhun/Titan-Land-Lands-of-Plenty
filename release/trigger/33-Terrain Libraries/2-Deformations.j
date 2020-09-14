@@ -1,11 +1,13 @@
-library LoPDeformLimit initializer init requires TileDefinition
+library LoPDeformLimit initializer init requires TileDefinition, LoPWarn
 
 globals
     public integer limitTile
+    public constant key MSGKEY
 endglobals
 
 //! textmacro LoPDeformLimitInline
     if (integer(this) - (integer(this) / WorldTilesX) * WorldTilesX) < LoPDeformLimit_limitTile then
+        call LoP_WarnPlayerTimeout(User.Local, LoPChannels.ERROR, LoPDeformLimit_MSGKEY, 10., "You cannot change terrain height outside of the Sandbox (eastern side of the map).")
         return
     endif
 //! endtextmacro
