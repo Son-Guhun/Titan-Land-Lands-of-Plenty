@@ -7,6 +7,7 @@ endfunction
 function Trig_CommandsR_Delete_Conditions takes nothing returns boolean
     local integer playerNumber = Commands_GetChatMessagePlayerNumber(LoP_Command.getArguments())
     local string command = LoP_Command.getCommand()
+    local player targetPlayer
     local LinkedHashSet_DecorationEffect test 
     local DecorationEffect i
     
@@ -16,19 +17,21 @@ function Trig_CommandsR_Delete_Conditions takes nothing returns boolean
         return false
     endif
     
+    set targetPlayer = Player(playerNumber - 1)
+    
     set udg_Commands_Counter = 0
     if ( command == "-delneu" ) then
     
         set commandsDeleteInsideTitanPalace = false
         set udg_Commands_Counter_Max = 500
-        call ForGroup( udg_System_NeutralUnits[( playerNumber - 1 )], function Trig_CommandsR_Delete_Func018A )
+        call LoP_ForNeutralUnits(targetPlayer, function Trig_CommandsR_Delete_Func018A )
         // Don't clear neutral group, protected units might be in it. Let automatic refresh take care of this.
     elseif ( command == "-delpal" ) then
     
         set commandsDeleteInsideTitanPalace = true
         set udg_Commands_Counter_Max = 500
         call GroupEnumUnitsOfPlayer(ENUM_GROUP, Player(playerNumber - 1), Condition(function GroupEnum_RemoveOutsidePalace))
-        call ForGroup( udg_System_NeutralUnits[( playerNumber - 1 )], function Trig_CommandsR_Delete_Func018A )
+        call LoP_ForNeutralUnits(targetPlayer, function Trig_CommandsR_Delete_Func018A )
     else
     
         set test = EnumDecorationsOfPlayer(Player(playerNumber - 1))

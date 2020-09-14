@@ -10,13 +10,12 @@ function Trig_System_Cleanup_UnitGroups_Actions takes nothing returns nothing
         loop
         exitwhen playerNumber > bj_MAX_PLAYERS
             if IsPlayerInForce(Player(playerNumber -1), bj_FORCE_ALL_PLAYERS) then
-                call GroupRefresh(udg_System_NeutralUnits[playerNumber - 1])
+                call LoP_RefreshNeutralUnits(Player(playerNumber - 1))
                 call GroupRefresh(udg_Player_ControlGroup[playerNumber])
             endif
             set playerNumber = playerNumber + 1
         endloop
         
-        // call GroupRefresh(udg_GUMS_LoopGroup) // Refreshing GUMS_LoopGroup should be unnecessary, since clearing unit data removes unit from GUMS_LoopGroup
         call GroupRefresh(udg_Abilities_AoRest_UnitGroup)
         set g_unitHasBeenRemoved = false
     endif

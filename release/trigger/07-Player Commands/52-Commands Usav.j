@@ -37,7 +37,7 @@ private function onCommand takes nothing returns boolean
         
         set userUnits = playerData.units
         call GroupEnumUnitsOfPlayer(playerData.units, trigP, Filter(function EnumFilter))
-        call ForGroup(LoP_GetPlayerNeutralUnits(trigP), function FilterNeutrals)
+        call LoP_ForNeutralUnits(trigP, function FilterNeutrals)
         call BlzGroupRemoveGroupFast(LoP_GetProtectedUnits(), playerData.units)  // Order matters, protected units may be in neutral group
         
         set saveData.centerX = GetUnitX(generator)

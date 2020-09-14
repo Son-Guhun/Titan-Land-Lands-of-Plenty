@@ -1,52 +1,46 @@
-function Trig_Commands_Take_Func004Func009A takes nothing returns nothing
-    if ( GetOwningPlayer(GetEnumUnit()) == Player(PLAYER_NEUTRAL_PASSIVE) and IsUnitInGroup(GetEnumUnit(), udg_System_NeutralUnits[( GetConvertedPlayerId(GetTriggerPlayer()) - 1 )]) ) then
-        if CheckCommandOverflow() then
-            call SetUnitOwner( GetEnumUnit(), GetTriggerPlayer(), false )
-            call GroupRemoveUnit(udg_System_NeutralUnits[( GetConvertedPlayerId(GetTriggerPlayer()) - 1 )], GetEnumUnit())
-        endif
-    else
-        call DisplayTextToPlayer(GetTriggerPlayer(), 0, 0, "This is not your unit.")
-    endif
-endfunction
-
-function Trig_Commands_Take_Func004Func013A takes nothing returns nothing
-    local unit enumUnit = GetEnumUnit()
-    
-    call GroupRemoveUnit(udg_System_NeutralUnits[GetPlayerId(GetTriggerPlayer())], enumUnit)
-    
-    if ( GetOwningPlayer(enumUnit) == Player(PLAYER_NEUTRAL_PASSIVE) ) then
-        call SetUnitOwner(enumUnit, GetTriggerPlayer(), false)
-    else
-        call LoP_WarnPlayerTimeout(GetTriggerPlayer(), LoPChannels.ERROR, LoPMsgKeys.NO_UNIT_ACCESS, 0., "This is not your unit.")
-    endif
-    
-    set enumUnit = null
-endfunction
-
-function Trig_Commands_Take_Func004C takes nothing returns boolean
-    if ( not ( GetEventPlayerChatString() == "-take" ) ) then
-        return false
-    endif
-    return true
-endfunction
-
 function Trig_Commands_Take_Conditions takes nothing returns boolean
-    local group g
     local string args = LoP_Command.getArguments()
+    local player trigP = GetTriggerPlayer()
+    local User pId = User[trigP]
+    local group g = CreateGroup()
+    local unit u
+    local integer i
     
     if ( args == "all" ) then
-        call ForGroup(udg_System_NeutralUnits[( GetConvertedPlayerId(GetTriggerPlayer()) - 1 )], function Trig_Commands_Take_Func004Func013A )
+        call LoP_EnumNeutralUnits(trigP, g)
+        set i = IMinBJ(BlzGroupGetSize(g), 2000)
+        loop
+            //! runtextmacro ForUnitInGroupCountedReverse("u", "i", "g")
+            
+            // Only return unit if it still belongs to neutral passive. Otherwise it was given to another player.
+            if (GetOwningPlayer(u) == LoP.NEUTRAL_PASSIVE) then
+                call SetUnitOwner(u, trigP, false)
+            endif
+        endloop
     else
-        set g = CreateGroup()
         call Commands_EnumSelectedCheckForGenerator(g, GetTriggerPlayer(), null)
         
-        set udg_Commands_Counter = 0
-        set udg_Commands_Counter_Max = 2000
-        call ForGroup(g, function Trig_Commands_Take_Func004Func009A)
+        set i = BlzGroupGetSize(g)  // IMinBJ(BlzGroupGetSize(g), 2000)  // does not work in this case because you would always enumarate the same number of units
+        loop
+            //! runtextmacro ForUnitInGroupCountedReverse("u", "i", "g")
+            
+            
+            if (GetOwningPlayer(u) == LoP.NEUTRAL_PASSIVE) then
+                if LoP_GetOwningPlayer(u) == trigP then
+                    call SetUnitOwner(u, trigP, false)
+                else
+                    call LoP_WarnPlayerTimeout(trigP, LoPChannels.ERROR, LoPMsgKeys.NO_UNIT_ACCESS, 0., "This unit is not your unit.")
+                endif
+            else
+                call LoP_WarnPlayerTimeout(trigP, LoPChannels.ERROR, LoPMsgKeys.INVALID, 0., "This unit is not neutral.")
+            endif
+        endloop
         
-        call DestroyGroup(g)
-        set g = null
+
     endif
+    
+    call DestroyGroup(g)
+    set g = null
     return false
 endfunction
 

@@ -13,7 +13,7 @@ private function onCommand takes nothing returns boolean
         set playerData.units = CreateGroup()
     endif
     call GroupEnumUnitsOfPlayer(playerData.units, trigP, Filter(function EnumFilter))
-    call BlzGroupAddGroupFast(LoP_GetPlayerNeutralUnits(trigP), playerData.units)
+    call LoP_EnumNeutralUnits(trigP, playerData.units)
     call BlzGroupRemoveGroupFast(LoP_GetProtectedUnits(), playerData.units)  // Order matters, protected units may be in neutral group
     
     

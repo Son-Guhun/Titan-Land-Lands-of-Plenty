@@ -108,13 +108,16 @@ Action
         Call  : GetPlayersAll
         Action
             CustomScriptCode
-                Const : 'local integer udg_temp_integer = GetPlayerId(GetEnumPlayer()) + 1'
+                Const : 'local integer udg_temp_integer'
             CustomScriptCode
                 Const : 'local player udg_temp_player'
             SetVariable
                 Var   : temp_player
-                Call  : ConvertedPlayer
-                    Var   : temp_integer
+                Call  : GetEnumPlayer
+            SetVariable
+                Var   : temp_integer
+                Call  : GetConvertedPlayerId
+                    Var   : temp_player
             CreateFogModifierRectBJ
                 Preset: EnabledDisabledEnabled
                 Var   : temp_player
@@ -181,7 +184,7 @@ Action
                 Call  : GetPlayerStartLocationLoc
                     Var   : temp_player
             CustomScriptCode
-                Const : 'set udg_System_NeutralUnits[udg_temp_integer - 1] = CreateGroup()'
+                Const : 'call LoP_InitializeNeutralUnits(udg_temp_player)'
             CustomScriptCode
                 Const : 'set udg_Player_ControlGroup[udg_temp_integer] = CreateGroup()'
             SetVariable

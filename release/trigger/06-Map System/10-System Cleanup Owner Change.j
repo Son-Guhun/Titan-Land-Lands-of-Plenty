@@ -3,7 +3,6 @@ library LoPfour requires LoPCleanUpDeath, LoPNeutralUnits
 //! runtextmacro DefineHooks()
 
 function LoP_onChangeOwner takes unit whichUnit, player ownerOld returns nothing
-    local player owner = GetOwningPlayer( whichUnit )
     local UnitVisuals unitId = GetHandleId(whichUnit)
     
     if not LoP_IsUnitDecoration(whichUnit) then
@@ -12,12 +11,13 @@ function LoP_onChangeOwner takes unit whichUnit, player ownerOld returns nothing
     endif
     
     // If ownership was changed with -neut command, no need to change colors.
-    if not IsUnitInGroup(whichUnit, LoP_GetPlayerNeutralUnits(ownerOld)) then
+    if LoP_GetOwningPlayer(whichUnit) != ownerOld then
         if unitId.hasColor() then
             call SetUnitColor(whichUnit, GetPlayerColor(Player(unitId.raw.getColor() - 1)))
         else
             call SetUnitColor(whichUnit, LoP_PlayerData.get(GetOwningPlayer(whichUnit)).getUnitColor())
         endif
+    elseif ownerOld == LoP.NEUTRAL_PASSIVE then
         call LoP_ClearNeutralData(whichUnit)
     endif
     

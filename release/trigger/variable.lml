@@ -295,8 +295,6 @@ DecoSystem_PlayerColor: integer
 System_searchStr: string
 save_XYminmaxcur: real
     Array : 1
-System_NeutralUnits: group
-    Array : 1
 Damage_Mod_Multiplier: real
     Def   : 1.00
 Damage_Mod_Add: real
