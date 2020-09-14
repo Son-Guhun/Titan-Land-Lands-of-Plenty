@@ -26,16 +26,20 @@ SaveUnitExtras library:
 
 globals
     private force ENUM_FORCE = CreateForce()
-    public boolean stillSaving = false  // used to determine whether any players are still saving
-    private timer loopTimer
 endglobals
 
 private struct InternalPlayerData extends array
+    //! runtextmacro TableStruct_NewStaticStructField("playerQueue", "LinkedHashSet")
 
     implement DebugPlayerStruct
     
+    static key static_members_key
     //! runtextmacro TableStruct_NewStructField("saveData", "SaveData")
-
+    static method isInitialized takes nothing returns boolean
+        return playerQueueExists()
+    endmethod
+    
+    
     // Contains units and effects to be saved
     //! runtextmacro TableStruct_NewHandleField("units", "group")
     //! runtextmacro TableStruct_NewStructField("effects", "LinkedHashSet")
@@ -208,8 +212,7 @@ private function GenerateFlagsStr takes unit saveUnit returns string
     return I2S(result)  // TODO: If max flag exceeds 4, we need to use AnyBase(92) instead of I2S
 endfunction
 
-private function SaveForceLoop takes nothing returns boolean
-    local player filterPlayer = GetFilterPlayer()
+private function SaveNextUnits takes player filterPlayer returns boolean
     local InternalPlayerData playerId = GetPlayerId(filterPlayer)
     local unit saveUnit
     local integer saveUnitCount = 0
@@ -223,7 +226,6 @@ private function SaveForceLoop takes nothing returns boolean
     endif
     
     if playerId.isSaving == true then
-        set stillSaving = true
         set saveData = playerId.saveData
         
         set saveUnitCount = SaveEffectDecos(playerId, saveData)  // Only begin saving units once all decorations have been saved.
@@ -313,17 +315,27 @@ private function SaveForceLoop takes nothing returns boolean
 endfunction
 
 private function SaveLoopActions takes nothing returns nothing
-    set stillSaving = false
-    call ForceEnumPlayers(ENUM_FORCE, Condition(function SaveForceLoop))
+    local InternalPlayerData playerId
+    local LinkedHashSet queue = InternalPlayerData.playerQueue
     
-    if not stillSaving then
-        call PauseTimer(GetExpiredTimer())
+    if not queue.isEmpty() then
+        set playerId = queue.getFirst() - 1
+        call queue.remove(playerId+1)
+        
+        call SaveNextUnits(Player(playerId))
+    
+        if playerId.isSaving then
+            call queue.append(playerId+1)
+        endif
     endif
-
 endfunction
 
 function SaveUnits takes SaveData saveData returns nothing
     local InternalPlayerData playerId = GetPlayerId(saveData.player)
+    
+    if not InternalPlayerData.isInitialized() then  // avoid creating an extra function
+        set InternalPlayerData.playerQueue = LinkedHashSet.create()
+    endif
 
     set playerId.savedCount = 0
     set playerId.isSaving = true
@@ -336,12 +348,11 @@ function SaveUnits takes SaveData saveData returns nothing
     if playerId.saveData != 0 then
         call DisplayTextToPlayer(saveData.player, 0., 0., "|cffff0000Warning:|r Did not finish saving previous file!")
         call playerId.saveData.destroy()
+    else
+        call InternalPlayerData.playerQueue.append(playerId + 1)
     endif
     set playerId.saveData = saveData
     
-    if not stillSaving then
-        call TimerStart(loopTimer, 0.5, true, function SaveLoopActions)
-    endif
     
     if User.fromLocal() == playerId then
         call BlzFrameSetText(saveUnitBarText, "Waiting...")
@@ -353,6 +364,6 @@ endfunction
 
 //===========================================================================
 function InitTrig_SaveUnit takes nothing returns nothing
-    set loopTimer = CreateTimer()
+    call TimerStart(CreateTimer(), 0.5, true, function SaveLoopActions)
 endfunction
 endlibrary

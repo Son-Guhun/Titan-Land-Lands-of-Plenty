@@ -1,6 +1,8 @@
-library SaveDestructable requires SaveNLoad, SaveIO
+library SaveDestructable requires SaveNLoad, SaveIO, GLHS
 
 private struct PlayerData extends array
+    static key static_members_key
+    //! runtextmacro TableStruct_NewStaticStructField("playerQueue", "LinkedHashSet")
 
     //! runtextmacro TableStruct_NewStructField("saveData", "SaveData")
     //! runtextmacro TableStruct_NewStructField("destructables", "ArrayList_destructable")
@@ -37,21 +39,22 @@ private function SaveNextDestructables takes PlayerData playerId returns nothing
 endfunction
 
 private function onTimer takes nothing returns nothing
-    local PlayerData playerId = 0
+    local PlayerData playerId 
     
-    loop
-    exitwhen playerId == bj_MAX_PLAYER_SLOTS
-        if playerId.saveData != 0 then
-            call SaveNextDestructables(playerId)
-            if playerId.current == playerId.destructables.size() then
-                call playerId.saveData.destroy()
-                set playerId.saveData = 0
-                call playerId.destructables.clear()
-                call DisplayTextToPlayer( Player(playerId),0,0, "Finished Saving" )
-            endif
+    if not PlayerData.playerQueue.isEmpty() then
+        set playerId = PlayerData.playerQueue.getFirst() - 1
+        call PlayerData.playerQueue.remove(playerId+1)
+        
+        call SaveNextDestructables(playerId)
+        if playerId.current == playerId.destructables.size() then
+            call playerId.saveData.destroy()
+            set playerId.saveData = 0
+            call playerId.destructables.clear()
+            call DisplayTextToPlayer(Player(playerId),0,0, "Finished Saving" )
+        else
+            call PlayerData.playerQueue.append(playerId+1)
         endif
-        set playerId = playerId + 1
-    endloop
+    endif
 endfunction
 
 private function AddToArrayList takes nothing returns boolean
@@ -67,6 +70,8 @@ function SaveDestructables takes SaveData saveData, rect rectangle returns nothi
         call DisplayTextToPlayer(playerId.saveData.player, 0., 0., "|cffff0000Warning:|r Did not finish saving previous file!")
         call playerId.saveData.destroy()
         call playerId.destructables.clear()
+    else
+        call PlayerData.playerQueue.append(playerId+1)
     endif
     set playerId.saveData = saveData
     set playerId.current = 0
@@ -85,6 +90,7 @@ function InitTrig_SaveDestructable takes nothing returns nothing
 
     call TimerStart(CreateTimer(), 0.5, true, function onTimer)
     
+    set PlayerData.playerQueue = LinkedHashSet.create()
     loop
     exitwhen playerId == bj_MAX_PLAYER_SLOTS
         if GetPlayerController(Player(playerId)) == MAP_CONTROL_USER then

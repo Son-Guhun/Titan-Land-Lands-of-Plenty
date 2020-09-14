@@ -11,6 +11,12 @@ library SaveTerrain requires SaveNLoad, SaveIO, SaveNLoadProgressBars
 //! endtextmacro
 
 private struct PlayerData extends array
+    static key static_members_key
+    //! runtextmacro TableStruct_NewStaticStructField("playerQueue", "LinkedHashSet")
+    static method isInitialized takes nothing returns boolean
+        return playerQueueExists()
+    endmethod
+
     //! runtextmacro TableStruct_NewStructField("saveData", "SaveData")
     //! runtextmacro SaveXYMethodTerrain("minX")
     //! runtextmacro SaveXYMethodTerrain("maxX")
@@ -113,38 +119,43 @@ endfunction
 */
 
 private function onTimer takes nothing returns nothing
-    local PlayerData playerId = 0
-    local integer total
-
-    loop
-    exitwhen playerId == bj_MAX_PLAYER_SLOTS
-        if playerId.saveData != 0 then
-            call SaveTiles(playerId)
-            if playerId.curY > playerId.maxY then
-                call playerId.saveData.write(SaveNLoad_FormatString("SnL_ter", "end"))
-                call playerId.saveData.destroy()
-                set playerId.saveData = 0
-                call DisplayTextToPlayer( Player(playerId),0,0, "Finished Saving" )
-                if User.fromLocal() == playerId then
-                    call BlzFrameSetVisible(saveTerrainBar, false)
-                endif
-            else
-                if User.fromLocal() == playerId then
-                    call BlzFrameSetValue(saveTerrainBar, 100.*((playerId.curY-playerId.minY)*(playerId.maxX-playerId.minX) + (playerId.maxX - playerId.curX)) / ((playerId.maxY-playerId.minY)*(playerId.maxX-playerId.minX)))
-                    call BlzFrameSetText(saveTerrainBarText, I2S(R2I((playerId.curY-playerId.minY)*(playerId.maxX-playerId.minX)+(playerId.maxX - playerId.curX))/16384) + "/" + I2S(R2I((playerId.maxY-playerId.minY)*(playerId.maxX-playerId.minX))/16384))
-                endif
+    local PlayerData playerId
+    
+    if not PlayerData.playerQueue.isEmpty() then
+        set playerId = PlayerData.playerQueue.getFirst() - 1
+        call PlayerData.playerQueue.remove(playerId+1)
+    
+        call SaveTiles(playerId)
+        if playerId.curY > playerId.maxY then
+            call playerId.saveData.write(SaveNLoad_FormatString("SnL_ter", "end"))
+            call playerId.saveData.destroy()
+            set playerId.saveData = 0
+            call DisplayTextToPlayer( Player(playerId),0,0, "Finished Saving" )
+            if User.fromLocal() == playerId then
+                call BlzFrameSetVisible(saveTerrainBar, false)
+            endif
+        else
+            call PlayerData.playerQueue.append(playerId+1)
+            if User.fromLocal() == playerId then
+                call BlzFrameSetValue(saveTerrainBar, 100.*((playerId.curY-playerId.minY)*(playerId.maxX-playerId.minX) + (playerId.maxX - playerId.curX)) / ((playerId.maxY-playerId.minY)*(playerId.maxX-playerId.minX)))
+                call BlzFrameSetText(saveTerrainBarText, I2S(R2I((playerId.curY-playerId.minY)*(playerId.maxX-playerId.minX)+(playerId.maxX - playerId.curX))/16384) + "/" + I2S(R2I((playerId.maxY-playerId.minY)*(playerId.maxX-playerId.minX))/16384))
             endif
         endif
-        set playerId = playerId + 1
-    endloop
+    endif
 endfunction
 
 function SaveTerrain takes SaveData saveData, rect saveRect returns nothing
     local PlayerData playerId = GetPlayerId(saveData.player)
+    
+    if not PlayerData.isInitialized() then  // avoid creating an extra function
+        set PlayerData.playerQueue = LinkedHashSet.create()
+    endif
 
     if playerId.saveData != 0 then
         call DisplayTextToPlayer(playerId.saveData.player, 0., 0., "|cffff0000Warning:|r Did not finish saving previous file!")
         call playerId.saveData.destroy()
+    else
+        call PlayerData.playerQueue.append(playerId+1)
     endif
     set playerId.saveData = saveData
     
