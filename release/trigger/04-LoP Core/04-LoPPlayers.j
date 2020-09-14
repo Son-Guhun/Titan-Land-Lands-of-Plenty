@@ -16,7 +16,7 @@ endfunction
 function MakeTitan takes player whichPlayer returns nothing
         set udg_GAME_MASTER = whichPlayer
         call SetUnitOwner(HERO_COSMOSIS(), udg_GAME_MASTER, false)
-        if GetOwningPlayer(HERO_CREATOR()) != Player(PLAYER_NEUTRAL_PASSIVE) then
+        if GetOwningPlayer(HERO_CREATOR()) != LoP.NEUTRAL_PASSIVE then
             call SetUnitOwner(HERO_CREATOR(), udg_GAME_MASTER, false)
         endif
         

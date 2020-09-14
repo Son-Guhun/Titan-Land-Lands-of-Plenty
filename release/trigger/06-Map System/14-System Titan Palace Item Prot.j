@@ -83,7 +83,7 @@ endfunction
 //===========================================================================
 function InitTrig_System_Titan_Palace_Item_Prot takes nothing returns nothing
     set gg_trg_System_Titan_Palace_Item_Prot = CreateTrigger(  )
-    call TriggerRegisterPlayerUnitEvent(gg_trg_System_Titan_Palace_Item_Prot, Player(PLAYER_NEUTRAL_PASSIVE), EVENT_PLAYER_UNIT_SELL_ITEM, null)
+    call TriggerRegisterPlayerUnitEvent(gg_trg_System_Titan_Palace_Item_Prot, LoP.NEUTRAL_PASSIVE, EVENT_PLAYER_UNIT_SELL_ITEM, null)
     call TriggerAddCondition(gg_trg_System_Titan_Palace_Item_Prot, Condition( function Trig_System_Titan_Palace_Item_Prot_Conditions))
     call TriggerAddAction(gg_trg_System_Titan_Palace_Item_Prot, function Trig_System_Titan_Palace_Item_Prot_Actions)
 endfunction

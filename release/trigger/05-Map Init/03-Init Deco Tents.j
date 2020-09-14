@@ -1,4 +1,4 @@
-library LoPInitDecoTents requires LoPDecoBuilders
+library LoPInitDecoTents requires LoPHeader, LoPDecoBuilders
 /*
     Defines functions to create the Deco Tents in the Titan Palace, which are dynamically
     generated.
@@ -53,7 +53,7 @@ function InitDecoTents takes nothing returns nothing
     set decoTentCount = 1
     loop
     exitwhen decoNumber > LoP_DecoBuilders.$name$DecoLastIndex
-        set decoTent = CreateUnit(Player(PLAYER_NEUTRAL_PASSIVE), 'n03H', xCur, yCur, bj_UNIT_FACING)
+        set decoTent = CreateUnit(LoP.NEUTRAL_PASSIVE, 'n03H', xCur, yCur, bj_UNIT_FACING)
         call BlzSetUnitName(decoTent, "Deco Tent $name$ "+ I2S(decoTentCount))
         call SetUnitVertexColor(decoTent, $name$_RED, $name$_GREEN, $name$_BLUE, $name$_ALPHA)
         
@@ -109,7 +109,7 @@ function InitReforgedTents takes nothing returns nothing
     set decoTentCount = 1
     loop
     exitwhen decoNumber > LoP_DecoBuilders.$name$DecoLastIndex
-        set decoTent = CreateUnit(Player(PLAYER_NEUTRAL_PASSIVE), 'n03H', xCur, yCur, bj_UNIT_FACING)
+        set decoTent = CreateUnit(LoP.NEUTRAL_PASSIVE, 'n03H', xCur, yCur, bj_UNIT_FACING)
         call BlzSetUnitName(decoTent, "Deco Tent $name$ "+ I2S(decoTentCount))
         call SetUnitVertexColor(decoTent, $name$_RED, $name$_GREEN, $name$_BLUE, $name$_ALPHA)
         
