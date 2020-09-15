@@ -145,6 +145,10 @@ globals
     private boolean unitHasBeenRemoved = false
 endglobals
 
+function GUMSPercentTo255 takes real percent returns real
+    return 2.55*percent + 0.5
+endfunction
+
 // Clears all data stored with a unit handle ID.
 function GUMSClearHandleId takes integer handleId returns nothing
     call data.flushChild(handleId)
@@ -264,10 +268,10 @@ endfunction
 
 //Set Vertex Color
 function GUMSSetUnitVertexColor takes unit whichUnit, real red, real green, real blue, real trans  returns nothing
-    local integer intRed = R2I(2.55 * red + 0.5)
-    local integer intGreen = R2I(2.55 * green + 0.5)
-    local integer intBlue = R2I(2.55 * blue + 0.5)
-    local integer intAlpha = R2I(2.55 * (100. - trans) + 0.5)
+    local integer intRed = R2I(GUMSPercentTo255(red))
+    local integer intGreen = R2I(GUMSPercentTo255(green))
+    local integer intBlue = R2I(GUMSPercentTo255(blue))
+    local integer intAlpha = R2I(GUMSPercentTo255(100. - trans))
     //! runtextmacro ASSERT("whichUnit != null")
     
     call SetUnitVertexColor(whichUnit, intRed, intGreen, intBlue, intAlpha)

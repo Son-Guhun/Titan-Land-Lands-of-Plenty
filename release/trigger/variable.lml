@@ -34,16 +34,13 @@ TreeSystem_Space: real
     Array : 13
     Def   : 128.00
 temp_real: real
-ColorSystem_Red: real
+ColorSystem_Red: integer
     Array : 1
-    Def   : 100.00
-ColorSystem_Green: real
+ColorSystem_Green: integer
     Array : 1
-    Def   : 100.00
-ColorSystem_Blue: real
+ColorSystem_Blue: integer
     Array : 1
-    Def   : 100.00
-ColorSystem_Alpha: real
+ColorSystem_Alpha: integer
     Array : 1
 DecoSystem_Scale: string
     Array : 1

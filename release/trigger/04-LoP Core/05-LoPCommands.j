@@ -1,4 +1,4 @@
-library LoPCommands initializer onInit requires CutToComma, TableStruct, ArgumentStack, LoPPlayers, UserDefinedRects
+library LoPCommands initializer onInit requires CutToComma, TableStruct, ArgumentStack, LoPPlayers, UserDefinedRects, UnitVisualMods
 
 globals
     constant integer ACCESS_TITAN = 1
@@ -65,6 +65,100 @@ function Commands_CheckOverflow takes nothing returns boolean
     return CheckCommandOverflow()
 endfunction
 
+function Commands_SetRGBAFromHex takes player whichPlayer, string args returns nothing
+    local integer pN = GetPlayerId(whichPlayer) + 1
+    local integer len = StringLength(args)
+    
+    if len > 3 and SubString(args, 0, 1) == "#" then
+        set args = SubString(args, 1, len)
+        set len = len - 1
+    elseif len < 2 then
+        set udg_ColorSystem_Green[pN] = 0
+        set udg_ColorSystem_Green[pN] = 0
+        set udg_ColorSystem_Blue[pN] = 0
+        set udg_ColorSystem_Alpha[pN] = 255
+        return
+    endif
+    set args = StringCase(args, false)
+    
+    
+    set udg_ColorSystem_Red[pN] = AnyBase(16).decode(SubString(args,0,2))
+    
+    if len >= 4 then
+        set udg_ColorSystem_Green[pN] = AnyBase(16).decode(SubString(args,2,4))
+        
+        if len >= 6 then
+            set udg_ColorSystem_Blue[pN] = AnyBase(16).decode(SubString(args,4,6))
+        
+            if len >= 8 then
+                set udg_ColorSystem_Alpha[pN] = AnyBase(16).decode(SubString(args,6,8))
+            else
+                set udg_ColorSystem_Alpha[pN] = 255
+            endif
+        else
+            set udg_ColorSystem_Blue[pN] = 0
+            set udg_ColorSystem_Alpha[pN] = 255
+        endif
+    else
+        set udg_ColorSystem_Green[pN] = 0
+        set udg_ColorSystem_Blue[pN] = 0
+        set udg_ColorSystem_Alpha[pN] = 255
+    endif
+endfunction
+
+function Commands_SetRGBAFromString takes player whichPlayer, string args, boolean forceInteger returns nothing
+    local integer pN = GetPlayerId(whichPlayer) + 1
+    local integer cutToComma
+    
+    local real red
+    local real green
+    local real blue
+    local real alpha
+    
+    if CutToCharacter(args, "#") != StringLength(args) then
+        call Commands_SetRGBAFromHex(whichPlayer, args)
+        return
+    endif
+
+    set cutToComma = CutToCharacter(args," ")
+    
+    if cutToComma == StringLength(args) and StringLength(args) == 6 or StringLength(args) == 8 then
+        call Commands_SetRGBAFromHex(whichPlayer, args)
+        return
+    endif
+    
+    set red = Arguments_ParseNumber(SubString(args,0,cutToComma))
+    
+    set args = SubString( args , cutToComma+1 , StringLength(args) )
+    set cutToComma = CutToCharacter(args," ")
+    set green = Arguments_ParseNumber(SubString(args,0,cutToComma))
+
+    set args = SubString(args,cutToComma+1, StringLength(args))
+    set cutToComma = CutToCharacter(args," ")
+    set blue = Arguments_ParseNumber(SubString(args,0,cutToComma))
+
+    set args = SubString(args,cutToComma+1, StringLength(args))
+    set cutToComma = CutToCharacter(args," ")
+    set alpha = Arguments_ParseNumber(SubString(args,0,cutToComma))
+    
+    
+    if not forceInteger then
+        if red > 100. or green > 100. or blue > 100. or alpha > 100. then
+            call LoP_WarnPlayer(whichPlayer, LoPChannels.WARNING, "Value over 100: assuming the user meant to use integer RGB.")
+        else
+            set red   = GUMSPercentTo255(red)
+            set blue  = GUMSPercentTo255(green)
+            set green = GUMSPercentTo255(blue)
+            set alpha = GUMSPercentTo255(alpha)
+        endif
+    endif
+    
+    set udg_ColorSystem_Red[pN] = R2I(red)
+    set udg_ColorSystem_Green[pN] = R2I(green)
+    set udg_ColorSystem_Blue[pN] = R2I(blue)
+    set udg_ColorSystem_Alpha[pN] = R2I(255 - alpha)
+endfunction
+
 
 struct LoP_Command extends array
     
@@ -85,7 +179,7 @@ struct LoP_Command extends array
         elseif .string == str then
             // Handle: Updating command.
         else
-            // Handle: Hash collision.
+            call BJDebugMsg("Command creation error: Hash collision with (" + .string + ") when creating (" + str + ").")
         endif
         return this
     endmethod

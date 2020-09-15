@@ -200,17 +200,21 @@ Action
                     Var   : temp_integer
                 Const : 128.00
             SetVariable
-                Array : ColorSystem_Blue
+                Array : ColorSystem_Red
                     Var   : temp_integer
-                Const : 100.00
+                Const : 255
             SetVariable
                 Array : ColorSystem_Green
                     Var   : temp_integer
-                Const : 100.00
+                Const : 255
             SetVariable
-                Array : ColorSystem_Red
+                Array : ColorSystem_Blue
                     Var   : temp_integer
-                Const : 100.00
+                Const : 255
+            SetVariable
+                Array : ColorSystem_Alpha
+                    Var   : temp_integer
+                Const : 255
             CommentString
                 Const : --
     CommentString

@@ -5,11 +5,6 @@ private struct Globals extends array
     static method operator value takes nothing returns real
         return MathParser.ans
     endmethod
-
-    static real red
-    static real green
-    static real blue
-    static real alpha
     
     static location loc
 
@@ -104,12 +99,8 @@ private function groupFunc takes nothing returns nothing
         else
             call GUMSSetUnitFacing(enumUnit, Globals.value)
         endif
-    elseif ( command == "'rgb" ) then
-        if args == "" then
-            call GUMSSetUnitVertexColor(enumUnit, udg_ColorSystem_Red[playerNumber], udg_ColorSystem_Green[playerNumber], udg_ColorSystem_Blue[playerNumber], udg_ColorSystem_Alpha[playerNumber])
-        else
-            call GUMSSetUnitVertexColor(enumUnit, Globals.red, Globals.green, Globals.blue, Globals.alpha)
-        endif
+    elseif ( SubString(command, 0, 4) == "'rgb") then
+        call GUMSSetUnitVertexColorInt(enumUnit, udg_ColorSystem_Red[playerNumber], udg_ColorSystem_Green[playerNumber], udg_ColorSystem_Blue[playerNumber], udg_ColorSystem_Alpha[playerNumber])
     elseif ( command == "'anim" ) then
         if args == "" then
             call SetUnitAnimation( enumUnit, udg_DecoSystem_Anims[playerNumber] )
@@ -149,19 +140,18 @@ private function onCommand takes nothing returns boolean
     local string args = LoP_Command.getArguments()
     local integer cutToComma
     
+    local integer pN = GetPlayerId(GetTriggerPlayer()) + 1
+    local integer red   = udg_ColorSystem_Red[pN]
+    local integer green = udg_ColorSystem_Green[pN]
+    local integer blue  = udg_ColorSystem_Blue[pN]
+    local integer alpha = udg_ColorSystem_Alpha[pN]
+    
     if cmd == "'rgb" then
-        set cutToComma = CutToCharacter(args, " ")
-        set Globals.red = Arguments_ParseNumber(CutToCommaResult(args, cutToComma))
-        set args = CutToCommaShorten(args, cutToComma)
-        set cutToComma = CutToCharacter(args, " ")
-        set Globals.green = Arguments_ParseNumber(CutToCommaResult(args, cutToComma))
-        set args = CutToCommaShorten(args, cutToComma)
-        set cutToComma = CutToCharacter(args, " ")
-        set Globals.blue = Arguments_ParseNumber(CutToCommaResult(args, cutToComma))
-        set args = CutToCommaShorten(args, cutToComma)
-        set cutToComma = CutToCharacter(args, " ")
-        set Globals.alpha = Arguments_ParseNumber(CutToCommaResult(args, cutToComma))
-        set args = CutToCommaShorten(args, cutToComma)
+        call Commands_SetRGBAFromString(GetTriggerPlayer(), args, false)
+    elseif cmd == "'rgbi" then
+        call Commands_SetRGBAFromString(GetTriggerPlayer(), args, true)
+    elseif cmd == "'rgbh" then
+        call Commands_SetRGBAFromHex(GetTriggerPlayer(), args)
     elseif cmd != "'anim" and cmd != "'color" then
         call MathParser.calculate(LoP_Command.getArguments())
     endif
@@ -174,6 +164,13 @@ private function onCommand takes nothing returns boolean
     // ---------------------------------------------
     call ForGroup( udg_temp_group, function groupFunc )
     call DestroyGroup(udg_temp_group)
+    
+    set udg_ColorSystem_Red[pN] = red
+    set udg_ColorSystem_Green[pN] = green
+    set udg_ColorSystem_Blue[pN] = blue
+    set udg_ColorSystem_Alpha[pN] = alpha
+    
+    
     set udg_temp_group = null
     set enumUnit = null
     return false
@@ -194,6 +191,8 @@ function InitTrig_CommandsD_Unit_Mods takes nothing returns nothing
     call LoP_Command.create("'roll", ACCESS_USER, Condition(function onCommand))
     
     call LoP_Command.create("'rgb", ACCESS_USER, Condition(function onCommand))
+    call LoP_Command.create("'rgbi", ACCESS_USER, Condition(function onCommand))
+    call LoP_Command.create("'rgbh", ACCESS_USER, Condition(function onCommand))
     
     set Globals.loc = Location(0., 0.)
 endfunction
