@@ -165,6 +165,7 @@
         Comment
     '57-Hotkey Fullscreen': 'Hotkey Fullscreen'
     '58-Hotkey Move Units': 'Hotkey Move Units'
+    '59-Hotkey Remove Units': 'Hotkey Remove Units'
 '08-Decoration Systems': 'Decoration Systems'
 '09-Deco Builders': 'Deco Builders'
     01-Libraries: Libraries
