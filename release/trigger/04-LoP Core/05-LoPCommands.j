@@ -198,8 +198,7 @@ public struct Globals extends array
     //! runtextmacro TableStruct_NewStaticAgentField("evaluator","trigger")
 endstruct
 
-public function MessageHandler takes nothing returns boolean
-    local string chatMsg
+public function ExecuteCommand takes string chatMsg returns boolean
     local integer cutToComma
     local string beforeSpace
     local string arguments
@@ -209,8 +208,6 @@ public function MessageHandler takes nothing returns boolean
     local boolean value
     
     local integer accessLevel
-    
-    set chatMsg = GetEventPlayerChatString()
     
     if Globals.evaluator == null then  // Initialization
         set Globals.evaluator = CreateTrigger()
@@ -256,6 +253,10 @@ public function MessageHandler takes nothing returns boolean
     endif
 
     return false
+endfunction
+
+public function MessageHandler takes nothing returns boolean
+    return ExecuteCommand(GetEventPlayerChatString())
 endfunction
 
 
