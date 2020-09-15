@@ -107,6 +107,35 @@ static if ENABLE_ID_FUNCTIONS and LIBRARY_WorldBounds then
     function GetCustomTileVerticalCount takes integer tileSize returns integer
         return Globals.totalY[tileSize]
     endfunction
+    
+    function ValidateCustomTileIndexI takes integer tileSize, integer i returns boolean
+        return Globals.totalY.integer[tileSize] > i
+    endfunction
+    
+    function ValidateCustomTileIndexJ takes integer tileSize, integer j returns boolean
+        return Globals.totalX.integer[tileSize] > j
+    endfunction
+    
+    function GetCustomTileIndexI takes integer tileId, integer tileSize returns integer
+        return ModuloInteger(tileId, Globals.totalY[tileSize])
+    endfunction
+    
+    function GetCustomTileIndexJ takes integer tileId, integer tileSize returns integer
+        return tileId / Globals.totalY[tileSize]
+    endfunction
+        
+    
+    function GetCustomTileIdFromIndices takes integer i, integer j, integer tileSize returns integer
+        return i + j*Globals.totalY[tileSize]
+    endfunction
+    
+    private function IntRoundUp takes integer num, integer multiple returns integer
+        return ((num-1)/multiple + 1)*multiple
+    endfunction
+    
+    function GetCustomTileIdLastVertical takes integer tileSize, integer tileId returns integer
+        return IntRoundUp(tileId, Globals.totalY[tileSize]) - 1
+    endfunction
 
     function InitCustomTiles takes integer tileSize returns nothing
         if not Globals.totalX.has(tileSize) then

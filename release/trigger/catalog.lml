@@ -284,6 +284,8 @@
         Disab
     39-WorldBoundsUtils: WorldBoundsUtils
         Disab
+    40-Matrices: Matrices
+    41-PathingMaps: PathingMaps
 21-Map-specific: Map-specific
     1-Debug: Debug
     2-ArrayAgent: ArrayAgent

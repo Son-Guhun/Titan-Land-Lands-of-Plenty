@@ -1,5 +1,6 @@
 //! runtextmacro GAL_Generate_List("true","ability","AbilityHandle","Handle","null")
 //! runtextmacro GAL_Generate_List("true","destructable","DestructableHandle","Handle","null")
+//! runtextmacro GAL_Generate_List("true","image","ImageHandle","Handle","null")
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 //Guhun's Array Lists v.1.0.0
 library GAL requires Lists
