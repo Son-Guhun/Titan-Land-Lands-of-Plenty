@@ -21,10 +21,13 @@ except:
 
 DEVELOPMEN_LNI = 'development'
 RELEASE_LNI = 'release'
+DEVEL_LNI = 'devel'
 DEVELOPMENT = 'development.w3x'
 RELEASE = 'release.w3x'
+DEVEL = 'devel.w3x'
 DEVELOPMENT_SLK = 'development_slk.w3x'
 RELEASE_SLK = 'release_slk.w3x'
+DEVEL_SLK = 'devel_slk.w3x'
 
 
 config_values = \
@@ -113,9 +116,15 @@ def make_devel():
     pull(release='development/', development='devel/', dirs=['scripts', 'map','table', 'trigger', 'w3x2lni'])
     makedevel.do('development/table/unit.ini', 'devel/table/unit.ini')
 
-def push_devel():
-    shutil.copyfile('devel/map/war3map.j', 'development/map/war3map.j')
-    push(release='development/', development='devel/', dirs=['trigger'])
+def push_devel(target='development'):
+    shutil.copyfile('devel/map/war3map.j', target+'/map/war3map.j')
+    push(release=target+'/', development='devel/', dirs=['trigger'])
+
+def test_devel(target='development'):
+    commit(DEVEL)
+    push_devel(target)
+    build(target)
+    test_map(target+'.w3x')
 
 def test_full(build=DEVELOPMENT):
     """Optimizes an OBJ map and then opens the generated SLK in WC3."""
