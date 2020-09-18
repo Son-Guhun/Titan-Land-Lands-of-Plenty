@@ -124,18 +124,26 @@ struct TerrainEditorButton extends array
     endmethod
     
     private static method create takes integer this returns thistype
+        local integer size = TerrainTools_GetTextureSize(this)
+    
         set .button = BlzCreateFrame("TerrainEditorButton", terrainEditorScreen["textureButtonsContainer"], 0, this)
         set .background =  BlzCreateSimpleFrame("TerrainEditorSimpleBackground", terrainEditorScreen["textureButtonsSimpleContainer"], this)
         set .eighthTexture = BlzGetFrameByName("TerrainEditorEighthBackground", this)
-        set .quarterTexture = BlzGetFrameByName("TerrainEditorEighthBackground", this)
-        set .halfTexture = BlzGetFrameByName("TerrainEditorEighthBackground", this)
+        set .quarterTexture = BlzGetFrameByName("TerrainEditorQuarterBackground", this)
+        set .halfTexture = BlzGetFrameByName("TerrainEditorHalfBackground", this)
         
         call BlzFrameSetSize(.button, 0.05, 0.05)
         call BlzFrameSetAllPoints(.background, .button)
         call IsMouseOnButton_Register(.button)
         call BlzTriggerRegisterFrameEvent(mouseClickHandler, .button, FRAMEEVENT_CONTROL_CLICK)
         
-        call BlzFrameSetTexture(.eighthTexture, Tile(TerrainTools_GetTexture(this)).file, 0, false)
+        if size == 1 then
+            call BlzFrameSetTexture(.quarterTexture, Tile(TerrainTools_GetTexture(this)).file, 0, false)
+        elseif size == 2 then
+            call BlzFrameSetTexture(.eighthTexture, Tile(TerrainTools_GetTexture(this)).file, 0, false)
+        elseif size == 3 then
+            call BlzFrameSetTexture(.halfTexture, Tile(TerrainTools_GetTexture(this)).file, 0, false)
+        endif
         set Table(tabb)[GetHandleId(.button)] = this
         return this
     endmethod

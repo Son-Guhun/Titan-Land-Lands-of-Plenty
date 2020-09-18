@@ -1,10 +1,7 @@
 library TileDefs requires TableStruct
 
-struct Tile extends array
-
-    //! runtextmacro TableStruct_NewPrimitiveField("file", "string")
-
-    static method onInit takes nothing returns nothing
+private module Init
+    private static method onInit takes nothing returns nothing
         set Tile('Ldrt').file = "TerrainArt\\LordaeronSummer\\Lords_Dirt.blp"
         set Tile('Ldro').file = "TerrainArt\\LordaeronSummer\\Lords_DirtRough.blp"
         set Tile('Ldrg').file = "TerrainArt\\LordaeronSummer\\Lords_DirtGrass.blp"
@@ -15,6 +12,7 @@ struct Tile extends array
         set Tile('Fdro').file = "TerrainArt\\LordaeronFall\\Lordf_DirtRough.blp"
         set Tile('Fdrg').file = "TerrainArt\\LordaeronFall\\Lordf_DirtGrass.blp"
         set Tile('Frok').file = "TerrainArt\\LordaeronFall\\Lordf_Rock.blp"
+        set Tile('Frok').isDouble = true
         set Tile('Fgrs').file = "TerrainArt\\LordaeronFall\\Lordf_Grass.blp"
         set Tile('Fgrd').file = "TerrainArt\\LordaeronFall\\Lordf_GrassDark.blp"
         set Tile('Wdrt').file = "TerrainArt\\LordaeronWinter\\Lordw_Dirt.blp"
@@ -33,6 +31,7 @@ struct Tile extends array
         set Tile('Bgrr').file = "TerrainArt\\Barrens\\Barrens_Grass.blp"
         set Tile('Adrt').file = "TerrainArt\\Ashenvale\\Ashen_Dirt.blp"
         set Tile('Adrd').file = "TerrainArt\\Ashenvale\\Ashen_DirtRough.blp"
+        set Tile('Adrd').isDouble = false
         set Tile('Agrs').file = "TerrainArt\\Ashenvale\\Ashen_Grass.blp"
         set Tile('Arck').file = "TerrainArt\\Ashenvale\\Ashen_Rock.blp"
         set Tile('Agrd').file = "TerrainArt\\Ashenvale\\Ashen_GrassLumpy.blp"
@@ -44,24 +43,34 @@ struct Tile extends array
         set Tile('Cpos').file = "TerrainArt\\Felwood\\Felwood_Poison.blp"
         set Tile('Crck').file = "TerrainArt\\Felwood\\Felwood_Rock.blp"
         set Tile('Cvin').file = "TerrainArt\\Felwood\\Felwood_Vines.blp"
+        set Tile('Cvin').isDouble = false
         set Tile('Cgrs').file = "TerrainArt\\Felwood\\Felwood_Grass.blp"
         set Tile('Clvg').file = "TerrainArt\\Felwood\\Felwood_Leaves.blp"
         set Tile('Ndrt').file = "TerrainArt\\Northrend\\North_dirt.blp"
         set Tile('Ndrd').file = "TerrainArt\\Northrend\\North_dirtdark.blp"
         set Tile('Nrck').file = "TerrainArt\\Northrend\\North_rock.blp"
+        set Tile('Nrck').isDouble = true
         set Tile('Ngrs').file = "TerrainArt\\Northrend\\North_Grass.blp"
+        set Tile('Ngrs').isDouble = true
         set Tile('Nice').file = "TerrainArt\\Northrend\\North_ice.blp"
+        set Tile('Nice').isDouble = true
         set Tile('Nsnw').file = "TerrainArt\\Northrend\\North_Snow.blp"
         set Tile('Nsnr').file = "TerrainArt\\Northrend\\North_SnowRock.blp"
         set Tile('Ydrt').file = "TerrainArt\\Cityscape\\City_Dirt.blp"
+        set Tile('Ydrt').isDouble = true
         set Tile('Ydtr').file = "TerrainArt\\Cityscape\\City_DirtRough.blp"
         set Tile('Yblm').file = "TerrainArt\\Cityscape\\City_BlackMarble.blp"
         set Tile('Ybtl').file = "TerrainArt\\Cityscape\\City_BrickTiles.blp"
         set Tile('Ysqd').file = "TerrainArt\\Cityscape\\City_SquareTiles.blp"
+        set Tile('Ysqd').isDouble = false
         set Tile('Yrtl').file = "TerrainArt\\Cityscape\\City_RoundTiles.blp"
+        set Tile('Yrtl').isDouble = false
         set Tile('Ygsb').file = "TerrainArt\\Cityscape\\City_Grass.blp"
+        set Tile('Ygsb').isDouble = true
         set Tile('Yhdg').file = "TerrainArt\\Cityscape\\City_GrassTrim.blp"
+        set Tile('Yhdg').isDouble = false
         set Tile('Ywmb').file = "TerrainArt\\Cityscape\\City_WhiteMarble.blp"
+        set Tile('Ywmb').isDouble = false
         set Tile('Vdrt').file = "TerrainArt\\Village\\Village_Dirt.blp"
         set Tile('Vdrr').file = "TerrainArt\\Village\\Village_DirtRough.blp"
         set Tile('Vcrp').file = "TerrainArt\\Village\\Village_Crops.blp"
@@ -108,6 +117,7 @@ struct Tile extends array
         set Tile('Zdrg').file = "TerrainArt\\Ruins\\Ruins_DirtGrass.blp"
         set Tile('Zbks').file = "TerrainArt\\Ruins\\Ruins_SmallBricks.blp"
         set Tile('Zsan').file = "TerrainArt\\Ruins\\Ruins_Sand.blp"
+        set Tile('Zsan').isDouble = false
         set Tile('Zbkl').file = "TerrainArt\\Ruins\\Ruins_LargeBricks.blp"
         set Tile('Ztil').file = "TerrainArt\\Ruins\\Ruins_RoundTiles.blp"
         set Tile('Zgrs').file = "TerrainArt\\Ruins\\Ruins_Grass.blp"
@@ -126,6 +136,7 @@ struct Tile extends array
         set Tile('Osmb').file = "TerrainArt\\Outland\\Outland_RoughDirt.blp"
         set Tile('Ofst').file = "TerrainArt\\Outland\\Outland_DirtCracked.blp"
         set Tile('Olgb').file = "TerrainArt\\Outland\\Outland_FlatStones.blp"
+        set Tile('Olgb').isDouble = false
         set Tile('Orok').file = "TerrainArt\\Outland\\Outland_Rock.blp"
         set Tile('Ofsl').file = "TerrainArt\\Outland\\Outland_FlatStonesLight.blp"
         set Tile('Oaby').file = "TerrainArt\\Outland\\Outland_Abyss.blp"
@@ -163,6 +174,7 @@ struct Tile extends array
         set Tile('cCc2').file = "TerrainArt\\Felwood\\Felwood_Dirt.blp"
         set Tile('cCc1').file = "TerrainArt\\Felwood\\Felwood_Grass.blp"
         set Tile('cIc2').file = "TerrainArt\\Icecrown\\Ice_RuneBricks.blp"
+        set Tile('cIc2').isDouble = true
         set Tile('cIc1').file = "TerrainArt\\Icecrown\\Ice_Snow.blp"
         set Tile('cFc2').file = "TerrainArt\\LordaeronFall\\Lordf_Dirt.blp"
         set Tile('cFc1').file = "TerrainArt\\LordaeronFall\\Lordf_Grass.blp"
@@ -170,6 +182,7 @@ struct Tile extends array
         set Tile('cLc1').file = "TerrainArt\\LordaeronSummer\\Lords_Grass.blp"
         set Tile('cWc2').file = "TerrainArt\\LordaeronWinter\\Lordw_Grass.blp"
         set Tile('cWc1').file = "TerrainArt\\LordaeronWinter\\Lordw_Snow.blp"
+        set Tile('cWc1').isDouble = true
         set Tile('cNc2').file = "TerrainArt\\Northrend\\North_dirt.blp"
         set Tile('cNc1').file = "TerrainArt\\Northrend\\North_Snow.blp"
         set Tile('cOc1').file = "TerrainArt\\Outland\\Outland_Abyss.blp"
@@ -183,6 +196,14 @@ struct Tile extends array
         set Tile('cQc2').file = "TerrainArt\\VillageFall\\VillageFall_Dirt.blp"
         set Tile('cQc1').file = "TerrainArt\\VillageFall\\VillageFall_GrassThick.blp"
     endmethod
+endmodule
+
+struct Tile extends array
+
+    //! runtextmacro TableStruct_NewPrimitiveField("file", "string")
+    //! runtextmacro TableStruct_NewPrimitiveField("isDouble", "boolean")
+
+    implement Init
 endstruct
 
 

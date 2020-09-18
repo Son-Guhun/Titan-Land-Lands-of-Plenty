@@ -1,4 +1,4 @@
-library TerrainTools requires Table
+library TerrainTools requires Table, TileDefs
 
 //! textmacro TerrainTools_InitTextureArray
 
@@ -21,6 +21,11 @@ library TerrainTools requires Table
     set TEXTURES[15] = 'Ysqd'
 //! endtextmacro
 
+//! textmacro TerrainTools_InitCustomTextureSizes
+    // There must be no actual textures after the first 0.
+    set SIZES[2]  = 3
+//! endtextmacro
+
 scope SHAPE
     globals
         public constant integer CIRCLE = 0
@@ -30,6 +35,7 @@ endscope
 
 globals
     private integer array TEXTURES
+    private integer array SIZES
     private integer totalTextures
     
     private constant key TEXTURE2ID
@@ -49,6 +55,10 @@ public function GetTexture takes integer index returns integer
     return TEXTURES[index]
 endfunction
 
+public function GetTextureSize takes integer index returns integer
+    return SIZES[index]
+endfunction
+
 public function GetTextureId takes integer texture returns integer
     return Table(TEXTURE2ID)[texture]
 endfunction
@@ -57,10 +67,20 @@ private module InitModule
     private static method onInit takes nothing returns nothing
         local integer i = 0
         //! runtextmacro TerrainTools_InitTextureArray()
+        //! runtextmacro TerrainTools_InitCustomTextureSizes()
         
         loop
         exitwhen TEXTURES[i] == 0
             set Table(TEXTURE2ID)[TEXTURES[i]] = i
+            if SIZES[i] == 0 then
+                if Tile(TEXTURES[i]).isDouble then
+                    call BJDebugMsg("DOUBLE")
+                    set SIZES[i] = 2
+                else
+                    call BJDebugMsg("SINGLE")
+                    set SIZES[i] = 1
+                endif
+            endif
             set i = i + 1
         endloop
         set totalTextures = i
