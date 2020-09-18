@@ -5,6 +5,7 @@ from myconfigparser import MyConfigParser, load_unit_data, iter_deco_builders
 
 path = '../development/table/unit.ini'
 template = "set UpgradeData('{}').{} = '{}'"
+template2 = "set UpgradeData('{}').{} = {}"
 
 class Decoration:
     def __init__(self, rawcode, upgrades, first):
@@ -53,13 +54,18 @@ def do(file_path):
         result.append(template.format(decoration.rawcode, 'first', decoration.first))
 
         if decoration.first == decoration.rawcode:
-            if series is not None and len(series) > 2:
+            if series is not None:
                 length = len(series)
-                for i,d in enumerate(series):
-                    unit_data[d]['Upgrade'] = '"{},{}"'.format(series[(i+1)%length], series[(i-1)%length])
+                result.append(template2.format(series[0], f'tab[-1]', str(length)))
+                if length > 2:
+                    for i,d in enumerate(series):
+                        unit_data[d]['Upgrade'] = '"{},{}"'.format(series[(i+1)%length], series[(i-1)%length])
             series = [decoration.rawcode]
         else:
             series.append(decoration.rawcode)
+
+        result.append(template.format(decoration.first, f'tab[{len(series)-1}]', decoration.rawcode)) 
+    result.append(template2.format(series[0], f'tab[-1]', length)) 
 
     with open(file_path, 'w') as f:
         unit_data.write(f)

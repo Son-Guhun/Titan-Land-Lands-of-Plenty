@@ -1,4 +1,4 @@
-library DecorationBrowserController requires DecorationBrowserView, ListBox, RegisterClassicDecorations, SpecialEffect, ControlState, IsMouseOnButton, EditBoxFix, optional LoPUnitCompatibility
+library DecorationBrowserController requires UpgradeSystem, DecorationBrowserView, ListBox, RegisterClassicDecorations, SpecialEffect, ControlState, IsMouseOnButton, EditBoxFix, optional LoPUnitCompatibility
 
 //! runtextmacro optional LoPUnitCompatibility()
 
@@ -13,11 +13,12 @@ globals
     public ControlState controlState
     private SpecialEffect array effects
     private group array selectedUnits
+    private integer array variation
 endglobals
 
 struct DecorationsListbox extends array
     static constant framepointtype startFramepoint = FRAMEPOINT_RIGHT
-    static constant real startPointX = 0.78
+    static constant real startPointX = .9 // 0.78
     static constant real startPointY = 0.510
     static constant integer numberOfEntries = 13
     static constant string frameName = "ScriptDialogButton"
@@ -45,6 +46,12 @@ struct DecorationsListbox extends array
         endif
         
         if typeId != 0 then
+            // can typecast directly to UpgradeList because the unittype will always be the first in an upgrade list
+            if UpgradeData(typeId).hasUpgrades() then
+                set typeId = UpgradeList(typeId)[IMinBJ(variation[User.fromLocal()], UpgradeList(typeId).size-1)]
+            endif
+                
+        
             if effects[User.fromLocal()] != 0 and typeId == effects[User.fromLocal()].unitType then
                 call BlzFrameSetEnable(buttons[frameIndex], false)
             else
@@ -63,6 +70,7 @@ struct DecorationsListbox extends array
     
     static method onClickHandler takes player trigP, integer frameIndex, integer listIndex returns boolean
         local User pId = User[trigP]
+        local integer unitType
         
         if ControlState.getPlayerIdActiveState(pId) == ControlState.default then
             call controlState.activateForPlayer(trigP)
@@ -74,10 +82,17 @@ struct DecorationsListbox extends array
             endif
         
             if isReforged[pId] then
-                set effects[pId] = SpecialEffect.create(ReforgedDecorationList(playerLists[User[trigP]])[listIndex], GetPlayerLastMouseX(trigP), GetPlayerLastMouseY(trigP))
+                set unitType = ReforgedDecorationList(playerLists[User[trigP]])[listIndex]
             else
-                set effects[pId] = SpecialEffect.create(playerLists[User[trigP]][listIndex], GetPlayerLastMouseX(trigP), GetPlayerLastMouseY(trigP))
+                set unitType = playerLists[User[trigP]][listIndex]
             endif
+            
+            // can typecast directly to UpgradeList because the unittype will always be the first in an upgrade list
+            if UpgradeData(unitType).hasUpgrades() then
+                set unitType = UpgradeList(unitType)[IMinBJ(variation[pId], UpgradeList.get(unitType).size - 1)]
+            endif
+            
+            set effects[pId] = SpecialEffect.create(unitType, GetPlayerLastMouseX(trigP), GetPlayerLastMouseY(trigP))
             
             set effects[pId].alpha = 128
             return true
@@ -198,10 +213,35 @@ endfunction
 
 private function onKey takes nothing returns boolean
     local User pId = User[GetTriggerPlayer()]
+    local OSKeys key = GetHandleId(BlzGetTriggerPlayerKey())
+    local integer unitType
 
     if ControlState.getPlayerIdActiveState(pId) == controlState then
-        if BlzGetTriggerPlayerKey() == OSKEY_ESCAPE then
+        if key == OSKeys.ESCAPE then
             call ControlState.default.activateForPlayer(pId.handle)
+        endif
+    endif
+    
+    if controller.isEnabled(pId.handle) then
+        if key >= OSKeys.KEY0 and key <= OSKeys.KEY9 and BlzGetTriggerPlayerIsKeyDown() then
+            set key = key - OSKeys.KEY0 - 1
+            if key == -1 then
+                set key = 9
+            endif
+            set variation[pId] = key
+            call BJDebugMsg(I2S(variation[pId]))
+            if effects[pId] != 0 then
+                set unitType = effects[pId].unitType
+                
+                if UpgradeData(unitType).hasUpgrades() then
+                    set key = IMinBJ(variation[pId], UpgradeList.get(unitType).size - 1)
+                
+                    call effects[pId].destroy()
+                    set effects[pId] = SpecialEffect.create(UpgradeList.get(unitType)[key], GetPlayerLastMouseX(pId.handle), GetPlayerLastMouseY(pId.handle))
+                    set effects[pId].alpha = 128
+                endif
+            endif
+            call DecorationsListbox.refreshList(pId.handle)
         endif
     endif
     
@@ -267,6 +307,16 @@ endfunction
     call OSKeys.LSHIFT.register()
     call OSKeys.RSHIFT.register()
     call OSKeys.ESCAPE.register()
+    call OSKeys.KEY1.register()
+    call OSKeys.KEY2.register()
+    call OSKeys.KEY3.register()
+    call OSKeys.KEY4.register()
+    call OSKeys.KEY5.register()
+    call OSKeys.KEY6.register()
+    call OSKeys.KEY7.register()
+    call OSKeys.KEY8.register()
+    call OSKeys.KEY9.register()
+    call OSKeys.KEY0.register()
     call OSKeys.addListener(Condition(function onKey))
     
     call IsMouseOnButton_Register(decorationBrowserScreen["switchButton"])
