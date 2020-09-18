@@ -30,7 +30,8 @@ To implement this module in a struct, you will need to define the following fiel
     
     //     Called when a player clicks on a button. 'listIndex' will depend on the current number of total
     // options for a player. 
-    static method onClickHandler takes player trigP, integer frameIndex, integer listIndex returns nothing
+    // If true is returned, then the list will be refreshed, calling updateFrame for all frames.
+    static method onClickHandler takes player trigP, integer frameIndex, integer listIndex returns boolean
         call BJDebugMsg(BlzFrameGetText(buttons[frameIndex]))
         call BJDebugMsg(I2S(listIndex))
     endmethod
@@ -45,12 +46,31 @@ To implement this module in a struct, you will need to define the following fiel
 module ListBoxTemplate
     readonly static framehandle array buttons  // contains all the buttons in the listbox
     readonly static framehandle scrollBar
-    readonly static integer array lastValue  // for each player, stores the last value of the scrollBar frame
-    readonly static integer array sizes // for each player, stores the size of the list displayed by the listbox (all items)
-    readonly static integer array wheelSpins  // for each player, stores how many mouse wheel spins they have made whose value changed event has not triggered
     
+    // Static tables (basically arrays). These are private (but can't make them so due to module limitations)
     private static key tab  // a map from handleID to button frame, using a static Table
+    private static key lastValue_tab // for each player, stores the last value of the scrollBar fram
+    private static key sizes_tab // for each player, stores the size of the list displayed by the listbox (all items)
+    private static key wheelSpins_tab // for each player, stores how many mouse wheel spins they have made whose value changed event has not triggered
     
+    static method operator handleId2Index takes nothing returns Table
+        return tab
+    endmethod
+
+    static method operator lastValue takes nothing returns Table
+        return lastValue_tab
+    endmethod
+    
+    static method operator sizes takes nothing returns Table
+        return sizes_tab
+    endmethod
+    
+    static method operator wheelSpins takes nothing returns Table
+        return wheelSpins_tab
+    endmethod
+    
+
+    // Minimum value for list size
     static constant method operator minValue takes nothing returns integer
         return numberOfEntries - 1
     endmethod
@@ -62,11 +82,20 @@ module ListBoxTemplate
     endmethod
     
     private static method updateList takes player whichPlayer, integer i returns nothing
-            local integer min = i - numberOfEntries
-            local integer j = 0
-            local integer size = sizes[GetPlayerId(GetTriggerPlayer())]
+            local integer min
+            local integer j
+            local integer size
+
+            if i < 0 then
+                set i = lastValue[User[whichPlayer]]
+            else
+                set lastValue[User[whichPlayer]] = i
+            endif
             
-            set lastValue[User[whichPlayer]] = i
+            set min = i - numberOfEntries
+            set j = 0
+            set size = sizes[User[whichPlayer]]
+            
             if User.Local == whichPlayer then
                 loop
                 exitwhen i == min
@@ -75,6 +104,10 @@ module ListBoxTemplate
                     set j = j + 1
                 endloop
             endif
+    endmethod
+    
+    static method refreshList takes player whichPlayer returns nothing
+        call updateList(whichPlayer, -1)
     endmethod
     
     static method changeSize takes player whichPlayer, integer newSize returns nothing
@@ -100,7 +133,7 @@ module ListBoxTemplate
 
     endmethod
 
-    static method onValue takes nothing returns nothing
+    private static method onValue takes nothing returns nothing
         local integer i = R2I(BlzGetTriggerFrameValue())
         local User pId = User[GetTriggerPlayer()]
         
@@ -111,7 +144,7 @@ module ListBoxTemplate
         set wheelSpins[pId] = IMaxBJ(wheelSpins[pId] - 1, 0)
     endmethod
 
-    static method onWheel takes nothing returns nothing
+    private static method onWheel takes nothing returns nothing
         local player trigP = GetTriggerPlayer()
         local integer pId = GetPlayerId(trigP)
         local real value = RMaxBJ(RMinBJ(sizes[pId], lastValue[pId] + BlzGetTriggerFrameValue()/120.), minValue)
@@ -130,15 +163,18 @@ module ListBoxTemplate
     
     static method onClick takes nothing returns nothing
         local framehandle frame = BlzGetTriggerFrame()
-        local integer frameIndex = Table(tab)[GetHandleId(frame)]
+        local integer frameIndex = handleId2Index[GetHandleId(frame)]
         local User pId = User[GetTriggerPlayer()]
-        
-        call onClickHandler(GetTriggerPlayer(), frameIndex, sizes[pId] - lastValue[pId] + frameIndex)
         
         if User.fromLocal() == pId then
             call BlzFrameSetEnable(frame, false)
             call BlzFrameSetEnable(frame, true)
         endif
+        
+        if onClickHandler(GetTriggerPlayer(), frameIndex, sizes[pId] - lastValue[pId] + frameIndex) then
+            call refreshList(GetTriggerPlayer())
+        endif
+        
     endmethod
     
     private static method onStart takes nothing returns nothing
@@ -179,7 +215,7 @@ module ListBoxTemplate
             call BlzFrameSetSize(buttons[i-1], sizeX, sizeY/numberOfEntries)
             call BlzTriggerRegisterFrameEvent(wheelHandler, buttons[i-1], FRAMEEVENT_MOUSE_WHEEL)
             call BlzTriggerRegisterFrameEvent(clickHandler, buttons[i-1], FRAMEEVENT_CONTROL_CLICK)
-            set Table(tab)[GetHandleId(buttons[i-1])] = i-1
+            set handleId2Index[GetHandleId(buttons[i-1])] = i-1
             call onCreateFrame(i-1)
             exitwhen i == numberOfEntries
             set buttons[i] = BlzCreateFrame(frameName, mainFrame, 0,0)

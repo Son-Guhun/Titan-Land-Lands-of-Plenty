@@ -34,6 +34,7 @@ struct DecorationsListbox extends array
         return DecorationList.get("").size - 1
     endmethod
 
+    // this code is async
     static method updateFrame takes integer frameIndex, integer listIndex returns nothing
         local integer typeId
         
@@ -44,6 +45,11 @@ struct DecorationsListbox extends array
         endif
         
         if typeId != 0 then
+            if effects[User.fromLocal()] != 0 and typeId == effects[User.fromLocal()].unitType then
+                call BlzFrameSetEnable(buttons[frameIndex], false)
+            else
+                call BlzFrameSetEnable(buttons[frameIndex], true)
+            endif
             call BlzFrameSetText(buttons[frameIndex], GetObjectName(typeId))
         else
             call BlzFrameSetText(buttons[frameIndex], "")
@@ -55,7 +61,7 @@ struct DecorationsListbox extends array
         call IsMouseOnButton_Register(buttons[frameIndex])
     endmethod
     
-    static method onClickHandler takes player trigP, integer frameIndex, integer listIndex returns nothing
+    static method onClickHandler takes player trigP, integer frameIndex, integer listIndex returns boolean
         local User pId = User[trigP]
         
         if ControlState.getPlayerIdActiveState(pId) == ControlState.default then
@@ -74,7 +80,10 @@ struct DecorationsListbox extends array
             endif
             
             set effects[pId].alpha = 128
+            return true
         endif
+        
+        return false
     endmethod
 
     implement ListBoxTemplate
@@ -155,6 +164,7 @@ private function onStateExit takes nothing returns boolean
         call effects[pId].destroy()
         set effects[pId] = 0
     endif
+    call DecorationsListbox.refreshList(pId.handle)  // refresh list to re-enable button, if it's still in the listbox
     return false
 endfunction
 
