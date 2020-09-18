@@ -1,6 +1,8 @@
 _scripts/inliner/build
 development/*
 development.w3x
+devel/*
+devel.w3x
 !development/Scripts
 development/Scripts/*
 !development/Scripts/common.j

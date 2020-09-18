@@ -4,6 +4,7 @@ import os
 import shutil
 import webbrowser
 import types
+from _scripts import makedevel
 
 def get_user_functions(table):
     """An iterator that returns all user-defined functions in the global namespace."""
@@ -82,10 +83,8 @@ def optimize(which):
     return subprocess.Popen([p['paths']['w2l'],'slk',os.path.abspath(which)]).wait()
 
 
-def push(dirs = ['table', 'trigger', 'w3x2lni']):
+def push(dirs = ['table', 'trigger', 'w3x2lni'], release='release/', development='development/'):
     """Copies all specified directories from the development folder to the release folder."""
-    release= 'release/'
-    development = 'development/'
     for directory in dirs:
         if os.path.exists(release+directory):
             shutil.rmtree(release+directory)
@@ -95,10 +94,8 @@ def push_all():
     """As push, but includes the map directory, which contains many binary files."""
     push(['map', 'table', 'trigger', 'w3x2lni'])
 
-def pull(dirs = ['map','table', 'trigger', 'w3x2lni']):
+def pull(dirs = ['map','table', 'trigger', 'w3x2lni'], release='release/', development='development/'):
     """Copies all specified directories from the release folder to the developlment folder."""
-    release= 'release/'
-    development = 'development/'
 
     if not os.path.exists(development):
         os.mkdir(development)
@@ -110,6 +107,15 @@ def pull(dirs = ['map','table', 'trigger', 'w3x2lni']):
         if os.path.exists(development+directory):
             shutil.rmtree(development+directory)
         shutil.copytree(release+directory,development+directory)
+
+
+def make_devel():
+    pull(release='development/', development='devel/', dirs=['scripts', 'map','table', 'trigger', 'w3x2lni'])
+    makedevel.do('development/table/unit.ini', 'devel/table/unit.ini')
+
+def push_devel():
+    shutil.copyfile('devel/map/war3map.j', 'development/map/war3map.j')
+    push(release='development/', development='devel/', dirs=['trigger'])
 
 def test_full(build=DEVELOPMENT):
     """Optimizes an OBJ map and then opens the generated SLK in WC3."""

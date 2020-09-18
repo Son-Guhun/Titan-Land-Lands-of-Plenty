@@ -1,5 +1,11 @@
 from configparser import ConfigParser
-from s2id import Rawcode
+
+try:
+    from s2id import Rawcode
+    ispackage = False
+except:
+    from .s2id import Rawcode
+    ispackage = True
 
 class MyConfigParser(ConfigParser):
     """A ConfigParser with different default constructor arguments and an optionxform method that returns the string itself.
@@ -43,7 +49,7 @@ class UnitParser(MyConfigParser):
                 yield u if asString else unit
     
     def get_decobuilders(self, asString=False, builder_only = False):
-        for unit in self.get_with_ability('A00J', asString):
+        for unit in self.get_with_ability('A00J'):
             if not builder_only or unit['Builds'] != '""':
                 yield unit.name if asString else unit
 
@@ -77,7 +83,8 @@ def iter_deco_builders(unit_data, builder_only = False, ability = 'A00J'):
             if not (builder_only and ('Builds' not in unit or unit['Builds'] == '""')):
                 yield unit
 
-defaults_path = 'unit.ini'
+
+defaults_path = 'unit.ini' if not ispackage else '_scripts/unit.ini'
 with open(defaults_path) as f:
     DEFAULTS = load_unit_data(f)
 
