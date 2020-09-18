@@ -1,32 +1,56 @@
-library HashStruct requires HashtableWrapper
+library HashStruct requires optional Table, optional HashtableWrapper
 /*
-A mostly incomplete library that functions like TableStruct. It does not provide the same handle
-field functionaly as TableStruct, so it is recommended to use the HashStruct_NewPrimitiveGetterSetter
-for handles, which defines methods instead of method operators. With methods, the user can expect that
-a null parameter is invalid, unlike with method operators, which should always accept a null rvalue
-when setting.
+This library functions like TableStruct. However, it can use any hashtable wrapped with HashtableWrapper.
+
+This allows you to simply use this.tab.flush() when destroying a struct, instead of having to clear
+each field individually, like you would have to do with TableStruct.
+
+//! textmacro HashStruct_SetHashtableWrapper takes WRAPPER
+    static constant hashTable -> returns the wrapper
+    
+    $WRAPPER$child tab -> this struct, but typecaste to a table of the wrapped hashtable
+
+// Using the ExtendsTable module requires you to allocate your structs using Table.create()
+module ExtendsTable
+    Table tab -> this struct, but typecasted to a table
 */
+//! novjass
+struct Point extends array
+    //! runtextmacro HashStruct_SetHashtableWrapper("pointHashtable")
+
+    //! HashStruct_NewReadonlyPrimitiveFieldIndexed("x", "real", "0")
+    //! HashStruct_NewReadonlyPrimitiveFieldIndexed("y", "real", "1")
+    
+    static method create takes real x, real y returns thistype
+        local integer this = thistype.allocate()  // allocator is implemented from some other library
+        
+        set .x = x  // same as .tab[0] = x, since we used index 0 for the x field
+        set .y = y  // same as .tab[1] = x, since we used index 0 for the x field
+        
+        return this
+    endmethod
+    
+    method destroy takes nothing returns nothing
+        call .tab.flush()
+    endmethod
+//! endnovjass
+
+
+
 
 //! textmacro HashStruct_SetHashtableWrapper takes WRAPPER
     static constant method operator hashTable takes nothing returns $WRAPPER$
         return 0  // Return value does not matter, since this is not used as a hashtable.
     endmethod
     
-    static method operator hashTableHandle takes nothing returns hashtable
-        return $WRAPPER$.hashtable
-    endmethod
-    
-    static method getChildTable takes integer i returns $WRAPPER$_Child
-        return i
+    method operator tab takes nothing returns $WRAPPER$_Child
+        return this
     endmethod
 //! endtextmacro
 
+// Boolean fields with default values don't work with this table because the Table hashtable is private.
 module ExtendsTable
 
-    static method getChildTable takes integer i returns Table
-        return i
-    endmethod
-    
     method operator tab takes nothing returns Table
         return this
     endmethod
@@ -38,22 +62,22 @@ endmodule
     
     method get$NAME$ takes nothing returns $TYPE$
         implement assertNotNull
-        return thistype.getChildTable(this).$TYPE$[$NAME$_INDEX]
+        return this.tab.$TYPE$[$NAME$_INDEX]
     endmethod
     
     method set$NAME$ takes $TYPE$ new_$NAME$ returns nothing
         implement assertNotNull
-        set thistype.getChildTable(this).$TYPE$[$NAME$_INDEX] = new_$NAME$
+        set this.tab.$TYPE$[$NAME$_INDEX] = new_$NAME$
     endmethod
     
     private method clear$NAME$ takes nothing returns nothing
         implement assertNotNull
-        call thistype.getChildTable(this).$TYPE$.remove($NAME$_INDEX)
+        call this.tab.$TYPE$.remove($NAME$_INDEX)
     endmethod
     
     private method has$NAME$ takes nothing returns boolean
         implement assertNotNull
-        return thistype.getChildTable(this).$TYPE$.has($NAME$_INDEX)
+        return this.tab.$TYPE$.has($NAME$_INDEX)
     endmethod
 //! endtextmacro
 
@@ -66,22 +90,22 @@ endmodule
     
     method operator $NAME$ takes nothing returns $TYPE$
         implement assertNotNull
-        return thistype.getChildTable(this).$TYPE$[$NAME$_INDEX]
+        return this.tab.$TYPE$[$NAME$_INDEX]
     endmethod
     
     method operator $NAME$= takes $TYPE$ new_$NAME$ returns nothing
         implement assertNotNull
-        set thistype.getChildTable(this).$TYPE$[$NAME$_INDEX] = new_$NAME$
+        set this.tab.$TYPE$[$NAME$_INDEX] = new_$NAME$
     endmethod
     
     private method $NAME$_clear takes nothing returns nothing
         implement assertNotNull
-        call thistype.getChildTable(this).$TYPE$.remove($NAME$_INDEX)
+        call this.tab.$TYPE$.remove($NAME$_INDEX)
     endmethod
     
     private method $NAME$_exists takes nothing returns boolean
         implement assertNotNull
-        return thistype.getChildTable(this).$TYPE$.has($NAME$_INDEX)
+        return this.tab.$TYPE$.has($NAME$_INDEX)
     endmethod
 //! endtextmacro
 
@@ -90,22 +114,45 @@ endmodule
     
     method operator $NAME$ takes nothing returns $TYPE$
         implement assertNotNull
-        return thistype.getChildTable(this).$TYPE$[$NAME$_INDEX]
+        return this.tab.$TYPE$[$NAME$_INDEX]
     endmethod
     
     method operator $NAME$= takes $TYPE$ new_$NAME$ returns nothing
         implement assertNotNull
-        set thistype.getChildTable(this).$TYPE$[$NAME$_INDEX] = new_$NAME$
+        set this.tab.$TYPE$[$NAME$_INDEX] = new_$NAME$
     endmethod
     
     private method $NAME$_clear takes nothing returns nothing
         implement assertNotNull
-        call thistype.getChildTable(this).$TYPE$.remove($NAME$_INDEX)
+        call this.tab.$TYPE$.remove($NAME$_INDEX)
     endmethod
     
     private method $NAME$_exists takes nothing returns boolean
         implement assertNotNull
-        return thistype.getChildTable(this).$TYPE$.has($NAME$_INDEX)
+        return this.tab.$TYPE$.has($NAME$_INDEX)
+    endmethod
+//! endtextmacro
+
+// Used if you want to have control over the indices, instead of using a constant key variable
+//! textmacro HashStruct_NewReadonlyPrimitiveFieldIndexed takes NAME, TYPE, INDEX
+    method operator $NAME$ takes nothing returns $TYPE$
+        implement assertNotNull
+        return this.tab.$TYPE$[$INDEX$]
+    endmethod
+    
+    method operator $NAME$= takes $TYPE$ new_$NAME$ returns nothing
+        implement assertNotNull
+        set this.tab.$TYPE$[$INDEX$] = new_$NAME$
+    endmethod
+    
+    private method $NAME$_clear takes nothing returns nothing
+        implement assertNotNull
+        call this.tab.$TYPE$.remove($INDEX$)
+    endmethod
+    
+    private method $NAME$_exists takes nothing returns boolean
+        implement assertNotNull
+        return this.tab.$TYPE$.has($INDEX$)
     endmethod
 //! endtextmacro
 
@@ -140,22 +187,22 @@ endmodule
     
     method operator $NAME$ takes nothing returns $TYPE$ 
         implement assertNotNull
-        return thistype.getChildTable(this)[$NAME$_INDEX]
+        return this.tab[$NAME$_INDEX]
     endmethod
     
     method operator $NAME$= takes $TYPE$ new_$NAME$ returns nothing
         implement assertNotNull
-        set thistype.getChildTable(this)[$NAME$_INDEX] = new_$NAME$
+        set this.tab[$NAME$_INDEX] = new_$NAME$
     endmethod
     
     private method $NAME$_clear takes nothing returns nothing
         implement assertNotNull
-        call thistype.getChildTable(this).remove($NAME$_INDEX)
+        call this.tab.remove($NAME$_INDEX)
     endmethod
     
     private method $NAME$_exists takes nothing returns boolean
         implement assertNotNull
-        return thistype.getChildTable(this).has($NAME$_INDEX)
+        return this.tab.has($NAME$_INDEX)
     endmethod
 //! endtextmacro
 
@@ -164,22 +211,44 @@ endmodule
     
     method operator $NAME$ takes nothing returns $TYPE$
         implement assertNotNull
-        return thistype.getChildTable(this)[$NAME$_INDEX]
+        return this.tab[$NAME$_INDEX]
     endmethod
     
     method operator $NAME$= takes $TYPE$ new_$NAME$ returns nothing
         implement assertNotNull
-        set thistype.getChildTable(this)[$NAME$_INDEX] = new_$NAME$
+        set this.tab[$NAME$_INDEX] = new_$NAME$
     endmethod
     
     private method $NAME$_clear takes nothing returns nothing
         implement assertNotNull
-        call thistype.getChildTable(this).remove($NAME$_INDEX)
+        call this.tab.remove($NAME$_INDEX)
     endmethod
     
     private method $NAME$_exists takes nothing returns boolean
         implement assertNotNull
-        return thistype.getChildTable(this).has($NAME$_INDEX)
+        return this.tab.has($NAME$_INDEX)
+    endmethod
+//! endtextmacro
+
+//! textmacro HashStruct_NewReadonlyStructFieldIndexed takes NAME, TYPE, INDEX
+    method operator $NAME$ takes nothing returns $TYPE$
+        implement assertNotNull
+        return this.tab[$INDEX$]
+    endmethod
+    
+    method operator $NAME$= takes $TYPE$ new_$NAME$ returns nothing
+        implement assertNotNull
+        set this.tab[$INDEX$] = new_$NAME$
+    endmethod
+    
+    private method $NAME$_clear takes nothing returns nothing
+        implement assertNotNull
+        call this.tab.remove($INDEX$)
+    endmethod
+    
+    private method $NAME$_exists takes nothing returns boolean
+        implement assertNotNull
+        return this.tab.has($INDEX$)
     endmethod
 //! endtextmacro
 
@@ -214,22 +283,22 @@ endmodule
     
     method operator $NAME$ takes nothing returns $TYPE$ 
         implement assertNotNull
-        return thistype.getChildTable(this).$TYPE$[$NAME$_INDEX]
+        return this.tab.$TYPE$[$NAME$_INDEX]
     endmethod
     
     method operator $NAME$= takes $TYPE$ new_$NAME$ returns nothing
         implement assertNotNull
-        call thistype.getChildTable(this).handle.setValue($NAME$_INDEX, new_$NAME$)
+        call this.tab.handle.setValue($NAME$_INDEX, new_$NAME$)
     endmethod
     
     private method $NAME$_clear takes nothing returns nothing
         implement assertNotNull
-        call thistype.getChildTable(this).remove($NAME$_INDEX)
+        call this.tab.remove($NAME$_INDEX)
     endmethod
     
     private method $NAME$_exists takes nothing returns boolean
         implement assertNotNull
-        return thistype.getChildTable(this).has($NAME$_INDEX)
+        return this.tab.has($NAME$_INDEX)
     endmethod
 //! endtextmacro
 
@@ -238,22 +307,44 @@ endmodule
     
     method operator $NAME$ takes nothing returns $TYPE$
         implement assertNotNull
-        return thistype.getChildTable(this).$TYPE$[$NAME$_INDEX]
+        return this.tab.$TYPE$[$NAME$_INDEX]
     endmethod
     
     method operator $NAME$= takes $TYPE$ new_$NAME$ returns nothing
         implement assertNotNull
-        call thistype.getChildTable(this).handle.setValue($NAME$_INDEX, new_$NAME$)
+        call this.tab.handle.setValue($NAME$_INDEX, new_$NAME$)
     endmethod
     
     private method $NAME$_clear takes nothing returns nothing
         implement assertNotNull
-        call thistype.getChildTable(this).remove($NAME$_INDEX)
+        call this.tab.remove($NAME$_INDEX)
     endmethod
     
     private method $NAME$_exists takes nothing returns boolean
         implement assertNotNull
-        return thistype.getChildTable(this).has($NAME$_INDEX)
+        return this.tab.has($NAME$_INDEX)
+    endmethod
+//! endtextmacro
+
+//! textmacro HashStruct_NewReadonlyHandleFieldIndexed takes NAME, TYPE, INDEX    
+    method operator $NAME$ takes nothing returns $TYPE$
+        implement assertNotNull
+        return this.tab.$TYPE$[$INDEX$]
+    endmethod
+    
+    method operator $NAME$= takes $TYPE$ new_$NAME$ returns nothing
+        implement assertNotNull
+        call this.tab.handle.setValue($INDEX$, new_$NAME$)
+    endmethod
+    
+    private method $NAME$_clear takes nothing returns nothing
+        implement assertNotNull
+        call this.tab.remove($INDEX$)
+    endmethod
+    
+    private method $NAME$_exists takes nothing returns boolean
+        implement assertNotNull
+        return this.tab.has($INDEX$)
     endmethod
 //! endtextmacro
 
@@ -266,7 +357,7 @@ endmodule
     
     method operator $NAME$= takes $TYPE$ new_$NAME$ returns nothing
         implement assertNotNull
-        call thistype.getChildTable(this).handle.setValue($NAME$_INDEX, new_$NAME$)
+        call this.tab.handle.setValue($NAME$_INDEX, new_$NAME$)
     endmethod
     
     private method $NAME$_clear takes nothing returns nothing
@@ -289,22 +380,22 @@ endmodule
     
     method operator $NAME$ takes nothing returns $TYPE$ 
         implement assertNotNull
-        return thistype.getChildTable(this).$TYPE$[$NAME$_INDEX]
+        return this.tab.$TYPE$[$NAME$_INDEX]
     endmethod
     
     method operator $NAME$= takes $TYPE$ new_$NAME$ returns nothing
         implement assertNotNull
-        call thistype.getChildTable(this).agent.setVal($NAME$_INDEX, new_$NAME$)
+        call this.tab.agent.setVal($NAME$_INDEX, new_$NAME$)
     endmethod
     
     private method $NAME$_clear takes nothing returns nothing
         implement assertNotNull
-        call thistype.getChildTable(this).remove($NAME$_INDEX)
+        call this.tab.remove($NAME$_INDEX)
     endmethod
     
     private method $NAME$_exists takes nothing returns boolean
         implement assertNotNull
-        return thistype.getChildTable(this).has($NAME$_INDEX)
+        return this.tab.has($NAME$_INDEX)
     endmethod
 //! endtextmacro
 
@@ -313,22 +404,44 @@ endmodule
     
     method operator $NAME$ takes nothing returns $TYPE$
         implement assertNotNull
-        return thistype.getChildTable(this).$TYPE$[$NAME$_INDEX]
+        return this.tab.$TYPE$[$NAME$_INDEX]
     endmethod
     
     method operator $NAME$= takes $TYPE$ new_$NAME$ returns nothing
         implement assertNotNull
-        call thistype.getChildTable(this).agent.setVal($NAME$_INDEX, new_$NAME$)
+        call this.tab.agent.setVal($NAME$_INDEX, new_$NAME$)
     endmethod
     
     private method $NAME$_clear takes nothing returns nothing
         implement assertNotNull
-        call thistype.getChildTable(this).remove($NAME$_INDEX)
+        call this.tab.remove($NAME$_INDEX)
     endmethod
     
     private method $NAME$_exists takes nothing returns boolean
         implement assertNotNull
-        return thistype.getChildTable(this).has($NAME$_INDEX)
+        return this.tab.has($NAME$_INDEX)
+    endmethod
+//! endtextmacro
+
+//! textmacro HashStruct_NewReadonlyAgentFieldIndexed takes NAME, TYPE, INDEX
+    method operator $NAME$ takes nothing returns $TYPE$
+        implement assertNotNull
+        return this.tab.$TYPE$[$INDEX$]
+    endmethod
+    
+    method operator $NAME$= takes $TYPE$ new_$NAME$ returns nothing
+        implement assertNotNull
+        call this.tab.agent.setVal($INDEX$, new_$NAME$)
+    endmethod
+    
+    private method $NAME$_clear takes nothing returns nothing
+        implement assertNotNull
+        call this.tab.remove($INDEX$)
+    endmethod
+    
+    private method $NAME$_exists takes nothing returns boolean
+        implement assertNotNull
+        return this.tab.has($INDEX$)
     endmethod
 //! endtextmacro
 
@@ -341,7 +454,7 @@ endmodule
     
     method operator $NAME$= takes $TYPE$ new_$NAME$ returns nothing
         implement assertNotNull
-        call thistype.getChildTable(this).agent.setVal($NAME$_INDEX, new_$NAME$)
+        call this.tab.agent.setVal($NAME$_INDEX, new_$NAME$)
     endmethod
     
     private method $NAME$_clear takes nothing returns nothing
@@ -365,22 +478,22 @@ endmodule
     
     method operator $NAME$ takes nothing returns $TYPE$
         implement assertNotNull
-        return thistype.getChildTable(this).$TYPE$[$NAME$_INDEX] + $DEFAULT$
+        return this.tab.$TYPE$[$NAME$_INDEX] + $DEFAULT$
     endmethod
     
     method operator $NAME$= takes $TYPE$ new_$NAME$ returns nothing
         implement assertNotNull
-        set thistype.getChildTable(this).$TYPE$[$NAME$_INDEX] = new_$NAME$ - $DEFAULT$
+        set this.tab.$TYPE$[$NAME$_INDEX] = new_$NAME$ - $DEFAULT$
     endmethod
     
     private method $NAME$_clear takes nothing returns nothing
         implement assertNotNull
-        call thistype.getChildTable(this).$TYPE$.remove($NAME$_INDEX)
+        call this.tab.$TYPE$.remove($NAME$_INDEX)
     endmethod
     
     private method $NAME$_exists takes nothing returns boolean
         implement assertNotNull
-        return thistype.getChildTable(this).$TYPE$.has($NAME$_INDEX)
+        return this.tab.$TYPE$.has($NAME$_INDEX)
     endmethod
 //! endtextmacro
 
@@ -390,22 +503,22 @@ endmodule
     
     method operator $NAME$ takes nothing returns $TYPE$
         implement assertNotNull
-        return thistype.getChildTable(this).$TYPE$[$NAME$_INDEX] + $DEFAULT$
+        return this.tab.$TYPE$[$NAME$_INDEX] + $DEFAULT$
     endmethod
     
     private method operator $NAME$= takes $TYPE$ new_$NAME$ returns nothing
         implement assertNotNull
-        set thistype.getChildTable(this).$TYPE$[$NAME$_INDEX] = new_$NAME$ - $DEFAULT$
+        set this.tab.$TYPE$[$NAME$_INDEX] = new_$NAME$ - $DEFAULT$
     endmethod
     
     private method $NAME$_clear takes nothing returns nothing
         implement assertNotNull
-        call thistype.getChildTable(this).$TYPE$.remove($NAME$_INDEX)
+        call this.tab.$TYPE$.remove($NAME$_INDEX)
     endmethod
     
     private method $NAME$_exists takes nothing returns boolean
         implement assertNotNull
-        return thistype.getChildTable(this).$TYPE$.has($NAME$_INDEX)
+        return this.tab.$TYPE$.has($NAME$_INDEX)
     endmethod
 //! endtextmacro
 
@@ -428,12 +541,12 @@ endfunction
     
     method operator $NAME$ takes nothing returns boolean
         implement assertNotNull
-        return thistype.getChildTable(this).boolean.has($NAME$_INDEX) != $DEFAULT$
+        return this.tab.boolean.has($NAME$_INDEX) != $DEFAULT$
     endmethod
     
     method operator $NAME$= takes boolean value returns nothing
         implement assertNotNull
-        call HashStruct_SetBooleanField($DEFAULT$, thistype.hashTableHandle, this, $NAME$_INDEX, value)
+        call HashStruct_SetBooleanField($DEFAULT$, thistype.hashTable.hashtable, this, $NAME$_INDEX, value)
     endmethod
 //! endtextmacro
 
@@ -443,12 +556,12 @@ endfunction
     
     method operator $NAME$ takes nothing returns boolean
         implement assertNotNull
-        return thistype.getChildTable(this).boolean.has($NAME$_INDEX) != $DEFAULT$
+        return this.tab.boolean.has($NAME$_INDEX) != $DEFAULT$
     endmethod
     
     private method operator $NAME$= takes boolean value returns nothing
         implement assertNotNull
-        call HashStruct_SetBooleanField($DEFAULT$, thistype.hashTableHandle, this, $NAME$_INDEX, value)
+        call HashStruct_SetBooleanField($DEFAULT$, thistype.hashTable.hashtable, this, $NAME$_INDEX, value)
     endmethod
 //! endtextmacro
 

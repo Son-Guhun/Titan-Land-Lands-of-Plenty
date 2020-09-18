@@ -7,15 +7,15 @@ private struct TimerDataReal extends array
     implement AgentStruct
 
     method operator[] takes integer i returns real
-        return thistype.getChildTable(this).real[i]
+        return .tab.real[i]
     endmethod
     
     method operator[]= takes integer i, real value returns nothing
-        set thistype.getChildTable(this).real[i] = value
+        set .tab.real[i] = value
     endmethod
     
     method has takes integer i returns boolean
-        return thistype.getChildTable(this).real.has(i)
+        return .tab.real.has(i)
     endmethod
 endstruct
 
@@ -24,23 +24,23 @@ private struct TimerData extends array
     implement AgentStruct
     
     method operator[] takes integer i returns integer 
-        return thistype.getChildTable(this)[i]
+        return .tab[i]
     endmethod
     
     method operator[]= takes integer i, integer value returns nothing
-        set thistype.getChildTable(this)[i] = value
+        set .tab[i] = value
     endmethod
     
     method has takes integer i returns boolean
-        return thistype.getChildTable(this).has(i)
+        return .tab.has(i)
     endmethod
     
     method operator unit takes nothing returns unit
-        return thistype.getChildTable(this).unit[-1]
+        return .tab.unit[-1]
     endmethod
     
     method operator unit= takes unit whichUnit returns nothing
-        set thistype.getChildTable(this).unit[-1] = whichUnit
+        set .tab.unit[-1] = whichUnit
     endmethod
     
     method operator real takes nothing returns TimerDataReal

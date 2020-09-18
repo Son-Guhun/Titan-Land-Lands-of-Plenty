@@ -1,4 +1,9 @@
 library AgentStruct requires HashStruct
+/*
+A library that creates a module to easily attach temporary data to agents/handles.
+
+This is mostly used for attaching data to timers.
+*/
 
 globals
     private hashtable hash = InitHashtable()
@@ -29,11 +34,5 @@ module AgentStruct
     endmethod
 
 endmodule
-
-struct testing extends array
-    
-    implement AgentStruct
-
-endstruct
 
 endlibrary

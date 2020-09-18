@@ -38,11 +38,11 @@ endfunction
 module DecorationListTemplate
 
     method operator[] takes integer index returns integer
-        return thistype.getChildTable(this)[index]
+        return .tab[index]
     endmethod
     
     method operator[]= takes integer index, integer newVal returns nothing
-        set thistype.getChildTable(this)[index] = newVal
+        set .tab[index] = newVal
     endmethod
     
     private method calculateSize takes string searchStr, thistype list returns integer
@@ -119,14 +119,14 @@ module DecorationListTemplate
                     set sub = StringHash(temp)
                     
                     if .calculateSize(searchStr, sub) == sub.size then
-                        call getChildTable(this).flush()
+                        call .tab.flush()
                         set .sub = sub
                         set this = sub
                     endif
                     
                     // This block would not exist if the lists for all substrings is already calculated
                     if this.sup_exists() and this.sup.size == this.size then
-                        call getChildTable(this.sup).flush()
+                        call this.sup.tab.flush()
                         if this.sub_exists() then
                             set this.sup.sub = this.sub
                         else

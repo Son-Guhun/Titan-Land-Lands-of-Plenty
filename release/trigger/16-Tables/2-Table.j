@@ -1,3 +1,4 @@
+// This library was modified by Guhun (added Table.handle.setValue method)
 library Table /* made by Bribe, special thanks to Vexorian & Nestharus, version 4.1.0.1.
    
     One map, one hashtable. Welcome to NewTable 4.1.0.1

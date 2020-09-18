@@ -1,5 +1,7 @@
 library ConstTable requires Table
-// By Guhun
+/*
+A library that provides an alternative Hashtable meant to store static Tables.
+*/
    
 globals
     private hashtable ht = InitHashtable()

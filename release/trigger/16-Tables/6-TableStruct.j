@@ -1,6 +1,19 @@
 library TableStruct requires Table, optional ConstTable, LoPDebug
-// Defines Structs that use Table (or ConstTable) as a backend, instead of arrays.
-// You should use your own allocator (for non-static structs).
+/*
+This library aims to solve the following JASS limitations:
+    - The hashtable used to lookup variables does not have dynamic resizing. This means accessing a global variable will be slower the more hash collisions there are. Reducing the number of globals created will reduce the chance of collisions.
+    - Arrays can only have up to 2^15 indices.
+
+This library allows you to define struct fields which are hashtable-based instead of array based. They
+use static tables, that is, tables that are not created at runtime, but instead use a constant key
+variable to determine their id.
+
+As long as the map is optimized and constants are inlined, fields created using this library will not
+generate any new global variables, unlike normal vJass fields, which generate an array.
+
+By nature of being hashtable-based, you can also instantiate structs up to 2 billion times, instead of
+the normal 32k limit of JASS. This also means you can use handle ids as an allocation method for structs.
+*/ 
 
 static if LIBRARY_ConstTable then
     private module Const
