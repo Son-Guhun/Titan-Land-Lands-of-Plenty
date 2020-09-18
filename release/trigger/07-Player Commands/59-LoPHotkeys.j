@@ -1,10 +1,10 @@
-library LoPHotkeys initializer Init requires LoPCommands, Table
+library LoPHotkeys initializer Init requires LoPCommands, ConstTable
 
 private struct G extends array
 
     private static key hashTable
     
-    static method operator table takes nothing returns HashTable  // might need to return a HashTable in the future
+    static method operator table takes nothing returns ConstHashTable  // might need to return a HashTable in the future
         return hashTable
     endmethod
 

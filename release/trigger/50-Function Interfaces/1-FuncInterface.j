@@ -25,7 +25,6 @@ library FuncInterface requires ConstTable
         
         static method evaluate takes boolexpr func returns nothing
             local triggercondition cond = TriggerAddCondition(trig, func)
-            call BJDebugMsg("Trig:" + I2S(GetHandleId(trig)))
             call TriggerEvaluate(trig)
             call TriggerRemoveCondition(trig, cond)
         endmethod

@@ -94,7 +94,6 @@ struct ScreenController extends array
             if User.fromLocal() == pId then
                 call .screen.show(enable)
             endif
-            call BJDebugMsg("onEnable:" + I2S(GetHandleId(.onEnable)))
             //! runtextmacro FuncInterfaceIntegerPlayerBoolean_evaluate(".onEnable", "this", "p", "enable")
         endif
     endmethod

@@ -61,7 +61,6 @@ struct UIView extends array
             set ResolutionWidth = w
             set ResolutionHeight = h
             
-            call TriggerExecute(gg_trg_Untitled_Trigger_003)
             set minX = getScreenPosX(0)
             set maxX = getScreenPosX(ResolutionWidth)
             call BlzFrameSetAbsPoint(LEFT_BORDER, FRAMEPOINT_TOPLEFT, minX, 0.6)

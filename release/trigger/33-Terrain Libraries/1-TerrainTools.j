@@ -74,10 +74,8 @@ private module InitModule
             set Table(TEXTURE2ID)[TEXTURES[i]] = i
             if SIZES[i] == 0 then
                 if Tile(TEXTURES[i]).isDouble then
-                    call BJDebugMsg("DOUBLE")
                     set SIZES[i] = 2
                 else
-                    call BJDebugMsg("SINGLE")
                     set SIZES[i] = 1
                 endif
             endif

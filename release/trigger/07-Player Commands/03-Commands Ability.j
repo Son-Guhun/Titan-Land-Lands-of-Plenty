@@ -1,4 +1,4 @@
-library LoPCommandsAbility requires CustomizableAbilityList
+library LoPCommandsAbility requires CustomizableAbilityList, LoPWarn
 
 globals
     private key MSGKEY_MAXABILS
