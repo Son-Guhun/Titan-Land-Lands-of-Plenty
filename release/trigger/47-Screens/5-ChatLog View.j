@@ -14,7 +14,9 @@ endglobals
     
     set mainButton =  BlzCreateFrame("EscMenuTextAreaTemplate", mainFrame.main,0,0)
     call BlzFrameSetSize(mainButton, 0.2, 0.395)
-    call BlzFrameSetAbsPoint(mainButton, FRAMEPOINT_RIGHT, View4by3.w, View4by3.h/2+.055)
+    call BlzFrameSetPoint(mainButton, FRAMEPOINT_RIGHT, UIView.RIGHT_BORDER, FRAMEPOINT_LEFT, 0., .055)
+    //call BlzFrameSetPoint(mainButton, FRAMEPOINT_RIGHT, UIView.RIGHT_BORDER, FRAMEPOINT_LEFT, 0., View4by3.h/2+.055)
+    // call BlzFrameSetAbsPoint(mainButton, FRAMEPOINT_RIGHT, View4by3.w, View4by3.h/2+.055)
     set mainFrame["OOC log"] = mainButton
     call BlzFrameSetVisible(mainButton, false)
     

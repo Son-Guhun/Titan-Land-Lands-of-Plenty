@@ -7,8 +7,6 @@ endglobals
 //! runtextmacro Begin0SecondInitializer("Init")
     local framehandle mainButton
     
-    call BlzLoadTOCFile("war3mapimported\\BoxedText.toc")
-    
     set mainFrame = Screen.create()
     call mainFrame.show(false)
     

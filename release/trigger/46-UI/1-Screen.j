@@ -1,4 +1,4 @@
-library Screen requires OSKeyLib, Table, PlayerUtils, GMUI
+library Screen requires OSKeyLib, Table, PlayerUtils, GMUI, LoPUI
 
 
 struct Screen extends array
@@ -11,7 +11,7 @@ struct Screen extends array
     framehandle simpleContainer
     private Table frames
 
-    static method fromFrame takes framehandle mainFrame returns thistype
+    private static method fromFrame takes framehandle mainFrame returns thistype
         local thistype this = thistype.allocate()
         
         set .main = mainFrame
@@ -21,12 +21,14 @@ struct Screen extends array
     endmethod
 
     static method create takes nothing returns thistype
-        return fromFrame(BlzCreateFrameByType("FRAME", "ScreenFrame", BlzGetOriginFrame(ORIGIN_FRAME_GAME_UI,0),"", 0))
+        return fromFrame(BlzCreateFrameByType("FRAME", "ScreenFrame", LoPUI_ConsoleUIBackdrop,"", 0)) 
     endmethod
     
     static method createWithSimple takes nothing returns thistype
-        local thistype this = create()
-        set .simpleContainer = BlzCreateFrameByType("SIMPLEFRAME", "SimpleScreenFrame", BlzGetOriginFrame(ORIGIN_FRAME_GAME_UI,0),"", 0)
+        local thistype this = .create()
+        set .simpleContainer = BlzCreateFrameByType("SIMPLEFRAME", "SimpleScreenFrame", LoPUI_ConsoleUIBackdrop,"", 0)
+        return this
+    endmethod
         return this
     endmethod
     

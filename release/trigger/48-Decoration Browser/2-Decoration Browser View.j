@@ -11,7 +11,6 @@ endglobals
     call decorationBrowserScreen.show(false)
     
     call BlzLoadTOCFile("war3mapImported\\Templates.toc")
-    call BlzLoadTOCFile("war3mapImported\\boxedtext.toc")
     
     set mainButton = BlzCreateFrame("QuestButtonBaseTemplate", decorationBrowserScreen.main,0,0)
     set decorationBrowserScreen["backdrop"] = mainButton

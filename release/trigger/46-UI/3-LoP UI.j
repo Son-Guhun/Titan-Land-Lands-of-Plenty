@@ -1,13 +1,14 @@
-library LoPUI initializer Init requires UpperButtonBarView
+library LoPUI requires UILib, UpperButtonBarView
 
 globals
-    private framehandle ConsoleUIBackdrop
+    public framehandle ConsoleUIBackdrop
+    public framehandle ConsoleUIBackdropDummy
     private framehandle array commandButtons
     public boolean altZEnabled = true
 endglobals
 
 function IsFullScreen takes nothing returns boolean
-    return not BlzFrameIsVisible(ConsoleUIBackdrop)
+    return not BlzFrameIsVisible(ConsoleUIBackdropDummy)
 endfunction
 
 function FullScreen takes boolean enable, integer cmdBtnAlpha returns nothing
@@ -17,7 +18,7 @@ function FullScreen takes boolean enable, integer cmdBtnAlpha returns nothing
 
         call BlzHideOriginFrames(enable)
         call BlzEnableUIAutoPosition(not enable)
-        call BlzFrameSetVisible(ConsoleUIBackdrop, not enable)
+        call BlzFrameSetVisible(ConsoleUIBackdropDummy, not enable)
         call BlzFrameSetVisible(UpperButtonBar.rightFrame, not enable)
         call BlzFrameSetVisible(UpperButtonBar.resourceBar, false)
     endif
@@ -36,6 +37,8 @@ private function onStart takes nothing returns nothing
     local integer i = 0
 
     set ConsoleUIBackdrop = BlzGetFrameByName("ConsoleUIBackdrop", 0)
+    set ConsoleUIBackdropDummy = BlzCreateFrame("ConsoleUIBackdrop", ConsoleUIBackdrop, 0, 1)
+    call BlzFrameSetTexture(ConsoleUIBackdrop, "ReplaceableTextures\\CommandButtons\\PAS__EmptyDummy.tga", 0, true)
     loop
     exitwhen i == 12
         set commandButtons[i] = BlzGetOriginFrame(ORIGIN_FRAME_COMMAND_BUTTON, i)
@@ -45,8 +48,13 @@ private function onStart takes nothing returns nothing
     call DestroyTimer(GetExpiredTimer())
 endfunction
 
-private function Init takes nothing returns nothing
-    call TimerStart(CreateTimer(), 0., false, function onStart)
-endfunction
+private module Init
+    private static method onInit takes nothing returns nothing
+        call TimerStart(CreateTimer(), 0., false, function onStart)
+    endmethod
+endmodule
+private struct InitStruct extends array
+    implement Init
+endstruct
 
 endlibrary

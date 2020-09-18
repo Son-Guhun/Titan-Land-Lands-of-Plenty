@@ -226,6 +226,8 @@ endfunction
     call BlzFrameSetPoint(decorationBrowserScreen["backdrop"], FRAMEPOINT_RIGHT, DecorationsListbox.scrollBar, FRAMEPOINT_RIGHT, 0., 0.)
     call BlzFrameSetPoint(decorationBrowserScreen["backdrop"], FRAMEPOINT_BOTTOMLEFT, DecorationsListbox.buttons[DecorationsListbox.numberOfEntries-1], FRAMEPOINT_BOTTOMLEFT, -0.008, -0.004)
     
+    call BlzFrameSetPoint(DecorationsListbox.buttons[0], FRAMEPOINT_RIGHT, UIView.RIGHT_BORDER, FRAMEPOINT_BOTTOMLEFT, -0.02, 0.510)
+    
     loop
         exitwhen pId >= bj_MAX_PLAYERS
         if GetPlayerSlotState(pId.handle) == PLAYER_SLOT_STATE_PLAYING then

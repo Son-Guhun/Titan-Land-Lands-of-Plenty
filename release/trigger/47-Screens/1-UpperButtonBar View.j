@@ -1,4 +1,4 @@
-library UpperButtonBarView requires Screen
+library UpperButtonBarView
 
 private keyword InitModule
 
