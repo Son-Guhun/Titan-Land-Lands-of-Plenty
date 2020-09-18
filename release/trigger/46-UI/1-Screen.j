@@ -9,6 +9,7 @@ struct Screen extends array
     private boolean isVisible  // async
     framehandle main
     framehandle simpleContainer
+    framehandle topContainer
     private Table frames
 
     private static method fromFrame takes framehandle mainFrame returns thistype
@@ -29,12 +30,17 @@ struct Screen extends array
         set .simpleContainer = BlzCreateFrameByType("SIMPLEFRAME", "SimpleScreenFrame", LoPUI_ConsoleUIBackdrop,"", 0)
         return this
     endmethod
+    
+    static method createWithSimpleAndTop takes nothing returns thistype
+        local thistype this = .createWithSimple()
+        set .topContainer = BlzCreateFrameByType("FRAME", "TopScreenFrame", BlzGetOriginFrame(ORIGIN_FRAME_GAME_UI, 0), "", 0)
         return this
     endmethod
     
     method show takes boolean show returns nothing
         if .isVisible != show then
             set .isVisible = show
+            call BlzFrameSetVisible(.topContainer, show)
             call BlzFrameSetVisible(.simpleContainer, show)
             call BlzFrameSetVisible(.main, show)
         endif

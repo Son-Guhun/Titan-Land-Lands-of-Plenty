@@ -10,45 +10,54 @@ endglobals
     call BlzLoadTOCFile("war3mapImported\\Templates.toc")
     call BlzLoadTOCFile("war3mapImported\\terraineditor.toc")
     
-    set terrainEditorScreen = Screen.createWithSimple()
+    set terrainEditorScreen = Screen.createWithSimpleAndTop()
     call terrainEditorScreen.show(false)
     
     set mainButton = BlzCreateFrame("ScriptDialogButton", terrainEditorScreen.main, 0,0)
-    call BlzFrameSetSize(mainButton, 0.06, 0.05)
-    call BlzFrameSetAbsPoint(mainButton, FRAMEPOINT_LEFT, 0.0,0.595)
+    call BlzFrameSetSize(mainButton, 0.06, 0.03)
+    call BlzFrameSetPoint(mainButton, FRAMEPOINT_TOPLEFT, UIView.LEFT_BORDER, FRAMEPOINT_TOPLEFT, -0., 0.)
+    // call BlzFrameSetAbsPoint(mainButton, FRAMEPOINT_TOPLEFT, 0.0,0.6)
     call BlzFrameSetText(mainButton, "Exit")
     set terrainEditorScreen["exitButton"] = mainButton
     
     set mainButton = BlzCreateFrame("ScriptDialogButton", terrainEditorScreen.main, 0,0)
-    call BlzFrameSetSize(mainButton, 0.12, 0.05)
-    call BlzFrameSetAbsPoint(mainButton, FRAMEPOINT_CENTER, 0.3,0.595)
+    call BlzFrameSetSize(mainButton, 0.12, 0.03)
+    call BlzFrameSetPoint(mainButton, FRAMEPOINT_TOP, UIView.LEFT_BORDER, FRAMEPOINT_TOPLEFT, 0.2, 0.)
+    // call BlzFrameSetAbsPoint(mainButton, FRAMEPOINT_TOP, 0.3,0.6)
     call BlzFrameSetText(mainButton, "Texturing: On")
     set terrainEditorScreen["paintButton"] = mainButton
     
     set mainButton = BlzCreateFrame("ScriptDialogButton", terrainEditorScreen.main, 0,0)
-    call BlzFrameSetSize(mainButton, 0.06, 0.05)
-    call BlzFrameSetAbsPoint(mainButton, FRAMEPOINT_CENTER, 0.5,0.595)
-    call BlzFrameSetText(mainButton, "None")
-    set terrainEditorScreen["heightButton"] = mainButton
-    call BlzFrameSetEnable(mainButton, false)
-    
-    set mainButton = BlzCreateFrame("ScriptDialogButton", terrainEditorScreen.main, 0,0)
-    call BlzFrameSetSize(mainButton, 0.05, 0.03)
-    call BlzFrameSetPoint(mainButton, FRAMEPOINT_LEFT, terrainEditorScreen["heightButton"], FRAMEPOINT_RIGHT, 0., 0.)
-    call BlzFrameSetText(mainButton, "Hill")
-    set terrainEditorScreen["hillButton"] = mainButton
+    call BlzFrameSetSize(mainButton, 0.07, 0.03)
+    call BlzFrameSetPoint(mainButton, FRAMEPOINT_TOPRIGHT, UIView.RIGHT_BORDER, FRAMEPOINT_TOPLEFT, 0., 0.)
+    call BlzFrameSetText(mainButton, "Smooth")
+    set terrainEditorScreen["smoothButton"] = mainButton
     
     set mainButton = BlzCreateFrame("ScriptDialogButton", terrainEditorScreen.main, 0,0)
     call BlzFrameSetSize(mainButton, 0.08, 0.03)
-    call BlzFrameSetPoint(mainButton, FRAMEPOINT_LEFT, terrainEditorScreen["hillButton"], FRAMEPOINT_RIGHT, 0., 0.)
+    call BlzFrameSetPoint(mainButton, FRAMEPOINT_RIGHT, terrainEditorScreen["smoothButton"], FRAMEPOINT_LEFT, 0., 0.)
     call BlzFrameSetText(mainButton, "Plateau")
     set terrainEditorScreen["plateauButton"] = mainButton
     
     set mainButton = BlzCreateFrame("ScriptDialogButton", terrainEditorScreen.main, 0,0)
-    call BlzFrameSetSize(mainButton, 0.07, 0.03)
-    call BlzFrameSetPoint(mainButton, FRAMEPOINT_LEFT, terrainEditorScreen["plateauButton"], FRAMEPOINT_RIGHT, 0., 0.)
-    call BlzFrameSetText(mainButton, "Smooth")
-    set terrainEditorScreen["smoothButton"] = mainButton
+    call BlzFrameSetSize(mainButton, 0.05, 0.03)
+    call BlzFrameSetPoint(mainButton, FRAMEPOINT_RIGHT, terrainEditorScreen["plateauButton"], FRAMEPOINT_LEFT, 0., 0.)
+    call BlzFrameSetText(mainButton, "Hill")
+    set terrainEditorScreen["hillButton"] = mainButton
+    
+    set mainButton = BlzCreateFrame("ScriptDialogButton", terrainEditorScreen.main, 0,0)
+    call BlzFrameSetSize(mainButton, 0.06, 0.03)
+    call BlzFrameSetPoint(mainButton, FRAMEPOINT_RIGHT, terrainEditorScreen["hillButton"], FRAMEPOINT_LEFT, 0., 0.)
+    // call BlzFrameSetAbsPoint(mainButton, FRAMEPOINT_TOP, 0.5,0.6)
+    call BlzFrameSetText(mainButton, "None")
+    set terrainEditorScreen["heightButton"] = mainButton
+    call BlzFrameSetEnable(mainButton, false)
+    
+
+    
+
+    
+
     
     set mainButton = BlzCreateFrame("EscMenuEditBoxTemplate", terrainEditorScreen.main,0,0)
     call BlzFrameSetPoint(mainButton, FRAMEPOINT_TOPLEFT, terrainEditorScreen["plateauButton"], FRAMEPOINT_BOTTOMLEFT, 0., 0.)  
@@ -68,10 +77,16 @@ endglobals
     call BlzFrameSetPoint(mainButton, FRAMEPOINT_RIGHT, terrainEditorScreen["heightButton"], FRAMEPOINT_LEFT, 0, 0)
     call BlzFrameSetText(mainButton, "Height Tool:")
     
+    set mainButton = BlzCreateFrameByType("TEXT", "HotkeyIndicator", terrainEditorScreen.main, "StandardExtraSmallTextTemplate", 0)
+    call BlzFrameSetPoint(mainButton, FRAMEPOINT_LEFT, terrainEditorScreen["paintButton"], FRAMEPOINT_RIGHT, 0.03, 0)
+    call BlzFrameSetText(mainButton, "Brush Size:")
+    set terrainEditorScreen["brushSizeText"] = mainButton
+    
     set mainButton = BlzCreateFrame("EscMenuSliderTemplate", terrainEditorScreen.main,0,0) // BlzCreateFrameByType( "SLIDER", "Test", terrainEditorScreen.main, "EscMenuSliderTemplate", 0 )
     call BlzFrameClearAllPoints(mainButton)
     // call BlzFrameSetAbsPoint(mainButton, FRAMEPOINT_CENTER, 0.4, 0.3)
-    call BlzFrameSetPoint(mainButton, FRAMEPOINT_TOP, terrainEditorScreen["paintButton"], FRAMEPOINT_BOTTOM, 0., 0.)
+    // call BlzFrameSetPoint(mainButton, FRAMEPOINT_TOP, terrainEditorScreen["paintButton"], FRAMEPOINT_BOTTOM, 0., 0.)
+    call BlzFrameSetPoint(mainButton, FRAMEPOINT_LEFT, terrainEditorScreen["brushSizeText"], FRAMEPOINT_RIGHT, 0., 0.)
     call BlzFrameSetMinMaxValue(mainButton, 1., 5.)
     call BlzFrameSetStepSize(mainButton, 1)
     // call BlzFrameSetSize(mainButton, 0.5, 0.012)
@@ -79,7 +94,7 @@ endglobals
     
     set terrainEditorScreen["brushSizeSliderButton"] = BlzGetFrameByName("EscMenuThumbButtonTemplate",0)
     
-    set mainButton = BlzCreateFrameByType("FRAME", "TerrainEditorButtonContainer", terrainEditorScreen.main, "", 0)
+    set mainButton = BlzCreateFrameByType("FRAME", "TerrainEditorButtonContainer", terrainEditorScreen.topContainer, "", 0)
     set terrainEditorScreen["textureButtonsContainer"] = mainButton
     
     set mainButton = BlzCreateFrameByType("SIMPLEFRAME", "TerrainEditorButtonSimpleContainer", terrainEditorScreen.simpleContainer, "", 0)
@@ -132,7 +147,7 @@ struct TerrainEditorButton extends array
         set .quarterTexture = BlzGetFrameByName("TerrainEditorQuarterBackground", this)
         set .halfTexture = BlzGetFrameByName("TerrainEditorHalfBackground", this)
         
-        call BlzFrameSetSize(.button, 0.05, 0.05)
+        call BlzFrameSetSize(.button, 0.035, 0.035)
         call BlzFrameSetAllPoints(.background, .button)
         call IsMouseOnButton_Register(.button)
         call BlzTriggerRegisterFrameEvent(mouseClickHandler, .button, FRAMEEVENT_CONTROL_CLICK)
@@ -150,10 +165,11 @@ struct TerrainEditorButton extends array
     
     private static method onStart takes nothing returns nothing
         local framehandle text
+        // local framehandle box = BlzCreateFrame("BoxedText", terrainEditorScreen["textureButtonsContainer"], 0, 0)
         local integer i = 1
         
         set thistype(0).button = TerrainEditorButton.create(0).button
-        call BlzFrameSetAbsPoint(thistype(0).button, FRAMEPOINT_LEFT, 0.2, 0.075)
+        call BlzFrameSetAbsPoint(thistype(0).button, FRAMEPOINT_TOPLEFT, 0.26, 0.035*2 + .007)
         
         loop
             set text = BlzCreateFrameByType("TEXT", "HotkeyIndicator", terrainEditorScreen["textureButtonsContainer"], "StandardExtraSmallTextTemplate", 0)
@@ -165,6 +181,7 @@ struct TerrainEditorButton extends array
             call BlzFrameSetPoint(thistype(i).button, FRAMEPOINT_LEFT, thistype(i-1).button, FRAMEPOINT_RIGHT, 0, 0)
             set i = i + 1
         endloop
+        // call BlzFrameSetPoint(box, FRAMEPOINT_TOPRIGHT, text, FRAMEPOINT_TOPRIGHT, 0.05, 0.02)
         
         set thistype(8).button = TerrainEditorButton.create(i).button
         call BlzFrameSetPoint(thistype(8).button, FRAMEPOINT_TOP, thistype(0).button, FRAMEPOINT_BOTTOM, 0, 0)
@@ -185,6 +202,7 @@ struct TerrainEditorButton extends array
         set text = BlzCreateFrameByType("TEXT", "HotkeyIndicator", terrainEditorScreen["textureButtonsContainer"], "StandardExtraSmallTextTemplate", 0)
         call BlzFrameSetPoint(text, FRAMEPOINT_RIGHT, thistype(8).button, FRAMEPOINT_LEFT, 0, 0)
         call BlzFrameSetText(text, "Alt+")
+        // call BlzFrameSetPoint(box, FRAMEPOINT_BOTTOMLEFT, text, FRAMEPOINT_BOTTOMLEFT, -0.03, -0.05)
         
         call DestroyTimer(GetExpiredTimer())
     endmethod
