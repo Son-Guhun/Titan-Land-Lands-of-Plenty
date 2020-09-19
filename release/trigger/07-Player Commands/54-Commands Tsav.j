@@ -20,7 +20,7 @@ private function onCommand takes nothing returns boolean
         call LoP_WarnPlayer(GetTriggerPlayer(), LoPChannels.ERROR, "You must be selecting a Rect Generator.")
     endif
     
-    return true
+    return false
 endfunction
 
 //===========================================================================

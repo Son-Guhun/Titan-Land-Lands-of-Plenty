@@ -529,11 +529,13 @@ endglobals
         call TriggerAddCondition(trig, Filter(function OnPreDamage))
         
         // Added by Guhun to work around W3X2LNI renaming vars when it shouldn't
-        call TriggerRegisterVariableEvent(null, "udg_DamageModifierEvent", null, 0.)
-        call TriggerRegisterVariableEvent(null, "udg_DamageEvent", null, 0.)
-        call TriggerRegisterVariableEvent(null, "udg_AfterDamageEvent", null, 0.)
-        call TriggerRegisterVariableEvent(null, "udg_LethalDamageEvent", null, 0.)
-        call TriggerRegisterVariableEvent(null, "udg_AOEDamageEvent", null, 0.)
+        if false then
+            call TriggerRegisterVariableEvent(null, "udg_DamageModifierEvent", null, 0.)
+            call TriggerRegisterVariableEvent(null, "udg_DamageEvent", null, 0.)
+            call TriggerRegisterVariableEvent(null, "udg_AfterDamageEvent", null, 0.)
+            call TriggerRegisterVariableEvent(null, "udg_LethalDamageEvent", null, 0.)
+            call TriggerRegisterVariableEvent(null, "udg_AOEDamageEvent", null, 0.)
+        endif
         set trig = null
     endfunction
    

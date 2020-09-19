@@ -2,7 +2,6 @@ scope CommandsRequest
 
 private function onCommand takes nothing returns boolean
     local integer playerId = GetPlayerId(GetTriggerPlayer())
-    local string chatStr = GetEventPlayerChatString()
     local string errorString = "Save not found under specified name. To load saves from before 1.4.0, use the |cffffff00-compat|r command."
     
     set stringsLoaded[playerId + 1] = 0
