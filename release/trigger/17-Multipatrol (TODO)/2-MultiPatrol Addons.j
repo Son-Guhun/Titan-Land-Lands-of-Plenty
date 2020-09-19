@@ -1,3 +1,4 @@
+/*
 scope MultiPatrolCommands initializer onInit
 
 private function CommandActions takes nothing returns nothing
@@ -44,6 +45,7 @@ private function onInit takes nothing returns nothing
 endfunction
 
 endscope
+*/
 
 scope MultiPatrolOrder initializer onInit
 
