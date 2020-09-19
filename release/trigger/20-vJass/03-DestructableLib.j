@@ -12,10 +12,14 @@ library DestructableLib initializer Initialization
 globals
     private constant integer DUMMY_UNIT_ID = 'hfoo' // footman
     private constant integer HARVEST_ID    = 'Ahrl' // ghouls harvest
-    private constant player OWNING_PLAYER  = Player(PLAYER_NEUTRAL_PASSIVE)
     
     private unit dummy = null
 endglobals
+
+// Added by Guhun to avoid creating a player variable in globals block
+private constant function OWNING_PLAYER takes nothing returns player
+    return Player(PLAYER_NEUTRAL_PASSIVE)
+endfunction
 
 function IsDestructableDead takes destructable dest returns boolean
     return GetDestructableLife(dest) <= 0.405
@@ -32,7 +36,7 @@ function IsDestructableTree takes destructable dest returns boolean
 endfunction
 
 private function Initialization takes nothing returns nothing
-    set dummy = CreateUnit(OWNING_PLAYER, DUMMY_UNIT_ID, 0.0, 0.0, 0.0)
+    set dummy = CreateUnit(OWNING_PLAYER(), DUMMY_UNIT_ID, 0.0, 0.0, 0.0)
     call ShowUnit(dummy, false) // cannot enumerate
     call UnitAddAbility(dummy, HARVEST_ID)
     call UnitAddAbility(dummy, 'Aloc') // unselectable, invulnerable

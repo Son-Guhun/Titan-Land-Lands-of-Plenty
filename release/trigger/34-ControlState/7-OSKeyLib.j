@@ -263,8 +263,8 @@ struct OSKeys extends array
 
     readonly boolean isRegistered
     private static trigger eventResponder = null
-    private static trigger executer = CreateTrigger()
-    private static trigger holdExecuter = CreateTrigger()
+    private static trigger executer
+    private static trigger holdExecuter
     private static real array latestTimestamp
     private static integer array totalPressedKeys
     private static boolean array isPressedArray[256][24]
@@ -477,6 +477,8 @@ endstruct
 private module Init
     private static method onInit takes nothing returns nothing
         call TimerStart(CreateTimer(), 0., false, function thistype.onStart)
+        set executer = CreateTrigger()
+        set holdExecuter = CreateTrigger()
     endmethod
 endmodule
 

@@ -125,7 +125,7 @@ endglobals
 
 struct TerrainEditorButton extends array
 
-    static trigger mouseClickHandler = CreateTrigger()
+    static trigger mouseClickHandler
     static key tabb
 
     framehandle button
@@ -208,6 +208,7 @@ struct TerrainEditorButton extends array
     endmethod
     
     private static method onInit takes nothing returns nothing
+        set mouseClickHandler = CreateTrigger()
         call TimerStart(CreateTimer(), 0., false, function thistype.onStart)
     endmethod
 
