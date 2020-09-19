@@ -22,20 +22,35 @@ def get_rlvalues(line):
     if i != -1:
         line = line[:i]
 
-    line = line.split('=')
-    line = tuple(x.strip() for x in line)
-    return line
+    line = [x.strip() for x in line.split('=')]
+    if len(line) < 2:
+        line.append(None)
+    return tuple(line)
 
 def parse_constant(line):
     rvalue, lvalue = get_rlvalues(line)
 
     const ,type, name = rvalue.split()
 
-    if type in ['integer', 'real', 'boolean']:
+    if type in ('integer', 'real', 'boolean'):
         if is_const(lvalue):
             constants[name] = lvalue.strip()
             return True
     return False
+
+handles = []
+def parse_global_handle(line):
+    rvalue, lvalue = get_rlvalues(line)
+
+    if lvalue is None: return line
+
+    type, name = rvalue.split()
+
+    if type not in ('integer', 'real', 'boolean', 'code', 'string'):
+        if 'null' not in lvalue:
+            handles.append((name, lvalue))
+            return '{} {}'.format(type, name)
+    return line
 
 def parse_local(line):
     rvalue = get_rlvalues(line)[0]
@@ -74,7 +89,9 @@ def parse(file, out=sys.stdout):
             elif starts_with(stripped, "endglobals"):
                 in_globals = False
             else:
-                line = inline_constants(line)
+                if not stripped.startswith('//'):
+                    line = parse_global_handle(stripped)+'\n'
+                    line = inline_constants(line)
         elif in_locals:
             if starts_with(stripped, "local"):
                 line = inline_constants(line)
@@ -84,12 +101,14 @@ def parse(file, out=sys.stdout):
                 in_function = True
         if in_function:
             if stripped:
-                if starts_with(stripped, "endfunction"):
+                if stripped.startswith("endfunction"):
                     in_locals = False
                     in_function = False
                     l_vars.clear()
                     #out.write(line)
-
+                elif stripped.startswith('call ExecuteFunc("jasshelper__initstructs'):
+                    for rval,lval in handles:
+                        out.write('set {} = {}\n'.format(rval,lval))
                 else:
                     try:
                         line = inline_constants(line)
@@ -97,7 +116,7 @@ def parse(file, out=sys.stdout):
                         sys.stderr.write(line)
                         raise e
         else: 
-            if starts_with(stripped, 'function') or starts_with(stripped, 'constant function'):
+            if stripped.startswith('function') or stripped.startswith('constant function'):
                 in_locals = True
         
         if line:
