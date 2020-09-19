@@ -142,14 +142,9 @@ private function InitializeUnitIndexer takes nothing returns nothing
     set udg_UnitIndexEvent = 3.00
 endfunction
 
-function Trig_Unit_Indexer_Actions takes nothing returns nothing
-        call InitializeUnitIndexer()
-endfunction
-
 //===========================================================================
 function InitTrig_Unit_Indexer takes nothing returns nothing
-    set gg_trg_Unit_Indexer = CreateTrigger(  )
-    call TriggerAddAction( gg_trg_Unit_Indexer, function Trig_Unit_Indexer_Actions )
+    call InitializeUnitIndexer()
 endfunction
 
 endlibrary

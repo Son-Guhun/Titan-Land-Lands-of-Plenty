@@ -258,5 +258,3 @@ endfunction
 function StartKnockback2DTimer takes nothing returns nothing
     call TimerStart(udg_K2DTimer, udg_K2DTimeout, true, function Knockback2DLooper)
 endfunction
-function InitTrig_Knockback_2D_System takes nothing returns nothing
-endfunction

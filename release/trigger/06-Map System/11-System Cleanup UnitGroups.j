@@ -23,8 +23,6 @@ endfunction
 
 //===========================================================================
 function InitTrig_System_Cleanup_UnitGroups takes nothing returns nothing
-    set gg_trg_System_Cleanup_UnitGroups = CreateTrigger(  )
-    call TriggerRegisterTimerEventPeriodic( gg_trg_System_Cleanup_UnitGroups, 10.00 )
-    call TriggerAddAction( gg_trg_System_Cleanup_UnitGroups, function Trig_System_Cleanup_UnitGroups_Actions )
+    call TimerStart(CreateTimer(), 10., true, function Trig_System_Cleanup_UnitGroups_Actions)
 endfunction
 
