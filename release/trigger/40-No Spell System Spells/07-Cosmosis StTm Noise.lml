@@ -1,7 +1,0 @@
-Event
-    TriggerRegisterTimerEventPeriodic
-        Const : 1.00
-Condition
-Action
-    PlaySoundBJ
-        Var   : gg_snd_StopTimeTicTac
