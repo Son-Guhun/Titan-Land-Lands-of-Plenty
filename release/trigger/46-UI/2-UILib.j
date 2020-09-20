@@ -1,5 +1,9 @@
 library UILib
 
+globals
+    public framehandle ConsoleUIBackdrop
+endglobals
+
 module UIViewInit
     private static method onInit takes nothing returns nothing
         call TimerStart(CreateTimer(), 0., false, function thistype.onTimer)
@@ -42,7 +46,6 @@ struct UIView extends array
     static method onTimer takes nothing returns nothing
         local integer w = BlzGetLocalClientWidth()
         local integer h = BlzGetLocalClientHeight()
-        local framehandle ConsoleUIBackdrop
         
         if LEFT_BORDER == null then
             set ConsoleUIBackdrop = BlzGetFrameByName("ConsoleUIBackdrop", 0)

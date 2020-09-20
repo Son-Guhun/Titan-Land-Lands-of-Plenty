@@ -110,7 +110,7 @@ module AdvChatBoxController
         local player trigP = GetTriggerPlayer()
         local User pId = User[trigP]
         
-        if msg != lastSentText[pId] and Timeline.game.elapsed > lastSentTimestamp[pId] + .5 then
+        if not (msg == lastSentText[pId] and Timeline.game.elapsed < lastSentTimestamp[pId] + .5) then
             if len == 0 then
                 if User.Local == trigP then
                     call BlzFrameSetVisible(AdvChatBox.editBox, false)

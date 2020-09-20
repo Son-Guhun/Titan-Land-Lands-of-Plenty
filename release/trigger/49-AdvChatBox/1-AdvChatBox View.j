@@ -1,4 +1,4 @@
-library AdvChatBoxView
+library AdvChatBoxView requires UILib
 
 private keyword Init
 
@@ -25,10 +25,11 @@ private module Init
         call BlzFrameSetVisible(AdvChatBox.editBox, false)
         call BlzFrameSetTextSizeLimit(AdvChatBox.editBox, 255)
         
-        set AdvChatBox.typingIndicator = BlzCreateFrameByType("TEXT", "TypingIndicator", BlzGetOriginFrame(ORIGIN_FRAME_GAME_UI, 0), "StandardExtraSmallTextTemplate", 0)
+        set AdvChatBox.typingIndicator = BlzCreateFrameByType("TEXT", "TypingIndicator", UILib_ConsoleUIBackdrop, "StandardExtraSmallTextTemplate", 0)
         call BlzFrameSetPoint(AdvChatBox.typingIndicator, FRAMEPOINT_TOPRIGHT, AdvChatBox.editBox, FRAMEPOINT_TOPLEFT, 0, 0.02)
         call BlzFrameSetPoint(AdvChatBox.typingIndicator, FRAMEPOINT_BOTTOM, AdvChatBox.editBox, FRAMEPOINT_BOTTOM, 0, 0.0)
-        call BlzFrameSetAbsPoint(AdvChatBox.typingIndicator, FRAMEPOINT_LEFT, 0., 0.)
+        call BlzFrameSetPoint(AdvChatBox.typingIndicator, FRAMEPOINT_LEFT, UIView.LEFT_BORDER, FRAMEPOINT_LEFT, 0., 0.)
+        // call BlzFrameSetAbsPoint(AdvChatBox.typingIndicator, FRAMEPOINT_LEFT, 0., 0.)
         
         set AdvChatBox.closeButton = BlzCreateFrame("ScriptDialogButton", AdvChatBox.editBox, 0,0)
         call BlzFrameSetSize(AdvChatBox.closeButton, 0.125, 0.028)
