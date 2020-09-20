@@ -1,3 +1,11 @@
+scope ChatMessageHandler
+
+private struct G extends array
+    static key static_members_key
+    //! runtextmacro TableStruct_NewStaticStructField("hints", "ArrayList")
+
+endstruct
+
 function Trig_Chat_Message_Handler_Actions takes nothing returns nothing
     local string msg = GetEventPlayerChatString()
     local integer len = StringLength(msg)
@@ -7,6 +15,10 @@ function Trig_Chat_Message_Handler_Actions takes nothing returns nothing
         if LoPCommands_MessageHandler() then
             return
         endif
+    endif
+    
+    if Timeline.game.elapsed < 3600. and Timeline.game.elapsed > 30. then
+        call LoPHints.displayFromList(GetTriggerPlayer(), G.hints)
     endif
     
     if len > 2 then
@@ -29,6 +41,10 @@ function InitTrig_Chat_Message_Handler takes nothing returns nothing
     set gg_trg_Chat_Message_Handler = CreateTrigger(  )
     call TriggerAddAction( gg_trg_Chat_Message_Handler, function Trig_Chat_Message_Handler_Actions )
     
+    set G.hints = ArrayList.create()
+    call G.hints.append(LoPHints.CHAT_LOGS)
+    call G.hints.append(LoPHints.COMMAND_CHATBOX)
+    
     loop
         exitwhen pId == bj_MAX_PLAYERS
         if GetPlayerController(pId.handle) == MAP_CONTROL_USER then
@@ -38,3 +54,4 @@ function InitTrig_Chat_Message_Handler takes nothing returns nothing
     endloop
 endfunction
 
+endscope
