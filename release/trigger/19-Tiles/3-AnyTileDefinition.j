@@ -19,11 +19,7 @@ endglobals
 
 
 function GetCustomTileCenterCoordinate takes integer tileSize, real a returns real
-    if (a >= 0.) then
-        return I2R(R2I((a/tileSize) + .5)*tileSize)
-    else
-        return I2R(R2I((a/tileSize) - .5)*tileSize)
-    endif
+    return I2R(MathRound(a/tileSize)*tileSize)
 endfunction
 
 function AreCoordinatesInSameCustomTile takes integer tileSize, real a, real b returns boolean

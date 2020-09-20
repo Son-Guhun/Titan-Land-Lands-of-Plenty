@@ -64,11 +64,7 @@ endglobals
 **      
 ***********************************************************************************************************/   
     function GetTileCenterCoordinate takes real a returns real
-        if (a >= 0.) then
-            return R2I((a/128) + .5)*128.
-        else
-            return R2I((a/128) - .5)*128.
-        endif
+        return MathRound(a/128)*128.
     endfunction
    
     function AreCoordinatesInSameTile takes real a, real b returns boolean

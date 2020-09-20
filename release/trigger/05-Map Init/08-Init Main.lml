@@ -53,6 +53,9 @@ Action
         Var   : gg_dest_ATg3_0004
     CommentString
         Const : ---------------
+    EnableMinimapFilterButtons
+        Preset: EnableDisableDisable
+        Preset: EnableDisableDisable
     CommentString
         Const : 'Ally Players and Create Spawns'
     CommentString

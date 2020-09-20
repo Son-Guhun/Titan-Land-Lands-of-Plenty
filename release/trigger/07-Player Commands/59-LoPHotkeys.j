@@ -39,7 +39,7 @@ private function Init takes nothing returns nothing
     
     call Register(MetaKeys.ALT, OSKeys.R, "-rect mouse")
     call Register(MetaKeys.ALT, OSKeys.W, "-start mouse")
-    call Register(MetaKeys.ALT, OSKeys.T, "-controller mouse")
+    call Register(MetaKeys.ALT, OSKeys.Q, "-controller mouse")
     
     
 endfunction
