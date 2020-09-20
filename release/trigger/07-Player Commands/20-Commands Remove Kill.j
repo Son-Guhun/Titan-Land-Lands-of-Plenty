@@ -38,8 +38,10 @@ endfunction
 
 //===========================================================================
 function InitTrig_Commands_Remove_Kill takes nothing returns nothing
-    call LoP_Command.create("-kill", ACCESS_USER, Condition(function Trig_Commands_Remove_Kill_Conditions))
-    call LoP_Command.create("-remove", ACCESS_USER, Condition(function Trig_Commands_Remove_Kill_Conditions))
+    call LoP_Command.create("-kill", ACCESS_USER, Condition(function Trig_Commands_Remove_Kill_Conditions))/*
+    */.addHint(LoPHints.REMOVE_UNIT_HOTKEY).addHint(LoPHints.COMMAND_DELETEME)/*
+    */.createChained("-remove", ACCESS_USER, Condition(function Trig_Commands_Remove_Kill_Conditions))/*
+    */.useHintsFrom("-kill")
     
     // set G.allowedTypes.boolean['nshp'] = true
     // set G.allowedTypes.boolean['nbot'] = true

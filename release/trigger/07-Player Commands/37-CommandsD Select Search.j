@@ -133,8 +133,8 @@ endfunction
 
 //===========================================================================
 function InitTrig_CommandsD_Select_Search takes nothing returns nothing
-    call LoP_Command.create("-seln", ACCESS_USER, Condition(function SearchSelectMain ))
-    call LoP_Command.create("-sele", ACCESS_USER, Condition(function SearchSelectMain ))
-    call LoP_Command.create("-selc", ACCESS_USER, Condition(function SearchSelectMain ))
+    call LoP_Command.create("-seln", ACCESS_USER, Condition(function SearchSelectMain )) /*
+    */.createChained("-sele", ACCESS_USER, Condition(function SearchSelectMain )) /*
+    */.createChained("-selc", ACCESS_USER, Condition(function SearchSelectMain ))
 endfunction
 

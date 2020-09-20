@@ -1,4 +1,4 @@
-library LoPCommands initializer onInit requires CutToComma, TableStruct, ArgumentStack, LoPPlayers, UserDefinedRects, UnitVisualMods
+library LoPCommands initializer onInit requires CutToComma, TableStruct, ArgumentStack, LoPPlayers, LoPTip, UserDefinedRects, UnitVisualMods, GAL
 
 globals
     constant integer ACCESS_TITAN = 1
@@ -169,6 +169,7 @@ struct LoP_Command extends array
     //! runtextmacro TableStruct_NewAgentField("boolexpr","boolexpr")
     //! runtextmacro TableStruct_NewPrimitiveField("string","string")
     //! runtextmacro TableStruct_NewPrimitiveField("accessLevel","integer")
+    //! runtextmacro TableStruct_NewStructField("hints","ArrayList")
     
     static method create takes string str, integer access, boolexpr expr returns LoP_Command
         local LoP_Command this = LoP_Command.fromString(str)
@@ -183,6 +184,28 @@ struct LoP_Command extends array
         endif
         return this
     endmethod
+    
+    method hasHints takes nothing returns boolean
+        return .hintsExists()
+    endmethod
+    
+    method createChained takes  string str, integer access, boolexpr expr returns LoP_Command
+        return 0*this + create(str, access, expr)
+    endmethod
+    
+    method addHint takes integer hint returns thistype
+        if not .hintsExists() then
+            set .hints = ArrayList.create()
+        endif
+        call .hints.append(hint)
+        return this
+    endmethod
+    
+    method useHintsFrom takes string command returns LoP_Command
+        set .hints = thistype(StringHash(command)).hints
+        return this
+    endmethod
+        
     
     static method getCommand takes nothing returns string
         return Args.getString(0)
@@ -231,6 +254,10 @@ public function ExecuteCommand takes string chatMsg returns boolean
     
     
     if beforeSpace == command.string then
+        if command.hasHints() then
+            call LoPHints.displayFromList(GetTriggerPlayer(), command.hints)
+        endif
+    
         if accessLevel >= command.accessLevel and LoP_PlayerData.get(GetTriggerPlayer()).commandsEnabled then
             set evaluator = Globals.evaluator
             debug call BJDebugMsg("Command called: " + beforeSpace)
@@ -249,6 +276,7 @@ public function ExecuteCommand takes string chatMsg returns boolean
         else
             call DisplayTextToPlayer(GetTriggerPlayer(), 0., 0., "You do not have permission to use this command.")
         endif
+        
         return true
     endif
 

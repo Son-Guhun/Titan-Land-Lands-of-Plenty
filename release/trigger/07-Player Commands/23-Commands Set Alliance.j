@@ -55,10 +55,10 @@ endfunction
 
 //===========================================================================
 function InitTrig_Commands_Set_Alliance takes nothing returns nothing
-    call LoP_Command.create("-ally", ACCESS_USER, Condition(function Trig_Commands_SetAlliance_Conditions))
-    call LoP_Command.create("-unally", ACCESS_USER, Condition(function Trig_Commands_SetAlliance_Conditions))
-    call LoP_Command.create("-share", ACCESS_USER, Condition(function Trig_Commands_SetAlliance_Conditions))
-    call LoP_Command.create("-war", ACCESS_USER, Condition(function Trig_Commands_SetAlliance_Conditions))
-    call LoP_Command.create("-unwar", ACCESS_USER, Condition(function Trig_Commands_SetAlliance_Conditions))
+    call LoP_Command.create("-ally", ACCESS_USER, Condition(function Trig_Commands_SetAlliance_Conditions))/*
+    */.createChained("-unally", ACCESS_USER, Condition(function Trig_Commands_SetAlliance_Conditions)) /*
+    */.createChained("-share", ACCESS_USER, Condition(function Trig_Commands_SetAlliance_Conditions)) /*
+    */.createChained("-war", ACCESS_USER, Condition(function Trig_Commands_SetAlliance_Conditions)) /*
+    */.createChained("-unwar", ACCESS_USER, Condition(function Trig_Commands_SetAlliance_Conditions))
 endfunction
 

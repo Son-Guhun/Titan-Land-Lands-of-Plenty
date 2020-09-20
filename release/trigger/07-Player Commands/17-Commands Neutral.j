@@ -125,7 +125,7 @@ endfunction
 
 //===========================================================================
 function InitTrig_Commands_Neutral takes nothing returns nothing
-    call LoP_Command.create("-neut", ACCESS_USER, Condition(function Trig_Commands_Neutral_Conditions ))
-    call LoP_Command.create("-neut decos", ACCESS_USER, Condition(function Trig_Commands_Neutral_Conditions ))
+    call LoP_Command.create("-neut", ACCESS_USER, Condition(function Trig_Commands_Neutral_Conditions )) /*
+    */.createChained("-neut decos", ACCESS_USER, Condition(function Trig_Commands_Neutral_Conditions ))
 endfunction
 

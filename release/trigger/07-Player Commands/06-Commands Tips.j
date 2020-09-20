@@ -31,8 +31,8 @@ endfunction
 
 //===========================================================================
 function InitTrig_Commands_Tips takes nothing returns nothing
-    call LoP_Command.create("-tips",  ACCESS_USER, Condition(function onCommand ))
-    call LoP_Command.create("-hints", ACCESS_USER, Condition(function onCommand ))
+    call LoP_Command.create("-tips",  ACCESS_USER, Condition(function onCommand )) /*
+    */.createChained("-hints", ACCESS_USER, Condition(function onCommand ))
 endfunction
 
 endscope

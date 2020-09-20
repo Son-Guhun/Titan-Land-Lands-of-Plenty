@@ -36,12 +36,12 @@ endfunction
 
 //===========================================================================
 function InitTrig_CommandsD_Set_RGB takes nothing returns nothing
-    call LoP_Command.create("-rgb", ACCESS_USER, Condition(function ColorSystem_Set_RGB_Conditions))
-    call LoP_Command.create("-rgbi", ACCESS_USER, Condition(function ColorSystem_Set_RGB_Conditions))
-    call LoP_Command.create("-rgbh", ACCESS_USER, Condition(function ColorSystem_Set_RGB_Conditions))
-    call LoP_Command.create("-red", ACCESS_USER, Condition(function ColorSystem_Set_RGB_Conditions))
-    call LoP_Command.create("-green", ACCESS_USER, Condition(function ColorSystem_Set_RGB_Conditions))
-    call LoP_Command.create("-blue", ACCESS_USER, Condition(function ColorSystem_Set_RGB_Conditions))
-    call LoP_Command.create("-alpha", ACCESS_USER, Condition(function ColorSystem_Set_RGB_Conditions))
+    call LoP_Command.create("-rgb", ACCESS_USER, Condition(function ColorSystem_Set_RGB_Conditions))/*
+    */.createChained("-rgbi", ACCESS_USER, Condition(function ColorSystem_Set_RGB_Conditions)) /*
+    */.createChained("-rgbh", ACCESS_USER, Condition(function ColorSystem_Set_RGB_Conditions)) /*
+    */.createChained("-red", ACCESS_USER, Condition(function ColorSystem_Set_RGB_Conditions)) /*
+    */.createChained("-green", ACCESS_USER, Condition(function ColorSystem_Set_RGB_Conditions)) /*
+    */.createChained("-blue", ACCESS_USER, Condition(function ColorSystem_Set_RGB_Conditions)) /*
+    */.createChained("-alpha", ACCESS_USER, Condition(function ColorSystem_Set_RGB_Conditions))
 endfunction
 

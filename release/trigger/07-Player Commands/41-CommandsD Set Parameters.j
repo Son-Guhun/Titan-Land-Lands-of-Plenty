@@ -31,14 +31,14 @@ endfunction
 
 //===========================================================================
 function InitTrig_CommandsD_Set_Parameters takes nothing returns nothing
-    call LoP_Command.create("-size", ACCESS_USER, Condition(function Trig_CommandsD_Set_Parameters_Conditions))
-    call LoP_Command.create("-face", ACCESS_USER, Condition(function Trig_CommandsD_Set_Parameters_Conditions))
-    call LoP_Command.create("-f", ACCESS_USER, Condition(function Trig_CommandsD_Set_Parameters_Conditions))
-    call LoP_Command.create("-fly", ACCESS_USER, Condition(function Trig_CommandsD_Set_Parameters_Conditions))
-    call LoP_Command.create("-h", ACCESS_USER, Condition(function Trig_CommandsD_Set_Parameters_Conditions))
-    call LoP_Command.create("-anim", ACCESS_USER, Condition(function Trig_CommandsD_Set_Parameters_Conditions))
-    call LoP_Command.create("-speed", ACCESS_USER, Condition(function Trig_CommandsD_Set_Parameters_Conditions))
-    call LoP_Command.create("-grid", ACCESS_USER, Condition(function Trig_CommandsD_Set_Parameters_Conditions))
-    call LoP_Command.create("-color", ACCESS_USER, Condition(function Trig_CommandsD_Set_Parameters_Conditions))
+    call LoP_Command.create("-size", ACCESS_USER, Condition(function Trig_CommandsD_Set_Parameters_Conditions))/*
+    */.createChained("-face", ACCESS_USER, Condition(function Trig_CommandsD_Set_Parameters_Conditions)) /*
+    */.createChained("-f", ACCESS_USER, Condition(function Trig_CommandsD_Set_Parameters_Conditions)) /*
+    */.createChained("-fly", ACCESS_USER, Condition(function Trig_CommandsD_Set_Parameters_Conditions)) /*
+    */.createChained("-h", ACCESS_USER, Condition(function Trig_CommandsD_Set_Parameters_Conditions)) /*
+    */.createChained("-anim", ACCESS_USER, Condition(function Trig_CommandsD_Set_Parameters_Conditions)) /*
+    */.createChained("-speed", ACCESS_USER, Condition(function Trig_CommandsD_Set_Parameters_Conditions)) /*
+    */.createChained("-grid", ACCESS_USER, Condition(function Trig_CommandsD_Set_Parameters_Conditions)) /*
+    */.createChained("-color", ACCESS_USER, Condition(function Trig_CommandsD_Set_Parameters_Conditions))
 endfunction
 

@@ -32,8 +32,10 @@ endfunction
 
 //===========================================================================
 function InitTrig_Commands_Spawn_Stuff takes nothing returns nothing    
-    call LoP_Command.create("-start", ACCESS_USER, Condition(function Trig_Commands_Spawn))
-    call LoP_Command.create("-rect", ACCESS_USER, Condition(function Trig_Commands_Spawn))
-    call LoP_Command.create("-controller", ACCESS_USER, Condition(function Trig_Commands_Spawn))
+    call LoP_Command.create("-start", ACCESS_USER, Condition(function Trig_Commands_Spawn)) /*
+    */.addHint(LoPHints.HOTKEY_RACE_SELECTOR) /*
+    */.createChained("-rect", ACCESS_USER, Condition(function Trig_Commands_Spawn)) /*
+    */.addHint(LoPHints.HOTKEY_RECT_GENERATOR) /*
+    */.createChained("-controller", ACCESS_USER, Condition(function Trig_Commands_Spawn))
 endfunction
 

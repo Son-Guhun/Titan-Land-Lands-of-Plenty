@@ -62,8 +62,8 @@ endfunction
 
 //===========================================================================
 function InitTrig_CommandsR_Delete takes nothing returns nothing
-    call LoP_Command.create("-delete", ACCESS_TITAN, Condition(function Trig_CommandsR_Delete_Conditions))
-    call LoP_Command.create("-delneu", ACCESS_TITAN, Condition(function Trig_CommandsR_Delete_Conditions))
-    call LoP_Command.create("-delpal", ACCESS_TITAN, Condition(function Trig_CommandsR_Delete_Conditions))
+    call LoP_Command.create("-delete", ACCESS_TITAN, Condition(function Trig_CommandsR_Delete_Conditions)) /*
+    */.createChained("-delneu", ACCESS_TITAN, Condition(function Trig_CommandsR_Delete_Conditions)) /*
+    */.createChained("-delpal", ACCESS_TITAN, Condition(function Trig_CommandsR_Delete_Conditions))
 endfunction
 

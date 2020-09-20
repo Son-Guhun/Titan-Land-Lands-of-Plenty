@@ -105,8 +105,8 @@ endfunction
 
 //===========================================================================
 function InitTrig_Commands_Ability takes nothing returns nothing
-    call LoP_Command.create("-ability", ACCESS_USER, Condition(function OnCommand ))
-    call LoP_Command.create("-abil", ACCESS_USER, Condition(function OnCommand ))
+    call LoP_Command.create("-ability", ACCESS_USER, Condition(function OnCommand ))/*
+    */.createChained("-abil", ACCESS_USER, Condition(function OnCommand ))
 endfunction
 
 endscope

@@ -5,6 +5,6 @@ endfunction
 
 //===========================================================================
 function InitTrig_Commands_Set_Name takes nothing returns nothing
-    call LoP_Command.create("-name", ACCESS_USER, Condition(function Trig_Commands_Set_Name_Conditions))
+    call LoP_Command.create("-name", ACCESS_USER, Condition(function Trig_Commands_Set_Name_Conditions)).addHint(LoPHints.COMMAND_NAMEUNIT)
 endfunction
 

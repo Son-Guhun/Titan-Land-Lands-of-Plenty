@@ -45,8 +45,8 @@ endfunction
 
 //===========================================================================
 function InitTrig_CommandsD_Control takes nothing returns nothing
-    call LoP_Command.create("-control", ACCESS_USER, Condition(function onCommand))
-    call LoP_Command.create("-uncontrol", ACCESS_USER, Condition(function onCommand))
+    call LoP_Command.create("-control", ACCESS_USER, Condition(function onCommand))/*
+    */.createChained("-uncontrol", ACCESS_USER, Condition(function onCommand))
 endfunction
 
 endscope
