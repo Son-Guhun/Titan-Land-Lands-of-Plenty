@@ -5,8 +5,10 @@ private function onCommand takes nothing returns boolean
     local string errorString = "Save not found under specified name. To load saves from before 1.4.0, use the |cffffff00-compat|r command."
     
     set stringsLoaded[playerId + 1] = 0
+    
+    // This block is only executed for the local player (async)
     if not SaveIO_LoadSave(Player(playerId), SaveNLoad_FOLDER() + LoP_Command.getArguments(), LoP_Command.getCommand() == "-req") then
-        call DisplayTextToPlayer(GetLocalPlayer(), 0., 0., errorString)
+        call LoP_WarnPlayer(User.Local, LoPChannels.ERROR, errorString)
     endif
     
     return false

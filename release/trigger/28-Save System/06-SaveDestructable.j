@@ -1,4 +1,4 @@
-library SaveDestructable requires SaveNLoad, SaveIO, GLHS
+library SaveDestructable requires SaveNLoad, SaveIO, GLHS, LoPWarn
 
 private struct PlayerData extends array
     static key static_members_key
@@ -67,7 +67,7 @@ function SaveDestructables takes SaveData saveData, rect rectangle returns nothi
     local PlayerData playerId = GetPlayerId(saveData.player)
     
     if playerId.saveData != 0 then
-        call DisplayTextToPlayer(playerId.saveData.player, 0., 0., "|cffff0000Warning:|r Did not finish saving previous file!")
+        call LoP_WarnPlayer(saveData.player, LoPChannels.WARNING, "Did not finish saving previous file!")
         call playerId.saveData.destroy()
         call playerId.destructables.clear()
     else

@@ -1,6 +1,6 @@
-library SaveUnit requires SaveNLoad, SaveIO, OOP, Maths, SaveNLoadProgressBars, optional SaveUnitExtras
+library SaveUnit requires SaveNLoad, SaveIO, OOP, Maths, SaveNLoadProgressBars, optional SaveUnitExtras, LoPWarn
 /* 
-This library defines functionality to save a group of units and effects using SaveIO over timer. Due
+This library defines functionality to save a group of units and effects using SaveIO over time. Due
 to performance issues, saving all units instantly is not a good idea, as that will lag the game and may
 cause disconnects.
 
@@ -346,7 +346,7 @@ function SaveUnits takes SaveData saveData returns nothing
     set playerId.minY = Pow(2, 23)
     
     if playerId.saveData != 0 then
-        call DisplayTextToPlayer(saveData.player, 0., 0., "|cffff0000Warning:|r Did not finish saving previous file!")
+        call LoP_WarnPlayer(saveData.player, LoPChannels.WARNING, "Did not finish saving previous file!")
         call playerId.saveData.destroy()
     else
         call InternalPlayerData.playerQueue.append(playerId + 1)

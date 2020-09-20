@@ -1,4 +1,4 @@
-library SaveTerrain requires SaveNLoad, SaveIO, SaveNLoadProgressBars
+library SaveTerrain requires SaveNLoad, SaveIO, SaveNLoadProgressBars, LoPWarn
 
 //! textmacro SaveXYMethodTerrain takes name
     method operator $name$ takes nothing returns real
@@ -152,7 +152,7 @@ function SaveTerrain takes SaveData saveData, rect saveRect returns nothing
     endif
 
     if playerId.saveData != 0 then
-        call DisplayTextToPlayer(playerId.saveData.player, 0., 0., "|cffff0000Warning:|r Did not finish saving previous file!")
+        call LoP_WarnPlayer(saveData.player, LoPChannels.WARNING, "Did not finish saving previous file!")
         call playerId.saveData.destroy()
     else
         call PlayerData.playerQueue.append(playerId+1)

@@ -47,7 +47,7 @@ private function onCommand takes nothing returns boolean
     endif
     
     call SaveUnits(saveData)
-    call LoP_WarnPlayer(GetLocalPlayer(), LoPChannels.WARNING, LoP_PlayerData(playerData).realName + ( " has started saving units."))
+    call LoP_WarnPlayer(GetLocalPlayer(), LoPChannels.SYSTEM, LoP_PlayerData(playerData).realName + ( " has started saving units."))
     
     return false
 endfunction
