@@ -21,7 +21,7 @@ endstruct
 private function SaveNextDestructables takes PlayerData playerId returns nothing
     local integer i = playerId.current
     local ArrayList_destructable destructables = playerId.destructables
-    local integer final = IMinBJ(i + 60, destructables.size())
+    local integer final = IMinBJ(i + 60, destructables.size)
     local destructable dest
     local SaveData saveData = playerId.saveData
 
@@ -46,7 +46,7 @@ private function onTimer takes nothing returns nothing
         call PlayerData.playerQueue.remove(playerId+1)
         
         call SaveNextDestructables(playerId)
-        if playerId.current == playerId.destructables.size() then
+        if playerId.current == playerId.destructables.size then
             call playerId.saveData.destroy()
             set playerId.saveData = 0
             call playerId.destructables.clear()

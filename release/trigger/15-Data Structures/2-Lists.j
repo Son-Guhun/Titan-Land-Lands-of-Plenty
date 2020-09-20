@@ -53,11 +53,11 @@ module ArrayListIteratorMethods
     endmethod
     
     public method end takes nothing returns Iterator
-        return this.size()
+        return this.size
     endmethod
     
     public method rBegin takes nothing returns Iterator
-        return this.size() - 1
+        return this.size - 1
     endmethod
     
     public static method rEnd takes nothing returns Iterator

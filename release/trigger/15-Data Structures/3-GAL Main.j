@@ -114,19 +114,19 @@ library_once GAL$type$ requires GAL
 
             //Gets the size of a specified list
             //Available since 1.0.0, replaced GetListSize
-            method size takes nothing returns integer
+            method operator size takes nothing returns integer
                 return LoadInteger(Lists_GetHashtable(), this, GAL_INDEX_SIZE())
             endmethod
             
             method append takes $type$ value returns integer
-                local integer size = this.size()
+                local integer size = this.size
                 set this[size] = value
                 call GAL_SetSize(this, size+1)
                 return size
             endmethod
             
             method delete takes integer index returns nothing
-                local integer size = this.size()
+                local integer size = this.size
                 set index = index + 1
                 loop
                 exitwhen index >= size
@@ -143,7 +143,7 @@ library_once GAL$type$ requires GAL
             endmethod
             
             method randomize takes nothing returns nothing
-                local integer i = .size() - 1
+                local integer i = .size - 1
                 local $type$ temp
                 local integer j
                 
@@ -162,7 +162,7 @@ library_once GAL$type$ requires GAL
             
             method copy takes nothing returns thistype
                 local thistype result = thistype.create()
-                local integer size = .size()
+                local integer size = .size
                 local integer i = 0
                 
                 loop

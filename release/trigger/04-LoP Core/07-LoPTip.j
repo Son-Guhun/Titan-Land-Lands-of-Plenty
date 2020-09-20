@@ -24,7 +24,7 @@ struct LoP_TipCategory extends array
             call .tips.randomize()
         endif
         
-        set .currentIndex = ModuloInteger(currentIndex + 1, tips.size())
+        set .currentIndex = ModuloInteger(currentIndex + 1, tips.size)
         return .tips[currentIndex]
     endmethod
 

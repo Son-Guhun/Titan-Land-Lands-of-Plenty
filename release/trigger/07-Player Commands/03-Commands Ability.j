@@ -12,7 +12,7 @@ endfunction
 public function AddAbility takes unit whichUnit, integer rawcode returns nothing
     local ArrayList_ability abilities = UnitEnumRemoveableAbilities(whichUnit)
     
-    if abilities.size() >= MAX_ABILITIES() then
+    if abilities.size >= MAX_ABILITIES() then
     
         call LoP_WarnPlayerTimeout(GetTriggerPlayer(), LoPChannels.ERROR, MSGKEY_MAXABILS, 5., "This hero already has " + I2S(MAX_ABILITIES()) + " abilities.")
     elseif not RemoveableAbility(rawcode).isHero then
