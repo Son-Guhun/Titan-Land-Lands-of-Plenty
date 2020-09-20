@@ -22,12 +22,12 @@ struct Screen extends array
     endmethod
 
     static method create takes nothing returns thistype
-        return fromFrame(BlzCreateFrameByType("FRAME", "ScreenFrame", LoPUI_ConsoleUIBackdrop,"", 0)) 
+        return fromFrame(BlzCreateFrameByType("FRAME", "ScreenFrame", UIView.ConsoleUIBackdrop,"", 0)) 
     endmethod
     
     static method createWithSimple takes nothing returns thistype
         local thistype this = .create()
-        set .simpleContainer = BlzCreateFrameByType("SIMPLEFRAME", "SimpleScreenFrame", LoPUI_ConsoleUIBackdrop,"", 0)
+        set .simpleContainer = BlzCreateFrameByType("SIMPLEFRAME", "SimpleScreenFrame", UIView.ConsoleUIBackdrop,"", 0)
         return this
     endmethod
     

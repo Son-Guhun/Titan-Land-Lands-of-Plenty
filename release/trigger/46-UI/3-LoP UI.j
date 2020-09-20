@@ -1,7 +1,6 @@
 library LoPUI requires UILib, UpperButtonBarView
 
 globals
-    public framehandle ConsoleUIBackdrop
     public framehandle ConsoleUIBackdropDummy
     private framehandle array commandButtons
     public boolean altZEnabled = true
@@ -36,9 +35,8 @@ endfunction
 private function onStart takes nothing returns nothing
     local integer i = 0
 
-    set ConsoleUIBackdrop = BlzGetFrameByName("ConsoleUIBackdrop", 0)
-    set ConsoleUIBackdropDummy = BlzCreateFrame("ConsoleUIBackdrop", ConsoleUIBackdrop, 0, 1)
-    call BlzFrameSetTexture(ConsoleUIBackdrop, "ReplaceableTextures\\CommandButtons\\PAS__EmptyDummy.tga", 0, true)
+    set ConsoleUIBackdropDummy = BlzCreateFrame("ConsoleUIBackdrop", UIView.ConsoleUIBackdrop, 0, 1)
+    call BlzFrameSetTexture(UIView.ConsoleUIBackdrop, "ReplaceableTextures\\CommandButtons\\PAS__EmptyDummy.tga", 0, true)
     loop
     exitwhen i == 12
         set commandButtons[i] = BlzGetOriginFrame(ORIGIN_FRAME_COMMAND_BUTTON, i)

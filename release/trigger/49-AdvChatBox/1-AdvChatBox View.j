@@ -25,7 +25,7 @@ private module Init
         call BlzFrameSetVisible(AdvChatBox.editBox, false)
         call BlzFrameSetTextSizeLimit(AdvChatBox.editBox, 255)
         
-        set AdvChatBox.typingIndicator = BlzCreateFrameByType("TEXT", "TypingIndicator", UILib_ConsoleUIBackdrop, "StandardExtraSmallTextTemplate", 0)
+        set AdvChatBox.typingIndicator = BlzCreateFrameByType("TEXT", "TypingIndicator", UIView.ConsoleUIBackdrop, "StandardExtraSmallTextTemplate", 0)
         call BlzFrameSetPoint(AdvChatBox.typingIndicator, FRAMEPOINT_TOPRIGHT, AdvChatBox.editBox, FRAMEPOINT_TOPLEFT, 0, 0.02)
         call BlzFrameSetPoint(AdvChatBox.typingIndicator, FRAMEPOINT_BOTTOM, AdvChatBox.editBox, FRAMEPOINT_BOTTOM, 0, 0.0)
         call BlzFrameSetPoint(AdvChatBox.typingIndicator, FRAMEPOINT_LEFT, UIView.LEFT_BORDER, FRAMEPOINT_LEFT, 0., 0.)
