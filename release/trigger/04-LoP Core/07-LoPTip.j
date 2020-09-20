@@ -107,6 +107,76 @@ private struct InitStruct extends array
     implement InitModule
 endstruct
 
+struct LoPHints extends array
+    /*
+    This struct is used to display common hints that are used in multiple commands. Each hint will
+    only be displayed once per game.
+    
+    It also has functionality to display a random hint from an ArrayList of hints.
+    */
 
+    readonly static string array hints
+    
+    method operator msg takes nothing returns string
+        return hints[this]
+    endmethod
+    
+    private boolean seen // async
+    
+    static constant integer REMOVE_UNIT_HOTKEY = 1
+    static constant integer COMMAND_CHATBOX = 2
+    static constant integer COMMAND_DELETEME = 3
+    static constant integer COMMAND_NAMEUNIT = 4
+    static constant integer HOTKEY_RACE_SELECTOR = 5
+    static constant integer HOTKEY_RECT_GENERATOR = 6
+    static constant integer CHAT_LOGS = 7
+    
+    
+    private static method onInit takes nothing returns nothing
+        set hints[REMOVE_UNIT_HOTKEY] = "You can use the hotkey Shift+Backspace to remove units."
+        set hints[COMMAND_CHATBOX] = "Use the -chatbox command to configure your chatbox preferences."
+        set hints[COMMAND_DELETEME] = "You can delete all your units outside of the Titan Palace with -deleteme."
+        set hints[COMMAND_NAMEUNIT] = "You can rename a unit using -nameunit."
+        set hints[HOTKEY_RACE_SELECTOR] = "You can spawn a Race Selector using Alt+W."
+        set hints[HOTKEY_RECT_GENERATOR] = "You can spawn a Rect Generator using Alt+R."
+        set hints[CHAT_LOGS] = "You can view a more detailed chat log in the Tools menu (Ctrl+F4)."
+        
+        // Make array the same size for all players
+        set hints[32] = "final hint"
+    endmethod
+
+    // This method sets the state of whether a hint has been seen or not in an async manner.
+    // Returns false if player has already seen the hint. Returns true if they haven't, and for players that aren't <whichPlayer> (async).
+    method displayToPlayer takes player whichPlayer returns boolean
+        if User.Local == whichPlayer then
+            if enabled and not .seen then
+                set .seen = true
+                
+                call LoP_WarnPlayer(whichPlayer, LoPChannels.HINT, .msg)
+                return true
+            else
+                return false
+            endif
+        endif
+        return true
+    endmethod
+    
+    // This is not safe to be called async (would need to change how displayToPlayer works in order to make it safe)
+    static method displayFromList takes player whichPlayer, ArrayList list returns nothing
+        local integer size = list.size
+        local integer i = GetRandomInt(0, size-1)
+        local integer first = i
+        
+        loop
+            exitwhen thistype(list[i]).displayToPlayer(whichPlayer) // async
+            
+            set i = i + 1
+            if i == size then
+                set i = 0
+            endif
+            exitwhen i == first
+        endloop
+    endmethod
+endstruct
 
 endlibrary
