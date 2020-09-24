@@ -294,6 +294,7 @@
         Disab
     40-Matrices: Matrices
     41-PathingMaps: PathingMaps
+    42-DefaultPathingMaps: DefaultPathingMaps
 21-Map-specific: Map-specific
     1-Debug: Debug
     2-ArrayAgent: ArrayAgent

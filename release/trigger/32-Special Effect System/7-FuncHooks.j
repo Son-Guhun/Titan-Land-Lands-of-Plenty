@@ -1,5 +1,5 @@
 // Missing Facing hook
-library FuncHooks requires AttachedSFX
+library FuncHooks requires AttachedSFX, PathingMaps
 
 //! runtextmacro FuncHooks("Orgl", "SetUnitX", "unit u, real x", "u,x")
 //! runtextmacro FuncHooks("Orgl", "SetUnitY", "unit u, real y", "u,y")

@@ -19,6 +19,11 @@ private function SetUnitY takes unit u, real y returns nothing
 endfunction
 
 private function SetUnitPosition takes unit u, real x, real y returns nothing
+    if DefaultPathingMap.get(u).hasPathing() then
+        //call ObjectPathing.get(u).update(DefaultPathingMap.get(u).path, x, y, GetUnitFacing(u)*bj_DEGTORAD)
+        call DefaultPathingMap.onMove(u, x, y)
+    endif
+
     call OrglSetUnitPosition(u, x, y)
     
     if UnitHasAttachedEffect(u) then
@@ -27,14 +32,24 @@ private function SetUnitPosition takes unit u, real x, real y returns nothing
 endfunction
 
 private function SetUnitFacing takes unit u, real angle returns nothing
+    if DefaultPathingMap.get(u).hasPathing() then
+        //call ObjectPathing.get(u).update(DefaultPathingMap.get(u).path, GetUnitX(u), GetUnitY(u), angle*bj_DEGTORAD)
+        call DefaultPathingMap.onSetFacing(u, angle)
+    endif
+
     call OrglSetUnitFacing(u, angle)
-    
+
     if UnitHasAttachedEffect(u) then
         call AttachedSFX_onSetFacing(u, angle)
     endif
 endfunction
 
 private function SetUnitFacingTimed takes unit u, real angle, real time returns nothing
+    if DefaultPathingMap.get(u).hasPathing() then
+        //call ObjectPathing.get(u).update(DefaultPathingMap.get(u).path, GetUnitX(u), GetUnitY(u), angle*bj_DEGTORAD)
+        call DefaultPathingMap.onSetFacing(u, angle)
+    endif
+
     call OrglSetUnitFacingTimed(u, angle, time)
     
     if UnitHasAttachedEffect(u) then

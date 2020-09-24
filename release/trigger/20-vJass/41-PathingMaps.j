@@ -54,6 +54,16 @@ private struct PathTile extends array
         set .counter = counter + add
     endmethod
     
+    // Handle Field does not work for images. Apparently the typecast trick is the issue.
+    //! runtextmacro TableStruct_NewPrimitiveField("image", "image")
+    method showImage takes boolean show returns nothing
+        if not .imageExists() then 
+            set .image = CreateImage("Images\\SelectionSquareWhite.tga", TILE_SIZE, TILE_SIZE, 0, 0, 0, 0, TILE_SIZE/2, TILE_SIZE/2, 0., 1)
+            call SetImagePosition(.image, .x, .y, 0)
+        endif
+        call SetImageRenderAlways(.image, show)
+    endmethod
+    
     method counterIncrement takes boolean add returns nothing
         local integer counter = .counter
         
@@ -64,12 +74,14 @@ private struct PathTile extends array
                     set .original = not IsTerrainPathable(.x, .y, PATHING_TYPE_WALKABILITY)  // this native returns reversed results
                 endif
                 call SetTerrainPathable(.x, .y, PATHING_TYPE_WALKABILITY, false)
+                call .showImage(true)
             endif
         else
             set .counter = counter - 1
             if counter == 1 then
                 if .originalExists() and .original then
                     call SetTerrainPathable(.x, .y, PATHING_TYPE_WALKABILITY, true)
+                    call .showImage(false)
                 endif
             endif
         endif

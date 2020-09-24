@@ -125,7 +125,7 @@ static if ENABLE_ID_FUNCTIONS and LIBRARY_WorldBounds then
         return i + j*Globals.totalY[tileSize]
     endfunction
     
-    private function IntRoundUp takes integer num, integer multiple returns integer
+    public function IntRoundUp takes integer num, integer multiple returns integer
         return ((num-1)/multiple + 1)*multiple
     endfunction
     
