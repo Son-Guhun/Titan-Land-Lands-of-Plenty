@@ -241,6 +241,7 @@
     1-TileDefinition: TileDefinition
     2-StructureTileDefinition: StructureTileDefinition
     3-AnyTileDefinition: AnyTileDefinition
+    4-PathingTileDefinition: PathingTileDefinition
 20-vJass: vJass
     01-External: External
         Comment

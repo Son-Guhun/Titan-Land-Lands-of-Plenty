@@ -1,4 +1,4 @@
-library PathingMaps requires GMUI, TableStruct, AnyTileDefinition, Matrices, GALimage, GLHS
+library PathingMaps requires GMUI, TableStruct, PathingTileDefinition, Matrices, GALimage, GLHS
 
 
 private module Init
@@ -13,20 +13,28 @@ private struct PathTile extends array
     //! runtextmacro TableStruct_NewReadonlyPrimitiveField("counter", "integer")
     //! runtextmacro TableStruct_NewReadonlyPrimitiveField("original", "boolean")
     
+    static method y2i takes real y returns integer
+        return PathingTileY2I(y)
+    endmethod
+    
+    static method x2j takes real x returns integer
+        return PathingTileX2J(x)
+    endmethod
+    
     method operator x takes nothing returns real
-        return GetCustomTileCenterXById(TILE_SIZE, this)
+        return GetPathingTileCenterXById(this)
     endmethod
     
     method operator y takes nothing returns real
-        return GetCustomTileCenterYById(TILE_SIZE, this)
+        return GetPathingTileCenterYById(this)
     endmethod
     
     method operator i takes nothing returns integer
-        return GetCustomTileIndexI(this, TILE_SIZE)
+        return GetPathingTileIndexI(this)
     endmethod
     
     method operator j takes nothing returns integer
-        return GetCustomTileIndexJ(this, TILE_SIZE)
+        return GetPathingTileIndexJ(this)
     endmethod
     
     method counterAdd takes integer add returns nothing
@@ -53,7 +61,7 @@ private struct PathTile extends array
             set .counter = counter + 1
             if counter == 0 then
                 if not .originalExists() then
-                    set .original = IsTerrainPathable(.x, .y, PATHING_TYPE_WALKABILITY)
+                    set .original = not IsTerrainPathable(.x, .y, PATHING_TYPE_WALKABILITY)  // this native returns reversed results
                 endif
                 call SetTerrainPathable(.x, .y, PATHING_TYPE_WALKABILITY, false)
             endif
@@ -68,16 +76,28 @@ private struct PathTile extends array
     endmethod
 
     static method get takes real x, real y returns thistype
-        return GetCustomTileId(TILE_SIZE, x, y)
+        return GetPathingTileId(x, y)
     endmethod
     
     static method fromIndices takes integer i, integer j returns thistype
-        return GetCustomTileIdFromIndices(i, j, TILE_SIZE)
+        return GetPathingTileIdFromIndices(i, j)
     endmethod
     
-    static method validateIndices takes integer i, integer j returns boolean
-        return ValidateCustomTileIndexI(TILE_SIZE, i) and ValidateCustomTileIndexJ(TILE_SIZE, j)
+    static method validateIndicesUpper takes integer i, integer j returns boolean
+        return ValidatePathingTileIndexI(i) and ValidatePathingTileIndexJ(j)
     endmethod
+    
+    static method validateIndicesLower takes integer i, integer j returns boolean
+        return i >= 0 and j >= 0
+    endmethod
+    
+    /*
+    static method validateIndices takes integer i, integer j returns boolean
+        return validateIndicesLower(i,j) and validateIndicesUpper(i,j)
+    endmethod
+    */
+    
+
     
     implement Init
 endstruct
@@ -152,8 +172,8 @@ struct PathingMap extends array
         local real cos = Cos(angle)
         local integer newI
         local integer newJ
-        local integer offsetI = PathTile.get(x,y).i
-        local integer offsetJ = PathTile.get(x,y).j
+        local integer offsetI = PathTile.y2i(y)
+        local integer offsetJ = PathTile.x2j(x)
         local integer maxI = .height
         local integer maxJ = .width
         
@@ -177,7 +197,7 @@ struct PathingMap extends array
     method applyAtAngledSimple takes real x, real y, boolean enable, real angle returns nothing
         //! runtextmacro tttt()
             // call BJDebugMsg("New i / j: " + I2S(newI) + " / " + I2S(newJ))
-            if PathTile.validateIndices(newI,newJ) then
+            if PathTile.validateIndicesLower(newI,newJ) and PathTile.validateIndicesUpper(newI,newJ) then
                 // call BJDebugMsg("Tile: " + I2S(PathTile.fromIndices(newI,newJ)))
                 call PathTile.fromIndices(newI,newJ).counterIncrement(enable)
             else
@@ -193,7 +213,7 @@ struct PathingMap extends array
         local image img
         
         //! runtextmacro tttt()
-        if PathTile.validateIndices(newI,newJ) then
+        if PathTile.validateIndicesLower(newI,newJ) and PathTile.validateIndicesUpper(newI,newJ) then
             set tile = PathTile.fromIndices(newI, newJ)
             
             if not seen.contains(tile) then
@@ -215,8 +235,8 @@ struct PathingMap extends array
         local real cos = Cos(angle)
         local LinkedHashSet tiles = .tiles
         local PathTile tile = tiles.begin()
-        local integer offsetI = PathTile.get(x,y).i
-        local integer offsetJ = PathTile.get(x,y).j
+        local integer offsetI = PathTile.y2i(y)
+        local integer offsetJ = PathTile.x2j(x)
     
         loop
             exitwhen tile == tiles.end()
@@ -225,7 +245,7 @@ struct PathingMap extends array
             
             set j = R2I(j*cos - i*sin) + offsetJ
             set i = R2I(j*sin + i*cos) + offsetI
-            if PathTile.validateIndices(i,j) then
+            if PathTile.validateIndicesLower(i,j) and PathTile.validateIndicesUpper(i,j) then
                 call PathTile.fromIndices(i,j).counterIncrement(enable)
             endif
             
