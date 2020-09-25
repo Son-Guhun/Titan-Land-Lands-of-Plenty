@@ -15,8 +15,8 @@ function Trig_Commands_Spawn takes nothing returns boolean
         set x = Get64TileCenterCoordinate(GetPlayerLastMouseX(trigP))
         set y = Get64TileCenterCoordinate(GetPlayerLastMouseY(trigP))
     else
-        set x = GetLocationX(udg_PLAYER_LOCATIONS[GetPlayerId(trigP) - 1])
-        set y = GetLocationY(udg_PLAYER_LOCATIONS[GetPlayerId(trigP)- 1])
+        set x = GetLocationX(udg_PLAYER_LOCATIONS[GetPlayerId(trigP) + 1])
+        set y = GetLocationY(udg_PLAYER_LOCATIONS[GetPlayerId(trigP) + 1])
     endif
 
     if ( command == "-rect" ) then
