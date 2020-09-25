@@ -9,7 +9,8 @@ private function ToEffect takes unit whichUnit returns nothing
 
     if UnitHasAttachedEffect(whichUnit) then
         set sfx = UnitDetachEffect(whichUnit)
-        call DecorationEffect.convertSpecialEffect(LoP_GetOwningPlayer(whichUnit), sfx, UnitVisuals.get(whichUnit).hasColor())
+        call DecorationEffect.convertSpecialEffectNoPathing(LoP_GetOwningPlayer(whichUnit), sfx, UnitVisuals.get(whichUnit).hasColor())
+        call ObjectPathing.get(whichUnit).disableAndTransfer(sfx.effect)
         call KillUnit(whichUnit)
     else
         call Unit2EffectEx(LoP_GetOwningPlayer(whichUnit), whichUnit)

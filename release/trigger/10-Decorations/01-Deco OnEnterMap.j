@@ -61,6 +61,15 @@ private function DecoOnEnterMapEx takes unit trigU, boolean isUpgrade returns no
             call UnitAddAbility(trigU, 'A05Z')
         endif
     endif
+    
+    if not isUpgrade and not DefaultPathingMaps_dontApplyPathMap then
+        if DefaultPathingMap.get(trigU).hasPathing() then
+            call DefaultPathingMap.get(trigU).update(trigU, GetUnitX(trigU), GetUnitY(trigU), GetUnitFacing(trigU)*bj_DEGTORAD)
+        endif
+    else
+        set DefaultPathingMaps_dontApplyPathMap = false
+    endif
+    
     // -
     // ADD ENABLE/DISABLE FLY TO STRUCTURES
     if IsUnitType(trigU, UNIT_TYPE_STRUCTURE) then

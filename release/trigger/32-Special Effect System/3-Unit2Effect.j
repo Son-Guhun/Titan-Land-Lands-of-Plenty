@@ -73,7 +73,11 @@ function Unit2SpecialEffect takes unit whichUnit returns SpecialEffect
 endfunction
 
 function Unit2EffectEx takes player owner, unit whichUnit returns DecorationEffect
-    return DecorationEffect.convertSpecialEffect(owner, Unit2SpecialEffect(whichUnit), UnitVisuals.get(whichUnit).hasColor())
+    local SpecialEffect sfx = Unit2SpecialEffect(whichUnit)
+    
+    call ObjectPathing.get(whichUnit).disableAndTransfer(sfx.effect)
+    
+    return DecorationEffect.convertSpecialEffectNoPathing(owner, sfx, UnitVisuals.get(whichUnit).hasColor())
 endfunction
 
 function Unit2Effect takes unit whichUnit returns DecorationEffect
@@ -85,7 +89,10 @@ endlibrary
 library Effect2Unit requires DecorationSFX, StringSubanimations, UnitVisualMods, UnitTypeDefaultValues
 
 function Effect2Unit takes DecorationEffect whichEffect returns unit
-    local unit u = CreateUnit(whichEffect.getOwner(), whichEffect.unitType, whichEffect.x, whichEffect.y, Rad2Deg(whichEffect.yaw))
+    local unit u
+    
+    set DefaultPathingMaps_dontApplyPathMap = true
+    set u = CreateUnit(whichEffect.getOwner(), whichEffect.unitType, whichEffect.x, whichEffect.y, Rad2Deg(whichEffect.yaw))
     
     call BlzSetUnitSkin(u, whichEffect.skin)
     call GUMSSetUnitScale(u, whichEffect.scaleX)
@@ -104,6 +111,8 @@ function Effect2Unit takes DecorationEffect whichEffect returns unit
     if whichEffect.hasSubAnimations() then
         call GUMSAddUnitAnimationTag(u, SubAnimations2Tags(whichEffect.subanimations))
     endif
+    
+    call ObjectPathing(whichEffect).disableAndTransfer(u)
     
     set bj_lastCreatedUnit = u
     set u = null

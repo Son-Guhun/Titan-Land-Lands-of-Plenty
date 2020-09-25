@@ -164,6 +164,18 @@ struct DecorationEffect extends array
         endif
     endmethod
     
+    static method convertSpecialEffectNoPathing takes player playerid, SpecialEffect sfx, boolean useCustomColor returns DecorationEffect
+        if useCustomColor then
+            set DecorationEffect(sfx).owner = GetPlayerId(playerid)
+            set DecorationEffect(sfx).hasCustomColor = true
+        else
+            call DecorationEffect(sfx).setOwner(playerid)
+        endif
+        
+        call DecorationEffectBlock.get(sfx.x, sfx.y).effects.append(sfx) 
+        return sfx
+    endmethod
+    
     // Factory method, converts a SpecialEffect to a DecorationEffect
     static method convertSpecialEffect takes player playerid, SpecialEffect sfx, boolean useCustomColor returns DecorationEffect
         if useCustomColor then
@@ -172,6 +184,10 @@ struct DecorationEffect extends array
         else
             call DecorationEffect(sfx).setOwner(playerid)
         endif
+        
+        set ObjectPathing(sfx).isDisabled = false
+        call DefaultPathingMap(sfx.unitType).update(sfx.effect, sfx.x, sfx.y, sfx.yaw)
+        
         call DecorationEffectBlock.get(sfx.x, sfx.y).effects.append(sfx) 
         return sfx
     endmethod

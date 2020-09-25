@@ -33,6 +33,7 @@ function LoP_onDeath takes unit whichUnit returns nothing
             call GUMSClearUnitData(whichUnit)
             call LoP_ClearNeutralData(whichUnit)
             call ClearSaveLoaderData(whichUnit)
+            call ObjectPathing.get(whichUnit).destroy()
             
             if UnitHasAttachedEffect(whichUnit) then
                 call UnitDetachEffect(whichUnit).destroy()
