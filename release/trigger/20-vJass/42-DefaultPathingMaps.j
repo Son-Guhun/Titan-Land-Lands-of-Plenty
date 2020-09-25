@@ -1,6 +1,9 @@
 library DefaultPathingMaps requires PathingMaps, TableStruct, HashStruct
 
 globals
+    // Set this to true before creating a unit to avoid the application of its default pathing map.
+    // This will automatially become false again if the unit is created sucessfully.
+    // If CreateUnit returns null, then you will need to manually set this to false.
     public boolean dontApplyPathMap = false
 endglobals
 

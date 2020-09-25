@@ -25,13 +25,24 @@ function LopCopyUnit takes unit u, player owner, integer newType returns unit
         set newType = GetUnitTypeId(whichUnit)
     endif
     
+    set DefaultPathingMaps_dontApplyPathMap = true 
     set u = GUMSCopyUnit(whichUnit, owner, newType)
-    if UnitHasAttachedEffect(whichUnit) then
-        call UnitAttachEffect(u, GetUnitAttachedEffect(whichUnit).copy(newType))
-    endif
     
-    if LoP_IsUnitHero(whichUnit) then
-        call UnitAddAbilities(u, UnitEnumRemoveableAbilityIds(whichUnit))
+    if u != null then
+        if UnitHasAttachedEffect(whichUnit) then
+            call UnitAttachEffect(u, GetUnitAttachedEffect(whichUnit).copy(newType))
+        endif
+        
+        if LoP_IsUnitHero(whichUnit) then
+            call UnitAddAbilities(u, UnitEnumRemoveableAbilityIds(whichUnit))
+        endif
+        
+        if DefaultPathingMap.get(u).hasPathing() then
+            set ObjectPathing.get(u).isDisabled = ObjectPathing.get(whichUnit).isDisabled
+            call DefaultPathingMap.get(u).update(u, GetUnitX(u), GetUnitY(u), GetUnitFacing(u)*bj_DEGTORAD)
+        endif
+    else
+        set u = null
     endif
     
     set whichUnit = null

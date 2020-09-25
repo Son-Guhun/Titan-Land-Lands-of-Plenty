@@ -94,25 +94,29 @@ function Effect2Unit takes DecorationEffect whichEffect returns unit
     set DefaultPathingMaps_dontApplyPathMap = true
     set u = CreateUnit(whichEffect.getOwner(), whichEffect.unitType, whichEffect.x, whichEffect.y, Rad2Deg(whichEffect.yaw))
     
-    call BlzSetUnitSkin(u, whichEffect.skin)
-    call GUMSSetUnitScale(u, whichEffect.scaleX)
-    call GUMSSetUnitVertexColor(u, whichEffect.red/2.55, whichEffect.green/2.55, whichEffect.blue/2.55, 100. - whichEffect.alpha/2.55)
-    call GUMSSetUnitFlyHeight(u, whichEffect.height)
-    
-    if whichEffect.hasCustomColor then
-        call GUMSSetUnitColor(u, whichEffect.color + 1)
+    if u != null then
+        call BlzSetUnitSkin(u, whichEffect.skin)
+        call GUMSSetUnitScale(u, whichEffect.scaleX)
+        call GUMSSetUnitVertexColor(u, whichEffect.red/2.55, whichEffect.green/2.55, whichEffect.blue/2.55, 100. - whichEffect.alpha/2.55)
+        call GUMSSetUnitFlyHeight(u, whichEffect.height)
+        
+        if whichEffect.hasCustomColor then
+            call GUMSSetUnitColor(u, whichEffect.color + 1)
+        endif
+        
+        if whichEffect.animationSpeed != 1. then
+            call GUMSSetUnitAnimSpeed(u, whichEffect.animationSpeed)
+        endif
+        
+        
+        if whichEffect.hasSubAnimations() then
+            call GUMSAddUnitAnimationTag(u, SubAnimations2Tags(whichEffect.subanimations))
+        endif
+        
+        call ObjectPathing(whichEffect).disableAndTransfer(u)
+    else
+         set DefaultPathingMaps_dontApplyPathMap = false
     endif
-    
-    if whichEffect.animationSpeed != 1. then
-        call GUMSSetUnitAnimSpeed(u, whichEffect.animationSpeed)
-    endif
-    
-    
-    if whichEffect.hasSubAnimations() then
-        call GUMSAddUnitAnimationTag(u, SubAnimations2Tags(whichEffect.subanimations))
-    endif
-    
-    call ObjectPathing(whichEffect).disableAndTransfer(u)
     
     set bj_lastCreatedUnit = u
     set u = null
