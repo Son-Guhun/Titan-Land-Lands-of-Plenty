@@ -203,7 +203,9 @@ endfunction
 
 private function GenerateFlagsStr takes unit saveUnit returns string
     local integer result = 0
-    if IsUnitType(saveUnit, UNIT_TYPE_ANCIENT) and BlzGetUnitIntegerField(saveUnit, UNIT_IF_DEFENSE_TYPE) == GetHandleId(DEFENSE_TYPE_LARGE) then
+    if LoP_IsUnitDecoration(saveUnit) and not ObjectPathing.get(saveUnit).isDisabled then
+        set result = result + SaveNLoad_BoolFlags.UNROOTED
+    elseif IsUnitType(saveUnit, UNIT_TYPE_ANCIENT) and BlzGetUnitIntegerField(saveUnit, UNIT_IF_DEFENSE_TYPE) == GetHandleId(DEFENSE_TYPE_LARGE) then
         set result = result + SaveNLoad_BoolFlags.UNROOTED
     endif
     if GetOwningPlayer(saveUnit) == Player(PLAYER_NEUTRAL_PASSIVE) then

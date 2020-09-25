@@ -244,8 +244,17 @@ struct UnitSaveFields extends array
 endstruct
 
 function LoadUnitFlags takes unit whichUnit, integer flags returns nothing
-    if SaveNLoad_BoolFlags.isAnyFlag(flags, SaveNLoad_BoolFlags.UNROOTED) then
+
+    if IsUnitType(whichUnit, UNIT_TYPE_ANCIENT) and SaveNLoad_BoolFlags.isAnyFlag(flags, SaveNLoad_BoolFlags.UNROOTED) then
         call IssueImmediateOrder(whichUnit, "unroot")
+    elseif DefaultPathingMap.get(whichUnit).hasPathing() then
+    
+        if SaveNLoad_BoolFlags.isAnyFlag(flags, SaveNLoad_BoolFlags.UNROOTED) then
+            set ObjectPathing.get(whichUnit).isDisabled = false
+            call DefaultPathingMap.get(whichUnit).update(whichUnit, GetUnitX(whichUnit), GetUnitY(whichUnit), GetUnitFacing(whichUnit)*bj_DEGTORAD)
+        else
+            set ObjectPathing.get(whichUnit).isDisabled = true
+        endif
     endif
     
     if SaveNLoad_BoolFlags.isAnyFlag(flags, SaveNLoad_BoolFlags.NEUTRAL) then
@@ -312,6 +321,7 @@ function LoadUnit takes string chat_str, player un_owner, real centerX, real cen
     // Selection type 3 (locust) was only added in version 4, so version 3 saves must handle exceptions for unselectable decorations that should be loaded as units
     if unitData.selectState != "2" or (SaveIO_GetCurrentlyLoadingSave(un_owner).version < 4 and ((IsUnitIdType(un_type, UNIT_TYPE_STRUCTURE) and unitData.flyHeight < GUMS_MINIMUM_FLY_HEIGHT()) or (un_type == 'nwgt'))) then
         //Create the unit and modify it according to the chat input data
+        set DefaultPathingMaps_dontApplyPathMap = true
         set resultUnit = CreateUnit (un_owner, un_type, unitData.x, unitData.y, unitData.yaw)
         
         if resultUnit != null then
@@ -359,6 +369,7 @@ function LoadUnit takes string chat_str, player un_owner, real centerX, real cen
                 endif
             endif
         else
+            set DefaultPathingMaps_dontApplyPathMap = false
             call DisplayTextToPlayer(un_owner, 0., 0., "Failed to load unit of type: " + ID2S(un_type))
         endif
         
