@@ -92,10 +92,7 @@ function UnitSetOrientation takes unit whichUnit, real yaw, real pitch, real rol
 endfunction
 
 public function onSetPosition takes unit whichUnit returns nothing
-    local SpecialEffect sfx = UnitData.get(whichUnit).attachedEffect
-    
-    set sfx.x = GetUnitX(whichUnit)
-    set sfx.y = GetUnitY(whichUnit)
+    call UnitData.get(whichUnit).attachedEffect.setPosition(GetUnitX(whichUnit), GetUnitY(whichUnit))
 endfunction
 
 public function onSetFacing takes unit whichUnit, real angle returns nothing

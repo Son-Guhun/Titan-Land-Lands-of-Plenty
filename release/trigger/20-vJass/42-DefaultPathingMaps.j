@@ -1,5 +1,9 @@
 library DefaultPathingMaps requires PathingMaps, TableStruct, HashStruct
 
+globals
+    public boolean dontApplyPathMap = false
+endglobals
+
 // When unit has a larger scale, also apply this scale to the pathing map by getting a larger one (default maps only)
 // By default offset will be set so the pathing map is centralized
 // Ability to remove pathing map will replace the self-destruct ability
@@ -54,6 +58,27 @@ struct ObjectPathing extends array
         return this
     endmethod
     
+    method disableAndTransfer takes handle receiver returns nothing
+        local thistype receiverData = get(receiver)
+        
+        if receiverData.exists() then
+            call BJDebugMsg("Removing receiver path")
+            call receiverData.pathMap.applyAtAngledSimple(receiverData.x, receiverData.y, false, receiverData.angle)
+        endif
+        
+        if this.exists() then
+            set receiverData.pathMap = .pathMap
+            set receiverData.x = .x
+            set receiverData.y = .y
+            set receiverData.angle = .angle
+            
+            call this.tab.flush()
+        endif
+        
+        set receiverData.isDisabled = .isDisabled
+        set this.isDisabled = true
+    endmethod
+
     method destroy takes nothing returns nothing
         call .update(0, 0, 0, 0).isDisabledClear()
     endmethod
@@ -85,8 +110,8 @@ struct DefaultPathingMap extends array
 
     //! runtextmacro TableStruct_NewStructField("path", "PathingMap")
 
-    static method get takes unit whichUnit returns thistype
-        return GetUnitTypeId(whichUnit)
+    static method get takes unit u returns thistype
+        return GetUnitTypeId(u)
     endmethod
     
     method hasPathing takes nothing returns boolean
@@ -97,6 +122,7 @@ struct DefaultPathingMap extends array
         set thistype('e00B').path = PathingMap.getGeneric(5, 2)
         set thistype('Hart').path = PathingMap.getGeneric(5, 5)
         set thistype('Harf').path = PathingMap.getGeneric(10, 10)
+        set thistype('h079').path = PathingMap.getGeneric(2, 5)
     endmethod
     
     //! textmacro DefaultPathingMapsUpdate
@@ -112,6 +138,20 @@ struct DefaultPathingMap extends array
     
         call lastPathData.update(path, x, y, ang)
     //! endtextmacro
+    
+    method update takes handle h, real x, real y, real ang returns nothing
+        local PathingMap path = this.path // get(h).path
+        local real offsetX =  -path.width*16.
+        local real offsetY =  -path.height*16.
+        local real sin = Sin(ang)
+        local real cos = Cos(ang)
+        local ObjectPathing lastPathData = ObjectPathing.get(h)
+        
+        set x = (offsetX*cos - offsetY*sin) + x
+        set y = (offsetX*sin + offsetY*cos) + y
+    
+        call lastPathData.update(path, x, y, ang)
+    endmethod
     
 
     static method onMove takes unit u, real x, real y returns nothing   

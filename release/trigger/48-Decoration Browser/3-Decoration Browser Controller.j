@@ -187,8 +187,7 @@ private function onMoveMouse takes nothing returns boolean
     local integer playerId = User[PlayerEvent_GetTriggerPlayer()]
 
     if effects[playerId] != 0 then
-        set effects[playerId].x = PlayerMouseEvent_GetTriggerPlayerMouseX()
-        set effects[playerId].y = PlayerMouseEvent_GetTriggerPlayerMouseY()
+        call effects[playerId].setPosition(PlayerMouseEvent_GetTriggerPlayerMouseX(), PlayerMouseEvent_GetTriggerPlayerMouseY())
     endif
     
     return false

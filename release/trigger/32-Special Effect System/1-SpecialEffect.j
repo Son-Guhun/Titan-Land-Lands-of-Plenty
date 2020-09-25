@@ -1,4 +1,4 @@
-library SpecialEffect requires AnyTileDefinition, GLHS, HashStruct, UnitModels
+library SpecialEffect requires AnyTileDefinition, GLHS, HashStruct, UnitModels, DefaultPathingMaps
 
 globals
         private hashtable hashTableHandle = InitHashtable()
@@ -69,7 +69,7 @@ struct SpecialEffect extends array
         
         return BlzGetLocalSpecialEffectY(.effect)
     endmethod
-    
+
     method operator height takes nothing returns real
         implement assertNotNull
         
@@ -85,6 +85,7 @@ struct SpecialEffect extends array
         call BlzSetSpecialEffectZ(.effect, GetLocationZ(.loc) + value)
     endmethod
     
+    /*
     method operator x= takes real value returns nothing
         implement assertNotNull
         
@@ -99,6 +100,16 @@ struct SpecialEffect extends array
         call BlzSetSpecialEffectY(.effect, value)
         // call BlzSetSpecialEffectHeight(.effect, .height_impl)
         set .height = .height
+    endmethod
+    */
+    
+    method setPosition takes real x, real y returns nothing
+        if DefaultPathingMap(.unitType).hasPathing() then
+            call DefaultPathingMap(.unitType).update(.effect, x, y, .yaw)
+        endif
+        
+        call MoveLocation(.loc, .x, .y)
+        call BlzSetSpecialEffectPosition(.effect, x, y, GetLocationZ(loc) + height)
     endmethod
     
     method operator yaw takes nothing returns real
@@ -275,6 +286,7 @@ struct SpecialEffect extends array
         set this.effect = e
         
         call BlzPlaySpecialEffect(e, ANIM_TYPE_STAND)
+        set ObjectPathing(this).isDisabled = true
         set e = null
         return this
     endmethod
