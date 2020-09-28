@@ -185,8 +185,10 @@ struct DecorationEffect extends array
             call DecorationEffect(sfx).setOwner(playerid)
         endif
         
-        set ObjectPathing(sfx).isDisabled = false
-        call DefaultPathingMap(sfx.unitType).update(sfx.effect, sfx.x, sfx.y, sfx.yaw)
+        if DefaultPathingMap(sfx.unitType).hasPathing() then
+            set ObjectPathing(sfx).isDisabled = false
+            call DefaultPathingMap(sfx.unitType).update(sfx.effect, sfx.x, sfx.y, sfx.yaw)
+        endif
         
         call DecorationEffectBlock.get(sfx.x, sfx.y).effects.append(sfx) 
         return sfx
@@ -195,6 +197,10 @@ struct DecorationEffect extends array
 
     static method create takes player playerid, integer unitType, real x, real y returns DecorationEffect
         return thistype.convertSpecialEffect(playerid, SpecialEffect.create(unitType, x, y), false)
+    endmethod
+    
+    static method createNoPathing takes player playerid, integer unitType, real x, real y returns DecorationEffect
+        return thistype.convertSpecialEffectNoPathing(playerid, SpecialEffect.create(unitType, x, y), false)
     endmethod
     
     method destroy takes nothing returns nothing

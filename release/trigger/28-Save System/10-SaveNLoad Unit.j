@@ -28,8 +28,8 @@ function ParseScaleEffect takes DecorationEffect sfx, string scaleStr returns no
     endif
 endfunction
 
-function LoadSpecialEffect takes player owner, UnitTypeDefaultValues unitType, real x, real y, real height, real facing, real pitch, real roll, string scale, string red, string green, string blue, string alpha, string color, string aSpeed, string aTags returns nothing
-    local DecorationEffect result = DecorationEffect.create(owner, unitType, x, y)
+function LoadSpecialEffect takes player owner, UnitTypeDefaultValues unitType, real x, real y, real height, real facing, real pitch, real roll, string scale, string red, string green, string blue, string alpha, string color, string aSpeed, string aTags, integer flags returns nothing
+    local DecorationEffect result = DecorationEffect.createNoPathing(owner, unitType, x, y)
     local real value
     local integer redRaw
     local integer greenRaw
@@ -82,6 +82,18 @@ function LoadSpecialEffect takes player owner, UnitTypeDefaultValues unitType, r
     
     if unitType.hasMaxRoll() then
         set result.roll = Deg2Rad(unitType.maxRoll+180.)
+    endif
+    
+    if DefaultPathingMap(unitType).hasPathing() then
+        call BJDebugMsg(I2S(flags))
+        if SaveNLoad_BoolFlags.isAnyFlag(flags, SaveNLoad_BoolFlags.UNROOTED) then
+            call BJDebugMsg("pathing")
+            set ObjectPathing(result).isDisabled = false
+            call DefaultPathingMap(unitType).update(result.effect, x, y, facing*bj_DEGTORAD)
+        else
+            call BJDebugMsg("no pathing")
+            set ObjectPathing(result).isDisabled = true
+        endif
     endif
     
     call BlzPlaySpecialEffect(result.effect, ANIM_TYPE_STAND)
@@ -376,7 +388,7 @@ function LoadUnit takes string chat_str, player un_owner, real centerX, real cen
         set udg_save_LastLoadedUnit[playerId] = resultUnit
         set resultUnit = null
     else
-        call LoadSpecialEffect(un_owner, un_type, unitData.x, unitData.y, unitData.flyHeight, unitData.yaw, unitData.pitch, unitData.roll, unitData.size, unitData.red, unitData.green, unitData.blue, unitData.alpha, unitData.color, unitData.animSpeed, unitData.animTag)
+        call LoadSpecialEffect(un_owner, un_type, unitData.x, unitData.y, unitData.flyHeight, unitData.yaw, unitData.pitch, unitData.roll, unitData.size, unitData.red, unitData.green, unitData.blue, unitData.alpha, unitData.color, unitData.animSpeed, unitData.animTag, unitData.flags)
     endif
     
     call unitData.destroy()

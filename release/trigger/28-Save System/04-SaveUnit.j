@@ -137,6 +137,21 @@ private function GetScaleStringEffect takes SpecialEffect sfx returns string
     endif
 endfunction
 
+// Used by GenerateEffectFlagsStr and GenerateFlagsStr
+private function I2FlagsString takes integer flags returns string
+    return I2S(flags)  // TODO: If max flag exceeds 4, we need to use AnyBase(92) instead of I2S
+endfunction
+
+private function GenerateEffectFlagsStr takes SpecialEffect sfx returns string
+    local integer result = 0
+    
+    if not ObjectPathing(sfx).isDisabled then
+        set result = result + SaveNLoad_BoolFlags.UNROOTED
+    endif
+
+    return I2FlagsString(result)
+endfunction
+
 
 private function GetSFXSaveStr takes SpecialEffect whichEffect, player owner, SaveData saveData, boolean hasCustomColor, integer selectionType returns string
     local string animTags
@@ -181,7 +196,7 @@ private function SaveEffectDecos takes InternalPlayerData playerId, SaveData sav
     loop
         exitwhen counter == 25 or decorations == 0 or decoration == decorations.end()
         
-        call saveData.write(SaveNLoad_FormatString("SnL_unit", GetSFXSaveStr(decoration, decoration.getOwner(), saveData, decoration.hasCustomColor, GUMS_SELECTION_UNSELECTABLE())))
+        call saveData.write(SaveNLoad_FormatString("SnL_unit", GetSFXSaveStr(decoration, decoration.getOwner(), saveData, decoration.hasCustomColor, GUMS_SELECTION_UNSELECTABLE()) + "," + GenerateEffectFlagsStr(decoration)))
         
         if not saveData.isRectSave() then
             call UpdatePlayerExtents(playerId, decoration.x, decoration.y)
@@ -211,7 +226,7 @@ private function GenerateFlagsStr takes unit saveUnit returns string
     if GetOwningPlayer(saveUnit) == Player(PLAYER_NEUTRAL_PASSIVE) then
         set result = result + SaveNLoad_BoolFlags.NEUTRAL
     endif
-    return I2S(result)  // TODO: If max flag exceeds 4, we need to use AnyBase(92) instead of I2S
+    return I2FlagsString(result)
 endfunction
 
 private function SaveNextUnits takes player filterPlayer returns boolean
@@ -248,7 +263,7 @@ private function SaveNextUnits takes player filterPlayer returns boolean
                 // Don't save dead and hidden units
             else
                 if UnitHasAttachedEffect(saveUnit) then
-                    set saveStr = GetSFXSaveStr(GetUnitAttachedEffect(saveUnit), filterPlayer, saveData, unitHandleId.hasColor(), GUMS_GetUnitSelectionType(saveUnit))
+                    set saveStr = GetSFXSaveStr(GetUnitAttachedEffect(saveUnit), filterPlayer, saveData, unitHandleId.hasColor(), GUMS_GetUnitSelectionType(saveUnit))+","+GenerateFlagsStr(saveUnit)
                 else
                     set saveStr = ID2S((GetUnitTypeId(saveUnit))) + "," + /*
                                 */   R2S(GetUnitX(saveUnit))+","+  /*
