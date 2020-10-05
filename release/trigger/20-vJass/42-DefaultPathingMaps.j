@@ -43,13 +43,13 @@ struct ObjectPathing extends array
     method update takes PathingMap path, real x, real y, real ang returns thistype
     
         if this.exists() then
-            call .pathMap.applyAtAngledSimple(.x, .y, false, .angle)
+            call .pathMap.applyAtAngled(.x, .y, false, .angle)
             // call path.createImages(x0, y0, true, ang)
         endif
         
         if path != 0 and not .isDisabled then
             // call path.createImages(x0, y0, true, ang)
-            call path.applyAtAngledSimple(x, y, true, ang)
+            call path.applyAtAngled(x, y, true, ang)
             set .pathMap = path
             set .x = x
             set .y = y
@@ -66,7 +66,7 @@ struct ObjectPathing extends array
         
         if receiverData.exists() then
             call BJDebugMsg("Removing receiver path")
-            call receiverData.pathMap.applyAtAngledSimple(receiverData.x, receiverData.y, false, receiverData.angle)
+            call receiverData.pathMap.applyAtAngled(receiverData.x, receiverData.y, false, receiverData.angle)
         endif
         
         if this.exists() then
@@ -84,6 +84,21 @@ struct ObjectPathing extends array
 
     method destroy takes nothing returns nothing
         call .update(0, 0, 0, 0).isDisabledClear()
+    endmethod
+
+endstruct
+
+struct paths extends array
+
+    private static key static_memebers_key
+    //! runtextmacro TableStruct_NewConstTableField("private", "tab")
+    
+    static method operator [] takes string s returns integer
+        return tab[StringHash(s)]
+    endmethod
+    
+    static method operator []= takes string s, PathingMap i returns nothing
+        set tab[StringHash(s)] = i
     endmethod
 
 endstruct
@@ -122,10 +137,15 @@ struct DefaultPathingMap extends array
     endmethod
 
     private static method onInit takes nothing returns nothing
+        local LinkedHashSet tiles
+        
+        //! runtextmacro optional InitializePathingsMapFromFiles()
+    
         set thistype('e00B').path = PathingMap.getGeneric(5, 2)
-        set thistype('Hart').path = PathingMap.getGeneric(5, 5)
+        set thistype('Hart').path = paths["citybuildinglarge_45.tga"]
         set thistype('Harf').path = PathingMap.getGeneric(10, 10)
         set thistype('h079').path = PathingMap.getGeneric(2, 5)
+        
     endmethod
     
     //! textmacro DefaultPathingMapsUpdate

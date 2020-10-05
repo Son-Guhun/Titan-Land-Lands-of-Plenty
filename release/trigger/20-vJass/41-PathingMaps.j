@@ -7,7 +7,7 @@ private module Init
     endmethod
 endmodule
 
-private struct PathTile extends array
+struct PathTile extends array
 
     static constant integer TILE_SIZE = 32
     //! runtextmacro TableStruct_NewReadonlyPrimitiveField("counter", "integer")
@@ -176,6 +176,16 @@ struct PathingMap extends array
         
         return this
     endmethod
+    
+    static method createWithList takes integer width, integer height, LinkedHashSet tiles returns thistype
+        local thistype this = thistype.allocate()
+        
+        set .width = width
+        set .height = height
+        set .tiles = tiles
+        
+        return this
+    endmethod
 
     //! textmacro tttt
         local integer i = 0
@@ -195,7 +205,6 @@ struct PathingMap extends array
                 exitwhen i >= maxI
                 set j = 0
             endif
-            // call BJDebugMsg("i / j: " + I2S(i) + " / " + I2S(j))
             
             set newJ = MathRound(j*cos - i*sin) + offsetJ
             set newI = MathRound(j*sin + i*cos) + offsetI
@@ -206,14 +215,10 @@ struct PathingMap extends array
         endloop
     //! endtextmacro
     
-    method applyAtAngledSimple takes real x, real y, boolean enable, real angle returns nothing
+    private method applyAtAngledSimple takes real x, real y, boolean enable, real angle returns nothing
         //! runtextmacro tttt()
-            // call BJDebugMsg("New i / j: " + I2S(newI) + " / " + I2S(newJ))
             if PathTile.validateIndicesLower(newI,newJ) and PathTile.validateIndicesUpper(newI,newJ) then
-                // call BJDebugMsg("Tile: " + I2S(PathTile.fromIndices(newI,newJ)))
                 call PathTile.fromIndices(newI,newJ).counterIncrement(enable)
-            else
-                call BJDebugMsg("WTF")
             endif
         //! runtextmacro dddd()
     endmethod
@@ -240,9 +245,10 @@ struct PathingMap extends array
         return images
     endmethod
     
-    method applyAtAngled takes real x, real y, boolean enable, real angle returns nothing
+    private method applyAtAngledAdvanced takes real x, real y, boolean enable, real angle returns nothing
         local integer i
         local integer j
+        local integer temp
         local real sin = Sin(angle)
         local real cos = Cos(angle)
         local LinkedHashSet tiles = .tiles
@@ -255,14 +261,24 @@ struct PathingMap extends array
             set i = tile.i
             set j = tile.j
             
-            set j = R2I(j*cos - i*sin) + offsetJ
-            set i = R2I(j*sin + i*cos) + offsetI
+            set temp = MathRound(j*cos - i*sin) + offsetJ
+            set i = MathRound(j*sin + i*cos) + offsetI
+            set j = temp
+            
             if PathTile.validateIndicesLower(i,j) and PathTile.validateIndicesUpper(i,j) then
                 call PathTile.fromIndices(i,j).counterIncrement(enable)
             endif
             
             set tile = tiles.next(tile)
         endloop
+    endmethod
+    
+    method applyAtAngled takes real x, real y, boolean enable, real angle returns nothing
+        if .tiles == 0 then
+            call applyAtAngledSimple(x,y,enable,angle)
+        else
+            call applyAtAngledAdvanced(x,y,enable,angle)
+        endif
     endmethod
 
 endstruct
