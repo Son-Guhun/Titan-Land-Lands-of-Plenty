@@ -22,7 +22,7 @@ globals
     public constant real TIMEOUT = 0.8
 
     // The period that a timer will use to check to see if TIMEOUT has passed since the last event.
-    // Should lower than TIMEOUT.
+    // Should lower than TIMEOUT (and preferably a power of 2 to avoid timer inaccuracy).
     public constant real ACCURACY = 0.25
     
 endglobals
@@ -396,8 +396,13 @@ struct OSKeys extends array
         
         if not pressed then
             set timestamp[key][pId] = Timeline.game.elapsed
-            set isPressedArray[key][pId] = false
-            set totalPressedKeys[pId] = totalPressedKeys[pId] - 1
+            
+            // A key firing a up event while it's already up is a sign of alt-tab/unintended behaviour
+            if isPressedArray[key][pId] then  
+                set totalPressedKeys[pId] = totalPressedKeys[pId] - 1  // only change total count if key was actually pressed before being released
+                set isPressedArray[key][pId] = false
+            endif
+            
             call TriggerEvaluate(executer)
 
         elseif not key.isPressedId(pId) then
@@ -411,9 +416,7 @@ struct OSKeys extends array
                 call resetKeys(pId)
             endif
         else
-            if pressed then  // A key firing a up event while it's already up is a sign of alt-tab/unintended behaviour
-                set latestTimestamp[pId] = Timeline.game.elapsed
-            endif
+            set latestTimestamp[pId] = Timeline.game.elapsed
         
             call TriggerEvaluate(holdExecuter)
         endif
@@ -422,6 +425,7 @@ struct OSKeys extends array
     // This runs the timer that determines whether a down event is still being fired for each player.
     private static method onTimer takes nothing returns nothing
         local User pId = 0
+        
         
         loop
             exitwhen pId >= bj_MAX_PLAYERS
@@ -442,7 +446,7 @@ struct OSKeys extends array
         
         set .eventResponder = trig
         
-        call TimerStart(CreateTimer(), ACCURACY, true, function thistype.onTimer)
+        call TimerStart(GetExpiredTimer(), ACCURACY, true, function thistype.onTimer)
         
         loop
             exitwhen key == 256
@@ -458,10 +462,9 @@ struct OSKeys extends array
             set key = key + 1
         endloop
         
-        call TriggerAddAction(trig, function thistype.onKey)
         
-        call PauseTimer(GetExpiredTimer())
-        call DestroyTimer(GetExpiredTimer())
+        
+        call TriggerAddAction(trig, function thistype.onKey)
 
         set trig = null
     endmethod
