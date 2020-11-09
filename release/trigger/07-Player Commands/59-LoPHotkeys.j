@@ -19,7 +19,7 @@ private function onKey takes nothing returns boolean
     local integer key = GetHandleId(BlzGetTriggerPlayerKey())
     local integer metaKey = BlzGetTriggerPlayerMetaKey()
     
-    if BlzGetTriggerPlayerIsKeyDown() then
+    if BlzGetTriggerPlayerIsKeyDown() and G.table[metaKey].string.has(key) then
         call LoPCommands_ExecuteCommand(G.table[metaKey].string[key])
     endif
     

@@ -1,4 +1,4 @@
-library LoPUI requires UILib, UpperButtonBarView
+library LoPUI requires UILib, UpperButtonBarView, WidescreenUI
 
 globals
     public framehandle ConsoleUIBackdropDummy

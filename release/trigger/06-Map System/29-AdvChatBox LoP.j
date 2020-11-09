@@ -49,7 +49,6 @@ struct AdvChatBoxLoP extends array
         local boolean OOC = not isIC[User[sender]]
         
         if SubString(msg, 0, 1) == "-" or SubString(msg, 0, 1) == "'" and LoPCommands_ExecuteCommand(msg) then
-                call BJDebugMsg("a")
                 if extendedMsg != "" then
                     call LoP_WarnPlayer(sender, LoPChannels.WARNING, "Commands are limited to 128 characters. Further characters are ignored.")
                 endif

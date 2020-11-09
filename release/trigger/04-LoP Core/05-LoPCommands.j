@@ -1,4 +1,4 @@
-library LoPCommands initializer onInit requires CutToComma, TableStruct, ArgumentStack, LoPPlayers, LoPTip, UserDefinedRects, UnitVisualMods, GAL
+library LoPCommands initializer onInit requires CutToComma, TableStruct, ArgumentStack, LoPPlayers, LoPTip, UserDefinedRects, UnitVisualMods, GAL, LoPWarn
 
 globals
     constant integer ACCESS_TITAN = 1
@@ -165,6 +165,9 @@ struct LoP_Command extends array
     static method fromString takes string str returns LoP_Command
         return StringHash(str)
     endmethod
+    
+    private static key static_members_key
+    //! runtextmacro TableStruct_NewStaticPrimitiveField("disabled","boolean")
 
     //! runtextmacro TableStruct_NewAgentField("boolexpr","boolexpr")
     //! runtextmacro TableStruct_NewPrimitiveField("string","string")
@@ -258,7 +261,7 @@ public function ExecuteCommand takes string chatMsg returns boolean
             call LoPHints.displayFromList(GetTriggerPlayer(), command.hints)
         endif
     
-        if accessLevel >= command.accessLevel and LoP_PlayerData.get(GetTriggerPlayer()).commandsEnabled then
+        if accessLevel >= command.accessLevel and LoP_PlayerData.get(GetTriggerPlayer()).commandsEnabled and not LoP_Command.disabled then
             set evaluator = Globals.evaluator
             debug call BJDebugMsg("Command called: " + beforeSpace)
             
@@ -274,7 +277,7 @@ public function ExecuteCommand takes string chatMsg returns boolean
             set condition = null
             set evaluator = null
         else
-            call DisplayTextToPlayer(GetTriggerPlayer(), 0., 0., "You do not have permission to use this command.")
+            call LoP_WarnPlayer(GetTriggerPlayer(), LoPChannels.ERROR, "You do not have permission to use this command.")
         endif
         
         return true
