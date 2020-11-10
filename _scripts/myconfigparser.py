@@ -65,7 +65,7 @@ class UnitParser(MyConfigParser):
 
 
 def load_unit_data(fp, parser=MyConfigParser):
-    unit_data = parser()
+    unit_data = parser(delimiters=("=",))
     unit_data.readfp(fp, 'unit.ini')
     return unit_data
 
