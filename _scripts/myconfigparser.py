@@ -83,8 +83,11 @@ def iter_deco_builders(unit_data, builder_only = False, ability = 'A00J'):
             if not (builder_only and ('Builds' not in unit or unit['Builds'] == '""')):
                 yield unit
 
+import inspect
+import os
 
-defaults_path = 'unit.ini' if not ispackage else '_scripts/unit.ini'
+module_path = os.path.abspath(inspect.getfile(inspect.currentframe()))
+defaults_path = os.path.join(module_path, '../unit.ini')
 with open(defaults_path) as f:
     DEFAULTS = load_unit_data(f)
 

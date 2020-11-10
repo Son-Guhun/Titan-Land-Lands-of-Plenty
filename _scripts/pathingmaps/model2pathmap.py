@@ -1,3 +1,7 @@
+import os
+import sys
+sys.path.insert(1, os.path.join(sys.path[0], '..'))
+
 from myconfigparser import MyConfigParser, load_unit_data
 from collections import defaultdict
 import json
@@ -34,10 +38,10 @@ def do():
 
 
     
-    with open('doodad.ini') as f:
+    with open('../doodad.ini') as f:
         parse(load_unit_data(f))
 
-    with open('unit_1.32.8.ini') as f:
+    with open('../unit_1.32.8.ini') as f:
         parse(load_unit_data(f))
         
 

@@ -1,9 +1,12 @@
-from PIL import Image, ImageFilter
 import os
+import sys
+sys.path.insert(1, os.path.join(sys.path[0], '..'))
+
+from PIL import Image, ImageFilter
 import pyperclip
 import json
 
-root = "..\\.future"
+root = "..\\..\\.future"
 folder = "pathtextures"
 
 
