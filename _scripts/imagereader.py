@@ -1,6 +1,7 @@
 from PIL import Image, ImageFilter
 import os
 import pyperclip
+import json
 
 root = "..\\.future"
 folder = "pathtextures"
@@ -8,6 +9,7 @@ folder = "pathtextures"
 
 def do():
     dirpath = os.path.join(root, folder)
+    used = []
     result = []
     
     for filename in os.listdir(dirpath):
@@ -27,6 +29,7 @@ def do():
                             cells.append((i,j))
 
                 if len(cells) > 0:
+                    used.append(filename)
                     width = maxI-minI+1
                     height = maxJ-minJ+1
                     if len(cells) == width*height:
@@ -38,5 +41,8 @@ def do():
                             result.append("call tiles.append(PathTile.fromIndices({},{}))".format(*cell))
                         result.append('set paths["{}"] = PathingMap.createWithList({},{}, tiles)'.format(filename, width, height))
                         # print(filename, cells)
+
+    with open('used_pathtexs.json', 'w') as f:
+        json.dump(used, f, indent=2)
 
     pyperclip.copy("\n".join(result))
