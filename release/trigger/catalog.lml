@@ -296,6 +296,8 @@
     40-Matrices: Matrices
     41-PathingMaps: PathingMaps
     42-DefaultPathingMaps: DefaultPathingMaps
+    43-InitializePathingsMapFromFiles: InitializePathingsMapFromFiles
+    44-GeneratedDecorationPathMaps: GeneratedDecorationPathMaps
 21-Map-specific: Map-specific
     1-Debug: Debug
     2-ArrayAgent: ArrayAgent

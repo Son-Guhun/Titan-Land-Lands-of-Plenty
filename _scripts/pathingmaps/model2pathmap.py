@@ -58,6 +58,7 @@ def do():
         raise ValueError("Duplicate pathtextures found")
 
     results = {x:next(iter(y)) for x,y in results.items()}
+    results = {x:y[y.rfind('\\')+1:-1].lower() for x,y in results.items()}
 
     with open('model2pathmap.json', 'w') as f:
         json.dump(results, f, indent=2)

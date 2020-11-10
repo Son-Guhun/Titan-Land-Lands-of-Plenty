@@ -146,26 +146,12 @@ struct DefaultPathingMap extends array
         set thistype('Harf').path = PathingMap.getGeneric(10, 10)
         set thistype('h079').path = PathingMap.getGeneric(2, 5)
         
+        //! runtextmacro GeneratedDecorationPathMaps()
     endmethod
     
     //! textmacro DefaultPathingMapsUpdate
-        local PathingMap path = get(u).path
-        local real offsetX =  -path.width*16.
-        local real offsetY =  -path.height*16.
-        local real sin = Sin(ang)
-        local real cos = Cos(ang)
-        local ObjectPathing lastPathData = ObjectPathing.get(u)
-        
-        set x = (offsetX*cos - offsetY*sin) + x
-        set y = (offsetX*sin + offsetY*cos) + y
-    
-        call lastPathData.update(path, x, y, ang)
-    //! endtextmacro
-    
-    method update takes handle h, real x, real y, real ang returns nothing
-        local PathingMap path = this.path // get(h).path
-        local real offsetX =  -path.width*16.
-        local real offsetY =  -path.height*16.
+        local real offsetX =  -path.height*16.// -path.width*16.
+        local real offsetY =  -path.width*16.// -path.height*16.
         local real sin = Sin(ang)
         local real cos = Cos(ang)
         local ObjectPathing lastPathData = ObjectPathing.get(h)
@@ -174,18 +160,25 @@ struct DefaultPathingMap extends array
         set y = (offsetX*sin + offsetY*cos) + y
     
         call lastPathData.update(path, x, y, ang)
-    endmethod
+    //! endtextmacro
     
+    
+    method update takes handle h, real x, real y, real ang returns nothing
+        local PathingMap path = this.path
+        //! runtextmacro DefaultPathingMapsUpdate()
+    endmethod
 
-    static method onMove takes unit u, real x, real y returns nothing   
-        local real ang = GetUnitFacing(u)*bj_DEGTORAD
+    static method onMove takes unit h, real x, real y returns nothing   
+        local real ang = GetUnitFacing(h)*bj_DEGTORAD
+        local PathingMap path = get(h).path
         //! runtextmacro DefaultPathingMapsUpdate()
     endmethod
     
-    static method onSetFacing takes unit u, real angle returns nothing
+    static method onSetFacing takes unit h, real angle returns nothing
         local real ang = angle*bj_DEGTORAD
-        local real x = GetUnitX(u)
-        local real y = GetUnitY(u)
+        local real x = GetUnitX(h)
+        local real y = GetUnitY(h)
+        local PathingMap path = get(h).path
         //! runtextmacro DefaultPathingMapsUpdate()
     endmethod
 

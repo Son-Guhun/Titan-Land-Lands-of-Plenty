@@ -18,7 +18,7 @@ def do():
     for filename in os.listdir(dirpath):
         if not os.path.isdir(os.path.join(dirpath, filename)):
             with Image.open(os.path.join(dirpath, filename)) as im:
-                im = im.transpose(Image.ROTATE_90)
+                # im = im.transpose(Image.ROTATE_90)
                 
                 minI, minJ = im.width, im.height
                 maxI = maxJ = 0
