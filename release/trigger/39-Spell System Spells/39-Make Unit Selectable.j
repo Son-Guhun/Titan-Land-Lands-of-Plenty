@@ -53,10 +53,14 @@ private function onEffect takes nothing returns nothing
         exitwhen deco == decorations.end()
             if deco.pitch != 0 or deco.roll != 0 or deco.scaleY != deco.scaleX or deco.scaleZ != deco.scaleX then
                 set u = Effect2Unit(deco)
-                if UnitHasAttachedEffect(u) then
-                    call UnitDetachEffect(u).destroy()
+                if u != null then
+                    if UnitHasAttachedEffect(u) then
+                        call UnitDetachEffect(u).destroy()
+                    endif
+                    call UnitAttachEffect(u, deco.convertToSpecialEffect())
+                else
+                    call deco.destroy()
                 endif
-                call UnitAttachEffect(u, deco.convertToSpecialEffect())
             else
                 call Effect2Unit(deco)
                 call deco.destroy()
