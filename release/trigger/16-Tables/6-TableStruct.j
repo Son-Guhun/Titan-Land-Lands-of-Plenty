@@ -36,6 +36,7 @@ struct TableStruct extends array
         implement Dynmc
     endif
     
+    // Does not work for images
     static method setHandle takes integer parent, integer child, handle h returns nothing
         if h != null then
             set .type(parent).fogstate[child] = ConvertFogState(GetHandleId(h))

@@ -8,7 +8,7 @@ endglobals
 
 
 
-function ButtonCallback takes player trigP, framehandle trigButton returns nothing
+private function ButtonCallback takes player trigP, framehandle trigButton returns nothing
     local User pId = User[trigP]
     
     if trigButton == terrainEditorScreen["heightButton"] then
@@ -101,11 +101,11 @@ private function onPress takes nothing returns boolean
     return true
 endfunction
 
-function onChangeValue takes nothing returns nothing
+private function onChangeValue takes nothing returns nothing
     call TerrainEditor_SetBrushSize(GetTriggerPlayer(), R2I(BlzGetTriggerFrameValue())*2-1)
 endfunction
 
-function onEditText takes nothing returns nothing
+private function onEditText takes nothing returns nothing
     local framehandle frame = BlzGetTriggerFrame()
     local player trigP = GetTriggerPlayer()
     local real value = -S2R(BlzGetTriggerFrameText())

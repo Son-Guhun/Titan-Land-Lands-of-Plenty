@@ -104,9 +104,12 @@ struct SpecialEffect extends array
     */
     
     method setPosition takes real x, real y returns nothing
+    // This code is currently not necessary, as there is no way for players to move non-attached sfx in-game.
+    /*
         if DefaultPathingMap(.unitType).hasPathing() then
             call DefaultPathingMap(.unitType).update(.effect, x, y, .yaw)
         endif
+    */
         
         call MoveLocation(.loc, .x, .y)
         call BlzSetSpecialEffectPosition(.effect, x, y, GetLocationZ(loc) + height)

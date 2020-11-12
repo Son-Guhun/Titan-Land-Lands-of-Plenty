@@ -1,7 +1,4 @@
 scope CommandsChatbox
-/*
-This command should be disabled for public releases. It's just here to make testing easier.
-*/
 
 private function onCommand takes nothing returns boolean
     local string args = LoP_Command.getArguments()
