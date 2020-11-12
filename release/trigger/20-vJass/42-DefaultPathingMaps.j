@@ -65,7 +65,6 @@ struct ObjectPathing extends array
         local thistype receiverData = get(receiver)
         
         if receiverData.exists() then
-            call BJDebugMsg("Removing receiver path")
             call receiverData.pathMap.applyAtAngled(receiverData.x, receiverData.y, false, receiverData.angle)
         endif
         

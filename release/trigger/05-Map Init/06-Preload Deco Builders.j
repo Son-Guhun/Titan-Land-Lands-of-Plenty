@@ -3,7 +3,7 @@ library PreloadDecoBuilders requires LoPDecoBuilders, DecoBuilderCount, LoPWarn,
 globals
     public constant boolean ENABLE = true
     
-    private constant integer STEP = 10
+    private constant integer STEP = 3
     private integer current = 0
     private boolean reforged = false
 endglobals
