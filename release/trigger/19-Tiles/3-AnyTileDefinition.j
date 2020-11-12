@@ -66,6 +66,12 @@ static if ENABLE_ID_FUNCTIONS and LIBRARY_WorldBounds then
         return ((R2I(x - WorldBounds.minX + halfTileSize) / tileSize) * Globals.totalY[tileSize] + R2I(y - WorldBounds.minY + halfTileSize) / tileSize)
     endfunction
     
+    /* Normally the first and last tiles lines in the map are only half-sized (like terrain tiles).
+    This function handles tiles like pathing tiles, which are always fully sized. */
+    function GetCustomTileIdOffset takes integer tileSize, real x, real y returns integer
+        return ((R2I(x - WorldBounds.minX) / tileSize) * Globals.totalY[tileSize] + R2I(y - WorldBounds.minY) / tileSize)
+    endfunction
+    
     function GetCustomTileIdSafe takes integer tileSize, real x, real y returns integer
         local integer halfTileSize = tileSize/2
         
