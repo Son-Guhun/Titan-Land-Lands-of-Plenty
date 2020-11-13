@@ -1,52 +1,16 @@
 function Trig_CommandsR_Fog_Conditions takes nothing returns boolean
     local string chatStr = LoP_Command.getArguments()
-    local integer style
-    local real zStart
-    local real zEnd
-    local real density
-    local real red
-    local real green
-    local real blue
-    local integer cutToComma
+    local ArrayList_string args
     
     static if LIBRARY_AutoRectEnvironment then
         local TerrainFog fog
-    endif
     
-    if chatStr == "reset" then
-        set RectEnvironment.default.fog = 0
-        return false
-    endif
-    
-    set cutToComma = CutToCharacter(chatStr, " ")
-    set style = S2I(CutToCommaResult(chatStr, cutToComma))
-    set chatStr = CutToCommaShorten(chatStr, cutToComma)
-    
-    set cutToComma = CutToCharacter(chatStr, " ")
-    set zStart = S2R(CutToCommaResult(chatStr, cutToComma))
-    set chatStr = CutToCommaShorten(chatStr, cutToComma)
-    
-    set cutToComma = CutToCharacter(chatStr, " ")
-    set zEnd = S2R(CutToCommaResult(chatStr, cutToComma))
-    set chatStr = CutToCommaShorten(chatStr, cutToComma)
-    
-    set cutToComma = CutToCharacter(chatStr, " ")
-    set density = S2R(CutToCommaResult(chatStr, cutToComma))
-    set chatStr = CutToCommaShorten(chatStr, cutToComma)
-    
-    set cutToComma = CutToCharacter(chatStr, " ")
-    set red = S2R(CutToCommaResult(chatStr, cutToComma))
-    set chatStr = CutToCommaShorten(chatStr, cutToComma)
-    
-    set cutToComma = CutToCharacter(chatStr, " ")
-    set green = S2R(CutToCommaResult(chatStr, cutToComma))
-    set chatStr = CutToCommaShorten(chatStr, cutToComma)
-    
-    set cutToComma = CutToCharacter(chatStr, " ")
-    set blue = S2R(CutToCommaResult(chatStr, cutToComma))
-    set chatStr = CutToCommaShorten(chatStr, cutToComma)
-    
-    static if LIBRARY_AutoRectEnvironment then
+        if chatStr == "reset" then
+            set RectEnvironment.default.fog = 0
+            return false
+        endif
+        
+        set args = StringSplitWS(chatStr)
         set fog = RectEnvironment.default.fog
         
         if fog == 0 then
@@ -54,16 +18,24 @@ function Trig_CommandsR_Fog_Conditions takes nothing returns boolean
             set RectEnvironment.default.fog = fog
         endif
         
-        set fog.style = style
-        set fog.zStart = zStart
-        set fog.zEnd = zEnd
-        set fog.density = density * 0.01
-        set fog.red = red * 0.01
-        set fog.green = green * 0.01
-        set fog.blue = blue * 0.01
+        set fog.style   = S2I(args[0])
+        set fog.zStart  = S2R(args[1])
+        set fog.zEnd    = S2R(args[2])
+        set fog.density = S2R(args[3]) * 0.01
+        set fog.red     = S2R(args[4]) * 0.01
+        set fog.green   = S2R(args[5]) * 0.01
+        set fog.blue    = S2R(args[6]) * 0.01
     else
-        call SetTerrainFogExBJ( style, zStart, zEnd, density, red, green, blue )
+        if chatStr == "reset" then
+            call ResetTerrainFog()
+            return false
+        endif
+    
+        set args = StringSplitWS(chatStr)
+        call SetTerrainFogExBJ( S2I(args[0]), S2R(args[1]), S2R(args[2]), S2R(args[3]), S2R(args[4]), S2R(args[5]), S2R(args[6]))
     endif
+    
+    call args.destroy()
     return false
 endfunction
 

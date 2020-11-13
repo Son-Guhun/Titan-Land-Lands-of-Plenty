@@ -62,6 +62,41 @@ function StringSplit takes string whichString, string splitter returns ArrayList
     return list
 endfunction
 
+function StringSplitWS takes string whichString returns ArrayList_string
+    local integer index = 0
+    local integer start = 0
+    local integer len = StringLength(whichString)
+    local ArrayList_string list = ArrayList.create()
+    local boolean inSplit = true
+    
+    if whichString == null then
+        // do nothing
+    elseif whichString == "" then
+        call list.append("")
+    else
+        loop
+            
+            if inSplit then
+                exitwhen index >= len
+            
+                if SubString(whichString, index, index+1) != " " then
+                    set inSplit = false
+                    set start = index
+                endif
+                
+            elseif SubString(whichString, index, index+1) == " " or index >= len then
+            
+                set inSplit = true
+                call list.append(SubString(whichString, start, index))
+            endif
+            
+            set index = index + 1
+        endloop
+    endif
+    
+    return list
+endfunction
+
 
 // Returns the size of the string if there is no match.
 // Only accepts characters (string length == 1).

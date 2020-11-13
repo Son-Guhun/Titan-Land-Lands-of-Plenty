@@ -1,27 +1,13 @@
 // -water red,green,blue,alpha
 function Trig_CommandsR_Water_Color_Conditions takes nothing returns boolean
     local string chatStr = LoP_Command.getArguments()
-    local real red
-    local real green
-    local real blue
-    local real trans
-    local integer cutToComma
+    local ArrayList_string args
     
-    set cutToComma = CutToCharacter(chatStr, " ")
-    set red = S2R(CutToCommaResult(chatStr, cutToComma))
-    set chatStr = CutToCommaShorten(chatStr, cutToComma)
+    set args = StringSplitWS(chatStr)
     
-    set cutToComma = CutToCharacter(chatStr, " ")
-    set green = S2R(CutToCommaResult(chatStr, cutToComma))
-    set chatStr = CutToCommaShorten(chatStr, cutToComma)
+    call SetWaterBaseColorBJ(S2R(args[0]), S2R(args[1]), S2R(args[2]), S2R(args[3]))
     
-    set cutToComma = CutToCharacter(chatStr, " ")
-    set blue = S2R(CutToCommaResult(chatStr, cutToComma))
-    set chatStr = CutToCommaShorten(chatStr, cutToComma)
-    
-    set trans = S2R(SubString(chatStr,0,StringLength(chatStr) + 1))
-    
-    call SetWaterBaseColorBJ( red, green, blue, trans )
+    call args.destroy()
     return false
 endfunction
 
