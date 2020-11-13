@@ -31,6 +31,7 @@ endstruct
 //New textmacro to allow table.integer[] syntax for compatibility with textmacros that might desire it.
 //! runtextmacro NEW_ARRAY_BASIC("Integer", "Integer", "integer")
    
+//! runtextmacro NEW_ARRAY("Frame", "framehandle")
 //! runtextmacro NEW_ARRAY("Player", "player")
 //! runtextmacro NEW_ARRAY("Widget", "widget")
 //! runtextmacro NEW_ARRAY("Destructable", "destructable")
@@ -77,6 +78,7 @@ struct ConstTable extends array
     implement integerm
     implement booleanm
     implement stringm
+    implement framehandlem
     implement playerm
     implement widgetm
     implement destructablem

@@ -270,7 +270,9 @@
     21-OOP: OOP
     22-MoveSpeedBonus: MoveSpeedBonus
     23-MultiBoard: MultiBoard
+        Disab
     24-GameTime: GameTime
+        Disab
     25-ArgumentStack: ArgumentStack
     26-BoolExprEvaluator: BoolExprEvaluator
     27-Map-specific: Map-specific
@@ -533,6 +535,8 @@
     '4-MainMenu Controller': 'MainMenu Controller'
     '5-ChatLog View': 'ChatLog View'
     '6-ChatLog Controller': 'ChatLog Controller'
+    '7-GameTime View': 'GameTime View'
+    '8-GameTime Copy': 'GameTime Copy'
 '48-Decoration Browser': 'Decoration Browser'
     1----------------------------: ---------------------------
         Comment
