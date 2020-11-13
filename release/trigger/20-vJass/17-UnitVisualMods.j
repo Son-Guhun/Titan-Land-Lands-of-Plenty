@@ -1,4 +1,4 @@
-library UnitVisualMods requires HashStruct, UnitVisualValues, UnitName, CutToComma, GroupTools, optional UnitVisualModsDefaults/*
+library UnitVisualMods requires HashStruct, UnitVisualValues, UnitName, GroupTools, optional UnitVisualModsDefaults/*
 
     */ /*optional*/ HashtableWrapper,  /* Required to initialize a hashtable.
     

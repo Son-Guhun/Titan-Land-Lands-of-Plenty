@@ -1,4 +1,4 @@
-library UnitVisualValues requires HashtableWrapper
+library UnitVisualValues requires HashtableWrapper, CutToComma
 
 globals
     private constant boolean INIT_HASHTABLE = true // Set this to false if you want to use a Table-based HashTable.
