@@ -2,10 +2,15 @@ library ListBox requires Table, PlayerUtils
 
 /*
   DOCUMENTATION
+
+This library defines the ListBoxTemplate module, which is used to implement ListBoxes.
+  
+  
 To implement this module in a struct, you will need to define the following fields/methods before the line in which the module is implemented:
 */
 
 //! novjass
+struct Example extends array
     static framepointtype startFramepoint = FRAMEPOINT_TOP  // absolute framepoint that will be set for the first button
     static real startPointX = 0.4  // X center for the framepoint of the first button
     static real startPointY = 0.57 // Y for the framepoint of the first button
@@ -37,6 +42,27 @@ To implement this module in a struct, you will need to define the following fiel
     endmethod
 
     implement ListBoxTemplate  // Important: template should be implemented last
+endstruct
+
+module ListBoxTemplate
+
+    // Fields
+    //========================
+    readonly static framehandle array buttons  // contains all the buttons in the listbox
+    readonly static framehandle scrollBar
+    
+    // Methods
+    //========================
+
+    // From the index of a frame in the buttons array, returns the index of the value held by that frame in the list of the given player
+    static method getListIndex takes player whichPlayer, integer frameIndex returns integer
+    
+    // Refresh the frames in a list, calling updateFrame for each.
+    static method refreshList takes player whichPlayer returns nothing
+    
+    // Changes the size of the list displayed by the listBox (i.e., how far down the scrollbar will go).
+    static method changeSize takes player whichPlayer, integer newSize returns nothing
+endmodule
 //! endnovjass
 
 
@@ -53,19 +79,21 @@ module ListBoxTemplate
     private static key sizes_tab // for each player, stores the size of the list displayed by the listbox (all items)
     private static key wheelSpins_tab // for each player, stores how many mouse wheel spins they have made whose value changed event has not triggered
     
-    static method operator handleId2Index takes nothing returns Table
+    
+    // These are supposed to be private, but private module operators are not supported for some reason.
+    /* private */ static method operator handleId2Index takes nothing returns Table
         return tab
     endmethod
 
-    static method operator lastValue takes nothing returns Table
+    /* private */ static method operator lastValue takes nothing returns Table
         return lastValue_tab
     endmethod
     
-    static method operator sizes takes nothing returns Table
+    /* private */ static method operator sizes takes nothing returns Table
         return sizes_tab
     endmethod
     
-    static method operator wheelSpins takes nothing returns Table
+    /* private */ static method operator wheelSpins takes nothing returns Table
         return wheelSpins_tab
     endmethod
     
