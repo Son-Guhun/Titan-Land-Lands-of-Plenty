@@ -214,8 +214,12 @@ struct LoP_Command extends array
         return Args.getString(0)
     endmethod
     
-    static method getArguments takes nothing returns string
+    static method getArgumentsRaw takes nothing returns string
         return Args.getString(1)
+    endmethod
+    
+    static method getArguments takes nothing returns string
+        return StringTrim(getArgumentsRaw())
     endmethod
 endstruct
 

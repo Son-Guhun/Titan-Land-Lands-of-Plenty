@@ -97,6 +97,34 @@ function StringSplitWS takes string whichString returns ArrayList_string
     return list
 endfunction
 
+function StringJoin takes string joiner, ArrayList_string parts returns string
+    local integer i = 1
+    local integer size = parts.size
+    local string result
+
+    if size > 0 then
+        set result = parts[0]
+        
+        loop
+            exitwhen i == size
+            set result = result + joiner + parts[i]
+            set i = i + 1
+        endloop
+        
+        return result
+    endif
+    
+    return ""
+endfunction
+
+function StringTrim takes string str returns string
+    local ArrayList_string parts = StringSplitWS(str)
+    local string result = StringJoin(" ", parts)
+    
+    call parts.destroy()
+    return result
+endfunction
+
 
 // Returns the size of the string if there is no match.
 // Only accepts characters (string length == 1).

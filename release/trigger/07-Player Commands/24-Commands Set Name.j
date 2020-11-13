@@ -1,5 +1,5 @@
 function Trig_Commands_Set_Name_Conditions takes nothing returns boolean
-    call SetPlayerName(GetTriggerPlayer(), LoP_Command.getArguments())
+    call SetPlayerName(GetTriggerPlayer(), LoP_Command.getArgumentsRaw())
     return false
 endfunction
 

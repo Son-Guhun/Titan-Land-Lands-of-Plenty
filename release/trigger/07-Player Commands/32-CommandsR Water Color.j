@@ -1,6 +1,6 @@
 // -water red,green,blue,alpha
 function Trig_CommandsR_Water_Color_Conditions takes nothing returns boolean
-    local string chatStr = LoP_Command.getArguments()
+    local string chatStr = LoP_Command.getArgumentsRaw()
     local ArrayList_string args
     
     set args = StringSplitWS(chatStr)

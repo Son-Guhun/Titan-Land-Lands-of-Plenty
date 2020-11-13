@@ -1,5 +1,5 @@
 function Trig_CommandsR_Fog_Conditions takes nothing returns boolean
-    local string chatStr = LoP_Command.getArguments()
+    local string chatStr = LoP_Command.getArgumentsRaw()
     local ArrayList_string args
     
     static if LIBRARY_AutoRectEnvironment then
