@@ -125,6 +125,14 @@ private function onEditText takes nothing returns boolean
     call RefreshList(pId, text)
     set Table(searchStrings).string[pId] = text
     
+    if User.fromLocal() == pId then
+        if text == "" then
+            call BlzFrameSetText(decorationBrowserScreen["searchTooltip"], DecorationBrowserView_SEARCH_HELP_TEXT())
+        else
+            call BlzFrameSetText(decorationBrowserScreen["searchTooltip"], "")
+        endif
+    endif
+    
     return true
 endfunction
 
