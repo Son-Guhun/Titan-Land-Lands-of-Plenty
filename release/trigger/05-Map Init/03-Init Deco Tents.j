@@ -1,29 +1,35 @@
 library LoPInitDecoTents requires LoPHeader, LoPDecoBuilders
 /*
     Defines functions to create the Deco Tents in the Titan Palace, which are dynamically
-    generated.
+generated. These functions can be culled during map initialization, but it is preferred to call them
+at 0 seconds.
+
+    - call InitDecoTents()
+    - call InitReforgedTents()
 */
-    globals
-        constant integer Special_RED = 255
-        constant integer Special_GREEN = 165
-        constant integer Special_BLUE = 0
-        constant integer Special_ALPHA = 255
-        
-        constant integer Basic_RED = 255
-        constant integer Basic_GREEN = 255
-        constant integer Basic_BLUE = 255
-        constant integer Basic_ALPHA = 255
-        
-        constant integer Adv_RED = 255
-        constant integer Adv_GREEN = 0
-        constant integer Adv_BLUE = 0
-        constant integer Adv_ALPHA = 255
-        
-        constant integer Reforged_RED = 255
-        constant integer Reforged_GREEN = 255
-        constant integer Reforged_BLUE = 255
-        constant integer Reforged_ALPHA = 255
-    endglobals
+
+// Color constants for each tent type (RGBA).
+globals
+    constant integer Special_RED = 255
+    constant integer Special_GREEN = 165
+    constant integer Special_BLUE = 0
+    constant integer Special_ALPHA = 255
+    
+    constant integer Basic_RED = 255
+    constant integer Basic_GREEN = 255
+    constant integer Basic_BLUE = 255
+    constant integer Basic_ALPHA = 255
+    
+    constant integer Adv_RED = 255
+    constant integer Adv_GREEN = 0
+    constant integer Adv_BLUE = 0
+    constant integer Adv_ALPHA = 255
+    
+    constant integer Reforged_RED = 255
+    constant integer Reforged_GREEN = 255
+    constant integer Reforged_BLUE = 255
+    constant integer Reforged_ALPHA = 255
+endglobals
 
 // This function is called in Init 0 seconds (to reduce loading time)
 function InitDecoTents takes nothing returns nothing

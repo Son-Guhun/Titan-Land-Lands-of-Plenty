@@ -5,19 +5,16 @@ globals
     constant integer ACCESS_USER = 0
 endglobals
 
-// The filter is only called for the units selected by the player.
-function Commands_EnumSelectedCheckForGenerator takes group whichGroup, player whichPlayer, boolexpr filter returns integer
-    call GroupEnumUnitsSelected(whichGroup, whichPlayer, filter)
-    
-    if GetUnitTypeId(FirstOfGroup(whichGroup)) == 'h0KD' and BlzGroupGetSize(whichGroup) == 1 then
-        call GroupClear(whichGroup)
-        call BlzGroupAddGroupFast(udg_Player_ControlGroup[GetPlayerId(whichPlayer) + 1], whichGroup)
-        return 0
-    endif
-    
-    return GUDR_SwapGroup_UnitsInsideUDR(whichGroup, false, null)
-endfunction
+// ======================================
+// Argument Parsing Utils
+// ======================================
 
+// Parsers a player argument and returns the respective player id.
+// "red" -> 0
+// "dg" -> 10
+// "light blue" -> 9
+// "5" -> 5
+// "999" -> 999 (invalid player numbers are returned as is)
 function Arguments_ParsePlayer takes string str returns integer
     local integer s2i = S2I(str)
     local integer strHash
@@ -30,6 +27,9 @@ function Arguments_ParsePlayer takes string str returns integer
     return s2i
 endfunction
 
+// Parses a number argument.
+// If MathParser is available, MathParser.calculate() is used.
+// Otherwise R2S() is used.
 function Arguments_ParseNumber takes string number returns real
     static if LIBRARY_MathParser then
         return MathParser.calculate(number)
@@ -38,33 +38,12 @@ function Arguments_ParseNumber takes string number returns real
     endif
 endfunction
 
+// Equivalent to Arguments_ParsePlayer.
 function Commands_GetChatMessagePlayerNumber takes string str returns integer
     return Arguments_ParsePlayer(str)
 endfunction
 
-/*
- Command Overflow check
-*/
-function CheckCommandOverflow takes nothing returns boolean
-    if udg_Commands_Counter < udg_Commands_Counter_Max then
-        set udg_Commands_Counter = ( udg_Commands_Counter + 1 )
-        return true
-    elseif udg_Commands_Counter == udg_Commands_Counter_Max then
-        call DisplayTextToPlayer( GetTriggerPlayer(), 0, 0, "Command Overflow! Execution stopped.\n Run the command again until it is finished.")
-        set udg_Commands_Counter = ( udg_Commands_Counter + 1 )
-    endif
-    return false
-endfunction
-
-function Commands_SetMaximumExecutions takes integer max returns nothing
-    set udg_Commands_Counter = 0
-    set udg_Commands_Counter_Max = max
-endfunction
-
-function Commands_CheckOverflow takes nothing returns boolean
-    return CheckCommandOverflow()
-endfunction
-
+// Used by rgb commands.
 function Commands_SetRGBAFromHex takes player whichPlayer, string args returns nothing
     local integer pN = GetPlayerId(whichPlayer) + 1
     local integer len = StringLength(args)
@@ -73,7 +52,7 @@ function Commands_SetRGBAFromHex takes player whichPlayer, string args returns n
         set args = SubString(args, 1, len)
         set len = len - 1
     elseif len < 2 then
-        set udg_ColorSystem_Green[pN] = 0
+        set udg_ColorSystem_Red[pN] = 0
         set udg_ColorSystem_Green[pN] = 0
         set udg_ColorSystem_Blue[pN] = 0
         set udg_ColorSystem_Alpha[pN] = 255
@@ -106,6 +85,7 @@ function Commands_SetRGBAFromHex takes player whichPlayer, string args returns n
     endif
 endfunction
 
+// Used by rgb commands.
 function Commands_SetRGBAFromString takes player whichPlayer, string args, boolean forceInteger returns nothing
     local integer pN = GetPlayerId(whichPlayer) + 1
     local integer cutToComma
@@ -159,6 +139,58 @@ function Commands_SetRGBAFromString takes player whichPlayer, string args, boole
     set udg_ColorSystem_Alpha[pN] = R2I(255 - alpha)
 endfunction
 
+// ======================================
+// Selection Utils
+// ======================================
+
+// The filter is only called for the units selected by the player.
+// Enums selected units.
+// - If a Controller is selected, then adds all units in the player's control group to 'whichGroup' and returns 0.
+// - Otherwise calls GUDR_SwapGroup_UnitsInsideUDR.
+//   - If a RectGenerator is selected, adds all units inside the Rect to 'whichGroup' and returns the generator's handle id.
+//   - Otherwise adds selected units to 'whichGroup' and returns 0.
+function Commands_EnumSelectedCheckForGenerator takes group whichGroup, player whichPlayer, boolexpr filter returns integer
+    call GroupEnumUnitsSelected(whichGroup, whichPlayer, filter)
+    
+    if GetUnitTypeId(FirstOfGroup(whichGroup)) == 'h0KD' and BlzGroupGetSize(whichGroup) == 1 then
+        call GroupClear(whichGroup)
+        call BlzGroupAddGroupFast(udg_Player_ControlGroup[GetPlayerId(whichPlayer) + 1], whichGroup)
+        return 0
+    endif
+    
+    return GUDR_SwapGroup_UnitsInsideUDR(whichGroup, false, null)
+endfunction
+
+// ======================================
+// Overflow Utils
+// ======================================
+
+/*
+ Command Overflow check
+*/
+function CheckCommandOverflow takes nothing returns boolean
+    if udg_Commands_Counter < udg_Commands_Counter_Max then
+        set udg_Commands_Counter = ( udg_Commands_Counter + 1 )
+        return true
+    elseif udg_Commands_Counter == udg_Commands_Counter_Max then
+        call DisplayTextToPlayer( GetTriggerPlayer(), 0, 0, "Command Overflow! Execution stopped.\n Run the command again until it is finished.")
+        set udg_Commands_Counter = ( udg_Commands_Counter + 1 )
+    endif
+    return false
+endfunction
+
+function Commands_SetMaximumExecutions takes integer max returns nothing
+    set udg_Commands_Counter = 0
+    set udg_Commands_Counter_Max = max
+endfunction
+
+function Commands_CheckOverflow takes nothing returns boolean
+    return CheckCommandOverflow()
+endfunction
+
+// ======================================
+// LoP_Command API
+// ======================================
 
 struct LoP_Command extends array
     
@@ -223,11 +255,12 @@ struct LoP_Command extends array
     endmethod
 endstruct
 
-public struct Globals extends array
+private struct Globals extends array
     private static key static_members_key
     //! runtextmacro TableStruct_NewStaticAgentField("evaluator","trigger")
 endstruct
 
+// Must be used while GetTriggerPlayer() is defined.
 public function ExecuteCommand takes string chatMsg returns boolean
     local integer cutToComma
     local string beforeSpace
@@ -290,6 +323,7 @@ public function ExecuteCommand takes string chatMsg returns boolean
     return false
 endfunction
 
+// Must be used while GetTriggerPlayer() is defined.
 public function MessageHandler takes nothing returns boolean
     return ExecuteCommand(GetEventPlayerChatString())
 endfunction

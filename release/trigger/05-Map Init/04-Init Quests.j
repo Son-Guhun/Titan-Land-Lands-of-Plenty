@@ -1,15 +1,29 @@
 library LoPInitQuests
+/*
+    This library defines the InitQuests function, which initializes all the quests available in the 
+Manual (F9 menu). To create a new quest, simply follow the pattern used in InitQuests. Make sure it 
+is placed in the correct category: "Commands" or "Credits & Information".
+
+    This library also defines the FixQuestDialog, which repositions the QuestDialog elements in order
+to display Manual entires in a less compact form.
+
+    Both InitQuests and FixQuestDialog should not be called during map initialization. 'InitQuests' is
+called in 'Init 0 Seconds' and FixQuestDialog is called in 'Init Create Events'.
+*/
 
 function FixQuestDialog takes nothing returns nothing
+
+    // Prevent multiplayer desyncs by forcing the creation of the QuestDialog frame
     call BlzFrameClick(UpperButtonBar.buttons[0])
     call ForceUICancel()
     
+    // Expand TextArea
     call BlzFrameSetPoint(BlzGetFrameByName("QuestDisplay",0), FRAMEPOINT_TOPLEFT, BlzGetFrameByName("QuestDetailsTitle", 0), FRAMEPOINT_BOTTOMLEFT, 0.003, -0.003)
     call BlzFrameSetPoint(BlzGetFrameByName("QuestDisplay",0), FRAMEPOINT_BOTTOMRIGHT, BlzGetFrameByName("QuestDisplayBackdrop", 0), FRAMEPOINT_BOTTOMRIGHT, -0.003, 0.)
-    call BlzFrameSetPoint(BlzGetFrameByName("QuestDisplayBackdrop",0), FRAMEPOINT_BOTTOM, BlzGetFrameByName("QuestBackdrop", 0), FRAMEPOINT_BOTTOM, 0., 0.017)
     
-    // call BlzFrameSetVisible(BlzGetFrameByName("QuestAcceptButton",0),  false)
+    // Relocate button
     call BlzFrameClearAllPoints(BlzGetFrameByName("QuestAcceptButton",0))
+    call BlzFrameSetPoint(BlzGetFrameByName("QuestDisplayBackdrop",0), FRAMEPOINT_BOTTOM, BlzGetFrameByName("QuestBackdrop", 0), FRAMEPOINT_BOTTOM, 0., 0.017)
     call BlzFrameSetPoint(BlzGetFrameByName("QuestAcceptButton",0), FRAMEPOINT_TOPRIGHT, BlzGetFrameByName("QuestBackdrop", 0), FRAMEPOINT_TOPRIGHT, -0.016, -0.016)
     call BlzFrameSetText(BlzGetFrameByName("QuestAcceptButton",0), "X")
     call BlzFrameSetSize(BlzGetFrameByName("QuestAcceptButton",0), 0.03, 0.03)
@@ -404,4 +418,6 @@ Doomlord => Custom Stat System
     call CreateQuestBJ(questType, "|cff00ff00Coding & Tools|r", quest_text, "ReplaceableTextures\\CommandButtons\\BTNEngineeringUpgrade.blp")
     // ----------
 endfunction
+
+
 endlibrary

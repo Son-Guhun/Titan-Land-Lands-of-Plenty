@@ -1,4 +1,9 @@
 library LoPInitPlayerCircles requires TableStruct
+/*
+    This library defines the InitPlayerCircles function, which creates the "Give to Player" circles
+in the Titan Palace and the regions necessary for their functionality.
+
+*/
 
 public struct Globals extends array
 

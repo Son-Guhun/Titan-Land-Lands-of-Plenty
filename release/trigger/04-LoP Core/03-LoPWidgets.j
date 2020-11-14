@@ -1,6 +1,9 @@
 /* Unit Constants
-These libraries define constants that represent units in the map. */
+    
+    These libraries define constants that represent units in the map.
+*/
 
+// Titan Powers
 library POWER
     public function INVULNERABILITY takes nothing returns unit
         return gg_unit_e00B_0405
@@ -27,6 +30,7 @@ library POWER
     endfunction
 endlibrary
 
+// Cosmosis and Angel of Creation
 library HERO
 
     public function COSMOSIS takes nothing returns unit
@@ -41,7 +45,30 @@ endlibrary
 
 library LoPWidgets requires LoPHeader, TableStruct, POWER, HERO, optional TerrainEditorUI
 /* 
-This libary defines many utilities for widget objects in the map's script.
+    This libary defines many utilities for widget objects in the map's script.
+    
+    struct LoP_UnitData
+        Fields:
+            boolean isHeroic -> this field is used by heroic units so that they can be easily recognized as heroic. It should never be set to false, if it had been set to true.
+            boolean hideOnDeselect -> whether a unit should be hidden upon being deselected.
+            
+        Methods:
+            method destroy takes nothing returns nothing -> must be called when a unit is removed from the game.
+            
+            Static:
+                static method get takes unit whichUnit returns LoP_UnitData -> get an instance of this struct for a unit (handle id)
+    
+    Functions:
+    
+        // All of these take a unit and return a boolean.
+        LoP_IsUnitHero
+        LoP_IsUnitDecoBuilder
+        LoP_IsUnitProtected -> protected units can't be removed or killed.
+        LoP_IsUnitDummy -> dummy units are used by abilities.
+        
+        LoP_GetProtectedUnits() -> returns the group which contains protected units.
+        
+        LoP_InitProtectedUnits() -> should be called after Deco Tents are created.
 */
 
 private struct Globals extends array
@@ -107,7 +134,7 @@ endfunction
 // Protected units intialization
 
 // This filter is used during map initialization to enumerate units in the Titan Palace and protect them.
-function LoP_InitProtectedUnitsFilter takes nothing returns boolean
+private function LoP_InitProtectedUnitsFilter takes nothing returns boolean
     local unit filterU = GetFilterUnit()
     
     if ( IsUnitType(filterU, UNIT_TYPE_STRUCTURE) and GetOwningPlayer(filterU) == LoP.NEUTRAL_PASSIVE ) /*

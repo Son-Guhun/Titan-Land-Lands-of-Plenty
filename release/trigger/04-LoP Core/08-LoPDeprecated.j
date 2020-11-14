@@ -1,4 +1,9 @@
 library LoPDeprecated requires TableStruct
+/*
+    This library is used by the Save System in order to load deprecated units as their replacements.
+
+
+*/
 
 private keyword InitModule
 
