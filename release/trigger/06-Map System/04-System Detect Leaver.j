@@ -1,3 +1,8 @@
+/*
+    Send message when a player leaves the game. Choose a new Titan if the leaver was the Titan.
+
+*/
+
 function Trig_System_Detect_Leaver_Actions takes nothing returns nothing
     call LoP_WarnPlayer(User.Local, LoPChannels.WARNING, GetPlayerName(GetTriggerPlayer()) + " has left the game.")
     

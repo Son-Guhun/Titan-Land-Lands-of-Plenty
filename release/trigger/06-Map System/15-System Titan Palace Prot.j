@@ -1,4 +1,9 @@
 scope TitanPalaceProt
+/*
+    Stop units without a Ruby Key item from entering the Inner Titan Palace.
+    
+    To turn off this system, simply turn off this trigger.
+*/
 
 globals
     

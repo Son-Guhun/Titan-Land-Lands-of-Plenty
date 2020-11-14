@@ -1,4 +1,8 @@
 scope SystemSetUnitColor
+/*
+    Set unit color to owner's color upon unit creation.
+
+*/
 
 //! runtextmacro DefineHooks()
 

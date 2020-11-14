@@ -1,4 +1,8 @@
 scope SystemLevelUpHeroes
+/*
+    Set hero level to 10 upon creation.
+
+*/
 
 private function onRegisterUnit takes nothing returns boolean
     local unit hero = udg_UDexUnits[udg_UDex]

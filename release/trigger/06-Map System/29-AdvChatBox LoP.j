@@ -1,3 +1,9 @@
+/*
+    This code handles the Advanced Chat Box. For more documentation, you can find the relevant libraries
+in the AdvChatBox folder.
+
+*/
+
 globals
     boolean LoP_displayCommands = false  // async
     boolean LoP_useAdvancedChatBox = false // async

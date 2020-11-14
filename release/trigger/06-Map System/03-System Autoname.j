@@ -1,3 +1,7 @@
+/*
+    Change player name upon unit selection.
+*/
+
 function Trig_System_Autoname_Actions takes nothing returns boolean
     local player trigPlayer = GetTriggerPlayer()
     local unit trigUnit = GetTriggerUnit()

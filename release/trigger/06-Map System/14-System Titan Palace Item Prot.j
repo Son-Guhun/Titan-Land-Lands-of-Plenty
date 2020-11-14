@@ -1,4 +1,13 @@
 //===========================================================================
+// Description
+//====================
+
+// This code is supposed to preclude units without a Ruby Key and who are not owned by the Titan
+// from buying items from a shop inside of the Inner Titan Palace.
+
+// This system assumes that the shops in the Titan Palace are owned by Neutral Passive.
+
+//===========================================================================
 // Configuration
 //====================
 
@@ -15,15 +24,12 @@ endfunction
 //===========================================================================
 // Code
 //====================
-
-// This code is supposed to impede units without a Ruby Key and who are not owned by the Titan
-// to buy items from a shop inside of the protected rect.
-
-// This system assumes that the shops in the Titan Palace are owned by Neutral Passive.
-
 // The protection system is NOT supposed to be fired off very often. So, in order to optimize the
 // code execution during the map, we will separate the condition from the action and optimize the
 // conditions as much as possible.
+
+// titanPalaceInner is defined in System Titan Palace Prot.
+
 scope TitanPalaceItemProtect
 
 

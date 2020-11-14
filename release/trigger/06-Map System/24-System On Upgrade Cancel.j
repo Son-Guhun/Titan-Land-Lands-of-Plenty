@@ -1,4 +1,8 @@
-// Should be unnecessary while all units upgrade instantly (thus upgrades can't be cancelled)
+/*
+    Perform necessary actions when a unit cancels an upgrade.
+    
+    Should be unnecessary as long as all units upgrade instantly (thus upgrades can't be cancelled).
+*/
 function Trig_System_On_Upgrade_Cancel_Actions takes nothing returns nothing
     local unit trigU = GetTriggerUnit()
     local SpecialEffect sfx = 0

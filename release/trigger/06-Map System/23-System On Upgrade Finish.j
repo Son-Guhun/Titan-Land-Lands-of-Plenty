@@ -1,3 +1,7 @@
+/*
+    Perform necessary actions when a unit finishes upgrading into a new one.
+*/
+
 function Trig_System_On_Upgrade_Finish_Actions takes nothing returns nothing
     local unit trigU = GetTriggerUnit()
     local SpecialEffect sfx = 0

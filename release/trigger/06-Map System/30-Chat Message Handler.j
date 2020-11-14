@@ -1,4 +1,10 @@
 scope ChatMessageHandler
+/*
+    This code is called whenever a player sends a chat message using the default WC3 chatbox.
+
+    It will execute commands using LoPCommands_MessageHandler(). If the message was not a command, it
+will be handled using SotDRPMessageHandler() for logging and display.
+*/
 
 private struct G extends array
     static key static_members_key
