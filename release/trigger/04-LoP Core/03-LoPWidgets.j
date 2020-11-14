@@ -1,74 +1,43 @@
-/* Unit Constants
-    
-    These libraries define constants that represent units in the map.
-*/
-
-// Titan Powers
-library POWER
-    public function INVULNERABILITY takes nothing returns unit
-        return gg_unit_e00B_0405
-    endfunction
-    
-    public function VULNERABILITY takes nothing returns unit
-        return gg_unit_e00A_0411
-    endfunction
-    
-    public function KILL takes nothing returns unit
-        return gg_unit_e008_0406
-    endfunction
-    
-    public function LEVEL takes nothing returns unit
-        return gg_unit_e009_0407
-    endfunction
-    
-    public function DELEVEL takes nothing returns unit
-        return gg_unit_e00C_0408
-    endfunction
-    
-    public function REMOVE takes nothing returns unit
-        return gg_unit_e007_0410
-    endfunction
-endlibrary
-
-// Cosmosis and Angel of Creation
-library HERO
-
-    public function COSMOSIS takes nothing returns unit
-        return gg_unit_H00V_0359
-    endfunction
-    
-    public function CREATOR takes nothing returns unit
-        return gg_unit_H00S_0141
-    endfunction
-
-endlibrary
-
 library LoPWidgets requires LoPHeader, TableStruct, POWER, HERO, optional TerrainEditorUI
 /* 
-    This libary defines many utilities for widget objects in the map's script.
+    This libary defines many utilities for widget objects in the map's script. The POWER and HERO
+libraries are defined at the end of this file.
     
-    struct LoP_UnitData
+    struct LoP_UnitData:
         Fields:
             boolean isHeroic -> this field is used by heroic units so that they can be easily recognized as heroic. It should never be set to false, if it had been set to true.
             boolean hideOnDeselect -> whether a unit should be hidden upon being deselected.
             
         Methods:
-            method destroy takes nothing returns nothing -> must be called when a unit is removed from the game.
+            nothing destroy() -> must be called when a unit is removed from the game.
             
             Static:
-                static method get takes unit whichUnit returns LoP_UnitData -> get an instance of this struct for a unit (handle id)
+                LoP_UnitDataget get(unit whichUnit)  -> get an instance of this struct for a unit (handle id)
+                
+    Constant Functions:
+    
+        . Titan powers:
+        .   unit POWER_INVULNERABILITY()
+        .   unit POWER_VULNERABILITY()
+        .   unit POWER_KILL()
+        .   unit POWER_LEVEL()
+        .   unit POWER_DELEVEL()
+        .   unit POWER_REMOVE()
+        
+        . Special heroes:
+        .   unit HERO_COSMOSIS()
+        .   unit HERO_CREATOR()
     
     Functions:
     
-        // All of these take a unit and return a boolean.
-        LoP_IsUnitHero
-        LoP_IsUnitDecoBuilder
-        LoP_IsUnitProtected -> protected units can't be removed or killed.
-        LoP_IsUnitDummy -> dummy units are used by abilities.
+        boolean LoP_IsUnitHero(unit u)
+        boolean LoP_IsUnitDecoBuilder(unit u)
+        boolean LoP_IsUnitProtected(unit u)  -> protected units can't be removed or killed.
+        boolean LoP_IsUnitDummy(unit u)  -> dummy units are used by abilities.
         
-        LoP_GetProtectedUnits() -> returns the group which contains protected units.
+        group LoP_GetProtectedUnits() -> returns the group which contains protected units.
         
-        LoP_InitProtectedUnits() -> should be called after Deco Tents are created.
+        nothing LoP_InitProtectedUnits() -> should be called after Deco Tents are created.
 */
 
 private struct Globals extends array
@@ -160,5 +129,50 @@ function LoP_InitProtectedUnits takes nothing returns nothing
 endfunction
 
 // ========
+
+endlibrary
+
+/* Unit Constants
+    
+    These libraries define constants that represent units in the map.
+*/
+
+// Titan Powers
+library POWER
+    public function INVULNERABILITY takes nothing returns unit
+        return gg_unit_e00B_0405
+    endfunction
+    
+    public function VULNERABILITY takes nothing returns unit
+        return gg_unit_e00A_0411
+    endfunction
+    
+    public function KILL takes nothing returns unit
+        return gg_unit_e008_0406
+    endfunction
+    
+    public function LEVEL takes nothing returns unit
+        return gg_unit_e009_0407
+    endfunction
+    
+    public function DELEVEL takes nothing returns unit
+        return gg_unit_e00C_0408
+    endfunction
+    
+    public function REMOVE takes nothing returns unit
+        return gg_unit_e007_0410
+    endfunction
+endlibrary
+
+// Cosmosis and Angel of Creation
+library HERO
+
+    public function COSMOSIS takes nothing returns unit
+        return gg_unit_H00V_0359
+    endfunction
+    
+    public function CREATOR takes nothing returns unit
+        return gg_unit_H00S_0141
+    endfunction
 
 endlibrary

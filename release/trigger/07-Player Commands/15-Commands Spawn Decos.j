@@ -23,15 +23,16 @@ endfunction
 function Trig_Commands_Deco_Spawn_Conditions takes nothing returns boolean
     local string arg = LoP_Command.getArguments()
     local integer lastIndex
+    local LoP_PlayerData pId = LoP_PlayerData.get(GetTriggerPlayer())
 
     if arg == "special" then
-        call Commands_CreateMissingDecos(GetTriggerPlayer(), 0, LoP_DecoBuilders.SpecialDecoLastIndex)
+        call LoPDecoBuilders_CreateMissing(pId.handle, pId.locX, pId.locY, null, 0, LoP_DecoBuilders.SpecialDecoLastIndex, DECO_BUILDERS_CLASSIC)
     elseif arg == "basic" then
-        call Commands_CreateMissingDecos(GetTriggerPlayer(), 0, LoP_DecoBuilders.BasicDecoLastIndex)
+        call LoPDecoBuilders_CreateMissing(pId.handle, pId.locX, pId.locY, null, 0, LoP_DecoBuilders.BasicDecoLastIndex, DECO_BUILDERS_CLASSIC)
     elseif arg == "advanced" or arg == "adv" or arg == "all" then
-        call Commands_CreateMissingDecos(GetTriggerPlayer(), 0, LoP_DecoBuilders.AdvDecoLastIndex)
+        call LoPDecoBuilders_CreateMissing(pId.handle, pId.locX, pId.locY, null, 0, LoP_DecoBuilders.AdvDecoLastIndex, DECO_BUILDERS_CLASSIC)
     elseif arg == "reforged" then
-        call Commands_CreateMissingDecosReforged(GetTriggerPlayer(), 0,  LoP_DecoBuilders.ReforgedDecoLastIndex)
+        call LoPDecoBuilders_CreateMissing(pId.handle, pId.locX, pId.locY, null, 0,  LoP_DecoBuilders.ReforgedDecoLastIndex, DECO_BUILDERS_REFORGED)
     else
         call DisplayTextToPlayer(GetTriggerPlayer(), 0, 0, MissingDecos_HelpMessage1())
         call DisplayTextToPlayer(GetTriggerPlayer(), 0, 0, MissingDecos_HelpMessage2())

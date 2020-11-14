@@ -1,9 +1,51 @@
 library LoPPlayers requires TableStruct, DecorationSFX, LoPNeutralUnits
+/*
 
-function LoP_SendSysMsg takes player whichPlayer, string msg returns nothing
-    call DisplayTextToPlayer(whichPlayer, 0., 0., "|cffffcc00[SYS]:|r " + msg)
-endfunction
+struct LoP_PlayerData:
 
+    Fields:
+        readonly player handle
+        
+        readonly string realName
+        
+        readonly location location
+        readonly real locX
+        readonly real locY
+        
+        readonly boolean commandsEnabled
+        
+    Methods:
+        integer toPlayerId()
+        integer toPlayerNumber()
+
+        boolean isAtWar(player other)
+        nothing setAtWar(player other, boolean enable)
+        
+        nothing enableCommands()
+        nothing disableCommands()
+        
+        playercolor getUnitColor()
+        nothing setUnitColor(playercolor color)
+    
+        Static:
+            LoP_PlayerData get(player whichPlayer)
+            
+Functions:
+    player FindFirstPlayer()
+    nothing MakeTitan(player whichPlayer)
+    
+    boolean LoP_GivesShareAccess(player whichPlayer, player recipient)
+    boolean LoP_PlayerOwnsUnit(player whichPlayer, unit whichUnit)
+    
+    boolean PlayerNumberIsNotExtraOrVictim(integer ID)
+    boolean PlayerNumberIsNotNeutral(integer ID) 
+
+*/
+
+// ==============================================
+// Leaver utilities
+
+// Find the first player that is still player. Should not be called during map initialization.
 function FindFirstPlayer takes nothing returns player
         local User pId = 0
         loop
@@ -13,6 +55,7 @@ function FindFirstPlayer takes nothing returns player
         return pId.handle
 endfunction
 
+// Makes 'whichPlayer' the new Titan.
 function MakeTitan takes player whichPlayer returns nothing
         set udg_GAME_MASTER = whichPlayer
         call SetUnitOwner(HERO_COSMOSIS(), udg_GAME_MASTER, false)
@@ -28,6 +71,9 @@ function MakeTitan takes player whichPlayer returns nothing
         call SetUnitOwner(POWER_VULNERABILITY(), udg_GAME_MASTER, false)
 endfunction
 
+// ==============================================
+// Unit access utilities
+
 function LoP_GivesShareAccess takes player whichPlayer, player recipient returns boolean
     return GetPlayerAlliance(whichPlayer, recipient, ALLIANCE_SHARED_ADVANCED_CONTROL)
 endfunction
@@ -36,6 +82,9 @@ endfunction
 function LoP_PlayerOwnsUnit takes player whichPlayer, unit whichUnit returns boolean
     return GetPlayerAlliance(LoP_GetOwningPlayer(whichUnit), whichPlayer, ALLIANCE_SHARED_ADVANCED_CONTROL)
 endfunction
+
+// ==============================================
+// Neutral utilities
 
 function PlayerNumberIsNotExtraOrVictim takes integer ID returns boolean
     return (ID <= bj_MAX_PLAYERS or ID == PLAYER_NEUTRAL_AGGRESSIVE+1 or ID == PLAYER_NEUTRAL_PASSIVE+1) and (ID >= 1)
@@ -61,15 +110,31 @@ struct LoP_PlayerData extends array
         return this+1
     endmethod
     
+    method operator handle takes nothing returns player
+        return Player(this)
+    endmethod
+    
     //==================================
     
     method operator realName takes nothing returns string
         return udg_RealNames[.toPlayerNumber()]
     endmethod
     
+    method operator location takes nothing returns location
+        return udg_PLAYER_LOCATIONS[.toPlayerNumber()]
+    endmethod
+    
+    method operator locX takes nothing returns real
+        return GetLocationX(.location)
+    endmethod
+    
+    method operator locY takes nothing returns real
+        return GetLocationY(.location)
+    endmethod
+    
     //==================================
     
-    static boolean array atWar[24][24]
+    private static boolean array atWar[24][24]
     
     method isAtWar takes player other returns boolean
         return atWar[this][GetPlayerId(other)]
@@ -79,7 +144,9 @@ struct LoP_PlayerData extends array
         set atWar[this][GetPlayerId(other)] = enable
     endmethod
 
-    static playercolor array playerColors
+    //==================================
+
+    private static playercolor array playerColors
 
     // Why use an array and not ConvertPlayerColor? Because ConvertPlayerColor can crash.
     // Would make finding any bugs caused by this really hard, since it could happen anywhere.
@@ -95,12 +162,8 @@ struct LoP_PlayerData extends array
     //! runtextmacro TableStruct_NewPrimitiveField("rotationStep","integer")
     
     //==================================
-    // Enable/Disable function (to be called by the Save System when loading)
-    
-    
-    // Should add a timer to check if player finished loading, because they might not type -load end
-    
-    // Alternative: create seperate command trigger for each player. Disable it or destroy it when they leave the game.
+    // Enable/Disable commands
+
     //! runtextmacro TableStruct_NewReadonlyPrimitiveField("commandsEnabled_internal","boolean")
     method enableCommands takes nothing returns nothing
         call commandsEnabled_internalClear()
@@ -111,6 +174,9 @@ struct LoP_PlayerData extends array
     method operator commandsEnabled takes nothing returns boolean
         return not commandsEnabled_internalExists()
     endmethod
+    
+    //==================================
+    // Initialization
     
     private static method onInit takes nothing returns nothing
         local LoP_PlayerData playerData = 0

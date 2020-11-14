@@ -3,10 +3,47 @@ library LoPDecoBuilders requires TableStruct
     This library defines functions to initialize the values of the rawcodes[] array, which
 should contain the rawcodes of all existing Deco Builders, in alphabetical order. Special builders 
 are listed first, though.
+
+
+struct LoP_DecoBuilders:
+
+    Static Fields:
+        integer[] rawcodes  -> an array containing rawcodes in [SpecialDecoFirstIndex, DecoLastIndex].
+        integer[] reforgedRawcodes  -> an array containing rawcodes in [SpecialDecoFirstIndex, ReforgedDecoLastIndex].
+        
+        integer SpecialDecoFirstIndex
+        integer SpecialDecoLastIndex
+        integer BasicDecoFirstIndex
+        integer BasicDecoLastIndex
+        integer AdvDecoFirstIndex
+        integer AdvDecoLastIndex
+        integer DecoLastIndex
+        integer ReforgedDecoLastIndex
+        
+Constants:
+    integer DECO_BUILDER_SPECIAL  -> rawcode for Deco Builder special.
+    
+    . Constants to be used as last parameter given to LoPDecoBuilders_CreateMissing:
+    .   boolean DECO_BUILDERS_CLASSIC
+    .   boolean DECO_BUILDERS_REFORGED
+
+Functions:
+    nothing LoPDecoBuilders_AdjustSpecialAbilities(unit deco)
+
+    nothing LoPDecoBuilders_CreateMissing(player owner, real x, real y, group g, integer firstIndex, integer lastIndex, boolean reforged)
+    .
+    . Creates all missing deco builders in the range [firstIndex, lastIndex] for the given player, at point (x,y).
+    .     group g  -> if not null, all created units will be added to it.
+    .     boolean reforged  -> use constants DECO_BUILDERS_CLASSIC and DECO_BUILDERS_REFORGED for future compatibility.
+
+
 */
 
 globals
     constant integer DECO_BUILDER_SPECIAL = 'u015'
+    
+    constant boolean DECO_BUILDERS_CLASSIC = false
+    constant boolean DECO_BUILDERS_REFORGED = true
 endglobals
 
 public function AdjustSpecialAbilities takes unit deco returns nothing
@@ -428,17 +465,5 @@ public function CreateMissing takes player owner, real x, real y, group g, integ
         set firstIndex = firstIndex + 1
     endloop
 endfunction
-
-function Commands_CreateMissingDecos takes player whichPlayer, integer firstIndex, integer lastIndex returns nothing
-    local location loc = udg_PLAYER_LOCATIONS[GetPlayerId(whichPlayer) + 1]
-    call CreateMissing(whichPlayer, GetLocationX(loc), GetLocationY(loc), null, firstIndex, lastIndex, false)
-endfunction
-
-function Commands_CreateMissingDecosReforged takes player whichPlayer, integer firstIndex, integer lastIndex returns nothing
-    local location loc = udg_PLAYER_LOCATIONS[GetPlayerId(whichPlayer) + 1]
-    call CreateMissing(whichPlayer, GetLocationX(loc), GetLocationY(loc), null, firstIndex, lastIndex, true)
-endfunction
-    
-
 
 endlibrary
