@@ -7,6 +7,8 @@ Action
         Const : 'EVENTS FOR TRIGGERS THAT SHULD ONLY ACTIVATE AFTER MAP INITIALIZATION'
     CommentString
         Const : 'EVENTS FOR COMMAND TRIGGERS'
+    CustomScriptCode
+        Const : 'call FixQuestDialog()'
     ForForceMultiple
         Call  : GetPlayersAll
         Action
