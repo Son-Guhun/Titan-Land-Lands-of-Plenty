@@ -54,6 +54,20 @@ struct TableStruct extends array
     endmethod
 endstruct
 
+// How to use this text macro:
+//  - Define a field (e.g: 'integer a' or 'TableStruct_NewPrimitiveField("a", "integer")')
+//  - Run this macro below that field's declaration.
+//  - You can now use the [] operator statically on the struct, using that field's type.
+//! textmacro TableStruct_DefineStaticArray takes FIELD, TYPE
+    static method operator[] takes integer i returns $TYPE$
+        return thistype(i).$FIELD$
+    endmethod
+    
+    static method operator[]= takes integer i, $TYPE$ g returns nothing
+        set thistype(i).$FIELD$ = g
+    endmethod
+//! endtextmacro
+
 //! textmacro TableStruct_NewConstTableField takes access, NAME
     private static key $NAME$_impl
     static if LIBRARY_ConstTable then
