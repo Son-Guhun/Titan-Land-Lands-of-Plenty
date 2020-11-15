@@ -2,15 +2,18 @@
 UnitTypeDefaultValues library. This code is copied to the clipboard and can be pasted in a text
 editor or inside the World Editor.
 """
+import os
+import sys
+sys.path.insert(1, os.path.join(sys.path[0], '..'))
+#______________________________________________________________________________________________
+
 from myconfigparser import MyConfigParser, load_unit_data, get_decorations
-
-
-
 import pyperclip
+
 
 keys = ['modelScale','red','green','blue','animProps','maxRoll']
 
-def do(file_path):
+def do(file_path='../../development/table/unit.ini'):
     with open(file_path) as f:
         unit_data = load_unit_data(f)
 
