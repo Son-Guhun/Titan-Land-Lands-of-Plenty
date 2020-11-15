@@ -67,6 +67,8 @@ endif
 function ClearTransportHandleId takes integer handleId returns nothing
     static if not LIBRARY_BribesUnitEvent then
         call UnitData(handleId).destroy()
+    else
+        call I2R(handleId)
     endif
 endfunction
 
