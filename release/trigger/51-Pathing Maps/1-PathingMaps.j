@@ -1,3 +1,5 @@
+//! runtextmacro GAL_Generate_List("true","image","ImageHandle","Handle","null")
+
 library PathingMaps requires GMUI, TableStruct, PathingTileDefinition, Matrices, GALimage, GLHS
 
 

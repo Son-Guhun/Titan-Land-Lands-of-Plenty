@@ -1,3 +1,5 @@
+//! runtextmacro GAL_Generate_List("true","ability","AbilityHandle","Handle","null")
+
 library CustomizableAbilityList requires TableStruct, Rawcode2String, GALability
 
 globals

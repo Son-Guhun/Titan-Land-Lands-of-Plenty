@@ -1,7 +1,3 @@
-//! runtextmacro GAL_Generate_List("true","string","Str","String","null")
-//! runtextmacro GAL_Generate_List("true","ability","AbilityHandle","Handle","null")
-//! runtextmacro GAL_Generate_List("true","destructable","DestructableHandle","Handle","null")
-//! runtextmacro GAL_Generate_List("true","image","ImageHandle","Handle","null")
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 //Guhun's Array Lists v.1.0.0
 library GAL requires Lists
@@ -25,19 +21,21 @@ struct ArrayList
     method forEachCode(code c) // executes a code variable instead of a trigger
     method forEachCodeCounted(code c)
 
-// You can create lists of different types. The syntax of each list type is as follows:
-struct ArrayList_unit   // for a list of units
-struct ArrayList_group  // for a list of groups
-library GALunit
-library GALgroup
-
-//You can create a new list of using the following macro:
-//! runtextmacro GRAL_Generate_List("true","unit","UnitHandle","Handle","null")
+//You can create new list structs for different typs using the following macro:
+//! runtextmacro GAL_Generate_List("true","unit","UnitHandle","Handle","null")
 // 1st parameter: Always set to 'true'
 // 2nd parameter: type name
 // 3rd parameter: last part of the 'Load' hashtable function for the type (LoadUnitHandle, LoadReal, etc.)
 // 4th parameter: last part of the 'Remove' hashtable function for the type (RemoveSavedHandle, RemoveSavedReal, etc.)
 // 5th parameter: 'null' value for the type (null, 0, '', false)
+
+// The syntax of each list type is as follows:
+struct ArrayList_unit   // for a list of units
+struct ArrayList_group  // for a list of groups
+
+// You have to require these libraries to use those structs.
+library GALunit
+library GALgroup
 
 //! endnovjass
 ////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -66,8 +64,13 @@ public function IsValidList takes integer listKey returns boolean
     return HaveSavedInteger(Lists_GetHashtable(), listKey, INDEX_SIZE())
 endfunction
 
+public function ClearList takes integer listKey returns nothing
+    call FlushChildHashtable(Lists_GetHashtable(), listKey)
+    call GAL_SetSize(listKey, 0)
+endfunction
+
 // TODO
-private struct Temp extends array
+private struct Allocator extends array
     // Operators must be declared here because private module operators are not supported
     static constant method RECYCLE_KEY takes nothing returns integer
         return Lists_RECYCLE_KEY
@@ -90,11 +93,11 @@ endstruct
 
 
 public function CreateList takes nothing returns integer
-    return Temp.create()
+    return Allocator.create()
 endfunction
 
 public function DestroyList takes integer this returns nothing
-    call Temp(this).destroy()
+    call Allocator(this).destroy()
 endfunction
 
 //==============
@@ -139,8 +142,7 @@ library_once GAL$type$ requires GAL
             endmethod
             
             method clear takes nothing returns nothing
-                call FlushChildHashtable(Lists_GetHashtable(), this)
-                call GAL_SetSize(this, 0)
+                call GAL_ClearList(this)
             endmethod
             
             method randomize takes nothing returns nothing

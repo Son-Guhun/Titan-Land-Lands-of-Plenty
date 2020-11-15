@@ -1,3 +1,5 @@
+//! runtextmacro GAL_Generate_List("true","string","Str","String","null")
+
 library CutToComma requires GALstring
 //////////////////////////////////////////////////////
 //CutToComma Library By Guhun v1.3

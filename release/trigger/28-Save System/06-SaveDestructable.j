@@ -1,3 +1,5 @@
+//! runtextmacro GAL_Generate_List("true","destructable","DestructableHandle","Handle","null")
+
 library SaveDestructable requires SaveNLoad, SaveIO, GLHS, LoPWarn
 /*
     Defines the SaveDestructables function:
