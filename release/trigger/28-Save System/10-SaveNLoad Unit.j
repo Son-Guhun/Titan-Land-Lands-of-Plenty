@@ -1,4 +1,8 @@
 library SaveNLoadUnit requires SaveNLoad, UnitVisualMods, AnyBase, DecorationSFX, UnitTypeDefaultValues, AttachedSFX, optional LoPDeprecated
+/*
+    Defines functions used when a unit is loaded into the game.
+
+*/
 
 globals
     private constant key forbiddenTypes // ConstTable

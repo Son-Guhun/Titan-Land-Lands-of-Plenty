@@ -1,4 +1,8 @@
 library SaveNLoadTerrain requires SaveNLoad, TerrainTools, Deformations, DeformationToolsHooks
+/*
+    Defines functions used for loading terrain into the game.
+
+*/
 
 function LoadD2H takes integer int returns string
     return SubString(AnyBase.digits,int,int+1)

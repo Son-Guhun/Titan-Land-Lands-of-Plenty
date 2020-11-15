@@ -1,5 +1,10 @@
-/* Functions that are not defined here will not have any hooks attached. To see which functions can be
-hooked to, check the FuncHooks library.*/
+/* 
+    These are the definitions for FuncHooks used in Titan Land: Lands of Plenty.
+
+    They are used to make the AttachedSFX and PathingMap libraries work, by moving the effects/pathing
+maps whenever the unit they are attached to moves. Effects must also be altered whenever a unit is
+visually altered.
+*/
 //! textmacro FuncHooks_Definitions
 
 private function SetUnitX takes unit u, real x returns nothing

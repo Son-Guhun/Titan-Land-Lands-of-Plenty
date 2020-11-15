@@ -1,11 +1,19 @@
 library AttachedSFX requires Unit2Effect, TableStruct, optional LoPHeader
+/*
+    This library facilities the attachment of a SpecialEffect to an immobile unit. By hooking to native
+calls, the effect is automatically adjusted whenever a visual change is applied to a unit. This is how
+decorations can have pitch, roll, matrix scale and negative height in LoP.
+
+    Hooks are managed by the FuncHooks library, not vJASS hooks.
+
+*/
 
 public function IsUnitValid takes unit whichUnit returns boolean
     return LoP_IsUnitDecoration(whichUnit)
     // return GetUnitTypeIdModel(GetUnitTypeId(whichUnit))
 endfunction
 
-struct UnitData extends array
+private struct UnitData extends array
 
     //! runtextmacro TableStruct_NewStructField("attachedEffect", "SpecialEffect")
     

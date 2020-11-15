@@ -1,4 +1,14 @@
 library SaveUnitExtras requires SaveNLoad, SaveIO, optional UserDefinedRects, optional LoPHeroicUnit, optional CustomizableAbilityList, optional MultiPatrol
+/*
+    Saves extra data from units which is not included in the main string.
+
+
+        -> Rect settings
+        -> Removeable abilities
+        -> Patrol Points
+        -> Waypoint destination
+        -> HeroicUnit state
+*/
 
 static if LIBRARY_UserDefinedRects then
     function Save_GetGUDRSaveString takes integer generatorId returns string

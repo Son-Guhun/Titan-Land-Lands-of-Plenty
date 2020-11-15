@@ -1,6 +1,23 @@
-// Missing Facing hook
+// Missing SetFacingEx hook
 library FuncHooks requires AttachedSFX, PathingMaps
+/*
+    This library defines the DefineHooks() textmacro. This textmacro can be called inside another
+library or in a scope to redefine all the natives handled by this library. Thus you can hook any code
+to a native call. These hooks will only work in libraries that run the DefineHooks() textmacro.
 
+    To define what the hooked functions will actually do, the FuncHooks_Definitions textmacro must
+be defined in another file. Functions that are not defined in that textmacro will not have any hooks
+attached. To see which functions can be hooked to, check the list in the source code below.
+    
+    If you need to call the original native, without running any hooks, from a scope or library in which
+DefineHooks is used, you can call the native prefixed by "Orgl". For example: "call OrglSetUnitX(u, 500.)".
+*/
+
+// ==========================
+// Source Code
+// ==========================
+
+// Define Orgl functions, which simply call the original natives. This is so they can be accessed even when hooks are used.
 //! runtextmacro FuncHooks("Orgl", "SetUnitX", "unit u, real x", "u,x")
 //! runtextmacro FuncHooks("Orgl", "SetUnitY", "unit u, real y", "u,y")
 //! runtextmacro FuncHooks("Orgl", "SetUnitPosition", "unit u, real x, real y", "u,x,y")
@@ -13,8 +30,10 @@ library FuncHooks requires AttachedSFX, PathingMaps
 //! runtextmacro FuncHooks("Orgl", "SetUnitColor", "unit u, playercolor c", "u,c")
 //! runtextmacro FuncHooks("Orgl", "SetUnitVertexColor", "unit u, integer r, integer g, integer b, integer a", "u,r,g,b,a")
 
+// Redefine all the native functions, using definitions from FuncHooks_Definitions
 //! runtextmacro optional FuncHooks_Definitions()
 
+// Create Hkd functions, which will be called by libraries and scopes which run the DefineHooks textmacro.
 //! runtextmacro FuncHooks("Hkd", "SetUnitX", "unit u, real x", "u,x")
 //! runtextmacro FuncHooks("Hkd", "SetUnitY", "unit u, real y", "u,y")
 //! runtextmacro FuncHooks("Hkd", "SetUnitPosition", "unit u, real x, real y", "u,x,y")
@@ -35,6 +54,7 @@ endlibrary
     endfunction
 //! endtextmacro
 
+// This textmacro must be ran in libraries that which to use the hooks.
 //! textmacro DefineHooks
 private function SetUnitX takes unit u, real x returns nothing
     call HkdSetUnitX(u, x)

@@ -1,4 +1,15 @@
 library SaveTerrain requires SaveNLoad, SaveIO, SaveNLoadProgressBars, LoPWarn
+/*
+    Defines the SaveTerrain function:
+    
+        function SaveTerrain takes SaveData saveData, rect rectangle returns nothing
+        
+    This function is used for saving terrain. When it is called, the rect's dimensions are saved
+in memory. Every 0.5 seconds, tiles from this rect are saved (starting from the bottomleft corner)
+until the entire rect has been traversed. If this function is called while saving is in progress
+or the owner of saveData, then saving is cancelled and the player is warned.
+
+*/
 
 //! textmacro SaveXYMethodTerrain takes name
     method operator $name$ takes nothing returns real
@@ -26,7 +37,7 @@ private struct PlayerData extends array
     //! runtextmacro SaveXYMethodTerrain("curY")
 endstruct
 
-function SaveTiles takes PlayerData playerId returns boolean
+private function SaveTiles takes PlayerData playerId returns boolean
     local real curX = playerId.curX
     local real curY = playerId.curY
     local integer i
@@ -43,7 +54,7 @@ function SaveTiles takes PlayerData playerId returns boolean
         set i = 0
         
         loop
-        exitwhen i >= 30 // 30 tiles per single string (avoid desync)
+        exitwhen i >= 30 // 30 tiles per single string (avoid desync). If we were not saving height data, we could double this value.
             
             set saveStr = saveStr + LoadD2H(TerrainTools_GetTextureId(GetTerrainType(curX, curY)))/*
                                 */+ LoadD2H(GetTerrainVariance(curX, curY))
@@ -74,49 +85,6 @@ function SaveTiles takes PlayerData playerId returns boolean
         
     return false
 endfunction
-
-/*
-function SaveTiles takes PlayerData playerId returns boolean
-    local real curX = playerId.curX
-    local real curY = playerId.curY
-    local integer i
-    local string saveStr
-    local real maxX = playerId.maxX
-    local real maxY = playerId.maxY
-    local integer j = 0
-    local SaveData saveData = playerId.saveData
-
-    loop
-    exitwhen j >= 25 /* avoid OP limit */ or curY > maxY  
-        set saveStr = "@"
-        set i = 0
-        
-        loop
-        exitwhen i >= 60 // 60 tiles per single string (avoid desync)
-            
-            set saveStr = saveStr + LoadD2H(TerrainTools_GetTextureId(GetTerrainType(curX, curY)))/*
-                                */+ LoadD2H(GetTerrainVariance(curX, curY))
-            
-            set i = i+1
-            if curX > maxX then
-                set curY = curY + 128
-                set curX = playerId.minX
-                exitwhen curY > maxY
-            else
-                set curX = curX + 128
-            endif
-        endloop
-        
-        call saveData.write(SaveNLoad_FormatString("SnL_ter", saveStr))
-        set j = j + 1
-    endloop
-
-    set playerId.curX = curX
-    set playerId.curY = curY
-        
-    return false
-endfunction
-*/
 
 private function onTimer takes nothing returns nothing
     local PlayerData playerId

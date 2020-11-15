@@ -3,6 +3,77 @@ library SaveIO requires TableStruct, GMUI, GLHS, Rawcode2String, PlayerUtils, op
 This library requires some trigger to be listening to SnL_IOsize sync data event in order to work.
 
 In the Save System folder, the RectSaveLoader library provides such a trigger.
+
+
+. This struct is used to save strings to a file.
+.
+struct SaveData:
+
+    Constants:
+            integer MAX_LINES
+            integer VERSION
+    
+    Fields:
+        integer current
+        integer linesWritten
+        string folder
+        player player
+        
+        real centerX
+        real centerY
+        real extentX
+        real extentY
+
+    Mehotds:
+    
+        boolean isRectSave()
+        
+        nothing write(string str)
+        
+        nothing destroy()  -> destroys this instance and flushes data to size.txt file.
+        
+        Constructors:
+            thistype create(player saver, string name)
+
+
+. This struct is used to read a file that has been saved using SaveData.
+.
+struct SaveLoader extends array
+
+    Fields:
+        integer version
+        real originalCenterX
+        real originalCenterY
+        
+        real centerX
+        real centerY
+        real extentX
+        real extentY
+        
+        boolean atOriginal
+        
+        integer current
+        integer totalFiles
+        string folder
+        player player
+
+    
+    Methods:
+        boolean isRectSave()
+        
+        . This method does not immediately read the file. It puts it in queue for reading.
+        . You can assume that calling this method will destroy the SaveLoader once all data has been synced.
+        .
+        nothing loadData()
+        
+        nothing destroy()
+        
+        
+        Constructors:
+            thistype create(player saver, string name, string data)
+    
+endstruct
+
 */
 
 private struct PlayerData extends array
@@ -42,19 +113,6 @@ private constant function VALIDATION_STR takes nothing returns string
     return "a"
 endfunction
 
-/*
-public constant function CONDITION_STR takes nothing returns string
-    return "b"
-endfunction
-*/
-
-// function Save_IsPlayerLoading takes integer playerId returns boolean
-//     return udg_save_load_boolean[playerId + 1 + bj_MAX_PLAYERS]
-// endfunction
-
-// function Save_SetPlayerLoading takes integer playerId, boolean flag returns nothing
-//    set udg_save_load_boolean[playerId + 1 + bj_MAX_PLAYERS] = flag
-// endfunction
 
 private module InitModule
     private static method onInit takes nothing returns nothing

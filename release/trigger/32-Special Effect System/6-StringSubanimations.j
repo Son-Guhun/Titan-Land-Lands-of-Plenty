@@ -1,4 +1,18 @@
 library StringSubanimations requires SpecialEffect, TableStruct
+/*
+    Converts strings (animation tags) to subanimation handles. Used to provide compatibility between
+the API for units and the API for effects.
+
+    . Unit API:
+    .     native AddUnitAnimationProperties            takes unit whichUnit, string animProperties, boolean add returns nothing
+    . 
+    . Effect API:
+    .     native BlzSpecialEffectClearSubAnimations    takes effect whichEffect returns nothing
+    .     native BlzSpecialEffectRemoveSubAnimation    takes effect whichEffect, subanimtype whichSubAnim returns nothing
+    .     native BlzSpecialEffectAddSubAnimation       takes effect whichEffect, subanimtype whichSubAnim returns nothing
+        
+    You can find a map from string to subanimation at the end of this library, inside the InitModule.
+*/
 
 private struct SubAnimString extends array
     //! runtextmacro TableStruct_NewPrimitiveField("subanimtypeId", "integer")

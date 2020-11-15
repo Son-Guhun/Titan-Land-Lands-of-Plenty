@@ -1,4 +1,15 @@
 library SaveDestructable requires SaveNLoad, SaveIO, GLHS, LoPWarn
+/*
+    Defines the SaveDestructables function:
+    
+        function SaveDestructables takes SaveData saveData, rect rectangle returns nothing
+        
+    This function is used for saving destructables. When it is called, all destructables inside the
+Rect are saved into a list. Every 0.5 seconds, 60 destructables in this list are saved, until the
+list is empty. If this function is called while saving is in progress for the owner of saveData, then
+saving is cancelled and the player is warned.
+
+*/
 
 private struct PlayerData extends array
     static key static_members_key

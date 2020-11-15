@@ -1,4 +1,8 @@
 library SaveNLoadProgressBars
+/*
+    A view-type library that defines the loading bars used when players are saving/loading.
+
+*/
 
 globals
     framehandle saveUnitBar
