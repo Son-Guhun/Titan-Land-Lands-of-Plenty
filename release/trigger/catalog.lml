@@ -34,6 +34,8 @@
         Disab
     '8-Stress Test 1': 'Stress Test 1'
         Disab
+    '9-Create Water': 'Create Water'
+        Disab
 '03-Main Systems': 'Main Systems'
 '04-LoP Core': 'LoP Core'
     01-LoPHeader: LoPHeader
@@ -255,64 +257,56 @@
     08-StringHashEx: StringHashEx
     09-Maths: Maths
     10-MathParser: MathParser
-    11-Modified: Modified
+    11-Matrices: Matrices
+    12-Modified: Modified
         Comment
-    '12-PlayerUtils Lite': 'PlayerUtils Lite'
-    '13-Timeline Lite': 'Timeline Lite'
-    '14-By Guhun': 'By Guhun'
+    '13-PlayerUtils Lite': 'PlayerUtils Lite'
+    '14-Timeline Lite': 'Timeline Lite'
+    '15-By Guhun': 'By Guhun'
         Comment
-    15-CutToComma: CutToComma
-    16-PlayerColorUtils: PlayerColorUtils
-    17-UnitVisualMods: UnitVisualMods
-    18-UnitVisualValues: UnitVisualValues
-    19-AnyBase: AnyBase
-    20-BitFlags: BitFlags
-    21-OOP: OOP
-    22-MoveSpeedBonus: MoveSpeedBonus
-    23-MultiBoard: MultiBoard
+    16-CutToComma: CutToComma
+    17-PlayerColorUtils: PlayerColorUtils
+    18-UnitVisualMods: UnitVisualMods
+    19-UnitVisualValues: UnitVisualValues
+    20-AnyBase: AnyBase
+    21-BitFlags: BitFlags
+    22-OOP: OOP
+    23-MoveSpeedBonus: MoveSpeedBonus
+    24-MultiBoard: MultiBoard
         Disab
-    24-GameTime: GameTime
+    25-GameTime: GameTime
         Disab
-    25-ArgumentStack: ArgumentStack
-    26-BoolExprEvaluator: BoolExprEvaluator
-    27-Map-specific: Map-specific
+    26-ArgumentStack: ArgumentStack
+    27-BoolExprEvaluator: BoolExprEvaluator
+    28-Map-specific: Map-specific
         Comment
-    28-NativeRedefinitions: NativeRedefinitions
-    29-UnitEvents: UnitEvents
-    30-CustomizableAbilityList: CustomizableAbilityList
-    '31-Move Speed Modification': 'Move Speed Modification'
+    29-NativeRedefinitions: NativeRedefinitions
+    30-UnitEvents: UnitEvents
+    31-CustomizableAbilityList: CustomizableAbilityList
     32-TransportUtils: TransportUtils
     '33-Under Construction': 'Under Construction'
         Comment
     '34-Camera System': 'Camera System'
         Disab
-    '35-Create Water': 'Create Water'
+    35-LockableStructs: LockableStructs
         Disab
-    36-UnitName: UnitName
-    37-LockableStructs: LockableStructs
+    36-Packets: Packets
         Disab
-    38-Packets: Packets
+    37-WorldBoundsUtils: WorldBoundsUtils
         Disab
-    39-WorldBoundsUtils: WorldBoundsUtils
-        Disab
-    40-Matrices: Matrices
-    41-PathingMaps: PathingMaps
-    42-DefaultPathingMaps: DefaultPathingMaps
-    43-InitializePathingsMapFromFiles: InitializePathingsMapFromFiles
-    44-GeneratedDecorationPathMaps: GeneratedDecorationPathMaps
 21-Map-specific: Map-specific
     1-Debug: Debug
-    2-ArrayAgent: ArrayAgent
-        Disab
-    3-DummyDmg: DummyDmg
-    4--------: -------
+    2-DummyDmg: DummyDmg
+    3--------: -------
         Comment
-    5-TimedBonus: TimedBonus
-    '6-Victim Tracker': 'Victim Tracker'
-        Disab
+    4-TimedBonus: TimedBonus
+    '5-Move Speed Modification': 'Move Speed Modification'
+    6-MountSystem: MountSystem
     '7-Under Construction': 'Under Construction'
         Comment
-    8-MountSystem: MountSystem
+    '8-Victim Tracker': 'Victim Tracker'
+        Disab
+    9-UnitName: UnitName
 22-External: External
 '23-Unit Event': 'Unit Event'
     '1-Unit Event Config': 'Unit Event Config'
@@ -551,3 +545,12 @@
 '50-Function Interfaces': 'Function Interfaces'
     1-FuncInterface: FuncInterface
     2-FuncInterfaceIntegerPlayerBoolean: FuncInterfaceIntegerPlayerBoolean
+'51-Pathing Maps': 'Pathing Maps'
+    1-PathingMaps: PathingMaps
+    2-DefaultPathingMaps: DefaultPathingMaps
+    '3-Generated Code': 'Generated Code'
+        Comment
+    4-GeneratedDecorationPathMaps: GeneratedDecorationPathMaps
+    '5-Do not click_ slows down editor': 'Do not click: slows down editor'
+        Comment
+    6-InitializePathingsMapFromFiles: InitializePathingsMapFromFiles
