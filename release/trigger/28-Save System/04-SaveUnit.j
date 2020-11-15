@@ -1,3 +1,6 @@
+// TO-DO: Instead of using InternalPlayerData to hold units and effects, instead define a new SaveData struct
+// that extends the default one and has fields to hold units and effects.
+
 library SaveUnit requires SaveNLoad, SaveIO, OOP, Maths, SaveNLoadProgressBars, optional SaveUnitExtras, LoPWarn
 /* 
 This library defines functionality to save a group of units and effects using SaveIO over time. Due
@@ -316,7 +319,6 @@ private function SaveNextUnits takes player filterPlayer returns boolean
                 call CalculateRectSave(playerId, saveData)
             endif
             call saveData.destroy()
-            // call playerId.effects.destroy()
             set playerId.saveData = 0
         else
             set playerId.savedCount = playerId.savedCount + 1
@@ -349,10 +351,6 @@ endfunction
 
 function SaveUnits takes SaveData saveData returns nothing
     local InternalPlayerData playerId = GetPlayerId(saveData.player)
-    
-    if not InternalPlayerData.isInitialized() then  // avoid creating an extra function
-        set InternalPlayerData.playerQueue = LinkedHashSet.create()
-    endif
 
     set playerId.savedCount = 0
     set playerId.isSaving = true
@@ -381,6 +379,17 @@ endfunction
 
 //===========================================================================
 function InitTrig_SaveUnit takes nothing returns nothing
+    local PlayerData playerId = 0
+
     call TimerStart(CreateTimer(), 0.5, true, function SaveLoopActions)
+    
+    set InternalPlayerData.playerQueue = LinkedHashSet.create()
+    loop
+    exitwhen playerId == bj_MAX_PLAYER_SLOTS
+        if GetPlayerController(Player(playerId)) == MAP_CONTROL_USER then
+            set playerId.effects = LinkedHashSet.create()
+        endif
+        set playerId = playerId + 1
+    endloop
 endfunction
 endlibrary

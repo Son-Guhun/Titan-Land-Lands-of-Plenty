@@ -1,6 +1,15 @@
 library DecorationSFX requires SpecialEffect, TableStruct, OOP
-
+/*/////////////////////////////////////////////////////////////
+// Description
 ///////////////////////////////////////////////////////////////
+
+    This library defines the DecorationEffect struct, which extends SpecialEffect. This struct represents
+an effect handle, just like the superclass. However, these effects can be enumerated based on their position.
+They are also owned by players. So, for example, you could enumerate all units within range of a certain
+point that belong to a player. This is how unselectable decorations are handled in LoP.
+
+
+*//////////////////////////////////////////////////////////////
 // Configuration
 ///////////////////////////////////////////////////////////////
 
@@ -51,12 +60,19 @@ struct LinkedHashSet_DecorationEffect extends array
 // Enumeration functions
 
 // The Sets returned by these fucntions are not meant to persist, they are meant solely for iteration.
-// DecorationEffects are not reference-counted, and they may be replaced by other effects after removed.
+// DecorationEffects are not reference-counted, and they may be replaced by other effects after being removed.
 function EnumDecorationsOfPlayer takes player whichPlayer returns LinkedHashSet
 function EnumDecorationsInRect takes real minX, real minY, real maxX, real maxY returns LinkedHashSet_DecorationEffect
 function EnumDecorationsOfPlayerInRect takes player whichPlayer, real minX, real minY, real maxX, real maxY returns LinkedHashSet_DecorationEffect
 function EnumDecorationsInRange takes real centerX, real centerY, real radius returns LinkedHashSet_DecorationEffect
 function EnumDecorationsOfPlayerInRange takes player whichPlayer, real centerX, real centerY, real radius returns LinkedHashSet_DecorationEffect
+
+// These functions manipulate an existing set, instead of creating a new one. They return the given set.
+function EnumDecorationsOfPlayerEx takes LinkedHashSet result, player whichPlayer returns LinkedHashSet
+function EnumDecorationsInRectEx takes LinkedHashSet result, real minX, real minY, real maxX, real maxY returns LinkedHashSet_DecorationEffect
+function EnumDecorationsOfPlayerInRectEx takes LinkedHashSet result, player whichPlayer, real minX, real minY, real maxX, real maxY returns LinkedHashSet_DecorationEffect
+function EnumDecorationsInRangeEx takes LinkedHashSet result, real centerX, real centerY, real radius returns LinkedHashSet_DecorationEffect
+function EnumDecorationsOfPlayerInRangeEx takes LinkedHashSet result, player whichPlayer, real centerX, real centerY, real radius returns LinkedHashSet_DecorationEffect
 
 '                                         Source Code                                              '
 //! endnovjass
@@ -218,13 +234,12 @@ struct DecorationEffect extends array
         return this
     endmethod
     
-    static method enumDecorationsOfPlayer takes player whichPlayer returns LinkedHashSet
+    static method enumDecorationsOfPlayerEx takes LinkedHashSet result, player whichPlayer returns LinkedHashSet
         local integer lastId = DecorationEffectBlock.get(WorldBounds.maxX, WorldBounds.maxY)
         local integer i = 0
         local LinkedHashSet decorations
         local DecorationEffect decoration
-        local LinkedHashSet result = LinkedHashSet.create()
-        
+
         loop
         exitwhen i > lastId
             set decorations = DecorationEffectBlock(i).effects
@@ -242,8 +257,12 @@ struct DecorationEffect extends array
 
             set i = i + 1
         endloop
-        
-        return result
+
+        return result   
+    endmethod
+    
+    static method enumDecorationsOfPlayer takes player whichPlayer returns LinkedHashSet
+        return enumDecorationsOfPlayerEx(LinkedHashSet.create(), whichPlayer)
     endmethod
     
     static method updateColorsForPlayer takes player whichPlayer returns nothing
@@ -298,12 +317,11 @@ public function ResetHeightsInBlock takes integer block returns nothing
     endif
 endfunction
 
-function EnumDecorationsInRect takes real minX, real minY, real maxX, real maxY returns LinkedHashSet_DecorationEffect
+function EnumDecorationsInRectEx takes LinkedHashSet result, real minX, real minY, real maxX, real maxY returns LinkedHashSet_DecorationEffect
     //! runtextmacro TilesInRectLoopDeclare("block", "BLOCK_SIZE", "minX", "minY", "maxX", "maxY")
     local LinkedHashSet decorations
     local DecorationEffect decoration
-    
-    local LinkedHashSet result = LinkedHashSet.create()
+
     local effect e
     
     loop   
@@ -324,12 +342,15 @@ function EnumDecorationsInRect takes real minX, real minY, real maxX, real maxY 
     return result
 endfunction
 
-function EnumDecorationsOfPlayerInRect takes player whichPlayer, real minX, real minY, real maxX, real maxY returns LinkedHashSet_DecorationEffect
+function EnumDecorationsInRect takes real minX, real minY, real maxX, real maxY returns LinkedHashSet_DecorationEffect
+    return EnumDecorationsInRectEx(LinkedHashSet.create(), minX, minY, maxX, maxY)
+endfunction
+
+function EnumDecorationsOfPlayerInRectEx takes LinkedHashSet result, player whichPlayer, real minX, real minY, real maxX, real maxY returns LinkedHashSet_DecorationEffect
     //! runtextmacro TilesInRectLoopDeclare("block", "BLOCK_SIZE", "minX", "minY", "maxX", "maxY")
     local LinkedHashSet decorations
     local DecorationEffect decoration
     
-    local LinkedHashSet result = LinkedHashSet.create()
     local effect e
     
     loop
@@ -347,7 +368,11 @@ function EnumDecorationsOfPlayerInRect takes player whichPlayer, real minX, real
         //! runtextmacro TilesInRectLoop("block", "BLOCK_SIZE")
     endloop
     
-    return result
+    return result    
+endfunction
+
+function EnumDecorationsOfPlayerInRect takes player whichPlayer, real minX, real minY, real maxX, real maxY returns LinkedHashSet_DecorationEffect
+    return EnumDecorationsOfPlayerInRectEx(LinkedHashSet.create(), whichPlayer, minX, minY, maxX, maxY)
 endfunction
 
 // This function should inline
@@ -360,13 +385,12 @@ private function Distance takes real x, real x0, real y, real y0 returns real
     return SquareRoot(DistanceSquared(x,x0,y,y0))
 endfunction
 
-function EnumDecorationsInRange takes real centerX, real centerY, real radius returns LinkedHashSet_DecorationEffect
+function EnumDecorationsInRangeEx takes LinkedHashSet result, real centerX, real centerY, real radius returns LinkedHashSet_DecorationEffect
     //! runtextmacro TilesInRectLoopDeclare("block", "BLOCK_SIZE", "centerX - radius", "centerY - radius", "centerX + radius", "centerY + radius")
 
     local LinkedHashSet decorations
     local DecorationEffect decoration
     
-    local LinkedHashSet result = LinkedHashSet.create()
     local effect e
     
     loop
@@ -387,13 +411,16 @@ function EnumDecorationsInRange takes real centerX, real centerY, real radius re
     return result
 endfunction
 
-function EnumDecorationsOfPlayerInRange takes player whichPlayer, real centerX, real centerY, real radius returns LinkedHashSet_DecorationEffect
+function EnumDecorationsInRange takes real centerX, real centerY, real radius returns LinkedHashSet_DecorationEffect
+    return EnumDecorationsInRangeEx(LinkedHashSet.create(), centerX, centerY, radius)
+endfunction
+
+function EnumDecorationsOfPlayerInRangeEx takes LinkedHashSet result, player whichPlayer, real centerX, real centerY, real radius returns LinkedHashSet_DecorationEffect
     //! runtextmacro TilesInRectLoopDeclare("block", "BLOCK_SIZE", "centerX - radius", "centerY - radius", "centerX + radius", "centerY + radius")
     
     local LinkedHashSet decorations
     local DecorationEffect decoration
-    
-    local LinkedHashSet result = LinkedHashSet.create()
+
     local effect e
     
     loop
@@ -412,6 +439,14 @@ function EnumDecorationsOfPlayerInRange takes player whichPlayer, real centerX, 
     endloop
     
     return result
+endfunction    
+    
+function EnumDecorationsOfPlayerInRange takes player whichPlayer, real centerX, real centerY, real radius returns LinkedHashSet_DecorationEffect
+    return EnumDecorationsOfPlayerInRangeEx(LinkedHashSet.create(), whichPlayer, centerX, centerY, radius)
+endfunction
+
+function EnumDecorationsOfPlayerEx takes LinkedHashSet result, player whichPlayer returns LinkedHashSet_DecorationEffect
+    return DecorationEffect.enumDecorationsOfPlayerEx(result, whichPlayer)
 endfunction
 
 function EnumDecorationsOfPlayer takes player whichPlayer returns LinkedHashSet_DecorationEffect
