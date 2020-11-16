@@ -28,11 +28,11 @@ function Trig_LoadUnitNew_Actions takes nothing returns nothing
 endfunction
 
 //===========================================================================
-function InitTrig_LoadUnit takes nothing returns nothing
-    set gg_trg_LoadUnit = CreateTrigger(  )
-    //call DisableTrigger( gg_trg_LoadUnit )
-    call TriggerAddAction( gg_trg_LoadUnit, function Trig_LoadUnitNew_Actions )
-    call TriggerRegisterAnyPlayerSyncEvent( gg_trg_LoadUnit, "SnL_unit", false)
+function InitTrig_SyncUnit takes nothing returns nothing
+    set gg_trg_SyncUnit = CreateTrigger(  )
+    //call DisableTrigger( gg_trg_SyncUnit )
+    call TriggerAddAction( gg_trg_SyncUnit, function Trig_LoadUnitNew_Actions )
+    call TriggerRegisterAnyPlayerSyncEvent( gg_trg_SyncUnit, "SnL_unit", false)
     
     // Cosmosis and Angel of Creation
     call SaveNLoad_ForbidUnitType('H00V')

@@ -26,9 +26,9 @@ endfunction
 
 
 //===========================================================================
-function InitTrig_LoadTerrain takes nothing returns nothing
-    set gg_trg_LoadTerrain = CreateTrigger(  )
-    call TriggerAddAction( gg_trg_LoadTerrain, function Trig_LoadTerrainNew_Actions )
-    call TriggerRegisterAnyPlayerSyncEvent( gg_trg_LoadTerrain, "SnL_ter", false)
+function InitTrig_SyncTerrain takes nothing returns nothing
+    set gg_trg_SyncTerrain = CreateTrigger(  )
+    call TriggerAddAction( gg_trg_SyncTerrain, function Trig_LoadTerrainNew_Actions )
+    call TriggerRegisterAnyPlayerSyncEvent( gg_trg_SyncTerrain, "SnL_ter", false)
 endfunction
 

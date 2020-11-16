@@ -340,13 +340,13 @@
 '28-Save System': 'Save System'
     '01-SaveLoad Commands': 'SaveLoad Commands'
     '02-SaveLoad Set Center Numbers': 'SaveLoad Set Center Numbers'
-    03-Save: Save
+    03-Saving: Saving
         Comment
     04-SaveUnit: SaveUnit
     05-SaveUnitExtras: SaveUnitExtras
     06-SaveDestructable: SaveDestructable
     07-SaveTerrain: SaveTerrain
-    08-Load: Load
+    08-Loading: Loading
         Comment
     09-SaveNLoad: SaveNLoad
     '10-SaveNLoad Unit': 'SaveNLoad Unit'
@@ -358,12 +358,12 @@
     '15-Sync Listeners': 'Sync Listeners'
         Comment
     16-RectSaveLoader: RectSaveLoader
-    17-LoadUnit: LoadUnit
+    17-SyncUnit: SyncUnit
         Closed
-    '18-LoadUnit Extra': 'LoadUnit Extra'
+    '18-SyncUnit Extra': 'SyncUnit Extra'
         Closed
-    19-LoadDestructable: LoadDestructable
-    20-LoadTerrain: LoadTerrain
+    19-SyncDestructable: SyncDestructable
+    20-SyncTerrain: SyncTerrain
     21----------------------------: ---------------------------
         Comment
     22-SaveMain: SaveMain
