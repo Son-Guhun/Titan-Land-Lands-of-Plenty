@@ -346,27 +346,25 @@
     05-SaveUnitExtras: SaveUnitExtras
     06-SaveDestructable: SaveDestructable
     07-SaveTerrain: SaveTerrain
-    08-Loading: Loading
+    08-SaveMain: SaveMain
+    09-Loading: Loading
         Comment
-    09-SaveNLoad: SaveNLoad
-    '10-SaveNLoad Unit': 'SaveNLoad Unit'
-    '11-SaveNLoad Terrain': 'SaveNLoad Terrain'
-    12-IO_UI: IO/UI
+    10-SaveNLoad: SaveNLoad
+    '11-SaveNLoad Unit': 'SaveNLoad Unit'
+    '12-SaveNLoad Terrain': 'SaveNLoad Terrain'
+    13-IO_UI: IO/UI
         Comment
-    13-SaveIO: SaveIO
-    '14-SaveNLoad ProgressBars': 'SaveNLoad ProgressBars'
-    '15-Sync Listeners': 'Sync Listeners'
+    14-SaveIO: SaveIO
+    '15-SaveNLoad ProgressBars': 'SaveNLoad ProgressBars'
+    '16-Sync Listeners': 'Sync Listeners'
         Comment
-    16-RectSaveLoader: RectSaveLoader
-    17-SyncUnit: SyncUnit
+    17-RectSaveLoader: RectSaveLoader
+    18-SyncUnit: SyncUnit
         Closed
-    '18-SyncUnit Extra': 'SyncUnit Extra'
+    '19-SyncUnit Extra': 'SyncUnit Extra'
         Closed
-    19-SyncDestructable: SyncDestructable
-    20-SyncTerrain: SyncTerrain
-    21----------------------------: ---------------------------
-        Comment
-    22-SaveMain: SaveMain
+    20-SyncDestructable: SyncDestructable
+    21-SyncTerrain: SyncTerrain
 '29-Circle Object System': 'Circle Object System'
     '1-GCOS Init Copy': 'GCOS Init Copy'
     '2-Circle Object System': 'Circle Object System'
