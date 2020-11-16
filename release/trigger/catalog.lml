@@ -166,7 +166,7 @@
     '55-Commands Compat': 'Commands Compat'
     56-Hotkeys: Hotkeys
         Comment
-    '57-Hotkey Fullscreen': 'Hotkey Fullscreen'
+    '57-Commands Fullscreen': 'Commands Fullscreen'
     '58-Hotkey Move Units': 'Hotkey Move Units'
     59-LoPHotkeys: LoPHotkeys
     60----------------------------: ---------------------------

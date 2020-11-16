@@ -1,5 +1,35 @@
 library LoPHotkeys initializer Init requires LoPCommands, ConstTable
+/*
+========
+Description
+========
 
+    This library provides a simple way to map hotkeys to the execution of a command + arguments.
+    
+========
+Cofiguration
+========
+*/
+//! textmacro LoPHotkeys_Mappings
+    call Register(MetaKeys.SHIFT, OSKeys.U, "-select no")
+    call Register(MetaKeys.SHIFT, OSKeys.BACKSPACE, "-remove")
+    call Register(MetaKeys.SHIFT, OSKeys.C, "-collision off")
+    
+    
+    call Register(MetaKeys.SHIFT+MetaKeys.CTRL, OSKeys.C, "-collision on")
+    
+    
+    call Register(MetaKeys.ALT, OSKeys.R, "-rect mouse")
+    call Register(MetaKeys.ALT, OSKeys.W, "-start mouse")
+    call Register(MetaKeys.ALT, OSKeys.Q, "-controller mouse")
+    call Register(MetaKeys.ALT, OSKeys.Z, "-fullscreen")
+//! endtextmacro
+// ========================
+// Source Code
+// ========================
+
+// G.table is a HashTable => G.table[metaKey] is a table mapping all OSKeys to strings, which are commands.
+// G.table[MetaKeys.ALT].string[OSKeys.Q] is equal to the string that will be executed as a command when Alt+Q is pressed.
 private struct G extends array
 
     private static key hashTable
@@ -29,19 +59,7 @@ endfunction
 private function Init takes nothing returns nothing
     call OSKeys.addListener(Condition(function onKey))
     
-    call Register(MetaKeys.SHIFT, OSKeys.U, "-select no")
-    call Register(MetaKeys.SHIFT, OSKeys.BACKSPACE, "-remove")
-    call Register(MetaKeys.SHIFT, OSKeys.C, "-collision off")
-    
-    
-    call Register(MetaKeys.SHIFT+MetaKeys.CTRL, OSKeys.C, "-collision on")
-    
-    
-    call Register(MetaKeys.ALT, OSKeys.R, "-rect mouse")
-    call Register(MetaKeys.ALT, OSKeys.W, "-start mouse")
-    call Register(MetaKeys.ALT, OSKeys.Q, "-controller mouse")
-    
-    
+    //! runtextmacro LoPHotkeys_Mappings()
 endfunction
 
 
