@@ -1,4 +1,4 @@
-library RectSaveLoader initializer Init requires SaveIO, RectGenerator
+library RectSaveLoader initializer Init requires SaveIO, RectGenerator, LoPWarn
 /*
 This library defines a listener for the SnL_IOsize sync event, which is fired by SaveIO and is 
 required to load saves.
@@ -35,7 +35,7 @@ public function onReceiveSize takes nothing returns nothing
     local SaveLoader saveData
     
     if syncData == "end" then
-        call DisplayTextToPlayer(GetTriggerPlayer(), 0., 0., "Finished loading!")
+        call LoP_WarnPlayer(GetTriggerPlayer(), LoPChannels.SYSTEM, "Finished loading!")
         set saveData = SaveIO_GetCurrentlyLoadingSave(GetTriggerPlayer())
         call saveData.destroy()
         return
@@ -45,6 +45,12 @@ public function onReceiveSize takes nothing returns nothing
     endif
     
     set saveData = SaveLoader.create(GetTriggerPlayer(), nextSave[GetPlayerId(GetTriggerPlayer())], syncData)
+    
+    if saveData.version > SaveWriter.VERSION then
+        call LoP_WarnPlayer(GetTriggerPlayer(), LoPChannels.ERROR, "You are attempting to load a save which was saved with a newer version of the map and is not compatible with this version.")
+        call saveData.destroy()
+        return
+    endif
     
     if not saveData.atOriginal then
         set generator = CreateUnit(GetTriggerPlayer(), RectGenerator_GENERATOR_ID, saveData.centerX, saveData.centerY, 270.)
