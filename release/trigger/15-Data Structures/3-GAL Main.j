@@ -41,9 +41,8 @@ library GALgroup
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 // Configurables
 /////////////////////////////////////////
-globals
-    public constant boolean ENABLE_GUI = false
-endglobals
+
+
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 // System Source (DO NOT TOUCH ANYTHING BELOW THIS LINE)
 /////////////////////////////////////////
@@ -244,30 +243,4 @@ endlibrary
 endlibrary
 //! runtextmacro GAL_Generate_List("false","integer","Integer","Integer","0")
 ////////////////////////////////////////////////////////////////////////////////////////////////////
-
-static if GAL_ENABLE_GUI then
-    function Trig_GAL_Main_Actions takes nothing returns nothing
-        if udg_Lists_ListID <= 0 then
-            set udg_Lists_ListID = ArrayList.create()
-        else
-            call ArrayList(udg_Lists_ListID).destroy()
-        endif
-    endfunction
-
-    function Trig_GAL_Main_Conditions takes nothing returns boolean
-        if udg_Lists_Index < 0 then
-            set udg_Lists_Index = ArrayList(udg_Lists_ListID).append(udg_Lists_Data)
-        else
-            call ArrayList(udg_Lists_ListID).delete(udg_Lists_Index)
-        endif
-        return false
-    endfunction
-    //===========================================================================
-    function InitTrig_GAL_Main takes nothing returns nothing
-        set gg_trg_GAL_Main = CreateTrigger(  )
-        call TriggerAddAction( gg_trg_GAL_Main, function Trig_GAL_Main_Actions )
-        call TriggerAddCondition( gg_trg_GAL_Main, Condition(function Trig_GAL_Main_Conditions))
-    endfunction
-endif
-
 

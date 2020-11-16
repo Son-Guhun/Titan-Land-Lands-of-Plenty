@@ -1,12 +1,60 @@
 ////////////////////////////////////////////////////////////////////////////////////////////////////
-//Guhun's MUI Engine version 3.0.0
+// Guhun's MUI Engine version 3.0.0
 library GMUI
+/*
+    GMUI is a library that provides hashtable-based allocation for structs. The advantage of using
+hashtables is that, with only a few functions and a global, allocation can be provided for any arbitrary
+number of structs.
+
+    Recycle Keys:
+        Whenver creating a new ID with GMUI, or recycling an ID, one must pass a recycle key. A recycle
+    key is basically a unique ID pool. For example, if I generate an ID for recycle key X, I cannot
+    generate that same ID for X until I recycle it. However, if I use a different recycle key Y, then
+    a call to GMUI_GetIndex may return ID, as it is unused for Y.
+    
+    Generic Recycle Key:
+        For Hashtable indexing, which can handle up to 2^31 - 1 instances, you will realistically only
+    ever need 1 recycle key. Therefore the system provides a constant GENERIC_KEY which can be used
+    for any purpose in which you won't need a unique recycle key. Using this generic key is not
+    recommended if you intend to use the generated IDs as array indices, as those are limited to 2^15
+    instances.
+
+===========
+Documentation
+===========
+
+Functions:
+
+    integer GMUI_GetIndex(integer recycleKey)  -> Gets a new unique ID from the given recycle key.
+    nothing GMUI_RecycleIndex(integer recycleKey, integer instance)  -> Recycles an ID for the given recycle key.
+
+Modules:
+    GMUIAllocatorMethods  -> defines allocate() and deallocate() using GMUI_GetIndex and GMUI_RecycleIndex.
+    .
+    . To use this module, the struct must define a static method called RECYCLE_KEY() that returns an integer.
+    
+    . These modules should be called inside the create/destroy methods. They inline the GMUI functions and set/recycle 'this'.
+    . They also use the type's RECYCLE_KEY() static method.
+    .
+    . GMUI_allocate_this
+    . GMUI_deallocate_this
+    
+    
+    GMUINewRecycleKey  -> Defines RECYCLE_KEY() as a new recycle key, for use with the modules above.
+    GMUIUseGenericKey  -> Defines RECYCLE_KEY() as the generic recycle key, for use with the modules above.
+    
+    
+Macros:
+    GMUI_GetIndex(var_name,recycle_key)  -> inlines GMUI_GetIndex
+    
+    GMUI_RecycleIndex(var_name,recycle_key)  -> inlines GMUI_RecycleIndex
+
+*/
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 
 globals
 
     public constant integer GENERIC_KEY = 0
-    public constant boolean ENABLE_GUI = false
     public hashtable hashTable = InitHashtable()
 endglobals
 
@@ -116,91 +164,5 @@ module GMUI_deallocate_this
     //! runtextmacro GMUI_RecycleIndex("this","thistype.RECYCLE_KEY()")
 endmodule
 
-//
 
-// When creating a new Recycle Key, you must call this function.
-public function InitializeRecycleKey takes integer newKey returns nothing
-        call SaveInteger(hashTable, newKey, 0, 1)
-endfunction
-
-// ==================
-// GUI Recycle Key Generation
-// ==================
-static if ENABLE_GUI then
-    globals
-        public boolexpr array Init_Funcs
-        public integer Init_Funcs_Size = 0
-    endglobals
-endif
-
-// Textmacro that allows GUI users to more easily create constant Recycle Keys.
-//! textmacro GMUI_GUI_CreateRecycleKey takes GLOBAL
-// If GUI is not enabled, $GLOBAL$ will just be zero, which is GENERIC_RECYCLE_KEY, unless user 
-// specifies a value in the Variable Editor (which is unlikely).
-static if GMUI_ENABLE_GUI then
-    globals
-        constant key $GLOBAL$_RECYCLE_KEY
-    endglobals
-
-    // After GUI initializes user-defined globals (after vJass init), we must set our desired value again.
-    function Init_$GLOBAL$func takes nothing returns boolean
-        set udg_$GLOBAL$ = $GLOBAL$_RECYCLE_KEY
-        return false
-    endfunction
-
-    module $GLOBAL$mod_    
-        private static method onInit takes nothing returns nothing
-            call GMUI_InitializeRecycleKey($GLOBAL$_RECYCLE_KEY)
-            set udg_$GLOBAL$ = $GLOBAL$_RECYCLE_KEY
-            set GMUI_Init_Funcs[GMUI_Init_Funcs_Size] = Filter(function Init_$GLOBAL$func)
-            set GMUI_Init_Funcs_Size = GMUI_Init_Funcs_Size + 1
-        endmethod
-    endmodule
-    struct $GLOBAL$stct extends array
-        implement $GLOBAL$mod_
-    endstruct
-endif
-//! endtextmacro
-// ==================
-
-////////////////////////////////////////////////////////////////////////////////////////////////////
-//End of MUI Engine
 endlibrary
-////////////////////////////////////////////////////////////////////////////////////////////////////
-
-static if GMUI_ENABLE_GUI then
-
-
-    function Trig_GMUI_Main_Conditions takes nothing returns boolean
-        if udg_GMUI_Index == 0 then
-            set udg_GMUI_Index =  GMUI_GetIndex(GMUI_GENERIC_KEY)
-        else
-            call GMUI_RecycleIndex(GMUI_GENERIC_KEY, udg_GMUI_Index)
-        endif
-        return false
-    endfunction
-        
-    function Trig_GMUI_Main_Actions takes nothing returns nothing
-        if not HaveSavedInteger(GMUI_hashTable, udg_GMUI_RecycleKey, 0) then
-            call GMUI_InitializeRecycleKey(udg_GMUI_RecycleKey)
-        endif
-    endfunction
-
-
-    //===========================================================================
-    function InitTrig_GMUI_Main takes nothing returns nothing
-        local integer i = 0
-        set gg_trg_GMUI_Main = CreateTrigger()
-        
-        loop
-        exitwhen i >= GMUI_Init_Funcs_Size
-            call ForceEnumPlayers(bj_FORCE_PLAYER[0], GMUI_Init_Funcs[i])
-            call DestroyBoolExpr(GMUI_Init_Funcs[i])
-            set GMUI_Init_Funcs[i] = null
-            set i = i+1
-        endloop
-        
-        call TriggerAddCondition(gg_trg_GMUI_Main, Condition(function Trig_GMUI_Main_Conditions))
-    endfunction
-endif
-

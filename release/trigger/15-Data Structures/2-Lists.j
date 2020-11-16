@@ -6,36 +6,18 @@ library_once Lists requires GMUI
 
 globals
     public constant key RECYCLE_KEY
-    public constant boolean ENABLE_GUI = false
 endglobals
 
-static if not ENABLE_GUI then
-    globals
-        private hashtable hashTable = InitHashtable()
-    endglobals
-endif
+globals
+    private hashtable hashTable = InitHashtable()
+endglobals
 
 public function GetHashtable takes nothing returns hashtable
-    static if not ENALBE_GUI then
-        return hashTable
-    else
-        return udg_Lists_Hashtable
-    endif
+    return hashTable
 endfunction
 
 //==============
 //System Initialization
-
-static if ENALBE_GUI then
-private module InitModule
-    private static method onInit takes nothing returns nothing
-        set udg_Lists_Hashtable = InitHashtable()
-    endmethod
-endmodule
-private struct InitStruct extends array
-    implement InitModule
-endstruct
-endif
 
 //==============
 //For Each methods

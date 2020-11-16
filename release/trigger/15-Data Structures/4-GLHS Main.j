@@ -43,9 +43,8 @@ struct LinkedHashSet extends array
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 // Configurables
 /////////////////////////////////////////
-globals
-    public constant boolean ENABLE_GUI = false
-endglobals
+
+
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 // System Source (DO NOT TOUCH ANYTHING BELOW THIS LINE)
 /////////////////////////////////////////
@@ -200,23 +199,8 @@ struct LinkedHashSet extends array
         return Lists_RECYCLE_KEY
     endmethod
     
-    static if not ENABLE_GUI then
-        private static integer enumElement = 0
-        private static LinkedHashSet enumSet = 0
-    else
-        private static method operator enumElement takes nothing returns integer
-            return udg_Lists_Data
-        endmethod
-        private static method operator enumElement= takes integer element returns nothing
-            set udg_Lists_Data = element
-        endmethod
-        private static method operator enumSet takes nothing returns LinkedHashSet
-            return udg_Lists_ListID
-        endmethod
-        private static method operator enumSet= takes integer element returns nothing
-            set udg_Lists_ListID = element
-        endmethod
-    endif
+    private static integer enumElement = 0
+    private static LinkedHashSet enumSet = 0
     
     static method getEnumSet takes nothing returns LinkedHashSet
         return thistype.enumSet
@@ -450,33 +434,7 @@ struct LinkedHashSet extends array
     endmethod
     
 endstruct
-////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+
 endlibrary
-//End of Ordered Sets
-////////////////////////////////////////////////////////////////////////////////////////////////////
-
-static if GLHS_ENABLE_GUI then
-    function Trig_GLL_Main_Actions takes nothing returns nothing
-        if enumSet == 0 then
-            set enumSet = LinkedHashSet.create()
-        else
-            call LinkedHashSet(enumSet).destroy()
-        endif
-    endfunction
-
-    function Trig_GLL_Main_Conditions takes nothing returns boolean
-        if HaveSavedInteger(Lists_GetHashtable(), enumSet, enumElement)  then //Faster than GLL_ListHasData function
-            call LinkedHashSet(enumSet).remove(enumElement)
-        else
-            call LinkedHashSet(enumSet).addBefore(udg_Lists_Index, enumElement)
-        endif
-        return false
-    endfunction
-    //===========================================================================
-    function InitTrig_GLHS_Main takes nothing returns nothing
-        set gg_trg_GLHS_Main = CreateTrigger(  )
-        call TriggerAddAction( gg_trg_GLHS_Main, function Trig_GLL_Main_Actions )
-        call TriggerAddCondition( gg_trg_GLHS_Main, Condition(function Trig_GLL_Main_Conditions))
-    endfunction
-endif
-

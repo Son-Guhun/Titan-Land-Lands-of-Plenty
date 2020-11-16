@@ -1,14 +1,38 @@
 scope HotkeyMoveUnits
+/*
+========
+Description
+========
 
-//! runtextmacro DefineHooks()
+    Scripts the teleporation of units when a player releases a mouse button while holding a certain
+metakey combination. The button and key combination can be configured below.
 
+    Creates a trigger at map initialization and sets it as the response to EVENT_PLAYER_MOUSE_UP of
+the default ControlState.
+
+========
+Cofiguration
+========
+*/
 private struct Config extends array
 
     static constant method operator METAKEY takes nothing returns integer
         return MetaKeys.CTRL + MetaKeys.SHIFT  // Use control because Alt would ping and Shift is used for queuing actions.
     endmethod
-
+    
+    static constant method operator MOUSE_BUTTON takes nothing returns mousebuttontype
+        return MOUSE_BUTTON_TYPE_LEFT
+    endmethod
+    
 endstruct
+
+// ========================
+// Source Code
+// ========================
+
+
+// We need to use FuncHooks since units will be moved around.
+//! runtextmacro DefineHooks()
 
 private function onMousePress takes nothing returns boolean
     local player trigP = GetTriggerPlayer()
@@ -23,7 +47,7 @@ private function onMousePress takes nothing returns boolean
     if PlayerMouseEvent_GetTriggerPlayerMouseX() == 0. and PlayerMouseEvent_GetTriggerPlayerMouseY() == 0. then
         // do nothing
     else
-        if not IsPlayerMouseOnButton(trigP) and PlayerMouseEvent_GetTriggerPlayerMouseButton() == MOUSE_BUTTON_TYPE_LEFT and Config.METAKEY == OSKeys.getPressedMetaKeys(trigP) then
+        if not IsPlayerMouseOnButton(trigP) and PlayerMouseEvent_GetTriggerPlayerMouseButton() == Config.MOUSE_BUTTON and Config.METAKEY == OSKeys.getPressedMetaKeys(trigP) then
             set g = CreateGroup()
             set g2 = CreateGroup()
             call GroupEnumUnitsSelected(g, trigP, null)
