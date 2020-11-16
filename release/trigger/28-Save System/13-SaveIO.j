@@ -7,7 +7,7 @@ In the Save System folder, the RectSaveLoader library provides such a trigger.
 
 . This struct is used to save strings to a file.
 .
-struct SaveData:
+struct SaveWriter:
 
     Constants:
             integer MAX_LINES
@@ -36,7 +36,7 @@ struct SaveData:
             thistype create(player saver, string name)
 
 
-. This struct is used to read a file that has been saved using SaveData.
+. This struct is used to read a file that has been saved using SaveWriter.
 .
 struct SaveLoader extends array
 
@@ -183,28 +183,33 @@ public function CleanUpString takes string str returns string
     return result
 endfunction
 
-struct SaveData extends array
-    implement GMUIUseGenericKey
 
-    static constant integer MAX_LINES = 20
-    static constant integer VERSION = 7
-    //! runtextmacro TableStruct_NewReadonlyPrimitiveField("current", "integer")
-    //! runtextmacro TableStruct_NewReadonlyPrimitiveField("linesWritten", "integer")
-    //! runtextmacro TableStruct_NewReadonlyPrimitiveField("folder", "string")
-    //! runtextmacro TableStruct_NewReadonlyAgentField("player", "player")
+struct SaveWriter extends array
+    implement ExtendsTable
+
+    //! runtextmacro HashStruct_NewReadonlyPrimitiveField("current", "integer")
+    //! runtextmacro HashStruct_NewReadonlyPrimitiveField("linesWritten", "integer")
+    //! runtextmacro HashStruct_NewReadonlyPrimitiveField("folder", "string")
+    //! runtextmacro HashStruct_NewReadonlyHandleField("player", "player")
     
-    //! runtextmacro TableStruct_NewPrimitiveField("centerX", "real")
-    //! runtextmacro TableStruct_NewPrimitiveField("centerY", "real")
-    //! runtextmacro TableStruct_NewPrimitiveField("extentX", "real")
-    //! runtextmacro TableStruct_NewPrimitiveField("extentY", "real")
+    //! runtextmacro HashStruct_NewPrimitiveField("centerX", "real")
+    //! runtextmacro HashStruct_NewPrimitiveField("centerY", "real")
+    //! runtextmacro HashStruct_NewPrimitiveField("extentX", "real")
+    //! runtextmacro HashStruct_NewPrimitiveField("extentY", "real")
     
-    //! runtextmacro TableStruct_NewStructField("buffer", "Table")
+    //! runtextmacro HashStruct_NewStructField("buffer", "Table")
+    
+    method isValid takes nothing returns boolean
+        return .folder_exists()
+    endmethod
     
     method isRectSave takes nothing returns boolean
         return this.extentX != 0
     endmethod
-    
-    
+
+    static constant integer MAX_LINES = 20
+    static constant integer VERSION = 7
+
     private method flush takes nothing returns nothing
         local string path = .folder + "\\" + I2S(.current) + ".txt"
         // local string validationString = FormatStringLocal(IO_ABILITY(), VALIDATION_STR())
@@ -233,7 +238,6 @@ function SomeRandomName takes nothing returns nothing //")  // Not calling Prelo
     
     
     method write takes string str returns nothing
-    
         if MAX_LINES <= .linesWritten then
             call .flush()
             set .linesWritten = 1
@@ -250,8 +254,7 @@ function SomeRandomName takes nothing returns nothing //")  // Not calling Prelo
     
     
     static method create takes player saver, string name returns thistype
-        local integer this
-        implement GMUI_allocate_this
+        local integer this = Table.create()
         
         set .folder = name
         set .player = saver
@@ -271,7 +274,7 @@ function SomeRandomName takes nothing returns nothing //")  // Not calling Prelo
         local string filePathSize = .folder + "\\size.txt"
         local string metaString
 
-        if .folderExists() then
+        if .isValid() then
             call .flush()
             set metaString = .getMetaString()  // Order matters for line and .flush()
             if GetLocalPlayer() == .player then
@@ -285,17 +288,8 @@ function SomeRandomName takes nothing returns nothing //")  // Not calling Prelo
             endif
             
             call .buffer.destroy()
-            call .linesWrittenClear()
-            call .currentClear()
-            call .folderClear()
-            call .playerClear()
-            call .centerXClear()
-            call .centerYClear()
-            call .extentXClear()
-            call .extentYClear()
-            call .bufferClear()
             
-            implement GMUI_deallocate_this
+            call .tab.destroy()
         endif
     endmethod
 
@@ -521,6 +515,12 @@ struct SaveLoader extends array
     implement InitModule
 endstruct
 
+/*
+    Returns true if the current local player is different from whichPlayer.
+    
+    Returns true for whichPlayer if new != original.
+    Returns false for whichPlayer if new == original.
+*/
 private function aaa takes player whichPlayer, boolean originalPosition, string pathString, string new, string original returns boolean
         if new == original then
             return GetLocalPlayer() != whichPlayer

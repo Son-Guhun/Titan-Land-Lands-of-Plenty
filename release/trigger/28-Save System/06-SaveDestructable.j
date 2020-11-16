@@ -4,7 +4,7 @@ library SaveDestructable requires SaveNLoad, SaveIO, GLHS, LoPWarn
 /*
     Defines the SaveDestructables function:
     
-        function SaveDestructables takes SaveData saveData, rect rectangle returns nothing
+        function SaveDestructables takes SaveWriter saveData, rect rectangle returns nothing
         
     This function is used for saving destructables. When it is called, all destructables inside the
 Rect are saved into a list. Every 0.5 seconds, 60 destructables in this list are saved, until the
@@ -17,7 +17,7 @@ private struct PlayerData extends array
     static key static_members_key
     //! runtextmacro TableStruct_NewStaticStructField("playerQueue", "LinkedHashSet")
 
-    //! runtextmacro TableStruct_NewStructField("saveData", "SaveData")
+    //! runtextmacro TableStruct_NewStructField("saveData", "SaveWriter")
     //! runtextmacro TableStruct_NewStructField("destructables", "ArrayList_destructable")
     //! runtextmacro TableStruct_NewPrimitiveField("current", "integer")
 
@@ -36,7 +36,7 @@ private function SaveNextDestructables takes PlayerData playerId returns nothing
     local ArrayList_destructable destructables = playerId.destructables
     local integer final = IMinBJ(i + 60, destructables.size)
     local destructable dest
-    local SaveData saveData = playerId.saveData
+    local SaveWriter saveData = playerId.saveData
 
     loop
     exitwhen i == final
@@ -52,6 +52,7 @@ private function SaveNextDestructables takes PlayerData playerId returns nothing
 endfunction
 
 private function onTimer takes nothing returns nothing
+/*
     local PlayerData playerId 
     
     if not PlayerData.playerQueue.isEmpty() then
@@ -68,6 +69,7 @@ private function onTimer takes nothing returns nothing
             call PlayerData.playerQueue.append(playerId+1)
         endif
     endif
+*/
 endfunction
 
 private function AddToArrayList takes nothing returns boolean
@@ -75,7 +77,7 @@ private function AddToArrayList takes nothing returns boolean
     return false
 endfunction
 
-function SaveDestructables takes SaveData saveData, rect rectangle returns nothing
+function SaveDestructables takes SaveWriter saveData, rect rectangle returns nothing
     local integer tempInteger
     local PlayerData playerId = GetPlayerId(saveData.player)
     

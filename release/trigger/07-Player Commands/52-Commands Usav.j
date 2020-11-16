@@ -27,7 +27,7 @@ private function onCommand takes nothing returns boolean
     local player trigP = GetTriggerPlayer()
     local LoP_PlayerData pId = GetPlayerId(trigP)
     local unit generator = GUDR_PlayerGetSelectedGenerator(trigP)
-    local SaveData saveData = SaveData.create(trigP, SaveNLoad_FOLDER() + LoP_Command.getArguments())
+    local SaveWriter saveData = SaveWriter.create(trigP, SaveNLoad_FOLDER() + LoP_Command.getArguments())
     local SaveInstance saveInstance = SaveInstance.create(saveData)
     
     set G.userUnits = CreateGroup()

@@ -62,7 +62,7 @@ function Save_PatrolPointStr takes real x, real y returns string
     return SaveNLoad_FormatString("SnL_unit_extra", "=p " + R2S(x) + "=" +  R2S(y))
 endfunction
 
-function Save_SaveUnitPatrolPoints takes SaveData saveData, integer unitHandleId returns nothing
+function Save_SaveUnitPatrolPoints takes SaveWriter saveData, integer unitHandleId returns nothing
     local integer i = 1
     local integer totalPoints = Patrol_GetTotalPatrolPoints(unitHandleId)
     local string saveStr
@@ -74,7 +74,7 @@ function Save_SaveUnitPatrolPoints takes SaveData saveData, integer unitHandleId
     endloop
 endfunction
 
-function SaveUnitExtraStrings takes SaveData saveData, unit saveUnit, integer unitHandleId returns nothing
+function SaveUnitExtraStrings takes SaveWriter saveData, unit saveUnit, integer unitHandleId returns nothing
         
         static if LIBRARY_UserDefinedRects then
             if GUDR_IsUnitIdGenerator(unitHandleId) then

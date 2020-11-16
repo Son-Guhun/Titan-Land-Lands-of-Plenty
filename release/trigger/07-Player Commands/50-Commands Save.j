@@ -7,7 +7,7 @@ endfunction
 private function onCommand takes nothing returns boolean
     local player trigP = GetTriggerPlayer()
     local LoP_PlayerData pId = GetPlayerId(trigP)
-    local SaveInstance saveInstance = SaveInstance.create(SaveData.create(trigP, SaveNLoad_FOLDER() + LoP_Command.getArguments()))
+    local SaveInstance saveInstance = SaveInstance.create(SaveWriter.create(trigP, SaveNLoad_FOLDER() + LoP_Command.getArguments()))
 
     set saveInstance.unit.effects = EnumDecorationsOfPlayer(trigP)
     

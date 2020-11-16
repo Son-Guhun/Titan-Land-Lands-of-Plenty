@@ -2,7 +2,7 @@ library SaveTerrain requires SaveNLoad, SaveIO, SaveNLoadProgressBars, LoPWarn
 /*
     Defines the SaveTerrain function:
     
-        function SaveTerrain takes SaveData saveData, rect rectangle returns nothing
+        function SaveTerrain takes SaveWriter saveData, rect rectangle returns nothing
         
     This function is used for saving terrain. When it is called, the rect's dimensions are saved
 in memory. Every 0.5 seconds, tiles from this rect are saved (starting from the bottomleft corner)
@@ -28,7 +28,7 @@ private struct PlayerData extends array
         return playerQueueExists()
     endmethod
 
-    //! runtextmacro TableStruct_NewStructField("saveData", "SaveData")
+    //! runtextmacro TableStruct_NewStructField("saveData", "SaveWriter")
     //! runtextmacro SaveXYMethodTerrain("minX")
     //! runtextmacro SaveXYMethodTerrain("maxX")
     //! runtextmacro SaveXYMethodTerrain("curX")
@@ -46,7 +46,7 @@ private function SaveTiles takes PlayerData playerId returns boolean
     local real maxX = playerId.maxX
     local real maxY = playerId.maxY
     local integer j = 0
-    local SaveData saveData = playerId.saveData
+    local SaveWriter saveData = playerId.saveData
 
     loop
     exitwhen j >= 25 /* avoid OP limit */ or curY > maxY  
@@ -87,11 +87,13 @@ private function SaveTiles takes PlayerData playerId returns boolean
 endfunction
 
 private function onTimer takes nothing returns nothing
+
     local PlayerData playerId
     
-    if not PlayerData.playerQueue.isEmpty() then
+    if PlayerData.playerQueue != 0 and not PlayerData.playerQueue.isEmpty() then
         set playerId = PlayerData.playerQueue.getFirst() - 1
         call PlayerData.playerQueue.remove(playerId+1)
+        
     
         call SaveTiles(playerId)
         if playerId.curY > playerId.maxY then
@@ -110,9 +112,10 @@ private function onTimer takes nothing returns nothing
             endif
         endif
     endif
+
 endfunction
 
-function SaveTerrain takes SaveData saveData, rect saveRect returns nothing
+function SaveTerrain takes SaveWriter saveData, rect saveRect returns nothing
     local PlayerData playerId = GetPlayerId(saveData.player)
     
     if not PlayerData.isInitialized() then  // avoid creating an extra function

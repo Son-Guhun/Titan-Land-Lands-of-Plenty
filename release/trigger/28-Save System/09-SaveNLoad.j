@@ -59,6 +59,19 @@ private struct PlayerTerrainData extends array
     //! runtextmacro SaveXYMethod("curY", "+5*bj_MAX_PLAYERS")
 endstruct
 
+struct SaveInstanceBase
+    SaveWriter saveWriter
+endstruct
+
+module SaveInstanceBaseModule
+    
+    method operator saveWriter takes nothing returns SaveWriter
+        return SaveInstanceBase(this).saveWriter
+    endmethod
+    
+endmodule
+
+
 struct SaveNLoad_PlayerData extends array
     
     private static real array loadCenter

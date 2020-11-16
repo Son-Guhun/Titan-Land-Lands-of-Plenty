@@ -2,12 +2,12 @@ scope CommandsTsav
 
 private function onCommand takes nothing returns boolean
     local player trigP = GetTriggerPlayer()
-    local SaveData saveData
+    local SaveWriter saveData
     local unit generator
     
     set generator =  GUDR_PlayerGetSelectedGenerator(trigP)
     if generator != null then
-        set saveData = SaveData.create(trigP, SaveNLoad_FOLDER() + LoP_Command.getArguments())
+        set saveData = SaveWriter.create(trigP, SaveNLoad_FOLDER() + LoP_Command.getArguments())
         set saveData.centerX = GetUnitX(generator)
         set saveData.centerY = GetUnitY(generator)
         set saveData.extentX = GUDR_GetGeneratorExtentX(generator)

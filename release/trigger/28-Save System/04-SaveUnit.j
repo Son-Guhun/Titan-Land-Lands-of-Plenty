@@ -1,31 +1,30 @@
-// TO-DO: Instead of using InternalPlayerData to hold units and effects, instead define a new SaveData struct
-// that extends the default one and has fields to hold units and effects.
+library SaveUnit requires SaveNLoad, SaveIO, Maths, SaveNLoadProgressBars, optional SaveUnitExtras /*
 
-library SaveUnit requires SaveNLoad, SaveIO, OOP, Maths, SaveNLoadProgressBars, optional SaveUnitExtras, LoPWarn, SaveUtils
+// Libraries whose values are serialized when saving:
+*/ UnitVisualValues, DecorationSFX, AttachedSFX
 /* 
-This library defines functionality to save a group of units and effects using SaveIO over time. Due
-to performance issues, saving all units instantly is not a good idea, as that will lag the game and may
-cause disconnects.
 
-Calling the SaveUnits function will schedule saving for a player. Every 0.5 seconds, units and effects in
-the SaveUnit_PlayerData fields "effects" and "units" will be saved, 25 units at a time. This library
-also handles cases where a save is made while another is not finished. In this case, the previous save
-is terminated and a warning is shown to the player.
-
-The same principles used in this library are used for SaveUnit and SaveDestructable libraries. Since
-those libraries are simpler, it might be easier to understand them first before looking at this library.
-
-This is a fairly LoP-specific implementation, though it could easily be adapted to work elsewhere.
 
 
 SaveUnitExtras library:
     If this library exists, it must define the following function:
     
-    function SaveUnitExtraStrings takes SaveData saveWriter, unit saveUnit, integer unitHandleId returns nothing
+    function SaveUnitExtraStrings takes SaveWriter saveWriter, unit saveUnit, integer unitHandleId returns nothing
     
     This function is executed after a unit's save string is saved, and is intended to save extra information.
     In LoP, this extra information includes waygate destinations, patrol points and rects.
 */
+globals
+    
+    // Non-rect saves in which all units are contained within a rect smaller than these extents will
+    // be automatically converted to a rect save.
+    public constant real MAX_X_EXTENT = 10000
+    public constant real MAX_Y_EXTENT = MAX_X_EXTENT
+    
+    // The number of units to be saved with each call to SaveInstanceUnit.saveNextUnits()
+    public constant integer BATCH_SIZE = 25
+    
+endglobals
 
 // Used by GenerateEffectFlagsStr and GenerateFlagsStr
 private function I2FlagsString takes integer flags returns string
@@ -33,6 +32,9 @@ private function I2FlagsString takes integer flags returns string
 endfunction
 
 scope SFX
+    /*
+        Utility functions to serialize SpecialEffects into strings.
+    */
 
     private function GetFacingString takes SpecialEffect sfx returns string
         if sfx.roll == 0 and sfx.pitch == 0 then
@@ -98,6 +100,9 @@ scope SFX
 endscope
 
 scope Unit
+    /*
+        Utility functions to serialize units into strings.
+    */
 
     public function GetFlagsStr takes unit saveUnit returns string
         local integer result = 0
@@ -126,9 +131,10 @@ struct SaveInstanceUnit extends array
     group units
     LinkedHashSet effects
     
-    private integer savedCount  // this must be set to 0 somewhere (probably constructor)
+    private integer savedCount
     private integer total
     
+    // Extents. These are used only if the SaveWriter is not a rect save.
     private real minX
     private real minY
     private real maxX
@@ -145,8 +151,9 @@ struct SaveInstanceUnit extends array
     endmethod
 
 
+    // Calculate the extents for a Rect save.
     private method calculateRectSave takes nothing returns nothing
-        local SaveData saveWriter = .saveWriter
+        local SaveWriter saveWriter = .saveWriter
         local real extentX = (.maxX - .minX)/2
         local real extentY = (.maxY - .minY)/2
         
@@ -179,6 +186,7 @@ struct SaveInstanceUnit extends array
         endif
     endmethod
     
+    // Update the extents, if the point is outside the current extents.
     private method updateExtents takes real x, real y returns nothing
         if x > .maxX then
             set .maxX = x
@@ -194,9 +202,9 @@ struct SaveInstanceUnit extends array
         endif    
     endmethod
 
-
+    
     method saveNextEffects takes nothing returns integer
-        local SaveData saveWriter = .saveWriter
+        local SaveWriter saveWriter = .saveWriter
         local LinkedHashSet_DecorationEffect decorations = .effects
         local DecorationEffect decoration = decorations.begin()
 
@@ -204,7 +212,7 @@ struct SaveInstanceUnit extends array
         local string saveStr
         
         loop
-            exitwhen counter == 25 or decoration == decorations.end()
+            exitwhen counter == BATCH_SIZE or decoration == decorations.end()
             
             call saveWriter.write(SaveNLoad_FormatString("SnL_unit", SFX_GetSaveStr(decoration, decoration.getOwner(), decoration.hasCustomColor, GUMS_SELECTION_UNSELECTABLE()) + "," + SFX_GetFlagsStr(decoration)))
             
@@ -223,7 +231,7 @@ struct SaveInstanceUnit extends array
 
 
     method saveNextUnits takes nothing returns boolean
-        local SaveData saveWriter = .saveWriter
+        local SaveWriter saveWriter = .saveWriter
         local player filterPlayer = saveWriter.player
         local integer playerId = GetPlayerId(filterPlayer)
         local unit saveUnit
@@ -239,7 +247,7 @@ struct SaveInstanceUnit extends array
         
         set saveUnitCount = .saveNextEffects()  // Only begin saving units once all decorations have been saved.
         loop
-        exitwhen saveUnitCount >= 25
+        exitwhen saveUnitCount >= BATCH_SIZE
             set grp = .units
             set saveUnit = FirstOfGroup(grp)
             set unitHandleId = GetHandleId(saveUnit)
@@ -309,8 +317,8 @@ struct SaveInstanceUnit extends array
         else
             set .savedCount = .savedCount + 1
             if User.fromLocal() == playerId then
-                call BlzFrameSetText(saveUnitBarText, I2S(.savedCount*25)+ "/" +I2S(.total))
-                call BlzFrameSetValue(saveUnitBar, 100.*.savedCount*25 / I2R(.total))
+                call BlzFrameSetText(saveUnitBarText, I2S(.savedCount*BATCH_SIZE)+ "/" +I2S(.total))
+                call BlzFrameSetValue(saveUnitBar, 100.*.savedCount*BATCH_SIZE / I2R(.total))
             endif
         endif
         
