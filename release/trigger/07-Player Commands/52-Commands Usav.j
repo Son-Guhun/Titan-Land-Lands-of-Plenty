@@ -25,23 +25,25 @@ endfunction
 
 private function onCommand takes nothing returns boolean
     local player trigP = GetTriggerPlayer()
-    local SaveUnit_PlayerData playerData = GetPlayerId(trigP)
+    local LoP_PlayerData pId = GetPlayerId(trigP)
     local unit generator = GUDR_PlayerGetSelectedGenerator(trigP)
     local SaveData saveData = SaveData.create(trigP, SaveNLoad_FOLDER() + LoP_Command.getArguments())
+    local SaveInstance saveInstance = SaveInstance.create(saveData)
+    
+    set G.userUnits = CreateGroup()
+    set saveInstance.unit.units = G.userUnits
     
     if generator == null then
-        call GroupEnumUnitsSelected(playerData.units, trigP, null)
-        call BlzGroupRemoveGroupFast(LoP_GetProtectedUnits(), playerData.units)
+        call GroupEnumUnitsSelected(G.userUnits, trigP, null)
+        call BlzGroupRemoveGroupFast(LoP_GetProtectedUnits(), G.userUnits)
     else
         set G.userRect = GUDR_GetGeneratorIdRect(GetHandleId(generator))
     
-        call playerData.effects.clear()
-        call EnumDecorationsOfPlayerInRectEx(playerData.effects, trigP, GetRectMinX(G.userRect), GetRectMinY(G.userRect), GetRectMaxX(G.userRect), GetRectMaxY(G.userRect))
+        set saveInstance.unit.effects = EnumDecorationsOfPlayerInRect(trigP, GetRectMinX(G.userRect), GetRectMinY(G.userRect), GetRectMaxX(G.userRect), GetRectMaxY(G.userRect))
         
-        set G.userUnits = playerData.units
-        call GroupEnumUnitsOfPlayer(playerData.units, trigP, Filter(function EnumFilter))
+        call GroupEnumUnitsOfPlayer(G.userUnits, trigP, Filter(function EnumFilter))
         call LoP_ForNeutralUnits(trigP, function FilterNeutrals)
-        call BlzGroupRemoveGroupFast(LoP_GetProtectedUnits(), playerData.units)  // Order matters, protected units may be in neutral group
+        call BlzGroupRemoveGroupFast(LoP_GetProtectedUnits(), G.userUnits)  // Order matters, protected units may be in neutral group
         
         set saveData.centerX = GetUnitX(generator)
         set saveData.centerY = GetUnitY(generator)
@@ -51,8 +53,8 @@ private function onCommand takes nothing returns boolean
         call G.clear()
     endif
     
-    call SaveUnits(saveData)
-    call LoP_WarnPlayer(GetLocalPlayer(), LoPChannels.SYSTEM, LoP_PlayerData(playerData).realName + ( " has started saving units."))
+    call SaveUnits(saveInstance)
+    call LoP_WarnPlayer(GetLocalPlayer(), LoPChannels.SYSTEM, pId.realName + ( " has started saving units."))
     
     return false
 endfunction

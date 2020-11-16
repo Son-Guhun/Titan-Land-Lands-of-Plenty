@@ -6,18 +6,20 @@ endfunction
 
 private function onCommand takes nothing returns boolean
     local player trigP = GetTriggerPlayer()
-    local SaveUnit_PlayerData playerData = GetPlayerId(trigP)
+    local LoP_PlayerData pId = GetPlayerId(trigP)
+    local SaveInstance saveInstance = SaveInstance.create(SaveData.create(trigP, SaveNLoad_FOLDER() + LoP_Command.getArguments()))
 
-    call playerData.effects.clear()
-    call EnumDecorationsOfPlayerEx(playerData.effects, trigP)
+    set saveInstance.unit.effects = EnumDecorationsOfPlayer(trigP)
     
-    call GroupEnumUnitsOfPlayer(playerData.units, trigP, Filter(function EnumFilter))
-    call LoP_EnumNeutralUnits(trigP, playerData.units)
-    call BlzGroupRemoveGroupFast(LoP_GetProtectedUnits(), playerData.units)  // Order matters, protected units may be in neutral group
+    set saveInstance.unit.units = CreateGroup()
+    call GroupEnumUnitsOfPlayer(saveInstance.unit.units, trigP, Filter(function EnumFilter))
+    call LoP_EnumNeutralUnits(trigP, saveInstance.unit.units)
+    call BlzGroupRemoveGroupFast(LoP_GetProtectedUnits(), saveInstance.unit.units)  // Order matters, protected units may be in neutral group
     
+    call BJDebugMsg(I2S(BlzGroupGetSize(saveInstance.unit.units)))
     
-    call SaveUnits(SaveData.create(trigP, SaveNLoad_FOLDER() + LoP_Command.getArguments()))
-    call LoP_WarnPlayer(GetLocalPlayer(), LoPChannels.SYSTEM, LoP_PlayerData(playerData).realName + ( " has started saving units."))
+    call SaveUnits(saveInstance)
+    call LoP_WarnPlayer(User.Local, LoPChannels.SYSTEM, pId.realName + ( " has started saving units."))
     
     return false
 endfunction

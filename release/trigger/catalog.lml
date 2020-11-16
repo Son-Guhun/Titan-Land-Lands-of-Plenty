@@ -363,6 +363,9 @@
         Closed
     19-LoadDestructable: LoadDestructable
     20-LoadTerrain: LoadTerrain
+    21----------------------------: ---------------------------
+        Comment
+    22-SaveMain: SaveMain
 '29-Circle Object System': 'Circle Object System'
     '1-GCOS Init Copy': 'GCOS Init Copy'
     '2-Circle Object System': 'Circle Object System'
