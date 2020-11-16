@@ -1,21 +1,19 @@
-library SaveUtils
+library SaveMain requires TileDefinition, SaveIO, SaveUnit, LoPWarn
+/*
+    This library defines functionality to save a group of units and effects using SaveIO over time. Due
+to performance issues, saving all units instantly is not a good idea, as that will lag the game and may
+cause disconnects.
 
-    struct SaveInstanceBase
-        SaveData saveWriter
-    endstruct
-    
-    module SaveInstanceBaseModule
-        
-        method operator saveWriter takes nothing returns SaveData
-            return SaveInstanceBase(this).saveWriter
-        endmethod
-        
-    endmodule
+Calling the SaveUnits function will schedule saving for a player. Every 0.5 seconds, units and effects in
+the SaveUnit_PlayerData fields "effects" and "units" will be saved, 25 units at a time. This library
+also handles cases where a save is made while another is not finished. In this case, the previous save
+is terminated and a warning is shown to the player.
 
+The same principles used in this library are used for SaveUnit and SaveDestructable libraries. Since
+those libraries are simpler, it might be easier to understand them first before looking at this library.
 
-endlibrary
-
-library SaveMain requires TileDefinition, SaveIO, SaveUnit, SaveUtils
+This is a fairly LoP-specific implementation, though it could easily be adapted to work elsewhere.
+*/
 
 
 struct SaveInstance//  extends array
@@ -24,7 +22,7 @@ struct SaveInstance//  extends array
     implement SaveInstanceBaseModule
     
     
-    static method create takes SaveData saveWriter returns thistype
+    static method create takes SaveWriter saveWriter returns thistype
         local thistype this = allocate()
     
         set SaveInstanceBase(this).saveWriter = saveWriter
@@ -93,7 +91,7 @@ private function SaveLoopActions takes nothing returns nothing
 endfunction
 
 function SaveUnits takes SaveInstance saveInstance returns nothing
-    local SaveData saveWriter = saveInstance.saveWriter
+    local SaveWriter saveWriter = saveInstance.saveWriter
     local PlayerData playerId = GetPlayerId(saveWriter.player)
 
 
