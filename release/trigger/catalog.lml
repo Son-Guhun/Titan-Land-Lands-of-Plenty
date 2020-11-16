@@ -378,15 +378,21 @@
     1-CustomStatSystem: CustomStatSystem
     2-NeoBonus: NeoBonus
 '32-Special Effect System': 'Special Effect System'
-    1-SpecialEffect: SpecialEffect
-    2-DecorationSFX: DecorationSFX
-    3-Unit2Effect: Unit2Effect
-    4-UnitTypeDefaultValues: UnitTypeDefaultValues
-    5-AttachedSFX: AttachedSFX
-    6-StringSubanimations: StringSubanimations
-    7-FuncHooks: FuncHooks
-    '8-FuncHooks Definitions': 'FuncHooks Definitions'
-    9-UnitModels: UnitModels
+    01-Core: Core
+        Comment
+    02-SpecialEffect: SpecialEffect
+    03-DecorationSFX: DecorationSFX
+    '04-Attaching to Units': 'Attaching to Units'
+        Comment
+    05-AttachedSFX: AttachedSFX
+    06-FuncHooks: FuncHooks
+    '07-FuncHooks Definitions': 'FuncHooks Definitions'
+    '08-Unit Conversion': 'Unit Conversion'
+        Comment
+    09-Unit2Effect: Unit2Effect
+    10-StringSubanimations: StringSubanimations
+    11-UnitTypeDefaultValues: UnitTypeDefaultValues
+    12-UnitModels: UnitModels
 '33-Terrain Libraries': 'Terrain Libraries'
     1-TerrainTools: TerrainTools
     2-Deformations: Deformations
