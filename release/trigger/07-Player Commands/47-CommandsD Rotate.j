@@ -7,8 +7,8 @@ function Trig_CommandsD_Rotate_Conditions takes nothing returns boolean
     set LoP_PlayerData.get(GetTriggerPlayer()).rotationStep = R2I(Arguments_ParseNumber(args))
     
     if GetLocalPlayer() == GetTriggerPlayer() then
-        call BlzSetAbilityTooltip('A011', toolTip, 0)
-        call BlzSetAbilityExtendedTooltip('A011', extendedToolTip, 0)
+        call BlzSetAbilityTooltip(DECO_ABIL_ROTATE, toolTip, 0)
+        call BlzSetAbilityExtendedTooltip(DECO_ABIL_ROTATE, extendedToolTip, 0)
     endif
     return false
 endfunction

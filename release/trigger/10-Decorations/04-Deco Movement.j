@@ -1,27 +1,7 @@
 scope DecoMovement
     //! runtextmacro optional DefineHooks()
 
-    globals
-        public constant integer CONTROLLER = 'h0KD'
-        
-        public constant integer MOVE_UP = 'A032'
-        public constant integer MOVE_LEFT = 'A02Y'
-        public constant integer MOVE_RIGHT = 'A02Z'
-        public constant integer MOVE_DOWN = 'A031'
-        
-        public constant integer MOVE = 'A037'
-        
-        public constant integer SUICIDE = 'A0B7'
-        public constant integer FACE = 'A00T'
-        public constant integer COPY = 'A012'
-        public constant integer ROTATE = 'A011'
-        
-        public constant integer UPGRADE_PREV = 'A048'
-        public constant integer UPGRADE_NEXT = 'A01T'
-        
-        public constant integer GATE_OPEN = 'A0B3'
-        public constant integer GATE_CLOSE = 'A0B5'
-    endglobals
+    //! runtextmacro USE_NAMESPACE_DECO_ABIL()
 
     private function PlayerNumber takes unit whichUnit returns integer
         return GetPlayerId(GetOwningPlayer(whichUnit)) + 1

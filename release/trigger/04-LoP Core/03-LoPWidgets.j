@@ -1,7 +1,7 @@
 library LoPWidgets requires LoPHeader, TableStruct, POWER, HERO, optional TerrainEditorUI
 /* 
     This libary defines many utilities for widget objects in the map's script. The POWER and HERO
-libraries are defined at the end of this file.
+libraries are defined in LoPConstants.
     
     struct LoP_UnitData:
         Fields:
@@ -129,50 +129,5 @@ function LoP_InitProtectedUnits takes nothing returns nothing
 endfunction
 
 // ========
-
-endlibrary
-
-/* Unit Constants
-    
-    These libraries define constants that represent units in the map.
-*/
-
-// Titan Powers
-library POWER
-    public function INVULNERABILITY takes nothing returns unit
-        return gg_unit_e00B_0405
-    endfunction
-    
-    public function VULNERABILITY takes nothing returns unit
-        return gg_unit_e00A_0411
-    endfunction
-    
-    public function KILL takes nothing returns unit
-        return gg_unit_e008_0406
-    endfunction
-    
-    public function LEVEL takes nothing returns unit
-        return gg_unit_e009_0407
-    endfunction
-    
-    public function DELEVEL takes nothing returns unit
-        return gg_unit_e00C_0408
-    endfunction
-    
-    public function REMOVE takes nothing returns unit
-        return gg_unit_e007_0410
-    endfunction
-endlibrary
-
-// Cosmosis and Angel of Creation
-library HERO
-
-    public function COSMOSIS takes nothing returns unit
-        return gg_unit_H00V_0359
-    endfunction
-    
-    public function CREATOR takes nothing returns unit
-        return gg_unit_H00S_0141
-    endfunction
 
 endlibrary

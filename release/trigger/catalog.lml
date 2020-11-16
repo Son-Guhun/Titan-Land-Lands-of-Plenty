@@ -48,6 +48,7 @@
     08-LoPDeprecated: LoPDeprecated
     09-LoPStdlib: LoPStdlib
     10-LoPWarn: LoPWarn
+    11-LoPConstants: LoPConstants
 '05-Map Init': 'Map Init'
     '01-Init Libraries': 'Init Libraries'
         Comment
