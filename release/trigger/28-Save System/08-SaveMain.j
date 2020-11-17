@@ -51,6 +51,10 @@ struct SaveInstance//  extends array
         return this
     endmethod
     
+    method operator terrain takes nothing returns SaveInstanceTerrain
+        return this
+    endmethod
+    
     
 
     
@@ -87,12 +91,18 @@ private function SaveLoopActions takes nothing returns nothing
             call BJDebugMsg("Units to save found")
             call BJDebugMsg(I2S(BlzGroupGetSize(saveInstance.unit.units)))
             call saveInstance.unit.saveNextUnits()
+            
         elseif not saveInstance.destructable.isFinished() then
             call BJDebugMsg("Destructables to save found")
             call saveInstance.destructable.saveNextDestructables()
+            
+        elseif not saveInstance.terrain.isFinished() then
+            call BJDebugMsg("Terrain still saving")
+            call saveInstance.terrain.saveNextTiles()
+            
         endif
     
-        if saveInstance.unit.isFinished() and saveInstance.destructable.isFinished() then
+        if saveInstance.unit.isFinished() and saveInstance.destructable.isFinished() and saveInstance.terrain.isFinished() then
             call saveInstance.destroy()
         else
             call queue.append(playerId+1)
@@ -117,12 +127,6 @@ function SaveUnits takes SaveInstance saveInstance returns nothing
         endif
         set playerId.saveInstance = saveInstance
         
-        
-        if User.fromLocal() == playerId then
-            call BlzFrameSetText(saveUnitBarText, "Waiting...")
-            call BlzFrameSetVisible(saveUnitBar, true)
-            call BlzFrameSetValue(saveUnitBar, 0.)
-        endif
     else
         call saveInstance.destroy()
         call LoP_WarnPlayer(saveWriter.player, LoPChannels.ERROR, "No units to save.")
@@ -176,6 +180,22 @@ function SaveDestructables takes SaveInstance saveInstance, rect rectangle retur
         call saveInstance.destroy()
         call LoP_WarnPlayer(saveWriter.player, LoPChannels.ERROR, "No destructables to save.")
     endif
+endfunction
+
+function SaveTerrain takes SaveInstance saveInstance, rect saveRect returns nothing
+    local SaveWriter saveWriter = saveInstance.saveWriter
+    local PlayerData playerId = GetPlayerId(saveWriter.player)
+    
+    call saveInstance.terrain.initialize(saveRect)
+
+    if playerId.saveInstance != 0 then
+        call LoP_WarnPlayer(saveWriter.player, LoPChannels.WARNING, "Did not finish saving previous file!")
+        call playerId.saveInstance.destroy()
+    else
+        call PlayerData.playerQueue.append(playerId+1)
+    endif
+    set playerId.saveInstance = saveInstance
+    
 endfunction
 
 private struct InitStruct

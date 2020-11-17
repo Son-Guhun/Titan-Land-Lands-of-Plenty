@@ -148,6 +148,12 @@ struct SaveInstanceUnit extends array
         set .minX = Pow(2, 23)
         set .maxY = -Pow(2, 23)
         set .minY = Pow(2, 23)
+        
+        if User.Local == saveWriter.player then
+            call BlzFrameSetText(saveUnitBarText, "Waiting...")
+            call BlzFrameSetVisible(saveUnitBar, true)
+            call BlzFrameSetValue(saveUnitBar, 0.)
+        endif
     endmethod
 
 
