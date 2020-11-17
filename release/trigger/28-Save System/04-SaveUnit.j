@@ -228,6 +228,18 @@ struct SaveInstanceUnit extends array
         
         return counter
     endmethod
+    
+    method units_exists takes nothing returns boolean
+        return units != null
+    endmethod
+    
+    method effects_exists takes nothing returns boolean
+        return effects != 0
+    endmethod
+    
+    method isFinished takes nothing returns boolean
+        return not ((.units_exists() and not IsGroupEmpty(.units)) or (.effects_exists() and not .effects.isEmpty()))
+    endmethod
 
 
     method saveNextUnits takes nothing returns boolean

@@ -1,4 +1,4 @@
-library SaveMain requires TileDefinition, SaveIO, SaveUnit, LoPWarn
+library SaveMain requires TileDefinition, SaveIO, SaveUnit, SaveDestructable LoPWarn
 /*
     This library defines functionality to save a group of units and effects using SaveIO over time. Due
 to performance issues, saving all units instantly is not a good idea, as that will lag the game and may
@@ -47,9 +47,13 @@ struct SaveInstance//  extends array
         return this
     endmethod
     
+    method operator destructable takes nothing returns SaveInstanceDestructable
+        return this
+    endmethod
+    
     
 
-    ArrayList_destructable  destructables
+    
     // maxX
     // maxY
     // minX
@@ -70,23 +74,29 @@ endstruct
 private function SaveLoopActions takes nothing returns nothing
     local PlayerData playerId
     local LinkedHashSet queue = PlayerData.playerQueue
+    local SaveInstance saveInstance
     
     if not queue.isEmpty() then
         call BJDebugMsg("Attempting to save")
         set playerId = queue.getFirst() - 1
+        set saveInstance = playerId.saveInstance
+        
         call queue.remove(playerId+1)
         
-        if not IsGroupEmpty(playerId.saveInstance.unit.units) or not playerId.saveInstance.unit.effects.isEmpty() then
+        if not saveInstance.unit.isFinished() then
             call BJDebugMsg("Units to save found")
-            call BJDebugMsg(I2S(BlzGroupGetSize(playerId.saveInstance.unit.units)))
-            call playerId.saveInstance.unit.saveNextUnits()
-        else
-            call playerId.saveInstance.destroy()
+            call BJDebugMsg(I2S(BlzGroupGetSize(saveInstance.unit.units)))
+            call saveInstance.unit.saveNextUnits()
+        elseif not saveInstance.destructable.isFinished() then
+            call BJDebugMsg("Destructables to save found")
+            call saveInstance.destructable.saveNextDestructables()
         endif
     
-        // if playerId.isSaving then
+        if saveInstance.unit.isFinished() and saveInstance.destructable.isFinished() then
+            call saveInstance.destroy()
+        else
             call queue.append(playerId+1)
-        // endif
+        endif
     endif
 endfunction
 
@@ -96,21 +106,75 @@ function SaveUnits takes SaveInstance saveInstance returns nothing
 
 
     // set playerId.isSaving = true
-    call saveInstance.unit.initialize()
-    
-    if playerId.saveInstance != 0 then
-        call LoP_WarnPlayer(saveWriter.player, LoPChannels.WARNING, "Did not finish saving previous file!")
-        call playerId.saveInstance.destroy()
+    if not saveInstance.unit.isFinished() then
+        call saveInstance.unit.initialize()
+        
+        if playerId.saveInstance != 0 then
+            call LoP_WarnPlayer(saveWriter.player, LoPChannels.WARNING, "Did not finish saving previous file!")
+            call playerId.saveInstance.destroy()
+        else
+            call PlayerData.playerQueue.append(playerId + 1)
+        endif
+        set playerId.saveInstance = saveInstance
+        
+        
+        if User.fromLocal() == playerId then
+            call BlzFrameSetText(saveUnitBarText, "Waiting...")
+            call BlzFrameSetVisible(saveUnitBar, true)
+            call BlzFrameSetValue(saveUnitBar, 0.)
+        endif
     else
-        call PlayerData.playerQueue.append(playerId + 1)
+        call saveInstance.destroy()
+        call LoP_WarnPlayer(saveWriter.player, LoPChannels.ERROR, "No units to save.")
     endif
-    set playerId.saveInstance = saveInstance
+endfunction
+
+private struct G extends array
+    
+    static method operator enumList takes nothing returns ArrayList_destructable
+        return bj_forLoopAIndex
+    endmethod
+    
+    static method operator enumList= takes integer list returns nothing
+        set bj_forLoopAIndex = list
+    endmethod
+
+endstruct
+
+private function AddToArrayList takes nothing returns boolean
+    call G.enumList.append(GetFilterDestructable())
+    return false
+endfunction
+
+function SaveDestructables takes SaveInstance saveInstance, rect rectangle returns nothing
+    local integer tempInteger
+    local SaveWriter saveWriter = saveInstance.saveWriter
+    local PlayerData playerId = GetPlayerId(saveWriter.player)
+    local ArrayList_destructable destructables = ArrayList.create()
     
     
-    if User.fromLocal() == playerId then
-        call BlzFrameSetText(saveUnitBarText, "Waiting...")
-        call BlzFrameSetVisible(saveUnitBar, true)
-        call BlzFrameSetValue(saveUnitBar, 0.)
+    set tempInteger = G.enumList  // store global value in local
+    set G.enumList = destructables
+
+    call EnumDestructablesInRect(rectangle, Condition(function AddToArrayList), null)
+    
+    set G.enumList = tempInteger  // restore global variable value
+    
+    if destructables.size > 0 then
+        call saveInstance.destructable.initialize(destructables)
+    
+        if playerId.saveInstance != 0 then
+            call LoP_WarnPlayer(saveWriter.player, LoPChannels.WARNING, "Did not finish saving previous file!")
+            call playerId.saveInstance.destroy()
+        else
+            call PlayerData.playerQueue.append(playerId+1)
+        endif
+        set playerId.saveInstance = saveInstance
+        
+    else
+        call destructables.destroy()
+        call saveInstance.destroy()
+        call LoP_WarnPlayer(saveWriter.player, LoPChannels.ERROR, "No destructables to save.")
     endif
 endfunction
 
