@@ -206,6 +206,7 @@ def pull(dirs = ['map','table', 'trigger', 'w3x2lni'], release='release/', devel
 def make_devel():
     pull(release='development/', development='devel/', dirs=['scripts', 'map','table', 'trigger', 'w3x2lni'])
     makedevel.do('development/table/unit.ini', 'devel/table/unit.ini')
+    shutil.copyfile('_scripts/devel_doodad_data.doo', 'devel/map/war3map.doo')  # script file
 
 def push_devel(target='development'):
     # Copy script-related map files
