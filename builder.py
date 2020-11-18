@@ -208,11 +208,15 @@ def make_devel():
     makedevel.do('development/table/unit.ini', 'devel/table/unit.ini')
     shutil.copyfile('_scripts/devel_doodad_data.doo', 'devel/map/war3map.doo')  # script file
 
+def copy_file_if_exists(source, target):
+    if os.path.exists(source):
+        shutil.copyfile(source, target)
+
 def push_devel(target='development'):
     # Copy script-related map files
-    shutil.copyfile('devel/map/war3map.j', target+'/map/war3map.j')  # script file
-    shutil.copyfile('devel/map/war3map.s', target+'/map/war3map.s')  # sound defs file
-    shutil.copyfile('devel/map/war3map.r', target+'/map/war3map.r')  # rect defs file
+    copy_file_if_exists('devel/map/war3map.j', target+'/map/war3map.j')      # script file
+    copy_file_if_exists('devel/map/war3map.w3s', target+'/map/war3map.w3s')  # sound defs file
+    copy_file_if_exists('devel/map/war3map.w3r', target+'/map/war3map.w3r')  # rect defs file
 
     push(release=target+'/', development='devel/', dirs=['trigger'])
 
