@@ -13,14 +13,15 @@ or the owner of saveWriter, then saving is cancelled and the player is warned.
 
 struct SaveInstanceTerrain extends array
 
+    implement ExtendsTable
     implement SaveInstanceBaseModule
     
-    real minX
-    real minY
-    real maxX
-    real maxY
-    real curX
-    real curY
+    //! runtextmacro HashStruct_NewReadonlyPrimitiveField("minX", "real")
+    //! runtextmacro HashStruct_NewReadonlyPrimitiveField("minY", "real")
+    //! runtextmacro HashStruct_NewReadonlyPrimitiveField("maxX", "real")
+    //! runtextmacro HashStruct_NewReadonlyPrimitiveField("maxY", "real")
+    //! runtextmacro HashStruct_NewReadonlyPrimitiveField("curX", "real")
+    //! runtextmacro HashStruct_NewReadonlyPrimitiveField("curY", "real")
     
     method initialize takes rect saveRect returns nothing
         local SaveWriter saveWriter = .saveWriter
@@ -39,15 +40,7 @@ struct SaveInstanceTerrain extends array
         endif
     endmethod
     
-    method minX_exists takes nothing returns boolean
-        return .minX != 0
-    endmethod
-    
     method isFinished takes nothing returns boolean
-        call BJDebugMsg(R2S(.maxX))
-        call BJDebugMsg(R2S(.maxY))
-        call BJDebugMsg(R2S(.curX))
-        call BJDebugMsg(R2S(.curY))
         return not .minX_exists() or (.curY > .maxY)
     endmethod
     

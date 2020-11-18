@@ -47,18 +47,15 @@ endfunction
 
 struct SaveInstanceDestructable extends array
 
+    implement ExtendsTable
     implement SaveInstanceBaseModule
     
-    private ArrayList_destructable  destructables
-    private integer current
+    //! runtextmacro HashStruct_NewStructField("destructables", "ArrayList_destructable")
+    //! runtextmacro HashStruct_NewReadonlyPrimitiveField("current", "integer")
     
     method initialize takes ArrayList_destructable dests returns nothing
         set .destructables = dests
         set .current = 0
-    endmethod
-    
-    method destructables_exists takes nothing returns boolean
-        return destructables != 0
     endmethod
     
     method isFinished takes nothing returns boolean

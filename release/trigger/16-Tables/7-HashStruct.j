@@ -298,7 +298,7 @@ endmodule
     
     private method $NAME$_exists takes nothing returns boolean
         implement assertNotNull
-        return this.tab.has($NAME$_INDEX)
+        return this.tab.handle.has($NAME$_INDEX)
     endmethod
 //! endtextmacro
 
@@ -322,7 +322,7 @@ endmodule
     
     private method $NAME$_exists takes nothing returns boolean
         implement assertNotNull
-        return this.tab.has($NAME$_INDEX)
+        return this.tab.handle.has($NAME$_INDEX)
     endmethod
 //! endtextmacro
 
@@ -344,7 +344,7 @@ endmodule
     
     private method $NAME$_exists takes nothing returns boolean
         implement assertNotNull
-        return this.tab.has($INDEX$)
+        return this.tab.handle.has($INDEX$)
     endmethod
 //! endtextmacro
 
@@ -367,7 +367,7 @@ endmodule
     
     private method $NAME$_exists takes nothing returns boolean
         implement assertNotNull
-        return $HASHTABLE$[this].has($INDEX$)
+        return $HASHTABLE$[this].handle.has($INDEX$)
     endmethod
 //! endtextmacro
 

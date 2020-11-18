@@ -16,14 +16,15 @@ This is a fairly LoP-specific implementation, though it could easily be adapted 
 */
 
 
-struct SaveInstance//  extends array
+struct SaveInstance extends array
 
 
+    implement ExtendsTable
     implement SaveInstanceBaseModule
     
     
     static method create takes SaveWriter saveWriter returns thistype
-        local thistype this = allocate()
+        local thistype this = Table.create()
     
         set SaveInstanceBase(this).saveWriter = saveWriter
         
@@ -39,6 +40,8 @@ struct SaveInstance//  extends array
         if .unit.effects != null then
             call .unit.effects.destroy()
         endif
+        
+        call Table(this).destroy()
     endmethod
     
 
@@ -54,14 +57,6 @@ struct SaveInstance//  extends array
     method operator terrain takes nothing returns SaveInstanceTerrain
         return this
     endmethod
-    
-    
-
-    
-    // maxX
-    // maxY
-    // minX
-    // minY
 
 endstruct
 
@@ -117,6 +112,10 @@ function SaveStuff takes SaveInstance saveInstance, rect destRect, rect terrainR
     local SaveWriter saveWriter = saveInstance.saveWriter
     local PlayerData playerId = GetPlayerId(saveWriter.player)
     local boolean isSaving = false
+
+    call BJDebugMsg(I2S(GetHandleId(saveInstance.unit.units)))
+    call BJDebugMsg(I2S(saveInstance.unit.effects))
+    call BJDebugMsg(I2S(BlzGroupGetSize(saveInstance.unit.units)))
 
     if not saveInstance.unit.isFinished() then
         call saveInstance.unit.initialize()

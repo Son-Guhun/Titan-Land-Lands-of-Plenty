@@ -126,19 +126,20 @@ endscope
 
 struct SaveInstanceUnit extends array
 
+    implement ExtendsTable
     implement SaveInstanceBaseModule
     
-    group units
-    LinkedHashSet effects
+    //! runtextmacro HashStruct_NewHandleField("units", "group")
+    //! runtextmacro HashStruct_NewStructField("effects", "LinkedHashSet")
     
-    private integer savedCount
-    private integer total
-    
+    //! runtextmacro HashStruct_NewReadonlyPrimitiveField("savedCount", "integer")
+    //! runtextmacro HashStruct_NewReadonlyPrimitiveField("total", "integer")
+
     // Extents. These are used only if the SaveWriter is not a rect save.
-    private real minX
-    private real minY
-    private real maxX
-    private real maxY
+    //! runtextmacro HashStruct_NewReadonlyPrimitiveField("minX", "real")
+    //! runtextmacro HashStruct_NewReadonlyPrimitiveField("minY", "real")
+    //! runtextmacro HashStruct_NewReadonlyPrimitiveField("maxX", "real")
+    //! runtextmacro HashStruct_NewReadonlyPrimitiveField("maxY", "real")
     
     method initialize takes nothing returns nothing
         set .savedCount = 0
@@ -233,14 +234,6 @@ struct SaveInstanceUnit extends array
         endloop
         
         return counter
-    endmethod
-    
-    method units_exists takes nothing returns boolean
-        return units != null
-    endmethod
-    
-    method effects_exists takes nothing returns boolean
-        return effects != 0
     endmethod
     
     method isFinished takes nothing returns boolean
