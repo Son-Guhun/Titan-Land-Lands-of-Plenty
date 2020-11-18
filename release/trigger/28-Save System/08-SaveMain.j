@@ -113,63 +113,22 @@ private function SaveLoopActions takes nothing returns nothing
     endif
 endfunction
 
-function SaveUnits takes SaveInstance saveInstance returns nothing
+function SaveStuff takes SaveInstance saveInstance, rect destRect, rect terrainRect returns nothing
     local SaveWriter saveWriter = saveInstance.saveWriter
     local PlayerData playerId = GetPlayerId(saveWriter.player)
+    local boolean isSaving = false
 
-
-    // set playerId.isSaving = true
     if not saveInstance.unit.isFinished() then
         call saveInstance.unit.initialize()
-        
-        if playerId.saveInstance != 0 then
-            call LoP_WarnPlayer(saveWriter.player, LoPChannels.WARNING, "Did not finish saving previous file!")
-            call playerId.saveInstance.destroy()
-        else
-            call PlayerData.playerQueue.append(playerId + 1)
-        endif
-        set playerId.saveInstance = saveInstance
-        
-    else
-        call saveInstance.destroy()
-        call LoP_WarnPlayer(saveWriter.player, LoPChannels.ERROR, "No units to save.")
     endif
-endfunction
-
-private struct G extends array
+    if destRect != null then
+        call saveInstance.destructable.initialize(ArrayListEnumDestructablesInRect(destRect))
+    endif
+    if terrainRect != null then
+        call saveInstance.terrain.initialize(terrainRect)
+    endif
     
-    static method operator enumList takes nothing returns ArrayList_destructable
-        return bj_forLoopAIndex
-    endmethod
-    
-    static method operator enumList= takes integer list returns nothing
-        set bj_forLoopAIndex = list
-    endmethod
-
-endstruct
-
-private function AddToArrayList takes nothing returns boolean
-    call G.enumList.append(GetFilterDestructable())
-    return false
-endfunction
-
-function SaveDestructables takes SaveInstance saveInstance, rect rectangle returns nothing
-    local integer tempInteger
-    local SaveWriter saveWriter = saveInstance.saveWriter
-    local PlayerData playerId = GetPlayerId(saveWriter.player)
-    local ArrayList_destructable destructables = ArrayList.create()
-    
-    
-    set tempInteger = G.enumList  // store global value in local
-    set G.enumList = destructables
-
-    call EnumDestructablesInRect(rectangle, Condition(function AddToArrayList), null)
-    
-    set G.enumList = tempInteger  // restore global variable value
-    
-    if destructables.size > 0 then
-        call saveInstance.destructable.initialize(destructables)
-    
+    if not saveInstance.unit.isFinished() or not saveInstance.destructable.isFinished() or not saveInstance.terrain.isFinished() then
         if playerId.saveInstance != 0 then
             call LoP_WarnPlayer(saveWriter.player, LoPChannels.WARNING, "Did not finish saving previous file!")
             call playerId.saveInstance.destroy()
@@ -177,28 +136,23 @@ function SaveDestructables takes SaveInstance saveInstance, rect rectangle retur
             call PlayerData.playerQueue.append(playerId+1)
         endif
         set playerId.saveInstance = saveInstance
-        
+    
     else
-        call destructables.destroy()
+        call LoP_WarnPlayer(saveWriter.player, LoPChannels.ERROR, "Nothing to save.")
         call saveInstance.destroy()
-        call LoP_WarnPlayer(saveWriter.player, LoPChannels.ERROR, "No destructables to save.")
     endif
 endfunction
 
-function SaveTerrain takes SaveInstance saveInstance, rect saveRect returns nothing
-    local SaveWriter saveWriter = saveInstance.saveWriter
-    local PlayerData playerId = GetPlayerId(saveWriter.player)
-    
-    call saveInstance.terrain.initialize(saveRect)
+function SaveUnits takes SaveInstance saveInstance returns nothing
+    call SaveStuff(saveInstance, null, null)
+endfunction
 
-    if playerId.saveInstance != 0 then
-        call LoP_WarnPlayer(saveWriter.player, LoPChannels.WARNING, "Did not finish saving previous file!")
-        call playerId.saveInstance.destroy()
-    else
-        call PlayerData.playerQueue.append(playerId+1)
-    endif
-    set playerId.saveInstance = saveInstance
-    
+function SaveDestructables takes SaveInstance saveInstance, rect rectangle returns nothing
+    call SaveStuff(saveInstance, rectangle, null)
+endfunction
+
+function SaveTerrain takes SaveInstance saveInstance, rect saveRect returns nothing
+    call SaveStuff(saveInstance, null, saveRect)
 endfunction
 
 private struct InitStruct

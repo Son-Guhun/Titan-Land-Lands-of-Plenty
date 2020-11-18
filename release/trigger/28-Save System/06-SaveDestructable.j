@@ -13,6 +13,38 @@ saving is cancelled and the player is warned.
 
 */
 
+private struct G extends array
+    
+    static method operator enumList takes nothing returns ArrayList_destructable
+        return bj_forLoopAIndex
+    endmethod
+    
+    static method operator enumList= takes integer list returns nothing
+        set bj_forLoopAIndex = list
+    endmethod
+
+endstruct
+
+private function AddToArrayList takes nothing returns boolean
+    call G.enumList.append(GetFilterDestructable())
+    return false
+endfunction
+
+function ArrayListEnumDestructablesInRect takes rect rectangle returns ArrayList_destructable
+    local ArrayList_destructable destructables = ArrayList.create()
+    local integer tempInteger
+
+    set tempInteger = G.enumList  // store global value in local
+    set G.enumList = destructables
+
+    call EnumDestructablesInRect(rectangle, Condition(function AddToArrayList), null)
+
+    set G.enumList = tempInteger  // restore global variable value
+        
+
+    return destructables
+endfunction
+
 struct SaveInstanceDestructable extends array
 
     implement SaveInstanceBaseModule
