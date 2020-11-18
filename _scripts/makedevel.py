@@ -8,6 +8,7 @@ except:
 
 dataBase = '../devel/table/unit.ini'
 
+# Unit types to be maintined in devel version.
 ignored = set([
     'e001', # Race Selector
     'H00V', # Cosmosis
@@ -24,6 +25,7 @@ ignored = set([
     'n02R', # Titanic Teleportation Solutions
     ])
 
+# Conditions a unit type must meet to be maintained in devel version.
 conditions = [
     lambda u: u.name in ignored,
     lambda u: u["Name"][1:-1].startswith("Tower: "),
