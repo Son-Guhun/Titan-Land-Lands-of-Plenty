@@ -1,3 +1,18 @@
+"""
+
+
+Map variants:
+    DEVEL         -> Does not contain most unit object data. Contains only necessary pre-placed doodads. Saves the fastest in the Editor.
+                  -> Used when editing script files.
+
+    DEVELOPMENT   -> Does not contain imports. Saves considerable faster than RELEASE in the World Editor.
+                  -> Used when editing object data.
+                  -> For creating new object data, the objecteditor python package is more convenient to use.
+
+    RELEASE       -> Contains entire map contents.
+                  -> Generally isn't opened in the editor.
+
+"""
 import configparser
 import subprocess
 import os
@@ -103,8 +118,8 @@ def pull(dirs = ['map','table', 'trigger', 'w3x2lni'], release='release/', devel
     if not os.path.exists(development):
         os.mkdir(development)
 
-    if not os.path.exists('development/.w3x'):
-        shutil.copy('release/.w3x', 'development/.w3x')
+    if not os.path.exists(os.path.join(development, '.w3x')):
+        shutil.copy(os.path.join(release, '.w3x'), os.path.join(development, '.w3x'))
 
     for directory in dirs:
         if os.path.exists(development+directory):
@@ -117,7 +132,11 @@ def make_devel():
     makedevel.do('development/table/unit.ini', 'devel/table/unit.ini')
 
 def push_devel(target='development'):
-    shutil.copyfile('devel/map/war3map.j', target+'/map/war3map.j')
+    # Copy script-related map files
+    shutil.copyfile('devel/map/war3map.j', target+'/map/war3map.j')  # script file
+    shutil.copyfile('devel/map/war3map.s', target+'/map/war3map.s')  # sound defs file
+    shutil.copyfile('devel/map/war3map.r', target+'/map/war3map.r')  # rect defs file
+
     push(release=target+'/', development='devel/', dirs=['trigger'])
 
 def test_devel(target='development'):
