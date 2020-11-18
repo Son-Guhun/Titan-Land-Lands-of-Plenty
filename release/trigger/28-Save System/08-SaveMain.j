@@ -103,6 +103,9 @@ private function SaveLoopActions takes nothing returns nothing
         endif
     
         if saveInstance.unit.isFinished() and saveInstance.destructable.isFinished() and saveInstance.terrain.isFinished() then
+            if User.fromLocal() == playerId then
+                call BlzFrameSetVisible(saveProgressBar, false)
+            endif
             call saveInstance.destroy()
         else
             call queue.append(playerId+1)

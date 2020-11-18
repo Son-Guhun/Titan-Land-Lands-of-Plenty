@@ -150,9 +150,9 @@ struct SaveInstanceUnit extends array
         set .minY = Pow(2, 23)
         
         if User.Local == saveWriter.player then
-            call BlzFrameSetText(saveUnitBarText, "Waiting...")
-            call BlzFrameSetVisible(saveUnitBar, true)
-            call BlzFrameSetValue(saveUnitBar, 0.)
+            call BlzFrameSetText(saveProgressBarText, "Waiting...")
+            call BlzFrameSetVisible(saveProgressBar, true)
+            call BlzFrameSetValue(saveProgressBar, 0.)
         endif
     endmethod
 
@@ -318,9 +318,6 @@ struct SaveInstanceUnit extends array
             //This block should be below the group refresh check in order to always produce correct results
             if IsGroupEmpty(grp) then
                 call DisplayTextToPlayer(filterPlayer,0,0, "Finished Saving" )
-                if User.fromLocal() == playerId then
-                    call BlzFrameSetVisible(saveUnitBar, false)
-                endif
                 exitwhen true
             endif
                 
@@ -335,8 +332,8 @@ struct SaveInstanceUnit extends array
         else
             set .savedCount = .savedCount + 1
             if User.fromLocal() == playerId then
-                call BlzFrameSetText(saveUnitBarText, I2S(.savedCount*BATCH_SIZE)+ "/" +I2S(.total))
-                call BlzFrameSetValue(saveUnitBar, 100.*.savedCount*BATCH_SIZE / I2R(.total))
+                call BlzFrameSetText(saveProgressBarText, I2S(.savedCount*BATCH_SIZE)+ "/" +I2S(.total))
+                call BlzFrameSetValue(saveProgressBar, 100.*.savedCount*BATCH_SIZE / I2R(.total))
             endif
         endif
         

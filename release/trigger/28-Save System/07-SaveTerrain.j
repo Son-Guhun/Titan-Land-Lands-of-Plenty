@@ -33,9 +33,9 @@ struct SaveInstanceTerrain extends array
         set .curY = .minY
         
         if User.Local == saveWriter.player then
-            call BlzFrameSetText(saveTerrainBarText, "Waiting...")
-            call BlzFrameSetValue(saveTerrainBar, 0.)
-            call BlzFrameSetVisible(saveTerrainBar, true)
+            call BlzFrameSetText(saveProgressBarText, "Waiting...")
+            call BlzFrameSetValue(saveProgressBar, 0.)
+            call BlzFrameSetVisible(saveProgressBar, true)
         endif
     endmethod
     
@@ -107,13 +107,10 @@ struct SaveInstanceTerrain extends array
         if curY > maxY then
             call saveWriter.write(SaveNLoad_FormatString("SnL_ter", "end"))
             call DisplayTextToPlayer(saveWriter.player, 0, 0, "Finished Saving")
-            if User.Local == saveWriter.player then
-                call BlzFrameSetVisible(saveTerrainBar, false)
-            endif
         else
             if User.Local == saveWriter.player then
-                call BlzFrameSetValue(saveTerrainBar, 100.*((curY-.minY)*(maxX-.minX) + (maxX - curX)) / ((maxY-.minY)*(maxX-.minX)))
-                call BlzFrameSetText(saveTerrainBarText, I2S(R2I((curY-.minY)*(maxX-.minX)+(maxX - curX))/16384) + "/" + I2S(R2I((maxY-.minY)*(maxX-.minX))/16384))
+                call BlzFrameSetValue(saveProgressBar, 100.*((curY-.minY)*(maxX-.minX) + (maxX - curX)) / ((maxY-.minY)*(maxX-.minX)))
+                call BlzFrameSetText(saveProgressBarText, I2S(R2I((curY-.minY)*(maxX-.minX)+(maxX - curX))/16384) + "/" + I2S(R2I((maxY-.minY)*(maxX-.minX))/16384))
             endif
         endif
 
