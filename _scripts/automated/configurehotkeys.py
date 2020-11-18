@@ -1,10 +1,15 @@
-"""This script iterates over all production buildings (see tags) in a .ini database and assigns hotkeys to all units produced by those buildings.
+"""
+This script iterates over all production buildings (see tags) in a .ini database and assigns hotkeys to all units produced by those buildings.
 
 Hotkey order: [Q,W,E,R,A,S,D,F,Z,W,C,V]
 Production buildings: sets hotkeys for trained units in the order that they appear.
 Race Selectors: configures hotkeys for upgrades, then for trained units, in the order that each appears.
 
 """
+import os
+import sys
+sys.path.insert(1, os.path.join(sys.path[0], '..'))
+#______________________________________________________________________________________________
 
 from myconfigparser import Section, load_unit_data, get_decorations, iter_deco_builders
 import traceback

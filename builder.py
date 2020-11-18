@@ -1,9 +1,9 @@
 """
 
-
 Map variants:
     DEVEL         -> Does not contain most unit object data. Contains only necessary pre-placed doodads. Saves the fastest in the Editor.
                   -> Used when editing script files.
+                  -> Loads quickly in WC3. Great for testing script changes.
 
     DEVELOPMENT   -> Does not contain imports. Saves considerable faster than RELEASE in the World Editor.
                   -> Used when editing object data.
@@ -11,6 +11,80 @@ Map variants:
 
     RELEASE       -> Contains entire map contents.
                   -> Generally isn't opened in the editor.
+
+
+Constants that refer to file paths for different map types:
+
+    LNI => folder maps
+        'release', 'development', 'devel'
+    
+    OBJ => normal maps
+        RELEASE, DEVELOPMENT, DEVEL
+
+    SLK => slk-optimized maps
+        RELEASE_SLK, DEVELOPMENT_SLK, DEVEL_SLK 
+
+
+Commands:
+
+    open_with_editor()                                         => Opens DEVELOPMENT in the World Editor.
+    open_with_editor(DEVEL)                                    => Opens DEVEL in the World Editor.
+
+    .. Converting between map types:
+    build('release'), build('development'), build('devel')     => Converts an LNI map to an OBJ map.
+    commit(DEVELOPMENT), commit(DEVEL)                         => Converts an OBJ map to an LNI map.
+
+    .. Pushing changes upstream across variants:
+    push_all()                                                 => Pushes files in 'development' to 'release'
+    push_devel()                                               => Pushes files in 'devel' to 'development'
+    push_devel('release')                                      => Pushes files in 'devel' to 'release'
+    
+    .. Pulling changes downstream:
+    pull()                                                     => Pulls changes from 'release' to 'development'. Creates folders if they don't exist.
+    make_devel()                                               => Pulls changes from 'development' to 'devel'. Creates folders if they don't exist.
+
+    .. Testing:
+    test_map(RELEASE), test_map(DEVELOPMENT), test_map(DEVEL)  => Opens an SLK or OBJ map in WC3.
+    test_devel()                                               => Executes commit(DEVEL)->push_devel()->build('development')->test_map(DEVELOPMENT)
+    test_devel('release')                                      => Same as test_devel, but for 'release' equivalents.
+
+
+Setting up:
+
+    Initial setup, then work on the map in the World Editor:
+            => run this builder.py script in an interactive Python console.
+            - generate_config()
+            => Open the config.ini file created in root folder and put in the correct values. Check the guide below.
+            - read_config()
+            - pull()
+            - build('development')
+            - make_devel()
+            - build('devel')
+            - open_with_editor() OR open_with_editor(DEVEL)
+
+    config.ini file fields:
+
+        paths:
+            w2l: path to w2l.exe (in w3x2lni folder)
+            war3: path to a classic wc3 version executable (optional) 
+            war3r: path to the Warcraft Reforged executable (not launcher)
+            worldedit: path to world editor used (usually SharpCraft editor running wc3 patch 1.29.2)
+
+        jass-preprocessors: ignore
+        obj-postprocessors: ignore
+        slk-postprocessors: ignore
+
+
+Command Examples:
+
+    Working with DEVEL in Editor. Send all changes to release folder:
+        - commit(DEVEL)
+        - push_devel('release')
+        => Changes will now show up in git.
+
+    Working with DEVELOPMENT in Editor. Send all changes to release folder:
+        - commit()
+        - push_all()
 
 """
 import configparser
@@ -27,13 +101,6 @@ def get_user_functions(table):
         yield f
 
 
-try:
-    p = configparser.ConfigParser()
-    p.read('config.ini')
-except:
-    print("Unable to load configuration file.")
-
-
 DEVELOPMEN_LNI = 'development'
 RELEASE_LNI = 'release'
 DEVEL_LNI = 'devel'
@@ -44,6 +111,7 @@ DEVELOPMENT_SLK = 'development_slk.w3x'
 RELEASE_SLK = 'release_slk.w3x'
 DEVEL_SLK = 'devel_slk.w3x'
 
+p = None  # hold read config values
 
 config_values = \
 {
@@ -87,6 +155,14 @@ def generate_config(path='config.ini'):
         writer.read(path)
     with open(path,'w') as f:
         writer.write(f)
+
+def read_config(path='config.ini'):
+    global p
+    try:
+        p = configparser.ConfigParser()
+        p.read(path)
+    except:
+        print("Unable to load configuration file.")
 
 def build(which):
     """Creates an OBJ from an LNI map"""
@@ -167,3 +243,5 @@ def ls():
         print (str(f).split()[1])
 
 print('For help type ls()')
+read_config()
+switch()  # use WC3 Reforged by default
