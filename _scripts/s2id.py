@@ -68,7 +68,7 @@ class Rawcode(str):
         return "Rawcode('{}')".format(self)
 
     def to_int(self):
-        return ord(self[0]) * ord(self[1]) * ord(self[2]) * ord(self[3])
+        return ord(self[0])*16777216 + ord(self[1])*65536 + ord(self[2])*256 + ord(self[3])
 
     def match(self, other):
         r = ''.join([
@@ -76,6 +76,14 @@ class Rawcode(str):
             self[1].lower() if other[1].islower() else self[1].upper(),
             self[2].lower() if other[2].islower() else self[2].upper(),
             self[3].lower() if other[3].islower() else self[3].upper()
+        ])
+
+        return self if self == r else type(self)(r)
+
+    def match_first(self, other):
+        r = ''.join([
+            self[0].lower() if other[0].islower() else self[0].upper(),
+            self[1],self[2],self[3]
         ])
 
         return self if self == r else type(self)(r)
