@@ -4,6 +4,23 @@ This library requires some trigger to be listening to SnL_IOsize sync data event
 
 In the Save System folder, the RectSaveLoader library provides such a trigger.
 
+Functions:
+
+    async boolean SaveIO_LoadSave(player whichPlayer, string path, boolean originalPosition)
+    .
+    . This function returns a value that is async:
+    .   It will return true for any player that is not 'whichPlayer'.
+    .   It will return false for 'whichPlayer' if the file failed to be read.
+
+    nothing SaveIO_LoadSaveOld(player whichPlayer, string path)
+    .
+    . This function is used in LoP to load old save formats.
+    
+    
+    string SaveIO_CleanUpString(string str)
+    .
+    . This function makes all occurences of quotation marks compatible with Preload I/O by converting them to '' (two single quotes).
+
 
 . This struct is used to save strings to a file.
 .
@@ -24,7 +41,7 @@ struct SaveWriter:
         real extentX
         real extentY
 
-    Mehotds:
+    Methods:
     
         boolean isRectSave()
         
@@ -83,10 +100,9 @@ private struct PlayerData extends array
 
 endstruct
 
-// Formats a string for synced I/O, using BlzSendSyncData (delayed read).
+// Formats a string for sending sync data using BlzSendSyncData.
 public function FormatString takes string prefix, string data returns string
     return prefix + "|" + data
-    // return "\" )\ncall BlzSendSyncData(\"" + prefix + "\",\"" + data + "\")\n//"
 endfunction
 
 // Formats a string for local I/O, using BlzSetAbilityTooltip (instant read).
@@ -212,7 +228,6 @@ struct SaveWriter extends array
 
     private method flush takes nothing returns nothing
         local string path = .folder + "\\" + I2S(.current) + ".txt"
-        // local string validationString = FormatStringLocal(IO_ABILITY(), VALIDATION_STR())
         local integer i = 1
         local integer totalLines = .linesWritten
         local Table buffer = .buffer
@@ -227,7 +242,6 @@ struct SaveWriter extends array
                 set i = i + 1
             endloop
         
-            // call Preload(validationString)
             call Preload( "\" )
 endfunction
 function SomeRandomName takes nothing returns nothing //")  // Not calling PreloadEnd in a preload file greatly improves loading performance.
@@ -245,11 +259,7 @@ function SomeRandomName takes nothing returns nothing //")  // Not calling Prelo
             set .linesWritten = .linesWritten + 1
         endif
         
-        set .buffer.string[.linesWritten] = "\" )\ncall BlzSetAbilityIcon('" + ID2S(abilities[.linesWritten]) + "',\"" + str + "\")\n//"
-        
-        // if GetLocalPlayer() == .player then
-           //  call Preload(str)
-        // endif
+        set .buffer.string[.linesWritten] = FormatStringLocal(abilities[.linesWritten], str)
     endmethod
     
     
@@ -516,12 +526,14 @@ struct SaveLoader extends array
 endstruct
 
 /*
+    new -> should hold the header string. If it is equal to original, that means the file could not be read.
+
     Returns true if the current local player is different from whichPlayer.
     
     Returns true for whichPlayer if new != original.
     Returns false for whichPlayer if new == original.
 */
-private function aaa takes player whichPlayer, boolean originalPosition, string pathString, string new, string original returns boolean
+private function SendIOSyncHeader takes player whichPlayer, boolean originalPosition, string pathString, string new, string original returns boolean
         if new == original then
             return GetLocalPlayer() != whichPlayer
         else
@@ -551,9 +563,9 @@ public function LoadSaveEx takes boolean newVersion, player whichPlayer, string 
         call Preloader(path)
     endif
     if newVersion then
-        if aaa(whichPlayer, originalPosition, pathString, BlzGetAbilityIcon(IO_ABILITY()), icon) then
+        if SendIOSyncHeader(whichPlayer, originalPosition, pathString, BlzGetAbilityIcon(IO_ABILITY()), icon) then
             set ret = true
-        elseif aaa(whichPlayer, originalPosition, pathString, BlzGetAbilityTooltip(IO_ABILITY(), 0), tooltip) then
+        elseif SendIOSyncHeader(whichPlayer, originalPosition, pathString, BlzGetAbilityTooltip(IO_ABILITY(), 0), tooltip) then
             set ret = true
         endif
     endif
@@ -567,7 +579,9 @@ public function GetCurrentlyLoadingSave takes player whichPlayer returns SaveLoa
     return PlayerData(GetPlayerId(whichPlayer)).loadRequests.begin()
 endfunction
 
-// This function returns a value that is async. It will be false if the file failed to load, and ONLY for 'whichPlayer'.
+// This function returns a value that is async:
+    // It will return true for any player that is not 'whichPlayer'
+    // It will return false for 'whichPlayer' if the file failed to load.
 public function LoadSave takes player whichPlayer, string path, boolean originalPosition returns boolean
     return LoadSaveEx(true, whichPlayer, path, originalPosition)
 endfunction

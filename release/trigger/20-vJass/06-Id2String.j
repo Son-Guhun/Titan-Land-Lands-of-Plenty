@@ -71,8 +71,8 @@ public struct Char extends array
         upper = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
         lower = upper.lower()
         ords = lambda string: [ord(c) for c in string]
-        valid = set(ords(numbers) + ords(upper) + ords(lower))
-        result = str([chr(i) if i in valid else '_' for i in range(256)])
+        valid = set(ords(numbers+upper+lower))
+        result = ''.join([chr(i) if i in valid else '_' for i in range(256)])
     */
     static method operator alphabet takes nothing returns string
         return "________________________________________________0123456789_______ABCDEFGHIJKLMNOPQRSTUVWXYZ______abcdefghijklmnopqrstuvwxyz_____________________________________________________________________________________________________________________________________"
