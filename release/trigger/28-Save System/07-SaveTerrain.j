@@ -1,4 +1,4 @@
-library SaveTerrain requires SaveNLoad, SaveIO, SaveNLoadProgressBars, LoPWarn
+library SaveTerrain requires SaveNLoadTerrain, SaveNLoadProgressBars, LoPWarn
 /*
     Defines the SaveTerrain function:
     
@@ -12,6 +12,9 @@ or the owner of saveWriter, then saving is cancelled and the player is warned.
 */
 
 struct SaveInstanceTerrain extends array
+
+    static constant integer BATCH_SIZE = 25  // Number of strings saved per saveNextTiles call (increasing will reduce FPS in-game and may cause OP limit issues)
+    static constant integer TILES_PER_STRING = 30  // 30 tiles per single string (avoid desync). If we were not saving height data, we could double this value.
 
     implement ExtendsTable
     implement SaveInstanceBaseModule
@@ -58,30 +61,18 @@ struct SaveInstanceTerrain extends array
         local SaveWriter saveWriter = .saveWriter
         
         if curY == .minY and curX == .minX then
-            call saveWriter.write(SaveNLoad_FormatString("SnL_ter", "=" + R2S(.minX - saveWriter.centerX) + "@" + R2S(.maxX - saveWriter.centerX) + "@" +/*
-                                                    */R2S(.minY - saveWriter.centerY) + "@" + R2S(.maxY - saveWriter.centerY) + "@"))
+            call saveWriter.write(SaveNLoad_FormatString("SnL_ter", SerializeTerrainHeader(saveWriter, .minX, .minY, .maxX, .maxY)))
         endif
 
         loop
-            // call BJDebugMsg(I2S(j))
-            // call BJDebugMsg(R2S(curX))
-            // call BJDebugMsg(R2S(curY))
-        exitwhen j >= 25 /* avoid OP limit */ or curY > maxY  
+        exitwhen j >= BATCH_SIZE or curY > maxY  
             set saveStr = ""
             set i = 0
             
             loop
-            exitwhen i >= 30 // 30 tiles per single string (avoid desync). If we were not saving height data, we could double this value.
+            exitwhen i >= TILES_PER_STRING
                 
-                set saveStr = saveStr + LoadD2H(TerrainTools_GetTextureId(GetTerrainType(curX, curY)))/*
-                                    */+ LoadD2H(GetTerrainVariance(curX, curY))
-                                    
-                set heightStr = AnyBase(92).encode(Deformation.fromCoords(curX, curY).idepth + SaveNLoad_BASE_92_OFFSET())
-                if StringLength(heightStr) == 1 then
-                    set saveStr = saveStr + ("0" + heightStr)
-                else
-                    set saveStr = saveStr + heightStr
-                endif
+                set saveStr = saveStr + SerializeTerrainTile(curX, curY)
                 
                 set i = i+1
                 if curX > maxX then

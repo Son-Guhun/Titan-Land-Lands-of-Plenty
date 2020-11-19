@@ -40,25 +40,6 @@ public struct BoolFlags extends array
     endmethod
 endstruct
 
-//! textmacro SaveXYMethod takes name, offset
-    method operator $name$ takes nothing returns real
-        return udg_save_XYminmaxcur[this$offset$]
-    endmethod
-    
-    method operator $name$= takes real value returns nothing
-        set udg_save_XYminmaxcur[this$offset$] = value
-    endmethod
-//! endtextmacro
-
-private struct PlayerTerrainData extends array
-    //! runtextmacro SaveXYMethod("minX", "")
-    //! runtextmacro SaveXYMethod("maxX", "+bj_MAX_PLAYERS")
-    //! runtextmacro SaveXYMethod("curX", "+2*bj_MAX_PLAYERS")
-    //! runtextmacro SaveXYMethod("minY", "+3*bj_MAX_PLAYERS")
-    //! runtextmacro SaveXYMethod("maxY", "+4*bj_MAX_PLAYERS")
-    //! runtextmacro SaveXYMethod("curY", "+5*bj_MAX_PLAYERS")
-endstruct
-
 struct SaveInstanceBase
     SaveWriter saveWriter
 endstruct
@@ -90,10 +71,6 @@ struct SaveNLoad_PlayerData extends array
     
     public method operator centerY= takes real value returns nothing
         set loadCenter[this + bj_MAX_PLAYERS] = value
-    endmethod
-    
-    method operator terrain takes nothing returns PlayerTerrainData
-        return this
     endmethod
     
 endstruct
