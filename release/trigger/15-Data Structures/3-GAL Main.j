@@ -1,12 +1,13 @@
 ////////////////////////////////////////////////////////////////////////////////////////////////////
-//Guhun's Array Lists v.1.0.0
+//Guhun's Array Lists v.1.1.0
 library GAL requires Lists
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 // System API
 /////////////////////////////////////////
 //! novjass
 struct ArrayList
-    method size() // returns the number of elements in the list.
+    integer size() // returns the number of elements in the list.
+    method trim(integer howMany)  // trims the list, keeping only howMany elements. howMany must be positive and <= list size. Values are not removed from memory.
     method append($type$ value) // adds the specified value at the end of the list.
     method delete(integer index) // deletes the value at the specified index from the list.
     method clear() // removes all elements from the list.
@@ -119,6 +120,13 @@ library_once GAL$type$ requires GAL
             //Available since 1.0.0, replaced GetListSize
             method operator size takes nothing returns integer
                 return LoadInteger(Lists_GetHashtable(), this, GAL_INDEX_SIZE())
+            endmethod
+            
+            // Doesn't actually check for size in order to be inlineable.
+            method trim takes integer howMany returns nothing
+                // assert howMany <= .size
+            
+                call GAL_SetSize(this, IMaxBJ(howMany, 0))
             endmethod
             
             method append takes $type$ value returns integer
