@@ -31,13 +31,6 @@ endstruct
 //==========================================
 //CONSTANTS FOR HASHTABLE ADDRESSES (Unit Handle Ids)
 globals
-    private constant integer COUNTER = -1  // Used to count if the unit has had their position set by the timer loop
-    private constant integer TARGET_ANGLE = -2  // Used to store the final facing angle of an immovable unit that's turning
-    private constant integer AUTO_LAND = -3
-    private constant integer STRUCTURE_HEIGHT = -4 // This is only saved for structures, which lose their flying heights when moving
-    
-    private constant integer saveFlyHeight = -5  // Used to save flying height for immovable units (to keep height after upgrading)
-
     private constant integer SCALE  = 0
     public constant integer RED    = 1
     public constant integer GREEN  = 2
@@ -95,8 +88,7 @@ endfunction
 //==========================================
 // GUMS Getters
 
-// Contains the Raw values of each UnitVisuals struct. Returned by the .raw method operator.
-private struct UnitVisualsRaw extends array
+//! textmacro UnitVisualValues_DeclareValuesField
     static if not INIT_HASHTABLE  and LIBRARY_HashtableWrapper then
         private method operator values takes nothing returns Table
             return data[this]
@@ -106,6 +98,12 @@ private struct UnitVisualsRaw extends array
             return data[this]
         endmethod
     endif
+//! endtextmacro
+
+// Contains the Raw values of each UnitVisuals struct. Returned by the .raw method operator.
+private struct UnitVisualsRaw extends array
+
+    //! runtextmacro UnitVisualValues_DeclareValuesField()
     
     method getScale takes nothing returns real
         return (.values.real[SCALE])
@@ -148,15 +146,7 @@ endstruct
 struct UnitVisuals extends array
     static constant string allTags = "gold lumber work flesh ready one two throw slam large medium small victory alternate defend swim spin fast upgrade first second third fourth fifth"
     
-    static if not INIT_HASHTABLE  and LIBRARY_HashtableWrapper then
-        private method operator values takes nothing returns Table
-            return data[this]
-        endmethod
-    else
-        private method operator values takes nothing returns data_Child
-            return data[this]
-        endmethod
-    endif
+    //! runtextmacro UnitVisualValues_DeclareValuesField()
     
     method operator raw takes nothing returns UnitVisualsRaw
         return this

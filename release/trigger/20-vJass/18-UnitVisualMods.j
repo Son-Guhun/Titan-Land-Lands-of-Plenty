@@ -15,13 +15,8 @@ globals
 endglobals
 
 //Hashtable values:
-globals
-    private constant integer COUNTER = -1  // Used to count if the unit has had their position set by the timer loop
-    private constant integer TARGET_ANGLE = -2  // Used to store the final facing angle of an immovable unit that's turning
-    private constant integer AUTO_LAND = -3
-    private constant integer STRUCTURE_HEIGHT = -4 // This is only saved for structures, which lose their flying heights when moving
-    
-    private constant integer saveFlyHeight = -5  // Used to save flying height for immovable units (to keep height after upgrading)
+globals    
+    private constant integer SAVED_FLY_HEIGHT = -1  // Used to save flying height for units (to keep height after upgrading)
 
     private constant integer SCALE  = 0
     public constant integer RED    = 1
@@ -58,11 +53,6 @@ endglobals
     endif
     
 //! endtextmacro
-
-globals
-    private group loopGroup = CreateGroup()
-endglobals
-
 private struct data extends array
     static method operator [] takes integer i returns UnitVisualValues_data_Child
         return UnitVisualValues_data[i]
@@ -85,10 +75,6 @@ endfunction
 
 // hooks here
 //! runtextmacro optional DefineHooks()
-
-function GUMS_RegisterImmovableUnit takes unit whichUnit returns nothing
-    call GroupAddUnit(loopGroup, whichUnit)
-endfunction
 
 //////////////////////////////////////////////////////
 constant function GUMSCustomUnitNameColor takes nothing returns string
@@ -137,13 +123,92 @@ endfunction
 //==========================================
 //==========================================
 
+private struct TimerData extends array
+
+    implement AgentStruct
+
+    //! runtextmacro HashStruct_NewAgentField("unit","unit")
+    //! runtextmacro HashStruct_NewPrimitiveField("owner","integer")
+    //! runtextmacro HashStruct_NewPrimitiveField("isSelected","boolean")
+endstruct
+
+globals
+    private boolean isAmovDisabled = false
+endglobals
+
+private function EnableAmov takes boolean flag returns nothing
+    local integer i = 0
+    loop
+    exitwhen i >= bj_MAX_PLAYER_SLOTS
+        call SetPlayerAbilityAvailable(Player(0), 'Amov', flag)
+        set i = i + 1
+    endloop
+endfunction
+
+
+/*
+    Performs cleanup after unit has finished rooting.
+    
+*/
+private function onTimerDoCleanup takes nothing returns nothing
+    local timer t = GetExpiredTimer()
+    local TimerData tData = TimerData.get(t)
+    local unit u = tData.unit
+    local player owner = Player(tData.owner)
+    //! runtextmacro ASSERT("u != null")
+    
+    call UnitRemoveAbility(u, 'DEDF')
+
+    if isAmovDisabled then
+        call EnableAmov(true)
+        set isAmovDisabled = false
+    endif
+    call SetUnitOwner(u, owner, false)
+    if tData.isSelected then
+        if GetLocalPlayer() == owner then
+            call SelectUnit(u, true)
+        endif
+    endif
+    
+    call PauseTimer(t)
+    call DestroyTimer(t)
+    call tData.destroy()
+    
+    set t = null
+    set u = null
+endfunction
+
+/*
+    Issue a root order while taking into account that units may be below the structure and thus stop it from rooting.
+    
+    This assumes that the following fields are empty for all structures:
+        - Pathing - Placement Requires        (requirePlace)
+        - Pathing - Placement Prevented By    (preventPlace)
+*/
+private function onTimerIssueRootOrder takes nothing returns nothing
+    local timer t = GetExpiredTimer()
+    local unit u = TimerData.get(t).unit
+    local player owner = GetOwningPlayer(u)
+    //! runtextmacro ASSERT("u != null")
+    
+    if not isAmovDisabled then  // Only disable if it hasn't already been disabled in this frame.
+        call EnableAmov(false)  // Disabled Amov so that units won't move out of the way.
+        set isAmovDisabled = true
+    endif
+    call SetUnitOwner(u, Player(bj_PLAYER_NEUTRAL_VICTIM), false)  // Change owner so that structure can root even if there are units belonging to the player below it
+    
+    call IssuePointOrder(u, "root", GetUnitX(u), GetUnitY(u))
+    call TimerStart(t, 0, false, function onTimerDoCleanup)
+    set TimerData.get(t).owner = GetPlayerId(owner)
+    set TimerData.get(t).isSelected = IsUnitSelected(u, owner)
+    
+    set t = null
+    set u = null
+endfunction
+
 //==========================================
 // GUMS API
 //==========================================
-
-globals
-    private boolean unitHasBeenRemoved = false
-endglobals
 
 function GUMSPercentTo255 takes real percent returns real
     return 2.55*percent + 0.5
@@ -152,7 +217,6 @@ endfunction
 // Clears all data stored with a unit handle ID.
 function GUMSClearHandleId takes integer handleId returns nothing
     call data.flushChild(handleId)
-    set unitHasBeenRemoved = true
 endfunction
 
 // Call this when a unit is removed from the game. It supports both in-scope units and units that are out of scope (aren't null, but can't really be manipulated)
@@ -164,19 +228,19 @@ endfunction
 private struct SaveFlyHeight extends array
 
     method operator height takes nothing returns real
-        return data[this].real[saveFlyHeight]
+        return data[this].real[SAVED_FLY_HEIGHT]
     endmethod
     
     method operator height= takes real value returns nothing
-        set data[this].real[saveFlyHeight] = value
+        set data[this].real[SAVED_FLY_HEIGHT] = value
     endmethod
     
     method clearHeight takes nothing returns nothing
-        call data[this].real.remove(saveFlyHeight)
+        call data[this].real.remove(SAVED_FLY_HEIGHT)
     endmethod
     
     method hasHeight takes nothing returns boolean
-        return data[this].real.has(saveFlyHeight)
+        return data[this].real.has(SAVED_FLY_HEIGHT)
     endmethod
 endstruct
 
@@ -186,47 +250,19 @@ endstruct
 // The setters cannot be a part of the struct, since they require setting values in the unit, and the
 // unit is not saved within the struct.
 
-function GUMSSetUnitFacing takes unit whichUnit, real newAngle returns nothing
-    //! runtextmacro ASSERT("whichUnit != null")
-    call SetUnitFacing(whichUnit, newAngle)
-    
-    if GetUnitAbilityLevel(whichUnit, 'Amov') == 0 then
-        call GroupAddUnit(loopGroup, whichUnit)
-        set data[GetHandleId(whichUnit)].real[TARGET_ANGLE] = ModuloReal(newAngle, 360)
-    endif
-endfunction
-
-function GUMSSetUnitFlyHeight takes unit whichUnit, real newHeight returns nothing
-    //! runtextmacro ASSERT("whichUnit != null")
-    if UnitAddAbility(whichUnit, 'Amrf' ) then
-        call UnitRemoveAbility(whichUnit, 'Amrf')
-    endif
-    
-    call SetUnitFlyHeight( whichUnit, newHeight, 0)
-    set SaveFlyHeight(GetHandleId(whichUnit)).height = newHeight
-    
-    if GetUnitAbilityLevel(whichUnit, 'Amov') == 0 then
-        call GroupAddUnit(loopGroup, whichUnit)
-    endif
-endfunction
-
 function GUMS_AddStructureFlightAbility takes unit structure returns nothing
     local real facing
     //! runtextmacro ASSERT("structure != null")
     //! runtextmacro ASSERT("IsUnitType(structure, UNIT_TYPE_STRUCTURE)")
 
-    if not data[GetHandleId(structure)].has(TARGET_ANGLE)  then
-        set facing = GetUnitFacing(structure)
-        call UnitAddAbility(structure, 'DEDF' )
-        call GUMSSetUnitFacing(structure, facing)
-    else
-        call UnitAddAbility(structure, 'DEDF' )
-        call SetUnitFacingTimed(structure , data[GetHandleId(structure)].real[TARGET_ANGLE], 0)
-        call SetUnitAnimation(structure, "stand")
-    endif
+    set facing = GetUnitFacing(structure)
+    call UnitAddAbility(structure, 'DEDF' )
+    call BlzSetUnitFacingEx(structure, facing)
 endfunction
 
 function GUMSSetStructureFlyHeight takes unit structure, real newHeight, boolean autoLand returns nothing
+    local timer t
+
     //! runtextmacro ASSERT("structure != null")
     //! runtextmacro ASSERT("IsUnitType(structure, UNIT_TYPE_STRUCTURE)")
     if GetUnitFlyHeight(structure) < GUMS_MINIMUM_FLY_HEIGHT() and newHeight < GUMS_MINIMUM_FLY_HEIGHT() then  // 0.01 seems to be the minimum flying height
@@ -244,12 +280,44 @@ function GUMSSetStructureFlyHeight takes unit structure, real newHeight, boolean
     if GetUnitAbilityLevel(structure,'Amov') > 0 then
         // this is an Ancient and probably already has root. Do nothing
     else
-        call GUMS_AddStructureFlightAbility(structure)  // already adds unit to loopGroup
+        call GUMS_AddStructureFlightAbility(structure)
         call IssueImmediateOrder(structure, "unroot")
-        set data[GetHandleId(structure)].boolean[STRUCTURE_HEIGHT] = true
         if autoLand then
-            set data[GetHandleId(structure)].boolean[AUTO_LAND] = true
+            set t = CreateTimer()
+            set TimerData.get(t).unit = structure
+            call TimerStart(t, 0, false, function onTimerIssueRootOrder)
+            call SetUnitAnimation(structure, "stand")
+            set t = null
         endif
+    endif
+endfunction
+
+function GUMSSetUnitFacing takes unit whichUnit, real newAngle returns nothing
+    //! runtextmacro ASSERT("whichUnit != null")
+    call BlzSetUnitFacingEx(whichUnit, newAngle)
+    
+    if GetUnitAbilityLevel(whichUnit, 'Amov') == 0 then
+        call GUMS_RedrawUnit(whichUnit)
+        
+        if IsUnitType(whichUnit, UNIT_TYPE_STRUCTURE) and GetUnitFlyHeight(whichUnit) > GUMS_MINIMUM_FLY_HEIGHT() then
+            call GUMSSetStructureFlyHeight(whichUnit, GetUnitFlyHeight(whichUnit), GetUnitAbilityLevel(whichUnit, 'DEDF') == 0)
+        endif
+    endif
+endfunction
+
+function GUMSSetUnitFlyHeight takes unit whichUnit, real newHeight returns nothing
+    //! runtextmacro ASSERT("whichUnit != null")
+    //! runtextmacro ASSERT("not IsUnitType(whichUnit, UNIT_TYPE_STRUCTURE)")
+    
+    if UnitAddAbility(whichUnit, 'Amrf' ) then
+        call UnitRemoveAbility(whichUnit, 'Amrf')
+    endif
+    
+    call SetUnitFlyHeight( whichUnit, newHeight, 0)
+    set SaveFlyHeight(GetHandleId(whichUnit)).height = newHeight
+    
+    if GetUnitAbilityLevel(whichUnit, 'Amov') == 0 then
+        call GUMS_RedrawUnit(whichUnit)
     endif
 endfunction
 
@@ -530,150 +598,6 @@ endfunction
 //==================================================================================================
 // GUMS Flying Height and Facing Timer
 
-private struct TimerData extends array
-
-    implement AgentStruct
-
-    //! runtextmacro HashStruct_NewAgentField("unit","unit")
-    //! runtextmacro HashStruct_NewPrimitiveField("owner","integer")
-    //! runtextmacro HashStruct_NewPrimitiveField("isSelected","boolean")
-endstruct
-
-globals
-    private boolean hasStructureFly = false
-endglobals
-
-private function EnableAmov takes boolean flag returns nothing
-    local integer i = 0
-    loop
-    exitwhen i >= bj_MAX_PLAYER_SLOTS
-        call SetPlayerAbilityAvailable(Player(0), 'Amov', flag)
-        set i = i + 1
-    endloop
-endfunction
-
-private function onTimer3 takes nothing returns nothing
-    local timer t = GetExpiredTimer()
-    local TimerData tData = TimerData.get(t)
-    local unit u = tData.unit
-    local player owner = Player(tData.owner)
-    //! runtextmacro ASSERT("u != null")
-    
-    call UnitRemoveAbility(u, 'DEDF')
-
-    if hasStructureFly then
-        call EnableAmov(true)
-        set hasStructureFly = false
-    endif
-    call SetUnitOwner(u, owner, false)
-    if tData.isSelected then
-        if GetLocalPlayer() == owner then
-            call SelectUnit(u, true)
-        endif
-    endif
-    
-    call PauseTimer(t)
-    call DestroyTimer(t)
-    call tData.destroy()
-    
-    set t = null
-    set u = null
-endfunction
-
-private function onTimer2 takes nothing returns nothing
-    local timer t = GetExpiredTimer()
-    local unit u = TimerData.get(t).unit
-    local player owner = GetOwningPlayer(u)
-    //! runtextmacro ASSERT("u != null")
-    
-    // Here, we make sure that units below the building don't stop it from instantly rooting (they have to move away first)
-    //call GroupEnumUnitsInRange(ENUM_GROUP, GetUnitX(u), GetUnitY(u), 1000., Filter(function FilterHide))
-    
-    // More efficient than the method used above, but units below still move out of the way: 
-    call SetUnitOwner(u, Player(bj_PLAYER_NEUTRAL_VICTIM), false)
-    
-    call IssuePointOrder(u, "root", GetUnitX(u), GetUnitY(u))
-    call TimerStart(t, 0, false, function onTimer3)
-    set TimerData.get(t).owner = GetPlayerId(owner)
-    set TimerData.get(t).isSelected = IsUnitSelected(u, owner)
-    
-    set t = null
-    set u = null
-endfunction
-
-//THIS FUNCTION IS USED TO SET FLYING HEIGHT AND FACING OF IMMOBILE UNITS (NO 'Amov')
-function GUMSGroupFunction takes nothing returns nothing
-    local unit enumUnit = GetEnumUnit()
-    local integer unitId = GetHandleId(enumUnit)
-    local real face
-    local boolean removeReal
-    local timer t
-    
-    //! runtextmacro ASSERT("enumUnit != null")
-    
-    //Check if unit is having it's facing changed and apply values accordingly
-    if not data[unitId].real.has(TARGET_ANGLE) then
-        set face = GetUnitFacing(enumUnit)
-        set removeReal = false
-    else
-        set face = data[unitId].real[TARGET_ANGLE]
-        set removeReal = true
-    endif
-    
-    //Move unit to it's own position to fix flying height and facing
-    if not data[unitId].has(COUNTER) then
-        set data[unitId][COUNTER] = 0
-        call GUMS_RedrawUnit(enumUnit)
-    elseif GetUnitFacing(enumUnit) < face - 0.001 or GetUnitFacing(enumUnit) > face + 0.001 then
-        call GUMS_RedrawUnit(enumUnit)
-    else
-        call data[unitId].remove(COUNTER)
-        if removeReal then //Not sure if removing unexisting stuff can cause crashes, but might as well avoid it
-            call data[unitId].real.remove(TARGET_ANGLE)
-        endif
-        call GUMS_RedrawUnit(enumUnit)
-        
-        if data[unitId].boolean.has(STRUCTURE_HEIGHT) then
-            call data[unitId].boolean.remove(STRUCTURE_HEIGHT)
-            if data[unitId].boolean.has(AUTO_LAND) then
-                set t = CreateTimer()
-                set TimerData.get(t).unit = enumUnit
-                call TimerStart(t, 0, false, function onTimer2)
-                call SetUnitAnimation(enumUnit, "stand")
-                set t = null
-                
-                if not hasStructureFly then
-                    call EnableAmov(false)
-                    set hasStructureFly = true
-                endif
-            endif
-            call GroupRemoveUnit(loopGroup, enumUnit)
-        else
-            if IsUnitType(enumUnit, UNIT_TYPE_STRUCTURE) and GetUnitFlyHeight(enumUnit) > GUMS_MINIMUM_FLY_HEIGHT() then
-                debug call BJDebugMsg(R2S(GetUnitFlyHeight(enumUnit)*1000))
-                call GUMSSetStructureFlyHeight(enumUnit,GetUnitFlyHeight(enumUnit), data[unitId].boolean.has(AUTO_LAND))
-            else 
-                call GroupRemoveUnit(loopGroup, enumUnit)
-            endif
-        endif
-    endif
-
-    set enumUnit = null
-endfunction
-
-
-//THIS FUNCTION IS RUN ON A TIMER THAT CALLS THE FUNCTION ABOVE
-function GUMSTimerFunction takes nothing returns nothing
-    if unitHasBeenRemoved then
-        call GroupRefresh(loopGroup)
-        set unitHasBeenRemoved = true
-    endif
-    // if BlzGroupGetSize(loopGroup) > 0 then
-        // call BJDebugMsg("GUMS Loop group: " + I2S(BlzGroupGetSize(loopGroup)))
-        call ForGroup(loopGroup, function GUMSGroupFunction)
-    // endif
-endfunction
-
 function GUMSOnUpgradeHandler takes unit trigU returns nothing
         local SaveFlyHeight unitData = GetHandleId(trigU)
         local real height
@@ -714,8 +638,6 @@ private module InitModule
             call TriggerRegisterAnyUnitEventBJ( fixUpgrades, EVENT_PLAYER_UNIT_UPGRADE_FINISH )
             call TriggerAddAction( fixUpgrades, function thistype.onUpgradeHandler )
         endif
-        
-        call TimerStart( t, 1/8., true, function GUMSTimerFunction)
     
         //! runtextmacro GUMS_RegisterTag("gold", "g")
         //! runtextmacro GUMS_RegisterTag("lumber", "l")
