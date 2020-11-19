@@ -43,8 +43,12 @@ struct SaveInstanceTerrain extends array
         endif
     endmethod
     
+    method isInitialized takes nothing returns boolean
+        return .minX_exists()
+    endmethod
+    
     method isFinished takes nothing returns boolean
-        return not .minX_exists() or (.curY > .maxY)
+        return not .isInitialized() or (.curY > .maxY)
     endmethod
     
     method saveNextTiles takes nothing returns nothing

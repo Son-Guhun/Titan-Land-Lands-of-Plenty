@@ -1,4 +1,4 @@
-library SaveUnitExtras requires SaveNLoad, SaveIO, optional UserDefinedRects, optional LoPHeroicUnit, optional CustomizableAbilityList, optional MultiPatrol
+library SaveUnitExtras requires SaveNLoad, optional UserDefinedRects, optional LoPHeroicUnit, optional CustomizableAbilityList, optional MultiPatrol
 /*
     Saves extra data from units which is not included in the main string.
 

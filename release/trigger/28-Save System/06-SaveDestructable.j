@@ -1,6 +1,6 @@
 //! runtextmacro GAL_Generate_List("true","destructable","DestructableHandle","Handle","null")
 
-library SaveDestructable requires SaveNLoad, SaveIO, GLHS, LoPWarn
+library SaveDestructable requires SaveNLoad, GALdestructable
 /*
     Defines the SaveDestructables function:
     
@@ -58,8 +58,12 @@ struct SaveInstanceDestructable extends array
         set .current = 0
     endmethod
     
+    method isInitialized takes nothing returns boolean
+        return .destructables_exists()
+    endmethod
+    
     method isFinished takes nothing returns boolean
-        return not (.destructables_exists() and .current < .destructables.size)
+        return not (.isInitialized() and .current < .destructables.size)
     endmethod
     
     method saveNextDestructables takes nothing returns nothing

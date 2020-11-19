@@ -1,4 +1,4 @@
-library SaveMain requires TileDefinition, SaveIO, SaveUnit, SaveDestructable LoPWarn
+library SaveMain requires SaveIO, SaveUnit, SaveDestructable, SaveTerrain, LoPWarn
 /*
     This library defines functionality to save a group of units and effects using SaveIO over time. Due
 to performance issues, saving all units instantly is not a good idea, as that will lag the game and may
@@ -34,11 +34,14 @@ struct SaveInstance extends array
     method destroy takes nothing returns nothing
         call .saveWriter.destroy()
         
-        if .unit.units != null then
+        if .unit.hasUnits() then
             call DestroyGroup(.unit.units)
         endif
-        if .unit.effects != null then
+        if .unit.hasEffects() then
             call .unit.effects.destroy()
+        endif
+        if .destructable.isInitialized() then
+            call .destructable.destructables.destroy()
         endif
         
         call Table(this).destroy()

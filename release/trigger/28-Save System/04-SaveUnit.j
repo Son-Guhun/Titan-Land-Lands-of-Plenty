@@ -1,7 +1,11 @@
-library SaveUnit requires SaveNLoad, SaveIO, Maths, SaveNLoadProgressBars, optional SaveUnitExtras /*
+library SaveUnit requires SaveNLoad, Maths, SaveNLoadProgressBars, /*
 
 // Libraries whose values are serialized when saving:
-*/ UnitVisualValues, DecorationSFX, AttachedSFX
+*/ UnitVisualValues, DecorationSFX, AttachedSFX, /*
+
+// Optional library for further unit serialization:
+*/ optional SaveUnitExtras
+
 /* 
 
 
@@ -140,6 +144,14 @@ struct SaveInstanceUnit extends array
     //! runtextmacro HashStruct_NewReadonlyPrimitiveField("minY", "real")
     //! runtextmacro HashStruct_NewReadonlyPrimitiveField("maxX", "real")
     //! runtextmacro HashStruct_NewReadonlyPrimitiveField("maxY", "real")
+    
+    method hasUnits takes nothing returns boolean
+        return units_exists()
+    endmethod
+    
+    method hasEffects takes nothing returns boolean
+        return effects_exists()
+    endmethod
     
     method initialize takes nothing returns nothing
         set .savedCount = 0
