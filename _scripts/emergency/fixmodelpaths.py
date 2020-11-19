@@ -1,5 +1,5 @@
-"""This script iterates over all decorations in a .ini database and set their Specialart field
-to the format expected by the SpecialEffect system.
+"""
+This script fixes model paths in a database which are using don't use two backslashes as a separator.
 """
 from myconfigparser import UnitParser, load_unit_data, Section
 
