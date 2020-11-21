@@ -1,5 +1,14 @@
 library LoPStdLib requires AttachedSFX, UnitVisualMods, LoPWidgets, LoPCommandsAbility
 
+struct LoP extends array
+    
+    //! runtextmacro ImportLibAs("LoPHeader", "Header")
+    
+    //! runtextmacro FromLibImportConstant("Header", "NEUTRAL_PASSIVE", "player")
+    //! runtextmacro FromLibImportGlobal("Header", "gameMaster", "player")
+
+endstruct
+
 private function UnitAddAbilities takes unit whichUnit, LinkedHashSet abilities returns nothing
     local LinkedHashSet oldAbilities = UnitEnumRemoveableAbilityIds(whichUnit)
     local RemoveableAbility abilId = abilities.begin()

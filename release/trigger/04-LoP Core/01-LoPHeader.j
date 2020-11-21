@@ -10,8 +10,8 @@ private module InitModule
     endmethod
 endmodule
 
-struct LoP extends array
-    
+struct LoPHeader extends array
+
     private static player neutPassive
     
     static method operator NEUTRAL_PASSIVE takes nothing returns player
