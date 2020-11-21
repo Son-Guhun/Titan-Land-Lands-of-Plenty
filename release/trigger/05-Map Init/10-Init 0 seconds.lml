@@ -213,39 +213,39 @@ Commands:
     CustomScriptCode
         Const : 'call LoP_InitProtectedUnits()'
     CustomScriptCode
-        Const : 'call GUMSSetUnitColor(POWER_INVULNERABILITY(), 4)'
+        Const : 'call LoP.UVS.Color(POWER_INVULNERABILITY(), 4)'
     CustomScriptCode
-        Const : 'call GUMSSetUnitVertexColor(POWER_INVULNERABILITY(), 0, 0, 255, 0)'
+        Const : 'call LoP.UVS.VertexColorInt(POWER_INVULNERABILITY(), 0, 0, 255, 0)'
     CustomScriptCode
         Const : 'call BlzSetUnitName(POWER_INVULNERABILITY(), "Power: Invulnerability")'
     CustomScriptCode
-        Const : 'call GUMSSetUnitColor(POWER_VULNERABILITY(), 8)'
+        Const : 'call LoP.UVS.Color(POWER_VULNERABILITY(), 8)'
     CustomScriptCode
-        Const : 'call GUMSSetUnitVertexColor(POWER_VULNERABILITY(), 200, 50, 50, 0)'
+        Const : 'call LoP.UVS.VertexColorInt(POWER_VULNERABILITY(), 200, 50, 50, 0)'
     CustomScriptCode
         Const : 'call BlzSetUnitName(POWER_VULNERABILITY(), "Power: Vulnerability")'
     CustomScriptCode
-        Const : 'call GUMSSetUnitColor(POWER_LEVEL(), 1)'
+        Const : 'call LoP.UVS.Color(POWER_LEVEL(), 1)'
     CustomScriptCode
-        Const : 'call GUMSSetUnitVertexColor(POWER_LEVEL(), 0, 255, 0, 0)'
+        Const : 'call LoP.UVS.VertexColorInt(POWER_LEVEL(), 0, 255, 0, 0)'
     CustomScriptCode
         Const : 'call BlzSetUnitName(POWER_LEVEL(), "Power: Level Up")'
     CustomScriptCode
-        Const : 'call GUMSSetUnitColor(POWER_DELEVEL(), 1)'
+        Const : 'call LoP.UVS.Color(POWER_DELEVEL(), 1)'
     CustomScriptCode
-        Const : 'call GUMSSetUnitVertexColor(POWER_DELEVEL(), 255, 0, 0, 0)'
+        Const : 'call  LoP.UVS.VertexColorInt(POWER_DELEVEL(), 255, 0, 0, 0)'
     CustomScriptCode
         Const : 'call BlzSetUnitName(POWER_DELEVEL(), "Power: Level Down")'
     CustomScriptCode
-        Const : 'call GUMSSetUnitColor(POWER_KILL(), 3)'
+        Const : 'call LoP.UVS.Color(POWER_KILL(), 3)'
     CustomScriptCode
-        Const : 'call GUMSSetUnitVertexColor(POWER_KILL(), 150, 150, 150, 0)'
+        Const : 'call LoP.UVS.VertexColorInt(POWER_KILL(), 150, 150, 150, 0)'
     CustomScriptCode
         Const : 'call BlzSetUnitName(POWER_KILL(), "Power: Kill")'
     CustomScriptCode
-        Const : 'call GUMSSetUnitColor(POWER_REMOVE(), 3)'
+        Const : 'call LoP.UVS.Color(POWER_REMOVE(), 3)'
     CustomScriptCode
-        Const : 'call GUMSSetUnitVertexColor(POWER_REMOVE(), 50, 50, 50, 0)'
+        Const : 'call LoP.UVS.VertexColorInt(POWER_REMOVE(), 50, 50, 50, 0)'
     CustomScriptCode
         Const : 'call BlzSetUnitName(POWER_REMOVE(), "Power: Remove")'
     EnumDestructablesInRectAllMultiple

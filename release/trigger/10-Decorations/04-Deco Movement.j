@@ -37,14 +37,14 @@ scope DecoMovement
                     call SetUnitPosition(enumU, GetSpellTargetX(), GetSpellTargetY())
                     
                 elseif ( spellId == FACE ) then
-                    call GUMSSetUnitFacing(enumU, bj_RADTODEG * Atan2(GetSpellTargetY() - Y(enumU), GetSpellTargetX() - X(enumU)))
+                    call LoP.UVS.Facing(enumU, bj_RADTODEG * Atan2(GetSpellTargetY() - Y(enumU), GetSpellTargetX() - X(enumU)))
                     
                 elseif ( spellId == ROTATE ) then
                     set angle = I2R(( ( ( R2I(( GetUnitFacing(enumU) + 1 )) / 90 ) + 1 ) * 90 ))
                     if angle > 270 then
                         set angle = 0
                     endif
-                    call GUMSSetUnitFacing(enumU, angle)
+                    call LoP.UVS.Facing(enumU, angle)
                     
                 elseif ( spellId == COPY ) then
                     if not IsUnitInGroup(enumU, udg_System_ProtectedGroup) then
@@ -91,14 +91,14 @@ scope DecoMovement
             call SetUnitPosition(trigU, GetSpellTargetX(), GetSpellTargetY())
             
         elseif ( spellId == FACE ) then
-            call GUMSSetUnitFacing(trigU, bj_RADTODEG * Atan2(GetSpellTargetY() - Y(trigU), GetSpellTargetX() - X(trigU)))
+            call LoP.UVS.Facing(trigU, bj_RADTODEG * Atan2(GetSpellTargetY() - Y(trigU), GetSpellTargetX() - X(trigU)))
         
         elseif ( spellId == ROTATE ) then
             set spellId = LoP_PlayerData.get(GetOwningPlayer(trigU)).rotationStep
             set angle = I2R(( ( ( R2I(( GetUnitFacing(trigU) + 1 )) / spellId ) + 1 ) * spellId ))
             
             set angle = ModuloReal(angle, 360.)
-            call GUMSSetUnitFacing(trigU, angle)
+            call LoP.UVS.Facing(trigU, angle)
             
         elseif ( spellId == COPY ) then
             call LopCopyUnitSameType(trigU, GetOwningPlayer(trigU))

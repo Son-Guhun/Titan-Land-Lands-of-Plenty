@@ -96,21 +96,21 @@ function Effect2Unit takes DecorationEffect whichEffect returns unit
     
     if u != null then
         call BlzSetUnitSkin(u, whichEffect.skin)
-        call GUMSSetUnitScale(u, whichEffect.scaleX)
-        call GUMSSetUnitVertexColor(u, whichEffect.red/2.55, whichEffect.green/2.55, whichEffect.blue/2.55, 100. - whichEffect.alpha/2.55)
-        call GUMSSetUnitFlyHeight(u, whichEffect.height)
+        call UnitVisualsSetters.Scale(u, whichEffect.scaleX)
+        call UnitVisualsSetters.VertexColor(u, whichEffect.red/2.55, whichEffect.green/2.55, whichEffect.blue/2.55, 100. - whichEffect.alpha/2.55)
+        call UnitVisualsSetters.FlyHeight(u, whichEffect.height)
         
         if whichEffect.hasCustomColor then
-            call GUMSSetUnitColor(u, whichEffect.color + 1)
+            call UnitVisualsSetters.Color(u, whichEffect.color + 1)
         endif
         
         if whichEffect.animationSpeed != 1. then
-            call GUMSSetUnitAnimSpeed(u, whichEffect.animationSpeed)
+            call UnitVisualsSetters.AnimSpeed(u, whichEffect.animationSpeed)
         endif
         
         
         if whichEffect.hasSubAnimations() then
-            call GUMSAddUnitAnimationTag(u, SubAnimations2Tags(whichEffect.subanimations))
+            call UnitVisualsSetters.AnimTag(u, SubAnimations2Tags(whichEffect.subanimations))
         endif
         
         call ObjectPathing(whichEffect).disableAndTransfer(u)

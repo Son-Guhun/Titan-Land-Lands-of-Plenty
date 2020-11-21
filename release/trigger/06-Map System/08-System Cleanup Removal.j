@@ -6,7 +6,7 @@ call GMSS_ClearHandleId
 call LoP_ClearNeutralHandleId
 */
 
-library LoPCleanUpRemoval requires LoPCleanUpDeath, UnitEvents, optional RedefineNatives
+library LoPCleanUpRemoval requires LoPCleanUpDeath, UnitEvents, LoPHeroicUnit, optional RedefineNatives
 
 //! runtextmacro optional RedefineNatives()
 

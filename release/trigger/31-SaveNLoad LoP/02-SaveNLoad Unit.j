@@ -283,9 +283,9 @@ function ParseScale takes unit u, string scaleStr returns nothing
         set scaleY = S2R(SubString(scaleStr, 0, cutToComma))
         set scaleZ = S2R(SubString(scaleStr, cutToComma+1, StringLength(scaleStr)))
         
-        call GUMSSetUnitMatrixScale(u, scaleX, scaleY, scaleZ)
+        call UnitVisualsSetters.MatrixScale(u, scaleX, scaleY, scaleZ)
     else
-        call GUMSSetUnitScale(u, scaleX)
+        call UnitVisualsSetters.Scale(u, scaleX)
     endif
 endfunction
 
@@ -519,12 +519,12 @@ function LoadUnit takes string chat_str, player un_owner, real centerX, real cen
             
             if IsUnitType(resultUnit, UNIT_TYPE_STRUCTURE) then
                 static if LIBRARY_SaveNLoadConfig then
-                    call GUMSSetStructureFlyHeight(resultUnit, unitData.flyHeight, SaveNLoadConfig_StructureShouldAutoLand(resultUnit))
+                    call UnitVisualsSetters.StructureFlyHeight(resultUnit, unitData.flyHeight, SaveNLoadConfig_StructureShouldAutoLand(resultUnit))
                 else
-                    call GUMSSetStructureFlyHeight(resultUnit, unitData.flyHeight, AUTO_LAND)
+                    call UnitVisualsSetters.StructureFlyHeight(resultUnit, unitData.flyHeight, AUTO_LAND)
                 endif
             else
-                call GUMSSetUnitFlyHeight(resultUnit, unitData.flyHeight)
+                call UnitVisualsSetters.FlyHeight(resultUnit, unitData.flyHeight)
             endif
 
             //GUMS modifications
@@ -532,16 +532,16 @@ function LoadUnit takes string chat_str, player un_owner, real centerX, real cen
                 call ParseScale(resultUnit, unitData.size)
             endif
             if unitData.red != "D" then
-                call GUMSSetUnitVertexColor(resultUnit, S2I(unitData.red)/2.55, S2I(unitData.green)/2.55, S2I(unitData.blue)/2.55, (255 - S2I(unitData.alpha))/2.55)
+                call UnitVisualsSetters.VertexColor(resultUnit, S2I(unitData.red)/2.55, S2I(unitData.green)/2.55, S2I(unitData.blue)/2.55, (255 - S2I(unitData.alpha))/2.55)
             endif
             if unitData.color != "D" then
-                call GUMSSetUnitColor(resultUnit, S2I(unitData.color))
+                call UnitVisualsSetters.Color(resultUnit, S2I(unitData.color))
             endif
             if unitData.animSpeed != "D" then
-                call GUMSSetUnitAnimSpeed(resultUnit, S2R(unitData.animSpeed))
+                call UnitVisualsSetters.AnimSpeed(resultUnit, S2R(unitData.animSpeed))
             endif
             if unitData.animTag != "D" then
-                call GUMSAddUnitAnimationTag(resultUnit, GUMSConvertTags(UnitVisualMods_TAGS_DECOMPRESS, unitData.animTag))
+                call UnitVisualsSetters.AnimTag(resultUnit, GUMSConvertTags(UnitVisualMods_TAGS_DECOMPRESS, unitData.animTag))
             endif
             if unitData.selectState != "0" then
                 if unitData.selectState == "2" then

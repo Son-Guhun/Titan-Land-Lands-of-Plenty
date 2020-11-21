@@ -1,4 +1,4 @@
-library LoPHeroicUnit requires LoPHeader, LoPWidgets, UnitVisualMods, optional NativeRedefinitions, UnitName
+library LoPHeroicUnit requires LoPStdLib, optional NativeRedefinitions, UnitName
 
 //! runtextmacro optional RedefineNatives()
 
@@ -121,19 +121,19 @@ library LoPHeroicUnit requires LoPHeader, LoPWidgets, UnitVisualMods, optional N
     endfunction
 
     function RestoreGUMSValues takes unit whichUnit, Table values returns nothing
-        call GUMSSetUnitFlyHeight(whichUnit, values.real['flyH'])
+        call LoP.UVS.FlyHeight(whichUnit, values.real['flyH'])
         
         if values.real.has('size') then
-            call GUMSSetUnitScale(whichUnit, values.real['size'])
+            call LoP.UVS.Scale(whichUnit, values.real['size'])
         endif
         if values.has('vtxR') then
-            call GUMSSetUnitVertexColorInt(whichUnit, values['vtxR'], values['vtxG'], values['vtxB'], values['vtxA'])
+            call LoP.UVS.VertexColorInt(whichUnit, values['vtxR'], values['vtxG'], values['vtxB'], values['vtxA'])
         endif
         if values.has('pClr') then
-            call GUMSSetUnitColor(whichUnit, values['pClr'])
+            call LoP.UVS.Color(whichUnit, values['pClr'])
         endif
         if values.real.has('Aspd') then
-            call GUMSSetUnitAnimSpeed(whichUnit, values.real['Aspd'])
+            call LoP.UVS.AnimSpeed(whichUnit, values.real['Aspd'])
         endif
         if values.string.has('name') then
             call GUMSSetUnitName(whichUnit, values.string['name'])

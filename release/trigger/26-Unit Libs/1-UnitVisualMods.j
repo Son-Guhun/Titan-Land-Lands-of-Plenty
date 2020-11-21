@@ -40,7 +40,7 @@ endglobals
 // CONFIGURATION
 
 // This function specifies what should be done to a unit when an argument which is not a valid
-// player number (1 <= n <= bj_MAX_PLAYERS) is passed to GUMSSetUnitColor. The default behaviour is
+// player number (1 <= n <= bj_MAX_PLAYERS) is passed to Libs.UVS.Color. The default behaviour is
 // to set the color of the unit to the color of the owning player.
 
 // NOTE: Hashtable data is automatically cleared when a non-player number argument is passed.
@@ -123,19 +123,6 @@ endfunction
 //==========================================
 //==========================================
 
-private struct TimerData extends array
-
-    implement AgentStruct
-
-    //! runtextmacro HashStruct_NewAgentField("unit","unit")
-    //! runtextmacro HashStruct_NewPrimitiveField("owner","integer")
-    //! runtextmacro HashStruct_NewPrimitiveField("isSelected","boolean")
-endstruct
-
-globals
-    private boolean isAmovDisabled = false
-endglobals
-
 private function EnableAmov takes boolean flag returns nothing
     local integer i = 0
     loop
@@ -145,66 +132,81 @@ private function EnableAmov takes boolean flag returns nothing
     endloop
 endfunction
 
+private struct TimerData extends array
 
-/*
-    Performs cleanup after unit has finished rooting.
-    
-*/
-private function onTimerDoCleanup takes nothing returns nothing
-    local timer t = GetExpiredTimer()
-    local TimerData tData = TimerData.get(t)
-    local unit u = tData.unit
-    local player owner = Player(tData.owner)
-    //! runtextmacro ASSERT("u != null")
-    
-    call UnitRemoveAbility(u, 'DEDF')
+    implement AgentStruct
 
-    if isAmovDisabled then
-        call EnableAmov(true)
-        set isAmovDisabled = false
-    endif
-    call SetUnitOwner(u, owner, false)
-    if tData.isSelected then
-        if GetLocalPlayer() == owner then
-            call SelectUnit(u, true)
+    //! runtextmacro HashStruct_NewAgentField("unit","unit")
+    //! runtextmacro HashStruct_NewPrimitiveField("owner","integer")
+    //! runtextmacro HashStruct_NewPrimitiveField("isSelected","boolean")
+    
+    private static boolean isAmovDisabled = false
+    
+    /*
+        Performs cleanup after unit has finished rooting.
+        
+    */
+    private static method doCleanup takes nothing returns nothing
+        local timer t = GetExpiredTimer()
+        local TimerData tData = TimerData.get(t)
+        local unit u = tData.unit
+        local player owner = Player(tData.owner)
+        //! runtextmacro ASSERT("u != null")
+        
+        call UnitRemoveAbility(u, 'DEDF')
+
+        if isAmovDisabled then
+            call EnableAmov(true)
+            set isAmovDisabled = false
         endif
-    endif
-    
-    call PauseTimer(t)
-    call DestroyTimer(t)
-    call tData.destroy()
-    
-    set t = null
-    set u = null
-endfunction
+        call SetUnitOwner(u, owner, false)
+        if tData.isSelected then
+            if GetLocalPlayer() == owner then
+                call SelectUnit(u, true)
+            endif
+        endif
+        
+        call PauseTimer(t)
+        call DestroyTimer(t)
+        call tData.destroy()
+        
+        set t = null
+        set u = null
+    endmethod
 
-/*
-    Issue a root order while taking into account that units may be below the structure and thus stop it from rooting.
-    
-    This assumes that the following fields are empty for all structures:
-        - Pathing - Placement Requires        (requirePlace)
-        - Pathing - Placement Prevented By    (preventPlace)
-*/
-private function onTimerIssueRootOrder takes nothing returns nothing
-    local timer t = GetExpiredTimer()
-    local unit u = TimerData.get(t).unit
-    local player owner = GetOwningPlayer(u)
-    //! runtextmacro ASSERT("u != null")
-    
-    if not isAmovDisabled then  // Only disable if it hasn't already been disabled in this frame.
-        call EnableAmov(false)  // Disabled Amov so that units won't move out of the way.
-        set isAmovDisabled = true
-    endif
-    call SetUnitOwner(u, Player(bj_PLAYER_NEUTRAL_VICTIM), false)  // Change owner so that structure can root even if there are units belonging to the player below it
-    
-    call IssuePointOrder(u, "root", GetUnitX(u), GetUnitY(u))
-    call TimerStart(t, 0, false, function onTimerDoCleanup)
-    set TimerData.get(t).owner = GetPlayerId(owner)
-    set TimerData.get(t).isSelected = IsUnitSelected(u, owner)
-    
-    set t = null
-    set u = null
-endfunction
+    /*
+        Issue a root order while taking into account that units may be below the structure and thus stop it from rooting.
+        
+        This assumes that the following fields are empty for all structures:
+            - Pathing - Placement Requires        (requirePlace)
+            - Pathing - Placement Prevented By    (preventPlace)
+    */
+    static method issueRootOrder takes nothing returns nothing
+        local timer t = GetExpiredTimer()
+        local unit u = TimerData.get(t).unit
+        local player owner = GetOwningPlayer(u)
+        //! runtextmacro ASSERT("u != null")
+        
+        if not isAmovDisabled then  // Only disable if it hasn't already been disabled in this frame.
+            call EnableAmov(false)  // Disabled Amov so that units won't move out of the way.
+            set isAmovDisabled = true
+        endif
+        call SetUnitOwner(u, Player(bj_PLAYER_NEUTRAL_VICTIM), false)  // Change owner so that structure can root even if there are units belonging to the player below it
+        
+        call IssuePointOrder(u, "root", GetUnitX(u), GetUnitY(u))
+        call TimerStart(t, 0, false, function TimerData.doCleanup)
+        set TimerData.get(t).owner = GetPlayerId(owner)
+        set TimerData.get(t).isSelected = IsUnitSelected(u, owner)
+        
+        set t = null
+        set u = null
+    endmethod
+endstruct
+
+
+
+
+
 
 //==========================================
 // GUMS API
@@ -249,7 +251,6 @@ endstruct
 
 // The setters cannot be a part of the struct, since they require setting values in the unit, and the
 // unit is not saved within the struct.
-
 function GUMS_AddStructureFlightAbility takes unit structure returns nothing
     local real facing
     //! runtextmacro ASSERT("structure != null")
@@ -260,144 +261,146 @@ function GUMS_AddStructureFlightAbility takes unit structure returns nothing
     call BlzSetUnitFacingEx(structure, facing)
 endfunction
 
-function GUMSSetStructureFlyHeight takes unit structure, real newHeight, boolean autoLand returns nothing
-    local timer t
+struct UnitVisualsSetters extends array
+    
+    static method StructureFlyHeight takes unit structure, real newHeight, boolean autoLand returns nothing
+        local timer t
 
-    //! runtextmacro ASSERT("structure != null")
-    //! runtextmacro ASSERT("IsUnitType(structure, UNIT_TYPE_STRUCTURE)")
-    if GetUnitFlyHeight(structure) < GUMS_MINIMUM_FLY_HEIGHT() and newHeight < GUMS_MINIMUM_FLY_HEIGHT() then  // 0.01 seems to be the minimum flying height
-        call SetUnitFlyHeight( structure, newHeight, 0)  // this is needed for hooked stuff
-        return
-    endif
- 
-    if UnitAddAbility(structure, 'Amrf' ) then
-        call UnitRemoveAbility(structure, 'Amrf')
-    endif
-    
-    call SetUnitFlyHeight( structure, newHeight, 0)
-    set SaveFlyHeight(GetHandleId(structure)).height = newHeight
-    
-    if GetUnitAbilityLevel(structure,'Amov') > 0 then
-        // this is an Ancient and probably already has root. Do nothing
-    else
-        call GUMS_AddStructureFlightAbility(structure)
-        call IssueImmediateOrder(structure, "unroot")
-        if autoLand then
-            set t = CreateTimer()
-            set TimerData.get(t).unit = structure
-            call TimerStart(t, 0, false, function onTimerIssueRootOrder)
-            call SetUnitAnimation(structure, "stand")
-            set t = null
+        //! runtextmacro ASSERT("structure != null")
+        //! runtextmacro ASSERT("IsUnitType(structure, UNIT_TYPE_STRUCTURE)")
+        if GetUnitFlyHeight(structure) < GUMS_MINIMUM_FLY_HEIGHT() and newHeight < GUMS_MINIMUM_FLY_HEIGHT() then  // 0.01 seems to be the minimum flying height
+            call SetUnitFlyHeight( structure, newHeight, 0)  // this is needed for hooked stuff
+            return
         endif
-    endif
-endfunction
-
-function GUMSSetUnitFacing takes unit whichUnit, real newAngle returns nothing
-    //! runtextmacro ASSERT("whichUnit != null")
-    call BlzSetUnitFacingEx(whichUnit, newAngle)
-    
-    if GetUnitAbilityLevel(whichUnit, 'Amov') == 0 then
-        call GUMS_RedrawUnit(whichUnit)
-        
-        if IsUnitType(whichUnit, UNIT_TYPE_STRUCTURE) and GetUnitFlyHeight(whichUnit) > GUMS_MINIMUM_FLY_HEIGHT() then
-            call GUMSSetStructureFlyHeight(whichUnit, GetUnitFlyHeight(whichUnit), GetUnitAbilityLevel(whichUnit, 'DEDF') == 0)
+     
+        if UnitAddAbility(structure, 'Amrf' ) then
+            call UnitRemoveAbility(structure, 'Amrf')
         endif
-    endif
-endfunction
-
-function GUMSSetUnitFlyHeight takes unit whichUnit, real newHeight returns nothing
-    //! runtextmacro ASSERT("whichUnit != null")
-    //! runtextmacro ASSERT("not IsUnitType(whichUnit, UNIT_TYPE_STRUCTURE)")
-    
-    if UnitAddAbility(whichUnit, 'Amrf' ) then
-        call UnitRemoveAbility(whichUnit, 'Amrf')
-    endif
-    
-    call SetUnitFlyHeight( whichUnit, newHeight, 0)
-    set SaveFlyHeight(GetHandleId(whichUnit)).height = newHeight
-    
-    if GetUnitAbilityLevel(whichUnit, 'Amov') == 0 then
-        call GUMS_RedrawUnit(whichUnit)
-    endif
-endfunction
-
-//Set Scale
-function GUMSSetUnitMatrixScale takes unit whichUnit, real scaleX, real scaleY, real scaleZ returns nothing
-    //! runtextmacro ASSERT("whichUnit != null")
-    call SetUnitScale(whichUnit, scaleX, scaleY, scaleZ)
-    set data[GetHandleId(whichUnit)].real[SCALE] = scaleX
-endfunction
-
-function GUMSSetUnitScale takes unit whichUnit, real scale returns nothing
-    //! runtextmacro ASSERT("whichUnit != null")
-    call SetUnitScale(whichUnit, scale, scale, scale)
-    set data[GetHandleId(whichUnit)].real[SCALE] = scale
-endfunction
-
-//Set Vertex Color
-function GUMSSetUnitVertexColor takes unit whichUnit, real red, real green, real blue, real trans  returns nothing
-    local integer intRed = R2I(GUMSPercentTo255(red))
-    local integer intGreen = R2I(GUMSPercentTo255(green))
-    local integer intBlue = R2I(GUMSPercentTo255(blue))
-    local integer intAlpha = R2I(GUMSPercentTo255(100. - trans))
-    //! runtextmacro ASSERT("whichUnit != null")
-    
-    call SetUnitVertexColor(whichUnit, intRed, intGreen, intBlue, intAlpha)
-    set data[GetHandleId(whichUnit)][RED]   = intRed
-    set data[GetHandleId(whichUnit)][GREEN] = intGreen
-    set data[GetHandleId(whichUnit)][BLUE]  = intBlue
-    set data[GetHandleId(whichUnit)][ALPHA] = intAlpha
-endfunction
-
-function GUMSSetUnitVertexColorInt takes unit whichUnit, integer red, integer green, integer blue, integer alpha returns nothing
-    //! runtextmacro ASSERT("whichUnit != null")
-    call SetUnitVertexColor(whichUnit, red, green, blue, alpha)
-    set data[GetHandleId(whichUnit)][RED]   = red
-    set data[GetHandleId(whichUnit)][GREEN] = green
-    set data[GetHandleId(whichUnit)][BLUE]  = blue
-    set data[GetHandleId(whichUnit)][ALPHA] = alpha
-endfunction
-
-//Set Player Color (why in hell can't this be retrieved with natives?!)
-function GUMSSetUnitColor takes unit whichUnit, integer color returns nothing
-    //! runtextmacro ASSERT("whichUnit != null")
-    if color <= bj_MAX_PLAYER_SLOTS and color >= 1 then
-        set data[GetHandleId(whichUnit)][COLOR] = color
-        call SetUnitColor(whichUnit, ConvertPlayerColor(color-1))
-    else
-        call data[GetHandleId(whichUnit)].remove(COLOR)
-
-        //! runtextmacro GUMS_Config_ResetColorFunc()
-    endif
-endfunction
-
-//Set Animation Speed
-function GUMSSetUnitAnimSpeed takes unit whichUnit, real speedMultiplier returns nothing
-    //! runtextmacro ASSERT("whichUnit != null")
-    call SetUnitTimeScale(whichUnit, speedMultiplier)
-    set data[GetHandleId(whichUnit)].real[ASPEED] = speedMultiplier
-endfunction
-
-//Set Animation Tag
-function GUMSAddUnitAnimationTag takes unit whichUnit, string whichTag returns nothing
-    local UnitVisuals unitId = GetHandleId(whichUnit)
-    //! runtextmacro ASSERT("whichUnit != null")
-    
-    if unitId.hasAnimTag() then
-        call AddUnitAnimationProperties(whichUnit, GUMSConvertTags(TAGS_DECOMPRESS, unitId.raw.getAnimTag()), false)
-    else
-        call AddUnitAnimationProperties(whichUnit, UnitVisuals.allTags, false)
-    endif
-    
-    if whichTag != "" then
-        call AddUnitAnimationProperties(whichUnit, whichTag, true)
-        set whichTag = GUMSConvertTags(TAGS_COMPRESS, whichTag)
-        set data[unitId].string[ATAG] = whichTag
         
-    else
-        call data[unitId].string.remove(ATAG)
-    endif
-endfunction
+        call SetUnitFlyHeight( structure, newHeight, 0)
+        set SaveFlyHeight(GetHandleId(structure)).height = newHeight
+        
+        if GetUnitAbilityLevel(structure,'Amov') > 0 then
+            // this is an Ancient and probably already has root. Do nothing
+        else
+            call GUMS_AddStructureFlightAbility(structure)
+            call IssueImmediateOrder(structure, "unroot")
+            if autoLand then
+                set t = CreateTimer()
+                set TimerData.get(t).unit = structure
+                call TimerStart(t, 0, false, function TimerData.issueRootOrder)
+                call SetUnitAnimation(structure, "stand")
+                set t = null
+            endif
+        endif
+    endmethod
+    
+    static method Facing takes unit whichUnit, real newAngle returns nothing
+        //! runtextmacro ASSERT("whichUnit != null")
+        call BlzSetUnitFacingEx(whichUnit, newAngle)
+        
+        if GetUnitAbilityLevel(whichUnit, 'Amov') == 0 then
+            call GUMS_RedrawUnit(whichUnit)
+            
+            if IsUnitType(whichUnit, UNIT_TYPE_STRUCTURE) and GetUnitFlyHeight(whichUnit) > GUMS_MINIMUM_FLY_HEIGHT() then
+                call StructureFlyHeight(whichUnit, GetUnitFlyHeight(whichUnit), GetUnitAbilityLevel(whichUnit, 'DEDF') == 0)
+            endif
+        endif    
+    endmethod
+    
+    static method FlyHeight takes unit whichUnit, real newHeight returns nothing
+        //! runtextmacro ASSERT("whichUnit != null")
+        //! runtextmacro ASSERT("not IsUnitType(whichUnit, UNIT_TYPE_STRUCTURE)")
+        
+        if UnitAddAbility(whichUnit, 'Amrf' ) then
+            call UnitRemoveAbility(whichUnit, 'Amrf')
+        endif
+        
+        call SetUnitFlyHeight( whichUnit, newHeight, 0)
+        set SaveFlyHeight(GetHandleId(whichUnit)).height = newHeight
+        
+        if GetUnitAbilityLevel(whichUnit, 'Amov') == 0 then
+            call GUMS_RedrawUnit(whichUnit)
+        endif
+    endmethod
+    
+    static method MatrixScale takes unit whichUnit, real scaleX, real scaleY, real scaleZ returns nothing
+        //! runtextmacro ASSERT("whichUnit != null")
+        call SetUnitScale(whichUnit, scaleX, scaleY, scaleZ)
+        set data[GetHandleId(whichUnit)].real[SCALE] = scaleX
+    endmethod
+
+    static method Scale takes unit whichUnit, real scale returns nothing
+        //! runtextmacro ASSERT("whichUnit != null")
+        call SetUnitScale(whichUnit, scale, scale, scale)
+        set data[GetHandleId(whichUnit)].real[SCALE] = scale
+    endmethod
+
+    //Set Vertex Color
+    static method VertexColor takes unit whichUnit, real red, real green, real blue, real trans  returns nothing
+        local integer intRed = R2I(GUMSPercentTo255(red))
+        local integer intGreen = R2I(GUMSPercentTo255(green))
+        local integer intBlue = R2I(GUMSPercentTo255(blue))
+        local integer intAlpha = R2I(GUMSPercentTo255(100. - trans))
+        //! runtextmacro ASSERT("whichUnit != null")
+        
+        call SetUnitVertexColor(whichUnit, intRed, intGreen, intBlue, intAlpha)
+        set data[GetHandleId(whichUnit)][RED]   = intRed
+        set data[GetHandleId(whichUnit)][GREEN] = intGreen
+        set data[GetHandleId(whichUnit)][BLUE]  = intBlue
+        set data[GetHandleId(whichUnit)][ALPHA] = intAlpha
+    endmethod
+
+    static method VertexColorInt takes unit whichUnit, integer red, integer green, integer blue, integer alpha returns nothing
+        //! runtextmacro ASSERT("whichUnit != null")
+        call SetUnitVertexColor(whichUnit, red, green, blue, alpha)
+        set data[GetHandleId(whichUnit)][RED]   = red
+        set data[GetHandleId(whichUnit)][GREEN] = green
+        set data[GetHandleId(whichUnit)][BLUE]  = blue
+        set data[GetHandleId(whichUnit)][ALPHA] = alpha
+    endmethod
+
+    //Set Player Color (why in hell can't this be retrieved with natives?!)
+    static method Color takes unit whichUnit, integer color returns nothing
+        //! runtextmacro ASSERT("whichUnit != null")
+        if color <= bj_MAX_PLAYER_SLOTS and color >= 1 then
+            set data[GetHandleId(whichUnit)][COLOR] = color
+            call SetUnitColor(whichUnit, ConvertPlayerColor(color-1))
+        else
+            call data[GetHandleId(whichUnit)].remove(COLOR)
+
+            //! runtextmacro GUMS_Config_ResetColorFunc()
+        endif
+    endmethod
+
+    static method AnimSpeed takes unit whichUnit, real speedMultiplier returns nothing
+        //! runtextmacro ASSERT("whichUnit != null")
+        call SetUnitTimeScale(whichUnit, speedMultiplier)
+        set data[GetHandleId(whichUnit)].real[ASPEED] = speedMultiplier
+    endmethod
+
+    
+    static method AnimTag takes unit whichUnit, string whichTag returns nothing
+        local UnitVisuals unitId = GetHandleId(whichUnit)
+        //! runtextmacro ASSERT("whichUnit != null")
+        
+        if unitId.hasAnimTag() then
+            call AddUnitAnimationProperties(whichUnit, GUMSConvertTags(TAGS_DECOMPRESS, unitId.raw.getAnimTag()), false)
+        else
+            call AddUnitAnimationProperties(whichUnit, UnitVisuals.allTags, false)
+        endif
+        
+        if whichTag != "" then
+            call AddUnitAnimationProperties(whichUnit, whichTag, true)
+            set whichTag = GUMSConvertTags(TAGS_COMPRESS, whichTag)
+            set data[unitId].string[ATAG] = whichTag
+            
+        else
+            call data[unitId].string.remove(ATAG)
+        endif
+    endmethod
+
+endstruct
 
 ///////////////////////////
 //These functions are used to work with unit names
@@ -445,6 +448,12 @@ endfunction
 //==========================================
 // GUMS Copying Utilities
 
+struct Libs extends array
+    static method operator UVS takes nothing returns UnitVisualsSetters
+        return 0
+    endmethod
+endstruct
+
 // Does not copy:
 //    -Unit selectability
 //    -Unit custom name
@@ -457,29 +466,29 @@ function GUMSCopyValues takes unit source, unit target returns nothing
     //! runtextmacro ASSERT("target != null")
     
     if IsUnitType(target, UNIT_TYPE_STRUCTURE) then
-        call GUMSSetStructureFlyHeight(target, GetUnitFlyHeight(source), GetUnitAbilityLevel(source, 'DEDF') == 0)
+        call Libs.UVS.StructureFlyHeight(target, GetUnitFlyHeight(source), GetUnitAbilityLevel(source, 'DEDF') == 0)
     else
-        call GUMSSetUnitFlyHeight(target, GetUnitFlyHeight(source))
+        call Libs.UVS.FlyHeight(target, GetUnitFlyHeight(source))
     endif
     
     if sourceId.hasScale() then
-        call GUMSSetUnitScale(target, data[sourceId].real[SCALE])
+        call Libs.UVS.Scale(target, data[sourceId].real[SCALE])
     endif
     if sourceId.hasVertexColor(RED) then
-        call GUMSSetUnitVertexColor(target, /*
+        call Libs.UVS.VertexColor(target, /*
                                 */  data[sourceId][RED]/2.55, /*
                                 */  data[sourceId][GREEN]/2.55, /*
                                 */  data[sourceId][BLUE]/2.55, /*
                                 */  (255 - data[sourceId][ALPHA])/2.55)
     endif
     if sourceId.hasColor() then
-        call GUMSSetUnitColor(target, data[sourceId][COLOR])
+        call Libs.UVS.Color(target, data[sourceId][COLOR])
     endif
     if sourceId.hasAnimSpeed() then
-        call GUMSSetUnitAnimSpeed(target, data[sourceId].real[ASPEED])
+        call Libs.UVS.AnimSpeed(target, data[sourceId].real[ASPEED])
     endif
     if sourceId.hasAnimTag() then
-        call GUMSAddUnitAnimationTag(target, GUMSConvertTags(UnitVisualMods_TAGS_DECOMPRESS,data[sourceId].string[ATAG]))
+        call Libs.UVS.AnimTag(target, GUMSConvertTags(UnitVisualMods_TAGS_DECOMPRESS,data[sourceId].string[ATAG]))
     endif
 endfunction
 
@@ -590,7 +599,7 @@ function GUMSSetUnitVertexColorString takes unit whichUnit, string args, string 
     set cAlpha = S2R(CutToCommaResult(args, cutToComma))
     set args = CutToCommaShorten(args, cutToComma)
     
-    call GUMSSetUnitVertexColor(whichUnit, cRed, cGreen, cBlue, cAlpha)
+    call Libs.UVS.VertexColor(whichUnit, cRed, cGreen, cBlue, cAlpha)
 endfunction
 
 //==================================================================================================
@@ -609,7 +618,7 @@ function GUMSOnUpgradeHandler takes unit trigU returns nothing
         
             call GUMSCopyValues(trigU, trigU)
 
-            call GUMSSetUnitFlyHeight(trigU, height)
+            call Libs.UVS.FlyHeight(trigU, height)
         else
             call GUMSCopyValues(trigU, trigU)
         endif
@@ -674,47 +683,4 @@ private struct InitStruct extends array
     implement InitModule
 endstruct
 
-//==================================================================================================
-//                                       Wrappers
-//==================================================================================================
-
-function GUMS_HaveSavedScale takes unit whichUnit returns boolean
-    return UnitVisuals.get(whichUnit).hasScale()
-endfunction
-
-function GUMS_HaveSavedVertexColor takes unit whichUnit, integer r1b2g3a4 returns boolean
-    return UnitVisuals.get(whichUnit).hasVertexColor(r1b2g3a4)
-endfunction
-
-function GUMS_HaveSavedColor takes unit whichUnit returns boolean
-    return UnitVisuals.get(whichUnit).hasColor()
-endfunction
-
-function GUMS_HaveSavedAnimSpeed takes unit whichUnit returns boolean
-    return UnitVisuals.get(whichUnit).hasAnimSpeed()
-endfunction
-
-function GUMS_HaveSavedAnimationTag takes unit whichUnit returns boolean
-    return UnitVisuals.get(whichUnit).hasAnimTag()
-endfunction 
-
-function GUMSGetUnitScale takes unit whichUnit returns string
-    return UnitVisuals.get(whichUnit).getScale()
-endfunction
-
-function GUMSGetUnitVertexColor takes unit whichUnit, integer r1g2b3a4  returns string
-    return UnitVisuals.get(whichUnit).getVertexColor(r1g2b3a4)
-endfunction
-
-function GUMSGetUnitColor takes unit whichUnit returns string
-    return UnitVisuals.get(whichUnit).getColor()
-endfunction
-
-function GUMSGetUnitAnimSpeed takes unit whichUnit returns string
-    return UnitVisuals.get(whichUnit).getAnimSpeed()
-endfunction
-
-function GUMSGetUnitAnimationTag takes unit whichUnit returns string
-    return UnitVisuals.get(whichUnit).getAnimTag()
-endfunction
 endlibrary

@@ -21,19 +21,19 @@ scope DecoModAbils
             call CommandsDUnitMods_SetMatrixScale(targetU, udg_DecoSystem_Scale[playerNumber])
             
         elseif spellId == 'A04A' then
-            call GUMSSetUnitFlyHeight(targetU, udg_DecoSystem_Height[playerNumber])
+            call LoP.UVS.FlyHeight(targetU, udg_DecoSystem_Height[playerNumber])
             
         elseif spellId == 'A0C4' then
-            call GUMSSetUnitFacing(targetU, udg_DecoSystem_Facing[playerNumber])
+            call LoP.UVS.Facing(targetU, udg_DecoSystem_Facing[playerNumber])
             
         elseif spellId == 'A0C3' then
-            call GUMSSetUnitVertexColor(targetU, udg_ColorSystem_Red[playerNumber], udg_ColorSystem_Green[playerNumber], udg_ColorSystem_Blue[playerNumber], udg_ColorSystem_Alpha[playerNumber])
+            call LoP.UVS.VertexColor(targetU, udg_ColorSystem_Red[playerNumber], udg_ColorSystem_Green[playerNumber], udg_ColorSystem_Blue[playerNumber], udg_ColorSystem_Alpha[playerNumber])
         
         elseif spellId == 'A0C1' then
             call SetUnitAnimation( targetU, udg_DecoSystem_Anims[playerNumber] )
             
         elseif spellId == 'A0C2' then
-            call GUMSSetUnitAnimSpeed(targetU, udg_DecoSystem_animSpeed[playerNumber]/100)
+            call LoP.UVS.AnimSpeed(targetU, udg_DecoSystem_animSpeed[playerNumber]/100)
         endif
         
         set trigU = null

@@ -3,6 +3,7 @@ library LoPStdLib requires AttachedSFX, UnitVisualMods, LoPWidgets, LoPCommandsA
 struct LoP extends array
     
     //! runtextmacro ImportLibAs("LoPHeader", "Header")
+    //! runtextmacro ImportLibAs("UnitVisualsSetters", "UVS")
     
     //! runtextmacro FromLibImportConstant("Header", "NEUTRAL_PASSIVE", "player")
     //! runtextmacro FromLibImportGlobal("Header", "gameMaster", "player")

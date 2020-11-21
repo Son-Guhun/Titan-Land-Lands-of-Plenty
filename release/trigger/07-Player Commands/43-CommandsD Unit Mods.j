@@ -1,4 +1,4 @@
-library CommandsDUnitMods requires LoPCommands, CutToComma, UnitVisualMods
+library CommandsDUnitMods requires LoPCommands, CutToComma, LoPStdLib
 
 private struct Globals extends array
     
@@ -32,9 +32,9 @@ public function SetMatrixScale takes unit u, string args returns nothing
             set scaleZ = 100.
         endif
         
-        call GUMSSetUnitMatrixScale(u, scaleX, scaleY, scaleZ)
+        call LoP.UVS.MatrixScale(u, scaleX, scaleY, scaleZ)
     else
-        call GUMSSetUnitScale(u, scaleX)
+        call LoP.UVS.Scale(u, scaleX)
     endif
 endfunction
 
@@ -65,15 +65,15 @@ private function groupFunc takes nothing returns nothing
     elseif ( command == "'fly" or command == "'h") then
         if IsUnitType(enumUnit, UNIT_TYPE_STRUCTURE) then
             if args == "" then
-                call GUMSSetStructureFlyHeight(enumUnit, udg_DecoSystem_Height[playerNumber], not LoP_IsUnitDecoration(enumUnit))
+                call LoP.UVS.StructureFlyHeight(enumUnit, udg_DecoSystem_Height[playerNumber], not LoP_IsUnitDecoration(enumUnit))
             else
-                call GUMSSetStructureFlyHeight(enumUnit, Globals.value, not LoP_IsUnitDecoration(enumUnit))
+                call LoP.UVS.StructureFlyHeight(enumUnit, Globals.value, not LoP_IsUnitDecoration(enumUnit))
             endif
         else
             if args == "" then
-                call GUMSSetUnitFlyHeight(enumUnit, udg_DecoSystem_Height[playerNumber])
+                call LoP.UVS.FlyHeight(enumUnit, udg_DecoSystem_Height[playerNumber])
             else
-                call GUMSSetUnitFlyHeight(enumUnit, Globals.value)
+                call LoP.UVS.FlyHeight(enumUnit, Globals.value)
             endif
         endif
     elseif ( command == "'ah" ) then
@@ -81,26 +81,26 @@ private function groupFunc takes nothing returns nothing
             call MoveLocation(Globals.loc, GetUnitX(enumUnit), GetUnitY(enumUnit))
             if IsUnitType(enumUnit, UNIT_TYPE_STRUCTURE) then
                 if args == "" then
-                    call GUMSSetStructureFlyHeight(enumUnit, udg_DecoSystem_Height[playerNumber] - GetLocationZ(Globals.loc), not LoP_IsUnitDecoration(enumUnit))
+                    call LoP.UVS.StructureFlyHeight(enumUnit, udg_DecoSystem_Height[playerNumber] - GetLocationZ(Globals.loc), not LoP_IsUnitDecoration(enumUnit))
                 else
-                    call GUMSSetStructureFlyHeight(enumUnit, Globals.value - GetLocationZ(Globals.loc), not LoP_IsUnitDecoration(enumUnit))
+                    call LoP.UVS.StructureFlyHeight(enumUnit, Globals.value - GetLocationZ(Globals.loc), not LoP_IsUnitDecoration(enumUnit))
                 endif
             else
                 if args == "" then
-                    call GUMSSetUnitFlyHeight(enumUnit, udg_DecoSystem_Height[playerNumber] - GetLocationZ(Globals.loc))
+                    call LoP.UVS.FlyHeight(enumUnit, udg_DecoSystem_Height[playerNumber] - GetLocationZ(Globals.loc))
                 else
-                    call GUMSSetUnitFlyHeight(enumUnit, Globals.value - GetLocationZ(Globals.loc))
+                    call LoP.UVS.FlyHeight(enumUnit, Globals.value - GetLocationZ(Globals.loc))
                 endif
             endif
         endif
     elseif ( command == "'face" or command == "'f") then
         if args == "" then
-            call GUMSSetUnitFacing(enumUnit, udg_DecoSystem_Facing[playerNumber])
+            call LoP.UVS.Facing(enumUnit, udg_DecoSystem_Facing[playerNumber])
         else
-            call GUMSSetUnitFacing(enumUnit, Globals.value)
+            call LoP.UVS.Facing(enumUnit, Globals.value)
         endif
     elseif ( SubString(command, 0, 4) == "'rgb") then
-        call GUMSSetUnitVertexColorInt(enumUnit, udg_ColorSystem_Red[playerNumber], udg_ColorSystem_Green[playerNumber], udg_ColorSystem_Blue[playerNumber], udg_ColorSystem_Alpha[playerNumber])
+        call UnitVisualsSetters.VertexColorInt(enumUnit, udg_ColorSystem_Red[playerNumber], udg_ColorSystem_Green[playerNumber], udg_ColorSystem_Blue[playerNumber], udg_ColorSystem_Alpha[playerNumber])
     elseif ( command == "'anim" ) then
         if args == "" then
             call SetUnitAnimation( enumUnit, udg_DecoSystem_Anims[playerNumber] )
@@ -109,15 +109,15 @@ private function groupFunc takes nothing returns nothing
         endif
     elseif ( command == "'speed" ) then
         if args == "" then
-            call GUMSSetUnitAnimSpeed(enumUnit, udg_DecoSystem_animSpeed[playerNumber]/100)
+            call UnitVisualsSetters.AnimSpeed(enumUnit, udg_DecoSystem_animSpeed[playerNumber]/100)
         else
-            call GUMSSetUnitAnimSpeed(enumUnit, Globals.value/100)
+            call UnitVisualsSetters.AnimSpeed(enumUnit, Globals.value/100)
         endif
     elseif ( command == "'color" ) then
         if args == "" then
-            call GUMSSetUnitColor(enumUnit, udg_DecoSystem_PlayerColor[playerNumber])
+            call UnitVisualsSetters.Color(enumUnit, udg_DecoSystem_PlayerColor[playerNumber])
         else
-            call GUMSSetUnitColor(enumUnit,  Commands_GetChatMessagePlayerNumber(args))
+            call UnitVisualsSetters.Color(enumUnit,  Commands_GetChatMessagePlayerNumber(args))
         endif
     elseif ( command == "'roll" ) then
         if args != "" then
