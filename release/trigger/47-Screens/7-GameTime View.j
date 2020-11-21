@@ -14,13 +14,13 @@ endstruct
     local framehandle prev
     
     // set mainButton = BlzCreateFrame("ScriptDialogButton", BlzGetOriginFrame(ORIGIN_FRAME_GAME_UI, 0), 0,0)
-    set mainButton = BlzCreateFrameByType("TEXT", "GameTimeDummyFrame", BlzGetOriginFrame(ORIGIN_FRAME_GAME_UI, 0), "", 0)
+    set mainButton = BlzCreateFrameByType("TEXT", "GameTimeDummyFrame", BlzGetOriginFrame(ORIGIN_FRAME_MINIMAP, 0), "", 0)
     call BlzFrameSetAbsPoint(mainButton, FRAMEPOINT_TOP, 0.4, 0.6)
     call BlzFrameSetSize(mainButton, 0.08, 0.05)
     set prev = mainButton
     
     // set mainButton = BlzCreateFrame("ScriptDialogButton", BlzGetOriginFrame(ORIGIN_FRAME_GAME_UI, 0), 0,0)
-    set mainButton = BlzCreateFrameByType("TEXT", "GameTimeDummyFrame", BlzGetOriginFrame(ORIGIN_FRAME_GAME_UI, 0), "", 0)
+    set mainButton = BlzCreateFrameByType("TEXT", "GameTimeDummyFrame", BlzGetOriginFrame(ORIGIN_FRAME_MINIMAP, 0), "", 0)
     call BlzFrameSetTooltip(prev, mainButton)
     
     set text = BlzCreateFrameByType("TEXT", "HotkeyIndicator", mainButton, "StandardExtraSmallTextTemplate", 0)
