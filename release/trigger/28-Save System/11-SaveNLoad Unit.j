@@ -4,6 +4,138 @@ library SaveNLoadUnit requires SaveNLoad, UnitVisualMods, AnyBase, DecorationSFX
 
 */
 
+// Used to serialize flags string
+private function I2FlagsString takes integer flags returns string
+    return I2S(flags)  // TODO: If max flag exceeds 4, we need to use AnyBase(92) instead of I2S
+endfunction
+
+// Used to deserialize flags string
+private function FlagsString2I takes string flags returns integer
+    return S2I(flags)  // TODO: If max flag exceeds 4, we need to use AnyBase(92) instead of S2I
+endfunction
+
+
+scope Serialization
+
+    scope SFX
+        /*
+            Utility functions to serialize SpecialEffects into strings.
+        */
+
+        private function GetFacingString takes SpecialEffect sfx returns string
+            if sfx.roll == 0 and sfx.pitch == 0 then
+                return R2S(sfx.yaw*bj_RADTODEG)
+            else
+                return R2S(sfx.yaw*128) + "|" + R2S(sfx.pitch*128) + "|" + R2S(sfx.roll*128)
+            endif
+        endfunction
+
+        private function GetScaleString takes SpecialEffect sfx returns string
+            local real scaleX = sfx.scaleX
+            if sfx.scaleY != scaleX  or sfx.scaleZ != scaleX then
+                return R2S(sfx.scaleX) + "|" + R2S(sfx.scaleY) + "|" + R2S(sfx.scaleZ)
+            else
+                return R2S(sfx.scaleX)
+            endif
+        endfunction
+
+        function SerializeSpecialEffectFlags takes SpecialEffect sfx returns string
+            local integer result = 0
+            
+            if not ObjectPathing(sfx).isDisabled then
+                set result = result + SaveNLoad_BoolFlags.UNROOTED
+            endif
+
+            return I2FlagsString(result)
+        endfunction
+
+
+        function SerializeSpecialEffect takes SpecialEffect whichEffect, player owner, boolean hasCustomColor, integer selectionType, string flags returns string
+            local string animTags
+            local string color
+            local SaveNLoad_PlayerData playerId = GetPlayerId(owner)
+            
+            if hasCustomColor then
+                set color = I2S(whichEffect.color + 1)
+            else
+                set color = "D"
+            endif
+            
+            if whichEffect.hasSubAnimations() then
+                set animTags = SaveIO_CleanUpString(GUMSConvertTags(UnitVisualMods_TAGS_COMPRESS, SubAnimations2Tags(whichEffect.subanimations)))
+            else
+                set animTags = "D"
+            endif
+
+            return ID2S(whichEffect.unitType) + "," +/*
+                */ R2S(whichEffect.x) + "," +/*
+                */ R2S(whichEffect.y) + "," +/*
+                */ R2S(whichEffect.height) + "," +/*
+                */ GetFacingString(whichEffect) + "," +/*
+                */ GetScaleString(whichEffect) + "," +/*
+                */ I2S(whichEffect.red) + "," +/*
+                */ I2S(whichEffect.green) + "," +/*
+                */ I2S(whichEffect.blue) + "," +/*
+                */ I2S(whichEffect.alpha) + "," +/*
+                */ color + "," +/*
+                */ R2S(whichEffect.animationSpeed) + "," +/*
+                */ animTags + "," +/*
+                */ I2S(selectionType) + "," +/*
+                */ flags
+        endfunction
+
+    endscope
+
+    scope Unit
+        /*
+            Utility functions to serialize units into strings.
+        */
+
+        function SerializeUnitFlags takes unit saveUnit returns string
+            local integer result = 0
+            
+            if LoP_IsUnitDecoration(saveUnit) and not ObjectPathing.get(saveUnit).isDisabled then
+                set result = result + SaveNLoad_BoolFlags.UNROOTED
+                
+            elseif IsUnitType(saveUnit, UNIT_TYPE_ANCIENT) and BlzGetUnitIntegerField(saveUnit, UNIT_IF_DEFENSE_TYPE) == GetHandleId(DEFENSE_TYPE_LARGE) then
+                set result = result + SaveNLoad_BoolFlags.UNROOTED
+                
+            endif
+            if GetOwningPlayer(saveUnit) == Player(PLAYER_NEUTRAL_PASSIVE) then
+                set result = result + SaveNLoad_BoolFlags.NEUTRAL
+                
+            endif
+            
+            return I2FlagsString(result)
+        endfunction
+        
+        function SerializeUnit takes unit saveUnit returns string
+            local UnitVisuals unitHandleId = GetHandleId(saveUnit)
+        
+            if UnitHasAttachedEffect(saveUnit) then
+                return SerializeSpecialEffect(GetUnitAttachedEffect(saveUnit), GetOwningPlayer(saveUnit), unitHandleId.hasColor(), GUMS_GetUnitSelectionType(saveUnit), SerializeUnitFlags(saveUnit))
+            else
+                return ID2S((GetUnitTypeId(saveUnit))) + "," + /*
+                            */   R2S(GetUnitX(saveUnit))+","+  /*
+                            */   R2S(GetUnitY(saveUnit)) + "," + /*
+                            */   R2S(GetUnitFlyHeight(saveUnit)) + "," + /*
+                            */   R2S(GetUnitFacing(saveUnit)) + "," + /*
+                            */   unitHandleId.getScale() + "," + /*
+                            */   unitHandleId.getVertexRed() + "," + /*
+                            */   unitHandleId.getVertexGreen() + "," + /*
+                            */   unitHandleId.getVertexBlue() + "," + /*
+                            */   unitHandleId.getVertexAlpha() + "," + /*
+                            */   unitHandleId.getColor() + "," + /*
+                            */   unitHandleId.getAnimSpeed() + "," + /*
+                            */   SaveIO_CleanUpString(unitHandleId.getAnimTag()) + "," + /*
+                            */   I2S(GUMS_GetUnitSelectionType(saveUnit)) + "," + /*
+                            */   SerializeUnitFlags(saveUnit)
+            endif
+        endfunction
+
+    endscope
+endscope
+
 globals
     private constant key forbiddenTypes // ConstTable
 endglobals
@@ -239,7 +371,7 @@ struct UnitSaveFields extends array
                     set len_str = StringLength(chat_str)
                     if chat_str != "" then
                         set str_index = CutToComma(chat_str)
-                        set .flags = S2I(SubString(chat_str,0,str_index))  // TODO: When max flag is larger than 4, we need to use AnyBase(92)
+                        set .flags = FlagsString2I(SubString(chat_str,0,str_index))  // TODO: When max flag is larger than 4, we need to use AnyBase(92)
                     else
                         set .flags = 0
                         // set chat_str = SubString(chat_str,str_index+1,len_str+1)

@@ -62,49 +62,53 @@ function Save_PatrolPointStr takes real x, real y returns string
     return SaveNLoad_FormatString("SnL_unit_extra", "=p " + R2S(x) + "=" +  R2S(y))
 endfunction
 
-function Save_SaveUnitPatrolPoints takes SaveWriter saveData, integer unitHandleId returns nothing
+function Save_SaveUnitPatrolPoints takes SaveWriter saveWriter, integer unitHandleId returns nothing
     local integer i = 1
     local integer totalPoints = Patrol_GetTotalPatrolPoints(unitHandleId)
     local string saveStr
     
     loop
     exitwhen i > totalPoints
-        call saveData.write(Save_PatrolPointStr(Patrol_GetPointX(unitHandleId, i),Patrol_GetPointY(unitHandleId, i)))
+        call saveWriter.write(Save_PatrolPointStr(Patrol_GetPointX(unitHandleId, i),Patrol_GetPointY(unitHandleId, i)))
         set i = i+1
     endloop
 endfunction
 
-function SaveUnitExtraStrings takes SaveWriter saveData, unit saveUnit, integer unitHandleId returns nothing
+function SaveUnitExtraStrings takes SaveWriter saveWriter, unit saveUnit, integer unitHandleId returns nothing
+
+        if GUMSUnitHasCustomName(unitHandleId) then
+            call saveWriter.write(SaveNLoad_FormatString("SnL_unit_extra", "=n " + SaveIO_CleanUpString(GUMSGetUnitName(saveUnit))))
+        endif
         
         static if LIBRARY_UserDefinedRects then
             if GUDR_IsUnitIdGenerator(unitHandleId) then
-                call saveData.write(SaveNLoad_FormatString("SnL_unit_extra", Save_GetGUDRSaveString(unitHandleId)))
+                call saveWriter.write(SaveNLoad_FormatString("SnL_unit_extra", Save_GetGUDRSaveString(unitHandleId)))
             endif
         endif
         
         if IsUnitWaygate(saveUnit) then
             if WaygateIsActive(saveUnit) then
-                call saveData.write(SaveNLoad_FormatString("SnL_unit_extra", "=w " + R2S(WaygateGetDestinationX(saveUnit)) + "=" + R2S(WaygateGetDestinationY(saveUnit)) + "=T="))
+                call saveWriter.write(SaveNLoad_FormatString("SnL_unit_extra", "=w " + R2S(WaygateGetDestinationX(saveUnit)) + "=" + R2S(WaygateGetDestinationY(saveUnit)) + "=T="))
             else
-                call saveData.write(SaveNLoad_FormatString("SnL_unit_extra", "=w " + R2S(WaygateGetDestinationX(saveUnit)) + "=" + R2S(WaygateGetDestinationY(saveUnit)) + "=F="))
+                call saveWriter.write(SaveNLoad_FormatString("SnL_unit_extra", "=w " + R2S(WaygateGetDestinationX(saveUnit)) + "=" + R2S(WaygateGetDestinationY(saveUnit)) + "=F="))
             endif
         endif
         
         static if LIBRARY_MultiPatrol then
             if Patrol_UnitIdHasPatrolPoints(unitHandleId) then
-                call Save_SaveUnitPatrolPoints(saveData, unitHandleId)
+                call Save_SaveUnitPatrolPoints(saveWriter, unitHandleId)
             endif
         endif
         
         static if LIBRARY_LoPHeroicUnit then
             if LoP_IsUnitCustomHero(saveUnit) then
-                call saveData.write(SaveNLoad_FormatString("SnL_unit_extra", "=h S"))
+                call saveWriter.write(SaveNLoad_FormatString("SnL_unit_extra", "=h S"))
             endif
         endif
         
         static if LIBRARY_CustomizableAbilityList then
             if GetUnitAbilityLevel(saveUnit, 'AHer') > 0 then
-                call saveData.write(SaveNLoad_FormatString("SnL_unit_extra", EncodeRemoveableAbilities(saveUnit)))
+                call saveWriter.write(SaveNLoad_FormatString("SnL_unit_extra", EncodeRemoveableAbilities(saveUnit)))
             endif
         endif
 endfunction
