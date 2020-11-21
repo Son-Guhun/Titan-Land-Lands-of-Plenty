@@ -1,13 +1,6 @@
 library CustomStatSystem requires NeoBonus
 //**************************************************************************************
-/* How to import:
-
-1- You must follow the instructions in the NeoBonus library in order to import it.
-2- You must follow the instructions in the CustomStatSystem triggers to import it. You do not need to
-use the Lua script or copy over any abilities, just the actual JASS code.
-3- In the code you imported to the Map Header for CSS, deleate everything below the line "// Bonus Handling Code".
-4- Delete the CSS Standalone Bonus trigger from the CSS System category.
-5- Import this trigger into your map.
+/* This is a compatibility layer for NeoBonus that exposes the same API as the popular CustomStatSystem.
 
 *///************************************************************************************
 

@@ -1,8 +1,0 @@
-Event
-Condition
-Action
-    SetVariable
-        Var   : temp_player
-        Call  : GetTriggerPlayer
-    CustomScriptCode
-        Const : 'call SetPlayerState(udg_temp_player, PLAYER_STATE_OBSERVER,1)'

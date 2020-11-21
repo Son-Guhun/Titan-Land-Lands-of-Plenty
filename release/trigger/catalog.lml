@@ -49,6 +49,7 @@
     09-LoPStdlib: LoPStdlib
     10-LoPWarn: LoPWarn
     11-LoPConstants: LoPConstants
+    12-NativeRedefinitions: NativeRedefinitions
 '05-Map Init': 'Map Init'
     '01-Init Libraries': 'Init Libraries'
         Comment
@@ -64,48 +65,46 @@
     '09-Init Main': 'Init Main'
     '10-Init 0 seconds': 'Init 0 seconds'
     '11-Init Create Events': 'Init Create Events'
+    12-Validation: Validation
+        Comment
+    '13-Initialization Checker': 'Initialization Checker'
+        Disab
 '06-Map System': 'Map System'
-    '01-System Set Unit Color': 'System Set Unit Color'
-    '02-System Level Up Heroes': 'System Level Up Heroes'
+    '01-System Deselect': 'System Deselect'
+    '02-System Set Unit Color': 'System Set Unit Color'
     '03-System Autoname': 'System Autoname'
     '04-System Detect Leaver': 'System Detect Leaver'
     '05-System Player Locations': 'System Player Locations'
-    '06-System Give Potion to Hero': 'System Give Potion to Hero'
-    07-Cleanup: Cleanup
+    06-Cleanup: Cleanup
         Comment
-    '08-System Cleanup Death': 'System Cleanup Death'
-    '09-System Cleanup Removal': 'System Cleanup Removal'
-    '10-System Cleanup Owner Change': 'System Cleanup Owner Change'
-    '11-System Cleanup UnitGroups': 'System Cleanup UnitGroups'
-    '12-System Cleanup Items': 'System Cleanup Items'
-    '13-Titan Powers': 'Titan Powers'
+    '07-System Cleanup Death': 'System Cleanup Death'
+    '08-System Cleanup Removal': 'System Cleanup Removal'
+    '09-System Cleanup Owner Change': 'System Cleanup Owner Change'
+    '10-System Cleanup UnitGroups': 'System Cleanup UnitGroups'
+    '11-System Cleanup Items': 'System Cleanup Items'
+    '12-Titan Powers': 'Titan Powers'
         Comment
-    '14-System Titan Palace Item Prot': 'System Titan Palace Item Prot'
-    '15-System Titan Palace Prot': 'System Titan Palace Prot'
-    '16-System Titan GiveUnit': 'System Titan GiveUnit'
-    '17-System Titan Powers': 'System Titan Powers'
-    '18-Prevent Saving': 'Prevent Saving'
+    '13-System Titan Palace Item Prot': 'System Titan Palace Item Prot'
+    '14-System Titan Palace Prot': 'System Titan Palace Prot'
+    '15-System Titan GiveUnit': 'System Titan GiveUnit'
+    '16-System Titan Powers': 'System Titan Powers'
+    '17-Prevent Saving': 'Prevent Saving'
         Comment
-    '19-System PreventSave Catch': 'System PreventSave Catch'
+    '18-System PreventSave Catch': 'System PreventSave Catch'
         Disab
-    '20-System PreventSave Clear': 'System PreventSave Clear'
+    '19-System PreventSave Clear': 'System PreventSave Clear'
         Disab
-    21-Upgrade: Upgrade
+    20-Upgrade: Upgrade
         Comment
-    '22-System Instant Upgrade': 'System Instant Upgrade'
-    '23-System On Upgrade Finish': 'System On Upgrade Finish'
-    '24-System On Upgrade Cancel': 'System On Upgrade Cancel'
+    '21-System Instant Upgrade': 'System Instant Upgrade'
+    '22-System On Upgrade Finish': 'System On Upgrade Finish'
+    '23-System On Upgrade Cancel': 'System On Upgrade Cancel'
         Disab
-    25-New: New
+    24-Chat: Chat
         Comment
-    '26-System HeroicUnit InfoPanel': 'System HeroicUnit InfoPanel'
-        Disab
-    '27-System Deselect': 'System Deselect'
-    '28-SotDRP Chat': 'SotDRP Chat'
-    '29-AdvChatBox LoP': 'AdvChatBox LoP'
-    '30-Chat Message Handler': 'Chat Message Handler'
-    '31-Initialization Checker': 'Initialization Checker'
-        Disab
+    '25-SotDRP Chat': 'SotDRP Chat'
+    '26-Chat Message Handler': 'Chat Message Handler'
+    '27-AdvChatBox LoP': 'AdvChatBox LoP'
 '07-Player Commands': 'Player Commands'
     '01-Commands Count': 'Commands Count'
     '02-Commands Fix': 'Commands Fix'
@@ -211,18 +210,28 @@
     09-Init: Init
         Comment
     10-UpgradeSystemInit: UpgradeSystemInit
-11----------------------------------------: ---------------------------------------
-12-Systems: Systems
-13-------------------: ------------------
-14-vJass: vJass
-'15-Data Structures': 'Data Structures'
+'11-Unit Systems': 'Unit Systems'
+12-Units: Units
+    1-CustomizableAbilityList: CustomizableAbilityList
+    2-MountSystem: MountSystem
+    3-Heroes: Heroes
+        Comment
+    '4-Hero Give Potion': 'Hero Give Potion'
+    '5-Hero Level Up': 'Hero Level Up'
+    '6-Cleanup Libraries': 'Cleanup Libraries'
+        Comment
+13----------------------------------------: ---------------------------------------
+14-Libraries: Libraries
+15-------------------: ------------------
+16-Stdlib: Stdlib
+'17-Data Structures': 'Data Structures'
     '1-GMUI Main': 'GMUI Main'
     2-Lists: Lists
     '3-GAL Main': 'GAL Main'
     '4-GLHS Main': 'GLHS Main'
     '5-GLHS Generics': 'GLHS Generics'
     6-StaticLinkedSet: StaticLinkedSet
-16-Tables: Tables
+18-Tables: Tables
     1-External: External
         Comment
     2-Table: Table
@@ -230,155 +239,83 @@
         Comment
     4-ConstTable: ConstTable
     5-HashtableWrapper: HashtableWrapper
-    6-TableStruct: TableStruct
-    7-HashStruct: HashStruct
-    8-AgentStruct: AgentStruct
-'17-Multipatrol (TODO)': 'Multipatrol (TODO)'
-    1-MultiPatrol: MultiPatrol
-    '2-MultiPatrol Addons': 'MultiPatrol Addons'
-18-Rects: Rects
+    '6-Struct Backends': 'Struct Backends'
+        Comment
+    7-TableStruct: TableStruct
+    8-HashStruct: HashStruct
+    9-AgentStruct: AgentStruct
+19-Tiles: Tiles
+    1-TileDefinition: TileDefinition
+    2-PathingTileDefinition: PathingTileDefinition
+    3-StructureTileDefinition: StructureTileDefinition
+    4-AnyTileDefinition: AnyTileDefinition
+20-Rects: Rects
     1-UserDefinedRects: UserDefinedRects
     2-RectGenerator: RectGenerator
     3-RectEnvironment: RectEnvironment
     4-AutoRectEnvironment: AutoRectEnvironment
-19-Tiles: Tiles
-    1-TileDefinition: TileDefinition
-    2-StructureTileDefinition: StructureTileDefinition
-    3-AnyTileDefinition: AnyTileDefinition
-    4-PathingTileDefinition: PathingTileDefinition
-20-vJass: vJass
+'21-Terrain Libraries': 'Terrain Libraries'
+    1-TerrainTools: TerrainTools
+    2-Deformations: Deformations
+    3-DeformationTools: DeformationTools
+    4-DeformationToolsHooks: DeformationToolsHooks
+'22-Function Interfaces': 'Function Interfaces'
+    1-FuncInterface: FuncInterface
+    2-FuncInterfaceIntegerPlayerBoolean: FuncInterfaceIntegerPlayerBoolean
+23-vJass: vJass
     01-External: External
         Comment
-    02-WorldBounds: WorldBounds
-    03-DestructableLib: DestructableLib
-    04-GroupTools: GroupTools
-    05-DummyRecycler: DummyRecycler
-    06-Id2String: Id2String
-    07-HeroicUnit: HeroicUnit
-    08-StringHashEx: StringHashEx
-    09-Maths: Maths
-    10-MathParser: MathParser
-    11-Matrices: Matrices
-    12-Modified: Modified
+    02-Maths: Maths
+    03-MathParser: MathParser
+    04-Matrices: Matrices
+    05-Id2String: Id2String
+    06-StringHashEx: StringHashEx
+    07-WorldBounds: WorldBounds
+    08-DestructableLib: DestructableLib
+    09-GroupTools: GroupTools
+    10-HeroicUnit: HeroicUnit
+    11-Modified: Modified
         Comment
-    '13-PlayerUtils Lite': 'PlayerUtils Lite'
-    '14-Timeline Lite': 'Timeline Lite'
-    '15-By Guhun': 'By Guhun'
+    '12-PlayerUtils Lite': 'PlayerUtils Lite'
+    '13-Timeline Lite': 'Timeline Lite'
+    '14-By Guhun': 'By Guhun'
         Comment
-    16-CutToComma: CutToComma
-    17-PlayerColorUtils: PlayerColorUtils
-    18-UnitVisualMods: UnitVisualMods
-    19-UnitVisualValues: UnitVisualValues
-    20-AnyBase: AnyBase
-    21-BitFlags: BitFlags
-    22-OOP: OOP
-    23-MoveSpeedBonus: MoveSpeedBonus
-    24-MultiBoard: MultiBoard
-        Disab
-    25-GameTime: GameTime
-        Disab
-    26-ArgumentStack: ArgumentStack
-    27-BoolExprEvaluator: BoolExprEvaluator
-    28-Map-specific: Map-specific
+    15-OOP: OOP
+    16-AnyBase: AnyBase
+    17-BitFlags: BitFlags
+    18-CutToComma: CutToComma
+    19-PlayerColorUtils: PlayerColorUtils
+    20-ArgumentStack: ArgumentStack
+    21-BoolExprEvaluator: BoolExprEvaluator
+    22-Map-specific: Map-specific
         Comment
-    29-NativeRedefinitions: NativeRedefinitions
-    30-UnitEvents: UnitEvents
-    31-CustomizableAbilityList: CustomizableAbilityList
-    32-TransportUtils: TransportUtils
-    '33-Under Construction': 'Under Construction'
+    23-Debug: Debug
+    '24-Under Construction': 'Under Construction'
         Comment
-    '34-Camera System': 'Camera System'
+    '25-Camera System': 'Camera System'
         Disab
-    35-LockableStructs: LockableStructs
+    26-LockableStructs: LockableStructs
         Disab
-    36-Packets: Packets
+    27-Packets: Packets
         Disab
-    37-WorldBoundsUtils: WorldBoundsUtils
+    28-WorldBoundsUtils: WorldBoundsUtils
         Disab
-21-Map-specific: Map-specific
-    1-Debug: Debug
-    2-DummyDmg: DummyDmg
-    3--------: -------
-        Comment
-    4-TimedBonus: TimedBonus
-    '5-Move Speed Modification': 'Move Speed Modification'
-    6-MountSystem: MountSystem
-    '7-Under Construction': 'Under Construction'
-        Comment
-    '8-Victim Tracker': 'Victim Tracker'
-        Disab
-    9-UnitName: UnitName
-22-External: External
-'23-Unit Event': 'Unit Event'
+    29-UnitName: UnitName
+'24-Unit Libraries': 'Unit Libraries'
+'25-Unit Event': 'Unit Event'
     '1-Unit Event Config': 'Unit Event Config'
         Disab
     '2-Unit Event': 'Unit Event'
         Disab
     '3-Unit Indexer': 'Unit Indexer'
         Run
-'24-Damage Engine': 'Damage Engine'
-    '1-Damage Engine Config': 'Damage Engine Config'
-    '2-Damage Engine': 'Damage Engine'
-    '3-Damage Tag': 'Damage Tag'
-    4-Bash: Bash
-    '5-Combat Tag': 'Combat Tag'
-'25-GUI Spell System': 'GUI Spell System'
-    '1-Read Me': 'Read Me'
-        Comment
-    '2-Spell System Config': 'Spell System Config'
-    '3-Spell System': 'Spell System'
-'26-Knockback 2D': 'Knockback 2D'
-    '1-Knockback 2D Config': 'Knockback 2D Config'
-    '2-Knockback 2D Destroy': 'Knockback 2D Destroy'
-    '3-Knockback 2D': 'Knockback 2D'
-    '4-Knockback 2D System': 'Knockback 2D System'
-    '5-Knockback 2D System Copy': 'Knockback 2D System Copy'
-        Disab
-    '6-K2D OnLoop Template': 'K2D OnLoop Template'
-        Disab
-'27-By Guhun': 'By Guhun'
-'28-Save System': 'Save System'
-    '01-SaveLoad Commands': 'SaveLoad Commands'
-    '02-SaveLoad Set Center Numbers': 'SaveLoad Set Center Numbers'
-    03-Saving: Saving
-        Comment
-    04-SaveUnit: SaveUnit
-    05-SaveUnitExtras: SaveUnitExtras
-    06-SaveDestructable: SaveDestructable
-    07-SaveTerrain: SaveTerrain
-    08-SaveMain: SaveMain
-    09-Loading: Loading
-        Comment
-    10-SaveNLoad: SaveNLoad
-    '11-SaveNLoad Unit': 'SaveNLoad Unit'
-    '12-SaveNLoad Terrain': 'SaveNLoad Terrain'
-    13-IO_UI: IO/UI
-        Comment
-    14-SaveIO: SaveIO
-    '15-SaveNLoad ProgressBars': 'SaveNLoad ProgressBars'
-    '16-Sync Listeners': 'Sync Listeners'
-        Comment
-    17-RectSaveLoader: RectSaveLoader
-    18-SyncUnit: SyncUnit
-        Closed
-    '19-SyncUnit Extra': 'SyncUnit Extra'
-        Closed
-    20-SyncDestructable: SyncDestructable
-    21-SyncTerrain: SyncTerrain
-    22----------------------------: ---------------------------
-        Comment
-    23-SaveNLoadDestructable: SaveNLoadDestructable
-'29-Circle Object System': 'Circle Object System'
-    '1-GCOS Init Copy': 'GCOS Init Copy'
-    '2-Circle Object System': 'Circle Object System'
-'30-Disable System - GDS': 'Disable System - GDS'
-    '1-GDS Setup': 'GDS Setup'
-    '2-GDS Main Modifier': 'GDS Main Modifier'
-    '3-GDS Main': 'GDS Main'
-31-NeoBonus: NeoBonus
-    1-CustomStatSystem: CustomStatSystem
-    2-NeoBonus: NeoBonus
-'32-Special Effect System': 'Special Effect System'
+'26-Unit Libs': 'Unit Libs'
+    1-UnitVisualMods: UnitVisualMods
+    2-UnitVisualValues: UnitVisualValues
+    3-MultiPatrol: MultiPatrol
+    '4-MultiPatrol Addons': 'MultiPatrol Addons'
+    5-TransportUtils: TransportUtils
+'27-Special Effect Libs': 'Special Effect Libs'
     01-Core: Core
         Comment
     02-SpecialEffect: SpecialEffect
@@ -392,31 +329,102 @@
         Comment
     09-Unit2Effect: Unit2Effect
     10-StringSubanimations: StringSubanimations
-    11-UnitTypeDefaultValues: UnitTypeDefaultValues
-    12-UnitModels: UnitModels
-'33-Terrain Libraries': 'Terrain Libraries'
-    1-TerrainTools: TerrainTools
-    2-Deformations: Deformations
-    3-DeformationTools: DeformationTools
-    4-DeformationToolsHooks: DeformationToolsHooks
-34-ControlState: ControlState
-    1-SelectionStates: SelectionStates
-    2-PlayerEventTools: PlayerEventTools
-    3-PlayerEvent: PlayerEvent
-    4-PlayerMouseEvent: PlayerMouseEvent
-    5-ControlState: ControlState
-    '6-Free Cam': 'Free Cam'
-    7-OSKeyLib: OSKeyLib
-35-TerrainEditor: TerrainEditor
-    1-TerrainEditor: TerrainEditor
-    2-TerrainEditorUI: TerrainEditorUI
-    '3-TerrainEditorUI View': 'TerrainEditorUI View'
-    '4-TerrainEditorUI Controller': 'TerrainEditorUI Controller'
-    5-TileDefs: TileDefs
-36----------------------------------------: ---------------------------------------
-37-Spells: Spells
-38-------------------: ------------------
-'39-Spell System Spells': 'Spell System Spells'
+    '11-Generated Code': 'Generated Code'
+        Comment
+    12-UnitTypeDefaultValues: UnitTypeDefaultValues
+    13-UnitModels: UnitModels
+'28-Pathing Maps': 'Pathing Maps'
+    1-PathingMaps: PathingMaps
+    2-DefaultPathingMaps: DefaultPathingMaps
+    '3-Generated Code': 'Generated Code'
+        Comment
+    4-GeneratedDecorationPathMaps: GeneratedDecorationPathMaps
+    '5-Do not click_ slows down editor': 'Do not click: slows down editor'
+        Comment
+    6-InitializePathingsMapFromFiles: InitializePathingsMapFromFiles
+'29-Save System': 'Save System'
+'30-SaveNLoad Core': 'SaveNLoad Core'
+    01-SaveNLoad: SaveNLoad
+    02-IO_UI: IO/UI
+        Comment
+    03-SaveIO: SaveIO
+    '04-SaveNLoad ProgressBars': 'SaveNLoad ProgressBars'
+    '05-Saving Routine': 'Saving Routine'
+        Comment
+    06-SaveUnit: SaveUnit
+    07-SaveDestructable: SaveDestructable
+    08-SaveTerrain: SaveTerrain
+    09-SaveMain: SaveMain
+    10----------------------------: ---------------------------
+        Comment
+    '11-SaveLoad Commands': 'SaveLoad Commands'
+    '12-SaveLoad Set Center Numbers': 'SaveLoad Set Center Numbers'
+'31-SaveNLoad LoP': 'SaveNLoad LoP'
+    01-Serialization_Deserialization: Serialization/Deserialization
+        Comment
+    '02-SaveNLoad Unit': 'SaveNLoad Unit'
+    03-SaveUnitExtras: SaveUnitExtras
+    04-SaveNLoadDestructable: SaveNLoadDestructable
+    '05-SaveNLoad Terrain': 'SaveNLoad Terrain'
+    '06-Sync Listeners': 'Sync Listeners'
+        Comment
+    07-RectSaveLoader: RectSaveLoader
+    08-SyncUnit: SyncUnit
+        Closed
+    '09-SyncUnit Extra': 'SyncUnit Extra'
+        Closed
+    10-SyncDestructable: SyncDestructable
+    11-SyncTerrain: SyncTerrain
+32----------------------------------------: ---------------------------------------
+33-Spells: Spells
+34-------------------: ------------------
+'35-External Libs': 'External Libs'
+'36-Knockback 2D': 'Knockback 2D'
+    '1-Knockback 2D Config': 'Knockback 2D Config'
+    '2-Knockback 2D Destroy': 'Knockback 2D Destroy'
+    '3-Knockback 2D': 'Knockback 2D'
+    '4-Knockback 2D System': 'Knockback 2D System'
+    '5-Knockback 2D System Copy': 'Knockback 2D System Copy'
+        Disab
+    '6-K2D OnLoop Template': 'K2D OnLoop Template'
+        Disab
+'37-Damage Engine': 'Damage Engine'
+    '1-Damage Engine Config': 'Damage Engine Config'
+    '2-Damage Engine': 'Damage Engine'
+    '3-Damage Tag': 'Damage Tag'
+    4-Bash: Bash
+    '5-Combat Tag': 'Combat Tag'
+'38-GUI Spell System': 'GUI Spell System'
+    '1-Read Me': 'Read Me'
+        Comment
+    '2-Spell System Config': 'Spell System Config'
+    '3-Spell System': 'Spell System'
+'39-Libs by Guhun': 'Libs by Guhun'
+'40-Spell Scripting Utils': 'Spell Scripting Utils'
+    01-DummyRecycler: DummyRecycler
+    02-UnitEvents: UnitEvents
+    '03-GCOS Init': 'GCOS Init'
+    '04-Circle Object System': 'Circle Object System'
+    '05-Bonus Systems': 'Bonus Systems'
+        Comment
+    06-NeoBonus: NeoBonus
+    07-MoveSpeedBonus: MoveSpeedBonus
+    08-CustomStatSystem: CustomStatSystem
+    09-MoveSpeedModification: MoveSpeedModification
+    10-Map-specifc: Map-specifc
+        Comment
+    11-TimedBonus: TimedBonus
+    12-DummyDmg: DummyDmg
+    '13-Under Construction': 'Under Construction'
+        Comment
+    '14-Victim Tracker': 'Victim Tracker'
+        Disab
+'41-Disable System - GDS': 'Disable System - GDS'
+    '1-GDS Setup': 'GDS Setup'
+    '2-GDS Main Modifier': 'GDS Main Modifier'
+    '3-GDS Main': 'GDS Main'
+42-------------------: ------------------
+'43-Spell System Spells': 'Spell System Spells'
     '01-Spell System Filter Decorations': 'Spell System Filter Decorations'
     '02-Initialize Spells': 'Initialize Spells'
     '03-Spell System Sample Config': 'Spell System Sample Config'
@@ -474,21 +482,19 @@
     '49-Pick Up Rider': 'Pick Up Rider'
     '50-Ditch Rider': 'Ditch Rider'
     '51-Silver Key': 'Silver Key'
-'40-No Spell System Spells': 'No Spell System Spells'
-    01-FilterTransformations: FilterTransformations
-    '02-Ability Cooldown': 'Ability Cooldown'
+'44-No Spell System Spells': 'No Spell System Spells'
+    1-FilterTransformations: FilterTransformations
+    '2-Ability Cooldown': 'Ability Cooldown'
         Disab
-    03-Summon: Summon
-    '04-Sargeras Silence New': 'Sargeras Silence New'
-    '05-Aura Of Restitution': 'Aura Of Restitution'
-    '06-Cosmosis Stop Time': 'Cosmosis Stop Time'
-    07----------------------------: ---------------------------
+    3-Summon: Summon
+    '4-Sargeras Silence Aura': 'Sargeras Silence Aura'
+    '5-Aura Of Restitution': 'Aura Of Restitution'
+    6----------------------------: ---------------------------
         Comment
-    '08-Cosmosis Give Item': 'Cosmosis Give Item'
-    '09-TheCreator Invincibility': 'TheCreator Invincibility'
-    10-Items: Items
-        Comment
-'41-Knockback Samples': 'Knockback Samples'
+    '7-Cosmosis Stop Time': 'Cosmosis Stop Time'
+    '8-Cosmosis Give Item': 'Cosmosis Give Item'
+    '9-TheCreator Invincibility': 'TheCreator Invincibility'
+'45-Knockback Samples': 'Knockback Samples'
     '1-On Damage': 'On Damage'
         Disab
     '2-On Impact': 'On Impact'
@@ -497,33 +503,13 @@
         Disab
     '4-On Spell Stop': 'On Spell Stop'
         Disab
-    '5-Stop time of day': 'Stop time of day'
+    5-Test: Test
         Disab
-    6-Test: Test
-        Disab
-42----------------------------------------: ---------------------------------------
-43-TESTING: TESTING
-    '1-Global Return Library': 'Global Return Library'
-        Disab
-    '2-Ban Player': 'Ban Player'
-        Disab
-    '3-Uproot Detect': 'Uproot Detect'
-        Disab
-    '4-Test SetUnitX': 'Test SetUnitX'
-        Disab
-'44-Destructable Systems': 'Destructable Systems'
-    '1-Untitled Trigger 002': 'Untitled Trigger 002'
-        Disab
-    '2-Create Destructable': 'Create Destructable'
-        Disab
-45-Memory: Memory
-    1-TimerMemory: TimerMemory
-        Disab
-    2-TriggerMemory: TriggerMemory
-        Disab
-    3-RegionMemory: RegionMemory
-        Disab
-46-UI: UI
+46----------------------------------------: ---------------------------------------
+'47-User Interface': 'User Interface'
+48-------------------: ------------------
+'49-Core Libs': 'Core Libs'
+50-UI: UI
     1-Screen: Screen
     2-UILib: UILib
     '3-LoP UI': 'LoP UI'
@@ -533,7 +519,18 @@
     7-WidescreenUI: WidescreenUI
     8-IsMouseOnWorld: IsMouseOnWorld
         Disab
-47-Screens: Screens
+    '9-System HeroicUnit InfoPanel': 'System HeroicUnit InfoPanel'
+        Disab
+51-ControlState: ControlState
+    1-SelectionStates: SelectionStates
+    2-PlayerEventTools: PlayerEventTools
+    3-PlayerEvent: PlayerEvent
+    4-PlayerMouseEvent: PlayerMouseEvent
+    5-ControlState: ControlState
+    '6-Free Cam': 'Free Cam'
+    7-OSKeyLib: OSKeyLib
+'52-Interface Elements': 'Interface Elements'
+53-Screens: Screens
     '1-UpperButtonBar View': 'UpperButtonBar View'
     '2-UpperButtonBar Controller': 'UpperButtonBar Controller'
     '3-MainMenu View': 'MainMenu View'
@@ -542,7 +539,7 @@
     '6-ChatLog Controller': 'ChatLog Controller'
     '7-GameTime View': 'GameTime View'
     '8-GameTime Copy': 'GameTime Copy'
-'48-Decoration Browser': 'Decoration Browser'
+'54-Decoration Browser': 'Decoration Browser'
     1----------------------------: ---------------------------
         Comment
     '2-Decoration Browser View': 'Decoration Browser View'
@@ -550,18 +547,26 @@
     '4-Register Decoration Names': 'Register Decoration Names'
     '5-Register Classic Decorations': 'Register Classic Decorations'
     '6-Register Reforged Decorations': 'Register Reforged Decorations'
-49-AdvChatBox: AdvChatBox
+55-AdvChatBox: AdvChatBox
     '1-AdvChatBox View': 'AdvChatBox View'
     '2-AdvChatBox Controller': 'AdvChatBox Controller'
-'50-Function Interfaces': 'Function Interfaces'
-    1-FuncInterface: FuncInterface
-    2-FuncInterfaceIntegerPlayerBoolean: FuncInterfaceIntegerPlayerBoolean
-'51-Pathing Maps': 'Pathing Maps'
-    1-PathingMaps: PathingMaps
-    2-DefaultPathingMaps: DefaultPathingMaps
-    '3-Generated Code': 'Generated Code'
-        Comment
-    4-GeneratedDecorationPathMaps: GeneratedDecorationPathMaps
-    '5-Do not click_ slows down editor': 'Do not click: slows down editor'
-        Comment
-    6-InitializePathingsMapFromFiles: InitializePathingsMapFromFiles
+56-TerrainEditor: TerrainEditor
+    1-TerrainEditor: TerrainEditor
+    2-TerrainEditorUI: TerrainEditorUI
+    '3-TerrainEditorUI View': 'TerrainEditorUI View'
+    '4-TerrainEditorUI Controller': 'TerrainEditorUI Controller'
+    5-TileDefs: TileDefs
+57----------------------------------------: ---------------------------------------
+58-TESTING: TESTING
+'59-Destructable Systems': 'Destructable Systems'
+    '1-Untitled Trigger 002': 'Untitled Trigger 002'
+        Disab
+    '2-Create Destructable': 'Create Destructable'
+        Disab
+60-Memory: Memory
+    1-TimerMemory: TimerMemory
+        Disab
+    2-TriggerMemory: TriggerMemory
+        Disab
+    3-RegionMemory: RegionMemory
+        Disab

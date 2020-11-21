@@ -1,6 +1,0 @@
-Event
-    MapInitializationEvent
-Condition
-Action
-    UseTimeOfDayBJ
-        Preset: OnOffOff

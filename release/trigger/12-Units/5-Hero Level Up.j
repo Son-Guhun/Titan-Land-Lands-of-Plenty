@@ -32,10 +32,10 @@ private function onRegisterUnit takes nothing returns boolean
 endfunction
 
 //===========================================================================
-function InitTrig_System_Level_Up_Heroes takes nothing returns nothing
-    set gg_trg_System_Level_Up_Heroes = CreateTrigger(  )
-    call TriggerRegisterVariableEvent( gg_trg_System_Level_Up_Heroes, "udg_UnitIndexEvent", EQUAL, 1.00 )
-    call TriggerAddCondition(gg_trg_System_Level_Up_Heroes, Condition(function onRegisterUnit))
+function InitTrig_Hero_Level_Up takes nothing returns nothing
+    set gg_trg_Hero_Level_Up = CreateTrigger(  )
+    call TriggerRegisterVariableEvent( gg_trg_Hero_Level_Up, "udg_UnitIndexEvent", EQUAL, 1.00 )
+    call TriggerAddCondition(gg_trg_Hero_Level_Up, Condition(function onRegisterUnit))
 endfunction
 
 endscope

@@ -1,3 +1,9 @@
+/*
+    When enabled, this trigger checks whether initialization was fully performed, or if an error ocurred.
+    
+    Should not be enabled for production.
+*/
+
 globals
     timer initCheckTimer
     boolean initCheckBool = false
