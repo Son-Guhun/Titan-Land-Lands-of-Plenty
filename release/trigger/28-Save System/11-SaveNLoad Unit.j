@@ -1,8 +1,42 @@
+library SaveNLoadConfig requires LoPHeader, LoPNeutralUnits
+    
+public function StructureShouldAutoLand takes unit structure returns boolean
+    return not LoP_IsUnitDecoration(structure)
+endfunction    
+
+endlibrary
+
 library SaveNLoadUnit requires SaveNLoad, UnitVisualMods, AnyBase, DecorationSFX, UnitTypeDefaultValues, AttachedSFX, optional LoPDeprecated
 /*
     Defines functions used when a unit is loaded into the game.
 
 */
+
+globals
+    boolean SaveNLoad_AUTO_LAND = false  // Can be overwritten by SaveNLoadConfig StructureShouldAutoLand
+endglobals
+
+struct SaveNLoad_BoolFlags extends array
+    static method isAnyFlag takes integer data, integer flags returns boolean
+        return BlzBitAnd(data, flags) > 0
+    endmethod
+    
+    static method isAllFlags takes integer data, integer flags returns boolean
+        return BlzBitAnd(data, flags) == flags
+    endmethod
+
+    static constant method operator UNROOTED takes nothing returns integer
+        return 1
+    endmethod
+    
+    static constant method operator NEUTRAL takes nothing returns integer
+        return 2
+    endmethod
+    
+    static constant method operator FLAG_3 takes nothing returns integer
+        return 4
+    endmethod
+endstruct
 
 // Used to serialize flags string
 private function I2FlagsString takes integer flags returns string

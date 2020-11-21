@@ -365,6 +365,9 @@
         Closed
     20-SyncDestructable: SyncDestructable
     21-SyncTerrain: SyncTerrain
+    22----------------------------: ---------------------------
+        Comment
+    23-SaveNLoadDestructable: SaveNLoadDestructable
 '29-Circle Object System': 'Circle Object System'
     '1-GCOS Init Copy': 'GCOS Init Copy'
     '2-Circle Object System': 'Circle Object System'
