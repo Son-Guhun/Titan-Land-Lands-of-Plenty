@@ -120,25 +120,6 @@ endfunction
 
 //==========================================
 
-//==========================================
-//==========================================
-
-
-//==========================================
-// GUMS API
-//==========================================
-
-// Clears all data stored with a unit handle ID.
-function GUMSClearHandleId takes integer handleId returns nothing
-    call data.flushChild(handleId)
-endfunction
-
-// Call this when a unit is removed from the game. It supports both in-scope units and units that are out of scope (aren't null, but can't really be manipulated)
-function GUMSClearUnitData takes unit whichUnit returns nothing
-    call GUMSClearHandleId(GetHandleId(whichUnit))
-endfunction
-
-
 private struct SaveFlyHeight extends array
 
     method operator height takes nothing returns real

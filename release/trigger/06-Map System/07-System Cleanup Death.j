@@ -30,7 +30,7 @@ function LoP_onDeath takes unit whichUnit returns nothing
             endif
         else
             call DestroyGUDR(whichUnit)
-            call GUMSClearUnitData(whichUnit)
+            call UnitVisuals[whichUnit].destroy()
             call LoP_ClearNeutralData(whichUnit)
             call ClearSaveLoaderData(whichUnit)
             call ObjectPathing.get(whichUnit).destroy()

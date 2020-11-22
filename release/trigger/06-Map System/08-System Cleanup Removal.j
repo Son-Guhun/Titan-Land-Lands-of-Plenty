@@ -30,7 +30,7 @@ function LoP_onRemoval takes integer userData returns nothing
         // call DecoBuilderCount_ReduceCount(whichUnit)  // DecoBuilderCount relies on UnitTypeId, which does not function for out-of-scope units
 
         
-        call GUMSClearUnitData(whichUnit)
+        call UnitVisuals[whichUnit].destroy()
         call Patrol_ClearUnitData(whichUnit)
         call GMSS_ClearData(whichUnit)
         call LoP_ClearNeutralData(whichUnit)

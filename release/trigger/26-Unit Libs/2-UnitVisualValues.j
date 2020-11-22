@@ -156,6 +156,14 @@ struct UnitVisuals extends array
         return GetHandleId(whichUnit)
     endmethod
     
+    static method operator[] takes unit whichUnit returns UnitVisuals
+        return get(whichUnit)
+    endmethod
+    
+    method destroy takes nothing returns nothing
+        call data.flushChild(this)
+    endmethod
+    
     method hasScale takes nothing returns boolean
         return .values.real.has(SCALE)
     endmethod
@@ -236,6 +244,7 @@ struct UnitVisuals extends array
             return "D" //D stands for default
         endif
     endmethod
+
 endstruct
 
 //==================================================================================================
