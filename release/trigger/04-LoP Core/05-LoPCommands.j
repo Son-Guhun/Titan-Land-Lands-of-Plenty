@@ -1,4 +1,4 @@
-library LoPCommands initializer onInit requires CutToComma, TableStruct, ArgumentStack, LoPPlayers, LoPTip, UserDefinedRects, UnitVisualMods, GAL, LoPWarn
+library LoPCommands initializer onInit requires CutToComma, TableStruct, ArgumentStack, LoPStdLib, LoPPlayers, LoPTip, UserDefinedRects, UnitVisualMods, GAL, LoPWarn
 
 globals
     constant integer ACCESS_TITAN = 1
@@ -126,10 +126,10 @@ function Commands_SetRGBAFromString takes player whichPlayer, string args, boole
         if red > 100. or green > 100. or blue > 100. or alpha > 100. then
             call LoP_WarnPlayer(whichPlayer, LoPChannels.WARNING, "Value over 100: assuming the user meant to use integer RGB.")
         else
-            set red   = GUMSPercentTo255(red)
-            set blue  = GUMSPercentTo255(green)
-            set green = GUMSPercentTo255(blue)
-            set alpha = GUMSPercentTo255(alpha)
+            set red   = LoP.UVS.utils.PercentTo255(red)
+            set blue  = LoP.UVS.utils.PercentTo255(green)
+            set green = LoP.UVS.utils.PercentTo255(blue)
+            set alpha = LoP.UVS.utils.PercentTo255(alpha)
         endif
     endif
     

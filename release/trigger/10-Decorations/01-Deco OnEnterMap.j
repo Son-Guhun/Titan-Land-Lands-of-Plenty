@@ -9,7 +9,7 @@
 
 
 
-library DecoOnEnterMap requires UnitVisualValues, RectGenerator, LoPHeader  // for textmacro
+library DecoOnEnterMap requires UnitVisualValues, RectGenerator, LoPStdLib  // for textmacro
 
 globals
     private group G = CreateGroup()
@@ -75,7 +75,7 @@ private function DecoOnEnterMapEx takes unit trigU, boolean isUpgrade returns no
     if IsUnitType(trigU, UNIT_TYPE_STRUCTURE) then
         if GetUnitAbilityLevel(trigU, 'A037') != 0 then
         else
-            call GUMS_AddStructureFlightAbility(trigU)
+            call LoP.UVS.utils.AddStructureFlightAbility(trigU)
 
             if not isUpgrade then
                 call BlzUnitDisableAbility(trigU, 'A011', false, false)

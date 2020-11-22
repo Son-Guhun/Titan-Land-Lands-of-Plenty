@@ -128,10 +128,6 @@ endfunction
 // GUMS API
 //==========================================
 
-function GUMSPercentTo255 takes real percent returns real
-    return 2.55*percent + 0.5
-endfunction
-
 // Clears all data stored with a unit handle ID.
 function GUMSClearHandleId takes integer handleId returns nothing
     call data.flushChild(handleId)
@@ -165,19 +161,27 @@ endstruct
 //==========================================
 // GUMS Setters
 
-// The setters cannot be a part of the struct, since they require setting values in the unit, and the
-// unit is not saved within the struct.
-function GUMS_AddStructureFlightAbility takes unit structure returns nothing
-    local real facing
-    //! runtextmacro ASSERT("structure != null")
-    //! runtextmacro ASSERT("IsUnitType(structure, UNIT_TYPE_STRUCTURE)")
+private struct Utils extends array
 
-    set facing = GetUnitFacing(structure)
-    call UnitAddAbility(structure, 'DEDF' )
-    call BlzSetUnitFacingEx(structure, facing)
-endfunction
+    static method PercentTo255 takes real percent returns integer
+        return MathRound(2.55*percent)
+    endmethod
+    
+    static method AddStructureFlightAbility takes unit structure returns nothing
+        local real facing
+        //! runtextmacro ASSERT("structure != null")
+        //! runtextmacro ASSERT("IsUnitType(structure, UNIT_TYPE_STRUCTURE)")
+
+        set facing = GetUnitFacing(structure)
+        call UnitAddAbility(structure, 'DEDF' )
+        call BlzSetUnitFacingEx(structure, facing)
+    endmethod
+
+endstruct
 
 struct UnitVisualsSetters extends array
+
+    //! runtextmacro ImportLibAs("Utils", "utils")
     
     static method StructureFlyHeight takes unit structure, real newHeight, boolean autoLand returns nothing
         //! runtextmacro ASSERT("structure != null")
@@ -198,7 +202,7 @@ struct UnitVisualsSetters extends array
         if GetUnitAbilityLevel(structure,'Amov') > 0 then
             // this is an Ancient and probably already has root. Do nothing
         else
-            call GUMS_AddStructureFlightAbility(structure)
+            call Utils.AddStructureFlightAbility(structure)
             call IssueImmediateOrder(structure, "unroot")
             if autoLand then
                 call IssueInstantRootOrder(structure)
@@ -249,10 +253,10 @@ struct UnitVisualsSetters extends array
 
     //Set Vertex Color
     static method VertexColor takes unit whichUnit, real red, real green, real blue, real trans  returns nothing
-        local integer intRed = R2I(GUMSPercentTo255(red))
-        local integer intGreen = R2I(GUMSPercentTo255(green))
-        local integer intBlue = R2I(GUMSPercentTo255(blue))
-        local integer intAlpha = R2I(GUMSPercentTo255(100. - trans))
+        local integer intRed   = Utils.PercentTo255(red)
+        local integer intGreen = Utils.PercentTo255(green)
+        local integer intBlue  = Utils.PercentTo255(blue)
+        local integer intAlpha = Utils.PercentTo255(100. - trans)
         //! runtextmacro ASSERT("whichUnit != null")
         
         call SetUnitVertexColor(whichUnit, intRed, intGreen, intBlue, intAlpha)
