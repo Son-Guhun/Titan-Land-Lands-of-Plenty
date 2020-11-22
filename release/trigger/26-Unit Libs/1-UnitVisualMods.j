@@ -57,10 +57,6 @@ private struct data extends array
     static method operator [] takes integer i returns UnitVisualValues_data_Child
         return UnitVisualValues_data[i]
     endmethod
-    
-    static method flushChild takes integer i returns nothing
-        call UnitVisualValues_data.flushChild(i)
-    endmethod
 endstruct
 
 
@@ -68,8 +64,8 @@ endstruct
 //                                        Source Code
 //==================================================================================================
 
-// hooks should be below, no need to hook setunitposition if the unit position is the same as before
-function GUMS_RedrawUnit takes unit whichUnit returns nothing
+// Define before creating hooks, since there's no need to hook SetUnitPosition if the unit position is the same as before.
+private function RedrawUnit takes unit whichUnit returns nothing
     call SetUnitPosition(whichUnit, GetUnitX(whichUnit), GetUnitY(whichUnit))
 endfunction
 
@@ -77,23 +73,13 @@ endfunction
 //! runtextmacro optional DefineHooks()
 
 //////////////////////////////////////////////////////
-constant function GUMSCustomUnitNameColor takes nothing returns string
-    return "|cffffcc00"
-endfunction
-
-function GUMSConvertToCustomName takes string name returns string
-    return GUMSCustomUnitNameColor() + name + "|r"
-endfunction
-
-function GUMSConvertFromCustomName takes string name returns string
-    return SubString(name, 10, StringLength(name) - 2)
-endfunction
 
 function GUMS_GetUnitSelectionType takes unit whichUnit returns integer
     return data[GetHandleId(whichUnit)][SELECT]
 endfunction
 
 //==========================================
+// Storing
 //==========================================
 
 private struct SaveFlyHeight extends array
@@ -116,7 +102,7 @@ private struct SaveFlyHeight extends array
 endstruct
 
 //==========================================
-// GUMS Setters
+// Setters
 
 private struct Utils extends array
 
@@ -172,7 +158,7 @@ struct UnitVisualsSetters extends array
         call BlzSetUnitFacingEx(whichUnit, newAngle)
         
         if GetUnitAbilityLevel(whichUnit, 'Amov') == 0 then
-            call GUMS_RedrawUnit(whichUnit)
+            call RedrawUnit(whichUnit)
             
             if IsUnitType(whichUnit, UNIT_TYPE_STRUCTURE) and GetUnitFlyHeight(whichUnit) > UnitVisuals.MIN_FLY_HEIGHT then
                 call StructureFlyHeight(whichUnit, GetUnitFlyHeight(whichUnit), GetUnitAbilityLevel(whichUnit, 'DEDF') == 0)
@@ -192,7 +178,7 @@ struct UnitVisualsSetters extends array
         set SaveFlyHeight(GetHandleId(whichUnit)).height = newHeight
         
         if GetUnitAbilityLevel(whichUnit, 'Amov') == 0 then
-            call GUMS_RedrawUnit(whichUnit)
+            call RedrawUnit(whichUnit)
         endif
     endmethod
     
@@ -280,14 +266,26 @@ endstruct
 //The unit's default proper name is saved in a Hashtable so it can be reset
 ///////////////////////////
 
+private constant function CustomUnitNameColor takes nothing returns string
+    return "|cffffcc00"
+endfunction
+
+private function ConvertToCustomName takes string name returns string
+    return CustomUnitNameColor() + name + "|r"
+endfunction
+
+private function ConvertFromCustomName takes string name returns string
+    return SubString(name, 10, StringLength(name) - 2)
+endfunction
+
+private function GetDefaultName takes integer unitHandle returns string
+    //! runtextmacro ASSERT("unitHandle != 0")
+    return data[unitHandle].string[NAME]
+endfunction
+
 function GUMSUnitHasCustomName takes integer unitHandle returns boolean
     //! runtextmacro ASSERT("unitHandle != 0")
     return data[unitHandle].string.has(NAME)
-endfunction
-
-function GUMSGetDefaultName takes integer unitHandle returns string
-    //! runtextmacro ASSERT("unitHandle != 0")
-    return data[unitHandle].string[NAME]
 endfunction
 
 function GUMSResetUnitName takes unit whichUnit returns nothing
@@ -295,7 +293,7 @@ function GUMSResetUnitName takes unit whichUnit returns nothing
     //! runtextmacro ASSERT("whichUnit != null")
     
     if GUMSUnitHasCustomName(unitHandle) then
-        call UnitName_SetUnitName(whichUnit, GUMSGetDefaultName(unitHandle))
+        call UnitName_SetUnitName(whichUnit, GetDefaultName(unitHandle))
         call data[unitHandle].string.remove(NAME)
     endif
 endfunction
@@ -306,7 +304,7 @@ function GUMSSetUnitName takes unit whichUnit, string name returns nothing
         if not GUMSUnitHasCustomName(GetHandleId(whichUnit)) then
             set data[GetHandleId(whichUnit)].string[NAME] = UnitName_GetUnitName(whichUnit)
         endif
-        call UnitName_SetUnitName(whichUnit, GUMSConvertToCustomName(name))
+        call UnitName_SetUnitName(whichUnit, ConvertToCustomName(name))
     else
         call GUMSResetUnitName(whichUnit)
     endif
@@ -314,7 +312,7 @@ endfunction
 
 function GUMSGetUnitName takes unit whichUnit returns string
     //! runtextmacro ASSERT("whichUnit != null")
-    return GUMSConvertFromCustomName(UnitName_GetUnitName(whichUnit))
+    return ConvertFromCustomName(UnitName_GetUnitName(whichUnit))
 endfunction
 
 //==========================================
@@ -344,23 +342,19 @@ function GUMSCopyValues takes unit source, unit target returns nothing
     endif
     
     if sourceId.hasScale() then
-        call Libs.UVS.Scale(target, data[sourceId].real[SCALE])
+        call Libs.UVS.Scale(target, sourceId.raw.getScale())
     endif
     if sourceId.hasVertexColor(RED) then
-        call Libs.UVS.VertexColor(target, /*
-                                */  data[sourceId][RED]/2.55, /*
-                                */  data[sourceId][GREEN]/2.55, /*
-                                */  data[sourceId][BLUE]/2.55, /*
-                                */  (255 - data[sourceId][ALPHA])/2.55)
+        call Libs.UVS.VertexColorInt(target, sourceId.raw.getVertexRed(), sourceId.raw.getVertexGreen(), sourceId.raw.getVertexBlue(), sourceId.raw.getVertexAlpha())
     endif
     if sourceId.hasColor() then
-        call Libs.UVS.Color(target, data[sourceId][COLOR])
+        call Libs.UVS.Color(target, sourceId.raw.getColor())
     endif
     if sourceId.hasAnimSpeed() then
-        call Libs.UVS.AnimSpeed(target, data[sourceId].real[ASPEED])
+        call Libs.UVS.AnimSpeed(target, sourceId.raw.getAnimSpeed())
     endif
     if sourceId.hasAnimTag() then
-        call Libs.UVS.AnimTag(target, GUMSConvertTags(UnitVisualMods_TAGS_DECOMPRESS,data[sourceId].string[ATAG]))
+        call Libs.UVS.AnimTag(target, GUMSConvertTags(UnitVisualMods_TAGS_DECOMPRESS, sourceId.raw.getAnimTag()))
     endif
 endfunction
 
@@ -449,31 +443,6 @@ endfunction
 //////////////////////////////////////////////////////
 //End of GUMS
 //////////////////////////////////////////////////////
-
-function GUMSSetUnitVertexColorString takes unit whichUnit, string args, string separator returns nothing
-    local integer cutToComma
-    local real cRed
-    local real cGreen
-    local real cBlue
-    local real cAlpha
-    //! runtextmacro ASSERT("whichUnit != null")
-    
-    set cutToComma = CutToCharacter(args, separator)
-    set cRed = S2R(CutToCommaResult(args, cutToComma))
-    set args = CutToCommaShorten(args, cutToComma)
-    set cutToComma = CutToCharacter(args, separator)
-    set cGreen = S2R(CutToCommaResult(args, cutToComma))
-    set args = CutToCommaShorten(args, cutToComma)
-    set cutToComma = CutToCharacter(args, separator)
-    set cBlue = S2R(CutToCommaResult(args, cutToComma))
-    set args = CutToCommaShorten(args, cutToComma)
-    set cutToComma = CutToCharacter(args, separator)
-    set cAlpha = S2R(CutToCommaResult(args, cutToComma))
-    set args = CutToCommaShorten(args, cutToComma)
-    
-    call Libs.UVS.VertexColor(whichUnit, cRed, cGreen, cBlue, cAlpha)
-endfunction
-
 //==================================================================================================
 //                                        Initialization
 //==================================================================================================
