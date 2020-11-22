@@ -53,7 +53,7 @@ private function EnumFunc takes nothing returns nothing
         endif
         
     else 
-        if GetUnitAbilityLevel(enumUnit, 'Awrp') > 0 or (IsUnitType(enumUnit, UNIT_TYPE_STRUCTURE) and GetUnitFlyHeight(enumUnit) < GUMS_MINIMUM_FLY_HEIGHT()) then
+        if GetUnitAbilityLevel(enumUnit, 'Awrp') > 0 or (IsUnitType(enumUnit, UNIT_TYPE_STRUCTURE) and GetUnitFlyHeight(enumUnit) < UnitVisuals.MIN_FLY_HEIGHT) then
             if GetOwningPlayer(enumUnit) == LoP.NEUTRAL_PASSIVE then
                 call SetUnitOwner(enumUnit, owner, false)  // This is required, otherwise neutral units must be enumed when a unit is made selectable.
             endif

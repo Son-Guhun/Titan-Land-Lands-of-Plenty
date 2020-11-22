@@ -49,6 +49,16 @@ globals
     public constant integer TAGS_COMPRESS   = -2
 endglobals
 
+private module Constants
+    // SELECTION TYPE CONSTANTS
+    static constant integer SELECTION_DEFAULT      = 0
+    static constant integer SELECTION_DRAG         = 1  // Units that can only be drag-selected.
+    static constant integer SELECTION_UNSELECTABLE = 2  // Units that are unselectable and may be converted to SFX.
+    static constant integer SELECTION_LOCUST       = 3  // Units that are unselectable and should not be converted to SFX.
+    
+    static constant real MIN_FLY_HEIGHT = 0.02
+endmodule
+
 //==========================================
 // GUMS Animation Tag Utilities
 //! textmacro GUMS_RegisterTag takes FULL, COMPRESSED
@@ -145,6 +155,7 @@ endstruct
 // Contains getters for all UnitVisualMods-related data. These getters return strings, not raw values.
 struct UnitVisuals extends array
     static constant string allTags = "gold lumber work flesh ready one two throw slam large medium small victory alternate defend swim spin fast upgrade first second third fourth fifth"
+    implement Constants
     
     //! runtextmacro UnitVisualValues_DeclareValuesField()
     

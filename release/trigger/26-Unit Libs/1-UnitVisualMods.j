@@ -92,32 +92,8 @@ endfunction
 function GUMS_GetUnitSelectionType takes unit whichUnit returns integer
     return data[GetHandleId(whichUnit)][SELECT]
 endfunction
+
 //==========================================
-//GUMS SELECTION TYPE CONSTANTS
-constant function GUMS_SELECTION_DEFAULT takes nothing returns integer
-    return 0
-endfunction
-
-// Units that can only be drag-selected.
-constant function GUMS_SELECTION_DRAG takes nothing returns integer
-    return 1
-endfunction
-
-// Units that are unselectable and may be converted to SFX.
-constant function GUMS_SELECTION_UNSELECTABLE takes nothing returns integer
-    return 2
-endfunction
-
-// Units that are unselectable and should not be converted to SFX.
-constant function GUMS_SELECTION_LOCUST takes nothing returns integer
-    return 3
-endfunction
-//==========================================
-constant function GUMS_MINIMUM_FLY_HEIGHT takes nothing returns real
-    return 0.02
-endfunction
-
-
 //==========================================
 
 private struct SaveFlyHeight extends array
@@ -168,7 +144,7 @@ struct UnitVisualsSetters extends array
         //! runtextmacro ASSERT("structure != null")
         //! runtextmacro ASSERT("IsUnitType(structure, UNIT_TYPE_STRUCTURE)")
         
-        if GetUnitFlyHeight(structure) < GUMS_MINIMUM_FLY_HEIGHT() and newHeight < GUMS_MINIMUM_FLY_HEIGHT() then  // 0.01 seems to be the minimum flying height
+        if GetUnitFlyHeight(structure) < UnitVisuals.MIN_FLY_HEIGHT and newHeight < UnitVisuals.MIN_FLY_HEIGHT then  // 0.01 seems to be the minimum flying height
             call SetUnitFlyHeight( structure, newHeight, 0)  // this is needed for hooked stuff
             return
         endif
@@ -198,7 +174,7 @@ struct UnitVisualsSetters extends array
         if GetUnitAbilityLevel(whichUnit, 'Amov') == 0 then
             call GUMS_RedrawUnit(whichUnit)
             
-            if IsUnitType(whichUnit, UNIT_TYPE_STRUCTURE) and GetUnitFlyHeight(whichUnit) > GUMS_MINIMUM_FLY_HEIGHT() then
+            if IsUnitType(whichUnit, UNIT_TYPE_STRUCTURE) and GetUnitFlyHeight(whichUnit) > UnitVisuals.MIN_FLY_HEIGHT then
                 call StructureFlyHeight(whichUnit, GetUnitFlyHeight(whichUnit), GetUnitAbilityLevel(whichUnit, 'DEDF') == 0)
             endif
         endif    
@@ -420,14 +396,14 @@ function GUMSMakeUnitDragSelectable takes unit whichUnit returns nothing
     local integer selectionType = data[unitId][SELECT]
     //! runtextmacro ASSERT("whichUnit != null")
 
-    if selectionType == GUMS_SELECTION_DRAG() then
+    if selectionType == UnitVisuals.SELECTION_DRAG then
         return //Unit is already drag-selectable, do nothing.
     endif
     
-    if selectionType != GUMS_SELECTION_UNSELECTABLE() then //Check if unit is already unselectable.
+    if selectionType != UnitVisuals.SELECTION_UNSELECTABLE then //Check if unit is already unselectable.
         if UnitAddAbility(whichUnit,'Aloc') then //Do nothing is unit has locust by default.
             call UnitRemoveAbility(whichUnit,'Aloc')
-            set data[unitId][SELECT] = GUMS_SELECTION_DRAG()
+            set data[unitId][SELECT] = UnitVisuals.SELECTION_DRAG
         else
             return
         endif
@@ -444,8 +420,8 @@ function GUMSSetUnitSelectionType takes unit whichUnit, integer selectType retur
     local integer unitId = GetHandleId(whichUnit) 
     //! runtextmacro ASSERT("whichUnit != null")
 
-    if selectType == GUMS_SELECTION_UNSELECTABLE() or selectType == GUMS_SELECTION_LOCUST() then
-        if data[unitId][SELECT] >= GUMS_SELECTION_UNSELECTABLE() then
+    if selectType == UnitVisuals.SELECTION_UNSELECTABLE or selectType == UnitVisuals.SELECTION_LOCUST then
+        if data[unitId][SELECT] >=UnitVisuals.SELECTION_UNSELECTABLE then
             set data[unitId][SELECT] = selectType
             return //Unit is already unselectable, do nothing.
         endif
@@ -456,17 +432,17 @@ function GUMSSetUnitSelectionType takes unit whichUnit, integer selectType retur
             call SetUnitInvulnerable(whichUnit, true)
             call BlzUnitDisableAbility(whichUnit, 'Aatk', true, true)
         endif
-    elseif selectType == GUMS_SELECTION_DRAG() then
+    elseif selectType == UnitVisuals.SELECTION_DRAG then
         call GUMSMakeUnitDragSelectable(whichUnit)
     endif
 endfunction
 
 function GUMSMakeUnitUnSelectable takes unit whichUnit returns nothing
-    call GUMSSetUnitSelectionType(whichUnit, GUMS_SELECTION_UNSELECTABLE())
+    call GUMSSetUnitSelectionType(whichUnit, UnitVisuals.SELECTION_UNSELECTABLE)
 endfunction
 
 function GUMSMakeUnitLocust takes unit whichUnit returns nothing
-    call GUMSSetUnitSelectionType(whichUnit, GUMS_SELECTION_LOCUST())
+    call GUMSSetUnitSelectionType(whichUnit, UnitVisuals.SELECTION_LOCUST)
 endfunction
 
 
@@ -509,7 +485,7 @@ function GUMSOnUpgradeHandler takes unit trigU returns nothing
         //! runtextmacro ASSERT("trigU != null")
         
         
-        if unitData.hasHeight() and unitData.height > GUMS_MINIMUM_FLY_HEIGHT() then
+        if unitData.hasHeight() and unitData.height > UnitVisuals.MIN_FLY_HEIGHT then
             set height = unitData.height
         
             call GUMSCopyValues(trigU, trigU)

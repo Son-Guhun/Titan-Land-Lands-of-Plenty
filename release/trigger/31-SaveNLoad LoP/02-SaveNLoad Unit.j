@@ -501,7 +501,7 @@ function LoadUnit takes string chat_str, player un_owner, real centerX, real cen
     endif
     
     // Selection type 3 (locust) was only added in version 4, so version 3 saves must handle exceptions for unselectable decorations that should be loaded as units
-    if unitData.selectState != "2" or (SaveIO_GetCurrentlyLoadingSave(un_owner).version < 4 and ((IsUnitIdType(un_type, UNIT_TYPE_STRUCTURE) and unitData.flyHeight < GUMS_MINIMUM_FLY_HEIGHT()) or (un_type == 'nwgt'))) then
+    if unitData.selectState != "2" or (SaveIO_GetCurrentlyLoadingSave(un_owner).version < 4 and ((IsUnitIdType(un_type, UNIT_TYPE_STRUCTURE) and unitData.flyHeight < UnitVisuals.MIN_FLY_HEIGHT) or (un_type == 'nwgt'))) then
         //Create the unit and modify it according to the chat input data
         set DefaultPathingMaps_dontApplyPathMap = true
         set resultUnit = CreateUnit (un_owner, un_type, unitData.x, unitData.y, unitData.yaw)
@@ -545,7 +545,7 @@ function LoadUnit takes string chat_str, player un_owner, real centerX, real cen
             endif
             if unitData.selectState != "0" then
                 if unitData.selectState == "2" then
-                    call GUMSSetUnitSelectionType(resultUnit, 3)
+                    call GUMSSetUnitSelectionType(resultUnit, UnitVisuals.SELECTION_LOCUST)
                 else
                     call GUMSSetUnitSelectionType(resultUnit, S2I(unitData.selectState))
                 endif

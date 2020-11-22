@@ -139,7 +139,7 @@ struct SaveInstanceUnit extends array
         loop
             exitwhen counter == BATCH_SIZE or decoration == decorations.end()
             
-            call saveWriter.write(SaveNLoad_FormatString("SnL_unit", SerializeSpecialEffect(decoration, decoration.getOwner(), decoration.hasCustomColor, GUMS_SELECTION_UNSELECTABLE(), SerializeSpecialEffectFlags(decoration))))
+            call saveWriter.write(SaveNLoad_FormatString("SnL_unit", SerializeSpecialEffect(decoration, decoration.getOwner(), decoration.hasCustomColor, UnitVisuals.SELECTION_UNSELECTABLE, SerializeSpecialEffectFlags(decoration))))
             
             if not saveWriter.isRectSave() then
                 call .updateExtents(decoration.x, decoration.y)
