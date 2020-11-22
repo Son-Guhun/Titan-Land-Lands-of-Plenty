@@ -151,7 +151,7 @@ function CreateUnitMimic takes unit whichUnit, unit target returns nothing
         call BlzSetUnitAttackCooldown(mimic, BlzGetUnitAttackCooldown(original, 2), 2)
         call BlzSetUnitArmor(mimic, BlzGetUnitArmor(original))
         
-        call GUMSCopyValues(target, mimic)
+        call LoP.UVS.CopyValues(target, mimic)
         call DestroyEffect(AddSpecialEffect("Abilities\\Spells\\Orc\\FeralSpirit\\feralspirittarget.mdl", GetUnitX(mimic), GetUnitY(mimic)))
         
         call UnitEvents(mimicId).onDeath.register(Condition(function OnDeath))

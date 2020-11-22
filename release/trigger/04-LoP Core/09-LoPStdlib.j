@@ -36,7 +36,7 @@ function LopCopyUnit takes unit u, player owner, integer newType returns unit
     endif
     
     set DefaultPathingMaps_dontApplyPathMap = true 
-    set u = GUMSCopyUnit(whichUnit, owner, newType)
+    set u = LoP.UVS.Copy(whichUnit, owner, newType)
     
     if u != null then
         if UnitHasAttachedEffect(whichUnit) then

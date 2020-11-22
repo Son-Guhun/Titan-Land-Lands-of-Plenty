@@ -17,14 +17,14 @@ private function MakeLocustUnitsSelectable takes nothing returns nothing
             if IsUnitInRangeLoc(u, udg_Spell__TargetPoint, range) then
                 if LoP_IsUnitDecoration(u) then
                     if includeDecos then
-                        set newUnit = GUMSCopyUnitSameType(u, GetOwningPlayer(u))
+                        set newUnit = LoP.UVS.CopySameType(u, GetOwningPlayer(u))
                         if UnitHasAttachedEffect(u) then
                             call UnitAttachEffect(newUnit, UnitDetachEffect(u))
                         endif
                         call KillUnit(u)
                     endif
                 else
-                    call GUMSCopyUnitSameType(u, GetOwningPlayer(u))
+                    call LoP.UVS.CopySameType(u, GetOwningPlayer(u))
                     call RemoveUnit(u)
                 endif
             endif    

@@ -1,6 +1,6 @@
-library UnitVisualMods requires HashStruct, UnitVisualValues, UnitName, GroupTools, InstantRootOrder optional UnitVisualModsDefaults/*
+library UnitVisualMods requires HashStruct, UnitVisualValues, UnitVisualModsCopy, UnitName, GroupTools, InstantRootOrder optional UnitVisualModsDefaults/*
 
-    */ /*optional*/ HashtableWrapper,  /* Required to initialize a hashtable.
+    */ /*optional*/ HashtableWrapper, /* Required to initialize a hashtable.
     
     */ optional Table, /*  Required if a hashtable is not intialized.
     
@@ -40,7 +40,7 @@ endglobals
 // CONFIGURATION
 
 // This function specifies what should be done to a unit when an argument which is not a valid
-// player number (1 <= n <= bj_MAX_PLAYERS) is passed to Libs.UVS.Color. The default behaviour is
+// player number (1 <= n <= bj_MAX_PLAYERS) is passed to UnitVisualsSetters.Color. The default behaviour is
 // to set the color of the unit to the color of the owning player.
 
 // NOTE: Hashtable data is automatically cleared when a non-player number argument is passed.
@@ -257,6 +257,8 @@ struct UnitVisualsSetters extends array
             call data[unitId].string.remove(ATAG)
         endif
     endmethod
+    
+    implement UnitVisualModsCopy_Module
 
 endstruct
 
@@ -313,73 +315,6 @@ endfunction
 function GUMSGetUnitName takes unit whichUnit returns string
     //! runtextmacro ASSERT("whichUnit != null")
     return ConvertFromCustomName(UnitName_GetUnitName(whichUnit))
-endfunction
-
-//==========================================
-// GUMS Copying Utilities
-
-struct Libs extends array
-    static method operator UVS takes nothing returns UnitVisualsSetters
-        return 0
-    endmethod
-endstruct
-
-// Does not copy:
-//    -Unit selectability
-//    -Unit custom name
-
-// Copies all GUMS values from one source unit to a target unit.
-function GUMSCopyValues takes unit source, unit target returns nothing
-    local real fangle = GetUnitFacing(source)
-    local UnitVisuals sourceId = GetHandleId(source)
-    //! runtextmacro ASSERT("source != null")
-    //! runtextmacro ASSERT("target != null")
-    
-    if IsUnitType(target, UNIT_TYPE_STRUCTURE) then
-        call Libs.UVS.StructureFlyHeight(target, GetUnitFlyHeight(source), GetUnitAbilityLevel(source, 'DEDF') == 0)
-    else
-        call Libs.UVS.FlyHeight(target, GetUnitFlyHeight(source))
-    endif
-    
-    if sourceId.hasScale() then
-        call Libs.UVS.Scale(target, sourceId.raw.getScale())
-    endif
-    if sourceId.hasVertexColor(RED) then
-        call Libs.UVS.VertexColorInt(target, sourceId.raw.getVertexRed(), sourceId.raw.getVertexGreen(), sourceId.raw.getVertexBlue(), sourceId.raw.getVertexAlpha())
-    endif
-    if sourceId.hasColor() then
-        call Libs.UVS.Color(target, sourceId.raw.getColor())
-    endif
-    if sourceId.hasAnimSpeed() then
-        call Libs.UVS.AnimSpeed(target, sourceId.raw.getAnimSpeed())
-    endif
-    if sourceId.hasAnimTag() then
-        call Libs.UVS.AnimTag(target, GUMSConvertTags(UnitVisualMods_TAGS_DECOMPRESS, sourceId.raw.getAnimTag()))
-    endif
-endfunction
-
-// Creates a new unit and copies all the GUMS values from the old unit to the newly created one.
-// bj_lastCreatedUnit is set to the newly created unit.
-// If the specified newType is nonpositive, then the created unit will have the same type as the copied one
-function GUMSCopyUnit takes unit whichUnit, player owner, integer newType returns unit
-    local real fangle = GetUnitFacing(whichUnit)
-    local unit newUnit
-    //! runtextmacro ASSERT("whichUnit != null")
-    
-    if newType < 1 then
-        set newType = GetUnitTypeId(whichUnit)
-    endif
-    set newUnit = CreateUnit( owner, newType, GetUnitX(whichUnit), GetUnitY(whichUnit), fangle)
-    
-    call GUMSCopyValues(whichUnit, newUnit)
-    
-    set bj_lastCreatedUnit = newUnit
-    set newUnit = null
-    return bj_lastCreatedUnit
-endfunction
-
-function GUMSCopyUnitSameType takes unit whichUnit, player owner returns unit
-    return GUMSCopyUnit(whichUnit, owner, 0)
 endfunction
 
 //==========================================
@@ -457,11 +392,11 @@ function GUMSOnUpgradeHandler takes unit trigU returns nothing
         if unitData.hasHeight() and unitData.height > UnitVisuals.MIN_FLY_HEIGHT then
             set height = unitData.height
         
-            call GUMSCopyValues(trigU, trigU)
+            call UnitVisualsSetters.CopyValues(trigU, trigU)
 
-            call Libs.UVS.FlyHeight(trigU, height)
+            call UnitVisualsSetters.FlyHeight(trigU, height)
         else
-            call GUMSCopyValues(trigU, trigU)
+            call UnitVisualsSetters.CopyValues(trigU, trigU)
         endif
         
         set trigU = null
