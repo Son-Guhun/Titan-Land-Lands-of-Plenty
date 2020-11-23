@@ -13,7 +13,7 @@ function Trig_System_On_Upgrade_Finish_Actions takes nothing returns nothing
     if UnitHasAttachedEffect(trigU) then
         set sfx = UnitDetachEffect(trigU)
     endif
-    call GUMSOnUpgradeHandler(trigU)
+    call LoP.UVS.UpgradeHandler(trigU)
     if sfx != 0 then
         call UnitAttachEffect(trigU, sfx.copy(GetUnitTypeId(trigU)))
         call sfx.destroy()

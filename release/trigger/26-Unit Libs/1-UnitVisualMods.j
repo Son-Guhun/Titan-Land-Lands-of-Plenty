@@ -7,19 +7,8 @@ library UnitVisualMods requires HashStruct, UnitVisualValues, UnitVisualModsCopy
     */ optional ConstTable  /* If present, then ConstHashTable is used instead of HashTable.
     
     */ optional FuncHooks  // Hooks for attached special effects
-//////////////////////////////////////////////////////
-//Guhun's Unit Modification System v1.3.1
 
-globals
-    constant boolean AUTOMATIC_ON_UPGRADE = false
-endglobals
-
-//Hashtable values:
-globals    
-    private constant integer SAVED_FLY_HEIGHT = -1  // Used to save flying height for units (to keep height after upgrading)
-endglobals
-
-//////////////////////////////////////////////////////
+//==================================================================================================
 // CONFIGURATION
 
 // This function specifies what should be done to a unit when an argument which is not a valid
@@ -36,17 +25,23 @@ endglobals
     endif
     
 //! endtextmacro
-private struct data extends array
-    static method operator [] takes integer i returns UnitVisualValues_data_Child
-        return UnitVisualValues_data[i]
-    endmethod
-endstruct
+
 
 //==================================================================================================
 //                                        Source Code
 //==================================================================================================
 private struct KEYS extends array
-    implement UnitVisualValues_KEYS_Module
+    implement UnitVisualValues_KEYS_Module  // Hashtable key constants
+endstruct
+
+private struct data extends array
+    static method operator [] takes integer i returns UnitVisualValues_data_Child
+        return UnitVisualValues_data[i]  // Wrap UnitVisualValues hashtable
+    endmethod
+endstruct
+
+private struct SaveFlyHeight extends array
+    implement UnitVisualModsUpgrade_StorageStructModule  // Struct that stores unit flying height (for handling upgrades)
 endstruct
 
 
@@ -59,41 +54,12 @@ endfunction
 //! runtextmacro optional DefineHooks()
 
 //==========================================
-// Storing
-//==========================================
-
-// Cannot store fly high in the "begins upgrade" event, as it is already lost by then.
-private struct SaveFlyHeight extends array
-
-    method operator height takes nothing returns real
-        return data[this].real[SAVED_FLY_HEIGHT]
-    endmethod
-    
-    method operator height= takes real value returns nothing
-        set data[this].real[SAVED_FLY_HEIGHT] = value
-    endmethod
-    
-    method clearHeight takes nothing returns nothing
-        call data[this].real.remove(SAVED_FLY_HEIGHT)
-    endmethod
-    
-    method hasHeight takes nothing returns boolean
-        return data[this].real.has(SAVED_FLY_HEIGHT)
-    endmethod
-endstruct
-
-//==========================================
-// Setters
-
-private constant function CustomUnitNameColor takes nothing returns string
-    return "|cffffcc00"
-endfunction
-
-private function ConvertToCustomName takes string name returns string
-    return CustomUnitNameColor() + name + "|r"
-endfunction
 
 private struct Utils extends array
+
+    static constant method operator CUSTOM_NAME_COLOR takes nothing returns string
+        return "|cffffcc00"
+    endmethod
 
     static method PercentTo255 takes real percent returns integer
         return MathRound(2.55*percent)
@@ -182,32 +148,22 @@ struct UnitVisualsSetters extends array
         call SetUnitScale(whichUnit, scale, scale, scale)
         set data[GetHandleId(whichUnit)].real[KEYS.SCALE] = scale
     endmethod
-
-    //Set Vertex Color
-    static method VertexColor takes unit whichUnit, real red, real green, real blue, real trans  returns nothing
-        local integer intRed   = Utils.PercentTo255(red)
-        local integer intGreen = Utils.PercentTo255(green)
-        local integer intBlue  = Utils.PercentTo255(blue)
-        local integer intAlpha = Utils.PercentTo255(100. - trans)
+    
+    static method VertexColorInt takes unit whichUnit, integer red, integer green, integer blue, integer alpha returns nothing
+        local integer uId = GetHandleId(whichUnit)
         //! runtextmacro ASSERT("whichUnit != null")
         
-        call SetUnitVertexColor(whichUnit, intRed, intGreen, intBlue, intAlpha)
-        set data[GetHandleId(whichUnit)][KEYS.RED]   = intRed
-        set data[GetHandleId(whichUnit)][KEYS.GREEN] = intGreen
-        set data[GetHandleId(whichUnit)][KEYS.BLUE]  = intBlue
-        set data[GetHandleId(whichUnit)][KEYS.ALPHA] = intAlpha
-    endmethod
-
-    static method VertexColorInt takes unit whichUnit, integer red, integer green, integer blue, integer alpha returns nothing
-        //! runtextmacro ASSERT("whichUnit != null")
         call SetUnitVertexColor(whichUnit, red, green, blue, alpha)
-        set data[GetHandleId(whichUnit)][KEYS.RED]   = red
-        set data[GetHandleId(whichUnit)][KEYS.GREEN] = green
-        set data[GetHandleId(whichUnit)][KEYS.BLUE]  = blue
-        set data[GetHandleId(whichUnit)][KEYS.ALPHA] = alpha
+        set data[uId][KEYS.RED]   = red
+        set data[uId][KEYS.GREEN] = green
+        set data[uId][KEYS.BLUE]  = blue
+        set data[uId][KEYS.ALPHA] = alpha
     endmethod
 
-    //Set Player Color (why in hell can't this be retrieved with natives?!)
+    static method VertexColor takes unit whichUnit, real red, real green, real blue, real trans  returns nothing        
+        call VertexColorInt(whichUnit, Utils.PercentTo255(red), Utils.PercentTo255(green), Utils.PercentTo255(blue), Utils.PercentTo255(100. - trans))
+    endmethod
+
     static method Color takes unit whichUnit, integer color returns nothing
         //! runtextmacro ASSERT("whichUnit != null")
         if color <= bj_MAX_PLAYER_SLOTS and color >= 1 then
@@ -246,7 +202,7 @@ struct UnitVisualsSetters extends array
         endif
     endmethod
     
-    implement UnitVisualModsCopy_Module
+    implement UnitVisualModsCopy_Module  // Import copy functions
     
     static method DragSelectable takes unit whichUnit returns nothing
         local integer unitId = GetHandleId(whichUnit)
@@ -320,63 +276,15 @@ struct UnitVisualsSetters extends array
             if not uId.hasCustomName() then
                 set data[uId].string[KEYS.NAME] = UnitName_GetUnitName(whichUnit)
             endif
-            call UnitName_SetUnitName(whichUnit, ConvertToCustomName(name))
+            call UnitName_SetUnitName(whichUnit, Utils.CUSTOM_NAME_COLOR + name + "|r")
         else
             call ResetName(whichUnit)
         endif
     endmethod
+    
+    implement UnitVisualModsUpgrade_Module  // Import upgrade handler function
 
 endstruct
 
-//==================================================================================================
-//                                        Initialization
-//==================================================================================================
-// GUMS Flying Height and Facing Timer
-
-function GUMSOnUpgradeHandler takes unit trigU returns nothing
-        local SaveFlyHeight unitData = GetHandleId(trigU)
-        local real height
-        //! runtextmacro ASSERT("trigU != null")
-        
-        
-        if unitData.hasHeight() and unitData.height > UnitVisuals.MIN_FLY_HEIGHT then
-            set height = unitData.height
-        
-            call UnitVisualsSetters.CopyValues(trigU, trigU)
-
-            call UnitVisualsSetters.FlyHeight(trigU, height)
-        else
-            call UnitVisualsSetters.CopyValues(trigU, trigU)
-        endif
-        
-        set trigU = null
-endfunction
-
-// When a unit cancels of finishes an upgrade, reapply its Visual modifications.
-private module InitModule
-
-    static if AUTOMATIC_ON_UPGRADE then
-        private static method onUpgradeHandler takes nothing returns nothing
-            call GUMSOnUpgradeHandler(GetTriggerUnit())
-        endmethod
-    endif
-
-
-    private static method onInit takes nothing returns nothing
-        local trigger fixUpgrades
-        local integer i
-        local timer t = CreateTimer()
-        
-        static if AUTOMATIC_ON_UPGRADE then
-            set fixUpgrades = CreateTrigger()
-            call TriggerRegisterAnyUnitEventBJ( fixUpgrades, EVENT_PLAYER_UNIT_UPGRADE_CANCEL )
-            call TriggerRegisterAnyUnitEventBJ( fixUpgrades, EVENT_PLAYER_UNIT_UPGRADE_FINISH )
-            call TriggerAddAction( fixUpgrades, function thistype.onUpgradeHandler )
-        endif
-    endmethod
-endmodule
-private struct InitStruct extends array
-    implement InitModule
-endstruct
 
 endlibrary

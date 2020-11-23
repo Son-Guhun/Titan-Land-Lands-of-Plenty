@@ -6,36 +6,16 @@ globals
 endglobals
 
 //==================================================================================================
-//                                     Hashtable Declaration
+//                                           Source Code
 //==================================================================================================
 
-// Never use keyword to declare the hashtable at the bottom of the library. That generates callers
-// that are unnecessary.
-
-static if LIBRARY_HashtableWrapper and INIT_HASHTABLE then
-    //! runtextmacro optional DeclareParentHashtableWrapperModule("hashTable","true", "data","public")
-else
-    //! runtextmacro DeclareHashTableWrapperModule("data")
-endif
-
-public struct data extends array
-    static if LIBRARY_HashtableWrapper and INIT_HASHTABLE then
-        implement optional data_ParentHashtableWrapper
-    else
-        implement data_HashTableWrapper
-    endif
-endstruct
-
-
-// =========================================
-//==========================================
-//CONSTANTS FOR HASHTABLE ADDRESSES (Unit Handle Ids)
+//CONSTANTS FOR HASHTABLE ADDRESSES (Unit Handle Ids as child tables)
 public module KEYS_Module
         static constant integer SCALE  = 0
-        static constant integer RED     = 1
-        static constant integer GREEN   = 2
-        static constant integer BLUE    = 3
-        static constant integer ALPHA   = 4
+        static constant integer RED    = 1
+        static constant integer GREEN  = 2
+        static constant integer BLUE   = 3
+        static constant integer ALPHA  = 4
         static constant integer COLOR  = 5
         static constant integer ASPEED = 6
         static constant integer ATAG   = 7
@@ -54,27 +34,39 @@ private module Constants
 endmodule
 
 //==========================================
-// GUMS Animation Tag Utilities
 
+static if LIBRARY_HashtableWrapper and INIT_HASHTABLE then
+    //! runtextmacro optional DeclareParentHashtableWrapperModule("hashTable","true", "data","public")
+else
+    //! runtextmacro DeclareHashTableWrapperModule("data")
+endif
 
-//==========================================
-// GUMS Getters
+// Hashtable wrapper declaration (this is considered "protected" and should not be accessed by the user.
+public struct data extends array
+    static if LIBRARY_HashtableWrapper and INIT_HASHTABLE then
+        implement optional data_ParentHashtableWrapper
+    else
+        implement data_HashTableWrapper
+    endif
+endstruct
 
 private struct KEYS extends array
     implement KEYS_Module
 endstruct
 
 //! textmacro UnitVisualValues_DeclareValuesField
-    static if not INIT_HASHTABLE  and LIBRARY_HashtableWrapper then
-        private method operator values takes nothing returns Table
+    static if INIT_HASHTABLE  and LIBRARY_HashtableWrapper then
+        private method operator values takes nothing returns data_Child
             return data[this]
         endmethod
     else
-        private method operator values takes nothing returns data_Child
+        private method operator values takes nothing returns Table
             return data[this]
         endmethod
     endif
 //! endtextmacro
+
+//==========================================
 
 // Contains the Raw values of each UnitVisuals struct. Returned by the .raw method operator.
 private struct UnitVisualsRaw extends array
