@@ -37,9 +37,9 @@ endglobals
 
 scope ERROR
     globals 
-        public constant integer OVERFLOW = 2
-        public constant integer NULL_POINTER = 3
-        public constant integer TOO_CLOSE = 1
+        public constant integer OVERFLOW = 2      // Unit already has maximum number of patrol points.
+        public constant integer NULL_POINTER = 3  // Used internally.
+        public constant integer TOO_CLOSE = 1     // New patrol point is too close to the unit's last one.
         public constant integer NONE = 0
     endglobals
 endscope
@@ -49,29 +49,14 @@ globals
     private boolean orderBool = false
     private rect ptrlRect
     
-    private constant integer INDEX_DISPLAY = 9999
+    //Hashtable keys
+    private constant integer KEY_POINT_CURRENT = 9996
+    private constant integer KEY_POINT_TOTAL   = 9997
+    private constant integer KEY_REGION        = 9998
+    private constant integer KEY_TRIGGER       = 9999
+    
+    private constant integer KEY_INDEX_DISPLAY = 10000  // effects and textags are saved after this index 
 endglobals
-
-// Constants
-private constant function Patrol_MinDistance takes nothing returns real
-    return 100.
-endfunction
-
-private constant function Patrol_POINT_CURRENT takes nothing returns integer
-    return 9996
-endfunction
-
-private constant function Patrol_POINT_TOTAL takes nothing returns integer
-    return 9997
-endfunction
-
-private constant function Patrol_REGION takes nothing returns integer
-    return 9998
-endfunction
-
-private constant function Patrol_TRIGGER takes nothing returns integer
-    return 9999
-endfunction
 //==================================================================================================
 
 // Getters and Setters
@@ -96,67 +81,67 @@ endfunction
 //=====================
 // Current Point and Total Points
 function Patrol_GetCurrentPatrolPoint takes integer unitHandleId returns integer
-    return LoadInteger(data , -unitHandleId , Patrol_POINT_CURRENT())
+    return LoadInteger(data , -unitHandleId , KEY_POINT_CURRENT)
 endfunction
 
 function Patrol_GetTotalPatrolPoints takes integer unitHandleId returns integer
-    return LoadInteger(data , -unitHandleId , Patrol_POINT_TOTAL())
+    return LoadInteger(data , -unitHandleId , KEY_POINT_TOTAL)
 endfunction
 
 function Patrol_SetCurrentPatrolPoint takes integer unitHandleId, integer pointNumber returns nothing
-    call SaveInteger(data , -unitHandleId , Patrol_POINT_CURRENT(), pointNumber)
+    call SaveInteger(data , -unitHandleId , KEY_POINT_CURRENT, pointNumber)
 endfunction
 
 function Patrol_SetTotalPatrolPoints takes integer unitHandleId, integer newTotal returns nothing
-    call SaveInteger(data , -unitHandleId , Patrol_POINT_TOTAL(), newTotal)
+    call SaveInteger(data , -unitHandleId , KEY_POINT_TOTAL, newTotal)
 endfunction
 //=====================
 // Region and Trigger
 private function Patrol_GetRegion takes integer unitHandleId returns region
-    return LoadRegionHandle(data , -unitHandleId , Patrol_REGION())
+    return LoadRegionHandle(data , -unitHandleId , KEY_REGION)
 endfunction
 
 private function Patrol_GetTrigger takes integer unitHandleId returns trigger
-    return LoadTriggerHandle(data , -unitHandleId , Patrol_TRIGGER())
+    return LoadTriggerHandle(data , -unitHandleId , KEY_TRIGGER)
 endfunction
 
 private function Patrol_HasTrigger takes integer unitHandleId returns boolean
-    return HaveSavedHandle(data , -unitHandleId , Patrol_TRIGGER())
+    return HaveSavedHandle(data , -unitHandleId , KEY_TRIGGER)
 endfunction
 
 
 private function Patrol_SetRegion takes integer unitHandleId, region newRegion returns nothing
-    call SaveRegionHandle(data , -unitHandleId , Patrol_REGION(), newRegion)
+    call SaveRegionHandle(data , -unitHandleId , KEY_REGION, newRegion)
 endfunction
 
 private function Patrol_SetTrigger takes integer unitHandleId, trigger newTrigger returns nothing
-    call SaveTriggerHandle(data , -unitHandleId , Patrol_TRIGGER(), newTrigger)
+    call SaveTriggerHandle(data , -unitHandleId , KEY_TRIGGER, newTrigger)
 endfunction
 
 //=====================
 // Text Tags and Special Effects for displaying patrol points
 private function Patrol_SetPointEffect takes integer uId, integer point, effect spEffect returns nothing
-    call SaveEffectHandle(data, uId, INDEX_DISPLAY+point, spEffect)
+    call SaveEffectHandle(data, uId, KEY_INDEX_DISPLAY+point, spEffect)
 endfunction
 
 private function Patrol_SetPointTag takes integer uId, integer point, texttag tag returns nothing
-    call SaveTextTagHandle(data,  uId, -INDEX_DISPLAY-point, tag)
+    call SaveTextTagHandle(data,  uId, -KEY_INDEX_DISPLAY-point, tag)
 endfunction
 
 private function Patrol_GetPointEffect takes integer uId, integer point returns effect
-    return LoadEffectHandle(data, uId, INDEX_DISPLAY+point)
+    return LoadEffectHandle(data, uId, KEY_INDEX_DISPLAY+point)
 endfunction
 
 private function Patrol_GetPointTag takes integer uId, integer point returns texttag
-    return LoadTextTagHandle(data,  uId, -INDEX_DISPLAY-point)
+    return LoadTextTagHandle(data,  uId, -KEY_INDEX_DISPLAY-point)
 endfunction
 
 private function Patrol_RemovePointEffect takes integer uId, integer point returns nothing
-    call RemoveSavedHandle(data, uId, INDEX_DISPLAY+point)
+    call RemoveSavedHandle(data, uId, KEY_INDEX_DISPLAY+point)
 endfunction
 
 private function Patrol_RemovePointTag takes integer uId, integer point returns nothing
-    call RemoveSavedHandle(data,  uId, -INDEX_DISPLAY-point)
+    call RemoveSavedHandle(data,  uId, -KEY_INDEX_DISPLAY-point)
 endfunction
 //==================================================================================================
 
