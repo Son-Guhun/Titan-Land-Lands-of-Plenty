@@ -95,7 +95,7 @@ library LoPHeroicUnit requires LoPStdLib, optional NativeRedefinitions, UnitName
             set result.real['size'] = visuals.raw.getScale()
         endif
         
-        if visuals.hasVertexRed() then
+        if visuals.hasVertexColor() then
             set result['vtxR'] = visuals.raw.getVertexRed()
             set result['vtxG'] = visuals.raw.getVertexGreen()
             set result['vtxB'] = visuals.raw.getVertexBlue()

@@ -30,18 +30,18 @@ endstruct
 // =========================================
 //==========================================
 //CONSTANTS FOR HASHTABLE ADDRESSES (Unit Handle Ids)
-globals
-    private constant integer SCALE  = 0
-    public constant integer RED    = 1
-    public constant integer GREEN  = 2
-    public constant integer BLUE   = 3
-    public constant integer ALPHA  = 4
-    private constant integer COLOR  = 5
-    private constant integer ASPEED = 6
-    private constant integer ATAG   = 7
-    private constant integer SELECT = 8
-    private constant integer NAME   = 9
-endglobals
+public module KEYS_Module
+        static constant integer SCALE  = 0
+        static constant integer RED     = 1
+        static constant integer GREEN   = 2
+        static constant integer BLUE    = 3
+        static constant integer ALPHA   = 4
+        static constant integer COLOR  = 5
+        static constant integer ASPEED = 6
+        static constant integer ATAG   = 7
+        static constant integer SELECT = 8
+        static constant integer NAME   = 9
+endmodule
 
 private module Constants
     // SELECTION TYPE CONSTANTS
@@ -59,6 +59,10 @@ endmodule
 
 //==========================================
 // GUMS Getters
+
+private struct KEYS extends array
+    implement KEYS_Module
+endstruct
 
 //! textmacro UnitVisualValues_DeclareValuesField
     static if not INIT_HASHTABLE  and LIBRARY_HashtableWrapper then
@@ -78,7 +82,7 @@ private struct UnitVisualsRaw extends array
     //! runtextmacro UnitVisualValues_DeclareValuesField()
     
     method getScale takes nothing returns real
-        return (.values.real[SCALE])
+        return (.values.real[KEYS.SCALE])
     endmethod
     
     method getVertexColor takes integer r1g2b3a4 returns integer
@@ -86,35 +90,35 @@ private struct UnitVisualsRaw extends array
     endmethod
     
     method getVertexRed takes nothing returns integer
-        return .getVertexColor(RED)
+        return .getVertexColor(KEYS.RED)
     endmethod
     
     method getVertexGreen takes nothing returns integer
-        return .getVertexColor(GREEN)
+        return .getVertexColor(KEYS.GREEN)
     endmethod
     
     method getVertexBlue takes nothing returns integer
-        return .getVertexColor(BLUE)
+        return .getVertexColor(KEYS.BLUE)
     endmethod
     
     method getVertexAlpha takes nothing returns integer
-        return .getVertexColor(ALPHA)
+        return .getVertexColor(KEYS.ALPHA)
     endmethod
     
     method getColor takes nothing returns integer
-        return (.values[COLOR])
+        return (.values[KEYS.COLOR])
     endmethod
     
     method getAnimSpeed takes nothing returns real
-        return (values.real[ASPEED])
+        return (values.real[KEYS.ASPEED])
     endmethod
     
     method getAnimTag takes nothing returns string
-        return .values.string[ATAG]
+        return .values.string[KEYS.ATAG]
     endmethod
     
     method getSelectionType takes nothing returns integer
-        return .values[SELECT]
+        return .values[KEYS.SELECT]
     endmethod
 endstruct
 
@@ -142,40 +146,36 @@ struct UnitVisuals extends array
     endmethod
     
     method hasScale takes nothing returns boolean
-        return .values.real.has(SCALE)
+        return .values.real.has(KEYS.SCALE)
     endmethod
     
-    method hasVertexColor takes integer whichChannel returns boolean
-        return .values.has(whichChannel)
-    endmethod
-    
-    method hasVertexRed takes nothing returns boolean
-        return .hasVertexColor(RED)
+    method hasVertexColor takes nothing returns boolean
+        return .values.has(KEYS.RED)
     endmethod
     
     method hasColor takes nothing returns boolean
-        return .values.has(COLOR)
+        return .values.has(KEYS.COLOR)
     endmethod
     
     method hasAnimSpeed takes nothing returns boolean
-        return .values.real.has(ASPEED)
+        return .values.real.has(KEYS.ASPEED)
     endmethod
     
     method hasAnimTag takes nothing returns boolean
-        return .values.string.has(ATAG)
+        return .values.string.has(KEYS.ATAG)
     endmethod
     
     //THESE FUNCTIONS RETRIEVE THE SAVED VALUES IN THE HASHTABLE OR RETURN "D" IF THERE IS NO SAVED VALUE
     method getScale takes nothing returns string
         if .hasScale() then
-            return R2S(.values.real[SCALE])
+            return R2S(.values.real[KEYS.SCALE])
         else
             return "D" //D stands for default
         endif
     endmethod
     
     method getVertexColor takes integer r1g2b3a4 returns string
-        if .hasVertexColor(r1g2b3a4) then
+        if .hasVertexColor() then
             return I2S(.values[r1g2b3a4])
         else
             return "D" //D stands for default
@@ -183,24 +183,24 @@ struct UnitVisuals extends array
     endmethod
     
     method getVertexRed takes nothing returns string
-        return .getVertexColor(RED)
+        return .getVertexColor(KEYS.RED)
     endmethod
     
     method getVertexGreen takes nothing returns string
-        return .getVertexColor(GREEN)
+        return .getVertexColor(KEYS.GREEN)
     endmethod
     
     method getVertexBlue takes nothing returns string
-        return .getVertexColor(BLUE)
+        return .getVertexColor(KEYS.BLUE)
     endmethod
     
     method getVertexAlpha takes nothing returns string
-        return .getVertexColor(ALPHA)
+        return .getVertexColor(KEYS.ALPHA)
     endmethod
     
     method getColor takes nothing returns string
         if .hasColor() then
-            return I2S(.values[COLOR])
+            return I2S(.values[KEYS.COLOR])
         else
             return "D" //D stands for default
         endif
@@ -208,7 +208,7 @@ struct UnitVisuals extends array
     
     method getAnimSpeed takes nothing returns string
         if .hasAnimSpeed() then
-            return R2S(values.real[ASPEED])
+            return R2S(values.real[KEYS.ASPEED])
         else
             return "D" //D stands for default
         endif
@@ -216,7 +216,7 @@ struct UnitVisuals extends array
     
     method getAnimTag takes nothing returns string
         if .hasAnimTag() then
-            return .values.string[ATAG]
+            return .values.string[KEYS.ATAG]
         else
             return "D" //D stands for default
         endif
@@ -227,11 +227,11 @@ struct UnitVisuals extends array
     endmethod
     
     method hasCustomName takes nothing returns boolean
-        return .values.string.has(NAME)
+        return .values.string.has(KEYS.NAME)
     endmethod
     
     method getOriginalName takes nothing returns string
-        return .values.string[NAME]
+        return .values.string[KEYS.NAME]
     endmethod
     
     static method getUnitName takes unit u returns string
@@ -249,9 +249,9 @@ endstruct
 
 //==================================================================================================
 // Include this so it is declared even if HashtableWrapper library is not present
-//! textmacro_once DeclareHashTableWrapperModule takes NAME
+//! textmacro_once DeclareHashTableWrapperModule takes KEYS.NAME
 
-    module $NAME$_HashTableWrapper
+    module $KEYS.NAME$_HashTableWrapper
         private static key table
         
         static if LIBRARY_ConstTable then

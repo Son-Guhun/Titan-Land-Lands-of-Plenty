@@ -16,7 +16,7 @@ public module Module
         if sourceId.hasScale() then
             call thistype.Scale(target, sourceId.raw.getScale())
         endif
-        if sourceId.hasVertexColor(UnitVisualValues_RED) then
+        if sourceId.hasVertexColor() then
             call thistype.VertexColorInt(target, sourceId.raw.getVertexRed(), sourceId.raw.getVertexGreen(), sourceId.raw.getVertexBlue(), sourceId.raw.getVertexAlpha())
         endif
         if sourceId.hasColor() then

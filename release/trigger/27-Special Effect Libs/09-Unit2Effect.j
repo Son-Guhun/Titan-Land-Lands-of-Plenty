@@ -26,7 +26,7 @@ function Unit2SpecialEffect takes unit whichUnit returns SpecialEffect
         call result.setScale(value, value, value)
     endif
     
-    if unitData.hasVertexColor(UnitVisualMods_RED) then
+    if unitData.hasVertexColor() then
         call result.setVertexColor(unitData.raw.getVertexRed(), unitData.raw.getVertexGreen(), unitData.raw.getVertexBlue())
         set result.alpha = unitData.raw.getVertexAlpha()
     else

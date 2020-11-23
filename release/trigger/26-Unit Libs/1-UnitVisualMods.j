@@ -17,17 +17,6 @@ endglobals
 //Hashtable values:
 globals    
     private constant integer SAVED_FLY_HEIGHT = -1  // Used to save flying height for units (to keep height after upgrading)
-
-    private constant integer SCALE  = 0
-    public constant integer RED    = 1
-    public constant integer GREEN  = 2
-    public constant integer BLUE   = 3
-    public constant integer ALPHA  = 4
-    private constant integer COLOR  = 5
-    private constant integer ASPEED = 6
-    private constant integer ATAG   = 7
-    private constant integer SELECT = 8
-    private constant integer NAME   = 9
 endglobals
 
 //////////////////////////////////////////////////////
@@ -53,10 +42,13 @@ private struct data extends array
     endmethod
 endstruct
 
-
 //==================================================================================================
 //                                        Source Code
 //==================================================================================================
+private struct KEYS extends array
+    implement UnitVisualValues_KEYS_Module
+endstruct
+
 
 // Define before creating hooks, since there's no need to hook SetUnitPosition if the unit position is the same as before.
 private function RedrawUnit takes unit whichUnit returns nothing
@@ -182,13 +174,13 @@ struct UnitVisualsSetters extends array
     static method MatrixScale takes unit whichUnit, real scaleX, real scaleY, real scaleZ returns nothing
         //! runtextmacro ASSERT("whichUnit != null")
         call SetUnitScale(whichUnit, scaleX, scaleY, scaleZ)
-        set data[GetHandleId(whichUnit)].real[SCALE] = scaleX
+        set data[GetHandleId(whichUnit)].real[KEYS.SCALE] = scaleX
     endmethod
 
     static method Scale takes unit whichUnit, real scale returns nothing
         //! runtextmacro ASSERT("whichUnit != null")
         call SetUnitScale(whichUnit, scale, scale, scale)
-        set data[GetHandleId(whichUnit)].real[SCALE] = scale
+        set data[GetHandleId(whichUnit)].real[KEYS.SCALE] = scale
     endmethod
 
     //Set Vertex Color
@@ -200,29 +192,29 @@ struct UnitVisualsSetters extends array
         //! runtextmacro ASSERT("whichUnit != null")
         
         call SetUnitVertexColor(whichUnit, intRed, intGreen, intBlue, intAlpha)
-        set data[GetHandleId(whichUnit)][RED]   = intRed
-        set data[GetHandleId(whichUnit)][GREEN] = intGreen
-        set data[GetHandleId(whichUnit)][BLUE]  = intBlue
-        set data[GetHandleId(whichUnit)][ALPHA] = intAlpha
+        set data[GetHandleId(whichUnit)][KEYS.RED]   = intRed
+        set data[GetHandleId(whichUnit)][KEYS.GREEN] = intGreen
+        set data[GetHandleId(whichUnit)][KEYS.BLUE]  = intBlue
+        set data[GetHandleId(whichUnit)][KEYS.ALPHA] = intAlpha
     endmethod
 
     static method VertexColorInt takes unit whichUnit, integer red, integer green, integer blue, integer alpha returns nothing
         //! runtextmacro ASSERT("whichUnit != null")
         call SetUnitVertexColor(whichUnit, red, green, blue, alpha)
-        set data[GetHandleId(whichUnit)][RED]   = red
-        set data[GetHandleId(whichUnit)][GREEN] = green
-        set data[GetHandleId(whichUnit)][BLUE]  = blue
-        set data[GetHandleId(whichUnit)][ALPHA] = alpha
+        set data[GetHandleId(whichUnit)][KEYS.RED]   = red
+        set data[GetHandleId(whichUnit)][KEYS.GREEN] = green
+        set data[GetHandleId(whichUnit)][KEYS.BLUE]  = blue
+        set data[GetHandleId(whichUnit)][KEYS.ALPHA] = alpha
     endmethod
 
     //Set Player Color (why in hell can't this be retrieved with natives?!)
     static method Color takes unit whichUnit, integer color returns nothing
         //! runtextmacro ASSERT("whichUnit != null")
         if color <= bj_MAX_PLAYER_SLOTS and color >= 1 then
-            set data[GetHandleId(whichUnit)][COLOR] = color
+            set data[GetHandleId(whichUnit)][KEYS.COLOR] = color
             call SetUnitColor(whichUnit, ConvertPlayerColor(color-1))
         else
-            call data[GetHandleId(whichUnit)].remove(COLOR)
+            call data[GetHandleId(whichUnit)].remove(KEYS.COLOR)
 
             //! runtextmacro GUMS_Config_ResetColorFunc()
         endif
@@ -231,7 +223,7 @@ struct UnitVisualsSetters extends array
     static method AnimSpeed takes unit whichUnit, real speedMultiplier returns nothing
         //! runtextmacro ASSERT("whichUnit != null")
         call SetUnitTimeScale(whichUnit, speedMultiplier)
-        set data[GetHandleId(whichUnit)].real[ASPEED] = speedMultiplier
+        set data[GetHandleId(whichUnit)].real[KEYS.ASPEED] = speedMultiplier
     endmethod
 
     
@@ -247,10 +239,10 @@ struct UnitVisualsSetters extends array
         
         if whichTag != "" then
             call AddUnitAnimationProperties(whichUnit, whichTag, true)
-            set data[unitId].string[ATAG] = whichTag
+            set data[unitId].string[KEYS.ATAG] = whichTag
             
         else
-            call data[unitId].string.remove(ATAG)
+            call data[unitId].string.remove(KEYS.ATAG)
         endif
     endmethod
     
@@ -258,7 +250,7 @@ struct UnitVisualsSetters extends array
     
     static method DragSelectable takes unit whichUnit returns nothing
         local integer unitId = GetHandleId(whichUnit)
-        local integer selectionType = data[unitId][SELECT]
+        local integer selectionType = data[unitId][KEYS.SELECT]
         //! runtextmacro ASSERT("whichUnit != null")
 
         if selectionType == UnitVisuals.SELECTION_DRAG then
@@ -268,7 +260,7 @@ struct UnitVisualsSetters extends array
         if selectionType != UnitVisuals.SELECTION_UNSELECTABLE then //Check if unit is already unselectable.
             if UnitAddAbility(whichUnit,'Aloc') then //Do nothing is unit has locust by default.
                 call UnitRemoveAbility(whichUnit,'Aloc')
-                set data[unitId][SELECT] = UnitVisuals.SELECTION_DRAG
+                set data[unitId][KEYS.SELECT] = UnitVisuals.SELECTION_DRAG
             else
                 return
             endif
@@ -286,14 +278,14 @@ struct UnitVisualsSetters extends array
         //! runtextmacro ASSERT("whichUnit != null")
 
         if selectType == UnitVisuals.SELECTION_UNSELECTABLE or selectType == UnitVisuals.SELECTION_LOCUST then
-            if data[unitId][SELECT] >=UnitVisuals.SELECTION_UNSELECTABLE then
-                set data[unitId][SELECT] = selectType
+            if data[unitId][KEYS.SELECT] >=UnitVisuals.SELECTION_UNSELECTABLE then
+                set data[unitId][KEYS.SELECT] = selectType
                 return //Unit is already unselectable, do nothing.
             endif
 
             if UnitAddAbility(whichUnit,'Aloc') then //Do nothing is unit has locust by default.
                 call UnitRemoveAbility(whichUnit,'Aloc')
-                set data[unitId][SELECT] = selectType
+                set data[unitId][KEYS.SELECT] = selectType
                 call SetUnitInvulnerable(whichUnit, true)
                 call BlzUnitDisableAbility(whichUnit, 'Aatk', true, true)
             endif
@@ -316,7 +308,7 @@ struct UnitVisualsSetters extends array
         
         if unitHandle.hasCustomName() then
             call UnitName_SetUnitName(whichUnit, unitHandle.getOriginalName())
-            call data[unitHandle].string.remove(NAME)
+            call data[unitHandle].string.remove(KEYS.NAME)
         endif
     endmethod
     
@@ -326,7 +318,7 @@ struct UnitVisualsSetters extends array
         
         if name != "" then
             if not uId.hasCustomName() then
-                set data[uId].string[NAME] = UnitName_GetUnitName(whichUnit)
+                set data[uId].string[KEYS.NAME] = UnitName_GetUnitName(whichUnit)
             endif
             call UnitName_SetUnitName(whichUnit, ConvertToCustomName(name))
         else
