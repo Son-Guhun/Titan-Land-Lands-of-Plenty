@@ -43,12 +43,6 @@ globals
     private constant integer NAME   = 9
 endglobals
 
-//CONSTANTS FOR STATIC TABLES (Must be negative to avoid null-point exceptions of handles and conflics with handles)
-globals
-    public constant integer TAGS_DECOMPRESS = -1
-    public constant integer TAGS_COMPRESS   = -2
-endglobals
-
 private module Constants
     // SELECTION TYPE CONSTANTS
     static constant integer SELECTION_DEFAULT      = 0
@@ -61,39 +55,7 @@ endmodule
 
 //==========================================
 // GUMS Animation Tag Utilities
-//! textmacro GUMS_RegisterTag takes FULL, COMPRESSED
-    set UnitVisualValues_data_Child(TAGS_COMPRESS).string[StringHash("$FULL$")] = "$COMPRESSED$"
-    set UnitVisualValues_data_Child(TAGS_DECOMPRESS).string[StringHash("$COMPRESSED$")] = "$FULL$"
-//! endtextmacro
 
-function GUMSConvertTags takes data_Child convertType, string whichStr returns string
-    local string result = ""
-    local string substring
-    local integer cutToComma = CutToCharacter(whichStr, " ")
-    local integer stringHash
-    
-    loop
-        set substring = SubString(whichStr, 0, cutToComma)
-        if substring != "" then
-            set stringHash = StringHash(substring)
-            if convertType.string.has(stringHash) then
-                set result = result + convertType.string[stringHash] + " "
-            else
-                set result = result + whichStr + " "
-                // call DisplayTextToPlayer(WHO?,0,0, whichStr + " is not a known tag. If you think this is wrong, please report it")
-            endif
-        endif
-        
-        exitwhen cutToComma >= StringLength(whichStr)-1
-        set whichStr = SubString(whichStr, cutToComma + 1, StringLength(whichStr))
-        set cutToComma = CutToCharacter(whichStr, " ")
-    endloop
-    if result == "" then
-        return ""
-    else
-        return SubString(result,0,StringLength(result) - 1)
-    endif
-endfunction
 
 //==========================================
 // GUMS Getters

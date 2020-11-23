@@ -26,7 +26,7 @@ public module Module
             call thistype.AnimSpeed(target, sourceId.raw.getAnimSpeed())
         endif
         if sourceId.hasAnimTag() then
-            call thistype.AnimTag(target, GUMSConvertTags(UnitVisualMods_TAGS_DECOMPRESS, sourceId.raw.getAnimTag()))
+            call thistype.AnimTag(target, sourceId.raw.getAnimTag())
         endif
     endmethod
 

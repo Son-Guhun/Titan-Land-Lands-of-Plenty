@@ -12,6 +12,51 @@ library SaveNLoadUnit requires SaveNLoad, UnitVisualMods, AnyBase, DecorationSFX
 
 */
 
+private struct TAGS extends array
+
+    private static key compress
+    private static key decompress
+    
+    static constant method operator COMPRESS takes nothing returns integer
+        return compress
+    endmethod
+    
+    static constant method operator DECOMPRESS takes nothing returns integer
+        return decompress
+    endmethod
+    
+endstruct
+
+function ConvertAnimTags takes ConstTable convertType, string whichStr returns string
+    local string result = ""
+    local string substring
+    local integer cutToComma = CutToCharacter(whichStr, " ")
+    local integer stringHash
+    
+    loop
+        set substring = SubString(whichStr, 0, cutToComma)
+        if substring != "" then
+            set stringHash = StringHash(substring)
+            if convertType.string.has(stringHash) then
+                set result = result + convertType.string[stringHash] + " "
+            else
+                set result = result + whichStr + " "
+                // call DisplayTextToPlayer(WHO?,0,0, whichStr + " is not a known tag. If you think this is wrong, please report it")
+            endif
+        endif
+        
+        exitwhen cutToComma >= StringLength(whichStr)-1
+        set whichStr = SubString(whichStr, cutToComma + 1, StringLength(whichStr))
+        set cutToComma = CutToCharacter(whichStr, " ")
+    endloop
+    if result == "" then
+        return ""
+    else
+        return SubString(result,0,StringLength(result) - 1)
+    endif
+endfunction
+
+
 globals
     boolean SaveNLoad_AUTO_LAND = false  // Can be overwritten by SaveNLoadConfig StructureShouldAutoLand
 endglobals
@@ -96,7 +141,7 @@ scope Serialization
             endif
             
             if whichEffect.hasSubAnimations() then
-                set animTags = SaveIO_CleanUpString(GUMSConvertTags(UnitVisualMods_TAGS_COMPRESS, SubAnimations2Tags(whichEffect.subanimations)))
+                set animTags = SaveIO_CleanUpString(ConvertAnimTags(TAGS.COMPRESS, SubAnimations2Tags(whichEffect.subanimations)))
             else
                 set animTags = "D"
             endif
@@ -247,7 +292,7 @@ function LoadSpecialEffect takes player owner, UnitTypeDefaultValues unitType, r
     endif
     
     if aTags != "D" then
-        call AddTagsStringAsSubAnimations(result, GUMSConvertTags(UnitVisualMods_TAGS_DECOMPRESS, aTags), true)
+        call AddTagsStringAsSubAnimations(result, ConvertAnimTags(TAGS.DECOMPRESS, aTags), true)
     endif
     
     if unitType.hasMaxRoll() then
@@ -541,7 +586,7 @@ function LoadUnit takes string chat_str, player un_owner, real centerX, real cen
                 call UnitVisualsSetters.AnimSpeed(resultUnit, S2R(unitData.animSpeed))
             endif
             if unitData.animTag != "D" then
-                call UnitVisualsSetters.AnimTag(resultUnit, GUMSConvertTags(UnitVisualMods_TAGS_DECOMPRESS, unitData.animTag))
+                call UnitVisualsSetters.AnimTag(resultUnit, ConvertAnimTags(TAGS.DECOMPRESS, unitData.animTag))
             endif
             if unitData.selectState != "0" then
                 if unitData.selectState == "2" then
@@ -563,5 +608,48 @@ function LoadUnit takes string chat_str, player un_owner, real centerX, real cen
     
     call unitData.destroy()
 endfunction
+
+//! textmacro GUMS_RegisterTag takes FULL, COMPRESSED
+    set UnitVisualValues_data_Child(TAGS.COMPRESS).string[StringHash("$FULL$")] = "$COMPRESSED$"
+    set UnitVisualValues_data_Child(TAGS.DECOMPRESS).string[StringHash("$COMPRESSED$")] = "$FULL$"
+//! endtextmacro
+
+private module InitModule
+
+    private static method onInit takes nothing returns nothing
+        //! runtextmacro GUMS_RegisterTag("gold", "g")
+        //! runtextmacro GUMS_RegisterTag("lumber", "l")
+        //! runtextmacro GUMS_RegisterTag("work", "w")
+        //! runtextmacro GUMS_RegisterTag("flesh", "f")
+        //! runtextmacro GUMS_RegisterTag("ready", "r")
+        //! runtextmacro GUMS_RegisterTag("one", "1")
+        //! runtextmacro GUMS_RegisterTag("two", "2")
+        //! runtextmacro GUMS_RegisterTag("throw", "t")
+        //! runtextmacro GUMS_RegisterTag("slam", "sl")
+        
+        //! runtextmacro GUMS_RegisterTag("large", "sl")
+        //! runtextmacro GUMS_RegisterTag("medium", "sm")
+        //! runtextmacro GUMS_RegisterTag("small", "ss")
+
+        //! runtextmacro GUMS_RegisterTag("victory", "v")
+        //! runtextmacro GUMS_RegisterTag("alternate", "a")
+        //! runtextmacro GUMS_RegisterTag("defend", "d")
+        //! runtextmacro GUMS_RegisterTag("swim", "s")
+        
+        //! runtextmacro GUMS_RegisterTag("spin", "sp")
+        //! runtextmacro GUMS_RegisterTag("fast", "fa")
+        //! runtextmacro GUMS_RegisterTag("talk", "ta")
+        
+        //! runtextmacro GUMS_RegisterTag("upgrade","u")
+        //! runtextmacro GUMS_RegisterTag("first","n1")
+        //! runtextmacro GUMS_RegisterTag("second","n2")
+        //! runtextmacro GUMS_RegisterTag("third","n3")
+        //! runtextmacro GUMS_RegisterTag("fourth","n4")
+        //! runtextmacro GUMS_RegisterTag("fifth","n5")
+    endmethod
+endmodule
+private struct InitStruct extends array
+    implement InitModule
+endstruct
 
 endlibrary

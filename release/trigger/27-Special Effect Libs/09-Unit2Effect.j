@@ -60,7 +60,7 @@ function Unit2SpecialEffect takes unit whichUnit returns SpecialEffect
     endif
     
     if unitData.hasAnimTag() then
-        call AddTagsStringAsSubAnimations(result, GUMSConvertTags(UnitVisualMods_TAGS_DECOMPRESS, unitData.raw.getAnimTag()), true)
+        call AddTagsStringAsSubAnimations(result, unitData.raw.getAnimTag(), true)
     elseif unitType.hasAnimProps() then
         call AddTagsStringAsSubAnimations(result, unitType.animProps, true)
     endif

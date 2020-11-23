@@ -30,12 +30,6 @@ globals
     private constant integer NAME   = 9
 endglobals
 
-//CONSTANTS FOR STATIC TABLES (Must be negative to avoid null-point exceptions of handles and conflics with handles)
-globals
-    public constant integer TAGS_DECOMPRESS = -1
-    public constant integer TAGS_COMPRESS   = -2
-endglobals
-
 //////////////////////////////////////////////////////
 // CONFIGURATION
 
@@ -246,14 +240,13 @@ struct UnitVisualsSetters extends array
         //! runtextmacro ASSERT("whichUnit != null")
         
         if unitId.hasAnimTag() then
-            call AddUnitAnimationProperties(whichUnit, GUMSConvertTags(TAGS_DECOMPRESS, unitId.raw.getAnimTag()), false)
+            call AddUnitAnimationProperties(whichUnit, unitId.raw.getAnimTag(), false)
         else
             call AddUnitAnimationProperties(whichUnit, UnitVisuals.allTags, false)
         endif
         
         if whichTag != "" then
             call AddUnitAnimationProperties(whichUnit, whichTag, true)
-            set whichTag = GUMSConvertTags(TAGS_COMPRESS, whichTag)
             set data[unitId].string[ATAG] = whichTag
             
         else
@@ -388,36 +381,6 @@ private module InitModule
             call TriggerRegisterAnyUnitEventBJ( fixUpgrades, EVENT_PLAYER_UNIT_UPGRADE_FINISH )
             call TriggerAddAction( fixUpgrades, function thistype.onUpgradeHandler )
         endif
-    
-        //! runtextmacro GUMS_RegisterTag("gold", "g")
-        //! runtextmacro GUMS_RegisterTag("lumber", "l")
-        //! runtextmacro GUMS_RegisterTag("work", "w")
-        //! runtextmacro GUMS_RegisterTag("flesh", "f")
-        //! runtextmacro GUMS_RegisterTag("ready", "r")
-        //! runtextmacro GUMS_RegisterTag("one", "1")
-        //! runtextmacro GUMS_RegisterTag("two", "2")
-        //! runtextmacro GUMS_RegisterTag("throw", "t")
-        //! runtextmacro GUMS_RegisterTag("slam", "sl")
-        
-        //! runtextmacro GUMS_RegisterTag("large", "sl")
-        //! runtextmacro GUMS_RegisterTag("medium", "sm")
-        //! runtextmacro GUMS_RegisterTag("small", "ss")
-
-        //! runtextmacro GUMS_RegisterTag("victory", "v")
-        //! runtextmacro GUMS_RegisterTag("alternate", "a")
-        //! runtextmacro GUMS_RegisterTag("defend", "d")
-        //! runtextmacro GUMS_RegisterTag("swim", "s")
-        
-        //! runtextmacro GUMS_RegisterTag("spin", "sp")
-        //! runtextmacro GUMS_RegisterTag("fast", "fa")
-        //! runtextmacro GUMS_RegisterTag("talk", "ta")
-        
-        //! runtextmacro GUMS_RegisterTag("upgrade","u")
-        //! runtextmacro GUMS_RegisterTag("first","n1")
-        //! runtextmacro GUMS_RegisterTag("second","n2")
-        //! runtextmacro GUMS_RegisterTag("third","n3")
-        //! runtextmacro GUMS_RegisterTag("fourth","n4")
-        //! runtextmacro GUMS_RegisterTag("fifth","n5")
     endmethod
 endmodule
 private struct InitStruct extends array
