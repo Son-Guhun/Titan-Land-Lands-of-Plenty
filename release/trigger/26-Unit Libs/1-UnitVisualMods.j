@@ -72,16 +72,11 @@ endfunction
 // hooks here
 //! runtextmacro optional DefineHooks()
 
-//////////////////////////////////////////////////////
-
-function GUMS_GetUnitSelectionType takes unit whichUnit returns integer
-    return data[GetHandleId(whichUnit)][SELECT]
-endfunction
-
 //==========================================
 // Storing
 //==========================================
 
+// Cannot store fly high in the "begins upgrade" event, as it is already lost by then.
 private struct SaveFlyHeight extends array
 
     method operator height takes nothing returns real
@@ -268,6 +263,60 @@ struct UnitVisualsSetters extends array
     
     implement UnitVisualModsCopy_Module
     
+    static method DragSelectable takes unit whichUnit returns nothing
+        local integer unitId = GetHandleId(whichUnit)
+        local integer selectionType = data[unitId][SELECT]
+        //! runtextmacro ASSERT("whichUnit != null")
+
+        if selectionType == UnitVisuals.SELECTION_DRAG then
+            return //Unit is already drag-selectable, do nothing.
+        endif
+        
+        if selectionType != UnitVisuals.SELECTION_UNSELECTABLE then //Check if unit is already unselectable.
+            if UnitAddAbility(whichUnit,'Aloc') then //Do nothing is unit has locust by default.
+                call UnitRemoveAbility(whichUnit,'Aloc')
+                set data[unitId][SELECT] = UnitVisuals.SELECTION_DRAG
+            else
+                return
+            endif
+        endif
+        
+        //This if block makes the unit drag-selectable after removing the locust ability.
+        if not IsUnitHidden(whichUnit) then
+            call ShowUnit(whichUnit,false)
+            call ShowUnit(whichUnit,true)
+        endif
+    endmethod
+    
+    static method SelectionType takes unit whichUnit, integer selectType returns nothing
+        local integer unitId = GetHandleId(whichUnit) 
+        //! runtextmacro ASSERT("whichUnit != null")
+
+        if selectType == UnitVisuals.SELECTION_UNSELECTABLE or selectType == UnitVisuals.SELECTION_LOCUST then
+            if data[unitId][SELECT] >=UnitVisuals.SELECTION_UNSELECTABLE then
+                set data[unitId][SELECT] = selectType
+                return //Unit is already unselectable, do nothing.
+            endif
+
+            if UnitAddAbility(whichUnit,'Aloc') then //Do nothing is unit has locust by default.
+                call UnitRemoveAbility(whichUnit,'Aloc')
+                set data[unitId][SELECT] = selectType
+                call SetUnitInvulnerable(whichUnit, true)
+                call BlzUnitDisableAbility(whichUnit, 'Aatk', true, true)
+            endif
+        elseif selectType == UnitVisuals.SELECTION_DRAG then
+            call DragSelectable(whichUnit)
+        endif
+    endmethod
+    
+    static method UnSelectable takes unit whichUnit returns nothing
+        call SelectionType(whichUnit, UnitVisuals.SELECTION_UNSELECTABLE)
+    endmethod
+
+    static method LocustSelectable takes unit whichUnit returns nothing
+        call SelectionType(whichUnit, UnitVisuals.SELECTION_LOCUST)
+    endmethod
+
     static method ResetName takes unit whichUnit returns nothing
         local UnitVisuals unitHandle = GetHandleId(whichUnit)
         //! runtextmacro ASSERT("whichUnit != null")
@@ -294,67 +343,6 @@ struct UnitVisualsSetters extends array
 
 endstruct
 
-//==========================================
-// GUMS Unit Selectability Utilities
-
-function GUMSMakeUnitDragSelectable takes unit whichUnit returns nothing
-    local integer unitId = GetHandleId(whichUnit)
-    local integer selectionType = data[unitId][SELECT]
-    //! runtextmacro ASSERT("whichUnit != null")
-
-    if selectionType == UnitVisuals.SELECTION_DRAG then
-        return //Unit is already drag-selectable, do nothing.
-    endif
-    
-    if selectionType != UnitVisuals.SELECTION_UNSELECTABLE then //Check if unit is already unselectable.
-        if UnitAddAbility(whichUnit,'Aloc') then //Do nothing is unit has locust by default.
-            call UnitRemoveAbility(whichUnit,'Aloc')
-            set data[unitId][SELECT] = UnitVisuals.SELECTION_DRAG
-        else
-            return
-        endif
-    endif
-    
-    //This if block makes the unit drag-selectable after removing the locust ability.
-    if not IsUnitHidden(whichUnit) then
-        call ShowUnit(whichUnit,false)
-        call ShowUnit(whichUnit,true)
-    endif
-endfunction
-
-function GUMSSetUnitSelectionType takes unit whichUnit, integer selectType returns nothing
-    local integer unitId = GetHandleId(whichUnit) 
-    //! runtextmacro ASSERT("whichUnit != null")
-
-    if selectType == UnitVisuals.SELECTION_UNSELECTABLE or selectType == UnitVisuals.SELECTION_LOCUST then
-        if data[unitId][SELECT] >=UnitVisuals.SELECTION_UNSELECTABLE then
-            set data[unitId][SELECT] = selectType
-            return //Unit is already unselectable, do nothing.
-        endif
-
-        if UnitAddAbility(whichUnit,'Aloc') then //Do nothing is unit has locust by default.
-            call UnitRemoveAbility(whichUnit,'Aloc')
-            set data[unitId][SELECT] = selectType
-            call SetUnitInvulnerable(whichUnit, true)
-            call BlzUnitDisableAbility(whichUnit, 'Aatk', true, true)
-        endif
-    elseif selectType == UnitVisuals.SELECTION_DRAG then
-        call GUMSMakeUnitDragSelectable(whichUnit)
-    endif
-endfunction
-
-function GUMSMakeUnitUnSelectable takes unit whichUnit returns nothing
-    call GUMSSetUnitSelectionType(whichUnit, UnitVisuals.SELECTION_UNSELECTABLE)
-endfunction
-
-function GUMSMakeUnitLocust takes unit whichUnit returns nothing
-    call GUMSSetUnitSelectionType(whichUnit, UnitVisuals.SELECTION_LOCUST)
-endfunction
-
-
-//////////////////////////////////////////////////////
-//End of GUMS
-//////////////////////////////////////////////////////
 //==================================================================================================
 //                                        Initialization
 //==================================================================================================

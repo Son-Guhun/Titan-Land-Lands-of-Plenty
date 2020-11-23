@@ -150,6 +150,10 @@ private struct UnitVisualsRaw extends array
     method getAnimTag takes nothing returns string
         return .values.string[ATAG]
     endmethod
+    
+    method getSelectionType takes nothing returns integer
+        return .values[SELECT]
+    endmethod
 endstruct
 
 // Contains getters for all UnitVisualMods-related data. These getters return strings, not raw values.
@@ -254,6 +258,10 @@ struct UnitVisuals extends array
         else
             return "D" //D stands for default
         endif
+    endmethod
+    
+    method getSelectionType takes nothing returns string
+        return I2S(.raw.getSelectionType())
     endmethod
     
     method hasCustomName takes nothing returns boolean

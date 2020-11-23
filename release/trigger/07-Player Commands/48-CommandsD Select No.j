@@ -46,7 +46,7 @@ private function EnumFunc takes nothing returns nothing
                 if GetOwningPlayer(enumUnit) == LoP.NEUTRAL_PASSIVE then
                     call SetUnitOwner(enumUnit, owner, false)  // This is required, otherwise neutral units must be enumed when a unit is made selectable.
                 endif
-               call GUMSMakeUnitLocust(enumUnit)
+               call LoP.UVS.LocustSelectable(enumUnit)
             else
                 call LoP_WarnPlayerTimeout(GetTriggerPlayer(), LoPChannels.ERROR, MSGKEY_USE_F, 0., "You must use |cffffff00-select no f|r to make non-decorations unselectable." ) 
             endif
@@ -57,7 +57,7 @@ private function EnumFunc takes nothing returns nothing
             if GetOwningPlayer(enumUnit) == LoP.NEUTRAL_PASSIVE then
                 call SetUnitOwner(enumUnit, owner, false)  // This is required, otherwise neutral units must be enumed when a unit is made selectable.
             endif
-            call GUMSMakeUnitLocust(enumUnit)
+            call LoP.UVS.LocustSelectable(enumUnit)
         else
             if CheckCommandOverflow() then
                 call ToEffect(enumUnit)

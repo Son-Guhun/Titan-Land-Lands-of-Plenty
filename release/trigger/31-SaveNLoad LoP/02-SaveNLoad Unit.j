@@ -147,7 +147,7 @@ scope Serialization
             local UnitVisuals unitHandleId = GetHandleId(saveUnit)
         
             if UnitHasAttachedEffect(saveUnit) then
-                return SerializeSpecialEffect(GetUnitAttachedEffect(saveUnit), GetOwningPlayer(saveUnit), unitHandleId.hasColor(), GUMS_GetUnitSelectionType(saveUnit), SerializeUnitFlags(saveUnit))
+                return SerializeSpecialEffect(GetUnitAttachedEffect(saveUnit), GetOwningPlayer(saveUnit), unitHandleId.hasColor(), unitHandleId.raw.getSelectionType(), SerializeUnitFlags(saveUnit))
             else
                 return ID2S((GetUnitTypeId(saveUnit))) + "," + /*
                             */   R2S(GetUnitX(saveUnit))+","+  /*
@@ -162,7 +162,7 @@ scope Serialization
                             */   unitHandleId.getColor() + "," + /*
                             */   unitHandleId.getAnimSpeed() + "," + /*
                             */   SaveIO_CleanUpString(unitHandleId.getAnimTag()) + "," + /*
-                            */   I2S(GUMS_GetUnitSelectionType(saveUnit)) + "," + /*
+                            */   unitHandleId.getSelectionType() + "," + /*
                             */   SerializeUnitFlags(saveUnit)
             endif
         endfunction
@@ -545,9 +545,9 @@ function LoadUnit takes string chat_str, player un_owner, real centerX, real cen
             endif
             if unitData.selectState != "0" then
                 if unitData.selectState == "2" then
-                    call GUMSSetUnitSelectionType(resultUnit, UnitVisuals.SELECTION_LOCUST)
+                    call UnitVisualsSetters.SelectionType(resultUnit, UnitVisuals.SELECTION_LOCUST)
                 else
-                    call GUMSSetUnitSelectionType(resultUnit, S2I(unitData.selectState))
+                    call UnitVisualsSetters.SelectionType(resultUnit, S2I(unitData.selectState))
                 endif
             endif
         else

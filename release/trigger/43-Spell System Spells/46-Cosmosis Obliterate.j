@@ -3,7 +3,7 @@ scope CosmosisObliterate
 private function filterUnitsFunc takes nothing returns boolean
     local unit filterUnit = GetFilterUnit()
     
-    if GUMS_GetUnitSelectionType(filterUnit) != 0 then
+    if UnitVisuals[filterUnit].raw.getSelectionType() != 0 then
         if IsUnitInRangeXY(filterUnit, GetLocationX(udg_Spell__TargetPoint),  GetLocationY(udg_Spell__TargetPoint), 300.) then
             call LoP_RemoveUnit( filterUnit )
         endif

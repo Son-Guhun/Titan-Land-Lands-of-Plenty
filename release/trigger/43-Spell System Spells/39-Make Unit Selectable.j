@@ -13,7 +13,7 @@ private function MakeLocustUnitsSelectable takes nothing returns nothing
 
     loop
         //! runtextmacro ForUnitInGroup("u", "g")
-        if GUMS_GetUnitSelectionType(u) != 0 then
+        if UnitVisuals[u].raw.getSelectionType() != 0 then
             if IsUnitInRangeLoc(u, udg_Spell__TargetPoint, range) then
                 if LoP_IsUnitDecoration(u) then
                     if includeDecos then
