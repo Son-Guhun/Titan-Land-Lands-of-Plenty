@@ -104,6 +104,14 @@ endstruct
 //==========================================
 // Setters
 
+private constant function CustomUnitNameColor takes nothing returns string
+    return "|cffffcc00"
+endfunction
+
+private function ConvertToCustomName takes string name returns string
+    return CustomUnitNameColor() + name + "|r"
+endfunction
+
 private struct Utils extends array
 
     static method PercentTo255 takes real percent returns integer
@@ -259,63 +267,32 @@ struct UnitVisualsSetters extends array
     endmethod
     
     implement UnitVisualModsCopy_Module
+    
+    static method ResetName takes unit whichUnit returns nothing
+        local UnitVisuals unitHandle = GetHandleId(whichUnit)
+        //! runtextmacro ASSERT("whichUnit != null")
+        
+        if unitHandle.hasCustomName() then
+            call UnitName_SetUnitName(whichUnit, unitHandle.getOriginalName())
+            call data[unitHandle].string.remove(NAME)
+        endif
+    endmethod
+    
+    static method Name takes unit whichUnit, string name returns nothing
+        local UnitVisuals uId = GetHandleId(whichUnit)
+        //! runtextmacro ASSERT("whichUnit != null")
+        
+        if name != "" then
+            if not uId.hasCustomName() then
+                set data[uId].string[NAME] = UnitName_GetUnitName(whichUnit)
+            endif
+            call UnitName_SetUnitName(whichUnit, ConvertToCustomName(name))
+        else
+            call ResetName(whichUnit)
+        endif
+    endmethod
 
 endstruct
-
-///////////////////////////
-//These functions are used to work with unit names
-//
-//The unit's default proper name is saved in a Hashtable so it can be reset
-///////////////////////////
-
-private constant function CustomUnitNameColor takes nothing returns string
-    return "|cffffcc00"
-endfunction
-
-private function ConvertToCustomName takes string name returns string
-    return CustomUnitNameColor() + name + "|r"
-endfunction
-
-private function ConvertFromCustomName takes string name returns string
-    return SubString(name, 10, StringLength(name) - 2)
-endfunction
-
-private function GetDefaultName takes integer unitHandle returns string
-    //! runtextmacro ASSERT("unitHandle != 0")
-    return data[unitHandle].string[NAME]
-endfunction
-
-function GUMSUnitHasCustomName takes integer unitHandle returns boolean
-    //! runtextmacro ASSERT("unitHandle != 0")
-    return data[unitHandle].string.has(NAME)
-endfunction
-
-function GUMSResetUnitName takes unit whichUnit returns nothing
-    local integer unitHandle = GetHandleId(whichUnit)
-    //! runtextmacro ASSERT("whichUnit != null")
-    
-    if GUMSUnitHasCustomName(unitHandle) then
-        call UnitName_SetUnitName(whichUnit, GetDefaultName(unitHandle))
-        call data[unitHandle].string.remove(NAME)
-    endif
-endfunction
-
-function GUMSSetUnitName takes unit whichUnit, string name returns nothing
-    //! runtextmacro ASSERT("whichUnit != null")
-    if name != "" then
-        if not GUMSUnitHasCustomName(GetHandleId(whichUnit)) then
-            set data[GetHandleId(whichUnit)].string[NAME] = UnitName_GetUnitName(whichUnit)
-        endif
-        call UnitName_SetUnitName(whichUnit, ConvertToCustomName(name))
-    else
-        call GUMSResetUnitName(whichUnit)
-    endif
-endfunction
-
-function GUMSGetUnitName takes unit whichUnit returns string
-    //! runtextmacro ASSERT("whichUnit != null")
-    return ConvertFromCustomName(UnitName_GetUnitName(whichUnit))
-endfunction
 
 //==========================================
 // GUMS Unit Selectability Utilities

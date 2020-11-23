@@ -76,8 +76,8 @@ endfunction
 
 function SaveUnitExtraStrings takes SaveWriter saveWriter, unit saveUnit, integer unitHandleId returns nothing
 
-        if GUMSUnitHasCustomName(unitHandleId) then
-            call saveWriter.write(SaveNLoad_FormatString("SnL_unit_extra", "=n " + SaveIO_CleanUpString(GUMSGetUnitName(saveUnit))))
+        if UnitVisuals(unitHandleId).hasCustomName() then
+            call saveWriter.write(SaveNLoad_FormatString("SnL_unit_extra", "=n " + SaveIO_CleanUpString(UnitVisuals.getUnitName(saveUnit))))
         endif
         
         static if LIBRARY_UserDefinedRects then

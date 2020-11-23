@@ -255,6 +255,25 @@ struct UnitVisuals extends array
             return "D" //D stands for default
         endif
     endmethod
+    
+    method hasCustomName takes nothing returns boolean
+        return .values.string.has(NAME)
+    endmethod
+    
+    method getOriginalName takes nothing returns string
+        return .values.string[NAME]
+    endmethod
+    
+    static method getUnitName takes unit u returns string
+        local string name = GetUnitName(u)
+        //! runtextmacro ASSERT("whichUnit != null")
+        
+        if thistype[u].hasCustomName() then
+            return SubString(name, 10, StringLength(name) - 2)
+        else
+            return name
+        endif
+    endmethod
 
 endstruct
 

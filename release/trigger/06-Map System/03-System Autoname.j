@@ -6,8 +6,8 @@ function Trig_System_Autoname_Actions takes nothing returns boolean
     local player trigPlayer = GetTriggerPlayer()
     local unit trigUnit = GetTriggerUnit()
 
-    if GUMSUnitHasCustomName(GetHandleId(trigUnit)) and GetOwningPlayer(trigUnit) == trigPlayer and udg_System_AutonameBoolean[GetPlayerId(trigPlayer) + 1] then
-        call SetPlayerName(trigPlayer, GUMSGetUnitName(trigUnit))
+    if UnitVisuals[trigUnit].hasCustomName() and GetOwningPlayer(trigUnit) == trigPlayer and udg_System_AutonameBoolean[GetPlayerId(trigPlayer) + 1] then
+        call SetPlayerName(trigPlayer, UnitVisuals.getUnitName(trigUnit))
     endif
 
     set trigUnit = null

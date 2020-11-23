@@ -110,8 +110,8 @@ library LoPHeroicUnit requires LoPStdLib, optional NativeRedefinitions, UnitName
             set result.real['Aspd'] = visuals.raw.getAnimSpeed()
         endif
         
-        if GUMSUnitHasCustomName(GetHandleId(whichUnit)) then
-            set result.string['name'] = GUMSGetUnitName(whichUnit)
+        if visuals.hasCustomName() then
+            set result.string['name'] = UnitVisuals.getUnitName(whichUnit)
         endif
         
         //call BJDebugMsg(visuals.raw.getAnimTag())
@@ -136,7 +136,7 @@ library LoPHeroicUnit requires LoPStdLib, optional NativeRedefinitions, UnitName
             call LoP.UVS.AnimSpeed(whichUnit, values.real['Aspd'])
         endif
         if values.string.has('name') then
-            call GUMSSetUnitName(whichUnit, values.string['name'])
+            call LoP.UVS.Name(whichUnit, values.string['name'])
         endif
         //GUMSSetUnitAnimTags(whichUnit, values.
     endfunction

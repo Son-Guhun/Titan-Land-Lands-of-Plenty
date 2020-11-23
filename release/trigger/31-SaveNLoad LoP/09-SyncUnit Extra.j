@@ -169,7 +169,7 @@ function Trig_LoadUnitNew_Extra_Actions takes nothing returns nothing
     
     
     if     cmdStr == "=n " then
-        call GUMSSetUnitName(udg_save_LastLoadedUnit[playerId], SubString(eventStr, 3, StringLength(eventStr)))
+        call LoP.UVS.Name(udg_save_LastLoadedUnit[playerId], SubString(eventStr, 3, StringLength(eventStr)))
     elseif cmdStr == "=w " then
         call Load_RestoreWaygate(SubString(eventStr, 3, StringLength(eventStr)), SaveIO_GetCurrentlyLoadingSave(GetTriggerPlayer()), udg_save_LastLoadedUnit[playerId])
     elseif cmdStr == "=p " then
