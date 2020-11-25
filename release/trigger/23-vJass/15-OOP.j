@@ -1,6 +1,30 @@
 // Contains tools of Object-Oriented Programming
 library OOP
 
+//! textmacro OOP_HandleStruct takes type
+    static method get takes $type$ h returns thistype
+        return GetHandleId(h)
+    endmethod
+    
+    static method operator [] takes $type$ h returns thistype
+        return thistype.get(h)
+    endmethod
+//! endtextmacro
+
+public module PlayerStruct
+    static method get takes player whichPlayer returns thistype
+        return GetPlayerId(whichPlayer)
+    endmethod
+    
+    static method operator[] takes player whichPlayer returns thistype
+        return GetPlayerId(whichPlayer)
+    endmethod
+    
+    method operator handle takes nothing returns player
+        return Player(this)
+    endmethod
+endmodule
+
 //! textmacro InheritField takes STRUCT, FIELD, TYPE
     method operator $FIELD$ takes nothing returns $TYPE$
         return $STRUCT$(this).$FIELD$
