@@ -610,8 +610,8 @@ function LoadUnit takes string chat_str, player un_owner, real centerX, real cen
 endfunction
 
 //! textmacro GUMS_RegisterTag takes FULL, COMPRESSED
-    set UnitVisualValues_data_Child(TAGS.COMPRESS).string[StringHash("$FULL$")] = "$COMPRESSED$"
-    set UnitVisualValues_data_Child(TAGS.DECOMPRESS).string[StringHash("$COMPRESSED$")] = "$FULL$"
+    set ConstTable(TAGS.COMPRESS).string[StringHash("$FULL$")] = "$COMPRESSED$"
+    set ConstTable(TAGS.DECOMPRESS).string[StringHash("$COMPRESSED$")] = "$FULL$"
 //! endtextmacro
 
 private module InitModule
