@@ -1,4 +1,49 @@
 library InstantRootOrder requires AgentStruct
+/*
+=========
+ Description
+=========
+
+    This library defines the IssueInstantRootOrder function. It issues a root order to a unit after a
+0-second timer. Assuming the root ability used follows the specifications provided in CONFIGURATION,
+then the unit will instantly be rooted in-game.
+
+    The function also handles cases in which units exist below the rooting structure. For this to
+function, the following properties are assumed to be zero for the structure:
+
+            - Pathing - Placement Requires        (requirePlace)
+            - Pathing - Placement Prevented By    (preventPlace)
+    
+    How it works:
+        - The structure owner is changed to neutral extra. Thus the structure is not prevented from
+    rooting if there are units below it. As such, neutral extra should not own any units in the map.
+        - The 'Amov' ability is disabled for all players using SetPlayerAbilityAvailable, so that
+    units won't move out of the way when the root order is issued.
+        - After another 0-second timer, the structure is already rooted, since the duration of the
+    ability is zero. When this happens, the root ability is removed, the structure is returned to the
+    owner, and Amov is enabled for all players again.
+
+=========
+ Documentation
+=========
+    
+    Functions:
+        nothing IssueInstantRootOrder(unit u)
+
+*/
+//==================================================================================================
+//                                       Configuration
+//==================================================================================================
+
+globals
+    // The ability to be used for root/unroot orders:
+    //     - Must have 'Duration - Hero (HeroDur1)' and 'Duration - Unit (Dur1)' set to 0.00
+    public constant integer ROOT_ABILITY = 'DEDF'
+endglobals
+
+//==================================================================================================
+//                                        Source Code
+//==================================================================================================
 
 private function EnableAmov takes boolean flag returns nothing
     local integer i = 0
@@ -30,7 +75,7 @@ private struct TimerData extends array
         local player owner = Player(tData.owner)
         //! runtextmacro ASSERT("u != null")
         
-        call UnitRemoveAbility(u, 'DEDF')
+        call UnitRemoveAbility(u, ROOT_ABILITY)
 
         if isAmovDisabled then
             call EnableAmov(true)

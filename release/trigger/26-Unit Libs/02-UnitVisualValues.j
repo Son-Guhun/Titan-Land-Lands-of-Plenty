@@ -1,16 +1,89 @@
-library UnitVisualValues requires HashtableWrapper, CutToComma
+library UnitVisualValues requires CutToComma, OOP, optional HashtableWrapper, optional Table, optional ConstTable
+/*
+=========
+ Description
+=========
+
+    This library declares the UnitVisuals struct, which is used to store visual properties of units.
+These visual properties are not set by this library. They are set by the UnitVisualMods library, which
+offers wrappers of the native functions that are normally used to change these visual attributes.
+
+    All data is stored using a hashtable. It is possible to configure this library to use a HashTable
+(from the Table library) instead. See configuration below. If the ConstTable library is present, then
+a ConstHashTable is used instead.
+    
+=========
+ Documentation
+=========
+
+    struct UnitVisuals:
+    
+        Implements:
+            textmacro OOP_HandleStruct("unit")
+            
+        Constants:
+            integer SELECTION_DEFAULT      = 0
+            integer SELECTION_DRAG         = 1  -> Units that can only be drag-selected.
+            integer SELECTION_UNSELECTABLE = 2  -> Units that are unselectable and may be converted to SFX.
+            integer SELECTION_LOCUST       = 3  -> Units that are unselectable and should not be converted to SFX.
+            
+            static constant real MIN_FLY_HEIGHT  -> minimum flying height that a unit can have. If it has less then this, it is considered as having 0.
+            
+        scope raw:
+            real    getScale()
+            integer getVertexRed()
+            integer getVertexGreen()
+            integer getVertexBlue()
+            integer getVertexAlpha()
+            integer getColor()          -> Returns the handle id of the unit's custom player color.
+            real    getAnimSpeed()
+            string  getAnimTag()        -> Also known as animation properties.
+            integer getSelectionType()
+            
+        Methods:
+        
+            nothing destroy()  -> Clears all data stored for the unit.
+            
+            boolean hasScale()
+            boolean hasVertexColor()
+            boolean hasColor()       -> returns whether the unit has a custom player color.
+            boolean hasAnimSpeed()
+            boolean hasAnimTag()
+            boolean hasCustomName()
+            
+            . These functions return the value as a string if it exists, otherwise they return "D".
+            .
+            .   string getScale()
+            .   string getVertexRed()
+            .   string getVertexGreen()
+            .   string getVertexBlue()
+            .   string getVertexAlpha()
+            .   string getColor()
+            .   string getAnimSpeed()
+            .   string getAnimTag()
+            
+            string getSelectionType()
+            string getOriginalName()
+            
+            Static:
+                string getUnitName(unit u)
+
+*/
+//==================================================================================================
+//                                       Configuration
+//==================================================================================================
 
 globals
-    private constant boolean INIT_HASHTABLE = true // Set this to false if you want to use a Table-based HashTable.
+    public constant boolean INIT_HASHTABLE = true // Set this to false if you want to use a Table-based HashTable.
     private hashtable hashTable = InitHashtable()  // Set this to null if you want to use a Table-based HashTable.
 endglobals
 
 //==================================================================================================
-//                                           Source Code
+//                                        Source Code
 //==================================================================================================
 
 //CONSTANTS FOR HASHTABLE ADDRESSES (Unit Handle Ids as child tables)
-public module KEYS_Module
+/*protected*/ public module KEYS_Module
         static constant integer SCALE  = 0
         static constant integer RED    = 1
         static constant integer GREEN  = 2
@@ -42,7 +115,7 @@ else
 endif
 
 // Hashtable wrapper declaration (this is considered "protected" and should not be accessed by the user.
-public struct data extends array
+/*protected*/ public struct data extends array
     static if LIBRARY_HashtableWrapper and INIT_HASHTABLE then
         implement optional data_ParentHashtableWrapper
     else
@@ -134,7 +207,7 @@ struct UnitVisuals extends array
     endmethod
     
     method destroy takes nothing returns nothing
-        call data.flushChild(this)
+        call data[this].flush()
     endmethod
     
     method hasScale takes nothing returns boolean

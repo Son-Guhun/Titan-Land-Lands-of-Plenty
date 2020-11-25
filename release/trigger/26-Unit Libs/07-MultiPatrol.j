@@ -21,7 +21,9 @@ library MultiPatrol initializer onInit
 // function Patrol_RegisterPoint takes unit trigU, real newX, real newY returns nothing
 //
 //==================================================================================================
-// Config
+//                                       Configuration
+//=================================================================================================
+
 globals
     // Maximum number of patrol points a single unit can have.
     private constant integer MAX_POINTS = 128
@@ -32,8 +34,10 @@ globals
     // Determines the minimum distance between two consecutive patrol points.
     private constant real MINIMUM_DISTANCE = 100.
 endglobals
+
 //==================================================================================================
-// Error codes for Patrol_AddPoint
+//                                        Source Code
+//==================================================================================================
 
 scope ERROR
     globals 
@@ -43,7 +47,7 @@ scope ERROR
         public constant integer NONE = 0
     endglobals
 endscope
-//==================================================================================================
+
 globals
     private hashtable data = InitHashtable()
     private boolean orderBool = false
@@ -57,7 +61,7 @@ globals
     
     private constant integer KEY_INDEX_DISPLAY = 10000  // effects and textags are saved after this index 
 endglobals
-//==================================================================================================
+//======================
 
 // Getters and Setters
 
@@ -143,15 +147,14 @@ endfunction
 private function Patrol_RemovePointTag takes integer uId, integer point returns nothing
     call RemoveSavedHandle(data,  uId, -KEY_INDEX_DISPLAY-point)
 endfunction
-//==================================================================================================
-
+//=====================
 // Uitilities
 private function Patrol_Distance takes real x, real y returns real
     return SquareRoot(Pow(x,2) + Pow(y,2))
 endfunction
 
-//==================================================================================================
-
+//=====================
+// Event response
 private function Patrol_PointReached takes nothing returns boolean
     local unit trigU = GetTriggerUnit()
     local integer u_handle = GetHandleId(trigU)
@@ -202,10 +205,8 @@ private function Patrol_PointReached takes nothing returns boolean
 
     return true
 endfunction
-//==================================================================================================
-
-// Guhun's Patrol Point System API
-
+//===================
+// API
 //===================
 
 function Patrol_UnitIdHasPatrolPoints takes integer unitHandleId returns boolean
@@ -411,10 +412,8 @@ function Patrol_RegisterPoint takes unit trigU, real newX, real newY returns not
         call Patrol_ResumePatrol(trigU)
     endif
 endfunction
-//==================================================================================================
-//  ------------------------
-// ||END OF PATROL SYSTEM ||
-//  
+
+
 private function onInit takes nothing returns nothing
     set ptrlRect = Rect(0,0,RANGE,RANGE)
 endfunction

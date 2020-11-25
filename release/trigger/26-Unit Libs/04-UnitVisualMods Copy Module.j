@@ -1,6 +1,25 @@
 library UnitVisualModsCopy requires UnitVisualValues
+/*
+=========
+ Description
+=========
 
-public module Module
+    Implements copy functions of the UnitVisualsSetters library struct defined in UnitVisualMods.
+    
+        - CopyValues, Copy, CopySameType
+
+=========
+ Documentation
+=========
+    
+    The documentation for the functions implemented here can be found in the UnitVisualMods library.
+
+*/
+//==================================================================================================
+//                                        Source Code
+//==================================================================================================
+
+/*protected*/ public module Module
     static method CopyValues takes unit source, unit target returns nothing
         local real fangle = GetUnitFacing(source)
         local UnitVisuals sourceId = GetHandleId(source)

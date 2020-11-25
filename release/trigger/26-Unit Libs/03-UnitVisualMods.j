@@ -1,15 +1,122 @@
-library UnitVisualMods requires HashStruct, UnitVisualValues, UnitVisualModsCopy, UnitName, GroupTools, InstantRootOrder optional UnitVisualModsDefaults/*
+library UnitVisualMods requires UnitVisualValues, UnitName, InstantRootOrder optional UnitVisualModsDefaults/*
 
-    */ /*optional*/ HashtableWrapper, /* Required to initialize a hashtable.
-    
-    */ optional Table, /*  Required if a hashtable is not intialized.
-    
-    */ optional ConstTable  /* If present, then ConstHashTable is used instead of HashTable.
-    
+    */ UnitVisualModsCopy, UnitVisualModsUpgrade  /* modules for this lib package
+
     */ optional FuncHooks  // Hooks for attached special effects
+/*
+=========
+ Description
+=========
 
+    This library adheres to the "Import Library Standard", and as such stores its funtions in the
+UnitVisualsSetters struct. When importing this library, UVS is recommended as a short alias.
+
+=========
+ Documentation      TODO: Util functions and Upgrade module.
+=========
+
+lib UnitVisualSetters:
+
+    Functions:
+    
+        nothing StructureFlyHeight(unit structure, real newHeight, boolean autoLand)
+            .
+            . Set flying height for a structure by ordering it to unroot. If autoLand is true, then 
+            . the root ability will be removed and the strucutre will be instantly rooted using the
+            . InstantRootOrder library.
+        
+        nothing Facing(unit whichUnit, real newAngle)
+            .
+            . Sets unit facing. Works for units that don't have the Amov ability by forecfully redrawing
+            . those units using SetUnitPosition.
+
+        nothing FlyHeight(unit whichUnit, real newHeight)
+            .
+            . Sets unit facing. Works for non-flying units by adding the Amrf ability to them. Works 
+            . for units that don't have Amov by redrawing them using SetUnitPosition. Does not work
+            . for structures, the StructureFlyHeight function must be used in this case.
+        
+        nothing MatrixScale(unit whichUnit, real scaleX, real scaleY, real scaleZ)
+            .
+            . Per-dimension scaling does not work for units unfortunately. This function exists in
+            . order to support hooks defined in the FuncHooks library.
+        
+        nothing Scale(unit whichUnit, real scale)
+            .
+            . Set unit scale. Since only the X dimension is considered by the native function, this
+            . function accepts only 1 value, which is applied on all dimensions.
+        
+        nothing VertexColorInt(unit whichUnit, integer red, integer green, integer blue, integer alpha)
+            .
+            . Works like SetUnitVertexColor.
+
+        nothing VertexColor(unit whichUnit, real red, real green, real blue, real trans)        
+            .
+            . Works like SetUnitVertexColorBJ. Values are still stored as integers.
+        
+        nothing Color(unit whichUnit, integer color)
+            .
+            . Sets the unit's player color. Integer is the handle id of the player color, which
+            . matches the player id of the player which has that color by default.
+
+        nothing AnimSpeed(unit whichUnit, real speedMultiplier)
+            .
+            . Sets unit animation speed. Negative values are supported, though the unit actually
+            . freezes at the end of the animation, instead of continually playing it (as of 1.32.9).
+        
+        nothing AnimTag(unit whichUnit, string whichTag)
+            .
+            . Set the unit's animation properties, known as animation tags in GUI. All animation tags 
+            . are removed from the unit first, then the specified animation tags (separated by spaces,
+            . as normal for the native) are added to the unit.
+
+
+        nothing CopyValues(unit source, unit target)
+            .
+            . Copy visual values from one unit to another. Does not copy unit name or selection type.
+
+        nothing Copy(unit whichUnit, player owner, integer newType)
+            .
+            . Creates a unit of 'newType' for the 'owner', then calls CopeValues with 'whichUnit' as
+            . the source and the newly created unit as the target. Returns the newly created unit.
+
+        nothing CopySameType(unit whichUnit, player owner)
+            .
+            . Calls Copy, with 'newType' being 'GetUnitTypeId(whichUnit)'.
+     
+     
+        nothing DragSelectable(unit whichUnit)
+            .
+            . Makes a unit unable to be selected by clicking, only by using drag-selection.
+        
+        nothing SelectionType(unit whichUnit, integer selectType)
+            .
+            . Set a unit's selection type. Check UnitVisualValues library for the relevant constants.
+        
+        nothing UnSelectable(unit whichUnit returns)
+            .
+            . Makes the unit completely unselectable, saves '2' as it's selection type.
+
+        nothing LocustSelectable(unit whichUnit)
+            .
+            . Makes the unit completely unselectable, saves '3' as it's selection type.
+          
+
+        nothing Name(unit whichUnit, string name)
+            .
+            . Gives a unit a custom name, which is colored. For heroes, their proper name is set.
+
+        nothing ResetName(unit whichUnit)
+            .
+            . Resets a unit's name, if it had a custom one.
+        
+
+
+
+*/
 //==================================================================================================
-// CONFIGURATION
+//                                       Configuration
+//==================================================================================================
 
 // This function specifies what should be done to a unit when an argument which is not a valid
 // player number (1 <= n <= bj_MAX_PLAYERS) is passed to UnitVisualsSetters.Color. The default behaviour is
@@ -35,9 +142,15 @@ private struct KEYS extends array
 endstruct
 
 private struct data extends array
-    static method operator [] takes integer i returns UnitVisualValues_data_Child
-        return UnitVisualValues_data[i]  // Wrap UnitVisualValues hashtable
-    endmethod
+    static if LIBRARY_HashtableWrapper and UnitVisualValues_INIT_HASHTABLE then
+        static method operator [] takes integer i returns UnitVisualValues_data_Child
+            return UnitVisualValues_data[i]  // Wrap UnitVisualValues hashtable
+        endmethod
+    else
+        static method operator [] takes integer i returns Table
+            return UnitVisualValues_data[i]  // Wrap UnitVisualValues hashtable
+        endmethod
+    endif
 endstruct
 
 private struct SaveFlyHeight extends array
@@ -71,7 +184,7 @@ private struct Utils extends array
         //! runtextmacro ASSERT("IsUnitType(structure, UNIT_TYPE_STRUCTURE)")
 
         set facing = GetUnitFacing(structure)
-        call UnitAddAbility(structure, 'DEDF' )
+        call UnitAddAbility(structure, InstantRootOrder_ROOT_ABILITY )
         call BlzSetUnitFacingEx(structure, facing)
     endmethod
 
@@ -116,7 +229,7 @@ struct UnitVisualsSetters extends array
             call RedrawUnit(whichUnit)
             
             if IsUnitType(whichUnit, UNIT_TYPE_STRUCTURE) and GetUnitFlyHeight(whichUnit) > UnitVisuals.MIN_FLY_HEIGHT then
-                call StructureFlyHeight(whichUnit, GetUnitFlyHeight(whichUnit), GetUnitAbilityLevel(whichUnit, 'DEDF') == 0)
+                call StructureFlyHeight(whichUnit, GetUnitFlyHeight(whichUnit), GetUnitAbilityLevel(whichUnit, InstantRootOrder_ROOT_ABILITY) == 0)
             endif
         endif    
     endmethod
