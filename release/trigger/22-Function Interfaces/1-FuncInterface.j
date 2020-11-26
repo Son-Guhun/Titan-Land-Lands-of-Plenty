@@ -13,13 +13,13 @@ library FuncInterfaceType1Type2Type3ReturnType4
 
 endlibrary
 */
-library FuncInterface requires ConstTable
+library FuncInterface requires Table
 
     struct FuncInterface extends array
         private static key tab
         private static trigger trig = CreateTrigger()
         
-        static method operator stack takes nothing returns ConstTable
+        static method operator stack takes nothing returns Table  // use Table instead of ConstTable because it has .handle.setValue().
             return tab
         endmethod
         

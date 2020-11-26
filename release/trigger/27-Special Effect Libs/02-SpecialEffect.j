@@ -1,4 +1,4 @@
-library SpecialEffect requires AnyTileDefinition, GLHS, HashStruct, UnitModels, DefaultPathingMaps
+library SpecialEffect requires GLHS, HashStruct, UnitModels, DefaultPathingMaps
 
 globals
         private hashtable hashTableHandle = InitHashtable()

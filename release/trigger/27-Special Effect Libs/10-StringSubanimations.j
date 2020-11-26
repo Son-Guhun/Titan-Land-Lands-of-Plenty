@@ -1,5 +1,9 @@
 library StringSubanimations requires SpecialEffect, TableStruct
 /*
+=========
+ Description
+=========
+
     Converts strings (animation tags) to subanimation handles. Used to provide compatibility between
 the API for units and the API for effects.
 
@@ -12,13 +16,42 @@ the API for units and the API for effects.
     .     native BlzSpecialEffectAddSubAnimation       takes effect whichEffect, subanimtype whichSubAnim returns nothing
         
     You can find a map from string to subanimation at the end of this library, inside the InitModule.
-*/
+    
+=========
+ Documentation
+=========
 
-private struct SubAnimString extends array
+    Functions:
+    
+        nothing AddTagsStringAsSubAnimations(SpecialEffect whichEffect, string tags, boolean add)
+            .
+            . Functionally the same as 'AddUnitAnimationProperties', but for a SpecialEffect object.
+            .
+            . Params:
+            .   tags -> string list of tags separated by spaces.
+            .   add  -> if false, subanimations are removed instead of added.
+            
+        string SubAnimations2Tags LinkedHashSet subanims returns string
+            .
+            . Converts a LinkedHashSet of subanimation handle id's to the equivalent string list of
+            . animation tags, where each tag is separated by a space. This string can then be passed
+            . to 'AddUnitAnimationProperties'.
+
+*/
+//==================================================================================================
+//                                        Source Code
+//==================================================================================================
+
+// Stores a string's equivalent subanimtype.
+private struct SubAnimStr extends array
     //! runtextmacro TableStruct_NewPrimitiveField("subanimtypeId", "integer")
     
+    static method operator[] takes string s returns thistype
+        return StringHash(s)
+    endmethod
+    
     method getSubAnimType takes nothing returns subanimtype
-        return ConvertSubAnimType(.subanimtypeId)
+        return ConvertSubAnimType(.subanimtypeId)  // Only call this function after an .isValid() check.
     endmethod
     
     method setSubAnimType takes subanimtype anim returns nothing
@@ -30,8 +63,13 @@ private struct SubAnimString extends array
     endmethod
 endstruct
 
-private struct SubAnimInteger extends array
+// Stores a subanimtype's equivalent string.
+private struct SubAnimInt extends array
     //! runtextmacro TableStruct_NewPrimitiveField("string", "string")
+    
+    static method operator[] takes subanimtype s returns thistype
+        return GetHandleId(s)
+    endmethod
     
     method getString takes nothing returns string
         return .string
@@ -48,10 +86,10 @@ endstruct
 
 function AddTagsStringAsSubAnimations takes SpecialEffect whichEffect, string tags, boolean add returns nothing
     local integer cutToComma = CutToCharacter(tags, " ")
-    local SubAnimString current
+    local SubAnimStr current
     
     loop
-        set current = StringHash(SubString(tags, 0, cutToComma))
+        set current = SubAnimStr[SubString(tags, 0, cutToComma)]
         
         if current.isValid() then
             if add then
@@ -69,7 +107,7 @@ function AddTagsStringAsSubAnimations takes SpecialEffect whichEffect, string ta
 endfunction
 
 function SubAnimations2Tags takes LinkedHashSet subanims returns string
-    local SubAnimInteger current = subanims.begin()
+    local SubAnimInt current = subanims.begin()
     local string result = ""
     
     loop
@@ -82,46 +120,46 @@ function SubAnimations2Tags takes LinkedHashSet subanims returns string
         set current = subanims.next(current)
     endloop
     
-    if StringLength(result) > 0 then
-        return SubString(result, 1, StringLength(result))
-    else
-        return ""
+    if result != "" then
+        return SubString(result, 1, StringLength(result))  // get rid of leading space
     endif
+        
+    return ""
 endfunction
 
 //! textmacro RegisterSubAnimation takes STRING, SUBANIMTYPE
-    call SubAnimString(StringHash("$STRING$")).setSubAnimType($SUBANIMTYPE$)
-    call SubAnimInteger(GetHandleId($SUBANIMTYPE$)).setString("$STRING$")
+    call SubAnimStr["$STRING$"].setSubAnimType($SUBANIMTYPE$)
+    call SubAnimInt[$SUBANIMTYPE$].setString("$STRING$")
 //! endtextmacro
 
 private module InitModule
 
     private static method onInit takes nothing returns nothing
         //! runtextmacro RegisterSubAnimation("alternate", "SUBANIM_TYPE_ROOTED")  // I guess it's because ancients use the alternate animation set for rooted forms
-        //! runtextmacro RegisterSubAnimation("slam", "SUBANIM_TYPE_SLAM")
-        //! runtextmacro RegisterSubAnimation("throw", "SUBANIM_TYPE_THROW")
-        //! runtextmacro RegisterSubAnimation("fast", "SUBANIM_TYPE_FAST")
-        //! runtextmacro RegisterSubAnimation("spin", "SUBANIM_TYPE_SPIN")
-        //! runtextmacro RegisterSubAnimation("ready", "SUBANIM_TYPE_READY")
-        //! runtextmacro RegisterSubAnimation("channel", "SUBANIM_TYPE_CHANNEL")
-        //! runtextmacro RegisterSubAnimation("defend", "SUBANIM_TYPE_DEFEND")
-        //! runtextmacro RegisterSubAnimation("victory", "SUBANIM_TYPE_VICTORY")
-        //! runtextmacro RegisterSubAnimation("flesh", "SUBANIM_TYPE_FLESH")
-        //! runtextmacro RegisterSubAnimation("gold", "SUBANIM_TYPE_GOLD")
-        //! runtextmacro RegisterSubAnimation("lumber", "SUBANIM_TYPE_LUMBER")
-        //! runtextmacro RegisterSubAnimation("work", "SUBANIM_TYPE_WORK")
-        //! runtextmacro RegisterSubAnimation("talk", "SUBANIM_TYPE_TALK")
-        //! runtextmacro RegisterSubAnimation("first", "SUBANIM_TYPE_FIRST")
-        //! runtextmacro RegisterSubAnimation("second", "SUBANIM_TYPE_SECOND")
-        //! runtextmacro RegisterSubAnimation("third", "SUBANIM_TYPE_THIRD")
-        //! runtextmacro RegisterSubAnimation("fourth", "SUBANIM_TYPE_FOURTH")
-        //! runtextmacro RegisterSubAnimation("fifth", "SUBANIM_TYPE_FIFTH")
-        //! runtextmacro RegisterSubAnimation("one", "SUBANIM_TYPE_ONE")
-        //! runtextmacro RegisterSubAnimation("two", "SUBANIM_TYPE_TWO")
-        //! runtextmacro RegisterSubAnimation("small", "SUBANIM_TYPE_SMALL")
-        //! runtextmacro RegisterSubAnimation("medium", "SUBANIM_TYPE_MEDIUM")
-        //! runtextmacro RegisterSubAnimation("large", "SUBANIM_TYPE_LARGE")
-        //! runtextmacro RegisterSubAnimation("upgrade", "SUBANIM_TYPE_UPGRADE")
+        //! runtextmacro RegisterSubAnimation("slam",      "SUBANIM_TYPE_SLAM")
+        //! runtextmacro RegisterSubAnimation("throw",     "SUBANIM_TYPE_THROW")
+        //! runtextmacro RegisterSubAnimation("fast",      "SUBANIM_TYPE_FAST")
+        //! runtextmacro RegisterSubAnimation("spin",      "SUBANIM_TYPE_SPIN")
+        //! runtextmacro RegisterSubAnimation("ready",     "SUBANIM_TYPE_READY")
+        //! runtextmacro RegisterSubAnimation("channel",   "SUBANIM_TYPE_CHANNEL")
+        //! runtextmacro RegisterSubAnimation("defend",    "SUBANIM_TYPE_DEFEND")
+        //! runtextmacro RegisterSubAnimation("victory",   "SUBANIM_TYPE_VICTORY")
+        //! runtextmacro RegisterSubAnimation("flesh",     "SUBANIM_TYPE_FLESH")
+        //! runtextmacro RegisterSubAnimation("gold",      "SUBANIM_TYPE_GOLD")
+        //! runtextmacro RegisterSubAnimation("lumber",    "SUBANIM_TYPE_LUMBER")
+        //! runtextmacro RegisterSubAnimation("work",      "SUBANIM_TYPE_WORK")
+        //! runtextmacro RegisterSubAnimation("talk",      "SUBANIM_TYPE_TALK")
+        //! runtextmacro RegisterSubAnimation("first",     "SUBANIM_TYPE_FIRST")
+        //! runtextmacro RegisterSubAnimation("second",    "SUBANIM_TYPE_SECOND")
+        //! runtextmacro RegisterSubAnimation("third",     "SUBANIM_TYPE_THIRD")
+        //! runtextmacro RegisterSubAnimation("fourth",    "SUBANIM_TYPE_FOURTH")
+        //! runtextmacro RegisterSubAnimation("fifth",     "SUBANIM_TYPE_FIFTH")
+        //! runtextmacro RegisterSubAnimation("one",       "SUBANIM_TYPE_ONE")
+        //! runtextmacro RegisterSubAnimation("two",       "SUBANIM_TYPE_TWO")
+        //! runtextmacro RegisterSubAnimation("small",     "SUBANIM_TYPE_SMALL")
+        //! runtextmacro RegisterSubAnimation("medium",    "SUBANIM_TYPE_MEDIUM")
+        //! runtextmacro RegisterSubAnimation("large",     "SUBANIM_TYPE_LARGE")
+        //! runtextmacro RegisterSubAnimation("upgrade",   "SUBANIM_TYPE_UPGRADE")
         
         // Unused subanimtypes
         /*

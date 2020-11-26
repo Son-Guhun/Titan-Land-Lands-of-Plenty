@@ -1,18 +1,21 @@
-library LoPPlayers requires TableStruct, DecorationSFX, LoPNeutralUnits
+library LoPPlayers requires TableStruct, DecorationSFX, LoPNeutralUnits, OOP
 /*
 
 struct LoP_PlayerData:
 
+    Implements:
+        module OOP_PlayerStruct
+
     Fields:
         readonly player handle
         
-        readonly string realName
+        readonly string realName  -> Player name at map start.
         
         readonly location location
         readonly real locX
         readonly real locY
         
-        readonly boolean commandsEnabled
+        readonly boolean commandsEnabled  -> Behavior for this boolean field must be implemented by the commands library.
         
     Methods:
         integer toPlayerId()
@@ -21,24 +24,21 @@ struct LoP_PlayerData:
         boolean isAtWar(player other)
         nothing setAtWar(player other, boolean enable)
         
-        nothing enableCommands()
-        nothing disableCommands()
+        nothing enableCommands()   -> Sets this.commandsEnabled to true. Doesn't execute any further code.
+        nothing disableCommands()  -> Sets this.commandsEnabled to false. Doesn't execute any further code.
         
-        playercolor getUnitColor()
-        nothing setUnitColor(playercolor color)
-    
-        Static:
-            LoP_PlayerData get(player whichPlayer)
+        playercolor getUnitColor()               -> Get color used by the player's units.
+        nothing setUnitColor(playercolor color)  -> Set the color used by the player's units.
             
 Functions:
-    player FindFirstPlayer()
-    nothing MakeTitan(player whichPlayer)
+    player FindFirstPlayer()               ->  Find the first player that is still player. Should not be called during map initialization.
+    nothing MakeTitan(player whichPlayer)  -> Makes 'whichPlayer' the new Titan.
     
-    boolean LoP_GivesShareAccess(player whichPlayer, player recipient)
-    boolean LoP_PlayerOwnsUnit(player whichPlayer, unit whichUnit)
+    boolean LoP_GivesShareAccess(player whichPlayer, player recipient)  -> Returns whether whichPlayer is sharing units with recipient.
+    boolean LoP_PlayerOwnsUnit(player whichPlayer, unit whichUnit)      -> Returns whether whichPlayer has access to whichUnit.
     
-    boolean PlayerNumberIsNotExtraOrVictim(integer ID)
-    boolean PlayerNumberIsNotNeutral(integer ID) 
+    boolean PlayerNumberIsNotExtraOrVictim(integer ID)  -> Returns false for invalid numbers ( x < 1 or x > bj_MAX_PLAYER_SLOTS).
+    boolean PlayerNumberIsNotNeutral(integer ID)        -> Returns false for invalid numbers ( x < 1 or x > bj_MAX_PLAYER_SLOTS).
 
 */
 
@@ -74,11 +74,16 @@ endfunction
 // ==============================================
 // Unit access utilities
 
+// Returns whether whichPlayer is sharing units with recipient.
 function LoP_GivesShareAccess takes player whichPlayer, player recipient returns boolean
     return GetPlayerAlliance(whichPlayer, recipient, ALLIANCE_SHARED_ADVANCED_CONTROL)
 endfunction
 
-
+/* Returns whether whichPlayer has access to whichUnit.
+    -> Unit is directly owned by player.
+    -> Unit is in player's neutral group.
+    -> Unit is owned by a player that shares control with whichPlayer.
+*/
 function LoP_PlayerOwnsUnit takes player whichPlayer, unit whichUnit returns boolean
     return GetPlayerAlliance(LoP_GetOwningPlayer(whichUnit), whichPlayer, ALLIANCE_SHARED_ADVANCED_CONTROL)
 endfunction
@@ -97,9 +102,7 @@ endfunction
 
 struct LoP_PlayerData extends array
     
-    static method get takes player whichPlayer returns LoP_PlayerData
-        return GetPlayerId(whichPlayer)
-    endmethod
+    implement OOP_PlayerStruct
     
     method toPlayerId takes nothing returns integer
         return this
@@ -108,10 +111,6 @@ struct LoP_PlayerData extends array
     // Player number is the value used by GUI and also by user commands in the map. It is also used as an index in some systems.
     method toPlayerNumber takes nothing returns integer
         return this+1
-    endmethod
-    
-    method operator handle takes nothing returns player
-        return Player(this)
     endmethod
     
     //==================================

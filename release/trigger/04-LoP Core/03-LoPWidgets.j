@@ -4,6 +4,10 @@ library LoPWidgets requires LoPHeader, TableStruct, POWER, HERO, optional Terrai
 libraries are defined in LoPConstants.
     
     struct LoP_UnitData:
+        
+        Implements:
+            textmacro OOP_HashStruct(unit)
+    
         Fields:
             boolean isHeroic -> this field is used by heroic units so that they can be easily recognized as heroic. It should never be set to false, if it had been set to true.
             boolean hideOnDeselect -> whether a unit should be hidden upon being deselected.
@@ -62,9 +66,7 @@ struct LoP_UnitData extends array
     /*
         This struct is used to retrieve unit data that is tied to the unit's Handle Id.
     */
-    static method get takes unit whichUnit returns LoP_UnitData
-        return GetHandleId(whichUnit)
-    endmethod
+    //! runtextmacro OOP_HandleStruct("unit")
 
     // This field is used by heroic units so that they can be easily recognized as heroic. It should never be set to false, if it had been set to true.
     //! runtextmacro TableStruct_NewPrimitiveField("isHeroic","boolean")
