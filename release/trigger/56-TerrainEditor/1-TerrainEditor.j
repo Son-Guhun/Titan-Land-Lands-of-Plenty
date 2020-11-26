@@ -96,8 +96,8 @@ public function GetBrushSize takes player whichPlayer returns integer
 endfunction
 
 private function onMousePress takes nothing returns boolean
-    local real x = GetTileCenterCoordinate(PlayerMouseEvent_GetTriggerPlayerMouseX())
-    local real y = GetTileCenterCoordinate(PlayerMouseEvent_GetTriggerPlayerMouseY())
+    local real x = GetTileCenterCoordinate(PlayerEvent_GetTriggerPlayerMouseX())
+    local real y = GetTileCenterCoordinate(PlayerEvent_GetTriggerPlayerMouseY())
     local integer radius = brushSize[GetPlayerId(PlayerEvent_GetTriggerPlayer())]/2
     local integer playerId = GetPlayerId(PlayerEvent_GetTriggerPlayer())
     local real step
@@ -106,13 +106,13 @@ private function onMousePress takes nothing returns boolean
         return false
     endif
     
-    if PlayerMouseEvent_GetTriggerPlayerMouseButton() == MOUSE_BUTTON_TYPE_RIGHT then
+    if PlayerEvent_GetTriggerPlayerMouseButton() == MOUSE_BUTTON_TYPE_RIGHT then
         set isRightButtonPressed[playerId] = true
     else
         set isLeftButtonPressed[playerId] = true
     endif
 
-    if PlayerMouseEvent_GetTriggerPlayerMouseButton() == MOUSE_BUTTON_TYPE_RIGHT then
+    if PlayerEvent_GetTriggerPlayerMouseButton() == MOUSE_BUTTON_TYPE_RIGHT then
         set step =  0.125
     else
         set step = -0.125
@@ -134,7 +134,7 @@ private function onMousePress takes nothing returns boolean
 endfunction
 
 private function onMouseRelease takes nothing returns boolean
-    if PlayerMouseEvent_GetTriggerPlayerMouseButton() == MOUSE_BUTTON_TYPE_RIGHT then
+    if PlayerEvent_GetTriggerPlayerMouseButton() == MOUSE_BUTTON_TYPE_RIGHT then
         set isRightButtonPressed[GetPlayerId(PlayerEvent_GetTriggerPlayer())] = false
     else
         set isLeftButtonPressed[GetPlayerId(PlayerEvent_GetTriggerPlayer())] = false
@@ -147,8 +147,8 @@ private function PlayerEnableCursorInEditor takes integer playerId returns boole
 endfunction
 
 function onMoveMouse takes nothing returns boolean
-    local real x = GetTileCenterCoordinate(PlayerMouseEvent_GetTriggerPlayerMouseX())
-    local real y = GetTileCenterCoordinate(PlayerMouseEvent_GetTriggerPlayerMouseY())
+    local real x = GetTileCenterCoordinate(PlayerEvent_GetTriggerPlayerMouseX())
+    local real y = GetTileCenterCoordinate(PlayerEvent_GetTriggerPlayerMouseY())
     local integer radius = brushSize[GetPlayerId(PlayerEvent_GetTriggerPlayer())]/2
     local integer playerId = GetPlayerId(PlayerEvent_GetTriggerPlayer())
     

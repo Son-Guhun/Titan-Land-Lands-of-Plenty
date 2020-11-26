@@ -195,7 +195,7 @@ private function onMoveMouse takes nothing returns boolean
     local integer playerId = User[PlayerEvent_GetTriggerPlayer()]
 
     if effects[playerId] != 0 then
-        call effects[playerId].setPosition(PlayerMouseEvent_GetTriggerPlayerMouseX(), PlayerMouseEvent_GetTriggerPlayerMouseY())
+        call effects[playerId].setPosition(PlayerEvent_GetTriggerPlayerMouseX(), PlayerEvent_GetTriggerPlayerMouseY())
     endif
     
     return false
@@ -204,11 +204,11 @@ endfunction
 private function onMousePress takes nothing returns boolean
     local User playerId = User[PlayerEvent_GetTriggerPlayer()]
     
-    if PlayerMouseEvent_GetTriggerPlayerMouseX() == 0. and PlayerMouseEvent_GetTriggerPlayerMouseY() == 0. then
+    if PlayerEvent_GetTriggerPlayerMouseX() == 0. and PlayerEvent_GetTriggerPlayerMouseY() == 0. then
         // do nothing
     else
-        if not IsPlayerIdMouseOnButton(playerId) and effects[playerId] != 0 and PlayerMouseEvent_GetTriggerPlayerMouseButton() == MOUSE_BUTTON_TYPE_LEFT then
-            call CreateUnit(playerId.handle, effects[playerId].unitType, PlayerMouseEvent_GetTriggerPlayerMouseX(), PlayerMouseEvent_GetTriggerPlayerMouseY(), 0.)
+        if not IsPlayerIdMouseOnButton(playerId) and effects[playerId] != 0 and PlayerEvent_GetTriggerPlayerMouseButton() == MOUSE_BUTTON_TYPE_LEFT then
+            call CreateUnit(playerId.handle, effects[playerId].unitType, PlayerEvent_GetTriggerPlayerMouseX(), PlayerEvent_GetTriggerPlayerMouseY(), 0.)
             if not OSKeys.LSHIFT.isPressedId(playerId) and not OSKeys.RSHIFT.isPressedId(playerId) then
                 call ControlState.default.activateForPlayer(playerId.handle)
             endif

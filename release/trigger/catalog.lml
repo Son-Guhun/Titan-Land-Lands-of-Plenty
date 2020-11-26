@@ -311,14 +311,20 @@
     '3-Unit Indexer': 'Unit Indexer'
         Run
 '26-Unit Libs': 'Unit Libs'
-    1-UnitVisualMods: UnitVisualMods
-    2-UnitVisualValues: UnitVisualValues
-    3-MultiPatrol: MultiPatrol
-    '4-MultiPatrol Addons': 'MultiPatrol Addons'
-    5-TransportUtils: TransportUtils
-    6-InstantRootOrder: InstantRootOrder
-    '7-UnitVisualMods Copy Module': 'UnitVisualMods Copy Module'
-    '8-UnitVisualMods Upgrade': 'UnitVisualMods Upgrade'
+    '01-UnitVisuals Lib': 'UnitVisuals Lib'
+        Comment
+    02-UnitVisualValues: UnitVisualValues
+    03-UnitVisualMods: UnitVisualMods
+    '04-UnitVisualMods Copy Module': 'UnitVisualMods Copy Module'
+    '05-UnitVisualMods Upgrade Module': 'UnitVisualMods Upgrade Module'
+    '06-MultiPatrol Lib': 'MultiPatrol Lib'
+        Comment
+    07-MultiPatrol: MultiPatrol
+    '08-MultiPatrol Addons': 'MultiPatrol Addons'
+    09----------------------------: ---------------------------
+        Comment
+    10-TransportUtils: TransportUtils
+    11-InstantRootOrder: InstantRootOrder
 '27-Special Effect Libs': 'Special Effect Libs'
     01-Core: Core
         Comment
@@ -529,7 +535,8 @@
     1-SelectionStates: SelectionStates
     2-PlayerEventTools: PlayerEventTools
     3-PlayerEvent: PlayerEvent
-    4-PlayerMouseEvent: PlayerMouseEvent
+    4----------------------------: ---------------------------
+        Comment
     5-ControlState: ControlState
     '6-Free Cam': 'Free Cam'
     7-OSKeyLib: OSKeyLib

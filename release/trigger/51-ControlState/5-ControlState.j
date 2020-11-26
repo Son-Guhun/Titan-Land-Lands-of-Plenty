@@ -5,13 +5,11 @@ ControlState should have a parent field, which holds a control state. If the cur
 does not have a certain event attached, but has a parent, check the parent for the event. If the 
 parent has the event, execute the parent's event. A parent can have a parent.
 */
-library ControlState initializer onInit requires TableStruct, SelectionStates, PlayerMouseEvent
+library ControlState initializer onInit requires TableStruct, SelectionStates, PlayerEvent
 
 globals
     private real array LastMouseX
     private real array LastMouseY
-    
-    private constant key PLAYER_STACK
 endglobals
 
 function GetPlayerLastMouseX takes player whichPlayer returns real
@@ -111,7 +109,7 @@ private function onMouseButtonEvent takes nothing returns boolean
     local integer playerId = GetPlayerId(triggerPlayer)
     
     if ControlState.getPlayerIdActiveState(playerId).trigger.has(GetTriggerEventId()) then
-        call PlayerMouseEvent_EvaluateButton(triggerPlayer, /*
+        call PlayerEvent_EvaluateMouseButton(triggerPlayer, /*
                                            */GetTriggerEventId(), /*
                                            */BlzGetTriggerPlayerMouseX(), /*
                                            */BlzGetTriggerPlayerMouseY(), /*
@@ -129,7 +127,7 @@ private function onMouseMoveEvent takes nothing returns boolean
     local integer playerId = GetPlayerId(triggerPlayer)
     
     if ControlState.getPlayerIdActiveState(playerId).trigger.has(EVENT_PLAYER_MOUSE_MOVE) then
-        call PlayerMouseEvent_EvaluateMove(triggerPlayer, /*
+        call PlayerEvent_EvaluateMouseMove(triggerPlayer, /*
                                            */BlzGetTriggerPlayerMouseX(), /*
                                            */BlzGetTriggerPlayerMouseY(), /*
                                            */ControlState.getPlayerIdActiveState(playerId).trigger[EVENT_PLAYER_MOUSE_MOVE])

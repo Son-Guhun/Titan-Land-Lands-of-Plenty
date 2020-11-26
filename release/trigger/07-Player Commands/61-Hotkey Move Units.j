@@ -44,10 +44,10 @@ private function onMousePress takes nothing returns boolean
     local real centerY = 0.
     local boolean hasStructure = false
     
-    if PlayerMouseEvent_GetTriggerPlayerMouseX() == 0. and PlayerMouseEvent_GetTriggerPlayerMouseY() == 0. then
+    if PlayerEvent_GetTriggerPlayerMouseX() == 0. and PlayerEvent_GetTriggerPlayerMouseY() == 0. then
         // do nothing
     else
-        if not IsPlayerMouseOnButton(trigP) and PlayerMouseEvent_GetTriggerPlayerMouseButton() == Config.MOUSE_BUTTON and Config.METAKEY == OSKeys.getPressedMetaKeys(trigP) then
+        if not IsPlayerMouseOnButton(trigP) and PlayerEvent_GetTriggerPlayerMouseButton() == Config.MOUSE_BUTTON and Config.METAKEY == OSKeys.getPressedMetaKeys(trigP) then
             set g = CreateGroup()
             set g2 = CreateGroup()
             call GroupEnumUnitsSelected(g, trigP, null)
@@ -70,8 +70,8 @@ private function onMousePress takes nothing returns boolean
                 set centerX = centerX/BlzGroupGetSize(g2)
                 set centerY = centerY/BlzGroupGetSize(g2)
                 
-                set centerX = PlayerMouseEvent_GetTriggerPlayerMouseX() - centerX
-                set centerY = PlayerMouseEvent_GetTriggerPlayerMouseY() - centerY
+                set centerX = PlayerEvent_GetTriggerPlayerMouseX() - centerX
+                set centerY = PlayerEvent_GetTriggerPlayerMouseY() - centerY
                 
                 if hasStructure then
                     set centerX = 64*(R2I(centerX)/64)
