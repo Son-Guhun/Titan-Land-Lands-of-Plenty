@@ -520,16 +520,18 @@
 48-------------------: ------------------
 '49-Core Libs': 'Core Libs'
 50-UI: UI
-    1-Screen: Screen
-    2-UILib: UILib
-    '3-LoP UI': 'LoP UI'
-    4-ListBox: ListBox
-    5-IsMouseOnButton: IsMouseOnButton
-    6-EditBoxFix: EditBoxFix
-    7-WidescreenUI: WidescreenUI
-    8-IsMouseOnWorld: IsMouseOnWorld
+    01-Screen: Screen
+    02-UILib: UILib
+    '03-LoP UI': 'LoP UI'
+    04-ListBox: ListBox
+    05-IsMouseOnButton: IsMouseOnButton
+    06-EditBoxFix: EditBoxFix
+    07-WidescreenUI: WidescreenUI
+    08-IsMouseOnWorld: IsMouseOnWorld
         Disab
-    '9-System HeroicUnit InfoPanel': 'System HeroicUnit InfoPanel'
+    '09-System HeroicUnit InfoPanel': 'System HeroicUnit InfoPanel'
+        Disab
+    10-ButtonTools: ButtonTools
         Disab
 51-ControlState: ControlState
     1-SelectionStates: SelectionStates
