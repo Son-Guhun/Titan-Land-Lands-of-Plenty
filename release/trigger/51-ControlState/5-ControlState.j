@@ -58,24 +58,27 @@ struct ControlState extends array
     //! runtextmacro TableStruct_NewHandleField("onDeactivate","trigger")
     
     static method getChangingPlayer takes nothing returns player
-        return Player(Args.integerGet(PLAYER_STACK))
+        return Player(Args.s[0])
     endmethod
     
     method activateForPlayer takes player whichPlayer returns nothing
         local integer playerId = GetPlayerId(whichPlayer)
         local ControlState current = activeStates[playerId]
         
+        call Args.newStack()
+        
         if current.onDeactivate != null then
-            call Args.integerSet(PLAYER_STACK, playerId)
+            set Args.s.integer[0] = playerId
             call TriggerEvaluate(current.onDeactivate)
-            call Args.integerFree(PLAYER_STACK)
         endif
         
         if .onActivate != null then
-            call Args.integerSet(PLAYER_STACK, playerId)
+            set Args.s.integer[0] = playerId
             call TriggerEvaluate(.onActivate)
-            call Args.integerFree(PLAYER_STACK)
         endif
+        
+        call Args.s.flush()
+        call Args.pop()
         
         set activeStates[playerId] = this
         if GetLocalPlayer() == whichPlayer then

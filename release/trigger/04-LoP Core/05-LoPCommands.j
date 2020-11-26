@@ -241,13 +241,14 @@ struct LoP_Command extends array
         return this
     endmethod
         
+    implement ArgumentStack
     
     static method getCommand takes nothing returns string
-        return Args.getString(0)
+        return stack.string[0]
     endmethod
     
     static method getArgumentsRaw takes nothing returns string
-        return Args.getString(1)
+        return stack.string[1]
     endmethod
     
     static method getArguments takes nothing returns string
@@ -304,11 +305,12 @@ public function ExecuteCommand takes string chatMsg returns boolean
             
             set condition = TriggerAddCondition(evaluator, command.boolexpr)
             
-            call Args.setString(0, beforeSpace)
-            call Args.setString(1, arguments)
+            call LoP_Command.newStack()
+            set LoP_Command.stack.string[0] = beforeSpace
+            set LoP_Command.stack.string[1] = arguments
             call TriggerEvaluate(evaluator)
-            call Args.freeString(0)
-            call Args.freeString(1)
+            call LoP_Command.stack.flush()
+            call LoP_Command.pop()
             call TriggerRemoveCondition(evaluator, condition)
             
             set condition = null

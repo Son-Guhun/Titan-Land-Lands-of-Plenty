@@ -11,10 +11,10 @@ endstruct
 
 private function onExpire_EnumInRange takes nothing returns nothing
     local unit filterU = GetFilterUnit()
-    local unit caster = Args.getUnit(0)
+    local unit caster = Args.s.unit[0]
     
     if not IsPlayerAlly(GetOwningPlayer(caster), GetOwningPlayer(filterU)) then
-        if not LoP_IsUnitDecoration(filterU) and IsUnitInRangeXY(filterU, Args.getReal(0), Args.getReal(1), 150) then
+        if not LoP_IsUnitDecoration(filterU) and IsUnitInRangeXY(filterU, Args.s.real[1], Args.s.real[2], 150) then
             call UnitDamageTarget( caster, filterU, 200., true, false, ATTACK_TYPE_NORMAL, DAMAGE_TYPE_MAGIC, WEAPON_TYPE_WHOKNOWS )
             
             if IsUnitType(filterU, UNIT_TYPE_HERO) or IsUnitType(filterU, UNIT_TYPE_RESISTANT) then
@@ -43,13 +43,13 @@ private function onExpire takes nothing returns nothing
     local real x = tData.x
     local real y = tData.y
     
-    call Args.setUnit(0, tData.caster)
-    call Args.setReal(0, x)
-    call Args.setReal(1, y)
+    call Args.newStack()
+    set Args.s.unit[0] = tData.caster
+    set Args.s.real[1] = x
+    set Args.s.real[2] = y
     call GroupEnumUnitsInRange(ENUM_GROUP, x, y, 400, Filter(function onExpire_EnumInRange))
-    call Args.freeReal(0)
-    call Args.freeReal(1)
-    call Args.freeUnit(0)
+    call Args.s.flush()
+    call Args.pop()
     
     
     call tData.destroy()

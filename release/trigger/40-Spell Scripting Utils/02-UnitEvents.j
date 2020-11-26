@@ -35,7 +35,7 @@ library UnitEvents requires ArgumentStack, BoolExprEvaluator, optional NativeRed
         
         
         static method getEventUnit takes nothing returns unit
-            return Args.unitGet(0)
+            return Args.s.unit[0]
         endmethod
         
         method setRemoveOnDeath takes nothing returns nothing
@@ -60,18 +60,22 @@ library UnitEvents requires ArgumentStack, BoolExprEvaluator, optional NativeRed
         
         static method evalOnRemove takes unit whichUnit returns nothing
             if UnitEvents.get(whichUnit).onRemove_implExists() then
-                call Args.unitSet(0, whichUnit)
+                call Args.newStack()
+                set Args.s.unit[0] = whichUnit
                 call UnitEvents.get(whichUnit).onRemove.evaluate()
-                call Args.unitFree(0)
+                call Args.s.flush()
+                call Args.pop()
             endif
             call UnitEvents.get(whichUnit).destroy()
         endmethod
         
         static method evalOnDeath takes unit whichUnit returns nothing
             if UnitEvents.get(whichUnit).onDeath_implExists() then
-                call Args.unitSet(0, whichUnit)
+                call Args.newStack()
+                set Args.s.unit[0] = whichUnit
                 call UnitEvents.get(whichUnit).onDeath.evaluate()
-                call Args.unitFree(0)
+                call Args.s.flush()
+                call Args.pop()
             endif
             if UnitEvents.get(whichUnit).removeOnDeath then
                 call UnitEvents.get(whichUnit).evalOnRemove(whichUnit)
