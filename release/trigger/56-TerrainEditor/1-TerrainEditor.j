@@ -246,25 +246,11 @@ private module Init
     set controlState.dragSelectionState = DragSelectionState.create()
     set controlState.preSelectionState = PreSelectionState.create()
     
-    set trig = CreateTrigger()
-    call TriggerAddCondition(trig, Condition(function onStateEnter))
-    set controlState.onActivate = trig
-    
-    set trig = CreateTrigger()
-    call TriggerAddCondition(trig, Condition(function onStateExit))
-    set controlState.onDeactivate = trig
-    
-    set trig = CreateTrigger()
-    call TriggerAddCondition(trig, Condition(function onMousePress))
-    set controlState.trigger[EVENT_PLAYER_MOUSE_DOWN] = trig
-    
-    set trig = CreateTrigger()
-    call TriggerAddCondition(trig, Condition(function onMouseRelease))
-    set controlState.trigger[EVENT_PLAYER_MOUSE_UP] = trig
-    
-    set trig = CreateTrigger()
-    call TriggerAddCondition(trig, Condition(function onMoveMouse))
-    set controlState.trigger[EVENT_PLAYER_MOUSE_MOVE] = trig
+    set controlState.onActivate   = Condition(function onStateEnter)
+    set controlState.onDeactivate = Condition(function onStateExit)
+    set controlState.boolexpr[EVENT_PLAYER_MOUSE_DOWN] = Condition(function onMousePress)
+    set controlState.boolexpr[EVENT_PLAYER_MOUSE_UP]   = Condition(function onMouseRelease)
+    set controlState.boolexpr[EVENT_PLAYER_MOUSE_MOVE] = Condition(function onMoveMouse)
     
     
     set trig = null

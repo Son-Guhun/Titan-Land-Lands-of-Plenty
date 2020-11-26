@@ -1,4 +1,4 @@
-library PlayerEvent requires ArgumentStack
+library PlayerEvent requires ArgumentStack, CallbackTools
 /*
 This library allows you to evaluate triggers or boolexprs as if they had been set off by a player event.
 
@@ -60,7 +60,8 @@ public function GetTriggerPlayerMouseButton takes nothing returns mousebuttontyp
     return ConvertMouseButtonType(Args.s.integer[BUTTON_STACK])
 endfunction
 
-private function EvaluateEx takes player whichPlayer, eventid whichEvent, trigger callback, boolean createStack returns nothing
+
+private function EvaluateEx takes player whichPlayer, eventid whichEvent, boolexpr callback, boolean createStack returns nothing
     if whichEvent == null then
         return
     endif
@@ -70,16 +71,16 @@ private function EvaluateEx takes player whichPlayer, eventid whichEvent, trigge
     endif
     set Args.s.player[PLAYER_STACK] = whichPlayer
     set Args.s.integer[EVENT_STACK] = GetHandleId(whichEvent)
-    call TriggerEvaluate(callback)
+    call CallbackTools_EvaluateBoolexpr(callback)
     call Args.s.flush()
     call Args.pop()
 endfunction
 
-public function Evaluate takes player whichPlayer, eventid whichEvent, trigger callback returns nothing
+public function Evaluate takes player whichPlayer, eventid whichEvent, boolexpr callback returns nothing
     call EvaluateEx(whichPlayer, whichEvent, callback, true)
 endfunction
 
-public function EvaluateMouseMove takes player whichPlayer, real x, real y, trigger callback returns nothing
+public function EvaluateMouseMove takes player whichPlayer, real x, real y, boolexpr callback returns nothing
 
     call Args.newStack()
     set Args.s.real[X_STACK] = x
@@ -87,7 +88,7 @@ public function EvaluateMouseMove takes player whichPlayer, real x, real y, trig
     call EvaluateEx(whichPlayer, EVENT_PLAYER_MOUSE_MOVE, callback, false)
 endfunction
 
-public function EvaluateMouseButton takes player whichPlayer, eventid whichEvent, real x, real y, mousebuttontype whichButton, trigger callback returns nothing
+public function EvaluateMouseButton takes player whichPlayer, eventid whichEvent, real x, real y, mousebuttontype whichButton, boolexpr callback returns nothing
     if whichButton == null then
         return
     endif

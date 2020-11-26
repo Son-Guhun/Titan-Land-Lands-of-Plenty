@@ -96,14 +96,8 @@ endfunction
 
 //===========================================================================
 function InitTrig_Hotkey_Move_Units takes nothing returns nothing
-    local trigger trig = CreateTrigger()
-    
     call OSKeys.registerMetaKey(Config.METAKEY)
-    
-    set ControlState.default.trigger[EVENT_PLAYER_MOUSE_UP] = trig
-    call TriggerAddCondition(trig, Condition(function onMousePress))
-    
-    set trig = null
+    set ControlState.default.boolexpr[EVENT_PLAYER_MOUSE_UP] = Condition(function onMousePress)
 endfunction
 
 endscope

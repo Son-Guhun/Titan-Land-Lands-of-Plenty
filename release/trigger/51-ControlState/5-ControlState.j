@@ -20,19 +20,19 @@ function GetPlayerLastMouseY takes player whichPlayer returns real
     return LastMouseY[GetPlayerId(whichPlayer)]
 endfunction
 
-private struct Triggers extends array
+private struct Boolexprs extends array
     //! runtextmacro TableStruct_NewStructField("tab","Table")
     
-    method operator [] takes eventid e returns trigger
-        return tab.trigger[GetHandleId(e)]
+    method operator [] takes eventid e returns boolexpr
+        return tab.boolexpr[GetHandleId(e)]
     endmethod
     
-    method operator []= takes eventid e, trigger value returns nothing
-        set tab.trigger[GetHandleId(e)] = value
+    method operator []= takes eventid e, boolexpr callback returns nothing
+        set tab.boolexpr[GetHandleId(e)] = callback
     endmethod
     
     method has takes eventid e returns boolean
-        return tab.trigger.has(GetHandleId(e))
+        return tab.boolexpr.has(GetHandleId(e))
     endmethod
 endstruct
 
@@ -44,7 +44,7 @@ struct ControlState extends array
         return activeStates[playerId]
     endmethod
 
-    method operator trigger takes nothing returns Triggers
+    method operator boolexpr takes nothing returns Boolexprs
         return this
     endmethod
     
@@ -52,8 +52,8 @@ struct ControlState extends array
     //! runtextmacro TableStruct_NewStructField("dragSelectionState","DragSelectionState")
     //! runtextmacro TableStruct_NewStructField("preSelectionState","PreSelectionState")
     
-    //! runtextmacro TableStruct_NewHandleField("onActivate","trigger")
-    //! runtextmacro TableStruct_NewHandleField("onDeactivate","trigger")
+    //! runtextmacro TableStruct_NewHandleField("onActivate","boolexpr")
+    //! runtextmacro TableStruct_NewHandleField("onDeactivate","boolexpr")
     
     static method getChangingPlayer takes nothing returns player
         return Player(Args.s[0])
@@ -67,12 +67,12 @@ struct ControlState extends array
         
         if current.onDeactivate != null then
             set Args.s.integer[0] = playerId
-            call TriggerEvaluate(current.onDeactivate)
+            call CallbackTools_EvaluateBoolexpr(current.onDeactivate)
         endif
         
         if .onActivate != null then
             set Args.s.integer[0] = playerId
-            call TriggerEvaluate(.onActivate)
+            call CallbackTools_EvaluateBoolexpr(.onActivate)
         endif
         
         call Args.s.flush()
@@ -97,7 +97,7 @@ struct ControlState extends array
     static method create takes nothing returns thistype
         local ControlState this = .allocate()
         
-        set Triggers(this).tab = Table.create()
+        set Boolexprs(this).tab = Table.create()
         
         return this
     endmethod
@@ -108,13 +108,13 @@ private function onMouseButtonEvent takes nothing returns boolean
     local player triggerPlayer = GetTriggerPlayer()
     local integer playerId = GetPlayerId(triggerPlayer)
     
-    if ControlState.getPlayerIdActiveState(playerId).trigger.has(GetTriggerEventId()) then
+    if ControlState.getPlayerIdActiveState(playerId).boolexpr.has(GetTriggerEventId()) then
         call PlayerEvent_EvaluateMouseButton(triggerPlayer, /*
                                            */GetTriggerEventId(), /*
                                            */BlzGetTriggerPlayerMouseX(), /*
                                            */BlzGetTriggerPlayerMouseY(), /*
                                            */BlzGetTriggerPlayerMouseButton(), /*
-                                           */ControlState.getPlayerIdActiveState(playerId).trigger[GetTriggerEventId()])
+                                           */ControlState.getPlayerIdActiveState(playerId).boolexpr[GetTriggerEventId()])
     endif
     
     set LastMouseX[playerId] = BlzGetTriggerPlayerMouseX()
@@ -126,27 +126,15 @@ private function onMouseMoveEvent takes nothing returns boolean
     local player triggerPlayer = GetTriggerPlayer()
     local integer playerId = GetPlayerId(triggerPlayer)
     
-    if ControlState.getPlayerIdActiveState(playerId).trigger.has(EVENT_PLAYER_MOUSE_MOVE) then
+    if ControlState.getPlayerIdActiveState(playerId).boolexpr.has(EVENT_PLAYER_MOUSE_MOVE) then
         call PlayerEvent_EvaluateMouseMove(triggerPlayer, /*
                                            */BlzGetTriggerPlayerMouseX(), /*
                                            */BlzGetTriggerPlayerMouseY(), /*
-                                           */ControlState.getPlayerIdActiveState(playerId).trigger[EVENT_PLAYER_MOUSE_MOVE])
+                                           */ControlState.getPlayerIdActiveState(playerId).boolexpr[EVENT_PLAYER_MOUSE_MOVE])
     endif
     
     set LastMouseX[playerId] = BlzGetTriggerPlayerMouseX()
     set LastMouseY[playerId] = BlzGetTriggerPlayerMouseY()
-    return false
-endfunction
-
-private function onEvent takes nothing returns boolean
-    local player triggerPlayer = GetTriggerPlayer()
-    local integer playerId = GetPlayerId(triggerPlayer)
-
-    if ControlState.getPlayerIdActiveState(playerId).trigger.has(GetTriggerEventId()) then
-        call PlayerEvent_Evaluate(GetTriggerPlayer(), /*
-                                           */GetTriggerEventId(), /*
-                                           */ControlState.getPlayerIdActiveState(playerId).trigger[GetTriggerEventId()])
-    endif
     return false
 endfunction
 
@@ -167,19 +155,6 @@ function onStart takes nothing returns nothing
             call TriggerRegisterPlayerEvent(onMouseButton, Player(i), EVENT_PLAYER_MOUSE_UP )
             
             call TriggerRegisterPlayerEvent(onMouseMove, Player(i), EVENT_PLAYER_MOUSE_MOVE )
-        
-        
-            call TriggerRegisterPlayerEvent(onKey, Player(i), EVENT_PLAYER_END_CINEMATIC)
-        
-            call TriggerRegisterPlayerEvent(onKey, Player(i), EVENT_PLAYER_ARROW_DOWN_DOWN)
-            call TriggerRegisterPlayerEvent(onKey, Player(i), EVENT_PLAYER_ARROW_RIGHT_DOWN)
-            call TriggerRegisterPlayerEvent(onKey, Player(i), EVENT_PLAYER_ARROW_UP_DOWN)
-            call TriggerRegisterPlayerEvent(onKey, Player(i), EVENT_PLAYER_ARROW_LEFT_DOWN)
-            
-            call TriggerRegisterPlayerEvent(onKey, Player(i), EVENT_PLAYER_ARROW_DOWN_UP)
-            call TriggerRegisterPlayerEvent(onKey, Player(i), EVENT_PLAYER_ARROW_RIGHT_UP)
-            call TriggerRegisterPlayerEvent(onKey, Player(i), EVENT_PLAYER_ARROW_UP_UP)
-            call TriggerRegisterPlayerEvent(onKey, Player(i), EVENT_PLAYER_ARROW_LEFT_UP)
         endif
         set i = i + 1
     endloop

@@ -540,6 +540,7 @@
     5-ControlState: ControlState
     '6-Free Cam': 'Free Cam'
     7-OSKeyLib: OSKeyLib
+    '8-Untitled Trigger 001': 'Untitled Trigger 001'
 '52-Interface Elements': 'Interface Elements'
 53-Screens: Screens
     '1-UpperButtonBar View': 'UpperButtonBar View'

@@ -295,21 +295,10 @@ endfunction
     set controlState.dragSelectionState = DragSelectionState.create()
     set controlState.preSelectionState = PreSelectionState.create()
     
-    set trig = CreateTrigger()
-    call TriggerAddCondition(trig, Condition(function onStateEnter))
-    set controlState.onActivate = trig
-    
-    set trig = CreateTrigger()
-    call TriggerAddCondition(trig, Condition(function onStateExit))
-    set controlState.onDeactivate = trig
-    
-    set trig = CreateTrigger()
-    call TriggerAddCondition(trig, Condition(function onMoveMouse))
-    set controlState.trigger[EVENT_PLAYER_MOUSE_MOVE] = trig
-    
-    set trig = CreateTrigger()
-    call TriggerAddCondition(trig, Condition(function onMousePress))
-    set controlState.trigger[EVENT_PLAYER_MOUSE_UP] = trig
+    set controlState.onActivate   = Condition(function onStateEnter)
+    set controlState.onDeactivate = Condition(function onStateExit)
+    set controlState.boolexpr[EVENT_PLAYER_MOUSE_MOVE] = Condition(function onMoveMouse)
+    set controlState.boolexpr[EVENT_PLAYER_MOUSE_UP]   = Condition(function onMousePress)
     
     call OSKeys.LSHIFT.register()
     call OSKeys.RSHIFT.register()
