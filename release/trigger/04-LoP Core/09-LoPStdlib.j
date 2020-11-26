@@ -1,4 +1,33 @@
 library LoPStdLib requires AttachedSFX, UnitVisualMods, LoPWidgets, LoPCommandsAbility
+/*
+=========
+ Description
+=========
+
+    This library defines the LoP struct library, which follows the Import Library Standard.
+    
+    Utilities that use may external libraries are defined here. The LoP struct also imports libraries
+using convenient abbreviations.
+    
+=========
+ Documentation
+=========
+    
+    lib LoP:
+    
+        scope Header  -> LoPHeader
+        scope UVS     -> UnitVisualsSetters
+        
+        Constants:
+            player NEUTRAL_PASSIVE  -> imported from LoPHeader
+            
+        Globals:
+            player gameMaster  -> imported from LoPHeader
+
+*/
+//==================================================================================================
+//                                        Source Code
+//==================================================================================================
 
 struct LoP extends array
     

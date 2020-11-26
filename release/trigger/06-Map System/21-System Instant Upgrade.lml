@@ -9,11 +9,6 @@ Condition
         Preset: OperatorNotEqual
         Const : 0
 Action
-    DisplayTextToForce
-        Call  : GetPlayersAll
-        Call  : R2S
-            Call  : GetUnitFlyHeight
-                Call  : GetTriggerUnit
     UnitSetUpgradeProgress
         Call  : GetTriggerUnit
         Const : 100
