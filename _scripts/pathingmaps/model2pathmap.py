@@ -10,7 +10,10 @@ model_fields = ('file', '"file:hd"', '"file:sd"')
 
 # Hardcoded duplicates that can't be automatically handled
 hardcoded = {
-    '"Doodads\\\\Silvermoon\\\\Structures\\\\SilvermoonWallStraightDoorShort\\\\SilvermoonWallStraightDoorShort_0.mdl"': "PathTextures\\\\22x8Default.tga"
+    '"Doodads\\\\Silvermoon\\\\Structures\\\\SilvermoonWallStraightDoorShort\\\\SilvermoonWallStraightDoorShort_0.mdl"': "PathTextures\\\\22x8Default.tga",
+    '"Doodads\\\\Dalaran\\\\Terrain\\\\DalaranVioletCitadel\\\\DalaranVioletCitadel"': '',
+    '"Doodads\\\\Icecrown\\\\Terrain\\\\IceCrownRoundDoor\\\\IceCrownRoundDoor"': '"PathTextures\\\\RoundDoor1Path.tga"',
+    
     }
 
 def do():
@@ -43,7 +46,9 @@ def do():
 
     with open('../unit_1.32.8.ini') as f:
         parse(load_unit_data(f))
-        
+
+    with open('../destructable.ini') as f:
+        parse(load_unit_data(f))    
 
     for model in hardcoded:
         results[model] = set([hardcoded[model]])
@@ -54,7 +59,7 @@ def do():
             duplicates.append(model)
 
     if duplicates:
-        for d in duplicates: print(d)
+        for d in duplicates: print(d.__repr__(), results[d])
         raise ValueError("Duplicate pathtextures found")
 
     results = {x:next(iter(y)) for x,y in results.items()}
