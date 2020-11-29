@@ -43,8 +43,6 @@ def do():
                     else:
                         results[model] = set([''])
             
-
-
     
     with open('../doodad.ini') as f:
         parse(load_unit_data(f))
@@ -64,7 +62,8 @@ def do():
             duplicates.append(model)
 
     if duplicates:
-        for d in duplicates: print(d.__repr__(), results[d])
+        for d in duplicates:
+            print(d.__repr__(), results[d])
         raise ValueError("Duplicate pathtextures found")
 
     results = {x:next(iter(y)) for x,y in results.items()}
@@ -72,8 +71,3 @@ def do():
 
     with open('model2pathmap.json', 'w') as f:
         json.dump(results, f, indent=2)
-    
-    # return results
-
-# a = do()
-# 

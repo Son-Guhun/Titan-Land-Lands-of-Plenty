@@ -31,6 +31,10 @@ def do(file_path=file_path):
     with open('customized_pathmaps.json') as f:
         customized = json.load(f)
 
+    with open('excluded_decorations.txt') as f:
+        excluded = set(line for line in (line.strip() for line in f) if not line.startswith('//') and line)
+        
+
     print(len(model2pathmap))
 
     rawcodes = {}
@@ -70,7 +74,8 @@ def do(file_path=file_path):
                             result.append(line_template.format(decoration, model2pathmap[modelN]))
                         break
                 else:
-                        missing.append(data)
+                        if decoration not in excluded:
+                            missing.append(data)
 
 
     result.append('//! endtextmacro')
@@ -78,12 +83,3 @@ def do(file_path=file_path):
     print(len(missing))
     for d in missing:
         print(f"Missing: {d['Name']} [{d.name}]")
-
-
-def b():
-    for x in a.split('\n'):
-        x = x.strip()
-        if not x.startswith('//') and x:
-            yield x
-
-c = set(b())
