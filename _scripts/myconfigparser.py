@@ -108,6 +108,20 @@ class Section:
     @property
     def parser(self):
         return self._section.parser
+
+    @property
+    def tags(self):
+        tags =  self['EditorSuffix'][1:-1]
+        tags = tags.split('[')
+        for tag in tags:
+            if tag.endswith(']'):
+                yield tag[:-1]
+
+    def isbldg(self):
+        return int(self['isbldg'])
+
+    def has_tag(self, tag):
+        return (f'[{tag}]' if tag[0] == '[' else tag) in self['EditorSuffix']
         
     def __getitem__(self, i):
         if i in self._section:
