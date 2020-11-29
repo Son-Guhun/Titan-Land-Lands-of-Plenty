@@ -10,6 +10,7 @@ import pyperclip
 file_path = '../../development/table/unit.ini'
 
 line_template = 'set thistype(\'{}\').path = paths["{}"]'
+line_template_generic = 'set thistype(\'{}\').path = PathingMap.getGeneric({},{})'
 
 def do(file_path=file_path):
     result = ['//! textmacro GeneratedDecorationPathMaps']
@@ -26,6 +27,9 @@ def do(file_path=file_path):
 
     with open('derivatives.json') as f:
         derivatives = json.load(f)
+
+    with open('customized_pathmaps.json') as f:
+        customized = json.load(f)
 
     print(len(model2pathmap))
 
@@ -46,6 +50,8 @@ def do(file_path=file_path):
         
         if decoration in legacy:
             result.append(line_template.format(decoration, legacy[decoration]))
+        elif decoration in customized:
+            result.append(line_template_generic.format(decoration, *customized[decoration]))
         else:
             if decoration in rawcodes:
                 model = rawcodes[decoration]
