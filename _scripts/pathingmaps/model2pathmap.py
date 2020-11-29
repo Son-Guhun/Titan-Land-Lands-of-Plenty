@@ -11,6 +11,7 @@ model_fields = ('file', '"file:hd"', '"file:sd"')
 # Hardcoded duplicates that can't be automatically handled
 hardcoded = {
     '"Doodads\\\\Silvermoon\\\\Structures\\\\SilvermoonWallStraightDoorShort\\\\SilvermoonWallStraightDoorShort_0.mdl"': "PathTextures\\\\22x8Default.tga",
+    '"Units\\\\Creeps\\\\StormreaverApprentice\\\\StormreaverApprentice"' : '',
     '"Doodads\\\\Dalaran\\\\Terrain\\\\DalaranVioletCitadel\\\\DalaranVioletCitadel"': '',
     '"Doodads\\\\Icecrown\\\\Terrain\\\\IceCrownRoundDoor\\\\IceCrownRoundDoor"': '"PathTextures\\\\RoundDoor1Path.tga"',
     
@@ -23,8 +24,12 @@ def do():
         for s in parser:
             section = parser[s]
             if 'pathtex' in section and section['pathtex'] not in ('"none"', '""'):
-                for field in model_fields:
-                    results[section[field]].add(section['pathtex'])
+                pathtex = section['pathtex']
+            else:
+                pathtex = ''
+            
+            for field in model_fields:
+                results[section[field]].add(pathtex)
 
         # Handle duplicates automatically
         for s in parser:
@@ -36,7 +41,7 @@ def do():
                     if 'pathtex' in section and section['pathtex'] not in ('"none"', '""'):
                         results[model] = set([section['pathtex']])
                     else:
-                        del results[model]
+                        results[model] = set([''])
             
 
 

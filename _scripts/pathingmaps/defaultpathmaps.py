@@ -29,11 +29,6 @@ def do(file_path=file_path):
 
     print(len(model2pathmap))
 
-    # Delete pathing maps that haven't been converted.
-    for model in list(model2pathmap.keys()):
-        if model2pathmap[model] not in used_pathtexs:
-            del model2pathmap[model]
-
     rawcodes = {}
     for model,codes in derivatives.items():
         for rawcode in codes.split(','):
@@ -58,13 +53,15 @@ def do(file_path=file_path):
                 model = data['file'].replace("war3.w3mod:","")
                                  
             if model in model2pathmap:
-                result.append(line_template.format(decoration, model2pathmap[model]))
+                if model in used_pathtexs:
+                    result.append(line_template.format(decoration, model2pathmap[model]))
             else:
                 for i in (-1, -2, -4, -5, -6):  # exclude .mdl, then exlcude derivate number
                     modelN = model[:-1][:i] + '"'
                     
                     if modelN in model2pathmap:
-                        result.append(line_template.format(decoration, model2pathmap[modelN]))
+                        if model in used_pathtexs:
+                            result.append(line_template.format(decoration, model2pathmap[modelN]))
                         break
                 else:
                         missing.append(data)
