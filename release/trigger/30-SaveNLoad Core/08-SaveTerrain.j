@@ -29,10 +29,10 @@ struct SaveInstanceTerrain extends array
     method initialize takes rect saveRect returns nothing
         local SaveWriter saveWriter = .saveWriter
         
-        set .minX = GetRectMinX(saveRect)
-        set .maxX = GetRectMaxX(saveRect)
-        set .minY = GetRectMinY(saveRect)
-        set .maxY = GetRectMaxY(saveRect)
+        set .minX = GetTileMin(GetRectMinX(saveRect))
+        set .maxX = GetTileMax(GetRectMaxX(saveRect))
+        set .minY = GetTileMin(GetRectMinY(saveRect))
+        set .maxY = GetTileMax(GetRectMaxY(saveRect))
         set .curX = .minX
         set .curY = .minY
         
@@ -79,7 +79,7 @@ struct SaveInstanceTerrain extends array
                 set saveStr = saveStr + SerializeTerrainTile(curX, curY)
                 
                 set i = i+1
-                if curX > maxX then
+                if curX >= maxX then
                     set curY = curY + 128
                     set curX = .minX
                     exitwhen curY > maxY

@@ -69,7 +69,7 @@ scope DeSerialization
 
     // Loads the first line of a terrain save, which contains the coords of the rect
     // offsetIsCenter indicates that offsetX and offsetY should be interpreted as the coords of a new center for the rect, and not actual offsets. Used for version 3 saves.
-    function LoadTerrainHeader takes PlayerTerrainData playerId, string chatStr, real offsetX, real offsetY, boolean offsetIsCenter returns nothing
+    function LoadTerrainHeader takes PlayerTerrainData playerId, string chatStr, real offsetX, real offsetY, boolean offsetIsCenter, boolean beforeV8 returns nothing
         local integer cutToComma
         
         local real centerY
@@ -111,6 +111,10 @@ scope DeSerialization
 
         set playerId.curX = playerId.minX
         set playerId.curY = playerId.minY
+        
+        if beforeV8 then
+            set playerId.maxX = playerId.maxX + 128.
+        endif
     endfunction
 
     function LoadTerrainFinish takes PlayerTerrainData playerId returns nothing    
@@ -128,7 +132,7 @@ scope DeSerialization
             exitwhen i >= strSize
                 call SetTerrainType(playerId.curX, playerId.curY, TerrainTools_GetTexture(LoadH2D(SubString(chatStr,i,i+1))), LoadH2D(SubString(chatStr,i+1,i+2)), 1, 0)
                 set i = i + 2
-                if playerId.curX > playerId.maxX then
+                if playerId.curX >= playerId.maxX then
                     set playerId.curY = playerId.curY + 128
                     set playerId.curX = playerId.minX
                 else
@@ -142,7 +146,7 @@ scope DeSerialization
                 call SetTerrainType(playerId.curX, playerId.curY, TerrainTools_GetTexture(LoadH2D(SubString(chatStr,i,i+1))), LoadH2D(SubString(chatStr,i+1,i+2)), 1, 0)
                 set Deformation.fromCoords(playerId.curX, playerId.curY).depth = AnyBase(92).decode(SubString(chatStr,i+2,i+4)) - SaveNLoad_BASE_92_OFFSET()
                 set i = i + 4
-                if playerId.curX > playerId.maxX then
+                if playerId.curX >= playerId.maxX then
                     set playerId.curY = playerId.curY + 128
                     set playerId.curX = playerId.minX
                 else

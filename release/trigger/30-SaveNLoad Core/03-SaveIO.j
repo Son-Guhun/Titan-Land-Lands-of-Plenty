@@ -224,7 +224,7 @@ struct SaveWriter extends array
     endmethod
 
     static constant integer MAX_LINES = 20
-    static constant integer VERSION = 7
+    static constant integer VERSION = 8
 
     private method flush takes nothing returns nothing
         local string path = .folder + "\\" + I2S(.current) + ".txt"
