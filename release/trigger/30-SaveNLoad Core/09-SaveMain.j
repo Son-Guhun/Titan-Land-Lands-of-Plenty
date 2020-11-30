@@ -104,6 +104,7 @@ private function SaveLoopActions takes nothing returns nothing
             if User.fromLocal() == playerId then
                 call BlzFrameSetVisible(saveProgressBar, false)
             endif
+            set playerId.saveInstance = 0
             call saveInstance.destroy()
         else
             call queue.append(playerId+1)

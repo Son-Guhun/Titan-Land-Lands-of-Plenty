@@ -70,8 +70,6 @@ struct Deformation extends array
     method operator depth= takes real depth returns nothing
         local integer delta
         
-        //! runtextmacro LoPDeformLimitInline()
-        
         if this >= 0 then
             if depth > MAX_HEIGHT then
                 set depth = MAX_HEIGHT
@@ -81,6 +79,8 @@ struct Deformation extends array
             set delta =  R2I(depth) - .depth_actual
             
             if delta != 0 then
+                //! runtextmacro LoPDeformLimitInline()
+            
                 call TerrainDeformCrater(GetTileCenterXById(this), GetTileCenterYById(this), .CELL_SIZE, delta, 1, true)
                 set .depth_impl = depth
                 set .depth_actual = R2I(depth)
