@@ -91,7 +91,8 @@ endfunction
 
 //===========================================================================
 function InitTrig_Commands_Count takes nothing returns nothing
-    call LoP_Command.create("-count", ACCESS_USER, Condition(function OnCommand ))
+    call LoP_Command.create("-count", ACCESS_USER, Condition(function OnCommand )) /*
+    */.addHint(LoPHints.COMMAND_COUNT).addHint(LoPHints.UNIT_CATEGORIES)
 endfunction
 
 endscope

@@ -130,6 +130,8 @@ struct LoPHints extends array
     static constant integer HOTKEY_RACE_SELECTOR = 5
     static constant integer HOTKEY_RECT_GENERATOR = 6
     static constant integer CHAT_LOGS = 7
+    static constant integer UNIT_CATEGORIES = 8
+    static constant integer COMMAND_COUNT = 9
     
     
     private static method onInit takes nothing returns nothing
@@ -140,11 +142,18 @@ struct LoPHints extends array
         set hints[HOTKEY_RACE_SELECTOR] = "You can spawn a Race Selector using Alt+W."
         set hints[HOTKEY_RECT_GENERATOR] = "You can spawn a Rect Generator using Alt+R."
         set hints[CHAT_LOGS] = "You can view a more detailed chat log in the Tools menu (Ctrl+F4)."
-        
+        set hints[UNIT_CATEGORIES] = "Units are split into the following categories:
+    |cffffcc00Character:|r a unit that can move around and sometimes attack.
+    |cffffcc00Decoration:|r a unit used built by a Deco Builder. Most AoE abilities will ignore these units.
+    |cffffcc00Structures:|r a unit that can train characters.\n \n"
+        set hints[COMMAND_COUNT] = "This command can be called with up to 5 arguments in other to receive more detailed information:
+    Example: |cffffff00-count red blue dark green light blue 6\n \n"
+
         // Make array the same size for all players
         set hints[32] = "final hint"
     endmethod
 
+    // async
     // This method sets the state of whether a hint has been seen or not in an async manner.
     // Returns false if player has already seen the hint. Returns true if they haven't, and for players that aren't <whichPlayer> (async).
     method displayToPlayer takes player whichPlayer returns boolean
@@ -161,11 +170,17 @@ struct LoPHints extends array
         return true
     endmethod
     
-    // This is not safe to be called async (would need to change how displayToPlayer works in order to make it safe)
-    static method displayFromList takes player whichPlayer, ArrayList list returns nothing
+    static method displayFromListEx takes player whichPlayer, ArrayList list, boolean random returns nothing
         local integer size = list.size
-        local integer i = GetRandomInt(0, size-1)
-        local integer first = i
+        local integer i
+        local integer first
+        
+        if random then
+            set i = GetRandomInt(0, size-1)
+        else
+            set i = 0
+        endif
+        set first = i
         
         loop
             exitwhen thistype(list[i]).displayToPlayer(whichPlayer) // async
@@ -176,6 +191,16 @@ struct LoPHints extends array
             endif
             exitwhen i == first
         endloop
+    endmethod
+    
+    // This is not safe to be called async (would need to change how displayToPlayer works in order to make it safe)
+    // Must not be called in local block.
+    static method displayFromList takes player whichPlayer, ArrayList list returns nothing
+        call displayFromListEx(whichPlayer, list, true)
+    endmethod
+    
+    static method displayFromListNonRandom takes player whichPlayer, ArrayList list returns nothing
+        call displayFromListEx(whichPlayer, list, false)
     endmethod
 endstruct
 

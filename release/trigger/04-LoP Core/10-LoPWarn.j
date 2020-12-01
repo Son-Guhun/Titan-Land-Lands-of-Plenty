@@ -112,7 +112,11 @@ endglobals
 function LoP_WarnPlayerTimeout takes player whichPlayer, string channel, integer msgKey, real timeout, string message returns nothing
     local boolean msgSent = false // async, used to determine whether sound should be played.
     
-    set message = channel + " " + message
+    if SubString(message, StringLength(message)-3, StringLength(message)) == "\n \n" then
+        set message = "\n" + channel + " " + message
+    else
+        set message = channel + " " + message
+    endif
     
     if msgKey == 0 then 
         // No message key given, just send the message.

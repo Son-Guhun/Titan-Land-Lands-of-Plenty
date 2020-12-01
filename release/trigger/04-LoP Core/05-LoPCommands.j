@@ -356,7 +356,7 @@ public function ExecuteCommand takes string chatMsg returns boolean
     
     if beforeSpace == command.string then
         if command.hasHints() then
-            call LoPHints.displayFromList(GetTriggerPlayer(), command.hints)
+            call LoPHints.displayFromListNonRandom(GetTriggerPlayer(), command.hints)
         endif
     
         if accessLevel >= command.accessLevel and LoP_PlayerData.get(GetTriggerPlayer()).commandsEnabled and not LoP_Command.disabled then
