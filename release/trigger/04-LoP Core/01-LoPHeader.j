@@ -52,15 +52,16 @@ endfunction
 //! endtextmacro
 
 //! textmacro ForUnitInGroupCountedReverse takes UNIT, INTEGER, GROUP
-    exitwhen i <= 0
+    exitwhen $INTEGER$ <= 0
     set $INTEGER$ = $INTEGER$ - 1
     set $UNIT$ = BlzGroupUnitAt($GROUP$, $INTEGER$)
     if $UNIT$ == null then
         loop
             set $INTEGER$ = $INTEGER$ - 1
             set $UNIT$ = BlzGroupUnitAt($GROUP$, $INTEGER$)
-            exitwhen $UNIT$ != null
+            exitwhen $UNIT$ != null or $INTEGER$ <= 0
         endloop
+        exitwhen $INTEGER$ <= 0
     endif
 //! endtextmacro
 
