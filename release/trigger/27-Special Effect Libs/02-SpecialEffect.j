@@ -58,6 +58,10 @@ struct SpecialEffect extends array
         endif
     endmethod
     
+    method hasSkin takes nothing returns boolean
+        return .skin_impl_exists()
+    endmethod
+    
     method operator x takes nothing returns real
         implement assertNotNull
         

@@ -130,9 +130,16 @@ scope Serialization
 
 
         function SerializeSpecialEffect takes SpecialEffect whichEffect, player owner, boolean hasCustomColor, integer selectionType, string flags returns string
+            local string typeStr
             local string animTags
             local string color
             local SaveNLoad_PlayerData playerId = GetPlayerId(owner)
+            
+            if whichEffect.hasSkin() then
+                set typeStr = ID2S(whichEffect.unitType) + "|" + ID2S(whichEffect.skin)
+            else
+                set typeStr = ID2S(whichEffect.unitType)
+            endif
             
             if hasCustomColor then
                 set color = I2S(whichEffect.color + 1)
@@ -146,7 +153,7 @@ scope Serialization
                 set animTags = "D"
             endif
 
-            return ID2S(whichEffect.unitType) + "," +/*
+            return typeStr + "," +/*
                 */ R2S(whichEffect.x) + "," +/*
                 */ R2S(whichEffect.y) + "," +/*
                 */ R2S(whichEffect.height) + "," +/*
@@ -190,11 +197,18 @@ scope Serialization
         
         function SerializeUnit takes unit saveUnit returns string
             local UnitVisuals unitHandleId = GetHandleId(saveUnit)
+            local string typeStr
+            
+            if BlzGetUnitSkin(saveUnit) != GetUnitTypeId(saveUnit) then
+                set typeStr = ID2S(GetUnitTypeId(saveUnit)) + "|" + ID2S(BlzGetUnitSkin(saveUnit))
+            else
+                set typeStr = ID2S(GetUnitTypeId(saveUnit))
+            endif
         
             if UnitHasAttachedEffect(saveUnit) then
                 return SerializeSpecialEffect(GetUnitAttachedEffect(saveUnit), GetOwningPlayer(saveUnit), unitHandleId.hasColor(), unitHandleId.raw.getSelectionType(), SerializeUnitFlags(saveUnit))
             else
-                return ID2S((GetUnitTypeId(saveUnit))) + "," + /*
+                return typeStr + "," + /*
                             */   R2S(GetUnitX(saveUnit))+","+  /*
                             */   R2S(GetUnitY(saveUnit)) + "," + /*
                             */   R2S(GetUnitFlyHeight(saveUnit)) + "," + /*
@@ -243,11 +257,17 @@ function ParseScaleEffect takes DecorationEffect sfx, string scaleStr returns no
     endif
 endfunction
 
-function LoadSpecialEffect takes player owner, UnitTypeDefaultValues unitType, real x, real y, real height, real facing, real pitch, real roll, string scale, string red, string green, string blue, string alpha, string color, string aSpeed, string aTags, integer flags returns nothing
-    local DecorationEffect result = DecorationEffect.createNoPathing(owner, unitType, x, y)
+function LoadSpecialEffect takes player owner, UnitTypeDefaultValues unitType, integer skin, real x, real y, real height, real facing, real pitch, real roll, string scale, string red, string green, string blue, string alpha, string color, string aSpeed, string aTags, integer flags returns nothing
+    local DecorationEffect result
     local real value
     local integer redRaw
     local integer greenRaw
+    
+    if skin != 0 then
+        set result = DecorationEffect.convertSpecialEffectNoPathing(owner, SpecialEffect.createWithSkin(unitType, skin, x, y), false)
+    else
+        set result = DecorationEffect.createNoPathing(owner, unitType, x, y)
+    endif
     
     set result.height = height
     call result.setOrientation(facing*bj_DEGTORAD, pitch, roll)
@@ -339,6 +359,7 @@ struct UnitSaveFields extends array
     implement ExtendsTable
 
     //! runtextmacro HashStruct_NewPrimitiveField("unitType", "integer")
+    //! runtextmacro HashStruct_NewPrimitiveField("skin", "integer")
     //! runtextmacro HashStruct_NewPrimitiveField("x", "real")
     //! runtextmacro HashStruct_NewPrimitiveField("y", "real")
     //! runtextmacro HashStruct_NewPrimitiveField("flyHeight", "real")
@@ -490,24 +511,34 @@ function LoadUnitFlags takes unit whichUnit, integer flags returns nothing
 endfunction
 
 function LoadUnit takes string chat_str, player un_owner, real centerX, real centerY returns nothing
-    local integer str_index
+    local ArrayList_string tokens
     local integer un_type
-    local integer len_str = StringLength(chat_str)
+    local integer str_index
     local unit resultUnit
+    
     local SaveNLoad_PlayerData playerId = GetPlayerId(un_owner)
     local UnitSaveFields unitData
 
     set udg_save_LastLoadedUnit[playerId] = null
     set str_index = CutToComma(chat_str)
-    set un_type = (S2ID((SubString(chat_str,0,str_index))))
-    set chat_str = SubString(chat_str,str_index+1,len_str)
-    set len_str = StringLength(chat_str)
+    set tokens = StringSplit(SubString(chat_str, 0, str_index), "|")
+    set chat_str = SubString(chat_str, str_index+1, StringLength(chat_str))
+    
+    set un_type = S2ID(tokens[0])
     
     if ConstTable(forbiddenTypes).has(un_type) then
+        call tokens.destroy()
         return
     endif
     
     set unitData = unitData.create(un_type, chat_str, centerX, centerY)
+    
+    if tokens.size > 1 then
+        set unitData.skin = S2ID(tokens[1])
+    else
+        set unitData.skin = 0
+    endif
+    call tokens.destroy()
 
 
     //If the desired position is outside of the playable map area, abort the opertaion
@@ -554,6 +585,10 @@ function LoadUnit takes string chat_str, player un_owner, real centerX, real cen
         if resultUnit != null then
             if IsUnitIdType(un_type, UNIT_TYPE_ANCIENT) then
                 call SetUnitFacing(resultUnit, unitData.yaw)
+            endif
+            
+            if unitData.skin != 0 then
+                call BlzSetUnitSkin(resultUnit, unitData.skin)
             endif
             
             call LoadUnitFlags(resultUnit, unitData.flags)
@@ -603,7 +638,7 @@ function LoadUnit takes string chat_str, player un_owner, real centerX, real cen
         set udg_save_LastLoadedUnit[playerId] = resultUnit
         set resultUnit = null
     else
-        call LoadSpecialEffect(un_owner, un_type, unitData.x, unitData.y, unitData.flyHeight, unitData.yaw, unitData.pitch, unitData.roll, unitData.size, unitData.red, unitData.green, unitData.blue, unitData.alpha, unitData.color, unitData.animSpeed, unitData.animTag, unitData.flags)
+        call LoadSpecialEffect(un_owner, un_type, unitData.skin, unitData.x, unitData.y, unitData.flyHeight, unitData.yaw, unitData.pitch, unitData.roll, unitData.size, unitData.red, unitData.green, unitData.blue, unitData.alpha, unitData.color, unitData.animSpeed, unitData.animTag, unitData.flags)
     endif
     
     call unitData.destroy()
