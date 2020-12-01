@@ -38,18 +38,15 @@ endfunction
 // Splits a string using the given splitter and returns an ArrayList with each substring
 //
 // Returns a list with a single element (the string) if the splitter does not exist in the string.
-// Same as above for empty string.
-// Returns an empty list for a null string.
+// Returns an empty list for a null string or an empty string.
 function StringSplit takes string whichString, string splitter returns ArrayList_string
     local integer index
     local integer start = 0
     
     local ArrayList_string list = ArrayList.create()
     
-    if whichString == null then
+    if whichString == null or whichString == "" then
         // do nothing
-    elseif whichString == "" then
-        call list.append("")
     else
         loop
             set index = StringFindEx(whichString, splitter, start)
@@ -71,10 +68,8 @@ function StringSplitWS takes string whichString returns ArrayList_string
     local ArrayList_string list = ArrayList.create()
     local boolean inSplit = true
     
-    if whichString == null then
+    if whichString == null or whichString == "" then
         // do nothing
-    elseif whichString == "" then
-        call list.append("")
     else
         loop
             

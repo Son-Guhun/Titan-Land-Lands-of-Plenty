@@ -43,6 +43,66 @@ function Commands_GetChatMessagePlayerNumber takes string str returns integer
     return Arguments_ParsePlayer(str)
 endfunction
 
+/* 
+    Traverses a list until it finds a string or a string pair that can be converted to a player.
+
+    If there is a match, the strings are cleared from the list (value at their index is set to ""),
+and the player number is returned.
+    
+    If the string "all" is found, -1 is returned.
+    
+    If there is no match, 0 is returned.
+*/
+globals
+    private constant integer ALL = -1
+endglobals
+
+function GetNextPlayerArgument takes ArrayList_string list returns integer
+    local string lastVal
+    local string curVal
+    local integer number
+    local integer i = 1
+    
+    if list.size > 0 then
+        set lastVal = list[0]
+        set number = Commands_GetChatMessagePlayerNumber(lastVal)
+        
+        if number != 0 then
+            set list[0] = ""
+            return number
+        endif
+        if lastVal == "all" then
+            return ALL
+        endif
+        
+        loop
+            exitwhen i >= list.size
+            set curVal = list[i]
+            
+            if curVal == "all" then
+                set list[i] = ""
+                return ALL
+            endif
+            set number = Commands_GetChatMessagePlayerNumber(lastVal + " " + curVal)
+            if number != 0 then
+                set list[i] = ""
+                set list[i-1] = ""
+                return number
+            endif
+            set number = Commands_GetChatMessagePlayerNumber(curVal)
+            if number != 0 then
+                set list[i] = ""
+                return number
+            endif
+
+            set lastVal = list[i]
+            set i = i + 1
+        endloop
+    endif
+    
+    return 0
+endfunction
+
 // Used by rgb commands.
 function Commands_SetRGBAFromHex takes player whichPlayer, string args returns nothing
     local integer pN = GetPlayerId(whichPlayer) + 1
