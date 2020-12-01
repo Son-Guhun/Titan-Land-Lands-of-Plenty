@@ -37,6 +37,9 @@ library DECO
             
             public constant integer GATE_OPEN = 'A0B3'
             public constant integer GATE_CLOSE = 'A0B5'
+
+            public constant integer PATHING_ON = 'A069'
+            public constant integer PATHING_OFF = 'A068'
         endglobals
         //! endtextmacro
         

@@ -36,26 +36,27 @@ struct ObjectPathing extends array
         return GetHandleId(h)
     endmethod
     
-    method exists takes nothing returns boolean
+    // Returns false if:
+    //  -> .update() has never been called.
+    //  -> .update() has been called while .isDisabled was set to true.
+    method operator isActive takes nothing returns boolean
         return .pathMap_exists() 
     endmethod
     
     method update takes PathingMap path, real x, real y, real ang returns thistype
     
-        if this.exists() then
+        if this.isActive then
             call .pathMap.applyAtAngled(.x, .y, false, .angle)
-            // call path.createImages(x0, y0, true, ang)
         endif
         
         if path != 0 and not .isDisabled then
-            // call path.createImages(x0, y0, true, ang)
             call path.applyAtAngled(x, y, true, ang)
             set .pathMap = path
             set .x = x
             set .y = y
             set .angle = ang
         else
-            call .tab.flush()
+            call .tab.flush()  // this makes this.isActive() return false
         endif
         
         return this
@@ -64,11 +65,11 @@ struct ObjectPathing extends array
     method disableAndTransfer takes handle receiver returns nothing
         local thistype receiverData = get(receiver)
         
-        if receiverData.exists() then
+        if receiverData.isActive then
             call receiverData.pathMap.applyAtAngled(receiverData.x, receiverData.y, false, receiverData.angle)
         endif
         
-        if this.exists() then
+        if this.isActive then
             set receiverData.pathMap = .pathMap
             set receiverData.x = .x
             set receiverData.y = .y
@@ -102,32 +103,32 @@ struct paths extends array
 
 endstruct
 
-struct ObjectPathMap extends array
-    /*This struct contains data about an objects unique pathing map */
-    
-    //! runtextmacro TableStruct_NewStructField("pathMap", "PathingMap")
-    //! runtextmacro TableStruct_NewPrimitiveField("offsetX", "real")
-    //! runtextmacro TableStruct_NewPrimitiveField("offsetY", "real")
-    
-    method update takes real x, real y, real angle returns nothing
-        local real sin = Sin(angle)
-        local real cos = Cos(angle)
-        local real offsetX = .offsetX
-        local real offsetY = .offsetY
-    
-        set x = (offsetX*cos - offsetY*sin) + x
-        set y = (offsetX*sin + offsetY*cos) + y
-        
-        call ObjectPathing(this).update(.pathMap, x, y, angle)
-    endmethod
-
-endstruct
+//struct ObjectPathMap extends array
+//    /*This struct contains data about an objects unique pathing map */
+//    
+//    //! runtextmacro TableStruct_NewStructField("pathMap", "PathingMap")
+//    //! runtextmacro TableStruct_NewPrimitiveField("offsetX", "real")
+//    //! runtextmacro TableStruct_NewPrimitiveField("offsetY", "real")
+//    
+//    method update takes real x, real y, real angle returns nothing
+//        local real sin = Sin(angle)
+//        local real cos = Cos(angle)
+//        local real offsetX = .offsetX
+//        local real offsetY = .offsetY
+//    
+//        set x = (offsetX*cos - offsetY*sin) + x
+//        set y = (offsetX*sin + offsetY*cos) + y
+//        
+//        call ObjectPathing(this).update(.pathMap, x, y, angle)
+//    endmethod
+//
+//endstruct
 
 struct DefaultPathingMap extends array
 
     //! runtextmacro TableStruct_NewStructField("path", "PathingMap")
 
-    static method get takes unit u returns thistype
+    static method fromTypeOfUnit takes unit u returns thistype
         return GetUnitTypeId(u)
     endmethod
     
@@ -169,7 +170,7 @@ struct DefaultPathingMap extends array
 
     static method onMove takes unit h, real x, real y returns nothing   
         local real ang = GetUnitFacing(h)*bj_DEGTORAD
-        local PathingMap path = get(h).path
+        local PathingMap path = fromTypeOfUnit(h).path
         //! runtextmacro DefaultPathingMapsUpdate()
     endmethod
     
@@ -177,7 +178,7 @@ struct DefaultPathingMap extends array
         local real ang = angle*bj_DEGTORAD
         local real x = GetUnitX(h)
         local real y = GetUnitY(h)
-        local PathingMap path = get(h).path
+        local PathingMap path = fromTypeOfUnit(h).path
         //! runtextmacro DefaultPathingMapsUpdate()
     endmethod
 

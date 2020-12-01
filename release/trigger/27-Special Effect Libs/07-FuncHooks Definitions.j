@@ -24,8 +24,8 @@ private function SetUnitY takes unit u, real y returns nothing
 endfunction
 
 private function SetUnitPosition takes unit u, real x, real y returns nothing
-    if DefaultPathingMap.get(u).hasPathing() then
-        call DefaultPathingMap.get(u).update(u, x, y, GetUnitFacing(u)*bj_DEGTORAD)
+    if DefaultPathingMap.fromTypeOfUnit(u).hasPathing() then
+        call DefaultPathingMap.fromTypeOfUnit(u).update(u, x, y, GetUnitFacing(u)*bj_DEGTORAD)
     endif
 
     call OrglSetUnitPosition(u, x, y)
@@ -36,8 +36,8 @@ private function SetUnitPosition takes unit u, real x, real y returns nothing
 endfunction
 
 private function SetUnitFacing takes unit u, real angle returns nothing
-    if DefaultPathingMap.get(u).hasPathing() then
-         call DefaultPathingMap.get(u).update(u, GetUnitX(u), GetUnitY(u), angle*bj_DEGTORAD)
+    if DefaultPathingMap.fromTypeOfUnit(u).hasPathing() then
+         call DefaultPathingMap.fromTypeOfUnit(u).update(u, GetUnitX(u), GetUnitY(u), angle*bj_DEGTORAD)
     endif
 
     call OrglSetUnitFacing(u, angle)
@@ -48,8 +48,8 @@ private function SetUnitFacing takes unit u, real angle returns nothing
 endfunction
 
 private function SetUnitFacingTimed takes unit u, real angle, real time returns nothing
-    if DefaultPathingMap.get(u).hasPathing() then
-         call DefaultPathingMap.get(u).update(u, GetUnitX(u), GetUnitY(u), angle*bj_DEGTORAD)
+    if DefaultPathingMap.fromTypeOfUnit(u).hasPathing() then
+         call DefaultPathingMap.fromTypeOfUnit(u).update(u, GetUnitX(u), GetUnitY(u), angle*bj_DEGTORAD)
     endif
 
     call OrglSetUnitFacingTimed(u, angle, time)

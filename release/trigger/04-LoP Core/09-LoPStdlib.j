@@ -76,9 +76,9 @@ function LopCopyUnit takes unit u, player owner, integer newType returns unit
             call UnitAddAbilities(u, UnitEnumRemoveableAbilityIds(whichUnit))
         endif
         
-        if DefaultPathingMap.get(u).hasPathing() then
+        if DefaultPathingMap.fromTypeOfUnit(u).hasPathing() then
             set ObjectPathing.get(u).isDisabled = ObjectPathing.get(whichUnit).isDisabled
-            call DefaultPathingMap.get(u).update(u, GetUnitX(u), GetUnitY(u), GetUnitFacing(u)*bj_DEGTORAD)
+            call DefaultPathingMap.fromTypeOfUnit(u).update(u, GetUnitX(u), GetUnitY(u), GetUnitFacing(u)*bj_DEGTORAD)
         endif
     else
         set u = null

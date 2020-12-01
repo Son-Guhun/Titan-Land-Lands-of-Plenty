@@ -474,11 +474,11 @@ function LoadUnitFlags takes unit whichUnit, integer flags returns nothing
 
     if IsUnitType(whichUnit, UNIT_TYPE_ANCIENT) and SaveNLoad_BoolFlags.isAnyFlag(flags, SaveNLoad_BoolFlags.UNROOTED) then
         call IssueImmediateOrder(whichUnit, "unroot")
-    elseif DefaultPathingMap.get(whichUnit).hasPathing() then
+    elseif DefaultPathingMap.fromTypeOfUnit(whichUnit).hasPathing() then
     
         if SaveNLoad_BoolFlags.isAnyFlag(flags, SaveNLoad_BoolFlags.UNROOTED) then
             set ObjectPathing.get(whichUnit).isDisabled = false
-            call DefaultPathingMap.get(whichUnit).update(whichUnit, GetUnitX(whichUnit), GetUnitY(whichUnit), GetUnitFacing(whichUnit)*bj_DEGTORAD)
+            call DefaultPathingMap.fromTypeOfUnit(whichUnit).update(whichUnit, GetUnitX(whichUnit), GetUnitY(whichUnit), GetUnitFacing(whichUnit)*bj_DEGTORAD)
         else
             set ObjectPathing.get(whichUnit).isDisabled = true
         endif

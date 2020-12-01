@@ -63,8 +63,8 @@ private function DecoOnEnterMapEx takes unit trigU, boolean isUpgrade returns no
     endif
     
     if not isUpgrade and not DefaultPathingMaps_dontApplyPathMap then
-        if DefaultPathingMap.get(trigU).hasPathing() then
-            call DefaultPathingMap.get(trigU).update(trigU, GetUnitX(trigU), GetUnitY(trigU), GetUnitFacing(trigU)*bj_DEGTORAD)
+        if DefaultPathingMap.fromTypeOfUnit(trigU).hasPathing() then
+            call DefaultPathingMap.fromTypeOfUnit(trigU).update(trigU, GetUnitX(trigU), GetUnitY(trigU), GetUnitFacing(trigU)*bj_DEGTORAD)
         endif
     else
         set DefaultPathingMaps_dontApplyPathMap = false
