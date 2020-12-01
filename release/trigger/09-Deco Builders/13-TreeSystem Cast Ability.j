@@ -76,8 +76,69 @@ private function KillDests takes nothing returns boolean
     //! runtextmacro DestructableInRangeFooter()
 endfunction
 
+//! textmacro TreeSystem_ShowDoodads takes showOrHide
+        // Rock Chunks
+        call SetDoodadAnimationRect(r, 'D00C', "$showOrHide$", false)  // Dark Gray
+        call SetDoodadAnimationRect(r, 'D02B', "$showOrHide$", false)  // Dark Green
+        call SetDoodadAnimationRect(r, 'D01I', "$showOrHide$", false)  // Orange Rock
+        call SetDoodadAnimationRect(r, 'D00D', "$showOrHide$", false)  // Normal
+        
+        // Dungeon Rock Chunks
+        call SetDoodadAnimationRect(r, 'D003', "$showOrHide$", false)
+        call SetDoodadAnimationRect(r, 'D002', "$showOrHide$", false)
+        call SetDoodadAnimationRect(r, 'D004', "$showOrHide$", false)
+        call SetDoodadAnimationRect(r, 'D005', "$showOrHide$", false)
+        call SetDoodadAnimationRect(r, 'D006', "$showOrHide$", false)
+        call SetDoodadAnimationRect(r, 'D007', "$showOrHide$", false)
+        
+        // Ice Cliff
+        call SetDoodadAnimationRect(r, 'D00G', "$showOrHide$", false)
+        call SetDoodadAnimationRect(r, 'D00H', "$showOrHide$", false)
+        
+        call SetDoodadAnimationRect(r, 'D000', "$showOrHide$", false)  // Acid
+        call SetDoodadAnimationRect(r, 'D008', "$showOrHide$", false)  // Lava
+        
+        
+        call SetDoodadAnimationRect(r, 'D009', "$showOrHide$", false)  // Lavafall
+        call SetDoodadAnimationRect(r, 'IWw0', "$showOrHide$", false)  // Icy Waterfall
+        call SetDoodadAnimationRect(r, 'LWw0', "$showOrHide$", false)  // Waterfall
+        
+        // Archways
+        call SetDoodadAnimationRect(r, 'YSaw', "$showOrHide$", false)
+        call SetDoodadAnimationRect(r, 'DSar', "$showOrHide$", false)
+        call SetDoodadAnimationRect(r, 'CSra', "$showOrHide$", false)
+        call SetDoodadAnimationRect(r, 'NSra', "$showOrHide$", false)
+        call SetDoodadAnimationRect(r, 'ZSas', "$showOrHide$", false)
+        call SetDoodadAnimationRect(r, 'ZSab', "$showOrHide$", false)
+        call SetDoodadAnimationRect(r, 'GSar', "$showOrHide$", false)
+        call SetDoodadAnimationRect(r, 'YSa1', "$showOrHide$", false)
+        call SetDoodadAnimationRect(r, 'ZSb1', "$showOrHide$", false)
+        call SetDoodadAnimationRect(r, 'DSa1', "$showOrHide$", false)
+        call SetDoodadAnimationRect(r, 'CSr1', "$showOrHide$", false)
+        call SetDoodadAnimationRect(r, 'NSr1', "$showOrHide$", false)
+        call SetDoodadAnimationRect(r, 'ZSs1', "$showOrHide$", false)
+        call SetDoodadAnimationRect(r, 'GSa1', "$showOrHide$", false)
+        call SetDoodadAnimationRect(r, 'ISs1', "$showOrHide$", false)
+        call SetDoodadAnimationRect(r, 'ISa1', "$showOrHide$", false)
+        call SetDoodadAnimationRect(r, 'ZSa1', "$showOrHide$", false)
+        call SetDoodadAnimationRect(r, 'OSa1', "$showOrHide$", false)
+        call SetDoodadAnimationRect(r, 'GSa2', "$showOrHide$", false)
+        call SetDoodadAnimationRect(r, 'DSa2', "$showOrHide$", false)
+        call SetDoodadAnimationRect(r, 'ISsr', "$showOrHide$", false)
+        call SetDoodadAnimationRect(r, 'ISar', "$showOrHide$", false)
+        call SetDoodadAnimationRect(r, 'ZSar', "$showOrHide$", false)
+        call SetDoodadAnimationRect(r, 'OSar', "$showOrHide$", false)
+        call SetDoodadAnimationRect(r, 'JSar', "$showOrHide$", false)
+        call SetDoodadAnimationRect(r, 'JSax', "$showOrHide$", false)
+        call SetDoodadAnimationRect(r, 'DSah', "$showOrHide$", false)
+        call SetDoodadAnimationRect(r, 'GSah', "$showOrHide$", false)
+        
+//! endtextmacro
+
 private function onCast takes nothing returns boolean
     local boolexpr action = null
+    local rect r
+    local integer val = udg_DecoSystem_Value[GetPlayerId(GetOwningPlayer(GetTriggerUnit()))+1]
     
     if GetUnitTypeId(GetTriggerUnit()) == DECO_BUILDER_SPECIAL then
     
@@ -89,11 +150,22 @@ private function onCast takes nothing returns boolean
             set action = Filter(function RemoveDests)
         elseif ( GetSpellAbilityId() == 'A00A' ) then
             call TreeSystemCreateTrees()
+        elseif ( GetSpellAbilityId() == 'A06A' ) then
+                set r = Rect(GetSpellTargetX() - 64.*val, GetSpellTargetY()-64*val, GetSpellTargetX()+64*val, GetSpellTargetY()+64*val)
+                //! runtextmacro TreeSystem_ShowDoodads("hide")
+                call RemoveRect(r)
+                set r = null
+                
+        elseif ( GetSpellAbilityId() == 'A06B' ) then
+                set r = Rect(GetSpellTargetX() - 64.*val, GetSpellTargetY()-64*val, GetSpellTargetX()+64*val, GetSpellTargetY()+64*val)
+                //! runtextmacro TreeSystem_ShowDoodads("show")
+                call RemoveRect(r)
+                set r = null
         endif
         
         if action != null then
             call EnumDestructablesInRange(GetSpellTargetX(), GetSpellTargetY(), /*
-                                        */128. * udg_DecoSystem_Value[GetPlayerId(GetOwningPlayer(GetTriggerUnit()))+1],/*
+                                        */128. * val,/*
                                         */action)
         endif
     
