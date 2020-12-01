@@ -112,6 +112,23 @@ scope DecoMovement
                     call IssueImmediateOrderById(trigU, typeId.next)
                 endif
             endif
+        
+        elseif ( spellId == PATHING_ON ) then
+            if DefaultPathingMap.fromTypeOfUnit(trigU).hasPathing() then
+                set ObjectPathing[trigU].isDisabled = false
+                call DefaultPathingMap.fromTypeOfUnit(trigU).update(trigU, GetUnitX(trigU), GetUnitY(trigU), GetUnitFacing(trigU)*bj_DEGTORAD)
+                call UnitAddAbility(trigU, DECO_ABIL_PATHING_OFF)
+                call UnitRemoveAbility(trigU, DECO_ABIL_PATHING_ON)
+            endif
+        
+        elseif ( spellId == PATHING_OFF ) then
+            if DefaultPathingMap.fromTypeOfUnit(trigU).hasPathing() then
+                set ObjectPathing[trigU].isDisabled = true
+                call ObjectPathing[trigU].deActivate()
+                call UnitAddAbility(trigU, DECO_ABIL_PATHING_ON)
+                call UnitRemoveAbility(trigU, DECO_ABIL_PATHING_OFF)
+            endif
+        
         endif
         
         if IsUnitType(trigU, UNIT_TYPE_STRUCTURE) and GetUnitAbilityLevel(trigU, GATE_CLOSE) > 0 then

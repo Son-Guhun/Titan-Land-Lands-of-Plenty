@@ -9,7 +9,7 @@
 
 
 
-library DecoOnEnterMap requires UnitVisualValues, RectGenerator, LoPStdLib  // for textmacro
+library DecoOnEnterMap requires UnitVisualValues, RectGenerator, LoPStdLib, LoPConstants, DefaultPathingMaps  // for textmacro
 
 globals
     private group G = CreateGroup()
@@ -68,6 +68,15 @@ private function DecoOnEnterMapEx takes unit trigU, boolean isUpgrade returns no
         endif
     else
         set DefaultPathingMaps_dontApplyPathMap = false
+    endif
+    
+    if DefaultPathingMap.fromTypeOfUnit(trigU).hasPathing() then
+        call UnitRemoveAbility(trigU, DECO_ABIL_SUICIDE)
+        if ObjectPathing[trigU].isDisabled then
+            call UnitAddAbility(trigU, DECO_ABIL_PATHING_ON)
+        else
+            call UnitAddAbility(trigU, DECO_ABIL_PATHING_OFF)
+        endif
     endif
     
     // -

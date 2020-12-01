@@ -3,10 +3,19 @@ scope CommandsCollision
 private function OnCommand_GroupLoop takes nothing returns nothing
     local string args = LoP_Command.getArguments()
     if ( GetOwningPlayer(GetEnumUnit()) == GetTriggerPlayer() ) then
-        if args == "off" then
-            call SetUnitPathing(GetEnumUnit(), false)
-        elseif args == "on" then
-            call SetUnitPathing(GetEnumUnit(), true)
+    
+        if LoP_IsUnitDecoration(GetEnumUnit()) then
+            if args == "off" then
+                call IssueImmediateOrder(GetEnumUnit(), "thunderclap")
+            elseif args == "on" then
+                call IssueImmediateOrder(GetEnumUnit(), "thunderbolt")
+            endif
+        else
+            if args == "off" then
+                call SetUnitPathing(GetEnumUnit(), false)
+            elseif args == "on" then
+                call SetUnitPathing(GetEnumUnit(), true)
+            endif
         endif
     else
         call LoP_WarnPlayerTimeout(GetTriggerPlayer(), LoPChannels.ERROR, LoPMsgKeys.NO_UNIT_ACCESS, 0., "This is not your unit!")

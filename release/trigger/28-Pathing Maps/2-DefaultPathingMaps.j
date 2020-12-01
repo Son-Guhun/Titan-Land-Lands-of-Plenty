@@ -1,4 +1,4 @@
-library DefaultPathingMaps requires PathingMaps, TableStruct, HashStruct
+library DefaultPathingMaps requires PathingMaps, TableStruct, HashStruct, OOP
 
 globals
     // Set this to true before creating a unit to avoid the application of its default pathing map.
@@ -32,9 +32,7 @@ struct ObjectPathing extends array
     //! runtextmacro HashStruct_NewReadonlyPrimitiveField("y", "real")
     //! runtextmacro HashStruct_NewReadonlyPrimitiveField("angle", "real")
     
-    static method get takes handle h returns thistype
-        return GetHandleId(h)
-    endmethod
+    //! runtextmacro OOP_HandleStruct("handle")
     
     // Returns false if:
     //  -> .update() has never been called.
@@ -60,6 +58,10 @@ struct ObjectPathing extends array
         endif
         
         return this
+    endmethod
+    
+    method deActivate takes nothing returns thistype
+        return .update(0, 0, 0, 0)
     endmethod
     
     method disableAndTransfer takes handle receiver returns nothing
