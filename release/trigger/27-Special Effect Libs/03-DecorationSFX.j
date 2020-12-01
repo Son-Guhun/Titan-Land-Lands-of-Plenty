@@ -99,9 +99,9 @@ private struct PlayerData extends array
         endif
     endmethod
     
-    static method get takes player whichPlayer returns thistype
-        return GetPlayerId(whichPlayer)
-    endmethod
+    //! runtextmacro TableStruct_NewStructField("effects","LinkedHashSet")
+    
+    implement OOP_PlayerStruct
     
 endstruct
 
@@ -124,7 +124,7 @@ struct DecorationEffect extends array
     implement InheritedFromSpecialEffect
     
     //! runtextmacro HashStruct_SetHashtableWrapper("SpecialEffect_hT")
-    //! runtextmacro HashStruct_NewReadonlyPrimitiveField("owner","integer")
+    //! runtextmacro HashStruct_NewReadonlyStructField("owner","PlayerData")
     //! runtextmacro HashStruct_NewReadonlyBooleanFieldWithDefault("hasCustomColor","false")
     
     method operator x= takes real value returns nothing
@@ -161,47 +161,43 @@ struct DecorationEffect extends array
     
     method resetColor takes nothing returns nothing
         set .hasCustomColor = false
-        set SpecialEffect(this).color = PlayerData(.owner).color
+        set SpecialEffect(this).color = .owner.color
     endmethod
     
     method getOwner takes nothing returns player
-        return Player(.owner)
+        return .owner.handle
     endmethod
     
-    method setOwner takes player newOwner returns nothing
-        local PlayerData owner
+    private method setOwnerEx takes player newOwner, boolean changeColor returns nothing
+        local PlayerData newOwnerId = PlayerData[newOwner]
+    
         if newOwner != null then
-            set owner = GetPlayerId(newOwner)
-        
-            set .owner = owner
-            if not .hasCustomColor then
-                set SpecialEffect(this).color = owner.color
+            if .owner_exists() then
+                call .owner.effects.remove(this)
+            endif
+            call newOwnerId.effects.append(this)
+            
+            set .owner = newOwnerId
+            set .hasCustomColor = not changeColor
+            if changeColor then
+                set SpecialEffect(this).color = newOwnerId.color
             endif
         endif
     endmethod
     
-    static method convertSpecialEffectNoPathing takes player playerid, SpecialEffect sfx, boolean useCustomColor returns DecorationEffect
-        if useCustomColor then
-            set DecorationEffect(sfx).owner = GetPlayerId(playerid)
-            set DecorationEffect(sfx).hasCustomColor = true
-        else
-            call DecorationEffect(sfx).setOwner(playerid)
-        endif
-        
-        call DecorationEffectBlock.get(sfx.x, sfx.y).effects.append(sfx) 
-        return sfx
+    method setOwner takes player newOwner returns nothing
+        call setOwnerEx(newOwner, false)
     endmethod
     
     // Factory method, converts a SpecialEffect to a DecorationEffect
-    static method convertSpecialEffect takes player playerid, SpecialEffect sfx, boolean useCustomColor returns DecorationEffect
-        if useCustomColor then
-            set DecorationEffect(sfx).owner = GetPlayerId(playerid)
-            set DecorationEffect(sfx).hasCustomColor = true
-        else
-            call DecorationEffect(sfx).setOwner(playerid)
+    static method convertSpecialEffectEx takes player playerid, SpecialEffect sfx, boolean useCustomColor, boolean usePathing returns DecorationEffect
+        if playerid == null then
+            set playerid = Player(0)
         endif
         
-        if DefaultPathingMap(sfx.unitType).hasPathing() then
+        call thistype(sfx).setOwnerEx(playerid, not useCustomColor)
+        
+        if usePathing and DefaultPathingMap(sfx.unitType).hasPathing() then
             set ObjectPathing(sfx).isDisabled = false
             call DefaultPathingMap(sfx.unitType).update(sfx.effect, sfx.x, sfx.y, sfx.yaw)
         endif
@@ -210,7 +206,15 @@ struct DecorationEffect extends array
         return sfx
     endmethod
     
-
+    static method convertSpecialEffectNoPathing takes player playerid, SpecialEffect sfx, boolean useCustomColor returns DecorationEffect
+        return convertSpecialEffectEx(playerid, sfx, useCustomColor, false)
+    endmethod
+    
+    // Factory method, converts a SpecialEffect to a DecorationEffect
+    static method convertSpecialEffect takes player playerid, SpecialEffect sfx, boolean useCustomColor returns DecorationEffect
+        return convertSpecialEffectEx(playerid, sfx, useCustomColor, true)
+    endmethod
+    
     static method create takes player playerid, integer unitType, real x, real y returns DecorationEffect
         return thistype.convertSpecialEffect(playerid, SpecialEffect.create(unitType, x, y), false)
     endmethod
@@ -219,50 +223,45 @@ struct DecorationEffect extends array
         return thistype.convertSpecialEffectNoPathing(playerid, SpecialEffect.create(unitType, x, y), false)
     endmethod
     
-    method destroy takes nothing returns nothing
-        local effect e = .effect
-        call DecorationEffectBlock.get(BlzGetLocalSpecialEffectX(e), BlzGetLocalSpecialEffectY(e)).effects.remove(this)
-        
-        call SpecialEffect(this).destroy()
-        set e = null
-    endmethod
-    
     method convertToSpecialEffect takes nothing returns SpecialEffect
+        call DecorationEffectBlock.get(.x, .y).effects.remove(this)
+        call .owner.effects.remove(this)
+    
         call .owner_clear()
         set .hasCustomColor = false  // this clears it, since it is a boolean field with default "false"
-        call DecorationEffectBlock.get(.x, .y).effects.remove(this)
+        
         return this
     endmethod
     
+    method destroy takes nothing returns nothing
+        call DecorationEffectBlock.get(.x, .y).effects.remove(this)
+        call .owner.effects.remove(this)
+        
+        call SpecialEffect(this).destroy()
+    endmethod
+    
     static method enumDecorationsOfPlayerEx takes LinkedHashSet result, player whichPlayer returns LinkedHashSet
-        local integer lastId = DecorationEffectBlock.get(WorldBounds.maxX, WorldBounds.maxY)
-        local integer i = 0
-        local LinkedHashSet decorations
+        local LinkedHashSet decorations = PlayerData[whichPlayer].effects
         local DecorationEffect decoration
 
-        loop
-        exitwhen i > lastId
-            set decorations = DecorationEffectBlock(i).effects
-            
-            if not decorations.isEmpty() then
-                set decoration = decorations.begin()
-                loop
-                    exitwhen decoration == decorations.end()
-                    if decoration.getOwner() == whichPlayer then
-                        call result.append(decoration)
-                    endif
-                    set decoration = decorations.next(decoration)
-                endloop  
-            endif
-
-            set i = i + 1
-        endloop
+        if not decorations.isEmpty() then
+            set decoration = decorations.begin()
+            loop
+                exitwhen decoration == decorations.end()
+                call result.append(decoration)
+                set decoration = decorations.next(decoration)
+            endloop  
+        endif
 
         return result   
     endmethod
     
     static method enumDecorationsOfPlayer takes player whichPlayer returns LinkedHashSet
         return enumDecorationsOfPlayerEx(LinkedHashSet.create(), whichPlayer)
+    endmethod
+    
+    static method getDecorationsOfPlayer takes player whichPlayer returns LinkedHashSet
+        return PlayerData[whichPlayer].effects
     endmethod
     
     static method updateColorsForPlayer takes player whichPlayer returns nothing
@@ -470,6 +469,7 @@ private module InitModule
         loop
         exitwhen i == bj_MAX_PLAYER_SLOTS
             set PlayerData(i).color = GetHandleId(GetPlayerColor(Player(i)))
+            set PlayerData(i).effects = LinkedHashSet.create()
             set i = i + 1
         endloop
     endmethod
