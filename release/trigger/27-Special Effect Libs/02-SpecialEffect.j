@@ -325,11 +325,18 @@ struct SpecialEffect extends array
         set e = null
     endmethod
     
-    method copy takes integer newType returns SpecialEffect
-        local SpecialEffect result = SpecialEffect.create(newType, this.x, this.y)
+    method copy takes integer newType, integer skin returns SpecialEffect
+        local SpecialEffect result
         local LinkedHashSet subanims
         local integer subanim
         implement assertNotNull
+        
+        if skin == 0 then
+            set result = SpecialEffect.create(newType, this.x, this.y)
+        else
+            set result = SpecialEffect.createWithSkin(newType, skin, this.x, this.y)
+        endif
+            
         
         set result.height = this.height
         call result.setOrientation(this.yaw, this.pitch, this.roll)

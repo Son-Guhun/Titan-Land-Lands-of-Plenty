@@ -59,17 +59,30 @@ endfunction
 
 function LopCopyUnit takes unit u, player owner, integer newType returns unit
     local unit whichUnit = u
+    local integer skin
     
     if newType < 1 then
         set newType = GetUnitTypeId(whichUnit)
+        set skin = BlzGetUnitSkin(whichUnit)
+        if skin == GetUnitTypeId(whichUnit) then
+            set skin = 0
+        endif
+    else
+        set skin = 0
     endif
     
     set DefaultPathingMaps_dontApplyPathMap = true 
     set u = LoP.UVS.Copy(whichUnit, owner, newType)
     
     if u != null then
+        call BJDebugMsg(ID2S(skin))
+    
         if UnitHasAttachedEffect(whichUnit) then
-            call UnitAttachEffect(u, GetUnitAttachedEffect(whichUnit).copy(newType))
+            call UnitAttachEffect(u, GetUnitAttachedEffect(whichUnit).copy(newType, skin))
+        endif
+        
+        if skin != 0 then
+            call BlzSetUnitSkin(u, skin)
         endif
         
         if LoP_IsUnitHero(whichUnit) then

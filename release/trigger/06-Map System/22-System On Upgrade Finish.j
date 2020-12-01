@@ -15,7 +15,7 @@ function Trig_System_On_Upgrade_Finish_Actions takes nothing returns nothing
     endif
     call LoP.UVS.UpgradeHandler(trigU)
     if sfx != 0 then
-        call UnitAttachEffect(trigU, sfx.copy(GetUnitTypeId(trigU)))
+        call UnitAttachEffect(trigU, sfx.copy(GetUnitTypeId(trigU), 0))
         call sfx.destroy()
     endif
     
