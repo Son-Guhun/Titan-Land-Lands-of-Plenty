@@ -22,6 +22,7 @@ DefineHooks is used, you can call the native prefixed by "Orgl". For example: "c
 //! runtextmacro FuncHooks("Orgl", "SetUnitY", "unit u, real y", "u,y")
 //! runtextmacro FuncHooks("Orgl", "SetUnitPosition", "unit u, real x, real y", "u,x,y")
 //! runtextmacro FuncHooks("Orgl", "SetUnitFacing", "unit u, real a", "u,a")
+//! runtextmacro FuncHooks("Orgl", "BlzSetUnitFacingEx", "unit u, real a", "u,a")
 //! runtextmacro FuncHooks("Orgl", "SetUnitFacingTimed", "unit u, real a, real t", "u,a,t")
 //! runtextmacro FuncHooks("Orgl", "SetUnitTimeScale", "unit u, real scale", "u,scale")
 //! runtextmacro FuncHooks("Orgl", "SetUnitScale", "unit u, real x, real y, real z", "u,x,y,z")
@@ -38,6 +39,7 @@ DefineHooks is used, you can call the native prefixed by "Orgl". For example: "c
 //! runtextmacro FuncHooks("Hkd", "SetUnitY", "unit u, real y", "u,y")
 //! runtextmacro FuncHooks("Hkd", "SetUnitPosition", "unit u, real x, real y", "u,x,y")
 //! runtextmacro FuncHooks("Hkd", "SetUnitFacing", "unit u, real a", "u,a")
+//! runtextmacro FuncHooks("Hkd", "BlzSetUnitFacingEx", "unit u, real a", "u,a")
 //! runtextmacro FuncHooks("Hkd", "SetUnitFacingTimed", "unit u, real a, real t", "u,a,t")
 //! runtextmacro FuncHooks("Hkd", "SetUnitTimeScale", "unit u, real scale", "u,scale")
 //! runtextmacro FuncHooks("Hkd", "SetUnitScale", "unit u, real x, real y, real z", "u,x,y,z")
@@ -70,6 +72,10 @@ endfunction
 
 private function SetUnitFacing takes unit u, real a returns nothing
     call HkdSetUnitFacing(u, a)
+endfunction
+
+private function BlzSetUnitFacingEx takes unit u, real a returns nothing
+    call HkdBlzSetUnitFacingEx(u, a)
 endfunction
 
 private function SetUnitFacingTimed takes unit u, real a, real t returns nothing

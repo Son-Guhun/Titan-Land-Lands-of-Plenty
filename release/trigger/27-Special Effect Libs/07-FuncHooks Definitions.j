@@ -47,6 +47,18 @@ private function SetUnitFacing takes unit u, real angle returns nothing
     endif
 endfunction
 
+private function BlzSetUnitFacingEx takes unit u, real angle returns nothing
+    if DefaultPathingMap.fromTypeOfUnit(u).hasPathing() then
+         call DefaultPathingMap.fromTypeOfUnit(u).update(u, GetUnitX(u), GetUnitY(u), angle*bj_DEGTORAD)
+    endif
+
+    call OrglBlzSetUnitFacingEx(u, angle)
+
+    if UnitHasAttachedEffect(u) then
+        call AttachedSFX_onSetFacing(u, angle)
+    endif
+endfunction
+
 private function SetUnitFacingTimed takes unit u, real angle, real time returns nothing
     if DefaultPathingMap.fromTypeOfUnit(u).hasPathing() then
          call DefaultPathingMap.fromTypeOfUnit(u).update(u, GetUnitX(u), GetUnitY(u), angle*bj_DEGTORAD)
