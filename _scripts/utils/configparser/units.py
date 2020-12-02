@@ -54,6 +54,9 @@ class Section:
 
     def list(self, field, wrapper=None):
         strings = self[field][1:-1].split(',')
+        if strings[0] == '':
+            return []
+        
         if wrapper:
             return [wrapper(self._section.parser[s]) for s in strings]
         else:
@@ -64,9 +67,10 @@ class Section:
 
     def get_version(self):
         if self.is_hero():
-            return 2 if int(self['campaign']) else 1
+            return 2 if self['Name'][1:-1].startswith('_HD') else 1
         else:
-            return 2 if Section(data[u])['Name'][1:-1].startswith('_HD') else 1
+            return 2 if int(self['campaign']) else 1
+            
 
     def isbldg(self):
         return int(self['isbldg'])
@@ -202,7 +206,13 @@ class UnitParser(MyConfigParser):
     def get_hero_towers(self):
         for unit in self.sections():
             if unit['Name'].startswith('"Tower: '):
-                yield unit            
+                yield unit
+
+    def get_selectors(self):
+        yield from self.get_with_tags("sele", wrapper=Section)
+
+    def get_builders(self):
+        yield from itertools.chain(*(u.list('Trains', Section) for u in self.get_selectors()))
 
     def get_decorations(self, asString=False):
         yield from self.get_with_ability('A0C6', asString=asString, wrapper=Decoration)
@@ -217,7 +227,7 @@ class UnitParser(MyConfigParser):
         yield from self.get_with_tags("spawn", wrapper=Production)
 
     def get_troops(self):
-        yield from itertools.chain(*(unit.trained() for unit in self.get_production()))
+        yield from itertools.chain(*(unit.trained() for unit in self.get_production_bldgs()))
 
     def get_civilians(self):
         yield from itertools.chain(*(unit.trained() for unit in self.get_spawners()))
