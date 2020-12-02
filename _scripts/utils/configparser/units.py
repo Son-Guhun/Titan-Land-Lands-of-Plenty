@@ -124,6 +124,12 @@ class Production(Section):
             
 class Decoration(Section):
 
+    def selectable_only(self):
+        return 'A04U' in self['abilList']
+
+    def allow_unselectable(self):
+        return not self.selectable_only()
+
     def upgrades(self, asString=False):
         yield self.name if asString else self
         current = self['Upgrade'][1:-1].split(',')[0]
