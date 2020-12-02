@@ -1,7 +1,31 @@
+"""
+This module contains Section classes that represent units. A section class is a class
+which wraps a section of a configparser. In w3x2lni, all objects have a "_parent" field
+which stores the original object from which they were derived. A Section uses this field
+to find the parent section in the DEFAULT configparser, which contains the default values
+used by wc3, and wraps that parent section as well.
+
+Whenever there is an attempt to get an item from a Section, if that key does not exist in the
+wrapped configparser section, then the equivalent item is returned from the parent section. There
+are also specialized Section classes which extend the original class and offer useful method.
+
+Section classes:
+    - Section or Unit
+    - Production
+    - Decoration
+
+Additionally, this file defines the UnitParser class, which inherits from MyConfigParser. This parser
+can be passed to the "load_unit_data" function in order to return a parser that contains many utility methods
+for working with unit data.
+"""
+
 from . import MyConfigParser, load_unit_data
 import itertools
 
+# Defaults parser, which is nromally initialized in myconfigparser.py.
 DEFAULTS = None
+
+# Fields which may be empty even in the default unit sections.
 FIELDS = set(('EditorSuffix', 'Hotkey', 'Builds', 'Trains', 'Upgrade', 'abilList', 'Sellunits', 'Propernames'))
 
 class Section:
@@ -78,6 +102,7 @@ class Section:
     def __delitem__(self, i):
         del self._section[i]
 
+Unit = Section
 
 class Production(Section):
 

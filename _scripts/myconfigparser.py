@@ -29,6 +29,7 @@ with open(defaults_path) as f:
 
 
 Section = units.Section
+Unit = units.Unit
 Production = units.Production
 Decoration = units.Decoration
 UnitParser = units.UnitParser
