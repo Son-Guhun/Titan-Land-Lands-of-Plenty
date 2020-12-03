@@ -62,8 +62,7 @@ private function DecoOnEnterMapEx takes unit trigU returns nothing
     endif
     
     if DefaultPathingMap(typeId).hasPathing() then
-        call UnitRemoveAbility(trigU, DECO_ABIL_SUICIDE)
-        
+    
         if handleId.isDisabled then
             call UnitAddAbility(trigU, DECO_ABIL_PATHING_ON)
         else

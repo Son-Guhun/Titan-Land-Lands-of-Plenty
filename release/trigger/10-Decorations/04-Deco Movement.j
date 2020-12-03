@@ -131,7 +131,7 @@ scope DecoMovement
         
         endif
         
-        if IsUnitType(trigU, UNIT_TYPE_STRUCTURE) and GetUnitAbilityLevel(trigU, GATE_CLOSE) > 0 then
+        if GetUnitAbilityLevel(trigU, GATE_CLOSE) > 0 then
             call PlayGateOpenAnimation(trigU)
         endif
         set trigU = null
@@ -152,20 +152,20 @@ function InitTrig_Deco_Movement takes nothing returns nothing
     call UnitAddAbility(u, MOVE_RIGHT)
     call UnitAddAbility(u, MOVE_DOWN)
     call UnitAddAbility(u, MOVE)
-    call UnitAddAbility(u, SUICIDE)
     call UnitAddAbility(u, FACE)
     call UnitAddAbility(u, COPY)
     call UnitAddAbility(u, ROTATE)
     call UnitAddAbility(u, UPGRADE_NEXT)
     call UnitAddAbility(u, UPGRADE_PREV)
+    
+    // Load the following abilities in order of priority (if one above exists on the unit, the others will only show up if there is space).
     call UnitAddAbility(u, GATE_CLOSE)
     call UnitAddAbility(u, GATE_OPEN)
     call UnitAddAbility(u, PATHING_ON)
     call UnitAddAbility(u, PATHING_OFF)
-    
-    
+    call UnitAddAbility(u, SUICIDE)
     call UnitAddAbility(u, 'DEDF')  // Enable/Disable Fly
-    call UnitAddAbility(u, 'A05Z')  // Dummy Abil
+    
     call RemoveUnit(u)
     set u= null
 endfunction

@@ -236,7 +236,7 @@ private function onKey takes nothing returns boolean
                 set key = 9
             endif
             set variation[pId] = key
-            call BJDebugMsg(I2S(variation[pId]))
+
             if effects[pId] != 0 then
                 set unitType = effects[pId].unitType
                 

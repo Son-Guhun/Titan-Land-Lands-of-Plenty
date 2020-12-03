@@ -75,8 +75,6 @@ function LopCopyUnit takes unit u, player owner, integer newType returns unit
     set u = LoP.UVS.Copy(whichUnit, owner, newType)
     
     if u != null then
-        call BJDebugMsg(ID2S(skin))
-    
         if UnitHasAttachedEffect(whichUnit) then
             call UnitAttachEffect(u, GetUnitAttachedEffect(whichUnit).copy(newType, skin))
         endif
