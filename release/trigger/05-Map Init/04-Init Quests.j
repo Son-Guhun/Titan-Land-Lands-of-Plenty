@@ -4,8 +4,8 @@ library LoPInitQuests
 Manual (F9 menu). To create a new quest, simply follow the pattern used in InitQuests. Make sure it 
 is placed in the correct category: "Commands" or "Credits & Information".
 
-    This library also defines the FixQuestDialog, which repositions the QuestDialog elements in order
-to display Manual entires in a less compact form.
+    This library also defines the FixQuestDialog function, which repositions the QuestDialog elements
+in order to display Manual entires in a less compact form.
 
     Both InitQuests and FixQuestDialog should not be called during map initialization. 'InitQuests' is
 called in 'Init 0 Seconds' and FixQuestDialog is called in 'Init Create Events'.

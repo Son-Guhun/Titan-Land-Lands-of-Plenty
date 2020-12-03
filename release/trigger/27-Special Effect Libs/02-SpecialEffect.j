@@ -317,6 +317,7 @@ struct SpecialEffect extends array
         
         call .clearSubAnimations()
         
+        call ObjectPathing(this).destroy()
         call DestroyEffect(e)
         call BlzPlaySpecialEffect(e, ANIM_TYPE_STAND)
         call BlzSetSpecialEffectZ(e, 9999.)

@@ -158,9 +158,12 @@ function InitTrig_Deco_Movement takes nothing returns nothing
     call UnitAddAbility(u, ROTATE)
     call UnitAddAbility(u, UPGRADE_NEXT)
     call UnitAddAbility(u, UPGRADE_PREV)
+    call UnitAddAbility(u, GATE_CLOSE)
+    call UnitAddAbility(u, GATE_OPEN)
+    call UnitAddAbility(u, PATHING_ON)
+    call UnitAddAbility(u, PATHING_OFF)
     
-    call UnitAddAbility(u, GATE_CLOSE)  // Gate Close
-    call UnitAddAbility(u, GATE_OPEN)  // Gate Open
+    
     call UnitAddAbility(u, 'DEDF')  // Enable/Disable Fly
     call UnitAddAbility(u, 'A05Z')  // Dummy Abil
     call RemoveUnit(u)
