@@ -198,8 +198,8 @@ struct PathingMap extends array
         local integer newJ
         local integer offsetI = PathTile.y2i(y)
         local integer offsetJ = PathTile.x2j(x)
-        local integer maxI = .height
-        local integer maxJ = .width
+        local integer maxI = .width
+        local integer maxJ = .height
         
         loop
             if j >= maxJ then

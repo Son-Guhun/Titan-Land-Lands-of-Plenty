@@ -28,7 +28,7 @@ library StructureTileDefinition /* v1.2b    By Guhun - Credits to IcemanBo and t
 
 
     function Get64TileCenterCoordinate takes real a returns real
-        return MathRound((a+32)/64)*64. - 32
+        return MathRound((a+32.)/64.)*64. - 32.
     endfunction
    
 endlibrary

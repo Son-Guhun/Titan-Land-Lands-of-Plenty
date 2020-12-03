@@ -61,6 +61,51 @@ row/column of tiles is full-sized, instead of half-sized.
     endfunction
     
     
+    /*////////////
+    // ID Index API
+    These functions are used to get tile id's from i/j matrix indices and vice-versa.
+    
+    
+    *////////////
+    
+    // Convert a real x coordinate to a j index.
+    function PathingTileX2J takes real x returns integer
+        // return MathRound(x - WorldBounds.minX) / 32
+        return R2I(x - WorldBounds.minX) / 32
+    endfunction
+
+    // Convert a real y coordinate to a i index.
+    function PathingTileY2I takes real y returns integer
+        return R2I(y - WorldBounds.minY) / 32
+        // return MathRound(y - WorldBounds.minY) / 32
+    endfunction
+    
+    // Converts the given i and j indices into a tile id.
+    function GetPathingTileIdFromIndices takes integer i, integer j returns integer
+        return i + j*WorldPathTilesY
+    endfunction
+    
+    // Returns the i index of a tile.
+    function GetPathingTileIndexI takes integer tileId returns integer
+        return ModuloInteger(tileId, WorldPathTilesY)
+    endfunction
+    
+    // Returns the j index of a tile.
+    function GetPathingTileIndexJ takes integer tileId returns integer
+        return tileId / WorldPathTilesY
+    endfunction
+    
+    // Check whether an integer is a valid i index for a tile or if it is out of bounds.
+    function ValidatePathingTileIndexI takes integer i returns boolean
+        return WorldPathTilesY > i
+    endfunction
+    
+    // Check whether an integer is a valid j index for a tile or if it is out of bounds.
+    function ValidatePathingTileIndexJ takes integer j returns boolean
+        return WorldPathTilesX > j
+    endfunction
+    
+    
     
     /*////////////
     // ID Coordinate API
@@ -71,7 +116,7 @@ row/column of tiles is full-sized, instead of half-sized.
     
     // Returns the tile which contains the given point.
     function GetPathingTileId takes  real x, real y returns integer
-        return ((R2I(x - WorldBounds.minX) / 32) * WorldPathTilesY + R2I(y - WorldBounds.minY) / 32)
+        return PathingTileX2J(x)*WorldPathTilesY + PathingTileY2I(y)  // Reversed argument order of GetPathingTileIdFromIndices
     endfunction
     
     // Returns the x coordinate at the center of a tile.
@@ -102,50 +147,6 @@ row/column of tiles is full-sized, instead of half-sized.
     // Returns the minimum Y coordinate of a tile.
     function GetPathingTileMinYById takes integer id returns real
         return GetPathingTileCenterYById(id) - 16
-    endfunction
-
-
-
-    /*////////////
-    // ID Index API
-    These functions are used to get tile id's from i/j matrix indices and vice-versa.
-    
-    
-    *////////////
-    
-    // Converts the given i and j indices into a tile id.
-    function GetPathingTileIdFromIndices takes integer i, integer j returns integer
-        return i + j*WorldPathTilesY
-    endfunction
-    
-    // Returns the i index of a tile.
-    function GetPathingTileIndexI takes integer tileId returns integer
-        return ModuloInteger(tileId, WorldPathTilesY)
-    endfunction
-    
-    // Returns the j index of a tile.
-    function GetPathingTileIndexJ takes integer tileId returns integer
-        return tileId / WorldPathTilesY
-    endfunction
-    
-    // Check whether an integer is a valid i index for a tile or if it is out of bounds.
-    function ValidatePathingTileIndexI takes integer i returns boolean
-        return WorldPathTilesY > i
-    endfunction
-    
-    // Check whether an integer is a valid j index for a tile or if it is out of bounds.
-    function ValidatePathingTileIndexJ takes integer j returns boolean
-        return WorldPathTilesX > j
-    endfunction
-    
-    // Convert a real x coordinate to a j index.
-    function PathingTileX2J takes real x returns integer
-        return R2I(x - WorldBounds.minX) / 32
-    endfunction
-
-    // Convert a real y coordinate to a i index.
-    function PathingTileY2I takes real y returns integer
-        return R2I(y - WorldBounds.minY) / 32
     endfunction
     
     

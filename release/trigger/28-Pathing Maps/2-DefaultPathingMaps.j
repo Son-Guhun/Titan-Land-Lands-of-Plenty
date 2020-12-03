@@ -152,15 +152,15 @@ struct DefaultPathingMap extends array
     endmethod
     
     //! textmacro DefaultPathingMapsUpdate
-        local real offsetX =  -path.height*16.// -path.width*16.
-        local real offsetY =  -path.width*16.// -path.height*16.
+        local real offsetX =  -path.height*15.99  // Multiplying by 16. instead of 15.99 is currently a hacky way to avoid rounding issues with 90/180/270 degrees
+        local real offsetY =  -path.width*15.99
         local real sin = Sin(ang)
         local real cos = Cos(ang)
         local ObjectPathing lastPathData = ObjectPathing.get(h)
         
         set x = (offsetX*cos - offsetY*sin) + x
         set y = (offsetX*sin + offsetY*cos) + y
-    
+        
         call lastPathData.update(path, x, y, ang)
     //! endtextmacro
     
