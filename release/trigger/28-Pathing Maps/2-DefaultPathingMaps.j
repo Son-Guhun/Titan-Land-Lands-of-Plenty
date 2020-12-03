@@ -141,12 +141,7 @@ struct DefaultPathingMap extends array
     private static method onInit takes nothing returns nothing
         local LinkedHashSet tiles
         
-        //! runtextmacro optional InitializePathingsMapFromFiles()
-    
-        set thistype('e00B').path = PathingMap.getGeneric(5, 2)
-        set thistype('Hart').path = paths["citybuildinglarge_45.tga"]
-        set thistype('Harf').path = PathingMap.getGeneric(10, 10)
-        set thistype('h079').path = PathingMap.getGeneric(2, 5)
+        //! runtextmacro InitializePathingsMapFromFiles()
         
         //! runtextmacro GeneratedDecorationPathMaps()
     endmethod

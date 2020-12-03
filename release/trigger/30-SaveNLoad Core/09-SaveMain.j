@@ -79,23 +79,18 @@ private function SaveLoopActions takes nothing returns nothing
     local SaveInstance saveInstance
     
     if not queue.isEmpty() then
-        call BJDebugMsg("Attempting to save")
         set playerId = queue.getFirst() - 1
         set saveInstance = playerId.saveInstance
         
         call queue.remove(playerId+1)
         
         if not saveInstance.unit.isFinished() then
-            call BJDebugMsg("Units to save found")
-            call BJDebugMsg(I2S(BlzGroupGetSize(saveInstance.unit.units)))
             call saveInstance.unit.saveNextUnits()
             
         elseif not saveInstance.destructable.isFinished() then
-            call BJDebugMsg("Destructables to save found")
             call saveInstance.destructable.saveNextDestructables()
             
         elseif not saveInstance.terrain.isFinished() then
-            call BJDebugMsg("Terrain still saving")
             call saveInstance.terrain.saveNextTiles()
             
         endif
@@ -116,10 +111,6 @@ function SaveStuff takes SaveInstance saveInstance, rect destRect, rect terrainR
     local SaveWriter saveWriter = saveInstance.saveWriter
     local PlayerData playerId = GetPlayerId(saveWriter.player)
     local boolean isSaving = false
-
-    call BJDebugMsg(I2S(GetHandleId(saveInstance.unit.units)))
-    call BJDebugMsg(I2S(saveInstance.unit.effects))
-    call BJDebugMsg(I2S(BlzGroupGetSize(saveInstance.unit.units)))
 
     if not saveInstance.unit.isFinished() then
         call saveInstance.unit.initialize()
