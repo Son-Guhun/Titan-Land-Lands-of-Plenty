@@ -132,11 +132,10 @@ scope DeSerialization
             exitwhen i >= strSize
                 call SetTerrainType(playerId.curX, playerId.curY, TerrainTools_GetTexture(LoadH2D(SubString(chatStr,i,i+1))), LoadH2D(SubString(chatStr,i+1,i+2)), 1, 0)
                 set i = i + 2
-                if playerId.curX >= playerId.maxX then
+                set playerId.curX = playerId.curX + 128
+                if playerId.curX > playerId.maxX then
                     set playerId.curY = playerId.curY + 128
                     set playerId.curX = playerId.minX
-                else
-                    set playerId.curX = playerId.curX + 128
                 endif
             endloop
         else
@@ -146,11 +145,10 @@ scope DeSerialization
                 call SetTerrainType(playerId.curX, playerId.curY, TerrainTools_GetTexture(LoadH2D(SubString(chatStr,i,i+1))), LoadH2D(SubString(chatStr,i+1,i+2)), 1, 0)
                 set Deformation.fromCoords(playerId.curX, playerId.curY).depth = AnyBase(92).decode(SubString(chatStr,i+2,i+4)) - SaveNLoad_BASE_92_OFFSET()
                 set i = i + 4
-                if playerId.curX >= playerId.maxX then
+                set playerId.curX = playerId.curX + 128
+                if playerId.curX > playerId.maxX then
                     set playerId.curY = playerId.curY + 128
                     set playerId.curX = playerId.minX
-                else
-                    set playerId.curX = playerId.curX + 128
                 endif
             endloop
         endif

@@ -30,9 +30,9 @@ struct SaveInstanceTerrain extends array
         local SaveWriter saveWriter = .saveWriter
         
         set .minX = GetTileMin(GetRectMinX(saveRect))
-        set .maxX = GetTileMax(GetRectMaxX(saveRect))
+        set .maxX = GetTileCenterCoordinate(GetRectMaxX(saveRect))
         set .minY = GetTileMin(GetRectMinY(saveRect))
-        set .maxY = GetTileMax(GetRectMaxY(saveRect))
+        set .maxY = GetTileCenterCoordinate(GetRectMaxY(saveRect))
         set .curX = .minX
         set .curY = .minY
         
@@ -79,12 +79,11 @@ struct SaveInstanceTerrain extends array
                 set saveStr = saveStr + SerializeTerrainTile(curX, curY)
                 
                 set i = i+1
-                if curX >= maxX then
+                set curX = curX + 128
+                if curX > maxX then
                     set curY = curY + 128
                     set curX = .minX
                     exitwhen curY > maxY
-                else
-                    set curX = curX + 128
                 endif
             endloop
             
