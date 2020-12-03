@@ -53,6 +53,7 @@ private function onCommand takes nothing returns boolean
         call LoP_WarnPlayer(GetLocalPlayer(), LoPChannels.SYSTEM, pId.realName + ( " has started."))
         
         call G.clear()
+        set generator = null
     else
         call LoP_WarnPlayer(GetTriggerPlayer(), LoPChannels.ERROR, "You must be selecting a Rect Generator.")
     endif

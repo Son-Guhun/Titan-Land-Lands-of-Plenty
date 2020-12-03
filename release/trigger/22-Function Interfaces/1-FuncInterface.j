@@ -13,20 +13,17 @@ library FuncInterfaceType1Type2Type3ReturnType4
 
 endlibrary
 */
-library FuncInterface requires Table
+library FuncInterface requires Table, CallbackTools
 
     struct FuncInterface extends array
         private static key tab
-        private static trigger trig = CreateTrigger()
         
         static method operator stack takes nothing returns Table  // use Table instead of ConstTable because it has .handle.setValue().
             return tab
         endmethod
         
         static method evaluate takes boolexpr func returns nothing
-            local triggercondition cond = TriggerAddCondition(trig, func)
-            call TriggerEvaluate(trig)
-            call TriggerRemoveCondition(trig, cond)
+            call CallbackTools_EvaluateBoolexpr(func)
         endmethod
         
         static method evaluateAltName takes boolexpr func returns nothing

@@ -51,6 +51,7 @@ private function onCommand takes nothing returns boolean
         set saveData.extentY = GUDR_GetGeneratorExtentY(generator)
         
         call G.clear()
+        set generator = null
     endif
     
     call SaveUnits(saveInstance)

@@ -1,4 +1,4 @@
-library LoPCommands initializer onInit requires CutToComma, TableStruct, ArgumentStack, LoPStdLib, LoPPlayers, LoPTip, UserDefinedRects, UnitVisualMods, GAL, LoPWarn
+library LoPCommands initializer onInit requires CutToComma, TableStruct, ArgumentStack, LoPStdLib, LoPPlayers, LoPTip, UserDefinedRects, UnitVisualMods, GAL, LoPWarn, CallbackTools
 
 globals
     constant integer ACCESS_TITAN = 1
@@ -316,26 +316,15 @@ struct LoP_Command extends array
     endmethod
 endstruct
 
-private struct Globals extends array
-    private static key static_members_key
-    //! runtextmacro TableStruct_NewStaticAgentField("evaluator","trigger")
-endstruct
-
 // Must be used while GetTriggerPlayer() is defined.
 public function ExecuteCommand takes string chatMsg returns boolean
     local integer cutToComma
     local string beforeSpace
     local string arguments
     local LoP_Command command
-    local triggercondition condition
-    local trigger evaluator
     local boolean value
     
     local integer accessLevel
-    
-    if Globals.evaluator == null then  // Initialization
-        set Globals.evaluator = CreateTrigger()
-    endif
     
     set cutToComma = CutToCharacter(chatMsg, " ")
     set beforeSpace = SubString(chatMsg, 0, cutToComma)
@@ -360,21 +349,15 @@ public function ExecuteCommand takes string chatMsg returns boolean
         endif
     
         if accessLevel >= command.accessLevel and LoP_PlayerData.get(GetTriggerPlayer()).commandsEnabled and not LoP_Command.disabled then
-            set evaluator = Globals.evaluator
             debug call BJDebugMsg("Command called: " + beforeSpace)
-            
-            set condition = TriggerAddCondition(evaluator, command.boolexpr)
             
             call LoP_Command.newStack()
             set LoP_Command.stack.string[0] = beforeSpace
             set LoP_Command.stack.string[1] = arguments
-            call TriggerEvaluate(evaluator)
+            call CallbackTools_EvaluateBoolexpr(command.boolexpr)
             call LoP_Command.stack.flush()
             call LoP_Command.pop()
-            call TriggerRemoveCondition(evaluator, condition)
             
-            set condition = null
-            set evaluator = null
         else
             call LoP_WarnPlayer(GetTriggerPlayer(), LoPChannels.ERROR, "You do not have permission to use this command.")
         endif
