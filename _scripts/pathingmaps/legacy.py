@@ -35,7 +35,7 @@ for d in decorations:
         path = path[path.rfind('\\')+1:]
     else:
         path = path[path.rfind('\\')+1:]
-        path = 'lop\\' + path
+        path = 'lop\\\\' + path
 
     r[d.name] = path
     if path in used_pathtexs:

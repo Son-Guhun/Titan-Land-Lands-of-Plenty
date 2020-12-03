@@ -12,10 +12,7 @@ file_path = '../../development/table/unit.ini'
 line_template = 'set thistype(\'{}\').path = paths["{}"]'
 line_template_generic = 'set thistype(\'{}\').path = PathingMap.getGeneric({},{})'
 
-def do(file_path=file_path):
-    result = ['//! textmacro GeneratedDecorationPathMaps']
-    missing = []
-    
+def do(file_path=file_path):    
     with open('model2pathmap.json') as f:
         model2pathmap = json.load(f)
 
@@ -48,14 +45,19 @@ def do(file_path=file_path):
         unit_data = load_unit_data(f)
 
     decorations = get_decorations(unit_data)
+    result = ['//! textmacro GeneratedDecorationPathMaps']
+    missing = []
 
     for decoration in decorations:
         data = Section(unit_data[decoration])
         
         if decoration in legacy:
-            result.append(line_template.format(decoration, legacy[decoration]))
+            if legacy[decoration]:
+                result.append(line_template.format(decoration, legacy[decoration]))
+            
         elif decoration in customized:
             result.append(line_template_generic.format(decoration, *customized[decoration]))
+            
         else:
             if decoration in rawcodes:
                 model = rawcodes[decoration]
@@ -63,19 +65,25 @@ def do(file_path=file_path):
                 model = data['file'].replace("war3.w3mod:","")
                                  
             if model in model2pathmap:
-                if model in used_pathtexs:
+                if model2pathmap[model] in used_pathtexs:
                     result.append(line_template.format(decoration, model2pathmap[model]))
+                else:
+                    if model2pathmap[model]:
+                        print(data['Name'], model2pathmap[model])
             else:
                 for i in (-1, -2, -4, -5, -6):  # exclude .mdl, then exlcude derivate number
                     modelN = model[:-1][:i] + '"'
                     
                     if modelN in model2pathmap:
-                        if model in used_pathtexs:
+                        if model2pathmap[modelN] in used_pathtexs:
                             result.append(line_template.format(decoration, model2pathmap[modelN]))
+                        else:
+                            if model2pathmap[modelN]:
+                                print(data['Name'], model2pathmap[modelN])
                         break
                 else:
-                        if decoration not in excluded:
-                            missing.append(data)
+                    if decoration not in excluded:
+                        missing.append(data)
 
 
     result.append('//! endtextmacro')
@@ -83,3 +91,4 @@ def do(file_path=file_path):
     print(len(missing))
     for d in missing:
         print(f"Missing: {d['Name']} [{d.name}]")
+    print(len(get_decorations(unit_data)))
