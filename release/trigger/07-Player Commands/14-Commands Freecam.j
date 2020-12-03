@@ -1,9 +1,13 @@
 scope CommandsFreeCam
 
-private function onCommand takes nothing returns boolean
-    local boolean enable = not FreeCam_IsEnabled(GetTriggerPlayer())
-        
-    call FreeCam_Enable(GetTriggerPlayer(), enable)
+private function onCommand takes nothing returns boolean    
+    if FreeCam_IsEnabled(GetTriggerPlayer()) then       
+        call FreeCam_Enable(GetTriggerPlayer(), false)
+        call LoP_WarnPlayer(GetTriggerPlayer(), LoPChannels.SYSTEM, "Free Camera Disabled.")
+    else
+        call FreeCam_Enable(GetTriggerPlayer(), true)
+        call LoP_WarnPlayer(GetTriggerPlayer(), LoPChannels.SYSTEM, "Free Camera Enabled.")
+    endif
     
     return false
 endfunction

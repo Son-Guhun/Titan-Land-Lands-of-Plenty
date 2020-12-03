@@ -23,6 +23,8 @@ Cofiguration
     call Register(MetaKeys.ALT, OSKeys.W, "-start mouse")
     call Register(MetaKeys.ALT, OSKeys.Q, "-controller mouse")
     call Register(MetaKeys.ALT, OSKeys.Z, "-fullscreen")
+    
+    call Register(MetaKeys.CTRL, OSKeys.F, "-freecam")
 //! endtextmacro
 // ========================
 // Source Code
