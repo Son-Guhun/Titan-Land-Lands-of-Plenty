@@ -121,7 +121,7 @@ scope Serialization
         function SerializeSpecialEffectFlags takes SpecialEffect sfx returns string
             local integer result = 0
             
-            if not ObjectPathing(sfx).isDisabled then
+            if ObjectPathing(sfx).isDisabled then
                 set result = result + SaveNLoad_BoolFlags.UNROOTED
             endif
 
@@ -180,7 +180,7 @@ scope Serialization
         function SerializeUnitFlags takes unit saveUnit returns string
             local integer result = 0
             
-            if LoP_IsUnitDecoration(saveUnit) and not ObjectPathing.get(saveUnit).isDisabled then
+            if LoP_IsUnitDecoration(saveUnit) and ObjectPathing.get(saveUnit).isDisabled then
                 set result = result + SaveNLoad_BoolFlags.UNROOTED
                 
             elseif IsUnitType(saveUnit, UNIT_TYPE_ANCIENT) and BlzGetUnitIntegerField(saveUnit, UNIT_IF_DEFENSE_TYPE) == GetHandleId(DEFENSE_TYPE_LARGE) then
@@ -320,14 +320,13 @@ function LoadSpecialEffect takes player owner, UnitTypeDefaultValues unitType, i
     endif
     
     if DefaultPathingMap(unitType).hasPathing() then
-        call BJDebugMsg(I2S(flags))
         if SaveNLoad_BoolFlags.isAnyFlag(flags, SaveNLoad_BoolFlags.UNROOTED) then
-            call BJDebugMsg("pathing")
+            set ObjectPathing(result).isDisabled = true
+            
+        else
             set ObjectPathing(result).isDisabled = false
             call DefaultPathingMap(unitType).update(result.effect, x, y, facing*bj_DEGTORAD)
-        else
-            call BJDebugMsg("no pathing")
-            set ObjectPathing(result).isDisabled = true
+            
         endif
     endif
     
@@ -498,10 +497,10 @@ function LoadUnitFlags takes unit whichUnit, integer flags returns nothing
     elseif DefaultPathingMap.fromTypeOfUnit(whichUnit).hasPathing() then
     
         if SaveNLoad_BoolFlags.isAnyFlag(flags, SaveNLoad_BoolFlags.UNROOTED) then
+            set ObjectPathing.get(whichUnit).isDisabled = true
+        else
             set ObjectPathing.get(whichUnit).isDisabled = false
             call DefaultPathingMap.fromTypeOfUnit(whichUnit).update(whichUnit, GetUnitX(whichUnit), GetUnitY(whichUnit), GetUnitFacing(whichUnit)*bj_DEGTORAD)
-        else
-            set ObjectPathing.get(whichUnit).isDisabled = true
         endif
     endif
     
@@ -518,6 +517,9 @@ function LoadUnit takes string chat_str, player un_owner, real centerX, real cen
     
     local SaveNLoad_PlayerData playerId = GetPlayerId(un_owner)
     local UnitSaveFields unitData
+    
+    local SaveLoader saveData = SaveIO_GetCurrentlyLoadingSave(un_owner)
+    local boolean asUnit
 
     set udg_save_LastLoadedUnit[playerId] = null
     set str_index = CutToComma(chat_str)
@@ -576,8 +578,23 @@ function LoadUnit takes string chat_str, player un_owner, real centerX, real cen
         endif
     endif
     
-    // Selection type 3 (locust) was only added in version 4, so version 3 saves must handle exceptions for unselectable decorations that should be loaded as units
-    if unitData.selectState != "2" or (SaveIO_GetCurrentlyLoadingSave(un_owner).version < 4 and ((IsUnitIdType(un_type, UNIT_TYPE_STRUCTURE) and unitData.flyHeight < UnitVisuals.MIN_FLY_HEIGHT) or (un_type == 'nwgt'))) then
+    set asUnit = unitData.selectState != "2"
+    if saveData.version < 4 then
+        // Selection type 3 (locust) was only added in version 4, so version 3 saves must handle exceptions for unselectable decorations that should be loaded as units
+        set asUnit = asUnit or ((StringStartsWith(GetObjectName(un_type), "_BLDG") or (IsUnitIdType(un_type, UNIT_TYPE_STRUCTURE)) and unitData.flyHeight < UnitVisuals.MIN_FLY_HEIGHT)) or (un_type == 'nwgt')
+    endif
+    if saveData.version < 8 then
+        // After version 8, locust unselectable decorations no longer exist, since pathing map libs were created.
+        if unitData.selectState == "3" or (unitData.selectState == "2" and asUnit) then
+            if StringStartsWith(GetObjectName(un_type), "_BLDG") then
+                set asUnit = false
+            endif   
+        elseif not asUnit then
+            set unitData.flags = unitData.flags + SaveNLoad_BoolFlags.UNROOTED
+        endif
+    endif
+    
+    if asUnit then
         //Create the unit and modify it according to the chat input data
         set DefaultPathingMaps_dontApplyPathMap = true
         set resultUnit = CreateUnit (un_owner, un_type, unitData.x, unitData.y, unitData.yaw)
