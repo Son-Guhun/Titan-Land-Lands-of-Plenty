@@ -35,6 +35,10 @@ function StringFind takes string str, string find returns integer
     return StringFindEx(str, find, 0)
 endfunction
 
+function StringStartsWith takes string str, string start returns boolean
+    return StringFind(str, start) == 0
+endfunction
+
 // Splits a string using the given splitter and returns an ArrayList with each substring
 //
 // Returns a list with a single element (the string) if the splitter does not exist in the string.

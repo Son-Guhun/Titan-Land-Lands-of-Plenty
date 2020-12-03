@@ -1,10 +1,6 @@
 // This trigger disables movement for all units that are marked as decorations 
 // (have the "ZZIsDecoration" ability in Custom->Humans->Items)
 
-
-// It also gives an ability based on Root (zz_Enable/Disable Fly in Custom->Special->Units) to any structures.
-// This ability allows them to have a flying height.
-
 // This is executed as soon as a unit is created (before the next line of code) and is called in the Unit Event trigger
 
 
@@ -38,10 +34,16 @@ function PlayGateOpenAnimation takes unit u returns nothing
     call TimerStart(T, 0., false, function PlayAnim)
 endfunction
 
-private function DecoOnEnterMapEx takes unit trigU, boolean isUpgrade returns nothing
+private function DecoOnEnterMapEx takes unit trigU returns nothing
     local UpgradeData typeId = GetUnitTypeId(trigU)
+    local ObjectPathing handleId = ObjectPathing[trigU]
+    local string name = GetUnitName(trigU)
     //! runtextmacro ASSERT("trigU != null")
     //! runtextmacro ASSERT("LoP_IsUnitDecoration(trigU)")
+    
+    if StringStartsWith(name, "_BLDG") then
+        call BlzSetUnitName(trigU, SubString(name, 6, StringLength(name)))
+    endif
     
     // REMOVE ATTACK AND MOVE ABILITIES
     call UnitRemoveAbility(trigU, 'Amov')
@@ -49,73 +51,49 @@ private function DecoOnEnterMapEx takes unit trigU, boolean isUpgrade returns no
     if RectGenerator_Conditions(trigU) then
         //! runtextmacro GUDR_FirstPage("Add","trigU")
     endif
+    
     call SetUnitPathing(trigU, false)  // If UNIT_IF_MOVE_TYPE ever works, check if this line is only necessary before or after the unit move type is set
-    // call BlzSetUnitIntegerField(trigU, UNIT_IF_MOVE_TYPE, GetHandleId(MOVE_TYPE_AMPHIBIOUS))
     call BlzSetUnitIntegerField(trigU, UNIT_IF_MOVE_TYPE, GetHandleId(MOVE_TYPE_FLOAT))  // Use Float because Amphibious does not go above the water level in shallow water.
     call SetUnitPathing(trigU, false)
     
     if typeId.hasUpgrades() then
-        call UnitAddAbility(trigU, 'A01T')
-        call UnitAddAbility(trigU, 'A048')
-        if IsUnitType(trigU, UNIT_TYPE_STRUCTURE) and GetUnitAbilityLevel(trigU, 'A0B5') == 0 and GetUnitAbilityLevel(trigU, 'A0B3') == 0 and GetUnitAbilityLevel(trigU, 'A00T') == 0 then
-            call UnitAddAbility(trigU, 'A05Z')
-        endif
+        call UnitAddAbility(trigU, DECO_ABIL_UPGRADE_NEXT)
+        call UnitAddAbility(trigU, DECO_ABIL_UPGRADE_PREV)
     endif
     
-    if not isUpgrade and not DefaultPathingMaps_dontApplyPathMap then
-        if DefaultPathingMap.fromTypeOfUnit(trigU).hasPathing() then
-            call DefaultPathingMap.fromTypeOfUnit(trigU).update(trigU, GetUnitX(trigU), GetUnitY(trigU), GetUnitFacing(trigU)*bj_DEGTORAD)
-        endif
-    else
-        set DefaultPathingMaps_dontApplyPathMap = false
-    endif
-    
-    if DefaultPathingMap.fromTypeOfUnit(trigU).hasPathing() then
+    if DefaultPathingMap(typeId).hasPathing() then
         call UnitRemoveAbility(trigU, DECO_ABIL_SUICIDE)
-        if ObjectPathing[trigU].isDisabled then
+        
+        if handleId.isDisabled then
             call UnitAddAbility(trigU, DECO_ABIL_PATHING_ON)
         else
             call UnitAddAbility(trigU, DECO_ABIL_PATHING_OFF)
+            if not DefaultPathingMaps_dontApplyPathMap then
+                if handleId.isActive and handleId.pathMap == DefaultPathingMap(typeId).path then
+                    // Do nothing, correct pathing already exists
+                else
+                    call DefaultPathingMap(typeId).update(trigU, GetUnitX(trigU), GetUnitY(trigU), GetUnitFacing(trigU)*bj_DEGTORAD)
+                endif
+            endif
         endif
     endif
+    set DefaultPathingMaps_dontApplyPathMap = false
     
-    // -
-    // ADD ENABLE/DISABLE FLY TO STRUCTURES
-    if IsUnitType(trigU, UNIT_TYPE_STRUCTURE) then
-        if GetUnitAbilityLevel(trigU, 'A037') != 0 then
-        else
-            call LoP.UVS.utils.AddStructureFlightAbility(trigU)
-
-            if not isUpgrade then
-                call BlzUnitDisableAbility(trigU, 'A011', false, false)
-                call BlzUnitDisableAbility(trigU, 'A012', false, false)
-                call BlzUnitDisableAbility(trigU, 'UDR4', false, false)
-                call BlzUnitDisableAbility(trigU, 'A02Y', false, false)
-                call BlzUnitDisableAbility(trigU, 'A02Z', false, false)
-                call BlzUnitDisableAbility(trigU, 'A031', false, false)
-                call BlzUnitDisableAbility(trigU, 'A032', false, false)
-                call BlzUnitDisableAbility(trigU, 'A0B7', false, false)
-            endif
-            // -
-            // PLAY OPEN ANIMATION FOR OPENED GATES
-            // OTHERWISE, PLAY STAND ANIMATION
-            if ( GetUnitAbilityLevel(trigU, 'A0B5') != 0 ) then
-                call PlayGateOpenAnimation(trigU)
-            else
-                    call SetUnitAnimation(trigU, "stand")
-            endif
-        endif
+    if ( GetUnitAbilityLevel(trigU, DECO_ABIL_GATE_CLOSE) != 0 ) then
+        call PlayGateOpenAnimation(trigU)
+    else
+        call SetUnitAnimation(trigU, "stand")
     endif
 
     set trigU = null
 endfunction
 
 function DecoOnEnterMap takes unit trigU returns nothing
-    call DecoOnEnterMapEx(trigU, false)
+    call DecoOnEnterMapEx(trigU)
 endfunction
 
 function DecoOnUpgrade takes unit trigU returns nothing
-    call DecoOnEnterMapEx(trigU, true)
+    call DecoOnEnterMapEx(trigU)
 endfunction
 
 endlibrary
