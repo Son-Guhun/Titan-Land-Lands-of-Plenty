@@ -3,6 +3,15 @@ scope CommandsTest
 This command should be disabled for public releases. It's just here to make testing easier.
 */
 
+private function AddPathingMap takes unit u returns nothing
+    local ArrayList_string args = StringSplitWS(LoP_Command.getArgumentsRaw())
+    
+    set DefaultPathingMap.fromTypeOfUnit(u).path = PathingMap.getGeneric(S2I(args[0]), S2I(args[1]))
+    call DefaultPathingMap.fromTypeOfUnit(u).update(u, GetUnitX(u), GetUnitY(u), GetUnitFacing(u)*bj_DEGTORAD)
+    
+    call args.destroy()
+endfunction
+
 private function SelectedUnitsTemplate takes nothing returns nothing
     local group g = CreateGroup()
     local unit u
@@ -14,6 +23,7 @@ private function SelectedUnitsTemplate takes nothing returns nothing
         //! runtextmacro ForUnitInGroupCountedReverse("u", "i", "g")
         
         // Do stuff
+        call AddPathingMap(u)
     endloop
     
     call DestroyGroup(g)
