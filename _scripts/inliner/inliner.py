@@ -80,6 +80,7 @@ def parse(file, out=sys.stdout):
 
     for line in file:
         stripped = line.strip()
+        line = line.replace(')*1.0', ')')
 
         if in_globals:
             if starts_with(stripped, "constant "):
@@ -198,8 +199,7 @@ if FROZEN:
     else:
         w3x = os.path.abspath(sys.argv[1])
 
-        if '-replace' in sys.argv:
-            replace = True
+        replace = '-replace' in sys.argv
 
     if w3x[w3x.rfind('.'):] == '.j':
         with open(w3x[:w3x.rfind('.')]+'-opt.j','w') as f:
