@@ -28,12 +28,22 @@ endglobals
     set mainButton = BlzCreateFrameByType("FRAME", "DummyFrame", decorationBrowserScreen.main, "", 0)
     call BlzFrameSetAllPoints(mainButton, decorationBrowserScreen["backdrop"])
     set decorationBrowserScreen["backdropDummy"] = mainButton
+    
+    set decorationBrowserScreen["editBoxBackdrop"] = BlzCreateFrame("EscMenuEditBoxBackdropTemplate", decorationBrowserScreen.main, 0, 0)
+    
+    set mainButton = BlzCreateFrameByType("TEXT", "HotkeyIndicator", decorationBrowserScreen.main, "StandardExtraSmallTextTemplate", 0)
+    call BlzFrameSetPoint(mainButton, FRAMEPOINT_LEFT, decorationBrowserScreen["editBoxBackdrop"], FRAMEPOINT_LEFT, 0.0085, -0.001)
+    call BlzFrameSetText(mainButton, SEARCH_HELP_TEXT())
+    call BlzFrameSetAlpha(mainButton, 127)
+    set decorationBrowserScreen["searchTooltip"] = mainButton
 
     set mainButton = BlzCreateFrame("EscMenuEditBoxTemplate", decorationBrowserScreen.main,0,0)
     // call BlzFrameSetAbsPoint(mainButton, FRAMEPOINT_CENTER, 0.4, 0.18)    
     call BlzFrameSetSize(mainButton, 0.6, 0.028)
     call BlzFrameSetTextSizeLimit(mainButton, 25)
     set decorationBrowserScreen["editBox"] = mainButton
+    call BlzFrameSetAlpha(BlzGetFrameByName("EscMenuEditBoxBackdrop", 0), 0)
+    call BlzFrameSetAllPoints(decorationBrowserScreen["editBoxBackdrop"], BlzGetFrameByName("EscMenuEditBoxBackdrop", 0))
     
     set mainButton = BlzCreateFrame("ScriptDialogButton", decorationBrowserScreen.main, 0,0)
     call BlzFrameSetSize(mainButton, 0.06, 0.028)
@@ -42,11 +52,7 @@ endglobals
     
     
     
-    set mainButton = BlzCreateFrameByType("TEXT", "HotkeyIndicator", decorationBrowserScreen.main, "StandardExtraSmallTextTemplate", 0)
-    call BlzFrameSetPoint(mainButton, FRAMEPOINT_LEFT, decorationBrowserScreen["editBox"], FRAMEPOINT_LEFT, 0.0085, -0.001)
-    call BlzFrameSetText(mainButton, SEARCH_HELP_TEXT())
-    call BlzFrameSetAlpha(mainButton, 127)
-    set decorationBrowserScreen["searchTooltip"] = mainButton
+
     
 //! runtextmacro End0SecondInitializer()
 
