@@ -12,6 +12,7 @@ globals
     public ScreenController controller
     public ControlState controlState
     private SpecialEffect array effects
+    private effect array centerEffects
     private group array selectedUnits
     private integer array variation
 endglobals
@@ -66,6 +67,7 @@ struct DecorationsListbox extends array
     static method onCreateFrame takes integer frameIndex returns nothing
         call BlzFrameSetText(buttons[frameIndex], GetObjectName(DecorationList.get("")[frameIndex]))
         call IsMouseOnButton_Register(buttons[frameIndex])
+        // call 
     endmethod
     
     static method onClickHandler takes player trigP, integer frameIndex, integer listIndex returns boolean
@@ -102,6 +104,48 @@ struct DecorationsListbox extends array
     endmethod
 
     implement ListBoxTemplate
+    
+    static method onHover takes nothing returns nothing
+        local frameeventtype eventId = BlzGetTriggerFrameEvent()
+        local User pId = User[GetTriggerPlayer()]
+        local effect e = centerEffects[pId]
+        local integer unitType
+        
+        if isReforged[pId] then
+            set unitType = ReforgedDecorationList(playerLists[pId])[getListIndex(pId.handle, getFrameIndex(BlzGetTriggerFrame()))]
+        else
+            set unitType = playerLists[pId][getListIndex(pId.handle, getFrameIndex(BlzGetTriggerFrame()))]
+        endif
+        
+        if UpgradeData(unitType).hasUpgrades() then
+            set unitType = UpgradeList(unitType)[IMinBJ(variation[pId], UpgradeList.get(unitType).size - 1)]
+        endif
+
+        if eventId == FRAMEEVENT_MOUSE_ENTER then
+            if e != null then
+                call BlzSetSpecialEffectHeight(e, 9999.)
+                call DestroyEffect(e)
+                call BlzPlaySpecialEffect(e, ANIM_TYPE_STAND)
+            endif
+            
+            set e = AddSpecialEffect(GetUnitTypeIdModel(unitType), GetCameraTargetPositionX(), GetCameraTargetPositionY())
+            call BlzPlaySpecialEffect(e, ANIM_TYPE_STAND)
+            if User.fromLocal() != pId then
+                call BlzSetSpecialEffectHeight(e, 9999.)
+            endif
+            set centerEffects[pId] = e
+            
+        else
+            if e != null then
+                call BlzSetSpecialEffectHeight(e, 9999.)
+                call DestroyEffect(e)
+                call BlzPlaySpecialEffect(e, ANIM_TYPE_STAND)
+            endif
+        
+        endif
+
+        set e = null
+    endmethod
 endstruct
 
 private function RefreshList takes User pId, string searchStr returns nothing
@@ -282,6 +326,18 @@ endfunction
         endif
         set pId = pId + 1
     endloop
+    
+    set trig = CreateTrigger()
+    call TriggerAddAction(trig, function DecorationsListbox.onHover)
+    
+    set pId = 0
+    loop
+        exitwhen pId >= DecorationsListbox.numberOfEntries
+        call BlzTriggerRegisterFrameEvent(trig, DecorationsListbox.buttons[pId], FRAMEEVENT_MOUSE_ENTER)
+        call BlzTriggerRegisterFrameEvent(trig, DecorationsListbox.buttons[pId], FRAMEEVENT_MOUSE_LEAVE)
+        set pId = pId + 1
+    endloop
+    
     
     set trig = CreateTrigger()
     call TriggerAddAction(trig, function onButton)

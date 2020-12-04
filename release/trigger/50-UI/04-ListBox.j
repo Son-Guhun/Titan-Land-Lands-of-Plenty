@@ -103,6 +103,11 @@ module ListBoxTemplate
         return numberOfEntries - 1
     endmethod
     
+    // Returns the position of a frame in the listbox
+    static method getFrameIndex takes framehandle frame returns integer
+        return handleId2Index[GetHandleId(frame)]
+    endmethod
+    
     // From the index of a frame in the buttons array, returns the index of the value held by that frame in the list of the given player
     static method getListIndex takes player whichPlayer, integer frameIndex returns integer
         local integer pId = User[whichPlayer]
