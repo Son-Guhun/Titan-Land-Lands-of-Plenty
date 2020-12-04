@@ -8,6 +8,14 @@ endglobals
 
 private keyword Init
 
+private struct String2Rawcode extends array
+    static method operator[] takes string rawcode returns thistype
+        return StringHash(rawcode)
+    endmethod
+    
+    //! runtextmacro TableStruct_NewPrimitiveField("rawcode", "integer")
+endstruct
+
 private struct Tooltip2Rawcode extends array
     //! runtextmacro TableStruct_NewPrimitiveField("rawcode", "integer")
     
@@ -20,6 +28,13 @@ struct RemoveableAbility extends array
 
     //! runtextmacro TableStruct_NewReadonlyPrimitiveField("isRegistered", "boolean")
     //! runtextmacro TableStruct_NewReadonlyPrimitiveField("isHero", "boolean")
+    
+    static method operator[] takes string rawcode returns thistype
+        local integer result = String2Rawcode[rawcode].rawcode
+        call BJDebugMsg(rawcode)
+        call BJDebugMsg(ID2S(result))
+        return result
+    endmethod
     
     static method isTooltipRegistered takes string tooltip returns boolean
         return Tooltip2Rawcode(StringHash(tooltip)).hasData()
@@ -37,6 +52,7 @@ struct RemoveableAbility extends array
         set whichAbility.isHero = isHero
         
         set id = ID2S(whichAbility)
+        set String2Rawcode[id].rawcode = whichAbility
     
         if isHero then
             call BlzFrameAddText(abilityListTextArea, "[" + id + "] - " + tooltip)
