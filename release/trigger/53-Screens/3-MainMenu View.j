@@ -10,6 +10,10 @@ endglobals
     set mainFrame = Screen.create()
     call mainFrame.show(false)
     
+    set mainButton = BlzCreateFrame("EscMenuBackdrop", mainFrame.main, 0,0)
+    call BlzFrameSetSize(mainButton, 0.2, 0.398)
+    call BlzFrameSetAbsPoint(mainButton, FRAMEPOINT_CENTER, 0.4, 0.37)
+    
     set mainButton = BlzCreateFrame("ScriptDialogButton", mainFrame.main, 0,0)
     call BlzFrameSetSize(mainButton, 0.12, 0.05)
     call BlzFrameSetAbsPoint(mainButton, FRAMEPOINT_CENTER, View4by3.w/2, 7*View4by3.h/8)
