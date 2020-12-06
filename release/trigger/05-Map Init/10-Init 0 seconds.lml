@@ -17,18 +17,6 @@ Action
         Const : 'Create Quests'
     CommentString
         Const : ---------------
-    Disab: CreateQuestBJ
-        Preset: QuestTypeReqDiscovered
-        Const : 'First Person Camera'
-        Const : 'This map employs Guhun''s First Person Camera system, for a more immersive experience!
-
-To enter first person perspective, select a unit and then double-click the |c00ffff00Esc|r key. You will see a help message when you do this the first time.
-
-Commands:
-|c00ffff00-first person|r and |c00ffff00-third person|r: Alternatives to double-clicking |c00ffff00Esc.|r
-|c00ffff00-fixed camera|r and |c00ffff00-free camera|r: Alternatives to clicking |c00ffff00Esc|r while in first person.
-|c00ffff00-help camera|r: Displays help text for the system.'
-        Const : ReplaceableTextures\CommandButtons\BTNAmbush.blp
     CustomScriptCode
         Const : 'call InitQuests()'
     CommentString
@@ -182,8 +170,8 @@ Commands:
         Const : ---------------------
     CommentString
         Const : ---------------------
-    CommentString
-        Const : ---------------------
+    ShowUnitHide
+        Var   : gg_unit_H00S_0141
     CommentString
         Const : ---------------------
     CommentString
@@ -212,6 +200,8 @@ Commands:
         Const : 'call InitReforgedTents()'
     CustomScriptCode
         Const : 'call LoP_InitProtectedUnits()'
+    CommentString
+        Const : 'Customize Titan Powers'
     CustomScriptCode
         Const : 'call LoP.UVS.Color(POWER_INVULNERABILITY(), 4)'
     CustomScriptCode
@@ -248,13 +238,13 @@ Commands:
         Const : 'call LoP.UVS.VertexColorInt(POWER_REMOVE(), 50, 50, 50, 255)'
     CustomScriptCode
         Const : 'call BlzSetUnitName(POWER_REMOVE(), "Power: Remove")'
+    CommentString
+        Const : 'Protect destructables'
     EnumDestructablesInRectAllMultiple
         Var   : gg_rct_Titan_Palace_Inner
         Action
             CustomScriptCode
                 Const : 'call LoP_ProtectDestructable(GetEnumDestructable())'
-    ShowUnitHide
-        Var   : gg_unit_H00S_0141
     CommentString
         Const : 'CREATE STRING HASHES FOR PLAYER COLOR STRINGS'
     SaveIntegerBJ

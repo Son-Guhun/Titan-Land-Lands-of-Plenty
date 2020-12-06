@@ -419,5 +419,15 @@ Doomlord => Custom Stat System
     // ----------
 endfunction
 
+/*
+This map employs Guhun's First Person Camera system, for a more immersive experience!
+
+To enter first person perspective, select a unit and then double-click the |c00ffff00Esc|r key. You will see a help message when you do this the first time.
+
+Commands:
+|c00ffff00-first person|r and |c00ffff00-third person|r: Alternatives to double-clicking |c00ffff00Esc.|r
+|c00ffff00-fixed camera|r and |c00ffff00-free camera|r: Alternatives to clicking |c00ffff00Esc|r while in first person.
+|c00ffff00-help camera|r: Displays help text for the system.
+*/
 
 endlibrary
