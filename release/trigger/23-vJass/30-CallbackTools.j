@@ -11,7 +11,7 @@ globals
 endglobals
 
 public function EvaluateBoolexpr takes boolexpr callback returns nothing
-    call ForceEnumPlayersCounted(ENUM_FORCE, callback, 1)
+    call ForceEnumAllies(ENUM_FORCE, Player(PLAYER_NEUTRAL_AGGRESSIVE), callback)
 endfunction
 
 public function ExecuteCode takes code callback returns nothing
