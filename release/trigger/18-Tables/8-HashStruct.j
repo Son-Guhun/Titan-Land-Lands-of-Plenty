@@ -134,13 +134,36 @@ endmodule
 //! endtextmacro
 
 // Used if you want to have control over the indices, instead of using a constant key variable
-//! textmacro HashStruct_NewReadonlyPrimitiveFieldIndexed takes NAME, TYPE, INDEX
+//! textmacro HashStruct_NewPrimitiveFieldIndexed takes NAME, TYPE, INDEX
     method operator $NAME$ takes nothing returns $TYPE$
         implement assertNotNull
         return this.tab.$TYPE$[$INDEX$]
     endmethod
     
     method operator $NAME$= takes $TYPE$ new_$NAME$ returns nothing
+        implement assertNotNull
+        set this.tab.$TYPE$[$INDEX$] = new_$NAME$
+    endmethod
+    
+    private method $NAME$_clear takes nothing returns nothing
+        implement assertNotNull
+        call this.tab.$TYPE$.remove($INDEX$)
+    endmethod
+    
+    private method $NAME$_exists takes nothing returns boolean
+        implement assertNotNull
+        return this.tab.$TYPE$.has($INDEX$)
+    endmethod
+//! endtextmacro
+
+// Used if you want to have control over the indices, instead of using a constant key variable
+//! textmacro HashStruct_NewReadonlyPrimitiveFieldIndexed takes NAME, TYPE, INDEX
+    method operator $NAME$ takes nothing returns $TYPE$
+        implement assertNotNull
+        return this.tab.$TYPE$[$INDEX$]
+    endmethod
+    
+    private method operator $NAME$= takes $TYPE$ new_$NAME$ returns nothing
         implement assertNotNull
         set this.tab.$TYPE$[$INDEX$] = new_$NAME$
     endmethod
@@ -326,13 +349,35 @@ endmodule
     endmethod
 //! endtextmacro
 
-//! textmacro HashStruct_NewReadonlyHandleFieldIndexed takes NAME, TYPE, INDEX    
+//! textmacro HashStruct_NewHandleFieldIndexed takes NAME, TYPE, INDEX    
     method operator $NAME$ takes nothing returns $TYPE$
         implement assertNotNull
         return this.tab.$TYPE$[$INDEX$]
     endmethod
     
     method operator $NAME$= takes $TYPE$ new_$NAME$ returns nothing
+        implement assertNotNull
+        call this.tab.handle.setValue($INDEX$, new_$NAME$)
+    endmethod
+    
+    private method $NAME$_clear takes nothing returns nothing
+        implement assertNotNull
+        call this.tab.remove($INDEX$)
+    endmethod
+    
+    private method $NAME$_exists takes nothing returns boolean
+        implement assertNotNull
+        return this.tab.handle.has($INDEX$)
+    endmethod
+//! endtextmacro
+
+//! textmacro HashStruct_NewReadonlyHandleFieldIndexed takes NAME, TYPE, INDEX    
+    method operator $NAME$ takes nothing returns $TYPE$
+        implement assertNotNull
+        return this.tab.$TYPE$[$INDEX$]
+    endmethod
+    
+    private method operator $NAME$= takes $TYPE$ new_$NAME$ returns nothing
         implement assertNotNull
         call this.tab.handle.setValue($INDEX$, new_$NAME$)
     endmethod

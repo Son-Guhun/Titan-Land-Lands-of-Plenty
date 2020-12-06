@@ -312,7 +312,7 @@ private struct $NAME$_handles extends array
     method []= takes integer key, handle h returns nothing
         call SaveFogStateHandle($NAME$_GetWrappedHashtable(), this, key, ConvertFogState(GetHandleId(h)))
     endmethod
-    method set takes integer key, handle h returns nothing
+    method setValue takes integer key, handle h returns nothing
         call HashtableWrapper_SetHandle($NAME$_GetWrappedHashtable(), this, key, h)
     endmethod
 endstruct
