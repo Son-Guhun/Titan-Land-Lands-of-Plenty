@@ -73,13 +73,21 @@ endglobals
         call SaveInteger(hashTable, $recycle_key$, 0, LoadInteger(hashTable, $recycle_key$, $var_name$))
         call RemoveSavedInteger(hashTable, $recycle_key$, $var_name$)
     endif
+    
+    call SaveInteger(hashTable, $recycle_key$, $var_name$, -1)
 //! endtextmacro
 
 // Recycles the value of variable "var_name" in the specified recycle key. Does not alter "var_name".
 //! textmacro GMUI_RecycleIndex takes var_name,recycle_key
-    if $var_name$ != 0 then  // Do not free a nil value
-        call SaveInteger(hashTable, $recycle_key$, $var_name$, LoadInteger(hashTable, $recycle_key$, 0))
-        call SaveInteger(hashTable, $recycle_key$, 0, $var_name$)
+    if LoadInteger(hashTable, $recycle_key$, $var_name$) == -1 then
+        if $var_name$ > 0 then  // Do not free a nil value
+            call SaveInteger(hashTable, $recycle_key$, $var_name$, LoadInteger(hashTable, $recycle_key$, 0))
+            call SaveInteger(hashTable, $recycle_key$, 0, $var_name$)
+        else
+            call BJDebugMsg("|cffff0000GMUI Error:|r Tried to free a negative or null index.")
+        endif
+    else
+        call BJDebugMsg("|cffff0000GMUI Error:|r Tried to free an unused index (or double-free).")
     endif
 //! endtextmacro
 

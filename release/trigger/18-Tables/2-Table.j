@@ -63,8 +63,9 @@ library Table /* made by Bribe, special thanks to Vexorian & Nestharus, version 
 */
    
 globals
+    private constant integer STATIC_TABLES = 8190  // Number of static tables (dynamic tables start from this index)
     private integer less = 0    //Index generation for TableArrays (below 0).
-    private integer more = 8190 //Index generation for Tables.
+    private integer more =  STATIC_TABLES  //Index generation for Tables.
     //Configure it if you use more than 8190 "key" variables in your map (this will never happen though).
    
     private hashtable ht = InitHashtable()
@@ -291,7 +292,7 @@ struct Table extends array
             call dex.list.remove(this) //Clear hashed memory
         endif
        
-        debug set dex.list[this] = -1
+        set dex.list[this] = -1
         return this
     endmethod
    
@@ -300,10 +301,13 @@ struct Table extends array
     //     call tb.destroy()
     //
     method destroy takes nothing returns nothing
-        debug if dex.list[this] != -1 then
-            debug call BJDebugMsg("Table Error: Tried to double-free instance: " + I2S(this))
-            debug return
-        debug endif
+        if integer(this) < STATIC_TABLES then
+            call BJDebugMsg("|cffff0000Table Error:|r Tried to destroy static table: " + I2S(this))
+            return
+        elseif dex.list[this] != -1 then
+            call BJDebugMsg("|cffff0000Table Error:|r Tried to double-free instance: " + I2S(this))
+            return
+        endif
        
         call this.flush()
        

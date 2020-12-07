@@ -11,6 +11,19 @@ library OOP
     endmethod
 //! endtextmacro
 
+public module CatchNullPointerEx
+    if this == 0 then
+        call BJDebugMsg("Null pointer exception: $CURRENT_FUNCTION$")
+    endif
+endmodule
+
+public module CatchNullPointer
+    if this <= 0 then
+        call BJDebugMsg("Invalid pointer (" + I2S(this) + ") exception: $CURRENT_FUNCTION$")
+    endif
+endmodule
+
+
 public module PlayerStruct
     static method get takes player whichPlayer returns thistype
         return GetPlayerId(whichPlayer)

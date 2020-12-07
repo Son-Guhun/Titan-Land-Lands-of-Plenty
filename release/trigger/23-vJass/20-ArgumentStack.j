@@ -22,6 +22,12 @@ private struct G extends array
     endmethod
 
     static method setVar takes integer key, integer val returns integer
+        if val < 0 then
+            call BJDebugMsg("|cffff0000ArgumentStack error:|r popped null stack.")
+        elseif val > 5 then
+            call BJDebugMsg("|cffff0000ArgumentStack warning:|r high stack count.")
+        endif
+    
         set .tab[key] = val
         return val
     endmethod
@@ -41,11 +47,11 @@ module ArgumentStack
         endmethod
         
         static method newStack takes nothing returns nothing
-            set stack = stackStack()[G.setVar(current, G.getVar(current + 1))]
+            set stack = stackStack()[G.setVar(current, G.getVar(current) + 1)]
         endmethod
         
         static method pop takes nothing returns nothing
-            set stack = stackStack()[G.setVar(current, G.getVar(current - 1))]
+            set stack = stackStack()[G.setVar(current, G.getVar(current) - 1)]
         endmethod
 
 endmodule

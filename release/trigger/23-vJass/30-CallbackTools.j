@@ -11,7 +11,11 @@ globals
 endglobals
 
 public function EvaluateBoolexpr takes boolexpr callback returns nothing
-    call ForceEnumAllies(ENUM_FORCE, Player(PLAYER_NEUTRAL_AGGRESSIVE), callback)
+    local trigger trig = CreateTrigger()
+    call TriggerAddCondition(trig, callback)
+    call TriggerEvaluate(trig)
+    call DestroyTrigger(trig)
+    set trig = null
 endfunction
 
 public function ExecuteCode takes code callback returns nothing

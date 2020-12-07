@@ -81,7 +81,7 @@ struct SpecialEffect extends array
     endmethod
     
     method operator height= takes real value returns nothing
-        implement assertNotNull
+        implement OOP_CatchNullPointer
         
         set .height_impl = value
         call MoveLocation(.loc, .x, .y)
@@ -108,6 +108,8 @@ struct SpecialEffect extends array
     */
     
     method setPosition takes real x, real y returns nothing
+        implement OOP_CatchNullPointer
+    
     // This code is currently not necessary, as there is no way for players to move non-attached sfx in-game.
     /*
         if DefaultPathingMap(.unitType).hasPathing() then
@@ -138,7 +140,7 @@ struct SpecialEffect extends array
     endmethod
     
     method operator yaw= takes real value returns nothing
-        implement assertNotNull
+        implement OOP_CatchNullPointer
         
         set .yaw_impl = value
         // call BlzSetSpecialEffectYaw(.effect, value)
@@ -147,7 +149,7 @@ struct SpecialEffect extends array
     endmethod
     
     method operator pitch= takes real value returns nothing
-        implement assertNotNull
+        implement OOP_CatchNullPointer
         
         set .pitch_impl = value
         //call BlzSetSpecialEffectPitch(.effect, value)
@@ -156,7 +158,7 @@ struct SpecialEffect extends array
     endmethod
     
     method operator roll= takes real value returns nothing
-        implement assertNotNull
+        implement OOP_CatchNullPointer
         
         set .roll_impl = value
         //call BlzSetSpecialEffectRoll(.effect, value)
@@ -165,7 +167,7 @@ struct SpecialEffect extends array
     endmethod
     
     method setOrientation takes real yaw, real pitch, real roll returns nothing
-        implement assertNotNull
+        implement OOP_CatchNullPointer
         
         set .yaw_impl = yaw
         set .pitch_impl = pitch
@@ -181,7 +183,7 @@ struct SpecialEffect extends array
     endmethod
     
     method operator color= takes integer value returns nothing
-        implement assertNotNull
+        implement OOP_CatchNullPointer
         
         if 0 <= value and bj_MAX_PLAYER_SLOTS > value then
             set .color_impl = value
@@ -190,7 +192,7 @@ struct SpecialEffect extends array
     endmethod
     
     method setScale takes real scaleX, real scaleY, real scaleZ returns nothing
-        implement assertNotNull
+        implement OOP_CatchNullPointer
         
         set .scaleX = scaleX
         set .scaleY = scaleY
@@ -202,7 +204,7 @@ struct SpecialEffect extends array
     endmethod
     
     method setVertexColor takes integer red, integer green, integer blue returns nothing
-        implement assertNotNull
+        implement OOP_CatchNullPointer
         
         set .red = red
         set .green = green
@@ -217,7 +219,7 @@ struct SpecialEffect extends array
     endmethod
     
     method operator alpha= takes integer alpha returns nothing
-        implement assertNotNull
+        implement OOP_CatchNullPointer
         
         set .alpha_impl = alpha
         call BlzSetSpecialEffectAlpha(.effect, alpha)
@@ -230,7 +232,7 @@ struct SpecialEffect extends array
     endmethod
     
     method operator animationSpeed= takes real value returns nothing
-        implement assertNotNull
+        implement OOP_CatchNullPointer
         
         set .animationSpeed_impl = value
         call BlzSetSpecialEffectTimeScale(.effect, value)
@@ -244,7 +246,7 @@ struct SpecialEffect extends array
     
     method addSubAnimation takes subanimtype anim returns nothing
         local integer animId = GetHandleId(anim)
-        implement assertNotNull
+        implement OOP_CatchNullPointer
         
         if not .subanimations_exists() then
             set .subanimations = LinkedHashSet.create()
@@ -259,7 +261,7 @@ struct SpecialEffect extends array
     
     method removeSubAnimation takes subanimtype anim returns nothing
         local integer animId = GetHandleId(anim)
-        implement assertNotNull
+        implement OOP_CatchNullPointer
         
         if .subanimations_exists() then
             if .subanimations.contains(animId) then
@@ -275,7 +277,7 @@ struct SpecialEffect extends array
     endmethod
     
     method clearSubAnimations takes nothing returns nothing
-        implement assertNotNull
+        implement OOP_CatchNullPointer
         
         if .subanimations_exists() then
             call BlzSpecialEffectClearSubAnimations(.effect)
@@ -313,7 +315,7 @@ struct SpecialEffect extends array
     
     method destroy takes nothing returns nothing
         local effect e = .effect
-        implement assertNotNull
+        implement OOP_CatchNullPointer
         
         call .clearSubAnimations()
         
@@ -330,7 +332,7 @@ struct SpecialEffect extends array
         local SpecialEffect result
         local LinkedHashSet subanims
         local integer subanim
-        implement assertNotNull
+        implement OOP_CatchNullPointer
         
         if skin == 0 then
             set result = SpecialEffect.create(newType, this.x, this.y)

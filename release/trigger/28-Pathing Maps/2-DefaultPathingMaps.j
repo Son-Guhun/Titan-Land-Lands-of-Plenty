@@ -43,6 +43,8 @@ struct ObjectPathing extends array
     
     method update takes PathingMap path, real x, real y, real ang returns thistype
     
+        implement OOP_CatchNullPointer
+    
         if this.isActive then
             call .pathMap.applyAtAngled(.x, .y, false, .angle)
         endif
@@ -66,6 +68,8 @@ struct ObjectPathing extends array
     
     method disableAndTransfer takes handle receiver returns nothing
         local thistype receiverData = get(receiver)
+        
+        implement OOP_CatchNullPointer
         
         if receiverData.isActive then
             call receiverData.pathMap.applyAtAngled(receiverData.x, receiverData.y, false, receiverData.angle)
