@@ -224,14 +224,23 @@ endfunction
 
 private function onStateExit takes nothing returns boolean
     local User pId = User[ControlState.getChangingPlayer()]
+    local unit u
+    
+    loop
+        //! runtextmacro ForUnitInGroup("u", "selectedUnits[pId]")
+    
+        if User.fromLocal() == pId then
+            call SelectUnit(u, true)
+        endif
+    endloop
 
-    call SelectGroupForPlayerBJ(selectedUnits[pId], pId.handle)
-    call GroupClear(selectedUnits[pId])
     if effects[pId] != 0 then
         call effects[pId].destroy()
         set effects[pId] = 0
     endif
     call DecorationsListbox.refreshList(pId.handle)  // refresh list to re-enable button, if it's still in the listbox
+    
+    set u = null
     return false
 endfunction
 
