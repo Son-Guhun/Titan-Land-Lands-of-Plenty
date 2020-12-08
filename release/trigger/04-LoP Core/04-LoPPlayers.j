@@ -45,14 +45,18 @@ Functions:
 // ==============================================
 // Leaver utilities
 
+function FindFirstPlayerExcept takes User except returns player
+    local User pId = 0
+    loop
+        exitwhen pId != except and GetPlayerSlotState(pId.handle) == PLAYER_SLOT_STATE_PLAYING
+        set pId = pId + 1
+    endloop
+    return pId.handle
+endfunction
+
 // Find the first player that is still player. Should not be called during map initialization.
 function FindFirstPlayer takes nothing returns player
-        local User pId = 0
-        loop
-            exitwhen GetPlayerSlotState(pId.handle) == PLAYER_SLOT_STATE_PLAYING
-            set pId = pId + 1
-        endloop
-        return pId.handle
+    return FindFirstPlayerExcept(-1)
 endfunction
 
 // Makes 'whichPlayer' the new Titan.

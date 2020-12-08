@@ -7,7 +7,7 @@ function Trig_System_Detect_Leaver_Actions takes nothing returns nothing
     call LoP_WarnPlayer(User.Local, LoPChannels.WARNING, GetPlayerName(GetTriggerPlayer()) + " has left the game.")
     
     if GetTriggerPlayer() == udg_GAME_MASTER then
-        call MakeTitan(FindFirstPlayer())
+        call MakeTitan(FindFirstPlayerExcept(User[udg_GAME_MASTER]))
         call LoP_WarnPlayer(User.Local, LoPChannels.WARNING, "The Titan has left. " + GetPlayerName(udg_GAME_MASTER) + " is the new Titan.")
     endif
 endfunction
