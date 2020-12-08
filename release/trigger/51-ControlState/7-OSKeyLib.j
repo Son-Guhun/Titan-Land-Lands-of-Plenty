@@ -265,8 +265,9 @@ struct OSKeys extends array
     private static trigger eventResponder = null
     private static trigger executer
     private static trigger holdExecuter
+    private static framehandle syncButton
     private static real array latestTimestamp
-    private static integer array totalPressedKeys
+    private static thistype array lastPressedKey
     private static boolean array isPressedArray[256][24]
     private static real array timestamp[256][24]
     
@@ -348,7 +349,7 @@ struct OSKeys extends array
             set key = key + 1
         endloop
         
-        set totalPressedKeys[pId] = 0
+        set lastPressedKey[pId] = 0
     endmethod
     
     static method getPressedMetaKeys takes player whichPlayer returns integer
@@ -399,23 +400,23 @@ struct OSKeys extends array
             
             // A key firing a up event while it's already up is a sign of alt-tab/unintended behaviour
             if isPressedArray[key][pId] then  
-                set totalPressedKeys[pId] = totalPressedKeys[pId] - 1  // only change total count if key was actually pressed before being released
                 set isPressedArray[key][pId] = false
             endif
             
             call TriggerEvaluate(executer)
 
         elseif not key.isPressedId(pId) then
+            set lastPressedKey[pId] = key
             set latestTimestamp[pId] = Timeline.game.elapsed
             set timestamp[key][pId] = Timeline.game.elapsed
             set isPressedArray[key][pId] = true
-            set totalPressedKeys[pId] = totalPressedKeys[pId] + 1
             call TriggerEvaluate(executer)
 
             if key == RETURN  then
                 call resetKeys(pId)
             endif
         else
+            set lastPressedKey[pId] = key
             set latestTimestamp[pId] = Timeline.game.elapsed
         
             call TriggerEvaluate(holdExecuter)
@@ -430,20 +431,37 @@ struct OSKeys extends array
         loop
             exitwhen pId >= bj_MAX_PLAYERS
             
-            if totalPressedKeys[pId] > 0 and Timeline.game.elapsed - latestTimestamp[pId] > TIMEOUT then
+            if lastPressedKey[pId] != 0 and lastPressedKey[pId].isPressedId(pId) and Timeline.game.elapsed - latestTimestamp[pId] > TIMEOUT then
                 call resetKeys(pId)
             endif
             
             set pId = pId + 1
         endloop
         
+        if not BlzIsLocalClientActive() and lastPressedKey[User.fromLocal()] != 0 then
+            call BlzFrameClick(syncButton)
+        endif
+        
+    endmethod
+    
+    private static method onSync takes nothing returns nothing
+        if lastPressedKey[User[GetTriggerPlayer()]] != 0 then
+            call resetKeys(User[GetTriggerPlayer()])
+        endif
     endmethod
     
     private static method onStart takes nothing returns nothing
         local trigger trig = CreateTrigger()
         local User p
         local thistype key = 0
+        local framehandle frame = BlzCreateFrameByType("BUTTON", "OSKeysSyncButton", BlzGetOriginFrame(ORIGIN_FRAME_GAME_UI, 0), "",0)
         
+        call TriggerAddAction(trig, function thistype.onSync)
+        call BlzTriggerRegisterFrameEvent(trig, frame, FRAMEEVENT_CONTROL_CLICK)
+        call BlzFrameSetVisible(frame, false)
+        
+        set .syncButton = frame
+        set trig = CreateTrigger()
         set .eventResponder = trig
         
         call TimerStart(GetExpiredTimer(), ACCURACY, true, function thistype.onTimer)
