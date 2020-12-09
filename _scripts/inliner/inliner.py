@@ -47,7 +47,7 @@ def parse_global_handle(line):
     type, name = rvalue.split()
 
     if type not in ('integer', 'real', 'boolean', 'code', 'string'):
-        if 'null' not in lvalue:
+        if lvalue != 'null':
             handles.append((name, lvalue))
             return '{} {}'.format(type, name)
     return line
@@ -87,12 +87,19 @@ def parse(file, out=sys.stdout):
                 line = inline_constants(line)
                 if parse_constant(line):
                     line = ''
+                else:
+                    temp = parse_global_handle(line[len("constant "):])
+                    if temp != line[len("constant "):]:
+                        line = temp + '\n'
+                    
             elif starts_with(stripped, "endglobals"):
                 in_globals = False
-            else:
-                if not stripped.startswith('//'):
-                    line = parse_global_handle(stripped)+'\n'
-                    line = inline_constants(line)
+                
+            elif not stripped.startswith('//'):
+                line = parse_global_handle(stripped)+'\n'
+                line = inline_constants(line)
+                
+                    
         elif in_locals:
             if starts_with(stripped, "local"):
                 line = inline_constants(line)
