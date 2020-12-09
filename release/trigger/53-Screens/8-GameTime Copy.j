@@ -1,4 +1,4 @@
-library GameTime requires TableStruct
+library GameTime requires TableStruct, GameTimeView
 
 struct GameTime extends array
     static integer a

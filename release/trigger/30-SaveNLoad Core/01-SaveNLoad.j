@@ -10,7 +10,7 @@ public constant function FOLDER takes nothing returns string
     return "TLLoP\\Saves\\"
 endfunction
 
-struct SaveInstanceBase
+struct SaveInstanceBase extends array
     SaveWriter saveWriter
 endstruct
 

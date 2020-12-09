@@ -1,4 +1,4 @@
-library LoPInitDecoTents requires LoPHeader, LoPDecoBuilders
+library LoPInitDecoTents requires LoPStdLib, LoPDecoBuilders
 /*
     Defines functions to create the Deco Tents in the Titan Palace, which are dynamically
 generated. These functions can be culled during map initialization, but it is preferred to call them

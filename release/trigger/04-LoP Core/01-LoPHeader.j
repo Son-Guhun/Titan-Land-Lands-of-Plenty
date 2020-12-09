@@ -4,15 +4,9 @@ This library defines many functions that are used across the map's code.
 
 */
 
-private module InitModule
-    private static method onInit takes  nothing returns nothing
-        set neutPassive = Player(PLAYER_NEUTRAL_PASSIVE)
-    endmethod
-endmodule
-
 struct LoPHeader extends array
 
-    private static player neutPassive
+    private static constant player neutPassive = Player(PLAYER_NEUTRAL_PASSIVE)
     
     static method operator NEUTRAL_PASSIVE takes nothing returns player
         return neutPassive
@@ -25,8 +19,7 @@ struct LoPHeader extends array
     static method operator gameMaster= takes player p returns nothing
         set udg_GAME_MASTER = p
     endmethod
-        
-    implement InitModule
+    
 endstruct
 
 function LoP_IsUnitDecoration takes unit whichUnit returns boolean

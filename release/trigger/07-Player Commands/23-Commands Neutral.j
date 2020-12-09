@@ -1,4 +1,4 @@
-library LoPNeutralUnits requires TableStruct, LoPHeader
+library LoPNeutralUnits requires TableStruct, LoPStdLib
 
     struct PlayerData extends array
         //! runtextmacro TableStruct_NewHandleField("neutralUnits", "group")

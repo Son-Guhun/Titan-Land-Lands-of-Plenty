@@ -18,9 +18,21 @@ This is a fairly LoP-specific implementation, though it could easily be adapted 
 
 struct SaveInstance extends array
 
-
     implement ExtendsTable
     implement SaveInstanceBaseModule
+    
+    
+    method operator unit takes nothing returns SaveInstanceUnit
+        return this
+    endmethod
+    
+    method operator destructable takes nothing returns SaveInstanceDestructable
+        return this
+    endmethod
+    
+    method operator terrain takes nothing returns SaveInstanceTerrain
+        return this
+    endmethod
     
     
     static method create takes SaveWriter saveWriter returns thistype
@@ -45,20 +57,6 @@ struct SaveInstance extends array
         endif
         
         call Table(this).destroy()
-    endmethod
-    
-
-
-    method operator unit takes nothing returns SaveInstanceUnit
-        return this
-    endmethod
-    
-    method operator destructable takes nothing returns SaveInstanceDestructable
-        return this
-    endmethod
-    
-    method operator terrain takes nothing returns SaveInstanceTerrain
-        return this
     endmethod
 
 endstruct
@@ -149,7 +147,7 @@ function SaveTerrain takes SaveInstance saveInstance, rect saveRect returns noth
     call SaveStuff(saveInstance, null, saveRect)
 endfunction
 
-private struct InitStruct
+private struct InitStruct extends array
     private static method onInit takes nothing returns nothing
         call TimerStart(CreateTimer(), 0.5, true, function SaveLoopActions)
         set PlayerData.playerQueue = LinkedHashSet.create()

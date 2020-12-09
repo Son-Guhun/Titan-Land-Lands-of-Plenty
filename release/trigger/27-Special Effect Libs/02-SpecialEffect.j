@@ -11,7 +11,7 @@ function GetUnitTypeIdModel takes integer unitTypeId returns string
     return UnitModels[unitTypeId]
 endfunction
 
-module InitModule
+private module InitModule
     private static method onInit takes nothing returns nothing
         set .loc = Location(0., 0.)
     endmethod

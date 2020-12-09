@@ -1,4 +1,4 @@
-library ArgumentStack
+library ArgumentStack requires ConstTable
 /*
 
     How to use:

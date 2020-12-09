@@ -108,7 +108,7 @@ endfunction
 private function LoP_InitProtectedUnitsFilter takes nothing returns boolean
     local unit filterU = GetFilterUnit()
     
-    if ( IsUnitType(filterU, UNIT_TYPE_STRUCTURE) and GetOwningPlayer(filterU) == LoP.NEUTRAL_PASSIVE ) /*
+    if ( IsUnitType(filterU, UNIT_TYPE_STRUCTURE) and GetOwningPlayer(filterU) == LoPHeader.NEUTRAL_PASSIVE ) /*
         */ or filterU == HERO_COSMOSIS() /*
         */ or filterU == HERO_CREATOR() /*
         */ or filterU == POWER_KILL() /*
