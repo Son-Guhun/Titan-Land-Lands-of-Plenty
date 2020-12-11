@@ -6,6 +6,8 @@ private struct Globals extends array
         return MathParser.ans
     endmethod
     
+    static RGBA color = 0
+    
     static location loc
 
 endstruct
@@ -62,6 +64,7 @@ private function groupFunc takes nothing returns nothing
         else
             call CommandsDUnitMods_SetMatrixScale(enumUnit, args)
         endif
+        
     elseif ( command == "'fly" or command == "'h") then
         if IsUnitType(enumUnit, UNIT_TYPE_STRUCTURE) then
             if args == "" then
@@ -76,6 +79,7 @@ private function groupFunc takes nothing returns nothing
                 call LoP.UVS.FlyHeight(enumUnit, Globals.value)
             endif
         endif
+        
     elseif ( command == "'ah" ) then
         if LoP_IsUnitDecoration(enumUnit) then
             call MoveLocation(Globals.loc, GetUnitX(enumUnit), GetUnitY(enumUnit))
@@ -93,36 +97,43 @@ private function groupFunc takes nothing returns nothing
                 endif
             endif
         endif
+        
     elseif ( command == "'face" or command == "'f") then
         if args == "" then
             call LoP.UVS.Facing(enumUnit, udg_DecoSystem_Facing[playerNumber])
         else
             call LoP.UVS.Facing(enumUnit, Globals.value)
         endif
+        
     elseif ( SubString(command, 0, 4) == "'rgb") then
-        call UnitVisualsSetters.VertexColorInt(enumUnit, udg_ColorSystem_Red[playerNumber], udg_ColorSystem_Green[playerNumber], udg_ColorSystem_Blue[playerNumber], udg_ColorSystem_Alpha[playerNumber])
-    elseif ( command == "'anim" ) then
+        call LoP.UVS.VertexColorInt(enumUnit, Globals.color.red, Globals.color.green, Globals.color.blue, Globals.color.alpha)
+   
+   elseif ( command == "'anim" ) then
         if args == "" then
             call SetUnitAnimation( enumUnit, udg_DecoSystem_Anims[playerNumber] )
         else
             call SetUnitAnimation( enumUnit, args )
         endif
+        
     elseif ( command == "'speed" ) then
         if args == "" then
-            call UnitVisualsSetters.AnimSpeed(enumUnit, udg_DecoSystem_animSpeed[playerNumber]/100)
+            call LoP.UVS.AnimSpeed(enumUnit, udg_DecoSystem_animSpeed[playerNumber]/100)
         else
-            call UnitVisualsSetters.AnimSpeed(enumUnit, Globals.value/100)
+            call LoP.UVS.AnimSpeed(enumUnit, Globals.value/100)
         endif
+        
     elseif ( command == "'color" ) then
         if args == "" then
-            call UnitVisualsSetters.Color(enumUnit, udg_DecoSystem_PlayerColor[playerNumber])
+            call LoP.UVS.Color(enumUnit, udg_DecoSystem_PlayerColor[playerNumber])
         else
-            call UnitVisualsSetters.Color(enumUnit,  Commands_GetChatMessagePlayerNumber(args))
+            call LoP.UVS.Color(enumUnit,  Commands_GetChatMessagePlayerNumber(args))
         endif
+        
     elseif ( command == "'roll" ) then
         if args != "" then
             call UnitSetRoll(enumUnit, Globals.value*bj_DEGTORAD)
         endif
+        
     elseif ( command == "'pitch" ) then
         if args != "" then
             call UnitSetPitch(enumUnit, Globals.value*bj_DEGTORAD)
@@ -141,19 +152,19 @@ private function onCommand takes nothing returns boolean
     local integer cutToComma
     
     local integer pN = GetPlayerId(GetTriggerPlayer()) + 1
-    local integer red   = udg_ColorSystem_Red[pN]
-    local integer green = udg_ColorSystem_Green[pN]
-    local integer blue  = udg_ColorSystem_Blue[pN]
-    local integer alpha = udg_ColorSystem_Alpha[pN]
     
-    if cmd == "'rgb" then
-        call Commands_SetRGBAFromString(GetTriggerPlayer(), args, false)
-    elseif cmd == "'rgbi" then
-        call Commands_SetRGBAFromString(GetTriggerPlayer(), args, true)
-    elseif cmd == "'rgbh" then
-        call Commands_SetRGBAFromHex(GetTriggerPlayer(), args)
-    elseif cmd != "'anim" and cmd != "'color" then
-        call MathParser.calculate(LoP_Command.getArguments())
+    if args != "" then
+        if cmd == "'rgb" then
+            set Globals.color = Commands_SetRGBAFromString(GetTriggerPlayer(), args, false)
+        elseif cmd == "'rgbi" then
+            set Globals.color = Commands_SetRGBAFromString(GetTriggerPlayer(), args, true)
+        elseif cmd == "'rgbh" then
+            set Globals.color = Commands_SetRGBAFromHex(GetTriggerPlayer(), args)
+        elseif cmd != "'anim" and cmd != "'color" then
+            call MathParser.calculate(LoP_Command.getArguments())
+        endif
+    else
+        set Globals.color = udg_DecoSystem_RGBA[pN]
     endif
         
     
@@ -164,12 +175,6 @@ private function onCommand takes nothing returns boolean
     // ---------------------------------------------
     call ForGroup( udg_temp_group, function groupFunc )
     call DestroyGroup(udg_temp_group)
-    
-    set udg_ColorSystem_Red[pN] = red
-    set udg_ColorSystem_Green[pN] = green
-    set udg_ColorSystem_Blue[pN] = blue
-    set udg_ColorSystem_Alpha[pN] = alpha
-    
     
     set udg_temp_group = null
     set enumUnit = null

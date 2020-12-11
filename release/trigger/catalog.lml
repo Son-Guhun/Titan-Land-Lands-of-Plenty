@@ -304,6 +304,7 @@
         Disab
     29-UnitName: UnitName
     30-CallbackTools: CallbackTools
+    31-RGBA: RGBA
 '24-Unit Libraries': 'Unit Libraries'
 '25-Unit Event': 'Unit Event'
     '1-Unit Event Config': 'Unit Event Config'

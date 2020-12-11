@@ -10,6 +10,7 @@ scope DecoModAbils
         local player owner = GetOwningPlayer(trigU)
         local integer playerNumber = GetPlayerId(owner) + 1
         local unit targetU = GetSpellTargetUnit()
+        local RGBA color
 
         if GetUnitTypeId(trigU) != 'u015' then
             // Do nothing if unit is not Special Deco (performance)
@@ -27,7 +28,8 @@ scope DecoModAbils
             call LoP.UVS.Facing(targetU, udg_DecoSystem_Facing[playerNumber])
             
         elseif spellId == 'A0C3' then
-            call LoP.UVS.VertexColor(targetU, udg_ColorSystem_Red[playerNumber], udg_ColorSystem_Green[playerNumber], udg_ColorSystem_Blue[playerNumber], udg_ColorSystem_Alpha[playerNumber])
+            set color = udg_DecoSystem_RGBA[playerNumber]
+            call LoP.UVS.VertexColor(targetU, color.red, color.green, color.blue, color.alpha)
         
         elseif spellId == 'A0C1' then
             call SetUnitAnimation( targetU, udg_DecoSystem_Anims[playerNumber] )

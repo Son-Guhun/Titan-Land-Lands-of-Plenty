@@ -1,4 +1,4 @@
-library LoPCommands initializer onInit requires CutToComma, TableStruct, ArgumentStack, LoPStdLib, LoPPlayers, LoPTip, UserDefinedRects, UnitVisualMods, GAL, LoPWarn, CallbackTools
+library LoPCommands initializer onInit requires CutToComma, TableStruct, ArgumentStack, LoPStdLib, LoPPlayers, LoPTip, UserDefinedRects, UnitVisualMods, GAL, LoPWarn, CallbackTools, RGBA
 
 globals
     constant integer ACCESS_TITAN = 1
@@ -104,49 +104,49 @@ function GetNextPlayerArgument takes ArrayList_string list returns integer
 endfunction
 
 // Used by rgb commands.
-function Commands_SetRGBAFromHex takes player whichPlayer, string args returns nothing
+function Commands_SetRGBAFromHex takes player whichPlayer, string args returns RGBA
     local integer pN = GetPlayerId(whichPlayer) + 1
     local integer len = StringLength(args)
+    local RGBA color
     
     if len > 3 and SubString(args, 0, 1) == "#" then
         set args = SubString(args, 1, len)
         set len = len - 1
     elseif len < 2 then
-        set udg_ColorSystem_Red[pN] = 0
-        set udg_ColorSystem_Green[pN] = 0
-        set udg_ColorSystem_Blue[pN] = 0
-        set udg_ColorSystem_Alpha[pN] = 255
-        return
+        return RGBA.create(0, 0, 0, 255)
     endif
     set args = StringCase(args, false)
     
     
-    set udg_ColorSystem_Red[pN] = AnyBase(16).decode(SubString(args,0,2))
+    set color = RGBA.newRed(AnyBase(16).decode(SubString(args,0,2)))
     
     if len >= 4 then
-        set udg_ColorSystem_Green[pN] = AnyBase(16).decode(SubString(args,2,4))
+        set color = color.withGreen(AnyBase(16).decode(SubString(args,2,4)))
         
         if len >= 6 then
-            set udg_ColorSystem_Blue[pN] = AnyBase(16).decode(SubString(args,4,6))
+            set color = color.withBlue(AnyBase(16).decode(SubString(args,4,6)))
         
             if len >= 8 then
-                set udg_ColorSystem_Alpha[pN] = AnyBase(16).decode(SubString(args,6,8))
+                set color = color.withAlpha(AnyBase(16).decode(SubString(args,6,8)))
             else
-                set udg_ColorSystem_Alpha[pN] = 255
+                set color = color.withAlpha(255)
             endif
         else
-            set udg_ColorSystem_Blue[pN] = 0
-            set udg_ColorSystem_Alpha[pN] = 255
+            set color = color.withBlue(255).withAlpha(255)
         endif
     else
-        set udg_ColorSystem_Green[pN] = 0
-        set udg_ColorSystem_Blue[pN] = 0
-        set udg_ColorSystem_Alpha[pN] = 255
+        set color = color.withGreen(255).withBlue(255).withAlpha(255)
     endif
+
+    return color
 endfunction
 
+globals
+    private key INT_CONV_MSGKEY
+endglobals
+
 // Used by rgb commands.
-function Commands_SetRGBAFromString takes player whichPlayer, string args, boolean forceInteger returns nothing
+function Commands_SetRGBAFromString takes player whichPlayer, string args, boolean forceInteger returns RGBA
     local integer pN = GetPlayerId(whichPlayer) + 1
     local integer cutToComma
     
@@ -156,15 +156,13 @@ function Commands_SetRGBAFromString takes player whichPlayer, string args, boole
     local real alpha
     
     if CutToCharacter(args, "#") != StringLength(args) then
-        call Commands_SetRGBAFromHex(whichPlayer, args)
-        return
+        return Commands_SetRGBAFromHex(whichPlayer, args)
     endif
 
     set cutToComma = CutToCharacter(args," ")
     
     if cutToComma == StringLength(args) and StringLength(args) == 6 or StringLength(args) == 8 then
-        call Commands_SetRGBAFromHex(whichPlayer, args)
-        return
+        return Commands_SetRGBAFromHex(whichPlayer, args)
     endif
     
     set red = Arguments_ParseNumber(SubString(args,0,cutToComma))
@@ -181,10 +179,9 @@ function Commands_SetRGBAFromString takes player whichPlayer, string args, boole
     set cutToComma = CutToCharacter(args," ")
     set alpha = Arguments_ParseNumber(SubString(args,0,cutToComma))
     
-    
     if not forceInteger then
         if red > 100. or green > 100. or blue > 100. or alpha > 100. then
-            call LoP_WarnPlayer(whichPlayer, LoPChannels.WARNING, "Value over 100: assuming the user meant to use integer RGB.")
+            call LoP_WarnPlayerTimeout(whichPlayer, LoPChannels.WARNING, INT_CONV_MSGKEY, 60., "Value over 100: assuming the user meant to use integer RGB.")
         else
             set red   = LoP.UVS.utils.PercentTo255(red)
             set green = LoP.UVS.utils.PercentTo255(green)
@@ -192,11 +189,8 @@ function Commands_SetRGBAFromString takes player whichPlayer, string args, boole
             set alpha = LoP.UVS.utils.PercentTo255(alpha)
         endif
     endif
-    
-    set udg_ColorSystem_Red[pN] = R2I(red)
-    set udg_ColorSystem_Green[pN] = R2I(green)
-    set udg_ColorSystem_Blue[pN] = R2I(blue)
-    set udg_ColorSystem_Alpha[pN] = R2I(255 - alpha)
+
+    return RGBA.create(R2I(red), R2I(green), R2I(blue), 255 - R2I(alpha))
 endfunction
 
 // ======================================
