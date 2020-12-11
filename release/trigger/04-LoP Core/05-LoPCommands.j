@@ -187,8 +187,8 @@ function Commands_SetRGBAFromString takes player whichPlayer, string args, boole
             call LoP_WarnPlayer(whichPlayer, LoPChannels.WARNING, "Value over 100: assuming the user meant to use integer RGB.")
         else
             set red   = LoP.UVS.utils.PercentTo255(red)
-            set blue  = LoP.UVS.utils.PercentTo255(green)
-            set green = LoP.UVS.utils.PercentTo255(blue)
+            set green = LoP.UVS.utils.PercentTo255(green)
+            set blue  = LoP.UVS.utils.PercentTo255(blue)
             set alpha = LoP.UVS.utils.PercentTo255(alpha)
         endif
     endif
