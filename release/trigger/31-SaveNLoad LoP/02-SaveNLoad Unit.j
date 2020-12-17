@@ -1,16 +1,35 @@
-library SaveNLoadConfig requires LoPHeader, LoPNeutralUnits
-    
-public function StructureShouldAutoLand takes unit structure returns boolean
-    return not LoP_IsUnitDecoration(structure)
-endfunction    
-
-endlibrary
-
-library SaveNLoadUnit requires SaveNLoad, UnitVisualMods, AnyBase, DecorationSFX, UnitTypeDefaultValues, AttachedSFX, optional LoPDeprecated
+library SaveNLoadUnit requires SaveNLoad, UnitVisualMods, AnyBase, DecorationSFX, UnitTypeDefaultValues, AttachedSFX, optional LoPDeprecated, LoPHeader, LoPNeutralUnits
 /*
-    Defines functions used when a unit is loaded into the game.
+=========
+ Description
+=========
 
+    This library defines functions used for unit serialization and deserialization in Titan Land LoP.
+    
+    It is mainly used to implement the SaveUnit core library of SaveNLoad, though the public-facing
+functions may be called elsewhere.
+    
+=========
+ Documentation
+=========
+
+    struct SaveNLoad_BoolFlags:
+        . This struct contains constants that represent unit flags, which are bit fields used when
+        . serializing units.
+        
+        Constants:
+            integer UNROOTED  -> Represents root state for ancients and pathing map state for decorations
+            integer NEUTRAL   -> Represents whether a player's unit belongs to neutral passive.
+        
+        Static Methods:
+            boolean isAnyFlag(integer data, integer flags) 
+            boolean isAllFlags(integer data, integer flags)
+        
+    
 */
+//==================================================================================================
+//                                        Source Code
+//==================================================================================================
 
 private struct TAGS extends array
 
@@ -27,7 +46,7 @@ private struct TAGS extends array
     
 endstruct
 
-function ConvertAnimTags takes ConstTable convertType, string whichStr returns string
+private function ConvertAnimTags takes ConstTable convertType, string whichStr returns string
     local string result = ""
     local string substring
     local integer cutToComma = CutToCharacter(whichStr, " ")
@@ -56,10 +75,9 @@ function ConvertAnimTags takes ConstTable convertType, string whichStr returns s
     endif
 endfunction
 
-
-globals
-    boolean SaveNLoad_AUTO_LAND = false  // Can be overwritten by SaveNLoadConfig StructureShouldAutoLand
-endglobals
+private function StructureShouldAutoLand takes unit structure returns boolean
+    return not LoP_IsUnitDecoration(structure)
+endfunction
 
 struct SaveNLoad_BoolFlags extends array
     static method isAnyFlag takes integer data, integer flags returns boolean
@@ -615,11 +633,7 @@ function LoadUnit takes string chat_str, player un_owner, real centerX, real cen
             endif
             
             if IsUnitType(resultUnit, UNIT_TYPE_STRUCTURE) then
-                static if LIBRARY_SaveNLoadConfig then
-                    call UnitVisualsSetters.StructureFlyHeight(resultUnit, unitData.flyHeight, SaveNLoadConfig_StructureShouldAutoLand(resultUnit))
-                else
-                    call UnitVisualsSetters.StructureFlyHeight(resultUnit, unitData.flyHeight, AUTO_LAND)
-                endif
+                call UnitVisualsSetters.StructureFlyHeight(resultUnit, unitData.flyHeight, StructureShouldAutoLand(resultUnit))
             else
                 call UnitVisualsSetters.FlyHeight(resultUnit, unitData.flyHeight)
             endif
