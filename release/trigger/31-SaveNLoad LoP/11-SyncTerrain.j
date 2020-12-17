@@ -11,12 +11,12 @@ function Trig_LoadTerrainNew_Actions takes nothing returns nothing
         if (saveData.version < 7 and IsTerrainHeader(syncStr)) or IsTerrainHeaderV7(syncStr) then
             if saveData.atOriginal then
                 if saveData.version == 3 then
-                    call LoadTerrainHeader(playerId, syncStr, playerId.centerX, playerId.centerY, true, true)
+                    call LoadTerrainHeader(playerId, syncStr, playerId.centerX, playerId.centerY, saveData.version)
                 else
-                    call LoadTerrainHeader(playerId, syncStr, saveData.centerX + playerId.centerX, saveData.centerY + playerId.centerY, false, saveData.version < 8)
+                    call LoadTerrainHeader(playerId, syncStr, saveData.centerX + playerId.centerX, saveData.centerY + playerId.centerY, saveData.version)
                 endif
             else
-                call LoadTerrainHeader(playerId, syncStr, saveData.centerX, saveData.centerY, false, saveData.version < 8)
+                call LoadTerrainHeader(playerId, syncStr, saveData.centerX, saveData.centerY, saveData.version)
             endif
         else
             call LoadTerrain(playerId, syncStr)

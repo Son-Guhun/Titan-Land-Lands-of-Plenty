@@ -67,13 +67,18 @@ scope DeSerialization
         
     endstruct
 
+    
     // Loads the first line of a terrain save, which contains the coords of the rect
-    // offsetIsCenter indicates that offsetX and offsetY should be interpreted as the coords of a new center for the rect, and not actual offsets. Used for version 3 saves.
-    function LoadTerrainHeader takes PlayerTerrainData playerId, string chatStr, real offsetX, real offsetY, boolean offsetIsCenter, boolean beforeV8 returns nothing
+    function LoadTerrainHeader takes PlayerTerrainData playerId, string chatStr, real offsetX, real offsetY, integer versionId returns nothing
         local integer cutToComma
-        
         local real centerY
         local real centerX
+        
+        // indicates that offsetX and offsetY should be interpreted as the coords of a new center for the rect, and not actual offsets.
+        local boolean offsetIsCenter = versionId <= 3
+        
+        // version 8 fixed an OBOE that existed in older formats. This OBOE error must be taken into account when loading older saves.
+        local boolean beforeV8 = versionId < 8
         
         if IsTerrainHeaderV7(chatStr) then
             set chatStr = SubString(chatStr, 1, StringLength(chatStr))
@@ -96,7 +101,7 @@ scope DeSerialization
         
         if offsetX != 0 or offsetY != 0 then
         
-            if offsetIsCenter then // old versions support
+            if offsetIsCenter then
                 set centerX = (playerId.minX + playerId.maxX)/2
                 set centerY = (playerId.minY + playerId.maxY)/2
                 set offsetX = offsetX - centerX
