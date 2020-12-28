@@ -1,15 +1,13 @@
-library StructureTileDefinition /* v1.2b    By Guhun - Credits to IcemanBo and to WaterKnight
-               
-   */ requires /*
-
-        */ optional WorldBounds    /* github.com/nestharus/JASS/blob/master/jass/Systems/WorldBounds/script.j  
-               
+library StructureTileDefinition
+/*
 **
 **
 **                          Information
 **                         _____________
 **
-**  StrcutureTileDefinition provides an API to give information about a structure tile.
+**  StrcutureTileDefinition provides an API to give information about a structure tile. Structure tiles
+** are different from terrain tiles. They are sized 64x64, and the border tiles are entirely in the map,
+** instead of starting from the center coordinate.
 **            
 **      
 **                             API

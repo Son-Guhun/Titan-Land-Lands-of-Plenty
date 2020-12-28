@@ -15,8 +15,8 @@ using convenient abbreviations.
     
     lib LoP:
     
-        scope Header  -> LoPHeader
-        scope UVS     -> UnitVisualsSetters
+        scope H    -> LoPHeader
+        scope UVS  -> UnitVisualsSetters
         
         Constants:
             player NEUTRAL_PASSIVE  -> imported from LoPHeader
@@ -31,11 +31,11 @@ using convenient abbreviations.
 
 struct LoP extends array
     
-    //! runtextmacro ImportLibAs("LoPHeader", "Header")
+    //! runtextmacro ImportLibAs("LoPHeader", "H")
     //! runtextmacro ImportLibAs("UnitVisualsSetters", "UVS")
     
-    //! runtextmacro FromLibImportConstant("Header", "NEUTRAL_PASSIVE", "player")
-    //! runtextmacro FromLibImportGlobal("Header", "gameMaster", "player")
+    //! runtextmacro FromLibImportConstant("H", "NEUTRAL_PASSIVE", "player")
+    //! runtextmacro FromLibImportGlobal("H", "gameMaster", "player")
 
 endstruct
 

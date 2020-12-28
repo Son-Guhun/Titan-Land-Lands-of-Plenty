@@ -1,12 +1,55 @@
 library AutoRectEnvironment requires RectEnvironment, GLHS, WorldBounds
 // Version 1.1.0 => Now uses AnyTileDefiniton to split map into blocks of 2048x2048 instead of a region. 
+/*
+=========
+ Description
+=========
+
+    This library is used to automatically apply a rect's RectEnvironment when the local player's camera
+target is inside of the Rect. In order for a rect to be affected by this system, it must be registered
+first. When two rects overlap, the last one registered or moved has the lower priority.
+
+    This library functions by splitting the map into square blocks with sides 2048. Each block has a list
+of registered rects which intersect it. 32 times per second (can be configured), the system will determine
+which block the current camera target is located in, and then iterate over all rects which intersect that block.
+If it finds a rect which contains the current camera target, then iteration stops and the RectEnvironment
+is applied.
+
+    When moving or setting a rect, you must use this library functions instead of the natives, so that
+the map blocks it intersects are also updated. This library also provides hooks for this purpose, which
+can be found in the configuration section.
+    
+=========
+ Documentation
+=========
+    
+    public boolean IsRectRegistered(rect r)
+    public nothing RegisterRect(rect r)
+    public nothing DeRegisterRect(rect r)
+    
+    . In order for this system to function, these functions must be called instead of the natives:
+    .
+    .   public nothing MoveRect(rect r, real x, real y)
+    .   public nothing SetRect(rect r, real x, real y)
+    .
+    . Alternatively, you can enable hooks in this library's configratuion section.
+
+*/
+//==================================================================================================
+//                                      Configuration
+//==================================================================================================
 
 globals
-    private constant boolean ENABLE_SET_HOOK = false
-    private constant boolean ENABLE_MOVE_HOOK = false
-    private constant boolean ENABLE_REMOVE_HOOK = false
-    private constant real PERIOD = 1/32.
+    private constant boolean ENABLE_SET_HOOK = false     // Hooks this library's SetRect to the native of the same name.
+    private constant boolean ENABLE_MOVE_HOOK = false    // Hooks this library's SetRect to the native of the same name.
+    private constant boolean ENABLE_REMOVE_HOOK = false  // Hooks DeRegisterRect to RemoveRect.
+    
+    private constant real PERIOD = 1/32.  // Set the frequency at which this system checks the camera position.
 endglobals
+
+//==================================================================================================
+//                                        Source Code
+//==================================================================================================
 
 private struct Globals extends array
 
@@ -93,7 +136,7 @@ public function MoveRect takes rect r, real newCenterX, real newCenterY returns 
     
 endfunction
 
-function AutoRectEnvironment_SetRect takes rect r, real minx, real miny, real maxx, real maxy returns nothing
+public function SetRect takes rect r, real minx, real miny, real maxx, real maxy returns nothing
     if IsRectRegistered(r) then
         set Globals.rectWasMoved = true
         call RemoveRectFromBlocks(r)
@@ -111,11 +154,11 @@ static if ENABLE_REMOVE_HOOK then
     hook RemoveRect DeRegisterRect
 endif
 static if ENABLE_SET_HOOK then
-    hook SetRect AutoRectEnvironment_SetRect
+    hook SetRect SetRect
 endif
 
 // This function executes code specific for localplayer.
-function onTimer takes nothing returns nothing
+private function onTimer takes nothing returns nothing
     local real x = GetCameraTargetPositionX()
     local real y = GetCameraTargetPositionY()
     local rect r

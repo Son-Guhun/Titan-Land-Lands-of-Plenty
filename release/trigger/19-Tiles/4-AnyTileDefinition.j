@@ -1,22 +1,65 @@
-library AnyTileDefinition /* v1.2b    By IcemanBo - Credits to WaterKnight
-                             
-               
-   */ requires /*
-        */ TableStruct             /*
-        
-        */ optional WorldBounds    /* github.com/nestharus/JASS/blob/master/jass/Systems/WorldBounds/script.j  
- 
- 
-  ====  Config variable added by Guhun ==== */
- globals
+library AnyTileDefinition requires TableStruct, optional WorldBounds 
+/*
+=========
+ Description
+=========
+
+    This library allows you to split the map into square blocks of any integer size. Additinally, you
+can also initialize a custom tile size, which will assign a unique ID to every block. This can be used
+to store and work with tiles in a 1D data structure. WorldBounds is required in order to use tile IDs.
+
     
-    // If you do not use these functions, setting this to false will spare you 2 global variables and an init function
-    // Requires WorldBounds.
-    private constant boolean ENABLE_ID_FUNCTIONS = true
+=========
+ Documentation
+=========
 
-endglobals
+real GetCustomTileCenterCoordinate(integer tileSize, real a) 
 
+boolean AreCoordinatesInSameCustomTile(integer tileSize, real a, real b)
 
+boolean AreLocationsInSameCustomTile(integer tileSize, real x1, real y1, real x2, real y2)
+
+real GetCustomTileMin(integer tileSize, real a)
+
+real GetCustomTileMax(integer tileSize, real a)
+        
+integer GetCustomTileId(integer tileSize, real x, real y)
+
+integer GetCustomTileIdOffset(integer tileSize, real x, real y)
+
+integer GetCustomTileIdSafe(integer tileSize, real x, real y)
+
+boolean IsValidCustomTileId(integer tileSize, integer id)
+
+real GetCustomTileCenterXById(integer tileSize, integer id)
+
+real GetCustomTileCenterYById(integer tileSize, integer id)
+
+integer GetCustomTileHorizontalCount(integer tileSize)
+
+integer GetCustomTileVerticalCount(integer tileSize)
+
+boolean ValidateCustomTileIndexI(integer tileSize, integer i)
+
+boolean ValidateCustomTileIndexJ(integer tileSize, integer j)
+
+integer GetCustomTileIndexI(integer tileId, integer tileSize)
+
+integer GetCustomTileIndexJ(integer tileId, integer tileSize)
+    
+integer GetCustomTileIdFromIndices(integer i, integer j, integer tileSize)
+
+public integer IntRoundUp(integer num, integer multiple)
+
+integer GetCustomTileIdLastVertical(integer tileSize, integer tileId)
+
+nothing InitCustomTiles(integer tileSize)
+
+*/
+//==================================================================================================
+//                                        Source Code
+//==================================================================================================
+ 
 
 function GetCustomTileCenterCoordinate takes integer tileSize, real a returns real
     return I2R(MathRound(a/tileSize)*tileSize)
@@ -39,22 +82,7 @@ function GetCustomTileMax takes integer tileSize, real a returns real
     return GetCustomTileCenterCoordinate(tileSize, a) + tileSize/2
 endfunction
 
-
-//! textmacro Define_AreCoordinatesInSameCustomTile_Wrapper takes tileSize
-    function AreCoordinatesInSame$tileSize$Tile takes real a, real b returns boolean
-        return GetCustomTileCenterCoordinate($tileSize$,a) == GetCustomTileCenterCoordinate($tileSize$,b)
-    endfunction
-    
-    function Get$tileSize$TileMin takes real a returns real
-        GetCustomTileCenterCoordinate($tileSize$, a) - $halfTileSize$
-    endfunction
-    
-    function Get$tileSize$TileMax takes real a returns real
-        GetCustomTileCenterCoordinate($tileSize$, a) + $halfTileSize$
-    endfunction
-//! endtextmacro
-
-static if ENABLE_ID_FUNCTIONS and LIBRARY_WorldBounds then
+static if LIBRARY_WorldBounds then
 
     private struct Globals extends array
         //! runtextmacro TableStruct_NewConstTableField("","totalX")

@@ -18,6 +18,43 @@ SaveUnitExtras library:
     This function is executed after a unit's save string is saved, and is intended to save extra information.
     In LoP, this extra information includes waygate destinations, patrol points and rects.
 */
+/*
+=========
+ Description
+=========
+
+    This is the core SaveNLoad library that defines the struct used in SaveInstance.unit (see SaveMain).
+    
+    In order for this library to compile, a library called SaveNLoadUnit must exist. This is a library
+specific to the map the system is being implemented in, and must define the following functions:
+    - SerializeSpecialEffect
+    - SerializeUnit
+    
+=========
+ Documentation
+=========
+
+struct SaveInstanceUnit:
+    . This struct is not actually instantiated. Instead, it is used as a member of the SaveInstance
+    . struct defined in the SaveMain library.
+    
+    
+    Methods:
+        
+    boolean hasUnits()   -> Whether a group of units to save exists.
+    boolean hasEffects() -> Whether a hash set of effects to save exists.
+    
+    boolean isFinished() -> Whether all units and effects have been saved.
+    
+    nothing initialize() -> Must be called before the first call of saveNextUnits().
+    
+    nothing saveNextUnits() -> Saves the next batch of units if there are any left to save.
+    
+*/
+//==================================================================================================
+//                                       Configuration
+//==================================================================================================
+
 globals
     
     // Non-rect saves in which all units are contained within a rect smaller than these extents will
@@ -29,6 +66,10 @@ globals
     public constant integer BATCH_SIZE = 25
     
 endglobals
+
+//==================================================================================================
+//                                        Source Code
+//==================================================================================================
 
 struct SaveInstanceUnit extends array
 
@@ -128,7 +169,7 @@ struct SaveInstanceUnit extends array
     endmethod
 
     
-    method saveNextEffects takes nothing returns integer
+    private method saveNextEffects takes nothing returns integer
         local SaveWriter saveWriter = .saveWriter
         local LinkedHashSet_DecorationEffect decorations = .effects
         local DecorationEffect decoration = decorations.begin()
