@@ -165,12 +165,12 @@ module StaticLinkedSetNode
     /* DOC: getFirst()
     Returns the size of the set. This is an O(n) operation.
     */
-    method size takes nothing returns integer
+    static method size takes nothing returns integer
         local thistype data = .begin()
         local integer count = 0
         
         loop
-        exitwhen data == this.end()
+        exitwhen data == .end()
             set count = count + 1
             set data = data.next
         endloop

@@ -20,6 +20,12 @@ struct LoPHeader extends array
         set udg_GAME_MASTER = p
     endmethod
     
+    // Disable ability without affecting hide counter by calling BlzUnitHideAbility first.
+    static method UnitDisableAbility takes unit u, integer a, boolean flag returns nothing
+        call BlzUnitHideAbility(u, a, true)
+        call BlzUnitDisableAbility(u, a, flag, false)
+    endmethod
+    
 endstruct
 
 function LoP_IsUnitDecoration takes unit whichUnit returns boolean
