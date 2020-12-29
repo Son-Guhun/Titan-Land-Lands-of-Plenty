@@ -1,4 +1,4 @@
-library UnitVisualValues requires CutToComma, OOP, optional HashtableWrapper, optional Table, optional ConstTable
+library UnitVisualValues requires CutToComma, OOP, optional HashtableWrapper, UnitName, optional Table, optional ConstTable
 /*
 =========
  Description
@@ -300,7 +300,7 @@ struct UnitVisuals extends array
     endmethod
     
     static method getUnitName takes unit u returns string
-        local string name = GetUnitName(u)
+        local string name = UnitName_GetUnitName(u)
         //! runtextmacro ASSERT("whichUnit != null")
         
         if thistype[u].hasCustomName() then
