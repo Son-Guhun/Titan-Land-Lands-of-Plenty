@@ -131,16 +131,35 @@ config_values = \
 }
 
 def switch():
+    """Switches between Reforged and Classic exectuables"""
     temp = p['paths']['war3']
     p['paths']['war3'] = p['paths']['war3r']
     p['paths']['war3r'] = temp
 
-def test(version='',build='development'):
+def test_map(map=DEVELOPMENT_SLK, hd=None):
+    args =[]
+    if hd is not None:
+        args.extend(('-hd', '1' if hd else '0'))
+
+    subprocess.Popen([p['paths']['war3'],
+                      '-loadfile', os.path.abspath(map),
+                      '-launch']
+                     + args)
+
+def test(version='', build='development', **kwargs):
     """Opens a .w3x map with Warcraft III."""
-    subprocess.Popen([p['paths']['war3'],'-loadfile',os.path.abspath(build+'{}.w3x'.format('_' + version if version else '')),'-launch'])
+    test_map(os.path.abspath(build+'{}.w3x'.format('_' + version if version else '')), **kwargs)
     
-def test_map(map=DEVELOPMENT_SLK):
-    subprocess.Popen([p['paths']['war3'], '-loadfile',os.path.abspath(map),'-launch'])
+def test_devel(target='development', **kwargs):
+    commit(DEVEL)
+    push_devel(target)
+    build(target)
+    test_map(target+'.w3x', **kwargs)
+
+def test_full(build=DEVELOPMENT, **kwargs):
+    """Optimizes an OBJ map and then opens the generated SLK in WC3."""
+    optimize(build)
+    test('slk', build[:build.rfind('.w3x')], **kwargs)
 
 def open_with_editor(file=DEVELOPMENT):
     subprocess.Popen([p['paths']['worldedit'],'-loadfile',os.path.abspath(file)])
@@ -219,17 +238,6 @@ def push_devel(target='development'):
     copy_file_if_exists('devel/map/war3map.w3r', target+'/map/war3map.w3r')  # rect defs file
 
     push(release=target+'/', development='devel/', dirs=['trigger'])
-
-def test_devel(target='development'):
-    commit(DEVEL)
-    push_devel(target)
-    build(target)
-    test_map(target+'.w3x')
-
-def test_full(build=DEVELOPMENT):
-    """Optimizes an OBJ map and then opens the generated SLK in WC3."""
-    optimize(build)
-    test('slk',build[:build.rfind('.w3x')])
 
 def open_in_explorer(file):
     """Opens a file in the Windows explorer (or equivalent)."""
