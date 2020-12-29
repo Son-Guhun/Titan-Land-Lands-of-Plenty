@@ -30,13 +30,6 @@ Constants:
 Functions:
     nothing LoPDecoBuilders_AdjustSpecialAbilities(unit deco)
 
-    nothing LoPDecoBuilders_CreateMissing(player owner, real x, real y, group g, integer firstIndex, integer lastIndex, boolean reforged)
-    .
-    . Creates all missing deco builders in the range [firstIndex, lastIndex] for the given player, at point (x,y).
-    .     group g  -> if not null, all created units will be added to it.
-    .     boolean reforged  -> use constants DECO_BUILDERS_CLASSIC and DECO_BUILDERS_REFORGED for future compatibility.
-
-
 */
 
 globals
@@ -440,30 +433,5 @@ struct LoP_DecoBuilders extends array
 
     implement InitModule
 endstruct
-
-//Checks the deco counter for the player. If any counter is 0, create the missing deco.
-public function CreateMissing takes player owner, real x, real y, group g, integer firstIndex, integer lastIndex, boolean reforged returns nothing
-    local integer playerNumber = GetPlayerId(owner) + 1
-    local integer id
-
-    loop
-    exitwhen firstIndex > lastIndex
-        if reforged then
-            set id = LoP_DecoBuilders.reforgedRawcodes[firstIndex]
-        else
-            set id = LoP_DecoBuilders.rawcodes[firstIndex]
-        endif
-    
-        if LoadInteger(udg_Hashtable_2, playerNumber, id ) == 0 then
-            if g == null then
-                call CreateUnit(owner, id, x, y, bj_UNIT_FACING)
-            else
-                call GroupAddUnit(g, CreateUnit(owner, id, x, y, bj_UNIT_FACING))
-            endif
-        endif
-        
-        set firstIndex = firstIndex + 1
-    endloop
-endfunction
 
 endlibrary
