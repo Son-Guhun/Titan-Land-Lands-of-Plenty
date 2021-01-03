@@ -9,10 +9,11 @@ function Trig_CommandsD_Set_AoE_Conditions takes nothing returns boolean
     local group g
     local unit u
     local integer count = 0
+    local integer totalCount = LoP.H.CountPlayerUnitsOfType(trigP, DECO_BUILDER_SPECIAL)
     
     set udg_DecoSystem_Value[GetPlayerId(trigP) + 1] = IMaxBJ(IMinBJ(value, MAX_VAL_SIZE()), 1)
     
-    if DecoBuilderCount_GetForPlayer(trigP, DECO_BUILDER_SPECIAL) > 0 then
+    if totalCount > 0 then
         set g = CreateGroup()
         call GroupEnumUnitsOfPlayer(g, trigP, null)
         loop
@@ -20,9 +21,7 @@ function Trig_CommandsD_Set_AoE_Conditions takes nothing returns boolean
             if GetUnitTypeId(u) == DECO_BUILDER_SPECIAL then
                 call LoPDecoBuilders_AdjustSpecialAbilities(u)
                 set count = count + 1
-                if count == DecoBuilderCount_GetForPlayer(trigP, 'u015') then
-                    exitwhen true
-                endif
+                exitwhen count == totalCount
             endif
         endloop
         call DestroyGroup(g)

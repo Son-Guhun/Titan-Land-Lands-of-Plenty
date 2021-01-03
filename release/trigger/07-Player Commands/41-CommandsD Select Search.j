@@ -86,7 +86,7 @@ function SelcHandler takes player whichPlayer, string name returns nothing
     loop
         exitwhen i == LoP_DecoBuilders.AdvDecoLastIndex
         
-        if LoadInteger(udg_Hashtable_2, pId+1, LoP_DecoBuilders.rawcodes[i]) == 0 and  StartsString(StringCase(GetThirdName(GetObjectName(LoP_DecoBuilders.rawcodes[i])), true), name) then
+        if LoP.H.CountPlayerUnitsOfType(whichPlayer, LoP_DecoBuilders.rawcodes[i]) == 0 and  StartsString(StringCase(GetThirdName(GetObjectName(LoP_DecoBuilders.rawcodes[i])), true), name) then
             
             set deco = CreateUnitAtLoc(whichPlayer, LoP_DecoBuilders.rawcodes[i], udg_PLAYER_LOCATIONS[pId+1], 270.)
             set LoP_UnitData.get(deco).hideOnDeselect = true

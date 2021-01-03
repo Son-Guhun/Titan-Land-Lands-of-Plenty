@@ -26,6 +26,10 @@ struct LoPHeader extends array
         call BlzUnitDisableAbility(u, a, flag, false)
     endmethod
     
+    static method CountPlayerUnitsOfType takes player p, integer typeId returns integer
+        return GetPlayerTechCount(p, typeId, true)
+    endmethod
+    
 endstruct
 
 function LoP_IsUnitDecoration takes unit whichUnit returns boolean

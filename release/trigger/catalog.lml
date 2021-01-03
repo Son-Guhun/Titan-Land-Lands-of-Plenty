@@ -180,13 +180,15 @@
         Disab
 '08-Decoration Systems': 'Decoration Systems'
 '09-Deco Builders': 'Deco Builders'
-    01-Libraries: Libraries
+    01----------------------------: ---------------------------
         Comment
-    02-DecoBuilderCount: DecoBuilderCount
+    02----------------------------: ---------------------------
+        Comment
     03-Triggers: Triggers
         Comment
     '04-DecoBuilder Movement': 'DecoBuilder Movement'
-    '05-DecoBuilder Increase Count': 'DecoBuilder Increase Count'
+    05----------------------------: ---------------------------
+        Comment
     '06-DecoBuilder RangedBuild': 'DecoBuilder RangedBuild'
     '07-Unit Mods': 'Unit Mods'
         Comment

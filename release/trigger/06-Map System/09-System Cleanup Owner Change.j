@@ -5,11 +5,6 @@ library LoPfour requires LoPCleanUpDeath, LoPNeutralUnits
 function LoP_onChangeOwner takes unit whichUnit, player ownerOld returns nothing
     local UnitVisuals unitId = GetHandleId(whichUnit)
     
-    if LoP_IsUnitDecoBuilder(whichUnit) then
-        // DECO BUILDER DECREASE AND INCREASE COUNT
-        call DecoBuilderCount_SwitchOwner(whichUnit, ownerOld)
-    endif
-    
     // If ownership was changed with -neut command, no need to change colors.
     if LoP_GetOwningPlayer(whichUnit) != ownerOld then
         if unitId.hasColor() then

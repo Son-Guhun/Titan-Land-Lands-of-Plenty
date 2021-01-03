@@ -1,4 +1,4 @@
-library LoPDecoBuilders requires TableStruct
+library LoPDecoBuilders requires LoPHeader, TableStruct
 /*
     This library defines functions to initialize the values of the rawcodes[] array, which
 should contain the rawcodes of all existing Deco Builders, in alphabetical order. Special builders 
@@ -433,5 +433,29 @@ struct LoP_DecoBuilders extends array
 
     implement InitModule
 endstruct
+
+//Checks the deco counter for the player. If any counter is 0, create the missing deco.
+public function CreateMissing takes player owner, real x, real y, group g, integer firstIndex, integer lastIndex, boolean reforged returns nothing
+    local integer id
+
+    loop
+    exitwhen firstIndex > lastIndex
+        if reforged then
+            set id = LoP_DecoBuilders.reforgedRawcodes[firstIndex]
+        else
+            set id = LoP_DecoBuilders.rawcodes[firstIndex]
+        endif
+    
+        if LoPHeader.CountPlayerUnitsOfType(owner, id) == 0 then
+            if g == null then
+                call CreateUnit(owner, id, x, y, bj_UNIT_FACING)
+            else
+                call GroupAddUnit(g, CreateUnit(owner, id, x, y, bj_UNIT_FACING))
+            endif
+        endif
+        
+        set firstIndex = firstIndex + 1
+    endloop
+endfunction
 
 endlibrary
