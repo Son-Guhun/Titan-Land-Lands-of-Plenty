@@ -180,27 +180,21 @@
         Disab
 '08-Decoration Systems': 'Decoration Systems'
 '09-Deco Builders': 'Deco Builders'
-    01----------------------------: ---------------------------
+    01-Triggers: Triggers
         Comment
-    02----------------------------: ---------------------------
+    '02-DecoBuilder Movement': 'DecoBuilder Movement'
+    '03-DecoBuilder RangedBuild': 'DecoBuilder RangedBuild'
+    '04-Unit Mods': 'Unit Mods'
         Comment
-    03-Triggers: Triggers
+    '05-DecoBuilder Cast Ability': 'DecoBuilder Cast Ability'
+    '06-Terrain Mods': 'Terrain Mods'
         Comment
-    '04-DecoBuilder Movement': 'DecoBuilder Movement'
-    05----------------------------: ---------------------------
+    '07-TerrainSystem Cast Ability': 'TerrainSystem Cast Ability'
+    '08-Tree Mods': 'Tree Mods'
         Comment
-    '06-DecoBuilder RangedBuild': 'DecoBuilder RangedBuild'
-    '07-Unit Mods': 'Unit Mods'
-        Comment
-    '08-DecoBuilder Cast Ability': 'DecoBuilder Cast Ability'
-    '09-Terrain Mods': 'Terrain Mods'
-        Comment
-    '10-TerrainSystem Cast Ability': 'TerrainSystem Cast Ability'
-    '11-Tree Mods': 'Tree Mods'
-        Comment
-    '12-TreeSystem Create Trees': 'TreeSystem Create Trees'
-    '13-TreeSystem Cast Ability': 'TreeSystem Cast Ability'
-    '14-TreeSystem Choose Tree': 'TreeSystem Choose Tree'
+    '09-TreeSystem Create Trees': 'TreeSystem Create Trees'
+    '10-TreeSystem Cast Ability': 'TreeSystem Cast Ability'
+    '11-TreeSystem Choose Tree': 'TreeSystem Choose Tree'
 10-Decorations: Decorations
     '01-Deco OnEnterMap': 'Deco OnEnterMap'
     '02-Deco Root Anywhere': 'Deco Root Anywhere'
