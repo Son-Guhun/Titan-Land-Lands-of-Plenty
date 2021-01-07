@@ -115,42 +115,38 @@ struct LoPHints extends array
     It also has functionality to display a random hint from an ArrayList of hints.
     */
 
-    readonly static string array hints
-    
-    method operator msg takes nothing returns string
-        return hints[this]
-    endmethod
-    
+    readonly string msg
     private boolean seen // async
     
-    static constant integer REMOVE_UNIT_HOTKEY = 1
-    static constant integer COMMAND_CHATBOX = 2
-    static constant integer COMMAND_DELETEME = 3
-    static constant integer COMMAND_NAMEUNIT = 4
-    static constant integer HOTKEY_RACE_SELECTOR = 5
-    static constant integer HOTKEY_RECT_GENERATOR = 6
-    static constant integer CHAT_LOGS = 7
-    static constant integer UNIT_CATEGORIES = 8
-    static constant integer COMMAND_COUNT = 9
-    
+    //! runtextmacro OOP_ConstantStructField("thistype", "REMOVE_UNIT_HOTKEY", "1")
+    //! runtextmacro OOP_ConstantStructField("thistype", "COMMAND_CHATBOX",  "2")
+    //! runtextmacro OOP_ConstantStructField("thistype", "COMMAND_DELETEME", "3")
+    //! runtextmacro OOP_ConstantStructField("thistype", "COMMAND_NAMEUNIT", "4")
+    //! runtextmacro OOP_ConstantStructField("thistype", "HOTKEY_RACE_SELECTOR",  "5")
+    //! runtextmacro OOP_ConstantStructField("thistype", "HOTKEY_RECT_GENERATOR", "6")
+    //! runtextmacro OOP_ConstantStructField("thistype", "CHAT_LOGS",       "7")
+    //! runtextmacro OOP_ConstantStructField("thistype", "UNIT_CATEGORIES", "8")
+    //! runtextmacro OOP_ConstantStructField("thistype", "COMMAND_COUNT",   "9")
+    //! runtextmacro OOP_ConstantStructField("thistype", "FULLSCREEN",      "10")
     
     private static method onInit takes nothing returns nothing
-        set hints[REMOVE_UNIT_HOTKEY] = "You can use the hotkey Shift+Backspace to remove units."
-        set hints[COMMAND_CHATBOX] = "Use the -chatbox command to configure your chatbox preferences."
-        set hints[COMMAND_DELETEME] = "You can delete all your units outside of the Titan Palace with -deleteme."
-        set hints[COMMAND_NAMEUNIT] = "You can rename a unit using -nameunit."
-        set hints[HOTKEY_RACE_SELECTOR] = "You can spawn a Race Selector using Alt+W."
-        set hints[HOTKEY_RECT_GENERATOR] = "You can spawn a Rect Generator using Alt+R."
-        set hints[CHAT_LOGS] = "You can view a more detailed chat log in the Tools menu (Ctrl+F4)."
-        set hints[UNIT_CATEGORIES] = "Units are split into the following categories:
+        set REMOVE_UNIT_HOTKEY.msg = "You can use the hotkey Shift+Backspace to remove units."
+        set COMMAND_CHATBOX.msg = "Use the -chatbox command to configure your chatbox preferences."
+        set COMMAND_DELETEME.msg = "You can delete all your units outside of the Titan Palace with -deleteme."
+        set COMMAND_NAMEUNIT.msg = "You can rename a unit using -nameunit."
+        set HOTKEY_RACE_SELECTOR.msg = "You can spawn a Race Selector using Alt+W."
+        set HOTKEY_RECT_GENERATOR.msg = "You can spawn a Rect Generator using Alt+R."
+        set CHAT_LOGS.msg = "You can view a more detailed chat log in the Tools menu (Ctrl+F4)."
+        set UNIT_CATEGORIES.msg = "Units are split into the following categories:
     |cffffcc00Character:|r a unit that can move around and sometimes attack.
     |cffffcc00Decoration:|r a unit used built by a Deco Builder. Most AoE abilities will ignore these units.
     |cffffcc00Structures:|r a unit that can train characters.\n \n"
-        set hints[COMMAND_COUNT] = "This command can be called with up to 5 arguments in other to receive more detailed information:
+        set COMMAND_COUNT.msg = "This command can be called with up to 5 arguments in other to receive more detailed information:
     Example: |cffffff00-count red blue dark green light blue 6\n \n"
+        set FULLSCREEN.msg = "You have entered fullscreen mode. To display the UI again, use the |cffffff00-fullscreen|r command or press |cffffff00Alt+Z|r."
 
         // Make array the same size for all players
-        set hints[32] = "final hint"
+        set thistype(32).msg = "final hint"
     endmethod
 
     // async

@@ -1,6 +1,12 @@
 // Contains tools of Object-Oriented Programming
 library OOP
 
+//! textmacro OOP_ConstantStructField takes type, name, value
+    static constant method operator $name$ takes nothing returns $type$
+        return $value$
+    endmethod
+//! endtextmacro
+
 //! textmacro OOP_HandleStruct takes type
     static method get takes $type$ h returns thistype
         return GetHandleId(h)
