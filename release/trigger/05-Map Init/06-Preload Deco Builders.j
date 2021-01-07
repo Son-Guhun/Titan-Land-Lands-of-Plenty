@@ -1,4 +1,4 @@
-library PreloadDecoBuilders requires DecoBuilderCount, LoPWarn, LoPCleanUpRemoval, PreloadDecoBuildersView, LoPCommands
+library PreloadDecoBuilders requires LoPDecoBuilders, LoPWarn, LoPCleanUpRemoval, PreloadDecoBuildersView, LoPCommands
 
 globals
     public constant boolean ENABLE = true
@@ -36,12 +36,12 @@ private function CreateDecos takes nothing returns nothing
     
     if not reforged then
         set end = IMinBJ(LoP_DecoBuilders.DecoLastIndex, current+STEP)
-        call DecoBuilderCount_CreateMissing(udg_GAME_MASTER, 0., 0., g, current, end, false)
+        call LoPDecoBuilders_CreateMissing(udg_GAME_MASTER, 0., 0., g, current, end, false)
         call BlzFrameSetText(PreloadDecoBuildersView_loadBarText, "Preloading Deco Builders: " + I2S(end) + " / " + I2S(G.finalTotal))
         call BlzFrameSetValue(PreloadDecoBuildersView_loadBar, 100.*end/G.finalTotal)
     else
         set end = IMinBJ(LoP_DecoBuilders.ReforgedDecoLastIndex, current+STEP)
-        call DecoBuilderCount_CreateMissing(udg_GAME_MASTER, 0., 0., g, current, end, true)
+        call LoPDecoBuilders_CreateMissing(udg_GAME_MASTER, 0., 0., g, current, end, true)
         call BlzFrameSetText(PreloadDecoBuildersView_loadBarText, "Preloading Deco Builders: " + I2S(G.getReforgedCurrent(end)) + " / " + I2S(G.finalTotal))
         call BlzFrameSetValue(PreloadDecoBuildersView_loadBar, 100.*G.getReforgedCurrent(end)/G.finalTotal)
     endif
