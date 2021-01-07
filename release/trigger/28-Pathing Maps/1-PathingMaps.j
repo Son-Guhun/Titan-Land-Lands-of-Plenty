@@ -2,6 +2,10 @@
 
 library PathingMaps requires GMUI, TableStruct, PathingTileDefinition, Matrices, GALimage, GLHS
 
+globals
+    private constant boolean DISPLAY_IMAGES = false
+endglobals
+
 
 private module Init
     static method onInit takes nothing returns nothing
@@ -56,15 +60,18 @@ struct PathTile extends array
         set .counter = counter + add
     endmethod
     
-    // Handle Field does not work for images. Apparently the typecast trick is the issue.
-    //! runtextmacro TableStruct_NewPrimitiveField("image", "image")
-    method showImage takes boolean show returns nothing
-        if not .imageExists() then 
-            set .image = CreateImage("Images\\SelectionSquareWhite.tga", TILE_SIZE, TILE_SIZE, 0, 0, 0, 0, TILE_SIZE/2, TILE_SIZE/2, 0., 1)
-            call SetImagePosition(.image, .x, .y, 0)
-        endif
-        call SetImageRenderAlways(.image, show)
-    endmethod
+    static if DISPLAY_IMAGES then
+        // Handle Field does not work for images. Apparently the typecast trick is the issue.
+        //! runtextmacro TableStruct_NewPrimitiveField("image", "image")
+        
+        method showImage takes boolean show returns nothing
+            if not .imageExists() then 
+                set .image = CreateImage("Images\\SelectionSquareWhite.tga", TILE_SIZE, TILE_SIZE, 0, 0, 0, 0, TILE_SIZE/2, TILE_SIZE/2, 0., 1)
+                call SetImagePosition(.image, .x, .y, 0)
+            endif
+            call SetImageRenderAlways(.image, show)
+        endmethod
+    endif
     
     method counterIncrement takes boolean add returns nothing
         local integer counter = .counter
@@ -76,14 +83,21 @@ struct PathTile extends array
                     set .original = not IsTerrainPathable(.x, .y, PATHING_TYPE_WALKABILITY)  // this native returns reversed results
                 endif
                 call SetTerrainPathable(.x, .y, PATHING_TYPE_WALKABILITY, false)
-                call .showImage(true)
+                
+                static if DISPLAY_IMAGES then
+                    call .showImage(true)
+                endif
             endif
+            
         else
             set .counter = counter - 1
             if counter == 1 then
                 if .originalExists() and .original then
                     call SetTerrainPathable(.x, .y, PATHING_TYPE_WALKABILITY, true)
-                    call .showImage(false)
+                    
+                    static if DISPLAY_IMAGES then
+                        call .showImage(false)
+                    endif
                 endif
             endif
         endif
